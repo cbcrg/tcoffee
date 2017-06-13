@@ -2034,6 +2034,88 @@ NT_node tree2fj_tree (NT_node T)
 /*                                                                   */
 /*                                                                   */
 /*********************************************************************/
+//Non Recirsive function -- Essential for the manipulation of very large trees
+int use_recursion ();
+int use_recursion()
+{
+  static int use;
+
+  if (!use)
+    {
+      if (getenv ("USE_REC4TCOFFEE"))use=1;
+      else use =-1;
+    }
+  if (use==1) return 1;
+  else return 0;
+}
+  
+  
+void rec_reset_node_count (NT_node root);
+void no_rec_reset_node_count (NT_node root);
+void reset_node_count (NT_node root)
+{ 
+  if (use_recursion())  return rec_reset_node_count (root);
+  else return no_rec_reset_node_count (root);
+}
+
+void rec_reset_node_count (NT_node root)
+{
+  if (!root) return;
+  root->visited=0;
+  rec_reset_node_count (root->left);
+  rec_reset_node_count (root->right);
+  return;
+}
+void no_rec_reset_node_count (NT_node root)
+{
+  //MorrisTraversal: No Recursion, No stack
+  NT_node current,pre;
+  
+  if( root== NULL)
+    return; 
+ 
+  current = root;
+  root->visited=0;
+  
+  while(current)
+    {                 
+      if(!current->left)
+	{
+	  if (current)current->visited=0;
+	  current = current->right;   
+	  if ( current) current->visited=0;
+	}    
+      else
+	{
+	  pre = current->left;
+	  if (pre)pre->visited=0;
+	  
+	  while(pre->right && pre->right != current)
+	    {
+	      pre = pre->right;
+	      if (pre)pre->visited=0;
+	    }
+	  
+	  
+	  if(!pre->right )
+	    {
+	      pre->right = current;
+	      if ( current)current->visited=0;
+	      current = current->left;
+	      if (current) current->visited=0;
+	    }
+	  
+	  else 
+	    {
+	      pre->right = NULL;
+	      current = current->right;     
+	      if (current) current->visited=0;
+	    } 
+	} 
+    } 
+}
+
+
 int tree2star_nodes (NT_node R, int n_max)
 {
   if ( !R) return 0;
@@ -2118,15 +2200,106 @@ NT_node* free_treelist (NT_node *L)
   vfree (L);
   return NULL;
 }
+NT_node no_rec_free_tree ( NT_node root);
+NT_node rec_free_tree ( NT_node root);
 NT_node free_tree ( NT_node R)
+{
+  if (use_recursion ())return rec_free_tree(R);
+  else return no_rec_free_tree (R);
+}
+NT_node no_rec_free_tree ( NT_node root)
+{
+  NT_node stack, current, pre;
+  reset_node_count (root);
+  
+  stack=root;
+  stack->bot=NULL;
+  current = root;
+  root->visited=1;
+  
+  while(current)
+    {                 
+      if(!current->left)
+	{
+	  if (current)
+	    {
+	      if (!current->visited){ current->bot=stack;stack=current;}
+	      current->visited=1;
+	    }
+	  current = current->right;   
+	  if ( current) 
+	    {
+	      if (!current->visited){current->bot=stack;stack=current;}
+	      current->visited=1;
+	    }
+	}    
+      else
+	{
+	  pre = current->left;
+	  if (pre)
+	    {
+	      if (!pre->visited){pre->bot=stack;stack=pre;}
+	      pre->visited=1;
+	    }
+	  
+	  while(pre->right && pre->right != current)
+	    {
+	      pre = pre->right;
+	      if (pre)
+		 {
+		   if (!pre->visited){pre->bot=stack;stack=pre;}
+		   pre->visited=1;
+		 }
+	    }
+	  
+	  
+	  if(!pre->right )
+	    {
+	      pre->right = current;
+	      if ( current)
+		{
+		  if (!current->visited){current->bot=stack;stack=current;}
+		  current->visited=1;
+		}
+	      current = current->left;
+	      if (current)
+		{
+		  if (!current->visited){current->bot=stack;stack=current;}
+		  current->visited=1;
+		}
+	    }
+	  
+	  else 
+	    {
+	      pre->right = NULL;
+	      current = current->right;     
+	      if (current) 
+		{
+		  if (!current->visited){current->bot=stack;stack=current;}
+		  current->visited=1;
+		}
+	    } 
+	} 
+    } 
+  while ( stack)
+    {
+      NT_node tofree=stack;
+      stack->visited++;
+      stack=stack->bot;
+      
+    }
+}
+  
+
+NT_node rec_free_tree ( NT_node R)
 {
   if ( !R)return R;
   if(R->right)
-  	  R->right=free_tree (R->right);
+  	  R->right=rec_free_tree (R->right);
   if(R->left)
-  	  R->left=free_tree (R->left);
+  	  R->left=rec_free_tree (R->left);
   if(R->bot)
-  	  R->bot=free_tree (R->bot);
+  	  R->bot=rec_free_tree (R->bot);
   free_tree_node (R);
   return R;
 }
@@ -2202,7 +2375,84 @@ char * node2seq_file (NT_node N, Sequence *S, int cache, char *file)
   vfclose (fp);
   return file;
 }
-Sequence * tree2seq    (NT_node R, Sequence *S)
+Sequence * no_rec_tree2seq    (NT_node R, Sequence *S);
+Sequence * rec_tree2seq    (NT_node R, Sequence *S);
+
+Sequence * tree2seq (NT_node R, Sequence *S)
+{
+  if ( use_recursion())return rec_tree2seq (R, S);
+  return no_rec_tree2seq (R, S);
+}
+Sequence * no_rec_tree2seq    (NT_node root, Sequence *S)
+{
+   NT_node current,pre;
+  if ( !root)return S;
+  if ( !S)
+    {
+      int n=tree2nseq (root);
+      S=declare_sequence (10, 10, tree2nseq (root));
+      S->nseq=0;
+    }
+  
+  reset_node_count (root);
+  current = root;
+  root->visited=1;
+  
+  while(current != NULL)
+    {                 
+      if(!current->left)
+	{
+	  if (current && current->isseq && !current->visited)
+	    {
+	      sprintf ( S->name[S->nseq++], current->name);
+	   } 
+	  current->visited=1;
+	  current = current->right;  
+	  
+	}    
+      else
+	{
+	  pre = current->left;
+	  
+	  if (!pre->visited)
+	    {
+	      if (pre && !pre->visited && pre->isseq)
+		{
+		  sprintf ( S->name[S->nseq++], pre->name);
+		}
+	      pre->visited=1;
+	    }
+	  while(pre->right && pre->right != current)
+	    {
+	      pre = pre->right;
+	      if (pre)
+		{
+		  if (pre && !pre->visited && pre->isseq)
+		    {
+		      sprintf ( S->name[S->nseq++], pre->name);
+		    }
+		  pre->visited=1;
+		}
+	    }
+	  
+	  
+	  if(!pre->right )
+	    {
+	      pre->right = current;
+	      current = current->left;
+	    }
+	  
+	  else 
+	    {
+	      pre->right = NULL;
+	      current = current->right;      
+	    } 
+	} 
+    } 
+  return S;
+}
+
+Sequence * rec_tree2seq    (NT_node R, Sequence *S)
 {
 
   if ( !R)return S;
@@ -2321,7 +2571,73 @@ int tree2nnode ( NT_node R)
     }
   return n;
 }
+int no_rec_tree2nleaf (NT_node root);
+int rec_tree2nleaf (NT_node R);
+
 int tree2nleaf (NT_node R)
+{
+  if ( use_recursion ())return rec_tree2nleaf (R);
+  return no_rec_tree2nleaf (R);
+}
+
+int no_rec_tree2nleaf (NT_node root)
+{
+  //MorrisTraversal: No Recursion, No stack
+  NT_node current,pre;
+  int nleaf=0;
+  
+  reset_node_count (root);
+  
+  if( root== NULL)
+    return nleaf; 
+ 
+  current = root;
+  root->visited=1;
+  
+  while(current)
+    {                 
+      if(!current->left)
+	{
+	  if (!current->visited && current->isseq)nleaf++;
+	  current->visited=1;
+	  current = current->right;      
+	}    
+      else
+	{
+	  pre = current->left;
+	  
+	  if (!pre->visited && pre->isseq)nleaf++;
+	  pre->visited=1;
+	  
+	  while(pre->right && pre->right != current)
+	    {
+	      pre = pre->right;
+	      if (pre)
+		{
+		  if (!pre->visited && pre->isseq)nleaf++;
+		  pre->visited=1;
+		}
+	    }
+	  
+	  
+	  if(!pre->right )
+	    {
+	      pre->right = current;
+	      current = current->left;
+	    }
+	  
+	  else 
+	    {
+	      pre->right = NULL;
+	      current = current->right;      
+	    } 
+	} 
+    } 
+  return nleaf;
+}
+
+
+int rec_tree2nleaf (NT_node R)
 {
   if ( !R)return 0;
   else if (R->isseq==1){R->nseq=1;return 1;}
@@ -2669,6 +2985,7 @@ FILE * print_tree_list ( NT_node *T, char *format,FILE *fp)
     }
   return fp;
 }
+
 char * tree2string (NT_node T)
 {
   if (!T) return NULL;
@@ -2684,14 +3001,24 @@ char * tree2string (NT_node T)
       return file2string (f);
     }
 }
+  
 char * tree2file (NT_node T, char *name, char *mode)
 {
+  FILE *fp;
   if (!name)name=vtmpnam (NULL);
-  string2file (name, mode, tree2string(T));
+  
+  fp=vfopen (name, mode);
+  
+  if (use_recursion)fp=rec_print_tree (T, fp);
+  else fp=no_rec_print_tree (T, fp);
+  
+  fprintf ( fp, ";\n");
+  vfclose (fp);
   return name;
 }
 FILE * print_tree ( NT_node T, char *format,FILE *fp)
 {
+  
   return print_ordered_tree (T,NULL, format, fp);
 }
 FILE * print_ordered_tree ( NT_node T, Sequence *S,char *format,FILE *fp)
@@ -2718,8 +3045,8 @@ FILE * print_ordered_tree ( NT_node T, Sequence *S,char *format,FILE *fp)
     }
   else if ( ! format || strm2 (format, "newick_tree","newick"))
     {
-      /*T=balance_tree (T);*/
-      fp=rec_print_tree (T, fp);
+      if (use_recursion)fp=rec_print_tree (T, fp);
+      else fp=no_rec_print_tree (T, fp);
       fprintf ( fp, ";\n");
     }
   else
@@ -2729,7 +3056,7 @@ FILE * print_ordered_tree ( NT_node T, Sequence *S,char *format,FILE *fp)
     }
   return fp;
 }
-int print_newick_tree ( NT_node T, char *name)
+int rec_print_newick_tree ( NT_node T, char *name)
 {
   FILE *fp;
   fp=vfopen (name, "w");
@@ -2738,6 +3065,23 @@ int print_newick_tree ( NT_node T, char *name)
   vfclose (fp);
   return 1;
 }
+
+int print_newick_tree ( NT_node T, char *name)
+{
+  FILE *fp;
+  fp=vfopen (name, "w");
+
+  if (use_recursion)fp=rec_print_tree (T, fp);
+  else fp=no_rec_print_tree (T, fp);
+
+
+  
+  fprintf (fp, ";\n");
+  vfclose (fp);
+  return 1;
+}
+
+
 FILE * rec_print_tree_shuffle ( NT_node T, FILE *fp)
 {
 
@@ -2816,6 +3160,57 @@ FILE * rec_print_tree ( NT_node T, FILE *fp)
 
   return fp;
 }
+
+FILE * no_rec_print_tree ( NT_node p, FILE *fp)
+{
+  reset_node_count (p);
+  
+  while (p)
+    {
+      int x=++(p->visited);
+      if (!p->isseq)
+	{
+	  if (x==1)
+	    {
+	      fprintf ( fp, "(");
+	      p=p->left;
+	    }
+	  else if (x==2)
+	    {
+	      fprintf ( fp, ",");
+	      p=p->right;
+	    }
+	  else if (x==3 && !p->parent)
+	    {
+	      fprintf ( fp, ")");
+	      p=p->parent;
+	    }
+	  else if (x>=3)
+	    {
+	      fprintf ( fp, ")");
+	    }
+	}
+      
+      if (x>=3 || p->isseq)
+	{
+	  if (p)
+	    {
+	      if (p->isseq)fprintf ( fp, "%s:%.5f",p->name,p->dist);
+	      else 
+		{
+		  if ( p->bootstrap!=0)fprintf (fp, " %d", (int)p->bootstrap);
+		  fprintf ( fp, ":%.5f",p->dist);
+		}
+	    }
+	  if (x>3)p=NULL;
+	  else if (p) p=p->parent;
+	}
+    }
+  return fp;
+}
+
+
+
 
 
 
@@ -4066,6 +4461,7 @@ NT_node index_tree_node    (NT_node T)
 
 
 
+
 NT_node simple_recode_tree (NT_node T, int nseq)
 {
 
@@ -4422,8 +4818,99 @@ float *seq2dpa_weight (Sequence *S, char *mode)
     }
   return w;
 }
-
+NT_node no_rec_indextree2nametree (Sequence*S, NT_node root);
+NT_node rec_indextree2nametree (Sequence*S, NT_node root);
 NT_node indextree2nametree (Sequence*S, NT_node T)
+{
+  if (use_recursion()) return rec_indextree2nametree (S, T);
+  return no_rec_indextree2nametree (S, T);
+}
+NT_node no_rec_indextree2nametree (Sequence*S, NT_node root)
+{
+  NT_node current,pre;
+  if ( !root)return root;
+  if ( !S)
+    {
+      int n=tree2nseq (root);
+      S=declare_sequence (10, 10, tree2nseq (root));
+      S->nseq=0;
+    }
+  
+  reset_node_count (root);
+  current = root;
+  root->visited=1;
+  
+  while(current != NULL)
+    {                 
+      if(!current->left)
+	{
+	  if (current && current->isseq && !current->visited)
+	    {
+	      int i=atoi (current->name)-1;
+	      current->seq=i;
+	      vfree (current->name);
+	      current->name=(char*)vcalloc ( strlen (S->name[i])+1, sizeof (char));
+	      sprintf (current->name, "%s", S->name[i]);
+	      current->isseq=current->nseq=1;
+	   } 
+	  current->visited=1;
+	  current = current->right;  
+	  
+	}    
+      else
+	{
+	  pre = current->left;
+	  
+	  if (!pre->visited)
+	    {
+	      if (pre && !pre->visited && pre->isseq)
+		{
+		  int i=atoi (pre->name)-1;
+		  pre->seq=i;
+		  vfree (pre->name);
+		  pre->name=(char*)vcalloc ( strlen (S->name[i])+1, sizeof (char));
+		  sprintf (pre->name, "%s", S->name[i]);
+		  pre->isseq=pre->nseq=1;
+		}
+	      pre->visited=1;
+	    }
+	  while(pre->right && pre->right != current)
+	    {
+	      pre = pre->right;
+	      if (pre)
+		{
+		  if (pre && !pre->visited && pre->isseq)
+		    {
+		      int i=atoi (pre->name)-1;
+		      pre->seq=i;
+		      vfree (pre->name);
+		      pre->name=(char*)vcalloc ( strlen (S->name[i])+1, sizeof (char));
+		      sprintf (pre->name, "%s", S->name[i]);
+		      pre->isseq=pre->nseq=1;
+		      
+		    }
+		  pre->visited=1;
+		}
+	    }
+	  
+	  
+	  if(!pre->right )
+	    {
+	      pre->right = current;
+	      current = current->left;
+	    }
+	  
+	  else 
+	    {
+	      pre->right = NULL;
+	      current = current->right;      
+	    } 
+	} 
+    } 
+  return root;
+}
+
+NT_node rec_indextree2nametree (Sequence*S, NT_node T)
 {
   if (!T )return T;
   else if (!T->left && !T->right)
@@ -8209,7 +8696,7 @@ ALN_node declare_aln_node (int mode)
 {
 
   ALN_node r;
-  int chunk=10000;
+  int chunk=100000;
   static ALN_node *bufbuf;
   static int bb;
   static int available;
@@ -8436,6 +8923,4 @@ void check_seq_graph (Sequence *S, ALN_node iseq)
     }
   fprintf (stdout, " %s\n\n",S->name[seq->seqN]);
 }
-
-
 

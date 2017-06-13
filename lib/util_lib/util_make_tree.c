@@ -1713,9 +1713,13 @@ NT_node seq2dnd (Sequence *S, char *dpa_tree)
     {
       T=seq2co_dnd (S);
     }
-  else if (strm (dpa_tree, "clustalwdnd") )
+  else if (strm (dpa_tree, "cwdnd")|| strm (dpa_tree, "clustalwdnd") )
     {
       T=seq2cw_dnd (S);
+    }
+  else if (strm (dpa_tree, "cwqdnd") )
+    {
+      T=seq2cwquick_dnd (S);
     }
   else if (strm (dpa_tree, "parttree"))
     {     
@@ -1771,7 +1775,6 @@ NT_node seq2dnd (Sequence *S, char *dpa_tree)
   tree2file (T, tmptree, "w");
   free_tree(T);
   T=main_read_tree (tmptree);  
-  
   return T;
 }
 
@@ -1826,7 +1829,6 @@ NT_node seq2parttree_dnd ( Sequence *S)
       fprintf (fp, ";");
       vfclose (fp);
       T=main_read_tree ("seq.tree");
-      
       T=indextree2nametree (S, T);
     }
   chdir    (cdir);
@@ -1899,7 +1901,31 @@ NT_node seq2fastparttree_dnd ( Sequence *S)
   return T;
   
 }
+NT_node seq2cwquick_dnd ( Sequence *S)
+{
+  Alignment *A;
+  int tot_node=0;
+  NT_node T=NULL;
+  char *dir =vtmpnam (NULL);
+  char *cdir=get_pwd (NULL);
 
+  my_mkdir (dir);
+  chdir (dir);
+  output_fasta_seqS ("seq",S);
+  printf_system_direct ("clustalw -infile=seq %s -quicktree",TO_NULL_DEVICE);
+  //printf_system_direct ("clustalw -infile=seq");
+  if (check_file_exists ("seq.dnd"))
+    {
+      T=main_read_tree ("seq.dnd");
+    }
+  chdir    (cdir);
+  printf_system_direct ("rm %s/*", dir);
+  my_rmdir (dir);
+  vfree (cdir);
+  return T;
+
+
+}
 NT_node seq2cw_dnd ( Sequence *S)
 {
   Alignment *A;
@@ -1912,11 +1938,10 @@ NT_node seq2cw_dnd ( Sequence *S)
   chdir (dir);
   output_fasta_seqS ("seq",S);
   printf_system_direct ("clustalw -infile=seq %s",TO_NULL_DEVICE);
-  if (check_file_exists ("seq.tree"))
+  //printf_system_direct ("clustalw -infile=seq");
+  if (check_file_exists ("seq.dnd"))
     {
-    
-      
-      T=main_read_tree ("seq.tree");
+      T=main_read_tree ("seq.dnd");
     }
   chdir    (cdir);
   printf_system_direct ("rm %s/*", dir);
@@ -1966,6 +1991,7 @@ NT_node seq2cw_tree ( Sequence *S)
   output_fasta_aln ("aln", A);
   
   printf_system_direct ("clustalw -infile=aln -newtree=tree -tree %s",TO_NULL_DEVICE);
+  //printf_system_direct ("clustalw -infile=aln -newtree=tree -tree");
   T=main_read_tree ("tree");
 
   chdir    (cdir);
@@ -1985,8 +2011,9 @@ NT_node seq2co_dnd (Sequence *S)
   if (!seq)seq=vtmpnam (NULL);
   output_fasta_simple (seq, S);
   
-  printf_system ("clustalo --in %s --threads=2 --guidetree-out %s --force>/dev/null 2>/dev/null", seq,tree);
-  //printf_system ("clustalo --in %s --guidetree-out %s --force>/dev/null", seq,tree);
+  //printf_system ("clustalo --in %s --threads=2 --guidetree-out %s --force>/dev/null 2>/dev/null", seq,tree);
+  //printf_system ("clustalo --in %s --threads=2 --guidetree-out %s --force>/dev/null ", seq,tree);
+  printf_system ("clustalo --in %s --guidetree-out %s --force>/dev/null", seq,tree);
   return main_read_tree(tree);
 }
 

@@ -3613,9 +3613,8 @@ int main_output  (Sequence_data_struc *D1, Sequence_data_struc *D2, Sequence_dat
 	    rec_print_tree_shuffle (D1->T, stdout);
 	    fprintf (stdout, ";\n");
 	  }
-	else if ( strm4 (out_format, "newick_tree","newick","binary","nh") || strm2 (out_format, "quick_newick", "newick_shuffle"))
+	else if ( strm4 (out_format, "newick_tree","newick","binary","nh") || strm (out_format, "quick_newick"))
 	        {
-		 
 		  if (!D1)return 1;
 		  if (!D1->T && (D1->A))
 		    {
@@ -3631,8 +3630,7 @@ int main_output  (Sequence_data_struc *D1, Sequence_data_struc *D2, Sequence_dat
 		    }
 		  else
 		    {
-		      /*D1->T=unroot_tree(D1->T);*/
-		      vfclose (print_tree ((D1->T), out_format, vfopen ( out_file, "w")));
+		      print_newick_tree (D1->T, out_file);
 		    }
 		}
 	else if ( strncmp (out_format, "sarsim", 6)==0)

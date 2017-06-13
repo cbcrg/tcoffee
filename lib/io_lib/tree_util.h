@@ -175,6 +175,7 @@ Alignment * filter_aln4tree (Alignment *A, int n,int fg,char* mode);
 /*                                                                   */
 /*                                                                   */
 /*********************************************************************/
+void reset_node_count (NT_node root);
 int  tree2star_nodes (NT_node R, int n_max);
 NT_node aln2tree (Alignment *A);
 NT_node reset_boot_tree ( NT_node R, int n);
@@ -223,6 +224,7 @@ char *tree2file   (NT_node T, char *name, char *mode);
 
 int print_newick_tree ( NT_node T, char *name);
 FILE * rec_print_tree ( NT_node T, FILE *fp);
+FILE * no_rec_print_tree ( NT_node T, FILE *fp);
 FILE*  rec_print_tree_shuffle ( NT_node T, FILE *fp);
 
 NT_node find_longest_branch ( NT_node T, NT_node L);
