@@ -342,4 +342,6 @@ int kseq2kmsa   (KT_node *K, int n, char *method);
 char* kmsa2msa  (Sequence *S,KT_node K, int n, int *cn);
 int ktree2klist (KT_node K, KT_node *KL, int *n);
 KT_node tree2ktree (NT_node T,Sequence *S, int N);
+
+char * kmsa2msa_d (Sequence *S,KT_node K, int max, int *cn);
 #endif

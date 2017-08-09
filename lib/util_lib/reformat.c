@@ -11776,7 +11776,7 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	     }
 	   if (strm (ACTION(na), "strike"))
 	     {
-	       //no param or: <max> <enb> <strikeMatrixFile>, values can be feft to "def"
+	       //no param or: <max> <enb> <strikeMatrixFile>, values can be left to "def"
 	       ev3d="strike";
 	       enb=3;
 	       max=1.2;

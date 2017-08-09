@@ -7833,6 +7833,10 @@ char* tree2msa4dpa (NT_node T, Sequence *S, int N, char *method)
 
   outname=kmsa2msa  (S,K,n,&cn);
   
+  //do it on disc
+  //no memory footprint but very very slow
+  //outname=kmsa2msa_d  (S,K,n,&cn); 
+  
   declare_aln_node (-1);//Free all the nodes declared
   
   return outname;
@@ -8250,6 +8254,7 @@ char * kmsa2msa (Sequence *S,KT_node K, int max, int *cn)
   int done=1;
   aln=(ALN_node*)vcalloc ((2*S->nseq)+1, sizeof (ALN_node));
   lu=(short*)vcalloc (S->nseq, sizeof (short));
+  
   aln=kmsa2graph_multi (S,K, NULL, NULL,aln,&nseq,&done,max);
   
   
@@ -8696,7 +8701,7 @@ ALN_node declare_aln_node (int mode)
 {
 
   ALN_node r;
-  int chunk=100000;
+  int chunk=1000;
   static ALN_node *bufbuf;
   static int bb;
   static int available;
@@ -8924,3 +8929,486 @@ void check_seq_graph (Sequence *S, ALN_node iseq)
   fprintf (stdout, " %s\n\n",S->name[seq->seqN]);
 }
 
+////////on disc
+
+
+unsigned long* kmsa2graph_d (Sequence *S,KT_node K,Alignment *A0, unsigned long **lu0, unsigned long *list, int *ns, int *done, int max);
+unsigned long ** msa2graph_d (Sequence *S, Alignment *A, unsigned long**lu);
+int node2gap_len_d (unsigned long n);
+char *graph2cons_d (unsigned long m, int len);
+unsigned long insert_gap_in_graph_d (unsigned long start);
+int insert_msa_in_msa_d (unsigned long s, unsigned long m);
+unsigned long n2FirstSeq_d (unsigned long n);
+unsigned long n2start_d (unsigned long n);
+
+unsigned long n2top_d (unsigned long n);
+unsigned long n2bot_d (unsigned long n);
+
+unsigned long rn_c    (unsigned long n);
+unsigned long rn_p    (unsigned long n);
+unsigned long rn_l    (unsigned long n);
+unsigned long rn_r    (unsigned long n);
+char       rn_aa   (unsigned long n);
+int        rn_seqN (unsigned long n);
+
+void wn_c    (unsigned long n, unsigned long t);
+void wn_p    (unsigned long n, unsigned long t);
+void wn_l    (unsigned long n, unsigned long t);
+void wn_r    (unsigned long n, unsigned long t);
+void wn_aa   (unsigned long n, char aa);
+void wn_seqN (unsigned long n, int seqN);
+
+ALN_node d2m(unsigned long n);
+unsigned long m2d(ALN_node m,unsigned long d );
+
+unsigned long declare_aln_node_d (int i);
+
+
+char * kmsa2msa_d (Sequence *S,KT_node K, int max, int *cn)
+{
+  char *out=vtmpnam (NULL);
+  int  a;
+  int nseq=0;
+  FILE*fp;
+  unsigned long *aln;
+  short *lu;
+  int done=1;
+  aln=(unsigned long*)vcalloc ((2*S->nseq)+1, sizeof (unsigned long));
+  lu=(short*)vcalloc (S->nseq, sizeof (short));
+  aln=kmsa2graph_d (S,K, NULL, NULL,aln,&nseq,&done,max);
+  
+  
+  fp=vfopen (out, "w");
+  for (a=0; a<nseq; a++)
+    {
+      unsigned long seq=aln[a];
+      int seqN=rn_seqN(seq);
+      if (lu[seqN]);
+      else
+	{
+	  char aa;
+	  lu[rn_seqN(seq)]=1;
+	  fprintf (fp, ">%s\n", S->name[seqN]);
+	  while ((aa=rn_aa(seq))!=')')
+	    {
+	      if (aa!='(')fprintf (fp, "%c",aa);
+	      seq=rn_r(seq);
+	    }
+	  fprintf (fp, "\n");
+	}
+    }
+  
+  vfclose (fp);
+  vfree (aln);
+  vfree (lu);
+  return out;
+}
+unsigned long* kmsa2graph_d (Sequence *S,KT_node K,Alignment *A0, unsigned long **lu0, unsigned long *list, int *ns, int *done, int max)
+{
+  int a,b,c, n;
+  Alignment *A1;
+  
+  if (!A0)
+    {
+      A0=quick_read_aln (K->msaF);
+      lu0=msa2graph_d (S,A0, NULL);
+      for (a=0; a<A0->nseq; a++)list[ns[0]++]=lu0[a][0];
+    }  
+  
+  for (a=0; a<K->nc; a++)
+    {
+      unsigned long m, s, t;
+      A1 =quick_read_aln ((K->child[a])->msaF);
+      unsigned long **lu1=msa2graph_d (S,A1, NULL);
+      int i0=name_is_in_list ((K->child[a])->name,A0->name, A0->nseq,MAXNAMES);
+      int i1=name_is_in_list ((K->child[a])->name,A1->name, A1->nseq,MAXNAMES);
+      
+      for (b=0; b<A1->nseq; b++)list[ns[0]++]=lu1[b][0];
+            
+      n=0;
+      while (lu0[i0][n])
+	{
+	  int g;
+	  
+	  m=lu0[i0][n];
+	  s=lu1[i1][n];
+	  
+	  int lm=node2gap_len_d (rn_r(m));
+	  int ls=node2gap_len_d (rn_r(s));
+	  if (lm>0 || ls>0)
+	    {
+	      int c;
+	      char *master=graph2cons_d(rn_r(m), lm);
+	      char *slave =graph2cons_d(rn_r(s), ls);
+	      unsigned long tm=n2top_d(m);
+	      unsigned long ts=n2top_d(s);
+	      static Alignment *A;
+	      ALN_node buf;
+	      
+	      
+	      A=align_two_streches4dpa (master, slave, "blosum62mt",-4,-1, "myers_miller_pair_wise", A);
+	      for (c=0; c<A->len_aln; c++)
+		{
+		  if (A->seq_al[0][c]=='-')tm=insert_gap_in_graph_d (tm);
+		  else tm=rn_r(tm);
+		  if (A->seq_al[1][c]=='-')ts=insert_gap_in_graph_d (ts);
+		  else ts=rn_r(ts);
+		}
+	      vfree (master); vfree (slave);
+	    }
+	  n++;
+	}
+      
+      done[0]+=1;
+      output_completion (stderr,done[0],max, 100, "Incorporating MSAs");
+      insert_msa_in_msa_d (lu1[i1][0],lu0[i0][0]);
+      list=kmsa2graph_d(S,K->child[a], A1, lu1, list, ns, done, max);
+      
+      for (b=0; b<A1->nseq; b++)vfree(lu1[b]);
+      vfree (lu1);
+      free_aln (A1);
+    }
+  
+  return list;
+}
+unsigned long ** msa2graph_d (Sequence *S, Alignment *A, unsigned long**lu)
+{
+  int *cc=(int*)vcalloc (A->nseq, sizeof (int));
+  unsigned long **aln;
+  int s, c;
+  
+  if (!lu)
+    {
+      lu=(unsigned long**)vcalloc (A->nseq, sizeof (unsigned long*));
+      for (s=0; s<A->nseq; s++)
+	{
+	  lu[s]=(unsigned long*)vcalloc (A->len_aln+2, sizeof (unsigned long));
+	}
+    }
+  
+  aln=(unsigned long**)vcalloc (A->nseq+4,sizeof (unsigned long*));
+  for (s=0;s<A->nseq+4; s++)
+    {
+      aln[s]=(unsigned long*)vcalloc ( A->len_aln+4, sizeof (unsigned long));
+      aln[s]+=2;
+    }
+  aln+=2;
+  for (s=-1; s<=A->nseq; s++)
+    for (c=-1; c<=A->len_aln; c++)
+      aln[s][c]=declare_aln_node_d(1);
+
+  
+  for (s=-1; s<=A->nseq; s++)
+    {
+      int seqN=(s<0 || s==A->nseq)?-1:name_is_in_hlist2 (A->name[s], S->name, S->nseq);
+      
+      for (c=-1; c<=A->len_aln; c++)
+	{
+	  unsigned long n=aln[s][c];
+	  
+	  wn_seqN(n,seqN);
+	  wn_p(n,aln[s-1    ][c  ]);
+	  wn_c(n,aln[s+1    ][c  ]);
+	  wn_l(n,aln[s      ][c-1]);
+	  wn_r(n,aln[s      ][c+1]);
+	  
+	  if      (s==-1      ){wn_aa(n,'[');}
+	  else if (s== A->nseq){wn_aa(n,']');}
+	  else if (c==-1      )
+	    {
+	      
+	      wn_aa(n,'(');
+	      if (seqN!=-1)lu[s][0]=n;
+	    }
+	  else if (c== A->len_aln){wn_aa(n,')');}
+	  else
+	    {
+	      wn_aa(n,A->seq_al[s][c]);
+	      if (A->seq_al[s][c]!='-')
+		{
+		  cc[s]++;
+		  lu[s][cc[s]]=n;
+		}
+	    }
+	}
+      
+    }
+  
+  aln-=2;
+  for (s=0; s<A->nseq+4; s++)
+    {
+      vfree (aln[s]-2);
+    }
+  vfree (aln);
+  vfree (cc);
+  return lu;
+}
+int node2gap_len_d (unsigned long n)
+{
+  int len=0;
+  
+  while (n && rn_aa(n)=='-'){len++, n=rn_r(n);}
+  return len;
+}
+
+char *graph2cons_d (unsigned long m, int len)
+{
+  char *master=(char*)vcalloc (len+1, sizeof (char));
+  static int *aa=(int*)vcalloc(256, sizeof (int));
+  int a;
+  int l=0;
+  m=n2top_d(m);
+  m=rn_c(m);
+  while (l<len)
+    {
+      unsigned long s=m;
+      unsigned long c;
+      int best_naa=0;
+      char best_aa=0;
+      for (a=0; a<256; a++)aa[a]=0;
+      
+      while ((c=rn_c(s))!=NULL)
+	{
+	  char r=tolower(rn_aa(s));
+	  aa[r]++;
+	  
+	  if (aa[r]>best_naa){best_naa=aa[r]; best_aa=r;}
+	  s=c;
+	}
+      master[l++]=(best_aa=='-')?'x':best_aa;
+      m=rn_r(m);
+    }
+  master[l]='\0';
+  return master;
+}
+
+
+unsigned long insert_gap_in_graph_d (unsigned long start)
+{
+  unsigned long pn=NULL;
+  unsigned long n, top;
+  if (!start) return NULL;
+
+  while (start)
+    {
+      unsigned long rr;
+      n=declare_aln_node_d(1);
+      
+      //parent
+      wn_p(n,pn);
+      if (pn)wn_c(pn,n);
+      else top=n;
+      
+      //chilren
+      wn_c(n,NULL);
+      
+      //right
+      wn_r(n, rn_r(start));
+      rr=rn_r(n);
+      if (rr)wn_l(rr,n);
+      
+      //left
+      wn_l(n,start);
+      wn_r(start,n);
+
+      if      (!rn_p(start))wn_aa(n,'[');
+      else if (!rn_c(start))wn_aa(n,']');
+      else wn_aa(n,'-');
+      
+      pn=n;
+      start=rn_c(start);
+    }
+  return top;
+}
+
+int insert_msa_in_msa_d (unsigned long s, unsigned long m)
+{
+  int n=0;
+  unsigned long botM, topM, botS, topS,lastM, firstM, lastS, firstS, is, im, aln;
+  
+
+  m=n2FirstSeq_d(m);
+  s=n2FirstSeq_d(s);
+  
+  lastM =n2bot_d(m); lastM =rn_p(lastM);
+  firstS=n2top_d(s); firstS=rn_c(firstS);
+  lastS =n2bot_d(s); lastS =rn_p(lastS);
+  
+  while (lastM)
+    {
+      unsigned long bot =rn_c(lastM);
+            
+      wn_c(lastM,firstS);
+      wn_p(firstS,lastM);
+      
+      wn_c(lastS,bot);
+      wn_p(bot,lastS);
+            
+      lastM =rn_r(lastM);
+      firstS=rn_r(firstS);
+      lastS =rn_r(lastS);
+    }
+  return n;
+}
+unsigned long n2FirstSeq_d (unsigned long n)
+{
+  n=n2top_d(n);
+  n=rn_c(n);
+  return n2start_d(n);
+}
+unsigned long n2start_d (unsigned long n)
+{
+  unsigned long l;
+  while ((l=rn_l(n)))n=l;
+  return n;
+}
+
+unsigned long n2top_d (unsigned long n)
+{
+  unsigned long p;
+  while ((p=rn_p(n)))n=p;
+  return n;
+}
+unsigned long n2bot_d (unsigned long n)
+{
+  unsigned long c;
+  while ((c=rn_c(n)))n=c;
+  return n;
+}
+
+unsigned long rn_c (unsigned long n)
+{
+  ALN_node nn=d2m(n);
+  return (unsigned long)nn->c;
+}
+unsigned long rn_p (unsigned long n)
+{
+  ALN_node nn=d2m(n);
+  return (unsigned long)nn->p;
+}
+unsigned long rn_l (unsigned long n)
+{
+  ALN_node nn=d2m(n);
+  return (unsigned long)nn->l;
+}
+unsigned long rn_r (unsigned long n)
+{
+  ALN_node nn=d2m(n);
+  return (unsigned long)nn->r;
+}
+char rn_aa (unsigned long n)
+{
+  ALN_node nn=d2m(n);
+  return nn->aa;
+}
+int rn_seqN (unsigned long n)
+{
+  ALN_node nn=d2m(n);
+  return nn->seqN;
+}
+
+void wn_c (unsigned long n, unsigned long t)
+{
+  ALN_node nn=d2m(n);
+  nn->c=(ALN_node)t;
+  m2d(nn,n);
+}
+void wn_p (unsigned long n, unsigned long t)
+{
+  ALN_node nn=d2m(n);
+  nn->p=(ALN_node)t;
+  m2d(nn,n);
+}
+void wn_l (unsigned long n, unsigned long t)
+{
+  ALN_node nn=d2m(n);
+  nn->l=(ALN_node)t;
+  m2d(nn,n);
+}
+void wn_r (unsigned long n, unsigned long t)
+{
+  ALN_node nn=d2m(n);
+  nn->r=(ALN_node)t;
+  m2d(nn,n);
+}
+
+void wn_aa (unsigned long n, char t)
+{
+  ALN_node nn=d2m(n);
+  nn->aa=t;
+  m2d(nn,n);
+}
+void wn_seqN (unsigned long n, int t)
+{
+  ALN_node nn=d2m(n);
+  nn->seqN=t;
+  m2d(nn,n);
+}
+
+ALN_node d2m(unsigned long n)
+{
+  return (ALN_node)n;
+}
+unsigned long m2d(ALN_node m,unsigned long d )
+{
+  return d;
+}
+
+unsigned long declare_aln_node_d (int i)
+{
+  return (unsigned long)declare_aln_node (i);
+}
+#ifdef ONDISC
+FILE *disc;
+ALN_node d2m(unsigned long d)
+{
+  static ALN_node m=declare_aln_node (1);
+ 
+  if (!disc)disc=tmpfile();
+  fseek (disc, sizeof(ALNnode)*(d-1), SEEK_SET);
+  fread (m   , sizeof(ALNnode), 1, disc);
+  
+  return m;
+}
+unsigned long m2d(ALN_node m, unsigned long d)
+{
+ 
+  if (!disc)disc=tmpfile();
+  fseek  (disc, sizeof(ALNnode)*(d-1), SEEK_SET);
+  fwrite (m   , sizeof(ALNnode), 1, disc);
+  
+  return d;
+}
+unsigned long declare_aln_node_d_old (int i)
+{
+  static ALN_node n=declare_aln_node (i);
+  static unsigned long d;
+  return m2d (n,++d);
+}
+
+
+
+unsigned long declare_aln_node_d (int mode)
+{
+
+  int chunk=100000;
+  static int available;
+  static int tot;
+  static unsigned long allocated;
+  
+  if (!disc)disc=tmpfile();
+  
+  
+  if (!available)
+    {
+      static ALN_node *buf=(ALN_node*)vcalloc (chunk, sizeof (alnnode));
+      fseek  (disc, sizeof(ALNnode)*(tot-1), SEEK_SET);
+      fwrite (buf , sizeof(ALNnode),chunk+1, disc);
+      tot+=(chunk+1);
+      available=chunk;
+      HERE ("DEclared chunk: %d", tot);
+    }
+  available--;
+  return ++allocated;
+}   
+#endif

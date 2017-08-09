@@ -1948,10 +1948,10 @@ Downstream Analysis
 
 Clustering/Trees based on protein 3D structures
 ===============================================
-This section describes tree estimation procedure based on the comparison of intramolecular distances. One particular mode (T-RMSD) have been develop for this purpose yet there are many other options to do so. On the other hand,T-RMSD makes it possible to estimate a tree using either contact conservation or differences in internal distances as a measure of similarity between protein or RNA sequences. The trees thus estimated can be bootsrapped or further analyzed like regular phylogenetic trees. T-RMSD also makes it possible to estimate the local support of any structural alignment (i.e. each individual column) for either a full tree or any pre-defined sub-group contained within the dataset. 
+This section describes tree estimation procedure based on the comparison of intramolecular distances. These methods are slightly different from the `T-RMSD <http://tcoffee.readthedocs.io/en/latest/tcoffee_main_documentation.html#the-t-rmsd>` that was also originally developped for this purpose and whose usage is decribed in the next section. The methods described in this section are more versatile than the original T-RMSD: they support trees based on contacts or intra-molecular distance variations,alternative tree reconstruction algorithms (NJ, UPGMA), genuine column based generalized boostrap procedures. They also support the STRIKE protocol that involves projecting contacts measured within one or more experimental structures onto the sequences these are aligned with and using the `STRIKE <https://academic.oup.com/bioinformatics/article/27/24/3385/306640/STRIKE-evaluation-of-protein-MSAs-using-a-single>` contact matrice to score these contacts in the sequences without known structures.   
 
-Generating a tree based on structural distances
------------------------------------------------
+Generating a tree based on 3D intramolecular distances conservation
+---------------------------------------------------------------------------
 
 This option makes it possible to estimate a tree while taking into account the variation of intramolecular distances within the considered sequences. It requires in input an alignment (FASTA, MSF, ClustalW...) and a template file (structure files associated with the query sequences). The following command (command 1) will generate a 100 replicate NJ trees using the difference of distances between pairs of aligned residues, at a maximum cut-off of 15A. Columns with less than 50% residues are ignored. It is possible to control the defautl parameters (command 2). The ouput will be a tree in the Newick format with bootstrap supports.
 
@@ -2029,6 +2029,41 @@ If you want to check the capacity of an algorithm to bring related sequences wit
   ##: t_coffee -other_pg seq_reformat -in <aln> -in2 <template> -action +tree replicates 100 \
       +evaluate3D  distances 15 +tree2bs first +tree2collapse groups 4 +print nseq -output no
 
+Structural Tree Parameters
+--------------------------
+The structural tree parameters come through three distinct flags:
+ - **-tree**                       :Used to pass Tree computation parameters 
+ - *** replicates <I=integer> ***  : Indicates how many replicates I are to be produced (def=1) when doing the bootsrap
+ - *** mode <nj|upgma> ***         : Tree computation mode to be used
+ - *** gap  <F=float>***           : ignores columns with a fraction of gaps higher or equal to F (def=0.5)
+ 
+ - **-evaluate3D contacts <MaxD> <Ng>**:Used to estimate the cointact matrix
+ - ***<MAxD=float>***              : maximum distance between the closest atoms (including side chains) of two residues <def=1.3>
+ - ***<Ng=integer>***              : Number of excluded neighbours (on both side) <def=3>	 
+ - ***def***                       : Any value can be left to its default as follows -evaluate3D contacts def 5 will used 1.2 as maxD and 5 as neighbor cutoff
+
+ - **-evaluate3D distances <MaxD> <Ng>**:Used to estimate the cointact matrix
+ - ***<MAxD=float>***              : maximum distance between the closest atoms (including side chains) of two residues <def=15>. When set to 0, all against all distances are computed. 
+ - ***<Ng=integer>***              : Number of excluded neighbours (on both side) <def=3>	 
+ - ***def***                       : Any value can be left to its default as follows -evaluate3D contacts def 5 will used 1.2 as maxD and 5 as neighbor cutoff
+
+ - **-evaluate3D strike <MaxD> <Ng> <mat>**:Used to estimate the cointact matrix
+ - ***<MAxD=float>***              : maximum distance between the closest atoms (including side chains) of two residues <def=15>
+ - ***<Ng=integer>***              : Number of excluded neighbours (on both side) <def=3>	 
+ - ***<mat=string>***              : strike matrix file (def="strike")
+ - ***def***                       : Any value can be left to its default as follows -evaluate3D contacts def 5 will used 1.2 as maxD and 5 as neighbor cutoff
+
+
+Distance based trees measures are based on a normalized difference of distances between pairs of residues:
+::
+	X AB
+	Y CD
+	d1=d(A,B)
+	d2=d(B,B)
+	score(AB, CD)=(Min (d1/d2, d2/d1)^3)*d1
+	score (X,Y)=Sum(score(AB,CD))+Sum(score (CD, AB)/Sum (d(AB))+Sum (d(CD)) over all pairs for which d(AB)>=MaxD AND d(CD)>=MaxD
+
+
 The T-RMSD
 ==========
 What is the T-RMSD?
@@ -2057,7 +2092,11 @@ T-Coffee have limited tree visualization capacities, yet the T-RMSD delivers two
 
 The TCS
 =======
-The TCS was described in the previous subsection as it is mainly an evaluation tool. It has however several option that are relevant for downstream analysis such weighting and/or trimming MSA for phylogenetic reconstruction. It was demonstrated that TCS was able to improve phylogenetic reconstruction, you are welcome to look at the publication for more details.
+The TCS (Transitive Consistency Score) is a measure of consistency between a multiple sequence alignmment and a library of pairwise alignments of the same sequences. In the original `publication <https://academic.oup.com/mbe/article/31/6/1625/2925802/TCS-A-New-Multiple-Sequence-Alignment-Reliability>` the TCS score was shown to correlate well with local structural accuracy and with the phylogenic reconstruction potential of individual MSA columns. As such the TCS can therefore be used to down-weight or filter out the less reliable positions. The TCS is available as `>web-server http://tcoffee.crg.cat/apps/tcoffee/do:core>` and its command line usage is described in details in an `earlier section <http://tcoffee.readthedocs.io/en/latest/tcoffee_main_documentation.html#transitive-consistency-score-tcs>` of this documentation. 
+
+It can be used to evaluate and compare existing alignmnets 
+. The original publication describing it is available
+described in the previous subsection as it is mainly an evaluation tool. It has however several option that are relevant for downstream analysis such weighting and/or trimming MSA for phylogenetic reconstruction. It was demonstrated that TCS was able to improve phylogenetic reconstruction, you are welcome to look at the publication for more details.
 
 
 *************************
