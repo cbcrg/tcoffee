@@ -2064,7 +2064,7 @@ Distance based trees measures are based on a normalized difference of distances 
 	score (X,Y)=Sum(score(AB,CD))+Sum(score (CD, AB)/Sum (d(AB))+Sum (d(CD)) over all pairs for which d(AB)>=MaxD AND d(CD)>=MaxD
 
 
-The T-RMSD
+The T-RMSD 
 ==========
 What is the T-RMSD?
 -------------------
