@@ -270,7 +270,8 @@ struct Alignment
 /*Trees*/
       Alignment *Tree;
       char *tname;
-      int **RepColList;//last item set to -1
+      int  **RepColList;//last item set to -1
+      char **dmF_list;
 /*Score*/
       
     double ** dm;   

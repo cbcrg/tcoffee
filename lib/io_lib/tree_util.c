@@ -2985,7 +2985,13 @@ FILE * print_tree_list ( NT_node *T, char *format,FILE *fp)
     }
   return fp;
 }
-
+FILE * print_tree ( NT_node T, char *format,FILE *fp)
+{
+  
+  tree2file2 (T,NULL, format, fp);
+  fprintf ( fp, "\n");
+  return fp;
+}
 char * tree2string (NT_node T)
 {
   if (!T) return NULL;
@@ -2996,7 +3002,7 @@ char * tree2string (NT_node T)
 
       if (!f)f=vtmpnam (NULL);
       fp=vfopen (f, "w");
-      print_tree (T, "newick", fp);
+      tree2file2 (T,NULL,"newick", fp);
       vfclose (fp);
       return file2string (f);
     }
@@ -3016,12 +3022,9 @@ char * tree2file (NT_node T, char *name, char *mode)
   vfclose (fp);
   return name;
 }
-FILE * print_tree ( NT_node T, char *format,FILE *fp)
-{
-  
-  return print_ordered_tree (T,NULL, format, fp);
-}
-FILE * print_ordered_tree ( NT_node T, Sequence *S,char *format,FILE *fp)
+
+
+FILE * tree2file2 ( NT_node T, Sequence *S,char *format,FILE *fp)
 {
   
   tree2nleaf(T);
@@ -3041,13 +3044,13 @@ FILE * print_ordered_tree ( NT_node T, Sequence *S,char *format,FILE *fp)
     {
       vsrand(0);
       fp=rec_print_tree_shuffle (T, fp);
-      fprintf ( fp, ";\n");
+      fprintf ( fp, ";");
     }
   else if ( ! format || strm2 (format, "newick_tree","newick"))
     {
       if (use_recursion)fp=rec_print_tree (T, fp);
       else fp=no_rec_print_tree (T, fp);
-      fprintf ( fp, ";\n");
+      fprintf ( fp, ";");
     }
   else
     {
@@ -3150,7 +3153,7 @@ FILE * rec_print_tree ( NT_node T, FILE *fp)
 	  fprintf ( fp, ")");
 	  if (T->parent || T->dist)
 	    {
-	      if ( T->bootstrap!=0)fprintf (fp, " %d", (int)T->bootstrap);
+	      if ( T->bootstrap!=0)fprintf (fp, "%d", (int)T->bootstrap);
 	      fprintf (fp, ":%.5f", T->dist);
 	    }
 	}
@@ -3198,7 +3201,7 @@ FILE * no_rec_print_tree ( NT_node p, FILE *fp)
 	      if (p->isseq)fprintf ( fp, "%s:%.5f",p->name,p->dist);
 	      else 
 		{
-		  if ( p->bootstrap!=0)fprintf (fp, " %d", (int)p->bootstrap);
+		  if ( p->bootstrap!=0)fprintf (fp, "%d", (int)p->bootstrap);
 		  fprintf ( fp, ":%.5f",p->dist);
 		}
 	    }
@@ -7420,7 +7423,7 @@ Alignment *tree2node_support (char *newick_tree, Alignment *T)
   sprintf (T->seq_comment[0], "Replicates: %d AverageNodeSupport: %.2f %% Source: seq_reformat", T->nseq, s);
   s=(s/(float)(T->nseq-1))*100;
   T->score=T->score_aln=(float)s*100;
-  T->nseq=1;
+  //T->nseq=1;
   vfree (p);
   return T;
 }

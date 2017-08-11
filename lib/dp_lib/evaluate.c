@@ -1742,6 +1742,7 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
   //receives an alignment and a constraint list file in which contacts are declared
   //can produce scores, trees and score caches to colr MSAs
 
+ 
   if (!A) return A;
   
   //Get arguments passed via environement
@@ -1938,7 +1939,7 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
       replicates=1;
       max_pw_sc=tot_pw_sc=NULL;
     }
-  ntrees=nd*replicates;
+  ntrees=nd*(replicates+1);
   if (!A->Tree)T=A->Tree=declare_aln2(ntrees,0);
   T->RepColList=declare_int  (ntrees, ((use_columns)?1:nlen_aln)+1);
   
@@ -1947,8 +1948,12 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
   
   for (maxD=lowD; maxD<=highD;maxD+=100) 
     {
-      for (rep=0; rep<replicates; rep++)
+
+      T->dmF_list=(char**)vcalloc (replicates+1, sizeof (char*));
+      
+      for (rep=0; rep<=replicates; rep++)
 	{
+	  FILE *fp;
 	  //prepare the replicates drawing from the proper positions
 	  if (use_columns)
 	    {
@@ -1958,6 +1963,7 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
 	    }
 	  else
 	    {
+	      //rep 0 is the target tree
 	      nlen_aln1=nlen_aln;
 	      for (c1=0; c1<nlen_aln; c1++)
 		{
@@ -2211,8 +2217,28 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
 	      printf_exit ( EXIT_FAILURE,stderr, "\nERROR: %s is not a known tree_mode[FATAL]",tree_mode);
 	    
 	    T->seq_al[T->nseq]=file2string(treeF);
-	    sprintf (T->name[T->nseq], "%d",T->nseq+1); 
+	    sprintf (T->name[T->nseq], "%d",T->nseq); 
+	    
+	    fp=vfopen (T->dmF_list[T->nseq]=vtmpnam (NULL), "w");
+	    if (T->nseq==0)fprintf ( fp, "#START Original Distance Matrix NSEQ %4d\n", A->nseq);
+	    else fprintf ( fp, "#START REPLICATE Distance Matrix - %4d - NSEQ %4d\n", T->nseq,A->nseq);
+	    fprintf ( fp, "#SEQS: ");
+	    for (s1=0; s1<A->nseq; s1++)fprintf ( fp, "%s;", A->name[s1]);
+	    fprintf ( fp, "\n");
+	    for (s1=0; s1<A->nseq-1; s1++)
+	      {
+		for (s2=s1+1;s2<A->nseq; s2++)
+		  {
+		    fprintf (fp, "%6.2f ", tot_pw_sc[s1][s2]);
+		  }
+		fprintf (fp, "\n");
+	      }
+	    if (T->nseq==0)fprintf (fp,"#END Original Distance Matrix\n");
+	    else fprintf (fp,"#END Replicate Distance MAtrix - %4d\n", T->nseq);
+	    vfclose (fp);
 	    T->nseq++;
+	    
+	    
 	    
 	    if (T->nseq<ntrees)
 	      {
@@ -2235,9 +2261,11 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
 	}
     }
   
-  if (strikeM)
+  if (modeM==strikeM)
     {
+      
       int maxL=3;
+            
       for (s1=0; s1<A->nseq; s1++)maxL=MAX((strlen(A->name[s1])),maxL);
 	
       for (s1=0; s1<A->nseq; s1++)
@@ -6582,8 +6610,8 @@ int column2et_score (Sequence *S,int *lu, NT_node T, int nseq, int **c, int gep)
   //sprintf (treeF, "cedricT");
   //sprintf (alnF, "cedricA");
   
-  vfclose (print_ordered_tree (T,S, "newick", vfopen (treeF, "w")));
-  
+  vfclose (tree2file2 (T,S, "newick", vfopen (treeF, "w")));
+  string2file (treeF, "a", "\n");
   A->nseq=0;
   A->len_aln=1;
   for (n=0,a=0; a<nseq; a++)

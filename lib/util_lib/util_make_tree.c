@@ -588,17 +588,17 @@ void slow_nj_tree(char **tree_description)
 void print_phylip_tree(char **tree_description, FILE *tree, int bootstrap)
 {
 
-	fprintf(tree,"(\n");
+	fprintf(tree,"(");
  
 	two_way_split(tree_description, tree, nseqs-2,1,bootstrap);
-	fprintf(tree,":%7.5f,\n",left_branch[nseqs-2]);
+	fprintf(tree,":%7.5f,",left_branch[nseqs-2]);
 	two_way_split(tree_description, tree, nseqs-2,2,bootstrap);
-	fprintf(tree,":%7.5f,\n",left_branch[nseqs-1]);
+	fprintf(tree,":%7.5f,",left_branch[nseqs-1]);
 	two_way_split(tree_description, tree, nseqs-2,3,bootstrap);
 
 	fprintf(tree,":%7.5f)",left_branch[nseqs]);
 	if (bootstrap) fprintf(tree,"TRICHOTOMY");
-	fprintf(tree,";\n");
+	fprintf(tree,";");
 }
 
 
@@ -608,7 +608,7 @@ void two_way_split
 	int row, new_row, col, test_col=0;
 	int single_seq;
 
-	if(start_row != nseqs-2) fprintf(tree,"(\n"); 
+	if(start_row != nseqs-2) fprintf(tree,"("); 
 
 	for(col=1; col<=nseqs; col++) {
 		if(tree_description[start_row][col] == flag) {
@@ -644,7 +644,7 @@ void two_way_split
 		return;
 	}
 
-	fprintf(tree,":%7.5f,\n",left_branch[start_row]);
+	fprintf(tree,":%7.5f,",left_branch[start_row]);
 
 	for(col=1; col<=nseqs; col++) 
 		if(tree_description[start_row][col] == flag) {
@@ -673,7 +673,7 @@ void two_way_split
 		two_way_split(tree_description, tree, new_row, (int)1, bootstrap);
 	}
 
-	fprintf(tree,":%7.5f)\n",right_branch[start_row]);
+	fprintf(tree,":%7.5f)",right_branch[start_row]);
 	
 	
 }

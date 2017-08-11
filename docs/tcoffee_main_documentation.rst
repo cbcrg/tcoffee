@@ -1951,7 +1951,7 @@ Clustering/Trees based on protein 3D structures
 This section describes tree estimation procedure based on the comparison of intramolecular distances. These methods are slightly different from the `T-RMSD <http://tcoffee.readthedocs.io/en/latest/tcoffee_main_documentation.html#the-t-rmsd>` that was also originally developped for this purpose and whose usage is decribed in the next section. The methods described in this section are more versatile than the original T-RMSD: they support trees based on contacts or intra-molecular distance variations,alternative tree reconstruction algorithms (NJ, UPGMA), genuine column based generalized boostrap procedures. They also support the STRIKE protocol that involves projecting contacts measured within one or more experimental structures onto the sequences these are aligned with and using the `STRIKE <https://academic.oup.com/bioinformatics/article/27/24/3385/306640/STRIKE-evaluation-of-protein-MSAs-using-a-single>` contact matrice to score these contacts in the sequences without known structures.   
 
 Generating a tree based on 3D intramolecular distances conservation
----------------------------------------------------------------------------
+-------------------------------------------------------------------
 
 This option makes it possible to estimate a tree while taking into account the variation of intramolecular distances within the considered sequences. It requires in input an alignment (FASTA, MSF, ClustalW...) and a template file (structure files associated with the query sequences). The following command (command 1) will generate a 100 replicate NJ trees using the difference of distances between pairs of aligned residues, at a maximum cut-off of 15A. Columns with less than 50% residues are ignored. It is possible to control the defautl parameters (command 2). The ouput will be a tree in the Newick format with bootstrap supports.
 
@@ -1959,13 +1959,24 @@ This option makes it possible to estimate a tree while taking into account the v
 
   Command 1:
   $$: t_coffee -other_pg seq_reformat -in sample_3Dseq1.aln -in2 sample_3Dseq1.template -action \
-      +tree replicates 100 +evaluate3D distances +tree2bs first -output newick
- 
-  Command 2:
+      +tree replicates 100 +evaluate3D distances +tree2bs first +print_replicates -output newick
+
+
+This command will print the main tree with bootstrap support values (first line). The 100 replicates (+tree replicates 100) will then be printed in the following lines (+print_replicates flag)  
+
+Command 2:
+  $$: t_coffee -other_pg seq_reformat -in sample_3Dseq1.aln -in2 sample_3Dseq1.template -action \
+      +tree replicates 100 +evaluate3D distances +tree2bs first +print_replicates -output dm
+
+
+This command will print the main distance matrix in triangular format (first block). The 100 replicates (+tree replicates 100) will then be printed in the following blocks (+print_replicates flag)  
+
+:: 
+  Command 3:
   $$: t_coffee -other_pg seq_reformat -in sample_3Dseq1.aln -in2 sample_3Dseq1.template -action \
       +tree replicates 100 gap 0.5 mode nj +evaluate3D distances 15 +tree2bs first -output newick
       
-
+This command will do the same but pairs of residues will only contribute to the distance computation if they are less than 15 Angstroms appart (i.e. when comparing two aligned pairs, both pairs of residues in each sequence must be less than 15 Angstroms appart)
 
 .. warning:: Sequences without 3D structure will be excluded from the analysis and from the final output.
 

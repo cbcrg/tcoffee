@@ -217,7 +217,7 @@ NT_node straighten_tree ( NT_node P, NT_node C, float new_dist);
 NT_node unroot_tree ( NT_node T);
 FILE* print_tree_list ( NT_node *T,char *format, FILE *fp);
 FILE* print_tree         ( NT_node T,char *format, FILE *fp);
-FILE* print_ordered_tree ( NT_node T,Sequence *S,char *format, FILE *fp);
+FILE* tree2file2 ( NT_node T,Sequence *S,char *format, FILE *fp);
 
 char *tree2string (NT_node T);
 char *tree2file   (NT_node T, char *name, char *mode);

@@ -392,6 +392,9 @@ int seq_reformat ( int argc, char **in_argv)
 		fprintf ( stdout, "\n     .....replicates <N>..+evaluate makes N replicates");
 		fprintf ( stdout, "\n     .....mode <nj|upgma>.+evaluate makes N replicates");
 		fprintf ( stdout, "\n     .....gap <N float>...+evaluate ignores colum with N float gap");
+		fprintf ( stdout, "\n     +tree2bs.............Add BS support to the original tree drwn from replicates");
+		fprintf ( stdout, "\n     +print_replicates....Print Replicate trees AFTER the main tree");
+		
 		
 		fprintf ( stdout, "\n     +tree_prune..........Prune the tree -in using the sequences provided via -in2");
 		fprintf ( stdout, "\n     +tree_cmp............Compares the tree -in and the tree -in2");
@@ -527,6 +530,9 @@ int seq_reformat ( int argc, char **in_argv)
 
 		fprintf ( stdout, "\n*********** OUTPUT FORMATS: weights ******************");
 		fprintf ( stdout, "\n     constraints    saga_pw_sd_weights  nseq\n");
+ 		fprintf ( stdout, "\n");
+		fprintf ( stdout, "\n*********** OUTPUT FORMATS: trees   ******************");
+		fprintf ( stdout, "\n     newick          dm   (note +print_replicates flag => print replicate trees or dm");
  		fprintf ( stdout, "\n");
 		fprintf ( stdout, "\n*********** OUTPUT Formats: special  ****************");
 		fprintf ( stdout, "\n     len             name               statistics<_hnrglNL>");
@@ -3613,19 +3619,48 @@ int main_output  (Sequence_data_struc *D1, Sequence_data_struc *D2, Sequence_dat
 	    rec_print_tree_shuffle (D1->T, stdout);
 	    fprintf (stdout, ";\n");
 	  }
+	else if ( strm  (out_format, "dm"))
+	  {
+	    int x;
+	    FILE *fpx;
+	    if (D1 && D1->A && (D1->A)->Tree && ((D1->A)->Tree)->dmF_list)
+	      {
+		Alignment *T=(D1->A)->Tree;
+		FILE *fpx=vfopen (out_file, "w");
+		display_file_content (fpx,T->dmF_list[0]);
+		if (int_variable_isset ("print_replicates")) 
+		  for (x=1; x<T->nseq; x++)
+		    {
+		      display_file_content (fpx,T->dmF_list[x]);
+		    }
+		vfclose (fpx);
+	      }
+	    else
+	      {
+		printf_exit ( EXIT_FAILURE, stderr, "Distance Matrix Not produced\n", PROGRAM);
+	      }
+	  }
 	else if ( strm4 (out_format, "newick_tree","newick","binary","nh") || strm (out_format, "quick_newick"))
 	        {
 		  if (!D1)return 1;
 		  if (!D1->T && (D1->A))
-		    {
+		    {		      
 		      Alignment *T;
 		      FILE *fpx;
 		      int x;
-		      if ((D1->A)->Tree)T=(D1->A)->Tree;
+		      
+		      if ((D1->A)->Tree)
+			{
+			  T=(D1->A)->Tree;
+			}
 		      else T=(D1->A);
 		      fpx=vfopen (out_file, "w");
-		      for (x=0; x<T->nseq; x++)
-			fprintf (fpx, "%s\n", T->seq_al[0]);
+		      fprintf (fpx, "%s\n", T->seq_al[0]);
+		      if (int_variable_isset ("print_replicates"))
+			{
+			  for (x=1; x<T->nseq; x++)
+			    fprintf (fpx, "%s\n", T->seq_al[x]);
+			}
 		      vfclose (fpx);
 		    }
 		  else
@@ -3633,6 +3668,8 @@ int main_output  (Sequence_data_struc *D1, Sequence_data_struc *D2, Sequence_dat
 		      print_newick_tree (D1->T, out_file);
 		    }
 		}
+	
+	    
 	else if ( strncmp (out_format, "sarsim", 6)==0)
 	        {
 		  if (!D1)return 1;
@@ -11629,6 +11666,10 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	   if (ACTION(1) && strm (ACTION(1), "best"))treelist2node_support_best (D1->A);
 	   else if (ACTION(1) && strm (ACTION(1), "cons"))treelist2cons (D1->A);
 	   else treelist2node_support (D1->A);
+	 }
+       else if (strm (action, "print_replicates"))
+	 {
+	   set_int_variable ("print_replicates",1);
 	 }
        else if ( strm (action, "treelist2bs_compare"))
 	 {
