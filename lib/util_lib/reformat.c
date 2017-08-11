@@ -532,7 +532,9 @@ int seq_reformat ( int argc, char **in_argv)
 		fprintf ( stdout, "\n     constraints    saga_pw_sd_weights  nseq\n");
  		fprintf ( stdout, "\n");
 		fprintf ( stdout, "\n*********** OUTPUT FORMATS: trees   ******************");
-		fprintf ( stdout, "\n     newick          dm   (note +print_replicates flag => print replicate trees or dm");
+		fprintf ( stdout, "\n     newick          dm             newick_dm");
+		fprintf ( stdout, "\n     use +print_replicates flag to print the replicates (first line = original)");
+		fprintf ( stdout, "\n     with newick_dm, grep \";\" to collect the trees");
  		fprintf ( stdout, "\n");
 		fprintf ( stdout, "\n*********** OUTPUT Formats: special  ****************");
 		fprintf ( stdout, "\n     len             name               statistics<_hnrglNL>");
@@ -3631,6 +3633,29 @@ int main_output  (Sequence_data_struc *D1, Sequence_data_struc *D2, Sequence_dat
 		if (int_variable_isset ("print_replicates")) 
 		  for (x=1; x<T->nseq; x++)
 		    {
+		      display_file_content (fpx,T->dmF_list[x]);
+		    }
+		vfclose (fpx);
+	      }
+	    else
+	      {
+		printf_exit ( EXIT_FAILURE, stderr, "Distance Matrix Not produced\n", PROGRAM);
+	      }
+	  }
+	else if ( strm  (out_format, "newick_dm"))
+	  {
+	    int x;
+	    FILE *fpx;
+	    if (D1 && D1->A && (D1->A)->Tree && ((D1->A)->Tree)->dmF_list)
+	      {
+		Alignment *T=(D1->A)->Tree;
+		FILE *fpx=vfopen (out_file, "w");
+		fprintf (fpx, "%s\n", T->seq_al[0]);
+		display_file_content (fpx,T->dmF_list[0]);
+		if (int_variable_isset ("print_replicates")) 
+		  for (x=1; x<T->nseq; x++)
+		    {
+		      fprintf (fpx, "%s\n", T->seq_al[0]);
 		      display_file_content (fpx,T->dmF_list[x]);
 		    }
 		vfclose (fpx);

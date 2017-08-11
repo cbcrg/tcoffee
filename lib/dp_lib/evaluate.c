@@ -2223,7 +2223,7 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
 	    if (T->nseq==0)fprintf ( fp, "#START Original Distance Matrix NSEQ %4d\n", A->nseq);
 	    else fprintf ( fp, "#START REPLICATE Distance Matrix - %4d - NSEQ %4d\n", T->nseq,A->nseq);
 	    fprintf ( fp, "#SEQS: ");
-	    for (s1=0; s1<A->nseq; s1++)fprintf ( fp, "%s;", A->name[s1]);
+	    for (s1=0; s1<A->nseq; s1++)fprintf ( fp, "%s,", A->name[s1]);
 	    fprintf ( fp, "\n");
 	    for (s1=0; s1<A->nseq-1; s1++)
 	      {

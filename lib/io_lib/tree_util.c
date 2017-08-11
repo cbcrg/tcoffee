@@ -7393,7 +7393,7 @@ char*tree2node_support_simple (char *newick_tree, Alignment *T,float *bs)
   RT=recode_tree (RT,S);
   RT=reset_bs2 (RT);
   
-  for (a=0; a<T->nseq; a++)
+  for (a=1; a<T->nseq; a++)
     {
       TT=newick_string2tree(T->seq_al[a]);
       TT=prune_tree (TT,S);
