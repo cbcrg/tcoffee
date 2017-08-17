@@ -1772,7 +1772,8 @@ NT_node seq2dnd (Sequence *S, char *dpa_tree)
 
   //make sure the internal tree is identical to a cached tree
   
-  tree2file (T, tmptree, "w");
+  vfclose (tree2file (T, S, "newick",vfopen(tmptree, "w")));
+  
   free_tree(T);
   T=main_read_tree (tmptree);  
   return T;

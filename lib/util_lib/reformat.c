@@ -385,6 +385,9 @@ int seq_reformat ( int argc, char **in_argv)
 		fprintf ( stdout, "\nTree Analysis___________________________________________________");
 
 
+		fprintf ( stdout, "\n     +mafftnewick2newick..replaces names by the index value in -in2=<seq> (1..N)");
+		fprintf ( stdout, "\n     +newick2mafftnewick..replaces index values by the names in -in2=<seq> (1..N)");
+					  
 		fprintf ( stdout, "\n     +newick_suffle..<N>..Randomly swp left and right node when righting N times the -in Tree");
 		fprintf ( stdout, "\n     +tree................Passes information to +evaluate");
 		fprintf ( stdout, "\n     .....................Default: +evaluate returns a tree");
@@ -498,7 +501,7 @@ int seq_reformat ( int argc, char **in_argv)
 		fprintf ( stdout, "\n     dali_aln       gotoh_aln     pima_aln");
 		fprintf ( stdout, "\n     dialign_aln    matrix        conc_aln");
 		fprintf ( stdout, "\n     NON AUTOMATIC RECOGNITION (use the -input file to specify the format");
-		fprintf ( stdout, "\n     number_aln     newick_tree");
+		fprintf ( stdout, "\n     number_aln     newick        mafftnewick");
 		fprintf ( stdout, "\n");
 		fprintf ( stdout, "\n***********  INPUT FORMATS: Sequences *****************");
  		fprintf ( stdout, "\n     fasta_seq      dali_seq       pir_seq");
@@ -533,6 +536,8 @@ int seq_reformat ( int argc, char **in_argv)
  		fprintf ( stdout, "\n");
 		fprintf ( stdout, "\n*********** OUTPUT FORMATS: trees   ******************");
 		fprintf ( stdout, "\n     newick          dm             newick_dm");
+		fprintf ( stdout, "\n     mafftnewick");
+		
 		fprintf ( stdout, "\n     use +print_replicates flag to print the replicates (first line = original)");
 		fprintf ( stdout, "\n     with newick_dm, grep \";\" to collect the trees");
  		fprintf ( stdout, "\n");
@@ -981,6 +986,7 @@ Sequence_data_struc *read_data_structure ( char *in_format, char *in_file,	Actio
 	    //D->S=tree2seq(D->T, NULL);
 	    D->A=seq2aln (D->S,D->A, 0);
 	  }
+
 	else if (strm4 (in_format, "newick_tree", "newick", "nh", "new_hampshire"))
 	  {
 	   
@@ -3664,6 +3670,11 @@ int main_output  (Sequence_data_struc *D1, Sequence_data_struc *D2, Sequence_dat
 	      {
 		printf_exit ( EXIT_FAILURE, stderr, "Distance Matrix Not produced\n", PROGRAM);
 	      }
+	  }
+	else if ( strm  (out_format, "mafftnewick"))
+	  {
+	    if (!D2->S)printf_exit (EXIT_FAILURE,stderr,"ERROR -output=mafftnewick requires -in2=<seqfile> [FATAL]");
+	    vfclose (tree2file (D1->T, D2->S, "mafftnewick", vfopen (out_file, "w")));
 	  }
 	else if ( strm4 (out_format, "newick_tree","newick","binary","nh") || strm (out_format, "quick_newick"))
 	        {
@@ -11205,6 +11216,7 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	   (D1->A)=aln2bootstrap (D1->A, ATOI_ACTION (1));
 	   D1->S=aln2seq (D1->A);
 	 }
+      
        else if ( strm (action,"aln2sample"))
 	 {
 	   (D1->A)=aln2sample (D1->A, ATOI_ACTION (1));
@@ -11685,6 +11697,18 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	 {
 	   node_sort ( action_list[1], D1->T);
 	   myexit (EXIT_SUCCESS);
+	 }
+       else if ( strm (action, "mafftnewick2newick"))
+	 {
+	   if (!D2->S)printf_exit (EXIT_FAILURE,stderr,"ERROR action +mafftnewick2newick requires -in2=<seqfile> [FATAL]");
+	   seqindex2seqname4tree (D1->T, D2->S);
+	 }
+       else if ( strm (action, "newick2mafftnewick"))
+	 {
+	   
+	   if (!D2->S)printf_exit (EXIT_FAILURE,stderr,"ERROR action +newick2mafftnewick requires -in2=<seqfile> [FATAL]");
+	   seqname2seqindex4tree (D1->T, D2->S);
+	   
 	 }
        else if ( strm ( action, "treelist2bs") ||strm ( action, "tree2bs") )
 	 {

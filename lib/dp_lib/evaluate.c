@@ -6610,7 +6610,7 @@ int column2et_score (Sequence *S,int *lu, NT_node T, int nseq, int **c, int gep)
   //sprintf (treeF, "cedricT");
   //sprintf (alnF, "cedricA");
   
-  vfclose (tree2file2 (T,S, "newick", vfopen (treeF, "w")));
+  vfclose (tree2file (T,S, "newick", vfopen (treeF, "w")));
   string2file (treeF, "a", "\n");
   A->nseq=0;
   A->len_aln=1;

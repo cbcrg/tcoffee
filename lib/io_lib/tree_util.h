@@ -188,6 +188,10 @@ NT_node free_tree_node ( NT_node R);
 
 char * node2seq_file (NT_node N, Sequence *S, int cache, char *file);
 Sequence * tree2seq    (NT_node R, Sequence *S);
+
+int seqname2seqindex4tree (NT_node root, Sequence *S);
+int seqindex2seqname4tree (NT_node root, Sequence *S);
+
 NT_node  rename_seq_in_tree ( NT_node R, char ***list);
 int decode_seq_in_tree (NT_node R, char **name);
   
@@ -217,10 +221,10 @@ NT_node straighten_tree ( NT_node P, NT_node C, float new_dist);
 NT_node unroot_tree ( NT_node T);
 FILE* print_tree_list ( NT_node *T,char *format, FILE *fp);
 FILE* print_tree         ( NT_node T,char *format, FILE *fp);
-FILE* tree2file2 ( NT_node T,Sequence *S,char *format, FILE *fp);
+FILE* tree2file ( NT_node T,Sequence *S,char *format, FILE *fp);
 
 char *tree2string (NT_node T);
-char *tree2file   (NT_node T, char *name, char *mode);
+
 
 int print_newick_tree ( NT_node T, char *name);
 FILE * rec_print_tree ( NT_node T, FILE *fp);

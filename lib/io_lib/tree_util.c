@@ -2383,6 +2383,7 @@ Sequence * tree2seq (NT_node R, Sequence *S)
   if ( use_recursion())return rec_tree2seq (R, S);
   return no_rec_tree2seq (R, S);
 }
+
 Sequence * no_rec_tree2seq    (NT_node root, Sequence *S)
 {
    NT_node current,pre;
@@ -2452,6 +2453,10 @@ Sequence * no_rec_tree2seq    (NT_node root, Sequence *S)
   return S;
 }
 
+
+
+
+
 Sequence * rec_tree2seq    (NT_node R, Sequence *S)
 {
 
@@ -2473,6 +2478,153 @@ Sequence * rec_tree2seq    (NT_node R, Sequence *S)
     }
   return S;
 }
+
+
+int seqindex2seqname4tree (NT_node root, Sequence *S)
+{
+  //index goes 1 to N
+  NT_node current,pre;
+  if ( !root)return 0;
+  int rv=0;
+  reset_node_count (root);
+  current = root;
+  root->visited=1;
+  
+  while(current != NULL)
+    {                 
+      if(!current->left)
+	{
+	  if (current && current->isseq && !current->visited)
+	    {
+	      int i=atoi (current->name)-1;
+	      if (i<S->nseq)current->name=csprintf (current->name, "%s", S->name[i]);
+	      else printf_exit ( EXIT_FAILURE,stderr, "\nERROR: Sequence %s is in tree but not in source sequence file [FATAL]", current->name);
+	      rv++;
+	    } 
+	  current->visited=1;
+	  current = current->right;  
+	}    
+      else
+	{
+	  pre = current->left;
+	  
+	  if (!pre->visited)
+	    {
+	      if (pre && !pre->visited && pre->isseq)
+		{
+		  int i=atoi (pre->name)-1;
+		  if (i<S->nseq)current->name=csprintf (pre->name, "%s", S->name[i]);
+		  else printf_exit ( EXIT_FAILURE,stderr, "\nERROR: Sequence %s is in tree but not in source sequence file [FATAL]",pre->name);
+		  rv++;
+		}
+	      pre->visited=1;
+	    }
+	  while(pre->right && pre->right != current)
+	    {
+	      pre = pre->right;
+	      if (pre)
+		{
+		  if (pre && !pre->visited && pre->isseq)
+		    {
+		       int i=atoi (pre->name)-1;
+		       if (i<S->nseq)pre->name=csprintf (pre->name, "%s", S->name[i]);
+		       else printf_exit ( EXIT_FAILURE,stderr, "\nERROR: Sequence %s is in tree but not in source sequence file [FATAL]",pre->name);
+		       rv++;
+		    }
+		  pre->visited=1;
+		}
+	    }
+	  
+	  
+	  if(!pre->right )
+	    {
+	      pre->right = current;
+	      current = current->left;
+	    }
+	  
+	  else 
+	    {
+	      pre->right = NULL;
+	      current = current->right;      
+	    } 
+	} 
+    } 
+  return rv;
+}
+int seqname2seqindex4tree (NT_node root, Sequence *S)
+{
+  //index goes 1 to N
+  NT_node current,pre;
+  if ( !root)return 0;
+  int rv=0;
+  reset_node_count (root);
+  current = root;
+  root->visited=1;
+  
+  while(current != NULL)
+    {                 
+      if(!current->left)
+	{
+	  if (current && current->isseq && !current->visited)
+	    {
+	      int i=name_is_in_hlist (current->name, S->name, S->nseq);
+	      if (i!=-1)current->name=csprintf (current->name, "%d", i+1);
+	      else printf_exit ( EXIT_FAILURE,stderr, "\nERROR: Sequence %s is in tree but not in source sequence file [FATAL]", current->name);
+	      rv++;
+	    } 
+	  current->visited=1;
+	  current = current->right;  
+	}    
+      else
+	{
+	  pre = current->left;
+	  
+	  if (!pre->visited)
+	    {
+	      if (pre && !pre->visited && pre->isseq)
+		{
+		  int i=name_is_in_hlist (pre->name, S->name, S->nseq);
+		  if (i!=-1)current->name=csprintf (pre->name, "%d", i+1);
+		  else printf_exit ( EXIT_FAILURE,stderr, "\nERROR: Sequence %s is in tree but not in source sequence file [FATAL]", pre->name);
+		  rv++;
+		}
+	      pre->visited=1;
+	    }
+	  while(pre->right && pre->right != current)
+	    {
+	      pre = pre->right;
+	      if (pre)
+		{
+		  if (pre && !pre->visited && pre->isseq)
+		    {
+		       int i=name_is_in_hlist (pre->name, S->name, S->nseq);
+		       if (i!=-1)pre->name=csprintf (pre->name, "%d", i+1);
+		       else printf_exit ( EXIT_FAILURE,stderr, "\nERROR: Sequence %s is in tree but not in source sequence file [FATAL]", pre->name);
+		       
+		       rv++;
+		    }
+		  pre->visited=1;
+		}
+	    }
+	  
+	  
+	  if(!pre->right )
+	    {
+	      pre->right = current;
+	      current = current->left;
+	    }
+	  
+	  else 
+	    {
+	      pre->right = NULL;
+	      current = current->right;      
+	    } 
+	} 
+    } 
+  return rv;
+}
+
+
 
 NT_node balance_tree (NT_node T)
 {
@@ -2988,8 +3140,7 @@ FILE * print_tree_list ( NT_node *T, char *format,FILE *fp)
 FILE * print_tree ( NT_node T, char *format,FILE *fp)
 {
   
-  tree2file2 (T,NULL, format, fp);
-  fprintf ( fp, "\n");
+  tree2file (T,NULL, format, fp);
   return fp;
 }
 char * tree2string (NT_node T)
@@ -3001,34 +3152,18 @@ char * tree2string (NT_node T)
       FILE *fp;
 
       if (!f)f=vtmpnam (NULL);
-      fp=vfopen (f, "w");
-      tree2file2 (T,NULL,"newick", fp);
-      vfclose (fp);
+      vfclose (tree2file (T,NULL,"newick", vfopen (f, "w")));
       return file2string (f);
     }
 }
-  
-char * tree2file (NT_node T, char *name, char *mode)
-{
-  FILE *fp;
-  if (!name)name=vtmpnam (NULL);
-  
-  fp=vfopen (name, mode);
-  
-  if (use_recursion)fp=rec_print_tree (T, fp);
-  else fp=no_rec_print_tree (T, fp);
-  
-  fprintf ( fp, ";\n");
-  vfclose (fp);
-  return name;
-}
 
 
-FILE * tree2file2 ( NT_node T, Sequence *S,char *format,FILE *fp)
+FILE * tree2file ( NT_node T, Sequence *S,char *format,FILE *fp)
 {
+  int ns=tree2nleaf(T);
   
-  tree2nleaf(T);
-  if (!S)
+  /*
+    if (!S)
     {
       S=tree2seq(T, NULL);
       recode_tree (T, S);
@@ -3036,7 +3171,7 @@ FILE * tree2file2 ( NT_node T, Sequence *S,char *format,FILE *fp)
     }
   else
     recode_tree (T, S);
-  
+  */
   
   if ( format && strm (format, "binary"))
     fp=display_tree ( T,S->nseq, fp);
@@ -3044,13 +3179,20 @@ FILE * tree2file2 ( NT_node T, Sequence *S,char *format,FILE *fp)
     {
       vsrand(0);
       fp=rec_print_tree_shuffle (T, fp);
-      fprintf ( fp, ";");
+      fprintf ( fp, ";\n");
     }
   else if ( ! format || strm2 (format, "newick_tree","newick"))
     {
       if (use_recursion)fp=rec_print_tree (T, fp);
       else fp=no_rec_print_tree (T, fp);
-      fprintf ( fp, ";");
+      fprintf ( fp, ";\n");
+    }
+  else if ( strm (format, "mafftnewick"))
+    {
+      if (!S)printf_exit ( EXIT_FAILURE,stderr, "\nERROR: tree2file/mafft requires sequence file [FATAL]\n");
+      seqname2seqindex4tree (T, S);
+      fp=no_rec_print_tree (T, fp);
+      fprintf ( fp, ";\n");
     }
   else
     {
@@ -3059,22 +3201,14 @@ FILE * tree2file2 ( NT_node T, Sequence *S,char *format,FILE *fp)
     }
   return fp;
 }
-int rec_print_newick_tree ( NT_node T, char *name)
-{
-  FILE *fp;
-  fp=vfopen (name, "w");
-  fp=rec_print_tree (T,fp);
-  fprintf (fp, ";\n");
-  vfclose (fp);
-  return 1;
-}
+
 
 int print_newick_tree ( NT_node T, char *name)
 {
   FILE *fp;
   fp=vfopen (name, "w");
 
-  if (use_recursion)fp=rec_print_tree (T, fp);
+  if (use_recursion())fp=rec_print_tree (T, fp);
   else fp=no_rec_print_tree (T, fp);
 
 
@@ -3134,6 +3268,7 @@ FILE * rec_print_tree_shuffle ( NT_node T, FILE *fp)
     }
   return fp;
 }
+
 FILE * rec_print_tree ( NT_node T, FILE *fp)
 {
 
@@ -4465,10 +4600,49 @@ NT_node index_tree_node    (NT_node T)
 
 
 
+NT_node find_node_in_tree (int *key, int nseq, NT_node T)
+{
+  if (!T || !key || !nseq)return NULL;
+  else
+    {
+      int yes,a;
+      NT_node C;
+      int debug=0;
+      if (debug)
+	{
+	  fprintf ( stderr, "\n\n");
+	  for (a=0; a<nseq; a++)
+	    fprintf (stderr, "%c", (key[a])?key[a]:'*');
+	  fprintf ( stderr, "\n");
+	  for (a=0; a<nseq; a++)
+	    fprintf (stderr, "%d", T->lseq2[a]);
+	  fprintf ( stderr, "\n");
+	}
+      for (yes=1,a=0; a<nseq; a++)
+	{
+	  if      ( key[a]&& !T->lseq2[a])
+	    {
+	      return NULL;
+	    }
+	  else if (!key[a]&&  T->lseq2[a])yes=0;
+	}
+
+      if (yes) return T;
+      else if ((C=find_node_in_tree(key, nseq, T->right)))return C;
+      else if ((C=find_node_in_tree(key, nseq, T->left )))return C;
+      else
+	{
+	  HERE ("NOT FOUND AT ALL");
+	  return NULL;
+	}
+    }
+  return NULL;
+}
+
 NT_node simple_recode_tree (NT_node T, int nseq)
 {
 
-  //recodes atree wher the leafs are already coded
+  //recodes a tree wher the leafs are already coded
   if (!T) return T;
 
 
@@ -4514,45 +4688,6 @@ NT_node simple_recode_tree (NT_node T, int nseq)
     }
   return T;
 }
-NT_node find_node_in_tree (int *key, int nseq, NT_node T)
-{
-  if (!T || !key || !nseq)return NULL;
-  else
-    {
-      int yes,a;
-      NT_node C;
-      int debug=0;
-      if (debug)
-	{
-	  fprintf ( stderr, "\n\n");
-	  for (a=0; a<nseq; a++)
-	    fprintf (stderr, "%c", (key[a])?key[a]:'*');
-	  fprintf ( stderr, "\n");
-	  for (a=0; a<nseq; a++)
-	    fprintf (stderr, "%d", T->lseq2[a]);
-	  fprintf ( stderr, "\n");
-	}
-      for (yes=1,a=0; a<nseq; a++)
-	{
-	  if      ( key[a]&& !T->lseq2[a])
-	    {
-	      return NULL;
-	    }
-	  else if (!key[a]&&  T->lseq2[a])yes=0;
-	}
-
-      if (yes) return T;
-      else if ((C=find_node_in_tree(key, nseq, T->right)))return C;
-      else if ((C=find_node_in_tree(key, nseq, T->left )))return C;
-      else
-	{
-	  HERE ("NOT FOUND AT ALL");
-	  return NULL;
-	}
-    }
-  return NULL;
-}
-
 NT_node recode_tree (NT_node T, Sequence *S)
 {
 
@@ -9414,4 +9549,74 @@ unsigned long declare_aln_node_d (int mode)
   available--;
   return ++allocated;
 }   
+
+ALN_node* kmsa2graph2 (Sequence *S,KT_node K,Alignment *A0, ALN_node **lu0, ALN_node *list, int *ns, int *done, int max)
+{
+  int a,b,c, n;
+  Alignment *A1;
+  
+  if (!A0)
+    {
+      A0=quick_read_aln (K->msaF);
+      lu0=msa2graph (S,A0, NULL);
+      for (a=0; a<A0->nseq; a++)list[ns[0]++]=lu0[a][0];
+      reset_output_completion ();
+    }  
+  
+  for (a=0; a<K->nc; a++)
+    {
+      ALN_node m, s, t;
+      A1 =quick_read_aln ((K->child[a])->msaF);
+      ALN_node **lu1=msa2graph (S,A1, NULL);
+      int i0=name_is_in_list ((K->child[a])->name,A0->name, A0->nseq,MAXNAMES);
+      int i1=name_is_in_list ((K->child[a])->name,A1->name, A1->nseq,MAXNAMES);
+      
+      for (b=0; b<A1->nseq; b++)list[ns[0]++]=lu1[b][0];
+            
+      n=0;
+      while (lu0[i0][n])
+	{
+	  int g;
+	  
+	  m=lu0[i0][n];
+	  s=lu1[i1][n];
+	  
+	  int lm=node2gap_len (m->r);
+	  int ls=node2gap_len (s->r);
+	  if (lm>0 || ls>0)
+	    {
+	      int c;
+	      char *master=graph2cons(m->r, lm);
+	      char *slave =graph2cons(s->r, ls);
+	      ALN_node tm=n2top(m);
+	      ALN_node ts=n2top(s);
+	      static Alignment *A;
+	      ALN_node buf;
+	      
+	      
+	      A=align_two_streches4dpa (master, slave, "blosum62mt",-4,-1, "myers_miller_pair_wise", A);
+	      for (c=0; c<A->len_aln; c++)
+		{
+		  if (A->seq_al[0][c]=='-')tm=insert_gap_in_graph (tm);
+		  else tm=tm->r;
+		  if (A->seq_al[1][c]=='-')ts=insert_gap_in_graph (ts);
+		  else ts=ts->r;
+		}
+	      vfree (master); vfree (slave);
+	    }
+	  n++;
+	}
+      
+      done[0]+=1;
+      //output_completion (stderr,done[0],max, 100, "Incorporating MSAs");
+      insert_msa_in_msa (lu1[i1][0],lu0[i0][0]);
+      list=kmsa2graph(S,K->child[a], A1, lu1, list, ns, done, max);
+      
+      for (b=0; b<A1->nseq; b++)vfree(lu1[b]);
+      vfree (lu1);
+      free_aln (A1);
+    }
+  
+  return list;
+}
 #endif

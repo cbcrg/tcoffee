@@ -5171,7 +5171,7 @@ get_cl_param(\
 			   fprintf ( le, "\nREAD PRECOMPUTED TREE: %s\n", pc);
 			   T=read_tree (pc,&tot_node,(CL->S)->nseq,  (CL->S)->name);
 			 }
-		       vfclose (tree2file2 ((T[3][0]),CL->S, "newick",vfopen (pc, "w")));
+		       vfclose (tree2file ((T[3][0]),CL->S, "newick",vfopen (pc, "w")));
 		       A->tname=(char*)vcalloc ( strlen (pc)+1, sizeof(char));
 		       sprintf (A->tname, "%s", pc);
 		       SNL=tree_aln ((T[3][0])->left,(T[3][0])->right,A,(CL->S)->nseq, CL);

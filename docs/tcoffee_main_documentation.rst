@@ -780,7 +780,7 @@ If your data is not data sequence, but a matrix of 1 and Os (i.e. SAR matrix for
 
 Comparing two phylogenetic trees
 --------------------------------
-A real interesting option is the ability to compare two trees (unrooted) returning some ofthe most common scores used for this including the famous Robinson-Foulds ;-)
+A real interesting option is the ability to compare two trees (unrooted) returning some ofthe most common scores used for this including Robinson-Foulds
 
 ::
 
@@ -825,7 +825,7 @@ For each position of the alignment, W*2 blocks of size 2*1+1 up to W*2+1 will be
 
   P: <position> <block start> <block_end> <block score> <block Length>
 
-Pruning phylogenetic trees [Under maintenance]
+Pruning phylogenetic trees
 --------------------------
 Pruning removes leaves from an existing tree and recomputes distances so that no information is lost. To do this with T-Coffee you need two input files: a tree file in the Newick format and a FASTA-like file where sequences can be omitted, but you can also leave them, at your entire convenience. The second file is merely a list of the sequences to be kept when pruning the tree. The resulting tree will contain only the sequences specified in the list.
 
@@ -842,6 +842,20 @@ Pruning removes leaves from an existing tree and recomputes distances so that no
   Pruning the tree:
   $$: t_coffee -other_pg seq_reformat -in sample_3Dseq1.tree -in2 sample_3Dseq1.fasta -action \
       +tree_prune -output newick
+
+Tree Reformatting for MAFFT
+---------------------------
+The most common format for phylogenetic trees is newick, but some alternatives exist, including the one used by MAFFT for very large trees, in which the sequence names are replaced by their original index (1..N) in the sequence file. Seq_reformat can be used to cross convert these two formats:
+
+::
+
+  $$: t_coffee -other_pg seq_reformat -in sample_3Dseq1.tree -in2 sample_3Dseq1.fasta -action +newick2mafftnewick
+
+And the reverse operation when processing a mafft guide tree
+
+::
+  $$: t_coffee -other_pg seq_reformat -in sample_3Dseq1.mafftnewick -in2 sample_3Dseq1.fasta -action +mafftnewick2newick
+
 
 
 Manipulating structure files (PDB)
