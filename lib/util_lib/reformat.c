@@ -789,8 +789,8 @@ int seq_reformat ( int argc, char **in_argv)
 	  {
 	    rename_list=read_rename_file ( rename_file,code);
 	  }
-
-
+	
+	
 	if ((D1=read_data_structure (in_format, in_file,RAD))!=NULL)
 	  {
 	    in_format=(in_format && in_format[0])?in_format:identify_seq_format(in_file);
@@ -2312,7 +2312,9 @@ int format_is_oligo(char *file)
     }
 int format_is_msf ( char *file)
     {
-      return token_is_in_n_lines (file,"MSF",5);
+      if (!token_is_in_n_lines (file,"MSF:",5)) return 0;
+      else if (!token_is_in_n_lines (file,"Type:",5))return 0;
+      else return 1;
 
     }
 
