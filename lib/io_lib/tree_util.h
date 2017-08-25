@@ -201,6 +201,7 @@ NT_node tree2deepest_node(NT_node T);
 int tree_file2nseq ( char *file);
 
 int tree2nleaf ( NT_node R);
+int no_rec_tree2nnode (NT_node R);
 int tree2nnode ( NT_node R);
 int tree2_nnode_unresolved (NT_node R, int *l);
 
@@ -227,9 +228,9 @@ char *tree2string (NT_node T);
 
 
 int print_newick_tree ( NT_node T, char *name);
-FILE * rec_print_tree ( NT_node T, FILE *fp);
 FILE * no_rec_print_tree ( NT_node T, FILE *fp);
-FILE*  rec_print_tree_shuffle ( NT_node T, FILE *fp);
+FILE*  no_rec_print_tree_shuffle ( NT_node T, FILE *fp);
+NT_node tree2shuffle (NT_node p);
 
 NT_node find_longest_branch ( NT_node T, NT_node L);
 NT_node shift_root ( NT_node R);
@@ -282,6 +283,7 @@ int tree2n_branches(NT_node T, int mode);
 int **display_tree_from_node (NT_node T, int up, int down, int **array);
 NT_node tree2node ( char *name, NT_node T);
 NT_node * tree2node_list (NT_node T, NT_node *L);
+NT_node * no_rec_tree2node_list (NT_node T, NT_node *L);
 NT_node tree2root ( NT_node T);
 int new_tree_sort ( char *name, NT_node T);
 

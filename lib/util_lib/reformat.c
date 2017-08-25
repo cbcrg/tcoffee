@@ -3626,7 +3626,7 @@ int main_output  (Sequence_data_struc *D1, Sequence_data_struc *D2, Sequence_dat
 
 	else if ( strm  (out_format, "newick_shuffle"))
 	  {
-	    rec_print_tree_shuffle (D1->T, stdout);
+	    no_rec_print_tree_shuffle (D1->T, stdout);
 	    fprintf (stdout, ";\n");
 	  }
 	else if ( strm  (out_format, "dm"))
@@ -11672,7 +11672,7 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	   int zz;
 	   for (zz=0; zz<shuf; zz++)
 	     {
-	       rec_print_tree_shuffle (D1->T, stdout);
+	       no_rec_print_tree_shuffle (D1->T, stdout);
 	       fprintf (stdout, ";\n");
 	     }
 	   myexit(EXIT_SUCCESS);
