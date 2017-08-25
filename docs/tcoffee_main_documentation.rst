@@ -1978,29 +1978,36 @@ This option makes it possible to estimate a tree while taking into account the v
 
 This command will print the main tree with bootstrap support values (first line). The 100 replicates (+tree replicates 100) will then be printed in the following lines (+print_replicates flag)  
 
+
 ::
 
-Command 2:
+  Command 2:
   $$: t_coffee -other_pg seq_reformat -in sample_3Dseq1.aln -in2 sample_3Dseq1.template -action \
       +tree replicates 100 +evaluate3D distances +tree2bs first +print_replicates -output dm
 
 
+
 This command will print the main distance matrix in triangular format (first block). The 100 replicates (+tree replicates 100) will then be printed in the following blocks (+print_replicates flag)  
+
 
 ::
 
-Command 3:
+  Command 3:
   $$: t_coffee -other_pg seq_reformat -in sample_3Dseq1.aln -in2 sample_3Dseq1.template -action \
       +tree replicates 100 +evaluate3D distances +tree2bs first +print_replicates -output newick_dm
 
 
 This command will print the newick trees and their corresponding distance matrix in triangular format (first block). The 100 replicates (+tree replicates 100) will then be printed in the following blocks along with the trees (+print_replicates flag). Note that the lines containing trees can be grepped by the ";" symbol they terminate with.  
 
+
 :: 
+  
   Command 4:
   $$: t_coffee -other_pg seq_reformat -in sample_3Dseq1.aln -in2 sample_3Dseq1.template -action \
       +tree replicates 100 gap 0.5 mode nj +evaluate3D distances 15 +tree2bs first -output newick
       
+
+
 This command will do the same but pairs of residues will only contribute to the distance computation if they are less than 15 Angstroms appart (i.e. when comparing two aligned pairs, both pairs of residues in each sequence must be less than 15 Angstroms appart)
 
 .. warning:: Sequences without 3D structure will be excluded from the analysis and from the final output.
