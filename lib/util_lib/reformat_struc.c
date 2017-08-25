@@ -1238,6 +1238,7 @@ float atom2radius (char *t)
     }
   if (!b)b=' ';
   else if (b>='A' && b<='Z')b=' ';
+  else if (b>='0' && b<='9')b=' ';
 
   if (lu[a][b]<0)printf_exit ( EXIT_FAILURE,stderr, "\nERROR: Atom [%s] is unknown[FATAL] (a=[%c] b=[%c]",t, a, b);
   return lu[a][b];
