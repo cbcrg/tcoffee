@@ -2793,6 +2793,8 @@ Alignment * align_two_sequences ( char *seq1, char *seq2, char *in_matrix, int g
 	if (!align_mode)align_mode=(char*)vcalloc ( 100, sizeof (char));
 	sprintf ( align_mode, "%s", in_align_mode);
 
+	//HERE ("## %s ##\## %s ##\n\n");
+
 	CL=(Constraint_list*)vcalloc ( 1, sizeof (Constraint_list));
 
 	CL->pw_parameters_set=1;

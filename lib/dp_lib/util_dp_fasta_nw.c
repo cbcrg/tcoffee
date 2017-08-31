@@ -1115,7 +1115,7 @@ int make_fasta_gotoh_pair_wise (Alignment *A,int*ns, int **l_s,Constraint_list *
 			char_buf[b]='-';
 		   }
 		char_buf[b]='\0';
-		sprintf (aln[l_s[c][a]],"%s", char_buf);
+		aln[l_s[c][a]]=csprintf (aln[l_s[c][a]],"%s", char_buf);
 	        }
 	     }
 
