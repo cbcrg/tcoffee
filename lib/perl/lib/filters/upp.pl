@@ -18,8 +18,6 @@ elsif ($ARGV[0] eq "all")
     listseq2listmsa ($ARGV[1]);
   }
 
-
-
 sub listseq2listmsa
   {
     my $list=shift;
@@ -29,43 +27,50 @@ sub listseq2listmsa
     my %h;
     my $n;
     mkdir  ($dir);
-    
+
     open (F, $list);
     while (<F>)
       {
-	my $l=$_;
+        my $l=$_;
 
-	chomp($l);
-	my @f=split (/\s+/, $l);
-	#print "$l: 0:$f[0], 1:$f[1]\n";
-	if ( -e $f[0])
-	  {
-	    $h{$n}{in}=$f[0];
-	    ($h{$n}{name},$h{$n}{path})=fileparse ($f[0]);
-	    $h{$n}{NFin}= "$dir/$h{$n}{name}.seq4nf";
-	    $h{$n}{NFout}="$dir/$h{$n}{name}.aln";
-	    
-	    $h{$n}{out}=$f[1];
-	    
-	    translate_fasta_seq ("uU", "X",$h{$n}{in}, $h{$n}{NFin});
-	    $n++;
-	  }
+        chomp($l);
+        my @f=split (/\s+/, $l);
+        #print "$l: 0:$f[0], 1:$f[1]\n";
+        if ( -e $f[0])
+          {
+            $h{$n}{in}=$f[0];
+            ($h{$n}{name},$h{$n}{path})=fileparse ($f[0]);
+            $h{$n}{NFin}= "$dir/$h{$n}{name}.seq";
+            #$h{$n}{NFin}= "$dir/$h{$n}{name}.seq4nf";
+            $h{$n}{NFout}="$dir/$h{$n}{name}.aln";
+
+            $h{$n}{out}=$f[1];
+
+            translate_fasta_seq ("uU", "X",$h{$n}{in}, $h{$n}{NFin});
+            $n++;
+          }
       }
     close (F);
-    
-    
+
     chdir ($dir);
-    dump_nf ("nf");
-    dump_config ();
-   
+    #dump_nf ("nf");
+    #dump_config ();
+
     #system ("nextflow run nf  --name \'*.seq4nf\' >/dev/null 2>/dev/null");
-    system ("nextflow run nf  --name \'*.seq4nf\'");
+    #system ("nextflow run nf  --name \'*.seq4nf\'");
+
+    system ("fbname=\$(basename `ls *.seq` .seq); \
+             run_upp.py -s \${fbname}.seq -m amino --cpu 1 -d outdir -o \${fbname}.aln; \
+             mv outdir/\${fbname}.aln_alignment.fasta \${fbname}.aln;");
+
+
     foreach my $n (keys (%h))
       {
-	translate_fasta_seq ("uU", "X",$h{$n}{NFout},$h{$n}{out});
+        translate_fasta_seq ("uU", "X",$h{$n}{NFout},$h{$n}{out});
       }
     chdir ($cdir);
   }
+
 sub seq2msa
     {
       my ($in, $out)=@_;
