@@ -35,13 +35,12 @@ sub listseq2listmsa
 
         chomp($l);
         my @f=split (/\s+/, $l);
-        #print "$l: 0:$f[0], 1:$f[1]\n";
-        if ( -e $f[0])
+	if ( -e $f[0])
           {
             $h{$n}{in}=$f[0];
             ($h{$n}{name},$h{$n}{path})=fileparse ($f[0]);
             $h{$n}{NFin}= "$dir/$h{$n}{name}.seq";
-            #$h{$n}{NFin}= "$dir/$h{$n}{name}.seq4nf";
+	    
             $h{$n}{NFout}="$dir/$h{$n}{name}.aln";
 
             $h{$n}{out}=$f[1];
@@ -51,14 +50,7 @@ sub listseq2listmsa
           }
       }
     close (F);
-
     chdir ($dir);
-    #dump_nf ("nf");
-    #dump_config ();
-
-    #system ("nextflow run nf  --name \'*.seq4nf\' >/dev/null 2>/dev/null");
-    #system ("nextflow run nf  --name \'*.seq4nf\'");
-
     system ("fbname=\$(basename `ls *.seq` .seq); \
              run_upp.py -s \${fbname}.seq -m amino --cpu 1 -d outdir -o \${fbname}.aln; \
              mv outdir/\${fbname}.aln_alignment.fasta \${fbname}.aln;");

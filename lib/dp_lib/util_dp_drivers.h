@@ -36,6 +36,7 @@ Alignment * seq2clustalw_aln (Sequence *S);
 Alignment * aln2clustalw_aln (Alignment *A, Constraint_list *CL);
 Alignment * realign_block ( Alignment *A, int col1, int col2, char *pg);
 char *seq_file2msa_file (char *file, char *seq, char *aln);
+int seq_are_duplicated (char *seq);
 Alignment *seq2msa (Sequence *S);
 
 /******************************************************************/

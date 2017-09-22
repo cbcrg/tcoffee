@@ -905,6 +905,7 @@ Alignment * realign_block ( Alignment *A, int col1, int col2, char *pg)
 
   return A;
 }
+
 Alignment *seq2msa (char *method,Sequence *S)
 {
   char *seq=vtmpnam (NULL);
@@ -916,23 +917,52 @@ Alignment *seq2msa (char *method,Sequence *S)
   A=main_read_aln (aln, NULL);
   return A;
 }
+int seq_are_duplicated (char *seq)
+{
+ 
+  if (!seq) return 0;
+  else if (!check_file_exists (seq))return 0;
+  else
+    {
+      Sequence *S=get_fasta_sequence (seq,NULL);
+      if (!S) return 0;
+      else if (S->nseq<=1);
+      else 
+	{
+	  int a;
+	  for ( a=1; a<S->nseq; a++)
+	    {
+	      if (strcmp (S->seq[0], S->seq[a])){free_sequence (S, -1); return 0;}
+	    }
+	}
+      free_sequence (S, -1);
+      return 1;
+    }
+}
+
 char *seq_file2msa_file (char *file, char *seq, char *aln)
 {
   TC_method *method=NULL;
-  static char *command=NULL;
+  static char *command;
+  static char *dir;
+  char *lcom=NULL;
   int free=0;
+  int local=1;
+  char *cdir=get_pwd (NULL);
+  int duplicated=0;
   
   if (!aln)
     {
       aln=vtmpnam (NULL);
     }
+  
+  duplicated=seq_are_duplicated (seq);
+  
   if (!file) return NULL;
   else if (file[0]=='#')
     {
-      char *lcom=NULL;
       //will run the T-Coffee master command
       lcom=csprintf (lcom, "%s -seq seq -outfile aln -output fasta_aln -quiet >/dev/null 2>/dev/null", file+1);
-      command=lcom;
     }
   else if ( !check_file_exists (file))
     {
@@ -949,37 +979,34 @@ char *seq_file2msa_file (char *file, char *seq, char *aln)
       command=make_aln_command (method,"seq", "aln");
     }
   
-  if (command)
+  if (!dir)
     {
-      static char *dir;
-      char *cdir=get_pwd (NULL);
-      
-      if (!dir)
-	{
-	  dir =vtmpnam (NULL);
-	  my_mkdir (dir);
-	}
-      
-      chdir (dir);
-      printf_system ("cp %s seq", seq);
-      
-      printf_system ("%s", command);
-      
-      if ( !check_file_exists ("aln"))
-	{
-	  printf_exit (EXIT_FAILURE, stderr, "ERROR: Impossible to run %s [FATAL:%s]\n",file, PROGRAM);
-	}
-      
+      dir =vtmpnam (NULL);
+      my_mkdir (dir);
+    }
+  
+  chdir (dir);
+  printf_system ("cp %s seq", seq);
+  
+  if ( duplicated==10)printf_system ("cp seq aln");
+  else if (lcom)
+    {
+      printf_system ("%s", lcom);vfree (lcom);
+    }
+  else if ( command)printf_system ("%s", command);
+  else printf_exit ( EXIT_FAILURE,stderr, "\nERROR: %s is an unknown method [FATAL]", file);
+  
+  if (check_file_exists ("aln"))
+    {
       printf_system ("cp aln %s",aln);
       chdir    (cdir);
       printf_system_direct ("rm %s/*", dir);
-      
     }
   else
     {
-      printf_exit ( EXIT_FAILURE,stderr, "\nERROR: %s is an unknown method [FATAL]", file);
+      printf_exit (EXIT_FAILURE, stderr, "ERROR: Impossible to run %s [FATAL:%s]\n",file, PROGRAM);
     }
-
+  
   return aln;
 }
 
