@@ -58,7 +58,7 @@ sub listseq2listmsa
 
     foreach my $n (keys (%h))
       {
-        translate_fasta_seq ("uU", "X",$h{$n}{NFout},$h{$n}{out});
+        translate_fasta_seq ("X", "U",$h{$n}{NFout},$h{$n}{out});
       }
     chdir ($cdir);
   }
@@ -81,29 +81,8 @@ sub seq2msa
       return listseq2listmsa ($file);
     }
 	
-sub seq2msa_old
-  {
-    my ($in, $out)=@_;
-    my $cdir = getcwd;
-    my $dir=random_string(10);
-    $dir="/tmp/upp.nf4tcoffee/$dir";
-    my $seq=random_string(10);
-    $seq.=".fa";
-    my $aln=$seq;
-    $aln.=".aln";
-    
-    mkdir ($dir);
-    translate_fasta_seq ("uU", "X",$in, "$dir/$seq");
-    chdir ($dir);
-    
-    dump_nf ("nf");
-    dump_config ();
-    print "IN: $in OUT: $cdir/$out\nDIR: $dir\nnextflow run nf  --name \'*.fa\' \n";
-    system ("nextflow run nf  --name \'*.fa\' ");
-    print "$dir/$aln $cdir/$out\n";
-    translate_fasta_seq ("xX", "U",$aln, "$cdir/$out");
-    chdir ($cdir);
-   } 
+
+
 sub translate_fasta_seq
   {
     my ($from, $to, $in, $out)=@_;
@@ -137,42 +116,7 @@ sub translate_fasta_seq
     close (OUT);
   }
 
-sub dump_config
-    {
-      open (F, ">nextflow.config");
 
-      print F "docker.enabled = true\n";
-      print F "process.container = \'cbcrg/benchfam_large_scale\'\n";
-      close (F);
-    }
-
-sub dump_nf
-  {
-    my $nff=shift;
-    open (F,">$nff");
-    print F "#!/usr/bin/env nextflow\n";
-    print F "params.base_dir=\"./\"\n";
-    print F "params.out_dir=\"./\"\n";
-    print F "Channel.fromPath(params.name)\n";
-    print F "\t.map{ tuple(it.baseName, it) }\n";
-    
-    print F "\t.set{ file_names_1 }\n";
-    print F "process upp_align{\n";
-    print F "\tpublishDir params.out_dir, mode: \"copy\"\n";
-    print F "tag \"\${name}\"";
-    print F "\n";
-    print F "\tinput:\n";
-    print F "\tset name, file(seq_file) from file_names_1\n";
-    print F "\toutput:\n";
-    print F "\tfile \"\${name}.aln\"\n";
-    print F "\n";
-    print F " \"\"\"\n";
-    print F " run_upp.py -s \$seq_file -m amino --cpu \${task.cpus} -d outdir -o \${name}.aln\n";
-    print F " mv outdir/\${name}.aln_alignment.fasta \${name}.aln\n";
-    print F "\"\"\"\n\n";
-    print F "}\n";
-    close (F);
-  }
 
 sub random_string
     {
