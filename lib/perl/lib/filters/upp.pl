@@ -2,7 +2,7 @@
 use strict;
 use Cwd;
 use File::Basename;
-
+my $test=0;
 
 my $tmpdir="/tmp/tco/aligners/upp/";
 mymkdir ($tmpdir);
@@ -45,20 +45,28 @@ sub listseq2listmsa
 
             $h{$n}{out}=$f[1];
 
-            translate_fasta_seq ("uU", "X",$h{$n}{in}, $h{$n}{NFin});
+            fasta2fastaupp ($h{$n}{in}, $h{$n}{NFin});
             $n++;
           }
       }
     close (F);
     chdir ($dir);
-    system ("fbname=\$(basename `ls *.seq` .seq); \
+    
+    if (!$test)
+      {
+	system ("fbname=\$(basename `ls *.seq` .seq); \
              run_upp.py -s \${fbname}.seq -m amino --cpu 1 -d outdir -o \${fbname}.aln; \
              mv outdir/\${fbname}.aln_alignment.fasta \${fbname}.aln;");
-
-
+      }
+    
     foreach my $n (keys (%h))
       {
-        translate_fasta_seq ("X", "U",$h{$n}{NFout},$h{$n}{out});
+	if ($test)
+	  {
+	    system ("cp $h{$n}{NFin} $h{$n}{NFout}");
+	    print "$h{$n}{NFin} $h{$n}{NFout} $h{$n}{out}\n";
+	  }
+        fastaupp2fasta ($h{$n}{NFout},$h{$n}{out});
       }
     chdir ($cdir);
   }
@@ -81,42 +89,80 @@ sub seq2msa
       return listseq2listmsa ($file);
     }
 	
-
-
-sub translate_fasta_seq
+sub fasta2fastaupp
   {
-    my ($from, $to, $in, $out)=@_;
-    my $n;
-    my $skip;
-    my $l;
-    my $cseq;
+    my ($in, $out)=@_;
+    my ($name, $seq, $n);
+    
     if (!-e $in){return;}
     
     open (IN, "$in");
     open (OUT, ">$out");
-   
+    local $/ = "\n>";  # read by FASTA record
+    
     while (<IN>)
       {
-	$l=$_;
-	if ($l=~">"){$n++;$cseq="";}
-	else { $l=~s/[$from]/$to/;$cseq.=$l;}
-
-	if ($skip){$skip=0;}
-	elsif ($l=~/>fake_seq/){$skip=1;}
-	else
-	  {
-	    print OUT "$l";
-	  }
+	my $l=$_;
+	$l=~s/>//g;
+	$l=">".$l;
+	
+	$l=~/^>(.*)/;
+	$name=$1;
+	
+	$l=~s/^>*.+\n//;
+	$l=~s/\n//g;
+	$seq=$l;
+	
+	$seq=~s/u/x/g;
+	$seq=~s/U/X/g;
+	print OUT ">$name\n$seq\n";
+	$n++;
       }
-    if ($n==2 && $from eq "uU")
+    if ($n==2)
       {
-	print OUT ">fake_seq\n$cseq\n";
+	print OUT ">fake_seq4upp\n$seq\n";
       }
     close (IN);
     close (OUT);
+    local $/="\n";
   }
 
-
+sub fastaupp2fasta
+  {
+    my ($in, $out)=@_;
+    my ($name, $seq, $n);
+    
+    if (!-e $in){return;}
+    
+    open (IN, "$in");
+    open (OUT, ">$out");
+    local $/ = "\n>";  # read by FASTA record
+    
+    while (<IN>)
+      {
+	my $l=$_;
+	$l=~s/>//g;
+	$l=">".$l;
+	
+	$l=~/^>(.*)/;
+	$name=$1;
+	
+	$l=~s/^>*.+\n//;
+	$l=~s/\n//g;
+	$seq=$l;
+	
+	$seq=~s/x/u/g;
+	$seq=~s/X/U/g;
+	
+	if (!($name=~/fake_seq4upp/))
+	  {
+	    print OUT ">$name\n$seq\n";
+	  }
+      }
+    close (IN);
+    close (OUT);
+    local $/="\n";
+  }
 
 sub random_string
     {

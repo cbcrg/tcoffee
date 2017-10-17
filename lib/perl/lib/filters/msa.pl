@@ -1,5 +1,5 @@
 #!/usr/bin/env perl
-
+$run_anyway=0;
 my $msaf="msa.in.tmp.$$";
 my $msaoutf="msa.out.tmp.$$";
 my $err="msa.out.err.$$";
