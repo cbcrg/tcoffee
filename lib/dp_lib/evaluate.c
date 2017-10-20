@@ -2097,10 +2097,37 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
 				double w2=(double)dm2[c1][c2];
 				if (modeM==distancesM && dm2[c1][c2])
 				  {
-				    double we=w1;
-				    sc=((MIN((w1/w2),(w2/w1))));
-				    sc=sc*sc*sc*we;
+				    static int   distance_mode=atoigetenv ("3DTREE_MODE");
+				    static float distance_modeE=atofgetenv ("3DTREE_MODE_EXP");
+				    double we;
+				    
+				    if ( distance_modeE<0.0001)distance_modeE=3;
+				    
+				    if (!distance_mode)
+				      {
+					we=w1;
+					sc=((MIN((w1/w2),(w2/w1))));
+				      }
+				    else if (distance_mode==1)
+				      {
+					double we=(w1+w2)/2;
+					sc=((MIN((w1/w2),(w2/w1))));
+				      }
+				    else if (distance_mode==2)
+				      {
+					double we=1;
+					sc=1-(FABS((w1-w2))/((w1+w2)/2));
+				      }
+				    else if (distance_mode==3)
+				      {
+					double we=(w1+w2)/2;
+					sc=FABS((w1-w2))/we;
+				      }
+				    sc=we;
 				    in=we;
+				    
+				    sc=pow(sc,distance_modeE)*we;
+				    
 				  }
 				else if (modeM==contactsM && w2>0)
 				  {sc=1;in=1;}
