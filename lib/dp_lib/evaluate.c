@@ -2097,48 +2097,63 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
 				double w2=(double)dm2[c1][c2];
 				if (modeM==distancesM && dm2[c1][c2])
 				  {
-				    static int   distance_mode=atoigetenv ("3DTREE_MODE");
-				    static float distance_modeE=atofgetenv ("3DTREE_MODE_EXP");
+				    static int   distance_mode=atoigetenv ("THREED_TREE_MODE");
+				    static double distance_modeE=atofgetenv ("THREED_TREE_MODE_EXP");
 				    double we;
 				    
 				    if ( distance_modeE<0.0001)distance_modeE=3;
 				    
+
+				    //first attempt-- Major issue because non symetrical and therefore not a distance
 				    if (!distance_mode)
 				      {
 					we=w1;
 					sc=((MIN((w1/w2),(w2/w1))));
 				      }
+				    //same as before but symetrical: the distance ratio weighted by the average distance
 				    else if (distance_mode==1)
 				      {
-					double we=(w1+w2)/2;
+					we=(w1+w2)/2;
 					sc=((MIN((w1/w2),(w2/w1))));
 				      }
+				    //the absolute difference of distance normalized by the average distance
 				    else if (distance_mode==2)
 				      {
-					double we=1;
-					sc=1-(FABS((w1-w2))/((w1+w2)/2));
+					
+					we=1;
+					sc=(double) 1-(FABS((w1-w2))/((w1+w2)/2));
+					
 				      }
+				    //the absolute difference of distance normalized by the average distance and weighted by the average distance
 				    else if (distance_mode==3)
 				      {
-					double we=(w1+w2)/2;
-					sc=FABS((w1-w2))/we;
+					we=(w1+w2)/2;
+					sc=(double)1-FABS((w1-w2))/we;
 				      }
-				    sc=we;
 				    in=we;
 				    
 				    sc=pow(sc,distance_modeE)*we;
 				    
+				    
 				  }
 				else if (modeM==contactsM && w2>0)
 				  {sc=1;in=1;}
-				else {sc=0;in=1;}
+				else {sc=1;in=1;}
 			      }
 			  }
 			
 			if (tree)
 			  {
+			    tot_pw_sc[s1][s2]+=sc;
+			    max_pw_sc[s1][s2]+=in;
+
 			    tot_pw_sc[s2][s1]+=sc;
-			    max_pw_sc[s1][s2]+=in;;
+			    max_pw_sc[s2][s1]+=in;
+			    //if ( s1==s2)
+			    //  {
+			    //	HERE ("[%f %f] - %f %f",(float)sc, (float)in,(float) tot_pw_sc[s2][s1], (float)max_pw_sc[s2][s1]);
+			    //  }
+			    
 			  }
 			
 			
@@ -2227,13 +2242,24 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
 	  if (tree)
 	    {
 	    static char *treeF=vtmpnam (NULL);
+	    static int ml;
+
+	    //Get length of lobguest name;
+	    if (!ml)
+	      {
+		for (s1=0; s1<A->nseq; s1++)ml=MAX((strlen (A->name[s1])),ml);
+	      }
 	    
 	    output_completion (stderr,T->nseq,ntrees,1, "Distance Tree Replicates");
-	    	    
+	    
+	    //This is where the distance between two sequences gets turned into a % between 0 and a 100
 	    for (s1=0; s1<A->nseq; s1++)
 	      for (s2=0; s2<A->nseq; s2++)
-		if (max_pw_sc[s1][s2])
-		  {tot_pw_sc[s1][s2]/=max_pw_sc[s1][s2];tot_pw_sc[s1][s2]=(double)100*(1-tot_pw_sc[s1][s2]);}
+		if (max_pw_sc[s1][s2]>0.000000001)
+		  {
+		    tot_pw_sc[s1][s2]/=max_pw_sc[s1][s2];
+		    tot_pw_sc[s1][s2]=(double)100*((double)1-tot_pw_sc[s1][s2]);
+		  }
 	    
 	    
 	    if (strm (tree_mode, "nj"))
@@ -2247,6 +2273,17 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
 	    sprintf (T->name[T->nseq], "%d",T->nseq); 
 	    
 	    fp=vfopen (T->dmF_list[T->nseq]=vtmpnam (NULL), "w");
+	    fprintf ( fp, "%d \n", A->nseq);
+	    for ( s1=0; s1<A->nseq;s1++)
+	      {
+		fprintf (fp, "%-*.*s ", ml,ml,A->name[s1]);
+		for (s2=0; s2<A->nseq; s2++)
+		  fprintf (fp, "%5.3f ", (float)((double)tot_pw_sc[s1][s2])/(float)100);
+		fprintf (fp, "\n");
+	      }
+	    fprintf ( fp, "\n");
+	    
+	    /*
 	    if (T->nseq==0)fprintf ( fp, "#START Original Distance Matrix NSEQ %4d\n", A->nseq);
 	    else fprintf ( fp, "#START REPLICATE Distance Matrix - %4d - NSEQ %4d\n", T->nseq,A->nseq);
 	    fprintf ( fp, "#SEQS: ");
@@ -2256,12 +2293,14 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
 	      {
 		for (s2=s1+1;s2<A->nseq; s2++)
 		  {
-		    fprintf (fp, "%6.2f ", tot_pw_sc[s1][s2]);
+		    fprintf (fp, "%6.2f ", (float)tot_pw_sc[s1][s2]);
 		  }
 		fprintf (fp, "\n");
 	      }
 	    if (T->nseq==0)fprintf (fp,"#END Original Distance Matrix\n");
 	    else fprintf (fp,"#END Replicate Distance MAtrix - %4d\n", T->nseq);
+	    */
+	    
 	    vfclose (fp);
 	    T->nseq++;
 	    
@@ -2305,7 +2344,7 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
 	      double rd=(max_randsc[s1])?tot_randsc[s1]/max_randsc[s1]:0;
 	      double r1=(bg!=0)?rs/bg:0;
 	      double r2=(rs!=0)?rs/rd:0;
-	      fprintf (stdout, "##STRS Template: %-*s Target: %-*s [UND] RS: %6.2f - Rn: %6.2f - Bg: %6.2f - RS/Bg: %4.2f - RS/Rd: %4.2f -\n",maxL, A->name[s1],maxL, "ALL",rs,rd,bg,r1, r2);
+	      fprintf (stdout, "##STRS Template: %-*s Target: %-*s [UND] RS: %6.2f - Rn: %6.2f - Bg: %6.2f - RS/Bg: %4.2f - RS/Rd: %4.2f -\n",maxL, A->name[s1],maxL, "ALL",(float)rs,(float)rd,(float)bg,(float)r1, (float)r2);
 	      
 	      double bbg,brs,brd,br1,br2;
 	      bbg=brs=brd=br1=br2=0;
@@ -2332,7 +2371,7 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
 		  double rd=(max_seq_randsc[s1][s2])?tot_seq_randsc[s1][s2]/max_seq_randsc[s1][s2]:0;
 		  double r1=(bg!=0)?rs/bg:0;
 		  double r2=(rs!=0)?rs/rd:0;
-		  fprintf (stdout, "##STRS Template: %-*s Target: %-*s [%s] RS: %6.2f %c Rn: %6.2f %c Bg: %6.2f %c RS/Bg: %4.2f %c RS/Rd: %4.2f %c\n",maxL, A->name[s1], maxL,A->name[s2],(rseq[s2]==-1)?"SEQ":"STR", rs,(rs==brs)?'*':'-',rd,(rd==brd)?'*':'-',bg, (bg==bbg)?'*':'-',r1, (r1==br1)?'*':'-',r2,(r2==br2)?'*':'-');
+		  fprintf (stdout, "##STRS Template: %-*s Target: %-*s [%s] RS: %6.2f %c Rn: %6.2f %c Bg: %6.2f %c RS/Bg: %4.2f %c RS/Rd: %4.2f %c\n",maxL, A->name[s1], maxL,A->name[s2],(rseq[s2]==-1)?"SEQ":"STR", (float)rs,(rs==brs)?'*':'-',(float)rd,(rd==brd)?'*':'-',(float)bg, (bg==bbg)?'*':'-',(float)r1, (r1==br1)?'*':'-',(float)r2,(r2==br2)?'*':'-');
 		}
 	    }
 	}
@@ -2360,7 +2399,7 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
 	  double rd=(max_seq_randsc[s1][s2])?tot_seq_randsc[s1][s2]/max_seq_randsc[s1][s2]:0;
 	  double r1=(bg!=0)?rs/bg:0;
 	  double r2=(rs!=0)?rs/rd:0;
-	  fprintf (stdout, "##STRS Template: %-*s Target: %-*s [%s] RS: %6.2f %c Rn: %6.2f %c Bg: %6.2f %c RS/Bg: %4.2f %c RS/Rd: %4.2f %c\n",maxL,"ALL", maxL,A->name[s2],(rseq[s2]==-1)?"SEQ":"STR", rs,(rs==brs)?'*':'-',rd,(rd==brd)?'*':'-',bg, (bg==bbg)?'*':'-',r1, (r1==br1)?'*':'-',r2,(r2==br2)?'*':'-');
+	  fprintf (stdout, "##STRS Template: %-*s Target: %-*s [%s] RS: %6.2f %c Rn: %6.2f %c Bg: %6.2f %c RS/Bg: %4.2f %c RS/Rd: %4.2f %c\n",maxL,"ALL", maxL,A->name[s2],(rseq[s2]==-1)?"SEQ":"STR",(float) rs,(rs==brs)?'*':'-',(float)rd,(rd==brd)?'*':'-',(float)bg, (bg==bbg)?'*':'-',(float)r1, (r1==br1)?'*':'-',(float)r2,(r2==br2)?'*':'-');
 	}
       //Global Results
       fprintf ( stdout, "##STRS GLOBAL RESULTS\n");
@@ -2370,7 +2409,7 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
       double rd=(max_randsc[s1])?tot_randsc[s1]/max_randsc[s1]:0;
       double r1=(bg!=0)?rs/bg:0;
       double r2=(rs!=0)?rs/rd:0;
-      fprintf (stdout, "##STRS Template: %-*s Target: %-*s [%s] RS: %6.2f * Rn: %6.2f * Bg: %6.2f * RS/Bg: %4.2f * RS/Rd: %4.2f *\n", maxL, "ALL", maxL,"ALL","UND", rs,rd,bg,r1,r2);
+      fprintf (stdout, "##STRS Template: %-*s Target: %-*s [%s] RS: %6.2f * Rn: %6.2f * Bg: %6.2f * RS/Bg: %4.2f * RS/Rd: %4.2f *\n", maxL, "ALL", maxL,"ALL","UND", (float)rs,(float)rd,(float)bg,(float)r1,(float)r2);
     }
 			     
 
