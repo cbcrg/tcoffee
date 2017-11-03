@@ -988,7 +988,7 @@ char *seq_file2msa_file (char *file, char *seq, char *aln)
   chdir (dir);
   printf_system ("cp %s seq", seq);
   
-  if ( duplicated==10)printf_system ("cp seq aln");
+  if ( duplicated==1)printf_system ("cp seq aln");
   else if (lcom)
     {
       printf_system ("%s", lcom);vfree (lcom);
