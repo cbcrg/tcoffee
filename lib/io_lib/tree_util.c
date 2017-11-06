@@ -3291,6 +3291,38 @@ NT_node tree2shuffle (NT_node p)
   vfree (L);
   return p;
 }
+
+FILE * no_rec_print_tree_randomize ( NT_node p, FILE *fp)
+{
+  NT_node *L;
+  int a, nseq;
+  char **names;
+  int **sorted;
+  
+  L=tree2seqnode_list (p,NULL);
+  nseq=0;
+  while (L[nseq])nseq++;
+  names=(char**)vcalloc (nseq, sizeof (char*));
+  sorted=declare_int (nseq, 2);
+  
+  for (a=0; a<nseq; a++)
+    {
+      names[a]=L[a]->name;
+      sorted[a][0]=a;
+      sorted[a][1]=rand()%nseq+1;
+    }
+  sort_int (sorted,2,1, 0,nseq-1);
+  
+  for (a=0; a<nseq; a++)
+    {
+      L[a]->name=names[sorted[a][0]];
+    }
+  free_int (sorted, -1);
+  vfree (names);
+  vfree (L);
+  return no_rec_print_tree (p,fp);
+}
+      
 FILE * no_rec_print_tree_shuffle ( NT_node p, FILE *fp)
 {
   p=tree2shuffle (p);
@@ -6059,6 +6091,45 @@ NT_node tree2node (char *name, NT_node T)
       return (T1>T2)?T1:T2;
   }
 
+}
+NT_node * tree2seqnode_list (NT_node p, NT_node *L)
+{
+  int n=0;
+  int nn=tree2nnode(p);
+  reset_node_count (p);
+  
+  if (!L) {L=(NT_node*)vcalloc (nn+1, sizeof (NT_node));}
+  while (p)
+    {
+      if (!p->visited && p->isseq)L[n++]=p;
+      
+      int x=++(p->visited);
+      
+      if (!p->isseq)
+	{
+	  if (x==1)
+	    {
+	      p=p->right;
+	    }
+	  else if (x==2)
+	    {
+	      p=p->left;
+	    }
+	  else if (x==3 && !p->parent)
+	    {
+	      p=p->parent;
+	    }
+	}
+      
+      if (x>=3 || p->isseq)
+	{
+	  if (p && p->isseq && !p->visited ){L[n++]=p, p->visited=1;}
+	  
+	  if (x>3)p=NULL;
+	  else if (p) p=p->parent;
+	}
+    }
+  return L;
 }
 
 

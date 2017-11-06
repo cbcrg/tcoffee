@@ -388,7 +388,8 @@ int seq_reformat ( int argc, char **in_argv)
 		fprintf ( stdout, "\n     +mafftnewick2newick..replaces names by the index value in -in2=<seq> (1..N)");
 		fprintf ( stdout, "\n     +newick2mafftnewick..replaces index values by the names in -in2=<seq> (1..N)");
 					  
-		fprintf ( stdout, "\n     +newick_suffle..<N>..Randomly swp left and right node when righting N times the -in Tree");
+		fprintf ( stdout, "\n     +newick_suffle.....<N>..Randomly swp left and right node when righting N times the -in Tree");
+		fprintf ( stdout, "\n     +newick_randomize..<N>..Randomize leafs of -in Tree...produces N replicates");
 		fprintf ( stdout, "\n     +tree................Passes information to +evaluate");
 		fprintf ( stdout, "\n     .....................Default: +evaluate returns a tree");
 		fprintf ( stdout, "\n     .....<N>.............+evaluate makes N replicates");
@@ -3622,11 +3623,15 @@ int main_output  (Sequence_data_struc *D1, Sequence_data_struc *D2, Sequence_dat
 		  output_statistics (out_file, D1->A,out_format+10);
 		}
 
-
-
-	else if ( strm  (out_format, "newick_shuffle"))
+	
+	else if ( strm  (out_format, "newick_randomize"))
 	  {
 	    no_rec_print_tree_shuffle (D1->T, stdout);
+	    fprintf (stdout, ";\n");
+	  }
+	else if ( strm  (out_format, "newick_shuffle"))
+	  {
+	    no_rec_print_tree_randomize (D1->T, stdout);
 	    fprintf (stdout, ";\n");
 	  }
 	else if ( strm  (out_format, "dm"))
@@ -11665,6 +11670,17 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	 {
 	   print_node_list ( D1->T,(DST)?DST->S:NULL);
 	   myexit (EXIT_SUCCESS);
+	 }
+       else if ( strm(action, "newick_randomize"))
+	 {
+	   int shuf=atoi (ACTION(1));
+	   int zz;
+	   for (zz=0; zz<shuf; zz++)
+	     {
+	       no_rec_print_tree_randomize (D1->T, stdout);
+	       fprintf (stdout, ";\n");
+	     }
+	   myexit(EXIT_SUCCESS);
 	 }
        else if ( strm(action, "newick_shuffle"))
 	 {

@@ -230,6 +230,7 @@ char *tree2string (NT_node T);
 int print_newick_tree ( NT_node T, char *name);
 FILE * no_rec_print_tree ( NT_node T, FILE *fp);
 FILE*  no_rec_print_tree_shuffle ( NT_node T, FILE *fp);
+FILE*  no_rec_print_tree_randomize ( NT_node T, FILE *fp);
 NT_node tree2shuffle (NT_node p);
 
 NT_node find_longest_branch ( NT_node T, NT_node L);
@@ -282,6 +283,8 @@ float tree2tot_dist ( NT_node T, int mode);
 int tree2n_branches(NT_node T, int mode);
 int **display_tree_from_node (NT_node T, int up, int down, int **array);
 NT_node tree2node ( char *name, NT_node T);
+
+NT_node * tree2seqnode_list (NT_node T, NT_node *L);
 NT_node * tree2node_list (NT_node T, NT_node *L);
 NT_node * no_rec_tree2node_list (NT_node T, NT_node *L);
 NT_node tree2root ( NT_node T);
