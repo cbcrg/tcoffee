@@ -224,8 +224,8 @@ PG prank mode			mcoffee
 PG prank version		100303	    
 
 PG sap 4_TCOFFEE		SAP
-PG sap type			    structure_pairwise_aligner		
-PG sap ADDRESS			https://mathbio.crick.ac.uk/wiki/Software
+PG sap type			structure_pairwise_aligner		
+PG sap ADDRESS			https://mathbio.crick.ac.uk/wiki/Software#SAP
 PG sap language			C
 PG sap language2		C	
 PG sap source			https://github.com/jkleinj/SAP/archive/v.1.1.3.tar.gz
@@ -247,7 +247,7 @@ PG TMalign version		2013.05.11
 
 PG mustang 4_TCOFFEE		MUSTANG
 PG mustang type			structure_pairwise_aligner		
-PG mustang ADDRESS		http://www.cs.mu.oz.au/~arun/mustang
+PG mustang ADDRESS		http://lcb.infotech.monash.edu.au/mustang/
 PG mustang language		C++
 PG mustang language2		CXX
 PG mustang source		http://lcb.infotech.monash.edu.au/mustang/mustang_v3.2.3.tgz
@@ -275,7 +275,7 @@ PG align_pdb mode		expresso,3dcoffee
 
 PG fugueali 4_TCOFFEE		FUGUE
 PG fugueali type		structure_pairwise_aligner		
-PG fugueali ADDRESS		http://www-cryst.bioc.cam.ac.uk/fugue/download.html
+PG fugueali ADDRESS		http://mizuguchilab.org/fugue/
 PG fugueali language		empty
 PG fugueali language2		empty
 PG fugueali source		empty

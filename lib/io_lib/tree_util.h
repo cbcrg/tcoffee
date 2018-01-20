@@ -1,6 +1,12 @@
 #ifndef TREE_UTIL_H
 #define TREE_UTIL_H
 
+typedef struct ALNcol
+{
+  char aa;
+  struct ALNcol *next;
+};
+typedef struct ALNcol ALNcol;
 
 typedef struct alnnode *ALN_node;
 typedef struct alnnode

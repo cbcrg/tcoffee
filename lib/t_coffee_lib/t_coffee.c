@@ -1080,8 +1080,7 @@ if ( !do_evaluate)
 	 return EXIT_SUCCESS;
        }
 
-
-     le=vfopen ( se_name, "w");
+     le=get_stdout1(se_name);
      fprintf ( le, "\nPROGRAM: %s %s (%s)\n",PROGRAM,VERSION,BUILD_INFO);
 
 /*PARAMETER PROTOTYPE: RUN NAME*/

@@ -4663,7 +4663,7 @@ char* lock(int pid,int type, int action,char *string, ...)
 			value=(char*)vcalloc (2, sizeof(char));
 			sprintf (value, " ");
 		}
-		string2file (fname, const_cast<char*>( (action==LSET)?"a":"w"), value);
+		string2file_direct (fname, const_cast<char*>( (action==LSET)?"a":"w"), value);
 		vfree (value);
 		r= " ";
 	}
@@ -8560,6 +8560,27 @@ int file_exists (char *path, char *fname)
     return S_ISREG(s.st_mode);
   else return 0;
 }
+
+FILE *get_stdout1(char *name)
+{
+  static FILE *fp;
+  
+  if     (!name)
+    {
+      if (!fp)fp=stderr;
+    }
+  else if(strm (name, "vfclose"))
+    {
+      if (fp)vfclose (fp);
+    }
+  else
+    {
+      if (fp)vfclose (fp);
+      fp=vfopen (name, "w");
+    }
+  return fp;
+}
+  
 int istmp  (char *file)
 {
   char tmp[10];
@@ -9959,7 +9980,15 @@ void clean_exit ()
   
   if (is_rootpid())
     {
-
+      if (scratch)
+	{
+	  fprintf (get_stdout1(NULL), "Your tmp files have been moved into [%s] --- Use a cron jon to delete them\n", scratch);
+	}
+      else 
+	{
+	  fprintf (get_stdout1(NULL), "Deleting tmp files --- Set TMP2SCRATCH to move them to SCRATCH instead\n");
+	}
+      
       kill_child_pid(getpid());
       if (has_error_lock())
 	{

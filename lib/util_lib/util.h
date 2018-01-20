@@ -655,7 +655,7 @@ char *set_file2remove_extension(char *extension, int mode);
 char * add2file2remove_list ( char *name);
 
 
-
+FILE *get_stdout1(char *name);
 FILE * vtmpfile();
 void initiate_vtmpnam (char *s);
 int     vtmpnam_size ();

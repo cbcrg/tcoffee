@@ -252,11 +252,11 @@ These procedures are not needed for default usage of T-Coffee. You will only nee
   lalign_pdbpair built_in
   extern_pdbpair built_in
   thread_pair built_in
-  fugue_pair http://www-cryst.bioc.cam.ac.uk/fugue/download.html
+  fugue_pair http://mizuguchilab.org/fugue/
   pdb_pair built_in
-  sap_pair http://www-cryst.bioc.cam.ac.uk/fugue/download.html
-  mustang_pair http://www.cs.mu.oz.au/~arun/mustang/
-  tmalign_pair http://zhang.bioinformatics.ku.edu/TM-align/
+  sap_pair https://mathbio.crick.ac.uk/wiki/Software#SAP
+  mustang_pair http://lcb.infotech.monash.edu.au/mustang/
+  tmalign_pair https://zhanglab.ccmb.med.umich.edu/TM-align/
 
   ****** Multiple Sequence Alignment Methods:
   --------------------------------------------

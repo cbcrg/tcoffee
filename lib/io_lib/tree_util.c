@@ -5700,8 +5700,8 @@ NT_node file2tree (char *fname)
     }
   
  if (!T->right && T->left)T=T->left;
-  else if (T->right && !T->left)T=T->right;
-  T->parent=NULL;
+ else if (T->right && !T->left)T=T->right;
+ T->parent=NULL;
       
   return T;
 }
@@ -8020,8 +8020,10 @@ NT_node nni (NT_node S, int n)
 }
 ////////////////////////////////////// Paralel DPA
 ALN_node declare_aln_node(int mode);
-
-char * kmsa2msa   (Sequence *S,KT_node K, int max, int *cn);
+int ktree2aln_bucketsF(KT_node K,char *fname);
+int ktree2seq_bucketsF(KT_node K,char *fname);
+char * kmsa2msa_new(Sequence *S,KT_node *KL, int n);
+char * kmsa2msa    (Sequence *S,KT_node K, int max, int *cn);
 char * kmsa2msa_file   (Sequence *S,KT_node K, int max, int *cn);
 char * kmsa2msa_serial   (Sequence *S,KT_node K, int max, int *cn);
 char* tree2msa4dpa (NT_node T, Sequence *S, int N, char *method)
@@ -8032,9 +8034,21 @@ char* tree2msa4dpa (NT_node T, Sequence *S, int N, char *method)
   KT_node K =tree2ktree  (T, S, N);
   KT_node*KL=(KT_node*)vcalloc (K->tot, sizeof (KT_node));
   n=ktree2klist(K,KL,&n);
-  kseq2kmsa(KL,n, method);
 
-  outname=kmsa2msa  (S,K,n,&cn);
+  if (getenv ("DUMP_SEQ_BUCKETS") ||getenv ("DUMP_SEQ_BUCKETS_ONLY"))
+    {
+      ktree2seq_bucketsF(K, "seqdump.");
+      if (getenv ("DUMP_SEQ_BUCKETS_ONLY"))exit (0);
+    }
+  kseq2kmsa(KL,n, method);
+  
+  if (getenv ("DUMP_ALN_BUCKETS") ||getenv ("DUMP_ALN_BUCKETS_ONLY"))
+    ktree2aln_bucketsF(K, "alndump.");
+  
+  outname=kmsa2msa_new  (S,KL,n);
+  
+  //outname=kmsa2msa  (S,K,n,&cn);
+  
   
   //do it on disc
   //no memory footprint but very very slow
@@ -8045,7 +8059,46 @@ char* tree2msa4dpa (NT_node T, Sequence *S, int N, char *method)
   return outname;
 }
 
+int ktree2aln_bucketsF(KT_node K,char *fname)
+{
 
+  if (!K)return 0;
+  else
+    {
+      char *nfname=(char*)vcalloc (1000, sizeof (char));
+      int a;
+      
+      for (a=0; a<K->nc; a++)
+	{
+	  sprintf (nfname, "%s.%d.aln_bucket",fname, a+1);
+	  printf_system ("cp %s %s", K->msaF, nfname);
+	  sprintf (nfname, "%s.%d",fname, a+1);
+	  ktree2seq_bucketsF (K->child[a],nfname); 
+	}
+      vfree (nfname);
+    }
+  return 1;
+}
+int ktree2seq_bucketsF(KT_node K,char *fname)
+{
+
+  if (!K)return 0;
+  else
+    {
+      char *nfname=(char*)vcalloc (1000, sizeof (char));
+      int a;
+      
+      for (a=0; a<K->nc; a++)
+	{
+	  sprintf (nfname, "%s.%d.seq_bucket", fname,a+1);
+	  printf_system ("cp %s %s", K->seqF, nfname);
+	  sprintf (nfname, "%s.%d", fname,a+1);
+	  ktree2seq_bucketsF (K->child[a],nfname); 
+	}
+      vfree (nfname);
+    }
+  return 1;
+}
     
 int ktree2klist (KT_node K, KT_node *KL, int *n)
 {
@@ -8141,6 +8194,7 @@ KT_node tree2ktree (NT_node T,Sequence *S, int N)
   vfree (CL);
   return K;
 }
+
 int kseq2kmsa_serial   (KT_node *K, int n, char *method);
 int kseq2kmsa_nextflow   (KT_node *K, int n, char *method);
 int kseq2kmsa_thread   (KT_node *K, int n, char *method);
@@ -8279,6 +8333,10 @@ int kseq2kmsa_thread   (KT_node *K, int n, char *method)
   
   return n;
 }
+
+
+    
+	
 char* kmsa2msa_serial (KT_node K, int max, int *cn)
 {
   int a;
@@ -8444,6 +8502,132 @@ char* graph2aln (Sequence *S, ALN_node *aln, int nseq,char *out)
   vfree (lu);
   return out;
 }
+
+char *kmsa2msa_new (Sequence *S,KT_node *KL, int n)
+{
+  char *out=vtmpnam (NULL);
+  ALNcol ***S2;
+  ALNcol *start, *end;
+  int a, s, c;
+  FILE*fp=vfopen (out,"w");
+
+  
+  S2=(ALNcol***)vcalloc (S->nseq, sizeof (ALNcol**));
+  for (s=0; s<S->nseq; s++)S2[s]=(ALNcol**)vcalloc (S->len[s], sizeof (ALNcol*));
+  
+    
+  for (a=0; a<n; a++)
+    {
+      
+      Alignment *A=quick_read_aln (KL[a]->msaF);
+      int * lu =(int*) vcalloc (A->nseq, sizeof (int));
+      int **pos=(int**)declare_int (A->nseq, A->len_aln);
+      output_completion (stderr,a,n, 100, "Incorporating Children the MSAs");
+      for (s=0; s<A->nseq; s++)
+	{
+	  int r;
+	  lu[s]=name_is_in_hlist2 (A->name[s],S->name, S->nseq);
+	  for (r=0,c=0; c<A->len_aln; c++)
+	    {
+	      if (A->seq_al[s][c]!='-')pos[s][c]=r++;
+	      else pos[s][c]=-1;
+	    }
+	}
+      
+      for (c=0; c<A->len_aln; c++)
+	{
+	  ALNcol *p=NULL;
+	  for (s=0; s<A->nseq; s++)
+	    {
+	      int ir=pos[s][c];
+	      
+	      if (ir!=-1)
+		{
+		  if (S2[lu[s]][ir])
+		    {
+		      p=S2[lu[s]][ir];
+		      break;
+		    }
+		}
+	    }
+	  if (!p)p=(ALNcol*)vcalloc (1, sizeof (ALNcol));
+	  for (s=0; s<A->nseq; s++)
+	    {
+	      int ir=pos[s][c];
+	      if (ir!=-1)
+		{
+		  S2[lu[s]][ir]=p;
+		  
+		}
+	    }
+	}
+      free_aln (A);
+      free_int (pos, -1);
+      vfree(lu);
+    }
+  
+ 
+  start=(ALNcol*)vcalloc (1, sizeof (ALNcol));
+  end  =(ALNcol*)vcalloc (1, sizeof (ALNcol));
+  start->aa=end->aa=-1;
+  start->next=end;
+  
+  for (s=0; s<S->nseq; s++)
+    {
+      ALNcol *cpos=start;
+      output_completion (stderr,s,S->nseq, 100, "Threading Sequences");
+      for (c=0; c<S->len[s]; c++)
+	{
+	  
+	  ALNcol *p=S2[s][c];
+	  if (!p->next)
+	    {
+	      p->next=cpos->next;
+	      cpos->next=p;
+	    }
+	  cpos=p;
+	}
+    }
+  
+  for (s=0; s<S->nseq; s++)
+    {
+      ALNcol *msa=start;
+      int r=0;
+      output_completion (stderr,s,S->nseq, 100, "Final MSA");
+      for (c=0; c<S->len[s]; c++)
+	{
+	  //S2[s][c]->aa=S->seq[s][c];
+	  S2[s][c]->aa=1;
+	}
+      fprintf (fp, ">%s\n", S->name[s]);
+      
+      while (msa->next)
+	{
+	  if (msa->aa==0){fprintf (fp, "-");}
+	  else if (msa->aa==1) 
+	    {
+	      fprintf (fp, "%c",S->seq[s][r++]);
+	      msa->aa=0;
+	    }
+      	  msa=msa->next;
+	}
+      fprintf (fp, "\n");
+    }
+  vfclose (fp);
+
+  while (start->next)
+    {
+      ALNcol *k=start;
+      start=start->next;
+      vfree (k);
+    }
+  vfree (start);
+  for (s=0; s<S->nseq; s++)vfree (S2[s]);
+  vfree (S2);
+  
+  return out;
+}
+	 
 
 
 char * kmsa2msa (Sequence *S,KT_node K, int max, int *cn)

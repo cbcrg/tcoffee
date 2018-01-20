@@ -932,6 +932,7 @@ sub viterbiL
     
     foreach my $j (keys(%$S))
       {
+	print "key: $j\n"
 	my $L=keys(%{$S->{$j}});
 	my $PTR={};
 	my $V={};
