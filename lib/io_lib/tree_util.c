@@ -8045,7 +8045,11 @@ char* tree2msa4dpa (NT_node T, Sequence *S, int N, char *method)
   if (getenv ("DUMP_ALN_BUCKETS") ||getenv ("DUMP_ALN_BUCKETS_ONLY"))
     ktree2aln_bucketsF(K, "alndump.");
   
-  if (getenv ("OLD_DPA"))outname=kmsa2msa  (S,K,n,&cn);
+  if (getenv ("OLD_DPA"))
+    {
+      HERE ("use the OLD DPA Assembly algorithm");
+      outname=kmsa2msa  (S,K,n,&cn);
+    }
   else outname=kmsa2msa_new  (S,KL,n);
   
   //
@@ -8523,7 +8527,7 @@ char *kmsa2msa_new (Sequence *S,KT_node *KL, int n)
       Alignment *A=quick_read_aln (KL[a]->msaF);
       int * lu =(int*) vcalloc (A->nseq, sizeof (int));
       int **pos=(int**)declare_int (A->nseq, A->len_aln);
-      output_completion (stderr,a,n, 100, "Incorporating Children the MSAs");
+      output_completion (stderr,a,n, 100, "Incorporating Children");
       for (s=0; s<A->nseq; s++)
 	{
 	  int r;
