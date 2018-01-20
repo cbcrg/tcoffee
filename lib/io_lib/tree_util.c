@@ -8045,9 +8045,10 @@ char* tree2msa4dpa (NT_node T, Sequence *S, int N, char *method)
   if (getenv ("DUMP_ALN_BUCKETS") ||getenv ("DUMP_ALN_BUCKETS_ONLY"))
     ktree2aln_bucketsF(K, "alndump.");
   
-  outname=kmsa2msa_new  (S,KL,n);
+  if (getenv ("OLD_DPA"))outname=kmsa2msa  (S,K,n,&cn);
+  else outname=kmsa2msa_new  (S,KL,n);
   
-  //outname=kmsa2msa  (S,K,n,&cn);
+  //
   
   
   //do it on disc
