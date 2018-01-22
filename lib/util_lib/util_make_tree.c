@@ -1683,10 +1683,36 @@ NT_node seq2dnd (Sequence *S, char *dpa_tree)
   NT_node T=NULL;
   static char *tmptree=vtmpnam (NULL);
   if (!dpa_tree) return T;
-  
+ 
   if (strm (dpa_tree, "kmdnd"))
     {
       T=seq2km_dnd (S);
+    }
+  else if ( strm(dpa_tree, "blength"))//Sequences sorted by size and the list is forced into a balanced tree    
+    {
+      int n=S->nseq;
+      char **lname=(char**)vcalloc (n, sizeof (char*));
+      int **lsort=declare_int (n, 2);
+      int a;
+      
+      for (a=0; a<n; a++)
+	{
+	  lsort[a][0]=a;
+	  lsort[a][1]=S->len[a];
+	}
+      sort_int (lsort,2,1,0, n-1);
+      
+      for ( a=0; a<n; a++)
+	{
+	  lname[a]=S->name[lsort[a][0]];
+	}
+      
+      
+      T=list2balanced_dnd(lname,n); 
+      vfree (lname);
+      free_int (lsort, -1);
+      
+      return T;
     }
   else if ( strm(dpa_tree, "swlcatdnd"))
     {
@@ -2025,6 +2051,44 @@ static int tprint;
 static int km_node;
 static float km_tbootstrap;
 static float km_tnode;
+
+NT_node list2balanced_dnd (char **name, int n)
+{
+  NT_node * NL=(NT_node*)vcalloc (n, sizeof (NT_node));
+  NT_node node;
+  int a;
+  
+  for (a=0; a<n; a++)
+    {
+      NL[a]=new_declare_tree_node();
+      sprintf ((NL[a])->name, "%s", name[a]);
+    }
+  
+  while (n>1)
+    {
+      int i,j;
+      i=j=0;
+      while (i<n)
+        {
+	  if ((n-i)>=2)
+	    {
+	      node=new_declare_tree_node();
+	      node->left=NL[i++];
+	      node->right=NL[i++];
+	    }
+	  else
+	    {
+	      node=NL[i++];
+	    }
+          NL[j++]=node;
+	}
+      n=j;
+    }
+  node=NL[0];
+  vfree (NL);
+  return node;
+}
+
 NT_node seq2cat_dnd (Sequence *S, char *mode)
 {
   int tot_node;

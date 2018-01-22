@@ -3,8 +3,10 @@
 
 typedef struct ALNcol
 {
-  char aa;
+  int aa;
+  int seq;
   struct ALNcol *next;
+  struct ALNcol *bot;
 };
 typedef struct ALNcol ALNcol;
 
@@ -353,8 +355,11 @@ int has_nni (NT_node N);
 NT_node tree2nni (NT_node T, NT_node S);
 
 char* tree2msa4dpa (NT_node T, Sequence *S, int N, char *method);
+NT_node tree2dnd4dpa (NT_node T, Sequence *S, int N, char *method);
+
 int kseq2kmsa   (KT_node *K, int n, char *method);
-char* kmsa2msa  (Sequence *S,KT_node K, int n, int *cn);
+char* kmsa2msa_old  (Sequence *S,KT_node K, int n, int *cn);
+char *kmsa2msa (Sequence *S,KT_node *KL, int n);
 int ktree2klist (KT_node K, KT_node *KL, int *n);
 KT_node tree2ktree (NT_node T,Sequence *S, int N);
 

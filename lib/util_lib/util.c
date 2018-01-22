@@ -2768,6 +2768,26 @@ int vsrand (int val)
     }
   return 1;
 }
+char **list2random_list (char **name, int n)
+{
+  char **rname=(char**)vcalloc (n, sizeof (char*));
+  int **ro=declare_int (n, 2);
+  int a;
+  
+  for (a=0; a<n; a++)
+    {
+      ro[a][0]=a;
+      ro[a][1]=rand()%n;
+    }
+  sort_int (ro,2,1,0, n-1);
+  
+  for ( a=0; a<n; a++)
+    {
+      rname[a]=name[ro[a][0]];
+    }
+  free_int (ro, -1);
+  return rname;
+}
 int  *randomize_list (int *list, int len, int ncycle)
 {
   int p1, p2, a, buf;

@@ -375,6 +375,8 @@ char *after_strstr (char *string, char *token);
 char ** push_string (char *val, char **stack, int *nval, int mode);
 int vsrand (int val);
 int  *randomize_list (int *list, int len, int ncycle);
+char **list2random_list (char **name, int n);
+
 int vstrcmp (const char *s1, const char *s2);
 int vstrncmp (const char *s1, const char *s2, int n);
 FILE *print_array_char (FILE *out, char **array, int n, char *sep);

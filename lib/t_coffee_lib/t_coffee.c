@@ -7033,12 +7033,24 @@ Alignment * t_coffee_dpa (int argc, char **argv)
   //check Sequences are here
   if (!S)
     myexit (fprintf_error ( stderr, "\nERROR: When using dpa, sequences must be provided via -seq [FATAL:%s]", PROGRAM));
+  //decide on bucket sizes
+  if (dpa_nseq==0)dpa_nseq=30;
   
   //prepare the guide tree
   fprintf ( stderr, "!Compute Guide Tree --- ");
   if (usetree){dpa_tree=usetree;}
   if (!dpa_tree)dpa_tree="kmdnd";
-  T=seq2dnd (S, dpa_tree);fprintf ( stderr, " dpa_tree %s\n", dpa_tree);
+  if (strm (dpa_tree, "dpa"))
+    {
+      
+      T=seq2dnd (S, "blength");
+      w=seq2dpa_weight (S, "longuest");
+      T=node2master (T, S, w);
+      T=tree2dnd4dpa(T, S, dpa_nseq, command);
+      
+    }
+  else
+    T=seq2dnd (S, dpa_tree);fprintf ( stderr, " dpa_tree %s\n", dpa_tree);
   
 
   if (dpa_tree && check_file_exists (dpa_tree))output_dpa_tree=0;
@@ -7046,8 +7058,7 @@ Alignment * t_coffee_dpa (int argc, char **argv)
   
   fprintf ( stderr, "!Compute Guide Tree ---  done\n");
   
-  //decide on bucket sizes
-  if (dpa_nseq==0)dpa_nseq=30;
+ 
   
   
   //get the weight

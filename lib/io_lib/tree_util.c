@@ -8022,10 +8022,25 @@ NT_node nni (NT_node S, int n)
 ALN_node declare_aln_node(int mode);
 int ktree2aln_bucketsF(KT_node K,char *fname);
 int ktree2seq_bucketsF(KT_node K,char *fname);
-char * kmsa2msa_new(Sequence *S,KT_node *KL, int n);
-char * kmsa2msa    (Sequence *S,KT_node K, int max, int *cn);
+char  * kmsa2msa(Sequence *S,KT_node *KL, int n);
+NT_node kmsa2dnd(Sequence *S,KT_node *KL, int n);
+char * kmsa2msa_old    (Sequence *S,KT_node K, int max, int *cn);
 char * kmsa2msa_file   (Sequence *S,KT_node K, int max, int *cn);
 char * kmsa2msa_serial   (Sequence *S,KT_node K, int max, int *cn);
+
+NT_node tree2dnd4dpa (NT_node T, Sequence *S, int N, char *method)
+{
+  int n=0;
+  char *outname;
+  int cn=0;
+  KT_node K =tree2ktree  (T, S, N);
+  KT_node*KL=(KT_node*)vcalloc (K->tot, sizeof (KT_node));
+  
+  n=ktree2klist(K,KL,&n);
+  kseq2kmsa(KL,n, method);
+  
+  return kmsa2dnd  (S,KL,n);
+}
 char* tree2msa4dpa (NT_node T, Sequence *S, int N, char *method)
 {
   int n=0;
@@ -8048,9 +8063,9 @@ char* tree2msa4dpa (NT_node T, Sequence *S, int N, char *method)
   if (getenv ("OLD_DPA"))
     {
       HERE ("use the OLD DPA Assembly algorithm");
-      outname=kmsa2msa  (S,K,n,&cn);
+      outname=kmsa2msa_old  (S,K,n,&cn);
     }
-  else outname=kmsa2msa_new  (S,KL,n);
+  else outname=kmsa2msa  (S,KL,n);
   
   //
   
@@ -8507,15 +8522,21 @@ char* graph2aln (Sequence *S, ALN_node *aln, int nseq,char *out)
   vfree (lu);
   return out;
 }
-
-char *kmsa2msa_new (Sequence *S,KT_node *KL, int n)
+char *getseq4kmsa2dnd (char *seq, char *alseq, ALNcol *start, ALNcol **S2);
+NT_node kmsa2dnd (Sequence *S,KT_node *KL, int n)
 {
   char *out=vtmpnam (NULL);
   ALNcol ***S2;
   ALNcol *start, *end;
   int a, s, c;
   FILE*fp=vfopen (out,"w");
-
+  int len_aln;
+  NT_node tree;
+  char *refseq, *newseq;
+  int  **ro;
+  char **nname;
+  int maxl, refseqI;
+  NT_node T;
   
   S2=(ALNcol***)vcalloc (S->nseq, sizeof (ALNcol**));
   for (s=0; s<S->nseq; s++)S2[s]=(ALNcol**)vcalloc (S->len[s], sizeof (ALNcol*));
@@ -8527,7 +8548,153 @@ char *kmsa2msa_new (Sequence *S,KT_node *KL, int n)
       Alignment *A=quick_read_aln (KL[a]->msaF);
       int * lu =(int*) vcalloc (A->nseq, sizeof (int));
       int **pos=(int**)declare_int (A->nseq, A->len_aln);
-      output_completion (stderr,a,n, 100, "Incorporating Children");
+      output_completion (stderr,a,n, 100, "Incorporating Children MSA to produce guide tree");
+      for (s=0; s<A->nseq; s++)
+	{
+	  int r;
+	  lu[s]=name_is_in_hlist2 (A->name[s],S->name, S->nseq);
+	  for (r=0,c=0; c<A->len_aln; c++)
+	    {
+	      if (A->seq_al[s][c]!='-')pos[s][c]=r++;
+	      else pos[s][c]=-1;
+	    }
+	}
+      
+      for (c=0; c<A->len_aln; c++)
+	{
+	  ALNcol *p=NULL;
+	  for (s=0; s<A->nseq; s++)
+	    {
+	      int ir=pos[s][c];
+	      
+	      if (ir!=-1)
+		{
+		  if (S2[lu[s]][ir])
+		    {
+		      p=S2[lu[s]][ir];
+		      break;
+		    }
+		}
+	    }
+	  if (!p)p=(ALNcol*)vcalloc (1, sizeof (ALNcol));
+	  for (s=0; s<A->nseq; s++)
+	    {
+	      int ir=pos[s][c];
+	      if (ir!=-1)
+		{
+		  S2[lu[s]][ir]=p;
+		  
+		}
+	    }
+	}
+      free_aln (A);
+      free_int (pos, -1);
+      vfree(lu);
+    }
+  
+ 
+  start=(ALNcol*)vcalloc (1, sizeof (ALNcol));
+  end  =(ALNcol*)vcalloc (1, sizeof (ALNcol));
+  start->aa=end->aa=-1;
+  start->next=end;
+  
+  for (s=0; s<S->nseq; s++)
+    {
+      ALNcol *cpos=start;
+      output_completion (stderr,s,S->nseq, 100, "Threading Sequences to produce guide tree");
+      for (c=0; c<S->len[s]; c++)
+	{
+	  
+	  ALNcol *p=S2[s][c];
+	  if (!p->next)
+	    {
+	      p->next=cpos->next;
+	      cpos->next=p;
+	      len_aln++;
+	    }
+	  cpos=p;
+	}
+    }
+  maxl=refseqI=0;
+  for (s=0; s<S->nseq; s++)
+    if (S->len[a]>maxl)
+      {
+	maxl=S->len[a];
+	refseqI=a;
+      }
+  refseq=(char*)vcalloc (len_aln+1, sizeof (char));
+  newseq=(char*)vcalloc (len_aln+1, sizeof (char));
+  ro=declare_int (S->nseq, 2);
+  nname=(char**)vcalloc (S->nseq, sizeof (char*));
+  
+  getseq4kmsa2dnd(S->seq[refseqI],refseq,start,S2[refseqI]);
+  for (a=0; a<S->nseq; a++)
+    {
+      getseq4kmsa2dnd(S->seq[a],newseq,start, S2[a]);
+      ro[a][0]=a;
+      ro[a][1]=get_seq_sim (refseq, newseq, "-", "sim1");
+      
+    }
+  sort_int (ro, 2, 1, 0, S->nseq-1);
+    
+  for (a=0;a<S->nseq; a++)
+    nname[a]=S->name[ro[a][0]];
+  
+  T=list2balanced_dnd (nname, S->nseq);
+  vfree (refseq);
+  vfree (newseq);
+  vfree (nname);
+  free_int (ro, -1);
+  
+  return T;
+  
+}
+
+char *getseq4kmsa2dnd (char *seq, char *alseq, ALNcol *start, ALNcol **S2)
+{
+  ALNcol *msa=start;
+  int l=strlen (seq);
+  int c, p, r;
+  
+  for (c=0; c<l; c++)
+    {
+      S2[c]->aa=1;
+    }
+  p=r=0;
+  while (msa->next)
+    {
+      if (!msa->aa){alseq[p++]='-';}
+      else if (msa->aa==1) 
+	{
+	  alseq[p++]=seq[r++];
+	  msa->aa=0;
+	}
+      msa=msa->next;
+    }
+  return alseq;
+}
+
+char *kmsa2msa (Sequence *S,KT_node *KL, int n)
+{
+  char *out=vtmpnam (NULL);
+  ALNcol ***S2;
+  ALNcol *start, *end, *msa;
+  int a, s, c;
+  FILE*fp=vfopen (out,"w");
+  int **S3;
+  int compact=1;
+  
+  S2=(ALNcol***)vcalloc (S->nseq, sizeof (ALNcol**));
+  for (s=0; s<S->nseq; s++)S2[s]=(ALNcol**)vcalloc (S->len[s], sizeof (ALNcol*));
+  
+    
+  for (a=0; a<n; a++)
+    {
+      
+      Alignment *A=quick_read_aln (KL[a]->msaF);
+      int * lu =(int*) vcalloc (A->nseq, sizeof (int));
+      int **pos=(int**)declare_int (A->nseq, A->len_aln);
+      output_completion (stderr,a,n, 100, "Incorporating Children MSA");
       for (s=0; s<A->nseq; s++)
 	{
 	  int r;
@@ -8596,7 +8763,81 @@ char *kmsa2msa_new (Sequence *S,KT_node *KL, int n)
   
   for (s=0; s<S->nseq; s++)
     {
-      ALNcol *msa=start;
+      for (c=0; c<S->len[a]; c++)
+	{
+	  ALNcol *nc=(ALNcol*)vcalloc (1, sizeof (ALNcol));
+	  nc->seq=s;
+	  nc->aa=c;
+	  nc->bot=S2[s][c]->bot;
+	  S2[s][c]->bot=nc;
+	}
+    }
+
+  //Compact left to right
+  if ( compact)
+    {
+      S3=(int **) vcalloc ( S->nseq, sizeof (int*));
+      for (a=0; a<S->nseq; a++) S3=(int*)vcalloc ( S->len[a], sizeof(int));
+  
+      msa=start->next;
+      while (msa->next && (msa->next)->aa>=0)
+	{
+	  ALNcol* next=msa->next;
+	  ALNcol* col1=msa->bot;
+	  ALNcol* col2=next->bot;
+	  ALNCol* lcol1;
+	  
+	  while (col1)
+	    {
+	      S3[col1->seq][col1->aa]=1;
+	      col1=col1->bot;
+	    }
+	  
+	  while (col2)
+	    {
+	      if (S3[col2->seq][col2->aa])
+		{
+		  compatible=0;
+		  break;
+		}
+	      col2=col2->bot;
+	    }
+	  
+	  col1=msa->bot;
+	  while (col1)
+	    {
+	      S3[col1->seq][col1->aa]=0;
+	      lcol1=col1;
+	      col1=col1->bot;
+	    }
+	  
+	  if (compatible)
+	    {
+	      col1=msa->bot
+		col2=next->bot;
+	      
+	      lcol1->bot=col2;
+	      while (col2)
+		{
+		  S[col2->seq][col2->aa]=msa;
+		  col2=col2->bot;
+		}
+	      next->bot=NULL;
+	      msa->next=next->next;
+	      vfree (next);
+	    }
+	  else
+	    {
+	      msa=msa->next;
+	    }
+	}
+      for (a=0; a<S->nseq; a++)vfree (S3[a]);
+      vfree (S3);
+    }
+  
+  for (s=0; s<S->nseq; s++)
+    {
+      msa=start;
       int r=0;
       output_completion (stderr,s,S->nseq, 100, "Final MSA");
       for (c=0; c<S->len[s]; c++)
@@ -8622,9 +8863,15 @@ char *kmsa2msa_new (Sequence *S,KT_node *KL, int n)
 
   while (start->next)
     {
-      ALNcol *k=start;
-      start=start->next;
-      vfree (k);
+      ALNcol *right=start->next;
+      while (start->bot)
+	{
+	  ALNcol *bot=start->bot;
+	  vfree (start);
+	  start=bot;
+	}
+      vfree (start);
+      start=right;
     }
   vfree (start);
   for (s=0; s<S->nseq; s++)vfree (S2[s]);
@@ -8635,7 +8882,7 @@ char *kmsa2msa_new (Sequence *S,KT_node *KL, int n)
 	 
 
 
-char * kmsa2msa (Sequence *S,KT_node K, int max, int *cn)
+char * kmsa2msa_old (Sequence *S,KT_node K, int max, int *cn)
 {
   char *out=vtmpnam (NULL);
   int  a;
