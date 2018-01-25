@@ -4,6 +4,7 @@
 typedef struct ALNcol
 {
   int aa;
+  int id;
   struct ALNcol *next;
 };
 typedef struct ALNcol ALNcol;
@@ -13,6 +14,7 @@ typedef struct alnnode
 {
   char aa;
   int seqN;
+ 
   
   ALN_node p;
   ALN_node r;

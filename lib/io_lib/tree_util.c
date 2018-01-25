@@ -8088,7 +8088,7 @@ ALNcol* declare_alncol ()
 {
   static int n;
   ALNcol *p=(ALNcol*)vcalloc (1, sizeof (ALNcol));
-  
+  p->id=++n;
   return p;
 }
 
@@ -8137,20 +8137,21 @@ char *kmsa2msa (KT_node K,Sequence *S, ALNcol***S2,ALNcol*start)
       output_completion (stderr,s,S->nseq, 100, "Final MSA");
       for (c=0; c<S->len[s]; c++)
 	{
-	  S2[s][c]->aa=1;
+	  S2[s][c]->aa=S->seq[s][c];
 	}
       fprintf (fp, ">%s\n", S->name[s]);
       
       while (msa->next)
 	{
 	  if (msa->aa==0){fprintf (fp, "-");}
-	  else if (msa->aa==1) 
+	  else if (msa->aa>0) 
 	    {
-	      fprintf (fp, "%c",S->seq[s][r++]);
+	      fprintf (fp, "%c",msa->aa);
 	      msa->aa=0;
 	    }
       	  msa=msa->next;
 	}
+      
       fprintf (fp, "\n");
     }
   vfclose (fp);
@@ -8169,7 +8170,7 @@ ALNcol * msa2graph (Alignment *A, Sequence *S, ALNcol***S2,ALNcol*msa,int seq)
   int * lu =(int*) vcalloc (A->nseq, sizeof (int));
   int **pos=(int**)declare_int (A->nseq, A->len_aln);
   ALNcol**graph=(ALNcol**)vcalloc ( A->len_aln, sizeof (ALNcol*));
-  ALNcol *lp, *p;
+  ALNcol *lp, *p, *test;
   ALNcol *start, *end, *parent, *child, *lchild, *lparent;
   int compact=-1;
   
@@ -8193,12 +8194,19 @@ ALNcol * msa2graph (Alignment *A, Sequence *S, ALNcol***S2,ALNcol*msa,int seq)
       for (s=0; s<A->nseq; s++)
 	{
 	  ir=pos[s][c];
-	  if (ir!=-1 && S2[lu[s]][ir] ){p=S2[lu[s]][ir];graph[c]=p;break;}
+	  if (ir!=-1 && S2[lu[s]][ir] )
+	    {
+	      p=S2[lu[s]][ir];graph[c]=p;
+	      break;
+	    }
 	}
-      if (!p)p=graph[c]=(ALNcol*)declare_alncol();
-      
+      if (!p)
+	{
+	  p=graph[c]=(ALNcol*)declare_alncol();
+	}
       for (s=0; s<A->nseq; s++)
 	{
+	  
 	  ir=pos[s][c];
 	  if (ir!=-1 && !S2[lu[s]][ir])S2[lu[s]][ir]=p;
 	}
@@ -8229,12 +8237,11 @@ ALNcol * msa2graph (Alignment *A, Sequence *S, ALNcol***S2,ALNcol*msa,int seq)
 	    {
 	      graph[c]->next=last->next;
 	      last->next=graph[c];
+	      last=last->next;
 	    }
 	}
       for (c=0; c<S->len[seq]; c++)(S2[seq][c])->aa=0;
     }
-        
-  
   
   vfree (graph);
   vfree (lu);
