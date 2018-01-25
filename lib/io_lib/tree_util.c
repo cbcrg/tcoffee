@@ -8022,14 +8022,10 @@ NT_node nni (NT_node S, int n)
 ALN_node declare_aln_node(int mode);
 int ktree2aln_bucketsF(KT_node K,char *fname);
 int ktree2seq_bucketsF(KT_node K,char *fname);
-char  * kmsa2msa(Sequence *S,KT_node *KL, int n);
 
-char   *kmsa2msa2 (KT_node K,Sequence *S, ALNcol***S2,ALNcol*PG);
-ALNcol *combine_graph2 (ALNcol *Start,Sequence *S, int seq, ALNcol ***S2);
-ALNcol *  test_combine_graph2(ALNcol *msa, Sequence *S, int seq, ALNcol ***S2);
-ALNcol * msa2graph2 (Alignment *A, Sequence *S, ALNcol***S2, ALNcol*msa,int seq);
-ALNcol * msa2graph3 (Alignment *A, Sequence *S, ALNcol***S2, ALNcol*msa,int seq);
-ALNcol * msa2graph2_old (Alignment *A, Sequence *S, ALNcol***S2,ALNcol*msa);
+char   *kmsa2msa (KT_node K,Sequence *S, ALNcol***S2,ALNcol*PG);
+ALNcol * msa2graph (Alignment *A, Sequence *S, ALNcol***S2, ALNcol*msa,int seq);
+
 
 
 NT_node kmsa2dnd(Sequence *S,KT_node *KL, int n);
@@ -8069,15 +8065,10 @@ char* tree2msa4dpa (NT_node T, Sequence *S, int N, char *method)
   if (getenv ("DUMP_ALN_BUCKETS") ||getenv ("DUMP_ALN_BUCKETS_ONLY"))
     ktree2aln_bucketsF(K, "alndump.");
   
-  if (getenv ("NEW_DPA"))
-    {
-      HERE ("use the NEW DPA Assembly algorithm::does not work well");
-      outname=kmsa2msa (S,KL,n); 
-    }
-  else if (getenv ("OLD_DPA"))
+  if (getenv ("OLD_DPA"))
 	   outname=kmsa2msa_old  (S,K,n,&cn);
   else
-    outname=kmsa2msa2 (K,S,NULL,NULL); 
+    outname=kmsa2msa (K,S,NULL,NULL); 
   //
   
   
@@ -8090,17 +8081,6 @@ char* tree2msa4dpa (NT_node T, Sequence *S, int N, char *method)
   return outname;
 }
 
-
-void display_graph (ALNcol*p, int mode, char *txt);
-void display_graph (ALNcol*p, int mode, char *txt)
-{
-  while (p)
-    {
-      HERE ("[%s] -- MODE %d - naa: %d -- %d", txt, mode, p->naa, p->id);
-      if ( mode==0)p=p->next;
-      else p=p->cnext;
-    }
-}
 	
 static int nalncol;
 ALNcol* declare_alncol ();
@@ -8108,12 +8088,11 @@ ALNcol* declare_alncol ()
 {
   static int n;
   ALNcol *p=(ALNcol*)vcalloc (1, sizeof (ALNcol));
-  p->seq=-1;
-  p->id=++n;
+  
   return p;
 }
 
-char *kmsa2msa2 (KT_node K,Sequence *S, ALNcol***S2,ALNcol*start)
+char *kmsa2msa (KT_node K,Sequence *S, ALNcol***S2,ALNcol*start)
 {
   int a, s, c;
   Alignment *A;
@@ -8127,7 +8106,7 @@ char *kmsa2msa2 (KT_node K,Sequence *S, ALNcol***S2,ALNcol*start)
       for (s=0; s<S->nseq; s++)S2[s]=(ALNcol**)vcalloc (S->len[s], sizeof (ALNcol*));
       
       A=quick_read_aln (K->msaF);
-      start=msa2graph3(A,S, S2,start, -1);
+      start=msa2graph(A,S, S2,start, -1);
       
       free_aln (A);
       
@@ -8140,10 +8119,10 @@ char *kmsa2msa2 (KT_node K,Sequence *S, ALNcol***S2,ALNcol*start)
       int i =name_is_in_hlist2((K->child[a])->name,S->name, S->nseq);
       
       A=quick_read_aln ((K->child[a])->msaF);
-      start=msa2graph3 (A,S, S2,start,i);
+      start=msa2graph (A,S, S2,start,i);
       
       free_aln (A);
-      kmsa2msa2 (K->child[a], S, S2,start);
+      kmsa2msa (K->child[a], S, S2,start);
     }
   
   if (!out) return out;
@@ -8176,25 +8155,14 @@ char *kmsa2msa2 (KT_node K,Sequence *S, ALNcol***S2,ALNcol*start)
     }
   vfclose (fp);
 
-  while (start->next)
-    {
-      ALNcol *right=start->next;
-      while (start->bot)
-	{
-	  ALNcol *bot=start->bot;
-	  vfree (start);
-	  start=bot;
-	}
-      vfree (start);
-      start=right;
-    }
+  
   vfree (start);
   for (s=0; s<S->nseq; s++)vfree (S2[s]);
   vfree (S2);
   
   return out;
 }
-ALNcol * msa2graph3 (Alignment *A, Sequence *S, ALNcol***S2,ALNcol*msa,int seq)
+ALNcol * msa2graph (Alignment *A, Sequence *S, ALNcol***S2,ALNcol*msa,int seq)
 {
   //Thread msa in the child section
   int s, c,ir;
@@ -8232,17 +8200,7 @@ ALNcol * msa2graph3 (Alignment *A, Sequence *S, ALNcol***S2,ALNcol*msa,int seq)
       for (s=0; s<A->nseq; s++)
 	{
 	  ir=pos[s][c];
-	  if (ir!=-1 && !S2[lu[s]][ir])
-	    {
-	      ALNcol *ne=(ALNcol*)declare_alncol();
-	      S2[lu[s]][ir]=p;
-	      ne->aa=ir;
-	      ne->seq=lu[s];
-	      ne->bot=p->bot;
-	      p->bot=ne;
-	      p->naa++;
-	      
-	    }
+	  if (ir!=-1 && !S2[lu[s]][ir])S2[lu[s]][ir]=p;
 	}
     }
   
@@ -8258,7 +8216,7 @@ ALNcol * msa2graph3 (Alignment *A, Sequence *S, ALNcol***S2,ALNcol*msa,int seq)
 
      
     }
-  else
+  else 
     {
       ALNcol*last=msa;
       int len=0;
@@ -8275,6 +8233,7 @@ ALNcol * msa2graph3 (Alignment *A, Sequence *S, ALNcol***S2,ALNcol*msa,int seq)
 	}
       for (c=0; c<S->len[seq]; c++)(S2[seq][c])->aa=0;
     }
+        
   
   
   vfree (graph);
@@ -8283,368 +8242,9 @@ ALNcol * msa2graph3 (Alignment *A, Sequence *S, ALNcol***S2,ALNcol*msa,int seq)
   
   return msa;
 }  
-ALNcol * msa2graph2 (Alignment *A, Sequence *S, ALNcol***S2,ALNcol*msa,int seq)
-{
-  //Thread msa in the child section
-  int s, c,ir;
-  int * lu =(int*) vcalloc (A->nseq, sizeof (int));
-  int **pos=(int**)declare_int (A->nseq, A->len_aln);
-  ALNcol**graph=(ALNcol**)vcalloc ( A->len_aln, sizeof (ALNcol*));
-  ALNcol *lp, *p;
-  ALNcol *start, *end, *parent, *child, *lchild, *lparent;
-  int compact=-1;
-  
-  if (A->len_aln==0)return msa;
-  
-  //1-fill up the look up section: pos
-  for (s=0; s<A->nseq; s++)
-    {
-      int r;
-      lu[s]=name_is_in_hlist2 (A->name[s],S->name, S->nseq);
-      for (r=0,c=0; c<A->len_aln; c++)
-	{
-	  if (A->seq_al[s][c]!='-')pos[s][c]=r++;
-	  else pos[s][c]=-1;
-	}
-    }
-  
-  for (c=0; c<A->len_aln; c++)
-    {
-      p=NULL;
-      for (s=0; s<A->nseq; s++)
-	{
-	  ir=pos[s][c];
-	  if (ir!=-1 && S2[lu[s]][ir] ){p=S2[lu[s]][ir];graph[c]=p;break;}
-	}
-      if (!p)p=graph[c]=(ALNcol*)declare_alncol();
-      
-      for (s=0; s<A->nseq; s++)
-	{
-	  ir=pos[s][c];
-	  if (ir!=-1 && !S2[lu[s]][ir])
-	    {
-	      ALNcol *ne=(ALNcol*)declare_alncol();
-	      S2[lu[s]][ir]=p;
-	      ne->aa=ir;
-	      ne->seq=lu[s];
-	      ne->bot=p->bot;
-	      p->bot=ne;
-	      p->naa++;
-	      
-	    }
-	}
-    }
 
-  if (!msa)
-    {
-      msa=start=declare_alncol();
-      end=declare_alncol();
-      start->aa=-1;
-      end->aa=-1;
-      start->next=graph[0];
 
-      for (c=0; c<A->len_aln; c++)graph[c]->next=(c<A->len_aln-1)?graph[c+1]:end;
-      
-    }
-  else if ( compact==-1)
-    {
-      ;
-    }
-  else if ( compact==0)
-    {
-      ALNcol *istart, *iend;
-      
-      for (c=0; c<S->len[seq]; c++)(S2[seq][c])->aa=1;
 
-      start=end=msa;
-      while (end->next)end=end->next;
-      
-      start->cnext=graph[0];
-      for (c=0; c<A->len_aln-1; c++)graph[c]->cnext=graph[c+1];	
-      graph[c]->cnext=end;
-
-      while (msa)
-	{
-	  if (msa->cnext)
-	    {
-	      iend=istart=msa->cnext;
-	      
-	      while (!iend->aa)
-		{
-		  iend->next=iend->cnext;
-		  iend=iend->cnext;
-		}
-	      if (iend!=istart)
-		{
-		  iend->next=msa->next;
-		  msa->next=istart;
-		  msa=iend->next;
-		}
-	      else msa=msa->next;
-	    }
-	  else
-	    msa=msa->next;
-	  
-	}
-      
-      start->cnext=NULL;
-      for (c=0; c<A->len_aln; c++)graph[c]->cnext=NULL;
-      start->cnext=NULL;
-      
-      for (c=0; c<S->len[seq]; c++)(S2[seq][c])->aa=0; 
-    }
-  else
-    {
-      for (c=0; c<S->len[seq]; c++)(S2[seq][c])->aa=1;
-      
-      start=end=msa;
-      while (end->next)end=end->next;
-      
-      start->cnext=graph[0];
-      for (c=0; c<A->len_aln-1; c++)graph[c]->cnext=graph[c+1];	
-      graph[c]->cnext=end;
-
-      lparent=lchild=parent=child=start;
-
-      while (parent)
-	{
-	  if (parent->cnext && parent->aa)
-	    {
-	      
-	      parent=parent ->next;
-	      child =child  ->cnext;
-	      
-	      while (!(parent->aa && child->aa))
-		{
-		  lparent->next=child;
-		  if (parent->aa)
-		    {
-		      while (!child->aa)
-			{
-			  child->next=child->cnext;
-			  child=child->cnext;
-			}
-		    }
-		  else if (child->aa)
-		    {
-		      lparent=parent;
-		      parent=parent->next;
-		    }
-		  else //merge
-		    {
-		      
-		      ALNcol *bot=parent;
-		      while (bot->bot) bot=bot->bot;
-		      bot->bot=child->bot;
-		      
-		      lparent=parent;
-		      lchild=child;
-
-		      parent=parent->next;
-		      child =child->cnext;
-		      
-		      vfree (lchild);
-		    }
-		}
-	    }
-	  else
-	    {
-	      parent=parent->next;
-	    }
-	}
-      start->cnext=NULL;
-      for (c=0; c<A->len_aln; c++)graph[c]->cnext=NULL;
-      start->cnext=NULL;
-      
-      for (c=0; c<S->len[seq]; c++)(S2[seq][c])->aa=0; 
-    }
-  vfree (graph);
-  vfree (lu);
-  free_int (pos,-1);
-  
-  return msa;
-}  
-
-ALNcol * msa2graph2_old (Alignment *A, Sequence *S, ALNcol***S2,ALNcol*msa)
-{
-  //Thread msa in the child section
-  int s, c;
-  int * lu =(int*) vcalloc (A->nseq, sizeof (int));
-  int **pos=(int**)declare_int (A->nseq, A->len_aln);
-  ALNcol *lp, *p;
-  ALNcol *start, *end;
-  ALNcol *tmp;
-  if (!msa)
-    {
-      msa=declare_alncol();
-      end=declare_alncol();
-      msa->aa=-1;
-      end->aa=-1;
-      msa->next=end;
-    }
-  else 
-    {
-      end=msa;
-      while (end->next)end=end->next;
-    }
-  
-  start=msa;
-  for (s=0; s<A->nseq; s++)
-    {
-      int r;
-      lu[s]=name_is_in_hlist2 (A->name[s],S->name, S->nseq);
-      for (r=0,c=0; c<A->len_aln; c++)
-	{
-	  if (A->seq_al[s][c]!='-')pos[s][c]=r++;
-	  else pos[s][c]=-1;
-	}
-    }
-  lp=msa;
-  for (c=0; c<A->len_aln; c++)
-    {
-      p=NULL;
-      int newp=0;
-      for (s=0; s<A->nseq; s++)
-	{
-	  int ir=pos[s][c];
-	  
-	  if (ir!=-1)
-	    {
-	      if (S2[lu[s]][ir])
-		{
-		  p=S2[lu[s]][ir];
-		  break;
-		}
-	    }
-	}
-      if (!p)
-	{
-	p=(ALNcol*)declare_alncol();
-	newp=1;
-	}
-      
-      for (s=0; s<A->nseq; s++)
-	{
-	  int ir=pos[s][c];
-	  if (ir!=-1)
-	    {
-	      if (!S2[lu[s]][ir])
-		{
-		  ALNcol *ne=(ALNcol*)declare_alncol();
-		  S2[lu[s]][ir]=p;
-		  ne->aa=ir;
-		  ne->seq=s;
-		  ne->bot=p->bot;
-		  p->bot=ne;
-		  p->naa++;
-		}
-	    }
-	}
-      if ( newp)
-	{
-	  p->next=lp->next;
-	  lp->next=p;
-	  lp=p;
-	}
-      else
-	{
-	  lp=p;
-	}
-    }
-  free_int (pos, -1);
-  vfree(lu);
-  return start;
-}
-          
-ALNcol * msa2graph2_ref (Alignment *A, Sequence *S, ALNcol***S2,ALNcol*msa)
-{
-  //Thread msa in the child section
-  int s, c;
-  int * lu =(int*) vcalloc (A->nseq, sizeof (int));
-  int **pos=(int**)declare_int (A->nseq, A->len_aln);
-  ALNcol *lp, *p;
-  ALNcol *start, *end;
-  ALNcol *tmp;
-  if (!msa)
-    {
-      msa=declare_alncol();
-      end=declare_alncol();
-      msa->aa=-1;
-      end->aa=-1;
-      msa->cnext=end;
-    }
-  else 
-    {
-      //end=add2pnext2(msa, NULL);
-    }
-  
-  start=msa;
-  for (s=0; s<A->nseq; s++)
-    {
-      int r;
-      lu[s]=name_is_in_hlist2 (A->name[s],S->name, S->nseq);
-      for (r=0,c=0; c<A->len_aln; c++)
-	{
-	  if (A->seq_al[s][c]!='-')pos[s][c]=r++;
-	  else pos[s][c]=-1;
-	}
-    }
-  lp=msa;
-  for (c=0; c<A->len_aln; c++)
-    {
-      p=NULL;
-      int newp=0;
-      for (s=0; s<A->nseq; s++)
-	{
-	  int ir=pos[s][c];
-	  
-	  if (ir!=-1)
-	    {
-	      if (S2[lu[s]][ir])
-		{
-		  p=S2[lu[s]][ir];
-		  break;
-		}
-	    }
-	}
-      if (!p)
-	{
-	p=(ALNcol*)declare_alncol();
-	newp=1;
-	}
-      
-      for (s=0; s<A->nseq; s++)
-	{
-	  int ir=pos[s][c];
-	  if (ir!=-1)
-	    {
-	      if (!S2[lu[s]][ir])
-		{
-		  ALNcol *ne=(ALNcol*)declare_alncol();
-		  S2[lu[s]][ir]=p;
-		  ne->aa=ir;
-		  ne->seq=s;
-		  ne->bot=p->bot;
-		  p->bot=ne;
-		  p->naa++;
-		}
-	    }
-	}
-      if ( newp)
-	{
-	  p->cnext=lp->cnext;
-	  lp->cnext=p;
-	  lp=p;
-	}
-      else
-	{
-	  lp=p;
-	}
-    }
-  free_int (pos, -1);
-  vfree(lu);
-  return start;
-}
       
       
 
@@ -9245,573 +8845,8 @@ char *getseq4kmsa2dnd (char *seq, char *alseq, ALNcol *start, ALNcol **S2)
   return alseq;
 }
 
-int colcomp (ALNcol *c1, ALNcol*c2, int *col);
-int compact_left (ALNcol *start, ALNcol *end, Sequence *S, ALNcol ***S2,int *S3, int len_aln);
-int compact_right (ALNcol *start, ALNcol *end, Sequence *S, ALNcol ***S2,int *S3, int len_aln);        
-char *kmsa2msa (Sequence *S,KT_node *KL, int n)
-{
-  char *out=vtmpnam (NULL);
-  ALNcol ***S2;
-  ALNcol *start, *end, *msa;
-    
-  int a, s, c;
-  FILE*fp=vfopen (out,"w");
-  int compact=0;
-  int len_aln=0;
-  
-  S2=(ALNcol***)vcalloc (S->nseq, sizeof (ALNcol**));
-  for (s=0; s<S->nseq; s++)S2[s]=(ALNcol**)vcalloc (S->len[s], sizeof (ALNcol*));
-        
-  for (a=0; a<n; a++)
-    {
-      
-      Alignment *A=quick_read_aln (KL[a]->msaF);
-     
-      int * lu =(int*) vcalloc (A->nseq, sizeof (int));
-      int **pos=(int**)declare_int (A->nseq, A->len_aln);
-      output_completion (stderr,a,n, 100, "Incorporating Children MSA");
-      for (s=0; s<A->nseq; s++)
-	{
-	  int r;
-	  lu[s]=name_is_in_hlist2 (A->name[s],S->name, S->nseq);
-	  for (r=0,c=0; c<A->len_aln; c++)
-	    {
-	      if (A->seq_al[s][c]!='-')
-		{
-		  pos[s][c]=r++;
-		}
-	      else pos[s][c]=-1;
-	    }
-	}
-      for (c=0; c<A->len_aln; c++)
-	{
-	  ALNcol *p=NULL;
-	  for (s=0; s<A->nseq; s++)
-	    {
-	      int ir=pos[s][c];
-	      
-	      if (ir!=-1)
-		{
-		  if (S2[lu[s]][ir])
-		    {
-		      p=S2[lu[s]][ir];
-		      break;
-		    }
-		}
-	    }
-	  if (!p)
-	    {
-	      p=(ALNcol*)vcalloc (1, sizeof (ALNcol));
-	      len_aln++;
-	    }
-	  for (s=0; s<A->nseq; s++)
-	    {
-	      int ir=pos[s][c];
-	      if (ir!=-1)
-		{
-		  S2[lu[s]][ir]=p;
-		  
-		}
-	    }
-	}
-      
-      free_aln (A);
-      free_int (pos, -1);
-      vfree(lu);
-    }
-  
- 
- 
-  start=(ALNcol*)vcalloc (1, sizeof (ALNcol));
-  end  =(ALNcol*)vcalloc (1, sizeof (ALNcol));
-  start->aa=end->aa=-1;
-  start->next=end;
-  
-  for (s=0; s<S->nseq; s++)
-    {
-      ALNcol *cpos=start;
-      output_completion (stderr,s,S->nseq, 100, "Threading Sequences");
-      for (c=0; c<S->len[s]; c++)
-	{
-	  
-	  ALNcol *p=S2[s][c];
-	  
-	  if (!p->next)
-	    {
-	      p->next=cpos->next;
-	      cpos->next=p;
-	    }
-	  cpos=p;
-	}
-    }
-  
-  for (s=0; s<S->nseq; s++)
-    {
-      for (c=0; c<S->len[s]; c++)
-	{
-	  ALNcol *nc=(ALNcol*)vcalloc (1, sizeof (ALNcol));
-	  nc->seq=s;
-	  nc->aa=c;
-	  
-	  nc->bot=S2[s][c]->bot;
-	  S2[s][c]->bot=nc;
-	}
-    }
-  
-
-  
-  if ( compact)
-    {
-      int *S3=(int*)vcalloc (S->nseq, sizeof(int));
-      int old_len=len_aln;
-      int new_len=0;
-       ALNcol *c1;
-      ALNcol *c2;
-     
-      
-      c1=start;
-      while (c1->next)
-	{
-	  (c1->next)->previous=c1;
-	  c1=c1->next;
-	}
-      
-      while (new_len<old_len)
-	{
-	  if (new_len==0)new_len=old_len;
-	  old_len=new_len;
-	  new_len=compact_right (start, end, S, S2, S3, new_len);
-	  new_len=compact_left  (start, end, S, S2, S3, new_len);
-	}
-#ifdef oldoldstuff
-      ALNcol *c1;
-      ALNcol *c2;
-     
-      
-      c1=start;
-      while (c1->next)
-	{
-	  (c1->next)->previous=c1;
-	  c1=c1->next;
-	}
-      
-      c1=start->next;  
-      while ((c1->next)!=end)
-	{
-	  ALNcol *bc1=NULL;
-	  ALNcol *cc1;
-	  ALNcol *cc2;
-	  
-	  c2=c1->next;
-	  
-	  cc1=c1;
-	  cc2=c2;
-	  while (cc1!=start && colcomp(cc1,c2, S3))
-	    {
-	      bc1=cc1;
-	      cc1=cc1->previous;
-	    }
-	  
-	  if (bc1)
-	    {
-	      cc1=bc1;
-	      cc2=c2;
-	      	      
-	      while (cc1->bot)cc1=cc1->bot;
-	      cc1->bot=cc2->bot;
-	      cc2=cc2->bot;
-	      
-	      while (cc2)
-		{
-		  S2[cc2->seq][cc2->aa]=bc1;
-		  cc2=cc2->bot;
-		}
-	      
-	      cc1=c1;
-	      cc2=c2;
-	      
-	      cc1->next=cc2->next;
-	      (cc2->next)->previous=cc1;
-	      vfree (cc2);
-	      
-	      c1=c1->next;
-	      
-	      len_aln--;
-	    }
-	  else
-	    {
-	      c1=c2;
-	    }
-	}
-
-      //rigth to left
-      c1=end->previous;  
-      
-      while ((c1->previous)!=start)
-	{
-	  ALNcol *bc1=NULL;
-	  ALNcol *cc1;
-	  ALNcol *cc2;
-	  
-	  c2=c1->previous;
-	  
-	  cc1=c1;
-	  cc2=c2;
-	  while (cc1!=end && colcomp(cc1,c2, S3))
-	    {
-	      bc1=cc1;
-	      cc1=cc1->next;
-	    }
-	  
-	  if (bc1)
-	    {
-	      cc1=bc1;
-	      cc2=c2;
-	      	      
-	      while (cc1->bot)cc1=cc1->bot;
-	      cc1->bot=cc2->bot;
-	      cc2=cc2->bot;
-	      
-	      while (cc2)
-		{
-		  S2[cc2->seq][cc2->aa]=bc1;
-		  cc2=cc2->bot;
-		}
-	      
-	      cc1=c1;
-	      cc2=c2;
-	      
-	      cc1->previous=cc2->previous;
-	      (cc2->previous)->next=cc1;
-	      vfree (cc2);
-	      
-	      c1=c1->previous;
-	      
-	      len_aln--;
-	      
-	    }
-	  else
-	    {
-	      c1=c2;
-	    }
-	}
-      
-
-       c1=start->next;  
-      while ((c1->next)!=end)
-	{
-	  ALNcol *bc1=NULL;
-	  ALNcol *cc1;
-	  ALNcol *cc2;
-	  
-	  c2=c1->next;
-	  
-	  cc1=c1;
-	  cc2=c2;
-	  while (cc1!=start && colcomp(cc1,c2, S3))
-	    {
-	      bc1=cc1;
-	      cc1=cc1->previous;
-	    }
-	  
-	  if (bc1)
-	    {
-	      cc1=bc1;
-	      cc2=c2;
-	      	      
-	      while (cc1->bot)cc1=cc1->bot;
-	      cc1->bot=cc2->bot;
-	      cc2=cc2->bot;
-	      
-	      while (cc2)
-		{
-		  S2[cc2->seq][cc2->aa]=bc1;
-		  cc2=cc2->bot;
-		}
-	      
-	      cc1=c1;
-	      cc2=c2;
-	      
-	      cc1->next=cc2->next;
-	      (cc2->next)->previous=cc1;
-	      vfree (cc2);
-	      
-	      c1=c1->next;
-	      
-	      len_aln--;
-	    }
-	  else
-	    {
-	      c1=c2;
-	    }
-	}
-
-       //rigth to left
-      c1=end->previous;  
-      
-      while ((c1->previous)!=start)
-	{
-	  ALNcol *bc1=NULL;
-	  ALNcol *cc1;
-	  ALNcol *cc2;
-	  
-	  c2=c1->previous;
-	  
-	  cc1=c1;
-	  cc2=c2;
-	  while (cc1!=end && colcomp(cc1,c2, S3))
-	    {
-	      bc1=cc1;
-	      cc1=cc1->next;
-	    }
-	  
-	  if (bc1)
-	    {
-	      cc1=bc1;
-	      cc2=c2;
-	      	      
-	      while (cc1->bot)cc1=cc1->bot;
-	      cc1->bot=cc2->bot;
-	      cc2=cc2->bot;
-	      
-	      while (cc2)
-		{
-		  S2[cc2->seq][cc2->aa]=bc1;
-		  cc2=cc2->bot;
-		}
-	      
-	      cc1=c1;
-	      cc2=c2;
-	      
-	      cc1->previous=cc2->previous;
-	      (cc2->previous)->next=cc1;
-	      vfree (cc2);
-	      
-	      c1=c1->previous;
-	      
-	      len_aln--;
-	      
-	    }
-	  else
-	    {
-	      c1=c2;
-	    }
-	}
-#endif      
 
 
-
-      vfree (S3);
-      HERE ("Lena_aln OUT: %d", len_aln);
-    }
-	  
-	      
-	  
-
-     
-  
-  for (s=0; s<S->nseq; s++)
-    {
-      msa=start;
-      int r=0;
-      output_completion (stderr,s,S->nseq, 100, "Final MSA");
-      for (c=0; c<S->len[s]; c++)
-	{
-	  //S2[s][c]->aa=S->seq[s][c];
-	  S2[s][c]->aa=1;
-	}
-      fprintf (fp, ">%s\n", S->name[s]);
-      
-      while (msa->next)
-	{
-	  if (msa->aa==0){fprintf (fp, "-");}
-	  else if (msa->aa==1) 
-	    {
-	      fprintf (fp, "%c",S->seq[s][r++]);
-	      msa->aa=0;
-	    }
-      	  msa=msa->next;
-	}
-      fprintf (fp, "\n");
-    }
-  vfclose (fp);
-
-  while (start->next)
-    {
-      ALNcol *right=start->next;
-      while (start->bot)
-	{
-	  ALNcol *bot=start->bot;
-	  vfree (start);
-	  start=bot;
-	}
-      vfree (start);
-      start=right;
-    }
-  vfree (start);
-  for (s=0; s<S->nseq; s++)vfree (S2[s]);
-  vfree (S2);
-  
-  return out;
-}
-	 
-int colcomp (ALNcol *c1, ALNcol*c2, int *col)
-{
-  ALNcol *ic1;
-  ALNcol *ic2;
-  int compatible=1;
-  
-  if (!c1 || !c2) return 0;
-  
-  ic1=c1->bot;
-  ic2=c2->bot;
-
-  if (!ic1 || !ic2) return 0;
-
-  while (ic1)
-    {
-      col[ic1->seq]=1;
-      ic1=ic1->bot;
-    }
-  while (ic2)
-    {
-      if (col[ic2->seq])
-	{
-	  compatible=0;
-	  break;
-	}
-      ic2=ic2->bot;
-    }
-  ic1=c1->bot;
-  while (ic1)
-    {
-      col[ic1->seq]=0;
-      ic1=ic1->bot;
-    }
- 
-  return compatible;
-}
-int compact_right (ALNcol *start, ALNcol *end, Sequence *S, ALNcol ***S2,int *S3, int len_aln)    
-{
-  ALNcol *c1;
-  ALNcol *c2;
-  
-  c1=start;
-  while (c1->next)
-    {
-      (c1->next)->previous=c1;
-      c1=c1->next;
-    }
-      
-  c1=start->next;  
-  while ((c1->next)!=end)
-    {
-      ALNcol *bc1=NULL;
-      ALNcol *cc1;
-      ALNcol *cc2;
-      
-      c2=c1->next;
-      
-      cc1=c1;
-      cc2=c2;
-      while (cc1!=start && colcomp(cc1,c2, S3))
-	{
-	  bc1=cc1;
-	  cc1=cc1->previous;
-	}
-      
-      if (bc1)
-	{
-	  cc1=bc1;
-	  cc2=c2;
-	  
-	  while (cc1->bot)cc1=cc1->bot;
-	  cc1->bot=cc2->bot;
-	  cc2=cc2->bot;
-	  
-	  while (cc2)
-	    {
-	      S2[cc2->seq][cc2->aa]=bc1;
-	      cc2=cc2->bot;
-	    }
-	  
-	  cc1=c1;
-	  cc2=c2;
-	  
-	  cc1->next=cc2->next;
-	  (cc2->next)->previous=cc1;
-	  vfree (cc2);
-	  
-	  c1=c1->next;
-	  len_aln--;
-	  
-
-	}
-      else
-	{
-	  c1=c2;
-	}
-      
-    }
-  return len_aln;
-}
-
-int compact_left (ALNcol *start, ALNcol *end, Sequence *S, ALNcol ***S2,int *S3, int len_aln)    
-{
-  ALNcol *c1;
-  ALNcol *c2;
-  c1=end->previous;  
-      
-  while ((c1->previous)!=start)
-    {
-      ALNcol *bc1=NULL;
-      ALNcol *cc1;
-      ALNcol *cc2;
-      
-      c2=c1->previous;
-      
-      cc1=c1;
-      cc2=c2;
-      while (cc1!=end && colcomp(cc1,c2, S3))
-	{
-	  bc1=cc1;
-	  cc1=cc1->next;
-	}
-      
-      if (bc1)
-	{
-	  cc1=bc1;
-	  cc2=c2;
-	  
-	  while (cc1->bot)cc1=cc1->bot;
-	  cc1->bot=cc2->bot;
-	  cc2=cc2->bot;
-	  
-	  while (cc2)
-	    {
-	      S2[cc2->seq][cc2->aa]=bc1;
-	      cc2=cc2->bot;
-	    }
-	  
-	  cc1=c1;
-	  cc2=c2;
-	  
-	  cc1->previous=cc2->previous;
-	  (cc2->previous)->next=cc1;
-	  vfree (cc2);
-	  
-	  c1=c1->previous;
-	  
-	  len_aln--;
-	  
-	}
-      else
-	{
-	  c1=c2;
-	}
-    }
-  return len_aln;
-}
 char * kmsa2msa_old (Sequence *S,KT_node K, int max, int *cn)
 {
   char *out=vtmpnam (NULL);

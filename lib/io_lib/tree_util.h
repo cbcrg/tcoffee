@@ -4,16 +4,7 @@
 typedef struct ALNcol
 {
   int aa;
-  int naa;
-  int seq;
-  int id;
   struct ALNcol *next;
-  struct ALNcol *cnext;
-  struct ALNcol *pnext;
-  
-  
-  struct ALNcol *previous;
-  struct ALNcol *bot;
 };
 typedef struct ALNcol ALNcol;
 
