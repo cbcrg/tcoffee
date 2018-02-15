@@ -3336,6 +3336,7 @@ FILE * no_rec_print_tree ( NT_node p, FILE *fp)
   while (p)
     {
       int x=++(p->visited);
+      
       if (!p->isseq)
 	{
 	  if (x==1)
@@ -8024,6 +8025,8 @@ int ktree2aln_bucketsF(KT_node K,char *fname);
 int ktree2seq_bucketsF(KT_node K,char *fname);
 
 char   *kmsa2msa (KT_node K,Sequence *S, ALNcol***S2,ALNcol*PG);
+char   *kmsa2msa_norec (Sequence *S,KT_node *KL, int n);
+
 ALNcol * msa2graph (Alignment *A, Sequence *S, ALNcol***S2, ALNcol*msa,int seq);
 
 
@@ -8067,6 +8070,8 @@ char* tree2msa4dpa (NT_node T, Sequence *S, int N, char *method)
   
   if (getenv ("OLD_DPA"))
 	   outname=kmsa2msa_old  (S,K,n,&cn);
+  else if ( getenv("NOREC_DPA"))
+    outname=kmsa2msa_norec  (S,KL,n);
   else
     outname=kmsa2msa (K,S,NULL,NULL); 
   //
@@ -8088,14 +8093,133 @@ ALNcol* declare_alncol ()
 {
   static int n;
   ALNcol *p=(ALNcol*)vcalloc (1, sizeof (ALNcol));
-  p->id=++n;
+  //p->id=++n; //put this back when debugging pointers
   return p;
 }
+char *kmsa2msa_norec (Sequence *S,KT_node *KL, int n)
+{
+  char *out=vtmpnam (NULL);
+  ALNcol ***S2;
+  ALNcol *start, *end;
+  int a, s, c;
+  FILE*fp=vfopen (out,"w");
 
+  HERE ("USE NOREC DPA");
+  S2=(ALNcol***)vcalloc (S->nseq, sizeof (ALNcol**));
+  for (s=0; s<S->nseq; s++)S2[s]=(ALNcol**)vcalloc (S->len[s], sizeof (ALNcol*));
+  
+    
+  for (a=0; a<n; a++)
+    {
+      
+      Alignment *A=quick_read_aln (KL[a]->msaF);
+      int * lu =(int*) vcalloc (A->nseq, sizeof (int));
+      int **pos=(int**)declare_int (A->nseq, A->len_aln);
+      output_completion (stderr,a,n, 100, "Incorporating Children");
+      for (s=0; s<A->nseq; s++)
+	{
+	  int r;
+	  lu[s]=name_is_in_hlist2 (A->name[s],S->name, S->nseq);
+	  for (r=0,c=0; c<A->len_aln; c++)
+	    {
+	      if (A->seq_al[s][c]!='-')pos[s][c]=r++;
+	      else pos[s][c]=-1;
+	    }
+	}
+      
+      for (c=0; c<A->len_aln; c++)
+	{
+	  ALNcol *p=NULL;
+	  for (s=0; s<A->nseq; s++)
+	    {
+	      int ir=pos[s][c];
+	      
+	      if (ir!=-1)
+		{
+		  if (S2[lu[s]][ir])
+		    {
+		      p=S2[lu[s]][ir];
+		      break;
+		    }
+		}
+	    }
+	  if (!p)p=(ALNcol*)vcalloc (1, sizeof (ALNcol));
+	  for (s=0; s<A->nseq; s++)
+	    {
+	      int ir=pos[s][c];
+	      if (ir!=-1)
+		{
+		  S2[lu[s]][ir]=p;
+		  
+		}
+	    }
+	}
+      free_aln (A);
+      free_int (pos, -1);
+      vfree(lu);
+    }
+  
+ 
+  start=(ALNcol*)vcalloc (1, sizeof (ALNcol));
+  end  =(ALNcol*)vcalloc (1, sizeof (ALNcol));
+  start->aa=end->aa=-1;
+  start->next=end;
+  
+  for (s=0; s<S->nseq; s++)
+    {
+      ALNcol *cpos=start;
+      output_completion (stderr,s,S->nseq, 100, "Threading Sequences");
+      for (c=0; c<S->len[s]; c++)
+	{
+	  
+	  ALNcol *p=S2[s][c];
+	  if (!p->next)
+	    {
+	      p->next=cpos->next;
+	      cpos->next=p;
+	    }
+	  cpos=p;
+	}
+    }
+  
+  for (s=0; s<S->nseq; s++)
+    {
+      ALNcol *msa=start;
+      int r=0;
+      output_completion (stderr,s,S->nseq, 100, "Final MSA");
+      for (c=0; c<S->len[s]; c++)
+	{
+	  S2[s][c]->aa=S->seq[s][c];
+	}
+      fprintf (fp, ">%s\n", S->name[s]);
+      
+      while (msa->next)
+	{
+	  
+	  if (msa->aa==0){fprintf (fp, "-");}
+	  else if (msa->aa>0)fprintf (fp, "%c",msa->aa);
+	  msa=msa->next;
+	}
+      fprintf (fp, "\n");
+    }
+  vfclose (fp);
+
+  while (start->next)
+    {
+      ALNcol *k=start;
+      start=start->next;
+      vfree (k);
+    }
+  vfree (start);
+  for (s=0; s<S->nseq; s++)vfree (S2[s]);
+  vfree (S2);
+  
+  return out;
+}
 char *kmsa2msa (KT_node K,Sequence *S, ALNcol***S2,ALNcol*start)
 {
   int a, s, c;
-  Alignment *A;
+  Alignment *A=NULL;
   char *out=NULL;
   FILE *fp;
   ALNcol *end;
@@ -8105,9 +8229,9 @@ char *kmsa2msa (KT_node K,Sequence *S, ALNcol***S2,ALNcol*start)
       S2=(ALNcol***)vcalloc (S->nseq, sizeof (ALNcol**));
       for (s=0; s<S->nseq; s++)S2[s]=(ALNcol**)vcalloc (S->len[s], sizeof (ALNcol*));
       
-      A=quick_read_aln (K->msaF);
+      //A=quick_read_aln (K->msaF);
+      A=main_read_aln (K->msaF,NULL);
       start=msa2graph(A,S, S2,start, -1);
-      
       free_aln (A);
       
       out=vtmpnam (NULL);
@@ -8118,12 +8242,14 @@ char *kmsa2msa (KT_node K,Sequence *S, ALNcol***S2,ALNcol*start)
     {
       int i =name_is_in_hlist2((K->child[a])->name,S->name, S->nseq);
       
-      A=quick_read_aln ((K->child[a])->msaF);
+      //A=quick_read_aln ((K->child[a])->msaF);
+      A=main_read_aln    ((K->child[a])->msaF,NULL);
       start=msa2graph (A,S, S2,start,i);
-      
       free_aln (A);
+      
       kmsa2msa (K->child[a], S, S2,start);
     }
+  
   
   if (!out) return out;
   

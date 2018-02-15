@@ -9981,8 +9981,9 @@ void clean_exit ()
   
   Tmpname *start;
   int debug=0;
-  char *scratch=NULL;
+  static char *scratch=NULL;
   
+  if (!scratch && getenv ("TMP2SCRATCH"))scratch=getenv ("TMP2SCRATCH");
   clean_exit_started=1;//prevent new locks
   start=tmpname;
   //1-start killing all the children
@@ -10002,11 +10003,12 @@ void clean_exit ()
     {
       if (scratch)
 	{
-	  fprintf (get_stdout1(NULL), "Your tmp files have been moved into [%s] --- Use a cron jon to delete them\n", scratch);
+	  fprintf (get_stdout1(NULL), "Your tmp files have been moved into [%s] --- Use a cron job to delete them\n", scratch);
 	}
       else 
 	{
-	  fprintf (get_stdout1(NULL), "Deleting tmp files --- Set TMP2SCRATCH to move them to SCRATCH instead\n");
+	  //fprintf (get_stdout1(NULL), "Deleting tmp files --- Set TMP2SCRATCH to move them to SCRATCH instead\n");
+	  ;
 	}
       
       kill_child_pid(getpid());

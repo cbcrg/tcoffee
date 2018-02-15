@@ -1293,6 +1293,45 @@ Sequence  * quick_read_seq ( char *file)
       return S;
     }
 }
+
+Alignment * quick_read_aln_static ( char *file)
+{
+  //only reads FASTA, Clustal, MSF, and Phylips
+  //turns 
+  
+  static char *tmp_name=vtmpnam (NULL);
+
+  if (!file || !check_file_exists (file))return NULL;
+  else if (printf_system ( "seq2name_seq.pl %s > %s",file, tmp_name)!=EXIT_SUCCESS)
+    {
+      printf_exit ( EXIT_FAILURE, stderr, "Could Not Read File %s [FATAL:%s]\n", file, PROGRAM);
+    }
+  file=tmp_name;
+  if (file)
+    {
+      static char **seq=NULL;
+      static char **comment=NULL;
+      static char **name=NULL;
+      int a;
+      char *dup;
+      int nseq=read_nameseq(file, &name, &seq, &comment);
+      
+      Alignment *A=declare_aln2(nseq,1);
+      free_char (A->seq_al, -1);
+      free_char (A->name, -1);
+      free_char (A->aln_comment, -1);
+      A->name=name;
+      A->seq_al=seq;
+      A->aln_comment=comment;
+      A->max_n_seq=A->nseq=nseq;
+      A->nseq=nseq;
+      
+      A->declared_len=A->len_aln=strlen (A->seq_al[0]);
+      
+      
+      return A;
+    }
+}
 Alignment * quick_read_aln ( char *file)
 {
   //only reads FASTA, Clustal, MSF, and Phylips

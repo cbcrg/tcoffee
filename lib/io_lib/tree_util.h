@@ -4,8 +4,8 @@
 typedef struct ALNcol
 {
   int aa;
-  int id;
-  struct ALNcol *next;
+  //int id //put this back when debugging pointers
+struct ALNcol *next;
 };
 typedef struct ALNcol ALNcol;
 

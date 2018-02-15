@@ -1704,7 +1704,9 @@ NT_node seq2dnd (Sequence *S, char *dpa_tree)
       
       for ( a=0; a<n; a++)
 	{
+	  
 	  lname[a]=S->name[lsort[a][0]];
+	  
 	}
       
       
@@ -2055,35 +2057,41 @@ static float km_tnode;
 NT_node list2balanced_dnd (char **name, int n)
 {
   NT_node * NL=(NT_node*)vcalloc (n, sizeof (NT_node));
-  NT_node node;
+  NT_node node, lnode;
   int a;
-  
+    
   for (a=0; a<n; a++)
     {
       NL[a]=new_declare_tree_node();
       sprintf ((NL[a])->name, "%s", name[a]);
+      NL[a]->isseq=1;
     }
   
   while (n>1)
     {
       int i,j;
       i=j=0;
-      while (i<n)
-        {
-	  if ((n-i)>=2)
-	    {
-	      node=new_declare_tree_node();
-	      node->left=NL[i++];
-	      node->right=NL[i++];
-	    }
-	  else
-	    {
-	      node=NL[i++];
-	    }
-          NL[j++]=node;
+      for (j=i=0; i<n-1; i+=2)
+	{
+	  node=new_declare_tree_node();
+	  node->left=NL[i];
+	  node->right=NL[i+1];
+	  (node->right)->parent=(node->left)->parent=node;
+	  NL[j++]=node;
 	}
+      
+      if (n%2)
+	{
+	  node=new_declare_tree_node();
+	  node->left =NL[j-1];
+	  node->right=NL[n-1];
+	  (node->right)->parent=(node->left)->parent=node;
+	 NL[j-1]=node;
+	}
+
       n=j;
     }
+  
   node=NL[0];
   vfree (NL);
   return node;
