@@ -6983,7 +6983,8 @@ Alignment * t_coffee_dpa (int argc, char **argv)
 	{
 	  dpa_weight=argv[++a];
 	}
-      else if (strm (argv[a],"-dpa_thread"))
+
+      else if (strm (argv[a],"-dpa_thread") || strm (argv[a],"-dpa_n_core"))
 	{
 	  set_nproc (atoi (argv[++a]));
 	}
@@ -7016,7 +7017,10 @@ Alignment * t_coffee_dpa (int argc, char **argv)
 	{
 	  myexit (fprintf_error (stderr, "%s is not supported when using -dpa [FATAL:%s]", argv[a],PROGRAM));
 	}
-      
+      else if (strstr (argv[a], "dpa"))
+	{
+	   myexit (fprintf_error (stderr, "%s is an unknown dpa flag [FATAL:%s]", argv[a],PROGRAM));
+	}
       else
 	command=strcatf (command,"%s ", argv[a]);
     }

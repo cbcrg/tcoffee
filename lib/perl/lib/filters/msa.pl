@@ -1,10 +1,11 @@
 #!/usr/bin/env perl
-$run_anyway=0;
+$run_anyway=2;
 my $msaf="msa.in.tmp.$$";
 my $msaoutf="msa.out.tmp.$$";
 my $err="msa.out.err.$$";
 open  (F, $ARGV[0]);
 open  (OUT, ">$msaf");
+$nseq=0;
 while (<F>)
   {
     $l=$_;
@@ -53,13 +54,25 @@ while (<F>)
   }
 close (F);
 
-if ($tot<1 && $run_anyway)
+if ($tot<1 && $run_anyway==1)
   {
     print STDERR "\nWarning: MSA returned a NULL file -- Use T-Coffee instead\n";
     open (F,$err);
     while (<F>){print "$_";}
       
     system ("t_coffee -seq $msaf -outfile $ARGV[1]  -quiet");
+  }
+elsif ($tot<1 && $run_anyway==2)
+  {
+    
+    
+    $nseq/=2;
+    $nseq=int ($nseq);
+    if ($nseq<2){$nseq=2;}
+    print "RUN MSA with NSeq=$nseq\n";
+    #print ("t_coffee -dpa -dpa_nseq $nseq -seq $ARGV[0] -dpa_tree codnd -outfile $ARGV[1] -dpa_method msa_msa");
+    system ("t_coffee -dpa -dpa_nseq $nseq -seq $ARGV[0] -dpa_tree codnd -outfile $ARGV[1] -dpa_method msa_msa>/dev/null");
+
   }
 elsif ($tot<1)
   {
@@ -74,6 +87,9 @@ else
       }
     close (OUT);
   }
+
+
+
 unlink ($msaf);
 unlink ($msaoutf);
 unlink ($err);

@@ -58,6 +58,14 @@ for ($a=0; $a<@ARGV; $a++)
 	    &dirsync;
 	  }
       }
+    elsif ($v eq "-dirsync.torre")
+      {
+	$action=$v;
+      }
+    elsif ($v eq "-dirsync.badal")
+      {
+	$action=$v;
+      }
     elsif ($v eq "-dirsync")
       {
 	$action=$v;
@@ -150,6 +158,58 @@ elsif    ($action eq "-itune")
     chdir ("..");
     rec_clean_mp3($d1);
     chdir ($d1);
+  }
+elsif    ($action eq "-exam")
+  {
+    my $d1=getcwd;
+    my $dh1=new DirHandle;
+    chdir ("..");
+    opendir ($dh1, $d1);
+    my @l1=readdir($dh1);
+    closedir($dh1);
+    chdir ("$d1");
+    foreach my $file_name (@l1)
+      {
+	my $new_file_name=$file_name;
+	$new_file_name=~s/\s/_/g;
+	print "\n$nnew_file_name";
+	if ($new_file_name=~/(.*)\.zip/)
+	  {
+	    my $new_dir_name=$1;
+	    mkdir("./$new_dir_name");
+	    my_rename ($file_name, "./$new_dir_name/$new_file_name");
+	    chdir ("$new_dir_name");
+	    system ("unzip $new_file_name");
+	    chdir ("..");
+	  }
+	elsif ($new_file_name=~/(.*)\.tar.gz/)
+	  {
+	    my $new_dir_name=$1;
+	    mkdir("./$new_dir_name");
+	    my_rename ($file_name, "./$new_dir_name/$new_file_name");
+	    chdir ("$new_dir_name");
+	    system ("gunzip $new_dir_name.tar.gz");
+	    system ("tar -xvf $new_dir_name.tar");
+	    chdir ("..");
+	  }
+	elsif ($new_file_name=~/(.*)\.py/)
+	   {
+	     my $new_dir_name=$1;
+	     mkdir("./$new_dir_name");
+	     my_rename ($file_name, "./$new_dir_name/$new_file_name");
+	     chdir ("$new_dir_name");
+	     chdir ("..");
+	   }
+	elsif ($new_file_name=~/(.*)\.pdf/)
+	   {
+	     my $new_dir_name=$1;
+	     mkdir("./$new_dir_name");
+	     my_rename ($file_name, "./$new_dir_name/$new_file_name");
+	     chdir ("$new_dir_name");
+	     chdir ("..");
+	   }
+      }
+    chdir ("$d1");
   }
 elsif    ($action eq "-ibooks")## synchronyze itune lib: rename_book.pl -action ibooks
   {
@@ -474,6 +534,16 @@ elsif       ($action eq "-dirsync")
     dirsync();
     die;
   }
+elsif       ($action eq "-dirsync.torre")
+  {
+    dirsync("torre")
+  }
+elsif       ($action eq "-dirsync.badal")
+  {
+    dirsync("badal")
+  }
+
+
 elsif       ($action eq "-year2series")
       {
 	print "\n";
@@ -1716,10 +1786,24 @@ sub rec_flac2mp3
 sub dirsync
   {
     my ($from_dir, $to_dir)=@_;
-    my $press_dir="/Users/cnotredame/Dropbox/presse";
-    if (!$from_dir){$from_dir="/Volumes/backup/download/";}
-    if (!$to_dir)   {$to_dir  ="/Volumes/Movies3/Download/download.raw/";}
-    my $ignore="/Volumes/Movies3/Download/.sync.ignore.txt";
+    my ($press_dir, $ignore);
+    
+    if ($from_dir eq "torre")
+      {
+	
+	$press_dir="/Users/cnotredame/Dropbox/presse";
+	$from_dir="/Volumes/Movies3/Download/download.raw/";
+	$to_dir  ="/Volumes/Movies3/Download/download.ready/";
+	$ignore="/Volumes/Movies3/Download/.sync.ignore.txt";
+      }
+    else
+      {
+	
+	$press_dir="/Users/cnotredame/Dropbox/presse";
+	if (!$from_dir){$from_dir="/Volumes/backup/download/";}
+	if (!$to_dir)   {$to_dir  ="/Volumes/Movies3/Download/download.raw/";}
+	$ignore="/Volumes/Movies3/Download/.sync.ignore.txt";
+      }
     
     opendir (DIR, "$from_dir");
     my @l1=readdir(DIR);

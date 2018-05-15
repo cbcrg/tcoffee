@@ -1438,7 +1438,8 @@ void * vmalloc ( size_t size)
 		return x;
 	      }
 	    }
-	return NULL;}
+	return NULL;
+	}
 
 
 
