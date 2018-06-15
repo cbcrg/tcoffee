@@ -198,6 +198,7 @@ char * node2seq_file (NT_node N, Sequence *S, int cache, char *file);
 Sequence * tree2seq    (NT_node R, Sequence *S);
 
 int seqname2seqindex4tree (NT_node root, Sequence *S);
+int seqname2seqindexname4tree (NT_node root, Sequence *S);
 int seqindex2seqname4tree (NT_node root, Sequence *S);
 
 NT_node  rename_seq_in_tree ( NT_node R, char ***list);

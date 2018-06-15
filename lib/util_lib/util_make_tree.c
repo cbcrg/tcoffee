@@ -1765,6 +1765,15 @@ NT_node seq2dnd (Sequence *S, char *dpa_tree)
     {
       T=seq2mafft_dnd (S);
     }
+  else if (strm (dpa_tree, "fftns1dnd"))
+    {
+      T=seq2fftns1_dnd (S);
+    }
+  else if (strm (dpa_tree, "fftns2dnd"))
+    {
+      T=seq2fftns1_dnd (S);
+    }
+  
   else if ( strm (dpa_tree, "upgma"))
     {
       
@@ -1806,7 +1815,64 @@ NT_node seq2dnd (Sequence *S, char *dpa_tree)
   T=main_read_tree (tmptree);  
   return T;
 }
-
+NT_node seq2fftns1_dnd ( Sequence *S)
+{
+  Alignment *A;
+  int tot_node=0;
+  NT_node T=NULL;
+  char *dir =vtmpnam (NULL);
+  char *cdir=get_pwd (NULL);
+  FILE*fp;
+  
+  my_mkdir (dir);
+  chdir (dir);
+  output_fasta_seqS ("seq",S);
+  printf_system_direct ("mafft-fftns --anysymbol --retree 1 --treeout seq > aln %s ",TO_NULL_DEVICE);
+  
+  if (check_file_exists ("seq.tree"))
+    {
+    
+      fp=vfopen ("seq.tree", "a");
+      fprintf (fp, ";");
+      vfclose (fp);
+      T=main_read_tree ("seq.tree");
+      T=indextree2nametree (S, T);
+    }
+  chdir    (cdir);
+  printf_system_direct ("rm %s/*", dir);
+  my_rmdir (dir);
+  vfree (cdir);
+  return T;
+}
+NT_node seq2fftns2_dnd ( Sequence *S)
+{
+  Alignment *A;
+  int tot_node=0;
+  NT_node T=NULL;
+  char *dir =vtmpnam (NULL);
+  char *cdir=get_pwd (NULL);
+  FILE*fp;
+  
+  my_mkdir (dir);
+  chdir (dir);
+  output_fasta_seqS ("seq",S);
+  printf_system_direct ("mafft-fftns --anysymbol --retree 2 --treeout seq > aln %s ",TO_NULL_DEVICE);
+  
+  if (check_file_exists ("seq.tree"))
+    {
+    
+      fp=vfopen ("seq.tree", "a");
+      fprintf (fp, ";");
+      vfclose (fp);
+      T=main_read_tree ("seq.tree");
+      T=indextree2nametree (S, T);
+    }
+  chdir    (cdir);
+  printf_system_direct ("rm %s/*", dir);
+  my_rmdir (dir);
+  vfree (cdir);
+  return T;
+}
 NT_node seq2mafft_dnd ( Sequence *S)
 {
   Alignment *A;

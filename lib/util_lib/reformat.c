@@ -11764,7 +11764,7 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	 {
 	   
 	   if (!D2->S)printf_exit (EXIT_FAILURE,stderr,"ERROR action +newick2mafftnewick requires -in2=<seqfile> [FATAL]");
-	   seqname2seqindex4tree (D1->T, D2->S);
+	   seqname2seqindexname4tree (D1->T, D2->S);
 	   
 	 }
        else if ( strm ( action, "treelist2bs") ||strm ( action, "tree2bs") )

@@ -2666,6 +2666,78 @@ int seqname2seqindex4tree (NT_node root, Sequence *S)
   return rv;
 }
 
+int seqname2seqindexname4tree (NT_node root, Sequence *S)
+{
+  //index goes 1 to N
+  NT_node current,pre;
+  if ( !root)return 0;
+  int rv=0;
+  reset_node_count (root);
+  current = root;
+  root->visited=1;
+  
+  while(current != NULL)
+    {                 
+      if(!current->left)
+	{
+	  if (current && current->isseq && !current->visited)
+	    {
+	      int i=name_is_in_hlist (current->name, S->name, S->nseq);
+	      if (i!=-1)current->name=csprintf (current->name, "%d_%s", i+1, current->name);
+	      else printf_exit ( EXIT_FAILURE,stderr, "\nERROR: Sequence %s is in tree but not in source sequence file [FATAL]", current->name);
+	      rv++;
+	    } 
+	  current->visited=1;
+	  current = current->right;  
+	}    
+      else
+	{
+	  pre = current->left;
+	  
+	  if (!pre->visited)
+	    {
+	      if (pre && !pre->visited && pre->isseq)
+		{
+		  int i=name_is_in_hlist (pre->name, S->name, S->nseq);
+		  if (i!=-1)current->name=csprintf (pre->name, "%d_%s", i+1, pre->name);
+		  else printf_exit ( EXIT_FAILURE,stderr, "\nERROR: Sequence %s is in tree but not in source sequence file [FATAL]", pre->name);
+		  rv++;
+		}
+	      pre->visited=1;
+	    }
+	  while(pre->right && pre->right != current)
+	    {
+	      pre = pre->right;
+	      if (pre)
+		{
+		  if (pre && !pre->visited && pre->isseq)
+		    {
+		       int i=name_is_in_hlist (pre->name, S->name, S->nseq);
+		       if (i!=-1)pre->name=csprintf (pre->name, "%d_%s", i+1, pre->name);
+		       else printf_exit ( EXIT_FAILURE,stderr, "\nERROR: Sequence %s is in tree but not in source sequence file [FATAL]", pre->name);
+		       
+		       rv++;
+		    }
+		  pre->visited=1;
+		}
+	    }
+	  
+	  
+	  if(!pre->right )
+	    {
+	      pre->right = current;
+	      current = current->left;
+	    }
+	  
+	  else 
+	    {
+	      pre->right = NULL;
+	      current = current->right;      
+	    } 
+	} 
+    } 
+  return rv;
+}
 
 
 NT_node balance_tree (NT_node T)
