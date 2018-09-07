@@ -8563,24 +8563,30 @@ KT_node tree2ktree (NT_node T,Sequence *S, int N)
   K->msaF =vtmpnam(NULL);
   
   fp=vfopen (K->seqF, "w");
-  ordered=declare_int (nc, 1);
-  for (a=0; a<nc; a++)ordered[a][0]=CL[a]->seq;
-  sort_int (ordered,1,0, 0, nc-1);
-  for (a=0; a<nc; a++)
+  if (S->nseq>N)
     {
-      int s=ordered[a][0];
-      fprintf (fp, ">%s\n%s\n", S->name[s],S->seq[s]);
+      ordered=declare_int (nc, 1);
+      for (a=0; a<nc; a++)ordered[a][0]=CL[a]->seq;
+      sort_int (ordered,1,0, 0, nc-1);
+      for (a=0; a<nc; a++)
+	{
+	  int s=ordered[a][0];
+	  fprintf (fp, ">%s\n%s\n", S->name[s],S->seq[s]);
+	}
+      vfclose (fp);
+      free_int (ordered, -1);
     }
-  vfclose (fp);
-  free_int (ordered, -1);
-  //for (a=0; a<nc; a++)
-  //  {
-  //    
-  //    int s=CL[a]->seq;
-  //    
-  //    fprintf (fp, ">%s\n%s\n", S->name[s],S->seq[s]);
-  // }
-  //vfclose (fp);
+  else
+    {
+      for (a=0; a<nc; a++)
+	{
+	  
+	  int s=CL[a]->seq;
+	  
+	  fprintf (fp, ">%s\n%s\n", S->name[s],S->seq[s]);
+	}
+      vfclose (fp);
+    }
   
   
   K->child=(KT_node*)vcalloc (nc, sizeof (KT_node));
