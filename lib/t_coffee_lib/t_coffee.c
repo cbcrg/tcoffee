@@ -6956,7 +6956,8 @@ Alignment * t_coffee_dpa (int argc, char **argv)
   float *w;
   int a;
   int output_dpa_tree=1;
-  
+  int seqflag=0;
+
   command=(char*)vcalloc (10000, sizeof (char));
   sprintf ( command, "#");
   
@@ -6969,6 +6970,7 @@ Alignment * t_coffee_dpa (int argc, char **argv)
 	{
 	  seqfile=argv[++a];
 	  S=quick_read_seq (seqfile);
+	  seqflag=1;
 	}
       
       else if (strm (argv[a],"-dpa_tree"))
@@ -7033,17 +7035,29 @@ Alignment * t_coffee_dpa (int argc, char **argv)
       command=(char*)vcalloc (10000, sizeof (char));
       sprintf ( command, "%s", dpa_aligner);
     }
+  else
+    {
+      command=(char*)vcalloc (10000, sizeof (char));
+      sprintf (command, "clustalo_msa");
+    }
   
   //check Sequences are here
-  if (!S)
+  
+  if (!seqflag)
     myexit (fprintf_error ( stderr, "\nERROR: When using dpa, sequences must be provided via -seq [FATAL:%s]", PROGRAM));
+  else if (!S)
+    myexit (fprintf_error ( stderr, "\nERROR: Could not read %s [FATAL:%s]", seqfile,PROGRAM));
   //decide on bucket sizes
-  if (dpa_nseq==0)dpa_nseq=30;
+  if (dpa_nseq==0)
+    {
+      if (S->nseq>10000)dpa_nseq=1000;
+      else dpa_nseq=S->nseq/10;
+    }
   
   //prepare the guide tree
   fprintf ( stderr, "!Compute Guide Tree --- ");
   if (usetree){dpa_tree=usetree;}
-  if (!dpa_tree)dpa_tree="kmdnd";
+  if (!dpa_tree)dpa_tree="codnd";
   if (strm (dpa_tree, "dpa"))
     {
       
@@ -7072,7 +7086,7 @@ Alignment * t_coffee_dpa (int argc, char **argv)
   fprintf ( stderr, "!Compute Weights --- done\n");
   
   //run the alignment
-  fprintf (stderr, "!Compute MSA --- dp_method %s -- dpa_n %d -- start\n", command, dpa_nseq);
+  fprintf (stderr, "!Compute MSA --- dp_method %s -- dpa_nseq %d -- start\n", command, dpa_nseq);
   T=node2master (T, S, w);
   //alnfile=tree2bucket (T,S,dpa_nseq,command);
   alnfile=tree2msa4dpa(T, S, dpa_nseq, command);

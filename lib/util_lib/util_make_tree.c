@@ -1737,7 +1737,7 @@ NT_node seq2dnd (Sequence *S, char *dpa_tree)
     {
       T=seq2swl_dnd (S);
     }
-  else if (strm (dpa_tree, "codnd") )
+  else if (strm (dpa_tree, "codnd") || strm (dpa_tree,"mbed"))
     {
       T=seq2co_dnd (S);
     }
