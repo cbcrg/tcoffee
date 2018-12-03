@@ -12,9 +12,9 @@ Multiple sequence alignments (MSA) are usualy estimated by progressively alignin
 
 Aside from its improved accuracy, the main benefit of this protocol is to allow any third party multiple sequence aligner to be applied on the sub-groups (ClustalO, MAfft, etc) and any third party guide-tree proticol. The default T-Coffee supports a large number of `internal and external package <https://tcoffee.readthedocs.io/en/latest/tcoffee_main_documentation.html#internal-external-methods>`_ but if the one you need is not supported, note that it is relatively simple to create a configuration file allowing T-Coffee to interact with the package you need as docimented `here <https://tcoffee.readthedocs.io/en/latest/tcoffee_main_documentation.html#advanced-method-integration>`_. 
 
-The regressive implmentation of T-Coffee is named DPA. In the following document, we list its main options and how these can be deployed from the T-Coffee algorithm. Note that DPA is a simplified wrapper around T-Coffee.It does not support all the T-Coffee flags and its output/input formats are limited to FASTA for the sequences and Newick for the trees.
+In the following document, we list its main options and how these can be deployed from the T-Coffee algorithm. Note that REG is a simplified wrapper around T-Coffee.It does not support all the T-Coffee flags and its output/input formats are limited to FASTA for the sequences and Newick for the trees.
 
-.. note:: DPA does not support ALL the T-Coffee options. It is especially limited with respect to input and output and will only allow FASTA.
+.. note:: REG does not support ALL the T-Coffee options. It is especially limited with respect to input and output and will only allow FASTA.
 
 
 
@@ -25,11 +25,11 @@ Exemples
 Fast and accurate
 =================
 
-In the following exemple, the regressive alignment is used to align the sequences in FASTA format. The tree is estimated using the mbed method of Clustal Omega (-dpa_tree=mbed), the size of the groups is 100 (-dpa_nseq=100) and the method used to align the groups is Clustal Omega:
+In the following exemple, the regressive alignment is used to align the sequences in FASTA format. The tree is estimated using the mbed method of Clustal Omega (-reg_tree=mbed), the size of the groups is 100 (-reg_nseq=100) and the method used to align the groups is Clustal Omega:
 
 ::
 
-  $$: t_coffee -dpa -seq proteases_large.fasta -dpa_nseq 100 -dpa_tree mbed -dpa_method clustalo_msa -outfile proteases_large.aln -outtree proteases_large.mbed
+  $$: t_coffee -reg -seq proteases_large.fasta -reg_nseq 100 -reg_tree mbed -reg_method clustalo_msa -outfile proteases_large.aln -outtree proteases_large.mbed
 
 This mode is the default mode and is expected to deliver fast and reasonnably accurate alignments 
 
@@ -39,7 +39,7 @@ This mode is expected to be the most accurate and combines the ginsi mode of MAF
 
 ::
 
-  $$: t_coffee -dpa -seq proteases_large.fasta -dpa_nseq 100 -dpa_tree mbed -dpa_method mafftginsi_msa -outfile proteases_large.aln -outtree proteases_large.mbed
+  $$: t_coffee -reg -seq proteases_large.fasta -reg_nseq 100 -reg_tree mbed -reg_method mafftginsi_msa -outfile proteases_large.aln -outtree proteases_large.mbed
 
 Very Fast
 =========
@@ -47,16 +47,16 @@ This mode is expected to be the fastest currently available. Its accuracy is com
 
 ::
 
-  $$: t_coffee -dpa -seq proteases_large.fasta -dpa_nseq 100 -dpa_tree parttree -dpa_method mafftfftnsi_msa -outfile proteases_large.aln -outtree proteases_large.parttree
+  $$: t_coffee -reg -seq proteases_large.fasta -reg_nseq 100 -reg_tree parttree -reg_method mafftfftnsi_msa -outfile proteases_large.aln -outtree proteases_large.parttree
 
-********************
-Regressive DPA flags
-********************
+****************
+Regressive flags
+****************
 
 - **-seq** (usage:**-seq=<FASTA sequence file>**)
 This flag is mandatory to provide the sequences. The sequences must be in FASTA and must not contain any sequences. Because these sequences are meant to be aligned with third party aligners that may not support the IUPAC extended alphabet, it is advisable to avoid non standard amino-acids symbols. It is also not advisable to provide gapped sequences. 
 
-- **-dpa_tree** (usage:**-dpa_tree=<method or Newick File>**, default: **mbed** )
+- **-reg_tree** (usage:**-reg_tree=<method or Newick File>**, default: **mbed** )
 This flag defines which method will be used to estimate the tree. The following methods are available
 
 ::
@@ -75,17 +75,17 @@ This flag defines which method will be used to estimate the tree. The following 
   - #<command>  : Runs comamnd <seq> > <tree>. 
   - filename    : Any file in newick format. The seq file and the tree file must match
 
-- **-newtree** (usage:**-newtree=<filename>** , default: <infile>.<dpa_tree>)
-This flag defines the name of the newly computed ouput tree. Deafult will be filename.dpa_tree
+- **-newtree** (usage:**-newtree=<filename>** , default: <infile>.<reg_tree>)
+This flag defines the name of the newly computed ouput tree. Deafult will be filename.reg_tree
 
 - **-outfile**(usage:**-outfile=<filename>** , default: <infile>.aln)
 This flag defines the name of the output file containing the multiple sequence alignment
 
 
-- **-dpa_nseq** (usage:**-dpa_nseq=N** , default: 1000 for datasets larger than 10,000 and Nseq/10 for smaller datasets )
+- **-reg_nseq** (usage:**-reg_nseq=N** , default: 1000 for datasets larger than 10,000 and Nseq/10 for smaller datasets )
 Sets the maximum size of the subsequence alignments. The recommanded value is 1000. With slow/accurate aligners that do not scale in a linear way, this parameter can have an importnat impact on CPU requirement with small values resulting in faster computation.
 
-- **-dpa_method**(usage:**-dpa_tree=<method or configuration file>** , default: clustalo_msa)
+- **-reg_method**(usage:**-reg_tree=<method or configuration file>** , default: clustalo_msa)
 This flag defines which method will be used to estimate the tree. In order to know which methods are available, type he following command line:
 
 ::

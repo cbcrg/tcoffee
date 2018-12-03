@@ -709,6 +709,24 @@ int batch_main ( int argc, char **argv)
 			    /*Min_value*/ "any"          ,		\
 			    /*Max Value*/ "any"				\
 					  );
+	        /*PARAMETER PROTOTYPE:    INFILE    */
+	       declare_name (type);
+	       get_cl_param(					\
+			    /*argc*/      argc           ,	\
+			    /*argv*/      argv           ,	\
+			    /*output*/    &le            ,	\
+			    /*Name*/      "-reg"        ,	\
+			    /*Flag*/      &garbage       ,	\
+			    /*TYPE*/      "D"            ,	\
+			    /*OPTIONAL?*/ OPTIONAL       ,	\
+			    /*MAX Nval*/  1              ,		\
+			    /*DOC*/       "Run DPA mode"           ,	\
+			    /*Parameter*/ &dpa          ,		\
+			    /*Def 1*/    "0"              ,		\
+			    /*Def 2*/    "1"              ,		\
+			    /*Min_value*/ "any"          ,		\
+			    /*Max Value*/ "any"				\
+					  );
 	       
 	       
 	       /**
@@ -6973,24 +6991,24 @@ Alignment * t_coffee_dpa (int argc, char **argv)
 	  seqflag=1;
 	}
       
-      else if (strm (argv[a],"-dpa_tree"))
+      else if (strm (argv[a],"-dpa_tree") ||strm (argv[a],"-reg_tree") )
 	{
 	  dpa_tree=argv[++a];
 	}
-      else if (strm (argv[a],"-dpa_swlN"))
+      else if (strm (argv[a],"-dpa_swlN")|| strm (argv[a],"-reg_swlN") )
 	{
 	  set_int_variable ("swlN",atoi (argv[++a]));
 	}
-      else if (strm (argv[a],"-dpa_weight"))
+      else if (strm (argv[a],"-dpa_weight") || strm (argv[a],"-reg_weight"))
 	{
 	  dpa_weight=argv[++a];
 	}
 
-      else if (strm (argv[a],"-dpa_thread") || strm (argv[a],"-dpa_n_core"))
+      else if (strm (argv[a],"-dpa_thread") || strm (argv[a],"-dpa_n_core") || strm (argv[a],"-reg_thread") || strm (argv[a],"-reg_n_core"))
 	{
 	  set_nproc (atoi (argv[++a]));
 	}
-      else if (strm (argv[a],"-dpa"));
+      else if (strm (argv[a],"-dpa")|| strm (argv[a],"-reg"));
       else if (strm (argv[a],"-usetree"))
 	{
 	  usetree=argv[++a];
@@ -7011,7 +7029,7 @@ Alignment * t_coffee_dpa (int argc, char **argv)
 	{
 	  dpa_nseq=atoi(argv[++a]);
 	}
-      else if ( strm (argv[a], "-dpa_method"))
+      else if ( strm (argv[a], "-dpa_method") || strm (argv[a], "-reg_method")  )
 	{
 	  dpa_aligner=argv[++a];
 	}
@@ -7044,7 +7062,7 @@ Alignment * t_coffee_dpa (int argc, char **argv)
   //check Sequences are here
   
   if (!seqflag)
-    myexit (fprintf_error ( stderr, "\nERROR: When using dpa, sequences must be provided via -seq [FATAL:%s]", PROGRAM));
+    myexit (fprintf_error ( stderr, "\nERROR: When using -reg, sequences must be provided via -seq [FATAL:%s]", PROGRAM));
   else if (!S)
     myexit (fprintf_error ( stderr, "\nERROR: Could not read %s [FATAL:%s]", seqfile,PROGRAM));
   //decide on bucket sizes
@@ -7068,7 +7086,7 @@ Alignment * t_coffee_dpa (int argc, char **argv)
       
     }
   else
-    T=seq2dnd (S, dpa_tree);fprintf ( stderr, " dpa_tree %s\n", dpa_tree);
+    T=seq2dnd (S, dpa_tree);fprintf ( stderr, " reg_tree %s\n", dpa_tree);
   
 
   if (dpa_tree && check_file_exists (dpa_tree))output_dpa_tree=0;
@@ -7086,7 +7104,7 @@ Alignment * t_coffee_dpa (int argc, char **argv)
   fprintf ( stderr, "!Compute Weights --- done\n");
   
   //run the alignment
-  fprintf (stderr, "!Compute MSA --- dp_method %s -- dpa_nseq %d -- start\n", command, dpa_nseq);
+  fprintf (stderr, "!Compute MSA --- reg_method %s -- reg_nseq %d -- start\n", command, dpa_nseq);
   T=node2master (T, S, w);
   //alnfile=tree2bucket (T,S,dpa_nseq,command);
   alnfile=tree2msa4dpa(T, S, dpa_nseq, command);
@@ -7121,7 +7139,7 @@ Alignment * t_coffee_dpa (int argc, char **argv)
   //terminate
   fprintf (stderr,"\n\n");
   print_command_line (stderr);
-  print_mem_usage (stdout, "DPA memory Usage");
+  print_mem_usage (stdout, "REG memory Usage");
   print_program_information (stderr, NULL);
   fprintf ( stderr, "\n");
   myexit (EXIT_SUCCESS);
