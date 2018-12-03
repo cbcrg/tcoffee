@@ -1,8 +1,6 @@
-#####################
-Regressive Quickstart
-#####################
-
-.. note:: This documentation is merely a cheat-sheet that recapitulates the material and the command lines associated with the `_ 
+################################
+Quick Start Regressive Algorithm
+################################
 
 ************
 Introduction
@@ -29,6 +27,8 @@ Fast and accurate
 
 In the following exemple, the regressive alignment is used to align the sequences in FASTA format. The tree is estimated using the mbed method of Clustal Omega (-dpa_tree=mbed), the size of the groups is 100 (-dpa_nseq=100) and the method used to align the groups is Clustal Omega:
 
+::
+
   $$: t_coffee -dpa -seq proteases_large.fasta -dpa_nseq 100 -dpa_tree mbed -dpa_method clustalo_msa -outfile proteases_large.aln -outtree proteases_large.mbed
 
 This mode is the default mode and is expected to deliver fast and reasonnably accurate alignments 
@@ -37,11 +37,15 @@ Slower and more accurate
 ========================
 This mode is expected to be the most accurate and combines the ginsi mode of MAFFT which is very accurate with the mbed trees of Clustal Omega. Note that it is the regressive deployment that allows ginsi to be used on datasets of unlimited size.
 
+::
+
   $$: t_coffee -dpa -seq proteases_large.fasta -dpa_nseq 100 -dpa_tree mbed -dpa_method mafftginsi_msa -outfile proteases_large.aln -outtree proteases_large.mbed
 
 Very Fast
 =========
 This mode is expected to be the fastest currently available. Its accuracy is comparable to that of MAFFT-fftnsi running on its own 
+
+::
 
   $$: t_coffee -dpa -seq proteases_large.fasta -dpa_nseq 100 -dpa_tree parttree -dpa_method mafftfftnsi_msa -outfile proteases_large.aln -outtree proteases_large.parttree
 
@@ -52,7 +56,7 @@ Regressive DPA flags
 - **-seq** (usage:**-seq=<FASTA sequence file>**)
 This flag is mandatory to provide the sequences. The sequences must be in FASTA and must not contain any sequences. Because these sequences are meant to be aligned with third party aligners that may not support the IUPAC extended alphabet, it is advisable to avoid non standard amino-acids symbols. It is also not advisable to provide gapped sequences. 
 
-- **-dpa_tree**(usage:**-dpa_tree=<method or Newick File>**)
+- **-dpa_tree** (usage:**-dpa_tree=<method or Newick File>**, default: **mbed** )
 This flag defines which method will be used to estimate the tree. The following methods are available
 
 ::
@@ -71,17 +75,17 @@ This flag defines which method will be used to estimate the tree. The following 
   - #<command>  : Runs comamnd <seq> > <tree>. 
   - filename    : Any file in newick format. The seq file and the tree file must match
 
-- **-newtree**(usage:**-newtree=<filename>**)
+- **-newtree** (usage:**-newtree=<filename>** , default: <infile>.<dpa_tree>)
 This flag defines the name of the newly computed ouput tree. Deafult will be filename.dpa_tree
 
-- **-outfile**(usage:**-outfile=<filename>**)
+- **-outfile**(usage:**-outfile=<filename>** , default: <infile>.aln)
 This flag defines the name of the output file containing the multiple sequence alignment
 
 
-- **-dpa_nseq** (usage:**-dpa_nseq=N**) [cw]
+- **-dpa_nseq** (usage:**-dpa_nseq=N** , default: 1000 for datasets larger than 10,000 and Nseq/10 for smaller datasets )
 Sets the maximum size of the subsequence alignments. The recommanded value is 1000. With slow/accurate aligners that do not scale in a linear way, this parameter can have an importnat impact on CPU requirement with small values resulting in faster computation.
 
-- **-dpa_method**(usage:**-dpa_tree=<method or configuration file>**)
+- **-dpa_method**(usage:**-dpa_tree=<method or configuration file>** , default: clustalo_msa)
 This flag defines which method will be used to estimate the tree. In order to know which methods are available, type he following command line:
 
 ::
