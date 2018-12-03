@@ -12,7 +12,7 @@ Contents:
    :maxdepth: 5
 
    tcoffee_installation
-   tcoffee_regressive_quickstart
+   tcoffee_quickstart_regressive
    tcoffee_quickstart
    tcoffee_main_documentation
    tcoffee_technical_documentation
