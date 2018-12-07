@@ -1971,6 +1971,8 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
 		  else T->RepColList[rep][c1]=used_col[c1];
 		}
 	      T->RepColList[rep][c1]=-1;
+	      if (getenv("BS_SQRLEN") && rep>1)T->RepColList[rep][(int)sqrt((double)nlen_aln)]=-1;
+	  
 	    }
 	  for (s1=0; s1<A->nseq; s1++)
 	    {
@@ -2032,23 +2034,29 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
 		if (modeM!=strikeM && !s2_has_contacts)continue;
 
 		//Now do the all against all
-		for (ic1=0; ic1<nlen_aln1; ic1++)
+		
+		ic1=0;
+		while (T->RepColList[rep][ic1]!=-1)//go through all thge positions selected 
 		  {
-		    c1=T->RepColList[rep][ic1];
+		    int ic2=0;
+		    c1=T->RepColList[rep][ic1++];
 		    
 		    if (A->seq_al[s1][c1]=='-')continue;
-		    for (c2=0; c2<A->len_aln; c2++)
+		    
+		    while (T->RepColList[rep][ic2]!=-1)//Go through All the positions selected
 		      {
 			double rsc=0;//raw score for strike
 			double brsc=0;//background raw score for strike
-			double randsc=0; //scorefor randomization;
+			double randsc=0; //score for randomization;
 			
 			double sc=0;
 			double in=0;
 			double bin=0; //background in => non contact evaluation for strike;
 			
-			double w1=(double)dm1[c1][c2];
-			
+			double w1; 
+		
+			c2=T->RepColList[rep][ic2++];
+			w1=(double)dm1[c1][c2];
 			
 			if (A->seq_al[s1][c2]=='-')continue;
 			else if (!col_lu[c2])continue; 
