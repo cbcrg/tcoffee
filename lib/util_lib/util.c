@@ -5492,14 +5492,15 @@ int get_nproc ()
 char * get_os()
 {
   static char os[100];
-  char *file;
+  char file[1000];
 
   if ( os[0])return os;
   else
     {
       char *s;
-
-      file=tmpnam (NULL);
+      sprintf (file, "tmp_file4os_name%d%d", rand(),getpid());
+      
+      //file=tmpnam_r (NULL);
       printf_system_direct ("uname > %s", file);
 
       s=file2string (file);
