@@ -24,12 +24,10 @@ Installation
 
 ::
 
-  ##: git clone git@github.com:cbcrg/tcoffee.git tcoffee
-      
-  Move in the project root folder named **tcoffee** and compile T-Coffee:    
-  ##: cd compile
-  ##: make t_coffee1. Checkout the latest version of T-Coffee from github
-  ##: cp t_coffee <bin>
+  ##: get the latest version from https://github.com/cbcrg/tcoffee
+  ##: cd tcoffee-master/t_coffee/src
+  ##: make t_coffee
+  ##: mv t_coffee <Binary Directory>
 
 In order to use T-Coffee you must also have the following pacaked installed
 
