@@ -53,13 +53,6 @@
             <value>${installdir}</value>
         </addEnvironmentVariable>
 
-	<!--  Add MAFFT_BINARIES environment variable -->
-	<addEnvironmentVariable>
-            <name>MAFFT_BINARIES</name>
-            <scope>user</scope>
-            <value>$DIR_4_TCOFFEE/plugins/${osname}/</value>
-        </addEnvironmentVariable>
-
 	<!--  Set CACHE_4_TCOFFEE environment variable -->
 	<addEnvironmentVariable>
             <name>CACHE_4_TCOFFEE</name>
