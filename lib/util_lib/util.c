@@ -5940,7 +5940,7 @@ char* store_string_variable (char *name, char* v, int mode)
 		  val_array[a]=(char*)vrealloc (val_array[a], strlen (v)+1);
 		  sprintf (val_array[a],"%s",v);
 		}
-	      else val_array[a]='\0';
+	      else val_array[a][0]='\0';
 	      return v;
 	    }
 	}
