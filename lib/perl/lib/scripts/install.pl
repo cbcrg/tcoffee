@@ -128,7 +128,7 @@ our ($ROOT_INSTALL, $NO_QUESTION, $default_update_action,$BINARIES_ONLY,$force, 
 if ( ($cl=~/-root/)){$ROOT_INSTALL=1;}
 if ( ($cl=~/-no_question/)){$NO_QUESTION=1;}
 if ( ($cl=~/-update/)){$default_update_action="update";}
-$BINARIES_ONLY=1;
+#$BINARIES_ONLY=1;
 if ( ($cl=~/-nobinaries/)){$BINARIES_ONLY=0;}
 if ( ($cl=~/-force/)){$force=1;$default_update_action="update"}
 if ( ($cl=~/-exec=\s*(\S+)/)){$INSTALL_DIR=$1;}
