@@ -18,7 +18,25 @@ In the following document, we list its main options and how these can be deploye
 
 .. note:: REG does not support ALL the T-Coffee options. It is especially limited with respect to input and output and will only allow FASTA.
 
+************
+Installation
+************
 
+::
+
+  ##: git clone git@github.com:cbcrg/tcoffee.git tcoffee
+      
+  Move in the project root folder named **tcoffee** and compile T-Coffee:    
+  ##: cd compile
+  ##: make t_coffee1. Checkout the latest version of T-Coffee from github
+  ##: cp t_coffee <bin>
+
+In order to use T-Coffee you must also have the following pacaked installed
+
+::
+  
+  ## Mafft:	 	https://mafft.cbrc.jp/alignment/software/
+  ## ClustalOmega:      http://www.clustal.org/omega/#Download
 
 ********
 Exemples
