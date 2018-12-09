@@ -55,7 +55,7 @@ our $FFLAGS="";
 
 my $install="all";
 my $default_update_action="no_update";
-########################################################
+###########################################################
 my @required_applications=("wget_OR_curl");
 ########### Mode Definitions ##############################
 #
