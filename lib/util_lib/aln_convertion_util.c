@@ -5566,7 +5566,7 @@ Sequence * swap_header ( Sequence *S, Sequence *H)
 
 	     list=string2list (H->seq_comment[n]);
 	     if ( list==NULL || atoi(list[0])==1)continue;
-	     S->seq_comment[a]='\0';
+	     //S->seq_comment[a]='\0';
 	     sprintf (S->name[a], "%s%s%s",H->name[n], list[1], list[2]);
 	     vfree ( S->seq_comment[a]);S->seq_comment[a]=(char*)vcalloc ( strlen (H->seq_comment[n])+1, sizeof (char));
 	     for (b=3; b< atoi(list[0]); b++)S->seq_comment[a]=strcat (S->seq_comment[a], list[b]);

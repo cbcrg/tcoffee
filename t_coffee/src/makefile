@@ -1,5 +1,5 @@
 #
-# T-Coffee legacy make file -- used mainly by the distrution and packaging procedure 
+# T-Coffee legacy make file -- used mainly by the distibution and packaging procedure 
 #
 PROGRAM=T-COFFEE
 EXECUTABLE=t_coffee
@@ -27,7 +27,7 @@ endif
 #                                                       #
 #########################################################
 
-CC=g++ 
+CC=g++
 ifndef CFLAGS
 #CFLAGS=-O3 -Wno-write-strings
 CFLAGS=-ggdb -w
