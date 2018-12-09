@@ -60,29 +60,8 @@ Make sure you have the developer's kit installed (compilers and makefile) and pr
      $$: t_coffee -version
 
 
-Windows (Cygwin)
-================
-T-Coffee doesn't run on Windows!!! In order to run T-Coffee, you need first to install a Linux environment such as a virtualbox or Cygwin. If you have a Linux virtualbox, follow the Unix/Linux procedure; If you use Cygwin, follow these different steps:
-
-::
-
-  1. Install Cygwin
-
-  2. Download the installer (NOT Cygwin/X)
-
-  3. Click on view to list ALL the packages
-
-  4. Select: gcc-core, make, wget
-
-  5. Optional: ssh, xemacs, nano
-
-  6. Run mkpasswd in Cygwin (as requested when you start Cygwin)
-
-  7. Install T-Coffee within Cygwin using the Unix procedure
-
-
-Cluster Installation
-====================
+Installation From Source
+========================
 In order to run, T-Coffee must have a value for the http_proxy and for the e-mail. In order to do so, you can perform any of the following options:
 
 ::
@@ -104,12 +83,20 @@ T-Coffee compilation requires the following tools installed on your system **mak
 
 ::
 
-  Clone the git project on your system:
-  ##: git clone git@github.com:cbcrg/tcoffee.git tcoffee
-      
-  Move in the project root folder named **tcoffee** and compile T-Coffee:    
-  ##: cd compile
+  ::
+
+  ##: get the latest version from https://github.com/cbcrg/tcoffee
+  ##: cd tcoffee-master/t_coffee/src
   ##: make t_coffee
+  ##: mv t_coffee <Binary Directory>
+
+In order to use T-Coffee you must also have the following pacaked installed
+
+::
+  
+  ## Mafft:	 	https://mafft.cbrc.jp/alignment/software/
+  ## ClustalOmega:      http://www.clustal.org/omega/#Download
+
     
 
 ******************
