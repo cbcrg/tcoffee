@@ -128,7 +128,7 @@ our ($ROOT_INSTALL, $NO_QUESTION, $default_update_action,$BINARIES_ONLY,$force, 
 if ( ($cl=~/-root/)){$ROOT_INSTALL=1;}
 if ( ($cl=~/-no_question/)){$NO_QUESTION=1;}
 if ( ($cl=~/-update/)){$default_update_action="update";}
-#$BINARIES_ONLY=1;
+$BINARIES_ONLY=1;
 if ( ($cl=~/-nobinaries/)){$BINARIES_ONLY=0;}
 if ( ($cl=~/-force/)){$force=1;$default_update_action="update"}
 if ( ($cl=~/-exec=\s*(\S+)/)){$INSTALL_DIR=$1;}
@@ -632,7 +632,7 @@ sub install_pg
 	$PG{$pg}{old}=$previous;
 	
 	if ($PG{$pg} {language2} eq "Perl"){&install_perl_package ($pg);}
-	elsif ($BINARIES_ONLY && &install_binary_package ($pg)){$PG{$pg}{from_binary}=1;}
+	elsif ($pg ne "t_coffee" && $BINARIES_ONLY && &install_binary_package ($pg)){$PG{$pg}{from_binary}=1;}
 	elsif (&install_source_package ($pg)){;}
 	else 
 	  {
