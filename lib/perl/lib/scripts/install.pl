@@ -128,7 +128,8 @@ our ($ROOT_INSTALL, $NO_QUESTION, $default_update_action,$BINARIES_ONLY,$force, 
 if ( ($cl=~/-root/)){$ROOT_INSTALL=1;}
 if ( ($cl=~/-no_question/)){$NO_QUESTION=1;}
 if ( ($cl=~/-update/)){$default_update_action="update";}
-if ( ($cl=~/-binaries/)){$BINARIES_ONLY=1;}
+$BINARIES_ONLY=1;
+if ( ($cl=~/-nobinaries/)){$BINARIES_ONLY=0;}
 if ( ($cl=~/-force/)){$force=1;$default_update_action="update"}
 if ( ($cl=~/-exec=\s*(\S+)/)){$INSTALL_DIR=$1;}
 if ( ($cl=~/-plugins=\s*(\S+)/)){$PLUGINS_DIR=$1;}
@@ -1203,23 +1204,9 @@ sub install_binary_package
 	`gunzip  $name`;
 	`tar -xvf $pg.tar`;
 	chdir $pg;
-	if ( $pg eq "mafft")
-	  {
-	    if ($ROOT_INSTALL)
-	      {
-		&root_run ("You Must be Roor to Install MAFFT\n", "$CP mafft/bin/* /usr/local/mafft;mkdir /usr/local/mafft/; $CP mafft/lib/* /usr/local/bin/");
-	      }
-	    else
-	      {
-		`$CP $TMP/$pg/bin/* $BIN $SILENT`;
-		`$CP $TMP/$pg/lib/* $BIN $SILENT`;
-	      }
-	  }
-	else
-	  {
-	    if (-e "$TMP/$pg/data"){`$CP $TMP/$pg/data/* $TCM $SILENT`;}
-	    if (!($pg=~/\*/)){`rm -rf $pg`;}
-	  }
+	if (-e "$TMP/$pg/data"){`$CP $TMP/$pg/data/* $TCM $SILENT`;}
+	elsif (-e "$TMP/$pg/"){`$CP $TMP/$pg/* $TCM $SILENT`;}
+	if (!($pg=~/\*/)){`rm -rf $pg`;}
       }
     else
       {

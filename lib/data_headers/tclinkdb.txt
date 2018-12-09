@@ -14,6 +14,7 @@ PG clustalo language		C++
 PG clustalo language2		C++
 PG clustalo source		http://www.clustal.org/omega/clustal-omega-1.2.4.tar.gz
 PG clustalo mode		mcoffee
+PG clustalo binary		clustalo
 PG clustalo version		1.2.4
 
 PG strike 4_TCOFFEE		STRIKE
@@ -120,7 +121,7 @@ PG mafft language		C
 PG mafft language		C				
 PG mafft source			http://mafft.cbrc.jp/alignment/software/mafft-7.310-with-extensions-src.tgz
 PG mafft mode			mcoffee,rcoffee	
-PG mafft binary			mafft
+PG mafft binary			mafft.tar.gz
 PG mafft version		7.310
 
 PG msa 4_TCOFFEE		MSA
