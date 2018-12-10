@@ -18,7 +18,8 @@ assert: file t_coffee.ErrorReport !exists
 ## https://sites.google.com/site/tcoffeetutorials/protein-alignment/t-coffee-default
 ##
 
-test: t_coffee -seq sh3.fasta
+###test: t_coffee -seq sh3.fasta
+test: t_coffee -help
 tag: tcoffee
 
 
