@@ -392,6 +392,27 @@ PG x3dna       source		http://www.tcoffee.org/Packages/mirrors/source/x3dna-v2.3
 PG x3dna       mode		saracoffee
 PG x3dna       update_action	never
 
+PG fsa 4_TCOFFEE		FSA
+PG fsa type			sequence_multiple_aligner		
+PG fsa ADDRESS			http://fsa.sourceforge.net/
+PG fsa language			C++
+PG fsa language2		CXX	
+PG fsa source			http://sourceforge.net/projects/fsa/files/fsa-1.15.3.tar.gz/download/
+PG fsa mode			mcoffee	    
+PG fsa version			1.15.3	    
+PG fsa update_action            never
+
+PG mus4 4_TCOFFEE		MUS4
+PG mus4 type			sequence_multiple_aligner		
+PG mus4 ADDRESS			http://www.drive5.com/muscle/
+PG mus4 language		C++
+PG mus4 language2		GPP
+PG mus4 source			http://www.drive5.com/muscle/muscle4.0_src.tar.gz
+PG mus4 mode			mcoffee,rcoffee	
+PG mus4 version			4.0	
+PG mus4 update_action		never
+
+
 MODE tcoffee  name tcoffee
 MODE rcoffee  name rcoffee
 MODE 3dcoffee name 3dcoffee
