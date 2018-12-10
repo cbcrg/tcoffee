@@ -36,8 +36,13 @@ test: t_coffee sample_seq1.fasta -mode accurate
     
 test: t_coffee -aln=sproteases_small.cw_aln, sproteases_small.muscle, sproteases_small.tc_aln -outfile=combined_aln.aln    
 test: t_coffee -infile=sproteases_small.aln -special_mode=evaluate    
-test: t_coffee 3d.fasta -special_mode=expresso    
+
+test: t_coffee 3d.fasta -special_mode=expresso 
+disabled: true        
+
 test: t_coffee 3d.fasta -special_mode=3dcoffee    
+disabled: true     
+
 test: t_coffee -other_pg seq_reformat -in sproteases_small.aln -output fasta_aln > sproteases_small.fasta_aln   
 test: t_coffee -other_pg seq_reformat -in sproteases_small.aln -output msf > sproteases_small.msf   
 test: t_coffee -other_pg seq_reformat -in sproteases_small.aln -output fasta_seq > sproteases_small.fasta   
@@ -150,8 +155,12 @@ test: t_coffee sample_seq1.fasta -lib lalign_id_pair_seq1.tc_lib, slow_pair_seq1
 disabled: true     
 
 test: t_coffee sample_seq1.fasta -type=PROTEIN    
-test: t_coffee -pdb=struc1.pdb,struc2.pdb,struc3.pdb -method sap_pair -cache=no    
+test: t_coffee -pdb=struc1.pdb,struc2.pdb,struc3.pdb -method sap_pair -cache=no
+disabled: true     
+    
 test: t_coffee -pdb=struc1.pdb,struc2.pdb,struc3.pdb -method sap_pair -cache=update    
+disabled: true     
+
 test: t_coffee sample_seq1.fasta -special_mode low_memory    
 test: t_coffee  sample_seq1.fasta -method=slow_pair,lalign_id_pair -distance_matrix_mode=idscore -dp_mode=myers_miller_pair_wise    
 test: t_coffee sample_seq1.fasta -output=msf,fasta_aln    
@@ -193,7 +202,9 @@ test: t_coffee three_cdna.fasta
 test: t_coffee sample_seq1.fasta -method=clustalw_pair,clustalw_msa -lib_list=sample_list1.lib_list -outfile=test    
 test: t_coffee sample_seq1.fasta -profile=sample_aln2.aln -outfile tacos    
 test: t_coffee -profile=sample_aln1.fasta,sample_aln2.aln -outfile tacos    
-test: t_coffee -profile=sample_profile1.aln,sample_profile2.aln -special_mode=3dcoffee -outfile=aligne_prf.aln    
+test: t_coffee -profile=sample_profile1.aln,sample_profile2.aln -special_mode=3dcoffee -outfile=aligne_prf.aln   
+disabled: true     
+ 
 test: t_coffee sample_seq1.fasta -output=html    
 test: t_coffee -infile=sample_aln1.aln -lib=sample_aln1.tc_lib -special_mode=evaluate    
 test: t_coffee -infile=sample_aln1.aln -special_mode evaluate    
@@ -236,7 +247,9 @@ test: t_coffee sample_seq1.fasta -dp_mode myers_miller_pair_wise
 test: t_coffee sample_seq2.fasta -multi_core jobs    
 test: t_coffee sample_seq2.fasta -multi_core no    
 test: t_coffee sample_seq2.fasta -multi_core jobs    
-test: t_coffee -pdb=struc1.pdb,struc2.pdb,struc3.pdb -method sap_pair    
+test: t_coffee -pdb=struc1.pdb,struc2.pdb,struc3.pdb -method sap_pair 
+disabled: true     
+   
 test: t_coffee -mode 3dcoffee -seq 3d_sample3.fasta -template_file template_file.template    
 test: t_coffee 3d_sample2.fasta -template_file SELF_P_    
 
@@ -251,7 +264,9 @@ test: t_coffee sample_seq1.fasta -evaluate_mode t_coffee_fast -output score_asci
 test: t_coffee sample_seq1.fasta -evaluate_mode t_coffee_non_extended -output score_ascii, score_html    
 test: t_coffee -other_pg seq_reformat -in 3d_sample4.aln -action +upper -output clustalw > 3d_sample4.cw_aln   
 test: t_coffee -other_pg apdb -aln 3d_sample4.aln    
-test: t_coffee -in Rsample_profile1.aln,Rsample_profile2.aln -mode=3dcoffee -outfile=aligned_prf.aln    
+test: t_coffee -in Rsample_profile1.aln,Rsample_profile2.aln -mode=3dcoffee -outfile=aligned_prf.aln  
+disabled: true     
+  
 test: t_coffee sample_seq1.fasta -in=Mclustalw_pair,Mclustalw_msa,Mslow_pair -outfile=clustal_text  
 
 # Missing Program fugueali
