@@ -16,28 +16,28 @@ assert: file result.score_html exists
 test: t_coffee -in=input-fasta.txt -mode=regular -output=score_html clustalw_aln fasta_aln phylip -maxnseq=150 -maxlen=10000 -case=upper -seqnos=on -outorder=input -run_name=result 
 
 ## M-Coffee
-test: t_coffee -in=input-fasta.txt Mpcma_msa Mmafft_msa Mclustalw_msa Mdialigntx_msa Mpoa_msa Mmuscle_msa Mprobcons_msa Mt_coffee_msa -output=score_html clustalw_aln fasta_aln phylip -tree -maxnseq=150 -maxlen=2500 -case=upper -seqnos=on -outorder=input -run_name=result 
+###test: t_coffee -in=input-fasta.txt Mpcma_msa Mmafft_msa Mclustalw_msa Mdialigntx_msa Mpoa_msa Mmuscle_msa Mprobcons_msa Mt_coffee_msa -output=score_html clustalw_aln fasta_aln phylip -tree -maxnseq=150 -maxlen=2500 -case=upper -seqnos=on -outorder=input -run_name=result 
 
 ## R-Coffee
-test: t_coffee -in=input-rna.txt -method=mafft_msa muscle_msa probconsRNA_msa -output=score_html clustalw_aln fasta_aln phylip -maxnseq=150 -maxlen=2500 -case=upper -seqnos=on -outorder=input -run_name=result -tree -special_mode=rcoffee -method_limits=consan_pair 5 150 
+###test: t_coffee -in=input-rna.txt -method=mafft_msa muscle_msa probconsRNA_msa -output=score_html clustalw_aln fasta_aln phylip -maxnseq=150 -maxlen=2500 -case=upper -seqnos=on -outorder=input -run_name=result -tree -special_mode=rcoffee -method_limits=consan_pair 5 150 
 
 ## Expresso
-test: t_coffee -in=input-fasta.txt -mode=expresso  -evaluate_mode=t_coffee_slow -output=score_html clustalw_aln fasta_aln phylip -maxnseq=150 -maxlen=2500 -case=upper -seqnos=on -outorder=input -run_name=result 
+###test: t_coffee -in=input-fasta.txt -mode=expresso  -evaluate_mode=t_coffee_slow -output=score_html clustalw_aln fasta_aln phylip -maxnseq=150 -maxlen=2500 -case=upper -seqnos=on -outorder=input -run_name=result 
 
 ## Psi-Coffee
-test: t_coffee -in=input-fasta.txt -mode=psicoffee -output=score_html clustalw_aln fasta_aln phylip -maxnseq=150 -maxlen=2500 -case=upper -seqnos=on -outorder=input -run_name=result
+###test: t_coffee -in=input-fasta.txt -mode=psicoffee -output=score_html clustalw_aln fasta_aln phylip -maxnseq=150 -maxlen=2500 -case=upper -seqnos=on -outorder=input -run_name=result
 
 ## Accurate 
-test: t_coffee -in=input-fasta.txt -mode=accurate -output=score_html clustalw_aln fasta_aln phylip -maxnseq=150 -maxlen=2500 -case=upper -seqnos=on -outorder=input -run_name=result
+###test: t_coffee -in=input-fasta.txt -mode=accurate -output=score_html clustalw_aln fasta_aln phylip -maxnseq=150 -maxlen=2500 -case=upper -seqnos=on -outorder=input -run_name=result
 
 ## combine
-test: t_coffee -in=input-clustal.txt -in=input-clustal.txt -output=score_html clustalw_aln fasta_aln phylip -evaluate_mode=t_coffee_slow -maxnseq=80 -maxlen=2500 -run_name=result 
+###test: t_coffee -in=input-clustal.txt -in=input-clustal.txt -output=score_html clustalw_aln fasta_aln phylip -evaluate_mode=t_coffee_slow -maxnseq=80 -maxlen=2500 -run_name=result 
 
 ## Core 
-test: t_coffee -infile=input-clustal.txt -in=Mproba_pair -score=1 -output=score_html clustalw_aln fasta_aln phylip -maxnseq=50 -maxlen=2500 -case=upper -seqnos=on -outorder=input -run_name=result
+###test: t_coffee -infile=input-clustal.txt -in=Mproba_pair -score=1 -output=score_html clustalw_aln fasta_aln phylip -maxnseq=50 -maxlen=2500 -case=upper -seqnos=on -outorder=input -run_name=result
 
 ## iRMSD-APDB
-test: t_coffee -other_pg apdb -aln input-clustal.txt -apdb_outfile default -outfile default -io_format hsg3 -output score_html -maximum_distance 10 -md_threshold 2.0 -similarity_threshold 70 -run_name result -quiet stdout
+###test: t_coffee -other_pg apdb -aln input-clustal.txt -apdb_outfile default -outfile default -io_format hsg3 -output score_html -maximum_distance 10 -md_threshold 2.0 -similarity_threshold 70 -run_name result -quiet stdout
 
 ## 
 ## tm-coffee
@@ -46,7 +46,7 @@ test: t_coffee -other_pg apdb -aln input-clustal.txt -apdb_outfile default -outf
 ## !! it may be required to run this test in the real linux machine
 ## 
 export BLASTDB=/users/cn/jchang/projects/database/4blast/uniref50-TM
-test: t_coffee -in=input-tm.txt -mode=psicoffee -blast_server=LOCAL -protein_db=uniref50-TM -template_file=PSITM -prot_min_sim=30 -prot_max_sim=90 -prot_min_cov=0 -output=score_html tm_html clustalw_aln fasta_aln phylip -maxnseq=150 -maxlen=2500 -case=upper -seqnos=on -outorder=input -run_name=result 
+###test: t_coffee -in=input-tm.txt -mode=psicoffee -blast_server=LOCAL -protein_db=uniref50-TM -template_file=PSITM -prot_min_sim=30 -prot_max_sim=90 -prot_min_cov=0 -output=score_html tm_html clustalw_aln fasta_aln phylip -maxnseq=150 -maxlen=2500 -case=upper -seqnos=on -outorder=input -run_name=result 
 if: env OSNAME = linux
 disabled: true
 assert: file result.tm_html exists

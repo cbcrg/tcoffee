@@ -6,7 +6,7 @@
 #
 # Displays the help info 
 #
-###test: t_coffee -help    
+test: t_coffee -help    
 
 #
 # Display the help info
@@ -30,4 +30,4 @@ exit: 1
 # T-Coffee dataset automated download
 #
 ###test: t_coffee -other_pg nature_protocol.pl
-assert: directory NatureProtocolsDataset exists
+###assert: directory NatureProtocolsDataset exists
