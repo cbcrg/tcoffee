@@ -157,16 +157,6 @@ PG muscle linux			http://www.drive5.com/muscle/downloads3.7/muscle3.7_linux_ia32
 PG muscle mode			mcoffee,rcoffee	
 PG muscle version		3.7
 
-PG mus4 4_TCOFFEE		MUS4
-PG mus4 type			sequence_multiple_aligner		
-PG mus4 ADDRESS			http://www.drive5.com/muscle/
-PG mus4 language		C++
-PG mus4 language2		GPP
-PG mus4 source			http://www.drive5.com/muscle/muscle4.0_src.tar.gz
-PG mus4 mode			mcoffee,rcoffee	
-PG mus4 version			4.0	
-
-
 PG pcma 4_TCOFFEE		PCMA
 PG pcma type			sequence_multiple_aligner		
 PG pcma ADDRESS			http://prodata.swmed.edu/pcma/pcma.php
@@ -205,15 +195,6 @@ PG proda language2		CXX
 PG proda source			http://proda.stanford.edu/proda_1_0.tar.gz
 PG proda mode			mcoffee	    
 PG proda version		1.0	    
-
-PG fsa 4_TCOFFEE		FSA
-PG fsa type			sequence_multiple_aligner		
-PG fsa ADDRESS			http://fsa.sourceforge.net/
-PG fsa language			C++
-PG fsa language2		CXX	
-PG fsa source			http://sourceforge.net/projects/fsa/files/fsa-1.15.3.tar.gz/download/
-PG fsa mode			mcoffee	    
-PG fsa version			1.15.3	    
 
 PG prank 4_TCOFFEE		PRANK
 PG prank type			sequence_multiple_aligner		

@@ -1171,11 +1171,7 @@ sub install_binary_package
     
     if (!&supported_os($OS)){return 0;}
     if ( $PG{$pg}{binary}){$name=$PG{$pg}{binary};}
-    else 
-      {
-	$name=$pg;
-	if ( $OS eq "windows"){$name.=".exe";}
-      }
+    else {$name=$pg;}
     
     $download="$WEB_BASE/Packages/Binaries/$OS/$name";
     
@@ -1204,9 +1200,9 @@ sub install_binary_package
 	`gunzip  $name`;
 	`tar -xvf $pg.tar`;
 	chdir $pg;
-	if (-e "$TMP/$pg/data"){`$CP $TMP/$pg/data/* $TCM $SILENT`;}
-	elsif (-e "$TMP/$pg/"){`$CP $TMP/$pg/* $TCM $SILENT`;}
-	if (!($pg=~/\*/)){`rm -rf $pg`;}
+	`chmod u+x *`;
+ 	`mv * $BIN`;
+	#if (!($pg=~/\*/)){`rm -rf $pg`;}
       }
     else
       {

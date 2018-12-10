@@ -2,6 +2,7 @@
 # all definitions 
 # Files in: ../../t_coffee/doc_test
 # Test Results in: http://www.tcoffee.org/Packages/tests/
+# The test can be monitored on: https://circleci.com/gh/cbcrg/tcoffee/178
 
 timeout: 30min
 input: ../../../t_coffee/doc_test/data
@@ -262,8 +263,8 @@ disabled: true
 
 test: t_coffee -in Asample_aln5.aln -outfile test.aln    
 #DPA Tests - Regressive Algorithm - Note: omit these tests for now because ClustalO and Parttree do not run on the test env
-test: t_coffee -reg -seq proteases_large.fasta -reg_nseq 100 -reg_tree mbed -dpa_method mafftginsi_msa -outfile proteases_large.aln -outtree proteases_large.mbed
-test: t_coffee -reg -seq proteases_large.fasta -reg_nseq 100 -reg_tree mbed -dpa_method mafftginsi_msa -outfile proteases_large.aln -outtree proteases_large.mbed
-test: t_coffee -reg -seq proteases_large.fasta -reg_nseq 100 -reg_tree parttree -reg_method mafftfftnsi_msa -outfile proteases_large.aln -outtree proteases_large.parttree
+#test: t_coffee -reg -seq proteases_large.fasta -reg_nseq 100 -reg_tree mbed -dpa_method mafftginsi_msa -outfile proteases_large.aln -outtree proteases_large.mbed
+#test: t_coffee -reg -seq proteases_large.fasta -reg_nseq 100 -reg_tree mbed -dpa_method mafftginsi_msa -outfile proteases_large.aln -outtree proteases_large.mbed
+#test: t_coffee -reg -seq proteases_large.fasta -reg_nseq 100 -reg_tree parttree -reg_method mafftfftnsi_msa -outfile proteases_large.aln -outtree proteases_large.parttree
 
 
