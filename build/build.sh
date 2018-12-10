@@ -457,7 +457,7 @@ function tcoffee() {
 	build_dist
 	build_and_pack_stable
 
-	if [ $DO_TEST == 100 ]; then
+	if [ $DO_TEST == 1 ]; then
 	doc_test 
 	fi
 }
