@@ -23,12 +23,14 @@ test: t_coffee -in=input-rna.txt -method=mafft_msa muscle_msa probconsRNA_msa -o
 
 ## Expresso
 test: t_coffee -in=input-fasta.txt -mode=expresso  -evaluate_mode=t_coffee_slow -output=score_html clustalw_aln fasta_aln phylip -maxnseq=150 -maxlen=2500 -case=upper -seqnos=on -outorder=input -run_name=result 
+disabled: true     
 
 ## Psi-Coffee
 test: t_coffee -in=input-fasta.txt -mode=psicoffee -output=score_html clustalw_aln fasta_aln phylip -maxnseq=150 -maxlen=2500 -case=upper -seqnos=on -outorder=input -run_name=result
 
 ## Accurate 
 test: t_coffee -in=input-fasta.txt -mode=accurate -output=score_html clustalw_aln fasta_aln phylip -maxnseq=150 -maxlen=2500 -case=upper -seqnos=on -outorder=input -run_name=result
+disabled: true     
 
 ## combine
 test: t_coffee -in=input-clustal.txt -in=input-clustal.txt -output=score_html clustalw_aln fasta_aln phylip -evaluate_mode=t_coffee_slow -maxnseq=80 -maxlen=2500 -run_name=result 
