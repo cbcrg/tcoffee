@@ -1,6 +1,8 @@
 #
-# definitions 
-#
+# all definitions 
+# Files in: ../../t_coffee/doc_test
+# Test Results in: http://www.tcoffee.org/Packages/tests/
+
 timeout: 30min
 input: ../../../t_coffee/doc_test/data
 
