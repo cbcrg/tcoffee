@@ -1315,6 +1315,8 @@ sub repo_store
 sub repo_load 
 {
     my ($pg)=(@_);
+
+    #Bypass the Repository Cache
     return 0;
     # check that all required data are available
     if( $REPO_ROOT eq "" ) { return 0; }
