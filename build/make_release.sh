@@ -17,9 +17,9 @@ echo "This script trigger a T-Coffee build and makes a new release"
 
 # Ask for confirmation 
 read -u 1 -p "* Confirm which type of release you want to creare [beta/stable] " -r
-if [[ $REPLY == 'beta']]; then
+if [[ $REPLY == 'beta' ]]; then
   RELEASE=0
-elif [[ $REPLY == 'stable']]; then
+elif [[ $REPLY == 'stable' ]]; then
   RELEASE=1
 else 
   echo Unknown option. You must type 'beta' or 'stable'
