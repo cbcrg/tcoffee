@@ -50,7 +50,7 @@ assert: file sh3_prf1.template_list exists
 ## https://sites.google.com/site/tcoffeetutorials/protein-alignment/expresso
 ##
 test: t_coffee -seq sh3.fasta -mode expresso -pdb_type dn
-disabled: true     
+
 tag: expresso
 assert: file sh3.dnd exists
 assert: file sh3.aln exists
@@ -62,9 +62,9 @@ assert: file sh3_pdb1.template_list exists
 ## https://sites.google.com/site/tcoffeetutorials/protein-alignment/3d-coffee
 ##
 test: t_coffee -seq sh3.fasta -method sap_pair -template_file sh3.template_file
-disabled: true     
 tag: 3dcoffee
 
+#TMalign is failing - Needs to be recompiled
 test: t_coffee -seq sh3.fasta -method TMalign_pair,sap_pair -template_file EXPRESSO
 disabled: true     
 tag: 3dcoffee
