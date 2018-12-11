@@ -31,14 +31,24 @@ deployment:
     branch: master
     commands:
       - > 
+        if [[ $RELEASE == 1 ]]; then MODE=Stable; else MODE=Beta; fi;
         version=$(cat ~/publish/sandbox/.version);
         rsync -avzr -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" ~/publish/sandbox/distributions/* ec2-user@tcoffee.org:~/Dropbox/Public/public_html/Packages/;
-        ssh ec2-user@tcoffee.org "rm -rf ~/Dropbox/Public/public_html/Packages/Beta/Latest; cp -r ~/Dropbox/Public/public_html/Packages/Beta/$version ~/Dropbox/Public/public_html/Packages/Beta/Latest"  
+        ssh ec2-user@tcoffee.org "rm -rf ~/Dropbox/Public/public_html/Packages/$MODE/Latest; cp -r ~/Dropbox/Public/public_html/Packages/$MODE/$version ~/Dropbox/Public/public_html/Packages/$MODE/Latest";
       - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
       - > 
         docker tag xcoffee cbcrg/tcoffee:latest;
-        docker push cbcrg/tcoffee:latest
+        docker push cbcrg/tcoffee:latest;
+        if [[ $RELEASE == 1 ]]; then
+        docker tag xcoffee cbcrg/tcoffee:stable;
+        docker push cbcrg/tcoffee:stable;
+        fi
       - > 
         version=$(cat ~/publish/sandbox/.version);
         docker tag xcoffee cbcrg/tcoffee:$version;
-        docker push cbcrg/tcoffee:$version
+        docker push cbcrg/tcoffee:$version;
+        if [[ $RELEASE == 1 ]]; then
+        version+='_stable'
+        docker tag xcoffee cbcrg/tcoffee:$version;
+        docker push cbcrg/tcoffee:$version;
+        fi
