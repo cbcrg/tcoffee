@@ -12,7 +12,7 @@ The Circle build is controlled by the [circle.yml](circle.yml) file.
   `~/publish/sandbox/build`. This folder is moved under path `build/tcoffee`
   
 3. A new Docker image named `xcoffee` is created copying the content of the folder `build/tcoffee`. 
-  The image is built by using [docker/Dockerfile](docker/Dockerfile). 
+  The image is built by using this [docker/Dockerfile](docker/Dockerfile). 
   
 4. The new `xcoffee` build is tested by running the [docker/run-tests.sh](docker/run-tests.sh) 
   tests suite. 
@@ -20,4 +20,7 @@ The Circle build is controlled by the [circle.yml](circle.yml) file.
 5. Test results are published to the following [location](http://www.tcoffee.org/Packages/tests/).
 
 6. If all tests are green the `xcoffee` image is pushed to the [Docker Hub](https://hub.docker.com/r/cbcrg/tcoffee/tags/) 
-  with the names `cbcrg/tcoffee:latest` and `cbcrg/tcoffee:<version.commit-id>`     
+  with the names `cbcrg/tcoffee:latest` and `cbcrg/tcoffee:<version.commit-id>`
+
+7. The environment variable `RELEASE=0|1` is used to mark the build as beta or stable 
+  (use the [build/make_release.sh] to trigger a new release build).
