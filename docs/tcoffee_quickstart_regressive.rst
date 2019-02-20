@@ -104,7 +104,7 @@ This flag defines the name of the output file containing the multiple sequence a
 Sets the maximum size of the subsequence alignments. The recommanded value is 1000. With slow/accurate aligners that do not scale in a linear way, this parameter can have an importnat impact on CPU requirement with small values resulting in faster computation.
 
 - **-reg_thread** (usage:**-reg_nseq=N** , default: 0 to use all available threads)
-Sets the maximum number of threads to be used by one instance. Note that if you have scrited your own aligner using a configuration file, you should make sure it does not run in a multi-threaded version as well.
+Sets the maximum number of threads to be used by one instance. Note that if you have scrited your own aligner using a configuration file, you should make sure it does not run in a multi-threaded version as well. 
 
 - **-reg_method**(usage:**-reg_tree=<method or configuration file>** , default: clustalo_msa)
 This flag defines which method will be used to estimate the tree. In order to know which methods are available, type he following command line:

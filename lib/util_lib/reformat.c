@@ -396,7 +396,8 @@ int seq_reformat ( int argc, char **in_argv)
 		fprintf ( stdout, "\n     .....replicates <N>..+evaluate makes N replicates");
 		fprintf ( stdout, "\n     .....mode <nj|upgma>.+evaluate makes N replicates");
 		fprintf ( stdout, "\n     .....gap <N float>...+evaluate ignores colum with N float gap");
-		fprintf ( stdout, "\n     +tree2bs.............Add BS support to the original tree drwn from replicates");
+		fprintf ( stdout, "\n     +tree2bs.............Add BS support to the original tree drawn from replicates");
+		fprintf ( stdout, "\n     +tree2bs.............The replicates must be provided via -in, one newick tree/line");
 		fprintf ( stdout, "\n     +print_replicates....Print Replicate trees AFTER the main tree");
 		
 		
@@ -11772,6 +11773,8 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	   if (ACTION(1) && strm (ACTION(1), "best"))treelist2node_support_best (D1->A);
 	   else if (ACTION(1) && strm (ACTION(1), "cons"))treelist2cons (D1->A);
 	   else treelist2node_support (D1->A);
+
+	   if (!int_variable_isset ("print_replicates"))(D1->A)->nseq=1;
 	 }
        else if (strm (action, "print_replicates"))
 	 {

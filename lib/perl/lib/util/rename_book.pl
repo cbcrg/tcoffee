@@ -72,6 +72,11 @@ for ($a=0; $a<@ARGV; $a++)
 	$from_dir=$ARGV[++$a];
 	$to_dir=$ARGV[++$a];
       }
+    elsif ($v eq "-year")
+      {
+	$action=$v;
+	$string_in=$ARGV[++$a];
+      }
     elsif ($v eq "-replace")
       {
 	$action=$v;
@@ -824,6 +829,35 @@ elsif    ($action eq "-cvid")
 	if (-e $from &&  $from=~/.*(\d\d\d\d)\.pdf/)
 	  {
 	    my $to=$1."__".$from;
+	    if ($from ne $to && $from ne "." && $from ne "..")
+	      {
+		print "---- mv $from --> $to\n";
+		&my_rename ($from,$to);
+	      }
+	  }
+      }
+  }
+elsif    ($action eq "-year")
+  {
+    print "\n";
+    foreach my $f (@file1)
+      {
+	my $l=$f;
+	if (($l=~/(.*)(\d\d\d\d)(.*)\.([^.]*)/))
+	  {
+	    my $movie_name=$1;
+	    my $year=$2;
+	    my $stuff=$3;
+	    my $movie_ext=$4;
+	    my $to;
+	    my $from;
+	    
+	    $movie_name=~s/\./ /g;
+	    
+	    $to="$movie_name ($year).$movie_ext";
+	    $to=~s/  / /g;
+	    $from=$f;
+	    
 	    if ($from ne $to && $from ne "." && $from ne "..")
 	      {
 		print "---- mv $from --> $to\n";
@@ -1792,7 +1826,7 @@ sub dirsync
       {
 	
 	$press_dir="/Users/cnotredame/Dropbox/presse";
-	$from_dir="/Volumes/Movies3/Download/download.raw/";
+	$from_dir="/Volumes/Torrent/Download/download.raw/";
 	$to_dir  ="/Volumes/Movies3/Download/download.ready/";
 	$ignore="/Volumes/Movies3/Download/.sync.ignore.txt";
       }
@@ -1966,9 +2000,10 @@ sub process_press
 	  my $today ="$to/recents/$type/";
 	  my $sorted="$to/sorted/$title/";
 	  my $tag=daytag();
+	  print ("$lcf -> $key\n");
 	  if ($lcf =~/$key/)
 	    {
-	      
+	      print "YES\n";
 	      opendir(DIR,$today);
 	      my @l=readdir (DIR);
 	      close(DIR);
@@ -1977,6 +2012,7 @@ sub process_press
 		  if ($ff=~/$key/){unlink ("$today/$ff");}
 		}
 	      copy ("$from/$f", $today);
+	      print "copy [$from/$f] -> $today\n";
 	      if (!-d $sorted){mkdir ($sorted);}
 	      copy ("$from/$f", "$sorted/"."$tag"."_$f");
 	      return 1;

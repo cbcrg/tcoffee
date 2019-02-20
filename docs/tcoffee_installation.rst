@@ -21,7 +21,7 @@ You need to have gcc, g77, CPAN, an internet connection and the root password. Y
 ::
 
   1. Download the installer package corresponding to your system from:
-     http://tcoffee.org/Packages/Stable/Latest/linux/
+     http://tcoffee.org/Packages/Stable/Latest/
 
   2. Grant execution permission to the downloaded file with the following command:
      ##: chmod +x T-COFFEE_installer_"version_x".bin
@@ -39,30 +39,11 @@ You need to have gcc, g77, CPAN, an internet connection and the root password. Y
 
 Mac OS X
 ========
-Make sure you have the developer's kit installed (compilers and makefile) and proceed as follows:
-
-::
-
-  1. Download the installer package from: 
-     http://tcoffee.org/Packages/Stable/Latest/macosx/ 
-     Mac OSX 10.5.x (Leopard) and before have to use the 32-bit installer
-     Mac OSX 10.6.x (Snow Leopard) and above have to use the 64-bit installer  
-
-  2. Double-click on the DMG file to open it
-   
-  3. Double-click on the installer icon to start the installation
-   
-  4. Follow the wizard instructions and complete the installation
-   
-  5. Open a new terminal session to be sure that your environment is updated
-  
-  6. Type the following command to verify the installation was successful:
-     $$: t_coffee -version
-
+The Macosx version is not currentley maintained and the package must be installed from source, as described in the next section. An alternative is to run the Linux binaries in a virtula machine on your Mac. 
 
 Installation From Source
 ========================
-In order to run, T-Coffee must have a value for the http_proxy and for the e-mail. In order to do so, you can perform any of the following options:
+In order to run, T-Coffee must have a value for the http_proxy and for the e-mail. In order to do so, you can perform ANY of the following options:
 
 ::
 
