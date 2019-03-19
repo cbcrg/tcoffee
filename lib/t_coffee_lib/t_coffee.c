@@ -727,6 +727,24 @@ int batch_main ( int argc, char **argv)
 			    /*Min_value*/ "any"          ,		\
 			    /*Max Value*/ "any"				\
 					  );
+	         /*PARAMETER PROTOTYPE:    INFILE    */
+	       declare_name (type);
+	       get_cl_param(					\
+			    /*argc*/      argc           ,	\
+			    /*argv*/      argv           ,	\
+			    /*output*/    &le            ,	\
+			    /*Name*/      "-dpa"        ,	\
+			    /*Flag*/      &garbage       ,	\
+			    /*TYPE*/      "D"            ,	\
+			    /*OPTIONAL?*/ OPTIONAL       ,	\
+			    /*MAX Nval*/  1              ,		\
+			    /*DOC*/       "Run DPA mode"           ,	\
+			    /*Parameter*/ &dpa          ,		\
+			    /*Def 1*/    "0"              ,		\
+			    /*Def 2*/    "1"              ,		\
+			    /*Min_value*/ "any"          ,		\
+			    /*Max Value*/ "any"				\
+					  );
 	       
 	       
 	       /**

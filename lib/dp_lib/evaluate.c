@@ -1777,7 +1777,7 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
       printf_exit ( EXIT_FAILURE,stderr, "\nERROR: struc_evaluate4tcoffe::mode %s is unknown", (mode)?mode:"unset");
     }
   
-
+ 
 
   //identify sequences with contact information
   //1-make sure the sequence is in the lib
@@ -2036,7 +2036,7 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
 		//Now do the all against all
 		
 		ic1=0;
-		while (T->RepColList[rep][ic1]!=-1)//go through all thge positions selected 
+		while (T->RepColList[rep][ic1]!=-1)//go through all the positions selected 
 		  {
 		    int ic2=0;
 		    c1=T->RepColList[rep][ic1++];
@@ -2340,6 +2340,8 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
       
       int maxL=3;
             
+     
+	 
       for (s1=0; s1<A->nseq; s1++)maxL=MAX((strlen(A->name[s1])),maxL);
 	
       for (s1=0; s1<A->nseq; s1++)

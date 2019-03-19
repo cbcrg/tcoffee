@@ -1959,6 +1959,27 @@ You simply need to cut and paste this library in a file and use this file to mea
 *******************
 Downstream Analysis
 *******************
+Contact Evaluations
+===================
+Contact Evaluation on proteins
+------------------------------
+This function will report in a library format all the intra-molecular distances of the provided sequences
+::
+
+  Command 1:
+  $$: t_coffee -other_pg seq_reformat -in sample_3Dseq1.aln -in2 sample_3Dseq1.template -action +pdb2contacts intra  distances 10 -output contact_lib
+
+This command will report all the distances between every pair of residue less than 10 Angstrom appart. In the output every pair of residue will be assocuiated with an integer value equal to 100*distance in Angstrom. Distances are between CA
+ 
+::
+
+Command 1:
+  $$: t_coffee -other_pg seq_reformat -in sample_3Dseq1.aln -in2 sample_3Dseq1.template -action +pdb2contacts intra  contacts 1.2  -output contact_lib
+
+This command will report all the pairs of residue featuring two atoms less than 1.2 Angstrom appart 
+ 
+
+
 
 Clustering/Trees based on protein 3D structures
 ===============================================

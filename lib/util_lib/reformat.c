@@ -315,7 +315,7 @@ int seq_reformat ( int argc, char **in_argv)
 		fprintf ( stdout, "\n     .....................distances..<Max|Def=15 >");
 		fprintf ( stdout, "\n     .....................contacts...<Max|Def=1.2> <nb|Def=3>");
 		fprintf ( stdout, "\n     .....................contacts|distances provided via -in2=contact_lib");
-		fprintf ( stdout, "\n     .....................contacts|distances estimated via pdb2contacts");
+		fprintf ( stdout, "\n     .....................contacts|distances estimated via +pdb2contacts");
 		fprintf ( stdout, "\n     +evaluateTree.<group>.Group is a fasta sequence file");
 		
 		fprintf ( stdout, "\n     +evaluate matrix..gop..gep");
@@ -11470,7 +11470,7 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	   
 	   if (!ACTION (1))
 	     {
-	       fprintf ( stderr, "+pdb_contact <contact mode> <contact type> <D> -output contact_lib\n");
+	       fprintf ( stderr, "+pdb2contacts <contact mode> <contact type> <D> -output contact_lib\n");
 	       fprintf ( stderr, "+pdb2contacts def => <all contacts 1.2> => reports all contacts less than 1.2 A appart\n");
 	       fprintf ( stderr, "    mode: intra       => Residues less than D appart with chain\n");
 	       fprintf ( stderr, "    mode: inter       => Residues less than D appart between chains\n");
@@ -11503,7 +11503,7 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	     }
 	   if (!T && !strm (type, "RNAplfold"))
 	     {
-	       printf_exit (EXIT_FAILURE,stderr, "+pdb2contact %s %s requires a template:  -in2 <template_file> [FATAL]", mode, type);
+	       printf_exit (EXIT_FAILURE,stderr, "+pdb2contacts %s %s requires a template:  -in2 <template_file> [FATAL]", mode, type);
 	     }
 	   
 	   
@@ -12028,6 +12028,7 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	   DST->S=aln2seq(DST->A);
 	   char *ev3d;
 
+	   
 	   if (ACTION(na) && strm (ACTION(na), "group"))
 	     {
 	        cputenv ("SGROUP_4_TCOFFEE=%s" ,ACTION(na+1));
@@ -12076,9 +12077,10 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	   if (!D2)CL=D1->CL;
 	   else if (!D2->CL)CL=D1->CL;
 	   else CL=D2->CL;
+	   
 	   if (!CL)//do a default contact based evaluation
 	     {
-	       
+	       	       
 	       ungap_seq(D1->S);
 	       if (strm (ev3d, "distances"))
 		 D1->CL=pdb2contacts (D1->S, D2?(D2->S):NULL,D1->CL, "intra","distances",2*max);
@@ -12086,7 +12088,7 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 		 D1->CL=pdb2contacts (D1->S, D2?(D2->S):NULL,D1->CL, "intra","contacts",0);
 	       else
 		 {
-
+		   
 		   D1->CL=pdb2contacts (D1->S, D2?(D2->S):NULL,D1->CL,"intra", "contacts",0);
 		   D1->CL=seq2contacts (D1->S, D2?(D2->S):NULL,D1->CL, NULL);
 		 }
