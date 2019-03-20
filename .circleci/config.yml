@@ -37,15 +37,16 @@ jobs:
           version=$(cat ~/publish/sandbox/.version);
           rsync -avzr -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" ~/publish/sandbox/distributions/* ec2-user@tcoffee.org:~/Dropbox/Public/public_html/Packages/;
           ssh ec2-user@tcoffee.org "rm -rf ~/Dropbox/Public/public_html/Packages/$MODE/Latest; cp -r ~/Dropbox/Public/public_html/Packages/$MODE/$version ~/Dropbox/Public/public_html/Packages/$MODE/Latest";
-      - run: docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
-      - run: |
+          # tag and push latest
+          docker login -u $DOCKER_USER -p $DOCKER_PASS
           docker tag xcoffee cbcrg/tcoffee:latest;
           docker push cbcrg/tcoffee:latest;
+          # push stable 
           if [[ $RELEASE == 1 ]]; then
           docker tag xcoffee cbcrg/tcoffee:stable;
           docker push cbcrg/tcoffee:stable;
           fi
-      - run: |
+          # tag versions
           version=$(cat ~/publish/sandbox/.version);
           docker tag xcoffee cbcrg/tcoffee:$version;
           docker push cbcrg/tcoffee:$version;
