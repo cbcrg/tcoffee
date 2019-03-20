@@ -704,7 +704,7 @@ int batch_main ( int argc, char **argv)
 			    /*OPTIONAL?*/ OPTIONAL       ,	\
 			    /*MAX Nval*/  1              ,		\
 			    /*DOC*/       "Run DPA mode"           ,	\
-			    /*Parameter*/ &reg          ,		\
+			    /*Parameter*/ &dpa          ,		\
 			    /*Def 1*/    "0"              ,		\
 			    /*Def 2*/    "1"              ,		\
 			    /*Min_value*/ "any"          ,		\
@@ -7027,7 +7027,7 @@ Alignment * t_coffee_dpa (int argc, char **argv)
 	{
 	  outfile=argv[++a];
 	}
-      else if (strm (argv[a],"-dpa_nseq"))
+      else if (strm (argv[a],"-dpa_nseq") || strm (argv[a], "-reg_nseq"))
 	{
 	  dpa_nseq=atoi(argv[++a]);
 	}
