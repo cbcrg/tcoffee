@@ -25,8 +25,9 @@ jobs:
             (set +e
             docker run -v ~/tcoffee:/root/tcoffee -v ~/publish/sandbox/test-results:/test-results xcoffee bash /root/tcoffee/docker/run-tests.sh
             test_status=$?
+            set -x
             rsync -avz -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" ~/publish/sandbox/test-results/index.html ec2-user@tcoffee.org:~/Dropbox/Public/public_html/Packages/tests/test-results-linux-x64-$(date +"%Y-%m-%d-%H:%M").html
-            [[ "$test_status" != 0 ]] && exit $test_status
+            [[ "$test_status" != 0 ]] && exit $test_status || true
             )
           no_output_timeout: 30m
 
