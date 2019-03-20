@@ -1,0 +1,55 @@
+version: 2
+jobs:
+  build:
+    machine: true
+    steps:
+      - checkout
+      - run: mv ~/project ~/tcoffee
+      - run: mkdir -p ~/repo 
+      - run: docker pull cbcrg/tcoffee-build-box:1.2
+      - run: mkdir $HOME/publish
+      - run: |
+          docker run -e BUILD_NUMBER=$CIRCLE_BUILD_NUM -e RELEASE=${RELEASE:-0} \
+          -v $HOME/tcoffee:/root/tcoffee \
+          -v $HOME/repo:/root/repo \
+          -v $HOME/publish:/publish \
+          cbcrg/tcoffee-build-box:1.2 \
+          bash -c 'tcoffee/build/build.sh env tcoffee; mv /root/sandbox /publish'
+      - run: sudo chown -R $(id -u):$(id -g) ~/repo ~/publish
+      # tests and publish htmls 
+      - run:
+          command: |
+            mv ~/publish/sandbox/build ~/tcoffee/docker/tcoffee
+            cd ~/tcoffee/docker/ && docker build -t xcoffee .
+            mkdir -p ~/publish/sandbox/test-results
+            (set +e
+            docker run -v ~/tcoffee:/root/tcoffee -v ~/publish/sandbox/test-results:/test-results xcoffee bash /root/tcoffee/docker/run-tests.sh
+            test_status=$?
+            rsync -avz -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" ~/publish/sandbox/test-results/index.html ec2-user@tcoffee.org:~/Dropbox/Public/public_html/Packages/tests/test-results-linux-x64-$(date +"%Y-%m-%d-%H:%M").html
+            [[ "$test_status" != 0 ]] && exit $test_status
+            )
+          no_output_timeout: 30m
+
+      # publish artifacts 
+      - run: |
+          if [[ $RELEASE == 1 ]]; then MODE=Stable; else MODE=Beta; fi;
+          version=$(cat ~/publish/sandbox/.version);
+          rsync -avzr -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" ~/publish/sandbox/distributions/* ec2-user@tcoffee.org:~/Dropbox/Public/public_html/Packages/;
+          ssh ec2-user@tcoffee.org "rm -rf ~/Dropbox/Public/public_html/Packages/$MODE/Latest; cp -r ~/Dropbox/Public/public_html/Packages/$MODE/$version ~/Dropbox/Public/public_html/Packages/$MODE/Latest";
+      - run: docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+      - run: |
+          docker tag xcoffee cbcrg/tcoffee:latest;
+          docker push cbcrg/tcoffee:latest;
+          if [[ $RELEASE == 1 ]]; then
+          docker tag xcoffee cbcrg/tcoffee:stable;
+          docker push cbcrg/tcoffee:stable;
+          fi
+      - run: |
+          version=$(cat ~/publish/sandbox/.version);
+          docker tag xcoffee cbcrg/tcoffee:$version;
+          docker push cbcrg/tcoffee:$version;
+          if [[ $RELEASE == 1 ]]; then
+          version+='_stable'
+          docker tag xcoffee cbcrg/tcoffee:$version;
+          docker push cbcrg/tcoffee:$version;
+          fi
