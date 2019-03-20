@@ -7027,7 +7027,7 @@ Alignment * t_coffee_dpa (int argc, char **argv)
 	{
 	  outfile=argv[++a];
 	}
-      else if (strm (argv[a],"-dpa_nseq"))
+      else if (strm (argv[a],"-dpa_nseq")|| strm (argv[a], "-reg_nseq") )	
 	{
 	  dpa_nseq=atoi(argv[++a]);
 	}
