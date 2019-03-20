@@ -454,6 +454,7 @@ int batch_main ( int argc, char **argv)
 	int n_special_mode2;
 	/*dpa*/
 	int dpa;
+	int reg;
 	char *dpa_master_aln;
 	int dpa_min_score1;
 	int dpa_min_score2;
@@ -703,7 +704,7 @@ int batch_main ( int argc, char **argv)
 			    /*OPTIONAL?*/ OPTIONAL       ,	\
 			    /*MAX Nval*/  1              ,		\
 			    /*DOC*/       "Run DPA mode"           ,	\
-			    /*Parameter*/ &dpa          ,		\
+			    /*Parameter*/ &reg          ,		\
 			    /*Def 1*/    "0"              ,		\
 			    /*Def 2*/    "1"              ,		\
 			    /*Min_value*/ "any"          ,		\
@@ -721,30 +722,13 @@ int batch_main ( int argc, char **argv)
 			    /*OPTIONAL?*/ OPTIONAL       ,	\
 			    /*MAX Nval*/  1              ,		\
 			    /*DOC*/       "Run DPA mode"           ,	\
-			    /*Parameter*/ &dpa          ,		\
+			    /*Parameter*/ &reg          ,		\
 			    /*Def 1*/    "0"              ,		\
 			    /*Def 2*/    "1"              ,		\
 			    /*Min_value*/ "any"          ,		\
 			    /*Max Value*/ "any"				\
 					  );
-	         /*PARAMETER PROTOTYPE:    INFILE    */
-	       declare_name (type);
-	       get_cl_param(					\
-			    /*argc*/      argc           ,	\
-			    /*argv*/      argv           ,	\
-			    /*output*/    &le            ,	\
-			    /*Name*/      "-dpa"        ,	\
-			    /*Flag*/      &garbage       ,	\
-			    /*TYPE*/      "D"            ,	\
-			    /*OPTIONAL?*/ OPTIONAL       ,	\
-			    /*MAX Nval*/  1              ,		\
-			    /*DOC*/       "Run DPA mode"           ,	\
-			    /*Parameter*/ &dpa          ,		\
-			    /*Def 1*/    "0"              ,		\
-			    /*Def 2*/    "1"              ,		\
-			    /*Min_value*/ "any"          ,		\
-			    /*Max Value*/ "any"				\
-					  );
+	       if (reg || dpa)reg=dpa=1;
 	       
 	       
 	       /**
