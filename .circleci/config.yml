@@ -35,6 +35,7 @@ jobs:
       - run: |
           if [[ $RELEASE == 1 ]]; then MODE=Stable; else MODE=Beta; fi;
           version=$(cat ~/publish/sandbox/.version);
+          cp ~/tcoffee/build/web-readme.txt ~/publish/sandbox/distributions/$MODE/$version/readme.txt
           rsync -avzr -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" ~/publish/sandbox/distributions/* ec2-user@tcoffee.org:~/Dropbox/Public/public_html/Packages/;
           ssh ec2-user@tcoffee.org "rm -rf ~/Dropbox/Public/public_html/Packages/$MODE/Latest; cp -r ~/Dropbox/Public/public_html/Packages/$MODE/$version ~/Dropbox/Public/public_html/Packages/$MODE/Latest";
           # tag and push latest
