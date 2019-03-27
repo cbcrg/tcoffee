@@ -2107,6 +2107,7 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
 				  {
 				    static int   distance_mode=atoigetenv ("THREED_TREE_MODE");
 				    static double distance_modeE=atofgetenv ("THREED_TREE_MODE_EXP");
+				    static int no_weights=atoigetenv ("THREED_TREE_NO_WEIGHTS");
 				    double we;
 				    
 				    if ( distance_modeE<0.0001)distance_modeE=3;
@@ -2140,18 +2141,19 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
 				      }
 				    else if (distance_mode ==4)
 				      {
-					we=1;
+					we=(w1+w2)/2;
 					sc=(double) 1-(FABS((w1-w2))/((w1>w2)?w1:w2));
 					
 				      }
 				    else if (distance_mode ==5)
 				      {
-					we=(w1+w2);
-					sc=(double)1-FABS((w1-w2))/we;
+					we=(w1+w2)/2;
+					sc=(double)1-FABS((w1-w2))/(w1+w2);
 					
 				      }
 				    in=we;
-				    
+				    if (no_weights)we=1;
+
 				    sc=pow(sc,distance_modeE)*we;
 				    
 				    
