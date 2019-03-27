@@ -2144,6 +2144,12 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
 					sc=(double) 1-(FABS((w1-w2))/((w1>w2)?w1:w2));
 					
 				      }
+				    else if (distance_mode ==5)
+				      {
+					we=(w1+w2);
+					sc=(double)1-FABS((w1-w2))/we;
+					
+				      }
 				    in=we;
 				    
 				    sc=pow(sc,distance_modeE)*we;
