@@ -2108,16 +2108,30 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
 				    static int   distance_mode=atoigetenv ("THREED_TREE_MODE");
 				    static double distance_modeE=atofgetenv ("THREED_TREE_MODE_EXP");
 				    static int no_weights=atoigetenv ("THREED_TREE_NO_WEIGHTS");
+				    static int print;
 				    double we;
 				    
+				    if ( !print)
+				      {
+					HERE ("THREED_TREE_MODE=%d THREED_TREE_MODE_EXP=%.1f THREED_TREE_NO_WEIGHTS=%d", distance_mode,distance_modeE,no_weights);
+					print=1;
+				      }
+
 				    if ( distance_modeE<0.0001)distance_modeE=3;
-				    
+				   
 
 				    //first attempt-- Major issue because non symetrical and therefore not a distance
 				    if (!distance_mode)
 				      {
+					static int warn;
 					we=w1;
 					sc=((MIN((w1/w2),(w2/w1))));
+					if (warn==0)
+					  {
+					    add_warning ( stderr, "\nWARNING: distance_mode==0 should not be used");
+					    warn=1;
+					  }
+					
 				      }
 				    //same as before but symetrical: the distance ratio weighted by the average distance
 				    else if (distance_mode==1)
@@ -2129,31 +2143,35 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
 				    else if (distance_mode==2)
 				      {
 					
-					we=1;
-					sc=(double) 1-(FABS((w1-w2))/((w1+w2)/2));
+					we=(w1+w2)/2;
+					sc=(double) 1-(FABS((w1-w2))/we);
 					
 				      }
 				    //the absolute difference of distance normalized by the average distance and weighted by the average distance
 				    else if (distance_mode==3)
 				      {
 					we=(w1+w2)/2;
-					sc=(double)1-FABS((w1-w2))/we;
+					sc=(double)1-(FABS((w1-w2))/we);
 				      }
 				    else if (distance_mode ==4)
 				      {
-					we=(w1+w2)/2;
-					sc=(double) 1-(FABS((w1-w2))/((w1>w2)?w1:w2));
+					we=((w1>w2)?w1:w2);
+					sc=(double) 1-(FABS((w1-w2))/we);
 					
 				      }
 				    else if (distance_mode ==5)
 				      {
-					we=(w1+w2)/2;
-					sc=(double)1-FABS((w1-w2))/(w1+w2);
+					we=(w1+w2);
+					sc=(double)1-(FABS((w1-w2))/we);
 					
 				      }
+				   
+				    if (no_weights)
+				      we=1;
+				    
+				    //Compute the score and its normalization
+				    //If 
 				    in=we;
-				    if (no_weights)we=1;
-
 				    sc=pow(sc,distance_modeE)*we;
 				    
 				    

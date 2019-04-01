@@ -758,7 +758,14 @@ int seq_reformat ( int argc, char **in_argv)
 		        {
 			set_warning_mode (NO);
  			}
-
+		else if ( strcmp (argv[a], "-setenv")==0)
+		        {
+			  while ((a+2)<argc && argv[a+1][0]!='-' && argv[a+2][0]!='-')
+			    {
+			      cputenv ("%s=%s", argv[a+1], argv[a+2]);
+			      a+=2;
+			    }
+			}
  		else
  			{
  			fprintf ( stdout, "\nUNKNOWN OPTION: %s", argv[a]);
