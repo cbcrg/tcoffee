@@ -2108,6 +2108,8 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
 				    static int   distance_mode=atoigetenv ("THREED_TREE_MODE");
 				    static double distance_modeE=atofgetenv ("THREED_TREE_MODE_EXP");
 				    static int no_weights=atoigetenv ("THREED_TREE_NO_WEIGHTS");
+				    
+				    
 				    static int print;
 				    double we;
 				    
@@ -2163,6 +2165,12 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
 				      {
 					we=(w1+w2);
 					sc=(double)1-(FABS((w1-w2))/we);
+					
+				      }
+				    else if (distance_mode ==6)
+				      {
+					we=1;
+					sc=(double)(FABS((w1-w2)));
 					
 				      }
 				   
@@ -2294,13 +2302,14 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
 	    
 	    //This is where the distance between two sequences gets turned into a % between 0 and a 100
 	    for (s1=0; s1<A->nseq; s1++)
-	      for (s2=0; s2<A->nseq; s2++)
-		if (max_pw_sc[s1][s2]>0.000000001)
-		  {
-		    tot_pw_sc[s1][s2]/=max_pw_sc[s1][s2];
-		    tot_pw_sc[s1][s2]=(double)100*((double)1-tot_pw_sc[s1][s2]);
-		  }
-	    
+	      {
+		for (s2=0; s2<A->nseq; s2++)
+		  if (max_pw_sc[s1][s2]>0.000000001)
+		    {
+		      tot_pw_sc[s1][s2]/=max_pw_sc[s1][s2];
+		      tot_pw_sc[s1][s2]=(double)100*((double)1-tot_pw_sc[s1][s2]);
+		    }
+	      }
 	    
 	    if (strm (tree_mode, "nj"))
 	      dist2nj_tree (tot_pw_sc, A->name, A->nseq, treeF);
