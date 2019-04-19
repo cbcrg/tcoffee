@@ -9919,8 +9919,12 @@ char ** standard_initialisation  (char **in_argv, int *in_argc)
 
 
   //set special Variables
-  cputenv ( "MAFFT_BINARIES=%s",get_plugins_4_tcoffee());
   
+  //cputenv ( "MAFFT_BINARIES=%s",get_plugins_4_tcoffee());
+  //This was ncessary with oldrr MAFFT version
+  //It conflicts with version 7+
+
+
   //set proxy
   set_proxy(get_proxy_from_env());
   set_email(get_email_from_env ());
