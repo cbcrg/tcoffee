@@ -9921,6 +9921,7 @@ char ** standard_initialisation  (char **in_argv, int *in_argc)
   //set special Variables
   
   //cputenv ( "MAFFT_BINARIES=%s",get_plugins_4_tcoffee());
+  cputenv ( "MAFFT_BINARIES=%s","");
   //This was ncessary with oldrr MAFFT version
   //It conflicts with version 7+
 
