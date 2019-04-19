@@ -25,6 +25,8 @@ PG strike language2		CXX
 PG strike source		http://www.tcoffee.org/Projects/strike/strike_v1.2.tar.bz2
 PG strike mode			tcoffee,expresso
 PG strike version		1.2
+PG strike binary		strike
+
      
 PG clustalw2 4_TCOFFEE		CLUSTALW2
 PG clustalw2 type		sequence_multiple_aligner		
@@ -33,6 +35,7 @@ PG clustalw2 language		C++
 PG clustalw2 language2		CXX
 PG clustalw2 source		http://www.clustal.org/download/2.0.10/clustalw-2.0.10-src.tar.gz
 PG clustalw2 mode		mcoffee,rcoffee
+PG clustalw2 binary		clustalw2
 PG clustalw2 version		2.0.10
 
 PG clustalw 4_TCOFFEE		CLUSTALW
@@ -43,6 +46,7 @@ PG clustalw language2		C
 PG clustalw source		http://www.clustal.org/download/1.X/ftp-igbmc.u-strasbg.fr/pub/ClustalW/clustalw1.82.UNIX.tar.gz
 PG clustalw mode		mcoffee,rcoffee
 PG clustalw version		1.82
+PG clustalw binary		clustalw
 
 PG dialign-t 4_TCOFFEE		DIALIGNT		
 PG dialign-t type		sequence_multiple_aligner		
@@ -213,6 +217,7 @@ PG sap language2		C
 PG sap source			https://github.com/jkleinj/SAP/archive/v.1.1.3.tar.gz
 PG sap mode			expresso,3dcoffee
 PG sap version			1.1.3
+PG sap binary			sap
 
 PG TMalign 4_TCOFFEE	        TMALIGN
 PG TMalign type			structure_pairwise_aligner		

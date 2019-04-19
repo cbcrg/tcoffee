@@ -506,7 +506,7 @@ sub url2file
 	exit ($EXIT_FAILURE);
       }
     
-    if     (&pg_is_installed    ("wget")){$pg="wget"; $flag="-O";$arg="--tries=2 --connect-timeout=10 $wget_arg";}
+    if     (&pg_is_installed    ("wget")){$pg="wget"; $flag="-O";$arg="--tries=2 --connect-timeout=10 --no-check-certificate $wget_arg";}
     elsif  (&pg_is_installed    ("curl")){$pg="curl"; $flag="-o";$arg=$curl_arg;}
     else
       {
@@ -1841,7 +1841,7 @@ $PG{Fortran}{type}="compiler";
 $PG{Perl}{compiler}="CPAN";
 $PG{Perl}{type}="compiler";
 
-$SUPPORTED_OS{macox}="Macintosh";
+$SUPPORTED_OS{macosx}="Macintosh";
 $SUPPORTED_OS{linux}="Linux";
 $SUPPORTED_OS{windows}="Cygwin";
 

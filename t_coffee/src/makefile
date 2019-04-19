@@ -141,8 +141,6 @@ test:
 	echo 'else {print "\\nInstallation of $(EXECUTABLE) Not Successful\\n";}'>>$(DISTRIB_DIR)/bin/test.pl
 	echo 'chdir "/..";'
 	chmod u+x $(DISTRIB_DIR)/bin/test.pl
-	#echo "./bin/test.pl" >>$(DISTRIB_DIR)/install
-	#echo "./bin/t_coffee -update" >>$(DISTRIB_DIR)/install
 
 debug: t_coffee
 	rm -r debug

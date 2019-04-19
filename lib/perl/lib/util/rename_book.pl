@@ -77,6 +77,16 @@ for ($a=0; $a<@ARGV; $a++)
 	$action=$v;
 	$string_in=$ARGV[++$a];
       }
+    elsif ($v eq "-disney")
+      {
+	$action=$v;
+	$string_in=$ARGV[++$a];
+      }
+    elsif ($v eq "-hitchcock")
+      {
+	$action=$v;
+	$string_in=$ARGV[++$a];
+      }
     elsif ($v eq "-replace")
       {
 	$action=$v;
@@ -829,6 +839,64 @@ elsif    ($action eq "-cvid")
 	if (-e $from &&  $from=~/.*(\d\d\d\d)\.pdf/)
 	  {
 	    my $to=$1."__".$from;
+	    if ($from ne $to && $from ne "." && $from ne "..")
+	      {
+		print "---- mv $from --> $to\n";
+		&my_rename ($from,$to);
+	      }
+	  }
+      }
+  }
+elsif    ($action eq "-disney")
+  {
+    print "\n";
+    foreach my $f (@file1)
+      {
+	my $l=$f;
+	if (($l=~/.* \- (\d\d\d\d) Walt Disney \- (.*)\.([^.]*)/))
+	  {
+	    my $year=$1;
+	    my $movie=$2;
+	    my $ext=$3;
+	    
+	    my $to;
+	    my $from;
+	    
+	    $movie=~s/\./ /g;
+	    
+	    $to="$movie ($year).$ext";
+	    $to=~s/  / /g;
+	    $from=$f;
+	    
+	    if ($from ne $to && $from ne "." && $from ne "..")
+	      {
+		print "---- mv $from --> $to\n";
+		&my_rename ($from,$to);
+	      }
+	  }
+      }
+  }
+elsif    ($action eq "-hitchcock")
+  {
+    print "\n";
+    foreach my $f (@file1)
+      {
+	my $l=$f;
+	if (($l=~/(\d\d\d\d) \- (.*)\.([^.]*)/))
+	  {
+	    my $year=$1;
+	    my $movie=$2;
+	    my $ext=$3;
+	    
+	    my $to;
+	    my $from;
+	    
+	    $movie=~s/\./ /g;
+	    
+	    $to="$movie ($year).fr.$ext";
+	    $to=~s/  / /g;
+	    $from=$f;
+	    
 	    if ($from ne $to && $from ne "." && $from ne "..")
 	      {
 		print "---- mv $from --> $to\n";

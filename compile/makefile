@@ -388,9 +388,9 @@ define_header.h:\
 	$(LIB_DIR)/coffee_defines.h \
 	$(KO_LIB)/programmes_define.h \
 	$(KO_LIB)/tclinkdb.txt
-	#
-	# Copy the 'define_header.h' file and udpate the compile info
-	#
+#
+# Copy the 'define_header.h' file and udpate the compile info
+#
 	cp $(LIB_DIR)/define_header.h .
 	sed -i -e 's/#define DATE ".*"/#define DATE "$(DATE)"/' define_header.h
 	sed -i -e 's/#define AUTHOR ".*"/#define AUTHOR "$(AUTHOR)"/' define_header.h
@@ -404,9 +404,9 @@ programmes_define.h:\
 	$(KO_LIB)/tclinkdb.txt \
 	$(PERL4MAKEFILE_LIB)/tclinkdb2header.pl \
 	$(KO_LIB)/programmes_define.h
-	#
-	# Create in the current folder the file 'programmes_define.h'
-	#
+#
+# Create in the current folder the file 'programmes_define.h'
+#
 	$(PERL4MAKEFILE_LIB)/tclinkdb2header.pl -infile=$(KO_LIB)/programmes_define.h -mode=C -db=$(KO_LIB)/tclinkdb.txt > programmes_define.h
 
 
