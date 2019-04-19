@@ -9919,9 +9919,12 @@ char ** standard_initialisation  (char **in_argv, int *in_argc)
 
 
   //set special Variables
+  if ( strm (get_os(), "macosx"))
+    cputenv ( "MAFFT_BINARIES=%s","");
+  else
+    cputenv ( "MAFFT_BINARIES=%s",get_plugins_4_tcoffee());
   
-  //cputenv ( "MAFFT_BINARIES=%s",get_plugins_4_tcoffee());
-  cputenv ( "MAFFT_BINARIES=%s","");
+  //cputenv ( "MAFFT_BINARIES=%s","");
   //This was ncessary with oldrr MAFFT version
   //It conflicts with version 7+
 
