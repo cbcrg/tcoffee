@@ -390,7 +390,8 @@ PG XML::Simple language2	Perl
 PG XML::Simple source		empty
 PG XML::Simple mode		psicoffee,expresso,accurate
 
-PG x3dna       4_TCOFFEE	x3dna-ssr
+
+PG x3dna       4_TCOFFEE	x3dna
 PG x3dna       type		RNA_secondarystructure_predictor
 PG x3dna       ADDRESS		http://x3dna.bio.columbia.edu/
 PG x3dna       source		http://www.tcoffee.org/Packages/mirrors/source/x3dna-v2.3-linux-64bit.tar.gz
