@@ -9921,7 +9921,8 @@ char ** standard_initialisation  (char **in_argv, int *in_argc)
   //set special Variables
   
   //There is an issue with the current MAFFT Linux Bundling that requires MAFFT_BINARIES to be set
-  if ( strm (get_os(), "macosx"))
+  if (getenv ("NO_MAFFT_BINARIES"));
+  else if ( strm (get_os(), "macosx"))
     cputenv ( "MAFFT_BINARIES=%s","");
   else
     cputenv ( "MAFFT_BINARIES=%s",get_plugins_4_tcoffee());
