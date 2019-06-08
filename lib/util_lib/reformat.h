@@ -59,6 +59,7 @@ int type_is_exon_boundaries(char **seq, int n);
 int format_is_oligo  ( char *file);
 int format_is_msf  ( char *file);
 int format_is_fasta( char *file);
+int format_is_not_fasta (char *file);
 // int format_is_fasta_aln( char *file);
 int format_is_fasta_aln ( char *file, int i_know_that_it_not_seq);
 int format_is_fasta_seq( char *file);
@@ -144,6 +145,7 @@ Sequence* get_sequence_dali          ( char *fname);
 Sequence* get_pir_sequence           ( char *fname, char *comment_name);
 Sequence* perl_reformat2fasta        ( char *perl_script, char *file);
 
+int get_next_fasta_sequence          (FILE*fp, char **name, char **comment, char **seq);
 Sequence* get_fasta_sequence         ( char *fname, char *comment_name);
 Sequence* get_fasta_sequence_num     ( char *fname, char *comment_name);
 Sequence* get_fasta_sequence_raw     ( char *fname, char *comment_name);

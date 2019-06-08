@@ -464,15 +464,25 @@ int aln_compare ( int argc, char *argv[])
 	char *tmp2=vtmpnam (NULL);
 	char *aln1=vtmpnam (NULL);
 	char *aln2=vtmpnam (NULL);
-	
-	printf_system ("seq2name_seq.pl %s > %s", alignment1_file, tmp1);
-	printf_system ("seq2name_seq.pl %s > %s", alignment2_file, tmp2);
-	printf_system ("seq2intersection.pl %s %s -fasta> %s", tmp1, tmp2, aln1);
-	printf_system ("seq2intersection.pl %s %s -fasta> %s", tmp2, tmp1, aln2);
-	alignment1_file=aln1;
-	alignment2_file=aln2;
+	int quick_trim=1; // this option was added to trim the MSA in C
+
+	if (quick_trim && trim_aln_file ( alignment1_file, alignment2_file,aln1, aln2))
+	  {
+	    alignment1_file=aln1;
+	    alignment2_file=aln2;
+	  }
+	    
+	else
+	  {
+	    printf_system ("seq2name_seq.pl %s > %s", alignment1_file, tmp1);
+	    printf_system ("seq2name_seq.pl %s > %s", alignment2_file, tmp2);
+	    printf_system ("seq2intersection.pl %s %s -fasta> %s", tmp1, tmp2, aln1);
+	    printf_system ("seq2intersection.pl %s %s -fasta> %s", tmp2, tmp1, aln2);
+	    alignment1_file=aln1;
+	    alignment2_file=aln2;
+	  }
       }
-     if (pep1_file[0] && check_file_exists ( pep1_file) && pep2_file[0] && check_file_exists ( pep2_file))
+    if (pep1_file[0] && check_file_exists ( pep1_file) && pep2_file[0] && check_file_exists ( pep2_file))
       {
 	char *ptmp1=vtmpnam (NULL);
 	char *ptmp2=vtmpnam (NULL);
@@ -486,7 +496,7 @@ int aln_compare ( int argc, char *argv[])
 	pep1_file=pep1;
 	pep1_file=pep2;
       }
-
+    
 
 /*PARAMETER PROCESSING*/
  //---Maria added this---//
@@ -668,6 +678,7 @@ if ( aln_compare==1)pep_compare=0;
        n_categories=parse_category_list ( category_list, category, n_sub_categories);
        sim_n_categories=parse_category_list ( sim_category_list, sim_category, sim_n_sub_categories);
        
+
        A=main_read_aln ( alignment1_file, NULL);
        B=main_read_aln ( alignment2_file, NULL);
        CLS=trim_aln_seq ( A, B);

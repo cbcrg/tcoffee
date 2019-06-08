@@ -1,6 +1,4 @@
 #!/usr/bin/env perl
-#This script reads an aln in fasta format and modifies names so thathere are no duplicates
-#if two sequences have the same name, the second one is renamed name_1 and so on
 use strict;
 use FileHandle;
 use Env qw(HOST);

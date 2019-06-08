@@ -2367,6 +2367,18 @@ int format_is_msf ( char *file)
     }
 
 //Fasta and PIR
+int format_is_not_fasta (char *name)
+{
+  FILE *fp;
+  char c;
+  
+  fp=vfopen (name, "r");
+  c=fgetc(fp);
+  vfclose (fp);
+  if ( c!='>')return 1;
+  else return 0;
+}
+
 int format_is_fasta_aln ( char *file, int i_know_that_it_not_seq)
 
 {
@@ -5175,6 +5187,70 @@ Sequence* get_fasta_sequence (char *fname, char *comment_out)
 	}
 
 #else
+int get_next_fasta_sequence(FILE*fp, char **name, char **comment, char **seq)
+{
+  static char *lname;
+  static char *lseq;
+  static char *lcomment;
+  static char *line;
+  static int  ml;
+  fpos_t position;
+  int l;
+  int count;
+  int c;
+  static int n=0;
+
+  //HERE ("ML=%d N=%d", ml, n++);
+  c=fgetc (fp);
+  if (c!='>') return 0;
+  
+  //get total length of the current record;
+  l=0;
+  fgetpos(fp, &position); 
+  while ((c=fgetc(fp))!='>' && c!=EOF)l++;
+  fsetpos(fp, &position); 
+  
+  if (ml==0)
+    {
+      ml=l;
+      lname=(char*)vcalloc (ml+1, sizeof (char));
+      lseq=(char*)vcalloc  (ml+1, sizeof (char));
+      lcomment=(char*)vcalloc  (ml+1, sizeof (char));
+      line=(char*)vcalloc  (ml+1, sizeof (char));
+    }
+  else if (l>ml)
+    {
+      ml=l;
+      lname=(char*)vrealloc (lname, sizeof(char)*(ml+1));
+      lcomment=(char*)vrealloc  (lcomment,sizeof (char)*(ml+1));
+      lseq=(char*)vrealloc  (lseq,  sizeof(char)*(ml+1));
+      line=(char*)vrealloc  (line,  sizeof(char)*(ml+1));
+    }
+ 
+  //get name 
+  lname[0]='\0';
+  fgets (line, ml,fp);
+ 
+  sscanf (line, "%s", lname);
+ 
+  //get comment
+  sprintf (lcomment, "%s", line+strlen (lname)+1);
+  
+  lseq[0]='\0';
+  while (fgets(line, ml,fp) && line[0]!='>')
+    {
+      strcat (lseq, line);
+      fgetpos(fp, &position); 
+    }
+  if (line[0]=='>')fsetpos(fp, &position); 
+  
+
+  name[0]=lname;
+  comment[0]=lcomment;
+  seq[0]=lseq;
+  return 1;
+}
+  
 
 Sequence* get_fasta_sequence (char *fname, char *comment_out)
 	{
@@ -6412,7 +6488,8 @@ void output_similarities (char *file, Alignment *A, char *mode)
 {
   float s;
   float *tot;
-  float bigtot=0;
+  double bigtot=0;
+  double bigtotsq=0;
   int n, max;
   FILE *fp;
   int a, b;
@@ -6473,7 +6550,8 @@ void output_similarities (char *file, Alignment *A, char *mode)
 	  fprintf (fp, "TOP\t %4d %4d\t %5.2f %*s\t %*s\t %5.2f\n", b,a,s,max,A->name[b], max, A->name[a], s);
 	  tot[a]+=s;
 	  tot[b]+=s;
-	  bigtot+=s;
+	  bigtot+=(double)s;
+	  bigtotsq+=(double)(s*s);
 	}
     }
   for ( a=0; a< A->nseq; a++)
@@ -6482,7 +6560,11 @@ void output_similarities (char *file, Alignment *A, char *mode)
 
     }
   vfree (tot);free_int (M, -1);
-  fprintf (fp, "TOT\t %*s\t %*s\t %5.2f\n", max,"TOT", max, "*", bigtot/n);
+  fprintf (fp, "TOT\t %*s\t %*s\t %5.2f\n", max,"TOT", max, "*", (float)(bigtot/(double)n));
+  fprintf (fp, "AVG\t %*s\t %*s\t %5.2f\n", max,"AVG", max, "*", (float)(bigtot/(double)n));
+  fprintf (fp, "VAR\t %*s\t %*s\t %5.2f\n", max,"VAR", max, "*", (float)(bigtotsq-(bigtot * bigtot)/(double)n)/(double)(n-1));
+  fprintf (fp, "STD\t %*s\t %*s\t %5.2f\n", max,"STD", max, "*", (float)sqrt(((bigtotsq-(bigtot * bigtot)/(double)n)/(double)(n-1))));
+    
   vfclose (fp);
 }
 
@@ -14688,7 +14770,7 @@ int parse_phecomp_data (char *in, char *out)
 {
   static char *buffer;
   in=quick_find_token_in_file (in, "[EXPERIMENT HEADER]");
-  while (fgets (buffer,fp,MAX_LINE_LENGTH));
+  while (fgets (buffer,MAX_LINE_LENGTH, fp));
 }
 FILE * quick_find_token_in_file  (FILE *fp, char *token)
 {

@@ -103,6 +103,8 @@ Sequence *seq2clean_seq ( Sequence *S, char *alp);//remove all alp characters fr
 char**gene2exons    (char **seq, int nseq);
 
 int       ** seq2aln_pos      (Alignment *A, int *n, int **ls);
+
+
 Alignment *padd_aln ( Alignment *A);
 char **padd_string ( char **string, int n,char pad);
 
@@ -168,6 +170,8 @@ int aln2ngap (Alignment *A);
 int  * count_in_aln ( Alignment *A, Alignment *ST, int value, int n_symbol,char **symbol_list, int *table);
 void count_misc (Alignment*A, Alignment *B);
 
+
+int         trim_aln_file (char *in_aln1, char*in_aln2, char *out_aln1, char *out_aln2);
 Alignment * trim_aln_with_seq ( Alignment *S, Alignment *P);
 Alignment * add_align_seq2aln ( Alignment *A, char *seq, char *seq_name);
 Alignment * aln2X (Alignment *A, int x);

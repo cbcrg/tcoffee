@@ -7397,6 +7397,24 @@ char *file2string (char *name)
 
 int file2size(char *name)
 {
+  FILE* fp;
+  int fd;
+  off_t file_size;
+  char *buffer;
+  struct stat st;
+  
+  fd = open(name, O_RDONLY);
+  if (fd == -1) {return -1;}
+  fp = fdopen(fd, "r");
+  if (fp == NULL) {return -1;}
+  if ((fstat(fd, &st) != 0) || (!S_ISREG(st.st_mode))) {return -1;}
+  if (fseeko(fp, 0 , SEEK_END) != 0) {return -1;}
+  file_size = ftello(fp);
+  return (int) file_size;
+}
+
+int file2size_old(char *name)
+{
   FILE *fp;
   char c;
   int n=0;
@@ -9921,9 +9939,10 @@ char ** standard_initialisation  (char **in_argv, int *in_argc)
   //set special Variables
   
   //There is an issue with the current MAFFT Linux Bundling that requires MAFFT_BINARIES to be set
-  if (getenv ("NO_MAFFT_BINARIES"));
-  else if ( strm (get_os(), "macosx"))
-    cputenv ( "MAFFT_BINARIES=%s","");
+  if (getenv ("NO_MAFFT_BINARIES"));    //Do NOTHING
+  else if (getenv ("MAFFT_BINARIES"));  //Keep the local value
+  else if ( strm (get_os(), "macosx"))  
+    cputenv ( "MAFFT_BINARIES=%s","");  //
   else
     cputenv ( "MAFFT_BINARIES=%s",get_plugins_4_tcoffee());
   

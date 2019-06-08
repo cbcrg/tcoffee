@@ -3010,6 +3010,9 @@ Alignment *seq2aln (Sequence *S, Alignment *A,int rm_gap)
 	return A;
 	}
 
+
+
+
 Alignment *padd_aln ( Alignment *A)
 {
   A->seq_al=padd_string (A->seq_al, A->nseq, '-');
@@ -3034,6 +3037,68 @@ char **padd_string ( char **string, int n,char pad)
   return string;
 }
 
+
+int trim_aln_file (char *in_aln1, char*in_aln2, char *out_aln1, char *out_aln2)
+{
+  FILE *fp1, *fp2, *fp;
+  Alignment *A;
+  int invert=0;
+  char *seq=NULL;
+  char *name=NULL;
+  char *comment=NULL;
+  int fs1, fs2;
+  int n=0;
+  
+  //fs1=file2size (in_aln1);
+  //fs2=file2size (in_aln2);
+  
+  fs1=1;
+  fs2=2;
+  if (fs1>fs2 && format_is_not_fasta (in_aln1))return 0;
+  else if ( format_is_not_fasta (in_aln2))return 0;
+  
+  
+  
+  if (fs1>fs2)
+    {
+      A=main_read_aln (in_aln2,NULL); 
+      fp=vfopen (in_aln1, "r");
+      invert=1;
+    }
+  else
+    {
+      A=main_read_aln (in_aln1,NULL);
+      fp=vfopen (in_aln2, "r");
+      invert=0;
+    }
+  
+  fp1=vfopen (out_aln1, "w");
+  fp2=vfopen (out_aln2, "w");
+
+  
+  while ((get_next_fasta_sequence(fp, &name, &comment,&seq)!=NULL))
+    {
+      int i;
+      
+
+      if ((i=name_is_in_hlist (name, A->name, A->nseq))!=-1)
+	{
+	  
+	  fprintf ((invert)?fp2:fp1, ">%s\n%s\n",name, A->seq_al[i]);
+	  fprintf ((invert)?fp1:fp2, ">%s\n%s\n",name, seq);
+	}
+    }
+  
+  vfclose (fp1);
+  vfclose (fp2);
+  vfclose (fp);
+  return 1;
+}
+	      
+	 
+	 
+  
+  
 Alignment * trim_aln_with_seq ( Alignment *S, Alignment *P)
 {
   Alignment *A, *R;
