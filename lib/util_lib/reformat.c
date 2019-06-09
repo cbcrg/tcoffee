@@ -5199,15 +5199,17 @@ int get_next_fasta_sequence(FILE*fp, char **name, char **comment, char **seq)
   int count;
   int c;
   static int n=0;
-
+  char buf[10001];
+  
   //HERE ("ML=%d N=%d", ml, n++);
   c=fgetc (fp);
   if (c!='>') return 0;
   
   //get total length of the current record;
-  l=0;
+  l=1;
   fgetpos(fp, &position); 
-  while ((c=fgetc(fp))!='>' && c!=EOF)l++;
+  while (fgets (buf, 10000,fp) && buf[0]!='>'){l+=10000;buf[0]='\0';}
+  l+=10000;
   fsetpos(fp, &position); 
   
   if (ml==0)
