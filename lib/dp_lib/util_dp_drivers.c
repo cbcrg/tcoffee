@@ -795,6 +795,7 @@ Alignment * compute_prrp_aln (Alignment *A, Constraint_list *CL)
        return A;
    }
 
+
 Alignment *seq2clustalw_aln  (Sequence *S)
 {
   return aln2clustalw_aln (seq2aln (S, NULL,RM_GAP), NULL);

@@ -240,6 +240,9 @@ int print_newick_tree ( NT_node T, char *name);
 FILE * no_rec_print_tree ( NT_node T, FILE *fp);
 FILE*  no_rec_print_tree_shuffle ( NT_node T, FILE *fp);
 FILE*  no_rec_print_tree_randomize ( NT_node T, FILE *fp);
+
+int newick2random4dpa (Sequence *S, NT_node p, int N, int ntrees);
+
 NT_node tree2shuffle (NT_node p);
 
 NT_node find_longest_branch ( NT_node T, NT_node L);
@@ -357,12 +360,13 @@ NT_node tree2nni (NT_node T, NT_node S);
 
 char* tree2msa4dpa (NT_node T, Sequence *S, int N, char *method);
 NT_node tree2dnd4dpa (NT_node T, Sequence *S, int N, char *method);
-
+int ktree2parent_seq_bucketsF(KT_node K,char *fname);
+int ktree2seq_bucketsF(KT_node K,char *fname);
 int kseq2kmsa   (KT_node *K, int n, char *method);
 char* kmsa2msa_old  (Sequence *S,KT_node K, int n, int *cn);
 char *kmsa2msa (Sequence *S,KT_node *KL, int n);
 int ktree2klist (KT_node K, KT_node *KL, int *n);
 KT_node tree2ktree (NT_node T,Sequence *S, int N);
-
+KT_node *free_ktree (KT_node k);
 char * kmsa2msa_d (Sequence *S,KT_node K, int max, int *cn);
 #endif

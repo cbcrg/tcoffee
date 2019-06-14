@@ -671,9 +671,21 @@ char *  vremove ( char *s);
 char *  vremove2 ( char *s);
 char *  vremove3 ( char *s, char *ext);
 
+void error_exit_sigsegv (int x);
+void error_exit_sigill (int x);
+void error_exit_sigfpe (int x);
+void error_exit_sigabrt(int x);
+
 void error_exit (int);
 void clean_exit();
+
+void signal_exit_sigterm (int x);
+void signal_exit_sigint  (int x);
+void signal_exit_sigill (int x);
+void signal_exit_sigsegv (int x);
+
 void signal_exit(int);
+
 void main_exit ();
 int  log_function (char *fname);
    

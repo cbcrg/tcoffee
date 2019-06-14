@@ -3364,6 +3364,107 @@ NT_node tree2shuffle (NT_node p)
   return p;
 }
 
+int newick2random4dpa (Sequence *S, NT_node p,int n, int ntrees)
+{
+  NT_node *L;
+  int a, nseq;
+  char **names;
+  int **sorted;
+  KT_node K;
+  float *w;
+  int sim;
+  Sequence *S2;
+  Alignment *A2;
+  char * tmp=vtmpnam (NULL);
+ 
+
+  int nt;
+ 
+  L=tree2seqnode_list (p,NULL);
+  nseq=0;
+  while (L[nseq])nseq++;
+  names=(char**)vcalloc (nseq, sizeof (char*));
+  sorted=declare_int (nseq, 2);
+  
+  w=seq2dpa_weight (S, "longuest");
+  for (nt=0; nt<ntrees; nt++)
+    {
+      for (a=0; a<nseq; a++)
+	{
+	  names[a]=L[a]->name;
+	  sorted[a][0]=a;
+	  sorted[a][1]=rand()%nseq+1;
+	}
+      sort_int (sorted,2,1, 0,nseq-1);
+      
+      for (a=0; a<nseq; a++)
+	{
+	  L[a]->name=names[sorted[a][0]];
+	}
+      p=node2master (p, S, w);
+      K=tree2ktree  (p, S, n);
+      seq2mafft_aln_file (K->seqF, tmp);
+      A2=main_read_aln(tmp, NULL);
+      sim=aln2sim(A2, "idmat");
+      HERE ("Tree: %d -- Sim=%d", nt+1, sim);
+      fprintf (stdout, "SIM: %d --", sim);
+      no_rec_print_tree (p,stdout);
+      fprintf (stdout, ";\n");
+      free_ktree(K);
+    }
+  return 1;
+}
+int newick2random4dpa_old (Sequence *S, NT_node p,int n)
+{
+  NT_node *L;
+  int a, nseq;
+  char **names;
+  int **sorted;
+  KT_node K;
+  float *w;
+  int sim;
+  Sequence *S2;
+  Alignment *A2;
+  char * tmp=vtmpnam (NULL);
+  L=tree2seqnode_list (p,NULL);
+  nseq=0;
+  while (L[nseq])nseq++;
+  names=(char**)vcalloc (nseq, sizeof (char*));
+  sorted=declare_int (nseq, 2);
+  
+  for (a=0; a<nseq; a++)
+    {
+      names[a]=L[a]->name;
+      sorted[a][0]=a;
+      sorted[a][1]=rand()%nseq+1;
+    }
+  sort_int (sorted,2,1, 0,nseq-1);
+  
+  for (a=0; a<nseq; a++)
+    {
+      L[a]->name=names[sorted[a][0]];
+    }
+  free_int (sorted, -1);
+  vfree (names);
+  vfree (L);
+  
+  w=seq2dpa_weight (S, "longuest");
+  p=node2master (p, S, w);
+  K=tree2ktree  (p, S, n);
+  
+  ktree2seq_bucketsF(K, "seqdump.");
+  
+  //S2=get_fasta_sequence ("seqdump..1.seq_bucket", NULL);
+  seq2co_aln_file ("seqdump..1.seq_bucket", tmp);
+  A2=main_read_aln(tmp, NULL);
+  //print_aln (A2);
+  sim=aln2sim(A2, "idmat");
+  HERE ("SIM=%d", sim);
+  
+  no_rec_print_tree (p,stdout);
+  return 1;
+}
+
 FILE * no_rec_print_tree_randomize ( NT_node p, FILE *fp)
 {
   NT_node *L;
@@ -8094,7 +8195,7 @@ NT_node nni (NT_node S, int n)
 ////////////////////////////////////// Paralel DPA
 ALN_node declare_aln_node(int mode);
 int ktree2aln_bucketsF(KT_node K,char *fname);
-int ktree2seq_bucketsF(KT_node K,char *fname);
+
 
 char   *kmsa2msa (KT_node K,Sequence *S, ALNcol***S2,ALNcol*PG);
 char   *kmsa2msa_norec (Sequence *S,KT_node *KL, int n);
@@ -8475,6 +8576,18 @@ int ktree2aln_bucketsF(KT_node K,char *fname)
     }
   return 1;
 }
+int ktree2parent_seq_bucketsF(KT_node K,char *fname)
+{
+  if (!K)return 0;
+  else
+    {
+      char *nfname=(char*)vcalloc (1000, sizeof (char));
+      int a;
+      
+      printf_system ("cp %s %s", K->seqF, fname);
+    }
+  return 1;
+}
 int ktree2seq_bucketsF(KT_node K,char *fname)
 {
 
@@ -8609,7 +8722,23 @@ KT_node tree2ktree (NT_node T,Sequence *S, int N)
   vfree (CL);
   return K;
 }
-
+KT_node *free_ktree (KT_node K)
+{
+  int n;
+  
+  if (!K) return NULL;
+  else if (K->nc==0)vfree (K);
+  else 
+    {
+      for (n=0; n<K->nc; n++)
+	free_ktree (K->child[n]);
+      vfree ((KT_node**)K->child);
+      vfree ((KT_node*)K);
+      
+    }
+  return NULL;
+}
+  
 int kseq2kmsa_serial   (KT_node *K, int n, char *method);
 int kseq2kmsa_nextflow   (KT_node *K, int n, char *method);
 int kseq2kmsa_thread   (KT_node *K, int n, char *method);

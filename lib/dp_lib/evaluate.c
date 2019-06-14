@@ -2829,7 +2829,8 @@ Alignment *msa2distances (Alignment *A, Constraint_list *CL, float radius, float
       
       int x=0;
       float *depth=(float*)vcalloc (A->len_aln+1, sizeof (float));
-      int maxN;
+      int maxN=0;
+
       
       for (p1=0; p1<A->len_aln; p1++)
 	{
@@ -2857,7 +2858,6 @@ Alignment *msa2distances (Alignment *A, Constraint_list *CL, float radius, float
 	  depth[p1]=res[s1][p1][2]/maxN;
 	}
 
-
       sort_float (z, 1, 0, 0, x-1);
       //filter out the lower decile
       //min_z=z[(int)(A->len_aln/10)][0];
@@ -2867,12 +2867,19 @@ Alignment *msa2distances (Alignment *A, Constraint_list *CL, float radius, float
 
       for (p1=0; p1<A->len_aln; p1++)
 	{
+	  int si;
 	  prs1=rs1=pos[s1][p1]-1;
 	  if (rs1>=0)prs1=seq2pdb [s1][rs1];
 	  if (rs1>=0 && prs1>=0)
 	    {
 	      float normZ=(res[s1][p1][1]>=max_z)?0:100*(1-((res[s1][p1][1]-min_z)/(max_z-min_z)));
 	      fprintf ( stdout , "##DECRES s1: %20s aa: %c c1: %3d r1: %3d pdbr1: %3d avg_stdev: %7.3f Norm_stdev: %7.3f Ngb: %3d Depth: %4.3f Radius: %6.2f Entropy: %6.3f N: %4d F: %4.3f PDB_Template: %s\n", A->name[s1],A->seq_al[s1][p1],p1+1,rs1+1,prs1,res[s1][p1][0],normZ,(int)res[s1][p1][2], depth[p1],radius, e[p1], ungapN [p1], ungapF[p1],seq2P_template_file (S,s1));
+	      	      
+	      if ((read_array_size_new (normZP[s1]))<=prs1)
+		{
+		  normZP[s1]=(float*)vrealloc (normZP[s1],(prs1+10)*sizeof (float));
+		  entropy[s1]=(float*)vrealloc(entropy[s1],(prs1+10)*sizeof (float));
+		}
 	      normZP [s1][prs1]=normZ;
 	      entropy[s1][prs1]=e[p1];
 	    }
@@ -3003,6 +3010,7 @@ Alignment *msa2distances (Alignment *A, Constraint_list *CL, float radius, float
 		  prs1=seq2pdb[s1][rs1];
 		  if (prs1>=0)
 		    {
+		      if (read_array_size_new (paint2)<=prs1)paint2=(float*)vrealloc (paint2, (prs1+10)*sizeof (float));
 		      paint2[prs1]=paint1[b];
 		    }
 		}

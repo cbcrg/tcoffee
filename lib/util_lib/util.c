@@ -9861,13 +9861,13 @@ char ** standard_initialisation  (char **in_argv, int *in_argc)
   global_exit_signal=EXIT_SUCCESS;
   atexit (clean_exit);
 
-  signal (SIGTERM,signal_exit);
-  signal (SIGINT, signal_exit);
-  signal (SIGKILL, signal_exit);
-  signal (SIGABRT, error_exit);
-  signal (SIGFPE, error_exit);
-  signal (SIGILL, error_exit);
-  signal (SIGSEGV, error_exit);
+  signal (SIGTERM,signal_exit_sigterm);
+  signal (SIGINT, signal_exit_sigint);
+  signal (SIGILL, signal_exit_sigill);
+  signal (SIGABRT, error_exit_sigabrt);
+  signal (SIGFPE, error_exit_sigfpe);
+  signal (SIGILL, error_exit_sigill);
+  signal (SIGSEGV, error_exit_sigsegv);
 
   program_name=(char*)vcalloc ( strlen (in_argv[0])+strlen (PROGRAM)+1, sizeof (char));
   if (in_argv)
@@ -9982,7 +9982,11 @@ char ** standard_initialisation  (char **in_argv, int *in_argc)
   
   return out_argv;
 }
-void signal_exit (int)
+void signal_exit_sigterm (int x){signal_exit (SIGTERM);}
+void signal_exit_sigint  (int x){signal_exit (SIGINT);}
+void signal_exit_sigill  (int x){signal_exit (SIGILL);}
+
+void signal_exit (int signal)
  {
 
    if (is_rootpid())fprintf ( stderr, "****** Forced interuption of main parent process %d\n", getpid());
@@ -9990,8 +9994,16 @@ void signal_exit (int)
    global_exit_signal=EXIT_SUCCESS;
    myexit (EXIT_SUCCESS);
  }
+void error_exit_sigsegv (int x){error_exit(SIGSEGV);}
+void error_exit_sigill (int x){error_exit(SIGILL);}
+void error_exit_sigfpe (int x){error_exit(SIGFPE);}
+void error_exit_sigabrt(int x){error_exit(SIGABRT);}
+
+
+
 void error_exit (int exit_code)
  {
+   
    lock (getpid(), LERROR, LSET, "%d -- ERROR: COREDUMP: %s %s (%s)\n",getpid(), PROGRAM, VERSION, BUILD_INFO );
    global_exit_signal=exit_code;
    myexit (exit_code);

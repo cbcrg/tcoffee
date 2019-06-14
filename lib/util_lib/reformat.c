@@ -5208,8 +5208,8 @@ int get_next_fasta_sequence(FILE*fp, char **name, char **comment, char **seq)
   //get total length of the current record;
   l=1;
   fgetpos(fp, &position); 
-  while (fgets (buf, 10000,fp) && buf[0]!='>'){l+=10000;buf[0]='\0';}
-  l+=10000;
+  while (fgets (buf, 10000,fp) && buf[0]!='>'){l+=strlen (buf);buf[0]='\0';}
+  
   fsetpos(fp, &position); 
   
   if (ml==0)
@@ -11801,6 +11801,15 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	 {
 	   print_node_list ( D1->T,(DST)?DST->S:NULL);
 	   myexit (EXIT_SUCCESS);
+	 }
+       else if ( strm(action, "newick2randomize4dpa"))
+	 {
+	   // +newick2randomize4dpa dpa_nseq n_replicates
+	   
+	   int shuf=atoi (ACTION(1));
+	   int n=atoi (ACTION (2));
+	   newick2random4dpa(D2->S,D1->T, n, shuf); 
+	   myexit(EXIT_SUCCESS);
 	 }
        else if ( strm(action, "newick_randomize"))
 	 {
