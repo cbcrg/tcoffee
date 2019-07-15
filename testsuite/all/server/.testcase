@@ -12,6 +12,18 @@ assert: stderr not contains 'FAILURE'
 assert: file t_coffee.ErrorReport !exists
 assert: file result.score_html exists
 
+
+########### Server Calls - Disabled by Default - Run from Time to Time
+## Expresso
+test: t_coffee -in=input-fasta.txt -mode=expresso  -evaluate_mode=t_coffee_slow -output=score_html clustalw_aln fasta_aln phylip -maxnseq=150 -maxlen=2500 -case=upper -seqnos=on -outorder=input -run_name=result 
+## Psi-Coffee
+test: t_coffee -in=input-fasta.txt -mode=psicoffee -output=score_html clustalw_aln fasta_aln phylip -maxnseq=150 -maxlen=2500 -case=upper -seqnos=on -outorder=input -run_name=result
+
+## Accurate 
+test: t_coffee -in=input-fasta.txt -mode=accurate -output=score_html clustalw_aln fasta_aln phylip -maxnseq=150 -maxlen=2500 -case=upper -seqnos=on -outorder=input -run_name=result
+
+
+
 ## T-Coffee
 test: t_coffee -in=input-fasta.txt -mode=regular -output=score_html clustalw_aln fasta_aln phylip -maxnseq=150 -maxlen=10000 -case=upper -seqnos=on -outorder=input -run_name=result 
 
@@ -21,15 +33,8 @@ test: t_coffee -in=input-fasta.txt Mpcma_msa Mmafft_msa Mclustalw_msa Mdialigntx
 ## R-Coffee
 test: t_coffee -in=input-rna.txt -method=mafft_msa muscle_msa probconsRNA_msa -output=score_html clustalw_aln fasta_aln phylip -maxnseq=150 -maxlen=2500 -case=upper -seqnos=on -outorder=input -run_name=result -tree -special_mode=rcoffee -method_limits=consan_pair 5 150 
 
-## Expresso
-test: t_coffee -in=input-fasta.txt -mode=expresso  -evaluate_mode=t_coffee_slow -output=score_html clustalw_aln fasta_aln phylip -maxnseq=150 -maxlen=2500 -case=upper -seqnos=on -outorder=input -run_name=result 
 
 
-## Psi-Coffee
-test: t_coffee -in=input-fasta.txt -mode=psicoffee -output=score_html clustalw_aln fasta_aln phylip -maxnseq=150 -maxlen=2500 -case=upper -seqnos=on -outorder=input -run_name=result
-
-## Accurate 
-test: t_coffee -in=input-fasta.txt -mode=accurate -output=score_html clustalw_aln fasta_aln phylip -maxnseq=150 -maxlen=2500 -case=upper -seqnos=on -outorder=input -run_name=result
 
 
 ## combine
