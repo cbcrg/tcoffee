@@ -562,7 +562,6 @@ Job_TC *submit_lib_job ( Job_TC *job)
 	    if (!evaluate_sys_call_io (io->out,p->aln_c, "") || (strm (M->out_mode, "aln") && !(is_aln (io->out) || is_seq(io->out))) )
 	      {
 		job->status=EXIT_FAILURE;
-		//myexit (EXIT_FAILURE);
 		return job;
 	      }
 	    if (flipped==1)invert_aln_file (io->out);

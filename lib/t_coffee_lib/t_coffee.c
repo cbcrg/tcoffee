@@ -3600,15 +3600,31 @@ get_cl_param(\
 			    /*TYPE*/      "D"          ,\
 			    /*OPTIONAL?*/ OPTIONAL       ,\
 			    /*MAX Nval*/  1              ,\
-			    /*DOC*/       "Number of cores to be used by machine [default=0 => all those defined in the environement]",\
+			    /*DOC*/       "Number of cores to be used by machine [default=1 => use one core only.Use 0 for all cores]",\
 			    /*Parameter*/ &n_core   ,\
-			    /*Def 1*/    "0"       ,\
+			    /*Def 1*/    "1"       ,\
 			    /*Def 2*/    "0"              ,\
 			    /*Min_value*/ "0"          ,\
-			    /*Max Value*/ "100"           \
+			    /*Max Value*/ "10000"           \
+		   );
+	       get_cl_param(					\
+			    /*argc*/      argc           ,\
+			    /*argv*/      argv           ,\
+			    /*output*/    &le            ,\
+			    /*Name*/      "-thread",\
+			    /*Flag*/      &garbage       ,\
+			    /*TYPE*/      "D"          ,\
+			    /*OPTIONAL?*/ OPTIONAL       ,\
+			    /*MAX Nval*/  1              ,\
+			    /*DOC*/       "Number of cores to be used by machine [default=1 => use one core only.Use 0 for all cores]",\
+			    /*Parameter*/ &n_core   ,\
+			    /*Def 1*/    "1"       ,\
+			    /*Def 2*/    "0"              ,\
+			    /*Min_value*/ "0"          ,\
+			    /*Max Value*/ "10000"           \
 		   );
 	      
-	       if (n_core)set_int_variable ("n_core",n_core);
+	       
 
 /*PARAMETER PROTOTYPE:    max_n_proc:: legacy for the nature protocol    */
 	       max_n_proc=0;
@@ -3629,7 +3645,7 @@ get_cl_param(\
 			    /*Max Value*/ "100"           \
 		   );
 	       if (max_n_proc)n_core=max_n_proc;
-
+	       if (n_core)set_int_variable ("n_core",n_core);
 
 /*PARAMETER PROTOTYPE:    lib_list    */
 	       declare_name (lib_list);
@@ -6983,6 +6999,7 @@ Alignment * t_coffee_dpa (int argc, char **argv)
   
   //default values
   set_int_variable ("swlN",50);
+  set_nproc(1);
   
   for (a=0; a<argc; a++)
     {
@@ -7071,9 +7088,11 @@ Alignment * t_coffee_dpa (int argc, char **argv)
   if (dpa_nseq==0)
     {
       if (S->nseq>10000)dpa_nseq=1000;
-      else dpa_nseq=S->nseq/10;
+      else dpa_nseq=MAX((S->nseq/10),2);
     }
   
+  //
+  fprintf ( stderr, "!Maximum N Threads --- %d\n",get_nproc());
   //prepare the guide tree
   fprintf ( stderr, "!Compute Guide Tree --- ");
   if (usetree){dpa_tree=usetree;}

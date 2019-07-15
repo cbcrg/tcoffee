@@ -3778,6 +3778,7 @@ int main_output  (Sequence_data_struc *D1, Sequence_data_struc *D2, Sequence_dat
 		  compare_sar_sequence (D1->S, (D2 &&D2->S)?D2->S:D1->S, atoi(out_format+6));
 		  return EXIT_SUCCESS;
 		}
+
 	else if ( strncmp (out_format, "sim",3)==0)
 	        {
 		  if (!D1)return 1;
@@ -6502,10 +6503,13 @@ void output_similarities (char *file, Alignment *A, char *mode)
 
   tot=(float*)vcalloc ( A->nseq, sizeof (float));
   fp=vfopen (file, "w");
-  fprintf (fp, "# TC_SIMILARITY_MATRIX_FORMAT_01\n");
-  for ( a=0; a<A->nseq; a++)
-    fprintf ( fp, "# SEQ_INDEX %s %d\n",A->name[a],a);
-  fprintf ( fp, "# PW_SEQ_DISTANCES \n");
+  if (!strstr (mode, "avg")&& !strstr (mode, "std"))
+    {
+      fprintf (fp, "# TC_SIMILARITY_MATRIX_FORMAT_01\n");
+      for ( a=0; a<A->nseq; a++)
+	fprintf ( fp, "# SEQ_INDEX %s %d\n",A->name[a],a);
+      fprintf ( fp, "# PW_SEQ_DISTANCES \n");
+    }
   for (n=0,a=0;a< A->nseq-1; a++)
     {
       for ( b=a+1; b<A->nseq; b++, n++)
@@ -6548,8 +6552,11 @@ void output_similarities (char *file, Alignment *A, char *mode)
 	    {
 	      s=get_seq_fsim2 (A->seq_al[a], A->seq_al[b],GAP_LIST, mode);
 	    }
-	  fprintf (fp, "BOT\t %4d %4d\t %5.2f %*s\t %*s\t %5.2f\n", a,b,s,max,A->name[a], max, A->name[b], s);
-	  fprintf (fp, "TOP\t %4d %4d\t %5.2f %*s\t %*s\t %5.2f\n", b,a,s,max,A->name[b], max, A->name[a], s);
+	   if ( !strstr (mode, "avg")&& !strstr (mode, "std"))
+	     {
+	       fprintf (fp, "BOT\t %4d %4d\t %5.2f %*s\t %*s\t %5.2f\n", a,b,s,max,A->name[a], max, A->name[b], s);
+	       fprintf (fp, "TOP\t %4d %4d\t %5.2f %*s\t %*s\t %5.2f\n", b,a,s,max,A->name[b], max, A->name[a], s);
+	     }
 	  tot[a]+=s;
 	  tot[b]+=s;
 	  bigtot+=(double)s;
@@ -6558,15 +6565,25 @@ void output_similarities (char *file, Alignment *A, char *mode)
     }
   for ( a=0; a< A->nseq; a++)
     {
-      fprintf (fp, "AVG\t %d\t %*s\t %*s\t %5.2f\n", a,max,A->name[a], max, "*", tot[a]/(A->nseq-1));
+      if ( !strstr (mode, "avg") && !strstr (mode, "std"))fprintf (fp, "AVG\t %d\t %*s\t %*s\t %5.2f\n", a,max,A->name[a], max, "*", tot[a]/(A->nseq-1));
 
     }
   vfree (tot);free_int (M, -1);
-  fprintf (fp, "TOT\t %*s\t %*s\t %5.2f\n", max,"TOT", max, "*", (float)(bigtot/(double)n));
-  fprintf (fp, "AVG\t %*s\t %*s\t %5.2f\n", max,"AVG", max, "*", (float)(bigtot/(double)n));
-  fprintf (fp, "VAR\t %*s\t %*s\t %5.2f\n", max,"VAR", max, "*", (float)(bigtotsq-(bigtot * bigtot)/(double)n)/(double)(n-1));
-  fprintf (fp, "STD\t %*s\t %*s\t %5.2f\n", max,"STD", max, "*", (float)sqrt(((bigtotsq-(bigtot * bigtot)/(double)n)/(double)(n-1))));
-    
+  if ( strstr (mode, "avg"))
+    {
+      fprintf (fp, "%5.2f\n",(float)(bigtot/(double)n));
+    }
+  else if (strstr (mode, "std"))
+    {
+      fprintf (fp, "%5.2f\n",(float)sqrt(((bigtotsq-(bigtot * bigtot)/(double)n)/(double)(n-1))));
+    }
+  else
+    {
+      fprintf (fp, "TOT\t %*s\t %*s\t %5.2f\n", max,"TOT", max, "*", (float)(bigtot/(double)n));
+      fprintf (fp, "AVG\t %*s\t %*s\t %5.2f\n", max,"AVG", max, "*", (float)(bigtot/(double)n));
+      fprintf (fp, "VAR\t %*s\t %*s\t %5.2f\n", max,"VAR", max, "*", (float)(bigtotsq-(bigtot * bigtot)/(double)n)/(double)(n-1));
+      fprintf (fp, "STD\t %*s\t %*s\t %5.2f\n", max,"STD", max, "*", (float)sqrt(((bigtotsq-(bigtot * bigtot)/(double)n)/(double)(n-1))));
+    }
   vfclose (fp);
 }
 

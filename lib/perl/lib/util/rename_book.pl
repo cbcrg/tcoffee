@@ -3,7 +3,9 @@ use File::Copy::Recursive qw(fcopy rcopy dircopy fmove rmove dirmove);
 use File::Path qw(make_path remove_tree);
 use Cwd;
 use File::Copy;
-
+use File::Basename;
+use utf8;
+use Encode;
 use DirHandle;
 my $dir;
 my $target_dir;
@@ -65,6 +67,12 @@ for ($a=0; $a<@ARGV; $a++)
     elsif ($v eq "-dirsync.badal")
       {
 	$action=$v;
+      }
+    elsif ($v eq "-ipad")
+      {
+	$action=$v;
+	$from_dir=$ARGV[++$a];
+	$to_dir=$ARGV[++$a];
       }
     elsif ($v eq "-dirsync")
       {
@@ -543,7 +551,11 @@ elsif($action eq "-renumber")
 	  }
       }
 
-
+elsif       ($action eq "-ipad")
+  {
+    ipadsync($from_dir, $to_dir);
+    die;
+  }
 elsif       ($action eq "-dirsync")
   {
     dirsync();
@@ -1884,7 +1896,95 @@ sub rec_flac2mp3
       }
     return ;
   }
+sub ipadsync
+  {
+    my ($root)=@_;
+    my %h;
+    my %clean;
+    
+    my $from="/ExportTools/";
+    my $to="/outdir";
+    my $delete="/outdir.delete";
+    my $processed="/processed.list";
+    my $processed_file=0;
+    if (!$root){$root="/Volumes/Torrent/ipadsync/";}
+    
+    $from=$root.$from;
+    $to=$root.$to;
+    $delete=$root.$delete;
+    $processed=$root.$processed;
 
+    if ( !-d $from){mkdir ($from);}
+    if ( !-d $to){mkdir ($to);}
+    if ( !-d $delete){mkdir ($delete);}
+    if ( !-e $processed){system("touch $processed");}
+    my %processed=file2plex_hash($processed);
+    
+    
+    opendir (DIR, $from);
+    my @l1=readdir(DIR);
+    closedir (DIR);
+    foreach my $f (@l1)
+      {
+	my $file="$from/$f";
+	if (!($file=~/processed/) && $file=~/\.csv/)
+	    {
+	      $processed_file=1;
+	      %h=cvs2h($file,%h);
+	      move ($file, "$file\.processed");
+	    }
+      }
+    if (!$processed_file)
+      {
+	print "ERROR: Did Not Find any CSV file to process in: $from\n";
+	die;
+      }
+    
+    
+    foreach my $n (sort(keys(%h)))
+      {
+	
+	my $file=$h{$n}{"File Name"};
+	my $id=$h{$n}{"Media ID"};
+	chomp ($file);
+	my ($name,$dir,$ext) = fileparse($file, qr/\.[^.]*/);
+	
+	my $dest="$to/$name\.PLEXID_$id$ext";
+	if (!-e $dest && !$processed{$id})
+	  {
+	    print "COPY $file --> $dest\n";
+	    copy ($file, $dest);
+	    
+	    open F,">>$processed" || die;
+	    print F "$dest\n";
+	    close (F);
+	  }
+	else
+	  {
+	    print "SKIP $file --> $dest\n";
+	  }
+	$clean{$id}=1;
+      }
+    
+    #clean
+    opendir (DIR, $to);
+    my @l1=readdir(DIR);
+    closedir (DIR);
+    foreach my $f (@l1)
+      {
+	if ( $f eq "." || $f eq ".."){next;}
+	my $file="$to/$f";
+	$file=~/.*PLEXID_(\d+)\..*/;
+	my $id=$1;
+	
+	if ($clean{$id}){;}
+	else
+	  {
+	    print "CLEAN $file\n";
+	    move ("$file", $delete);
+	  }
+      }
+  }
 sub dirsync
   {
     my ($from_dir, $to_dir)=@_;
@@ -2139,3 +2239,65 @@ sub daytag
 	 my $tag="$year"."$month"."$mday";
 	 return $tag;
        }
+
+
+sub file2plex_hash
+       {
+	 my %h;
+	 my $f=@_[0];
+	 open (F, "$f");
+	 while (<F>)
+	   {
+	     my $l=$_;
+	     $l=~/.*PLEXID_(\d+)\..*/;
+	     my $id=$1;
+	     print "[$id] -> $l\n";
+	     $h{$id}=$l;
+	   }
+	 close (F);
+	 return %h;
+       }
+       
+	   
+      
+sub cvs2h
+	 {
+	   my ($f,%f)=@_;
+	   my @header;
+	   my $n;
+	   if ( !-e $f || !($f=~/.*\.csv/)){return %h;}
+	   
+	   print "----Process $f\n";
+	   open (F, "$f");
+	   while (<F>)
+	     {
+	       my $l=$_;
+	       my @ll;
+	       my @lll=split (/\*/,$l);
+	      
+	       foreach my $x (@lll)
+		 {
+		   $x=~s/\r//g;
+		   $x=~s/\n//g;
+		   $x=~s/\"//g;
+		   @ll=(@ll,$x);
+		 }
+	       
+	       if ($n)
+		 {
+		   for (my $a=0;$a<=$#header; $a++)
+		     {
+		       $ll[$a]=~s/\"//g;
+		       $h{$n}{$header[$a]}=$ll[$a];
+		     }
+		 }
+	       else
+		 {
+		   @header=@ll;
+		 }
+	       $n++;
+	     }
+	   close (F);
+	   return %h;
+
+	 }

@@ -2395,8 +2395,8 @@ Here is the mother of all configuration file for T-Coffee:
   *******************************************************
   *IN_FLAG
   *flag indicating the name of the in coming sequences
-  *IN_FLAG S no_name ->no flag
-  *IN_FLAG S &amp;nbsp-in&amp;nbsp -> ' -in '
+  *IN_FLAG no_name ->no flag
+  *IN_FLAG &amp;nbsp-in&amp;nbsp -> ' -in '
   *
   IN_FLAG -infile=
   *
@@ -2406,7 +2406,7 @@ Here is the mother of all configuration file for T-Coffee:
   *OUT_FLAG
   *flag indicating the name of the out-coming data
   *same conventions as IN_FLAG
-  *OUT_FLAG S no_name ->no flag
+  *OUT_FLAG no_name ->no flag
   *
   OUT_FLAG -outfile=
   *
