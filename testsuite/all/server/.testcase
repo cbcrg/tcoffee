@@ -16,14 +16,17 @@ assert: file result.score_html exists
 ########### Server Calls - Disabled by Default - Run from Time to Time
 ## Expresso
 test: t_coffee -in=input-fasta.txt -mode=expresso  -evaluate_mode=t_coffee_slow -output=score_html clustalw_aln fasta_aln phylip -maxnseq=150 -maxlen=2500 -case=upper -seqnos=on -outorder=input -run_name=result 
+disabled: true
+
 ## Psi-Coffee
 test: t_coffee -in=input-fasta.txt -mode=psicoffee -output=score_html clustalw_aln fasta_aln phylip -maxnseq=150 -maxlen=2500 -case=upper -seqnos=on -outorder=input -run_name=result
+disabled: true
 
 ## Accurate 
 test: t_coffee -in=input-fasta.txt -mode=accurate -output=score_html clustalw_aln fasta_aln phylip -maxnseq=150 -maxlen=2500 -case=upper -seqnos=on -outorder=input -run_name=result
+disabled: true
 
-
-
+########### Local Tests Always Run
 ## T-Coffee
 test: t_coffee -in=input-fasta.txt -mode=regular -output=score_html clustalw_aln fasta_aln phylip -maxnseq=150 -maxlen=10000 -case=upper -seqnos=on -outorder=input -run_name=result 
 

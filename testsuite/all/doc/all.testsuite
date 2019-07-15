@@ -20,13 +20,9 @@ assert: file t_coffee.ErrorReport !exists
 # Tests start here 
 #
 
-#DPA Tests - Regressive Algorithm - Note: omit these tests for now because ClustalO and Parttree do not run on the test env
-test: t_coffee -reg -seq proteases_large.fasta -reg_nseq 100 -reg_tree mbed -dpa_method mafftginsi_msa -outfile proteases_large.aln -outtree proteases_large.mbed
-test: t_coffee -reg -seq proteases_large.fasta -reg_nseq 100 -reg_tree mbed -dpa_method mafftginsi_msa -outfile proteases_large.aln -outtree proteases_large.mbed
-test: t_coffee -reg -seq proteases_large.fasta -reg_nseq 100 -reg_tree parttree -reg_method mafftfftnsi_msa -outfile proteases_large.aln -outtree proteases_large.parttree
 
 
-#Long Tests - Require Network connection and remote services - Disabled by default - Test every once in a while
+################### Long Tests - Require Network connection and remote services - Disabled by default - Test every once in a while
 # The accurate mode requires a longer timeout 
 test: t_coffee sample_seq1.fasta -mode accurate
 disabled: true
@@ -46,12 +42,18 @@ disabled: true
 test: t_coffee -in Lsample_lib3.tc_lib,Mlalign_rs_s_pair -domain -start=100 -len=60    
 disabled: true
 
-#deprecated Tests
+################deprecated Tests
 #test: t_coffee -in Lmarna.tc_lib -outfile maran.test    
 #test: t_coffee -in Ssample_seq5.fasta Pstruc4.pdb Mfugue_pair    
 #test: t_coffee -in Sseq.fas P2PTC Mfugue_pair    
 #test: t_coffee -in S2seqs.fas Mfugue_pair -template_file SELF_P_    
 #test: t_coffee sample_seq6.fasta -in Mfast_pair Msap_pair Mfugue_pair -template_file template_file6.template    
+
+#DPA Tests - Regressive Algorithm - Note: omit these tests for now because ClustalO and Parttree do not run on the test env
+test: t_coffee -reg -seq proteases_large.fasta -reg_nseq 100 -reg_tree mbed -dpa_method mafftginsi_msa -outfile proteases_large.aln -outtree proteases_large.mbed
+test: t_coffee -reg -seq proteases_large.fasta -reg_nseq 100 -reg_tree mbed -dpa_method mafftginsi_msa -outfile proteases_large.aln -outtree proteases_large.mbed
+test: t_coffee -reg -seq proteases_large.fasta -reg_nseq 100 -reg_tree parttree -reg_method mafftfftnsi_msa -outfile proteases_large.aln -outtree proteases_large.parttree
+
 
 #Short tests
 
