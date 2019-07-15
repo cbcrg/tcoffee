@@ -12,6 +12,37 @@ assert: stderr not contains 'FATAL'
 assert: stderr not contains 'FAILURE'
 assert: file t_coffee.ErrorReport !exists
 
+############# Network Tests - Disabled by default - Activate every once in while
+##
+## PSI-Coffee
+## https://sites.google.com/site/tcoffeetutorials/protein-alignment/psi-coffee
+##
+test: t_coffee -seq sh3.fasta -mode psicoffee
+disabled: true
+
+timeout: 20min
+tag: psicoffee
+assert: file sh3.dnd exists
+assert: file sh3.aln exists
+assert: file sh3.html exists
+assert: file sh3_prf1.template_list exists
+
+
+##
+## Expresso
+## https://sites.google.com/site/tcoffeetutorials/protein-alignment/expresso
+##
+test: t_coffee -seq sh3.fasta -mode expresso -pdb_type dn
+disabled: true
+
+tag: expresso
+assert: file sh3.dnd exists
+assert: file sh3.aln exists
+assert: file sh3.html exists
+assert: file sh3_pdb1.template_list exists
+
+
+##############3 Non Networ Tests - Always On by Default
 
 ##
 ## T-Coffee default
@@ -33,29 +64,9 @@ tag: mcoffee
 test: t_coffee -seq sh3.fasta -method=muscle_msa,probcons_msa,clustalw_msa
 tag: mcoffee
 
-##
-## PSI-Coffee
-## https://sites.google.com/site/tcoffeetutorials/protein-alignment/psi-coffee
-##
-test: t_coffee -seq sh3.fasta -mode psicoffee
-timeout: 20min
-tag: psicoffee
-assert: file sh3.dnd exists
-assert: file sh3.aln exists
-assert: file sh3.html exists
-assert: file sh3_prf1.template_list exists
 
-##
-## Expresso
-## https://sites.google.com/site/tcoffeetutorials/protein-alignment/expresso
-##
-test: t_coffee -seq sh3.fasta -mode expresso -pdb_type dn
 
-tag: expresso
-assert: file sh3.dnd exists
-assert: file sh3.aln exists
-assert: file sh3.html exists
-assert: file sh3_pdb1.template_list exists
+
 
 ##
 ## 3D-Coffee

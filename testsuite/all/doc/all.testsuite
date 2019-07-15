@@ -25,23 +25,41 @@ test: t_coffee -reg -seq proteases_large.fasta -reg_nseq 100 -reg_tree mbed -dpa
 test: t_coffee -reg -seq proteases_large.fasta -reg_nseq 100 -reg_tree mbed -dpa_method mafftginsi_msa -outfile proteases_large.aln -outtree proteases_large.mbed
 test: t_coffee -reg -seq proteases_large.fasta -reg_nseq 100 -reg_tree parttree -reg_method mafftfftnsi_msa -outfile proteases_large.aln -outtree proteases_large.parttree
 
+
+#Long Tests - Require Network connection and remote services - Disabled by default - Test every once in a while
+# The accurate mode requires a longer timeout 
+test: t_coffee sample_seq1.fasta -mode accurate
+disabled: true
+
+test: t_coffee 3d.fasta -special_mode=expresso 
+disabled: true
+
+
+#Broken Test - to investigate
+test: t_coffee -aln=sproteases_small.cw_aln, sproteases_small.muscle, sproteases_small.tc_aln -outfile=combined_aln.aln    
+disabled: true
+
+# ERROR (Missing files )
+test: t_coffee sample_seq1.fasta -lib lalign_id_pair_seq1.tc_lib, slow_pair_seq1.tc_lib
+disabled: true  
+
+test: t_coffee -in Lsample_lib3.tc_lib,Mlalign_rs_s_pair -domain -start=100 -len=60    
+disabled: true
+
+#deprecated Tests
+#test: t_coffee -in Lmarna.tc_lib -outfile maran.test    
+#test: t_coffee -in Ssample_seq5.fasta Pstruc4.pdb Mfugue_pair    
+#test: t_coffee -in Sseq.fas P2PTC Mfugue_pair    
+#test: t_coffee -in S2seqs.fas Mfugue_pair -template_file SELF_P_    
+#test: t_coffee sample_seq6.fasta -in Mfast_pair Msap_pair Mfugue_pair -template_file template_file6.template    
+
 #Short tests
 
 test: t_coffee sample_seq1.fasta    
 test: t_coffee sample_seq1.fasta -mode quickaln    
 test: t_coffee sample_seq1.fasta -mode quickaln -ndiag=10    
-
-# The accurate mode requires a longer timeout
-test: t_coffee sample_seq1.fasta -mode accurate
-    
-# test: t_coffee -aln=sproteases_small.cw_aln, sproteases_small.muscle, sproteases_small.tc_aln -outfile=combined_aln.aln    
 test: t_coffee -infile=sproteases_small.aln -special_mode=evaluate    
-
-test: t_coffee 3d.fasta -special_mode=expresso 
-
-
 test: t_coffee 3d.fasta -special_mode=3dcoffee    
-
 test: t_coffee -other_pg seq_reformat -in sproteases_small.aln -output fasta_aln > sproteases_small.fasta_aln   
 test: t_coffee -other_pg seq_reformat -in sproteases_small.aln -output msf > sproteases_small.msf   
 test: t_coffee -other_pg seq_reformat -in sproteases_small.aln -output fasta_seq > sproteases_small.fasta   
@@ -124,17 +142,15 @@ test: t_coffee -other_pg seq_reformat -in sample_rnaseq2.aln -action +alifold2an
 test: t_coffee -other_pg seq_reformat -in sample_rnaseq2.aln -action +alifold2analyze color_htm    
 test: t_coffee -other_pg seq_reformat sproteases_small.fasta -output sim_idscore | grep TOP |sort -rnk3    
 input: sproteases_small.fasta
-
 test: t_coffee -infile sproteases_small.aln -lib  charge_relay_lib.tc_lib  -score -output html    
 test: t_coffee -seq sample_seq1.fasta -method fast_pair,lalign_id_pair    
 test: t_coffee sample_seq1.fasta -method slow_pair@EP@MATRIX@pam250mt@GOP@-10@GEP@-1    
 test: t_coffee sample_seq1.fasta -method clustalw_msa@EP@PARAM2@-GAPOPEN%e100%s-GAPEXT%e10    
 test: t_coffee sample_seq1.fasta -method=em@clustalw@pairwise    
-
 test: t_coffee sample_seq1.fasta -method clustalw_method.tc_method
 before: t_coffee -other_pg unpack_clustalw_method.tc_method
 input: clustalw_method.tc_method
-    
+
 test: t_coffee sample_seq1.fasta -method generic_method.tc_method    
 before: t_coffee -other_pg unpack_generic_method.tc_method
 input: sample_seq1.fasta
@@ -148,16 +164,9 @@ test: t_coffee -aln sample_aln1.aln -lib test_lib.tc_lib -outfile=outaln
 test: t_coffee -aln=sample_aln1_1.aln,sample_aln1_2.aln -method= fast_pair,lalign_id_pair -outfile=out_aln    
 test: t_coffee sample_seq1.fasta -method slow_pair -out_lib slow_pair_seq1.tc_lib -lib_only    
 test: t_coffee sample_seq1.fasta -method lalign_id_pair -out_lib lalign_id_pair_seq1.tc_lib -lib_only    
-
-# ERROR (Missing files )
-test: t_coffee sample_seq1.fasta -lib lalign_id_pair_seq1.tc_lib, slow_pair_seq1.tc_lib
-disabled: true     
-
 test: t_coffee sample_seq1.fasta -type=PROTEIN    
 test: t_coffee -pdb=struc1.pdb,struc2.pdb,struc3.pdb -method sap_pair -cache=no
-    
 test: t_coffee -pdb=struc1.pdb,struc2.pdb,struc3.pdb -method sap_pair -cache=update    
-
 test: t_coffee sample_seq1.fasta -special_mode low_memory    
 test: t_coffee  sample_seq1.fasta -method=slow_pair,lalign_id_pair -distance_matrix_mode=idscore -dp_mode=myers_miller_pair_wise    
 test: t_coffee sample_seq1.fasta -output=msf,fasta_aln    
@@ -177,11 +186,6 @@ test: t_coffee -lib=sample_lib1.tc_lib,sample_lib2.tc_lib -lib_only -out_lib=sam
 test: t_coffee Ssample_aln1.aln -outfile=outaln    
 test: t_coffee sample_seq1.fasta -output=score_ps 
    
-# Missing program: ps2pdf
-test: t_coffee sample_seq2.fasta -output=score_pdf    
-if: env os.name matches Linux
-
-
 test: t_coffee sample_seq1.fasta -output=clustalw,html,score_ps,msf    
 test: t_coffee sample_seq1.fasta -method muscle_msa,probcons_msa, mafft_msa, lalign_id_pair,slow_pair    
 test: t_coffee sample_dnaseq1.fasta -type dna    
@@ -249,9 +253,7 @@ test: t_coffee -pdb=struc1.pdb,struc2.pdb,struc3.pdb -method sap_pair
 test: t_coffee -mode 3dcoffee -seq 3d_sample3.fasta -template_file template_file.template    
 test: t_coffee 3d_sample2.fasta -template_file SELF_P_    
 
-# THIS IS failing 
-test: t_coffee -in Lsample_lib3.tc_lib,Mlalign_rs_s_pair -domain -start=100 -len=60    
-disabled: true
+
 
 test: t_coffee sample_seq1.fasta -output=clustalw,gcg, score_html    
 test: t_coffee -other_pg seq_reformat -in sample_aln1.aln -action +lower -output clustalw    
@@ -265,19 +267,9 @@ test: t_coffee -in Rsample_profile1.aln,Rsample_profile2.aln -mode=3dcoffee -out
   
 test: t_coffee sample_seq1.fasta -in=Mclustalw_pair,Mclustalw_msa,Mslow_pair -outfile=clustal_text  
 
-# Missing Program fugueali
-#test: t_coffee -in Ssample_seq5.fasta Pstruc4.pdb Mfugue_pair    
-#test: t_coffee -in Sseq.fas P2PTC Mfugue_pair    
-#test: t_coffee -in S2seqs.fas Mfugue_pair -template_file SELF_P_    
-#test: t_coffee sample_seq6.fasta -in Mfast_pair Msap_pair Mfugue_pair -template_file template_file6.template    
 
 test: t_coffee -mode 3dcoffee -in Sseq.fas P2PTC    
 test: t_coffee -mode 3dcoffee -in S2seqs.fas -template_file SELF_P_   
 test: t_coffee -in Msap_pair Ssample_seq7.fasta -template_file template_file7.template -weight 1001 -out_lib test_lib7.tc_lib -lib_only    
-
-# ERROR
-test: t_coffee -in Lmarna.tc_lib -outfile maran.test    
-disabled: true
-
 test: t_coffee -in Asample_aln5.aln -outfile test.aln    
 
