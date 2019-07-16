@@ -43,6 +43,7 @@ assert: file sh3_pdb1.template_list exists
 
 #TMalign is failing - Needs to be recompiled
 test: t_coffee -seq sh3.fasta -method TMalign_pair,sap_pair -template_file EXPRESSO
+disabled: true
 tag: 3dcoffee
 
 ##############3 Non Networ Tests - Always On by Default
