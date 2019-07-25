@@ -17,7 +17,7 @@ SHELL := /bin/bash
 ifndef HOME2
 HOME2=$(HOME)/Dropbox
 endif
-
+WEBDIR=$(HOME2)/dropBoxShared/Work/tcoffee.org/public_html/
 
 #########################################################
 #                                                       #
@@ -85,7 +85,18 @@ endif
 LIBRARY=$(PWD)/../../lib/
 
 
+
+
 DISTRIBUTION_FILE=$(PROGRAM)_distribution_$(VERSION)
+BETA_DISTRIBUTION_FILE=$(PROGRAM)_distribution
+STABLE_DISTRIBUTION_FILE=$(PROGRAM)_distribution
+
+
+BETA_SOURCES=$(WEBDIR)/Packages/sources/tcoffee/Beta/
+STABLE_SOURCES=$(WEBDIR)/Packages/sources/tcoffee/Stable/
+ARCHIVE_SOURCES=$(WEBDIR)/Packages/sources/tcoffee/Archives/
+
+
 LATEST_DISTRIBUTION_FILE=$(PROGRAM)_distribution
 DISTRIBUTIONS=$(HOME2)/distributions/
 UNTARED_DISTRIBUTIONS=$(HOME2)/untared_distributions/
@@ -268,6 +279,8 @@ license:
 
 packing:
 	mkdir -p $(UNTARED_DISTRIBUTIONS)
+	rm -rf $(UNTARED_DISTRIBUTIONS)
+	mkdir -p $(UNTARED_DISTRIBUTIONS)	
 	mkdir -p $(DISTRIBUTIONS)
 	mkdir -p $(LATEST_DISTRIBUTIONS)
 	mv $(DISTRIB_DIR) .
@@ -275,9 +288,23 @@ packing:
 	gzip $(DISTRIBUTION_FILE).tar
 	mv $(DISTRIBUTION_FILE)        $(UNTARED_DISTRIBUTIONS)
 	cp $(DISTRIBUTION_FILE).tar.gz $(DISTRIBUTIONS)
-	cp $(DISTRIBUTION_FILE).tar.gz $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz
-	rm $(DISTRIBUTION_FILE).tar.gz
+	mv $(DISTRIBUTION_FILE).tar.gz $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz
 
+
+beta_release:
+	make distribution
+	mkdir -p $(BETA_SOURCES)
+	mkdir -p $(ARCHIVE_SOURCES)
+	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(BETA_SOURCES)/$(BETA_SOURCES_FILE).tar.gz
+	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(ARCHIVE_SOURCES)/$(DISTRIBUTION_FILE).tar.gz
+
+stable_release:
+	make distribution
+	mkdir -p $(STABLE_SOURCES)
+	mkdir -p $(ARCHIVE_SOURCES)	
+	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(STABLE_SOURCES)/$(STABLE_SOURCES_FILE).tar.gz
+	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(ARCHIVE_SOURCES)/$(DISTRIBUTION_FILE).tar.gz		
+	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(ARCHIVE_SOURCES)/$(DISTRIBUTION_FILE).stable.tar.gz		
 
 #
 # Include the main T-Coffee makefile
