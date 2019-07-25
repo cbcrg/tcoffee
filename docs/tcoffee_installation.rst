@@ -9,9 +9,9 @@ Installation
 This chapter describes the installation procedures relevant for a standard use of T-Coffee on the most common operative systems: Unix/Linux and Mac OS. T-Coffee can only be installed on windows using virtual box simulating a Linux environement. We maintain two versions of T-Coffee:
 
 
- 1) the **stable version <http://tcoffee.org/Packages/sources/tcoffee/Stable/>** This is an extensively evaluated version, either linked to the latest paper or benefiting from an important fix- ** recommended **.
- 2) the **beta version <http://tcoffee.org/Packages/sources/tcoffee/Beta/>** is the latest release. It passes all the main tests and is usualy of higher quality that the stable. It is recommended to start installing this version if you experience any issue with the stable.
- 3) the **archives  <http://tcoffee.org/Packages/sources/tcoffee/Stable/>**; all previous releases of T-Coffee. If the one you need is missing please contact us. 
+ 1) the ** `stable version <http://tcoffee.org/Packages/sources/tcoffee/Stable/> `** This is an extensively evaluated version, either linked to the latest paper or benefiting from an important fix- ** recommended **.
+ 2) the ** `beta version <http://tcoffee.org/Packages/sources/tcoffee/Beta/> `** is the latest release. It passes all the main tests and is usualy of higher quality that the stable. It is recommended to start installing this version if you experience any issue with the stable.
+ 3) the ** `archives  <http://tcoffee.org/Packages/sources/tcoffee/Archives/> `** all previous releases of T-Coffee. If the one you need is missing please contact us. 
 
 T-Coffee is a complex package that interacts with many other third party software and/or servers (such as BLAST, see next section). All available versions on the server (starting from version 9.03) will install on your computer all the third party packages and setup the variables required for the different T-Coffee options to run correctly. Whenever the automated installation fails because of unforeseen system specificities, **don't hesitate to contact us**. If the installation was successfull with the exception of some packages, users should install the third party package manually. This documentation gives some useful tips, but users are encouraged to send their feedbacks and share their experiences in order to improve this documentation.
 
@@ -46,7 +46,7 @@ These binaries are not any more supported as such. However, the source installer
 Installation From Source
 ======================== 
 
-In order to run, T-Coffee must have a value for the http_proxy and for the e-mail. In order to do so, you can perform ANY of the following options:
+In order to run, T-Coffee you must firstIf you want to run PSICoffee or Expresso using remote BLAST, you must first set a value for the http_proxy and for the e-mail. In order to do so, you can perform ANY of the following options:
 
 ::
 
@@ -54,9 +54,9 @@ In order to run, T-Coffee must have a value for the http_proxy and for the e-mai
      ##: export http_proxy_4_TCOFFEE='proxy' (or '' if no proxy)
      ##: export EMAIL_4_TCOFFEE='your email'
      
-  2. Modify the file ~/.t_coffee/t_coffee_env
+  2. Modify the file ~/.t_coffee/t_coffee_env weninstallation is over
 
-  3. Add to your command line: 
+  3. When running T-Coffee, add to your command line: 
      ##: t_coffee ... -proxy=<proxy> -email=<email> (if you have a proxy)
      ##: t_coffee ... -proxy -email=<email> (if you don't have a proxy)
 

@@ -38,7 +38,7 @@ ifdef OPENMP
 endif
 
 ifndef LIB_DIR
-LIB_DIR=../../lib
+LIB_DIR=/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/
 endif
 
 SOURCE_DIR=$(PWD)/../../$(EXECUTABLE)/lib
@@ -74,11 +74,11 @@ PERL4MAKEFILE_LIB=$(PERL_LIB_DIR)/perl4makefile
 LICENSES = $(LIB_DIR)/licenses
 
 #
-# make version number condition so that it can specified
+# make version number condition so that it can be specified
 # using env variable otherwise it fallback on legacy mechanism
 #
 ifndef VERSION
-VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl $(LIB_DIR)/version_number.version)
+VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl $(LIB_DIR)/version_number)
 endif
 
 
@@ -88,8 +88,8 @@ LIBRARY=$(PWD)/../../lib/
 
 
 DISTRIBUTION_FILE=$(PROGRAM)_distribution_$(VERSION)
-BETA_DISTRIBUTION_FILE=$(PROGRAM)_distribution
-STABLE_DISTRIBUTION_FILE=$(PROGRAM)_distribution
+BETA_SOURCES_FILE=$(PROGRAM)_distribution
+STABLE_SOURCES_FILE=$(PROGRAM)_distribution
 
 
 BETA_SOURCES=$(WEBDIR)/Packages/sources/tcoffee/Beta/
@@ -297,6 +297,7 @@ beta_release:
 	mkdir -p $(ARCHIVE_SOURCES)
 	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(BETA_SOURCES)/$(BETA_SOURCES_FILE).tar.gz
 	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(ARCHIVE_SOURCES)/$(DISTRIBUTION_FILE).tar.gz
+	$(PERL4MAKEFILE_LIB)/read_program_version.pl $(LIB_DIR)/version_number > $(WEBDIR)/Packages/T-COFFEE.beta_version
 
 stable_release:
 	make distribution
@@ -304,7 +305,8 @@ stable_release:
 	mkdir -p $(ARCHIVE_SOURCES)	
 	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(STABLE_SOURCES)/$(STABLE_SOURCES_FILE).tar.gz
 	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(ARCHIVE_SOURCES)/$(DISTRIBUTION_FILE).tar.gz		
-	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(ARCHIVE_SOURCES)/$(DISTRIBUTION_FILE).stable.tar.gz		
+	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(ARCHIVE_SOURCES)/$(DISTRIBUTION_FILE).stable.tar.gz
+	$(PERL4MAKEFILE_LIB)/read_program_version.pl $(LIB_DIR)/version_number > $(WEBDIR)/Packages/T-COFFEE.version
 
 #
 # Include the main T-Coffee makefile

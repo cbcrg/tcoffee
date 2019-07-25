@@ -6,12 +6,20 @@ use strict;
 #it will return stdout
 
 my $file;
+
+my $versionF;
+my $branchF;
+
 my $version;
+my $branch;
 
 
 
 if( $ARGV[0]){$file=$ARGV[0];}
-else{$file="version_number.version";}
+else{$file="version_number";}
+
+$versionF=$file.".version";
+$branchF=$file.".branch";
 
 
 if ($ENV{'TC_MASTER_NODE'})
@@ -23,22 +31,34 @@ if ($ENV{'TC_MASTER_NODE'})
 	my $l=$_;
 	if ($l=~/\* master (\w+) .*/)
 	  {
-	    $version=$1;
+	    $branch=$1;
 	  }
       }
     close (F);
-    open (F, ">$file");
-    print F "$version";
+    open (F, ">$branchF");
+    print F "$branch";
     close F;
     unlink ("tmp.txt");
   }
-open (F,$file);
 
+
+#get version
+open (F,$versionF);
 while (<F>)
           {
-	  my $line=$_;
-	  chop ($line);
-	  print "$line";
-	  }
+	  $version=$_;
+	  chop ($version);
+	}
 close (F);
 
+
+
+#get branch
+open (F,$branchF);
+while (<F>)
+          {
+	  $branch=$_;
+	  chop ($branch);
+	}
+close (F);
+print "$version\.$branch";
