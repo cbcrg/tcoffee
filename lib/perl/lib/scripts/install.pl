@@ -606,7 +606,7 @@ sub sign_license_ni
 #                                                                               #
 #                                                                               #
 #                                                                               #
-#                   INDIVIDUAL MULTIPLE SEQUENCE ALIGNMNT PACKAGES INSTALLATION #
+#                  INDIVIDUAL MULTIPLE SEQUENCE ALIGNMENT PACKAGES INSTALLATION #
 #                                                                               #
 #                                                                               #
 #                                                                               #
@@ -742,7 +742,7 @@ sub install_source_package
 	print "\n------- unzipping/untaring $name\n";
 	if (($ext =~/z/))
 	  { 
-	    &flush_command ("gunzip $name$ext");
+	    &flush_command ("gunzip -f $name$ext");
 	    
 	  }
 	if (($ext =~/tar/) || ($ext =~/tgz/))
@@ -1197,7 +1197,7 @@ sub install_binary_package
     
     if ($name =~/tar\.gz/)
       {
-	`gunzip  $name`;
+	`gunzip  -f $name`;
 	`tar -xvf $pg.tar`;
 	chdir $pg;
 	`chmod u+x *`;

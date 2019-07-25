@@ -9939,8 +9939,13 @@ char ** standard_initialisation  (char **in_argv, int *in_argc)
   //set special Variables
   
   
-  //There is an issue with the current MAFFT Linux Bundling that requires MAFFT_BINARIES to be set
-  if (getenv ("NO_MAFFT_BINARIES"))
+    
+  if (!getenv ("USE_MAFFT_BINARIES") && getenv ("MAFFT_BINARIES"))
+    {
+      unsetenv("MAFFT_BINARIES");
+    }
+ 
+  else if (getenv ("NO_MAFFT_BINARIES"))
     {   
      add_warning (stderr,"NO_MAFFT_BINARIES is set");
      cputenv ( "MAFFT_BINARIES=%s",""); 

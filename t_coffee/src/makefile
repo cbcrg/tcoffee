@@ -10,6 +10,7 @@ INSTITUTE=Centro de Regulacio Genomica
 EMAIL=cedric.notredame@gmail.com
 SHELL := /bin/bash
 
+
 #
 # make it possibile to define HOME2 externally using environment
 # variable named 'SANDBOX', otherwise fallback on the defult mechanism
@@ -17,7 +18,7 @@ SHELL := /bin/bash
 ifndef HOME2
 HOME2=$(HOME)/Dropbox
 endif
-
+WEBDIR=$(HOME2)/dropBoxShared/Work/tcoffee.org/public_html/
 
 #########################################################
 #                                                       #
@@ -86,10 +87,15 @@ LIBRARY=$(PWD)/../../lib/
 
 
 DISTRIBUTION_FILE=$(PROGRAM)_distribution_$(VERSION)
-LATEST_DISTRIBUTION_FILE=$(PROGRAM)_distribution
-DISTRIBUTIONS=$(HOME2)/distributions/
+BETA_DISTRIBUTION_FILE=$(PROGRAM)_distribution
+STABLE_DISTRIBUTION_FILE=$(PROGRAM)_distribution
+
+BETA_DISTRIBUTIONS=$(WEBDIR)/Packages/sources/tcoffee/Beta/
+STABLE_DISTRIBUTIONS=$(WEBDIR)/Packages/sources/tcoffee/Stable/
+DISTRIBUTIONS=$(WEBDIR)/Packages/sources/tcoffee/Archives/
+
+
 UNTARED_DISTRIBUTIONS=$(HOME2)/untared_distributions/
-LATEST_DISTRIBUTIONS=$(HOME2)/latest_distributions/
 DISTRIB_DIR=$(HOME2)/distributions/$(PROGRAM)_distribution_$(VERSION)
 DISTRIB_DOC=$(DISTRIB_DIR)/doc
 
@@ -272,11 +278,17 @@ packing:
 	mkdir -p $(LATEST_DISTRIBUTIONS)
 	mv $(DISTRIB_DIR) .
 	tar -cvf $(DISTRIBUTION_FILE).tar $(DISTRIBUTION_FILE)
+	rm -rf  $(DISTRIBUTION_FILE)
 	gzip $(DISTRIBUTION_FILE).tar
-	mv $(DISTRIBUTION_FILE)        $(UNTARED_DISTRIBUTIONS)
-	cp $(DISTRIBUTION_FILE).tar.gz $(DISTRIBUTIONS)
-	cp $(DISTRIBUTION_FILE).tar.gz $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz
-	rm $(DISTRIBUTION_FILE).tar.gz
+	cp $(DISTRIBUTION_FILE).tar.gz $(BETA_DISTRIBUTIONS)/$(BETA_DISTRIBUTION_FILE).tar.gz
+	mv $(DISTRIBUTION_FILE).tar.gz $(DISTRIBUTIONS)
+
+release:
+	make packing
+	cp $(DISTRIBUTIONS)/$(DISTRIBUTION_FILE).tar.gz $(STABLE_DISTRIBUTIONS)/$(STABLE_DISTRIBUTION_FILE).tar.gz
+	cp $(DISTRIBUTIONS)/$(DISTRIBUTION_FILE).tar.gz $(DISTRIBUTIONS)/$(DISTRIBUTION_FILE).stable.tar.gz
+
+
 
 
 #

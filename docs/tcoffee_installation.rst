@@ -6,17 +6,17 @@ T-Coffee Installation
 ************
 Installation
 ************
-This chapter describes the installation procedures relevant for a standard use of T-Coffee on the most common operative systems: Unix/Linux and Mac OS. T-Coffee cannot be installed on any Windows version without using a Unix-like environment (i.e. Cygwin) or a Linux virtualbox. The procedure is quite easy using the automated installer provided on the T-Coffee `web server <http://tcoffee.crg.cat/apps/tcoffee/index.html>`_. When downloading T-Coffee package, several options are possible: 
+This chapter describes the installation procedures relevant for a standard use of T-Coffee on the most common operative systems: Unix/Linux and Mac OS. T-Coffee can only be installed on windows using virtual box simulating a Linux environement. We maintain two versions of T-Coffee:
 
- 1) the **latest stable version** ("recommended"); this is the same version as the one used on the web server. Then download the installer corresponding to your system and follow the corresponding procedure described hereafter.
- 2) the **latest beta version** ("under testing"); then download the installer corresponding to your system and follow the corresponding procedure described hereafter.
- 3) the **archives & older versions** ("deprecated"); in that case the current installation procedure won't work...You shouldn't use older versions but in case you need to reproduce old results; don't hesitate to contact us !
+
+ 1) the **stable version** ("recommended") This is an extensively evaluated version, either linked to the latest paper or benefiting from an important fix.
+ 2) the **beta version**  his is the latest release. It passes all the main tests
+ 3) the **archives & older versions**; all previous releases of T-Coffee. If the one you need is missing please contact us. 
 
 T-Coffee is a complex package that interacts with many other third party software and/or servers (such as BLAST, see next section). All available versions on the server (starting from version 9.03) will install on your computer all the third party packages and setup the variables required for the different T-Coffee options to run correctly. Whenever the automated installation fails because of unforeseen system specificities, **don't hesitate to contact us**. If the installation was successfull with the exception of some packages, users should install the third party package manually. This documentation gives some useful tips, but users are encouraged to send their feedbacks and share their experiences in order to improve this documentation.
 
-Unix/Linux
-==========
-You need to have gcc, g77, CPAN, an internet connection and the root password. You also need the following perl modules, LWP and XML, to use the services provided by the `EBI <http://www.ebi.ac.uk/Tools/webservices/tutorials/02_rest>`_, then follow this procedure:
+Unix/Linux Binaries
+===================
 
 ::
 
@@ -35,14 +35,17 @@ You need to have gcc, g77, CPAN, an internet connection and the root password. Y
   
   6. Type the following command to verify the installation was successful:
      $$: t_coffee -version
- 
 
-Mac OS X
-========
-The Macosx version is not currentley maintained and the package must be installed from source, as described in the next section. An alternative is to run the Linux binaries in a virtula machine on your Mac. 
+
+MacOS Binaries
+==============
+
+These binaries are not any more supported as such. However, the source installer - see below - will automatically retrive pre-compiled MacOS binaries if compilation fails on your system. 
+
 
 Installation From Source
-========================
+======================== 
+
 In order to run, T-Coffee must have a value for the http_proxy and for the e-mail. In order to do so, you can perform ANY of the following options:
 
 ::
@@ -52,33 +55,57 @@ In order to run, T-Coffee must have a value for the http_proxy and for the e-mai
      ##: export EMAIL_4_TCOFFEE='your email'
      
   2. Modify the file ~/.t_coffee/t_coffee_env
-  
+
   3. Add to your command line: 
      ##: t_coffee ... -proxy=<proxy> -email=<email> (if you have a proxy)
      ##: t_coffee ... -proxy -email=<email> (if you don't have a proxy)
 
 
-Compiling from source
-=====================
-T-Coffee compilation requires the following tools installed on your system **make**, **gcc-c++**, **g77**, **Perl** and **CPAN**. Clone the git repository on your computer and follow the procedure. At the end, the binary will be automatically copied to the path specified by the environment variable **$USER_BIN** (check that it exists before run the make command). 
+
+The following procedure shows howto install T-Coffee from the pre-packages source distribution. This procedure is recommanded because the version of T-Coffee available there is guarranteed to have passed a set of pre-specified tests. 
 
 ::
 
-  ::
+  1. Download the desired installer:
+     http://tcoffee.org/Packages/sources/tcoffee/Stable/T-COFFEE_distribution.tar.gz
+     http://tcoffee.org/Packages/sources/tcoffee/Beta/T-COFFEE_distribution.tar.gz
+     http://tcoffee.org/Packages/sources/tcoffee/Archives/T-COFFEE_distribution_<branchID>.tar.gz
+     
 
-  ##: get the latest version from https://github.com/cbcrg/tcoffee
-  ##: cd tcoffee-master/t_coffee/src
-  ##: make t_coffee
-  ##: mv t_coffee <Binary Directory>
+  2. untar the file
+     ##: tar -xvf chmod +x T-COFFEE_installer_"version_x".bin
 
-In order to use T-Coffee you must also have the following pacaked installed
+  3. go into the distribution and lauch 
+     ##: ./install tcoffee
 
-::
+  4. as an alternative you can install any of the T-Coffee mode you are interested in. Get the lis with:
+     ##: ./install 
   
-  ## Mafft:	 	https://mafft.cbrc.jp/alignment/software/
-  ## ClustalOmega:      http://www.clustal.org/omega/#Download
+  5. or you can install all the modes at once - the required packages will be installed automatically
+     ##: ./install all
+  
+  6. When you are done you will need to make this installation permanent by adding the following lines *at the bottom* of your configuration file (typically .bashrc)
+     ##: export PATH=<your home>/.t_coffee/plugins/macosx:$PATH
 
-    
+You can also clone the the github repository. https://github.com/cbcrg/tcoffee. In this case you will be using the latest committed distribution that may be unstable. 
+
+::
+
+  1. In the repository g into:
+     ##: cd tcoffee/t_coffee/src
+
+  2. launch
+     ##: ./install tcoffee
+
+  3. as an alternative you can install any of the T-Coffee mode you are interested in. Get the lis with:
+     ##: ./install 
+  
+  4. or you can install all the modes at once - the required packages will be installed automatically
+     ##: ./install all
+  
+  5. When you are done you will need to make this installation permanent by adding the following lines *at the bottom* of your configuration file (typically .bashrc)
+     ##: export PATH=<your home>/.t_coffee/plugins/macosx:$PATH
+
 
 ******************
 BLAST and T-Coffee

@@ -200,8 +200,6 @@ quote="'"'"
 
 SCRIPT_LIB_OBJECTS=\
 	msa2bootstrap.pl\
-	t_coffee_dpa\
-	t_coffee_dpa2\
 	tc_generic_method.pl\
 	rnapdb2protpdb.pl\
 	generic_method.tc_method\
@@ -568,5 +566,15 @@ t_coffee: $(HEADERS) $(OBJECTS)
 .PHONY: clean
 
 clean:
-	-rm `ls * | grep -v makefile`
+	rm *.o_*
+	rm *.script
+	mv install.pl install
+	rm *.pl
+	rm *.h
+	rm *.tc_method
+	rm code_list
+	rm extract_from_pdb
+	rm -rf folders
+
+
 

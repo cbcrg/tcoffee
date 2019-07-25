@@ -3,7 +3,7 @@ PG t_coffee type		sequence_multiple_aligner
 PG t_coffee ADDRESS		http://www.tcoffee.org
 PG t_coffee language		C++
 PG t_coffee language2		CXX
-PG t_coffee source		http://www.tcoffee.org/Packages/Stable/Latest/T-COFFEE_distribution.tar.gz
+PG t_coffee source		http://www.tcoffee.org/Packages/sources/tcoffee/stable/T-COFFEE_distribution.tar.gz
 PG t_coffee update_action	always
 PG t_coffee mode		tcoffee,mcoffee,rcoffee,expresso,3dcoffee
 
