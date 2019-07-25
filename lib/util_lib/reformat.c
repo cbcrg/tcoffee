@@ -1506,7 +1506,7 @@ Alignment * main_read_aln ( char *name, Alignment *A)
 	 }
        else if      (format && (strm(format, "saga_aln" ) ||strm(format, "clustal_aln")||strm(format, "t_coffee_aln" ) || strm (format, "msf_aln")))
 	 {
-	   char*tmp_name1=vtmpnam (NULL);
+	   char*tmp_name1=vtmpnam (NULL); 
 	   char*tmp_name2=vtmpnam (NULL);
 	   
 	   printf_system ( "seq2name_seq.pl %s > %s",name, tmp_name1);
