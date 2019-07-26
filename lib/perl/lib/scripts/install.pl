@@ -38,7 +38,7 @@ our $TCPLUGINS;
 our $PLUGINS_DIR="";
 our $INSTALL_DIR="";
 our $email;
-
+our $recompile;
 
 ###########   DEFINITIONS ##############################
 #
@@ -89,6 +89,8 @@ if (($cl=~/-h/) ||($cl=~/-H/) )
     print "!!!!!!! ./install [target:package|mode|] [-update|-force|-exec=dir|-dis=dir|-root|-tclinkdb=file|-] [CC=|FCC=|CXX=|CFLAGS=|CXXFLAGS=]\n";
     print "!!!!!!! ./install clean    [removes all executables]\n";
     print "!!!!!!! ./install [optional:target] -update               [updates package already installed]\n";
+    print "!!!!!!! ./install [optional:target] -recompile            [forces the recompilation of T-Coffee]\n";
+
     print "!!!!!!! ./install [optional:target] -force                [Forces recompilation over everything]\n";
     
     print "!!!!!!! ./install [optional:target] -root                 [You are running as root]\n";
@@ -132,7 +134,12 @@ our ($ROOT_INSTALL, $NO_QUESTION, $default_update_action,$BINARIES_ONLY,$force, 
 if ( ($cl=~/-root/)){$ROOT_INSTALL=1;}
 if ( ($cl=~/-no_question/)){$NO_QUESTION=1;}
 if ( ($cl=~/-update/)){$default_update_action="update";}
+if ( ($cl=~/-recompile/)){$recompile=1;}
+
+
+#By defualt the program will attempt to install packages from binaries maintained on www.tcoffee.org
 $BINARIES_ONLY=1;
+
 if ( ($cl=~/-nobinaries/)){$BINARIES_ONLY=0;}
 if ( ($cl=~/-force/)){$force=1;$default_update_action="update"}
 if ( ($cl=~/-exec=\s*(\S+)/)){$INSTALL_DIR=$1;}
@@ -691,7 +698,7 @@ sub install_source_package
     my ($report, $download, $arguments, $language, $address, $name, $ext, $main_dir, $distrib);
     my $wget_tmp="$TMP/wget.tmp";
     my (@fl);
-    if ( -e "$BIN/$pg" || -e "$BIN/$pg.exe"){return 1;}
+    if ( $default_update_action ne "update" && (-e "$BIN/$pg" || -e "$BIN/$pg.exe" )  ){return 1;}
     
     #
     # check if the module exists in the repository cache 
@@ -1123,20 +1130,34 @@ sub install_t_coffee
   {
     my ($pg)=(@_);
     my ($report,$cflags, $arguments, $language, $compiler) ;
-    #1-Install T-Coffee
-    chdir "t_coffee_source";
-    &flush_command ("make clean");
-    print "\n------- Compiling T-Coffee\n";
-    $language=$PG{$pg} {language2};
-    $arguments=$PG{$language}{arguments};
 
-    if ( $CC ne ""){
-      print "make -i $arguments t_coffee \n";
-      &flush_command ("make -i $arguments t_coffee");
-    }
-    &check_cp ($pg, $BIN);
-    
-    chdir $CDIR;
+
+    #check if the binary is already there
+    if ( -e "./bin/$OS/t_coffee" && !$recompile)
+     { 
+       print "\n------- Installing  T-Coffee from Pre-Compiled $OS binary\n";
+       print "\n------- If you want to trigger a fresh compilation use -recompile\n";
+       
+       &check_cp ("./bin/$OS/t_coffee", $BIN);
+     }
+    else
+      {
+	
+	#1-Install T-Coffee
+	chdir "t_coffee_source";
+	&flush_command ("make clean");
+	print "\n------- Compiling T-Coffee\n";
+	$language=$PG{$pg} {language2};
+	$arguments=$PG{$language}{arguments};
+	
+	if ( $CC ne ""){
+	  print "make -i $arguments t_coffee \n";
+	  &flush_command ("make -i $arguments t_coffee");
+	}
+	&check_cp ($pg, $BIN);
+	
+	chdir $CDIR;
+      }
     return &pg_is_installed ($pg, $BIN);
   }
 sub install_TMalign

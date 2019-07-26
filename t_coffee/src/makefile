@@ -184,11 +184,14 @@ general_distribution:
 	-rm $(CODE_LIST);
 	mkdir -p $(DISTRIB_DIR)
 	mkdir -p $(DISTRIB_DIR)/bin
+	mkdir -p $(DISTRIB_DIR)/bin/$(OSNAME)
+	mkdir -p $(DISTRIB_DIR)/bin/macosx	
 	mkdir -p $(DISTRIB_DOC)
 	mkdir -p $(DISTRIB_DIR)/$(EXECUTABLE)_source
 	mkdir -p $(DISTRIB_DIR)/reference_test
 	echo '' > $(DISTRIB_DIR)/install
 	make -i VERSION=$(VERSION) CC=cc code
+	cp $(EXECUTABLE) $(DISTRIB_DIR)/bin/$(OSNAME)
 	make -i VERSION=$(VERSION) CC=cc license
 
 library_distribution:
