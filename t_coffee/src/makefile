@@ -38,7 +38,8 @@ ifdef OPENMP
 endif
 
 ifndef LIB_DIR
-LIB_DIR=/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/
+#LIB_DIR=/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/
+LIB_DIR=$(CURDIR)/../../lib
 endif
 
 SOURCE_DIR=$(PWD)/../../$(EXECUTABLE)/lib
