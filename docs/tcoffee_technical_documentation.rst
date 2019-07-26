@@ -1237,3 +1237,14 @@ To removed unnecessary files, the following command will cause all the files in 
   ##: ./lib/perl/lib/perl4makefile/doc2test.pl -clean
 
 
+Making a new release
+====================
+The Beta and Stable releases can be done with the makefile, from the t_coffee/src/ directory
+
+::
+
+  1-git commit -a -m 'what you did'
+  2-make beta_release OR make stable_release -- This will populate the source directories
+  3-git push
+
+
