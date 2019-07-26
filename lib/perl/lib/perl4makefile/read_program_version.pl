@@ -61,4 +61,4 @@ while (<F>)
 	  chop ($branch);
 	}
 close (F);
-print "$version\.$branch";
+print "$branch";
