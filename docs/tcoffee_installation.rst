@@ -37,32 +37,16 @@ Unix/Linux Binaries
      $$: t_coffee -version
 
 
-MacOS Binaries
-==============
+MacOS Binaries - Deprecated
+===========================
 
 These binaries are not any more supported as such. However, the source installer - see below - will automatically retrive pre-compiled MacOS binaries if compilation fails on your system. 
 
 
-Installation From Source
-======================== 
+Installation From Source - Recommended
+====================================== 
 
-In order to run, T-Coffee you must firstIf you want to run PSICoffee or Expresso using remote BLAST, you must first set a value for the http_proxy and for the e-mail. In order to do so, you can perform ANY of the following options:
-
-::
-
-  1. Export the following values:
-     ##: export http_proxy_4_TCOFFEE='proxy' (or '' if no proxy)
-     ##: export EMAIL_4_TCOFFEE='your email'
-     
-  2. Modify the file ~/.t_coffee/t_coffee_env weninstallation is over
-
-  3. When running T-Coffee, add to your command line: 
-     ##: t_coffee ... -proxy=<proxy> -email=<email> (if you have a proxy)
-     ##: t_coffee ... -proxy -email=<email> (if you don't have a proxy)
-
-
-
-The following procedure shows howto install T-Coffee from the pre-packages source distribution. This procedure is recommanded because the version of T-Coffee available there is guarranteed to have passed a set of pre-specified tests. 
+The following procedure shows howto install T-Coffee from the pre-packages source distribution. This procedure is recommanded because the version of T-Coffee available there is guarranteed to have passed a set of pre-specified tests. By contrast the Github clone is the live version. It may not be stabel or functional and is only recommended for development purposes.
 
 ::
 
@@ -70,41 +54,35 @@ The following procedure shows howto install T-Coffee from the pre-packages sourc
      http://tcoffee.org/Packages/sources/tcoffee/Stable/T-COFFEE_distribution.tar.gz
      http://tcoffee.org/Packages/sources/tcoffee/Beta/T-COFFEE_distribution.tar.gz
      http://tcoffee.org/Packages/sources/tcoffee/Archives/T-COFFEE_distribution_<branchID>.tar.gz
-     
+     https://github.com/cbcrg/tcoffee
 
-  2. untar the file
-     ##: tar -xvf chmod +x T-COFFEE_installer_"version_x".bin
-
-  3. go into the distribution and lauch 
-     ##: ./install tcoffee
-
-  4. as an alternative you can install any of the T-Coffee mode you are interested in. Get the lis with:
-     ##: ./install 
+  2a. untar the file
+     ##: tar -xvf T-COFFEE_distribution.tar.gz
+     ##: cd  T-COFFEE_distribution
   
-  5. or you can install all the modes at once - the required packages will be installed automatically
+  2b. clone or unzip the github repo
+     ##: cd t_coffee/src
+
+
+  3a. Launch the installer
+     ##:  ./install tcoffee
+     
+  
+  3b. If you want to remote services (psiblast, expresso). You must enter a proxy value and a valid e-mail. These values will be stored in <your home>/.t_coffee/.t_coffee_env and can be edited at any time. 
+     ##: ./install tcoffee -email=<your email> -proxy=<your proxy>
+    
+
+  4. as an alternative you can install any of the T-Coffee mode you are interested in. Get the list with:
+     ##: ./install 
+     ##: ./install expresso
      ##: ./install all
+  
+  5. By default, the installer will not re-install any component already available on your system. If you want to update you must specify
+     ##: ./install <any component> -update
   
   6. When you are done you will need to make this installation permanent by adding the following lines *at the bottom* of your configuration file (typically .bashrc)
      ##: export PATH=<your home>/.t_coffee/plugins/macosx:$PATH
 
-You can also clone the the github repository. https://github.com/cbcrg/tcoffee. In this case you will be using the latest committed distribution that may be unstable. 
-
-::
-
-  1. In the repository g into:
-     ##: cd tcoffee/t_coffee/src
-
-  2. launch
-     ##: ./install tcoffee
-
-  3. as an alternative you can install any of the T-Coffee mode you are interested in. Get the lis with:
-     ##: ./install 
-  
-  4. or you can install all the modes at once - the required packages will be installed automatically
-     ##: ./install all
-  
-  5. When you are done you will need to make this installation permanent by adding the following lines *at the bottom* of your configuration file (typically .bashrc)
-     ##: export PATH=<your home>/.t_coffee/plugins/macosx:$PATH
 
 
 ******************
@@ -122,7 +100,7 @@ The most accurate modes of T-Coffee scan the databases for templates that they u
  1) **structures**, that can be found by a BLASTP against the PDB database.
  2) **profiles**, constructed using BLASTP or PSI-BLAST against nr or UniProt. 
  
-Don't worry, these templates are automatically built by T-Coffee when using one of the following modes:
+These templates are automatically built by T-Coffee when using one of the following modes:
 
 ::
 

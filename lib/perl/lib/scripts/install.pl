@@ -37,6 +37,8 @@ our $TCMETHODS;
 our $TCPLUGINS;
 our $PLUGINS_DIR="";
 our $INSTALL_DIR="";
+our $email;
+
 
 ###########   DEFINITIONS ##############################
 #
@@ -64,7 +66,6 @@ my @smode=("all", "clean", "install");
 
 ########################################################
 &initialize_PG();
-
 #Parse The Command Line
 my $cl=join( " ", @ARGV);
 if ($#ARGV==-1 || ($cl=~/-h/) ||($cl=~/-H/) )
@@ -96,8 +97,11 @@ if (($cl=~/-h/) ||($cl=~/-H/) )
     print "!!!!!!! ./install [optional:target] -tclinkdb=foo|update  [file containing all the packages to be installed]\n";
     print "!!!!!!! ./install [optional:target] -clean                [clean everything]\n";
     print "!!!!!!! ./install [optional:target] -plugins              [plugins directory]\n";
-    print "!!!!!!! ./install [optional:target] -tcdir=/foor/bar      [base path where T-Coffee will be installed]\n";
+    print "!!!!!!! ./install [optional:target] -tcdir=/foor/bar      [base path where T-Coffee will be installed - default ~/.t_coffee]\n";
     print "!!!!!!! ./install [optional:target] -repo=/path/to/repo   [binaries repository root directory]\n";
+    print "!!!!!!! ./install [optional:target] -email=<your email>   [needed for remote BLAST]\n";
+    print "!!!!!!! ./install [optional:target] -proxy=<proxy>   [may be needed to access remote services]\n";
+    
     print "!!!!!!! mode:";
     foreach $m (keys(%MODE)){print "$m ";}
     print "\n";
@@ -140,6 +144,10 @@ if ( ($cl=~/-proxy=\s*(\S+)/)){$proxy=$1;}
 if ( ($cl=~/-clean/)){$clean=1;}
 if ( ($cl=~/-repo=\s*(\S+)/)){ $REPO_ROOT=$1; }
 if ( ($cl=~/-tcdir=\s*(\S+)/)){ $TCDIR=$1; }
+
+if ( ($cl=~/-email=\s*(\S+)/)){$email=$1;}
+
+
 #automated update
 if ($tclinkdb){&update_tclinkdb ($tclinkdb);}
 
@@ -189,9 +197,15 @@ if (-d "mcoffee"){`cp mcoffee/* $TCM`;}
 
 
 #prepare the environement
-our $ENV_FILE="$TCDIR/t_coffee_env";
+our $ENV_FILE="$TCDIR/.t_coffee_env";
+unlink ($ENV_FILE);
+&add2env_file ($ENV_FILE,"EMAIL_4_TCOFFEE", $email);
+&add2env_file ($ENV_FILE,"http_proxy_4_TCOFFEE", $proxy);
 &env_file2putenv ($ENV_FILE);
 &set_proxy($proxy);
+
+
+
 my ($target, $p, $r);
 $target=$p;
 
@@ -1477,7 +1491,30 @@ sub supported_os
     my ($os)=(@_[0]);
     return $SUPPORTED_OS{$os};
   }
-    
+
+sub add2env_file
+  {
+    my ($env, $var, $value)=(@_);
+    my $F = new FileHandle;
+    my $t;
+    if (!$value){return;}
+    #make sure new variables do not get duplicated
+    if ( -e $env)
+      {
+	open ($F, "$env");
+	while (<$F>)
+	  {
+	    my $line=$_;
+	    if (!($line=~/$var/)){$t.=$line;}
+	  }
+	close ($F);
+      }
+    $t.="$var=$value\n";
+    open ($F, ">$env");
+    print $F "$t";
+    $ENV{$var}=$value;
+    close ($F);
+  }    
     
 ################################################################################
 #                                                                               #
