@@ -52,28 +52,13 @@
             <scope>user</scope>
             <value>${installdir}</value>
         </addEnvironmentVariable>
-
-	<!--  Set CACHE_4_TCOFFEE environment variable -->
+	
+        <!-- T-Coffee plugins  -->
 	<addEnvironmentVariable>
-            <name>CACHE_4_TCOFFEE</name>
+            <name>PLUGINS_4_TCOFFEE</name>
             <scope>user</scope>
-            <value>${cachedir}/</value>
+            <value>${installdir}/plugins/${platforms}</value>
         </addEnvironmentVariable>
-
-	<!--  Set TMP_4_TCOFFEE environment variable -->
-	<addEnvironmentVariable>
-            <name>TMP_4_TCOFFEE</name>
-            <scope>user</scope>
-            <value>$DIR_4_TCOFFEE/tmp/</value>
-        </addEnvironmentVariable>
-
-	<!--  Set LOCKDIR_4_TCOFFEE environment variable -->
-	<addEnvironmentVariable>
-            <name>LOCKDIR_4_TCOFFEE</name>
-            <scope>user</scope>
-            <value>$DIR_4_TCOFFEE/lck/</value>
-        </addEnvironmentVariable>
-        
 
 	<!--  Append PERL5LIB if already exists -->
 	<addEnvironmentVariable>
@@ -83,12 +68,6 @@
         </addEnvironmentVariable>
 
 
-	<!--  Add EMAIL_4_TCOFFEE environment variable -->
-	<addEnvironmentVariable>
-            <name>EMAIL_4_TCOFFEE</name>
-            <scope>user</scope>
-            <value>${user_email}</value>
-        </addEnvironmentVariable>
 
 	<!--  Change the application PATH  -->
 	<addDirectoryToPath>
@@ -181,7 +160,7 @@
             <description>Installer.Parameter.installdir.description</description>
             <explanation>Installer.Parameter.installdir.explanation</explanation>
             <value></value>
-            <default>${user_home_directory}/${product_shortname}/${product_version}</default>
+            <default>${user_home_directory}/.t_coffee</default>
             <allowEmptyValue>0</allowEmptyValue>
             <cliOptionName>prefix</cliOptionName>
             <mustBeWritable>1</mustBeWritable>
