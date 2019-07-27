@@ -1,1 +1,1 @@
-* master 6c7310a fixed makefile and version numbering
+* master 588dd34 fixed a distribution bug on the location of version_number.version
