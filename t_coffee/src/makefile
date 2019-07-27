@@ -314,36 +314,25 @@ github:
 beta_release:
 	make github VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -beta -print) release_type='beta'
 	make distribution VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print)
-	make finish_beta VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print)
-
-finish_beta:
-	mkdir -p $(BETA_SOURCES)
-	mkdir -p $(ARCHIVE_SOURCES)
-	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(BETA_SOURCES)/$(BETA_SOURCES_FILE).tar.gz
-	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(ARCHIVE_SOURCES)/$(PROGRAM)_distribution_$(VERSION).tar.gz
+	make finish_release VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print) target_dir=$(BETA_SOURCES) target_file=$(BETA_SOURCES_FILE)
 
 stable_release:
-	make github release_type='stable' vversion=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -stable -print)
-	make distribution
-	N_VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print)
-	N_DISTRIBUTION_FILE=$(PROGRAM)_distribution_$(N_VERSION)
-
-	mkdir -p $(STABLE_SOURCES)
-	mkdir -p $(ARCHIVE_SOURCES)
-	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(STABLE_SOURCES)/$(STABLE_SOURCES_FILE).tar.gz
-	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(ARCHIVE_SOURCES)/$(N_DISTRIBUTION_FILE).tar.gz		
-	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(ARCHIVE_SOURCES)/$(N_DISTRIBUTION_FILE).stable.tar.gz
+	make github VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -stable -print) release_type='stable'
+	make distribution VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print)
+	make finish_release VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print) target_dir=$(STABLE_SOURCES) target_file=$(STABLE_SOURCES_FILE)
 
 major_release:
-	make github release_type=major
-	VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print)
-	DISTRIBUTION_FILE=$(PROGRAM)_distribution_$(VERSION)
-	make distribution
-	mkdir -p $(STABLE_SOURCES)
-	mkdir -p $(ARCHIVE_SOURCES)	
-	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(STABLE_SOURCES)/$(STABLE_SOURCES_FILE).tar.gz
-	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(ARCHIVE_SOURCES)/$(DISTRIBUTION_FILE).tar.gz		
-	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(ARCHIVE_SOURCES)/$(DISTRIBUTION_FILE).stable.tar.gz
+	make github VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -major -print) release_type='major'
+	make distribution VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print)		
+	make finish_release VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print) target_dir=$(STABLE_SOURCES) target_file=$(STABLE_SOURCES_FILE)
+
+finish_release:
+	mkdir -p $(target_dir)
+	mkdir -p $(ARCHIVE_SOURCES)
+	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(target_dir)/$(target_file).tar.gz
+	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(ARCHIVE_SOURCES)/$(PROGRAM)_distribution_$(VERSION).tar.gz
+
+
 
 
 
