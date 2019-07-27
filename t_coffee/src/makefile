@@ -79,7 +79,7 @@ LICENSES = $(LIB_DIR)/licenses
 # using env variable otherwise it fallback on legacy mechanism
 #
 ifndef VERSION
-VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(LIB_DIR)/version)
+VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(LIB_DIR)/version -print)
 endif
 
 
@@ -296,7 +296,7 @@ packing:
 
 
 github:
-	git commit -a -m $(MM)
+	git commit -a -m '$(MM)'
 	git push
 
 beta_release:

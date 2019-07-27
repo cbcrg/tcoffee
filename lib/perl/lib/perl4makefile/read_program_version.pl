@@ -19,10 +19,16 @@ my $github;
 my $version_number;
 
 my $path;
+my $pr;
+
 my $cl=join( " ", @ARGV);
 
 if ( ($cl=~/-path=\s*(\S+)/)){$path=$1;}
 else {$path="./";}
+
+if ( ($cl=~/-print=\s*(\S+)/)){$pr=1;}
+else {$pr=0;}
+
 
 $build_versionF=$path."/build_version.version";
 $minor_versionF=$path."/minor_version.version";
@@ -59,7 +65,8 @@ $github=github_file2value($githubF);
 
 $version_number="$major_version\.$minor_version\.$build_version\.$github";
 value2file($version_number, $version_numberF);
-print "$version_number\n";
+
+if ($pr){print "$version_number\n";}
 
 
 
