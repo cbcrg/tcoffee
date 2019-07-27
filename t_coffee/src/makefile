@@ -317,7 +317,7 @@ beta_release:
 	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(ARCHIVE_SOURCES)/$(DISTRIBUTION_FILE).tar.gz
 
 stable_release:
-	VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print)
+	VERSION = $(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print)
 	make github release_type='stable'
 	echo V=$(VERSION)
 	echo $(DISTRIBUTION_FILE)
