@@ -47,8 +47,9 @@ fi
 #
 # Define the VERSION number 
 #
+#CN:28/07/19: rmoved the $GIT_revision, as now generated ny makefile. export VERSION="`cat $WORKSPACE/tcoffee/lib/version/version_number.version`.$GIT_REVISION"
 if [[ (-z $VERSION) || ($VERSION == auto) ]]; then 
-	export VERSION="`cat $WORKSPACE/tcoffee/lib/version_number.version`.$GIT_REVISION"
+	export VERSION="`cat $WORKSPACE/tcoffee/lib/version_number.version`"
 fi
 
 #
