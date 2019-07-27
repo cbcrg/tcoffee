@@ -26,7 +26,7 @@ my $cl=join( " ", @ARGV);
 if ( ($cl=~/-path=\s*(\S+)/)){$path=$1;}
 else {$path="./";}
 
-if ( ($cl=~/-print=\s*(\S+)/)){$pr=1;}
+if ( ($cl=~/-print/)){$pr=1;}
 else {$pr=0;}
 
 
