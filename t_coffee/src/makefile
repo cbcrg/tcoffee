@@ -83,7 +83,7 @@ LICENSES = $(LIB_DIR)/licenses
 # using env variable otherwise it fallback on legacy mechanism
 #
 ifndef VERSION
-VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print)
+#VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print)
 endif
 
 
