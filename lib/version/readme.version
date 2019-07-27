@@ -1,5 +1,6 @@
-minor_version.version : 13.xxx.aft3df: xxx gets incremented by 1 each time a beta release or a stable release takes place
-major_version.version : yyy.00.aft3df: yyy gets incremented by 1 each time a major release takes place 
-github.version        : 13.01.zzzzzz : zzzz takes the value provided by github, just after a commit -a
-version:number.version: 13.01.aft3df : final version tagging all the output of the release
+build_version.version : 13.01.xx.aft3df : xx incremented by 1 for each beta release
+minor_version.version : 13.xx.02.aft3df : xx incremented by 1 for each stable release
+major_version.version : xx.01.02.aft3df : xx incremented by 1 for each major release
+github.version        : 13.01.02.xxxxx  :  xx is updated after each github commit
+version:number.version: 13.01.02.aft3df : <major>.<minor>.<build>.<branch>
 

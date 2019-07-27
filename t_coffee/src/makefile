@@ -79,7 +79,7 @@ LICENSES = $(LIB_DIR)/licenses
 # using env variable otherwise it fallback on legacy mechanism
 #
 ifndef VERSION
-VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl $(LIB_DIR)/version_number)
+VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(LIB_DIR)/version)
 endif
 
 
@@ -295,7 +295,13 @@ packing:
 	mv $(DISTRIBUTION_FILE).tar.gz $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz
 
 
+github:
+	git commit -a -m $(MM)
+	git push
+
 beta_release:
+	make github
+	$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(LIB_DIR)/version) -beta
 	make distribution
 	mkdir -p $(BETA_SOURCES)
 	mkdir -p $(ARCHIVE_SOURCES)
@@ -304,6 +310,8 @@ beta_release:
 	$(PERL4MAKEFILE_LIB)/read_program_version.pl $(LIB_DIR)/version_number > $(WEBDIR)/Packages/T-COFFEE.beta_version
 
 stable_release:
+	make github
+	$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(LIB_DIR)/version) -stable
 	make distribution
 	mkdir -p $(STABLE_SOURCES)
 	mkdir -p $(ARCHIVE_SOURCES)	
@@ -311,6 +319,19 @@ stable_release:
 	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(ARCHIVE_SOURCES)/$(DISTRIBUTION_FILE).tar.gz		
 	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(ARCHIVE_SOURCES)/$(DISTRIBUTION_FILE).stable.tar.gz
 	$(PERL4MAKEFILE_LIB)/read_program_version.pl $(LIB_DIR)/version_number > $(WEBDIR)/Packages/T-COFFEE.version
+major_release:
+	make github
+	$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(LIB_DIR)/version) -major
+	make distribution
+	mkdir -p $(STABLE_SOURCES)
+	mkdir -p $(ARCHIVE_SOURCES)	
+	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(STABLE_SOURCES)/$(STABLE_SOURCES_FILE).tar.gz
+	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(ARCHIVE_SOURCES)/$(DISTRIBUTION_FILE).tar.gz		
+	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(ARCHIVE_SOURCES)/$(DISTRIBUTION_FILE).stable.tar.gz
+	$(PERL4MAKEFILE_LIB)/read_program_version.pl $(LIB_DIR)/version_number > $(WEBDIR)/Packages/T-COFFEE.version
+
+
+
 
 #
 # Include the main T-Coffee makefile
