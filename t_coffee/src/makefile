@@ -286,8 +286,6 @@ license:
 #   $(PERL4MAKEFILE_LIB)/tclinkdb2header.pl -infile=$(SCRIPT_LIB)/install.pl -mode=Perl -db=$(KO_LIB)/tclinkdb.txt > install
 
 packing:
-	echo $(DISTRIBUTION_FILE)	
-	shshshs
 	mkdir -p $(UNTARED_DISTRIBUTIONS)
 	rm -rf $(UNTARED_DISTRIBUTIONS)
 	mkdir -p $(UNTARED_DISTRIBUTIONS)	
@@ -322,7 +320,9 @@ stable_release:
 	make github release_type=stable
 	make distribution
 	mkdir -p $(STABLE_SOURCES)
-	mkdir -p $(ARCHIVE_SOURCES)	
+	mkdir -p $(ARCHIVE_SOURCES)
+	echo $(DISTRIBUTION_FILE)	
+	shshshs
 	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(STABLE_SOURCES)/$(STABLE_SOURCES_FILE).tar.gz
 	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(ARCHIVE_SOURCES)/$(DISTRIBUTION_FILE).tar.gz		
 	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(ARCHIVE_SOURCES)/$(DISTRIBUTION_FILE).stable.tar.gz
