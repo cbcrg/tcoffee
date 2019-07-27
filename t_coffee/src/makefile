@@ -319,6 +319,9 @@ beta_release:
 stable_release:
 	make github release_type='stable'
 	make distribution
+	N_VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print)
+	N_DISTRIBUTION_FILE=$(PROGRAM)_distribution_$(N_VERSION)
+
 	mkdir -p $(STABLE_SOURCES)
 	mkdir -p $(ARCHIVE_SOURCES)
 	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(STABLE_SOURCES)/$(STABLE_SOURCES_FILE).tar.gz
