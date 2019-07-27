@@ -316,7 +316,7 @@ beta_release:
 
 stable_release:
 	make github release_type="stable"
-	$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -stable -print)> $(WEB_DIR)/Packages/T-COFFEE.version.stable)
+	$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -stable -print> $(WEB_DIR)/Packages/T-COFFEE.version.stable)
 	make distribution
 	mkdir -p $(STABLE_SOURCES)
 	mkdir -p $(ARCHIVE_SOURCES)	
