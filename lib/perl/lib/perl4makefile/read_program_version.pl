@@ -34,7 +34,7 @@ $build_versionF=$path."/build_version.version";
 $minor_versionF=$path."/minor_version.version";
 $major_versionF=$path."/major_version.version";
 $githubF=$path."/github.version";
-$version_number=$path."/version_number.version";
+$version_numberF=$path."/version_number.version";
 
 
 if (!-e $build_versionF){print STDERR "build_version File [$build_versionF] could not be opened [FATAL:read_program_version.pl]\n";die;}
