@@ -17,7 +17,7 @@ SHELL := /bin/bash
 ifndef HOME2
 HOME2=$(HOME)/Dropbox
 endif
-WEBDIR=$(HOME2)/dropBoxShared/Work/tcoffee.org/public_html/
+WEB_DIR=$(HOME2)/dropBoxShared/Work/tcoffee.org/public_html/
 
 #########################################################
 #                                                       #
@@ -40,6 +40,10 @@ endif
 ifndef LIB_DIR
 #LIB_DIR=/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/
 LIB_DIR=$(CURDIR)/../../lib
+endif
+
+ifndef VER_DIR
+VER_DIR=$(LIB_DIR)/version
 endif
 
 SOURCE_DIR=$(PWD)/../../$(EXECUTABLE)/lib
@@ -79,7 +83,7 @@ LICENSES = $(LIB_DIR)/licenses
 # using env variable otherwise it fallback on legacy mechanism
 #
 ifndef VERSION
-VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(LIB_DIR)/version -print)
+VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print)
 endif
 
 
@@ -93,9 +97,9 @@ BETA_SOURCES_FILE=$(PROGRAM)_distribution
 STABLE_SOURCES_FILE=$(PROGRAM)_distribution
 
 
-BETA_SOURCES=$(WEBDIR)/Packages/sources/tcoffee/Beta/
-STABLE_SOURCES=$(WEBDIR)/Packages/sources/tcoffee/Stable/
-ARCHIVE_SOURCES=$(WEBDIR)/Packages/sources/tcoffee/Archives/
+BETA_SOURCES=$(WEB_DIR)/Packages/sources/tcoffee/Beta/
+STABLE_SOURCES=$(WEB_DIR)/Packages/sources/tcoffee/Stable/
+ARCHIVE_SOURCES=$(WEB_DIR)/Packages/sources/tcoffee/Archives/
 
 
 LATEST_DISTRIBUTION_FILE=$(PROGRAM)_distribution
@@ -296,40 +300,38 @@ packing:
 
 
 github:
-	git commit -a -m '$(MM)'
+	git commit -a -m '$(m)'
 	git push
+	$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -$(release_type) >$(WEB_DIR)/Packages/T-COFFEE.version.$(release_type))
+	$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR)  >$(WEB_DIR)/Packages/T-COFFEE.version)
 
 beta_release:
-	make github
-	$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(LIB_DIR)/version) -beta
+	make github Release_type="beta"
 	make distribution
 	mkdir -p $(BETA_SOURCES)
 	mkdir -p $(ARCHIVE_SOURCES)
 	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(BETA_SOURCES)/$(BETA_SOURCES_FILE).tar.gz
 	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(ARCHIVE_SOURCES)/$(DISTRIBUTION_FILE).tar.gz
-	$(PERL4MAKEFILE_LIB)/read_program_version.pl $(LIB_DIR)/version_number > $(WEBDIR)/Packages/T-COFFEE.beta_version
 
 stable_release:
-	make github
-	$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(LIB_DIR)/version) -stable
+	make github Release_type="stable"
+	$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -stable -print)> $(WEB_DIR)/Packages/T-COFFEE.version.stable)
 	make distribution
 	mkdir -p $(STABLE_SOURCES)
 	mkdir -p $(ARCHIVE_SOURCES)	
 	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(STABLE_SOURCES)/$(STABLE_SOURCES_FILE).tar.gz
 	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(ARCHIVE_SOURCES)/$(DISTRIBUTION_FILE).tar.gz		
 	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(ARCHIVE_SOURCES)/$(DISTRIBUTION_FILE).stable.tar.gz
-	$(PERL4MAKEFILE_LIB)/read_program_version.pl $(LIB_DIR)/version_number > $(WEBDIR)/Packages/T-COFFEE.version
-major_release:
-	make github
-	$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(LIB_DIR)/version) -major
-	make distribution
-	mkdir -p $(STABLE_SOURCES)
-	mkdir -p $(ARCHIVE_SOURCES)	
-	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(STABLE_SOURCES)/$(STABLE_SOURCES_FILE).tar.gz
-	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(ARCHIVE_SOURCES)/$(DISTRIBUTION_FILE).tar.gz		
-	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(ARCHIVE_SOURCES)/$(DISTRIBUTION_FILE).stable.tar.gz
-	$(PERL4MAKEFILE_LIB)/read_program_version.pl $(LIB_DIR)/version_number > $(WEBDIR)/Packages/T-COFFEE.version
 
+major_release:
+	make github Release_type="major"
+	$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR)/version -major)>$(WEB_DIR)/Packages/T-COFFEE.version.major)
+	make distribution
+	mkdir -p $(STABLE_SOURCES)
+	mkdir -p $(ARCHIVE_SOURCES)	
+	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(STABLE_SOURCES)/$(STABLE_SOURCES_FILE).tar.gz
+	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(ARCHIVE_SOURCES)/$(DISTRIBUTION_FILE).tar.gz		
+	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(ARCHIVE_SOURCES)/$(DISTRIBUTION_FILE).stable.tar.gz
 
 
 
