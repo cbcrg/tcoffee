@@ -318,6 +318,7 @@ beta_release:
 
 stable_release:
 	make github release_type='stable'
+	make distribution
 	mkdir -p $(STABLE_SOURCES)
 	mkdir -p $(ARCHIVE_SOURCES)
 	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(STABLE_SOURCES)/$(STABLE_SOURCES_FILE).tar.gz
