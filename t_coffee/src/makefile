@@ -321,8 +321,10 @@ stable_release:
 	VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print)
 	DISTRIBUTION_FILE=$(PROGRAM)_distribution_$(VERSION)
 	echo $(DISTRIBUTION_FILE)
-	shshshsh
+
 	make distribution
+	echo $(VERSION);
+	shshshs
 	mkdir -p $(STABLE_SOURCES)
 	mkdir -p $(ARCHIVE_SOURCES)
 	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(STABLE_SOURCES)/$(STABLE_SOURCES_FILE).tar.gz
