@@ -326,7 +326,7 @@ stable_release:
 
 major_release:
 	make github release_type="major"
-	$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR)/version -major)>$(WEB_DIR)/Packages/T-COFFEE.version.major)
+	$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -major) -print>$(WEB_DIR)/Packages/T-COFFEE.version.major)
 	make distribution
 	mkdir -p $(STABLE_SOURCES)
 	mkdir -p $(ARCHIVE_SOURCES)	
