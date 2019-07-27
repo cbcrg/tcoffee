@@ -119,8 +119,8 @@ DISTRIB_DOC=$(DISTRIB_DIR)/doc
 #########################################################
 
 distribution:
-	-rm *.c
-	-rm *.h
+#	-rm *.c
+#	-rm *.h
 	make -i VERSION=$(VERSION) CC=cc general_distribution
 	make -i VERSION=$(VERSION) CC=cc examples
 	make -i VERSION=$(VERSION) CC=cc mcoffee
