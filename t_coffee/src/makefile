@@ -307,6 +307,8 @@ github:
 	$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print >$(WEB_DIR)/Packages/T-COFFEE.version.$(release_type))
 	VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print)
 	DISTRIBUTION_FILE=$(PROGRAM)_distribution_$(VERSION)
+	echo $(DISTRIBUTION_FILE)
+	sksksks
 beta_release:
 	make github release_type=beta
 	make distribution
