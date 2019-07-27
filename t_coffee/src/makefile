@@ -305,11 +305,11 @@ github:
 	$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -$(release_type))
 	$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print >$(WEB_DIR)/Packages/T-COFFEE.version)	
 	$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print >$(WEB_DIR)/Packages/T-COFFEE.version.$(release_type))
-	VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print)
-	DISTRIBUTION_FILE=$(PROGRAM)_distribution_$(VERSION)
-	echo D1=$(DISTRIBUTION_FILE)
+
 beta_release:
 	make github release_type=beta
+	VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print)
+	DISTRIBUTION_FILE=$(PROGRAM)_distribution_$(VERSION)
 	make distribution
 	mkdir -p $(BETA_SOURCES)
 	mkdir -p $(ARCHIVE_SOURCES)
@@ -318,19 +318,19 @@ beta_release:
 
 stable_release:
 	make github release_type=stable
-	echo D2=$(DISTRIBUTION_FILE)	
-	shshshs
+	VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print)
+	DISTRIBUTION_FILE=$(PROGRAM)_distribution_$(VERSION)
 	make distribution
 	mkdir -p $(STABLE_SOURCES)
 	mkdir -p $(ARCHIVE_SOURCES)
-	echo $(DISTRIBUTION_FILE)	
-	shshshs
 	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(STABLE_SOURCES)/$(STABLE_SOURCES_FILE).tar.gz
 	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(ARCHIVE_SOURCES)/$(DISTRIBUTION_FILE).tar.gz		
 	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(ARCHIVE_SOURCES)/$(DISTRIBUTION_FILE).stable.tar.gz
 
 major_release:
 	make github release_type=major
+	VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print)
+	DISTRIBUTION_FILE=$(PROGRAM)_distribution_$(VERSION)
 	make distribution
 	mkdir -p $(STABLE_SOURCES)
 	mkdir -p $(ARCHIVE_SOURCES)	
