@@ -84,6 +84,7 @@ LICENSES = $(LIB_DIR)/licenses
 #
 ifndef VERSION
 VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print)
+echo V1=$(VERSION)
 endif
 
 
