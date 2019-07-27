@@ -318,7 +318,7 @@ beta_release:
 
 stable_release:
 	VERSION = $(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print)
-	echo $(VERSION)
+	echo xxx: $(VERSION)
 	make github release_type='stable'
 	echo V=$(VERSION)
 	echo $(DISTRIBUTION_FILE)
