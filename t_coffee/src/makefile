@@ -82,9 +82,15 @@ LICENSES = $(LIB_DIR)/licenses
 # make version number condition so that it can be specified
 # using env variable otherwise it fallback on legacy mechanism
 #
-ifndef VERSION
-#VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print)
-endif
+#
+
+VERSIONC='$(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -stable -print'
+VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print)
+
+
+#ifndef VERSION
+#
+#endif
 
 
 LIBRARY=$(PWD)/../../lib/
@@ -301,6 +307,8 @@ packing:
 
 github:
 	git commit -a -m '$(m)'
+	echo $(vversion)
+	asjjs
 #	git push
 	$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -$(release_type))
 	$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print >$(WEB_DIR)/Packages/T-COFFEE.version)	
@@ -319,7 +327,7 @@ beta_release:
 	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(ARCHIVE_SOURCES)/$(DISTRIBUTION_FILE).tar.gz
 
 stable_release:
-	make github release_type='stable'
+	make github release_type='stable' vversion=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -stable -print)
 	make distribution
 	N_VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print)
 	N_DISTRIBUTION_FILE=$(PROGRAM)_distribution_$(N_VERSION)
