@@ -307,7 +307,7 @@ github:
 #	$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print >$(WEB_DIR)/Packages/T-COFFEE.version.$(release_type))
 
 beta_release:
-	make github release_type=beta
+	make github release_type='beta'
 	make distribution
 	mkdir -p $(BETA_SOURCES)
 	mkdir -p $(ARCHIVE_SOURCES)
