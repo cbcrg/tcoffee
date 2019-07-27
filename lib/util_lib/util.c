@@ -5402,7 +5402,12 @@ char *get_plugins_4_tcoffee ()
   if ( plugins_4_tcoffee[0])return plugins_4_tcoffee;
   else
     {
-      if (getenv ("UNIQUE_DIR_4_TCOFFEE"))sprintf (plugins_4_tcoffee, "%s/", getenv("UNIQUE_DIR_4_TCOFFEE"));
+      if (getenv ("LOCAL_PLUGINS_4_TCOFFEE"))
+	{
+	  sprintf (plugins_4_tcoffee, "%s", getenv ("LOCAL_PLUGINS_4_TCOFFEE"));
+	  unstenv ("LOCAL_PLUGINS_4_TCOFFEE");
+	}
+      else if (getenv ("UNIQUE_DIR_4_TCOFFEE"))sprintf (plugins_4_tcoffee, "%s/", getenv("UNIQUE_DIR_4_TCOFFEE"));
       else if (isdir4path (getenv("PLUGINS_4_TCOFFEE")))sprintf (plugins_4_tcoffee, "%s/", getenv("PLUGINS_4_TCOFFEE"));
       else sprintf (plugins_4_tcoffee, "%s/plugins/%s/", get_dir_4_tcoffee(), get_os());
       my_mkdir(plugins_4_tcoffee);
@@ -9920,7 +9925,7 @@ char ** standard_initialisation  (char **in_argv, int *in_argc)
   if (!getenv ("ENV_4_TCOFFEE"))cputenv ("ENV_4_TCOFFEE=%s/.t_coffee_env", get_dir_4_tcoffee());
 
 
-  if (!getenv ("UPDATED_ENV_4_TCOFFEE"))
+  if (1==2 && !getenv ("UPDATED_ENV_4_TCOFFEE"))
     {
       cputenv4path ("/usr/local/t_coffee/plugins");
       sprintf (buf, "%s/.t_coffee/plugins", getenv ("HOME"));
@@ -10177,6 +10182,32 @@ void clean_exit ()
   return;
 }
 
+int cputenv4pathFirst (char *p)
+{
+  if (!p)return 0;
+  else if (isdir4path (p))
+    {
+      cputenv ("PATH=%s:%s", p, getenv("PATH"));
+      return 1;
+    }
+  else
+    {
+      return 0;
+    }
+}
+int cputenv4pathLast (char *p)
+{
+  if (!p)return 0;
+  else if (isdir4path (p))
+    {
+      cputenv ("PATH=%s:%s",getenv("PATH"),p);
+      return 1;
+    }
+  else
+    {
+      return 0;
+    }
+}
 
 int cputenv4path (char *p)
 {

@@ -632,7 +632,9 @@ char *input_email ();
 char *get_email_from_env ();
 char *get_email ();
 int set_email (char *email);
-int cputenv4path (char*);
+int cputenv4pathFirst (char*);
+int cputenv4pathLast (char*);
+
 int   cputenv (char*, ...);
 int   fcputenv (char *,char *, char*, ...);
 char *file_putenv (char *file);

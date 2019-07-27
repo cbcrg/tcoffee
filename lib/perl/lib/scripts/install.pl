@@ -36,6 +36,7 @@ our $TCM;
 our $TCMETHODS;
 our $TCPLUGINS;
 our $PLUGINS_DIR="";
+our $TCBIN_DIR="";
 our $INSTALL_DIR="";
 our $email;
 our $recompile;
@@ -173,11 +174,13 @@ if(!$TCDIR) { $TCDIR="$HOME/.t_coffee"; }
 &add_dir ($TCM="$TCDIR/mcoffee");
 &add_dir ($TCMETHODS="$TCDIR/methods");
 &add_dir ($TCPLUGINS="$TCDIR/plugins/$OS");
+&add_dir ($TCBIN_DIR="$TCDIR/bin/$OS");
+
 
 #Prepare the Installation Structure
 
 our $BASE="$CD/bin";
-our $BIN="$BASE/binaries/$OS";
+our $BIN="$BASE/binarie/$OS";
 our $DOWNLOAD_DIR="$BASE/download";
 our $DOWNLOAD_FILE="$DOWNLOAD_DIR/files";
 our $TMP="$BASE/tmp";
@@ -196,7 +199,7 @@ if    (!$PLUGINS_DIR && !$ROOT_INSTALL){$PLUGINS_DIR=$TCPLUGINS;}
 elsif (!$PLUGINS_DIR &&  $ROOT_INSTALL){$PLUGINS_DIR="/usr/local/bin/";}
 
 #set the directory for t_coffee
-if    (!$INSTALL_DIR && !$ROOT_INSTALL){$INSTALL_DIR="$HOME/bin/";mkpath ($INSTALL_DIR);}
+if    (!$INSTALL_DIR && !$ROOT_INSTALL){$INSTALL_DIR="$HOME/bin";mkpath ($INSTALL_DIR);}
 elsif (!$INSTALL_DIR &&  $ROOT_INSTALL){$INSTALL_DIR="/usr/local/bin/";}
 
 #prepare mcoffee files [Only if vanilla installation]
@@ -582,14 +585,22 @@ sub install
     
     if (!$ROOT_INSTALL)
       {
-	
-	if (-e "$BIN/t_coffee"){`$CP $BIN/t_coffee $INSTALL_DIR`};
-	`cp $BIN/* $PLUGINS_DIR`;
+	`$CP $BIN/* $PLUGINS_DIR`;
+	if (-e "$BIN/t_coffee")
+	  {
+	    `$CP $BIN/t_coffee $TCBIN_DIR`;
+	      unlink("$PLUGINS_DIR/t_coffee");
+	  }
 	$copied=1;
       }
     else
       {
 	$copied=&root_run ("You must be root to finalize the installation", "$CP $BIN/* $INSTALL_DIR $SILENT");
+	if (-e "$BIN/t_coffee")
+	  {
+	    &root_run ("You must be root to finalize the installation", "$CP $BIN/t_coffee $TCBIN_DIR");
+	    &root_run ("You must be root to finalize the installation", "rm  $PLUGINS_DIR/t_coffee");
+	  }
       }
     
      
@@ -603,10 +614,18 @@ sub install
     }
   elsif ( $copied && !$ROOT)
     {
-      $report= "*!!!!!! T-Coffee and associated packages have been copied in: $new_bin\n";
-      $report.="*!!!!!! This address is NOT in your PATH sytem variable\n";
-      $report.="*!!!!!! You can do so by adding the following line in your ~/.bashrc file:\n";
-      $report.="*!!!!!! export PATH=$new_bin:\$PATH\n";
+      $report= "*!!!!!! T-Coffee has been installed in $TCBIN_DIR\n";
+      $report= "*!!!!!! T-Coffee and associated packages have been copied in: $PLUGINS_DIR\n";
+      $report.="*!!!!!! This T-Coffee location is NOT on your PATH sytem variable\n";
+      if ( $OS eq "linux")
+	{
+	  $report.="*!!!!!! You can do so by adding the following line in your ~/.bashrc file:\n";
+	}
+      else
+	{
+	  $report.="*!!!!!! You can do so by adding the following line in your ~/.profile file:\n";
+	}
+      $report.="*!!!!!! export PATH=$TCBIN_DIR:\$PATH\n";
     }
   return $report;
 }

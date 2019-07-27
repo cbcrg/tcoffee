@@ -57,7 +57,7 @@
 	<addEnvironmentVariable>
             <name>PLUGINS_4_TCOFFEE</name>
             <scope>user</scope>
-            <value>${installdir}/plugins/${platforms}</value>
+            <value>${installdir}/plugins/${osname}</value>
         </addEnvironmentVariable>
 
 	<!--  Append PERL5LIB if already exists -->
