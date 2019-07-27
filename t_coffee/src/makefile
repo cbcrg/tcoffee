@@ -308,8 +308,6 @@ github:
 
 beta_release:
 	make github release_type=beta
-	VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print)
-	DISTRIBUTION_FILE=$(PROGRAM)_distribution_$(VERSION)
 	make distribution
 	mkdir -p $(BETA_SOURCES)
 	mkdir -p $(ARCHIVE_SOURCES)
@@ -318,8 +316,7 @@ beta_release:
 
 stable_release:
 	make github release_type=stable
-	VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print)
-	DISTRIBUTION_FILE=$(PROGRAM)_distribution_$(VERSION)
+	echo V=$(VERSION)
 	echo $(DISTRIBUTION_FILE)
 
 	make distribution
