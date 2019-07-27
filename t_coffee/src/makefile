@@ -301,12 +301,12 @@ packing:
 
 github:
 	git commit -a -m '$(m)'
-	git push
+#	git push
 	$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -$(release_type) >$(WEB_DIR)/Packages/T-COFFEE.version.$(release_type))
 	$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR)  >$(WEB_DIR)/Packages/T-COFFEE.version)
 	VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print)	
 beta_release:
-	make github Release_type=beta
+	make github release_type=beta
 	echo V=$(VERSION)
 	make distribution
 	mkdir -p $(BETA_SOURCES)
@@ -315,7 +315,7 @@ beta_release:
 	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(ARCHIVE_SOURCES)/$(DISTRIBUTION_FILE).tar.gz
 
 stable_release:
-	make github Release_type="stable"
+	make github release_type="stable"
 	$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -stable -print)> $(WEB_DIR)/Packages/T-COFFEE.version.stable)
 	make distribution
 	mkdir -p $(STABLE_SOURCES)
@@ -325,7 +325,7 @@ stable_release:
 	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(ARCHIVE_SOURCES)/$(DISTRIBUTION_FILE).stable.tar.gz
 
 major_release:
-	make github Release_type="major"
+	make github release_type="major"
 	$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR)/version -major)>$(WEB_DIR)/Packages/T-COFFEE.version.major)
 	make distribution
 	mkdir -p $(STABLE_SOURCES)
