@@ -84,7 +84,6 @@ LICENSES = $(LIB_DIR)/licenses
 #
 ifndef VERSION
 VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print)
-echo V1=$(VERSION)
 endif
 
 
@@ -305,7 +304,7 @@ github:
 	git push
 	$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -$(release_type) >$(WEB_DIR)/Packages/T-COFFEE.version.$(release_type))
 	$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR)  >$(WEB_DIR)/Packages/T-COFFEE.version)
-	$(VERSION)=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print)	
+	VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print)	
 beta_release:
 	make github Release_type="beta"
 	echo V=$(VERSION)
