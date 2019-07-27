@@ -318,7 +318,7 @@ stable_release:
 	make github release_type=stable
 	echo V=$(VERSION)
 	echo $(DISTRIBUTION_FILE)
-
+	sgsgfs
 	make distribution
 	echo $(VERSION);
 	shshshs
