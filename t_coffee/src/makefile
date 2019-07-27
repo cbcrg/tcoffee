@@ -318,6 +318,8 @@ beta_release:
 
 stable_release:
 	make github release_type=stable
+	echo $(DISTRIBUTION_FILE)	
+	shshshs
 	make distribution
 	mkdir -p $(STABLE_SOURCES)
 	mkdir -p $(ARCHIVE_SOURCES)
