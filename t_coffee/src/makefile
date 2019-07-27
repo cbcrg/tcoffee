@@ -306,6 +306,8 @@ github:
 	$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print >$(WEB_DIR)/Packages/T-COFFEE.version)	
 	$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print >$(WEB_DIR)/Packages/T-COFFEE.version.$(release_type))
 	N_VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print)
+	echo $(N_VERSION)
+	sjsjsjsjs
 	N_DISTRIBUTION_FILE=$(PROGRAM)_distribution_$(N_VERSION)
 
 beta_release:
