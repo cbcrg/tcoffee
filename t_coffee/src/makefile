@@ -320,6 +320,8 @@ stable_release:
 	make github release_type=stable
 	VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print)
 	DISTRIBUTION_FILE=$(PROGRAM)_distribution_$(VERSION)
+	echo $(DISTRIBUTION_FILE)
+	shshshsh
 	make distribution
 	mkdir -p $(STABLE_SOURCES)
 	mkdir -p $(ARCHIVE_SOURCES)
