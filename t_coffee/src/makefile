@@ -84,12 +84,11 @@ LICENSES = $(LIB_DIR)/licenses
 #
 #
 
-VERSIONC='$(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -stable -print'
-VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print)
+
 
 
 #ifndef VERSION
-#
+VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print)
 #endif
 
 
@@ -310,7 +309,6 @@ github:
 	echo $(vversion)
 	asjjs
 #	git push
-	$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -$(release_type))
 	$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print >$(WEB_DIR)/Packages/T-COFFEE.version)	
 	$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print >$(WEB_DIR)/Packages/T-COFFEE.version.$(release_type))
 	N_VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print)
@@ -319,12 +317,15 @@ github:
 	N_DISTRIBUTION_FILE=$(PROGRAM)_distribution_$(N_VERSION)
 
 beta_release:
-	make github release_type='beta'
-	make distribution
+	make github VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -beta -print) release_type='beta'
+	make distribution VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print)
+	make finish_beta VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print)
+
+finish_beta:
 	mkdir -p $(BETA_SOURCES)
 	mkdir -p $(ARCHIVE_SOURCES)
 	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(BETA_SOURCES)/$(BETA_SOURCES_FILE).tar.gz
-	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(ARCHIVE_SOURCES)/$(DISTRIBUTION_FILE).tar.gz
+	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(ARCHIVE_SOURCES)/$(PROGRAM)_distribution_$(VERSION).tar.gz
 
 stable_release:
 	make github release_type='stable' vversion=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -stable -print)
