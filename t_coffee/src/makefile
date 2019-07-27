@@ -302,7 +302,7 @@ packing:
 github:
 	git commit -a -m '$(m)'
 #	git push
-#	$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -$(release_type))
+	$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -$(release_type))
 #	$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print >$(WEB_DIR)/Packages/T-COFFEE.version)	
 #	$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print >$(WEB_DIR)/Packages/T-COFFEE.version.$(release_type))
 
@@ -315,7 +315,7 @@ beta_release:
 	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(ARCHIVE_SOURCES)/$(DISTRIBUTION_FILE).tar.gz
 
 stable_release:
-	make github release_type=stable
+	make github release_type='stable'
 	echo V=$(VERSION)
 	echo $(DISTRIBUTION_FILE)
 	sgsgfs
