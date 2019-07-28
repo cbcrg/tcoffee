@@ -323,7 +323,7 @@ PG hmmtop language2		C
 PG hmmtop source		http://www.tcoffee.org/Packages/mirrors/hmmtop2.1.tgz
 PG hmmtop binary		hmmtop
 PG hmmtop update_action		never
-PG hmmtop mode			tcoffee
+PG hmmtop mode			psicoffee
 PG hmmtop version		2.1
 
 PG gorIV 4_TCOFFEE		GOR4
