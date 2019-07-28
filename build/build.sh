@@ -353,8 +353,8 @@ function pack_binaries() {
 
 	# remove the t_coffee binaries from 'plugins' folder 
 	# it have to exist in 'bin' folder  
-        #Cedric This should now be fixed	
-        #rm -rf $TCDIR/plugins/$OSNAME/t_coffee
+	# Cedric This should now be fixed	
+        # rm -rf $TCDIR/plugins/$OSNAME/t_coffee
 
     # copy the sources 
     rm -rf $TCDIR/src
