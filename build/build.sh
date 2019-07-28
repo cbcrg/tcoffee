@@ -49,7 +49,7 @@ fi
 #
 
 export VERSION="`cat $WORKSPACE/tcoffee/lib/version/version_number.version`"
-export RELEASE="`cat $WORKSPACE/tcoffee/lib/version/new_release`";
+#export RELEASE="`cat $WORKSPACE/tcoffee/lib/version/new_release`";
 
 
 
