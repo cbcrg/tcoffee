@@ -180,7 +180,7 @@ if(!$TCDIR) { $TCDIR="$HOME/.t_coffee"; }
 #Prepare the Installation Structure
 
 our $BASE="$CD/bin";
-our $BIN="$BASE/binarie/$OS";
+our $BIN="$BASE/binaries/$OS";
 our $DOWNLOAD_DIR="$BASE/download";
 our $DOWNLOAD_FILE="$DOWNLOAD_DIR/files";
 our $TMP="$BASE/tmp";
