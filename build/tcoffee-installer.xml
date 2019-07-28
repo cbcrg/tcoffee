@@ -57,7 +57,7 @@
 	<addEnvironmentVariable>
             <name>PLUGINS_4_TCOFFEE</name>
             <scope>user</scope>
-            <value>${installdir}/plugins/${osname}</value>
+            <value>${installdir}/plugins/</value>
         </addEnvironmentVariable>
 
 	<!--  Append PERL5LIB if already exists -->
@@ -72,7 +72,7 @@
 	<!--  Change the application PATH  -->
 	<addDirectoryToPath>
             <insertAt>beginning</insertAt>
-            <path>$DIR_4_TCOFFEE/bin/${osname}</path>
+            <path>$DIR_4_TCOFFEE/bin/</path>
             <scope>user</scope>
         </addDirectoryToPath>
 

@@ -174,7 +174,7 @@ if(!$TCDIR) { $TCDIR="$HOME/.t_coffee"; }
 &add_dir ($TCM="$TCDIR/mcoffee");
 &add_dir ($TCMETHODS="$TCDIR/methods");
 &add_dir ($TCPLUGINS="$TCDIR/plugins/$OS");
-&add_dir ($TCBIN_DIR="$TCDIR/bin/$OS");
+&add_dir ($TCBIN_DIR="$TCDIR/bin/");
 
 
 #Prepare the Installation Structure
