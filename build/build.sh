@@ -138,6 +138,7 @@ INST_NAME=T-COFFEE_installer_"$VERSION"_"$OSNAME"_"$OSARCH"
 
 UNTARED=$SANDBOX/untared_distributions/T-COFFEE_distribution_"$VERSION"
 TCDIR=$SANDBOX/build
+TCBINDIR=$SANDBOX/build/bin/$OSNAME
 
 #
 # exported variabled (required by 'generic_makefile')
@@ -245,15 +246,19 @@ function build_binaries()
 
 	# create t-coffee binaries installation
 	cd $UNTARED
-	./install all -tclinkdb=./tclinkdb.txt -repo=$BUILD_REPO -tcdir=$TCDIR -exec=$TCDIR/bin || true
+	./install all -tclinkdb=./tclinkdb.txt -repo=$BUILD_REPO -tcdir=$TCDIR -exec=$TCBINDIR || true
+	
     
 	# Check that the binary has successfully compiled 
-	if [ ! -f $TCDIR/bin/t_coffee ] 
+	if [ ! -f $TCBINDIR ] 
 	then 
 		echo "Target 't_coffee' binary has not been compiled"
 		exit 1
 	fi    
-    
+	# in order to keep compatibility with black-coffee.jar
+	cp $TCBINDIR/t_coffee $TCDIR/bin
+	
+
     
 	# add perl modules 
 	cp -r $PERLM $TCDIR
