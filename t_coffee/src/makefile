@@ -288,7 +288,7 @@ license:
 	rm $(DISTRIB_DIR)/short_license.c
 
 #install:
-#   $(PERL4MAKEFILE_LIB)/tclinkdb2header.pl -infile=$(SCRIPT_LIB)/install.pl -mode=Perl -db=$(KO_LIB)/tclinkdb.txt > install
+#   $(PERL4MAKEFILE_LIB)/tclinkdb2header.pl -infile=$(SCRIPT_LIB)/install.pl -mode=Perl -db=$(KO_LIB)/tclinkdb.txt >  install
 
 packing:
 	mkdir -p $(UNTARED_DISTRIBUTIONS)
