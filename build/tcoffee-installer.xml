@@ -67,7 +67,12 @@
             <value>$PERL5LIB:$DIR_4_TCOFFEE/perl/lib/perl5</value>
         </addEnvironmentVariable>
 
-
+	<!--  Change the application PATH  -->
+	<addDirectoryToPath>
+            <insertAt>beginning</insertAt>
+            <path>${installdir}/bin/linux/</path>
+            <scope>user</scope>
+        </addDirectoryToPath>
 
 	<!--  Change the application PATH  -->
 	<addDirectoryToPath>
