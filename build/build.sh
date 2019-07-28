@@ -144,7 +144,7 @@ INST_NAME=T-COFFEE_installer_"$VERSION"_"$OSNAME"_"$OSARCH"
 
 UNTARED=$SANDBOX/untared_distributions/T-COFFEE_distribution_"$VERSION"
 TCDIR=$SANDBOX/build
-TCBIN=$TCDIR/bin/$OSNAME/
+TCBIN=$TCDIR/bin/linux/
 TCPLUGINS=$TCDIR/plugins/$OSNAME/
 
 #

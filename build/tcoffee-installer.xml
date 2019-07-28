@@ -72,7 +72,7 @@
 	<!--  Change the application PATH  -->
 	<addDirectoryToPath>
             <insertAt>beginning</insertAt>
-            <path>$DIR_4_TCOFFEE/bin/${osname}</path>
+            <path>$DIR_4_TCOFFEE/bin/linux</path>
             <scope>user</scope>
         </addDirectoryToPath>
 
