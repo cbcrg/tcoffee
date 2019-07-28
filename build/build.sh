@@ -238,11 +238,11 @@ function build_binaries()
 
 	rm -rf $TCDIR
 	mkdir -p $TCDIR
-	mkdir -p $TCDIR/bin
+	mkdir -p $TCDIR/bin/$OSNAME
 
 	# Make sure that does not exist already binaries
 	rm -rf $UNTARED/bin
-	mkdir -p $UNTARED/bin
+	mkdir -p $UNTARED/bin/$OSNAME
 
 	# create t-coffee binaries installation
 	cd $UNTARED
@@ -250,7 +250,7 @@ function build_binaries()
 	
     
 	# Check that the binary has successfully compiled 
-	if [ ! -f $TCBINDIR ] 
+	if [ ! -f $TCBINDIR/t_coffee ] 
 	then 
 		echo "Target 't_coffee' binary has not been compiled"
 		exit 1
