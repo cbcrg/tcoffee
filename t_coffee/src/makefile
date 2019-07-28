@@ -309,7 +309,6 @@ github:
 	make version release_type=$(release_type)
 version:
 	$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print -$(release_type)>$(WEB_DIR)/Packages/T-COFFEE.version)
-	wtwtw	
 	$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print >$(WEB_DIR)/Packages/T-COFFEE.version.$(release_type))
 
 beta:
