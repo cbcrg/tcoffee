@@ -29,6 +29,8 @@ else {$path="./";}
 if ( ($cl=~/-print/)){$pr=1;}
 else {$pr=0;}
 
+##
+
 
 $build_versionF=$path."/build_version.version";
 $minor_versionF=$path."/minor_version.version";
