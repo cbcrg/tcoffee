@@ -93,7 +93,7 @@ fi
 if [ -z $DO_TEST ]; then 
 DO_TEST=0
 fi 
-DO_TEST=0
+
 
 #
 # The Dropbox folder where to copy produces binaries 	
@@ -198,7 +198,11 @@ function clean()
 #
 # Execute legacy doc_test target 
 #
-function doc_test() { 
+function doc_test() {
+ 	echo "[ doc_test ]"
+	set -e	
+	}
+function doc_test_ref() { 
 	echo "[ doc_test ]"
 
 	set +u
@@ -459,7 +463,8 @@ function tcoffee() {
 	build_and_pack_stable
 
 	if [ $DO_TEST == 1 ]; then
-	doc_test 
+	echo "skipped test"
+#	doc_test 
 	fi
 }
 
