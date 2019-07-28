@@ -305,8 +305,8 @@ packing:
 
 
 github:
-	git commit -a -m '$(m)'
 	make version release_type=$(release_type)
+	git commit -a -m '$(m)'
 version:
 	$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print -$(release_type)>$(WEB_DIR)/Packages/T-COFFEE.version)
 	$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print >$(WEB_DIR)/Packages/T-COFFEE.version.$(release_type))
