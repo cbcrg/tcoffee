@@ -3,6 +3,7 @@
     <shortName>tcoffee</shortName>
     <fullName>T-Coffee</fullName>
     <version>1.0</version>
+    <myos>linux</myos>
     <installerFilename>${outname}.${platform_exec_suffix}</installerFilename>
     <readmeFile>readme.txt</readmeFile>
     <licenseFile>${untared}/license.txt</licenseFile>
@@ -72,7 +73,7 @@
 	<!--  Change the application PATH  -->
 	<addDirectoryToPath>
             <insertAt>beginning</insertAt>
-            <path>$DIR_4_TCOFFEE/bin/</path>
+            <path>$DIR_4_TCOFFEE/bin/${myos}</path>
             <scope>user</scope>
         </addDirectoryToPath>
 
