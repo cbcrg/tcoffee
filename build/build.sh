@@ -66,11 +66,6 @@ export BUILD_INFO="`date +"%Y-%m-%d %H:%M:%S"` - Revision $GIT_REVISION - Build 
 fi
 
 
-# default bin path 
-if [ -z $USER_BIN ]; then 
-export USER_BIN=$WORKSPACE/bin/
-fi
-
 #
 # default third party binaries cache location 
 #
@@ -282,29 +277,29 @@ function build_binaries()
 
 	rm -rf $TCDIR
 	mkdir -p $TCDIR
-	mkdir -p $TCDIR/bin
+	mkdir -p $TCDIR/bin/linux
 
 	# Make sure that does not exist already binaries
 	rm -rf $UNTARED/bin
-	mkdir -p $UNTARED/bin
+	mkdir -p $UNTARED/bin/linux
 
 	# create t-coffee binaries installation
 	cd $UNTARED
-	./install all -tclinkdb=./tclinkdb.txt -repo=$BUILD_REPO -tcdir=$TCDIR -exec=$TCDIR/bin || true
+	./install all -tclinkdb=./tclinkdb.txt -repo=$BUILD_REPO -tcdir=$TCDIR -exec=$TCDIR/bin/linux || true
     
 	# Check that the binary has successfully compiled 
-	if [ ! -f $TCDIR/bin/t_coffee ] 
+	if [ ! -f $TCDIR/bin/linux/t_coffee ] 
 	then 
 		echo "Target 't_coffee' binary has not been compiled"
 		exit 1
 	fi    
-    
+	
     
 	# add perl modules 
 	cp -r $PERLM $TCDIR
 	#mkdir -p $TCDIR/perl
 	#cp $WORKSPACE/tcoffee/build/cpanm  $TCDIR/perl	
-    #chmod +x $TCDIR/perl/cpanm
+        #chmod +x $TCDIR/perl/cpanm
 
 	# add gfortran libraries
 	if [ $OSNAME == "macosx" ] 
@@ -349,10 +344,6 @@ function pack_binaries() {
 	echo "[ pack_binaries ]"
 	echo Package name: $INST_NAME 
 
-	# remove the t_coffee binaries from 'plugins' folder 
-	# it have to exist in 'bin' folder  
-	# Cedric This should now be fixed	
-        # rm -rf $TCDIR/plugins/$OSNAME/t_coffee
 
     # copy the sources 
     rm -rf $TCDIR/src
