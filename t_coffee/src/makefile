@@ -313,7 +313,7 @@ version:
 
 beta:
 	make github release_type='beta'
-	make new_finsh_release
+	make new_finish_release
 
 new_finish_release:
 	make distribution VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print)	
