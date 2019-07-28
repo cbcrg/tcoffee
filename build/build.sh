@@ -144,8 +144,6 @@ INST_NAME=T-COFFEE_installer_"$VERSION"_"$OSNAME"_"$OSARCH"
 
 UNTARED=$SANDBOX/untared_distributions/T-COFFEE_distribution_"$VERSION"
 TCDIR=$SANDBOX/build
-TCBIN=$TCDIR/bin/linux/
-TCPLUGINS=$TCDIR/plugins/$OSNAME/
 
 #
 # exported variabled (required by 'generic_makefile')
@@ -178,10 +176,6 @@ function env()
   echo ". UNTARED     : $UNTARED"  
   echo ". INSTALLER   : $INSTALLER"
   echo ". TCDIR       : $TCDIR"
-  echo ". TCBIN       : $TCBIN"
-  echo ". TCPLUGINS   : $TCPLUGINS"
-
-
   echo ". PERLM       : $PERLM"
   echo ". DIST_BASE   : $DIST_BASE"
   echo ". DIST_DIR    : $DIST_DIR"
@@ -297,10 +291,11 @@ function build_binaries()
 
 	# create t-coffee binaries installation
 	cd $UNTARED
-	./install all -tclinkdb=./tclinkdb.txt -repo=$BUILD_REPO -tcdir=$TCDIR -exec=$TCBIN || true
+#    ./install t_coffee -tclinkdb=./tclinkdb.txt -repo=$BUILD_REPO -tcdir=$TCDIR -exec=$TCDIR/bin
+    ./install all -tclinkdb=./tclinkdb.txt -repo=$BUILD_REPO -tcdir=$TCDIR -exec=$TCDIR/bin || true
     
 	# Check that the binary has successfully compiled 
-	if [ ! -f $TCBIN/t_coffee ] 
+	if [ ! -f $TCDIR/bin/t_coffee ] 
 	then 
 		echo "Target 't_coffee' binary has not been compiled"
 		exit 1
@@ -370,7 +365,7 @@ function pack_binaries() {
 
 	# invoke the install builder 
 	mkdir -p $DIST_DIR
-	"$INSTALLER" build $WORKSPACE/tcoffee/build/tcoffee-installer.xml --setvars product_version=$VERSION untared=$UNTARED osname=$OSNAME tcbin=$TCBIN tcplugings=$TCPLUGINS tcdir=$TCDIR outdir=$DIST_DIR outname=$INST_NAME
+	"$INSTALLER" build $WORKSPACE/tcoffee/build/tcoffee-installer.xml --setvars product_version=$VERSION untared=$UNTARED osname=$OSNAME tcdir=$TCDIR outdir=$DIST_DIR outname=$INST_NAME
 	
 	# mac osx specific step 
 	if [ $OSNAME == "macosx" ]
