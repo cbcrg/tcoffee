@@ -5405,7 +5405,7 @@ char *get_plugins_4_tcoffee ()
       if (getenv ("LOCAL_PLUGINS_4_TCOFFEE"))
 	{
 	  sprintf (plugins_4_tcoffee, "%s", getenv ("LOCAL_PLUGINS_4_TCOFFEE"));
-	  unstenv ("LOCAL_PLUGINS_4_TCOFFEE");
+	  unsetenv ("LOCAL_PLUGINS_4_TCOFFEE");
 	}
       else if (getenv ("UNIQUE_DIR_4_TCOFFEE"))sprintf (plugins_4_tcoffee, "%s/", getenv("UNIQUE_DIR_4_TCOFFEE"));
       else if (isdir4path (getenv("PLUGINS_4_TCOFFEE")))sprintf (plugins_4_tcoffee, "%s/", getenv("PLUGINS_4_TCOFFEE"));

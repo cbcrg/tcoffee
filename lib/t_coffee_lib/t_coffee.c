@@ -477,6 +477,7 @@ int batch_main ( int argc, char **argv)
 	char *tip;
 	int run_local_script;
 	char *plugins;
+	char *plugins_order;
 	char *email;
 	char *proxy;
 	char *tmp_4_tcoffee;
