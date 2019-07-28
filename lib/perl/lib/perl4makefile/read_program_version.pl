@@ -37,7 +37,7 @@ $build_versionF=$path."/build_version.version";
 $minor_versionF=$path."/minor_version.version";
 $major_versionF=$path."/major_version.version";
 $githubF=$path."/github.version";
-$new_releaseF=$path."new_release";
+$new_releaseF=$path."/new_release";
 $version_numberF=$path."/version_number.version";
 
 
