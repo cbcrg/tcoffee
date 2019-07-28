@@ -93,6 +93,7 @@ fi
 if [ -z $DO_TEST ]; then 
 DO_TEST=0
 fi 
+DO_TEST=0
 
 #
 # The Dropbox folder where to copy produces binaries 	
