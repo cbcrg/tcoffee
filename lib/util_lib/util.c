@@ -9926,8 +9926,11 @@ char ** standard_initialisation  (char **in_argv, int *in_argc)
   //set special Variables
   
   
-    
-  if (!getenv ("USE_MAFFT_BINARIES") && getenv ("MAFFT_BINARIES"))
+  if (1==1)
+    {
+      if (getenv ("MAFFT_BINARIES"))unsetenv ("MAFFT_BINARIES"))
+    }
+  else if (!getenv ("USE_MAFFT_BINARIES") && getenv ("MAFFT_BINARIES"))
     {
       unsetenv("MAFFT_BINARIES");
     }
