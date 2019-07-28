@@ -315,7 +315,16 @@ beta:
 	make github release_type='beta'
 	make new_finish_release  target_dir=$(BETA_SOURCES) target_file=$(BETA_SOURCES_FILE)
 
-new_finish_release:
+
+stable:
+	make github release_type='stable'
+	make new_finish_release  target_dir=$(STABLE_SOURCES) target_file=$(STABLE_SOURCES_FILE)
+
+major:
+	make github release_type='major'
+	make new_finish_release  target_dir=$(STABLE_SOURCES) target_file=$(STABLE_SOURCES_FILE)
+
+finish_release:
 	make distribution VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print)	
 	mkdir -p $(target_dir)
 	mkdir -p $(ARCHIVE_SOURCES)
@@ -325,30 +334,6 @@ new_finish_release:
 
 
 
-beta2:
-	make distribution VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print)
-	make finish_release VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print) target_dir=$(BETA_SOURCES) target_file=$(BETA_SOURCES_FILE)
-
-stable:
-	make github  release_type='stable'
-	make stable2
-stable2:		
-	make distribution VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print)
-	make finish_release VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print) target_dir=$(STABLE_SOURCES) target_file=$(STABLE_SOURCES_FILE)
-
-major:
-	make github  release_type='major'
-	make major2
-major2:
-	make distribution VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print)		
-	make finish_release VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print) target_dir=$(STABLE_SOURCES) target_file=$(STABLE_SOURCES_FILE)
-
-finish_release:
-	mkdir -p $(target_dir)
-	mkdir -p $(ARCHIVE_SOURCES)
-	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(target_dir)/$(target_file).tar.gz
-	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(ARCHIVE_SOURCES)/$(PROGRAM)_distribution_$(VERSION).tar.gz
-	git  push
 
 
 
