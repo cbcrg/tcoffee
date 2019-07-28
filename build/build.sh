@@ -8,7 +8,7 @@
 # $OSNAME	: the target platform name i.e. linux, macosx, windows		
 # $OSARCH	: the target platform architecture i.e. i386, x64
 # $BUILD_REPO   : (optional) shared path to cache thirdy parts tools compiled binaries
-# $GIT_REVISION : (optional) the svn revision used to mark this build
+# $GIT_REVISION : (optional) the svn revision used to mark this buld
 # $VERSION 	: (optional) the version used to tag this build
 # $BUILD_REPO	: (optional) the path where compiled binaries will be cached
 # $USER_BIN	: (deprecated) path where store binary to be used 
@@ -291,7 +291,7 @@ function build_binaries()
 
 	# create t-coffee binaries installation
 	cd $UNTARED
-#    ./install t_coffee -tclinkdb=./tclinkdb.txt -repo=$BUILD_REPO -tcdir=$TCDIR -exec=$TCDIR/bin
+    ./install t_coffee -tclinkdb=./tclinkdb.txt -repo=$BUILD_REPO -tcdir=$TCDIR -exec=$TCDIR/bin
     ./install all -tclinkdb=./tclinkdb.txt -repo=$BUILD_REPO -tcdir=$TCDIR -exec=$TCDIR/bin || true
     
 	# Check that the binary has successfully compiled 
