@@ -24,20 +24,6 @@
 # 
 export RELEASE=${RELEASE:-0}
 
-
-#
-# default SVN revision number 
-#
-if [ -z $GIT_REVISION ]; then 
-GIT_REVISION=`( cd $WORKSPACE/tcoffee; git rev-parse --short HEAD; )`
-fi
-
-if [ "$GIT_REVISION" == "" ]; then 
-  echo 'Missing $GIT_REVISION value. Cannot continue the build process.' 
-  exit 1
-fi
-
-#
 # The build number is generated automatically by the build containg (Hudson/Jenkins)
 #
 if [ -z $BUILD_NUMBER ]; then 
