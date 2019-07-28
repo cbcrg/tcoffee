@@ -313,16 +313,16 @@ version:
 
 beta:
 	make github release_type='beta'
-	make new_finish_release  target_dir=$(BETA_SOURCES) target_file=$(BETA_SOURCES_FILE)
+	make finish_release  target_dir=$(BETA_SOURCES) target_file=$(BETA_SOURCES_FILE)
 
 
 stable:
 	make github release_type='stable'
-	make new_finish_release  target_dir=$(STABLE_SOURCES) target_file=$(STABLE_SOURCES_FILE)
+	make finish_release  target_dir=$(STABLE_SOURCES) target_file=$(STABLE_SOURCES_FILE)
 
 major:
 	make github release_type='major'
-	make new_finish_release  target_dir=$(STABLE_SOURCES) target_file=$(STABLE_SOURCES_FILE)
+	make finish_release  target_dir=$(STABLE_SOURCES) target_file=$(STABLE_SOURCES_FILE)
 
 finish_release:
 	make distribution VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print)	
