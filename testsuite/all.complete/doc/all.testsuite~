@@ -42,12 +42,6 @@ disabled: true
 test: t_coffee -in Lsample_lib3.tc_lib,Mlalign_rs_s_pair -domain -start=100 -len=60    
 disabled: true
 
-
-test: t_coffee sample_seq1.fasta -mode expresso    
-disabled: true
-
-test: t_coffee sample_seq1.fasta -template_file EXPRESSO -method TMalign_pair    
-disabled: true
 ################deprecated Tests
 #test: t_coffee -in Lmarna.tc_lib -outfile maran.test    
 #test: t_coffee -in Ssample_seq5.fasta Pstruc4.pdb Mfugue_pair    
@@ -223,7 +217,8 @@ test: t_coffee sample_seq1.fasta -ktuple=3
 test: t_coffee sample_seq1.fasta    
 test: t_coffee sample_dnaseq1.fasta -type=dna    
 test: t_coffee sample_seq1.fasta -mode mcoffee    
-
+test: t_coffee sample_seq1.fasta -mode expresso    
+test: t_coffee sample_seq1.fasta -template_file EXPRESSO -method TMalign_pair    
 test: t_coffee sample_rnaseq1.fasta -mode mrcoffee    
 test: t_coffee sample_rnaseq1.fasta -mode rcoffee -method lalign_id_pair slow_pair    
 test: t_coffee -other_pg irmsd -aln 3d_sample4.aln    
