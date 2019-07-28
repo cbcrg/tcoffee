@@ -294,7 +294,7 @@ function build_binaries()
 	./install all -tclinkdb=./tclinkdb.txt -repo=$BUILD_REPO -tcdir=$TCDIR -exec=$TCDIR/bin/linux || true
     
 	# Check that the binary has successfully compiled 
-	if [ ! -f $TCDIR/bin/t_coffee ] 
+	if [ ! -f $TCDIR/bin/linux/t_coffee ] 
 	then 
 		echo "Target 't_coffee' binary has not been compiled"
 		exit 1
