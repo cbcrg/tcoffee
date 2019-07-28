@@ -174,7 +174,7 @@ if(!$TCDIR) { $TCDIR="$HOME/.t_coffee"; }
 &add_dir ($TCM="$TCDIR/mcoffee");
 &add_dir ($TCMETHODS="$TCDIR/methods");
 &add_dir ($TCPLUGINS="$TCDIR/plugins/$OS");
-&add_dir ($TCBIN_DIR="$TCDIR/bin/$OS");
+&add_dir ($TCBIN_DIR="$TCDIR/bin/");
 
 
 #Prepare the Installation Structure
@@ -1213,6 +1213,8 @@ sub pg_has_binary_distrib
     my ($pg)=(@_);
     if ($PG{$pg}{windows}){return 1;}
     elsif ($PG{$pg}{osx}){return 1;}
+    elsif ($PG{$pg}{macosx}){return 1;}
+
     elsif ($PG{$pg}{linux}){return 1;}
     return 0;
   }
