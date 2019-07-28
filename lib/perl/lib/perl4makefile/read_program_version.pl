@@ -11,7 +11,7 @@ my $minor_versionF;
 my $major_versionF;
 my $githubF;
 my $version_numberF;
-my $releaseF;
+my $new_releaseF;
 
 my $build_version;
 my $minor_version;
@@ -37,7 +37,7 @@ $build_versionF=$path."/build_version.version";
 $minor_versionF=$path."/minor_version.version";
 $major_versionF=$path."/major_version.version";
 $githubF=$path."/github.version";
-$releaseF=$patth."new_release";
+$new_releaseF=$path."new_release";
 $version_numberF=$path."/version_number.version";
 
 

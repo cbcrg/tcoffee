@@ -49,10 +49,7 @@ fi
 #
 
 export VERSION="`cat $WORKSPACE/tcoffee/lib/version/version_number.version`"
-
-if [ $RELEASE == 0 ]; then
-export RELEASE="`cat $WORKSPACE/tcoffee/lib/version/new_release";
-fi
+export RELEASE="`cat $WORKSPACE/tcoffee/lib/version/new_release`";
 
 
 
