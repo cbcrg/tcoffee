@@ -291,7 +291,7 @@ function build_binaries()
 
 	# create t-coffee binaries installation
 	cd $UNTARED
-    ./install t_coffee -tclinkdb=./tclinkdb.txt -repo=$BUILD_REPO -tcdir=$TCDIR -exec=$TCDIR/bin
+#    ./install t_coffee -tclinkdb=./tclinkdb.txt -repo=$BUILD_REPO -tcdir=$TCDIR -exec=$TCDIR/bin
     ./install all -tclinkdb=./tclinkdb.txt -repo=$BUILD_REPO -tcdir=$TCDIR -exec=$TCDIR/bin || true
     
 	# Check that the binary has successfully compiled 

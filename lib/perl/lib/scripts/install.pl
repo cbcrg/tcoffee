@@ -36,7 +36,6 @@ our $TCM;
 our $TCMETHODS;
 our $TCPLUGINS;
 our $PLUGINS_DIR="";
-our $TCBIN_DIR="";
 our $INSTALL_DIR="";
 our $email;
 our $recompile;
@@ -174,8 +173,6 @@ if(!$TCDIR) { $TCDIR="$HOME/.t_coffee"; }
 &add_dir ($TCM="$TCDIR/mcoffee");
 &add_dir ($TCMETHODS="$TCDIR/methods");
 &add_dir ($TCPLUGINS="$TCDIR/plugins/$OS");
-&add_dir ($TCBIN_DIR="$TCDIR/bin/");
-
 
 #Prepare the Installation Structure
 
@@ -199,7 +196,7 @@ if    (!$PLUGINS_DIR && !$ROOT_INSTALL){$PLUGINS_DIR=$TCPLUGINS;}
 elsif (!$PLUGINS_DIR &&  $ROOT_INSTALL){$PLUGINS_DIR="/usr/local/bin/";}
 
 #set the directory for t_coffee
-if    (!$INSTALL_DIR && !$ROOT_INSTALL){$INSTALL_DIR="$HOME/bin";mkpath ($INSTALL_DIR);}
+if    (!$INSTALL_DIR && !$ROOT_INSTALL){$INSTALL_DIR="$TCDIR/bin";mkpath ($INSTALL_DIR);}
 elsif (!$INSTALL_DIR &&  $ROOT_INSTALL){$INSTALL_DIR="/usr/local/bin/";}
 
 #prepare mcoffee files [Only if vanilla installation]
@@ -597,14 +594,14 @@ sub install
 	`$CP $BIN/* $PLUGINS_DIR`;
 	if (-e "$BIN/t_coffee")
 	  {
-	    `$CP $BIN/t_coffee $TCBIN_DIR`;
+	    `$CP $BIN/t_coffee $INSTALL_DIR`;
 	      unlink("$PLUGINS_DIR/t_coffee");
 	  }
 	$copied=1;
       }
     else
       {
-	$copied=&root_run ("You must be root to finalize the installation", "$CP $BIN/* $INSTALL_DIR $SILENT");
+	$copied=&root_run ("You must be root to finalize the installation", "$CP $BIN/* $PLUGINS_DIR $SILENT");
 	if (-e "$BIN/t_coffee")
 	  {
 	    &root_run ("You must be root to finalize the installation", "$CP $BIN/t_coffee $TCBIN_DIR");
