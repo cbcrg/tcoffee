@@ -57,7 +57,7 @@
 	<addEnvironmentVariable>
             <name>PLUGINS_4_TCOFFEE</name>
             <scope>user</scope>
-            <value>${installdir}/plugins/(</value>
+            <value>${installdir}/plugins/</value>
         </addEnvironmentVariable>
 
 	<!--  Append PERL5LIB if already exists -->
@@ -67,17 +67,12 @@
             <value>$PERL5LIB:$DIR_4_TCOFFEE/perl/lib/perl5</value>
         </addEnvironmentVariable>
 
-	<!--  Change the application PATH  -->
-	<addDirectoryToPath>
-            <insertAt>beginning</insertAt>
-            <path>${installdir}/bin/linux/</path>
-            <scope>user</scope>
-        </addDirectoryToPath>
+
 
 	<!--  Change the application PATH  -->
 	<addDirectoryToPath>
             <insertAt>beginning</insertAt>
-            <path>$DIR_4_TCOFFEE/bin/linux</path>
+            <path>$DIR_4_TCOFFEE/bin/</path>
             <scope>user</scope>
         </addDirectoryToPath>
 

@@ -284,7 +284,6 @@ function build_binaries()
 	rm -rf $TCDIR
 	mkdir -p $TCDIR
 	mkdir -p $TCDIR/bin
-	mkdir -p $TCDIR/bin/linux
 
 	# Make sure that does not exist already binaries
 	rm -rf $UNTARED/bin
@@ -292,10 +291,10 @@ function build_binaries()
 
 	# create t-coffee binaries installation
 	cd $UNTARED
-	./install all -tclinkdb=./tclinkdb.txt -repo=$BUILD_REPO -tcdir=$TCDIR -exec=$TCDIR/bin/linux || true
+	./install all -tclinkdb=./tclinkdb.txt -repo=$BUILD_REPO -tcdir=$TCDIR -exec=$TCDIR/bin || true
     
 	# Check that the binary has successfully compiled 
-	if [ ! -f $TCDIR/bin/linux/t_coffee ] 
+	if [ ! -f $TCDIR/bin/t_coffee ] 
 	then 
 		echo "Target 't_coffee' binary has not been compiled"
 		exit 1
