@@ -116,7 +116,7 @@ sub value2file
     {
       my ($value,$file)=@_;
       open (F, ">$file");
-      print F "$value\n";
+      print F "$value";
       close F;
     }
     
