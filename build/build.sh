@@ -139,6 +139,8 @@ INST_NAME=T-COFFEE_installer_"$VERSION"_"$OSNAME"_"$OSARCH"
 
 UNTARED=$SANDBOX/untared_distributions/T-COFFEE_distribution_"$VERSION"
 TCDIR=$SANDBOX/build
+EXECDIR=$TCDIR/bin/$OSNAME
+
 
 #
 # exported variabled (required by 'generic_makefile')
@@ -238,15 +240,15 @@ function build_binaries()
 
 	rm -rf $TCDIR
 	mkdir -p $TCDIR
-	mkdir -p $TCDIR/bin
-
+	mkdir -p $TCDIR/bin/$OSNAME
+	
 	# Make sure that does not exist already binaries
 	rm -rf $UNTARED/bin
 	mkdir -p $UNTARED/bin
 
 	# create t-coffee binaries installation
 	cd $UNTARED
-	./install all -tclinkdb=./tclinkdb.txt -repo=$BUILD_REPO -tcdir=$TCDIR -exec=$TCDIR/bin || true
+	./install all -tclinkdb=./tclinkdb.txt -repo=$BUILD_REPO -tcdir=$TCDIR -exec=$EXECDIR || true
     
 	# Check that the binary has successfully compiled 
 	if [ ! -f $TCDIR/bin/t_coffee ] 
@@ -254,7 +256,8 @@ function build_binaries()
 		echo "Target 't_coffee' binary has not been compiled"
 		exit 1
 	fi    
-    
+	# Put te binary in TCDIR/bin for test purposes
+	cp $EXECDIR/t_coffee $TCDIR/bin 
     
 	# add perl modules 
 	cp -r $PERLM $TCDIR
@@ -275,7 +278,7 @@ function build_binaries()
 	# add extra pack packages 
 	#
 	# + hmmtop
-	cp $WORKSPACE/tcoffee/build/extra/hmmtop/2.1/$OSNAME-$OSARCH/* $TCDIR/plugins/$OSNAME
+	#cp $WORKSPACE/tcoffee/build/extra/hmmtop/2.1/$OSNAME-$OSARCH/* $TCDIR/plugins/$OSNAME
 
 	# + secondary_struc.py (by Carsten)
 	cp $WORKSPACE/tcoffee/build/extra/secondary_struc.py $TCDIR/plugins/$OSNAME/secondary_struc.py
