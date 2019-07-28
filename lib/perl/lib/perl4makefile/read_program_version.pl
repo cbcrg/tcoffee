@@ -68,7 +68,7 @@ $github=github_file2value($githubF);
 $version_number="Version_$major_version\.$minor_version\.$build_version\.$github\n";
 value2file($version_number, $version_numberF);
 
-if ($pr){print "$version_number";}
+if ($pr){print "$version_number"; }
 
 
 
