@@ -94,7 +94,6 @@ if [ -z $DO_TEST ]; then
 DO_TEST=0
 fi 
 
-
 #
 # The Dropbox folder where to copy produces binaries 	
 #
@@ -198,10 +197,41 @@ function clean()
 #
 # Execute legacy doc_test target 
 #
-function doc_test() {
- 	echo "[ doc_test ]"
+function doc_test() { 
+	echo "[ doc_test ]"
+
+	set +u
+	if [ -z $TEST_HTML_PREFIX ]; 	then TEST_HTML_PREFIX="all"; fi
+	if [ -z $TEST_STOP ]; 			then TEST_STOP="error"; fi
+	if [ -z $TEST_DELETE ]; 		then TEST_DELETE="never"; fi
+	if [ -z $TEST_SANDBOX ];		then TEST_SANDBOX="$SANDBOX/test-results/all"; fi
+	if [ -z $TEST_OUTPUT ]; 		then TEST_OUTPUT="$SANDBOX/test-results/index.html"; fi
+	if [ -z $TEST_FILES ];			then TEST_FILES="-R ./all"; fi
+
+	TEST_CMDLINE="--var tcoffee.home=$TCDIR --stop $TEST_STOP --delete $TEST_DELETE --sandbox-dir \"$TEST_SANDBOX\" --html-path-prefix \"$TEST_HTML_PREFIX\" -o \"$TEST_OUTPUT\" $TEST_ARGS $TEST_FILES"
+	echo Test parameters: $TEST_CMDLINE
+	set -u
+	
+	# remove previous result (if any)
+	rm -rf $TEST_SANDBOX
+	
+	# run tests 
+	cd $WORKSPACE/tcoffee/testsuite/
+	
+	set +e
+	java -jar black-coffee.jar $TEST_CMDLINE
+
+	if [ $? != 0 ]; then
+		echo "Some test FAILED. Check result file: $TEST_OUTPUT "
+		exit 2
+	fi
+
+
+	if [ $? == 0 ]; then
+		echo "All tests PASSED. Check result file: $TEST_OUTPUT "
+	fi
 	set -e	
-	}
+}
 
 
 #
@@ -428,8 +458,7 @@ function tcoffee() {
 	build_and_pack_stable
 
 	if [ $DO_TEST == 1 ]; then
-	echo "skipped test"
-#	doc_test 
+	doc_test 
 	fi
 }
 
