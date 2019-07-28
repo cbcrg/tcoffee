@@ -1,0 +1,33 @@
+#
+# The main command w/o arguments display installation infortation
+#
+test: t_coffee    
+
+#
+# Displays the help info 
+#
+test: t_coffee -help    
+
+#
+# Display the help info
+# 
+test: t_coffee -help -in    
+
+#
+# do not check the exit value
+#
+test: t_coffee -update    
+disabled: true
+exit: 1
+assert: stdout contains 'Your version of T-COFFEE is not up to date'
+
+#
+# Display the T-coffee version information
+#
+test: t_coffee -version 
+
+#
+# T-Coffee dataset automated download
+#
+test: t_coffee -other_pg nature_protocol.pl
+assert: directory NatureProtocolsDataset exists

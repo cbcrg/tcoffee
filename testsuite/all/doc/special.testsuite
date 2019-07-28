@@ -1,33 +1,26 @@
 #
-# The main command w/o arguments display installation infortation
-#
-test: t_coffee    
+# all definitions 
+# Files in: ../../t_coffee/doc_test
+# Test Results in: http://www.tcoffee.org/Packages/tests/
+# The test can be monitored on: https://circleci.com/gh/cbcrg/tcoffee/178
+
+timeout: 30min
+input: ../../../t_coffee/doc_test/data
 
 #
-# Displays the help info 
+# common assertions
 #
-test: t_coffee -help    
+assert: stderr not contains 'ERROR'
+assert: stderr not contains 'FATAL'
+assert: stderr not contains 'FAILURE'
+assert: file t_coffee.ErrorReport !exists
+
 
 #
-# Display the help info
-# 
-test: t_coffee -help -in    
+# Tests start here 
+#
 
-#
-# do not check the exit value
-#
-test: t_coffee -update    
-disabled: true
-exit: 1
-assert: stdout contains 'Your version of T-COFFEE is not up to date'
 
-#
-# Display the T-coffee version information
-#
-test: t_coffee -version 
 
-#
-# T-Coffee dataset automated download
-#
-test: t_coffee -other_pg nature_protocol.pl
-assert: directory NatureProtocolsDataset exists
+# The accurate mode requires a longer timeout
+
