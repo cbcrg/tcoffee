@@ -28,13 +28,13 @@ export RELEASE=${RELEASE:-0}
 #
 # default SVN revision number 
 #
-if [ -z $GIT_REVISION ]; then 
+
 GIT_REVISION=`( cd $WORKSPACE/tcoffee; git rev-parse --short HEAD; )`
 fi
 
 if [ "$GIT_REVISION" == "" ]; then 
-    echo 'Missing $GIT_REVISION value. Cannot continue the build process.' 
-    exit 1
+  echo 'Missing $GIT_REVISION value. Cannot continue the build process.' 
+  exit 1
 fi
 
 #
@@ -47,9 +47,10 @@ fi
 #
 # Define the VERSION number 
 #
-
-export VERSION="`cat $WORKSPACE/tcoffee/lib/version/version_number.version`"
-
+#CN:28/07/19: rmoved the $GIT_revision, as now generated ny makefile. export VERSION="`cat $WORKSPACE/tcoffee/lib/version/version_number.version`.$GIT_REVISION"
+if [[ (-z $VERSION) || ($VERSION == auto) ]]; then 
+	export VERSION="`cat $WORKSPACE/tcoffee/lib/version/version_number.version`"
+fi
 
 #
 # The date timestamp string contains also the svn revision number
@@ -65,6 +66,11 @@ if [ -z $BUILD_INFO ]; then
 export BUILD_INFO="`date +"%Y-%m-%d %H:%M:%S"` - Revision $GIT_REVISION - Build $BUILD_NUMBER"
 fi
 
+
+# default bin path 
+if [ -z $USER_BIN ]; then 
+export USER_BIN=$WORKSPACE/bin/
+fi
 
 #
 # default third party binaries cache location 
@@ -293,13 +299,13 @@ function build_binaries()
 		echo "Target 't_coffee' binary has not been compiled"
 		exit 1
 	fi    
-	
+    
     
 	# add perl modules 
 	cp -r $PERLM $TCDIR
 	#mkdir -p $TCDIR/perl
 	#cp $WORKSPACE/tcoffee/build/cpanm  $TCDIR/perl	
-        #chmod +x $TCDIR/perl/cpanm
+    #chmod +x $TCDIR/perl/cpanm
 
 	# add gfortran libraries
 	if [ $OSNAME == "macosx" ] 
@@ -344,6 +350,10 @@ function pack_binaries() {
 	echo "[ pack_binaries ]"
 	echo Package name: $INST_NAME 
 
+	# remove the t_coffee binaries from 'plugins' folder 
+	# it have to exist in 'bin' folder  
+	# Cedric This should now be fixed	
+        # rm -rf $TCDIR/plugins/$OSNAME/t_coffee
 
     # copy the sources 
     rm -rf $TCDIR/src
