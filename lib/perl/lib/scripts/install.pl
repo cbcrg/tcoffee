@@ -419,9 +419,9 @@ print "*********************************************************************\n";
 print "------- Your third party executables are in:\n"; 
 print "-------       $PLUGINS_DIR:\n";
 print "------- Your t_coffee exccutable is in\n";
-print "-------       $TCBIN_DIR:\n";
+print "-------       $INSTALL_DIR:\n";
 print "------- In order to make your installation permanent add these two lines\n";
-print "-------       export PATH=$TCBIN_DIR:\$PATH\n";
+print "-------       export PATH=$INSTALL_DIR:\$PATH\n";
 print "-------       export PLUGINS_4_TCOFFEE=$PLUGINS_DIR:\n";
 if ($OS eq "linux")
   {
@@ -604,7 +604,7 @@ sub install
 	$copied=&root_run ("You must be root to finalize the installation", "$CP $BIN/* $PLUGINS_DIR $SILENT");
 	if (-e "$BIN/t_coffee")
 	  {
-	    &root_run ("You must be root to finalize the installation", "$CP $BIN/t_coffee $TCBIN_DIR");
+	    &root_run ("You must be root to finalize the installation", "$CP $BIN/t_coffee $INSTALL_DIR");
 	    &root_run ("You must be root to finalize the installation", "rm  $PLUGINS_DIR/t_coffee");
 	  }
       }
@@ -620,7 +620,7 @@ sub install
     }
   elsif ( $copied && !$ROOT)
     {
-      $report= "*!!!!!! T-Coffee has been installed in $TCBIN_DIR\n";
+      $report= "*!!!!!! T-Coffee has been installed in $INSTALL_DIR\n";
       $report= "*!!!!!! T-Coffee and associated packages have been copied in: $PLUGINS_DIR\n";
       $report.="*!!!!!! This T-Coffee location is NOT on your PATH sytem variable\n";
       if ( $OS eq "linux")
@@ -631,7 +631,7 @@ sub install
 	{
 	  $report.="*!!!!!! You can do so by adding the following line in your ~/.profile file:\n";
 	}
-      $report.="*!!!!!! export PATH=$TCBIN_DIR:\$PATH\n";
+      $report.="*!!!!!! export PATH=$INSTALL_DIR:\$PATH\n";
     }
   return $report;
 }
