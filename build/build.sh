@@ -284,6 +284,7 @@ function build_binaries()
 	rm -rf $TCDIR
 	mkdir -p $TCDIR
 	mkdir -p $TCDIR/bin
+	mkdir -p $TCDIR/bin/linux
 
 	# Make sure that does not exist already binaries
 	rm -rf $UNTARED/bin
