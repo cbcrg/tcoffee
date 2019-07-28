@@ -8,7 +8,7 @@
 # $OSNAME	: the target platform name i.e. linux, macosx, windows		
 # $OSARCH	: the target platform architecture i.e. i386, x64
 # $BUILD_REPO   : (optional) shared path to cache thirdy parts tools compiled binaries
-# $GIT_REVISION : (optional) the svn revision used to mark this buld
+# $GIT_REVISION : (optional) the svn revision used to mark this build
 # $VERSION 	: (optional) the version used to tag this build
 # $BUILD_REPO	: (optional) the path where compiled binaries will be cached
 # $USER_BIN	: (deprecated) path where store binary to be used 

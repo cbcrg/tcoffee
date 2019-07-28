@@ -729,6 +729,52 @@ int batch_main ( int argc, char **argv)
 			    /*Min_value*/ "any"          ,		\
 			    /*Max Value*/ "any"				\
 					  );
+
+
+
+	       declare_name (plugins);
+	       get_cl_param(					\
+			    /*argc*/      argc           ,	\
+			    /*argv*/      argv           ,	\
+			    /*output*/    &le            ,	\
+			    /*Name*/      "-plugins",		\
+			    /*Flag*/      &garbage       ,	\
+			    /*TYPE*/      "S"          ,	\
+			    /*OPTIONAL?*/ OPTIONAL       ,		\
+			    /*MAX Nval*/  1              ,		\
+			    /*DOC*/       "Set the directory containing the plugins [no if no plugin]",	\
+			    /*Parameter*/ &plugins   ,			\
+			    /*Def 1*/    "default"       ,		\
+			    /*Def 2*/    ""              ,		\
+			    /*Min_value*/ "any"          ,		\
+			    /*Max Value*/ "any"				\
+					  );
+	       if (!strm (plugins,"default"))
+		 {
+		   cputenv ("LOCAL_PLUGINS_4_TCOFFEE=%s", plugins);// single use environement variable
+		   get_plugins_4_tcoffee();
+		 }
+	       
+	       declare_name (plugins_order);
+	       get_cl_param(					\
+			    /*argc*/      argc           ,	\
+			    /*argv*/      argv           ,	\
+			    /*output*/    &le            ,	\
+			    /*Name*/      "-plugins_order",	\
+			    /*Flag*/      &garbage       ,	\
+			    /*TYPE*/      "S"          ,	\
+			    /*OPTIONAL?*/ OPTIONAL       ,		\
+			    /*MAX Nval*/  1              ,		\
+			    /*DOC*/       "first or last. Set the order of the plugins for T-Coffee. First means the plugins are used first. Last means that local installations are used first and the plugins only used if the local installation cannot", \
+			    /*Parameter*/ &plugins_order   ,		\
+			    /*Def 1*/    "first"       ,		\
+			    /*Def 2*/    ""              ,		\
+			    /*Min_value*/ "any"          ,		\
+			    /*Max Value*/ "any"				\
+					  );
+	       if (strm (plugins_order,"first"))cputenv4pathFirst(get_plugins_4_tcoffee());
+	       else cputenv4pathLast(get_plugins_4_tcoffee());
+	       
 	       if (reg || dpa)reg=dpa=1;
 	       
 	       
@@ -3756,49 +3802,9 @@ get_cl_param(\
 			    /*Max Value*/ "1"				\
 		   );
 	       set_int_variable ("run_local_script", run_local_script);
-	       declare_name (plugins);
-	       get_cl_param(					\
-			    /*argc*/      argc           ,\
-			    /*argv*/      argv           ,	\
-			    /*output*/    &le            ,\
-			    /*Name*/      "-plugins",\
-			    /*Flag*/      &garbage       ,	\
-			    /*TYPE*/      "S"          ,	\
-			    /*OPTIONAL?*/ OPTIONAL       ,	\
-			    /*MAX Nval*/  1              ,		\
-			    /*DOC*/       "Set the directory containing the plugins [no if no plugin]",	\
-			    /*Parameter*/ &plugins   ,		\
-			    /*Def 1*/    "default"       ,			\
-			    /*Def 2*/    ""              ,		\
-			    /*Min_value*/ "any"          ,		\
-			    /*Max Value*/ "any"				\
-		   );
-	       if (!strm (plugins,"default"))
-		 {
-		   cputenv ("LOCAL_PLUGINS_4_TCOFFEE=%s", plugins);// single use environement variable
-		   get_plugins_4_tcoffee();
-		 }
+
 	       
-	       declare_name (plugins_order);
-	       get_cl_param(					\
-			    /*argc*/      argc           ,\
-			    /*argv*/      argv           ,	\
-			    /*output*/    &le            ,\
-			    /*Name*/      "-plugins_order",\
-			    /*Flag*/      &garbage       ,	\
-			    /*TYPE*/      "S"          ,	\
-			    /*OPTIONAL?*/ OPTIONAL       ,	\
-			    /*MAX Nval*/  1              ,		\
-			    /*DOC*/       "first or last. Set the order of the plugins for T-Coffee. First means the plugins are used first. Last means that local installations are used first and the plugins only used if the local installation cannot",	\
-			    /*Parameter*/ &plugins_order   ,		\
-			    /*Def 1*/    "first"       ,			\
-			    /*Def 2*/    ""              ,		\
-			    /*Min_value*/ "any"          ,		\
-			    /*Max Value*/ "any"				\
-					  );
-	       if (strm (plugins_order,"first"))cputenv4pathFirst(get_plugins_4_tcoffee());
-	       else cputenv4pathLast(get_plugins_4_tcoffee());
-	       
+
 	       
 	       declare_name (proxy);
 	       get_cl_param(\
