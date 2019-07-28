@@ -11,6 +11,7 @@ my $minor_versionF;
 my $major_versionF;
 my $githubF;
 my $version_numberF;
+my $releaseF;
 
 my $build_version;
 my $minor_version;
@@ -36,6 +37,7 @@ $build_versionF=$path."/build_version.version";
 $minor_versionF=$path."/minor_version.version";
 $major_versionF=$path."/major_version.version";
 $githubF=$path."/github.version";
+$releaseF=$patth."new_release";
 $version_numberF=$path."/version_number.version";
 
 
@@ -43,16 +45,20 @@ if (!-e $build_versionF){print STDERR "build_version File [$build_versionF] coul
 if (!-e $minor_versionF){print STDERR "minor_version File [$minor_versionF] could not be opened [FATAL:read_program_version.pl]\n";die;}
 if (!-e $major_versionF){print STDERR "major_version File [$major_versionF] could not be opened [FATAL:read_program_version.pl]\n";die;}
 
+
+
 if (($cl=~/-beta/))
   {
     increase ($build_versionF, 1);
     if ($ENV{'TC_MASTER_NODE'}){system ("git branch -v  >$githubF");}
+    value2file(0, $new_releaseF);
   }
 elsif ( ($cl=~/-stable/))
   {
     value2file(0, $build_versionF);
     increase   ($minor_versionF, 1);
     if ($ENV{'TC_MASTER_NODE'}){system ("git branch -v  >$githubF");}
+    value2file(1, $new_releaseF);
   }
 elsif ( ($cl=~/-major/))
   {
@@ -60,6 +66,7 @@ elsif ( ($cl=~/-major/))
     value2file(0, $minor_versionF);
     increase   ($major_versionF, 1);
     if ($ENV{'TC_MASTER_NODE'}){system ("git branch -v  >$githubF");}
+    value2file(1, $new_releaseF);
   }
 
 $build_version=file2value($build_versionF);
