@@ -55,7 +55,7 @@ elsif ( ($cl=~/-major/))
     increase   ($major_versionF, 1);
   }
 
-#if ($ENV{'TC_MASTER_NODE'}){system ("git branch -v  >$githubF");}
+#if ($ENV{'TC_MASTER_NODE'}){system ("git branch -v  >$githubF") ;}
 if ($ENV{'TC_MASTER_NODE'}){system ("git rev-parse --short HEAD  >$githubF");}
 
 $build_version=file2value($build_versionF);
