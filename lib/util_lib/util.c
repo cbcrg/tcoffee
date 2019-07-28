@@ -5198,28 +5198,7 @@ FILE * print_command_line (FILE *fp )
   return fp;
 }
 int check_dir_getenv ( char *string);
-char *get_plugins_4_tcoffee_old ( char *mode)
-{
-  static char *plugins_4_tcoffee;
 
-  if ( !plugins_4_tcoffee)plugins_4_tcoffee=(char*)vcalloc ( 1000, sizeof (char));
-
-  if (mode)plugins_4_tcoffee[0]='\0';
-
-
-  if ( plugins_4_tcoffee[0])return plugins_4_tcoffee;
-  else if ( mode) sprintf (plugins_4_tcoffee, "%s", mode);
-  else if ( check_dir_getenv ("PLUGINS_4_TCOFFEE"))
-    {
-      sprintf (plugins_4_tcoffee, "%s", getenv ("PLUGINS_4_TCOFFEE"));
-    }
-  else
-    {
-      sprintf (plugins_4_tcoffee, "%s/plugins/%s/", get_dir_4_tcoffee(), get_os());
-    }
-  //if (!isdir (plugins_4_tcoffee)){printf_exit (EXIT_FAILURE, stderr, "ERROR: The declared plugin directory for T-Coffee is invalid: [%s] [FATAL:%s %s]", plugins_4_tcoffee, PROGRAM, VERSION); }
-  return plugins_4_tcoffee;
-}
 char *get_home_4_tcoffee ()
 {
   static char *home_4_tcoffee;
@@ -5411,7 +5390,7 @@ char *get_plugins_4_tcoffee ()
     {
       
       if (getenv ("UNIQUE_DIR_4_TCOFFEE"))sprintf (plugins_4_tcoffee, "%s/", getenv("UNIQUE_DIR_4_TCOFFEE"));
-      else if (isdir4path (getenv("PLUGINS_4_TCOFFEE")))sprintf (plugins_4_tcoffee, "%s/%s/", getenv("PLUGINS_4_TCOFFEE"),get_os() );
+      else if (isdir4path (getenv("PLUGINS_4_TCOFFEE")))sprintf (plugins_4_tcoffee, "%s/", getenv("PLUGINS_4_TCOFFEE"));
       else sprintf (plugins_4_tcoffee, "%s/plugins/%s/", get_dir_4_tcoffee(), get_os());
       my_mkdir(plugins_4_tcoffee);
     }

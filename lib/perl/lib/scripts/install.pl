@@ -196,7 +196,7 @@ if    (!$PLUGINS_DIR && !$ROOT_INSTALL){$PLUGINS_DIR=$TCPLUGINS;}
 elsif (!$PLUGINS_DIR &&  $ROOT_INSTALL){$PLUGINS_DIR="/usr/local/bin/";}
 
 #set the directory for t_coffee
-if    (!$INSTALL_DIR && !$ROOT_INSTALL){$INSTALL_DIR="$TCDIR/bin";mkpath ($INSTALL_DIR);}
+if    (!$INSTALL_DIR && !$ROOT_INSTALL){$INSTALL_DIR="$TCDIR/bin/$OS";mkpath ($INSTALL_DIR);}
 elsif (!$INSTALL_DIR &&  $ROOT_INSTALL){$INSTALL_DIR="/usr/local/bin/";}
 
 #prepare mcoffee files [Only if vanilla installation]
