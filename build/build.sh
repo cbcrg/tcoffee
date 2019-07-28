@@ -28,13 +28,13 @@ export RELEASE=${RELEASE:-0}
 #
 # default SVN revision number 
 #
-
+if [ -z $GIT_REVISION ]; then 
 GIT_REVISION=`( cd $WORKSPACE/tcoffee; git rev-parse --short HEAD; )`
 fi
 
 if [ "$GIT_REVISION" == "" ]; then 
-  echo 'Missing $GIT_REVISION value. Cannot continue the build process.' 
-  exit 1
+    echo 'Missing $GIT_REVISION value. Cannot continue the build process.' 
+    exit 1
 fi
 
 #
@@ -47,10 +47,9 @@ fi
 #
 # Define the VERSION number 
 #
-#CN:28/07/19: rmoved the $GIT_revision, as now generated ny makefile. export VERSION="`cat $WORKSPACE/tcoffee/lib/version/version_number.version`.$GIT_REVISION"
-if [[ (-z $VERSION) || ($VERSION == auto) ]]; then 
-	export VERSION="`cat $WORKSPACE/tcoffee/lib/version/version_number.version`"
-fi
+
+export VERSION="`cat $WORKSPACE/tcoffee/lib/version/version_number.version`"
+
 
 #
 # The date timestamp string contains also the svn revision number
@@ -479,4 +478,3 @@ else
     echo "Usage: build <target>"
     exit 1
 fi
-
