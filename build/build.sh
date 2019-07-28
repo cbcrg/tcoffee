@@ -44,7 +44,13 @@ if [ -z $BUILD_NUMBER ]; then
 	BUILD_NUMBER=0
 fi
 
-
+#
+# Define the VERSION number 
+#
+#CN:28/07/19: rmoved the $GIT_revision, as now generated ny makefile. export VERSION="`cat $WORKSPACE/tcoffee/lib/version/version_number.version`.$GIT_REVISION"
+if [[ (-z $VERSION) || ($VERSION == auto) ]]; then 
+	export VERSION="`cat $WORKSPACE/tcoffee/lib/version/version_number.version`"
+fi
 
 #
 # The date timestamp string contains also the svn revision number
@@ -127,12 +133,6 @@ DIST_BASE=$SANDBOX/distributions/Stable/
 else
 DIST_BASE=$SANDBOX/distributions/Beta/
 fi
-
-
-#
-# Define the VERSION number 
-
-VERSION="`cat $WORKSPACE/tcoffee/lib/version/version_number.version`"
 
 # Distribution package file name
 DIST_DIR=$DIST_BASE/$VERSION
@@ -479,5 +479,4 @@ else
     echo "Usage: build <target>"
     exit 1
 fi
-
 

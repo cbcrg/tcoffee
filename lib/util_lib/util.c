@@ -9922,11 +9922,10 @@ char ** standard_initialisation  (char **in_argv, int *in_argc)
   lock(getpid(),LLOCK, LRESET, "%d\n",getppid());//set the main lock
   if (is_shellpid(getppid()))lock(getppid(),LLOCK, LSET, "%d\n",getpid());//update parent lock when parent is shell
 
-  exit (0);
+  
   //set special Variables
   if (!getenv ("USE_MAFFT_BINARIES") && getenv ("MAFFT_BINARIES"))
     {
-      exit (0);
       unsetenv("MAFFT_BINARIES");
     }
  
