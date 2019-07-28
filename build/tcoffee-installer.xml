@@ -47,8 +47,7 @@
     </readyToInstallActionList>
 
     <postInstallationActionList>
-    <setInstallerVariable name="myos" value="linux"/>
-	<!-- T-Coffee HOME directory  -->
+    	<!-- T-Coffee HOME directory  -->
 	<addEnvironmentVariable>
             <name>DIR_4_TCOFFEE</name>
             <scope>user</scope>
@@ -74,7 +73,7 @@
 	<!--  Change the application PATH  -->
 	<addDirectoryToPath>
             <insertAt>beginning</insertAt>
-            <path>$DIR_4_TCOFFEE/bin/${myos}</path>
+            <path>$DIR_4_TCOFFEE/bin/${osname}</path>
             <scope>user</scope>
         </addDirectoryToPath>
 
