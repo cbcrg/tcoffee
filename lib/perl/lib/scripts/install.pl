@@ -180,10 +180,10 @@ if(!$TCDIR) { $TCDIR="$HOME/.t_coffee"; }
 #Prepare the Installation Structure
 
 our $BASE="$CD/bin";
-our $BIN="$BASE/binaries/$OS";
-our $DOWNLOAD_DIR="$BASE/download";
+our $BIN="$BASE/cache/binaries/$OS";
+our $DOWNLOAD_DIR="$BASE/cache/download";
 our $DOWNLOAD_FILE="$DOWNLOAD_DIR/files";
-our $TMP="$BASE/tmp";
+our $TMP="$BASE/cache/tmp";
 
 &add_dir($BASE);
 &add_dir($BIN);
@@ -419,12 +419,21 @@ if ($failure)
 print "*********************************************************************\n";
 print "********              FINALIZE YOUR INSTALLATION    *****************\n";
 print "*********************************************************************\n";
-print "------- Your executables are in:\n"; 
+print "------- Your third party executables are in:\n"; 
 print "-------       $PLUGINS_DIR:\n";
-print "------- Add this directory to your path with the following command:\n";
-print "-------       export PATH=$PLUGINS_DIR:\$PATH\n";
-print "------- Make this permanent by adding this line to the file:\n";
-print "-------       $HOME/.bashrc\n";
+print "------- Your t_coffee exccutable is in\n";
+print "-------       $TCBIN_DIR:\n";
+print "------- In order to make your installation permanent add these two lines\n";
+print "-------       export PATH=$TCBIN_DIR:\$PATH\n";
+print "-------       export PLUGINS_4_TCOFFEE=$PLUGINS_DIR:\n";
+if ($OS eq "linux")
+  {
+    print "-------       to the file: $HOME/.bashrc\n";
+  }
+else 
+  {
+    print "-------       to the file: $HOME/.profile\n";
+  }
 exit ($EXIT_SUCCESS);  
   
 #################################################################################
