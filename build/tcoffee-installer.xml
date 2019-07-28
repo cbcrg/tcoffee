@@ -9,7 +9,7 @@
     <licenseFile>${untared}/license.txt</licenseFile>
     <preInstallationActionList>
     </preInstallationActionList>
-
+    
     <readyToInstallActionList>
         <createBackupFile>
             <abortOnError>0</abortOnError>
@@ -47,6 +47,7 @@
     </readyToInstallActionList>
 
     <postInstallationActionList>
+    <setInstallerVariable name="myos" value="linux"/>
 	<!-- T-Coffee HOME directory  -->
 	<addEnvironmentVariable>
             <name>DIR_4_TCOFFEE</name>
