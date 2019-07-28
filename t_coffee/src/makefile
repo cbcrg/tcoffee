@@ -306,21 +306,21 @@ packing:
 
 github:
 	git commit -a -m '$(m)'
-	$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print >$(WEB_DIR)/Packages/T-COFFEE.version)	
+	$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print -$(release_type)>$(WEB_DIR)/Packages/T-COFFEE.version)	
 	$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print >$(WEB_DIR)/Packages/T-COFFEE.version.$(release_type))
 
 beta:
-	make github VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -beta -print) release_type='beta'
+	make github release_type='beta'
 	make distribution VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print)
 	make finish_release VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print) target_dir=$(BETA_SOURCES) target_file=$(BETA_SOURCES_FILE)
 
 stable:
-	make github VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -stable -print) release_type='stable'
+	make github  release_type='stable'
 	make distribution VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print)
 	make finish_release VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print) target_dir=$(STABLE_SOURCES) target_file=$(STABLE_SOURCES_FILE)
 
 major:
-	make github VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -major -print) release_type='major'
+	make github  release_type='major'
 	make distribution VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print)		
 	make finish_release VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print) target_dir=$(STABLE_SOURCES) target_file=$(STABLE_SOURCES_FILE)
 
