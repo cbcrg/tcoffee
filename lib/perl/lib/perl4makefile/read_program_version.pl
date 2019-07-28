@@ -51,14 +51,14 @@ if (($cl=~/-beta/))
   {
     increase ($build_versionF, 1);
     if ($ENV{'TC_MASTER_NODE'}){system ("git branch -v  >$githubF");}
-    value2file(0, $new_releaseF);
+    unlink($new_releaseF);
   }
 elsif ( ($cl=~/-stable/))
   {
     value2file(0, $build_versionF);
     increase   ($minor_versionF, 1);
     if ($ENV{'TC_MASTER_NODE'}){system ("git branch -v  >$githubF");}
-    value2file(1, $new_releaseF);
+    value2file(1,$new_releaseF);
   }
 elsif ( ($cl=~/-major/))
   {
