@@ -5390,7 +5390,7 @@ char *get_plugins_4_tcoffee ()
     {
       
       if (getenv ("UNIQUE_DIR_4_TCOFFEE"))sprintf (plugins_4_tcoffee, "%s/", getenv("UNIQUE_DIR_4_TCOFFEE"));
-      else if (isdir4path (getenv("PLUGINS_4_TCOFFEE")))sprintf (plugins_4_tcoffee, "%s/", getenv("PLUGINS_4_TCOFFEE") );
+      else if (isdir4path (getenv("PLUGINS_4_TCOFFEE")))sprintf (plugins_4_tcoffee, "%s/%s/", getenv("PLUGINS_4_TCOFFEE"),get_os() );
       else sprintf (plugins_4_tcoffee, "%s/plugins/%s/", get_dir_4_tcoffee(), get_os());
       my_mkdir(plugins_4_tcoffee);
     }

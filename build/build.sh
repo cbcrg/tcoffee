@@ -89,6 +89,10 @@ if [ -z $INSTALLER ]; then
 	fi
 fi
 
+# Flag DO_TEST, if true test are executed (default: false)
+if [ -z $DO_TEST ]; then 
+DO_TEST=0
+fi 
 
 #
 # The Dropbox folder where to copy produces binaries 	
@@ -139,8 +143,6 @@ INST_NAME=T-COFFEE_installer_"$VERSION"_"$OSNAME"_"$OSARCH"
 
 UNTARED=$SANDBOX/untared_distributions/T-COFFEE_distribution_"$VERSION"
 TCDIR=$SANDBOX/build
-EXECDIR=$TCDIR/bin/$OSNAME
-
 
 #
 # exported variabled (required by 'generic_makefile')
@@ -179,7 +181,7 @@ function env()
   echo ". DIST_NAME   : $DIST_NAME"
   echo ". DIST_HOST   : $DIST_HOST"
   echo ". INST_NAME   : $INST_NAME"
-
+  echo ". DO_TEST     : $DO_TEST"
 }
 
 #
@@ -192,7 +194,47 @@ function clean()
 
 }
 
+#
+# Execute legacy doc_test target 
+#
+function doc_test() { 
+	echo "[ doc_test ]"
 
+	set +u
+	if [ -z $TEST_HTML_PREFIX ]; 	then TEST_HTML_PREFIX="all"; fi
+	if [ -z $TEST_STOP ]; 			then TEST_STOP="error"; fi
+	if [ -z $TEST_DELETE ]; 		then TEST_DELETE="never"; fi
+	if [ -z $TEST_SANDBOX ];		then TEST_SANDBOX="$SANDBOX/test-results/all"; fi
+	if [ -z $TEST_OUTPUT ]; 		then TEST_OUTPUT="$SANDBOX/test-results/index.html"; fi
+	if [ -z $TEST_FILES ];			then TEST_FILES="-R ./all"; fi
+
+	TEST_CMDLINE="--var tcoffee.home=$TCDIR --stop $TEST_STOP --delete $TEST_DELETE --sandbox-dir \"$TEST_SANDBOX\" --html-path-prefix \"$TEST_HTML_PREFIX\" -o \"$TEST_OUTPUT\" $TEST_ARGS $TEST_FILES"
+	echo Test parameters: $TEST_CMDLINE
+	set -u
+	
+	# remove previous result (if any)
+	rm -rf $TEST_SANDBOX
+	
+	# run tests 
+	cd $WORKSPACE/tcoffee/testsuite/
+	
+	set +e
+	java -jar black-coffee.jar $TEST_CMDLINE
+
+	if [ $? != 0 ]; then
+		echo "Some test FAILED. Check result file: $TEST_OUTPUT "
+		exit 2
+	fi
+
+
+	if [ $? == 0 ]; then
+		echo "All tests PASSED. Check result file: $TEST_OUTPUT "
+	fi
+	set -e	
+}
+
+
+#
 # rename temporary makefile and run it
 #
 function build_dist() 
@@ -240,15 +282,15 @@ function build_binaries()
 
 	rm -rf $TCDIR
 	mkdir -p $TCDIR
-	mkdir -p $TCDIR/bin/$OSNAME
-	
+	mkdir -p $TCDIR/bin
+
 	# Make sure that does not exist already binaries
 	rm -rf $UNTARED/bin
 	mkdir -p $UNTARED/bin
 
 	# create t-coffee binaries installation
 	cd $UNTARED
-	./install all -tclinkdb=./tclinkdb.txt -repo=$BUILD_REPO -tcdir=$TCDIR -exec=$EXECDIR || true
+	./install all -tclinkdb=./tclinkdb.txt -repo=$BUILD_REPO -tcdir=$TCDIR -exec=$TCDIR/bin || true
     
 	# Check that the binary has successfully compiled 
 	if [ ! -f $TCDIR/bin/t_coffee ] 
@@ -256,8 +298,7 @@ function build_binaries()
 		echo "Target 't_coffee' binary has not been compiled"
 		exit 1
 	fi    
-	# Put te binary in TCDIR/bin for test purposes
-	cp $EXECDIR/t_coffee $TCDIR/bin 
+    
     
 	# add perl modules 
 	cp -r $PERLM $TCDIR
@@ -278,7 +319,7 @@ function build_binaries()
 	# add extra pack packages 
 	#
 	# + hmmtop
-	#cp $WORKSPACE/tcoffee/build/extra/hmmtop/2.1/$OSNAME-$OSARCH/* $TCDIR/plugins/$OSNAME
+	cp $WORKSPACE/tcoffee/build/extra/hmmtop/2.1/$OSNAME-$OSARCH/* $TCDIR/plugins/$OSNAME
 
 	# + secondary_struc.py (by Carsten)
 	cp $WORKSPACE/tcoffee/build/extra/secondary_struc.py $TCDIR/plugins/$OSNAME/secondary_struc.py
@@ -415,6 +456,10 @@ function tcoffee() {
     
 	build_dist
 	build_and_pack_stable
+
+	if [ $DO_TEST == 1 ]; then
+	doc_test 
+	fi
 }
 
 
