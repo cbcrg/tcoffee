@@ -136,6 +136,7 @@ DISTRIB_DOC=$(DISTRIB_DIR)/doc
 distribution:
 #	-rm *.c
 #	-rm *.h
+	lalala
 	make -i VERSION=$(VERSION) CC=cc general_distribution
 	make -i VERSION=$(VERSION) CC=cc examples
 	make -i VERSION=$(VERSION) CC=cc mcoffee
@@ -344,7 +345,6 @@ major:
 	make finish_release  target_dir=$(STABLE_SOURCES) target_file=$(STABLE_SOURCES_FILE)
 
 finish_release:
-	kakakak
 	make distribution VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print)	
 	mkdir -p $(target_dir)
 	mkdir -p $(ARCHIVE_SOURCES)
