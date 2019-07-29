@@ -242,6 +242,9 @@ code:
 	cp $(KO_LIB)/tclinkdb.txt $(DISTRIB_DIR)
 	chmod u+x $(DISTRIB_DIR)/install
 	echo $(DISTRIB_DIR)/install
+	echo $(VERSION)
+	echo $(PERL4MAKEFILE_LIB)/edit_version.pl
+	echo $(PERL4MAKEFILE_LIB)/edit_version.pl -target=$(DISTRIB_DIR)/install -tag=XXX -version=$(VERSION)
 	$(shell $(PERL4MAKEFILE_LIB)/edit_version.pl -target=$(DISTRIB_DIR)/install -tag=XXX -version=$(VERSION))
 	gsgsgs
 
