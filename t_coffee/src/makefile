@@ -241,13 +241,11 @@ code:
 	$(PERL4MAKEFILE_LIB)/tclinkdb2header.pl -infile=$(SCRIPT_LIB)/install.pl -mode=Perl -db=$(KO_LIB)/tclinkdb.txt >$(DISTRIB_DIR)/install
 	cp $(KO_LIB)/tclinkdb.txt $(DISTRIB_DIR)
 	chmod u+x $(DISTRIB_DIR)/install
-	echo $(DISTRIB_DIR)/install
-	echo $(VERSION)
-	echo $(PERL4MAKEFILE_LIB)/edit_version.pl
-	echo $(PERL4MAKEFILE_LIB)/edit_version.pl -target=$(DISTRIB_DIR)/install -tag=XXX -version=$(VERSION)
-	$(shell $(PERL4MAKEFILE_LIB)/edit_version.pl -target=$(DISTRIB_DIR)/install -tag="XXX" -version=$(VERSION))
-	gsgsgs
+	makeinstall2version VERSION=$(VERSION)
+	ggggg
 
+install2version:
+	$(shell $(PERL4MAKEFILE_LIB)/edit_version.pl -target=$(DISTRIB_DIR)/install -tag="XXX" -version=$(VERSION))
 # 
 # This target copies T-Coffee sources files from the library folder 
 # to the distribution folder. 

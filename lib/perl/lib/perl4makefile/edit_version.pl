@@ -18,8 +18,6 @@ if ( ($cl=~/-versionF=\s*(\S+)/)){$versionF=$1;}
 if ($versionF){$version=file2value($versionF);}
 file2edit_file ($target, $tag, $version);
 
-print "TAG=$tag\n";
-
 
 sub file2edit_file
       {
