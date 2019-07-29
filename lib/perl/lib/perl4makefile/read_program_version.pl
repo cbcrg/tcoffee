@@ -25,10 +25,17 @@ my $pr;
 
 my $cl=join( " ", @ARGV);
 
-if ( ($cl=~/-path=\s*(\S+)/)){$path=$1;}
+
+if ( ($cl=~/-path=\s*(\S+)/))
+  {
+    $path=$1;
+  }
 else {$path="./";}
 
-if ( ($cl=~/-circleci=\s*(\S+)/)){$circleciF=$1;}
+if ( ($cl=~/-circleci=\s*(\S+)/))
+  {
+    $circleciF=$1;
+  }
 else {$circleciF="./.circleci/config.yml";}
 
 if ( ($cl=~/-print/)){$pr=1;}
@@ -145,7 +152,7 @@ sub circleci2releaseV
 	   print $line;
 	   if ( $line=~/\#UPDATE_RELEASE_STATUS/)
 	     {
-	       $line=~s/RELEASE=\".\"/RELEASE=$value/;
+	       $line=~s/RELEASE=\".\"/RELEASE=\"$value\"/;
 	     }
 	   $new_file.=$line;
 	 }

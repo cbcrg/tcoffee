@@ -63,7 +63,7 @@ VER_DIR=$(LIB_DIR)/version/
 endif
 
 ifndef CIRCLECI_CONFIG
-VER_DIR=$(GIT_DIR)/.circleci/config.yml
+CIRCLECI_CONFIG=$(GIT_DIR)/.circleci/config.yml
 endif
 
 
@@ -320,8 +320,9 @@ packing:
 github:
 	make version release_type=$(release_type)
 	git commit -a -m '$(m)'
+
 version:
-	$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print -$(release_type) -circleci=$(CIRCLECI_CONFIG)>$(WEB_DIR)/Packages/T-COFFEE.version)
+	$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print -$(release_type) -circleci=$(CIRCLECI_CONFIG)> $(WEB_DIR)/Packages/T-COFFEE.version)
 	$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print >$(WEB_DIR)/Packages/T-COFFEE.version.$(release_type))
 
 beta:
@@ -343,7 +344,7 @@ finish_release:
 	mkdir -p $(ARCHIVE_SOURCES)
 	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(target_dir)/$(target_file).tar.gz
 	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(ARCHIVE_SOURCES)/$(PROGRAM)_distribution_$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print).tar.gz
-	#git  push
+	git  push
 
 
 
