@@ -200,6 +200,7 @@ env:
 
 
 general_distribution:
+	ajaj
 	-rm $(CODE_LIST);
 	mkdir -p $(DISTRIB_DIR)
 	mkdir -p $(DISTRIB_DIR)/bin
