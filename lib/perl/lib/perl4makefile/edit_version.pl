@@ -15,7 +15,6 @@ if ( ($cl=~/-tag=\s*([^-]+[^-\s])/)){$tag=$1;}
 if ( ($cl=~/-version=\s*(\S+)/)){$version=$1;}
 if ( ($cl=~/-versionF=\s*(\S+)/)){$versionF=$1;}
 
-print "[$tag]\n";
 if ($versionF){$version=file2value($versionF);}
 file2edit_file ($target, $tag, $version);
 
