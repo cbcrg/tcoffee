@@ -134,9 +134,6 @@ DISTRIB_DOC=$(DISTRIB_DIR)/doc
 #########################################################
 
 distribution:
-#	-rm *.c
-#	-rm *.h
-	lalala
 	make -i VERSION=$(VERSION) CC=cc general_distribution
 	make -i VERSION=$(VERSION) CC=cc examples
 	make -i VERSION=$(VERSION) CC=cc mcoffee
@@ -201,6 +198,7 @@ env:
 
 
 general_distribution:
+	akakakak
 	-rm $(CODE_LIST);
 	mkdir -p $(DISTRIB_DIR)
 	mkdir -p $(DISTRIB_DIR)/bin
