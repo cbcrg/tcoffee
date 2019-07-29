@@ -209,7 +209,7 @@ general_distribution:
 	mkdir -p $(DISTRIB_DIR)/reference_test
 	echo '' > $(DISTRIB_DIR)/install
 #__#put back -i
-	make -i VERSION=$(VERSION) CC=cc code
+	make VERSION=$(VERSION) CC=cc code
 	cp $(EXECUTABLE) $(DISTRIB_DIR)/bin/$(OSNAME)
 	make -i VERSION=$(VERSION) CC=cc license
 
