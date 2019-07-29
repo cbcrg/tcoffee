@@ -23,7 +23,6 @@
 # Release flag  
 # 
 export RELEASE=${RELEASE:-0}
-export RELEASE=1
 
 #
 # default SVN revision number 
