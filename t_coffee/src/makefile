@@ -342,7 +342,7 @@ major:
 
 finish_release:
 	make distribution VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print)	
-	$(shell $(PERL4MAKEFILE_LIB)/edit_version.pl -target=$(DISTRIB_DIR)/install -tag="#__#VERSION" -version=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print))
+	$(shell $(PERL4MAKEFILE_LIB)/edit_version.pl -target=$(DISTRIB_DIR)/install -tag=XXX -version=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print))
 	mkdir -p $(target_dir)
 	mkdir -p $(ARCHIVE_SOURCES)
 	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(target_dir)/$(target_file).tar.gz
