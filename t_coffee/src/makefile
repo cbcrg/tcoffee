@@ -212,7 +212,7 @@ general_distribution:
 	make -i VERSION=$(VERSION) CC=cc code
 	cp $(EXECUTABLE) $(DISTRIB_DIR)/bin/$(OSNAME)
 	make -i VERSION=$(VERSION) CC=cc license
-
+	$(shell $(PERL4MAKEFILE_LIB)/edit_version.pl -target=$(DISTRIB_DIR)/install -tag=XXX -version=$(VERSION))
 library_distribution:
 	cd $(LIBRARY)/..
 	tar -cvf lib.tar $(LIBRARY)
@@ -342,8 +342,6 @@ major:
 
 finish_release:
 	make distribution VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print)	
-	echo 
-	$(shell $(PERL4MAKEFILE_LIB)/edit_version.pl -target=$(DISTRIB_DIR)/install -tag=XXX -version=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print))
 	mkdir -p $(target_dir)
 	mkdir -p $(ARCHIVE_SOURCES)
 	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(target_dir)/$(target_file).tar.gz
