@@ -682,7 +682,7 @@ sub install_pg
 	$PG{$pg}{old}=$previous;
 	
 	if ($PG{$pg} {language2} eq "Perl"){&install_perl_package ($pg);}
-	elsif ($pg ne "t_coffee" && $BINARIES_ONLY && &install_binary_package ($pg)){$PG{$pg}{from_binary}=1;}
+	elsif ($BINARIES_ONLY && &install_binary_package ($pg)){$PG{$pg}{from_binary}=1;}
 	elsif (&install_source_package ($pg)){;}
 	else 
 	  {
@@ -1228,10 +1228,8 @@ sub install_binary_package
     else {$name=$pg;}
     if ($name eq "t_coffee")
       {
-	#check if recompilation is required
-	if ($recompile){return 0;}
-	#check is the binary is in the distribution
-	elsif (-e "./bin/$OS/t_coffee")
+	#check if local bin is there
+	if (-e "./bin/$OS/t_coffee")
 	  {
 	    print "\n------- Installing  T-Coffee from Pre-Compiled/Pre-Downloaded $OS binary\n";
 	    print "\n------- If you want to trigger a fresh compilation use -recompile\n";
