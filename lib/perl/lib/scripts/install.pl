@@ -1244,7 +1244,7 @@ sub install_binary_package
       }
     else
       {
-	$download="$WEB_BASE/Packages/Binaries/$OS/$name";
+	$download="$WEB_BASE/Packages/Binaries/plugins/$OS/$name";
       }
     
     $base=cwd();

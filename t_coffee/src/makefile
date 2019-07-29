@@ -53,9 +53,17 @@ ifndef GIT_DIR
 GIT_DIR=$(HOME)/Dropbox/projects/git/tcoffee/
 endif
 
+ifndef BUILD_DIR
+BUILD_DIR=$(GIT_DIR)/build
+endif
+
+
+
 ifndef CIRCLECI_CONFIG
 CIRCLECI_CONFIG=$(GIT_DIR)/.circleci/config.yml
 endif
+
+
 
 SOURCE_DIR=$(PWD)/../../$(EXECUTABLE)/lib
 SCRIPT_DIR=$(PWD)/../../$(EXECUTABLE)/scripts
@@ -113,9 +121,9 @@ BETA_SOURCES_FILE=$(PROGRAM)_distribution
 STABLE_SOURCES_FILE=$(PROGRAM)_distribution
 
 
-BETA_SOURCES=$(WEB_DIR)/Packages/sources/tcoffee/Beta/
-STABLE_SOURCES=$(WEB_DIR)/Packages/sources/tcoffee/Stable/
-ARCHIVE_SOURCES=$(WEB_DIR)/Packages/sources/tcoffee/Archives/
+BETA_SOURCES=$(WEB_DIR)/Packages/Beta/Latest
+STABLE_SOURCES=$(WEB_DIR)/Packages/Stable/Latest
+ARCHIVE_SOURCES=$(WEB_DIR)/Packages/Archives/
 
 
 LATEST_DISTRIBUTION_FILE=$(PROGRAM)_distribution
@@ -246,6 +254,7 @@ code:
 install2version:
 	echo $(DISTRIB_DIR)/install
 	$(shell $(PERL4MAKEFILE_LIB)/edit_version.pl -target=$(DISTRIB_DIR)/install -tag="#_#UPDATE_VERSION" -version=$(VERSION))
+	$(shell $(PERL4MAKEFILE_LIB)/edit_version.pl -target=$(BUILD_DIR)/web-readme.txt.source -tag="#_#UPDATE_VERSION" -version=$(VERSION))	
 # 
 # This target copies T-Coffee sources files from the library folder 
 # to the distribution folder. 
@@ -322,14 +331,29 @@ github:
 	git commit -a -m '$(m)'
 	make version release_type=$(release_type)
 
-
-version_old:
-	$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print -$(release_type)>$(WEB_DIR)/Packages/T-COFFEE.version)
-	$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print >$(WEB_DIR)/Packages/T-COFFEE.version.$(release_type))
-
 version:
 	$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print -$(release_type) -circleci=$(CIRCLECI_CONFIG)> $(WEB_DIR)/Packages/T-COFFEE.version)
-	$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print >$(WEB_DIR)/Packages/T-COFFEE.version.$(release_type))
+
+beta_local:
+	make github release_type='beta'
+	make finish_release_local  target_dir=$(BETA_SOURCES) target_file=$(BETA_SOURCES_FILE)
+
+
+stable_local:
+	make github release_type='stable'
+	make finish_release_local  target_dir=$(STABLE_SOURCES) target_file=$(STABLE_SOURCES_FILE)
+
+major_local:
+	make github release_type='major'
+	make finish_release_local  target_dir=$(STABLE_SOURCES) target_file=$(STABLE_SOURCES_FILE)
+
+finish_release_local:
+	make distribution VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print)	
+	mkdir -p $(ARCHIVE_SOURCES)
+	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(ARCHIVE_SOURCES)/$(PROGRAM)_distribution_$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print).tar.gz
+	mkdir -p $(target_dir) 
+	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(target_dir)/$(target_file).tar.gz
+	git  push
 
 beta:
 	make github release_type='beta'
@@ -346,15 +370,9 @@ major:
 
 finish_release:
 	make distribution VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print)	
-	mkdir -p $(target_dir)
 	mkdir -p $(ARCHIVE_SOURCES)
-	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(target_dir)/$(target_file).tar.gz
 	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(ARCHIVE_SOURCES)/$(PROGRAM)_distribution_$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print).tar.gz
 	git  push
-
-
-
-
 
 
 #
