@@ -18,6 +18,7 @@ ifndef HOME2
 HOME2=$(HOME)/Dropbox
 endif
 WEB_DIR=$(HOME2)/dropBoxShared/Work/tcoffee.org/public_html/
+WEB_BIN_DIR=$(HOME2)/dropBoxShared/Work/tcoffee.org/public_html/Packages/Binaries/tcoffee/$(OSNAME)/
 
 #########################################################
 #                                                       #
@@ -207,9 +208,9 @@ general_distribution:
 	mkdir -p $(DISTRIB_DIR)/$(EXECUTABLE)_source
 	mkdir -p $(DISTRIB_DIR)/reference_test
 	echo '' > $(DISTRIB_DIR)/install
-
 	make -i VERSION=$(VERSION) CC=cc code
 	cp $(EXECUTABLE) $(DISTRIB_DIR)/bin/$(OSNAME)
+	cp $(EXECUTABLE) $(WEB_BIN_DIR);
 	make -i VERSION=$(VERSION) CC=cc license
 
 library_distribution:
