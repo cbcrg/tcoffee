@@ -200,7 +200,6 @@ env:
 
 
 general_distribution:
-	ajaj
 	-rm $(CODE_LIST);
 	mkdir -p $(DISTRIB_DIR)
 	mkdir -p $(DISTRIB_DIR)/bin
@@ -345,6 +344,7 @@ major:
 	make finish_release  target_dir=$(STABLE_SOURCES) target_file=$(STABLE_SOURCES_FILE)
 
 finish_release:
+	kakakak
 	make distribution VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print)	
 	mkdir -p $(target_dir)
 	mkdir -p $(ARCHIVE_SOURCES)
