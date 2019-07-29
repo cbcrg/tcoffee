@@ -46,12 +46,8 @@ fi
 
 #
 # Define the VERSION number 
-#
 
 export VERSION="`cat $WORKSPACE/tcoffee/lib/version/version_number.version`"
-if [-e $WORKSPACE/tcoffee/lib/version/new_release]; then
-RELEASE=1
-fi
 
 
 

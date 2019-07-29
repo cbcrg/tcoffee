@@ -26,6 +26,8 @@ else
   exit 1
 fi 
 
+RELEASE=1
+
 function trigger_build() {
 
 	local PROJECT=cbcrg/tcoffee
