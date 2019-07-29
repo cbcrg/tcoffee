@@ -142,6 +142,7 @@ sub circleci2releaseV
        while (<F>)
 	 {
 	   my $line=$_;
+	   print $line;
 	   if ( $line=~/\#UPDATE_RELEASE_STATUS/)
 	     {
 	       $line=~s/RELEASE=\".\"/RELEASE=$value/;
