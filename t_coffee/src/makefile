@@ -246,7 +246,7 @@ code:
 
 install2version:
 	echo $(DISTRIB_DIR)/install
-	$(shell $(PERL4MAKEFILE_LIB)/edit_version.pl -target=$(DISTRIB_DIR)/install -tag="XXX" -version=$(VERSION))
+	$(shell $(PERL4MAKEFILE_LIB)/edit_version.pl -target=$(DISTRIB_DIR)/install -tag="#_#UPDATE_VERSION" -version=$(VERSION))
 # 
 # This target copies T-Coffee sources files from the library folder 
 # to the distribution folder. 
