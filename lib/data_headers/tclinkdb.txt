@@ -5,6 +5,7 @@ PG t_coffee language		C++
 PG t_coffee language2		CXX
 PG t_coffee source		http://www.tcoffee.org/Packages/sources/tcoffee/stable/T-COFFEE_distribution.tar.gz
 PG t_coffee update_action	always
+PG t_coffee binary              t_coffee
 PG t_coffee mode		tcoffee,mcoffee,rcoffee,expresso,3dcoffee
 
 PG clustalo 4_TCOFFEE		CLUSTALO

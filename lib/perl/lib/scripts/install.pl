@@ -736,7 +736,7 @@ sub install_source_package
 		return 1;
 	}
     
-    if ($pg eq "t_coffee")  {return   &install_t_coffee ($pg);}
+    if ($pg eq "t_coffee")  {return   &install_t_coffee_source ($pg);}
     elsif ($pg eq "TMalign"){return   &install_TMalign ($pg);}
     
     chdir $DISTRIBUTIONS;
@@ -1155,38 +1155,26 @@ sub install_source_package
     return &pg_is_installed ($pg, $BIN);
   }
 
-sub install_t_coffee
+sub install_t_coffee_source
   {
     my ($pg)=(@_);
     my ($report,$cflags, $arguments, $language, $compiler) ;
 
-
-    #check if the binary is already there
-    if ( -e "./bin/$OS/t_coffee" && !$recompile)
-     { 
-       print "\n------- Installing  T-Coffee from Pre-Compiled $OS binary\n";
-       print "\n------- If you want to trigger a fresh compilation use -recompile\n";
-       
-       &check_cp ("./bin/$OS/t_coffee", $BIN);
-     }
-    else
+    #1-Install T-Coffee
+    chdir "t_coffee_source";
+    &flush_command ("make clean");
+    print "\n------- Compiling T-Coffee\n";
+    $language=$PG{$pg} {language2};
+    $arguments=$PG{$language}{arguments};
+    
+    if ( $CC ne "")
       {
-	
-	#1-Install T-Coffee
-	chdir "t_coffee_source";
-	&flush_command ("make clean");
-	print "\n------- Compiling T-Coffee\n";
-	$language=$PG{$pg} {language2};
-	$arguments=$PG{$language}{arguments};
-	
-	if ( $CC ne ""){
-	  print "make -i $arguments t_coffee \n";
-	  &flush_command ("make -i $arguments t_coffee");
-	}
-	&check_cp ($pg, $BIN);
-	
-	chdir $CDIR;
+	print "make -i $arguments t_coffee \n";
+	&flush_command ("make -i $arguments t_coffee");
       }
+    &check_cp ($pg, $BIN);
+    
+    chdir $CDIR;
     return &pg_is_installed ($pg, $BIN);
   }
 sub install_TMalign
@@ -1238,8 +1226,28 @@ sub install_binary_package
     if (!&supported_os($OS)){return 0;}
     if ( $PG{$pg}{binary}){$name=$PG{$pg}{binary};}
     else {$name=$pg;}
-    
-    $download="$WEB_BASE/Packages/Binaries/$OS/$name";
+    if ($name eq "t_coffee")
+      {
+	#check if recompilation is required
+	if ($recompile){return 0;}
+	#check is the binary is in the distribution
+	elsif (-e "./bin/$OS/t_coffee")
+	  {
+	    print "\n------- Installing  T-Coffee from Pre-Compiled/Pre-Downloaded $OS binary\n";
+	    print "\n------- If you want to trigger a fresh compilation use -recompile\n";
+	    &check_cp ("./bin/$OS/t_coffee", $BIN);
+	    return &pg_is_installed ($pg, $BIN);
+	  }
+	#try to get precompiled binary -- available from MAC is distribution from MAC
+	else
+	  {
+	    $download="$WEB_BASE/Packages/Binaries/tcoffee/$OS/$name.$VERSION";
+	  }
+      }
+    else
+      {
+	$download="$WEB_BASE/Packages/Binaries/$OS/$name";
+      }
     
     $base=cwd();
     chdir $TMP;
@@ -1281,6 +1289,7 @@ sub install_binary_package
     return &pg_is_installed ($pg, $BIN);
   }
 
+	
 ################################################################################
 #                                                                               #
 #                                                                               #
@@ -1290,7 +1299,7 @@ sub install_binary_package
 #                                                                               #
 #                                                                               #
 #################################################################################
-sub add_dir 
+sub add_dir
   {
     my $dir=@_[0];
     
