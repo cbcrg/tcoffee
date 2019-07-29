@@ -9,7 +9,7 @@ use strict;
 
 our (%MODE, %PG, %ENV_SET, %SUPPORTED_OS);
 
-
+our $VERSION="populate with Version Number"
 our $EXIT_SUCCESS=0;
 our $EXIT_FAILURE=1;
 our $INTERNET=0;

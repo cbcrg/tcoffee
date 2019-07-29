@@ -10,7 +10,6 @@ if ( ($cl=~/-db=\s*(\S+)/)){$db=$1;}
 if ( ($cl=~/-infile=\s*(\S+)/)){$infile=$1;}
 if ( ($cl=~/-mode=\s*(\S+)/)){$mode=$1;}
 
-
 open (F, "$db");
 while (<F>)
   {
