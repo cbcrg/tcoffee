@@ -1263,6 +1263,7 @@ sub install_binary_package
       {
 	print "!!!!!!! $PG{$pg}{dname}: Download of $pg binary failed\n";
 	print "!!!!!!! $PG{$pg}{dname}: Check Address: $download\n";
+	chdir $base;
 	return 0;
       }
     print "\n------- Installing $pg\n";
@@ -1284,6 +1285,7 @@ sub install_binary_package
       }
     chdir $base;
     $PG{$pg}{from_binary}=1;
+
     return &pg_is_installed ($pg, $BIN);
   }
 
