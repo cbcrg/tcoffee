@@ -420,6 +420,8 @@ function tcoffee() {
 	if [ $DO_TEST == 1 ]; then
 	doc_test 
 	fi
+   
+   source make_release.sh
 }
 
 
