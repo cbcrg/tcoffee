@@ -25,8 +25,6 @@ else
   echo Unknown option. You must type 'beta' or 'stable'
   exit 1
 fi 
-RELEASE=1
-
 
 function trigger_build() {
 
