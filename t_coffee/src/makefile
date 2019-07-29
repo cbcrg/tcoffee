@@ -134,8 +134,7 @@ DISTRIB_DOC=$(DISTRIB_DIR)/doc
 #########################################################
 
 distribution:
-#__#put back -i
-	make VERSION=$(VERSION) CC=cc general_distribution
+	make -i VERSION=$(VERSION) CC=cc general_distribution
 	make -i VERSION=$(VERSION) CC=cc examples
 	make -i VERSION=$(VERSION) CC=cc mcoffee
 	make -i VERSION=$(VERSION) CC=cc packing
@@ -208,8 +207,8 @@ general_distribution:
 	mkdir -p $(DISTRIB_DIR)/$(EXECUTABLE)_source
 	mkdir -p $(DISTRIB_DIR)/reference_test
 	echo '' > $(DISTRIB_DIR)/install
-#__#put back -i
-	make VERSION=$(VERSION) CC=cc code
+
+	make -i VERSION=$(VERSION) CC=cc code
 	cp $(EXECUTABLE) $(DISTRIB_DIR)/bin/$(OSNAME)
 	make -i VERSION=$(VERSION) CC=cc license
 
@@ -242,7 +241,6 @@ code:
 	cp $(KO_LIB)/tclinkdb.txt $(DISTRIB_DIR)
 	chmod u+x $(DISTRIB_DIR)/install
 	make install2version VERSION=$(VERSION)
-	ggggg
 
 install2version:
 	echo $(DISTRIB_DIR)/install

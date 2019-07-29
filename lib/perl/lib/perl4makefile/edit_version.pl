@@ -31,7 +31,7 @@ sub file2edit_file
 	   if ( $line=~/$tag/)
 	     {
 	       
-	       $line=~s/$tag/our \$VERSION=\"$version\";/;
+	       $line=~s/$tag/our \$VERSION=\"$version\";#POPULATED by edit_version.pl from $tag/;
 	     }
 	   $new_file.=$line;
 	 }
