@@ -43,16 +43,16 @@ MacOS Binaries - Deprecated
 These binaries are not any more supported as such. However, the source installer - see below - will automatically retrive pre-compiled MacOS binaries if compilation fails on your system. 
 
 
-Installation From Source - Recommended
-====================================== 
+Installation From Source/Binaries downloader (Mac OSX/Linux)
+============================================================ 
 
-The following procedure shows howto install T-Coffee from the pre-packages source distribution. This procedure is recommanded because the version of T-Coffee available there is guarranteed to have passed a set of pre-specified tests. By contrast the Github clone is the live version. It may not be stabel or functional and is only recommended for development purposes.
+The following procedure shows howto install T-Coffee from the pre-packages source distribution. This procedure is recommanded because the version of T-Coffee available there is guarranteed to have passed a set of pre-specified tests. By contrast, the github version is untested, and therefore ongoing work... In most cases the binaries will be downloaded from a repository but you may also trigger local compilation. 
 
 ::
 
   1. Download the desired installer:
-     http://tcoffee.org/Packages/sources/tcoffee/Stable/T-COFFEE_distribution.tar.gz
-     http://tcoffee.org/Packages/sources/tcoffee/Beta/T-COFFEE_distribution.tar.gz
+     http://tcoffee.org/Packages/sources/tcoffee/Stable/T-COFFEE_Version_<version>.tar.gz
+     http://tcoffee.org/Packages/sources/tcoffee/Beta/T-COFFEE_<version>.tar.gz
      http://tcoffee.org/Packages/sources/tcoffee/Archives/T-COFFEE_distribution_<branchID>.tar.gz
      https://github.com/cbcrg/tcoffee
 
@@ -79,9 +79,11 @@ The following procedure shows howto install T-Coffee from the pre-packages sourc
   
   5. By default, the installer will not re-install any component already available on your system. If you want to update you must specify
      ##: ./install <any component> -update
+     OR
+     ##: ./install <any component> -update -nobinaries
   
   6. When you are done you will need to make this installation permanent by adding the following lines *at the bottom* of your configuration file (typically .bashrc)
-     ##: export PATH=<your home>/.t_coffee/plugins/macosx:$PATH
+     ##: export PATH=<your home>/.t_coffee/bin/macosx:$PATH
 
 
 
