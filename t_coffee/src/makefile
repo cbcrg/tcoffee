@@ -17,7 +17,7 @@ SHELL := /bin/bash
 ifndef HOME2
 HOME2=$(HOME)/Dropbox
 endif
-WEB_DIR=$(HOME2)/dropBoxShared/Work/tcoffee.org/public_html/
+
 
 #########################################################
 #                                                       #
@@ -33,21 +33,42 @@ ifndef CFLAGS
 CFLAGS=-ggdb -w
 endif
 
+
+
 ifdef OPENMP
     KM_FLAGS=-fopenmp
 endif
 
+#########################################################
+#                                                       #
+#       ROOT DIRECTORIES                                #
+#                                                       #
+#                                                       #
+#                                                       #
+#########################################################
+ifndef WEB_DIR
+WEB_DIR=$(HOME2)/dropBoxShared/Work/tcoffee.org/public_html/
+endif
+
+ifndef GIT_DIR
+GIT_DIR=$(HOME)/Dropbox/projects/git/tcoffee/
+endif
+
 ifndef LIB_DIR
-#LIB_DIR=/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/
-LIB_DIR=$(CURDIR)/../../lib
+LIB_DIR=$(GIT_DIR)/lib
 endif
 
 ifndef VER_DIR
-VER_DIR=$(LIB_DIR)/version
+VER_DIR=$(LIB_DIR)/version/
 endif
 
-SOURCE_DIR=$(PWD)/../../$(EXECUTABLE)/lib
-SCRIPT_DIR=$(PWD)/../../$(EXECUTABLE)/scripts
+ifndef CIRCLECI_CONFIG
+VER_DIR=$(GIT_DIR)/.circleci/config.yml
+endif
+
+
+SOURCE_DIR=$(GIT_DIR)/$(EXECUTABLE)/lib
+SCRIPT_DIR=$(GIT_DIR)/$(EXECUTABLE)/scripts
 
 
 #
@@ -78,24 +99,16 @@ PERL4MAKEFILE_LIB=$(PERL_LIB_DIR)/perl4makefile
 #LIST OF LICENSES
 LICENSES = $(LIB_DIR)/licenses
 
-#
-# make version number condition so that it can be specified
-# using env variable otherwise it fallback on legacy mechanism
-#
-#
+VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print
 
 
-
-
-#ifndef VERSION
-VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print)
-#endif
-
-
-LIBRARY=$(PWD)/../../lib/
-
-
-
+#########################################################
+#                                                       #
+#       DISTRIBUTION  FILES and FOLDERS                 #
+#                                                       #
+#                                                       #
+#                                                       #
+#########################################################
 
 DISTRIBUTION_FILE=$(PROGRAM)_distribution_$(VERSION)
 BETA_SOURCES_FILE=$(PROGRAM)_distribution
@@ -145,7 +158,7 @@ doc:
 mcoffee:
 	-rm -rf $(DISTRIB_DIR)/mcoffee
 	mkdir -p $(DISTRIB_DIR)/mcoffee
-	cp $(LIBRARY)/mcoffee/* $(DISTRIB_DIR)/mcoffee
+	cp $(LIB_DIR)/mcoffee/* $(DISTRIB_DIR)/mcoffee
 
 examples:
 	mkdir -p $(DISTRIB_DIR)/example/
@@ -185,7 +198,7 @@ env:
 	@echo 'EXECUTABLE       :' $(EXECUTABLE)
 	@echo 'USER_BIN         :' $(USER_BIN)
 	@echo 'LIB_DIR          :' $(LIB_DIR)
-	@echo 'LIBRARY          :' $(LIBRARY)
+	@echo 'LIB_DIR          :' $(LIB_DIR)
 	@echo 'DISTRIBUTIONS    :' $(DISTRIBUTIONS)
 
 
@@ -204,8 +217,8 @@ general_distribution:
 	make -i VERSION=$(VERSION) CC=cc license
 
 library_distribution:
-	cd $(LIBRARY)/..
-	tar -cvf lib.tar $(LIBRARY)
+	cd $(LIB_DIR)/..
+	tar -cvf lib.tar $(LIB_DIR)
 	gzip lib.tar
 	mkdir $(DISTRIBUTIONS)
 	mv lib.tar.gz $(DISTRIBUTIONS)/lib_$(VERSION).tar.gz
@@ -308,7 +321,7 @@ github:
 	make version release_type=$(release_type)
 	git commit -a -m '$(m)'
 version:
-	$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print -$(release_type)>$(WEB_DIR)/Packages/T-COFFEE.version)
+	$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print -$(release_type) -circleci=$(CIRCLECI_CONFIG)>$(WEB_DIR)/Packages/T-COFFEE.version)
 	$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print >$(WEB_DIR)/Packages/T-COFFEE.version.$(release_type))
 
 beta:
@@ -330,7 +343,7 @@ finish_release:
 	mkdir -p $(ARCHIVE_SOURCES)
 	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(target_dir)/$(target_file).tar.gz
 	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(ARCHIVE_SOURCES)/$(PROGRAM)_distribution_$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print).tar.gz
-	git  push
+	#git  push
 
 
 
