@@ -241,7 +241,7 @@ code:
 	$(PERL4MAKEFILE_LIB)/tclinkdb2header.pl -infile=$(SCRIPT_LIB)/install.pl -mode=Perl -db=$(KO_LIB)/tclinkdb.txt >$(DISTRIB_DIR)/install
 	cp $(KO_LIB)/tclinkdb.txt $(DISTRIB_DIR)
 	chmod u+x $(DISTRIB_DIR)/install
-	makeinstall2version VERSION=$(VERSION)
+	make install2version VERSION=$(VERSION)
 	ggggg
 
 install2version:
