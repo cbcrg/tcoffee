@@ -134,7 +134,8 @@ DISTRIB_DOC=$(DISTRIB_DIR)/doc
 #########################################################
 
 distribution:
-	make -i VERSION=$(VERSION) CC=cc general_distribution
+#__#put back -i
+	make VERSION=$(VERSION) CC=cc general_distribution
 	make -i VERSION=$(VERSION) CC=cc examples
 	make -i VERSION=$(VERSION) CC=cc mcoffee
 	make -i VERSION=$(VERSION) CC=cc packing
@@ -198,7 +199,6 @@ env:
 
 
 general_distribution:
-	akakak
 	-rm $(CODE_LIST);
 	mkdir -p $(DISTRIB_DIR)
 	mkdir -p $(DISTRIB_DIR)/bin
@@ -208,6 +208,7 @@ general_distribution:
 	mkdir -p $(DISTRIB_DIR)/$(EXECUTABLE)_source
 	mkdir -p $(DISTRIB_DIR)/reference_test
 	echo '' > $(DISTRIB_DIR)/install
+#__#put back -i
 	make -i VERSION=$(VERSION) CC=cc code
 	cp $(EXECUTABLE) $(DISTRIB_DIR)/bin/$(OSNAME)
 	make -i VERSION=$(VERSION) CC=cc license
