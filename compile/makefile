@@ -12,28 +12,6 @@
 # About Mac compilation flags see http://goo.gl/HLtS4
 #
 
-CC=g++
-
-ifndef CFLAGS
-CFLAGS=-O3 -Wno-write-strings
-endif
-
-ifndef LIB_DIR
-LIB_DIR = ../lib
-endif
-
-ifdef OPENMP
-    KM_FLAGS=-fopenmp
-endif
-
-
-#
-# The version number to be stamped in the produced binary
-# Read about date formatting
-ifndef VERSION
-VERSION=dev_$(USER)@$(shell date '+%Y%m%d_%H:%M')
-endif
-
 #
 # Full Version number
 #

@@ -43,10 +43,6 @@ ifndef LIB_DIR
 LIB_DIR=$(CURDIR)/../../lib
 endif
 
-ifndef VER_DIR
-VER_DIR=$(LIB_DIR)/version
-endif
-
 
 
 ifndef GIT_DIR
@@ -57,17 +53,23 @@ ifndef BUILD_DIR
 BUILD_DIR=$(GIT_DIR)/build
 endif
 
+ifndef LIB_DIR
+LIB_DIR=$(GIT_DIR)/lib
+endif
 
+ifndef VER_DIR
+VER_DIR=$(LIB_DIR)/version
+endif
 
 ifndef CIRCLECI_CONFIG
 CIRCLECI_CONFIG=$(GIT_DIR)/.circleci/config.yml
 endif
 
+PERL_LIB_DIR=$(LIB_DIR)/perl/lib
+KO_LIB=$(LIB_DIR)/data_headers
 
-
-SOURCE_DIR=$(PWD)/../../$(EXECUTABLE)/lib
-SCRIPT_DIR=$(PWD)/../../$(EXECUTABLE)/scripts
-
+#LIST OF LICENSES
+LICENSES = $(LIB_DIR)/licenses
 
 #
 # Base path for library folders
@@ -87,19 +89,16 @@ USER_BIN=$(HOME)/bin/
 endif
 
 CODE_LIST=$(LIB_DIR)/compilation/code_list
-PERL_LIB_DIR=$(LIB_DIR)/perl/lib
-KO_LIB=$(LIB_DIR)/data_headers
+
 
 #LIST OF PERL MODULES
 SCRIPT_LIB=$(PERL_LIB_DIR)/scripts
 PERL4MAKEFILE_LIB=$(PERL_LIB_DIR)/perl4makefile
 
-#LIST OF LICENSES
-LICENSES = $(LIB_DIR)/licenses
+
 
 #
-# make version number condition so that it can be specified
-# using env variable otherwise it fallback on legacy mechanism
+# READ VERSION NUMBER as minatined and updated 
 #
 #
 
@@ -109,11 +108,6 @@ LICENSES = $(LIB_DIR)/licenses
 #ifndef VERSION
 VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print)
 #endif
-
-
-LIBRARY=$(PWD)/../../lib/
-
-
 
 
 DISTRIBUTION_FILE=$(PROGRAM)_distribution_$(VERSION)
@@ -162,7 +156,7 @@ doc:
 mcoffee:
 	-rm -rf $(DISTRIB_DIR)/mcoffee
 	mkdir -p $(DISTRIB_DIR)/mcoffee
-	cp $(LIBRARY)/mcoffee/* $(DISTRIB_DIR)/mcoffee
+	cp $(LIB_DIR)/mcoffee/* $(DISTRIB_DIR)/mcoffee
 
 examples:
 	mkdir -p $(DISTRIB_DIR)/example/
@@ -202,7 +196,6 @@ env:
 	@echo 'EXECUTABLE       :' $(EXECUTABLE)
 	@echo 'USER_BIN         :' $(USER_BIN)
 	@echo 'LIB_DIR          :' $(LIB_DIR)
-	@echo 'LIBRARY          :' $(LIBRARY)
 	@echo 'DISTRIBUTIONS    :' $(DISTRIBUTIONS)
 
 
@@ -222,8 +215,8 @@ general_distribution:
 	make -i VERSION=$(VERSION) CC=cc license
 
 library_distribution:
-	cd $(LIBRARY)/..
-	tar -cvf lib.tar $(LIBRARY)
+	cd $(LIB_DIR)/..
+	tar -cvf lib.tar $(LIB_DIR)
 	gzip lib.tar
 	mkdir $(DISTRIBUTIONS)
 	mv lib.tar.gz $(DISTRIBUTIONS)/lib_$(VERSION).tar.gz
