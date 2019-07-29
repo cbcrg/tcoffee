@@ -134,7 +134,7 @@ DISTRIB_DOC=$(DISTRIB_DIR)/doc
 #########################################################
 
 distribution:
-	make  VERSION=$(VERSION) CC=cc general_distribution
+	make -i VERSION=$(VERSION) CC=cc general_distribution
 	make -i VERSION=$(VERSION) CC=cc examples
 	make -i VERSION=$(VERSION) CC=cc mcoffee
 	make -i VERSION=$(VERSION) CC=cc packing
