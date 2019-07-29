@@ -212,7 +212,7 @@ general_distribution:
 	make -i VERSION=$(VERSION) CC=cc code
 	cp $(EXECUTABLE) $(DISTRIB_DIR)/bin/$(OSNAME)
 	make -i VERSION=$(VERSION) CC=cc license
-	$(shell $(PERL4MAKEFILE_LIB)/edit_version.pl -target=$(DISTRIB_DIR)/install -tag=XXX -version=$(VERSION))
+
 library_distribution:
 	cd $(LIBRARY)/..
 	tar -cvf lib.tar $(LIBRARY)
@@ -241,6 +241,9 @@ code:
 	$(PERL4MAKEFILE_LIB)/tclinkdb2header.pl -infile=$(SCRIPT_LIB)/install.pl -mode=Perl -db=$(KO_LIB)/tclinkdb.txt >$(DISTRIB_DIR)/install
 	cp $(KO_LIB)/tclinkdb.txt $(DISTRIB_DIR)
 	chmod u+x $(DISTRIB_DIR)/install
+	echo $(DISTRIB_DIR)/install
+	$(shell $(PERL4MAKEFILE_LIB)/edit_version.pl -target=$(DISTRIB_DIR)/install -tag=XXX -version=$(VERSION))
+	gsgsgs
 
 # 
 # This target copies T-Coffee sources files from the library folder 
