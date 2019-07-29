@@ -11,7 +11,7 @@ my $version;
 
 my $cl=join( " ", @ARGV);
 if ( ($cl=~/-target=\s*(\S+)/)){$target=$1;}
-if ( ($cl=~/-tag=\s*([^-]+)/)){$tag=$1;}
+if ( ($cl=~/-tag=\s*([^-]+[^-\s])/)){$tag=$1;}
 if ( ($cl=~/-version=\s*(\S+)/)){$version=$1;}
 if ( ($cl=~/-versionF=\s*(\S+)/)){$versionF=$1;}
 
@@ -27,9 +27,11 @@ sub file2edit_file
        while (<F>)
 	 {
 	   my $line=$_;
+	   
 	   if ( $line=~/$tag/)
 	     {
-	       $line=~s/$tag/VERSION=$version/;
+	       
+	       $line=~s/$tag/our \$VERSION=\"$version\";/;
 	     }
 	   $new_file.=$line;
 	 }
