@@ -4,6 +4,7 @@ jobs:
     machine: true
     steps:
       - checkout
+      - run: echo 'export RELEASE="1"' >> $BASH_ENV # Redirect MY_ENV_VAR into $BASH_ENV -- Cedric 
       - run: mv ~/project ~/tcoffee
       - run: mkdir -p ~/repo 
       - run: docker pull cbcrg/tcoffee-build-box:1.2
