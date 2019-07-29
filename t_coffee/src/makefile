@@ -210,7 +210,7 @@ general_distribution:
 	echo '' > $(DISTRIB_DIR)/install
 	make -i VERSION=$(VERSION) CC=cc code
 	cp $(EXECUTABLE) $(DISTRIB_DIR)/bin/$(OSNAME)
-	cp $(EXECUTABLE) $(WEB_BIN_DIR);
+	cp $(EXECUTABLE) $(WEB_BIN_DIR)/$(executable).$(VERSION);
 	make -i VERSION=$(VERSION) CC=cc license
 
 library_distribution:
