@@ -11,7 +11,7 @@ our (%MODE, %PG, %ENV_SET, %SUPPORTED_OS);
 
 #DO NOT EDIT MANUALLY START
 #To be populated with edit_version.pl 
-our $VERSION="0"
+our $VERSION="0";
 #DO NOT EDIT MANUALLY END
 our $EXIT_SUCCESS=0;
 our $EXIT_FAILURE=1;
