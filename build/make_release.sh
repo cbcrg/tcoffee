@@ -32,7 +32,7 @@ function trigger_build() {
 
 	local PROJECT=cbcrg/tcoffee
 	local BRANCH=${2:-master}
-	echo "Triggering T-Coffee build [${BRANCH}] -- RELEASE=${RELEASE}"
+	echo "Triggering T-Coffee build [${BRANCH}] -- RELEASE=${RELEASE} -- ${CIRCLE_TOKEN}"
 
 	local trigger_build_url=https://circleci.com/api/v1/project/${PROJECT}/tree/${BRANCH}?circle-token=${CIRCLE_TOKEN}
 
