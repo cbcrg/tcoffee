@@ -1,7 +1,7 @@
 #####################
 T-Coffee Installation
 #####################
-.. warning:: This chapter has been extensively updated in 11/2016. Installation of T-Coffee versions lower than version 9.03 may now be deprecated. Contact if you need to install an older version !
+.. warning:: This chapter has been extensively updated in 11/2016. Installation of T-Coffee versions lower than version 9.03 may now be deprecated. Contact us if you need to install an older version !
 
 ************
 Installation
@@ -9,11 +9,11 @@ Installation
 This chapter describes the installation procedures relevant for a standard use of T-Coffee on the most common operative systems: Unix/Linux and Mac OS. T-Coffee can only be installed on windows using virtual box simulating a Linux environement. We maintain two versions of T-Coffee:
 
 
- 1) the ** `stable version <http://tcoffee.org/Packages/sources/tcoffee/Stable/> `** This is an extensively evaluated version, either linked to the latest paper or benefiting from an important fix- ** recommended **.
- 2) the ** `beta version <http://tcoffee.org/Packages/sources/tcoffee/Beta/> `** is the latest release. It passes all the main tests and is usualy of higher quality that the stable. It is recommended to start installing this version if you experience any issue with the stable.
- 3) the ** `archives  <http://tcoffee.org/Packages/sources/tcoffee/Archives/> `** all previous releases of T-Coffee. If the one you need is missing please contact us. 
+ 1) the ** `stable version <http://tcoffee.org/Packages/tcoffee/Stable/> `** This is an extensively evaluated version, either linked to the latest paper or benefiting from an important fix- ** recommended **.
+ 2) the ** `beta version <http://www.tcoffee.org/Packages/Beta/Latest/> `** is the latest release. It passes all the main tests and is usualy of higher quality that the stable. It is recommended to start installing this version if you experience any issue with the stable.
+ 3) the ** `archives  <http://www.tcoffee.org/Packages/Archives/> `** all previous releases of T-Coffee. If the one you need is missing please contact us. 
 
-T-Coffee is a complex package that interacts with many other third party software and/or servers (such as BLAST, see next section). All available versions on the server (starting from version 9.03) will install on your computer all the third party packages and setup the variables required for the different T-Coffee options to run correctly. Whenever the automated installation fails because of unforeseen system specificities, **don't hesitate to contact us**. If the installation was successfull with the exception of some packages, users should install the third party package manually. This documentation gives some useful tips, but users are encouraged to send their feedbacks and share their experiences in order to improve this documentation.
+T-Coffee is a complex package that interacts with many other third party software and/or servers (such as BLAST, see next section). All available versions on the server (starting from version 1.08) will install on your computer all the third party packages and setup the variables required for the different T-Coffee options to run correctly. Whenever the automated installation fails because of unforeseen system specificities, **don't hesitate to contact us**. If the installation was successfull with the exception of some packages, users should install the third party package manually. This documentation gives some useful tips, but users are encouraged to send their feedbacks and share their experiences in order to improve it.
 
 Unix/Linux Binaries
 ===================
@@ -51,9 +51,9 @@ The following procedure shows howto install T-Coffee from the pre-packages sourc
 ::
 
   1. Download the desired installer:
-     http://tcoffee.org/Packages/sources/tcoffee/Stable/T-COFFEE_Version_<version>.tar.gz
-     http://tcoffee.org/Packages/sources/tcoffee/Beta/T-COFFEE_<version>.tar.gz
-     http://tcoffee.org/Packages/sources/tcoffee/Archives/T-COFFEE_distribution_<branchID>.tar.gz
+     http://www.tcoffee.org/Packages/Stable/Latest/T-COFFEE_distribution_Version_<version>.tar.gz
+     http://www.tcoffee.org/Packages/Beta/Latest/T-COFFEE_distribution_Version_<version>.tar.gz
+     http://www.tcoffee.org/Packages/Archives/T-COFFEE_distribution_Version_<version>.tar.gz
      https://github.com/cbcrg/tcoffee
 
   2a. untar the file
@@ -68,22 +68,27 @@ The following procedure shows howto install T-Coffee from the pre-packages sourc
      ##:  ./install tcoffee
      
   
-  3b. If you want to remote services (psiblast, expresso). You must enter a proxy value and a valid e-mail. These values will be stored in <your home>/.t_coffee/.t_coffee_env and can be edited at any time. 
+  3b. If you want to use remote services (psiblast, expresso). You must enter a proxy value and a valid e-mail. These values will be stored in <your home>/.t_coffee/.t_coffee_env and can be edited at any time. The proxy is not compulsory. It is usualy needed when working behind a firewall.
      ##: ./install tcoffee -email=<your email> -proxy=<your proxy>
     
 
-  4. as an alternative you can install any of the T-Coffee mode you are interested in. Get the list with:
+  4. as you can also install any of the T-Coffee mode you are interested in. Get the list with:
      ##: ./install 
+     Then install one, for instance
      ##: ./install expresso
+     Or install them all
      ##: ./install all
+    
   
   5. By default, the installer will not re-install any component already available on your system. If you want to update you must specify
      ##: ./install <any component> -update
      OR
      ##: ./install <any component> -update -nobinaries
+     For instance the following will cause T-Coffee to be recompiled on your system
+     ##: ./install t_coffee -update -nobinaries
   
   6. When you are done you will need to make this installation permanent by adding the following lines *at the bottom* of your configuration file (typically .bashrc)
-     ##: export PATH=<your home>/.t_coffee/bin/macosx:$PATH
+     ##: export PATH=<your home>/.t_coffee/bin/<macosx|linux>:$PATH
 
 
 

@@ -77,3 +77,9 @@ The installer backs up your environment configuration file, making a copy of it 
 In order to un-install T-Coffee rollback your configuration restoring your previous environment configuration file.
 
 Moreover you may want also to remove all installer binaries deleting the T-Coffee installation directory.
+
+
+HOW DOES THE BUILDER WORK
+-------------------------
+The file build.sh runs, it runs the lib/perl/lib/scripts/install.pl - named install and packages T-Coffee as specified in this script
+The package is then built into an installer, as specified in tcoffee-installer.xml
