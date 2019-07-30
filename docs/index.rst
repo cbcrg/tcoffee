@@ -17,7 +17,8 @@ Contents:
    tcoffee_main_documentation
    tcoffee_technical_documentation
    tcoffee_webserver
-   
+   tcoffee_doctest
+
    tcoffee_faq
    
    tcoffee_citations_references
