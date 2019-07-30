@@ -249,7 +249,7 @@ install2version:
 	$(shell $(PERL4MAKEFILE_LIB)/edit_version.pl -target=$(DISTRIB_DIR)/install -tag="#_#UPDATE_VERSION" -version=$(VERSION))
 	cp $(BUILD_DIR)/web-readme.txt.source $(BUILD_DIR)/webreadme
 	$(shell $(PERL4MAKEFILE_LIB)/edit_version.pl -target=$(BUILD_DIR)/webreadme -tag="#_#UPDATE_VERSION" -version=$(VERSION))	
-	mv $(BUILD_DIR)/webreadme.txt $(BUILD_DIR)/web-readme.txt 
+	mv $(BUILD_DIR)/webreadme $(BUILD_DIR)/web-readme.txt 
 # 
 # This target copies T-Coffee sources files from the library folder 
 # to the distribution folder. 
