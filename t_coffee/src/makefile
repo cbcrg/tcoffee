@@ -20,13 +20,13 @@ endif
 WEB_DIR=$(HOME2)/dropBoxShared/Work/tcoffee.org/public_html/
 WEB_BIN_DIR=$(HOME2)/dropBoxShared/Work/tcoffee.org/public_html/Packages/Binaries/tcoffee/$(OSNAME)/
 
-#########################################################
-#                                                       #
-#       COMPILERS AND FLAGS                             #
-#                                                       #
-#                                                       #
-#                                                       #
-#########################################################
+###########################################################
+#                                                         #
+#       COMPILERS AND FLAGS                               #
+#                                                         #
+#                                                         #
+#                                                         #
+# #########################################################
 
 CC=g++
 ifndef CFLAGS
