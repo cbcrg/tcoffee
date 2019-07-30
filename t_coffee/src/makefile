@@ -175,7 +175,7 @@ test:
 	chmod u+x $(DISTRIB_DIR)/bin/test.pl
 
 debug: t_coffee
-	rm -r debug
+	rm -fr debug
 	mkdir debug
 	cp *.c debug
 	cp *.h debug
@@ -200,7 +200,7 @@ env:
 
 
 general_distribution:
-	-rm $(CODE_LIST);
+	-rm -f $(CODE_LIST);
 	mkdir -p $(DISTRIB_DIR)
 	mkdir -p $(DISTRIB_DIR)/bin
 	mkdir -p $(DISTRIB_DIR)/bin/$(OSNAME)
@@ -222,17 +222,17 @@ library_distribution:
 	mv lib.tar.gz $(DISTRIBUTIONS)/lib_$(VERSION).tar.gz
 
 empty:
-	-rm *.o_$(OSNAME)
+	-rm -f *.o_$(OSNAME)
 	tar -cf old_c.tar *.c *.h
-	rm *.c
-	rm *.h
+	rm -f *.c
+	rm -f *.h
 	echo x > core
-	rm core
+	rm -f core
 
 distribute: all
 	echo x > core
-	rm core
-	-rm *.o_$(OSNAME)
+	rm -f core
+	-rm -f *.o_$(OSNAME)
 code:
 	echo $(OSNAME) Compilation
 	make clean
@@ -247,8 +247,9 @@ code:
 install2version:
 	echo $(DISTRIB_DIR)/install
 	$(shell $(PERL4MAKEFILE_LIB)/edit_version.pl -target=$(DISTRIB_DIR)/install -tag="#_#UPDATE_VERSION" -version=$(VERSION))
-	cp $(BUILD_DIR)/web-readme.txt.source $(BUILD_DIR)/web-readme.txt
-	$(shell $(PERL4MAKEFILE_LIB)/edit_version.pl -target=$(BUILD_DIR)/web-readme.txt -tag="#_#UPDATE_VERSION" -version=$(VERSION))	
+	cp $(BUILD_DIR)/web-readme.txt.source $(BUILD_DIR)/webreadme.txt
+	$(shell $(PERL4MAKEFILE_LIB)/edit_version.pl -target=$(BUILD_DIR)/webreadme.txt -tag="#_#UPDATE_VERSION" -version=$(VERSION))	
+	mv $(BUILD_DIR)/webreadme.txt $(BUILD_DIR)/web-readme.txt 
 # 
 # This target copies T-Coffee sources files from the library folder 
 # to the distribution folder. 
@@ -302,7 +303,7 @@ license:
 	  cat $(DISTRIB_DIR)/short_license.c $$file > $$file.new; \
 	  mv $$file.new $$file; \
 	done
-	rm $(DISTRIB_DIR)/short_license.c
+	rm -f $(DISTRIB_DIR)/short_license.c
 
 #install:
 #   $(PERL4MAKEFILE_LIB)/tclinkdb2header.pl -infile=$(SCRIPT_LIB)/install.pl -mode=Perl -db=$(KO_LIB)/tclinkdb.txt >  install
