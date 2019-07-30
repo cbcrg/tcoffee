@@ -323,9 +323,9 @@ packing:
 
 
 github:
-	make version release_type=$(release_type)
-	
 	git commit -a -m '$(m)'
+	make version release_type=$(release_type)
+#This first commit makes it possible to have the correct branch number (i.e. ahead). 
 
 version:
 	$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print -$(release_type) -circleci=$(CIRCLECI_CONFIG)> $(WEB_DIR)/Packages/T-COFFEE.version)
@@ -349,26 +349,27 @@ finish_release_local:
 	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(ARCHIVE_SOURCES)/$(PROGRAM)_distribution_$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print).tar.gz
 	mkdir -p $(target_dir) 
 	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(target_dir)/$(target_file).tar.gz
+	git commit -a -m '$(m)'
 	git  push
 
 beta:
-	
-	make version release_type='beta'
+	make github release_type='beta'
 	make finish_release  target_dir=$(BETA_SOURCES) target_file=$(BETA_SOURCES_FILE)
 
 
 stable:
-	make version release_type='stable'
+	make github release_type='stable'
 	make finish_release  target_dir=$(STABLE_SOURCES) target_file=$(STABLE_SOURCES_FILE)
 
 major:
-	make version release_type='major'
+	make github release_type='major'
 	make finish_release  target_dir=$(STABLE_SOURCES) target_file=$(STABLE_SOURCES_FILE)
 
 finish_release:
 	make distribution VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print)	
 	mkdir -p $(ARCHIVE_SOURCES)
 	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(ARCHIVE_SOURCES)/$(PROGRAM)_distribution_$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print).tar.gz
+	git commit -a -m '$(m)'
 	git  push
 
 
