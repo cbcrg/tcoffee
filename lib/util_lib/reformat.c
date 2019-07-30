@@ -1214,7 +1214,7 @@ Sequence  * main_read_seq ( char *name)
        Sequence *S=NULL;
        Alignment *A=NULL;
        int a;
-
+       register_file4dump (name, "r");/*make sure file is included in dump*/
        
 
        format=identify_seq_format (name);
@@ -1261,6 +1261,8 @@ Sequence  * main_read_seq ( char *name)
 Sequence  * quick_read_seq ( char *file)
 {
   static char *tmp_name=vtmpnam (NULL);
+  register_file4dump (file, "r");
+ 
   
   if (!file || !check_file_exists (file))return NULL;
   if (printf_system ( "seq2name_seq.pl %s > %s",file, tmp_name)!=EXIT_SUCCESS)
@@ -1308,7 +1310,7 @@ Alignment * quick_read_aln_static ( char *file)
   //turns 
   
   static char *tmp_name=vtmpnam (NULL);
-
+  register_file4dump (file, "r");
   if (!file || !check_file_exists (file))return NULL;
   else if (printf_system ( "seq2name_seq.pl %s > %s",file, tmp_name)!=EXIT_SUCCESS)
     {
@@ -1480,7 +1482,7 @@ Alignment * main_read_aln ( char *name, Alignment *A)
        static char *format;
        Sequence *S=NULL;
        Sequence *IN_SEQ;
-
+       register_file4dump (name, "r");/*make sure file is in dump*/
        
 
        if ( !name)return NULL;

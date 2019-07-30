@@ -93,3 +93,36 @@ It will cause the test to stop whenever a failed is encountered
   ##: ./lib/perl/lib/perl4makefile/doc2test.pl -mode reset
 
 Will cause all the reference files to be erased.
+
+*************************
+Creating a new command   
+*************************
+
+In order to generate a new test command, all you need to do is to run your command while setting an environement variable. This will generate a dump file that can be used to rerun the same call:
+Dump files are very easy to produce yout simply need to run
+
+::
+
+  ##:rm -f <your dump file>;export DUMP_4_TCOFFEE=<your dump file>;t_coffee -in seq 
+  OR
+  ##:rm -f <your dump file>;export DUMP_4_TCOFFEE=<your dump file>;t_coffee -other_pg seq_reformat -in xxxx/xx/s.pep -output fasta_seq > yyy
+
+This command will generate a self contained dumpfile. This dumpfile will contain all the information needed ton reprodduce the runn (i.e file name, path, content and T-Coffee parameters). In order to reproduce the call you need to have T-Coffee installed and run:
+
+::
+
+  ##: ./lib/perl/lib/perl4makefile/doc2test.pl -replay yourdumpfile
+
+Will allow you to check if the command runs and produces similar files. By default the test is "PASSED" if no error is thrown by the call. This can be refined as follows:
+
+  ##: ./lib/perl/lib/perl4makefile/doc2test.pl -replay yourdumpfile -strict
+
+Will report failure whenever an output file is missing or whenever an error is reported. 
+  
+  ##: ./lib/perl/lib/perl4makefile/doc2test.pl -replay yourdumpfile -very_strict
+
+Will report failure whenever there is a warning OR whenever an output file differs (Note that VERSION and CPU are excluded from the comparison as a consequence different versions will not result in different output files). It is possible to visualize the replayed dump for debugging purposes.
+  
+  ##: ./lib/perl/lib/perl4makefile/doc2test.pl -replay yourdumpfile -keepreplayed
+
+

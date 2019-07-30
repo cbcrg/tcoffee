@@ -8,6 +8,10 @@ use Cwd;
 use File::Copy;
 use DirHandle;
 use strict;
+use DateTime;
+use File::Basename;
+
+
 my $RETURN=" ####RETURN#### ";
 my %cl;
 my %dir;
@@ -15,7 +19,8 @@ my %dir;
 #$GIT=1: Commit all new files, uncommit all deleted files
 #$GIT=2: blank run
 
-
+my $TIMEOUT=1000;#Default Timeout in seconds
+my $KEEPREPLAYED=0;
 my $GIT=1;
 
 my $max=0;
@@ -26,8 +31,9 @@ my $regexp;
 my $reset;
 my $stop_on_failed;
 my $clean;
-
-
+my $replay;
+my $STRICT=0;
+my $VERY_STRICT=0;
 my $failed;
 my $rep;
 my $cw=cwd();
@@ -92,6 +98,13 @@ if ($ARGV[0] eq "-help")
     print "     -failed        directory containing all the failed dumps\n";
     print "     -tmp           tmp directory\n";
     print "     -latest        latest directory\n";
+    print "     -replay <file> replay an existing dump -- will produce file.replay along with diagnostic\n";
+    print "     -keepreplyed   Keep the dump of the replayed dump. Will be named file.replayed\n";
+    print "     -strict        Will report failure if one or more replay output files are missing\n";
+    print "     -very_strict   Will report failure if there is any difference between replay output\n";
+    print "     -timeout       Will report failure is time is over this value [Def=$TIMEOUT sec.]\n";
+    
+    
     
     print "     -max           max number of CL to check [DEBUG]\n";
     print "     -help          display this help message\n";
@@ -107,7 +120,6 @@ if ($ARGV[0] eq "-help")
 
 for (my $a=0; $a<=$#ARGV; $a++)
   {
-    
     
     if ($ARGV[$a]=~/-pattern/)
       {
@@ -165,6 +177,14 @@ for (my $a=0; $a<=$#ARGV; $a++)
       {
 	$dir{ref}=$ARGV[++$a];
       }
+    elsif ($ARGV[$a]=~/-replay/)
+      {
+	$replay=$ARGV[++$a];
+      }
+    elsif ($ARGV[$a]=~/-keepreplayed/)
+      {
+	$KEEPREPLAYED=1;
+      }
     elsif ($ARGV[$a]=~/-rep/)
       {
 	$rep=$ARGV[++$a];
@@ -173,7 +193,75 @@ for (my $a=0; $a<=$#ARGV; $a++)
       {
 	$mode=$ARGV[++$a];
       }
+    elsif ($ARGV[$a]=~/-timeout/)
+      {
+	$TIMEOUT=$ARGV[++$a];
+      }
+    elsif ($ARGV[$a]=~/-very_strict/)
+      {
+	$VERY_STRICT=1;
+       
+      }
+    elsif ($ARGV[$a]=~/-strict/)
+      {
+	$STRICT=1;
+      }
+    
   }
+
+# SIngle check mode: replay
+
+if ($replay)
+  {
+    my $replayed=$replay.".replay";
+    my ($shell,$etime)=dump2run ($replay, $replayed, "quiet");
+    my $com=dump2cl ($replay);
+    my ($missing, $different, $error, $warning);
+
+    $missing=$warning=$error=$different=0;
+    print "~ $com $etime ms ";
+    my %in =dump2report($replay);
+    my %out=dump2report($replayed);
+    
+    compare_reports (\%in, \%out, "quiet");
+    $missing=$out{MissingOutput};
+    $different=$out{N_DifferentOutput};
+    $error=$out{error};
+    
+    if (!$error){$error=0;}
+    if (!$warning){$warning=0;}
+    if (!$different){$different=0;}
+    if (!$missing){$missing=0;}
+
+    
+    print "MISSING_IO $missing ";
+    print "DIFFERENT_IO $different ";
+    print "WARNINGS $warning ";
+    print "ERRORS $error ";
+    
+    if    ($STRICT && ($error || $missing)){$shell=1;}
+    elsif ($VERY_STRICT && ($error || $missing || $warning || $different)){$shell=1;}
+    
+    if (!$shell)
+      {
+	print "PASSED\n";
+      }
+    else
+      {
+	print "FAILED\n";
+      }
+    if ($KEEPREPLAYED)
+      {
+	print "Replay File: $replayed\n";
+      }
+    else
+      {
+	unlink ($replayed);
+      }
+    exit ($SHELL);
+  }
+#End of single replay      
+
 
 #protect special char in pattern if non regexp mode is used
 if (!$regexp)
@@ -401,7 +489,6 @@ $report="";
 
 # 5 - run the analysis
 chdir ($dir{tmp});
-my (%R, %D);
 my  @com_list=keys (%cl);
 my $n_com=$#com_list+1;
 my $data;
@@ -417,6 +504,7 @@ foreach my $com (sort (keys (%cl)))
     my $shell_com;
     my $run;
     my $shell;
+    my $etime;
     my $success=0;
     
     my $ref   =$cl{$com}{ref}{n};
@@ -475,11 +563,11 @@ foreach my $com (sort (keys (%cl)))
       }
     elsif ($mode eq "check")
       {
-	$shell=dump2run ($rdump, $ndump, $shell_com);
+	($shell,$etime)=dump2run ($rdump, $ndump, $shell_com);
       }
     elsif ($mode eq "failed" && $failed)
       {
-	$shell=dump2run ($fdump, $ndump, $shell_com);
+	($shell, $etime)=dump2run ($fdump, $ndump, $shell_com);
       }
     else
       {
@@ -705,6 +793,7 @@ sub docdump
   }
 sub file2word_hash
     {
+
       my ($file,$h)=@_;
       open (F, $file);
       while (<F>)
@@ -846,18 +935,37 @@ sub dir2dump
   }
 sub compare_reports
   {
-    my ($ref, $doc)=@_;
+    my ($ref, $doc, $quiet)=@_;
 
-
+    
     if (!$ref || !$doc){return;}
     
     foreach my $f (keys (%{$ref->{file}}))
       {
+	if ($quiet ne "quiet")
+	  {print "FILE: $f";
+	   print "********\n\n";
+	   print "($doc->{file}{$f}{content}\n\n\n\n($ref->{file}{$f}{content}\n\n\n";
+	   print "********\n\n";
+	 }
+
+
+
+	#Get rid of the Version and CPU effects
+	my $content1=$doc->{file}{$f}{content};
+	my $content2=$doc->{file}{$f}{content};
+	
+	$content1=~s/Version_\S+ /Version_XXXX /g;
+	$content2=~s/Version_\S+ /Version_XXXX /g;
+	
+	$content1=~s/CPU\S+ /CPU=XXXX /g;
+	$content2=~s/CPU\S+ /CPU=XXXX /g;
+		
 	if (!$doc->{file}{$f})
 	  {
 	    $doc->{MissingOutputF}{$f}=1;$doc->{MissingOutput}++;
 	  }
-	elsif ($doc->{file}{$f} ne $ref->{file}{$f})
+	elsif ($content1 ne $content2)
 	  {
 	    $doc->{DifferentOutput}{$f}=1;$doc->{N_DifferentOutput}++;
 	  }
@@ -868,12 +976,19 @@ sub system4tc
     {
       my $com=shift;
       system ("t_coffee -clean >/dev/null 2>/dev/null");
-      return system ($com);
+      return timeout_system ($com);
     }
-    
+
 sub dump2run
   {
     my ($idump, $odump, $com)=@_;
+    my $cdir=cwd;
+    my $use_stdout;
+    my $shell;
+    
+    $idump=path2abs($idump);
+    $odump=path2abs($odump);
+    
     
     my $dir=random_string();
 
@@ -881,9 +996,8 @@ sub dump2run
     chdir  ($dir);
     
     if (!$com){$com=dump2cl($idump);}
-
+    $com=dump2cl($idump);
     
-
     if ($com =~/.*\|(.*)/)
       {
 	$com=$1;
@@ -902,60 +1016,76 @@ sub dump2run
 	  
 	  if ($stream eq "input")
 	    {
+	      my $dir=dirname ($name);
+	      $dir="./$dir";
+	      system ("mkdir -p $dir");
+	      
 	      open (F, ">$name");
 	      print F "$content";
 	      close (F);
 	      
 	      if ($name eq "stdin"){$com="cat stdin | $com";}
 	    }
+	  if ($stream eq "output" && $name eq "stdout"){$use_stdout=1;}
 	}
-
-    my $shell=system4tc ("export DUMP_4_TCOFFEE=$odump;$com >/dev/null 2>/dev/null");
-    system ("rm *");
-    chdir ("..");
     
-    system ("rmdir $dir");
+   
+    my $before=time;
+    unlink ($odump);
+    if (!$use_stdout)
+      {
+	$shell=system4tc ("export DUMP_4_TCOFFEE=$odump;$com >/dev/null 2>/dev/null");
+      }
+    else
+      {
+	$shell=system4tc ("export DUMP_4_TCOFFEE=$odump;$com >stdout 2>/dev/null");
+      }
+    my $etime=time - $before;
+    $etime*=1000;
+        
+    chdir($cdir);
+    system ("rm -rf $dir");
     
-    return $shell;
+    return ($shell, $etime);
   }
   
 sub dump2report
   {
       my ($dump)=shift;
-      
-      if (!$dump || -e $dump){return %R;}
-      
-      my %ref=xml2tag_list ($dump, "file");
+      my $cdir=cwd;
+      my %ref;
+      if (!$dump || !-e $dump){return %ref;}
+     
+      %ref=xml2tag_list ($dump, "file");
       
       for (my $i=0; $i<$ref{n};$i++)
 	{
-	  
 	  my $stream=xmltag2value($ref{$i}{body},"stream");
 	  my $name=xmltag2value($ref{$i}{body},"name");
 	  my $content=xmltag2value($ref{$i}{body},"content");
 	
 	if ($name  eq "stdout" || $name  eq "stderr")
 	  {
-	    $R{$name}=$content;
+	    $ref{$name}=$content;
 	  }
 	else
 	  { 
-	   $R{file}{$name}{stream}=$stream;
-	   $R{file}{$name}{content}=$content;
-	   $R{nfiles}++;
+	   $ref{file}{$name}{stream}=$stream;
+	   $ref{file}{$name}{content}=$content;
+	   $ref{nfiles}++;
 	 }
 	}
-      $R{stack}=dump2stack ($dump);
-      my $stderr=$R{stderr};
-      my $stdout=$R{stdout};
+      $ref{stack}=dump2stack ($dump);
+      my $stderr=$ref{stderr};
+      my $stdout=$ref{stdout};
     
       if ($stderr=~/ERROR/ || $stderr =~/FATAL/)
 	{
-	  $R{error}=1;
+	  $ref{error}=1;
 	}
-      $R{warning}=($stderr=~/WARNING/g);
+      $ref{warning}=($stderr=~/WARNING/g);
     
-      return %R
+      return %ref
   }
   
 sub dump2stack
@@ -1205,8 +1335,9 @@ sub xml2tag_list
       {
 	$string=$string_in;
       }
+    
     my $cwd=$cw;
-        
+    
     $tag_in1="<$tag ";
     $tag_in2="<$tag>";
     $tag_out="/$tag>";
@@ -1220,9 +1351,10 @@ sub xml2tag_list
     
     foreach $t (@l)
       {
+	
 	$t=~s/<#//;
 	$t=~s/#>//;
-
+	
 	if ( $t=~/$tag_in1/ || $t=~/$tag_in2/)
 	  {
 	    $in=1;
@@ -1236,15 +1368,16 @@ sub xml2tag_list
 
 	    $tag{$tag{n}}{close}=$t;
 	    $tag{n}++;
+		
 	    $in=0;
+	    
 	  }
 	elsif ($in)
 	  {
-
 	    $tag{$tag{n}}{body}.=$t;
 	  }
       }
-
+    
     return %tag;
   }
 
@@ -1499,7 +1632,7 @@ sub random_string
        {
 	 my $l=shift;
 
-	 if (!$l){$l=10;}
+	 if (!$l){$l=20;}
 	 my $ret;
 	 my $s="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
 	 my @l=split (//,$s);
@@ -1590,3 +1723,35 @@ sub rpath2apath
       }
 	  
 
+sub path2abs
+	{
+	  my ($file)=@_;
+	  if ($file=~/^^\//){return $file;}
+	  my $dir=cwd;
+	  $file=$dir."/".$file;
+	  return $file;
+	}
+
+
+
+sub timeout_system
+   {
+     my ($command, $timeout)=(@_);
+     my $shell;
+     if (!$timeout)
+       {
+	 $timeout=$TIMEOUT;
+       }
+     
+     eval 
+       {
+	 local $SIG{ALRM} = sub { die "alarm\n" }; # NB: \n required
+	 
+	 alarm($timeout);
+	 $shell=system ($command);
+	 alarm(0);
+       };
+     
+     if ($@ eq "alarm\n"){return "-1";}
+     else {return $shell}
+   }

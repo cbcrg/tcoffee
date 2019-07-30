@@ -6343,7 +6343,7 @@ char *dump_io_start (char *dump)
       string2file_direct (dump_output_file_list, "a", "%s w\n", redirect_stderr (NULL)); 
     }
   dump_io_started=1;	   
-  return dump_output_file_list;;
+  return dump_output_file_list;
 }
 void dump_io(char *target, char *nature)
 {
@@ -7099,10 +7099,50 @@ FILE * vfopen  ( char *name_in, char *mode)
     return NULL;
     }
 
+/*Files must be registered in order to be part of the dump*/
+int register_file4dump (char *file, char *mode)
+{
+  int exists;
+  if (!file)return 0;
+  
+  exists=file_exists (NULL,file);
+  
+  if (strstr (mode, "w"))
+    {
+      if (exists)
+	{
+	  static char *tmp=vtmpnam (NULL);
+	  if (check_file_exists (file))
+	    {
+	      printf_system ("mv %s %s", file, tmp);
+	      vfclose(vfopen (file, mode));
+	      printf_system ("mv %s %s", tmp,file);
+	    }
+	}
+      else
+	{
+	  vfclose(vfopen (file, mode));
+	  remove (file);
+	}
+    }
+  else if (exists)
+    {
+      vfclose(vfopen (file, mode));
+    }
+  else 
+    {
+      return 0;
+    }
+  return 1;
+  
+  
+}
 
 FILE *myfopen (char *name, char *mode)
 {
   char *dump_output_file_list=dump_io_start(NULL);
+
+
   if (dump_output_file_list)
     {
       
@@ -8503,7 +8543,8 @@ FILE * display_output_filename ( FILE *io, char *type, char *format, char *name,
   static char ***buf;
   static int nbuf;
   char *f;
-
+  register_file4dump(name, "w");
+  
   if ( strm ( name, "stdout") || strm (name, "stderr"))return io;
 
   if ( check_output==STORE)

@@ -777,7 +777,25 @@ int batch_main ( int argc, char **argv)
 	       
 	       if (reg || dpa)reg=dpa=1;
 	       
-	       
+	       declare_name (dump);
+	       get_cl_param(\
+			    /*argc*/      argc           ,\
+			    /*argv*/      argv           ,\
+			    /*output*/    &le            ,\
+			    /*Name*/      "-dump",\
+			    /*Flag*/      &garbage       ,\
+			    /*TYPE*/      "S"          ,\
+			    /*OPTIONAL?*/ OPTIONAL       ,\
+			    /*MAX Nval*/  1              ,\
+			    /*DOC*/       "dump",\
+			    /*Parameter*/ &dump   ,\
+			    /*Def 1*/    "no"       ,\
+			    /*Def 2*/    ""              ,\
+			    /*Min_value*/ "any"          ,\
+			    /*Max Value*/ "any"           \
+			   );
+
+	       dump_io_start (dump);
 	       /**
 		* Load T-Coffee default parameters.
 		* Next, decide whether a special mode of T_Coffee has been called and load the
@@ -4051,25 +4069,7 @@ get_cl_param(\
 		   );
 	       if ( exon_boundaries[0])set_string_variable ("exon_boundaries", exon_boundaries);
 
-	       declare_name (dump);
-	       get_cl_param(\
-			    /*argc*/      argc           ,\
-			    /*argv*/      argv           ,\
-			    /*output*/    &le            ,\
-			    /*Name*/      "-dump",\
-			    /*Flag*/      &garbage       ,\
-			    /*TYPE*/      "S"          ,\
-			    /*OPTIONAL?*/ OPTIONAL       ,\
-			    /*MAX Nval*/  1              ,\
-			    /*DOC*/       "dump",\
-			    /*Parameter*/ &dump   ,\
-			    /*Def 1*/    "no"       ,\
-			    /*Def 2*/    ""              ,\
-			    /*Min_value*/ "any"          ,\
-			    /*Max Value*/ "any"           \
-			   );
 
-	       dump_io_start (dump);
 	       
 
 	       display=100;
@@ -7024,7 +7024,15 @@ Alignment * t_coffee_dpa (int argc, char **argv)
   int a;
   int output_dpa_tree=1;
   int seqflag=0;
-
+  FILE *le;
+  char *se_name;
+  
+  /* This is used for the dump function see -dump option*/
+  declare_name (se_name);
+  sprintf (se_name, "stderr");
+  le=get_stdout1(se_name);
+  
+  
   command=(char*)vcalloc (10000, sizeof (char));
   sprintf ( command, "#");
   
@@ -7123,9 +7131,9 @@ Alignment * t_coffee_dpa (int argc, char **argv)
     }
   
   //
-  fprintf ( stderr, "!Maximum N Threads --- %d\n",get_nproc());
+  fprintf ( le, "!Maximum N Threads --- %d\n",get_nproc());
   //prepare the guide tree
-  fprintf ( stderr, "!Compute Guide Tree --- ");
+  fprintf ( le, "!Compute Guide Tree --- ");
   if (usetree){dpa_tree=usetree;}
   if (!dpa_tree)dpa_tree="codnd";
   if (strm (dpa_tree, "dpa"))
@@ -7138,29 +7146,28 @@ Alignment * t_coffee_dpa (int argc, char **argv)
       
     }
   else
-    T=seq2dnd (S, dpa_tree);fprintf ( stderr, " reg_tree %s\n", dpa_tree);
+    T=seq2dnd (S, dpa_tree);fprintf ( le, " reg_tree %s\n", dpa_tree);
   
-
   if (dpa_tree && check_file_exists (dpa_tree))output_dpa_tree=0;
   else output_dpa_tree=1;
   
-  fprintf ( stderr, "!Compute Guide Tree ---  done\n");
+  fprintf ( le, "!Compute Guide Tree ---  done\n");
   
  
   
   
   //get the weight
-  fprintf (stderr, "!Compute Weights --- ");
-  if (dpa_weight){w=seq2dpa_weight (S, dpa_weight); fprintf ( stderr, "%s\n", dpa_weight);}
-  else { w=seq2dpa_weight (S, "longuest");fprintf ( stderr, "default longuest\n", dpa_weight);}
-  fprintf ( stderr, "!Compute Weights --- done\n");
+  fprintf (le, "!Compute Weights --- ");
+  if (dpa_weight){w=seq2dpa_weight (S, dpa_weight); fprintf ( le, "%s\n", dpa_weight);}
+  else { w=seq2dpa_weight (S, "longuest");fprintf ( le, "default longuest\n", dpa_weight);}
+  fprintf ( le, "!Compute Weights --- done\n");
   
   //run the alignment
-  fprintf (stderr, "!Compute MSA --- reg_method %s -- reg_nseq %d -- start\n", command, dpa_nseq);
+  fprintf (le, "!Compute MSA --- reg_method %s -- reg_nseq %d -- start\n", command, dpa_nseq);
   T=node2master (T, S, w);
   //alnfile=tree2bucket (T,S,dpa_nseq,command);
   alnfile=tree2msa4dpa(T, S, dpa_nseq, command);
-  fprintf ( stderr, "!Compute MSA --- done\n");
+  fprintf ( le, "!Compute MSA --- done\n");
   
   //figure out the name
   F=parse_fname(seqfile);
@@ -7173,8 +7180,8 @@ Alignment * t_coffee_dpa (int argc, char **argv)
       sprintf (outfile, "%s.aln", F->name);
     }
   printf_system ("mv %s %s", alnfile, outfile);
-  display_output_filename (stderr, "MSA","fasta",outfile, CHECK);
- 
+  display_output_filename (le, "MSA","fasta",outfile, CHECK);
+  
   
   //output The tree
   if (output_dpa_tree)
@@ -7185,15 +7192,15 @@ Alignment * t_coffee_dpa (int argc, char **argv)
 	  sprintf (newtree, "%s.%s", F->name, dpa_tree);
 	}
       print_newick_tree (T,newtree);
-      display_output_filename (stderr, "TREE","newick",newtree, CHECK);
+      display_output_filename (le, "TREE","newick",newtree, CHECK);
     }
   
   //terminate
-  fprintf (stderr,"\n\n");
-  print_command_line (stderr);
+  fprintf (le,"\n\n");
+  print_command_line (le);
   print_mem_usage (stdout, "REG memory Usage");
-  print_program_information (stderr, NULL);
-  fprintf ( stderr, "\n");
+  print_program_information (le, NULL);
+  fprintf ( le, "\n");
   myexit (EXIT_SUCCESS);
   return NULL;
 }
