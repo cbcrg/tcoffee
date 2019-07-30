@@ -247,8 +247,8 @@ code:
 install2version:
 	echo $(DISTRIB_DIR)/install
 	$(shell $(PERL4MAKEFILE_LIB)/edit_version.pl -target=$(DISTRIB_DIR)/install -tag="#_#UPDATE_VERSION" -version=$(VERSION))
-	cp $(BUILD_DIR)/web-readme.txt.source $(BUILD_DIR)/webreadme.txt
-	$(shell $(PERL4MAKEFILE_LIB)/edit_version.pl -target=$(BUILD_DIR)/webreadme.txt -tag="#_#UPDATE_VERSION" -version=$(VERSION))	
+	cp $(BUILD_DIR)/web-readme.txt.source $(BUILD_DIR)/webreadme
+	$(shell $(PERL4MAKEFILE_LIB)/edit_version.pl -target=$(BUILD_DIR)/webreadme -tag="#_#UPDATE_VERSION" -version=$(VERSION))	
 	mv $(BUILD_DIR)/webreadme.txt $(BUILD_DIR)/web-readme.txt 
 # 
 # This target copies T-Coffee sources files from the library folder 
@@ -323,8 +323,9 @@ packing:
 
 
 github:
-	git commit -a -m '$(m)'
 	make version release_type=$(release_type)
+	
+	git commit -a -m '$(m)'
 
 version:
 	$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print -$(release_type) -circleci=$(CIRCLECI_CONFIG)> $(WEB_DIR)/Packages/T-COFFEE.version)
@@ -351,16 +352,17 @@ finish_release_local:
 	git  push
 
 beta:
-	make github release_type='beta'
+	
+	make version release_type='beta'
 	make finish_release  target_dir=$(BETA_SOURCES) target_file=$(BETA_SOURCES_FILE)
 
 
 stable:
-	make github release_type='stable'
+	make version release_type='stable'
 	make finish_release  target_dir=$(STABLE_SOURCES) target_file=$(STABLE_SOURCES_FILE)
 
 major:
-	make github release_type='major'
+	make version release_type='major'
 	make finish_release  target_dir=$(STABLE_SOURCES) target_file=$(STABLE_SOURCES_FILE)
 
 finish_release:
