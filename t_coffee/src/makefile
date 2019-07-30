@@ -38,13 +38,6 @@ ifdef OPENMP
     KM_FLAGS=-fopenmp
 endif
 
-ifndef LIB_DIR
-#LIB_DIR=/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/
-LIB_DIR=$(CURDIR)/../../lib
-endif
-
-
-
 ifndef GIT_DIR
 GIT_DIR=$(HOME)/Dropbox/projects/git/tcoffee/
 endif
@@ -247,9 +240,10 @@ code:
 install2version:
 	echo $(DISTRIB_DIR)/install
 	$(shell $(PERL4MAKEFILE_LIB)/edit_version.pl -target=$(DISTRIB_DIR)/install -tag="#_#UPDATE_VERSION" -version=$(VERSION))
-	cp $(BUILD_DIR)/web-readme.txt.source $(BUILD_DIR)/webreadme
-	$(shell $(PERL4MAKEFILE_LIB)/edit_version.pl -target=$(BUILD_DIR)/webreadme -tag="#_#UPDATE_VERSION" -version=$(VERSION))	
-	mv $(BUILD_DIR)/webreadme $(BUILD_DIR)/web-readme.txt 
+	cp $(BUILD_DIR)/web-readme.txt.source $(BUILD_DIR)/web
+	$(PERL4MAKEFILE_LIB)/edit_version.pl -target=$(BUILD_DIR)/web -tag="#_#UPDATE_VERSION" -version=$(VERSION)	
+	mv $(BUILD_DIR)/web $(BUILD_DIR)/web-readme.txt 
+
 # 
 # This target copies T-Coffee sources files from the library folder 
 # to the distribution folder. 

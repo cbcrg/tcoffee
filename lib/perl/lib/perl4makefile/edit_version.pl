@@ -18,6 +18,7 @@ if ( ($cl=~/-versionF=\s*(\S+)/)){$versionF=$1;}
 if ($versionF){$version=file2value($versionF);}
 file2edit_file ($target, $tag, $version);
 
+print $tag;
 
 sub file2edit_file
       {
@@ -27,7 +28,7 @@ sub file2edit_file
        while (<F>)
 	 {
 	   my $line=$_;
-	   
+	  
 	   if ( $line=~/$tag/)
 	     {
 	       
