@@ -4478,7 +4478,10 @@ int my_system ( char *command0)
 {
   static char ***unpacked_list;
   static int n_unpacked;
+  char *dump=NULL;
 
+  /* Chile process must not be granted access to the dump file*/
+  if (dump=getenv("DUMP_4_TCOFFEE"))unsetenv ("DUMP_4_TCOFFEE");
   
   if (!unpacked_list)
     {
@@ -4486,7 +4489,12 @@ int my_system ( char *command0)
     }
   
   
-  if ( getenv ("DEBUG_PERL"))return safe_system (command0);
+  if ( getenv ("DEBUG_PERL"))
+    {
+      if (dump)cputenv ("DUMP_4_TCOFFEE=%s", dump);
+      
+      return safe_system (command0);
+    }
   else
     {
       char **list;
@@ -4505,7 +4513,11 @@ int my_system ( char *command0)
 
       list=string2list (command1);
 
-      if ( !list) return EXIT_SUCCESS;
+      if ( !list) 
+	{
+	  if (dump)cputenv ("DUMP_4_TCOFFEE=%s", dump);
+	  return EXIT_SUCCESS;
+	}
       is_command=1;
 
       //Identify T-Coffee self threads and install threads
@@ -4550,7 +4562,8 @@ int my_system ( char *command0)
       command2=substitute ( command2, "//", "/");
       command2=substitute ( command2, ":/", "://");
       return_val=safe_system (command2);
-
+      if (dump)cputenv ("DUMP_4_TCOFFEE=%s", dump);
+      
       vfree ( command2);
       return return_val;
     }
@@ -6324,8 +6337,11 @@ char *dump_io_start (char *dump)
   static int dump_io_started;
   static char *dump_output_file_list;
   char *f;
-  
+ 
   if (! dump && dump_io_started) return dump_output_file_list;
+  
+  /*remove dump file if file already exists*/
+  if (!dump_io_started && getenv ("DUMP_4_TCOFFEE") && file_exists (NULL,getenv ("DUMP_4_TCOFFEE")))remove (getenv ("DUMP_4_TCOFFEE"));
   
   
   if (!dump)dump=getenv ("DUMP_4_TCOFFEE");
@@ -6333,7 +6349,7 @@ char *dump_io_start (char *dump)
   else if (dump && !dump_io_started && check_file_exists (dump))return NULL;
   
 
-	   
+ 
   set_string_variable ("dump_output_file_list", (dump_output_file_list=vtmpnam(NULL)));
   set_string_variable ("dump",dump);
   
@@ -6342,7 +6358,8 @@ char *dump_io_start (char *dump)
       string2file_direct (dump_output_file_list, "a", "%s w\n", redirect_stdout (NULL)); 
       string2file_direct (dump_output_file_list, "a", "%s w\n", redirect_stderr (NULL)); 
     }
-  dump_io_started=1;	   
+  dump_io_started=1;
+ 
   return dump_output_file_list;
 }
 void dump_io(char *target, char *nature)
@@ -9992,6 +10009,7 @@ char ** standard_initialisation  (char **in_argv, int *in_argc)
   set_email(get_email_from_env ());
 
   //prepare dump if needed
+  
   dump_io_start (NULL);
   
   //pipe_in
@@ -10327,7 +10345,7 @@ char* file_putenv (char *file)
   if (!file || !file_exists(NULL,file)) return NULL;
 
   list=file2list (file, "\n=");
-  fprintf ( stderr, "Import Environement Variables from %s\n", file);
+  //fprintf ( stderr, "Import Environement Variables from %s\n", file);
 
   while (list[n])
     {
@@ -10337,13 +10355,13 @@ char* file_putenv (char *file)
 	    {
 
 	      cputenv ( "PATH=%s:%s",list[n][2], getenv ("PATH"));
-	      fprintf ( stderr, "\tPATH=%s:$PATH", list[n][2]);
+	      //fprintf ( stderr, "\tPATH=%s:$PATH", list[n][2]);
 	    }
 	  else
 	    {
 
 	      cputenv("%s=%s", list[n][1],list[n][2]);
-	      fprintf ( stderr, "\t%s=%s",  list[n][1],list[n][2]);
+	      //fprintf ( stderr, "\t%s=%s",  list[n][1],list[n][2]);
 	    }
 	  n++;
 	}

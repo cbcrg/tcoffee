@@ -498,8 +498,6 @@ int batch_main ( int argc, char **argv)
 	int     overaln_target;
 	int     clean_overaln;
 	int     display;
-	char    *dump;
-	
 	int sand_box=0;
 
 
@@ -515,22 +513,21 @@ int batch_main ( int argc, char **argv)
 	 *        If so, redirect to ::run_other_pg.
 	 *        (In case of kmcoffee, load the kmcoffee arguments from ::km_coffee)
 	 */
-	
-	argv=standard_initialisation (argv, &argc);
 
+	argv=standard_initialisation (argv, &argc);
+	
 	set_string_variable ("t_coffee", argv[0]);
 
 	if (argc>=3 && strm (argv[1], "-other_pg"))
 	  {
 	    set_string_variable ("-other_pg", "set");
-	    //standard_initialisation (NULL,NULL);
 	    return run_other_pg (argc-2, argv+2);
 	  }
 	else if ( name_is_in_list ("kmcoffee", argv, argc, 100)!=-1)
 	  {
 	    argv=km_coffee(argc, argv); 
 	  }
-
+	
 	
 	 /**
 	  * Read all the parameters of T_Coffee using ::get_cl_param
@@ -555,7 +552,6 @@ int batch_main ( int argc, char **argv)
 			    /*Max Value*/ "any"             \
 					  );
 		 
-
 /*PARAMETER PROTOTYPE:    READ PARAMETER FILE     */
 	       declare_name (parameters);
 	       get_cl_param(\
@@ -777,25 +773,7 @@ int batch_main ( int argc, char **argv)
 	       
 	       if (reg || dpa)reg=dpa=1;
 	       
-	       declare_name (dump);
-	       get_cl_param(\
-			    /*argc*/      argc           ,\
-			    /*argv*/      argv           ,\
-			    /*output*/    &le            ,\
-			    /*Name*/      "-dump",\
-			    /*Flag*/      &garbage       ,\
-			    /*TYPE*/      "S"          ,\
-			    /*OPTIONAL?*/ OPTIONAL       ,\
-			    /*MAX Nval*/  1              ,\
-			    /*DOC*/       "dump",\
-			    /*Parameter*/ &dump   ,\
-			    /*Def 1*/    "no"       ,\
-			    /*Def 2*/    ""              ,\
-			    /*Min_value*/ "any"          ,\
-			    /*Max Value*/ "any"           \
-			   );
 
-	       dump_io_start (dump);
 	       /**
 		* Load T-Coffee default parameters.
 		* Next, decide whether a special mode of T_Coffee has been called and load the
@@ -807,8 +785,11 @@ int batch_main ( int argc, char **argv)
 		*/
 	       
 	       
-if (dpa)t_coffee_dpa (argc, argv);
-
+if (dpa)
+  {
+    dump_io_start (NULL);
+    t_coffee_dpa (argc, argv);
+  }
 
 
 
@@ -857,27 +838,30 @@ if (t_coffee_defaults_flag)
 
  if ( parameters && parameters[0])argv=push_string (file2string (parameters), argv, &argc, 1);
 
- 
- 
  if (n_special_mode && !type_only)
    {
      char *special_mode;
      char *lseq_type;
+     
+
      declare_name(lseq_type);
+     
      if (type && !strm (type, ""))
        sprintf (lseq_type,"%s",type);
      else
        sprintf (lseq_type,"%s",get_seq_type_from_cl (argc, argv));
-
+     
+     
+     
      for ( a=0; a< n_special_mode; a++)
        {
 	 char *new_arg=NULL;
-
+	 
 	 special_mode=special_mode_list[a];
 
 	 store_mode (special_mode);
-
-
+	 
+	 
 	 if (special_mode && !special_mode[0]);
 	 
 	 else if ( strm (special_mode, "genepredx"))new_arg=get_genepredx_defaults(NULL,lseq_type);
@@ -933,18 +917,16 @@ if (t_coffee_defaults_flag)
 	     fprintf ( stderr, "\nERROR: special_mode %s is unknown [FATAL:%s]\n",special_mode, PROGRAM);
 	     myexit (EXIT_FAILURE);
 	   }
-
 	 if (new_arg)argv=push_string (new_arg, argv, &argc, 1);
        }
    }
 
 if ( getenv ("TCOFFEE_EXTRA_PARAM"))argv=push_string (getenv ("TCOFFEE_EXTRA_PARAM"), argv, &argc, argc);
 
-
+	       
+dump_io_start (NULL);
 argv=break_list ( argv, &argc, "=;, \n");
 argv=merge_list ( argv, &argc);
-/*check_cl4t_coffee ( argc, argv); */
-
 
 /*PARAMETER PROTOTYPE:    VERSION      */
 	       get_cl_param(\
@@ -1167,6 +1149,7 @@ if ( !do_evaluate)
 
      le=get_stdout1(se_name);
      fprintf ( le, "\nPROGRAM: %s %s (%s)\n",PROGRAM,VERSION,BUILD_INFO);
+     
 
 /*PARAMETER PROTOTYPE: RUN NAME*/
                declare_name (full_log);
@@ -4098,15 +4081,7 @@ get_cl_param(\
 
 
 
-	       
-
-
-
-	       /**
-	        * If T-Coffee is invoked without any arguments or with dump
-	        * it displays the available method names through ::display_method_names and exits.
-	        */
-	       if (argc==1 || (strm (argv[1], "-dump") && argc <=3))
+	       if (argc==1 )
 		 {
 		   display_method_names ("display", stdout);
 		   return EXIT_SUCCESS;
@@ -5881,7 +5856,6 @@ char *get_accurate4PROTEIN_defaults(char *buf, char *type)
      if (NO_METHODS_IN_CL)buf=strcat (buf,"-in Mbest_pair4prot -template_file BLAST -template_file EXPRESSO  ");
      else buf=strcat (buf,"-template_file BLAST -template_file EXPRESSO  ");
      buf=strcat (buf,"-output aln, expanded_fasta_aln ");
-
      return buf;
    }
 
@@ -6380,8 +6354,6 @@ int set_methods_limits (char ** method,int nl,char **list, int n, int *maxnseq, 
   return nm;
 }
 
-
-
 char * get_seq_type_from_cl (int argc, char **argv)
 {
   char *buf, *r;
@@ -6393,6 +6365,7 @@ char * get_seq_type_from_cl (int argc, char **argv)
   sprintf (file, "%d.tmp", rand()%10000);
   buf=(char*)vcalloc ( 10000, sizeof (char));
   sprintf ( buf, "%s ", get_string_variable ("t_coffee"));
+  
   for (a=1, seq=0; a<argc; a++)
     {
       if ( check_file_exists (argv[a]))seq=1;
@@ -6408,12 +6381,14 @@ char * get_seq_type_from_cl (int argc, char **argv)
   buf=strcat (buf, " -type_only >");
   buf=strcat (buf, file);
 
-  my_system ( buf);
+  printf_system ( "%s",buf);
 
   r=file2string (file);
   vremove (file);
   return r;
 }
+
+
 
 
 /////////////////////////

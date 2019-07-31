@@ -22,6 +22,7 @@ my %dir;
 my $TIMEOUT=1000;#Default Timeout in seconds
 my $KEEPREPLAYED=0;
 my $GIT=0;
+my %FILE2IGNORE;
 
 my $max=0;
 my $pattern='$$';
@@ -50,6 +51,8 @@ $dir{latest}  ="$cw/testsuite/validation/docs/latest/";
 $dir{log}     ="$cw/testsuite/validation/docs/log/";
 $dir{failed}  ="$cw/testsuite/validation/docs/failed/";
 
+$FILE2IGNORE{'stdout'}=1;
+$FILE2IGNORE{'stderr'}=1;
 
 
 if ($ARGV[0] eq "-help")
@@ -109,7 +112,7 @@ if ($ARGV[0] eq "-help")
     print "     -strict        Will report failure if one or more replay output files are missing\n";
     print "     -very_strict   Will report failure if there is any difference between replay output\n";
     print "     -timeout       Will report failure is time is over this value [Def=$TIMEOUT sec.]\n";
-    
+    print "     -ignore        List of filesto be ignore: File1 File2 Def: -ignore stdout stderr\n";
     
     
     print "     -max           max number of CL to check [DEBUG]\n";
@@ -221,7 +224,14 @@ for (my $a=0; $a<=$#ARGV; $a++)
       {
 	$STRICT=1;
       }
-    
+    elsif ($ARGV[$a]=~/-ignore/)
+      {
+	$FILE2IGNORE{$ARGV[++$a]}=1;
+	while (!($ARGV[$a+1]=~/^-/))
+	  {
+	   $FILE2IGNORE{$ARGV[++$a]}=1;
+	 }
+      }
   }
 
 # SIngle check mode: replay
@@ -1017,24 +1027,26 @@ sub compare_reports
 	 }
 
 
-
-	#Get rid of the Version and CPU effects
-	my $content1=$doc->{file}{$f}{content};
-	my $content2=$doc->{file}{$f}{content};
-	
-	$content1=~s/Version_\S+ /Version_XXXX /g;
-	$content2=~s/Version_\S+ /Version_XXXX /g;
-	
-	$content1=~s/CPU\S+ /CPU=XXXX /g;
-	$content2=~s/CPU\S+ /CPU=XXXX /g;
-		
-	if (!$doc->{file}{$f})
+	if (!$FILE2IGNORE{$f})
 	  {
-	    $doc->{MissingOutputF}{$f}=1;$doc->{MissingOutput}++;
-	  }
-	elsif ($content1 ne $content2)
-	  {
-	    $doc->{DifferentOutput}{$f}=1;$doc->{N_DifferentOutput}++;
+	    #Get rid of the Version and CPU effects
+	    my $content1=$doc->{file}{$f}{content};
+	    my $content2=$doc->{file}{$f}{content};
+	    
+	    $content1=~s/Version_\S+ /Version_XXXX /g;
+	    $content2=~s/Version_\S+ /Version_XXXX /g;
+	    
+	    $content1=~s/CPU\S+ /CPU=XXXX /g;
+	    $content2=~s/CPU\S+ /CPU=XXXX /g;
+	    
+	    if (!$doc->{file}{$f})
+	      {
+		$doc->{MissingOutputF}{$f}=1;$doc->{MissingOutput}++;
+	      }
+	    elsif ($content1 ne $content2)
+	      {
+		$doc->{DifferentOutput}{$f}=1;$doc->{N_DifferentOutput}++;
+	      }
 	  }
       }
     return;
