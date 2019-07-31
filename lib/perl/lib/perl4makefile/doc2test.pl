@@ -21,7 +21,7 @@ my %dir;
 
 my $TIMEOUT=1000;#Default Timeout in seconds
 my $KEEPREPLAYED=0;
-my $GIT=1;
+my $GIT=0;
 
 my $max=0;
 my $pattern='$$';
@@ -31,7 +31,9 @@ my $regexp;
 my $reset;
 my $stop_on_failed;
 my $clean;
-my $replay;
+my $replay_dump_file;
+my $replay_dump_list;
+my $replay_dump_dir;
 my $STRICT=0;
 my $VERY_STRICT=0;
 my $failed;
@@ -99,7 +101,11 @@ if ($ARGV[0] eq "-help")
     print "     -tmp           tmp directory\n";
     print "     -latest        latest directory\n";
     print "     -replay <file> replay an existing dump -- will produce file.replay along with diagnostic\n";
-    print "     -keepreplyed   Keep the dump of the replayed dump. Will be named file.replayed\n";
+    print "     -replay_list<file> replay dumps in a file (one per line, comments start with #, files are checked)\n";
+    print "     -replay_dir <dir>  replay dumps in a dir -- files are checked --\n";
+    
+    
+    print "     -keepreplayed  Keep the dump of the replayed dump. Will be named file.replayed\n";
     print "     -strict        Will report failure if one or more replay output files are missing\n";
     print "     -very_strict   Will report failure if there is any difference between replay output\n";
     print "     -timeout       Will report failure is time is over this value [Def=$TIMEOUT sec.]\n";
@@ -177,9 +183,18 @@ for (my $a=0; $a<=$#ARGV; $a++)
       {
 	$dir{ref}=$ARGV[++$a];
       }
+     elsif ($ARGV[$a]=~/-replay_list/)
+      {
+	$replay_dump_list=$ARGV[++$a];
+      }
+    elsif ($ARGV[$a]=~/-replay_dir/)
+      {
+	$replay_dump_dir=$ARGV[++$a];
+      }
+    
     elsif ($ARGV[$a]=~/-replay/)
       {
-	$replay=$ARGV[++$a];
+	$replay_dump_file=$ARGV[++$a];
       }
     elsif ($ARGV[$a]=~/-keepreplayed/)
       {
@@ -210,57 +225,18 @@ for (my $a=0; $a<=$#ARGV; $a++)
   }
 
 # SIngle check mode: replay
-
-if ($replay)
+if ($replay_dump_file)
   {
-    my $replayed=$replay.".replay";
-    my ($shell,$etime)=dump2run ($replay, $replayed, "quiet");
-    my $com=dump2cl ($replay);
-    my ($missing, $different, $error, $warning);
-
-    $missing=$warning=$error=$different=0;
-    print "~ $com $etime ms ";
-    my %in =dump2report($replay);
-    my %out=dump2report($replayed);
-    
-    compare_reports (\%in, \%out, "quiet");
-    $missing=$out{MissingOutput};
-    $different=$out{N_DifferentOutput};
-    $error=$out{error};
-    
-    if (!$error){$error=0;}
-    if (!$warning){$warning=0;}
-    if (!$different){$different=0;}
-    if (!$missing){$missing=0;}
-
-    
-    print "MISSING_IO $missing ";
-    print "DIFFERENT_IO $different ";
-    print "WARNINGS $warning ";
-    print "ERRORS $error ";
-    
-    if    ($STRICT && ($error || $missing)){$shell=1;}
-    elsif ($VERY_STRICT && ($error || $missing || $warning || $different)){$shell=1;}
-    
-    if (!$shell)
-      {
-	print "PASSED\n";
-      }
-    else
-      {
-	print "FAILED\n";
-      }
-    if ($KEEPREPLAYED)
-      {
-	print "Replay File: $replayed\n";
-      }
-    else
-      {
-	unlink ($replayed);
-      }
-    exit ($SHELL);
+    exit(replay_dump_file ($replay_dump_file, 1));
   }
-#End of single replay      
+elsif ($replay_dump_list)
+  {
+    exit(replay_dump_list ($replay_dump_list));
+  }
+elsif ($replay_dump_dir)
+  {
+    exit(replay_dump_dir ($replay_dump_dir));
+  }
 
 
 #protect special char in pattern if non regexp mode is used
@@ -763,7 +739,98 @@ elsif ($clean=~/failed/)
   }
 exit;
 
-#end main block
+sub replay_dump_dir
+  {
+    my ($replay_dir)=@_;
+    my $shell=0;
+    my $n=0;
+    
+    opendir (DIR, $replay_dir);
+    my @dump_list=readdir (DIR);
+    foreach my $dump (@dump_list)
+      {
+	if (file_is_dump($dump))
+	  {
+	    if (replay_dump_file ($dump, ++$n)){$shell=1;}
+	  }
+      }
+    return $shell;
+  }
+
+sub replay_dump_list
+  {
+    my ($replay_list)=@_;
+    my $n=0;
+    my $shell=0;
+    
+    open (F, "$replay_list");
+    while (<F>)
+      {
+	my $l=$_;
+	chomp ($l);
+	if (!$l=~/^#/ && file_is_dump($l))
+	  {
+	    if (replay_dump_file ($l, ++$n)){$shell=1;}
+	  }
+      }
+    close (F);
+    return $shell;
+  }
+
+      
+sub replay_dump_file
+  {
+    my ($replay, $n)=@_;
+    my $replayed=$replay.".replay";
+    my ($shell,$etime)=dump2run ($replay, $replayed, "quiet");
+    my $com=dump2cl ($replay);
+    my ($missing, $different, $error, $warning);
+    
+    $missing=$warning=$error=$different=0;
+    print "~ ($n) $com $etime ms ";
+    my %in =dump2report($replay);
+    my %out=dump2report($replayed);
+    
+    compare_reports (\%in, \%out, "quiet");
+    $missing=$out{MissingOutput};
+    $different=$out{N_DifferentOutput};
+    $error=$out{error};
+    
+    if (!$error){$error=0;}
+    if (!$warning){$warning=0;}
+    if (!$different){$different=0;}
+    if (!$missing){$missing=0;}
+    
+    
+    print "MISSING_IO $missing ";
+    print "DIFFERENT_IO $different ";
+    print "WARNINGS $warning ";
+    print "ERRORS $error ";
+    
+    if    ($STRICT && ($error || $missing)){$shell=1;}
+    elsif ($VERY_STRICT && ($error || $missing || $warning || $different)){$shell=1;}
+    
+    if (!$shell)
+      {
+	print "PASSED\n";
+      }
+    else
+      {
+	print "FAILED\n";
+      }
+    if ($KEEPREPLAYED)
+      {
+	print "Replay File: $replayed\n";
+      }
+    else
+      {
+	unlink ($replayed);
+      }
+    return ($SHELL);
+  }
+  
+#End of single replay      
+
 sub docdump
   {
     my ($cl, $docdump)=@_;
