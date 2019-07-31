@@ -1,1 +1,1 @@
-* master be8129d [ahead 1] improved the dump process -- reg can dump -- upadated the doc -- added a replay option do doc2test.pl
+* master 4e2c658 [ahead 1] added support for dump directoreis and dump lists in doc2test.pl
