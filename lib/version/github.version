@@ -1,1 +1,1 @@
-* master 6909e10 [ahead 1] fixed a glitch in dump that mixed parent and child processes output. Children do not contribute to the dump any more -- Removed the -dump option of T-Coffee. The dump is now requested via the environement variable DUMP_4_TCOFFEE=<dumpfile>
+* master e20069d [ahead 3] improved documentation, improved doc2test, doc will be posted on github, [ci skip]
