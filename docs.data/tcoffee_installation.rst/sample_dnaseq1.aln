@@ -1,0 +1,34 @@
+CLUSTAL FORMAT for T-COFFEE Version_11.00 [http://www.tcoffee.org] [MODE:  ], CPU=0.00 sec, SCORE=926, Nseq=3, Len=850 
+
+sp|O35205|GRAK_MOUSE   -atg---agattctccagttgggcgctagtatctttagtggcaggg------gtgtatatgtcctcagaatgcttccacactgagatcataggcggtcgagaggtgcaacctcatagccgcccgtttatggcct---------c---------aatccag
+sp|P08884|GRAE_MOUSE   atgcccccagtgctcatactactga-ctcttcttttgcccctgggcgccggcg------------cagagg------------aaataataggagggcatgttgtgaagccgcactctaggccctatatggcctttgtaaaaagtgtagatatcgagggt
+sp|P21844|MCPT5_MOUSE  atgc---acttattgactctgcacc-ttctattattactcttggga------t---------cttcaa---ctaaagccggagaaatcataggcgggaccgagtgtattccgcacagtcgtccatacatggcttaccttgaaattgtgacttcggaaaac
+                                 *  *     *         *    **       **                    **                * ** ***** **    *        ** **     * ** *  ***** *                          
+
+sp|O35205|GRAK_MOUSE   tatcggtctaagcatatttgtggtggggttctaattcacccccaatgggttttgacggctgcgcactgttactcttggtttcctagaggacattcccccactgtggttttaggcgcgcattctctgtcgaaaaatgaaccgatgaagcagacatttgaga
+sp|P08884|GRAE_MOUSE   aatcgcc------gttattgcggcggttttctagtacaagacgactttgtcctgacggcagcacactgtc---------------ggaatcgaaccatgacggtcaccctcggtgcgcacaacatcaaagctaaagaggagacccaacagataatacctg
+sp|P21844|MCPT5_MOUSE  tatctga------gcgcgtgttctggttttttaatccgcagaaattttgtccttacggcggctcactgtg---------------ccggacgttctattacggttctccttggagcacacaataagacatctaaggaggatacgtggcaaaaactggaag
+                        ***              **    **  ** ** * *      * *  **  * ***** ** ******                     *   *    ** **     * ** ** **             ** **    *     ** * * *     
+
+sp|O35205|GRAK_MOUSE   taaagaagtttattcctttttccagactccaatcaggatcgg---ccagccacgacattatgttgatcaagctgcgaacggctgccgagctcaataagaacgtgcaattgcttcatctaggctcta---aaaactatctacgtgatggtacgaagtgtca
+sp|P08884|GRAE_MOUSE   tggcaaaagccattcctc-acccgg--actataacgcaactgcattcttttcagatatcatgttgcttaagcttgagagcaaagcaaagcgcacaaaagcggtaagacctctgaagctcccccgaccgaacgccagggtgaagcctggagatgtgtgctc
+sp|P21844|MCPT5_MOUSE  tcgaa-aagcaattcctacacccta--agtacgatgagaacctagtggtgcatgatatcatgttgttgaaattgaaagagaaagccaaattaacgttaggtgttggaacactgcctttgtccgctaacttcaatttcatcccacccgggcgtatgtgtag
+                       *     *    ******    **       *    *                 ** ** ****** * **  *          **  *    *        **   *   **     *   *                *       **      ***   
+
+sp|O35205|GRAK_MOUSE   agtaacaggatggggaa---cgacgaaaccagatttgctcacggcttcggacaccttgcgcgaagtgacagtgactatcatttcaaggaaacgctgcaattcacaat------cttactacaatcacaaacctgtcatcacgaaggatatgatctgtgca
+sp|P08884|GRAE_MOUSE   cgttgccggctggggatcgcgaagcatta---acgatactaaggcctctgcacggctgcgggaggcacaacttgtcatacaagaagacgaagagtgta------aaa------agcgttttagacattatactgagacgacgg------aaatttgtgcc
+sp|P21844|MCPT5_MOUSE  ggccgttggctggggca---gaacgaatg---tcaatgagcctgcaagcgataccctgcaagaggtgaaaatgcggctccaggaaccacaggcatgca------aacactttactagttttcgacata---------acagtc------aactttgcgtc
+                        *     ** *****       *  *                 **    *      ***  ** *    * *     *      *    *    ** *      **            *     **             *            * ** *  
+
+sp|O35205|GRAK_MOUSE   ggagatgcaagaggccaaaaggactcttgtaaaggtgattcaggaggcccgttgatctgtaaagggatatttcatgccctcgtctcacagggatacaagtgtggaattgccaaaaagccaggtatct---acacgctcc------taacaaagaagtatc
+sp|P08884|GRAE_MOUSE   ggcgatctgaagaagatcaagacccccttcaaaggtgacagtggaggcccgttagtgtgcgataacaaag------cctacggcctattagcgtacg------------caaaaaacagaacaataagttcgggggttttcaccaagatcgtgcactttc
+sp|P21844|MCPT5_MOUSE  ggcaatcccaagaaaatgcagaacgtatacaaaggggacagtgggggaccattgttgtgcgcgggcatcg------cccaaggaattgcctcttatgtccaccgtaatgcgaaaccccctgctgtct---tcacta---------gaatttcacactacc
+                       **  **   *         **  *   *  ***** **    ** ** ** **  * **       *         **   *           **              * ***          *                      *      * *  *
+
+sp|O35205|GRAK_MOUSE   agacttggattaagtctaagcttgctcctagtcgtgcgcat---------
+sp|P08884|GRAE_MOUSE   tgccctggataa------------------gccgcaacatgaagctgtta
+sp|P21844|MCPT5_MOUSE  gcccatggattaataagattctcagggaaaac------------------
+                          * ***** *                                      
+
+
+

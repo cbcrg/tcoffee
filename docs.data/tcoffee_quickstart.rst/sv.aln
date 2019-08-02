@@ -1,0 +1,28 @@
+CLUSTAL FORMAT for T-COFFEE Version_11.00 [http://www.tcoffee.org] [MODE:  ], CPU=0.00 sec, SCORE=566, Nseq=4, Len=581 
+
+Q8CAN2_MOUSE    MAAGGRGLIRALHSSPCPTWKRAQSGANGRLKPEYDAVVIGAGHNGLVAAAYLQRLGVNTAVFERRHVIGGAAVTEEIIPGFKFSRASYLLSLLRPQICTDLELK-------------VD-RLAWPGGW-------------------------------
+Q9D630_MOUSE    MAAGGRGLIRALHSSPCPTWKRAQSGANGRLKPEYDAVVIGAGHNGLVAAAYLQRLGVNTAVFERRHVIGGARVTEEIIPGFKFSRASYLLSLLRPQICTDLELKKHGLKLHLRDPYSFTPMLEEGTLNRLPRSLLLGTDMAANQKEISQFSRKDAQVGK
+CJ033_MOUSE     M---------------------------------------------------------------------------------------------------------------------------------------------------------------
+CJ033_HUMAN     MAASGRGLCKAVAASPFPAWRRDNTEARGGLKPEYDAVVIGAGHNGLVAAAYLQRLGVNTAVFERRHVIGGAAVTEEIIPGFKFSRASYLLSLLRPQIYTDLELKKHGLRLHLRNPYSFTPMLEEGAGSKVPRCLLLGTDMAENQKQIAQFSQKDAQVFP
+                *                                                                                                                                                               
+
+Q8CAN2_MOUSE    ----------------------------------------------------------------------------------------------------------------------------------------------------------------
+Q9D630_MOUSE    VSGD------------------------------------------------------------------------------------------------------------------------------------------------------------
+CJ033_MOUSE     ------KRLVLAIDPLLDAAPVDTTAFHHGSLLQRLGALSTLKPLLKAGRTLGAQLPQYCEVLTAPISKVLDQWFESEPLKATLATDAVIGAMTSPHTPGSGYVLLHHVMGSLEGTQGAWSYVQGGMGALSDAIASSAATRGASIFTEKTVAKVQVNSEG
+CJ033_HUMAN     KYEEFMHRLALAIDPLLDAAPVDMAAFQHGSLLQRMRSLSTLKPLLKAGRILGAQLPRYYEVLTAPITKVLDQWFESEPLKATLATDAVIGAMTSPHTPGSGYVLLHHVMGGLEGMQGAWGYVQGGMGALSDAIASSATTHGASIFTEKTVAKVQVNSEG
+                                                                                                                                                                                
+
+Q8CAN2_MOUSE    ----------------------------------------------------------------------------------------------------------------------------------------------------------------
+Q9D630_MOUSE    ----------------------------------------------------------------------------------------------------------------------------------------------------------------
+CJ033_MOUSE     RVQGVTLQDGEEVRSRVVLSCASPQVTFLELTPQEWLPGAFVKRISQLDTQSPVTKINVAVDRLPNFQAAPNAPGDQPQGHHQCSIHLNCEDTLLLHQAFEDAKGGLPSQKPMIELCIPSSLDPTLAPPGCHVVSLFTQYTPYTLAGGKVWNEQEKNTYA
+CJ033_HUMAN     CVQGVVLEDGTEVRSKMVLSNTSPQITFLKLTPQEWLPEEFLERISQLDTRSPVTKINVAVDRLPSFLAAPNAPRGQPLPHHQCSIHLNCEDTLLLHQAFEDAMDGLPSHRPVIELCIPSSLDPTLAPPGCHVVSLFTQYMPYTLAGGKAWDEQERDAYA
+                                                                                                                                                                                
+
+Q8CAN2_MOUSE    -----------------------------------------------------------------------------------------------------
+Q9D630_MOUSE    -----------------------------------------------------------------------------------------------------
+CJ033_MOUSE     DKVFDCIEAYAPGFKRSVLARDILTPPDLERIFRLPGGNIFHGAMSLDQLYFARPVPQHSDYRCPVQGLYLCGSGAHPGGGVMGAAGRNAAHVVFRDLKNM
+CJ033_HUMAN     DRVFDCIEVYAPGFKDSVVGRDILTPPDLERIFGLPGGNIFHCAMSLDQLYFARPVPLHSGYRCPLQGLYLCGSGAHPGGGVMGAAGRNAAHVAFRDLKSM
+                                                                                                                     
+
+
+

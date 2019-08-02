@@ -1,0 +1,5905 @@
+#!/usr/bin/env perl
+$VersionTag =                                                                                                                                   2.43;
+use Env;
+use FileHandle;
+use Cwd;
+use File::Path;
+use Sys::Hostname;
+
+our $PIDCHILD;
+our $ERROR_DONE;
+our @TMPFILE_LIST;
+our $EXIT_FAILURE=1;
+our $EXIT_SUCCESS=0;
+
+our $REFDIR=getcwd;
+our $EXIT_SUCCESS=0;
+our $EXIT_FAILURE=1;
+
+our $PROGRAM="extract_from_pdb";
+our $CL=$PROGRAM;
+
+our $CLEAN_EXIT_STARTED;
+our $debug_lock=$ENV{"DEBUG_LOCK"};
+our $LOCKDIR=$ENV{"LOCKDIR_4_TCOFFEE"};
+if (!$LOCKDIR){$LOCKDIR=getcwd();}
+our $ERRORDIR=$ENV{"ERRORDIR_4_TCOFFEE"};
+our $ERRORFILE=$ENV{"ERRORFILE_4_TCOFFEE"};
+&set_lock ($$);
+if (isshellpid(getppid())){lock4tc(getppid(), "LLOCK", "LSET", "$$\n");}
+      
+our $SILENT=" >/dev/null 2>/dev/null";
+our $INTERNET=-1;
+
+
+
+
+
+
+
+our $BLAST_MAX_NRUNS=2;
+our $EXIT_SUCCESS=0;
+our $EXIT_FAILURE=1;
+our $CONFIGURATION=-1;
+our $REF_EMAIL="";
+our $PROGRAM="extract_from_pdb";
+
+
+my %onelett_prot=&fill_onelett_prot();
+my %threelett_prot=&fill_threelett_prot();
+my %onelett_RNA=&fill_onelett_RNA();
+my %threelett_RNA=&fill_threelett_RNA();
+my %onelett_DNA=&fill_onelett_DNA();
+my %threelett_DNA=&fill_threelett_DNA();
+
+
+
+
+
+my %onelett = (
+'P' => \%onelett_prot,
+'D' => \%onelett_DNA,
+'R' => \%onelett_RNA
+);
+
+
+my %threelett = (
+'P' => \%threelett_prot,
+'D' => \%threelett_DNA,
+'R' => \%threelett_RNA
+);
+
+
+
+
+
+
+
+if($ARGV[0]=~/help/ ||$ARGV[0]=~/man/ || $ARGV[0]=~/HELP/ || $ARGV[0]=~/Man/ || $ARGV[0] eq "-h"  || $ARGV[0] eq "-H"  )
+{die "SYNTAX: extract_from_pdb Version $VersionTag	
+	Minimum:             [extract_from_pdb file] 
+			   OR 
+			     [... | extract_from_pdb]
+ 	Flags (Default setting on the first line)
+	   -version...................[Returns the Version Number]
+           -force.....................[Forces the file to be treated like a PDB file]
+                                      [Regenerates the header and SEQRES fields]
+           -force_name................[Forces the file to be named after name]]
+           -infile.....file...........[Flag can be omited]
+			              [File must be pdb or fro pgm]
+                                      [File can also be compressed Z or gz]
+                                      [In the case of a compressed file, you can omit the gz|Z extension]
+           -netfile...................[File will be fetch from the net using wget]
+                                      [wget or curl must be installed]
+                                      [ftp://ftp.gnu.org/pub/gnu/wget/]
+                                      [http://curl.haxx.se/]
+                                      [Must also be used to retrieve the file from a local pdb copy (cf netaddress)]
+           -netaddress................[Address used for the retrieving the netfile]
+                                      [http://www.rcsb.org/pdb/cgi/export.cgi/%%.pdb.gz?format=PDB&pdbId=%%&compression=gz]
+                                      [http://www.expasy.ch/cgi-bin/get-pdb-entry.pl?%%]
+                                      [local -> will get the file from pdb_dir (see pdb_dir)]
+           -netcompression............[Extension if the netfile comes compressed]
+                                      [gz]
+           -pdb_dir...................[address of the repertory where the pdb is installed]
+                                      [Supports standard ftp style installation OR every stru in DIR]
+                                      [Give the ..../pdb/structure/ dir]
+                                      [If value omitted, the pg gets it from the env variable PDB_DIR]
+           -netcompression_pg.........[gunzip]
+           -is_pdb_name..........name.[Returns 1 if the name is a PDB ID, 0 otherwise]
+           -model_type...........name.[Returns the model type if valid PDB name]
+           -is_released_pdb_name name.[Returns 1 if the name corresponds to a released PDB file]
+           -get_pdb_chains.....name...[Returns the list of chains corresponding to the entry]
+           -get_pdb_id.........name...[Returns the PDB id within the provided pdb file]
+           -get_fugue_name.....name...[Turns a name into a name valid for fugue]
+                                      [Uses the netaddress to do so]
+	   -chain......FIRST..........[Extract the first chain only]
+		       A B C..........[Extract Several chains if needed]
+		       ALL............[Extract all the chains]	
+           -ligand.....ALL............[Extract the ligands in the chain (HETATM)]
+                       <name1>,<name2>[Extract All the named lignds]
+	   -ligand_only...............[Extract only the ligands]
+           -ligand_list...............[Extract the list of ligands]
+	   -coor.......<start>..<end>.[Coordinates of the fragment to extract]
+			              [Omit end to include the Cter]
+           -num........absolute.......[absolute: relative to the seq] 
+                       file...........[file: relative to file]
+           -num_out....new............[new: start 1->L]
+                       old............[old: keep the file coordinates]
+           -delete.....<start>..<end>.[Delete from residue start to residue end]
+	   -atom.......CA.............[Atoms to include, ALL for all of them]
+		       CA O N.........[Indicate several atoms if needed]
+	   -code.......3..............[Use the 1 letter code or the 3 letters code]
+	   -mode.......raw............[Output original pdb file]
+                       pdb............[Output something that looks like pdb]
+		       fasta..........[Output the sequences in fasta format]
+		       simple.........[Output a format easy to parse in C ]
+            -seq_field..ATOM...........[Field used to extract the sequence]
+		       SEQRES.........[Use the complete sequence]
+	   -seq.......................[Equivalent to  -mode fasta]
+	   -model......1..............[Chosen Model in an NMR file]
+           -nodiagnostic..............[Switches Error Messages off]
+           -debug.....................[Sets the DEBUG ON]
+           -no_remote_pdb_dir.........[Do not look for a remote file]
+           -cache_pdb.................[Cache Value, default is $HOME/.t_coffee/cache, other values: NO<=> No cache]
+
+      Environement Variables
+           These variables can be set from the environement
+           Command line values with the corresponding flag superseed evironement value
+           NO_REMOTE_PDB_DIR..........[Prevents the program from searching remote file: faster]
+           PDB_DIR....................[Indicates where PDB file must be fetched (localy)]
+
+	 PROBLEMS: please contact cedric.notredame\@europe.com\n";
+	 exit ($EXIT_SUCCESS);
+}
+
+$np=0;
+$n_para=$#ARGV;
+$model=1;
+$pdb_dir=$ENV{'PDB_DIR'};if ($pdb_dir){$pdb_dir.="/";}
+$debug=$ENV{'DEBUG_EXTRACT_FROM_PDB'};
+
+$no_remote_pdb_dir=$ENV{NO_REMOTE_PDB_DIR};
+$HOME=$ENV{'HOME'};
+if ( $ENV{CACHE_4_TCOFFEE})
+{$cache=$ENV{CACHE_4_TCOFFEE};}
+else
+{
+    $cache="$HOME/.t_coffee/cache/";
+}
+
+   
+$netaddress="http://www.rcsb.org/pdb/files/%%.pdb.gz";
+$netcompression_pg="gunzip";
+$netcompression="gz";
+
+foreach ($np=0; $np<=$n_para; $np++)
+  {        
+    $value=$ARGV[$np];
+   
+    if  ($np==0 && !($value=~/^-.*/))
+      { 
+	$pdb_file= $ARGV[$np];
+      }
+    elsif ( !($value=~/^-.*/))
+      {
+	print "@ARGV";
+	die;
+      } 
+    
+    elsif ($value eq "-nodiagnostic"){$nodiagnostic=1;}
+    elsif ($value eq "-force")
+      {
+	$force_pdb=1;
+      }
+    elsif ($value eq "-force_name")
+      {
+	$force_name=$ARGV[++$np];
+	$force_pdb=1;
+      }
+    
+    elsif ($value eq "-is_pdb_name")
+      {
+	$pdb_file= $ARGV[++$np];	
+	$is_pdb_name=1;	
+      } 
+    elsif ($value eq "-is_released_pdb_name")
+      {
+	$pdb_file= $ARGV[++$np];	
+	$is_released_pdb_name=1;
+      }
+    elsif ($value eq "-model_type")
+      {
+	$pdb_file= $ARGV[++$np];	
+	$model_type=1;
+      }
+    elsif ($value eq "-debug")
+{
+	$debug=1;
+}
+    elsif ($value eq "-get_pdb_chains")
+{
+	$pdb_file= $ARGV[++$np];
+	$get_pdb_chains=1;
+}
+    elsif ($value eq "-get_pdb_ligands")
+{
+	$get_pdb_ligands=1;
+}
+    
+    elsif ($value eq "-get_pdb_id")
+{
+	$pdb_file= $ARGV[++$np];
+	$get_pdb_id=1;
+	
+}
+    
+    elsif ( $value eq "-get_fugue_name")
+{
+	$pdb_file= $ARGV[++$np];
+	$get_fugue_name=1;
+}
+    elsif ( $value eq "-infile")
+{
+       $pdb_file= $ARGV[++$np];
+} 
+    elsif ($value eq "-netfile")
+{
+	$netfile=1;
+	if ( !($ARGV[$np+1]=~/^-.*/)){$pdb_file= $ARGV[++$np];}
+}
+    elsif (  $value eq "-num")
+{
+       $numbering= $ARGV[++$np];
+}
+    elsif (  $value eq "-num_out")
+{
+       $numbering_out= $ARGV[++$np];
+}
+    elsif ( $value eq "-netaddress")
+{
+	$netadress=$ARGV[++$np];
+}
+     
+    elsif ( $value eq "-netcompression")
+{
+	 $netcompression=$ARGV[++$np];
+}
+    elsif ( $value eq "-pdb_dir")
+{
+	 if ( !($ARGV[$np+1]=~/^-.*/)){$pdb_dir= "$ARGV[++$np]/";}
+}
+     elsif ( $value eq "-no_remote_pdb_dir")
+{
+	$no_remote_pdb_dir=1;
+	if ( !($ARGV[$np+1]=~/^-.*/)){$pdb_dir= "$ARGV[++$np]/";}
+}
+    elsif ( $value eq "-cache")
+{
+	$cache=$ARGV[++$np];
+}
+    
+    elsif ($value eq "-netcompression_pg")
+{
+	  $netcompression_pg=$ARGV[++$np];
+}
+     elsif ($value eq "-mode")
+{
+       $MODE=$ARGV[++$np];
+}
+
+    elsif ( $value eq "-model")
+{
+       $model= $ARGV[++$np];
+}
+    elsif ($value eq "-seq_field" )
+{
+       $seq_field= $ARGV[++$np];
+}   
+    elsif ($value eq "-coor" )
+{
+       $start= $ARGV[++$np];
+  
+       if (($ARGV[$np+1] eq "") ||($ARGV[$np+1]=~/^-.*/)){$end="*";} 
+       else {$end=   $ARGV[++$np];}     
+       $coor_set=1;
+}
+    elsif ($value eq "-delete" )
+{
+       $delete_start= $ARGV[++$np];
+       $delete_end= $ARGV[++$np];
+       $delete_set=1;
+}
+    elsif  ($value eq "-code")
+{
+       $code= $ARGV[++$np];
+}
+    elsif  ($value eq "-no_hetatm")
+{
+       $no_hetatm=1;
+}
+    elsif ($value eq "-chain")
+{
+       while (!($ARGV[$np+1] eq "") &&!($ARGV[$np+1]=~/^-.*/))
+{
+	      ++$np;
+	      @c_chain=(@chain,  $ARGV[$np]);
+	      $hc_chain{$ARGV[$np]}=$#c_chain+1;
+}           
+}
+    elsif ($value eq "-atom")
+{
+
+       while (!($ARGV[$np+1] eq "") && !($ARGV[$np+1]=~/^-.*/))
+{
+	      ++$np;
+	      $atom[$n_atom++]=  $ARGV[$np];
+	      $atom_list{$ARGV[$np]}=1;	      
+} 
+       
+}
+    elsif ( $value eq "-unfold")
+{
+	$unfold=1;
+}
+    elsif ($value eq "-seq" ||$value eq "-fasta" )
+{
+       $MODE="fasta";
+}
+    elsif ( $value eq "-version")
+{
+	print STDERR  "\nextract_from_pdb: Version $VersionTag\n";
+	&myexit ($EXIT_SUCCESS);
+}
+    elsif ( $value eq "-ligand")
+{
+	while (!($ARGV[$np+1] eq "") && !($ARGV[$np+1]=~/^-.*/))
+{
+	    ++$np;
+	    $ligand=1;
+	    $ligand_list{$ARGV[$np]}=1;	      
+} 
+	$hc_chain{'LIGAND'}=1;
+}
+    elsif ( $value eq "-ligand_only")
+{
+	$ligand_only=1;
+}
+}
+if ( $debug)
+{
+    print STDERR "\n[DEBUG:extract_from_pdb] NO_REMOTE_PDB_DIR: $no_remote_pdb_dir\n";
+    print STDERR "\n[DEBUG:extract_from_pdb] PDB_DIR: $pdb_dir\n";
+}
+
+
+if ( $is_pdb_name)
+  {
+    if (&remote_is_pdb_name($pdb_file))
+      {
+	print "1";
+      }
+    else
+      {
+	print "0";
+      }
+    exit ($EXIT_SUCCESS);
+  }
+
+if ( $is_released_pdb_name)
+  {
+    
+    if (&is_released($pdb_file))
+      {
+	print "1";
+      }
+    else
+      {
+	print "0";
+      }
+    exit ($EXIT_SUCCESS);
+  }
+if ($model_type)
+  {
+   
+    printf "%s", &pdb2model_type($pdb_file);
+    exit ($EXIT_SUCCESS);
+    
+  }
+    
+
+if (!$force_name)
+{
+    $pdb_file=~/([^\/]*)$/;
+    $force_name=$1;
+}
+
+$local_pdb_file=$pdb_file;
+
+if ( $debug){print STDERR "\n[DEBUG: extract_from_pdb] Scan For $local_pdb_file\n";}
+
+$mem=$no_remote_pdb_dir;
+$no_remote_pdb_dir=1;
+$tmp_pdb_file=get_pdb_file ($local_pdb_file);
+
+if ( !-e $tmp_pdb_file || $tmp_pdb_file eq "")
+  {
+    $local_pdb_file=$pdb_file;
+    ($local_pdb_file, $suffix_chain)=&pdb_name2name_and_chain($local_pdb_file);
+
+    if ($local_pdb_file)
+      {
+	if ( $debug){print STDERR "\nSplit $pdb_file into $local_pdb_file and $suffix_chain \n";}
+	$tmp_pdb_file=get_pdb_file ($local_pdb_file);
+	if ( $tmp_pdb_file ne "")
+	  {
+	    @c_chain=();
+	    @c_chain=($suffix_chain);
+	    %hc_chain=();
+	    $hc_chain{$suffix_chain}=1;
+	  }
+      }
+  }
+
+$no_remote_pdb_dir=$mem;
+if ($no_remote_pdb_dir==0)
+  {
+    
+    if ( !-e $tmp_pdb_file || $tmp_pdb_file eq "")
+      {
+	
+	$local_pdb_file=$pdb_file;
+	($local_pdb_file, $suffix_chain)=&pdb_name2name_and_chain($local_pdb_file);
+	if ($local_pdb_file)
+	  {
+	    
+	    if ( $debug){print STDERR "\nSplit $pdb_file into $local_pdb_file and $suffix_chain \n";}
+	    
+	    $tmp_pdb_file=get_pdb_file ($local_pdb_file);    
+	    
+	    if ( $tmp_pdb_file ne "")
+	      {
+		@c_chain=();
+		@c_chain=($suffix_chain);
+		%hc_chain=();
+		$hc_chain{$suffix_chain}=1;
+	      }
+	  }
+      }
+  }
+
+if ( $debug){print STDERR "\n$pdb_file copied into ##$tmp_pdb_file##\n";}
+
+if ( !-e $tmp_pdb_file || $tmp_pdb_file eq "")
+{
+	if ($is_pdb_name)
+{
+	    print "0\n"; exit ($EXIT_SUCCESS);
+}
+	else
+{
+  
+	    print "\nEXTRACT_FROM_PDB: NO RESULT for $pdb_file\n";
+	    &myexit ($EXIT_SUCCESS);	
+}
+}
+
+
+
+
+%molecule_type=&pdbfile2chaintype($tmp_pdb_file);
+if ( $debug){print STDERR "\n\tSequence Type determined\n";}
+
+$pdb_id=&get_pdb_id ($tmp_pdb_file);
+if ( $debug){print STDERR "\n\tID: $pdb_id (for $tmp_pdb_file)\n";}
+
+if ( $pdb_id eq ""){$pdb_id=$force_name;}
+
+@f_chain=&get_chain_list ($tmp_pdb_file);
+if ( $debug){print STDERR "\n\tChain_list:@f_chain\n";}
+
+if ( $get_pdb_chains)
+{
+    print "@f_chain\n";
+    &myexit ($EXIT_SUCCESS);
+}
+if ( $get_pdb_ligands)
+{
+    %complete_ligand_list=&get_ligand_list ($tmp_pdb_file);
+    print $complete_ligand_list{"result"};
+    &myexit ($EXIT_SUCCESS);
+}
+
+elsif ( $get_pdb_id ||$get_fugue_name )
+{
+    if    (@c_chain && $c_chain[0] eq "FIRST"){$pdb_id=$pdb_id.$f_chain[0];}
+    elsif (@c_chain && $c_chain[0] ne " "){$pdb_id=$pdb_id.$c_chain[0];}
+    
+    print "$pdb_id\n";
+    &myexit ($EXIT_SUCCESS);
+    
+}
+elsif ( $is_pdb_name)
+{
+    printf "1\n";
+    &myexit ($EXIT_SUCCESS);
+}
+
+
+
+$structure_file=vtmpnam();
+
+if ( $debug){print STDERR "\n\tCheck_point #1: $tmp_pdb_file  $structure_file\n";}
+
+$INFILE=vfopen ("$tmp_pdb_file", "r"); 
+my $TMP=vfopen ("$structure_file", "w");
+
+$print_model=1;
+$in_model=0;
+
+if ( $debug){print STDERR "\n\tCheck_point #2\n";}
+while ( <$INFILE>)
+{
+  my $first_model=0;
+  $line=$_;
+
+  if ( !$first_model && ($line =~/^MODEL\s*(\d*)/))
+    {
+      $first_model=$1;
+      if ($model==1){$model=$first_model;}
+    }
+  
+  if (($line =~/^MODEL\s*(\d*)/))
+    {
+      if ($1==$model)
+	{
+	  $in_model=1;
+	  $print_model=1;
+	  $is_nmr=1;
+	}
+      elsif ( $in_model==0)
+	{
+	  $print_model=0;
+	}
+      elsif ( $in_model==1)
+	{
+	  last;
+	}
+    }
+  if ($print_model){print $TMP $line;}  
+}
+close ($TMP);
+close ($INFILE);
+
+if ( $debug){print STDERR "\n\tCheck_point #3\n";}	
+
+  if ($numbering eq ""){$numbering="absolute";}
+  if ($numbering_out eq ""){$numbering_out="new";}
+
+  if ( $delete_set && $coor_set) {die "-delete and -coor are mutually exclusive, sorry\n";}
+  if ( $n_atom==0){$atom_list[$n_atom++]="ALL";$atom_list{$atom_list[0]}=1;}
+  if ( $seq_field eq ""){$seq_field="ATOM";}
+  
+  if ( $MODE eq ""){$MODE="pdb";}
+  elsif ( $MODE eq "simple" && $code==0){$code=1;}
+
+  if ( $code==0){$code=3;}
+
+
+if ($f_chain[0] eq " "){$hc_chain{' '}=1;$c_chain[0]=" ";}
+elsif (!@c_chain){$hc_chain{FIRST}=1;$c_chain[0]="FIRST";}#make sure the first chain is taken by default
+
+if    ($hc_chain{ALL}) 
+{
+      @c_chain=@f_chain;
+      foreach $e (@c_chain){$hc_chain{$e}=1;}
+}
+elsif($hc_chain{FIRST})
+{
+	@c_chain=($f_chain[0]);
+	$hc_chain{$f_chain[0]}=1;
+}
+
+
+$MAIN_HOM_CODE=&get_main_hom_code ($structure_file);
+$INFILE=vfopen ($structure_file, "r");
+
+
+if ( $MODE eq "raw_pdb" || $MODE eq "raw")
+{
+    while (<$INFILE>)
+{	print "$_";}
+    close ( $INFILE);
+    &myexit($EXIT_SUCCESS);
+}    
+if ( $MODE eq "raw4fugue" )
+{
+    while (<$INFILE>)
+{	
+	$l=$_;
+	if ($l=~/^SEQRES/)
+{
+	    
+	    $c= substr($l,11,1);
+	    if ($hc_chain {$c}){print "$l";}
+}
+	elsif ( $l=~/^ATOM/)
+{
+	    $c=substr($l,21,1);
+	    if ($hc_chain {$c}){print "$l";}
+}
+}
+    close ( $INFILE);
+    &myexit($EXIT_SUCCESS);
+}    
+
+if ( $MODE eq "pdb")
+{
+
+    $read_header=0;
+    while (<$INFILE>) 
+{
+	    $line=$_;
+	    if    ($line =~ /^HEADER/){print "$line";$read_header=1;}
+}
+    close ($INFILE);
+
+    if (!$read_header)
+{
+	print "HEADER    UNKNOWN                                 00-JAN-00   $force_name\n";
+}
+
+    $INFILE=vfopen ($structure_file, "r");
+    
+    print "COMPND   1 CHAIN:";
+    $last=pop(@c_chain);
+    foreach $c ( @c_chain){ print " $c,";}
+    if ( $last eq " "){print " NULL;\n";}
+    else 
+{
+      print " $last;\n";
+}
+    @c_chain=(@c_chain, $last);
+    
+    print "REMARK Output of the program extract_from_pdb (Version $VersionTag)\n";
+    print "REMARK Legal PDB format not Guaranteed\n";
+    print "REMARK This format is not meant to be used in place of the PDB format\n";
+    print "REMARK The header refers to the original entry\n";
+    print "REMARK The sequence from the original file has been taken in the field: $seq_field\n";
+    print "REMARK extract_from_pdb, 2001, 2002, 2003, 2004, 2005 2006 (c) CNRS and Cedric Notredame\n";   
+    if ( $coor_set)
+{
+       print "REMARK Partial chain: Start $start End $end\n";
+}
+    if ( $is_nmr)
+{
+       print "REMARK NMR structure: MODEL $model\n";
+}
+   
+    if ( $n_atom!=0)
+{
+       print "REMARK Contains Coordinates of: ";
+       foreach $a (@atom){print "$a ";}
+       print "\n";
+}  
+}
+
+
+
+
+my $residue_index = -999;
+my $old_c = "TemporaryChain";
+
+while (<$INFILE>) 
+{
+	$line=$_;
+
+
+	if ($line =~ /^SEQRES/)
+{
+
+		@field=/(\S*)\s*/g;
+
+		$c= substr($_,11,1);
+
+		
+		$l=$#field;
+		for ($a=4; $a<$#field ;)
+{
+			if (!$onelett{$molecule_type{$c}}->{$field[$a]})
+{
+				splice @field, $a, 1;
+}
+			else 
+{
+				$a++;
+}
+}
+	
+		if ( $c ne $in_chain)
+{
+			$pdb_chain_list[$n_pdb_chains]=$c;
+			$pdb_chain_len [$n_pdb_chains]=$len;
+			$in_chain=$c;
+			$n_pdb_chains++;
+}
+	
+		for ( $a=4; $a<$#field;$a++)
+{
+			$complete_seq{$c}[$complete_seq_len{$c}++]=$field[$a];
+}
+}
+    elsif ( $line=~/^ATOM/ || ($line=~/^HETATM/ && &is_aa(substr($line,17,3),substr($line,21,1)) && !$no_hetatm))
+{
+
+	 
+    $RAW_AT_ID=$AT_ID=substr($line,12,4);
+	$RES_ID=&is_aa(substr($line,17,3),substr($line,21,1));
+	$CHAIN=substr($line,21,1);
+
+    $RES_NO=substr($line,22,4);
+	$HOM_CODE=substr ($line, 26, 1);
+	$TEMP=substr($line,60,6);
+	
+	$TEMP=~s/\s//g;
+        $AT_ID=~s/\s//g;
+	$RES_ID=~s/\s//g;
+        $RES_NO=~s/\s//g;
+		
+	if ( $HOM_CODE ne $MAIN_HOM_CODE){next;}
+	elsif ( $already_read2{$CHAIN}{$RES_ID}{$AT_ID}{$RES_NO}){next;}
+	else{$already_read2{$CHAIN}{$RES_ID}{$AT_ID}{$RES_NO}=1;}
+	
+	
+	if ($coor_set && $numbering eq "file" && $residue_index ne $RES_NO)
+{
+	    
+	    if ( $RES_NO<=$start){$real_start{$CHAIN}++;}
+	    if ( $RES_NO<=$end){$real_end{$CHAIN}++;}
+}
+	elsif ($numbering eq "absolute")
+{
+	    $real_start{$CHAIN}=$start;
+	    $real_end{$CHAIN}=$end;
+}
+
+        $KEY="ALL";
+        if ( $CHAIN ne $in_atom_chain)
+{
+	    
+	  $pdb_atom_chain_list[$n_pdb_atom_chains]=$c;
+	  $pdb_atom_chain_len [$n_pdb_atom_chains]=$len;
+	  $in_atom_chain=$c;
+	  $n_pdb_atom_chains++;
+}
+	
+	if ( $residue_index ne $RES_NO)
+{
+	     $residue_index = $RES_NO;
+	     $atom_seq{$CHAIN}[$atom_seq_len{$CHAIN}++]=$RES_ID;;
+}
+}
+
+}
+close ($INFILE);
+
+
+
+
+
+
+$INFILE=vfopen ($structure_file, "r");
+foreach $c (@c_chain)
+{
+
+	if    ( $seq_field eq "SEQRES"){@pdb_seq=@{$complete_seq{$c}};}
+	elsif ( $seq_field eq "ATOM")  {@pdb_seq=@{$atom_seq{$c}};}
+	
+
+	$full_length=$l=$#pdb_seq+1;
+		
+	if ( $real_end{$c}=="*"){$real_end{$c}=$full_length;}
+	if ( $coor_set)
+{	   
+
+	   if ( $real_end{$c} < $l){splice @pdb_seq, $real_end{$c}, $l;}
+	   if ( $real_start{$c} < $l){splice @pdb_seq, 0, $real_start{$c}-1;}	  	   
+	   $l=$#pdb_seq;
+}
+
+	elsif ( $delete_set)
+{
+	   splice @pdb_seq, $delete_start, $delete_end-$delete_start+1;
+	   $l=$#pdb_seq;
+}
+	
+	$new_fasta_name="$pdb_id$c";
+	if ( $coor_set)
+{
+	   if ( $n_pdb_chains==0){$new_fasta_name="$new_fasta_name$c";}
+	   $new_fasta_name= $new_fasta_name."\_$start\_$end";
+}
+	   
+	if ( $MODE eq "pdb")
+{
+	   $nl=1;
+	   $n=0;
+	   
+	   foreach $res ( @pdb_seq)
+		{
+		if ( !$n)
+		{
+		
+		 printf "SEQRES %3d %1s %4d  ", $nl,$c, $l;
+		 $nl++;
+	}
+	     $res=~s/\s//g;
+	     
+	     if ($code==1){ printf "%3s ",$onelett{$molecule_type{$c}}->{$res};}
+	     elsif  ($code==3){ printf "%3s ",$res};
+	     
+	     $n++;		  
+	     if ( $n==13){$n=0;print "\n";}
+}
+	  if ( $n!=0){print "\n"; $n=0;}
+}
+	elsif ( $MODE eq "simple")
+{
+	  print "# SIMPLE_PDB_FORMAT\n";
+	  if ( $new_fasta_name eq " "){$new_fasta_name="dummy_name";}
+	  print ">$new_fasta_name\n";
+
+	  foreach $res ( @pdb_seq)
+{
+	      print "$onelett{$molecule_type{$c}}->{$res}";
+}
+	  print "\n";
+}
+	elsif ( $MODE eq "fasta")
+{
+	  $n=0;
+	  print ">$new_fasta_name\n";
+	  
+	  foreach $res ( @pdb_seq)
+{
+
+	      print "$onelett{$molecule_type{$c}}->{$res}";
+              $n++;
+	      if ( $n==60){print "\n"; $n=0;}
+}
+	  print "\n"; 
+}
+}
+
+if ( $MODE eq "fasta")
+{
+     &myexit($EXIT_SUCCESS);
+  
+}
+
+  
+  $charcount=0;
+  $inchain="BEGIN";
+  $n=0;
+  while (<$INFILE>) 
+{
+    $line=$_;
+     
+    if ($line =~/^ATOM/  ||  ($line=~/^HETATM/))
+{
+	$line_header="UNKNWN";
+	$RES_ID=substr($line,17,3);
+	$chain = substr($line,21,1);
+
+	if ($line =~/^ATOM/)
+{
+	    $line_header="ATOM";
+	    $RES_ID=(&is_aa($RES_ID,$chain))?&is_aa($RES_ID,$chain):$RES_ID;
+}
+	elsif ($line=~/^HETATM/ && ($ligand_list {$RES_ID} ||$ligand_list {'ALL'} || !&is_aa($RES_ID,$chain)))
+{
+	    $line_header="HETATM";
+}
+	elsif ($line=~/^HETATM/ && (&is_aa($RES_ID,$chain) && !$no_hetatm))
+{
+	    $line_header="ATOM";
+	    $RES_ID=&is_aa($RES_ID,$chain);
+}
+	else
+{
+	    next;
+}
+
+	
+
+	$X=substr($line,30,8);     
+	$Y=substr($line,38,8);
+	$Z=substr($line,46,8);
+	$TEMP=substr($line,60,6);
+	
+	$RAW_AT_ID=$AT_ID=substr($line,12,4);
+	$CHAIN=substr($line,21,1);
+	$RES_NO=substr($line,22,4);
+	$HOM_CODE=substr ($line, 26, 1);
+	
+	$X=~s/\s//g;
+	$Y=~s/\s//g;
+	$Z=~s/\s//g;
+	$TEMP=~s/\s//g;
+	
+	$AT_ID=~s/\s//g;
+	$RES_ID=~s/\s//g;
+	$RES_NO=~s/\s//g;
+
+	
+	if ( $HOM_CODE ne $MAIN_HOM_CODE){next;}
+	elsif ( $already_read{$CHAIN}{$RES_ID}{$AT_ID}{$RES_NO}){next;}
+	else{$already_read{$CHAIN}{$RES_ID}{$AT_ID}{$RES_NO}=1;}
+	
+	$KEY="ALL";
+
+      	if ( $RES_NO ==0){$start_at_zero=1;}
+
+	$RES_NO+=$start_at_zero;    
+	
+	if ( $current_chain ne $CHAIN)
+{
+	    $current_chain=$CHAIN;
+	    $pos=$current_residue=0;
+	    $offset=($coor_set)?($real_start{$CHAIN}-1):0;
+	    if    ( $seq_field eq "SEQRES"){@ref_seq=@{$complete_seq{$CHAIN}};}
+	    elsif ( $seq_field eq "ATOM")  {@ref_seq=@{$atom_seq{$CHAIN}};}
+}
+	
+	if ($current_residue != $RES_NO)
+{
+	    $current_residue=$RES_NO;
+	    if    ( $seq_field eq "SEQRES"){$pos=$current_residue;}
+	    elsif ( $seq_field eq "ATOM"){$pos++;}
+}
+	
+	
+	if ($n_atom==0 || $atom_list{$AT_ID}==1 || $atom_list{$KEY}==1)
+{ 	
+	    
+	    $do_it=(!@c_chain || $hc_chain{$CHAIN} ||$hc_chain{'LIGAND'} );
+	    
+	    $do_it= ($do_it==1) && ($coor_set==0 ||($pos>=$real_start{$CHAIN} && $pos<=$real_end{$CHAIN}));
+	    $do_it= ($do_it==1) && ($delete_set==0 || $pos<$delete_start ||$pos>$delete_end );
+	    if ($ligand==0 && $line_header eq "HETATM" ){$do_it=0;}
+	    if ($ligand_only==1 && $line_header eq "ATOM" ){$do_it=0;}
+	    if ($ligand==1 && $line_header eq "HETATM" && $ligand_list{$RES_ID}==0 && $ligand_list{"ALL"}==0){$do_it=0;} 
+	    
+	    
+	    if ( $do_it)
+{
+		$n++;
+		$out_pos=$pos;
+		
+	       if ( $delete_set)
+{
+		  if ( $out_pos< $delete_start){;}
+		  else {$offset=$delete_end-$delete_start;}
+}       
+	       
+	       if ( $numbering_out eq "new"){$out_pos-=$offset;}
+	       elsif ( $numbering_out eq "old"){$out_pos=$RES_NO;}
+	       
+       
+	       
+	       if ( $code==1){$RES_ID=$onelett{$molecule_type{$c}}->{$RES_ID};}
+	    
+	       if ($unfold)
+{
+		   $unfolded_x+=5;
+		   $X=$unfolded_x;
+		   $Y=0;
+		   $Z=0;
+		   $float=1;
+}
+	       else
+{
+		   $float=3;
+}
+
+	       if ( $MODE eq "pdb")
+{
+		   printf "%-6s%5d %-4s %3s %s%4d    %8.3f%8.3f%8.3f  1.00 %5.2f\n",$line_header, $n, $RAW_AT_ID,$RES_ID,$CHAIN,$out_pos, $X, $Y, $Z,$TEMP;		  
+}
+	       elsif ( $MODE eq "simple")
+{
+		    if ( $RES_ID eq ""){$RES_ID="X";}
+		  printf "%-6s %5s %s %2s %4d    %8.3f %8.3f %8.3f\n",$line_header, $AT_ID, $RES_ID,($CHAIN eq"" || $CHAIN eq " ")?"A":$CHAIN,$out_pos, $X, $Y, $Z,$TEMP;
+}
+
+}
+}
+}
+}
+print "\n";
+close($INFILE);
+
+
+if ( $error ne "") 
+{$error=$error."\nDiagnostic:    SEQRES and the residues in ATOM are probably Incompatible\n";
+    $error=$error.  "Recomendation: Rerun with '-fix 1' in order to ignore the SEQRES sequences\n";
+}
+if (!$nodiagnostic){print STDERR $error;}
+&myexit ( $EXIT_SUCCESS);
+
+sub get_pdb_entry_type_file
+  {
+    my $cache_file="$cache/pdb_entry_type.txt";
+    my $env_file  = $ENV{"PDB_ENTRY_TYPE_FILE"};
+    my $pdb_file  ="$ENV{'PDB_DIR'}/derived_data/pdb_entry_type.txt";
+    
+    
+    if (-z $cache_file){unlink ($cache_file);}#will get updated
+    if (-z $env_file){$env_file="";}    #cannot update
+    if (-z $pdb_file){$pdb_file="";}    #cannot update
+    
+    if    (-e $env_file){return $env_file;} #env wins: user decides
+    elsif (-e $pdb_file){return $pdb_file;} #local database wins: network file may be out of sync
+    elsif ($no_remote_pdb_dir==1)
+      {
+	if (-e $cache_file){return $cache_file;}
+	else
+	  {add_warning($$,$$,"PDB_ENTRY_TYPE_FILE must be set to the location of <pdb>/derived_data/pdb_entry_type.txt when using NO_REMOTE_PDB_DIR=1");
+	   return "";
+	 }
+      }
+    else #update can only take place if the file lives in cache
+      {
+	my $new_file;
+	if (!-e $cache_file || (-M $cache_file)>1)
+	  {
+	    $new_file=vtmpnam();
+	    &url2file("ftp://ftp.wwpdb.org/pub/pdb/derived_data/pdb_entry_type.txt", $new_file);
+	    if ( !-z $new_file){system ("mv $new_file $cache_file"); unlink ($new_file); $new_file=$cache_file;}
+	    else {unlink($new_file);}
+	  }
+	else
+	  {
+	    $new_file=$cache_file;
+	  }
+	
+	if (!-e $cache_file && !-e $new_file)
+	  {
+	    add_warning($$,$$,"Could not download ftp://ftp.wwpdb.org/pub/pdb/derived_data/pdb_entry_type.txt");
+	    return "";
+	  }
+	elsif (-e $cache_file && !-e $new_file)
+	  {
+	    my $m=(-M $cache_file);
+	    add_warning($$,$$,"Could not update file ftp://ftp.wwpdb.org/pub/pdb/derived_data/pdb_entry_type.txt. Older Version [$cache_file]($m Month(s) old) will be used instead");
+	    return $cache_file;
+	  }
+	else
+	  {
+	    return $new_file;
+	  }
+      }
+  }
+
+
+
+sub get_unrealeased_file
+  {
+    my $cache_file="$cache/unrealeased.xml";
+    my $env_file  = $ENV{"PDB_UNREALEASED_FILE"};
+    my $pdb_file  ="$ENV{'PDB_DIR'}/derived_data/unrealeased.xml";
+    
+    
+    if ($env_file eq "NO" || $env_file eq "No" || $env_file eq "no" || $env_file eq "0"){return "NO";}
+
+    if (-z $cache_file){unlink ($cache_file);}#will get updated
+    if (-z $env_file){unlink($env_file);}     #will update
+    if (-z $pdb_file){$pdb_file="";}          #cannot update
+    
+    if    (-e $env_file){return $env_file;} #env wins: user decides
+    elsif (-e $pdb_file){return $pdb_file;} #local database wins: network file may be out of sync
+    elsif ($no_remote_pdb_dir==1)        
+      {
+	if (-e $cache_file){return $cache_file;}
+	elsif ( $env_file && ! -e $env_file)
+	  {
+	    &url2file("http://www.rcsb.org/pdb/rest/getUnreleased",$env_file);
+	    if ( -e $env_file && !-z $env_file){return $env_file;}
+	  }
+	else
+	  {
+	    add_warning($$,$$,"UNREALEASED_FILE must be set to the location of your unrealeased.xml file as downloaded from http://www.rcsb.org/pdb/rest/getUnreleased when using NO_REMOTE_PDB_DIR=1");
+	    return "";
+	  }
+      }
+    else #update can only take place if the file lives in cache
+      {
+	my $new_file=vtmpnam ();
+	if (!-e $cache_file || (-M $cache_file)>1)
+	  {
+	    &url2file("http://www.rcsb.org/pdb/rest/getUnreleased",$new_file);
+	    if ( !-z $new_file){system ("mv $new_file $cache_file"); unlink ($new_file); $new_file=$cache_file;}
+	    else {unlink($new_file);}
+	  }
+	else
+	  {
+	    $new_file=$cache_file;
+	  }
+	
+	if (!-e $cache_file && !-e $new_file)
+	  {
+	    add_warning($$,$$,"Could not download http://www.rcsb.org/pdb/rest/getUnreleased");
+	    return "";
+	  }
+	elsif (-e $cache_file && !-e $new_file)
+	  {
+	    my $m=(-M $cache_file);
+	    add_warning($$,$$,"Could not update file http://www.rcsb.org/pdb/rest/getUnreleased. Older Version [$cache_file]($m Month(s) ) will be used");
+	    return $cache_file;
+	  }
+	else
+	  {
+	    return $new_file;
+	  }
+      }
+  }
+
+sub is_released 
+  {
+    my ($r);
+    my $in=@_[0];
+    my $name=&remote_is_pdb_name ($in);
+    my $hold=&remote_is_on_hold($in);
+    
+    $r=($name && !$hold)?1:0;
+    return $r;
+  }
+
+sub remote_is_pdb_name 
+  {
+    my $in=@_[0];
+    my ($pdb);
+    my ($value,$value1,$value2);
+    my $max=2;
+    
+    
+    
+    my $ref_file=&get_pdb_entry_type_file();
+    
+    if ( $in=~/[^\w\d\:\_]/){return 0;}
+    elsif (!-e $ref_file)
+      {
+	add_warning ($$,$$,"Cannot find pdb_entry_type.txt;  $in is assumed to be valid; add ftp://ftp.wwpdb.org/pub/pdb/derived_data/pdb_entry_type.txt in $cache to automatically check name status");
+	return 1;
+      }
+    else
+      {
+	$pdb=substr ($in,0, 4);
+	chomp(($value1=`grep -c $pdb $ref_file`));
+	$pdb=lc($pdb);
+	chomp(($value2=`grep -c $pdb $ref_file`));
+	$value=($value1 || $value2)?1:0;
+	$value=($value>0)?1:0;
+	
+	return $value;
+      }
+  }
+
+
+
+sub pdb2model_type
+{
+    my $in=@_[0];
+    my ($ref_file, $pdb);
+    my ($value, $ret);
+
+    if ( $in=~/[^\w\d\:\_]/){return 0;}
+    $ref_file=&get_pdb_entry_type_file();
+    if (!-e $ref_file)
+      {
+	add_warning ($$,$$,"Cannot find pdb_entry_type.txt;  $in is assumed to be diffraction; add ftp://ftp.wwpdb.org/pub/pdb/derived_data/pdb_entry_type.txt in $cache to check name status");
+	return "diffraction";
+      }
+    else
+      {
+	$pdb=substr ($in,0, 4);
+	$pdb=lc($pdb);
+	
+	chomp(($value=`grep $pdb $ref_file`));
+	
+	$value=~/^\S+\s+\S+\s+(\S+)/;
+	$ret=$1;
+	if ( $ret eq""){return "UNKNOWN";}
+	
+	return $ret;
+      }
+  }
+sub remote_is_on_hold
+  {
+    my $in=@_[0];
+    my ($ref_file, $pdb);
+    my ($value1, $value2,$value);
+    
+
+
+    
+    $ref_file=&get_unrealeased_file();
+    if ($ref_file eq "NO"){return 0;}
+
+
+    if ($no_remote_pdb==1){return 0;}
+    if ( $in=~/[^\w\d\:\_]/){return 0;}
+    
+    $ref_file=&get_unrealeased_file();
+    if (!-e $ref_file)
+      {
+	add_warning ($$,$$,"Cannot find unrealeased.xml;  $in is assumed to be released;");
+	return 1;
+      }
+    
+    $pdb=substr ($in,0, 4);
+    chomp(($value1=`grep -c $pdb $ref_file`));
+    $pdb=lc($pdb);
+    chomp(($value2=`grep -c $pdb $ref_file`));
+    $value=($value1 || $value2)?1:0;
+    $value=($value>0)?1:0;
+    return $value;
+  }
+
+sub is_pdb_file
+  {
+    my @arg=@_;
+    
+    if ( !-e $arg[0]){return 0;}
+    
+    $F=vfopen ($arg[0], "r");
+    while ( <$F>)
+      {
+	if (/^HEADER/)
+	  {
+	    close $F;
+	    return 1;
+	  }
+	elsif ( /^SEQRES/)
+	  {
+	    close $F;
+	    return 1;
+	  }
+	elsif ( /^ATOM/)
+	  {
+	    close $F;
+	    return 1;
+	  }
+      }
+    return 0;
+  }
+sub get_pdb_id
+{
+    my $header_file=@_[0];
+    my $id;
+    my $F= new FileHandle;
+    
+    
+    $F=vfopen ("$header_file", "r");
+
+    while ( <$F>)
+      {
+	if ( /HEADER/)
+	  {
+	    if ($debug){print "$_";}
+	    $id=substr($_,62,4 );
+	    return $id;
+	  }
+      }
+    close ($F);
+    
+    return "";
+}
+
+sub get_ligand_list
+{
+    my $pdb_file=@_[0];
+    my $chain;
+    my $ligand;
+    my %complete_ligand_list;
+    
+
+    $F=vfopen ($pdb_file, "r");
+    while ( <$F>)
+{
+	if ( /^HETATM/)
+{
+	    $line=$_;
+	    $chain=substr($line,21,1);
+	    $ligand=substr($line,17,3);
+	    
+	    if (!$complete_ligand_list{$chain}{$ligand})
+{
+		
+		$complete_ligand_list{"result"}.="CHAIN $chain LIGAND $ligand\n";
+		$complete_ligand_list{$chain}{$ligand}=1;
+}
+}
+}
+    close ($F);
+    return %complete_ligand_list;
+}
+
+sub get_chain_list 
+{
+    my $header_file;
+    my @chain_list;
+    my @list;
+    my $n_chains;
+    my %chain_hasch;
+    my $pdb_file=@_[0];
+    my $c;
+    my %hasch;
+    my $chain;
+  
+    
+    $F=vfopen ($pdb_file, "r");
+    while ( <$F>)
+{
+
+
+	if (/SEQRES\s+\d+\s+(\S+)/)
+	  {
+	    $chain = substr($_,11,1);$chain=~s/\s//g;if ( $chain eq ""){$chain=" ";}
+	    if (!$hasch{$chain}){$hasch{$chain}=1;push @chain_list, $chain;}
+	  }
+	if (/^ATOM/ || /^HETATM/)
+	  {
+	    $chain = substr($_,21,1); $chain=~s/\s//g;if ( $chain eq ""){$chain=" ";}
+	    if (!$hasch{$chain}){$hasch{$chain}=1;push @chain_list, $chain;}
+	  }
+      }
+
+
+close ($F);
+if (!@chain_list)
+  {
+    @chain_list=("A");
+  }
+
+
+return @chain_list;
+}
+
+sub token_is_in_list
+{
+
+    my @list=@_;
+    my $a;
+    
+    for ($a=1; $a<=$#list; $a++)
+{
+	if ( $list[$a] eq $list[0]){return $a;}
+}
+}
+
+sub pdb_name2name_and_chain 
+{
+    my $pdb_file=@_[0];
+    my $pdb_file_in;
+    my @array;
+    my $chain;
+    my $c;
+
+    $pdb_file_in=$pdb_file;
+
+    $pdb_file=~/^(.{4})/;$pdb_id=$1;
+    @array=($pdb_file=~/([\w])/g);
+  
+  
+    $chain=uc ($array[4]);
+    $chain=($chain eq "")?"FIRST":$chain;
+    
+    return ( $pdb_id, $chain);
+
+    if ( $#array==3){return ($pdb_id, "FIRST");}
+    elsif ( $#array<4){ return ($pdb_id, "");}
+    else {return ( $pdb_id, $chain);}
+      
+    
+    
+}
+sub get_main_hom_code 
+{
+    my $pdb_file=@_[0];
+    my %hom, $n, $best, $best_h;
+    open (F, $pdb_file);
+    while (<F>)
+{
+	if ( $_=~/^ATOM/)
+{
+	    $h=substr ($_,26, 1);
+	    $n=++$hom{$h};
+	    if ($n>$best)
+{
+		$best=$n;
+		$best_h=$h;
+}
+}
+}
+    close (F);
+    return $best_h;
+}
+
+
+sub get_pdb_file 
+{
+    my ($pdb_file_in)=(@_);
+    my $result;
+    my @letter;
+    my @chain;
+    my $v;
+    my $pdb_file=$pdb_file_in;
+
+    $pdb_file=($pdb_file_in=~/\S+_S_(\S+)/)?$1:$pdb_file_in;
+    
+    if ($no_remote_pdb_dir==0)
+      {
+	$no_remote_pdb_dir=1;
+	$result=get_pdb_file3 ($pdb_file);
+	$no_remote_pdb_dir=0;
+	if ( $result){return $result;}
+	else
+	  {
+	    
+	    lc ($pdb_file);
+	    $result=get_pdb_file3($pdb_file);
+	    return  $result;
+	  }
+      }
+    else
+      {
+	return get_pdb_file3 ($pdb_file);
+      }
+    
+  }
+
+sub get_pdb_file3 
+{
+    my $pdb_file_in=@_[0];
+    my $result;
+    my @letter;
+    my @chain;
+    my $lcfile;
+    my $ucfile;
+    my $pdb_file=$pdb_file_in;
+    
+    $lcfile=lc $pdb_file;
+    $ucfile=uc $pdb_file;
+
+    if ( ($result=get_pdb_file2 ($pdb_file))){return $result;}
+    
+
+    if ($lcfile ne $pdb_file && ($result=get_pdb_file2 ($lcfile))){return $result;}
+    if ($ucfile ne $pdb_file && ($result=get_pdb_file2 ($ucfile))){return $result;}
+    
+   
+    
+    return "";
+}
+sub get_pdb_file2
+{
+    my $pdb_file=@_[0];
+    my $return_value;
+    
+    $return_value="";
+    
+    if ( ($result=get_pdb_file1 ($pdb_file))){$return_value=$result;}
+    elsif ( !($pdb_file=~/\.pdb/) && !($pdb_file=~/\.PDB/))
+{
+	if ( ($result=get_pdb_file1 ("$pdb_file.pdb"))){$return_value=$result;}
+	elsif ( ($result=get_pdb_file1 ("$pdb_file.PDB"))){$return_value=$result;}
+
+	elsif ( ($result=get_pdb_file1 ("pdb$pdb_file.pdb"))){$return_value=$result;}	
+	elsif ( ($result=get_pdb_file1 ("pdb$pdb_file.PDB"))){$return_value=$result;}
+	elsif ( ($result=get_pdb_file1 ("PDB$pdb_file.PDB"))){$return_value=$result;}
+	elsif ( ($result=get_pdb_file1 ("PDB$pdb_file.pdb"))){$return_value=$result;}
+	
+	
+	elsif ( ($result=get_pdb_file1 ("$pdb_file.ent"))){$return_value=$result;}
+	elsif ( ($result=get_pdb_file1 ("pdb$pdb_file.ent"))){$return_value=$result;}
+	elsif ( ($result=get_pdb_file1 ("PDB$pdb_file.ent"))){$return_value=$result;}
+
+	elsif ( ($result=get_pdb_file1 ("$pdb_file.ENT"))){$return_value=$result;}
+	elsif ( ($result=get_pdb_file1 ("pdb$pdb_file.ENT"))){$return_value=$result;}
+	elsif ( ($result=get_pdb_file1 ("PDB$pdb_file.ENT"))){$return_value=$result;}
+	
+	
+	
+}
+    return $return_value;
+}
+    
+sub get_pdb_file1
+{
+    my ($pdb_file)=(@_);
+    my $return_value;
+    
+
+    $return_value="";
+    if ( ($result=get_pdb_file0 ($pdb_file))){$return_value=$result;}
+    elsif ( ($result=get_pdb_file0 ("$pdb_file.Z"))){$return_value=$result;}
+    elsif ( ($result=get_pdb_file0 ("$pdb_file.gz"))){$return_value=$result;}
+    elsif ( ($result=get_pdb_file0 ("$pdb_file.GZ"))){$return_value=$result;}
+    return $return_value;
+}
+sub get_pdb_file0 
+{ 
+    my ($pdb_file, $attempt)=(@_);
+    my $pdb_file=@_[0];
+    my $tmp_pdb_file;    
+    my $return_value;
+
+    if ( !$attempt){$attempt=1;}
+    
+    $local_pdb_file="$pdb_file";
+    if ( $local_pdb_file eq "")
+{
+	$tmp_pdb_file=vtmpnam();
+	open F, ">$tmp_pdb_file";
+	
+	while (<STDIN>){print F "$_";}
+	close (F);
+	
+	if (-e $tmp_pdb_file && &is_pdb_file ( $local_pdb_file))
+{return $tmp_pdb_file;}
+}
+
+    $local_pdb_file="$pdb_file";
+    &debug_print ("\nTry access local file: $local_pdb_file");
+    
+    $local_pdb_file=&check_pdb_file4compression ($local_pdb_file);
+    if ( -e $local_pdb_file && (&is_pdb_file ($local_pdb_file) || $force_pdb))
+{
+	&debug_print ( "\n\tIs in Current Dir");
+	$tmp_pdb_file=vtmpnam();
+	`cp $local_pdb_file $tmp_pdb_file`;
+	return $tmp_pdb_file;
+}
+    else
+{
+	&debug_print ("\n\tFile Not in Current Dir");
+}
+
+    if ($pdb_file=~/^pdb/||$pdb_file=~/^PDB/){$pdb_div=substr ($pdb_file, 4, 2);}
+    else
+{
+	  $pdb_div=substr ($pdb_file, 1, 2);
+}
+    $local_pdb_file="$pdb_dir/$pdb_div/$pdb_file";
+    $local_pdb_file=&check_pdb_file4compression ( $local_pdb_file);
+    &debug_print ("\nTry access file From PDB_DIR: $local_pdb_file");
+    if ($pdb_dir && -e $local_pdb_file && &is_pdb_file ($local_pdb_file))
+{
+	&debug_print ( "\n\tIs in Local PDB DIR");
+	$tmp_pdb_file=vtmpnam();
+	`cp $local_pdb_file $tmp_pdb_file`;
+	return $tmp_pdb_file;
+}
+
+    $local_pdb_file="$pdb_dir/$pdb_file";
+    $local_pdb_file=&check_pdb_file4compression ( $local_pdb_file);
+    &debug_print ("\nTry access file From PDB_DIR: local_pdb_file");
+    if ($pdb_dir && -e $local_pdb_file && &is_pdb_file ($local_pdb_file))
+{
+	&debug_print ( "\n\tIs in Local PDB DIR");
+	$tmp_pdb_file=vtmpnam();
+	`cp $local_pdb_file $tmp_pdb_file`;
+	return $tmp_pdb_file;
+}
+
+    $local_pdb_file="$pdb_dir$pdb_file";
+    $local_pdb_file=&check_pdb_file4compression ( $local_pdb_file);
+    &debug_print ("\nTry access file From PDB_DIR: $local_pdb_file");
+    if ($pdb_dir && -e $local_pdb_file && &is_pdb_file ($local_pdb_file))
+{
+	&debug_print ( "\n\tIs in Local PDB DIR");
+	$tmp_pdb_file=vtmpnam();
+	`cp $local_pdb_file $tmp_pdb_file`;
+	return $tmp_pdb_file;
+}
+    else
+{&debug_print ( "\n\tNot In Local Pdb Dir");}
+
+    if ($cache ne "NO" && $cache ne "no")
+{
+
+	$local_pdb_file="$cache/$pdb_file";
+	$local_pdb_file=&check_pdb_file4compression ( $local_pdb_file);
+	&debug_print("\nTry access file From Cache: $local_pdb_file");
+	if (-e $local_pdb_file && &is_pdb_file ($local_pdb_file))
+{
+	    &debug_print ( "\n\tIs in T-Coffee Cache");
+	    $tmp_pdb_file=vtmpnam();
+	    `cp $local_pdb_file $tmp_pdb_file`;
+	    return $tmp_pdb_file;
+}
+	else{&debug_print ( "\n\tNot in Cache Dir");}
+}
+
+if (!$no_remote_pdb_dir) 
+  {
+    my $value=&is_released ($pdb_file);
+    my $return_value="";
+    if ($value==1)
+      {
+	
+	&debug_print ("\n*****************************************************\nTry Remote Access for $pdb_file");
+	$tmp_pdb_file=vtmpnam();
+	$netcommand=$netaddress;
+	$netcommand=~s/%%/$pdb_file/g;
+	&url2file("$netcommand", "$tmp_pdb_file.$netcompression");
+	&debug_print("\nREMOTE: $netcommand\n");
+	
+	$compressed_tmp_file_name="$tmp_pdb_file.$netcompression";
+	
+	if ($netcompression && -B $compressed_tmp_file_name && $attempt<5)
+	  {
+	    my $r;
+	    &debug_print ("\n\tFile Found Remotely");
+	    if (($r=safe_system ( "$netcompression_pg $compressed_tmp_file_name")!=$EXIT_SUCCESS) && $attempts<5)
+	      {
+		&debug_print ("\n\tProper Download Failed Try again");
+		unlink $compressed_tmp_file_name;
+		print "\nFailed to Download $compressed_tmp_file_name. New Attempt $attempt/5\n";
+		return &get_pdb_file0($pdb_file, $attempt+1);
+	      }
+	    elsif ($r== $EXIT_SUCCESS)
+	      {
+		&debug_print ("\n\tProper Download Succeeded ");
+		$return_value=$tmp_pdb_file;
+	      }
+	    else
+	      {
+		&debug_print ("\n\tProper Download Failed ");
+		&debug_print ("\nFile Not Found Remotely");
+		unlink $compressed_tmp_file_name;
+	      }
+	  }
+	else
+	  {
+
+	    &debug_print ("\nFile Not Found Remotely");
+	    unlink $compressed_tmp_file_name;
+	  }
+	#Update cache if required
+	if ($cache ne "no" && $cache ne "update" && -e $return_value)
+	  {
+	    `cp $return_value $cache/$pdb_file.pdb`;
+	    #`t_coffee -other_pg clean_cache.pl -file $pdb_file.pdb -dir $cache`;
+	  }
+      }
+    &debug_print ("\nRemote Download Finished");
+    return $return_value;
+  }
+return "";
+}
+
+sub check_pdb_file4compression 
+{
+    my $file=@_[0];
+    my $tmp;
+    my $r;
+    
+    $tmp=&vtmpnam();
+    if (-e $tmp){unlink $tmp;}
+    
+    $file=~s/\/\//\//g;
+    if    (-B $file && ($file=~/\.Z/)) {`cp $file $tmp.Z`;`rm $tmp`;`gunzip $tmp.Z $SILENT`;$r=$tmp;}
+    elsif (-B $file && ($file=~/\.gz/)){`cp $file $tmp.gz`;`gunzip $tmp.gz $SILENT`;return $r=$tmp;}
+    elsif (-B $file ){`cp $file $tmp.gz`;`gunzip $tmp.gz $SILENT`;$r=$tmp;}
+    elsif ( -e $file ) {$r= $file;}
+    elsif ( -e "$file.gz" ){ `cp $file.gz $tmp.gz`;`gunzip     $tmp.gz $SILENT`;$r=$tmp;}    
+    elsif ( -e "$file.Z") {`cp $file.Z  $tmp.Z`; `gunzip $tmp.Z $SILENT`;$r=$tmp;}
+    else  {$r= $file;}
+
+    if ( -e "$tmp.Z"){unlink "$tmp.Z";}
+    if ( -e "$tmp.gz"){unlink "$tmp.gz";}
+    
+    return $r;
+    
+}
+
+
+
+
+
+    
+
+
+
+
+
+
+
+sub vfopen 
+{
+    my $file=@_[0];
+    my $mode=@_[1];
+    my $tmp;
+    my $F = new FileHandle;
+    
+    
+    $tmp=$file;
+	
+    
+    if ( $mode eq "r" && !-e $file){ myexit(flush_error ("Cannot open file $file"));}
+    elsif ($mode eq "w"){$tmp=">$file";}
+    elsif ($mode eq "a"){$tmp=">>$file";}
+    
+    
+    open ($F,$tmp);
+    return $F;
+}
+sub debug_print
+{
+    my $message =@_[0];
+    if ($debug){print STDERR "NO_REMOTE_PDB_DIR: $no_remote_pdb_dir - $message [DEBUG:extract_from_pdb]";}
+    return;
+}
+sub is_aa 
+{
+    my ($aa, $chain) =@_;
+
+    my $one;
+    my $trhee;
+    
+    if ( $onelett{$molecule_type{$chain}}->{$aa} eq 'X' || !$onelett{$molecule_type{$chain}}->{$aa} ){return '';}
+    else
+      {
+	$one=$onelett{$molecule_type{$chain}}->{$aa};
+
+	$three=$threelett{$molecule_type{$chain}}->{$one};
+	
+
+	return $three;
+      }
+  }
+
+
+
+
+
+sub url2file
+{
+    my ($address, $out, $wget_arg, $curl_arg)=(@_);
+    my ($pg, $flag, $r, $arg, $count);
+    
+    if (!$CONFIGURATION){&check_configuration ("wget", "INTERNET", "gzip");$CONFIGURATION=1;}
+    
+    if (&pg_is_installed ("wget"))   {$pg="wget"; $flag="-O";$arg=$wget_arg;}
+    elsif (&pg_is_installed ("curl")){$pg="curl"; $flag="-o";$arg=$curl_arg;}
+    return safe_system ("$pg $flag$out $address >/dev/null 2>/dev/null");
+
+}
+
+
+
+
+sub pdbfile2chaintype
+  {
+    my $file=@_[0];
+    my %ct;
+    my $F;
+    
+    $F=vfopen ($file, "r");
+    while (<$F>)
+      {
+	my $line=$_;
+	if ($line =~/^ATOM/)
+	  {
+	    my $C=substr($line,21,1);
+	    if (!$ct{$C})
+	      {	
+		my $r=substr($line,17,3);
+		$r=~s/\s+//;
+		if (length ($r)==1){$ct{$C}="R";}
+		elsif (length ($r)==2){$ct{$C}="D";}
+		elsif (length ($r)==3){$ct{$C}="P";}
+		else 
+		  {
+		    myexit(flush_error("ERROR: Could not read RES_ID field in file $file"));
+		  }
+	      }
+	  }
+      }
+    close ($F);
+    return %ct;
+  }
+   
+    
+
+
+
+sub fill_threelett_RNA
+{
+
+	my %threelett=(
+	'A', '  A',
+	'T', '  T',
+	'U', '  U',
+	'C', '  C',
+	'G', '  G',
+	'I', '  I', #Inosine
+	);
+	
+	return %threelett;
+
+}
+
+
+sub fill_onelett_RNA
+{
+	my   %onelett=(
+	'  A' => 'A',
+	'  T' => 'T',
+	'  U' => 'U',
+	'  C' => 'C',
+	'  G' => 'G',
+	'CSL' => 'X',
+	'UMS' => 'X',
+	'  I' => 'I',
+	'A' => 'A',
+	'T' => 'T',
+	'U' => 'U',
+	'C' => 'C',
+	'G' => 'G',
+	'I' => 'I',
+	);
+
+	return %onelett;
+
+}
+
+
+sub fill_onelett_DNA
+{
+	my   %onelett=(
+	' DA', 'A',
+	' DT', 'T',
+	' DC', 'C',
+	' DG', 'G',
+	'DA', 'A',
+	'DT', 'T',
+	'DC', 'C',
+	'DG', 'G',
+	);
+
+	return %onelett;
+
+}
+
+sub fill_threelett_DNA
+{
+
+	my %threelett=(
+	'A', ' DA',
+	'T', ' DT',
+	'C', ' DC',
+	'G', ' DG',
+	);
+
+	return %threelett;
+
+}
+
+
+
+
+sub fill_threelett_prot
+{  
+  my %threelett;
+
+  %threelett=(
+'A', 'ALA',
+'C', 'CYS',
+'D', 'ASP',
+'E', 'GLU',
+'F', 'PHE',
+'G', 'GLY',
+'H', 'HIS',
+'I', 'ILE',
+'K', 'LYS',
+'L', 'LEU',
+'N', 'ASN',
+'M', 'MET',
+'P', 'PRO',
+'Q', 'GLN',
+'R', 'ARG',
+'S', 'SER',
+'T', 'THR',
+'V', 'VAL',
+'W', 'TRP',
+'Y', 'TYR',
+);
+
+return %threelett;
+
+
+}
+
+sub fill_onelett_prot
+{
+    my %onelett;
+    
+    %onelett=(
+
+'10A', 'X',
+'11O', 'X',
+'12A', 'X',
+'13P', 'X',
+'13R', 'X',
+'13S', 'X',
+'14W', 'X',
+'15P', 'X',
+'16A', 'X',
+'16G', 'X',
+'1AN', 'X',
+'1AP', 'X',
+'1AR', 'X',
+'1BH', 'X',
+'1BO', 'X',
+'1C5', 'X',
+'1CU', 'X',
+'1DA', 'X',
+'1GL', 'X',
+'1GN', 'X',
+'1IN', 'X',
+'1LU', 'L',
+'1MA', 'X',
+'1MC', 'X',
+'1MG', 'X',
+'1MZ', 'X',
+'1NA', 'X',
+'1NB', 'X',
+'1NI', 'X',
+'1PA', 'A',
+'1PC', 'X',
+'1PE', 'X',
+'1PG', 'X',
+'1PI', 'A',
+'1PM', 'X',
+'1PN', 'X',
+'1PU', 'X',
+'1PY', 'X',
+'1UN', 'X',
+'24T', 'X',
+'25T', 'X',
+'26P', 'X',
+'2AB', 'X',
+'2AM', 'X',
+'2AN', 'X',
+'2AP', 'X',
+'2AR', 'X',
+'2AS', 'D',
+'2BL', 'X',
+'2BM', 'X',
+'2CP', 'X',
+'2DA', 'X',
+'2DG', 'X',
+'2DP', 'X',
+'2DT', 'X',
+'2EP', 'X',
+'2EZ', 'X',
+'2FG', 'X',
+'2FL', 'X',
+'2FP', 'X',
+'2FU', 'X',
+'2GL', 'X',
+'2GP', 'X',
+'2HP', 'X',
+'2IB', 'X',
+'2IP', 'X',
+'2LU', 'L',
+'2MA', 'X',
+'2MD', 'X',
+'2ME', 'X',
+'2MG', 'X',
+'2ML', 'L',
+'2MO', 'X',
+'2MR', 'R',
+'2MU', 'X',
+'2MZ', 'X',
+'2NO', 'X',
+'2NP', 'X',
+'2OG', 'X',
+'2PA', 'X',
+'2PC', 'X',
+'2PE', 'X',
+'2PG', 'X',
+'2PH', 'X',
+'2PI', 'X',
+'2PL', 'X',
+'2PP', 'X',
+'2PU', 'X',
+'2SI', 'X',
+'2TB', 'X',
+'34C', 'X',
+'35G', 'X',
+'3AA', 'X',
+'3AD', 'X',
+'3AH', 'H',
+'3AN', 'X',
+'3AP', 'X',
+'3AT', 'X',
+'3BT', 'X',
+'3CH', 'X',
+'3CN', 'X',
+'3CO', 'X',
+'3CP', 'X',
+'3DR', 'X',
+'3EP', 'X',
+'3FM', 'X',
+'3GA', 'X',
+'3GP', 'X',
+'3HB', 'X',
+'3HC', 'X',
+'3HP', 'X',
+'3IB', 'X',
+'3ID', 'X',
+'3IN', 'X',
+'3MA', 'X',
+'3MB', 'X',
+'3MC', 'X',
+'3MD', 'D',
+'3MF', 'X',
+'3MP', 'X',
+'3MT', 'X',
+'3OL', 'X',
+'3PA', 'X',
+'3PG', 'X',
+'3PO', 'X',
+'3PP', 'X',
+'3PY', 'X',
+'49A', 'X',
+'4AB', 'X',
+'4AM', 'X',
+'4AN', 'X',
+'4AP', 'X',
+'4BA', 'X',
+'4BT', 'X',
+'4CA', 'X',
+'4CO', 'X',
+'4HP', 'X',
+'4IP', 'X',
+'4MO', 'X',
+'4MV', 'X',
+'4MZ', 'X',
+'4NC', 'X',
+'4NP', 'X',
+'4OX', 'X',
+'4PB', 'X',
+'4PN', 'X',
+'4PP', 'X',
+'4SC', 'X',
+'4SU', 'X',
+'4TB', 'X',
+'55C', 'X',
+'5AD', 'X',
+'5AN', 'X',
+'5AT', 'X',
+'5CM', 'X',
+'5GP', 'X',
+'5HP', 'E',
+'5HT', 'X',
+'5IT', 'X',
+'5IU', 'X',
+'5MB', 'X',
+'5MC', 'X',
+'5MD', 'X',
+'5MP', 'X',
+'5MU', 'X',
+'5NC', 'X',
+'5OB', 'X',
+'5PA', 'X',
+'5PV', 'X',
+'6AB', 'X',
+'6CT', 'X',
+'6HA', 'X',
+'6HC', 'X',
+'6HG', 'X',
+'6HT', 'X',
+'6IN', 'X',
+'6MO', 'X',
+'6MP', 'X',
+'6PG', 'X',
+'6WO', 'X',
+'70U', 'X',
+'7DG', 'X',
+'7HP', 'X',
+'7I2', 'X',
+'7MG', 'X',
+'7MQ', 'X',
+'7NI', 'X',
+'87Y', 'X',
+'8AD', 'X',
+'8BR', 'X',
+'8IG', 'X',
+'8IN', 'X',
+'8OG', 'X',
+'95A', 'X',
+'9AD', 'X',
+'9AM', 'X',
+'9AP', 'X',
+'9DG', 'X',
+'9DI', 'X',
+'9HX', 'X',
+'9OH', 'X',
+'9TA', 'X',
+'A12', 'X',
+'A15', 'X',
+'A23', 'X',
+'A24', 'X',
+'A26', 'X',
+'A2G', 'X',
+'A2P', 'X',
+'A32', 'X',
+'A3P', 'X',
+'A4P', 'X',
+'A5P', 'X',
+'A70', 'X',
+'A76', 'X',
+'A77', 'X',
+'A78', 'X',
+'A79', 'X',
+'A80', 'X',
+'A85', 'X',
+'A88', 'X',
+'A9A', 'X',
+'AA3', 'X',
+'AA4', 'X',
+'AA6', 'X',
+'AAA', 'X',
+'AAB', 'X',
+'AAC', 'X',
+'AAE', 'X',
+'AAG', 'R',
+'AAH', 'X',
+'AAM', 'X',
+'AAN', 'X',
+'AAP', 'X',
+'AAR', 'R',
+'AAS', 'X',
+'AAT', 'X',
+'ABA', 'X',
+'ABC', 'X',
+'ABD', 'X',
+'ABE', 'X',
+'ABH', 'X',
+'ABI', 'X',
+'ABK', 'X',
+'ABM', 'X',
+'ABN', 'X',
+'ABP', 'X',
+'ABR', 'X',
+'ABS', 'X',
+'ABU', 'X',
+'AC1', 'X',
+'AC2', 'X',
+'ACA', 'X',
+'ACB', 'D',
+'ACC', 'C',
+'ACD', 'X',
+'ACE', 'X',
+'ACH', 'X',
+'ACI', 'X',
+'ACL', 'R',
+'ACM', 'X',
+'ACN', 'X',
+'ACO', 'X',
+'ACP', 'X',
+'ACQ', 'X',
+'ACR', 'X',
+'ACS', 'X',
+'ACT', 'X',
+'ACV', 'V',
+'ACX', 'X',
+'ACY', 'X',
+'AD2', 'X',
+'AD3', 'X',
+'ADC', 'X',
+'ADD', 'X',
+'ADE', 'X',
+'ADH', 'X',
+'ADI', 'X',
+'ADM', 'X',
+'ADN', 'X',
+'ADP', 'X',
+'ADQ', 'X',
+'ADR', 'X',
+'ADS', 'X',
+'ADT', 'X',
+'ADU', 'X',
+'ADW', 'X',
+'ADX', 'X',
+'AE2', 'X',
+'AEA', 'X',
+'AEB', 'X',
+'AEI', 'D',
+'AEN', 'X',
+'AET', 'T',
+'AF1', 'X',
+'AF3', 'X',
+'AFA', 'D',
+'AFP', 'X',
+'AG7', 'X',
+'AGB', 'X',
+'AGF', 'X',
+'AGL', 'X',
+'AGM', 'R',
+'AGN', 'X',
+'AGP', 'X',
+'AGS', 'X',
+'AGU', 'X',
+'AH0', 'X',
+'AH1', 'X',
+'AHA', 'X',
+'AHB', 'D',
+'AHC', 'X',
+'AHF', 'X',
+'AHG', 'X',
+'AHH', 'X',
+'AHM', 'X',
+'AHO', 'X',
+'AHP', 'X',
+'AHS', 'X',
+'AHT', 'Y',
+'AHU', 'X',
+'AHX', 'X',
+'AI1', 'X',
+'AI2', 'X',
+'AIB', 'X',
+'AIC', 'X',
+'AIM', 'X',
+'AIP', 'X',
+'AIQ', 'X',
+'AIR', 'X',
+'AJ3', 'X',
+'AKB', 'X',
+'AKG', 'X',
+'AKR', 'X',
+'AL1', 'X',
+'AL2', 'X',
+'AL3', 'X',
+'AL4', 'X',
+'AL5', 'X',
+'AL6', 'X',
+'AL7', 'X',
+'AL8', 'X',
+'AL9', 'X',
+'ALA', 'A',
+'ALB', 'X',
+'ALC', 'X',
+'ALD', 'L',
+'ALE', 'X',
+'ALF', 'X',
+'ALG', 'X',
+'ALL', 'X',
+'ALM', 'A',
+'ALN', 'A',
+'ALO', 'T',
+'ALP', 'X',
+'ALQ', 'X',
+'ALR', 'X',
+'ALS', 'X',
+'ALT', 'A',
+'ALY', 'K',
+'ALZ', 'X',
+'AMA', 'X',
+'AMB', 'X',
+'AMC', 'X',
+'AMD', 'X',
+'AMG', 'X',
+'AMH', 'X',
+'AMI', 'X',
+'AML', 'X',
+'AMN', 'X',
+'AMO', 'X',
+'AMP', 'X',
+'AMQ', 'X',
+'AMR', 'X',
+'AMS', 'X',
+'AMT', 'X',
+'AMU', 'X',
+'AMW', 'X',
+'AMX', 'X',
+'AMY', 'X',
+'ANA', 'X',
+'ANB', 'X',
+'ANC', 'X',
+'AND', 'X',
+'ANE', 'X',
+'ANI', 'X',
+'ANL', 'X',
+'ANO', 'X',
+'ANP', 'X',
+'ANS', 'X',
+'ANT', 'X',
+'AOE', 'X',
+'AOP', 'X',
+'AP1', 'X',
+'AP2', 'X',
+'AP3', 'X',
+'AP4', 'X',
+'AP5', 'X',
+'AP6', 'X',
+'APA', 'X',
+'APB', 'X',
+'APC', 'X',
+'APE', 'F',
+'APF', 'X',
+'APG', 'X',
+'APH', 'A',
+'API', 'X',
+'APL', 'X',
+'APM', 'X',
+'APN', 'G',
+'APP', 'X',
+'APQ', 'X',
+'APR', 'X',
+'APS', 'X',
+'APT', 'X',
+'APU', 'X',
+'APX', 'X',
+'APY', 'X',
+'APZ', 'X',
+'AQS', 'X',
+'AR1', 'X',
+'AR2', 'X',
+'ARA', 'X',
+'ARB', 'X',
+'ARC', 'X',
+'ARD', 'X',
+'ARG', 'R',
+'ARH', 'X',
+'ARI', 'X',
+'ARM', 'R',
+'ARN', 'X',
+'ARO', 'R',
+'ARP', 'X',
+'ARQ', 'X',
+'ARS', 'X',
+'AS1', 'R',
+'AS2', 'X',
+'ASA', 'D',
+'ASB', 'D',
+'ASC', 'X',
+'ASD', 'X',
+'ASE', 'X',
+'ASF', 'X',
+'ASI', 'X',
+'ASK', 'D',
+'ASL', 'X',
+'ASM', 'N',
+'ASO', 'X',
+'ASP', 'D',
+'ASQ', 'X',
+'ASU', 'X',
+'ATA', 'X',
+'ATC', 'X',
+'ATD', 'X',
+'ATF', 'X',
+'ATG', 'X',
+'ATH', 'X',
+'ATM', 'X',
+'ATO', 'X',
+'ATP', 'X',
+'ATQ', 'X',
+'ATR', 'X',
+'ATT', 'X',
+'ATY', 'X',
+'ATZ', 'X',
+'AUC', 'X',
+'AUR', 'X',
+'AVG', 'X',
+'AXP', 'X',
+'AYA', 'A',
+'AZ2', 'X',
+'AZA', 'X',
+'AZC', 'X',
+'AZD', 'X',
+'AZE', 'X',
+'AZI', 'X',
+'AZL', 'X',
+'AZM', 'X',
+'AZR', 'X',
+'AZT', 'X',
+'B12', 'X',
+'B1F', 'F',
+'B2A', 'A',
+'B2F', 'F',
+'B2I', 'I',
+'B2V', 'V',
+'B3I', 'X',
+'B3P', 'X',
+'B7G', 'X',
+'B96', 'X',
+'B9A', 'X',
+'BA1', 'X',
+'BAA', 'X',
+'BAB', 'X',
+'BAC', 'X',
+'BAF', 'X',
+'BAH', 'X',
+'BAI', 'X',
+'BAK', 'X',
+'BAL', 'A',
+'BAM', 'X',
+'BAO', 'X',
+'BAP', 'X',
+'BAR', 'X',
+'BAS', 'X',
+'BAT', 'F',
+'BAY', 'X',
+'BAZ', 'X',
+'BB1', 'X',
+'BB2', 'X',
+'BBA', 'X',
+'BBH', 'X',
+'BBS', 'X',
+'BBT', 'X',
+'BBZ', 'X',
+'BCA', 'X',
+'BCB', 'X',
+'BCC', 'X',
+'BCD', 'X',
+'BCL', 'X',
+'BCN', 'X',
+'BCR', 'X',
+'BCS', 'C',
+'BCT', 'X',
+'BCY', 'X',
+'BCZ', 'X',
+'BDA', 'X',
+'BDG', 'X',
+'BDK', 'X',
+'BDM', 'X',
+'BDN', 'X',
+'BDS', 'X',
+'BE1', 'X',
+'BE2', 'X',
+'BEA', 'X',
+'BEF', 'X',
+'BEN', 'X',
+'BEO', 'X',
+'BEP', 'X',
+'BER', 'X',
+'BES', 'X',
+'BET', 'X',
+'BEZ', 'X',
+'BF2', 'X',
+'BFA', 'X',
+'BFD', 'X',
+'BFP', 'X',
+'BFS', 'X',
+'BFU', 'X',
+'BG6', 'X',
+'BGF', 'X',
+'BGG', 'X',
+'BGL', 'X',
+'BGN', 'X',
+'BGP', 'X',
+'BGX', 'X',
+'BH4', 'X',
+'BHA', 'X',
+'BHC', 'X',
+'BHD', 'D',
+'BHO', 'X',
+'BHS', 'X',
+'BIC', 'X',
+'BIN', 'X',
+'BIO', 'X',
+'BIP', 'X',
+'BIS', 'X',
+'BIZ', 'X',
+'BJH', 'X',
+'BJI', 'X',
+'BJP', 'X',
+'BLA', 'X',
+'BLB', 'X',
+'BLE', 'L',
+'BLG', 'P',
+'BLI', 'X',
+'BLM', 'X',
+'BLV', 'X',
+'BLY', 'K',
+'BM1', 'X',
+'BM2', 'X',
+'BM5', 'X',
+'BM9', 'X',
+'BMA', 'X',
+'BMD', 'X',
+'BME', 'X',
+'BMP', 'X',
+'BMQ', 'X',
+'BMS', 'X',
+'BMT', 'T',
+'BMU', 'X',
+'BMY', 'X',
+'BMZ', 'X',
+'BNA', 'X',
+'BNG', 'X',
+'BNI', 'X',
+'BNN', 'F',
+'BNO', 'L',
+'BNS', 'X',
+'BNZ', 'X',
+'BO3', 'X',
+'BO4', 'X',
+'BOC', 'X',
+'BOG', 'X',
+'BOM', 'X',
+'BOT', 'X',
+'BOX', 'X',
+'BOZ', 'X',
+'BPA', 'X',
+'BPB', 'X',
+'BPD', 'X',
+'BPG', 'X',
+'BPH', 'X',
+'BPI', 'X',
+'BPJ', 'X',
+'BPM', 'X',
+'BPN', 'X',
+'BPO', 'X',
+'BPP', 'X',
+'BPT', 'X',
+'BPY', 'X',
+'BRB', 'X',
+'BRC', 'X',
+'BRE', 'X',
+'BRI', 'X',
+'BRL', 'X',
+'BRM', 'X',
+'BRN', 'X',
+'BRO', 'X',
+'BRS', 'X',
+'BRU', 'X',
+'BRZ', 'X',
+'BSB', 'X',
+'BSI', 'X',
+'BSP', 'X',
+'BT1', 'X',
+'BT2', 'X',
+'BT3', 'X',
+'BTA', 'L',
+'BTB', 'X',
+'BTC', 'C',
+'BTD', 'X',
+'BTN', 'X',
+'BTP', 'X',
+'BTR', 'W',
+'BU1', 'X',
+'BUA', 'X',
+'BUB', 'X',
+'BUC', 'X',
+'BUG', 'X',
+'BUL', 'X',
+'BUM', 'X',
+'BUQ', 'X',
+'BUT', 'X',
+'BVD', 'X',
+'BX3', 'X',
+'BYS', 'X',
+'BZ1', 'X',
+'BZA', 'X',
+'BZB', 'X',
+'BZC', 'X',
+'BZD', 'X',
+'BZF', 'X',
+'BZI', 'X',
+'BZM', 'X',
+'BZO', 'X',
+'BZP', 'X',
+'BZQ', 'X',
+'BZS', 'X',
+'BZT', 'X',
+'C02', 'X',
+'C11', 'X',
+'C1O', 'X',
+'C20', 'X',
+'C24', 'X',
+'C2F', 'X',
+'C2O', 'X',
+'C2P', 'X',
+'C3M', 'X',
+'C3P', 'X',
+'C3X', 'X',
+'C48', 'X',
+'C4M', 'X',
+'C4X', 'X',
+'C5C', 'X',
+'C5M', 'X',
+'C5P', 'X',
+'C5X', 'X',
+'C60', 'X',
+'C6C', 'X',
+'C6M', 'X',
+'C78', 'X',
+'C8E', 'X',
+'CA3', 'X',
+'CA5', 'X',
+'CAA', 'X',
+'CAB', 'X',
+'CAC', 'X',
+'CAD', 'X',
+'CAF', 'C',
+'CAG', 'X',
+'CAH', 'X',
+'CAL', 'X',
+'CAM', 'X',
+'CAN', 'X',
+'CAO', 'X',
+'CAP', 'X',
+'CAQ', 'X',
+'CAR', 'X',
+'CAS', 'C',
+'CAT', 'X',
+'CAV', 'X',
+'CAY', 'C',
+'CAZ', 'X',
+'CB3', 'X',
+'CB4', 'X',
+'CBA', 'X',
+'CBD', 'X',
+'CBG', 'X',
+'CBI', 'X',
+'CBL', 'X',
+'CBM', 'X',
+'CBN', 'X',
+'CBO', 'X',
+'CBP', 'X',
+'CBS', 'X',
+'CBX', 'X',
+'CBZ', 'X',
+'CC0', 'X',
+'CC1', 'X',
+'CCC', 'X',
+'CCH', 'X',
+'CCI', 'X',
+'CCM', 'X',
+'CCN', 'X',
+'CCO', 'X',
+'CCP', 'X',
+'CCR', 'X',
+'CCS', 'C',
+'CCV', 'X',
+'CCY', 'X',
+'CD1', 'X',
+'CDC', 'X',
+'CDE', 'X',
+'CDF', 'X',
+'CDI', 'X',
+'CDL', 'X',
+'CDM', 'X',
+'CDP', 'X',
+'CDR', 'X',
+'CDU', 'X',
+'CE1', 'X',
+'CEA', 'C',
+'CEB', 'X',
+'CEC', 'X',
+'CED', 'X',
+'CEF', 'X',
+'CEH', 'X',
+'CEM', 'X',
+'CEO', 'X',
+'CEP', 'X',
+'CEQ', 'X',
+'CER', 'X',
+'CES', 'G',
+'CET', 'X',
+'CFC', 'X',
+'CFF', 'X',
+'CFM', 'X',
+'CFO', 'X',
+'CFP', 'X',
+'CFS', 'X',
+'CFX', 'X',
+'CGN', 'X',
+'CGP', 'X',
+'CGS', 'X',
+'CGU', 'E',
+'CH2', 'X',
+'CH3', 'X',
+'CHA', 'X',
+'CHB', 'X',
+'CHD', 'X',
+'CHF', 'X',
+'CHG', 'G',
+'CHI', 'X',
+'CHN', 'X',
+'CHO', 'X',
+'CHP', 'G',
+'CHR', 'X',
+'CHS', 'F',
+'CHT', 'X',
+'CHX', 'X',
+'CIC', 'X',
+'CIN', 'X',
+'CIP', 'X',
+'CIR', 'X',
+'CIT', 'X',
+'CIU', 'X',
+'CKI', 'X',
+'CL1', 'X',
+'CL2', 'X',
+'CLA', 'X',
+'CLB', 'A',
+'CLC', 'S',
+'CLD', 'A',
+'CLE', 'L',
+'CLF', 'X',
+'CLK', 'S',
+'CLL', 'X',
+'CLM', 'X',
+'CLN', 'X',
+'CLO', 'X',
+'CLP', 'X',
+'CLQ', 'X',
+'CLR', 'X',
+'CLS', 'X',
+'CLT', 'X',
+'CLX', 'X',
+'CLY', 'X',
+'CMA', 'R',
+'CMC', 'X',
+'CMD', 'X',
+'CME', 'C',
+'CMG', 'X',
+'CMK', 'X',
+'CMN', 'X',
+'CMO', 'X',
+'CMP', 'X',
+'CMR', 'X',
+'CMS', 'X',
+'CMT', 'C',
+'CMX', 'X',
+'CNA', 'X',
+'CNC', 'X',
+'CND', 'X',
+'CNH', 'X',
+'CNM', 'X',
+'CNN', 'X',
+'CNO', 'X',
+'CNP', 'X',
+'CO2', 'X',
+'CO3', 'X',
+'CO5', 'X',
+'CO8', 'X',
+'COA', 'X',
+'COB', 'X',
+'COC', 'X',
+'COD', 'X',
+'COE', 'X',
+'COF', 'X',
+'COH', 'X',
+'COI', 'X',
+'COJ', 'X',
+'COL', 'X',
+'COM', 'X',
+'CON', 'X',
+'COP', 'X',
+'COR', 'X',
+'COS', 'X',
+'COT', 'X',
+'COY', 'X',
+'CP1', 'G',
+'CP2', 'X',
+'CP4', 'X',
+'CPA', 'X',
+'CPB', 'X',
+'CPC', 'X',
+'CPD', 'X',
+'CPG', 'X',
+'CPH', 'X',
+'CPI', 'X',
+'CPM', 'X',
+'CPN', 'G',
+'CPO', 'X',
+'CPP', 'X',
+'CPQ', 'X',
+'CPR', 'X',
+'CPS', 'X',
+'CPT', 'X',
+'CPU', 'X',
+'CPV', 'X',
+'CPY', 'X',
+'CR1', 'X',
+'CR6', 'X',
+'CRA', 'X',
+'CRB', 'X',
+'CRC', 'X',
+'CRG', 'X',
+'CRH', 'X',
+'CRO', 'T',
+'CRP', 'X',
+'CRQ', 'X',
+'CRS', 'X',
+'CRT', 'X',
+'CRY', 'X',
+'CSA', 'C',
+'CSB', 'X',
+'CSD', 'C',
+'CSE', 'C',
+'CSH', 'X',
+'CSI', 'X',
+'CSN', 'X',
+'CSO', 'C',
+'CSP', 'C',
+'CSR', 'C',
+'CSS', 'C',
+'CST', 'X',
+'CSW', 'C',
+'CSX', 'C',
+'CSY', 'X',
+'CSZ', 'C',
+'CT3', 'X',
+'CTA', 'X',
+'CTB', 'X',
+'CTC', 'X',
+'CTD', 'X',
+'CTH', 'T',
+'CTO', 'X',
+'CTP', 'X',
+'CTR', 'X',
+'CTS', 'X',
+'CTT', 'X',
+'CTY', 'X',
+'CTZ', 'X',
+'CU1', 'X',
+'CUA', 'X',
+'CUC', 'X',
+'CUL', 'X',
+'CUO', 'X',
+'CUZ', 'X',
+'CVI', 'X',
+'CXF', 'X',
+'CXL', 'X',
+'CXM', 'M',
+'CXN', 'X',
+'CXP', 'X',
+'CXS', 'X',
+'CY1', 'C',
+'CY3', 'X',
+'CYB', 'X',
+'CYC', 'X',
+'CYF', 'C',
+'CYG', 'C',
+'CYH', 'X',
+'CYL', 'X',
+'CYM', 'C',
+'CYN', 'X',
+'CYO', 'X',
+'CYP', 'X',
+'CYQ', 'C',
+'CYS', 'C',
+'CYU', 'X',
+'CYY', 'X',
+'CYZ', 'X',
+'CZH', 'X',
+'CZZ', 'C',
+'D12', 'X',
+'D13', 'X',
+'D16', 'X',
+'D18', 'X',
+'D19', 'X',
+'D1P', 'X',
+'D24', 'X',
+'D34', 'X',
+'D35', 'X',
+'D4D', 'X',
+'D4T', 'X',
+'D6G', 'X',
+'DA2', 'R',
+'DA3', 'X',
+'DA6', 'X',
+'DA7', 'X',
+'DAA', 'X',
+'DAB', 'X',
+'DAC', 'X',
+'DAD', 'X',
+'DAE', 'X',
+'DAF', 'X',
+'DAG', 'X',
+'DAH', 'A',
+'DAJ', 'X',
+'DAK', 'X',
+'DAL', 'A',
+'DAM', 'A',
+'DAN', 'X',
+'DAO', 'X',
+'DAP', 'X',
+'DAQ', 'X',
+'DAR', 'R',
+'DAS', 'D',
+'DAT', 'X',
+'DAU', 'X',
+'DAV', 'X',
+'DBA', 'X',
+'DBD', 'X',
+'DBF', 'X',
+'DBG', 'X',
+'DBI', 'X',
+'DBV', 'X',
+'DBY', 'Y',
+'DCA', 'X',
+'DCB', 'X',
+'DCE', 'X',
+'DCF', 'X',
+'DCG', 'X',
+'DCH', 'X',
+'DCI', 'I',
+'DCL', 'X',
+'DCM', 'X',
+'DCP', 'X',
+'DCS', 'X',
+'DCT', 'X',
+'DCY', 'C',
+'DCZ', 'X',
+'DDA', 'X',
+'DDB', 'X',
+'DDC', 'X',
+'DDF', 'X',
+'DDG', 'X',
+'DDH', 'X',
+'DDL', 'X',
+'DDM', 'X',
+'DDO', 'L',
+'DDP', 'X',
+'DDQ', 'X',
+'DDT', 'Y',
+'DDU', 'X',
+'DEA', 'X',
+'DEB', 'X',
+'DEC', 'X',
+'DEF', 'X',
+'DEL', 'X',
+'DEM', 'X',
+'DEN', 'X',
+'DEP', 'X',
+'DEQ', 'X',
+'DES', 'X',
+'DET', 'X',
+'DFC', 'X',
+'DFG', 'X',
+'DFI', 'X',
+'DFL', 'X',
+'DFO', 'X',
+'DFP', 'X',
+'DFR', 'X',
+'DFT', 'X',
+'DFV', 'X',
+'DFX', 'X',
+'DG2', 'X',
+'DG3', 'X',
+'DG6', 'X',
+'DGA', 'X',
+'DGD', 'X',
+'DGG', 'X',
+'DGL', 'E',
+'DGN', 'Q',
+'DGP', 'X',
+'DGT', 'X',
+'DGX', 'X',
+'DH2', 'X',
+'DHA', 'A',
+'DHB', 'X',
+'DHC', 'X',
+'DHD', 'X',
+'DHE', 'X',
+'DHF', 'X',
+'DHG', 'X',
+'DHI', 'H',
+'DHL', 'X',
+'DHM', 'X',
+'DHN', 'V',
+'DHP', 'X',
+'DHQ', 'X',
+'DHR', 'X',
+'DHS', 'X',
+'DHT', 'X',
+'DHU', 'X',
+'DHY', 'X',
+'DHZ', 'X',
+'DI2', 'X',
+'DI3', 'G',
+'DI4', 'X',
+'DI5', 'X',
+'DIA', 'X',
+'DIC', 'X',
+'DIF', 'X',
+'DIG', 'X',
+'DII', 'X',
+'DIL', 'I',
+'DIM', 'X',
+'DIO', 'X',
+'DIP', 'X',
+'DIQ', 'X',
+'DIS', 'X',
+'DIT', 'X',
+'DIV', 'V',
+'DIX', 'X',
+'DIY', 'X',
+'DKA', 'X',
+'DLA', 'X',
+'DLE', 'L',
+'DLF', 'X',
+'DLS', 'K',
+'DLY', 'K',
+'DM1', 'X',
+'DM2', 'X',
+'DM3', 'X',
+'DM4', 'X',
+'DM5', 'X',
+'DM6', 'X',
+'DM7', 'X',
+'DM8', 'X',
+'DM9', 'X',
+'DMA', 'X',
+'DMB', 'X',
+'DMC', 'X',
+'DMD', 'X',
+'DME', 'X',
+'DMF', 'X',
+'DMG', 'G',
+'DMH', 'N',
+'DMI', 'X',
+'DMJ', 'X',
+'DML', 'X',
+'DMM', 'X',
+'DMN', 'X',
+'DMO', 'X',
+'DMP', 'X',
+'DMQ', 'X',
+'DMR', 'X',
+'DMS', 'X',
+'DMT', 'X',
+'DMV', 'X',
+'DMY', 'X',
+'DNC', 'X',
+'DND', 'X',
+'DNH', 'X',
+'DNJ', 'X',
+'DNN', 'X',
+'DNP', 'X',
+'DNQ', 'X',
+'DNR', 'X',
+'DO2', 'X',
+'DO3', 'X',
+'DOA', 'X',
+'DOB', 'X',
+'DOC', 'X',
+'DOH', 'D',
+'DOM', 'X',
+'DOS', 'X',
+'DOX', 'X',
+'DP5', 'X',
+'DP7', 'X',
+'DPA', 'X',
+'DPC', 'X',
+'DPD', 'X',
+'DPE', 'X',
+'DPG', 'X',
+'DPH', 'F',
+'DPM', 'X',
+'DPN', 'F',
+'DPO', 'X',
+'DPP', 'X',
+'DPR', 'P',
+'DPS', 'X',
+'DPT', 'X',
+'DPX', 'X',
+'DPY', 'X',
+'DPZ', 'X',
+'DQH', 'X',
+'DQN', 'X',
+'DR1', 'X',
+'DRB', 'X',
+'DRC', 'X',
+'DRI', 'X',
+'DRP', 'X',
+'DRT', 'X',
+'DRU', 'X',
+'DSA', 'X',
+'DSB', 'X',
+'DSC', 'X',
+'DSD', 'X',
+'DSE', 'S',
+'DSI', 'X',
+'DSN', 'S',
+'DSP', 'D',
+'DSR', 'X',
+'DSS', 'X',
+'DSX', 'X',
+'DSY', 'X',
+'DTB', 'X',
+'DTD', 'X',
+'DTH', 'T',
+'DTN', 'X',
+'DTO', 'X',
+'DTP', 'X',
+'DTQ', 'X',
+'DTR', 'W',
+'DTT', 'X',
+'DTY', 'Y',
+'DUD', 'X',
+'DUO', 'X',
+'DUR', 'X',
+'DUT', 'X',
+'DVA', 'V',
+'DVR', 'X',
+'DX9', 'X',
+'DXA', 'X',
+'DXB', 'X',
+'DXC', 'X',
+'DXG', 'X',
+'DXX', 'X',
+'DZF', 'X',
+'E09', 'X',
+'E20', 'X',
+'E2P', 'X',
+'E3G', 'X',
+'E4N', 'X',
+'E4P', 'X',
+'E64', 'X',
+'E6C', 'X',
+'E96', 'X',
+'E97', 'X',
+'EA2', 'X',
+'EAA', 'X',
+'EAP', 'X',
+'EBP', 'X',
+'EBW', 'X',
+'ECO', 'X',
+'EDA', 'X',
+'EDC', 'X',
+'EDE', 'X',
+'EDO', 'X',
+'EDR', 'X',
+'EEB', 'X',
+'EEE', 'X',
+'EFC', 'X',
+'EFZ', 'X',
+'EG1', 'X',
+'EG2', 'X',
+'EG3', 'X',
+'EGC', 'X',
+'EGL', 'X',
+'EHP', 'A',
+'EIC', 'X',
+'EJT', 'X',
+'ELA', 'X',
+'EMB', 'X',
+'EMC', 'X',
+'EMD', 'X',
+'EMM', 'X',
+'EMO', 'X',
+'EMP', 'X',
+'EMR', 'X',
+'ENA', 'X',
+'ENC', 'X',
+'ENH', 'X',
+'ENO', 'X',
+'ENP', 'X',
+'EOA', 'X',
+'EOH', 'X',
+'EOT', 'X',
+'EOX', 'X',
+'EPA', 'X',
+'EPE', 'X',
+'EPH', 'X',
+'EPI', 'X',
+'EPN', 'X',
+'EPO', 'X',
+'EPT', 'X',
+'EPU', 'X',
+'EPX', 'X',
+'EPY', 'X',
+'EQI', 'X',
+'EQP', 'X',
+'EQU', 'X',
+'ERG', 'X',
+'ERI', 'X',
+'ERY', 'X',
+'ESC', 'X',
+'ESD', 'X',
+'ESI', 'X',
+'ESO', 'X',
+'ESP', 'X',
+'EST', 'X',
+'ESX', 'X',
+'ETA', 'X',
+'ETC', 'X',
+'ETD', 'X',
+'ETF', 'X',
+'ETH', 'X',
+'ETI', 'X',
+'ETN', 'X',
+'ETO', 'X',
+'ETP', 'X',
+'ETR', 'X',
+'ETS', 'X',
+'ETY', 'X',
+'EU3', 'X',
+'EUG', 'X',
+'EYS', 'C',
+'F09', 'X',
+'F2B', 'X',
+'F3S', 'X',
+'F42', 'X',
+'F43', 'X',
+'F4S', 'X',
+'F6B', 'X',
+'F6P', 'X',
+'F89', 'X',
+'FA1', 'X',
+'FA5', 'F',
+'FAA', 'X',
+'FAB', 'X',
+'FAC', 'X',
+'FAD', 'X',
+'FAF', 'X',
+'FAG', 'X',
+'FAM', 'X',
+'FAR', 'X',
+'FAS', 'X',
+'FAT', 'X',
+'FBA', 'X',
+'FBE', 'X',
+'FBI', 'X',
+'FBP', 'X',
+'FBQ', 'X',
+'FBS', 'X',
+'FBT', 'X',
+'FBU', 'X',
+'FCA', 'X',
+'FCB', 'X',
+'FCI', 'X',
+'FCN', 'X',
+'FCO', 'X',
+'FCR', 'X',
+'FCT', 'X',
+'FCX', 'X',
+'FCY', 'C',
+'FD1', 'F',
+'FD2', 'F',
+'FD3', 'F',
+'FD4', 'F',
+'FDA', 'X',
+'FDC', 'X',
+'FDI', 'X',
+'FDP', 'X',
+'FDS', 'X',
+'FE2', 'X',
+'FEA', 'X',
+'FEL', 'X',
+'FEM', 'X',
+'FEN', 'X',
+'FEO', 'X',
+'FEP', 'X',
+'FER', 'X',
+'FES', 'X',
+'FFB', 'X',
+'FFC', 'X',
+'FFF', 'X',
+'FFO', 'X',
+'FGL', 'G',
+'FHB', 'X',
+'FHC', 'X',
+'FHP', 'X',
+'FHU', 'X',
+'FID', 'X',
+'FII', 'X',
+'FIP', 'X',
+'FK5', 'X',
+'FKA', 'X',
+'FKI', 'X',
+'FKP', 'X',
+'FL2', 'X',
+'FL9', 'X',
+'FLA', 'A',
+'FLC', 'X',
+'FLD', 'X',
+'FLE', 'L',
+'FLF', 'X',
+'FLO', 'X',
+'FLP', 'X',
+'FLT', 'Y',
+'FLU', 'X',
+'FLX', 'X',
+'FM1', 'X',
+'FM2', 'X',
+'FMA', 'X',
+'FMB', 'X',
+'FMC', 'X',
+'FME', 'M',
+'FMN', 'X',
+'FMP', 'X',
+'FMR', 'X',
+'FMS', 'X',
+'FMT', 'X',
+'FNE', 'X',
+'FNP', 'X',
+'FNS', 'X',
+'FOC', 'X',
+'FOE', 'X',
+'FOG', 'F',
+'FOH', 'X',
+'FOK', 'X',
+'FOL', 'X',
+'FON', 'X',
+'FOP', 'X',
+'FOR', 'X',
+'FOS', 'X',
+'FPA', 'X',
+'FPC', 'X',
+'FPI', 'X',
+'FPO', 'X',
+'FPP', 'X',
+'FPT', 'X',
+'FQP', 'X',
+'FRA', 'X',
+'FRD', 'F',
+'FRU', 'X',
+'FS3', 'X',
+'FS4', 'X',
+'FSB', 'X',
+'FSO', 'X',
+'FSX', 'X',
+'FTC', 'X',
+'FTP', 'X',
+'FTR', 'W',
+'FTT', 'X',
+'FTY', 'Y',
+'FUA', 'X',
+'FUC', 'X',
+'FUM', 'X',
+'FUP', 'X',
+'FVF', 'X',
+'FXP', 'X',
+'FXV', 'X',
+'FYA', 'F',
+'G16', 'X',
+'G1P', 'X',
+'G20', 'X',
+'G21', 'X',
+'G23', 'X',
+'G26', 'X',
+'G28', 'X',
+'G2F', 'X',
+'G37', 'X',
+'G39', 'X',
+'G3H', 'X',
+'G3P', 'X',
+'G4D', 'X',
+'G6D', 'X',
+'G6P', 'X',
+'G6Q', 'X',
+'G7M', 'X',
+'GA2', 'X',
+'GAA', 'X',
+'GAB', 'X',
+'GAC', 'X',
+'GAI', 'X',
+'GAL', 'X',
+'GAM', 'X',
+'GAN', 'X',
+'GAO', 'X',
+'GAP', 'X',
+'GAR', 'G',
+'GAS', 'X',
+'GAT', 'X',
+'GBC', 'X',
+'GBI', 'X',
+'GBP', 'X',
+'GBS', 'X',
+'GBX', 'X',
+'GC4', 'X',
+'GCA', 'X',
+'GCD', 'X',
+'GCG', 'G',
+'GCH', 'G',
+'GCK', 'X',
+'GCL', 'X',
+'GCM', 'X',
+'GCN', 'X',
+'GCO', 'X',
+'GCP', 'X',
+'GCR', 'X',
+'GCS', 'X',
+'GCU', 'X',
+'GD3', 'X',
+'GDB', 'X',
+'GDM', 'X',
+'GDN', 'X',
+'GDP', 'X',
+'GDS', 'X',
+'GDU', 'X',
+'GE1', 'X',
+'GE2', 'X',
+'GE3', 'X',
+'GEA', 'X',
+'GEL', 'X',
+'GEM', 'X',
+'GEN', 'X',
+'GEP', 'X',
+'GER', 'X',
+'GFP', 'X',
+'GGB', 'X',
+'GGL', 'E',
+'GGP', 'X',
+'GHP', 'G',
+'GIP', 'X',
+'GIS', 'X',
+'GKR', 'X',
+'GL2', 'X',
+'GL3', 'G',
+'GL4', 'X',
+'GL5', 'X',
+'GL7', 'X',
+'GL9', 'X',
+'GLA', 'X',
+'GLB', 'X',
+'GLC', 'X',
+'GLD', 'X',
+'GLE', 'X',
+'GLF', 'X',
+'GLG', 'X',
+'GLH', 'Q',
+'GLI', 'X',
+'GLL', 'X',
+'GLM', 'G',
+'GLN', 'Q',
+'GLO', 'X',
+'GLP', 'X',
+'GLR', 'X',
+'GLS', 'X',
+'GLT', 'X',
+'GLU', 'E',
+'GLV', 'X',
+'GLW', 'X',
+'GLY', 'G',
+'GLZ', 'X',
+'GM1', 'X',
+'GMA', 'X',
+'GMC', 'X',
+'GMH', 'X',
+'GMP', 'X',
+'GMY', 'X',
+'GN7', 'X',
+'GNA', 'X',
+'GNB', 'X',
+'GNH', 'X',
+'GNP', 'X',
+'GNT', 'X',
+'GOA', 'X',
+'GOL', 'X',
+'GOX', 'X',
+'GP1', 'X',
+'GP3', 'X',
+'GP4', 'X',
+'GP6', 'X',
+'GP8', 'X',
+'GPB', 'E',
+'GPC', 'X',
+'GPE', 'X',
+'GPG', 'X',
+'GPI', 'X',
+'GPJ', 'X',
+'GPL', 'K',
+'GPM', 'X',
+'GPN', 'G',
+'GPP', 'X',
+'GPR', 'X',
+'GPS', 'X',
+'GPX', 'X',
+'GR1', 'X',
+'GR3', 'X',
+'GR4', 'X',
+'GSA', 'X',
+'GSB', 'X',
+'GSC', 'G',
+'GSE', 'S',
+'GSH', 'X',
+'GSP', 'X',
+'GSR', 'X',
+'GSS', 'X',
+'GT9', 'C',
+'GTA', 'X',
+'GTB', 'X',
+'GTD', 'X',
+'GTE', 'X',
+'GTH', 'T',
+'GTN', 'X',
+'GTO', 'X',
+'GTP', 'X',
+'GTR', 'X',
+'GTS', 'X',
+'GTT', 'X',
+'GTX', 'X',
+'GTZ', 'X',
+'GU7', 'X',
+'GUA', 'X',
+'GUD', 'X',
+'GUM', 'X',
+'GUN', 'X',
+'GUP', 'X',
+'GUR', 'X',
+'GW3', 'X',
+'GZZ', 'X',
+'H2B', 'X',
+'H2P', 'H',
+'H2S', 'X',
+'H2U', 'X',
+'H4B', 'X',
+'H5M', 'P',
+'H5P', 'X',
+'HAA', 'X',
+'HAB', 'X',
+'HAC', 'A',
+'HAD', 'X',
+'HAE', 'X',
+'HAG', 'X',
+'HAI', 'X',
+'HAM', 'X',
+'HAP', 'X',
+'HAQ', 'X',
+'HAR', 'R',
+'HAS', 'X',
+'HAV', 'V',
+'HAX', 'X',
+'HAZ', 'X',
+'HBA', 'X',
+'HBC', 'X',
+'HBD', 'X',
+'HBI', 'X',
+'HBO', 'X',
+'HBU', 'X',
+'HBY', 'X',
+'HC0', 'X',
+'HC1', 'X',
+'HC4', 'X',
+'HCA', 'X',
+'HCC', 'X',
+'HCI', 'X',
+'HCS', 'X',
+'HDA', 'X',
+'HDD', 'X',
+'HDF', 'X',
+'HDN', 'X',
+'HDS', 'X',
+'HDZ', 'X',
+'HE1', 'X',
+'HE6', 'X',
+'HEA', 'X',
+'HEB', 'X',
+'HEC', 'X',
+'HED', 'X',
+'HEE', 'X',
+'HEF', 'X',
+'HEG', 'X',
+'HEM', 'X',
+'HEN', 'X',
+'HEO', 'X',
+'HEP', 'X',
+'HEU', 'X',
+'HEV', 'X',
+'HEX', 'X',
+'HEZ', 'X',
+'HF1', 'X',
+'HFA', 'X',
+'HFP', 'X',
+'HGA', 'Q',
+'HGB', 'X',
+'HGC', 'X',
+'HGI', 'X',
+'HGU', 'X',
+'HHO', 'X',
+'HHP', 'X',
+'HIB', 'X',
+'HIC', 'H',
+'HII', 'X',
+'HIN', 'X',
+'HIO', 'X',
+'HIP', 'H',
+'HIS', 'H',
+'HLE', 'X',
+'HLT', 'X',
+'HMA', 'A',
+'HMB', 'X',
+'HMC', 'X',
+'HMD', 'X',
+'HMF', 'A',
+'HMG', 'X',
+'HMH', 'X',
+'HMI', 'L',
+'HMM', 'X',
+'HMN', 'X',
+'HMO', 'X',
+'HMP', 'X',
+'HMR', 'R',
+'HNI', 'X',
+'HNP', 'X',
+'HOA', 'X',
+'HOE', 'X',
+'HOH', 'X',
+'HOM', 'X',
+'HOP', 'X',
+'HOQ', 'X',
+'HP1', 'A',
+'HP2', 'A',
+'HP3', 'X',
+'HPA', 'X',
+'HPB', 'X',
+'HPC', 'X',
+'HPD', 'X',
+'HPE', 'A',
+'HPG', 'X',
+'HPH', 'F',
+'HPP', 'X',
+'HPQ', 'F',
+'HPR', 'X',
+'HPT', 'X',
+'HPY', 'X',
+'HQO', 'X',
+'HQQ', 'X',
+'HQU', 'X',
+'HRG', 'R',
+'HRI', 'X',
+'HSA', 'X',
+'HSE', 'S',
+'HSF', 'X',
+'HSM', 'X',
+'HSO', 'H',
+'HSP', 'X',
+'HT1', 'X',
+'HT2', 'X',
+'HTA', 'X',
+'HTL', 'X',
+'HTO', 'X',
+'HTP', 'X',
+'HTR', 'W',
+'HUP', 'X',
+'HUX', 'X',
+'HV5', 'A',
+'HV7', 'X',
+'HV8', 'X',
+'HXA', 'X',
+'HXC', 'X',
+'HXP', 'X',
+'HY1', 'X',
+'HYA', 'X',
+'HYB', 'X',
+'HYD', 'X',
+'HYG', 'X',
+'HYP', 'P',
+'I06', 'X',
+'I10', 'X',
+'I11', 'X',
+'I17', 'X',
+'I2P', 'X',
+'I3N', 'X',
+'I3P', 'X',
+'I40', 'X',
+'I48', 'X',
+'I4B', 'X',
+'I52', 'X',
+'I5P', 'X',
+'I84', 'G',
+'IAG', 'G',
+'IAS', 'X',
+'IB2', 'X',
+'IBB', 'X',
+'IBP', 'X',
+'IBR', 'X',
+'IBS', 'X',
+'IBZ', 'X',
+'IC1', 'X',
+'ICA', 'X',
+'ICI', 'X',
+'ICL', 'X',
+'ICP', 'X',
+'ICT', 'X',
+'ICU', 'X',
+'ID2', 'X',
+'IDC', 'X',
+'IDG', 'X',
+'IDH', 'X',
+'IDM', 'X',
+'IDO', 'X',
+'IDP', 'X',
+'IDR', 'X',
+'IDS', 'X',
+'IDT', 'X',
+'IDU', 'X',
+'IFG', 'X',
+'IFP', 'X',
+'IGL', 'X',
+'IGN', 'X',
+'IGP', 'X',
+'IGU', 'X',
+'IH1', 'X',
+'IH2', 'X',
+'IH3', 'X',
+'IHB', 'X',
+'IHN', 'X',
+'IHP', 'X',
+'IIC', 'X',
+'IIL', 'I',
+'IIP', 'X',
+'IK2', 'X',
+'IKT', 'X',
+'ILA', 'I',
+'ILE', 'I',
+'ILG', 'X',
+'ILO', 'X',
+'ILX', 'I',
+'IM1', 'X',
+'IM2', 'X',
+'IMC', 'X',
+'IMD', 'X',
+'IME', 'X',
+'IMF', 'X',
+'IMG', 'X',
+'IMH', 'X',
+'IMI', 'X',
+'IML', 'I',
+'IMM', 'X',
+'IMN', 'X',
+'IMO', 'X',
+'IMP', 'X',
+'IMR', 'X',
+'IMU', 'X',
+'IN0', 'D',
+'IN1', 'R',
+'IN2', 'K',
+'IN3', 'L',
+'IN4', 'X',
+'IN5', 'A',
+'IN6', 'L',
+'IN7', 'X',
+'IN8', 'X',
+'IN9', 'X',
+'INA', 'L',
+'INB', 'X',
+'INC', 'X',
+'IND', 'X',
+'INE', 'X',
+'INF', 'F',
+'ING', 'F',
+'INH', 'R',
+'INI', 'X',
+'INJ', 'X',
+'INK', 'X',
+'INL', 'X',
+'INM', 'X',
+'INN', 'A',
+'INO', 'X',
+'INP', 'X',
+'INQ', 'X',
+'INR', 'X',
+'INS', 'X',
+'INT', 'V',
+'INU', 'X',
+'INV', 'X',
+'INW', 'X',
+'INX', 'X',
+'INY', 'X',
+'INZ', 'X',
+'IOA', 'X',
+'IOB', 'X',
+'IOC', 'X',
+'IOD', 'X',
+'IOE', 'X',
+'IOF', 'X',
+'IOH', 'X',
+'IOL', 'X',
+'IOP', 'X',
+'IP1', 'X',
+'IP2', 'X',
+'IP3', 'X',
+'IP4', 'X',
+'IPA', 'X',
+'IPB', 'X',
+'IPD', 'X',
+'IPG', 'G',
+'IPH', 'X',
+'IPL', 'X',
+'IPM', 'X',
+'IPN', 'X',
+'IPO', 'F',
+'IPP', 'X',
+'IPS', 'X',
+'IPT', 'X',
+'IPU', 'X',
+'IPY', 'A',
+'IQB', 'X',
+'IQP', 'X',
+'IQS', 'X',
+'IR3', 'X',
+'IRI', 'X',
+'IRP', 'X',
+'ISA', 'X',
+'ISF', 'X',
+'ISO', 'X',
+'ISP', 'X',
+'ISQ', 'X',
+'ISU', 'X',
+'ITM', 'X',
+'ITP', 'X',
+'ITR', 'W',
+'ITS', 'X',
+'ITU', 'X',
+'IU5', 'X',
+'IUM', 'X',
+'IUR', 'X',
+'IVA', 'X',
+'IYG', 'G',
+'IYR', 'Y',
+'J77', 'X',
+'J78', 'X',
+'J80', 'X',
+'JE2', 'X',
+'JEN', 'X',
+'JST', 'X',
+'K21', 'X',
+'KAH', 'X',
+'KAI', 'X',
+'KAM', 'X',
+'KAN', 'X',
+'KAP', 'X',
+'KCP', 'X',
+'KCX', 'K',
+'KDO', 'X',
+'KEF', 'X',
+'KET', 'X',
+'KGR', 'X',
+'KH1', 'X',
+'KIF', 'X',
+'KIV', 'V',
+'KNI', 'X',
+'KPH', 'K',
+'KTH', 'X',
+'KTN', 'X',
+'KTP', 'X',
+'KWT', 'X',
+'L04', 'X',
+'L1P', 'X',
+'L24', 'E',
+'L2P', 'X',
+'L34', 'E',
+'L37', 'E',
+'L3P', 'X',
+'L4P', 'X',
+'L75', 'X',
+'LAC', 'X',
+'LAD', 'X',
+'LAK', 'X',
+'LAM', 'X',
+'LAR', 'X',
+'LAT', 'X',
+'LAX', 'X',
+'LCO', 'X',
+'LCP', 'X',
+'LCS', 'X',
+'LDA', 'X',
+'LDO', 'L',
+'LDP', 'X',
+'LEA', 'X',
+'LEO', 'X',
+'LEU', 'L',
+'LG2', 'X',
+'LG6', 'X',
+'LGC', 'X',
+'LGP', 'X',
+'LHG', 'X',
+'LHY', 'F',
+'LI1', 'X',
+'LIG', 'X',
+'LIL', 'X',
+'LIM', 'X',
+'LIN', 'X',
+'LIO', 'X',
+'LIP', 'X',
+'LLA', 'X',
+'LLP', 'K',
+'LLY', 'K',
+'LMG', 'X',
+'LML', 'X',
+'LMT', 'X',
+'LMU', 'X',
+'LMZ', 'X',
+'LNK', 'X',
+'LNL', 'X',
+'LNO', 'X',
+'LOF', 'X',
+'LOL', 'L',
+'LOM', 'X',
+'LOR', 'X',
+'LOS', 'X',
+'LOV', 'L',
+'LOX', 'X',
+'LP1', 'X',
+'LP2', 'R',
+'LPA', 'X',
+'LPC', 'X',
+'LPF', 'X',
+'LPL', 'X',
+'LPM', 'X',
+'LPP', 'X',
+'LRB', 'X',
+'LRU', 'X',
+'LS1', 'X',
+'LS2', 'X',
+'LS3', 'X',
+'LS4', 'X',
+'LS5', 'X',
+'LTA', 'X',
+'LTL', 'X',
+'LTR', 'W',
+'LUM', 'X',
+'LVS', 'L',
+'LXC', 'X',
+'LY2', 'X',
+'LY3', 'X',
+'LYA', 'X',
+'LYB', 'X',
+'LYC', 'X',
+'LYD', 'X',
+'LYM', 'K',
+'LYN', 'X',
+'LYS', 'K',
+'LYT', 'X',
+'LYW', 'X',
+'LYZ', 'K',
+'M1A', 'X',
+'M1G', 'X',
+'M2G', 'X',
+'M3L', 'K',
+'M6P', 'X',
+'M6T', 'X',
+'M7G', 'X',
+'MA1', 'X',
+'MA2', 'X',
+'MA3', 'X',
+'MA4', 'X',
+'MA6', 'X',
+'MAA', 'A',
+'MAB', 'X',
+'MAC', 'X',
+'MAE', 'X',
+'MAG', 'X',
+'MAH', 'X',
+'MAI', 'R',
+'MAK', 'X',
+'MAL', 'X',
+'MAM', 'X',
+'MAN', 'X',
+'MAO', 'X',
+'MAP', 'X',
+'MAR', 'X',
+'MAS', 'X',
+'MAT', 'X',
+'MAU', 'X',
+'MAZ', 'X',
+'MBA', 'X',
+'MBD', 'X',
+'MBG', 'X',
+'MBH', 'X',
+'MBN', 'X',
+'MBO', 'X',
+'MBR', 'X',
+'MBS', 'X',
+'MBV', 'X',
+'MBZ', 'X',
+'MCA', 'X',
+'MCD', 'X',
+'MCE', 'X',
+'MCG', 'G',
+'MCI', 'X',
+'MCN', 'X',
+'MCP', 'X',
+'MCT', 'X',
+'MCY', 'X',
+'MD2', 'X',
+'MDA', 'X',
+'MDC', 'X',
+'MDG', 'X',
+'MDH', 'X',
+'MDL', 'X',
+'MDM', 'X',
+'MDN', 'X',
+'MDP', 'X',
+'ME6', 'X',
+'MEB', 'X',
+'MEC', 'X',
+'MEL', 'X',
+'MEN', 'N',
+'MEP', 'X',
+'MER', 'X',
+'MES', 'X',
+'MET', 'M',
+'MEV', 'X',
+'MF2', 'X',
+'MF3', 'M',
+'MFB', 'X',
+'MFD', 'X',
+'MFU', 'X',
+'MG7', 'X',
+'MGA', 'X',
+'MGB', 'X',
+'MGD', 'X',
+'MGG', 'R',
+'MGL', 'X',
+'MGN', 'Q',
+'MGO', 'X',
+'MGP', 'X',
+'MGR', 'X',
+'MGS', 'X',
+'MGT', 'X',
+'MGU', 'X',
+'MGY', 'G',
+'MHB', 'X',
+'MHF', 'X',
+'MHL', 'L',
+'MHM', 'X',
+'MHO', 'M',
+'MHS', 'H',
+'MHZ', 'X',
+'MIA', 'X',
+'MIC', 'X',
+'MID', 'X',
+'MIL', 'X',
+'MIM', 'X',
+'MIN', 'G',
+'MIP', 'X',
+'MIS', 'S',
+'MIT', 'X',
+'MJI', 'X',
+'MK1', 'X',
+'MKC', 'X',
+'MLA', 'X',
+'MLC', 'X',
+'MLE', 'L',
+'MLN', 'X',
+'MLT', 'X',
+'MLY', 'K',
+'MLZ', 'K',
+'MM3', 'X',
+'MM4', 'X',
+'MMA', 'X',
+'MMC', 'X',
+'MME', 'M',
+'MMO', 'R',
+'MMP', 'X',
+'MMQ', 'X',
+'MMT', 'X',
+'MN1', 'X',
+'MN2', 'X',
+'MN3', 'X',
+'MN5', 'X',
+'MN7', 'X',
+'MN8', 'X',
+'MNA', 'X',
+'MNB', 'X',
+'MNC', 'X',
+'MNG', 'X',
+'MNL', 'L',
+'MNO', 'X',
+'MNP', 'X',
+'MNQ', 'X',
+'MNS', 'X',
+'MNT', 'X',
+'MNV', 'V',
+'MO1', 'X',
+'MO2', 'X',
+'MO3', 'X',
+'MO4', 'X',
+'MO5', 'X',
+'MO6', 'X',
+'MOA', 'X',
+'MOB', 'X',
+'MOC', 'X',
+'MOE', 'X',
+'MOG', 'X',
+'MOH', 'X',
+'MOL', 'X',
+'MOO', 'X',
+'MOP', 'X',
+'MOR', 'X',
+'MOS', 'X',
+'MOT', 'X',
+'MOX', 'X',
+'MP1', 'X',
+'MP3', 'X',
+'MPA', 'X',
+'MPB', 'X',
+'MPC', 'X',
+'MPD', 'X',
+'MPG', 'X',
+'MPH', 'M',
+'MPI', 'X',
+'MPJ', 'M',
+'MPL', 'X',
+'MPN', 'X',
+'MPO', 'X',
+'MPP', 'X',
+'MPQ', 'G',
+'MPR', 'X',
+'MPS', 'X',
+'MQ0', 'X',
+'MQ7', 'X',
+'MQ8', 'X',
+'MQ9', 'X',
+'MQI', 'X',
+'MR2', 'X',
+'MRC', 'X',
+'MRM', 'X',
+'MRP', 'X',
+'MS2', 'X',
+'MSA', 'X',
+'MSB', 'X',
+'MSD', 'X',
+'MSE', 'M',
+'MSF', 'X',
+'MSI', 'X',
+'MSO', 'M',
+'MSQ', 'X',
+'MST', 'X',
+'MSU', 'X',
+'MTA', 'X',
+'MTB', 'X',
+'MTC', 'X',
+'MTD', 'X',
+'MTE', 'X',
+'MTF', 'X',
+'MTG', 'X',
+'MTO', 'X',
+'MTS', 'X',
+'MTT', 'X',
+'MTX', 'X',
+'MTY', 'Y',
+'MUG', 'X',
+'MUP', 'X',
+'MUR', 'X',
+'MVA', 'V',
+'MW1', 'X',
+'MW2', 'X',
+'MXA', 'X',
+'MXY', 'X',
+'MYA', 'X',
+'MYC', 'X',
+'MYG', 'X',
+'MYR', 'X',
+'MYS', 'X',
+'MYT', 'X',
+'MZM', 'X',
+'N1T', 'X',
+'N25', 'X',
+'N2B', 'X',
+'N3T', 'X',
+'N4B', 'X',
+'NA2', 'X',
+'NA5', 'X',
+'NA6', 'X',
+'NAA', 'X',
+'NAB', 'X',
+'NAC', 'X',
+'NAD', 'X',
+'NAE', 'X',
+'NAF', 'X',
+'NAG', 'X',
+'NAH', 'X',
+'NAI', 'X',
+'NAL', 'A',
+'NAM', 'A',
+'NAN', 'X',
+'NAO', 'X',
+'NAP', 'X',
+'NAQ', 'X',
+'NAR', 'X',
+'NAS', 'X',
+'NAU', 'X',
+'NAV', 'X',
+'NAW', 'X',
+'NAX', 'X',
+'NAY', 'X',
+'NBA', 'X',
+'NBD', 'X',
+'NBE', 'X',
+'NBG', 'X',
+'NBN', 'X',
+'NBP', 'X',
+'NBS', 'X',
+'NBU', 'X',
+'NCA', 'X',
+'NCB', 'A',
+'NCD', 'X',
+'NCH', 'X',
+'NCM', 'X',
+'NCN', 'X',
+'NCO', 'X',
+'NCR', 'X',
+'NCS', 'X',
+'ND4', 'X',
+'NDA', 'X',
+'NDC', 'X',
+'NDD', 'X',
+'NDO', 'X',
+'NDP', 'X',
+'NDT', 'X',
+'NEA', 'X',
+'NEB', 'X',
+'NED', 'X',
+'NEM', 'H',
+'NEN', 'X',
+'NEO', 'X',
+'NEP', 'H',
+'NEQ', 'X',
+'NES', 'X',
+'NET', 'X',
+'NEV', 'X',
+'NFA', 'F',
+'NFE', 'X',
+'NFG', 'X',
+'NFP', 'X',
+'NFS', 'X',
+'NG6', 'X',
+'NGA', 'X',
+'NGL', 'X',
+'NGM', 'X',
+'NGO', 'X',
+'NGP', 'X',
+'NGT', 'X',
+'NGU', 'X',
+'NH2', 'X',
+'NH3', 'X',
+'NH4', 'X',
+'NHD', 'X',
+'NHE', 'X',
+'NHM', 'X',
+'NHP', 'X',
+'NHR', 'X',
+'NHS', 'X',
+'NI1', 'X',
+'NI2', 'X',
+'NIC', 'X',
+'NID', 'X',
+'NIK', 'X',
+'NIO', 'X',
+'NIP', 'X',
+'NIT', 'X',
+'NIU', 'X',
+'NIY', 'Y',
+'NLA', 'X',
+'NLE', 'L',
+'NLG', 'X',
+'NLN', 'L',
+'NLP', 'L',
+'NM1', 'X',
+'NMA', 'A',
+'NMB', 'X',
+'NMC', 'G',
+'NMD', 'X',
+'NME', 'X',
+'NMN', 'X',
+'NMO', 'X',
+'NMQ', 'X',
+'NMX', 'X',
+'NMY', 'X',
+'NNH', 'R',
+'NNO', 'X',
+'NO2', 'X',
+'NO3', 'X',
+'NOA', 'X',
+'NOD', 'X',
+'NOJ', 'X',
+'NON', 'X',
+'NOP', 'X',
+'NOR', 'X',
+'NOS', 'X',
+'NOV', 'X',
+'NOX', 'X',
+'NP3', 'X',
+'NPA', 'X',
+'NPC', 'X',
+'NPD', 'X',
+'NPE', 'X',
+'NPF', 'X',
+'NPH', 'C',
+'NPI', 'X',
+'NPL', 'X',
+'NPN', 'X',
+'NPO', 'X',
+'NPP', 'X',
+'NPT', 'X',
+'NPY', 'X',
+'NRG', 'R',
+'NRI', 'X',
+'NS1', 'X',
+'NS5', 'X',
+'NSP', 'X',
+'NTA', 'X',
+'NTB', 'X',
+'NTC', 'X',
+'NTH', 'X',
+'NTM', 'X',
+'NTP', 'X',
+'NTS', 'X',
+'NTU', 'X',
+'NTZ', 'X',
+'NU1', 'X',
+'NVA', 'V',
+'NVI', 'X',
+'NVP', 'X',
+'NW1', 'X',
+'NYP', 'X',
+'O4M', 'X',
+'OAA', 'X',
+'OAI', 'X',
+'OAP', 'X',
+'OAR', 'X',
+'OAS', 'S',
+'OBA', 'X',
+'OBN', 'X',
+'OC1', 'X',
+'OC2', 'X',
+'OC3', 'X',
+'OC4', 'X',
+'OC5', 'X',
+'OC6', 'X',
+'OC7', 'X',
+'OCL', 'X',
+'OCM', 'X',
+'OCN', 'X',
+'OCO', 'X',
+'OCP', 'X',
+'OCS', 'C',
+'OCT', 'X',
+'OCV', 'K',
+'OCY', 'C',
+'ODA', 'X',
+'ODS', 'X',
+'OES', 'X',
+'OET', 'X',
+'OF1', 'X',
+'OF2', 'X',
+'OF3', 'X',
+'OFL', 'X',
+'OFO', 'X',
+'OHE', 'X',
+'OHO', 'X',
+'OHT', 'X',
+'OIC', 'X',
+'OIP', 'X',
+'OKA', 'X',
+'OLA', 'X',
+'OLE', 'X',
+'OLI', 'X',
+'OLO', 'X',
+'OMB', 'X',
+'OMC', 'X',
+'OMD', 'X',
+'OME', 'X',
+'OMG', 'X',
+'OMP', 'X',
+'OMT', 'M',
+'OMU', 'X',
+'ONE', 'X',
+'ONL', 'L',
+'ONP', 'X',
+'OPA', 'X',
+'OPD', 'X',
+'OPE', 'X',
+'OPG', 'X',
+'OPH', 'X',
+'OPN', 'X',
+'OPP', 'X',
+'OPR', 'R',
+'ORN', 'X',
+'ORO', 'X',
+'ORP', 'X',
+'OSB', 'X',
+'OSS', 'X',
+'OTA', 'X',
+'OTB', 'X',
+'OTE', 'X',
+'OTG', 'X',
+'OUT', 'X',
+'OVA', 'X',
+'OWQ', 'X',
+'OXA', 'X',
+'OXE', 'X',
+'OXI', 'X',
+'OXL', 'X',
+'OXM', 'X',
+'OXN', 'X',
+'OXO', 'X',
+'OXP', 'X',
+'OXS', 'X',
+'OXY', 'X',
+'P11', 'A',
+'P24', 'X',
+'P28', 'X',
+'P2P', 'X',
+'P2U', 'X',
+'P3M', 'X',
+'P4C', 'X',
+'P4P', 'X',
+'P5P', 'X',
+'P6G', 'X',
+'PA1', 'X',
+'PA2', 'X',
+'PA3', 'X',
+'PA4', 'X',
+'PA5', 'X',
+'PAA', 'X',
+'PAB', 'X',
+'PAC', 'X',
+'PAD', 'X',
+'PAE', 'X',
+'PAG', 'X',
+'PAH', 'X',
+'PAI', 'X',
+'PAL', 'D',
+'PAM', 'X',
+'PAN', 'X',
+'PAO', 'X',
+'PAP', 'A',
+'PAQ', 'F',
+'PAR', 'X',
+'PAS', 'X',
+'PAT', 'W',
+'PBA', 'X',
+'PBB', 'X',
+'PBC', 'X',
+'PBF', 'F',
+'PBG', 'X',
+'PBI', 'X',
+'PBM', 'X',
+'PBN', 'X',
+'PBP', 'X',
+'PBR', 'X',
+'PBZ', 'X',
+'PC2', 'X',
+'PCA', 'E',
+'PCB', 'X',
+'PCD', 'X',
+'PCE', 'X',
+'PCG', 'X',
+'PCH', 'X',
+'PCL', 'X',
+'PCM', 'X',
+'PCP', 'X',
+'PCR', 'X',
+'PCS', 'X',
+'PCU', 'X',
+'PCV', 'X',
+'PCY', 'X',
+'PD1', 'X',
+'PDA', 'X',
+'PDC', 'X',
+'PDD', 'A',
+'PDE', 'A',
+'PDI', 'X',
+'PDL', 'A',
+'PDN', 'X',
+'PDO', 'X',
+'PDP', 'X',
+'PDT', 'X',
+'PDU', 'X',
+'PE2', 'X',
+'PE6', 'X',
+'PEA', 'X',
+'PEB', 'X',
+'PEC', 'X',
+'PED', 'X',
+'PEE', 'X',
+'PEF', 'X',
+'PEG', 'X',
+'PEL', 'X',
+'PEO', 'X',
+'PEP', 'X',
+'PEQ', 'X',
+'PER', 'X',
+'PET', 'X',
+'PFB', 'X',
+'PFC', 'X',
+'PFG', 'X',
+'PFL', 'X',
+'PFM', 'X',
+'PFZ', 'X',
+'PG4', 'X',
+'PG5', 'X',
+'PG6', 'X',
+'PGA', 'X',
+'PGC', 'X',
+'PGD', 'X',
+'PGE', 'X',
+'PGG', 'G',
+'PGH', 'X',
+'PGL', 'X',
+'PGO', 'X',
+'PGP', 'X',
+'PGQ', 'X',
+'PGR', 'X',
+'PGS', 'X',
+'PGU', 'X',
+'PGX', 'X',
+'PGY', 'G',
+'PH1', 'X',
+'PH2', 'X',
+'PH3', 'X',
+'PHA', 'F',
+'PHB', 'X',
+'PHC', 'X',
+'PHD', 'X',
+'PHE', 'F',
+'PHG', 'X',
+'PHH', 'X',
+'PHI', 'F',
+'PHL', 'F',
+'PHM', 'X',
+'PHN', 'X',
+'PHO', 'X',
+'PHP', 'X',
+'PHQ', 'X',
+'PHS', 'H',
+'PHT', 'X',
+'PHW', 'P',
+'PHY', 'X',
+'PI1', 'X',
+'PI2', 'X',
+'PI3', 'X',
+'PI4', 'X',
+'PI5', 'X',
+'PI6', 'X',
+'PI7', 'X',
+'PI8', 'X',
+'PI9', 'X',
+'PIA', 'X',
+'PIB', 'X',
+'PIC', 'X',
+'PID', 'X',
+'PIG', 'X',
+'PIH', 'X',
+'PIM', 'X',
+'PIN', 'X',
+'PIO', 'X',
+'PIP', 'X',
+'PIQ', 'X',
+'PIR', 'X',
+'PIV', 'X',
+'PKF', 'X',
+'PL1', 'X',
+'PL9', 'X',
+'PLA', 'D',
+'PLC', 'X',
+'PLE', 'L',
+'PLG', 'G',
+'PLH', 'X',
+'PLM', 'X',
+'PLP', 'X',
+'PLS', 'S',
+'PLT', 'W',
+'PLU', 'L',
+'PLY', 'X',
+'PMA', 'X',
+'PMB', 'X',
+'PMC', 'X',
+'PME', 'F',
+'PML', 'X',
+'PMM', 'X',
+'PMO', 'X',
+'PMP', 'X',
+'PMS', 'X',
+'PMY', 'X',
+'PN2', 'X',
+'PNA', 'X',
+'PNB', 'X',
+'PNC', 'G',
+'PND', 'X',
+'PNE', 'A',
+'PNF', 'X',
+'PNG', 'X',
+'PNI', 'X',
+'PNL', 'X',
+'PNM', 'X',
+'PNN', 'X',
+'PNO', 'X',
+'PNP', 'X',
+'PNQ', 'X',
+'PNS', 'X',
+'PNT', 'X',
+'PNU', 'X',
+'PO2', 'X',
+'PO4', 'X',
+'POB', 'X',
+'POC', 'X',
+'POL', 'X',
+'POM', 'P',
+'PON', 'X',
+'POP', 'X',
+'POR', 'X',
+'POS', 'X',
+'PP1', 'X',
+'PP2', 'X',
+'PP3', 'A',
+'PP4', 'X',
+'PP5', 'X',
+'PP6', 'X',
+'PP7', 'X',
+'PP8', 'N',
+'PP9', 'X',
+'PPB', 'X',
+'PPC', 'X',
+'PPD', 'X',
+'PPE', 'E',
+'PPG', 'X',
+'PPH', 'F',
+'PPI', 'X',
+'PPJ', 'V',
+'PPL', 'X',
+'PPM', 'X',
+'PPN', 'A',
+'PPO', 'X',
+'PPP', 'X',
+'PPQ', 'X',
+'PPR', 'X',
+'PPS', 'X',
+'PPT', 'X',
+'PPU', 'X',
+'PPX', 'F',
+'PPY', 'X',
+'PPZ', 'X',
+'PQ0', 'X',
+'PQN', 'X',
+'PQQ', 'X',
+'PR1', 'X',
+'PR2', 'X',
+'PR3', 'X',
+'PRA', 'X',
+'PRB', 'X',
+'PRC', 'X',
+'PRD', 'X',
+'PRE', 'X',
+'PRF', 'X',
+'PRH', 'X',
+'PRI', 'P',
+'PRL', 'X',
+'PRN', 'X',
+'PRO', 'P',
+'PRP', 'X',
+'PRR', 'A',
+'PRS', 'P',
+'PRZ', 'X',
+'PS0', 'X',
+'PSA', 'X',
+'PSD', 'X',
+'PSE', 'X',
+'PSF', 'S',
+'PSG', 'X',
+'PSI', 'X',
+'PSO', 'X',
+'PSQ', 'X',
+'PSS', 'X',
+'PST', 'X',
+'PSU', 'X',
+'PT1', 'X',
+'PT3', 'X',
+'PTA', 'X',
+'PTC', 'X',
+'PTD', 'X',
+'PTE', 'X',
+'PTH', 'Y',
+'PTL', 'X',
+'PTM', 'Y',
+'PTN', 'X',
+'PTO', 'X',
+'PTP', 'X',
+'PTR', 'Y',
+'PTS', 'X',
+'PTT', 'X',
+'PTU', 'X',
+'PTY', 'X',
+'PUA', 'X',
+'PUB', 'X',
+'PUR', 'X',
+'PUT', 'X',
+'PVA', 'X',
+'PVB', 'X',
+'PVH', 'H',
+'PVL', 'X',
+'PXA', 'X',
+'PXF', 'X',
+'PXG', 'X',
+'PXP', 'X',
+'PXY', 'X',
+'PXZ', 'X',
+'PY2', 'X',
+'PY4', 'X',
+'PY5', 'X',
+'PY6', 'X',
+'PYA', 'A',
+'PYC', 'X',
+'PYD', 'X',
+'PYE', 'X',
+'PYL', 'X',
+'PYM', 'X',
+'PYO', 'X',
+'PYP', 'X',
+'PYQ', 'X',
+'PYR', 'X',
+'PYS', 'X',
+'PYT', 'X',
+'PYX', 'X',
+'PYY', 'X',
+'PYZ', 'X',
+'PZQ', 'X',
+'Q82', 'X',
+'QNC', 'X',
+'QND', 'X',
+'QSI', 'Q',
+'QTR', 'X',
+'QUA', 'X',
+'QUE', 'X',
+'QUI', 'X',
+'QUO', 'X',
+'R11', 'X',
+'R12', 'X',
+'R13', 'X',
+'R18', 'X',
+'R1P', 'X',
+'R56', 'X',
+'R5P', 'X',
+'RA2', 'X',
+'RAD', 'X',
+'RAI', 'X',
+'RAL', 'X',
+'RAM', 'X',
+'RAN', 'X',
+'RAP', 'X',
+'RBF', 'X',
+'RBU', 'X',
+'RCA', 'X',
+'RCL', 'X',
+'RCO', 'X',
+'RDC', 'X',
+'RDF', 'W',
+'RE9', 'X',
+'REA', 'X',
+'RED', 'K',
+'REO', 'X',
+'REP', 'X',
+'RET', 'X',
+'RFA', 'X',
+'RFB', 'X',
+'RFL', 'X',
+'RFP', 'X',
+'RG1', 'X',
+'RGS', 'X',
+'RH1', 'X',
+'RHA', 'X',
+'RHC', 'X',
+'RHD', 'X',
+'RHM', 'X',
+'RHO', 'X',
+'RHQ', 'X',
+'RHS', 'X',
+'RIA', 'X',
+'RIB', 'X',
+'RIC', 'X',
+'RIF', 'X',
+'RIN', 'X',
+'RIP', 'X',
+'RIT', 'X',
+'RMB', 'X',
+'RMN', 'X',
+'RMP', 'X',
+'RNG', 'X',
+'RNS', 'X',
+'RNT', 'X',
+'RO2', 'X',
+'RO4', 'X',
+'ROC', 'N',
+'ROI', 'X',
+'ROM', 'X',
+'RON', 'V',
+'ROP', 'X',
+'ROS', 'X',
+'ROX', 'X',
+'RPA', 'X',
+'RPD', 'X',
+'RPH', 'X',
+'RPL', 'X',
+'RPP', 'X',
+'RPR', 'X',
+'RPX', 'X',
+'RQ3', 'X',
+'RR1', 'X',
+'RR6', 'X',
+'RRS', 'X',
+'RS1', 'X',
+'RS2', 'X',
+'RS7', 'X',
+'RSS', 'X',
+'RTA', 'X',
+'RTB', 'X',
+'RTC', 'X',
+'RTL', 'X',
+'RUB', 'X',
+'RUN', 'X',
+'RWJ', 'X',
+'RXP', 'X',
+'S02', 'X',
+'S11', 'X',
+'S1H', 'S',
+'S27', 'X',
+'S2C', 'C',
+'S3P', 'X',
+'S4U', 'X',
+'S57', 'X',
+'S58', 'X',
+'S5H', 'X',
+'S6G', 'X',
+'S80', 'X',
+'SAA', 'X',
+'SAB', 'X',
+'SAC', 'S',
+'SAD', 'X',
+'SAE', 'X',
+'SAF', 'X',
+'SAH', 'C',
+'SAI', 'C',
+'SAL', 'X',
+'SAM', 'M',
+'SAN', 'X',
+'SAP', 'X',
+'SAR', 'X',
+'SAS', 'X',
+'SB1', 'X',
+'SB2', 'X',
+'SB3', 'X',
+'SB4', 'X',
+'SB5', 'X',
+'SB6', 'X',
+'SBA', 'L',
+'SBB', 'X',
+'SBD', 'A',
+'SBI', 'X',
+'SBL', 'A',
+'SBN', 'X',
+'SBO', 'X',
+'SBR', 'X',
+'SBS', 'X',
+'SBT', 'X',
+'SBU', 'X',
+'SBX', 'X',
+'SC4', 'X',
+'SCA', 'X',
+'SCC', 'X',
+'SCD', 'X',
+'SCH', 'C',
+'SCI', 'X',
+'SCL', 'X',
+'SCM', 'X',
+'SCN', 'X',
+'SCO', 'X',
+'SCP', 'S',
+'SCR', 'X',
+'SCS', 'X',
+'SCV', 'C',
+'SCY', 'C',
+'SD8', 'X',
+'SDK', 'X',
+'SDZ', 'X',
+'SE4', 'X',
+'SEA', 'X',
+'SEB', 'S',
+'SEC', 'X',
+'SEG', 'A',
+'SEI', 'X',
+'SEL', 'S',
+'SEM', 'X',
+'SEO', 'X',
+'SEP', 'S',
+'SER', 'S',
+'SES', 'X',
+'SET', 'S',
+'SEU', 'X',
+'SF4', 'X',
+'SFG', 'X',
+'SFN', 'X',
+'SFO', 'X',
+'SGA', 'X',
+'SGC', 'X',
+'SGL', 'X',
+'SGM', 'X',
+'SGN', 'X',
+'SGP', 'X',
+'SHA', 'X',
+'SHC', 'X',
+'SHF', 'X',
+'SHH', 'X',
+'SHP', 'G',
+'SHR', 'E',
+'SHT', 'T',
+'SHU', 'X',
+'SI2', 'X',
+'SIA', 'X',
+'SIF', 'X',
+'SIG', 'X',
+'SIH', 'X',
+'SIM', 'X',
+'SIN', 'X',
+'SKD', 'X',
+'SKF', 'X',
+'SLB', 'X',
+'SLE', 'X',
+'SLZ', 'K',
+'SMA', 'X',
+'SMC', 'C',
+'SME', 'M',
+'SML', 'X',
+'SMM', 'M',
+'SMN', 'X',
+'SMP', 'X',
+'SMS', 'X',
+'SN1', 'X',
+'SN6', 'X',
+'SN7', 'X',
+'SNC', 'C',
+'SNN', 'X',
+'SNP', 'X',
+'SO1', 'X',
+'SO2', 'X',
+'SO3', 'X',
+'SO4', 'X',
+'SOA', 'X',
+'SOC', 'C',
+'SOM', 'X',
+'SOR', 'X',
+'SOT', 'X',
+'SOX', 'X',
+'SPA', 'X',
+'SPB', 'X',
+'SPC', 'X',
+'SPD', 'X',
+'SPE', 'X',
+'SPG', 'X',
+'SPH', 'X',
+'SPI', 'X',
+'SPK', 'X',
+'SPM', 'X',
+'SPN', 'X',
+'SPO', 'X',
+'SPP', 'X',
+'SPS', 'X',
+'SPY', 'X',
+'SQU', 'X',
+'SRA', 'X',
+'SRB', 'X',
+'SRD', 'X',
+'SRL', 'X',
+'SRM', 'X',
+'SRS', 'X',
+'SRY', 'X',
+'SSA', 'X',
+'SSB', 'X',
+'SSG', 'X',
+'SSP', 'X',
+'ST1', 'X',
+'ST2', 'X',
+'ST3', 'X',
+'ST4', 'X',
+'ST5', 'X',
+'ST6', 'X',
+'STA', 'X',
+'STB', 'X',
+'STE', 'X',
+'STG', 'X',
+'STI', 'X',
+'STL', 'X',
+'STN', 'X',
+'STO', 'X',
+'STP', 'X',
+'STR', 'X',
+'STU', 'X',
+'STY', 'Y',
+'SU1', 'X',
+'SU2', 'X',
+'SUC', 'X',
+'SUI', 'X',
+'SUL', 'X',
+'SUR', 'X',
+'SVA', 'S',
+'SWA', 'X',
+'T16', 'X',
+'T19', 'X',
+'T23', 'X',
+'T29', 'X',
+'T33', 'X',
+'T3P', 'X',
+'T42', 'A',
+'T44', 'X',
+'T5A', 'X',
+'T6A', 'T',
+'T6P', 'X',
+'T80', 'X',
+'T87', 'X',
+'TA1', 'X',
+'TAA', 'X',
+'TAB', 'X',
+'TAC', 'X',
+'TAD', 'X',
+'TAF', 'X',
+'TAM', 'X',
+'TAP', 'X',
+'TAR', 'X',
+'TAS', 'X',
+'TAU', 'X',
+'TAX', 'X',
+'TAZ', 'X',
+'TB9', 'X',
+'TBA', 'X',
+'TBD', 'X',
+'TBG', 'G',
+'TBH', 'X',
+'TBM', 'T',
+'TBO', 'X',
+'TBP', 'X',
+'TBR', 'X',
+'TBS', 'X',
+'TBT', 'X',
+'TBU', 'X',
+'TBZ', 'X',
+'TC4', 'X',
+'TCA', 'X',
+'TCB', 'X',
+'TCH', 'X',
+'TCK', 'X',
+'TCL', 'X',
+'TCM', 'X',
+'TCN', 'X',
+'TCP', 'X',
+'TCR', 'W',
+'TCS', 'X',
+'TCZ', 'X',
+'TDA', 'X',
+'TDB', 'X',
+'TDG', 'X',
+'TDP', 'X',
+'TDR', 'X',
+'TDX', 'X',
+'TEA', 'X',
+'TEM', 'X',
+'TEN', 'X',
+'TEO', 'X',
+'TEP', 'X',
+'TER', 'X',
+'TES', 'X',
+'TET', 'X',
+'TFA', 'X',
+'TFB', 'X',
+'TFH', 'X',
+'TFI', 'X',
+'TFK', 'X',
+'TFP', 'X',
+'THA', 'X',
+'THB', 'X',
+'THC', 'T',
+'THD', 'X',
+'THE', 'X',
+'THF', 'X',
+'THJ', 'X',
+'THK', 'X',
+'THM', 'X',
+'THN', 'X',
+'THO', 'T',
+'THP', 'X',
+'THQ', 'X',
+'THR', 'T',
+'THS', 'X',
+'THT', 'X',
+'THU', 'X',
+'THX', 'X',
+'THZ', 'X',
+'TI1', 'X',
+'TI2', 'X',
+'TI3', 'P',
+'TIA', 'X',
+'TIH', 'A',
+'TK4', 'X',
+'TLA', 'X',
+'TLC', 'X',
+'TLM', 'X',
+'TLN', 'X',
+'TLX', 'X',
+'TM5', 'X',
+'TM6', 'X',
+'TMA', 'X',
+'TMB', 'T',
+'TMC', 'X',
+'TMD', 'T',
+'TME', 'X',
+'TMF', 'X',
+'TML', 'K',
+'TMM', 'X',
+'TMN', 'X',
+'TMP', 'X',
+'TMQ', 'X',
+'TMR', 'X',
+'TMT', 'X',
+'TMZ', 'X',
+'TNB', 'C',
+'TND', 'X',
+'TNK', 'X',
+'TNP', 'X',
+'TNT', 'X',
+'TOA', 'X',
+'TOB', 'X',
+'TOC', 'X',
+'TOL', 'X',
+'TOP', 'X',
+'TOS', 'X',
+'TOT', 'X',
+'TP1', 'G',
+'TP2', 'P',
+'TP3', 'E',
+'TP4', 'E',
+'TP7', 'T',
+'TPA', 'X',
+'TPE', 'X',
+'TPF', 'X',
+'TPI', 'X',
+'TPL', 'W',
+'TPM', 'X',
+'TPN', 'G',
+'TPO', 'T',
+'TPP', 'X',
+'TPQ', 'A',
+'TPR', 'P',
+'TPS', 'X',
+'TPT', 'X',
+'TPV', 'X',
+'TPX', 'X',
+'TPY', 'X',
+'TQ3', 'X',
+'TQ4', 'X',
+'TQ5', 'X',
+'TQ6', 'X',
+'TR1', 'X',
+'TRA', 'X',
+'TRB', 'X',
+'TRC', 'X',
+'TRD', 'X',
+'TRE', 'X',
+'TRF', 'W',
+'TRG', 'K',
+'TRH', 'X',
+'TRI', 'X',
+'TRJ', 'X',
+'TRM', 'X',
+'TRN', 'W',
+'TRO', 'W',
+'TRP', 'W',
+'TRQ', 'X',
+'TRS', 'X',
+'TRX', 'W',
+'TRZ', 'X',
+'TS2', 'X',
+'TS3', 'X',
+'TS4', 'X',
+'TS5', 'X',
+'TSA', 'X',
+'TSB', 'X',
+'TSI', 'X',
+'TSM', 'X',
+'TSN', 'X',
+'TSP', 'X',
+'TSU', 'X',
+'TTA', 'X',
+'TTE', 'X',
+'TTN', 'X',
+'TTO', 'X',
+'TTP', 'X',
+'TTX', 'X',
+'TXL', 'X',
+'TYA', 'Y',
+'TYB', 'Y',
+'TYD', 'X',
+'TYI', 'Y',
+'TYL', 'X',
+'TYM', 'W',
+'TYN', 'Y',
+'TYQ', 'Y',
+'TYR', 'Y',
+'TYS', 'Y',
+'TYV', 'X',
+'TYY', 'A',
+'TZB', 'X',
+'TZC', 'X',
+'TZE', 'X',
+'TZL', 'X',
+'TZO', 'X',
+'TZP', 'X',
+'U01', 'X',
+'U02', 'X',
+'U03', 'X',
+'U04', 'X',
+'U05', 'X',
+'U0E', 'X',
+'U10', 'X',
+'U18', 'X',
+'U2G', 'X',
+'U3P', 'X',
+'U49', 'X',
+'U55', 'X',
+'U5P', 'X',
+'U66', 'X',
+'U89', 'X',
+'U8U', 'X',
+'UAA', 'X',
+'UAG', 'A',
+'UAP', 'X',
+'UAR', 'X',
+'UC1', 'X',
+'UC2', 'X',
+'UC3', 'X',
+'UC4', 'X',
+'UD1', 'X',
+'UD2', 'X',
+'UDP', 'X',
+'UDX', 'X',
+'UFG', 'X',
+'UFM', 'X',
+'UFP', 'X',
+'UGA', 'X',
+'UIN', 'X',
+'UKP', 'A',
+'UM3', 'X',
+'UMA', 'A',
+'UMG', 'X',
+'UMP', 'X',
+'UNA', 'X',
+'UND', 'X',
+'UNI', 'X',
+'UNK', 'X',
+'UNN', 'X',
+'UNX', 'X',
+'UP5', 'X',
+'UP6', 'X',
+'UPA', 'X',
+'UPF', 'X',
+'UPG', 'X',
+'UPP', 'X',
+'UQ1', 'X',
+'UQ2', 'X',
+'UQ6', 'X',
+'UR2', 'X',
+'URA', 'X',
+'URE', 'X',
+'URF', 'X',
+'URI', 'X',
+'URS', 'X',
+'UTP', 'X',
+'UVC', 'X',
+'UVW', 'X',
+'V35', 'X',
+'V36', 'X',
+'V4O', 'X',
+'V7O', 'X',
+'VAA', 'V',
+'VAC', 'X',
+'VAD', 'V',
+'VAF', 'V',
+'VAG', 'X',
+'VAL', 'V',
+'VAN', 'X',
+'VAS', 'X',
+'VAX', 'X',
+'VDX', 'X',
+'VDY', 'X',
+'VG1', 'X',
+'VIB', 'X',
+'VIR', 'X',
+'VIT', 'X',
+'VK3', 'X',
+'VO3', 'X',
+'VO4', 'X',
+'VS1', 'F',
+'VS2', 'F',
+'VS3', 'F',
+'VS4', 'F',
+'VXA', 'X',
+'W01', 'X',
+'W02', 'X',
+'W03', 'X',
+'W11', 'X',
+'W33', 'X',
+'W35', 'X',
+'W42', 'X',
+'W43', 'X',
+'W54', 'X',
+'W56', 'X',
+'W59', 'X',
+'W71', 'X',
+'W84', 'X',
+'W8R', 'X',
+'W91', 'X',
+'WAY', 'X',
+'WCC', 'X',
+'WO2', 'X',
+'WO4', 'X',
+'WRB', 'X',
+'WRR', 'X',
+'WRS', 'X',
+'WW7', 'X',
+'X2F', 'X',
+'X7O', 'X',
+'XAA', 'X',
+'XAN', 'X',
+'XAO', 'X',
+'XBB', 'X',
+'XBP', 'X',
+'XDN', 'X',
+'XDP', 'X',
+'XIF', 'X',
+'XIM', 'X',
+'XK2', 'X',
+'XL1', 'X',
+'XLS', 'X',
+'XMP', 'X',
+'XN1', 'X',
+'XN2', 'X',
+'XN3', 'X',
+'XUL', 'X',
+'XV6', 'X',
+'XYD', 'X',
+'XYH', 'X',
+'XYL', 'X',
+'XYP', 'X',
+'XYS', 'X',
+'YOF', 'Y',
+'YRR', 'X',
+'YT3', 'X',
+'YZ9', 'X',
+'Z34', 'G',
+'Z5A', 'X',
+'ZAF', 'X',
+'ZAP', 'X',
+'ZEB', 'X',
+'ZEN', 'X',
+'ZES', 'X',
+'ZID', 'X',
+'ZMR', 'X',
+'ZN3', 'X',
+'ZNH', 'X',
+'ZNO', 'X',
+'ZO3', 'X',
+'ZPR', 'P',
+'ZRA', 'A',
+'ZST', 'X',
+'ZYA', 'A',
+
+
+'ASN','N');
+} 
+
+
+sub file2head
+      {
+	my $file = shift;
+	my $size = shift;
+	my $f= new FileHandle;
+	my $line;
+	open ($f,$file);
+	read ($f,$line, $size);
+	close ($f);
+	return $line;
+      }
+sub file2tail
+      {
+	my $file = shift;
+	my $size = shift;
+	my $f= new FileHandle;
+	my $line;
+	
+	open ($f,$file);
+	seek ($f,$size*-1, 2);
+	read ($f,$line, $size);
+	close ($f);
+	return $line;
+      }
+
+
+sub vtmpnam
+      {
+	my $r=rand(100000);
+	my $f="file.$r.$$";
+	while (-e $f)
+	  {
+	    $f=vtmpnam();
+	  }
+	push (@TMPFILE_LIST, $f);
+	return $f;
+      }
+
+sub myexit
+  {
+    my $code=@_[0];
+    if ($CLEAN_EXIT_STARTED==1){return;}
+    else {$CLEAN_EXIT_STARTED=1;}
+    ### ONLY BARE EXIT
+    exit ($code);
+  }
+sub set_error_lock
+    {
+      my $name = shift;
+      my $pid=$$;
+
+      
+      &lock4tc ($$,"LERROR", "LSET", "$$ -- ERROR: $name $PROGRAM\n");
+      return;
+    }
+sub set_lock
+  {
+    my $pid=shift;
+    my $msg= shift;
+    my $p=getppid();
+    &lock4tc ($pid,"LLOCK","LRESET","$p$msg\n");
+  }
+sub unset_lock
+   {
+     
+    my $pid=shift;
+    &lock4tc ($pid,"LLOCK","LRELEASE","");
+  }
+sub shift_lock
+  {
+    my $from=shift;
+    my $to=shift;
+    my $from_type=shift;
+    my $to_type=shift;
+    my $action=shift;
+    my $msg;
+    
+    if (!&lock4tc($from, $from_type, "LCHECK", "")){return 0;}
+    $msg=&lock4tc ($from, $from_type, "LREAD", "");
+    &lock4tc ($from, $from_type,"LRELEASE", $msg);
+    &lock4tc ($to, $to_type, $action, $msg);
+    return;
+  }
+sub isshellpid
+  {
+    my $p=shift;
+    if (!lock4tc ($p, "LLOCK", "LCHECK")){return 0;}
+    else
+      {
+	my $c=lock4tc($p, "LLOCK", "LREAD");
+	if ( $c=~/-SHELL-/){return 1;}
+      }
+    return 0;
+  }
+sub isrootpid
+  {
+    if(lock4tc (getppid(), "LLOCK", "LCHECK")){return 0;}
+    else {return 1;}
+  }
+sub lock4tc
+	{
+	  my ($pid,$type,$action,$value)=@_;
+	  my $fname;
+	  my $host=hostname;
+	  
+	  if ($type eq "LLOCK"){$fname="$LOCKDIR/.$pid.$host.lock4tcoffee";}
+	  elsif ( $type eq "LERROR"){ $fname="$LOCKDIR/.$pid.$host.error4tcoffee";}
+	  elsif ( $type eq "LWARNING"){ $fname="$LOCKDIR/.$pid.$host.warning4tcoffee";}
+	  
+	  if ($debug_lock)
+	    {
+	      print STDERR "\n\t---lock4tc(tcg): $action => $fname =>$value (RD: $LOCKDIR)\n";
+	    }
+
+	  if    ($action eq "LCHECK") {return -e $fname;}
+	  elsif ($action eq "LREAD"){return file2string($fname);}
+	  elsif ($action eq "LSET") {return string2file ($value, $fname, ">>");}
+	  elsif ($action eq "LRESET") {return string2file ($value, $fname, ">");}
+	  elsif ($action eq "LRELEASE") 
+	    {
+	      if ( $debug_lock)
+		{
+		  my $g=new FileHandle;
+		  open ($g, ">>$fname");
+		  print $g "\nDestroyed by $$\n";
+		  close ($g);
+		  safe_system ("mv $fname $fname.old");
+		}
+	      else
+		{
+		  unlink ($fname);
+		}
+	    }
+	  return "";
+	}
+	
+sub file2string
+	{
+	  my $file=@_[0];
+	  my $f=new FileHandle;
+	  my $r;
+	  open ($f, "$file");
+	  while (<$f>){$r.=$_;}
+	  close ($f);
+	  return $r;
+	}
+sub string2file 
+    {
+    my ($s,$file,$mode)=@_;
+    my $f=new FileHandle;
+    
+    open ($f, "$mode$file");
+    print $f  "$s";
+    close ($f);
+  }
+
+BEGIN
+    {
+      srand;
+    
+      $SIG{'SIGUP'}='signal_cleanup';
+      $SIG{'SIGINT'}='signal_cleanup';
+      $SIG{'SIGQUIT'}='signal_cleanup';
+      $SIG{'SIGILL'}='signal_cleanup';
+      $SIG{'SIGTRAP'}='signal_cleanup';
+      $SIG{'SIGABRT'}='signal_cleanup';
+      $SIG{'SIGEMT'}='signal_cleanup';
+      $SIG{'SIGFPE'}='signal_cleanup';
+      
+      $SIG{'SIGKILL'}='signal_cleanup';
+      $SIG{'SIGPIPE'}='signal_cleanup';
+      $SIG{'SIGSTOP'}='signal_cleanup';
+      $SIG{'SIGTTIN'}='signal_cleanup';
+      $SIG{'SIGXFSZ'}='signal_cleanup';
+      $SIG{'SIGINFO'}='signal_cleanup';
+      
+      $SIG{'SIGBUS'}='signal_cleanup';
+      $SIG{'SIGALRM'}='signal_cleanup';
+      $SIG{'SIGTSTP'}='signal_cleanup';
+      $SIG{'SIGTTOU'}='signal_cleanup';
+      $SIG{'SIGVTALRM'}='signal_cleanup';
+      $SIG{'SIGUSR1'}='signal_cleanup';
+
+
+      $SIG{'SIGSEGV'}='signal_cleanup';
+      $SIG{'SIGTERM'}='signal_cleanup';
+      $SIG{'SIGCONT'}='signal_cleanup';
+      $SIG{'SIGIO'}='signal_cleanup';
+      $SIG{'SIGPROF'}='signal_cleanup';
+      $SIG{'SIGUSR2'}='signal_cleanup';
+
+      $SIG{'SIGSYS'}='signal_cleanup';
+      $SIG{'SIGURG'}='signal_cleanup';
+      $SIG{'SIGCHLD'}='signal_cleanup';
+      $SIG{'SIGXCPU'}='signal_cleanup';
+      $SIG{'SIGWINCH'}='signal_cleanup';
+      
+      $SIG{'INT'}='signal_cleanup';
+      $SIG{'TERM'}='signal_cleanup';
+      $SIG{'KILL'}='signal_cleanup';
+      $SIG{'QUIT'}='signal_cleanup';
+      
+      our $debug_lock=$ENV{"DEBUG_LOCK"};
+      
+      
+      
+      
+      foreach my $a (@ARGV){$CL.=" $a";}
+      if ( $debug_lock ){print STDERR "\n\n\n********** START PG: $PROGRAM *************\n";}
+      if ( $debug_lock ){print STDERR "\n\n\n**********(tcg) LOCKDIR: $LOCKDIR $$ *************\n";}
+      if ( $debug_lock ){print STDERR "\n --- $$ -- $CL\n";}
+      
+	     
+      
+      
+    }
+sub flush_error
+  {
+    my $msg=shift;
+    return add_error ($EXIT_FAILURE,$$, $$,getppid(), $msg, $CL);
+  }
+sub add_error 
+  {
+    my $code=shift;
+    my $rpid=shift;
+    my $pid=shift;
+    my $ppid=shift;
+    my $type=shift;
+    my $com=shift;
+    
+    $ERROR_DONE=1;
+    lock4tc ($rpid, "LERROR","LSET","$pid -- ERROR: $type\n");
+    lock4tc ($$, "LERROR","LSET", "$pid -- COM: $com\n");
+    lock4tc ($$, "LERROR","LSET", "$pid -- STACK: $ppid -> $pid\n");
+   
+    return $code;
+  }
+sub add_warning 
+  {
+    my $rpid=shift;
+    my $pid =shift;
+    my $command=shift;
+    my $msg="$$ -- WARNING: $command\n";
+    print STDERR "$msg";
+    lock4tc ($$, "LWARNING", "LSET", $msg);
+  }
+
+sub signal_cleanup
+  {
+    print dtderr "\n**** $$ (tcg) was killed\n";
+    &cleanup;
+    exit ($EXIT_FAILURE);
+  }
+sub clean_dir
+  {
+    my $dir=@_[0];
+    if ( !-d $dir){return ;}
+    elsif (!($dir=~/tmp/)){return ;}#safety check 1
+    elsif (($dir=~/\*/)){return ;}#safety check 2
+    else
+      {
+	`rm -rf $dir`;
+      }
+    return;
+  }
+sub cleanup
+  {
+    #print stderr "\n----tc: $$ Kills $PIDCHILD\n";
+    #kill (SIGTERM,$PIDCHILD);
+    my $p=getppid();
+    $CLEAN_EXIT_STARTED=1;
+    
+    
+    
+    if (&lock4tc($$,"LERROR", "LCHECK", ""))
+      {
+	my $ppid=getppid();
+	if (!$ERROR_DONE) 
+	  {
+	    &lock4tc($$,"LERROR", "LSET", "$$ -- STACK: $p -> $$\n");
+	    &lock4tc($$,"LERROR", "LSET", "$$ -- COM: $CL\n");
+	  }
+      }
+    my $warning=&lock4tc($$, "LWARNING", "LREAD", "");
+    my $error=&lock4tc($$,  "LERROR", "LREAD", "");
+    #release error and warning lock if root
+    
+    if (isrootpid() && ($warning || $error) )
+      {
+	
+	print STDERR "**************** Summary *************\n$error\n$warning\n";
+
+	&lock4tc($$,"LERROR","RELEASE","");
+	&lock4tc($$,"LWARNING","RELEASE","");
+      } 
+    
+    
+    foreach my $f (@TMPFILE_LIST)
+      {
+	if (-e $f){unlink ($f);} 
+      }
+    foreach my $d (@TMPDIR_LIST)
+      {
+	clean_dir ($d);
+      }
+    #No More Lock Release
+    #&lock4tc($$,"LLOCK","LRELEASE",""); #release lock 
+
+    if ( $debug_lock ){print STDERR "\n\n\n********** END PG: $PROGRAM ($$) *************\n";}
+    if ( $debug_lock ){print STDERR "\n\n\n**********(tcg) LOCKDIR: $LOCKDIR $$ *************\n";}
+  }
+END 
+  {
+    
+    &cleanup();
+  }
+   
+
+sub safe_system 
+{
+  my $com=shift;
+  my $ntry=shift;
+  my $ctry=shift;
+  my $pid;
+  my $status;
+  my $ppid=getppid();
+  if ($com eq ""){return 1;}
+  
+  
+
+  if (($pid = fork ()) < 0){return (-1);}
+  if ($pid == 0)
+    {
+      set_lock($$, " -SHELL- $com (tcg)");
+      exec ($com);
+    }
+  else
+    {
+      lock4tc ($$, "LLOCK", "LSET", "$pid\n");#update parent
+      $PIDCHILD=$pid;
+    }
+  if ($debug_lock){printf STDERR "\n\t .... safe_system (fasta_seq2hmm)  p: $$ c: $pid COM: $com\n";}
+
+  waitpid ($pid,WTERMSIG);
+
+  shift_lock ($pid,$$, "LWARNING","LWARNING", "LSET");
+
+  if ($? == $EXIT_FAILURE || lock4tc($pid, "LERROR", "LCHECK", ""))
+    {
+      if ($ntry && $ctry <$ntry)
+	{
+	  add_warning ($$,$$,"$com failed [retry: $ctry]");
+	  lock4tc ($pid, "LRELEASE", "LERROR", "");
+	  return safe_system ($com, $ntry, ++$ctry);
+	}
+      elsif ($ntry == -1)
+	{
+	  if (!shift_lock ($pid, $$, "LERROR", "LWARNING", "LSET"))
+	    {
+	      add_warning ($$,$$,"$com failed");
+	    }
+	  else
+	    {
+	      lock4tc ($pid, "LRELEASE", "LERROR", "");
+	    }
+	  return $?;}
+      else
+	{
+	  if (!shift_lock ($pid,$$, "LERROR","LERROR", "LSET"))
+	    {
+	      myexit(add_error ($EXIT_FAILURE,$$,$pid,getppid(), "UNSPECIFIED system", $com));
+	    }
+	}
+    }
+  return $?;
+}
+
+sub check_configuration 
+    {
+      my @l=@_;
+      my $v;
+      foreach my $p (@l)
+	{
+	  
+	  if   ( $p eq "EMAIL")
+	    { 
+	      if ( !($EMAIL=~/@/))
+		{
+		add_warning($$,$$,"Could Not Use EMAIL");
+		myexit(add_error ($EXIT_FAILURE,$$,$$,getppid(),"EMAIL","$CL"));
+	      }
+	    }
+	  elsif( $p eq "INTERNET")
+	    {
+	      if ( !&check_internet_connection())
+		{
+		  myexit(add_error ($EXIT_FAILURE,$$,$$,getppid(),"INTERNET","$CL"));
+		}
+	    }
+	  elsif( $p eq "wget")
+	    {
+	      if (!&pg_is_installed ("wget") && !&pg_is_installed ("curl"))
+		{
+		  myexit(add_error ($EXIT_FAILURE,$$,$$,getppid(),"PG_NOT_INSTALLED:wget","$CL"));
+		}
+	    }
+	  elsif( !(&pg_is_installed ($p)))
+	    {
+	      myexit(add_error ($EXIT_FAILURE,$$,$$,getppid(),"PG_NOT_INSTALLED:$p","$CL"));
+	    }
+	}
+      return 1;
+    }
+sub pg_is_installed
+  {
+    my @ml=@_;
+    my $r, $p, $m;
+    my $supported=0;
+    
+    my $p=shift (@ml);
+    if ($p=~/::/)
+      {
+	if (safe_system ("perl -M$p -e 1")==$EXIT_SUCCESS){return 1;}
+	else {return 0;}
+      }
+    else
+      {
+	$r=`which $p 2>/dev/null`;
+	if ($r eq ""){return 0;}
+	else {return 1;}
+      }
+  }
+
+
+
+sub check_internet_connection
+  {
+    my $internet;
+    my $tmp;
+    &check_configuration ( "wget"); 
+    
+    $tmp=&vtmpnam ();
+    
+    if     (&pg_is_installed    ("wget")){`wget www.google.com -O$tmp >/dev/null 2>/dev/null`;}
+    elsif  (&pg_is_installed    ("curl")){`curl www.google.com -o$tmp >/dev/null 2>/dev/null`;}
+    
+    if ( !-e $tmp || -s $tmp < 10){$internet=0;}
+    else {$internet=1;}
+    if (-e $tmp){unlink $tmp;}
+
+    return $internet;
+  }
+sub check_pg_is_installed
+  {
+    my @ml=@_;
+    my $r=&pg_is_installed (@ml);
+    if (!$r && $p=~/::/)
+      {
+	print STDERR "\nYou Must Install the perl package $p on your system.\nRUN:\n\tsudo perl -MCPAN -e 'install $pg'\n";
+      }
+    elsif (!$r)
+      {
+	myexit(flush_error("\nProgram $p Supported but Not Installed on your system"));
+      }
+    else
+      {
+	return 1;
+      }
+  }
+
+
+sub remote_is_pdb_name_deprecated
+{
+    my $in=@_[0];
+    my ($ref_file, $pdb);
+    my ($value,$value1,$value2);
+    my $max=2;
+    
+    
+    
+    $ref_file="$cache/pdb_entry_type.txt";
+    
+    if ( $in=~/[^\w\d\:\_]/){return 0;}
+    elsif ($no_remote_pdb_dir==1)
+      {
+	my $pdbdir=$ENV{'PDB_DIR'};
+	
+	my $r1="$pdbdir/derived_data/pdb_entry_type.txt";
+	my $r2=$ref_file;
+	if    (-e $r1){$ref_file=$r1;}
+	elsif (-e $r2){$ref_file=$r2;}
+	else
+	  {
+	    my $p=substr ($in,0, 4);
+	    add_warning ($$, $$, "Cannot find pdb_entry_type.txt;  $p is assumed to be valid; add ftp://ftp.wwpdb.org/pub/pdb/derived_data/pdb_entry_type.txt in $cache to check name status");
+	  }
+      }
+    elsif ( !-e $ref_file || (-M $ref_file)>$max || -z $ref_file)
+      {
+	&url2file("ftp://ftp.wwpdb.org/pub/pdb/derived_data/pdb_entry_type.txt", $ref_file);
+      }
+    $pdb=substr ($in,0, 4);
+    chomp(($value1=`grep -c $pdb $ref_file`));
+    $pdb=lc($pdb);
+    chomp(($value2=`grep -c $pdb $ref_file`));
+    $value=($value1 || $value2)?1:0;
+    $value=($value>0)?1:0;
+    
+    return $value;
+  }
+

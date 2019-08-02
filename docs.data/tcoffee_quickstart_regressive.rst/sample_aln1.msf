@@ -1,0 +1,44 @@
+PileUp
+
+
+
+   MSF:  217  Type: P    Check:  8584   .. 
+
+ Name: hmgb_chite oo  Len:  217  Check:  2911  Weight:  1.000
+ Name: hmgt_mouse oo  Len:  217  Check:  2376  Weight:  1.000
+ Name: hmgl_wheat oo  Len:  217  Check:  1822  Weight:  1.000
+ Name: hmgl_trybr oo  Len:  217  Check:  3720  Weight:  1.000
+ Name: 1cms oo  Len:  217  Check:  2728  Weight:  1.000
+ Name: 4pep oo  Len:  217  Check:  3689  Weight:  1.000
+ Name: 4ape oo  Len:  217  Check:  7767  Weight:  1.000
+ Name: 3app oo  Len:  217  Check:  1960  Weight:  1.000
+ Name: 2apr oo  Len:  217  Check:   748  Weight:  1.000
+ Name: 1cms_1 oo  Len:  217  Check:   863  Weight:  1.000
+
+//
+
+
+
+hmgb_chite      AD...KPKRP LSAY...... M......... ......LWLN SARESI.... .......... ....KRENPD F.KVTEVAK. KGGELWR... .......... .......... .......GLK ..DKSEWE.. .......... .......... .......... 
+hmgt_mouse      K.....PKRP RSAY...... N......... ......IYVS ESFQEA.... .......... ........KD D.SAQGKLK. LVNEAWK... .......... .......... .......NLS PEEKQAYI.. .......... .......... .......... 
+hmgl_wheat      DP..NKPKRA PSAF...... F......... ......VFMG EFREEF.... .......... ....KQKNPK NKSVAAVGK. AAGERWK... .......... .......... .......SLS ESEKAPYV.. .......... .......... .......... 
+hmgl_trybr      KKDSNAPKRA MTSF...... M......... ......FFSS DFRSKH.... .......... ........SD L.SIVEMSK. AAGAAWK... .......... .......... .......ELG PEERKVYE.. .......... .......... .......... 
+1cms            GE...VASVP LTNY...... LDSQYFGKIY LGTPPQEFTV LFDTGSSDFW VPSIYCKSNA CKNHQRFDPR KSS...TFQ. NLGKPLSIHY GTGS.MQGIL GYDTVTVSNI VDIQQTVGLS TQEPGDVFTY AEFD...... ..GILGMAYP SLASEY...S 
+4pep            .....IGDEP LENY...... LDTEYFGTIG IGTPAQDFTV IFDTGSSNLW VPSVYCSSLA CSDHNQFNPD DSS...TFE. ATSQELSITY GTGS.MTGIL GYDTVQVGGI SDTNQIFGLS ETEPGSFLYY APFD...... ..GILGLAYP SISASG...A 
+4ape            STG.SATTTP IDS....... LDDAYITPVQ IGTPAQTLNL DFDTGSSDLW VFSSETTASE VDGQTIYTPS KST...TAKL LSGATWSISY GDGSSSSGDV YTDTVSVGGL TVTGQAVESA KKVSSSFTED STID...... ..GLLGLAFS TLNTVSPTQQ 
+3app            AASGVATNTP TA........ NDEEYITPVT IGG..TTLNL NFDTGSADLW VFSTELPASQ QSGHSVYNPS A.....TGKE LSGYTWSISY GDGSSASGNV FTDSVTVGGV TAHGQAVQAA QQISAQFQQD TNND...... ..GLLGLAFS SINTVQPQSQ 
+2apr            AG...VGTVP MTDYG..... NDIEYYGQVT IGTPGKKFNL DFDTGSSDLW IASTLCTN.C GSGQTKYDPN QSS...TYQ. ADGRTWSISY GDGSSASGIL AKDNVNLGGL LIKGQTIELA KREAASFAS. GPND...... ..GLLGLGFD TITTVRG..V 
+1cms_1          YTG.SLHWVP VTVQQYWQFT VDSVTISGVV VACEG.GCQA ILDTGTSKLV GPSS...... .......... .......... .......... .......... ........DI LNIQQAIGAT QNQYGEFDID CDNLSYMPTV VFEINGKMYP LTPSAY...T 
+
+
+hmgb_chite      .......... ....AKA..A T......AKQ NYIRALQEYE R..NG..... ......G
+hmgt_mouse      .......... ....QLA..K D......DRI RYDNEMKSWE E..QM..A.. ......E
+hmgl_wheat      .......... ....AKA..N K......LKG EYNKAIAAYN K..GE..S.. ......A
+hmgl_trybr      .......... ....EMA..E K......DKE RYKREM.... .......... .......
+1cms            IPV....... .F..DNMMNR H....LVAQD LFSVYM.DRN G..QESMLTL GAIDPSY
+4pep            TPV....... .F..DNLWDQ G....LVSQD LFSVYL.SSN DD.SGSVVLL GGIDSSY
+4ape            KTF....... .F..DNA..K A....SLDSP VFTADL.GYH ...APGTYNF GFIDTTA
+3app            TTF....... .F..DTV..K S....SLAQP LFAVAL.KHQ ...QPGVYDF GFIDSSK
+2apr            KTP....... .M..DNLISQ G....LISRP IFGVYL.GKA KNGGGGEYIF GGYDSTK
+1cms_1          S.QDQGFCTS GFQSENHSQK WILGDVFIRE YYSVFD.RAN N..LVGLA.. KAI....
+

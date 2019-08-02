@@ -1,0 +1,3 @@
+-in=Ssample_seq1.fasta,Mfast_pair
+-output=msf_aln
+

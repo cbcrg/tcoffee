@@ -1,0 +1,12 @@
+#!/usr/bin/env perl
+*TC_METHOD_FORMAT_01
+***************clustalw_method.tc_method*********
+EXECUTABLE	clustalw
+ALN_MODE		pairwise
+IN_FLAG		-INFILE=
+OUT_FLAG		-OUTFILE=
+OUT_MODE		aln
+PARAM		-gapopen=-10
+SEQ_TYPE		S
+*************************************************
+

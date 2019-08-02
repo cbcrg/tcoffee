@@ -1,0 +1,12 @@
+>hmgl_trybr
+kkdsnapkramtsfmffssdfrskhsdlsivemskaagaawkelgpeerk
+vyeemaekdkerykrem
+>hmgt_mouse
+kpkrprsayniyvsesfqeakddsaqgklklvneawknlspeekqayiql
+akddrirydnemksweeqmae
+>hmgb_chite
+adkpkrplsaymlwlnsaresikrenpdfkvtevakkggelwrglkdkse
+weakaatakqnyiralqeyerngg
+>hmgl_wheat
+dpnkpkrapsaffvfmgefreefkqknpknksvaavgkaagerwkslses
+ekapyvakanklkgeynkaiaaynkgesa
