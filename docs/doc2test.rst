@@ -1,0 +1,8 @@
+tcoffee_installation.rst
+tcoffee_quickstart_regressive.rst
+tcoffee_quickstart.rst
+tcoffee_main_documentation.rst
+tcoffee_technical_documentation.rst
+tcoffee_webserver.rst
+tcoffee_faq.rst
+

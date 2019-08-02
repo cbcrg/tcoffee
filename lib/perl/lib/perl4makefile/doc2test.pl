@@ -10,6 +10,7 @@ use DirHandle;
 use strict;
 use DateTime;
 use File::Basename;
+use File::Find;
 
 
 my $RETURN=" ####RETURN#### ";
@@ -19,22 +20,28 @@ my %dir;
 #$GIT=1: Commit all new files, uncommit all deleted files
 #$GIT=2: blank run
 
-my $TIMEOUT=1000;#Default Timeout in seconds
+my $TIMEOUT=1500;#Default Timeout in seconds
+my $TIMEOUT_ERROR=1;
 my $KEEPREPLAYED=0;
 my $GIT=0;
 my %FILE2IGNORE;
+my @TMP_LIST;
 
 my $max=0;
-my $pattern='$$';
+my $PATTERN='';
 my $log ;
 my $docslog;
 my $regexp;
 my $reset;
 my $stop_on_failed;
 my $clean;
-my $replay_dump_file;
-my $replay_dump_list;
-my $replay_dump_dir;
+my $play;
+my $UPDATE;
+my $data="./";
+my $outdir="./";
+my $stream="input";
+my $replay;
+my $unplay;
 my $STRICT=0;
 my $VERY_STRICT=0;
 my $failed;
@@ -53,7 +60,6 @@ $dir{failed}  ="$cw/testsuite/validation/docs/failed/";
 
 $FILE2IGNORE{'stdout'}=1;
 $FILE2IGNORE{'stderr'}=1;
-
 
 if ($ARGV[0] eq "-help")
   {
@@ -75,48 +81,55 @@ if ($ARGV[0] eq "-help")
     print "To check All the commands against the references, use -mode validate\n";
     print "Dumps are containers containing the CL and the input files\n";
     print "flags:\n";
-    print "     -pattern       pattern used to recognize the command lines [def=**]\n";
-    print "                    pattern will be treated as a regexp if -regexp is set\n";
-    print "     -regexp        flag that causes pattern to be treated as a perl regexp\n";
-    print "     -pg            specify the path of the version of T-Coffee (optional)\n";
-    print "     -log           default: validation.log\n";
-    print "     -docslog        default: docs.log\n";
-    print "     -mode=<action> new|update|failed|check\n";
-    print "                    new    : check ONLY CL w/o ref/dump and create ref/dump\n";
-    print "                    update : check ALL  CL or create new ref/dum\n";
-    print "                    failed : run   ONLY FAILURE as found /failed\n";
-    print "                    check  : run   from dumps in ref";
+    print "     -pattern          pattern used to recognize the command lines [def=none]\n";
+    print "                       pattern will be treated as a regexp if -regexp is set\n";
+    print "     -regexp           flag that causes pattern to be treated as a perl regexp\n";
+    print "     -pg               specify the path of the version of T-Coffee (optional)\n";
+    print "     -log              default: validation.log\n";
+    print "     -docslog          default: docs.log\n";
+    print "     -mode=<action>    new|update|failed|check\n";
+    print "                       new    : check ONLY CL w/o ref/dump and create ref/dump\n";
+    print "                       update : check ALL  CL or create new ref/dum\n";
+    print "                       failed : run   ONLY FAILURE as found /failed\n";
+    print "                       check  : run   from dumps in ref";
     
-    print "     -reset         delete all the dumps [CAUTION]\n";
-    print "     -stop          stop at every FAILURE\n";
-    print "     -clean         examples|dumps\n";
-    print "                    examples: removes files in /examples/ not used by /docs [CAUTION]\n";
-    print "                    dump:     removes files dumps not used by /docs [CAUTION]\n";
+    print "     -reset            delete all the dumps [CAUTION]\n";
+    print "     -stop             stop at every FAILURE\n";
+    print "     -clean            examples|dumps\n";
+    print "                       examples: removes files in /examples/ not used by /docs [CAUTION]\n";
+    print "                       dump:     removes files dumps not used by /docs [CAUTION]\n";
     
-    print "     -rep           specifies a root repository\n";
-    print "     -example       directory containing the sample files\n"; 
-    print "     -docs          directory containing the .rst files\n";
-    print "                    OR .rst file\n";
-    print "                    OR file containing CLs (one per line)\n";
-    print "     -ref           directory containing the reference dumps\n";
-    print "                    OR dump file\n";
-    print "     -failed        directory containing all the failed dumps\n";
-    print "     -tmp           tmp directory\n";
-    print "     -latest        latest directory\n";
-    print "     -replay <file> replay an existing dump -- will produce file.replay along with diagnostic\n";
-    print "     -replay_list<file> replay dumps in a file (one per line, comments start with #, files are checked)\n";
-    print "     -replay_dir <dir>  replay dumps in a dir -- files are checked --\n";
+    print "     -rep              specifies a root repository\n";
+    print "     -example          directory containing the sample files\n"; 
+    print "     -docs             directory containing the .rst files\n";
+    print "                       OR .rst file\n";
+    print "                       OR file containing CLs (one per line)\n";
+    print "     -ref              directory containing the reference dumps\n";
+    print "                       OR dump file\n";
+    print "     -failed           directory containing all the failed dumps\n";
+    print "     -tmp              tmp directory\n";
+    print "     -latest           latest directory\n";
     
     
-    print "     -keepreplayed  Keep the dump of the replayed dump. Will be named file.replayed\n";
-    print "     -strict        Will report failure if one or more replay output files are missing\n";
-    print "     -very_strict   Will report failure if there is any difference between replay output\n";
-    print "     -timeout       Will report failure is time is over this value [Def=$TIMEOUT sec.]\n";
-    print "     -ignore        List of filesto be ignore: File1 File2 Def: -ignore stdout stderr\n";
+    print "     -play   <file>    generates T-Coffee dumps using -dir data and putting all the dumps in -outdir\n";
+    print "     -replay <file>    replay and check existing dumps -- Will repay the file, or the list dump in a file, or all dumps found recursively\n";
+    print "     -unplay <file>    outputs all the input files from the dump files into -outdir, path are respected. Different files with identical names give an error\n";
+    print "     -update           Recompute dumps already in -outdir\n";
+
+    print "     -data   <dir>     directory containing all the data required by -play [def: current dir]\n";
+    print "     -outdir <dir>     target_directory\n";
+    print "     -stream string    stdin|stdout|all when -unplay [default=stdin]\n";
+
+    
+    print "     -keepreplayed     Keep the dump of the replayed dump. Will be named file.replayed and put in -outdir\n";
+    print "     -strict           Will report failure if one or more replay output files are missing\n";
+    print "     -very_strict      Will report failure if there is any difference between replay output\n";
+    print "     -timeout          Will report failure is time is over this value [Def=$TIMEOUT sec.]\n";
+    print "     -ignore           List of files to be ignoreed: File1 File2 Def: -ignore stdout stderr\n";
     
     
-    print "     -max           max number of CL to check [DEBUG]\n";
-    print "     -help          display this help message\n";
+    print "     -max              max number of CL to check [DEBUG]\n";
+    print "     -helppp             display this help message\n";
     
     
     
@@ -132,7 +145,7 @@ for (my $a=0; $a<=$#ARGV; $a++)
     
     if ($ARGV[$a]=~/-pattern/)
       {
-	$pattern=$ARGV[++$a];
+	$PATTERN=$ARGV[++$a];
       }
     elsif ($ARGV[$a]=~/-regexp/)
       {
@@ -186,18 +199,35 @@ for (my $a=0; $a<=$#ARGV; $a++)
       {
 	$dir{ref}=$ARGV[++$a];
       }
-     elsif ($ARGV[$a]=~/-replay_list/)
+    elsif ($ARGV[$a]=~/-play/)
       {
-	$replay_dump_list=$ARGV[++$a];
+	$play=$ARGV[++$a];
       }
-    elsif ($ARGV[$a]=~/-replay_dir/)
+    elsif ($ARGV[$a]=~/-update/)
       {
-	$replay_dump_dir=$ARGV[++$a];
+	$UPDATE=1;
       }
     
+    elsif ($ARGV[$a]=~/-data/)
+      {
+	$data=$ARGV[++$a];
+      }
+    elsif ($ARGV[$a]=~/-outdir/)
+      {
+	$outdir=$ARGV[++$a];
+      }
     elsif ($ARGV[$a]=~/-replay/)
       {
-	$replay_dump_file=$ARGV[++$a];
+	$replay=$ARGV[++$a];
+
+      }
+    elsif ($ARGV[$a]=~/-unplay/)
+      {
+	$unplay=$ARGV[++$a];
+      }
+    elsif ($ARGV[$a]=~/-stream/)
+      {
+	$stream=$ARGV[++$a];
       }
     elsif ($ARGV[$a]=~/-keepreplayed/)
       {
@@ -234,24 +264,16 @@ for (my $a=0; $a<=$#ARGV; $a++)
       }
   }
 
-# SIngle check mode: replay
-if ($replay_dump_file)
-  {
-    exit(replay_dump_file ($replay_dump_file, 1));
-  }
-elsif ($replay_dump_list)
-  {
-    exit(replay_dump_list ($replay_dump_list));
-  }
-elsif ($replay_dump_dir)
-  {
-    exit(replay_dump_dir ($replay_dump_dir));
-  }
+# Replay Mode
+if ($replay){    exit(replay_dump_list ($replay, $outdir));}
+if ($play  ){exit(  play_dump_list ($play, $data, $outdir));}
+if ($unplay){exit(unplay_dump_list ($unplay, $stream,$outdir));}
+
 
 
 #protect special char in pattern if non regexp mode is used
 if (!$regexp)
-  {my @char=split (//, $pattern);
+  {my @char=split (//, $PATTERN);
    my $newP;
    foreach my $c (@char)
      {
@@ -260,7 +282,7 @@ if (!$regexp)
 	   $newP.="\\$c";
 	 }
      }
-   $pattern=$newP;
+   $PATTERN=$newP;
  }
 
 if ($rep)
@@ -749,55 +771,273 @@ elsif ($clean=~/failed/)
   }
 exit;
 
-sub replay_dump_dir
+sub unplay_dump_list
   {
-    my ($replay_dir)=@_;
-    my $shell=0;
+    my ($unplay_list, $stream,$outdir)=@_;
     my $n=0;
+    my $shell=0;
     
-    opendir (DIR, $replay_dir);
-    my @dump_list=readdir (DIR);
-    foreach my $dump (@dump_list)
+    if (!-d $outdir){system ("mkdir -p $outdir");}
+    
+    my @list=string2dump_list ($unplay_list);
+    
+    foreach my $d (@list)
       {
-	if (file_is_dump($dump))
+	unplay_dump($d,$stream,$outdir);
+      }
+  }
+sub unplay_dump
+    {
+      my ($dump, $stream, $dir)=@_;
+      my %lu;
+      
+      print "---- unplay $dump\n";
+     
+      my %D=dump2report($dump);
+      foreach my $f (keys (%{$D{file}}))
+	{
+	 
+	  my $name=$f;
+	  my $cstream=$D{file}{$f}{stream};
+	  my $content=$D{file}{$f}{content};
+	  my $fname="$dir/$name";
+	  
+	  
+	  if ($lu{$stream}{$fname}{name})
+	    {
+	      if ($lu{$stream}{$fname}{content} eq $content){;}
+	      else 
+		{
+		  my $pdump=$lu{$stream}{$fname}{dump};
+		  printf "ERROR: uplay --- $name appears with different contents in $dump and $pdump [FATAL]\n";
+		}
+	    }
+	  elsif (!$FILE2IGNORE{$f} && (($cstream eq $stream)|| ($stream eq "all")))
+	    {
+	      print "---- unplay $name\n";
+	      $content=~s/$RETURN/\n/g;
+	      my $f1 = new FileHandle;
+	      open ($f1, ">$dir/$name");
+	      print$f1 "$content";
+	      close ($f1);
+	      $lu{$stream}{$fname}{name}=$fname;
+	      $lu{$stream}{$fname}{stream}=$stream;
+	      $lu{$stream}{$fname}{content}=$content;
+	      $lu{$stream}{$fname}{dump}=$dump;
+	    }
+	}
+    return;
+  }
+
+	
+sub play_dump_list
+  {
+    my ($file, $data,$outdir)=@_;
+    my ($passed, $warning, $failed, $shell);
+    my ($cdir, $wdir, $ldata,$n, $line, $cl, $rdata, $rfile);
+    my $f= new FileHandle;
+   
+    my %lu;
+    
+    $file  =path2abs  ($file);
+    $outdir=path2abs  ($outdir);
+    $data  =path2abs  ($data);
+    
+    my $ffile = basename($file);
+    my $path  = dirname ($file);
+
+    $shell=$passed=$failed=$warning=0;
+    
+    if (!-d $data){printf ("Data directory must be provided  (try -data) [FATAL]\n");die;}
+    if (!-e $file){printf ("List of command must be provided (try -play) [FATAL]\n");die;}
+
+   
+    
+    
+
+    $cdir=cwd;
+    
+    $wdir="./tmp/".random_string();
+    system ("mkdir -p $wdir");
+    
+    $wdir=path2abs($wdir);
+    $ldata="$wdir/data";
+
+
+    if ($file =~/rst$/)
+      {
+	$rdata=$data;
+	$data="$data\./$ffile/";
+	$PATTERN='\$\$:';
+	$rfile="$wdir/$ffile";
+	shortlines2longlines ($file, $rfile)
+      }
+    else
+      {
+	$rfile=$file;
+      }
+    
+    print "#PRODUCE DUMP FILES: $ffile\n";
+    
+    open ($f, "$rfile");
+    chdir ($wdir);
+    while (<$f>)
+      {
+	my $l=$_;
+	chomp ($l);
+	
+	$line++;
+	my $cl=line2cl ($l, $PATTERN);
+
+	if ($l=~/rst$/)
 	  {
-	    if (replay_dump_file ($dump, ++$n)){$shell=1;}
+
+	    my $exit=play_dump_list ("$path/$l", $rdata, $outdir);
+	    if ($exit){$shell=1;}
+	  }
+	elsif ($l=~/^#/ || !($l=~/\w/) || !$cl){;}#skip
+	elsif  ($lu{$cl})#Do not recompzte twice the same CL
+	  {
+	    my $dump=$lu{$cl}{dump};
+	    print "File: $ffile Line:$line -- Command: $cl -- Dump: $dump -- SKIPED\n";
+	    $n++;
+	    if ($lu{$cl}{exit} eq "FAILED"){$failed++;}
+	    elsif ($lu{$cl}{exit} eq "WARNING"){$warning++;}
+	    elsif ($lu{$cl}{exit} eq "PASSED") {$passed++;}
+	  }
+	elsif ( !$lu{$cl})
+	  {
+	    $n++;
+	    my $dump="$ffile\.dump.$n";
+	    $dump=path2abs($dump);
+	    my $ddump=basename($dump);
+	    my %report;
+	    my $target_dump="$outdir/$ddump";
+	    my $cached;
+	    if (-e $target_dump && !$UPDATE)
+	      {
+		%report=dump2report ($target_dump);
+		$cached=1;
+	      }
+	    else
+	      {
+		if (-d $ldata){safe_rmrf($ldata);}#remove leftovers of previous run
+		system ("cp -r $data $ldata");
+		
+		chdir ($ldata);
+		system4tc ("export DUMP_4_TCOFFEE=$dump\;$cl;unset DUMP_4_TCOFFEE");
+		%report=dump2report ($dump);
+		
+		$lu{$cl}{dump}=$dump;
+		chdir ($wdir);
+	      }
+	    print "FILE: $ffile Line:$line -- Command: $cl -- Dump: $ddump -- ";
+	    if (!%report)
+	      {
+		print "FAILED";
+		$shell=1;
+		$failed++;
+		if ( $STRICT){exit ($shell);}
+		$lu{$cl}{exit}="FAILED";
+	      }
+	    elsif ($report{error})
+	      {
+		print "FAILED";
+		$shell=1;
+		$failed++;
+		$lu{$cl}{exit}="FAILED";
+		if ( $STRICT){exit ($shell);}
+	      }
+	    elsif ($report{warnng})
+	      {
+		print "WARNING";
+		$warning++;
+		$lu{$cl}{exit}="WARNING";
+		if ( $VERY_STRICT){exit ($shell);}
+	      }
+	    else
+	      {
+		$passed++;
+		print "PASSED";
+		$lu{$cl}{exit}="PASSED";
+	      }
+	    
+	    my $status;
+	    
+	    if ($TIMEOUT_ERROR)
+	      {
+		$TIMEOUT_ERROR=0;
+		$status="TIMEOUT";
+	      }
+	    elsif (!-e $dump)
+	      {
+		$status="MISSING";
+	      }
+	    else
+	      {
+		$status=$lu{$cl}{exit};
+	       }
+	    
+	    if ($cached){print "--- cached\n";}
+	    else {print "\n";}
+	    if (-e $dump)
+	      {
+		my $status=$lu{$cl}{exit};
+		system ("mv $dump $outdir/$ddump\.$status");
+	      }
+	    else
+	      {
+		system ("echo $cl > $outdir/$ddump\.$status");
+	      }
+	    
 	  }
       }
+    close ($f);
+    
+    chdir ($cdir);
+    safe_rmrf ($wdir);
+    
+    print "SUMMARY:FILE $ffile TESTED $n PASSED: $passed WARNING: $warning FAILED: $failed\n";
     return $shell;
+  }
+sub safe_rmrf
+  {
+    my ($dir)=@_;
+    if ( -d $dir && $dir=~/RANDOMSTRING/){system ("rm -rf $dir"); }
   }
 
 sub replay_dump_list
   {
-    my ($replay_list)=@_;
+    my ($replay_list, $outdir)=@_;
     my $n=0;
     my $shell=0;
     
-    open (F, "$replay_list");
-    while (<F>)
+    
+    my @list=string2dump_list ($replay_list);
+    
+    foreach my $d (@list)
       {
-	my $l=$_;
-	chomp ($l);
-	if (!$l=~/^#/ && file_is_dump($l))
-	  {
-	    if (replay_dump_file ($l, ++$n)){$shell=1;}
-	  }
+	if (replay_dump_file ($d)){$shell=1;}
       }
-    close (F);
     return $shell;
   }
 
       
 sub replay_dump_file
   {
-    my ($replay, $n)=@_;
+    my ($replay, $outdir, $name)=@_;
     my $replayed=$replay.".replay";
     my ($shell,$etime)=dump2run ($replay, $replayed, "quiet");
     my $com=dump2cl ($replay);
     my ($missing, $different, $error, $warning);
     
+    if (!$name){$name=basename ($replay);}
+    
+    
+    $replayed=path2abs($replayed);
+    
     $missing=$warning=$error=$different=0;
-    print "~ ($n) $com $etime ms ";
+    print "~ ($name) $com $etime ms ";
     my %in =dump2report($replay);
     my %out=dump2report($replayed);
     
@@ -831,6 +1071,7 @@ sub replay_dump_file
     if ($KEEPREPLAYED)
       {
 	print "Replay File: $replayed\n";
+	system ("mv $replayed $outdir");
       }
     else
       {
@@ -1069,9 +1310,9 @@ sub dump2run
     $odump=path2abs($odump);
     
     
-    my $dir=random_string();
+    my $dir="tmp/".random_string();
 
-    system ("mkdir $dir");
+    system ("mkdir -p $dir");
     chdir  ($dir);
     
     if (!$com){$com=dump2cl($idump);}
@@ -1276,13 +1517,13 @@ sub rst2cl
 		}
 	      
 	    }
-	  elsif ($line=~/\s+$pattern: (.*)\\/)
+	  elsif ($line=~/\s+$PATTERN: (.*)\\/)
 	    {
 	      $command=$1;
 	      $clineN=$lineN;
 	      $wrap=1;
 	    }
-	  elsif ($line=~/\s+$pattern: (.*)/)
+	  elsif ($line=~/\s+$PATTERN: (.*)/)
 	    {
 	      $command=$1;
 	      $clineN=$lineN;
@@ -1720,7 +1961,7 @@ sub random_string
 	     my $c=int(rand($#l+1));
 	     $ret.=$l[$c];
 	   }
-	 return $ret;
+	 return "RANDOMSTRING$ret";
        }
 sub check_dir
        {
@@ -1808,6 +2049,8 @@ sub path2abs
 	  if ($file=~/^^\//){return $file;}
 	  my $dir=cwd;
 	  $file=$dir."/".$file;
+	  $file =~s/\/\//\//g;
+	  
 	  return $file;
 	}
 
@@ -1817,11 +2060,12 @@ sub timeout_system
    {
      my ($command, $timeout)=(@_);
      my $shell;
+     $TIMEOUT_ERROR=0;
      if (!$timeout)
        {
 	 $timeout=$TIMEOUT;
        }
-     
+
      eval 
        {
 	 local $SIG{ALRM} = sub { die "alarm\n" }; # NB: \n required
@@ -1831,6 +2075,116 @@ sub timeout_system
 	 alarm(0);
        };
      
-     if ($@ eq "alarm\n"){return "-1";}
+     if ($@ eq "alarm\n")
+       {
+	 $TIMEOUT_ERROR=1;
+	 return "-1";
+       }
      else {return $shell}
    }
+
+sub string2dump_list
+     {
+       my ($string)=@_;
+       my @dump_list;
+       
+       print "$string";
+       @TMP_LIST=();
+       if (file_isdump($string)){return $string; }
+       elsif (-d $string)
+	 {
+	   dir2dump_list ($string);}
+       elsif (-f $string){file2dump_list($string);}
+       
+       @dump_list=@TMP_LIST;
+       @TMP_LIST=();
+       return @dump_list;
+     }
+sub file2dump_list
+     {
+       my ($file)=@_;
+       my $f= new FileHandle;
+       #Note: no return is needed because the global TMP_LIST is incremented
+       #Use of a global variable is imposed by find
+       open ($f, "$file");
+       while (<$f>)
+	 {
+	   my $l=$_;
+	   chomp ($l);
+	   if (file_is_dump($l))
+	     {
+	       $l=path2abs($l);
+	       push (@TMP_LIST, $l);
+	     }
+	   elsif (-f $l)
+	     {
+	       file2dump_list ($l);
+	     }
+	   elsif (-d $l)
+	     {
+	       dir2dump_list ($l);
+	     }
+	 }
+       
+       close ($f);
+       return @TMP_LIST;
+     }
+     
+sub dir2dump_list
+  {
+    my ($dir)=@_;
+
+    find (\&eachDumpFile, $dir);
+    return @TMP_LIST;
+  }
+  
+sub eachDumpFile 
+    {
+      my $filename =$_;
+      my $fullpath = $File::Find::name;
+      
+      #remember that File::Find changes your CWD, 
+      #so you can call open with just $_
+      my $abs=path2abs($filename);
+       
+      if (file_isdump($filename))	
+	{ 
+	  push (@TMP_LIST, "$abs");
+	}
+    }
+sub line2cl
+      {
+	my ($cl, $pattern)=@_;
+	if ( !$pattern){return $cl;}
+	elsif ($pattern && !($cl=~/^\s*$pattern/)){return 0;}
+	else
+	  {
+	    $cl=~s/$pattern//;
+	    return $cl;
+	  }
+	}
+	
+sub shortlines2longlines
+	{
+	  my ($inF, $outF)=@_;
+	  my $in=new FileHandle;
+	  my $out=new FileHandle;
+
+	  open ($in, "$inF");
+	  open ($out, ">$outF");
+	  
+
+	  while (<$in>)
+	    {
+	      my $l=$_;
+	      if ( ($l=~/\\/))
+		{
+		  $l=~s/\\/ /g;
+		  chomp ($l);
+		}
+	      print $out "$l";
+	    }
+	  close ($in);
+	  close ($out);
+
+	}
