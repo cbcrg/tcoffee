@@ -1,0 +1,74 @@
+CLUSTAL FORMAT for T-COFFEE Version_7.84 [http://www.tcoffee.org] [MODE: rcoffee ], CPU=0.79 sec, SCORE=20, Nseq=3, Len=797 
+
+OTTHUMT00000006707  uacGGAAGCU-UUAGGGAGGUGCUCUGAGACCCGAAACUAGACUCGACUUUAACAGACAC
+OTTHUMT00000043281  -aucccagcuacucgggagg----cugaggcaggagaau-cacuugaacccgggaggcag
+OTTHUMT00000007987  ----------------GAGGUGCUCUGAGACCCGAAACUAGACUCGACUUUAACAGACAC
+                                    ****    ***** *  ** * *  *** **       ** ** 
+
+OTTHUMT00000006707  AGACGACCCUGAA-----G-----------------------AUGGAAAUGUUUUCUUCC
+OTTHUMT00000043281  agguugcaguga-gccgag-----------------------aucgcaccccugcacucc
+OTTHUMT00000007987  AGACGACCCUGAAGGCGAGACugucugcuggugggaugcuggAUGGAAACGUUUUCUUCC
+                    **    *  ***      *                       ** * *    *    ***
+
+OTTHUMT00000006707  AAAUUGUGC-----UGCACGUUUU-----UGGCGAG-AGCAUGGGGCUGUGCGGCGUCCC
+OTTHUMT00000043281  agccugggugacagagcaagacuccaucucaaaaaaaauaaaggaaaUAUGCGUCGUUGG
+OTTHUMT00000007987  AAAUUGUGC-----UGCACGUUUU-----UGGCGAG-AGCAUGGGGCUGUGCGGCGUCCC
+                    *   ** *       *** *  *           *  *  * **   * **** ***   
+
+OTTHUMT00000006707  ---CUCCCUGGCGC-----CCACCUGUGCCCUGCACACU-G-GCCUGCACUGUGGUGAU-
+OTTHUMT00000043281  AUGCUGUAUGACAAUCAAGCUACUUAUAACAAACAAAAUUGAGAAUGAAGgauuaugauc
+OTTHUMT00000007987  ---CUCCCUGGCGC-----CCACCUGUGCCCUGCACACU-G-GCCUGCACUGUGGUGAU-
+                       **   ** *       * ** * *  *   ** * * * *  ** *   *  **** 
+
+OTTHUMT00000006707  ----CUC-GCUUGGCCC----CCACCUGA-------UUCC----UGACA----UACAGCA
+OTTHUMT00000043281  caaacucAGCUGGGCCUCCCCUC-CCUGCCCCAGGAUUGUGGAGUGAGAACGUUGCAGCA
+OTTHUMT00000007987  ----CUC-GCUUGGCCC----CCACCUGA-------UUCC----CGACA----UACAGCA
+                        *** *** ****      * ****        **       ** *    * *****
+
+OTTHUMT00000006707  GA--GGAAG----C--UUAGGCUCAGGUGG--AACA-----GCCUCAACU---GAUUCAG
+OTTHUMT00000043281  GGAGAGAACAACGCAGCAAAGCACAGCAGGGGAACCGgaaaugcucaccuuuugacaggg
+OTTHUMT00000007987  GA--GGAAC----C--UUAGGCUCAGGUGG--AACA-----GCCUCAACU---GAUUCUG
+                    *    ***     *    * ** ***  **  ***        **** **   **    *
+
+OTTHUMT00000006707  UCCCUGAACUUCCGUACA--CAGCCCUGGAGUCGUCU----UAGAgc-caugauuuauuu
+OTTHUMT00000043281  uacuuuuaguucuggggccuuaucuuaaggauauuccaacauauacaaaaagauucaugc
+OTTHUMT00000007987  UCCCUGAACUUCCGUACA--CAGCCCUGGAGUCGUCU----UAGAGc-caugauuuauuu
+                    * * *  * *** *       * *    *  *  **     ** *    * **** **  
+
+OTTHUMT00000006707  a------acuguucuuucauuuuacagaacaua--aaauguauuguuuccaa--cuuu-u
+OTTHUMT00000043281  acagagauauguacuuuaguauuauuuaccauaggaaaaaaguuggaaacaauacauuuu
+OTTHUMT00000007987  a------acuguucuuucauuuuacagaacaua--aaauguauuguuuccaa--cuuu-u
+                    *        *** ****  * ***   * ****  ***    ***    ***  * ** *
+
+OTTHUMT00000006707  uuccuaugguaa-----auaauacuaaaguaaau-aucucugug-caugaaucuu----u
+OTTHUMT00000043281  auguucuguaaaaugaaagaacaguuaaauaaaucauggCUCUAAGACGACUCCAGGGCU
+OTTHUMT00000007987  uuccuaugguaa-----auaauacuaaaguaaau-aucucug------------------
+                     *  * **  **     * ** * * ** ***** **  **                   
+
+OTTHUMT00000006707  uuguau--auguu--ggaauauccuuaagauaagg------ccccagaacuaaaaguacc
+OTTHUMT00000043281  GUGUACGGAAGUUCAGGGACAGAAUC-AGUUGAGGCUGUUCCACCUGAGCCUAAGCUUCC
+OTTHUMT00000007987  ------------------------------------------------------------
+                                                                                
+
+OTTHUMT00000006707  -cugucaaa-g---ggug-------a--gcauuuCCG----------------GUUC-CC
+OTTHUMT00000043281  UCUGCUGUAUGUCGGGAAUCAGGUGGGGGCCAAGCGAGAUCACCACAGUGCAGGC-CAGU
+OTTHUMT00000007987  ------------------------------------------------------------
+                                                                                
+
+OTTHUMT00000006707  CUGCUGUGCUUUGCUGCGUUGUUCUCCC-------------CUGCUGCAACGUUCUCACU
+OTTHUMT00000043281  GUGC-----AGGGCACAGGUGGGCACCAGGGAGGGGACGCCGCACAGCCCCAUGCUCUCG
+OTTHUMT00000007987  ------------------------------------------------------------
+                                                                                
+
+OTTHUMT00000006707  CCACAAUCCUGGGGCAGG-UAGGGG-A-------GGCCCAGCug--aguuuggaucauaa
+OTTHUMT00000043281  CCAAAAACGUGCAGCACAAUUU-GGAAGAAAACAUUUCCAUCUGUUAAUAAAGAGCAAGG
+OTTHUMT00000007987  ------------------------------------------------------------
+                                                                                
+
+OTTHUMT00000006707  uccu---gaaagacaca
+OTTHUMT00000043281  GCCUCUGGUCAUAAGUG
+OTTHUMT00000007987  -------ugcau--gaa
+                              *      
+
+
+

@@ -1,0 +1,36 @@
+#Tests for the Natuire Protocol
+t_coffee -seq sh3.fasta -mode psicoffee
+t_coffee -seq sh3.fasta -mode expresso -pdb_type dn
+t_coffee -seq sh3.fasta -method TMalign_pair,sap_pair -template_file EXPRESSO
+t_coffee -seq sh3.fasta
+t_coffee -help
+t_coffee -seq sh3.fasta -mode fmcoffee
+t_coffee -seq sh3.fasta -method=muscle_msa,probcons_msa,clustalw_msa
+t_coffee -seq sh3.fasta -method sap_pair -template_file sh3.template_file
+t_coffee -seq crd.fasta -method mustang_pair -template_file crd.template_file
+t_coffee -other_pg trmsd -aln crd.aln -template_file crd.template_file
+t_coffee -seq RNA_set.fa -mode rcoffee -outfile RNA_rcoffee.aln
+t_coffee -other_pg=seq_reformat -in RNA_rcoffee.aln -action +add_alifold -output stockholm_aln -out RNA_rcoffee_predicted.stk
+t_coffee -other_pg=seq_reformat -in RNA_rcoffee.aln -in2 1F6X_A_real.struc -input2 alifold -action +add_alifold -output stockholm_aln -out RNA_rcoffee_real.stk
+t_coffee -other_pg=seq_reformat -in RNA_rcoffee.aln -action +alifold2analyze color_html > RNA_rcoffee.comp.html
+t_coffee -other_pg=seq_reformat -in RNA_rcoffee.aln -action +alifold2analyze
+t_coffee -seq c18orf19.fa -mode procoffee
+t_coffee -other_pg seq_reformat -in sh3.aln -output fasta_aln > sh3_fasta.aln
+t_coffee -other_pg seq_reformat -in sh3.aln -output phylip_aln > sh3_phylip.aln
+t_coffee -other_pg seq_reformat -in sh3.aln -output fasta_seq
+t_coffee -other_pg seq_reformat -in sh3.fasta -action +trim _seq_%%90_
+t_coffee -other_pg seq_reformat -in sh3.fasta -action +trim _seq_%%90_O30
+t_coffee -other_pg seq_reformat -in sh3.fasta -action +trim _seq_n10_
+t_coffee -other_pg seq_reformat -in sh3.fasta -action +trim _seq_N20_
+t_coffee -other_pg seq_reformat -in sh3.fasta -action +rm_gap 50
+t_coffee -other_pg extract_from_pdb 1PHT.pdb -fasta
+t_coffee -other_pg seq_reformat -in sh3.aln -action +extract_block cons 10 20
+t_coffee -other_pg seq_reformat -in sh3.aln -action +extract_block '1PHT' 20 40
+t_coffee -other_pg seq_reformat -in sh3.aln -action +color_residue 1PHT 10 1 -output color_html > color.html
+t_coffee -other_pg seq_reformat -in sh3.aln -action +color_residue color.txt -output color_html > file2color.html
+t_coffee -other_pg seq_reformat -in sh3.aln -in3 sh3.aln -action +3evaluate pam250mt -output color_html > cons2color.html
+t_coffee -other_pg seq_reformat -in sh3.aln -in3 sh3.aln -action +3evaluate boxshade -output color_html > boxshade2color.html
+t_coffee -other_pg seq_reformat -in sh3.aln -output sim
+t_coffee -other_pg seq_reformat -in sh3.fasta -output sim_idscore
+t_coffee -other_pg aln_compare -al1 sh3_ref.aln -al2 sh3.aln -compare_mode column
+t_coffee -other_pg seq_reformat -in crd.struc_tree100 -in2 crd.struc_tree50  -action +tree_cmp

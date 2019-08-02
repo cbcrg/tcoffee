@@ -1,0 +1,359 @@
+<DumpIO>
+<nature>standard dump</nature>
+<program>T-COFFEE</program>
+<version>Version_13.30.4.4e2c658</version>
+<build>Version_13.30.4.4e2c658</build>
+<cl>t_coffee -other_pg seq_reformat -in sample_rnaseq2.stk -action +alifold2analyze list </cl>
+<stack>
+</stack>
+<warning>
+</warning>
+<file>
+<stream>output</stream>
+<name>stdout</name>
+<content>@@ Neutral pair:   17   51 =>[GU][GC][GU]
+@@ Neutral pair:   19   49 =>[GU][GC][GU]
+@@ incompatible pair:   20   48 =>[GC][GA][GC]
+@@ Neutral pair:   26   46 =>[UG][UG][UG]
+@@ Neutral pair:   27   45 =>[GC][GU][GC]
+@@ WC pair:   28   44 =>[AU][AU][AU]
+@@ WC pair:   29   43 =>[GC][GC][GC]
+@@ WC Compensated pair:   54  522 =>[CG][GC][CG]
+@@ WC pair:   55  521 =>[AU][AU][AU]
+@@ WC pair:   56  520 =>[GC][GC][GC]
+@@ WC pair:   62  396 =>[GC][GC][GC]
+@@ Neutral pair:   63  395 =>[AU][GU][AU]
+@@ incompatible pair:   64  394 =>[CG][UU][CG]
+@@ WC Compensated pair:   65  393 =>[GC][UA][GC]
+@@ Neutral pair:   66  392 =>[AU][GU][AU]
+@@ incompatible pair:   67  391 =>[CG][CA][CG]
+@@ incompatible pair:   68  389 =>[CG][AG][CG]
+@@ incompatible pair:   69  388 =>[CG][GA][CG]
+@@ WC pair:   70  121 =>[UA][UA][UA]
+@@ WC pair:   71  120 =>[GC][GC][GC]
+@@ WC pair:   79  119 =>[GC][GC][GC]
+@@ WC pair:  103  118 =>[AU][AU][AU]
+@@ incompatible pair:  105  116 =>[GC][CA][GC]
+@@ Neutral pair:  106  115 =>[GU][GC][GU]
+@@ WC Compensated pair:  107  114 =>[AU][CG][AU]
+@@ WC pair:  108  113 =>[AU][AU][AU]
+@@ WC pair:  125  382 =>[UA][UA][UA]
+@@ Neutral pair:  126  381 =>[GC][GU][GC]
+@@ WC Compensated pair:  127  378 =>[UA][GC][UA]
+@@ incompatible pair:  128  377 =>[GC][GG][GC]
+@@ Neutral pair:  129  301 =>[CG][UG][CG]
+@@ incompatible pair:  135  300 =>[UA][AA][UA]
+@@ WC pair:  136  299 =>[GC][GC][GC]
+@@ WC pair:  137  298 =>[CG][CG][CG]
+@@ incompatible pair:  144  287 =>[UA][CA][UA]
+@@ Neutral pair:  150  286 =>[UG][CG][UG]
+@@ Neural Compensated pair:  151  285 =>[GU][AU][GC]
+@@ WC Compensated pair:  152  280 =>[GC][AU][GC]
+@@ Neutral pair:  154  278 =>[GU][AU][GU]
+@@ WC pair:  155  277 =>[AU][AU][AU]
+@@ Neutral pair:  163  262 =>[GC][GU][GC]
+@@ Neutral pair:  164  257 =>[GC][GU][GC]
+@@ incompatible pair:  165  256 =>[GC][AC][GC]
+@@ incompatible pair:  166  255 =>[GC][AC][GC]
+@@ incompatible pair:  167  254 =>[CG][AG][CG]
+@@ Neutral pair:  168  253 =>[UG][UG][UG]
+@@ incompatible pair:  169  252 =>[GU][AG][GU]
+@@ WC pair:  171  250 =>[GC][GC][GC]
+@@ WC pair:  172  249 =>[CG][CG][CG]
+@@ WC pair:  173  200 =>[GC][GC][GC]
+@@ WC Compensated pair:  174  194 =>[GC][UA][GC]
+@@ incompatible pair:  175  193 =>[CG][CA][CG]
+@@ WC pair:  176  192 =>[GC][GC][GC]
+@@ Neutral pair:  177  191 =>[UG][UA][UG]
+@@ Neutral pair:  178  190 =>[CG][UG][CG]
+@@ Neutral pair:  201  237 =>[CG][UG][CG]
+@@ WC pair:  202  236 =>[AU][AU][AU]
+@@ incompatible pair:  203  235 =>[CG][CA][CG]
+@@ incompatible pair:  204  234 =>[CG][UU][CG]
+@@ incompatible pair:  206  230 =>[GC][AG][GC]
+@@ WC pair:  207  229 =>[UA][UA][UA]
+@@ incompatible pair:  208  228 =>[GC][AA][GC]
+@@ incompatible pair:  209  227 =>[CG][AG][CG]
+@@ incompatible pair:  213  224 =>[GC][AA][GC]
+@@ WC pair:  214  223 =>[CG][CG][CG]
+@@ WC Compensated pair:  305  373 =>[GC][AU][GC]
+@@ WC pair:  306  372 =>[GC][GC][GC]
+@@ WC pair:  307  371 =>[AU][AU][AU]
+@@ WC pair:  308  370 =>[AU][AU][AU]
+@@ incompatible pair:  309  369 =>[GC][CG][CC]
+@@ incompatible pair:  317  367 =>[UA][CU][UA]
+@@ Neural Compensated pair:  318  366 =>[UG][AU][UG]
+@@ WC pair:  319  365 =>[AU][AU][AU]
+@@ WC Compensated pair:  320  364 =>[GC][AU][GC]
+@@ WC pair:  321  363 =>[GC][GC][GC]
+@@ WC pair:  324  360 =>[CG][CG][CG]
+@@ WC pair:  326  344 =>[GC][GC][GC]
+@@ WC Compensated pair:  327  343 =>[GC][CG][GC]
+@@ Neural Compensated pair:  328  342 =>[UG][AU][UG]
+@@ WC pair:  345  355 =>[UA][UA][UA]
+@@ WC pair:  346  354 =>[CG][CG][CG]
+@@ WC pair:  413  514 =>[AU][AU][AU]
+@@ WC pair:  414  513 =>[UA][UA][UA]
+@@ WC pair:  415  512 =>[UA][UA][UA]
+@@ incompatible pair:  416  511 =>[UA][CA][UA]
+@@ WC pair:  417  510 =>[AU][AU][AU]
+@@ Neutral pair:  418  509 =>[UG][UA][UG]
+@@ incompatible pair:  419  508 =>[UA][GA][UA]
+@@ incompatible pair:  420  507 =>[UA][CA][UA]
+@@ WC Compensated pair:  429  447 =>[CG][AU][CG]
+@@ incompatible pair:  430  446 =>[UA][UU][UA]
+@@ Neutral pair:  431  445 =>[GC][GU][GC]
+@@ WC pair:  432  444 =>[UA][UA][UA]
+@@ incompatible pair:  460  504 =>[GC][AG][GC]
+@@ incompatible pair:  461  503 =>[UA][AA][UA]
+@@ WC Compensated pair:  462  502 =>[AU][GC][AU]
+@@ WC pair:  463  501 =>[UA][UA][UA]
+@@ WC pair:  464  500 =>[UA][UA][UA]
+@@ incompatible pair:  465  499 =>[GU][GG][GU]
+@@ incompatible pair:  466  498 =>[UA][GA][UA]
+@@ incompatible pair:  467  492 =>[UA][AA][UA]
+@@ incompatible pair:  468  491 =>[UA][AA][UA]
+@@ WC Compensated pair:  469  489 =>[CG][AU][CG]
+@@ WC pair:  470  488 =>[CG][CG][CG]
+@@ WC pair:  471  487 =>[AU][AU][AU]
+# STOCKHOLM 1.0
+
+OTTHUMT00000006707  uacGGAAGCU.UUAGGGAGGUGCUCUGAGACCCGAAACUAGACUCGACUU
+OTTHUMT00000043281  .aucccagcuacucgggagg....cugaggcaggagaau.cacuugaacc
+OTTHUMT00000007987  ................G.GGUGCUCUGAGACCCGAAACUAGACUCGACUU
+#=GC SS_cons        ................((((.....((((.............)))).)))
+
+OTTHUMT00000006707  UAACAGACACAGACGACCCUGAA.....G.....................
+OTTHUMT00000043281  cgggaggcagagguugcaguga.gccgag.....................
+OTTHUMT00000007987  UAACAGACACAGACGACCCUGAAGGCGAGACugucugcuggugggaugcu
+#=GC SS_cons        )..(((.....((((((((((.......(.....................
+
+OTTHUMT00000006707  ..AUGGAAAUGUUUUCUUCCAAAUUGUGC.....UGCACGUUUU.....U
+OTTHUMT00000043281  ..aucgcaccccugcacuccagccugggugacagagcaagacuccaucuc
+OTTHUMT00000007987  ggAUGGAAACGUUUUCUUCCAAAUUGUGC.....UGCACGUUUU.....U
+#=GC SS_cons        ..(.((((....)))).))))...(((((.....(((......(.....(
+
+OTTHUMT00000006707  GGCGAG.AGCAUGGGGCUGUGCGGCGUCCC...CUCCCUGGCGC.....C
+OTTHUMT00000043281  aaaaaaaauaaaggaaaUAUGCGUCGUUGGAUGCUGUAUGACAAUCAAGC
+OTTHUMT00000007987  GGCGAG.AGCAUGGGGCUGUGCGGCGUCCC...CUCCCUGGCGC.....C
+#=GC SS_cons        ((.((.......(((((((.((((((((...........))))).....)
+
+OTTHUMT00000006707  CACCUGUGCCCUGCACACU.G.GCCUGCACUGUGGUGAU.....CUC.GC
+OTTHUMT00000043281  UACUUAUAACAAACAAAAUUGAGAAUGAAGgauuaugauccaaacucAGC
+OTTHUMT00000007987  CACCUGUGCCCUGCACACU.G.GCCUGCACUGUGGUGAU.....CUC.GC
+#=GC SS_cons        ((((.((((...((........))..))))...))))...........))
+
+OTTHUMT00000006707  UUGGCCC....CCACCUGA.......UUCC....UGACA....UACAGCA
+OTTHUMT00000043281  UGGGCCUCCCCUC.CCUGCCCCAGGAUUGUGGAGUGAGAACGUUGCAGCA
+OTTHUMT00000007987  UUGGCCC....CCACCUGA.......UUCC....CGACA....UACAGCA
+#=GC SS_cons        .))))))....)..............)).)....)))..........)))
+
+OTTHUMT00000006707  GA..GGAAG....C..UUAGGCUCAGGUGG..AACA.....GCCUCAACU
+OTTHUMT00000043281  GGAGAGAACAACGCAGCAAAGCACAGCAGGGGAACCGgaaaugcucaccu
+OTTHUMT00000007987  GA..GGAAC....C..UUAGGCUCAGGUGG..AACA.....GCCUCAACU
+#=GC SS_cons        )...(((((.......(((((..(.(((.............)))((....
+
+OTTHUMT00000006707  ...GAUUCAGUCCCUGAACUUCCGUACA..CAGCCCUGGAGUCGUCU...
+OTTHUMT00000043281  uuugacaggguacuuuuaguucuggggccuuaucuuaaggauauuccaac
+OTTHUMT00000007987  ...GAUUCUGUCCCUGAACUUCCGUACA..CAGCCCUGGAGUCGUCU...
+#=GC SS_cons        ...))....)..))))).)))))...))..)).....)).))))))....
+
+OTTHUMT00000006707  .UAGAgc.caugauuuauuua......acuguucuuucauuuuacagaac
+OTTHUMT00000043281  auauacaaaaagauucaugcacagagauauguacuuuaguauuauuuacc
+OTTHUMT00000007987  .UAGAGc.caugauuuauuua......acuguucuuucauuuuacagaac
+#=GC SS_cons        ............((((((((........((((...........))))...
+
+OTTHUMT00000006707  aua..aaauguauuguuuccaa..cuuu.uuuccuaugguaa.....aua
+OTTHUMT00000043281  auaggaaaaaaguuggaaacaauacauuuuauguucuguaaaaugaaaga
+OTTHUMT00000007987  aua..aaauguauuguuuccaa..cuuu.uuuccuaugguaa.....aua
+#=GC SS_cons        .........((((((((((((...............))).)).....)))
+
+OTTHUMT00000006707  auacuaaaguaaau.aucucugug.caugaaucuu....uuuguau..au
+OTTHUMT00000043281  acaguuaaauaaaucauggCUCUAAGACGACUCCAGGGCUGUGUACGGAA
+OTTHUMT00000007987  auacuaaaguaaau.aucucug............................
+#=GC SS_cons        ))))..)))))))).....)))............................
+
+OTTHUMT00000006707  guu..ggaauauccuuaagauaagg......ccccagaacuaaaaguacc
+OTTHUMT00000043281  GUUCAGGGACAGAAUC.AGUUGAGGCUGUUCCACCUGAGCCUAAGCUUCC
+OTTHUMT00000007987  ..................................................
+#=GC SS_cons        ..................................................
+
+OTTHUMT00000006707  .cugucaaa.g...ggug.......a..gcauuuCCG.............
+OTTHUMT00000043281  UCUGCUGUAUGUCGGGAAUCAGGUGGGGGCCAAGCGAGAUCACCACAGUG
+OTTHUMT00000007987  ..................................................
+#=GC SS_cons        ..................................................
+
+OTTHUMT00000006707  ...GUUC.CCCUGCUGUGCUUUGCUGCGUUGUUCUCCC............
+OTTHUMT00000043281  CAGGC.CAGUGUGC.....AGGGCACAGGUGGGCACCAGGGAGGGGACGC
+OTTHUMT00000007987  ..................................................
+#=GC SS_cons        ..................................................
+
+OTTHUMT00000006707  .CUGCUGCAACGUUCUCACUCCACAAUCCUGGGGCAGG.UAGGGG.A...
+OTTHUMT00000043281  CGCACAGCCCCAUGCUCUCGCCAAAAACGUGCAGCACAAUUU.GGAAGAA
+OTTHUMT00000007987  ..................................................
+#=GC SS_cons        ..................................................
+
+OTTHUMT00000006707  ....GGCCCAGCug..aguuuggaucauaauccu...gaaagacaca
+OTTHUMT00000043281  AACAUUUCCAUCUGUUAAUAAAGAGCAAGGGCCUCUGGUCAUAAGUG
+OTTHUMT00000007987  .....................................ugcau..gaa
+#=GC SS_cons        ...............................................
+
+//
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>stderr</name>
+<content></content>
+</file>
+<file>
+<stream>input</stream>
+<name>sample_rnaseq2.stk</name>
+<content># STOCKHOLM 1.0
+
+OTTHUMT00000006707  uacGGAAGCU.UUAGGGAGGUGCUCUGAGACCCGAAACUAGACUCGACUU
+OTTHUMT00000043281  .aucccagcuacucgggagg....cugaggcaggagaau.cacuugaacc
+OTTHUMT00000007987  ................G.GGUGCUCUGAGACCCGAAACUAGACUCGACUU
+#=GC SS_cons        ................((((.....((((.............)))).)))
+
+OTTHUMT00000006707  UAACAGACACAGACGACCCUGAA.....G.....................
+OTTHUMT00000043281  cgggaggcagagguugcaguga.gccgag.....................
+OTTHUMT00000007987  UAACAGACACAGACGACCCUGAAGGCGAGACugucugcuggugggaugcu
+#=GC SS_cons        )..(((.....((((((((((.......(.....................
+
+OTTHUMT00000006707  ..AUGGAAAUGUUUUCUUCCAAAUUGUGC.....UGCACGUUUU.....U
+OTTHUMT00000043281  ..aucgcaccccugcacuccagccugggugacagagcaagacuccaucuc
+OTTHUMT00000007987  ggAUGGAAACGUUUUCUUCCAAAUUGUGC.....UGCACGUUUU.....U
+#=GC SS_cons        ..(.((((....)))).))))...(((((.....(((......(.....(
+
+OTTHUMT00000006707  GGCGAG.AGCAUGGGGCUGUGCGGCGUCCC...CUCCCUGGCGC.....C
+OTTHUMT00000043281  aaaaaaaauaaaggaaaUAUGCGUCGUUGGAUGCUGUAUGACAAUCAAGC
+OTTHUMT00000007987  GGCGAG.AGCAUGGGGCUGUGCGGCGUCCC...CUCCCUGGCGC.....C
+#=GC SS_cons        ((.((.......(((((((.((((((((...........))))).....)
+
+OTTHUMT00000006707  CACCUGUGCCCUGCACACU.G.GCCUGCACUGUGGUGAU.....CUC.GC
+OTTHUMT00000043281  UACUUAUAACAAACAAAAUUGAGAAUGAAGgauuaugauccaaacucAGC
+OTTHUMT00000007987  CACCUGUGCCCUGCACACU.G.GCCUGCACUGUGGUGAU.....CUC.GC
+#=GC SS_cons        ((((.((((...((........))..))))...))))...........))
+
+OTTHUMT00000006707  UUGGCCC....CCACCUGA.......UUCC....UGACA....UACAGCA
+OTTHUMT00000043281  UGGGCCUCCCCUC.CCUGCCCCAGGAUUGUGGAGUGAGAACGUUGCAGCA
+OTTHUMT00000007987  UUGGCCC....CCACCUGA.......UUCC....CGACA....UACAGCA
+#=GC SS_cons        .))))))....)..............)).)....)))..........)))
+
+OTTHUMT00000006707  GA..GGAAG....C..UUAGGCUCAGGUGG..AACA.....GCCUCAACU
+OTTHUMT00000043281  GGAGAGAACAACGCAGCAAAGCACAGCAGGGGAACCGgaaaugcucaccu
+OTTHUMT00000007987  GA..GGAAC....C..UUAGGCUCAGGUGG..AACA.....GCCUCAACU
+#=GC SS_cons        )...(((((.......(((((..(.(((.............)))((....
+
+OTTHUMT00000006707  ...GAUUCAGUCCCUGAACUUCCGUACA..CAGCCCUGGAGUCGUCU...
+OTTHUMT00000043281  uuugacaggguacuuuuaguucuggggccuuaucuuaaggauauuccaac
+OTTHUMT00000007987  ...GAUUCUGUCCCUGAACUUCCGUACA..CAGCCCUGGAGUCGUCU...
+#=GC SS_cons        ...))....)..))))).)))))...))..)).....)).))))))....
+
+OTTHUMT00000006707  .UAGAgc.caugauuuauuua......acuguucuuucauuuuacagaac
+OTTHUMT00000043281  auauacaaaaagauucaugcacagagauauguacuuuaguauuauuuacc
+OTTHUMT00000007987  .UAGAGc.caugauuuauuua......acuguucuuucauuuuacagaac
+#=GC SS_cons        ............((((((((........((((...........))))...
+
+OTTHUMT00000006707  aua..aaauguauuguuuccaa..cuuu.uuuccuaugguaa.....aua
+OTTHUMT00000043281  auaggaaaaaaguuggaaacaauacauuuuauguucuguaaaaugaaaga
+OTTHUMT00000007987  aua..aaauguauuguuuccaa..cuuu.uuuccuaugguaa.....aua
+#=GC SS_cons        .........((((((((((((...............))).)).....)))
+
+OTTHUMT00000006707  auacuaaaguaaau.aucucugug.caugaaucuu....uuuguau..au
+OTTHUMT00000043281  acaguuaaauaaaucauggCUCUAAGACGACUCCAGGGCUGUGUACGGAA
+OTTHUMT00000007987  auacuaaaguaaau.aucucug............................
+#=GC SS_cons        ))))..)))))))).....)))............................
+
+OTTHUMT00000006707  guu..ggaauauccuuaagauaagg......ccccagaacuaaaaguacc
+OTTHUMT00000043281  GUUCAGGGACAGAAUC.AGUUGAGGCUGUUCCACCUGAGCCUAAGCUUCC
+OTTHUMT00000007987  ..................................................
+#=GC SS_cons        ..................................................
+
+OTTHUMT00000006707  .cugucaaa.g...ggug.......a..gcauuuCCG.............
+OTTHUMT00000043281  UCUGCUGUAUGUCGGGAAUCAGGUGGGGGCCAAGCGAGAUCACCACAGUG
+OTTHUMT00000007987  ..................................................
+#=GC SS_cons        ..................................................
+
+OTTHUMT00000006707  ...GUUC.CCCUGCUGUGCUUUGCUGCGUUGUUCUCCC............
+OTTHUMT00000043281  CAGGC.CAGUGUGC.....AGGGCACAGGUGGGCACCAGGGAGGGGACGC
+OTTHUMT00000007987  ..................................................
+#=GC SS_cons        ..................................................
+
+OTTHUMT00000006707  .CUGCUGCAACGUUCUCACUCCACAAUCCUGGGGCAGG.UAGGGG.A...
+OTTHUMT00000043281  CGCACAGCCCCAUGCUCUCGCCAAAAACGUGCAGCACAAUUU.GGAAGAA
+OTTHUMT00000007987  ..................................................
+#=GC SS_cons        ..................................................
+
+OTTHUMT00000006707  ....GGCCCAGCug..aguuuggaucauaauccu...gaaagacaca
+OTTHUMT00000043281  AACAUUUCCAUCUGUUAAUAAAGAGCAAGGGCCUCUGGUCAUAAGUG
+OTTHUMT00000007987  .....................................ugcau..gaa
+#=GC SS_cons        ...............................................
+
+//
+</content>
+</file>
+<environement>
+HOME_4_TCOFFEE=/Users/cnotredame/
+MANPATH=/sw/share/man:/usr/share/man:/usr/local/share/man:/opt/X11/share/man:/Applications/Xcode.app/Contents/Developer/usr/share/man:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/share/man:/sw/lib/perl5/5.18.2/man
+TERM_PROGRAM=Apple_Terminal
+MCOFFEE_4_TCOFFEE=/Users/cnotredame//.t_coffee//mcoffee/
+ROOT_TMP_4_TCOFFEE=/var/tmp/
+SHELL=/bin/bash
+TERM=xterm-256color
+TMPDIR=/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/
+PERL5LIB=/sw/lib/perl5:/sw/lib/perl5/darwin
+Apple_PubSub_Socket_Render=/private/tmp/com.apple.launchd.u7asRiNodS/Render
+TERM_PROGRAM_VERSION=388.1.3
+OSNAME=macosx
+PERL_BIN=/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms::/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices
+TERM_SESSION_ID=08C395F9-69A0-4DC8-9DE9-5914C23D168F
+METHODS_4_TCOFFEE=/Users/cnotredame//.t_coffee//methods/
+VERSIONER_PERL_VERSION=5.18
+XAPPLRESDIR=/sw/etc/app-defaults/
+http_proxy=
+HTTP_proxy=
+USER=cnotredame
+SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.mMz4rqepoV/Listeners
+__CF_USER_TEXT_ENCODING=0x1F6:0x0:0x0
+ENV_4_TCOFFEE=/Users/cnotredame//.t_coffee//.t_coffee_env
+all_proxy=
+ALL_PROXY=
+HTTP_proxy_4_TCOFFEE=
+PATH=/opt/local/bin:/opt/local/sbin:/opt/local/bin:/opt/local/sbin:/Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/packages/x3dna-v2.1/bin:/Users/cnotredame/bin/macosx://Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms::/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices:/Users/cnotredame/bin/Scripts/:/Users/cnotredame/Library/Haskell/ghc-7.4.2/lib/epub-tools-2.0.0/bin/:/sw/bin:/sw/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin
+_=/usr/bin/printenv
+DIR_4_TCOFFEE=/Users/cnotredame//.t_coffee/
+PWD=/Users/cnotredame/Dropbox/projects/git/tcoffee/tmp/RANDOMSTRINGD9cjwqYdvpoZEJDwNe4Z/tmp/RANDOMSTRINGT3YORjyunF8pGjopkcQb/data
+CACHE_4_TCOFFEE=/Users/cnotredame//.t_coffee//cache/
+X3DNA=/Users/cnotredame/Dropbox/packages/x3dna-v2.1
+DBUS_LAUNCHD_SESSION_BUS_SOCKET=/private/tmp/com.apple.launchd.CeZrDaslOL/unix_domain_listener
+XPC_FLAGS=0x0
+VERSIONER_PERL_PREFER_32_BIT=no
+XPC_SERVICE_NAME=0
+ERRORFILE_4_TCOFFEE=t_coffee.ErrorReport
+PLUGINS_4_TCOFFEE=/Users/cnotredame//.t_coffee//plugins/macosx/
+SHLVL=3
+HOME=/Users/cnotredame
+DUMP_4_TCOFFEE=/Users/cnotredame/Dropbox/projects/git/tcoffee/tmp/RANDOMSTRINGD9cjwqYdvpoZEJDwNe4Z/tmp/RANDOMSTRINGT3YORjyunF8pGjopkcQb/core.tests.77.dump
+HTTP_PROXY=
+BIN=/Users/cnotredame/bin/macosx
+LOGNAME=cnotredame
+EMAIL_4_TCOFFEE=cedric.notredame@gmail.com
+LC_CTYPE=UTF-8
+EMAIL=cedric.notredame@gmail.com
+UPDATED_ENV_4_TCOFFEE=1
+INFOPATH=/sw/share/info:/sw/info:/usr/share/info
+DISPLAY=/private/tmp/com.apple.launchd.MDJPhYnCNw/org.macosforge.xquartz:0
+TC_MASTER_NODE=1
+NUMBER_OF_PROCESSORS=8
+ALL_proxy=
+SECURITYSESSIONID=186a6
+LOCKDIR_4_TCOFFEE=/var/tmp/tco/tco_oz1v9s864644//lck/rw2njarr9d/
+TMP_4_TCOFFEE=/var/tmp/tco/tco_oz1v9s864644/
+USER_BIN=/Users/cnotredame/bin/macosx
+SCRIPT_BIN=/Users/cnotredame/bin/Scripts/
+</environement>
+<DumpStatus>OK</DumpStatus>
+<DumpFile>/Users/cnotredame/Dropbox/projects/git/tcoffee/tmp/RANDOMSTRINGD9cjwqYdvpoZEJDwNe4Z/tmp/RANDOMSTRINGT3YORjyunF8pGjopkcQb/core.tests.77.dump</DumpFile>
+</DumpIO>

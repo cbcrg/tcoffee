@@ -1,0 +1,557 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>T-Coffee Installation &mdash; T-Coffee 11 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Quick Start Regressive Algorithm" href="tcoffee_quickstart_regressive.html" />
+    <link rel="prev" title="T-Coffee and related packages documentation (www.tcoffee.org)" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> T-Coffee
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                11
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">T-Coffee Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#unix-linux-binaries">Unix/Linux Binaries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#macos-binaries-deprecated">MacOS Binaries - Deprecated</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#installation-from-source-binaries-downloader-mac-osx-linux">Installation From Source/Binaries downloader (Mac OSX/Linux)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#blast-and-t-coffee">BLAST and T-Coffee</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#why-do-i-need-blast-with-t-coffee">Why do I need BLAST with T-Coffee?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-the-ebi-blast-client">Using the EBI BLAST client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-the-ncbi-blast-client">Using the NCBI BLAST client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-another-client">Using another client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-a-blast-local-version-on-unix">Using a BLAST local version on Unix</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-a-blast-local-version-on-windows-cygwin">Using a BLAST local version on Windows/Cygwin</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#troubleshooting">Troubleshooting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#third-party-packages">Third party packages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#m-coffee-parameters">M-Coffee parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#structural-modes-using-pdb">Structural modes (using PDB)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#r-coffee-associated-packages">R-Coffee associated packages</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tcoffee_quickstart_regressive.html">Quick Start Regressive Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tcoffee_quickstart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tcoffee_main_documentation.html">T-Coffee Main Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tcoffee_technical_documentation.html">T-Coffee Technical Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tcoffee_webserver.html">T-Coffee Web Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tcoffee_doctest.html">T-Coffee doc test</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tcoffee_faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tcoffee_citations_references.html">Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tcoffee_contacts_adresses.html">Contacts, Adresses &amp; Contributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tcoffee_license.html">License &amp; Terms of Use</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">T-Coffee</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>T-Coffee Installation</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/tcoffee_installation.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="t-coffee-installation">
+<h1>T-Coffee Installation<a class="headerlink" href="#t-coffee-installation" title="Permalink to this headline">¶</a></h1>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This chapter has been extensively updated in 11/2016. Installation of T-Coffee versions lower than version 9.03 may now be deprecated. Contact us if you need to install an older version !</p>
+</div>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>This chapter describes the installation procedures relevant for a standard use of T-Coffee on the most common operative systems: Unix/Linux and Mac OS. T-Coffee can only be installed on windows using virtual box simulating a Linux environement. We maintain two versions of T-Coffee:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>the ** <a href="#id1"><span class="problematic" id="id2">`</span></a>stable version &lt;<a class="reference external" href="http://tcoffee.org/Packages/tcoffee/Stable/">http://tcoffee.org/Packages/tcoffee/Stable/</a>&gt; <a href="#id3"><span class="problematic" id="id4">`</span></a>** This is an extensively evaluated version, either linked to the latest paper or benefiting from an important fix- ** recommended <a href="#id5"><span class="problematic" id="id6">**</span></a>.</p></li>
+<li><p>the ** <a href="#id7"><span class="problematic" id="id8">`</span></a>beta version &lt;<a class="reference external" href="http://www.tcoffee.org/Packages/Beta/Latest/">http://www.tcoffee.org/Packages/Beta/Latest/</a>&gt; <a href="#id9"><span class="problematic" id="id10">`</span></a>** is the latest release. It passes all the main tests and is usualy of higher quality that the stable. It is recommended to start installing this version if you experience any issue with the stable.</p></li>
+<li><p>the ** <a href="#id11"><span class="problematic" id="id12">`</span></a>archives  &lt;<a class="reference external" href="http://www.tcoffee.org/Packages/Archives/">http://www.tcoffee.org/Packages/Archives/</a>&gt; <a href="#id13"><span class="problematic" id="id14">`</span></a>** all previous releases of T-Coffee. If the one you need is missing please contact us.</p></li>
+</ol>
+</div></blockquote>
+<p>T-Coffee is a complex package that interacts with many other third party software and/or servers (such as BLAST, see next section). All available versions on the server (starting from version 1.08) will install on your computer all the third party packages and setup the variables required for the different T-Coffee options to run correctly. Whenever the automated installation fails because of unforeseen system specificities, <strong>don’t hesitate to contact us</strong>. If the installation was successfull with the exception of some packages, users should install the third party package manually. This documentation gives some useful tips, but users are encouraged to send their feedbacks and share their experiences in order to improve it.</p>
+<div class="section" id="unix-linux-binaries">
+<h3>Unix/Linux Binaries<a class="headerlink" href="#unix-linux-binaries" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>1. Download the installer package corresponding to your system from:
+   http://tcoffee.org/Packages/Stable/Latest/
+
+2. Grant execution permission to the downloaded file with the following command:
+   ##: chmod +x T-COFFEE_installer_&quot;version_x&quot;.bin
+
+3. Launch the installation wizard with:
+   ##: ./T-COFFEE_installer_&quot;version_x&quot;.bin
+
+4. Follow the wizard instructions and complete the installation
+
+5. Open a new terminal session to be sure that your environment is updated
+
+6. Type the following command to verify the installation was successful:
+   $$: t_coffee -version
+</pre></div>
+</div>
+</div>
+<div class="section" id="macos-binaries-deprecated">
+<h3>MacOS Binaries - Deprecated<a class="headerlink" href="#macos-binaries-deprecated" title="Permalink to this headline">¶</a></h3>
+<p>These binaries are not any more supported as such. However, the source installer - see below - will automatically retrive pre-compiled MacOS binaries if compilation fails on your system.</p>
+</div>
+<div class="section" id="installation-from-source-binaries-downloader-mac-osx-linux">
+<h3>Installation From Source/Binaries downloader (Mac OSX/Linux)<a class="headerlink" href="#installation-from-source-binaries-downloader-mac-osx-linux" title="Permalink to this headline">¶</a></h3>
+<p>The following procedure shows howto install T-Coffee from the pre-packages source distribution. This procedure is recommanded because the version of T-Coffee available there is guarranteed to have passed a set of pre-specified tests. By contrast, the github version is untested, and therefore ongoing work… In most cases the binaries will be downloaded from a repository but you may also trigger local compilation.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">1.</span> <span class="n">Download</span> <span class="n">the</span> <span class="n">desired</span> <span class="n">installer</span><span class="p">:</span>
+   <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">tcoffee</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">Packages</span><span class="o">/</span><span class="n">Stable</span><span class="o">/</span><span class="n">Latest</span><span class="o">/</span><span class="n">T</span><span class="o">-</span><span class="n">COFFEE_distribution_Version_</span><span class="o">&lt;</span><span class="n">version</span><span class="o">&gt;.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span>
+   <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">tcoffee</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">Packages</span><span class="o">/</span><span class="n">Beta</span><span class="o">/</span><span class="n">Latest</span><span class="o">/</span><span class="n">T</span><span class="o">-</span><span class="n">COFFEE_distribution_Version_</span><span class="o">&lt;</span><span class="n">version</span><span class="o">&gt;.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span>
+   <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">tcoffee</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">Packages</span><span class="o">/</span><span class="n">Archives</span><span class="o">/</span><span class="n">T</span><span class="o">-</span><span class="n">COFFEE_distribution_Version_</span><span class="o">&lt;</span><span class="n">version</span><span class="o">&gt;.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span>
+   <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">cbcrg</span><span class="o">/</span><span class="n">tcoffee</span>
+
+<span class="mi">2</span><span class="n">a</span><span class="o">.</span> <span class="n">untar</span> <span class="n">the</span> <span class="n">file</span>
+   <span class="c1">##: tar -xvf T-COFFEE_distribution.tar.gz</span>
+   <span class="c1">##: cd  T-COFFEE_distribution</span>
+
+<span class="mi">2</span><span class="n">b</span><span class="o">.</span> <span class="n">clone</span> <span class="ow">or</span> <span class="n">unzip</span> <span class="n">the</span> <span class="n">github</span> <span class="n">repo</span>
+   <span class="c1">##: cd t_coffee/src</span>
+
+
+<span class="mi">3</span><span class="n">a</span><span class="o">.</span> <span class="n">Launch</span> <span class="n">the</span> <span class="n">installer</span>
+   <span class="c1">##:  ./install tcoffee</span>
+
+
+<span class="mi">3</span><span class="n">b</span><span class="o">.</span> <span class="n">If</span> <span class="n">you</span> <span class="n">want</span> <span class="n">to</span> <span class="n">use</span> <span class="n">remote</span> <span class="n">services</span> <span class="p">(</span><span class="n">psiblast</span><span class="p">,</span> <span class="n">expresso</span><span class="p">)</span><span class="o">.</span> <span class="n">You</span> <span class="n">must</span> <span class="n">enter</span> <span class="n">a</span> <span class="n">proxy</span> <span class="n">value</span> <span class="ow">and</span> <span class="n">a</span> <span class="n">valid</span> <span class="n">e</span><span class="o">-</span><span class="n">mail</span><span class="o">.</span> <span class="n">These</span> <span class="n">values</span> <span class="n">will</span> <span class="n">be</span> <span class="n">stored</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">your</span> <span class="n">home</span><span class="o">&gt;/.</span><span class="n">t_coffee</span><span class="o">/.</span><span class="n">t_coffee_env</span> <span class="ow">and</span> <span class="n">can</span> <span class="n">be</span> <span class="n">edited</span> <span class="n">at</span> <span class="nb">any</span> <span class="n">time</span><span class="o">.</span> <span class="n">The</span> <span class="n">proxy</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">compulsory</span><span class="o">.</span> <span class="n">It</span> <span class="ow">is</span> <span class="n">usualy</span> <span class="n">needed</span> <span class="n">when</span> <span class="n">working</span> <span class="n">behind</span> <span class="n">a</span> <span class="n">firewall</span><span class="o">.</span>
+   <span class="c1">##: ./install tcoffee -email=&lt;your email&gt; -proxy=&lt;your proxy&gt;</span>
+
+
+<span class="mf">4.</span> <span class="k">as</span> <span class="n">you</span> <span class="n">can</span> <span class="n">also</span> <span class="n">install</span> <span class="nb">any</span> <span class="n">of</span> <span class="n">the</span> <span class="n">T</span><span class="o">-</span><span class="n">Coffee</span> <span class="n">mode</span> <span class="n">you</span> <span class="n">are</span> <span class="n">interested</span> <span class="ow">in</span><span class="o">.</span> <span class="n">Get</span> <span class="n">the</span> <span class="nb">list</span> <span class="k">with</span><span class="p">:</span>
+   <span class="c1">##: ./install</span>
+   <span class="n">Then</span> <span class="n">install</span> <span class="n">one</span><span class="p">,</span> <span class="k">for</span> <span class="n">instance</span>
+   <span class="c1">##: ./install expresso</span>
+   <span class="n">Or</span> <span class="n">install</span> <span class="n">them</span> <span class="nb">all</span>
+   <span class="c1">##: ./install all</span>
+
+
+<span class="mf">5.</span> <span class="n">By</span> <span class="n">default</span><span class="p">,</span> <span class="n">the</span> <span class="n">installer</span> <span class="n">will</span> <span class="ow">not</span> <span class="n">re</span><span class="o">-</span><span class="n">install</span> <span class="nb">any</span> <span class="n">component</span> <span class="n">already</span> <span class="n">available</span> <span class="n">on</span> <span class="n">your</span> <span class="n">system</span><span class="o">.</span> <span class="n">If</span> <span class="n">you</span> <span class="n">want</span> <span class="n">to</span> <span class="n">update</span> <span class="n">you</span> <span class="n">must</span> <span class="n">specify</span>
+   <span class="c1">##: ./install &lt;any component&gt; -update</span>
+   <span class="n">OR</span>
+   <span class="c1">##: ./install &lt;any component&gt; -update -nobinaries</span>
+   <span class="n">For</span> <span class="n">instance</span> <span class="n">the</span> <span class="n">following</span> <span class="n">will</span> <span class="n">cause</span> <span class="n">T</span><span class="o">-</span><span class="n">Coffee</span> <span class="n">to</span> <span class="n">be</span> <span class="n">recompiled</span> <span class="n">on</span> <span class="n">your</span> <span class="n">system</span>
+   <span class="c1">##: ./install t_coffee -update -nobinaries</span>
+
+<span class="mf">6.</span> <span class="n">When</span> <span class="n">you</span> <span class="n">are</span> <span class="n">done</span> <span class="n">you</span> <span class="n">will</span> <span class="n">need</span> <span class="n">to</span> <span class="n">make</span> <span class="n">this</span> <span class="n">installation</span> <span class="n">permanent</span> <span class="n">by</span> <span class="n">adding</span> <span class="n">the</span> <span class="n">following</span> <span class="n">lines</span> <span class="o">*</span><span class="n">at</span> <span class="n">the</span> <span class="n">bottom</span><span class="o">*</span> <span class="n">of</span> <span class="n">your</span> <span class="n">configuration</span> <span class="n">file</span> <span class="p">(</span><span class="n">typically</span> <span class="o">.</span><span class="n">bashrc</span><span class="p">)</span>
+   <span class="c1">##: export PATH=&lt;your home&gt;/.t_coffee/bin/&lt;macosx|linux&gt;:$PATH</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="blast-and-t-coffee">
+<h2>BLAST and T-Coffee<a class="headerlink" href="#blast-and-t-coffee" title="Permalink to this headline">¶</a></h2>
+<p>BLAST is a program that searches databases for homologues of a query sequence. It works for protein and nucleic acid sequences alike. In theory BLAST is just a package like any but in practice things are a bit more complex. To run correctly, BLAST requires up-to-date databases (that can be fairly large, like nr or UniProt) and a powerful computer. Fortunately, an increasing number of institutes or companies are now providing BLAST clients that run over the net. It means that all you need is a small program that send your query to the big server and gets the results back. This prevents you from the hassle of installing and maintaining BLAST, but of course it is less private and you rely on the network and the current load of these busy servers.</p>
+<p><strong>Thanks to its interaction with BLAST, T-Coffee can gather more information and deliver alignments significantly more accurate than the default T-Coffee or any similar method. Let us go through the various modes available for T-Coffee…</strong></p>
+<div class="section" id="why-do-i-need-blast-with-t-coffee">
+<h3>Why do I need BLAST with T-Coffee?<a class="headerlink" href="#why-do-i-need-blast-with-t-coffee" title="Permalink to this headline">¶</a></h3>
+<p>The most accurate modes of T-Coffee scan the databases for templates that they use to align the sequences. Let’s see how to get BLAST up and running, from the easy solution to tailored ones. There are currently two types of templates for proteins:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p><strong>structures</strong>, that can be found by a BLASTP against the PDB database.</p></li>
+<li><p><strong>profiles</strong>, constructed using BLASTP or PSI-BLAST against nr or UniProt.</p></li>
+</ol>
+</div></blockquote>
+<p>These templates are automatically built by T-Coffee when using one of the following modes:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">To</span> <span class="n">fetch</span> <span class="ow">and</span> <span class="n">use</span> <span class="n">structural</span> <span class="n">templates</span><span class="p">:</span>
+<span class="c1">##: t_coffee &lt;yourseq&gt; -mode expresso</span>
+
+<span class="n">To</span> <span class="n">fetch</span> <span class="ow">and</span> <span class="n">use</span> <span class="n">profile</span> <span class="n">templates</span><span class="p">:</span>
+<span class="c1">##: t_coffee &lt;your seq&gt; -mode psicoffee</span>
+
+<span class="n">To</span> <span class="n">fetch</span> <span class="n">everything</span> <span class="n">possible</span> <span class="ow">and</span> <span class="n">get</span> <span class="n">the</span> <span class="n">best</span> <span class="n">templates</span><span class="p">,</span> <span class="n">structure</span> <span class="ow">or</span> <span class="n">profile</span><span class="p">:</span>
+<span class="c1">##: t_coffee &lt;your seq&gt; -mode accurate</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="using-the-ebi-blast-client">
+<h3>Using the EBI BLAST client<a class="headerlink" href="#using-the-ebi-blast-client" title="Permalink to this headline">¶</a></h3>
+<p>This is by far the easiest way and conveniently the default mode of T-Coffee. The PERL clients are already incorporated in T-Coffee and all you need are the proper PERL libraries. In principle, T-Coffee should have already installed these libraries during the standard installation, yet, this requires having root access. It really is worth the effort since the EBI is providing one of the best webservice available around and most notably, the only public PSI-BLAST via a webservice. Note that because PSI-BLAST is time consuming, T-Coffee stores the runs in its cache (<strong>./tcoffee/cache</strong>) so that it does not need to be rerun. It means that if you realign your sequences (or add a few extra sequences), things will be considerably faster.</p>
+<div class="admonition danger">
+<p class="admonition-title">Danger</p>
+<p>Whenever you use a T-Coffee mode requiring BLAST access, it will ask you for an authentification e-mail. Be extra careful!!! If you provide a fake e-mail, the EBI may suspend the service for all machines associated with your IP address (that could mean your entire lab, entire institute, even the entire country or, but I doubt it, the whole universe).</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Files in the cache are never erased so remember to empty the cache from time to time otherwise it’s just getting bigger and bigger…</p>
+</div>
+</div>
+<div class="section" id="using-the-ncbi-blast-client">
+<h3>Using the NCBI BLAST client<a class="headerlink" href="#using-the-ncbi-blast-client" title="Permalink to this headline">¶</a></h3>
+<p>The NCBI is the next best alternative however in my hands it was always a bit slower and, most of all, it does not incorporate PSI-BLAST as a webservice. A big miss! The NCBI web BLAST client is a small executable that you should install on your system. To do so, you just have to follow the instructions given on this <a class="reference external" href="ftp://ftp.ncbi.nih.gov/blast/executables/LATEST">link</a>. Simply go for netbl, download the executable that corresponds to your architecture (Cygwin users should go for the win executable). Despite all the files that come along the executable blastcl3 is a stand alone executable that you can safely move to your $BIN. All you then need to do is to make sure that T-Coffee uses the right client; when you run T-Coffee, specify the client in the command line with the flag <strong>-blast_server=NCBI</strong>.</p>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>No need for any e-mail here, but you don’t get PSI-BLAST. Whenever T-Coffee will need to use it, BLASTP will be used instead.</p>
+</div>
+</div>
+<div class="section" id="using-another-client">
+<h3>Using another client<a class="headerlink" href="#using-another-client" title="Permalink to this headline">¶</a></h3>
+<p>You may have your own client (lucky you). If that is so, all you need is to make sure that this client is complient with the BLAST command line. If your client is named foo.pl, all you need to do is run T-Coffee command line with the flag <strong>-blast_server=CLIENT_foo.pl</strong>. Foo will be called as if it were BLASTPGP, and it is your responsability to make sure it can handle the following command line.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">##: foo.pl -p &lt;method&gt; -d &lt;db&gt; -i &lt;infile&gt; -o &lt;outfile&gt; -m 7</span>
+
+<span class="s2">&quot;method&quot;</span>  <span class="p">:</span> <span class="n">BLAST</span> <span class="n">method</span> <span class="k">for</span> <span class="n">the</span> <span class="n">search</span> <span class="p">(</span><span class="s2">&quot;blastp&quot;</span> <span class="ow">or</span> <span class="s2">&quot;psiblast&quot;</span><span class="p">)</span>
+<span class="s2">&quot;db&quot;</span>      <span class="p">:</span> <span class="n">database</span> <span class="n">used</span> <span class="k">for</span> <span class="n">the</span> <span class="n">search</span>
+<span class="s2">&quot;infile&quot;</span>  <span class="p">:</span> <span class="nb">input</span> <span class="n">sequence</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="ow">in</span> <span class="n">FASTA</span> <span class="nb">format</span>
+<span class="s2">&quot;outfile&quot;</span> <span class="p">:</span> <span class="n">name</span> <span class="n">the</span> <span class="n">output</span> <span class="n">file</span>
+<span class="s2">&quot;-m 7&quot;</span>    <span class="p">:</span> <span class="n">triggers</span> <span class="n">the</span> <span class="n">XML</span> <span class="n">output</span> <span class="p">(</span><span class="n">parses</span> <span class="n">both</span> <span class="n">the</span> <span class="n">EBI</span> <span class="o">&amp;</span> <span class="n">NCBI</span> <span class="n">XML</span> <span class="n">output</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If foo.pl behaves differently, the easiest way will probably be to write a wrapper around it so that wrapped_foo.pl behaves like BLASTPGP.</p>
+</div>
+</div>
+<div class="section" id="using-a-blast-local-version-on-unix">
+<h3>Using a BLAST local version on Unix<a class="headerlink" href="#using-a-blast-local-version-on-unix" title="Permalink to this headline">¶</a></h3>
+<p>If you have BLASTPGP installed, you can run it instead of the remote clients by using in your command line the flag <strong>-blast_server=LOCAL</strong>. The documentation for BLASTPGP can be found <a class="reference external" href="http://www.ncbi.nlm.nih.gov/staff/tao/URLAPI/blastpgp.html">here</a> and the package is part of the standard BLAST <a class="reference external" href="ftp://ftp.ncbi.nih.gov/blast/executables/LATEST">distribution</a>. Depending on your system, your own skills, your requirements and on more parameters than I have fingers to count, installing a BLAST server suited for your needs can range from a 10 minutes job to an achievement spread over several generations. So at this point, you should roam the NCBI website for suitable information. If you want to have your own BLAST server to run your own databases, you should know that it is possible to control both the database and the program used by BLAST using T-Coffee flags  <strong>-protein_db</strong> (will specify the database used by all the PSI-BLAST modes) and <strong>-pdb_db</strong> (will specify the database used by the structural modes)</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>T-Coffee is compliant with BLAST+, the latest NCBI BLAST.</p>
+</div>
+</div>
+<div class="section" id="using-a-blast-local-version-on-windows-cygwin">
+<h3>Using a BLAST local version on Windows/Cygwin<a class="headerlink" href="#using-a-blast-local-version-on-windows-cygwin" title="Permalink to this headline">¶</a></h3>
+<p>BLAST+ is the latest NCBI BLAST. It is easier to install and a default installation should be compliant with a default T-Coffee installation. For those of you using Cygwin, be careful!! While Cygwin behaves like a Unix system, the BLAST executable required for Cygwin (win32) is expecting Windows paths and not Unix paths. This has three important consequences:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">1.</span> <span class="n">The</span> <span class="n">NCBI</span> <span class="n">file</span> <span class="n">declaring</span> <span class="n">the</span> <span class="n">sata</span> <span class="n">directory</span> <span class="n">must</span> <span class="n">be</span><span class="p">:</span>
+   <span class="n">C</span><span class="p">:</span><span class="n">WINDOWS</span><span class="o">//</span><span class="n">ncbi</span><span class="o">.</span><span class="n">init</span> <span class="p">[</span><span class="n">at</span> <span class="n">the</span> <span class="n">root</span> <span class="n">of</span> <span class="n">your</span> <span class="n">WINDOWS</span><span class="p">]</span>
+
+<span class="mf">2.</span> <span class="n">The</span> <span class="n">address</span> <span class="n">mentioned</span> <span class="k">with</span> <span class="n">this</span> <span class="n">file</span> <span class="n">must</span> <span class="n">be</span> <span class="n">WINDOWS</span> <span class="n">formated</span><span class="p">,</span> <span class="k">for</span> <span class="n">example</span><span class="p">:</span>
+   <span class="n">Data</span><span class="o">=</span><span class="n">C</span><span class="p">:</span>\<span class="n">cygwin</span>\<span class="n">home</span>\<span class="n">notredame</span>\<span class="n">blast</span>\<span class="n">data</span>
+
+<span class="mf">3.</span> <span class="n">The</span> <span class="n">database</span> <span class="n">addresses</span> <span class="n">to</span> <span class="n">BLAST</span> <span class="n">must</span> <span class="n">be</span> <span class="ow">in</span> <span class="n">Windows</span> <span class="nb">format</span><span class="p">:</span>
+   <span class="c1">##: t_coffee ... -protein_db=&#39;c:/somewhere/somewhere else/database&#39;</span>
+</pre></div>
+</div>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>Using the slash (/) or the antislash (\) does not matter on new systems but I would recommend against incorporating white spaces.</p>
+</div>
+</div>
+</div>
+<div class="section" id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="third-party-packages">
+<h3>Third party packages<a class="headerlink" href="#third-party-packages" title="Permalink to this headline">¶</a></h3>
+<p>These procedures are not needed for default usage of T-Coffee. You will only need to install/configure these packages for specific purposes. T-Coffee is meant to interact with as many packages as possible, especially for aligning or using predictions. You will receive a list of supported packages that looks like the next table if you simply type <strong>t_coffee</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Command:
+$$: t_coffee
+
+Display the list of supported packages:
+
+****** Pairwise Sequence Alignment Methods:
+--------------------------------------------
+fast_pair built_in
+exon3_pair built_in
+exon2_pair built_in
+exon_pair built_in
+slow_pair built_in
+proba_pair built_in
+lalign_id_pair built_in
+seq_pair built_in
+externprofile_pair built_in
+hh_pair built_in
+profile_pair built_in
+cdna_fast_pair built_in
+cdna_cfast_pair built_in
+clustalw_pair ftp://www.ebi.ac.uk/pub/clustalw
+mafft_pair http://www.biophys.kyoto-u.ac.jp/~katoh/programs/align/mafft/
+mafftjtt_pair http://www.biophys.kyoto-u.ac.jp/~katoh/programs/align/mafft/
+mafftgins_pair http://www.biophys.kyoto-u.ac.jp/~katoh/programs/align/mafft/
+dialigntx_pair http://dialign-tx.gobics.de/
+dialignt_pair http://dialign-t.gobics.de/
+poa_pair http://www.bioinformatics.ucla.edu/poa/
+probcons_pair http://probcons.stanford.edu/
+muscle_pair http://www.drive5.com/muscle/
+t_coffee_pair http://www.tcoffee.org
+pcma_pair ftp://iole.swmed.edu/pub/PCMA/
+kalign_pair http://msa.cgb.ki.se
+amap_pair http://bio.math.berkeley.edu/amap/
+proda_pair http://bio.math.berkeley.edu/proda/
+prank_pair http://www.ebi.ac.uk/goldman-srv/prank/
+consan_pair http://selab.janelia.org/software/consan/
+
+****** Pairwise Structural Alignment Methods:
+--------------------------------------------
+align_pdbpair built_in
+lalign_pdbpair built_in
+extern_pdbpair built_in
+thread_pair built_in
+fugue_pair http://mizuguchilab.org/fugue/
+pdb_pair built_in
+sap_pair https://mathbio.crick.ac.uk/wiki/Software#SAP
+mustang_pair http://lcb.infotech.monash.edu.au/mustang/
+tmalign_pair https://zhanglab.ccmb.med.umich.edu/TM-align/
+
+****** Multiple Sequence Alignment Methods:
+--------------------------------------------
+clustalw_msa ftp://www.ebi.ac.uk/pub/clustalw
+mafft_msa http://www.biophys.kyoto-u.ac.jp/~katoh/programs/align/mafft/
+mafftjtt_msa http://www.biophys.kyoto-u.ac.jp/~katoh/programs/align/mafft/
+mafftgins_msa http://www.biophys.kyoto-u.ac.jp/~katoh/programs/align/mafft/
+dialigntx_msa http://dialign-tx.gobics.de/
+dialignt_msa http://dialign-t.gobics.de/
+poa_msa http://www.bioinformatics.ucla.edu/poa/
+probcons_msa http://probcons.stanford.edu/
+muscle_msa http://www.drive5.com/muscle/
+t_coffee_msa http://www.tcoffee.org
+pcma_msa ftp://iole.swmed.edu/pub/PCMA/
+kalign_msa http://msa.cgb.ki.se
+amap_msa http://bio.math.berkeley.edu/amap/
+proda_msa http://bio.math.berkeley.edu/proda/
+prank_msa http://www.ebi.ac.uk/goldman-srv/prank/
+
+####### Prediction Methods available to generate Templates
+-------------------------------------------------------------
+RNAplfold http://www.tbi.univie.ac.at/~ivo/RNA/
+HMMtop http://www.enzim.hu/hmmtop/
+GOR4 http://mig.jouy.inra.fr/logiciels/gorIV/
+wublast_client http://www.ebi.ac.uk/Tools/webservices/services/wublast
+blastpgp_client http://www.ebi.ac.uk/Tools/webservices/services/blastpgp
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>In our hands all these packages where very straightforward to compile and install on a standard Cygwin or Linux configuration. Just make sure you have gcc, the C compiler, properly installed. Once the package is compiled and ready to use, make sure that the executable is on your path, so that T-Coffee can find it automatically. Our favorite procedure is to create a bin directory in the home. If you do so, make sure this bin is in your path and fill it with all your executables (this is a standard Unix practice).</p>
+</div>
+</div>
+<div class="section" id="m-coffee-parameters">
+<h3>M-Coffee parameters<a class="headerlink" href="#m-coffee-parameters" title="Permalink to this headline">¶</a></h3>
+<p>M-Coffee is a special mode of T-Coffee that makes it possible to combine the output of many Multiple Sequence Alignment packages. By default all the packages will be in the following folder <strong>$HOME/.t_coffee/plugins/linux/</strong>. If you want to have these packages in a different directory, you can either set the environment variable (option 1) or use the flag <strong>-plugin</strong> (to override every other setting). If for some reason, you do not want this directory to be on your path or you want to specify a precise directory containing the executables, you can use option 2. You can also set the following environment variables to the absolute path of the executable you want to use option 3: whenever they are set these variables will supersede any other declaration. This is a convenient way to experiment with multiple package versions. If you would rather have the mcoffee directory in some other location, set the MCOFFEE_4_TCOFFEE environement variable to the proper directory (option 4).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Option</span> <span class="mi">1</span><span class="p">:</span> <span class="nb">set</span> <span class="n">the</span> <span class="n">environment</span> <span class="n">variable</span>
+<span class="c1">##: setenv PLUGINS_4_TCOFFEE=&lt;plugins dir&gt;</span>
+
+<span class="n">Option</span> <span class="mi">2</span><span class="p">:</span> <span class="n">specify</span> <span class="n">the</span> <span class="n">directory</span>
+<span class="c1">##: export PLUGINS_4_TCOFFEE=&lt;dir&gt;</span>
+
+<span class="n">Option</span> <span class="mi">3</span><span class="p">:</span>
+<span class="c1">##: POA_4_TCOFFEE CLUSTALW_4_TCOFFEE TCOFFEE_4_TCOFFEE MAFFT_4_TCOFFEE \</span>
+<span class="n">MUSCLE_4_TCOFFEE</span> <span class="n">DIALIGNT_4_TCOFFEE</span> <span class="n">PRANK_4_TCOFFEE</span> <span class="n">DIALIGNTX_4_TCOFFEE</span>
+
+<span class="n">Option</span> <span class="mi">4</span><span class="p">:</span>
+<span class="c1">##: setenv MCOFFEE_4_TCOFFEE &lt;directory containing mcoffee files&gt;</span>
+</pre></div>
+</div>
+<p>To be able to run M-Coffee, these following files are enough for a default usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">BLOSUM</span><span class="o">.</span><span class="n">diag_prob_t10</span> <span class="n">BLOSUM75</span><span class="o">.</span><span class="n">scr</span> <span class="n">blosum80_trunc</span><span class="o">.</span><span class="n">mat</span>
+<span class="n">dna_diag_prob_100_exp_330000</span> <span class="n">dna_diag_prob_200_exp_110000</span>
+<span class="n">BLOSUM</span><span class="o">.</span><span class="n">scr</span> <span class="n">BLOSUM90</span><span class="o">.</span><span class="n">scr</span> <span class="n">dna_diag_prob_100_exp_110000</span>
+<span class="n">dna_diag_prob_100_exp_550000</span> <span class="n">dna_diag_prob_250_exp_110000</span>
+<span class="n">BLOSUM75</span><span class="o">.</span><span class="n">diag_prob_t2</span> <span class="n">blosum80</span><span class="o">.</span><span class="n">mat</span> <span class="n">dna_diag_prob_100_exp_220000</span>
+<span class="n">dna_diag_prob_150_exp_110000</span> <span class="n">dna_matrix</span><span class="o">.</span><span class="n">scr</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="structural-modes-using-pdb">
+<h3>Structural modes (using PDB)<a class="headerlink" href="#structural-modes-using-pdb" title="Permalink to this headline">¶</a></h3>
+<p>Expresso/3D-Coffee are special modes of T-Coffee that allow to combine sequences and structures to reach more accurate alignments. T-Coffee proposes also other tools (iRMSD/APDB, T-RMSD, etc…) requiring access to structural information. You can do so either by having a database installed locally on your own system or by accessing the PDB through the web server. If you do not have PDB installed, don’t worry, T-Coffee will go and fetch any structure it needs directly from the PDB repository, it will simply be a bit slower. If you prefer to have access to a local installation of the PDB in your file system, you have to indicate their location in your system using one of the following commands:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Using</span> <span class="n">a</span> <span class="n">local</span> <span class="n">version</span> <span class="n">of</span> <span class="n">the</span> <span class="n">PDB</span> <span class="n">database</span><span class="p">:</span>
+<span class="c1">##: setenv (or export) PDB_DIR &lt;PATH&gt;/data/structures/all/pdb/</span>
+<span class="c1">##: setenv (or export) PDB_DIR &lt;PATH&gt;/structures/divided/pdb/</span>
+</pre></div>
+</div>
+<p>The T-RMSD tools comes along with T_Coffee package in order to build clustering based on structure. In addition to structural information it also requires the package Phylip, containing lots of phylogenetic tree reconstruction tools. If you need more information about the different Phylip tools, information can be obtained <a class="reference external" href="http://www.evolution.genetics.washington.edu/phylip.html">here</a>.</p>
+</div>
+<div class="section" id="r-coffee-associated-packages">
+<h3>R-Coffee associated packages<a class="headerlink" href="#r-coffee-associated-packages" title="Permalink to this headline">¶</a></h3>
+<p>R-Coffee is a special mode able to align RNA sequences while taking into account their secondary structure. R-Coffee only requires the package Vienna to be installed, in order to compute Multiple Sequence Alignments. To make the best out of it, you should also have all the packages required by M-Coffee.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference external" href="http://eddylab.org/software/consan/">Consan</a> from Eddy/Riva laboratory.</p></li>
+<li><p><a class="reference external" href="http://www.tbi.univie.ac.at/RNA/">RNAplfold</a> from the Vienna package.</p></li>
+<li><p><a class="reference external" href="http://probcons.stanford.edu/download.html">ProbConsRNA</a> from Stanford university.</p></li>
+</ul>
+</div></blockquote>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Regarding ProbConsRNA, make sure you rename the probcons executable into ProbConsRNA.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>In order to insure a proper interface bewteen Consan and R-Coffee, make sure that the file mix80.mod is in the directory <strong>~/.t_coffee/mcoffee</strong> or in the mcoffee directory otherwise declared.</p>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="tcoffee_quickstart_regressive.html" class="btn btn-neutral float-right" title="Quick Start Regressive Algorithm" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="T-Coffee and related packages documentation (www.tcoffee.org)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Cedric Notredame
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

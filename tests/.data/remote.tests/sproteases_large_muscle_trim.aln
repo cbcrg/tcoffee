@@ -1,0 +1,356 @@
+CLUSTAL FORMAT for T-COFFEE Version_4.32 [http://www.tcoffee.org], CPU=3.71 sec, SCORE=0, Nseq=20, Len=938 
+
+sp|Q8K0D2|HABP2_MOUSE  ----------------------------------mfvrmlvfrvlllialvgksviglsl
+sp|Q8BIK6|TMPS7_MOUSE  mchfklvaivgylirlsiesiqleadncitdsltvydsllpirsailyriceptrtlmsf
+sp|Q7RTY8|TMPS7_HUMAN  mchfklvaivgylirlsiksiqieadncvtdsltiydsllpirssilyriceptrtlmsf
+sp|P80009|PLMN_CANFA   -----------asdcmfgngkgyrgkkattvmgipcqewaaqephrhsiftpetnpqagl
+sp|P80015|CAP7_PIG     ------------------------------------------------------------
+sp_vs|O60259-2|O60259  ------mgrprpraaktwmfllllggawaacgsldlltklyaenlpcvhlnpqwpsqpsh
+sp|P11033|GRAD_MOUSE   --------------------------------------mppililltlllplr-------
+sp|P43430|MCPT8_MOUSE  --------------------------------------mflllvllvaalpvn-------
+sp|P50339|MCPT3_RAT    -------------------------------------mnlhalcllllllgss-------
+sp|Q9Y5K2|KLK4_HUMAN   ----------------------------------matagnpwgwflgylilgv-------
+sp|Q6H321|KLK2_HORSE   ----------------------------------------mwflvlcldlslg-------
+sp|P36178|CTRB2_PENVA  ----------------------------migk----------lslllvcvavasgnpaag
+sp|P35036|TRY2_ANOGA   ---------------------------------msnkiailllavvvavvacaqaqpsrr
+sp|Q7YRZ7|GRAA_BOVIN   ---------------------------------mnipfpfsfppaiclllipgvfpvsc-
+sp|P00773|ELA1_RAT     -----------------------------------mlrflvfaslvlyghstqdfpet--
+sp|Q3UP87|ELNE_MOUSE   -------------------------------malgrlssrtlaamllalflggpala---
+sp|P07338|CTRB1_RAT    ---------------------------------maflwlvscfalvgatfgcgvptiqpv
+sp|P29786|TRY3_AEDAE   --------------------------------mnqflfvsfcalldsakvsaatlss---
+sp|P03953|CFAD_MOUSE   ---------------------------------mhssvyfvalvilgaa-vcaaqpr---
+sp|Q03238|GRAM_RAT     ---------------------------------------lllllalktlwavgnrfe---
+                                                                                   
+
+sp|Q8K0D2|HABP2_MOUSE  ms-----fiappdpdwtpddyyysyeqsspdedpsvtqttpenpdw-----------yye
+sp|Q8BIK6|TMPS7_MOUSE  vstnnlmlvilkspyvrrlagirayfevipeqkcestilvkeinsfegkisspyypsyyp
+sp|Q7RTY8|TMPS7_HUMAN  vstnnlmlvtfksphirrlsgirayfevipeqkcentvlvkditgfegkisspyypsyyp
+sp|P80009|PLMN_CANFA   ek----------------------------------------------------------
+sp|P80015|CAP7_PIG     ------------------------------------------------------------
+sp_vs|O60259-2|O60259  cp----------------------------------------------------------
+sp|P11033|GRAD_MOUSE   ------------------------------------------------------------
+sp|P43430|MCPT8_MOUSE  ------------------------------------------------------------
+sp|P50339|MCPT3_RAT    ------------------------------------------------------------
+sp|Q9Y5K2|KLK4_HUMAN   ------------------------------------------------------------
+sp|Q6H321|KLK2_HORSE   ------------------------------------------------------------
+sp|P36178|CTRB2_PENVA  kp----------------------------------------------------------
+sp|P35036|TRY2_ANOGA   hh----------------------------------------------------------
+sp|Q7YRZ7|GRAA_BOVIN   ------------------------------------------------------------
+sp|P00773|ELA1_RAT     n-----------------------------------------------------------
+sp|Q3UP87|ELNE_MOUSE   ------------------------------------------------------------
+sp|P07338|CTRB1_RAT    lt----------------------------------------------------------
+sp|P29786|TRY3_AEDAE   ------------------------------------------------------------
+sp|P03953|CFAD_MOUSE   ------------------------------------------------------------
+sp|Q03238|GRAM_RAT     ------------------------------------------------------------
+                                                                                   
+
+sp|Q8K0D2|HABP2_MOUSE  dddpc-------------------------qsnpcehg----------gdciirgdtfsc
+sp|Q8BIK6|TMPS7_MOUSE  pkckctwtfqtslstlgialkfynysitkksakgcehgwweinehmycgsymdhetifrv
+sp|Q7RTY8|TMPS7_HUMAN  pkckctwkfqtslstlgialkfynysitkksmkgcehgwweinehmycgsymdhqtifrv
+sp|P80009|PLMN_CANFA   ------------------------------------------------------------
+sp|P80015|CAP7_PIG     ------------------------------------------------------------
+sp_vs|O60259-2|O60259  ------------------------------------------------------------
+sp|P11033|GRAD_MOUSE   ------------------------------------------------------------
+sp|P43430|MCPT8_MOUSE  ------------------------------------------------------------
+sp|P50339|MCPT3_RAT    ------------------------------------------------------------
+sp|Q9Y5K2|KLK4_HUMAN   ------------------------------------------------------------
+sp|Q6H321|KLK2_HORSE   ------------------------------------------------------------
+sp|P36178|CTRB2_PENVA  ------------------------------------------------------------
+sp|P35036|TRY2_ANOGA   ------------------------------------------------------------
+sp|Q7YRZ7|GRAA_BOVIN   ------------------------------------------------------------
+sp|P00773|ELA1_RAT     ------------------------------------------------------------
+sp|Q3UP87|ELNE_MOUSE   ------------------------------------------------------------
+sp|P07338|CTRB1_RAT    ------------------------------------------------------------
+sp|P29786|TRY3_AEDAE   ------------------------------------------------------------
+sp|P03953|CFAD_MOUSE   ------------------------------------------------------------
+sp|Q03238|GRAM_RAT     ------------------------------------------------------------
+                                                                                   
+
+sp|Q8K0D2|HABP2_MOUSE  scpapfsgsrcqtaqnkckdnpcv--hgdclitqkhp--yyrcackypytgpdcskvlpa
+sp|Q8BIK6|TMPS7_MOUSE  psplvhiqlqcss---rlsdkpllveyggynisqqcpagsfrcss---------------
+sp|Q7RTY8|TMPS7_HUMAN  psplvhiqlqcss---rlsdkpllaeygsynisqpcpvgsfrcss---------------
+sp|P80009|PLMN_CANFA   ------------------------------------------------------------
+sp|P80015|CAP7_PIG     ------------------------------------------------------------
+sp_vs|O60259-2|O60259  ------------------------------------------------------------
+sp|P11033|GRAD_MOUSE   ------------------------------------------------------------
+sp|P43430|MCPT8_MOUSE  ------------------------------------------------------------
+sp|P50339|MCPT3_RAT    ------------------------------------------------------------
+sp|Q9Y5K2|KLK4_HUMAN   ------------------------------------------------------------
+sp|Q6H321|KLK2_HORSE   ------------------------------------------------------------
+sp|P36178|CTRB2_PENVA  ------------------------------------------------------------
+sp|P35036|TRY2_ANOGA   ------------------------------------------------------------
+sp|Q7YRZ7|GRAA_BOVIN   ------------------------------------------------------------
+sp|P00773|ELA1_RAT     ------------------------------------------------------------
+sp|Q3UP87|ELNE_MOUSE   ------------------------------------------------------------
+sp|P07338|CTRB1_RAT    ------------------------------------------------------------
+sp|P29786|TRY3_AEDAE   ------------------------------------------------------------
+sp|P03953|CFAD_MOUSE   ------------------------------------------------------------
+sp|Q03238|GRAM_RAT     ------------------------------------------------------------
+                                                                                   
+
+sp|Q8K0D2|HABP2_MOUSE  crpnpcqnggvcsrhrrrsrftcacpdqykgkfceigpddcyvgdgysyrgkvsktvnqn
+sp|Q8BIK6|TMPS7_MOUSE  ---------glcvpqaqrcdgvndcfdesdelfcvtvkpac---nsssfr----------
+sp|Q7RTY8|TMPS7_HUMAN  ---------glcvpqaqrcdgvndcfdesdelfcvspqpac---ntssfr----------
+sp|P80009|PLMN_CANFA   ------------------------------------------------------------
+sp|P80015|CAP7_PIG     ------------------------------------------------------------
+sp_vs|O60259-2|O60259  ------------------------------------------------------------
+sp|P11033|GRAD_MOUSE   ------------------------------------------------------------
+sp|P43430|MCPT8_MOUSE  ------------------------------------------------------------
+sp|P50339|MCPT3_RAT    ------------------------------------------------------------
+sp|Q9Y5K2|KLK4_HUMAN   ------------------------------------------------------------
+sp|Q6H321|KLK2_HORSE   ------------------------------------------------------------
+sp|P36178|CTRB2_PENVA  ------------------------------------------------------------
+sp|P35036|TRY2_ANOGA   ------------------------------------------------------------
+sp|Q7YRZ7|GRAA_BOVIN   ------------------------------------------------------------
+sp|P00773|ELA1_RAT     ------------------------------------------------------------
+sp|Q3UP87|ELNE_MOUSE   ------------------------------------------------------------
+sp|P07338|CTRB1_RAT    ------------------------------------------------------------
+sp|P29786|TRY3_AEDAE   ------------------------------------------------------------
+sp|P03953|CFAD_MOUSE   ------------------------------------------------------------
+sp|Q03238|GRAM_RAT     ------------------------------------------------------------
+                                                                                   
+
+sp|Q8K0D2|HABP2_MOUSE  pclywnshlllqetynmfmedaethgiaehnfcrnpdgdhkpwcfvkvnsekvkweycdv
+sp|Q8BIK6|TMPS7_MOUSE  ----------------------qhgplvcdgfrdcedgqdeqnctrsipctsrtfk-cgn
+sp|Q7RTY8|TMPS7_HUMAN  ----------------------qhgplicdgfrdcengrdeqnctqsipcnnrtfk-cgn
+sp|P80009|PLMN_CANFA   ------------------------------------------------nycrnpdgdvng
+sp|P80015|CAP7_PIG     ------------------------------------------------------------
+sp_vs|O60259-2|O60259  ------------------------------------------------rgwrsnplppaa
+sp|P11033|GRAD_MOUSE   ------------------------------------------------------------
+sp|P43430|MCPT8_MOUSE  ------------------------------------------------------------
+sp|P50339|MCPT3_RAT    ------------------------------------------------------------
+sp|Q9Y5K2|KLK4_HUMAN   -------------------------------------------------------agslv
+sp|Q6H321|KLK2_HORSE   -------------------------------------------------------etgal
+sp|P36178|CTRB2_PENVA  ------------------------------------------------whwkspkplvdp
+sp|P35036|TRY2_ANOGA   ------------------------------------------------lvhpllprflpr
+sp|Q7YRZ7|GRAA_BOVIN   ------------------------------------------------------------
+sp|P00773|ELA1_RAT     ------------------------------------------------------------
+sp|Q3UP87|ELNE_MOUSE   ------------------------------------------------------------
+sp|P07338|CTRB1_RAT    ------------------------------------------------g-----------
+sp|P29786|TRY3_AEDAE   ------------------------------------------------------------
+sp|P03953|CFAD_MOUSE   ------------------------------------------------------------
+sp|Q03238|GRAM_RAT     ------------------------------------------------------------
+                                                                                   
+
+sp|Q8K0D2|HABP2_MOUSE  tvcpvpdtpnpvesllepvme---------------------------------------
+sp|Q8BIK6|TMPS7_MOUSE  dicfrkqnaqcdgivdcp--d---------------------------------------
+sp|Q7RTY8|TMPS7_HUMAN  dicfrkqnakcdgtvdcp--d---------------------------------------
+sp|P80009|PLMN_CANFA   pwcytmnqrklfdycdvpqcv---------------------------------------
+sp|P80015|CAP7_PIG     ------------------------------------------------------------
+sp_vs|O60259-2|O60259  ghsraqe-----------------------------------------------------
+sp|P11033|GRAD_MOUSE   ----aga-----------------------------------------------------
+sp|P43430|MCPT8_MOUSE  ----aeg-----------------------------------------------------
+sp|P50339|MCPT3_RAT    ----tka-----------------------------------------------------
+sp|Q9Y5K2|KLK4_HUMAN   s---gsc-----------------------------------------------------
+sp|Q6H321|KLK2_HORSE   p---piq-----------------------------------------------------
+sp|P36178|CTRB2_PENVA  rihvnat-----------------------------------------------------
+sp|P35036|TRY2_ANOGA   lhrdsng-----------------------------------------------------
+sp|Q7YRZ7|GRAA_BOVIN   ------------------------------------------------------------
+sp|P00773|ELA1_RAT     ------------------------------------------------------------
+sp|Q3UP87|ELNE_MOUSE   ------------------------------------------------------------
+sp|P07338|CTRB1_RAT    ------l-----------------------------------------------------
+sp|P29786|TRY3_AEDAE   ------------------------------------------------------------
+sp|P03953|CFAD_MOUSE   ------------------------------------------------------------
+sp|Q03238|GRAM_RAT     ------------------------------------------------------------
+                                                                                   
+
+sp|Q8K0D2|HABP2_MOUSE  ------------------------------------------------------------
+sp|Q8BIK6|TMPS7_MOUSE  ------------------------------------------------------------
+sp|Q7RTY8|TMPS7_HUMAN  ------------------------------------------------------------
+sp|P80009|PLMN_CANFA   ------------------------------------------------------------
+sp|P80015|CAP7_PIG     ------------------------------------------------------------
+sp_vs|O60259-2|O60259  ------------------------------------------------------------
+sp|P11033|GRAD_MOUSE   ------------------------------------------------------------
+sp|P43430|MCPT8_MOUSE  ------------------------------------------------------------
+sp|P50339|MCPT3_RAT    ------------------------------------------------------------
+sp|Q9Y5K2|KLK4_HUMAN   ------------------------------------------------------------
+sp|Q6H321|KLK2_HORSE   ------------------------------------------------------------
+sp|P36178|CTRB2_PENVA  ------------------------------------------------------------
+sp|P35036|TRY2_ANOGA   ------------------------------------------------------------
+sp|Q7YRZ7|GRAA_BOVIN   ------------------------------------------------------------
+sp|P00773|ELA1_RAT     ------------------------------------------------------------
+sp|Q3UP87|ELNE_MOUSE   ------------------------------------------------------------
+sp|P07338|CTRB1_RAT    ------------------------------------------------------------
+sp|P29786|TRY3_AEDAE   ------------------------------------------------------------
+sp|P03953|CFAD_MOUSE   ------------------------------------------------------------
+sp|Q03238|GRAM_RAT     ------------------------------------------------------------
+                                                                                   
+
+sp|Q8K0D2|HABP2_MOUSE  ------------------------------------------------------------
+sp|Q8BIK6|TMPS7_MOUSE  ------------------------------------------------------------
+sp|Q7RTY8|TMPS7_HUMAN  ------------------------------------------------------------
+sp|P80009|PLMN_CANFA   ------------------------------------------------------------
+sp|P80015|CAP7_PIG     ------------------------------------------------------------
+sp_vs|O60259-2|O60259  ------------------------------------------------------------
+sp|P11033|GRAD_MOUSE   ------------------------------------------------------------
+sp|P43430|MCPT8_MOUSE  ------------------------------------------------------------
+sp|P50339|MCPT3_RAT    ------------------------------------------------------------
+sp|Q9Y5K2|KLK4_HUMAN   ------------------------------------------------------------
+sp|Q6H321|KLK2_HORSE   ------------------------------------------------------------
+sp|P36178|CTRB2_PENVA  ------------------------------------------------------------
+sp|P35036|TRY2_ANOGA   ------------------------------------------------------------
+sp|Q7YRZ7|GRAA_BOVIN   ------------------------------------------------------------
+sp|P00773|ELA1_RAT     ------------------------------------------------------------
+sp|Q3UP87|ELNE_MOUSE   ------------------------------------------------------------
+sp|P07338|CTRB1_RAT    ------------------------------------------------------------
+sp|P29786|TRY3_AEDAE   ------------------------------------------------------------
+sp|P03953|CFAD_MOUSE   ------------------------------------------------------------
+sp|Q03238|GRAM_RAT     ------------------------------------------------------------
+                                                                                   
+
+sp|Q8K0D2|HABP2_MOUSE  ---------------------------------------------------------lpg
+sp|Q8BIK6|TMPS7_MOUSE  ---------------------------------------------------------gsd
+sp|Q7RTY8|TMPS7_HUMAN  ---------------------------------------------------------gsd
+sp|P80009|PLMN_CANFA   ---------------------------------------------------------sts
+sp|P80015|CAP7_PIG     ------------------------------------------------------------
+sp_vs|O60259-2|O60259  ------------------------------------------------------------
+sp|P11033|GRAD_MOUSE   ------------------------------------------------------------
+sp|P43430|MCPT8_MOUSE  ------------------------------------------------------------
+sp|P50339|MCPT3_RAT    ------------------------------------------------------------
+sp|Q9Y5K2|KLK4_HUMAN   ------------------------------------------------------------
+sp|Q6H321|KLK2_HORSE   ------------------------------------------------------------
+sp|P36178|CTRB2_PENVA  ------------------------------------------------------------
+sp|P35036|TRY2_ANOGA   ------------------------------------------------------------
+sp|Q7YRZ7|GRAA_BOVIN   ------------------------------------------------------------
+sp|P00773|ELA1_RAT     ------------------------------------------------------------
+sp|Q3UP87|ELNE_MOUSE   ------------------------------------------------------------
+sp|P07338|CTRB1_RAT    ------------------------------------------------------------
+sp|P29786|TRY3_AEDAE   ------------------------------------------------------------
+sp|P03953|CFAD_MOUSE   ------------------------------------------------------------
+sp|Q03238|GRAM_RAT     ------------------------------------------------------------
+                                                                                   
+
+sp|Q8K0D2|HABP2_MOUSE  fescgktevaehavkriyggfkstagkhpwqvslqtslplttsmpqghfcggalihpcwv
+sp|Q8BIK6|TMPS7_MOUSE  eegcgcsr-sssflhrivggsdsqegtwpwqvslh--------fvgsaycgasvisrewl
+sp|Q7RTY8|TMPS7_HUMAN  eegctcsr-sssalhriiggtdtleggwpwqvslh--------fvgsaycgasvisrewl
+sp|P80009|PLMN_CANFA   fdcgkpqvepkkcpgrvvggcvanphswpwqislr----tryg---khfcggtlispewv
+sp|P80015|CAP7_PIG     ----------------ivggrraqpqefpflasiq----kqg----rpfcagalvhprfv
+sp_vs|O60259-2|O60259  --------------dkvlgghecqphsqpwqaalf----qgq----qllcggvlvggnwv
+sp|P11033|GRAD_MOUSE   --------------eeiigghvvkphsrpymafvm----svdikgnriycggfliqddfv
+sp|P43430|MCPT8_MOUSE  --------------geiiwgteskphsrpymayir----fndsk-svyrcggflvardiv
+sp|P50339|MCPT3_RAT    --------------geiiggteciphsrpymayle----ivtsdnylsacsgflirrnfv
+sp|Q9Y5K2|KLK4_HUMAN   --------------sqiingedcsphsqpwqaalv----men----elfcsgvlvhpqwv
+sp|Q6H321|KLK2_HORSE   --------------sriiggwecekhskpwqvavy----hqg----hfqcggvlvhpqwv
+sp|P36178|CTRB2_PENVA  --------------privggveatphswphqaalf----idd----myfcggslissewv
+sp|P35036|TRY2_ANOGA   --------------hrvvggfqidvsdapyqvslq----yfn----shrcggsvldnkwv
+sp|Q7YRZ7|GRAA_BOVIN   --------------egiiggnevaphtrrymalik------g----lklcagalikenwv
+sp|P00773|ELA1_RAT     --------------arvvggaearrnswpsqislq----ylsggswyhtcggtlirrnwv
+sp|Q3UP87|ELNE_MOUSE   --------------seivggrparphawpfmaslq----rr---g-ghfcgatliarnfv
+sp|P07338|CTRB1_RAT    --------------srivngedaipgswpwqvslq----dk--tg-fhfcggslisedwv
+sp|P29786|TRY3_AEDAE   --------------grivggfqidiaevphqvslq----rs---g-rhfcggsiisprwv
+sp|P03953|CFAD_MOUSE   --------------grilggqeaaaharpymasvq----vn---g-thvcggtlldeqwv
+sp|Q03238|GRAM_RAT     --------------aqiiggreavphsrpymvslq----nt---k-shmcggvlvhqkwv
+                                       :  *             :               *.. ::    :
+
+sp|Q8K0D2|HABP2_MOUSE  ltaahctdin--------tkhlkvvlgdqdl-kktesheqtfrve--ki--lkysqyner
+sp|Q8BIK6|TMPS7_MOUSE  lsaahcfhgnrlsdptpwtahlgmyv--------qgnakfispvr--ri--vvheyyn--
+sp|Q7RTY8|TMPS7_HUMAN  lsaahcfhgnrlsdptpwtahlgmyv--------qgnakfvspvr--ri--vvheyyn--
+sp|P80009|PLMN_CANFA   ltaahcl-er-----ssrpasykvilgahke-vnlesdvqeievy--kl--fleptr---
+sp|P80015|CAP7_PIG     ltaascf--r-----gknsgsasvvlgaydl-rqqeqsrqtfsi---rs--isqngydpr
+sp_vs|O60259-2|O60259  ltaahck-----------kpkytvrlgdhsl-qnkdgpeqeipvv--qs--iphpcynss
+sp|P11033|GRAD_MOUSE   ltaahck-----------nssmtvtlgahni-takeetqqiipva--kd--iphpdynat
+sp|P43430|MCPT8_MOUSE  mtaahcn-----------gkvinvtlgihnl-kkkknt-qlipvs--ea--iphesfdne
+sp|P50339|MCPT3_RAT    ltaahca-----------grsitvllgahnk-tykedtwqkleve--kq--fihpnydkr
+sp|Q9Y5K2|KLK4_HUMAN   lsaahcf--------qn---sytiglglhsleadqepgsqmveas--ls--vrhpeynr-
+sp|Q6H321|KLK2_HORSE   ltaahcm--------sd---dyqiwlgrhnl-sededtaqfhqvs--ds--fldpqfdl-
+sp|P36178|CTRB2_PENVA  ltaahcm-dg-----agf---vevvlgahni-rqneasqvsitst--df--fthenwns-
+sp|P35036|TRY2_ANOGA   ltaahct-qg-----ldpss-lavrlgs----sehatggtlvgvl--rt--vehpqydg-
+sp|Q7YRZ7|GRAA_BOVIN   ltaahcd-lk-----gn----pqvilgahst-shkekldqvfsik--ka--ipypcfdp-
+sp|P00773|ELA1_RAT     mtaahcv-ss-----qmt---frvvvgdhnl-sqndgteqyvsvq--ki--mvhptwns-
+sp|Q3UP87|ELNE_MOUSE   msaahcv-ng-----lnfrs-vqvvlgahdl-rrqertrqtfsvq--ri--fen-gfdp-
+sp|P07338|CTRB1_RAT    vtaahcg-vk-----ts----dvvvagefdq-gsdeeniqvlkia--qv--fknpkfnm-
+sp|P29786|TRY3_AEDAE   ltrahct-tn-----tdpaa-ytiragstd----rtnggiivkvk--sv--iphpqyng-
+sp|P03953|CFAD_MOUSE   lsaahcm-dg-----vtdddsvqvllgahsl-sapepykrwydvq--sv--vphpgsrp-
+sp|Q03238|GRAM_RAT     ltaahcl-se-----plqq--lklvfglhsl-hdpqdpgltfyik--qa--ikhpgyn--
+                       :: * *                 :                           .        
+
+sp|Q8K0D2|HABP2_MOUSE  dei----------phndiallklkpvgghcalesryvktvclp---sdpfpsgtechisg
+sp|Q8BIK6|TMPS7_MOUSE  sqt----------fdydiallqlsiawpetl--kqliqpicippa-gqkvrsgekcwvtg
+sp|Q7RTY8|TMPS7_HUMAN  sqt----------fdydiallqlsiawpetl--kqliqpicippt-gqrvrsgekcwvtg
+sp|P80009|PLMN_CANFA   ---------------adiallkls---spav-itskvipaclppp-nyvvadrtlcyitg
+sp|P80015|CAP7_PIG     qnl------------ndvlllqld---rear-ltpsvalvplppq-natveagtncqvag
+sp_vs|O60259-2|O60259  dve---------dhnhdlmllqlr---dqas-lgskvkpisla---dhctqpgqkctvsg
+sp|P11033|GRAD_MOUSE   ify------------sdimllkle---skak-rtkavrplklprs-narvkpgdvcsvag
+sp|P43430|MCPT8_MOUSE  tlv------------ndimllkle---rkaq-lnsavdtialpks-kdwvkpgqvctvag
+sp|P50339|MCPT3_RAT    lvl------------hdimllklk---ekak-ltlgvgtlplsan-fnfippgrmcravg
+sp|Q9Y5K2|KLK4_HUMAN   pll-----------andlmlikld---esvs-esdtirsisiasq-cpta--gnsclvsg
+sp|Q6H321|KLK2_HORSE   sllkkkylrpyddishdlmllrla---qpar-itdavkildlptq-epkl--gstcytsg
+sp|P36178|CTRB2_PENVA  wll---------t--ndialiklp---spvs-lnsniktvklp---ssdvavgttvtptg
+sp|P35036|TRY2_ANOGA   nti---------d--ydfslmele---telt-fsdavqpvelpeh-eepvepgtmatvsg
+sp|Q7YRZ7|GRAA_BOVIN   qtf---------e--gdlqllqle---gkat-mtkavgilqlprt-eddvkphtkchvag
+sp|P00773|ELA1_RAT     nnv---------aagydiallrla---qsvt-lnnyvqlavlpqe-gtilannnpcyitg
+sp|Q3UP87|ELNE_MOUSE   sql---------l--ndiviiqln---gsat-inanvqvaqlpaq-gqgvgdrtpclamg
+sp|P07338|CTRB1_RAT    ftv---------r--nditllkla---tpaq-fsetvsavclpnv-dddfppgtvcattg
+sp|P29786|TRY3_AEDAE   dty---------n--ydfslleld---esig-fsrsieaialpda-setvadgamctvsg
+sp|P03953|CFAD_MOUSE   dsl---------e--ddlilfkls---qnas-lgphvrplplqye-dkevepgtlcdvag
+sp|Q03238|GRAM_RAT     lky---------e--ndlallkld---grvk-psknvkplalprkprdkpaegsrcstag
+                                       *. ::.*             :    :                 *
+
+sp|Q8K0D2|HABP2_MOUSE  w--------gvtetge------------gsrqlldakvklianplcnsrqlyd-------
+sp|Q8BIK6|TMPS7_MOUSE  w--------grrheads----------kgspvlqqaevelidqtvcvsty----------
+sp|Q7RTY8|TMPS7_HUMAN  w--------grrheadn----------kgslvlqqaevelidqtlcvsty----------
+sp|P80009|PLMN_CANFA   w--------getqgt------------ygagllkeaqlpvienkvcnryeyln-------
+sp|P80015|CAP7_PIG     w--------gtqrlrr-----------lfsrfprvlnvtvtsnpclpr------------
+sp_vs|O60259-2|O60259  w--------gtvtspre----------nfpdtlncaevkifpqkkced--ayp-------
+sp|P11033|GRAD_MOUSE   w--------gsrsindt----------kasarlrevqlviqedeeckk---rf-----r-
+sp|P43430|MCPT8_MOUSE  w--------gkla--nc----------tlsdtlqevnlevqkgqkcrs---m------sq
+sp|P50339|MCPT3_RAT    w--------grtn-vne----------pasdtlqevkmrlqepqsckh---f-------t
+sp|Q9Y5K2|KLK4_HUMAN   w--------glla----ng--------rmptvlqcvnvsvvseevcsk--lyd-----pl
+sp|Q6H321|KLK2_HORSE   w--------glis--tftn--------rgsgtlqcvelrlqsnekcar--ayp-----ek
+sp|P36178|CTRB2_PENVA  w--------grpldsag----------gisdvlrqvdvpimtnddcdavy----------
+sp|P35036|TRY2_ANOGA   w--------gntqsav-----------essdflraanvptvshedcsdaymwf-------
+sp|Q7YRZ7|GRAA_BOVIN   w--------gstkkdac----------qmsnalreanvtvidrkicndaqhyn-----fn
+sp|P00773|ELA1_RAT     w--------grtrtng-----------qlsqtlqqaylpsvdysicssssywg-------
+sp|Q3UP87|ELNE_MOUSE   w--------grlgtnr-----------pspsvlqelnvtvv-tnmcrrrvn---------
+sp|P07338|CTRB1_RAT    w--------gktkynal----------ktpeklqqaalpivseadck--kswg-------
+sp|P29786|TRY3_AEDAE   w--------gdtknvf-----------emntllravnvpsynqaecaaalvnv-------
+sp|P03953|CFAD_MOUSE   w--------gvvthag-----------rrpdvlhqlrvsimnrttcnlrtyhd-------
+sp|Q03238|GRAM_RAT     w--------githqrg-----------qlakslqeldlrlldtrmcnnsrfwn-------
+                       *        *                           :                      
+
+sp|Q8K0D2|HABP2_MOUSE  htiddsmicagnlqkpgsdtcqgdsggpltcek--dgtyyvygivswgqe--cgkk--pg
+sp|Q8BIK6|TMPS7_MOUSE  giitsrmlcagvmsgk-sdackgdsggplscrrksdgkwiltgivswghg--cgrpnfpg
+sp|Q7RTY8|TMPS7_HUMAN  giitsrmlcagimsgk-rdackgdsggplscrrksdgkwiltgivswghg--cgrpnfpg
+sp|P80009|PLMN_CANFA   grvkstelcagnlagg-tdscqgdsggplvcfe--kdkyilqgvtswglg--carpnkpg
+sp|P80015|CAP7_PIG     ------dmcigvfsrr-grisqgdrgtplvcng------laqgvasflrr---rfrrssg
+sp_vs|O60259-2|O60259  gqitdgmvcagsskga--dtcqgdsggplvcdg------alqgitswgsd-pcgrsdkpg
+sp|P11033|GRAD_MOUSE   yytetteicagdlkki-ktpfkgdsggplvchn------qayglfayakn----gtissg
+sp|P43430|MCPT8_MOUSE  tyndsiqlcvgnpsen-katgkgdsggpfvcng------vvqgivscrlc----tgtlpr
+sp|P50339|MCPT3_RAT    sfqhksqlcvgnpkkm-qnvykgdsggpllcag------iaqgiasyvhp----nakppa
+sp|Q9Y5K2|KLK4_HUMAN   --yhpsmfcagggqdq-kdscngdsggplicng------ylqglvsfgka-pcgqvgvpg
+sp|Q6H321|KLK2_HORSE   --mtefvlcathrdds-gsiclgdsggalicdg------vfqgitswgys-ecadfndnf
+sp|P36178|CTRB2_PENVA  givgngvvcidseggk-gt-cngdsggplnl----ng--mtygitsfgssagcevgy-pd
+sp|P35036|TRY2_ANOGA   geitdrmlcagyqqgg-kdacqgdsggplva----dg--klvgvvswgy--gcaqpgypg
+sp|Q7YRZ7|GRAA_BOVIN   pvidlsmicaggrkge-ddscegdsgsplic----dn--vfrgvtsfg---kcgnpqkpg
+sp|P00773|ELA1_RAT     stvkttmvcaggdgvr-sg-cqgdsggplhclv--ngqysvhgvtsfvssmgcnvskkpt
+sp|Q3UP87|ELNE_MOUSE   -------vctlvprrq-agicfgdsggplvc----nn--lvqgidsfirg-gcgsglypd
+sp|P07338|CTRB1_RAT    skitdvmtcagasgvs-s--cmgdsggplvcqk--dgvwtlagivswgsg-vcstst-pa
+sp|P29786|TRY3_AEDAE   vpvteqmicagyaagg-kdscqgdsggplvs----gd--klvgvvswg-k-gcalpnlpg
+sp|P03953|CFAD_MOUSE   gvvtinmmcaesnrrd-t--crgdsgsplvc----gd--avegvvtwgsr-vcgngkkpg
+sp|Q03238|GRAM_RAT     gvltdsmlclkagakg-qapckgdsggplvc----gkgkv-dgilsfssk-nctdifkpt
+                               *             ** * .:             *: :              
+
+sp|Q8K0D2|HABP2_MOUSE  vytqvt-kflnwikttmhreagl---------------
+sp|Q8BIK6|TMPS7_MOUSE  vytrvs-sfvpwihkyvpsll-----------------
+sp|Q7RTY8|TMPS7_HUMAN  vytrvs-nfvpwihkyvpsll-----------------
+sp|P80009|PLMN_CANFA   vyvrvs-rfvtwiegimrnn------------------
+sp|P80015|CAP7_PIG     fftrva-lfrnwidsvlnnpp-----------------
+sp_vs|O60259-2|O60259  vytnic-ryldwikkiigskg-----------------
+sp|P11033|GRAD_MOUSE   iftkvv-hflpwiswnmkll------------------
+sp|P43430|MCPT8_MOUSE  vftris-sfmpwirktmkllqqp---------------
+sp|P50339|MCPT3_RAT    vftris-hyrpwinkilren------------------
+sp|Q9Y5K2|KLK4_HUMAN   vytnlc-kftewiektvqas------------------
+sp|Q6H321|KLK2_HORSE   vftkvm-phlkwiketiekns-----------------
+sp|P36178|CTRB2_PENVA  aftrvyy-yldwieqktgvt-----------------p
+sp|P35036|TRY2_ANOGA   vygrvas-vrdwvrensgv-------------------
+sp|Q7YRZ7|GRAA_BOVIN   iyilltkkhlnwikktiagai-----------------
+sp|P00773|ELA1_RAT     vftrvsa-yiswmnnviayt------------------
+sp|Q3UP87|ELNE_MOUSE   afapvae-fadwinsiirshndhllthpkdregrtn--
+sp|P07338|CTRB1_RAT    vysrvta-lmpwvqqilean------------------
+sp|P29786|TRY3_AEDAE   vyarvst-vrqwirevsev-------------------
+sp|P03953|CFAD_MOUSE   vytrvss-yrmwienitngnmts---------------
+sp|Q03238|GRAM_RAT     vatavap-ysswirkvigrwspqplt------------
+                           :      *:                         
+
+
+

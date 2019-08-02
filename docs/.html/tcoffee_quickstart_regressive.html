@@ -1,0 +1,329 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Quick Start Regressive Algorithm &mdash; T-Coffee 11 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Quick Start" href="tcoffee_quickstart.html" />
+    <link rel="prev" title="T-Coffee Installation" href="tcoffee_installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> T-Coffee
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                11
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="tcoffee_installation.html">T-Coffee Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Quick Start Regressive Algorithm</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#exemples">Exemples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#fast-and-accurate">Fast and accurate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#slower-and-more-accurate">Slower and more accurate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#very-fast">Very Fast</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#regressive-flags">Regressive flags</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tcoffee_quickstart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tcoffee_main_documentation.html">T-Coffee Main Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tcoffee_technical_documentation.html">T-Coffee Technical Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tcoffee_webserver.html">T-Coffee Web Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tcoffee_doctest.html">T-Coffee doc test</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tcoffee_faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tcoffee_citations_references.html">Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tcoffee_contacts_adresses.html">Contacts, Adresses &amp; Contributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tcoffee_license.html">License &amp; Terms of Use</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">T-Coffee</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Quick Start Regressive Algorithm</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/tcoffee_quickstart_regressive.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="quick-start-regressive-algorithm">
+<h1>Quick Start Regressive Algorithm<a class="headerlink" href="#quick-start-regressive-algorithm" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>This document introduces the regressive mode of T-Coffee. It is meant to align very large datasets with a high accuracy. In order to ise it, you need a complete installation of T-Coffee with all supported third-party packages. These come by default in the installation package but you will have to install them manualy if you compile T-Coffee from its source code. See the <a class="reference external" href="https://tcoffee.readthedocs.io/en/latest/tcoffee_installation.html#installation">installation section</a> for more details.</p>
+<p>Multiple sequence alignments (MSA) are usualy estimated by progressively aligning all the sequences, starting with the most similar. The regressive alignment is a new procedure that proceeds the other way around and starts by aligning the most distantly related sequences first. Like its progressive sibblin, the regressive algorithm starts with a guide tree. It uses this guide tree to extract the N most diverse sequences. In this first intermediate MSA, each sequence is either a leaf or the representative of a subtree. The algorithm is re-aplied recursively onto every representative sequence until all sequences have been incorporated in an internediate MSA of max size N. The final MSA is then obtained by merging all the intermediate MSAs into the final MSA. The merging is very efficient and does not require further alignment because the intermediate MSAs contain common sequences.</p>
+<p>Aside from its improved accuracy, the main benefit of this protocol is to allow any third party multiple sequence aligner to be applied on the sub-groups (ClustalO, MAfft, etc) and any third party guide-tree protocol. The default T-Coffee supports a large number of <a class="reference external" href="https://tcoffee.readthedocs.io/en/latest/tcoffee_main_documentation.html#internal-external-methods">internal and external package</a> but if the one you need is not supported, note that it is relatively simple to create a configuration file allowing T-Coffee to interact with the package you need as docimented <a class="reference external" href="https://tcoffee.readthedocs.io/en/latest/tcoffee_main_documentation.html#advanced-method-integration">here</a>.</p>
+<p>When deployed serialy, the regressive algorithm scales linearly with the number of sequences both in time and memory. The amount of memory it needs is roughly the amount of memory required to align N sequences with the selected alignment method. Given TOT sequences, the amount of time is roughly TOT/N*(amount of time required to align N Seq with the selected method). The algorithm implementation is multi-threaded and owing to its embarrasingly parralel nature, it benefits from a very efficient speedup when deployed this way.</p>
+<p>In the following document, we list its main options and how these can be deployed from the T-Coffee algorithm.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>REG does not support ALL the T-Coffee options. It is especially limited with respect to input and output and will only allow FASTA.</p>
+</div>
+</div>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">##: get the latest version from https://github.com/cbcrg/tcoffee</span>
+<span class="c1">##: cd tcoffee-master/t_coffee/src</span>
+<span class="c1">##: make t_coffee</span>
+<span class="c1">##: mv t_coffee &lt;Binary Directory&gt;</span>
+</pre></div>
+</div>
+<p>In order to use T-Coffee you must also have the following pacaked installed</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">## Mafft:             https://mafft.cbrc.jp/alignment/software/</span>
+<span class="c1">## ClustalOmega:      http://www.clustal.org/omega/#Download</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="exemples">
+<h2>Exemples<a class="headerlink" href="#exemples" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="fast-and-accurate">
+<h3>Fast and accurate<a class="headerlink" href="#fast-and-accurate" title="Permalink to this headline">¶</a></h3>
+<p>In the following exemple, the regressive alignment is used to align the sequences in FASTA format. The tree is estimated using the mbed method of Clustal Omega (-reg_tree=mbed), the size of the groups is 100 (-reg_nseq=100) and the method used to align the groups is Clustal Omega:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$$: t_coffee -reg -seq proteases_large.fasta -reg_nseq 100 -reg_tree mbed -reg_method clustalo_msa -outfile proteases_large.aln -outtree proteases_large.mbed
+</pre></div>
+</div>
+<p>This mode is the default mode and is expected to deliver fast and reasonnably accurate alignments</p>
+</div>
+<div class="section" id="slower-and-more-accurate">
+<h3>Slower and more accurate<a class="headerlink" href="#slower-and-more-accurate" title="Permalink to this headline">¶</a></h3>
+<p>This mode is expected to be the most accurate and combines the ginsi mode of MAFFT which is very accurate with the mbed trees of Clustal Omega. Note that it is the regressive deployment that allows ginsi to be used on datasets of unlimited size.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$$: t_coffee -reg -seq proteases_large.fasta -reg_nseq 100 -reg_tree mbed -reg_method mafftginsi_msa -outfile proteases_large.aln -outtree proteases_large.mbed
+</pre></div>
+</div>
+</div>
+<div class="section" id="very-fast">
+<h3>Very Fast<a class="headerlink" href="#very-fast" title="Permalink to this headline">¶</a></h3>
+<p>This mode is expected to be the fastest currently available. Its accuracy is comparable to that of MAFFT-fftnsi running on its own</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$$: t_coffee -reg -seq proteases_large.fasta -reg_nseq 100 -reg_tree parttree -reg_method mafftfftnsi_msa -outfile proteases_large.aln -outtree proteases_large.parttree
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="regressive-flags">
+<h2>Regressive flags<a class="headerlink" href="#regressive-flags" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><strong>-seq</strong> (usage:<strong>-seq=&lt;FASTA sequence file&gt;</strong>)</p></li>
+</ul>
+<p>This flag is mandatory to provide the sequences. The sequences must be in FASTA and must not contain any sequences. Because these sequences are meant to be aligned with third party aligners that may not support the IUPAC extended alphabet, it is advisable to avoid non standard amino-acids symbols. It is also not advisable to provide gapped sequences.</p>
+<ul class="simple">
+<li><p><strong>-reg_tree</strong> (usage:<strong>-reg_tree=&lt;method or Newick File&gt;</strong>, default: <strong>mbed</strong> )</p></li>
+</ul>
+<p>This flag defines which method will be used to estimate the tree. The following methods are available</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Tree</span> <span class="n">Computation</span> <span class="n">Method</span><span class="p">:</span>
+<span class="o">-</span> <span class="n">mbed</span>        <span class="p">:</span> <span class="n">use</span> <span class="n">mBed</span> <span class="n">mode</span> <span class="n">of</span> <span class="n">ClustalO</span> <span class="o">-</span> <span class="n">Default</span>
+<span class="o">-</span> <span class="n">cwdnd</span>       <span class="p">:</span> <span class="n">use</span> <span class="n">the</span> <span class="n">quicktree</span> <span class="n">mode</span> <span class="n">of</span> <span class="n">ClustalW</span>
+<span class="o">-</span> <span class="n">parttree</span>    <span class="p">:</span> <span class="n">parttree</span> <span class="n">method</span> <span class="n">of</span> <span class="n">MAFFT</span> <span class="o">-</span> <span class="n">fastest</span> <span class="n">option</span><span class="o">.</span> <span class="n">Does</span> <span class="ow">not</span> <span class="n">support</span> <span class="n">sequences</span> <span class="n">less</span> <span class="n">than</span> <span class="mi">6</span> <span class="n">AA</span> <span class="n">long</span>
+<span class="o">-</span> <span class="n">dpparttree</span>  <span class="p">:</span> <span class="n">MAFFT</span> <span class="n">fast</span> <span class="n">clustering</span> <span class="n">method</span>
+<span class="o">-</span> <span class="n">fastparttree</span><span class="p">:</span> <span class="n">MAFFT</span> <span class="n">fast</span> <span class="n">clustering</span> <span class="n">method</span>
+<span class="o">-</span> <span class="n">mafftdnd</span>    <span class="p">:</span> <span class="n">default</span> <span class="n">MAFFT</span> <span class="n">NJ</span> <span class="n">tree</span> <span class="o">-</span> <span class="n">slower</span> <span class="n">than</span> <span class="n">the</span> <span class="n">parttree</span> <span class="n">modes</span>
+<span class="o">-</span> <span class="n">fftns1dnd</span>   <span class="p">:</span> <span class="n">Tree</span> <span class="n">produced</span> <span class="n">after</span> <span class="n">the</span> <span class="n">first</span> <span class="n">iteration</span> <span class="n">MAFFT</span> <span class="n">fftns</span> <span class="n">mode</span>
+<span class="o">-</span> <span class="n">fftns2dnd</span>   <span class="p">:</span> <span class="n">Tree</span> <span class="n">produced</span> <span class="n">after</span> <span class="n">the</span> <span class="n">second</span> <span class="n">iteration</span> <span class="n">MAFFT</span> <span class="n">fftns</span> <span class="n">mode</span>
+<span class="o">-</span> <span class="n">upgma</span>       <span class="p">:</span> <span class="n">upgma</span> <span class="n">tree</span> <span class="o">-</span> <span class="n">warning</span> <span class="n">cubic</span> <span class="n">time</span> <span class="n">computation</span>
+<span class="o">-</span> <span class="n">nj</span>          <span class="p">:</span> <span class="n">Neighbour</span> <span class="n">Joinning</span> <span class="n">tree</span>
+<span class="o">-</span> <span class="c1">#&lt;command&gt;  : Runs comamnd &lt;seq&gt; &gt; &lt;tree&gt;.</span>
+<span class="o">-</span> <span class="n">filename</span>    <span class="p">:</span> <span class="n">Any</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">newick</span> <span class="nb">format</span><span class="o">.</span> <span class="n">The</span> <span class="n">seq</span> <span class="n">file</span> <span class="ow">and</span> <span class="n">the</span> <span class="n">tree</span> <span class="n">file</span> <span class="n">must</span> <span class="n">match</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>-newtree</strong> (usage:<strong>-newtree=&lt;filename&gt;</strong> , default: &lt;infile&gt;.&lt;reg_tree&gt;)</p></li>
+</ul>
+<p>This flag defines the name of the newly computed ouput tree. Deafult will be filename.reg_tree</p>
+<ul class="simple">
+<li><p><strong>-outfile**(usage:</strong>-outfile=&lt;filename&gt;** , default: &lt;infile&gt;.aln)</p></li>
+</ul>
+<p>This flag defines the name of the output file containing the multiple sequence alignment</p>
+<ul class="simple">
+<li><p><strong>-reg_nseq</strong> (usage:<strong>-reg_nseq=N</strong> , default: 1000 for datasets larger than 10,000 and Nseq/10 for smaller datasets )</p></li>
+</ul>
+<p>Sets the maximum size of the subsequence alignments. The recommanded value is 1000. With slow/accurate aligners that do not scale in a linear way, this parameter can have an importnat impact on CPU requirement with small values resulting in faster computation.</p>
+<ul class="simple">
+<li><p><strong>-reg_thread</strong> (usage:<strong>-reg_nseq=N</strong> , default: 0 to use all available threads)</p></li>
+</ul>
+<p>Sets the maximum number of threads to be used by one instance. Note that if you have scrited your own aligner using a configuration file, you should make sure it does not run in a multi-threaded version as well.</p>
+<ul class="simple">
+<li><p><strong>-reg_method**(usage:</strong>-reg_tree=&lt;method or configuration file&gt;** , default: clustalo_msa)</p></li>
+</ul>
+<p>This flag defines which method will be used to estimate the tree. In order to know which methods are available, type he following command line:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$$: t_coffee
+</pre></div>
+</div>
+<p>All methods the multiple sequence alignment methods xxx_msa are supported.</p>
+<p>If you want to use an non-supported method, follow these <a class="reference external" href="https://tcoffee.readthedocs.io/en/latest/tcoffee_main_documentation.html#advanced-method-integration">guidelines</a>.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="tcoffee_quickstart.html" class="btn btn-neutral float-right" title="Quick Start" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="tcoffee_installation.html" class="btn btn-neutral float-left" title="T-Coffee Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Cedric Notredame
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

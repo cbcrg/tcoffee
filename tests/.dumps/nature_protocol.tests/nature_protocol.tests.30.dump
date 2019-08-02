@@ -1,0 +1,121 @@
+<DumpIO>
+<nature>standard dump</nature>
+<program>T-COFFEE</program>
+<version>Version_13.30.4.4e2c658</version>
+<build>Version_13.30.4.4e2c658</build>
+<cl>t_coffee -other_pg seq_reformat -in sh3.aln -in3 sh3.aln -action +3evaluate pam250mt -output color_html </cl>
+<stack>
+</stack>
+<warning>
+</warning>
+<file>
+<stream>output</stream>
+<name>stdout</name>
+<content><html>
+<style>
+SPAN { font-family: courier new, courier-new, courier, monospace; font-weight: bold; font-size: 11pt;}
+SPAN { line-height:100%}
+SPAN {	white-space: pre}
+SPAN.value0 {background: #9B92FF}
+SPAN.value1 {background: #B4FFB4}
+SPAN.value2 {background: #BEFFBE}
+SPAN.value3 {background: #C8FFC8}
+SPAN.value4 {background: #FFFFB7}
+SPAN.value5 {background: #FFFFAD}
+SPAN.value6 {background: #FFFFAD}
+SPAN.value7 {background: #FFE6E6}
+SPAN.value8 {background: #FFDCDC}
+SPAN.value9 {background: #FFC8C8}
+SPAN.valuedefault {}
+SPAN.valuegap {}
+SPAN.valueink {background: 000000}
+</style><body><br><span class=valuedefault>T-COFFEE,&nbsp;Version_13.30.4.4e2c658&nbsp;(Version_13.30.4.4e2c658)</span><br><span class=valuedefault>Cedric&nbsp;Notredame&nbsp;</span><br><br><br><span class=valuedefault>1PHT&nbsp;&nbsp;&nbsp;</span><span class=value1>Y</span><span class=value2>Q</span><span class=value4>Y</span><span class=value1>R</span><span class=value9>A</span><span class=value8>L</span><span class=value7>YD</span><span class=value9>Y</span><span class=value1>K</span><span class=value0>K</span><span class=value2>E</span><span class=value1>R</span><span class=value5>E</span><span class=value8>ED</span><span class=value9>I</span><span class=value1>D</span><span class=value9>L</span><span class=value4>H</span><span class=value0>L</span><span class=value8>G</span><span class=value9>D</span><span class=value2>I</span><span class=value9>L</span><span class=value2>T</span><span class=value9>V</span><span class=value0>N</span><span class=value2>K</span><span class=value0>G</span><span class=valuegap>SLVALG</span><span class=value5>FS</span><span class=value9>D</span><span class=value0>G</span><span class=valuegap>QEAR</span><span class=value0>P</span><br><span class=valuedefault>1BB9&nbsp;&nbsp;&nbsp;</span><span class=value2>FKV</span><span class=value1>Q</span><span class=value9>A</span><span class=value0>QH</span><span class=value7>D</span><span class=value9>Y</span><span class=value1>T</span><span class=value8>A</span><span class=value1>T</span><span class=value7>D</span><span class=value1>T</span><span class=value9>D</span><span class=value8>E</span><span class=value9>L</span><span class=value1>Q</span><span class=value9>L</span><span class=value4>K</span><span class=value1>A</span><span class=value8>G</span><span class=value9>D</span><span class=value2>V</span><span class=value8>V</span><span class=value1>L</span><span class=value9>V</span><span class=value8>I</span><span class=value0>P</span><span class=valuegap>-------</span><span class=value5>FQ</span><span class=value9>N</span><span class=value0>P</span><span class=valuegap>----</span><span class=value5>E</span><br><span class=valuedefault>1UHC&nbsp;&nbsp;&nbsp;</span><span class=value1>Q</span><span class=value5>V</span><span class=value4>Y</span><span class=value1>F</span><span class=value9>A</span><span class=value8>V</span><span class=value7>Y</span><span class=value1>T</span><span class=value9>F</span><span class=value1>K</span><span class=value8>A</span><span class=value2>R</span><span class=value5>N</span><span class=value1>P</span><span class=value8>NE</span><span class=value9>L</span><span class=value7>S</span><span class=value5>V</span><span class=value1>SA</span><span class=value0>N</span><span class=value9>Q</span><span class=value4>K</span><span class=value9>L</span><span class=value2>K</span><span class=value9>I</span><span class=value8>L</span><span class=value4>E</span><span class=valuegap>-------</span><span class=value5>F</span><span class=value3>K</span><span class=value9>D</span><span class=value0>V</span><span class=valuegap>----</span><span class=value0>T</span><br><span class=valuedefault>1YCS&nbsp;&nbsp;&nbsp;</span><span class=value0>G</span><span class=value5>VI</span><span class=value1>Y</span><span class=value9>A</span><span class=value8>L</span><span class=value0>W</span><span class=value7>D</span><span class=value9>Y</span><span class=value2>E</span><span class=value7>P</span><span class=value5>QND</span><span class=value9>D</span><span class=value8>E</span><span class=value9>L</span><span class=value7>P</span><span class=value5>M</span><span class=value4>K</span><span class=value0>E</span><span class=value8>G</span><span class=value9>D</span><span class=value0>C</span><span class=value8>M</span><span class=value2>T</span><span class=value9>I</span><span class=value8>I</span><span class=value4>H</span><span class=valuegap>-------</span><span class=value0>R</span><span class=value3>E</span><span class=value9>D</span><span class=value0>E</span><span class=valuegap>----</span><span class=value5>D</span><br><span class=valuedefault>1OOT&nbsp;&nbsp;&nbsp;</span><span class=value0>P</span><span class=value2>K</span><span class=value0>A</span><span class=value4>V</span><span class=value9>A</span><span class=value8>L</span><span class=value7>Y</span><span class=value1>S</span><span class=value9>F</span><span class=value1>A</span><span class=value7>G</span><span class=value2>E</span><span class=value5>E</span><span class=value2>S</span><span class=value4>G</span><span class=value8>D</span><span class=value9>L</span><span class=value7>PFR</span><span class=value4>K</span><span class=value8>G</span><span class=value9>D</span><span class=value2>V</span><span class=value9>I</span><span class=value2>T</span><span class=value9>I</span><span class=value8>L</span><span class=value2>K</span><span class=value0>K</span><span class=valuegap>-------</span><span class=value5>S</span><span class=valuegap>------</span><span class=value5>D</span><br><span class=valuedefault>1ABO&nbsp;&nbsp;&nbsp;</span><span class=value1>N</span><span class=value5>LF</span><span class=value4>V</span><span class=value9>A</span><span class=value8>L</span><span class=value7>YD</span><span class=value9>F</span><span class=value0>V</span><span class=value8>A</span><span class=value1>SG</span><span class=value5>D</span><span class=value8>N</span><span class=value0>T</span><span class=value9>L</span><span class=value7>S</span><span class=value9>I</span><span class=value1>T</span><span class=value4>K</span><span class=value8>G</span><span class=value9>E</span><span class=value4>K</span><span class=value9>L</span><span class=value2>R</span><span class=value9>V</span><span class=value8>L</span><span class=value0>G</span><span class=valuegap>-------</span><span class=value5>Y</span><span class=value9>NH</span><span class=valuegap>------</span><br><span class=valuedefault>1FYN&nbsp;&nbsp;&nbsp;</span><span class=value0>T</span><span class=value5>LF</span><span class=value4>V</span><span class=value9>A</span><span class=value8>L</span><span class=value7>YD</span><span class=value9>Y</span><span class=value2>E</span><span class=value8>A</span><span class=value2>R</span><span class=value0>T</span><span class=value5>E</span><span class=value9>D</span><span class=value8>D</span><span class=value9>L</span><span class=value7>SF</span><span class=value4>HK</span><span class=value8>G</span><span class=value9>E</span><span class=value4>K</span><span class=value5>F</span><span class=value2>Q</span><span class=value9>I</span><span class=value8>L</span><span class=value7>N</span><span class=valuegap>-------</span><span class=value0>S</span><span class=value5>S</span><span class=valuegap>-------</span><br><span class=valuedefault>1QCF&nbsp;&nbsp;&nbsp;</span><span class=value1>I</span><span class=value5>I</span><span class=value2>V</span><span class=value4>V</span><span class=value9>A</span><span class=value8>L</span><span class=value7>YD</span><span class=value9>Y</span><span class=value2>E</span><span class=value8>A</span><span class=value0>I</span><span class=value7>H</span><span class=value5>H</span><span class=value8>ED</span><span class=value9>L</span><span class=value7>SFQ</span><span class=value4>K</span><span class=value8>G</span><span class=value9>D</span><span class=value4>Q</span><span class=value8>M</span><span class=value1>V</span><span class=value9>V</span><span class=value8>L</span><span class=value4>E</span><span class=valuegap>-------</span><span class=value0>E</span><span class=valuegap>--------</span><br><span class=valuedefault>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;.&nbsp;&nbsp;.:&nbsp;.&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>1PHT&nbsp;&nbsp;&nbsp;</span><span class=value3>E</span><span class=value8>E</span><span class=value1>I</span><span class=valuegap>----------</span><span class=value4>G</span><span class=value9>W</span><span class=value0>L</span><span class=value5>N</span><span class=value8>G</span><span class=value0>Y</span><span class=value9>N</span><span class=value2>E</span><span class=value4>T</span><span class=value2>T</span><span class=value5>G</span><span class=value1>E</span><span class=value4>R</span><span class=value9>G</span><span class=value0>D</span><span class=value5>F</span><span class=value9>P</span><span class=value7>G</span><span class=value0>T</span><span class=value8>YV</span><span class=value2>E</span><span class=value0>Y</span><span class=value7>I</span><span class=value2>G</span><br><span class=valuedefault>1BB9&nbsp;&nbsp;&nbsp;</span><span class=value3>E</span><span class=value8>Q</span><span class=value5>D</span><span class=valuegap>EGWLMGVKES</span><span class=value9>DW</span><span class=value0>N</span><span class=value5>Q</span><span class=value0>H</span><span class=value6>K</span><span class=valuegap>-</span><span class=value2>E</span><span class=value4>LE</span><span class=value2>K</span><span class=value0>C</span><span class=value4>R</span><span class=value9>G</span><span class=value1>V</span><span class=value5>F</span><span class=value9>P</span><span class=value0>E</span><span class=value8>N</span><span class=value9>F</span><span class=value0>T</span><span class=value2>E</span><span class=value3>R</span><span class=value7>V</span><span class=value5>Q</span><br><span class=valuedefault>1UHC&nbsp;&nbsp;&nbsp;</span><span class=value3>G</span><span class=value9>N</span><span class=value0>T</span><span class=valuegap>----------</span><span class=value8>E</span><span class=value9>W</span><span class=value5>W</span><span class=value0>L</span><span class=value8>A</span><span class=value2>E</span><span class=valuegap>--</span><span class=value4>V</span><span class=value5>NG</span><span class=value4>KK</span><span class=value9>G</span><span class=value4>Y</span><span class=value5>V</span><span class=value9>P</span><span class=value7>S</span><span class=value8>NYI</span><span class=value0>R</span><span class=value3>K</span><span class=value0>T</span><span class=value5>E</span><br><span class=valuedefault>1YCS&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value8>E</span><span class=value1>I</span><span class=valuegap>----------</span><span class=value8>E</span><span class=value9>W</span><span class=value5>W</span><span class=value0>W</span><span class=value8>A</span><span class=valuegap>--</span><span class=value2>R</span><span class=value4>L</span><span class=value5>N</span><span class=value7>D</span><span class=value4>KE</span><span class=value9>G</span><span class=value4>Y</span><span class=value5>V</span><span class=value9>P</span><span class=value0>R</span><span class=value8>N</span><span class=value1>L</span><span class=value8>L</span><span class=value2>G</span><span class=value0>LYP</span><br><span class=valuedefault>1OOT&nbsp;&nbsp;&nbsp;</span><span class=value3>S</span><span class=value8>Q</span><span class=value1>N</span><span class=valuegap>----------</span><span class=value9>DW</span><span class=value5>W</span><span class=value0>T</span><span class=value8>G</span><span class=valuegap>--</span><span class=value2>R</span><span class=value4>V</span><span class=value5>NG</span><span class=value4>RE</span><span class=value9>G</span><span class=value1>I</span><span class=value5>F</span><span class=value9>P</span><span class=value7>A</span><span class=value8>NYV</span><span class=value2>E</span><span class=valuegap>-</span><span class=value7>L</span><span class=value0>V</span><br><span class=valuedefault>1ABO&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value9>N</span><span class=value4>G</span><span class=valuegap>----------</span><span class=value8>E</span><span class=value9>W</span><span class=value0>C</span><span class=value4>E</span><span class=value8>AQ</span><span class=valuegap>--</span><span class=value4>TK</span><span class=value2>N</span><span class=value0>G</span><span class=value8>Q</span><span class=value9>G</span><span class=value0>W</span><span class=value5>V</span><span class=value9>P</span><span class=value7>S</span><span class=value8>NYI</span><span class=value2>T</span><span class=value1>P</span><span class=value7>V</span><span class=value5>N</span><br><span class=valuedefault>1FYN&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value8>E</span><span class=value4>G</span><span class=valuegap>----------</span><span class=value9>DW</span><span class=value5>W</span><span class=value4>E</span><span class=value8>A</span><span class=value6>R</span><span class=value9>S</span><span class=value2>L</span><span class=value4>T</span><span class=value2>T</span><span class=value5>G</span><span class=value1>E</span><span class=value0>T</span><span class=value9>G</span><span class=value4>Y</span><span class=value9>IP</span><span class=value7>S</span><span class=value8>NYV</span><span class=value4>A</span><span class=value1>P</span><span class=value7>VD</span><br><span class=valuedefault>1QCF&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value2>S</span><span class=value4>G</span><span class=valuegap>----------</span><span class=value8>E</span><span class=value9>W</span><span class=value5>W</span><span class=value2>K</span><span class=value8>A</span><span class=value6>R</span><span class=value9>S</span><span class=value2>L</span><span class=value4>A</span><span class=value2>T</span><span class=value1>R</span><span class=value4>KE</span><span class=value9>G</span><span class=value4>Y</span><span class=value9>IP</span><span class=value7>S</span><span class=value8>NYV</span><span class=value4>A</span><span class=value3>R</span><span class=value7>VD</span><br><span class=valuedefault>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>&nbsp;.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;.*&nbsp;.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><br><br><br></body></html>
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>stderr</name>
+<content></content>
+</file>
+<file>
+<stream>input</stream>
+<name>sh3.aln</name>
+<content>CLUSTAL FORMAT for T-COFFEE r479 [http://www.tcoffee.org] [MODE:  ], CPU=0.00 sec, SCORE=90, Nseq=8, Len=83 
+
+1PHT            YQYRALYDYKKEREEDIDLHLGDILTVNKGSLVALGFSDGQEARPEEI----------GWLNGYNETTGERGDFPGTYVEYIG
+1BB9            FKVQAQHDYTATDTDELQLKAGDVVLVIP-------FQNP----EEQDEGWLMGVKESDWNQHK-ELEKCRGVFPENFTERVQ
+1UHC            QVYFAVYTFKARNPNELSVSANQKLKILE-------FKDV----TGNT----------EWWLAE--VNGKKGYVPSNYIRKTE
+1YCS            GVIYALWDYEPQNDDELPMKEGDCMTIIH-------REDE----D-EI----------EWWWA--RLNDKEGYVPRNLLGLYP
+1OOT            PKAVALYSFAGEESGDLPFRKGDVITILKK-------S------DSQN----------DWWTG--RVNGREGIFPANYVE-LV
+1ABO            NLFVALYDFVASGDNTLSITKGEKLRVLG-------YNH-------NG----------EWCEAQ--TKNGQGWVPSNYITPVN
+1FYN            TLFVALYDYEARTEDDLSFHKGEKFQILN-------SS--------EG----------DWWEARSLTTGETGYIPSNYVAPVD
+1QCF            IIVVALYDYEAIHHEDLSFQKGDQMVVLE-------E---------SG----------EWWKARSLATRKEGYIPSNYVARVD
+                    *   :       : .  .: . :                   .            *           * .* .      
+
+
+
+</content>
+</file>
+<environement>
+HOME_4_TCOFFEE=/Users/cnotredame/
+MANPATH=/sw/share/man:/usr/share/man:/usr/local/share/man:/opt/X11/share/man:/Applications/Xcode.app/Contents/Developer/usr/share/man:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/share/man:/sw/lib/perl5/5.18.2/man
+TERM_PROGRAM=Apple_Terminal
+MCOFFEE_4_TCOFFEE=/Users/cnotredame//.t_coffee//mcoffee/
+ROOT_TMP_4_TCOFFEE=/var/tmp/
+SHELL=/bin/bash
+TERM=xterm-256color
+TMPDIR=/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/
+PERL5LIB=/sw/lib/perl5:/sw/lib/perl5/darwin
+Apple_PubSub_Socket_Render=/private/tmp/com.apple.launchd.u7asRiNodS/Render
+TERM_PROGRAM_VERSION=388.1.3
+OSNAME=macosx
+PERL_BIN=/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms::/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices
+TERM_SESSION_ID=08C395F9-69A0-4DC8-9DE9-5914C23D168F
+METHODS_4_TCOFFEE=/Users/cnotredame//.t_coffee//methods/
+VERSIONER_PERL_VERSION=5.18
+XAPPLRESDIR=/sw/etc/app-defaults/
+http_proxy=
+HTTP_proxy=
+USER=cnotredame
+SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.mMz4rqepoV/Listeners
+__CF_USER_TEXT_ENCODING=0x1F6:0x0:0x0
+ENV_4_TCOFFEE=/Users/cnotredame//.t_coffee//.t_coffee_env
+all_proxy=
+ALL_PROXY=
+HTTP_proxy_4_TCOFFEE=
+PATH=/opt/local/bin:/opt/local/sbin:/opt/local/bin:/opt/local/sbin:/Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/packages/x3dna-v2.1/bin:/Users/cnotredame/bin/macosx://Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms::/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices:/Users/cnotredame/bin/Scripts/:/Users/cnotredame/Library/Haskell/ghc-7.4.2/lib/epub-tools-2.0.0/bin/:/sw/bin:/sw/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin
+_=/usr/bin/printenv
+DIR_4_TCOFFEE=/Users/cnotredame//.t_coffee/
+PWD=/Users/cnotredame/Dropbox/projects/git/tcoffee/tmp/RANDOMSTRINGhqTOfsyLmb092qvmwZTs/tmp/RANDOMSTRING8zfLD48qCTcIBOaHH9nJ/data
+CACHE_4_TCOFFEE=/Users/cnotredame//.t_coffee//cache/
+X3DNA=/Users/cnotredame/Dropbox/packages/x3dna-v2.1
+DBUS_LAUNCHD_SESSION_BUS_SOCKET=/private/tmp/com.apple.launchd.CeZrDaslOL/unix_domain_listener
+XPC_FLAGS=0x0
+VERSIONER_PERL_PREFER_32_BIT=no
+XPC_SERVICE_NAME=0
+ERRORFILE_4_TCOFFEE=t_coffee.ErrorReport
+PLUGINS_4_TCOFFEE=/Users/cnotredame//.t_coffee//plugins/macosx/
+SHLVL=3
+HOME=/Users/cnotredame
+DUMP_4_TCOFFEE=/Users/cnotredame/Dropbox/projects/git/tcoffee/tmp/RANDOMSTRINGhqTOfsyLmb092qvmwZTs/tmp/RANDOMSTRING8zfLD48qCTcIBOaHH9nJ/nature_protocol.tests.30.dump
+HTTP_PROXY=
+BIN=/Users/cnotredame/bin/macosx
+LOGNAME=cnotredame
+EMAIL_4_TCOFFEE=cedric.notredame@gmail.com
+LC_CTYPE=UTF-8
+EMAIL=cedric.notredame@gmail.com
+UPDATED_ENV_4_TCOFFEE=1
+INFOPATH=/sw/share/info:/sw/info:/usr/share/info
+DISPLAY=/private/tmp/com.apple.launchd.MDJPhYnCNw/org.macosforge.xquartz:0
+TC_MASTER_NODE=1
+NUMBER_OF_PROCESSORS=8
+ALL_proxy=
+SECURITYSESSIONID=186a6
+LOCKDIR_4_TCOFFEE=/var/tmp/tco/tco5dotpp6v95222//lck/k6336zp3kg/
+TMP_4_TCOFFEE=/var/tmp/tco/tco5dotpp6v95222/
+USER_BIN=/Users/cnotredame/bin/macosx
+SCRIPT_BIN=/Users/cnotredame/bin/Scripts/
+</environement>
+<DumpStatus>OK</DumpStatus>
+<DumpFile>/Users/cnotredame/Dropbox/projects/git/tcoffee/tmp/RANDOMSTRINGhqTOfsyLmb092qvmwZTs/tmp/RANDOMSTRING8zfLD48qCTcIBOaHH9nJ/nature_protocol.tests.30.dump</DumpFile>
+</DumpIO>

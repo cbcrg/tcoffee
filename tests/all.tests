@@ -1,0 +1,4 @@
+core.tests
+nature_protocol.tests
+remote.tests
+web.tests

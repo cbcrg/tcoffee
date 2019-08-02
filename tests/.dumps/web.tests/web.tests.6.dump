@@ -1,0 +1,1580 @@
+<DumpIO>
+<nature>standard dump</nature>
+<program>T-COFFEE</program>
+<version>Version_13.30.4.4e2c658</version>
+<build>Version_13.30.4.4e2c658</build>
+<cl>t_coffee -in input-rna.txt -method mafft_msa muscle_msa probconsRNA_msa -output score_html clustalw_aln fasta_aln phylip -maxnseq 150 -maxlen 2500 -case upper -seqnos on -outorder input -run_name result -tree -special_mode rcoffee -method_limits consan_pair 5 150 </cl>
+<stack>
+</stack>
+<warning>
+</warning>
+<file>
+<stream>output</stream>
+<name>stdout</name>
+<content>!	Process: >X02167.1-268_340 _F_ X_2167.1-268_34_.rfold
+!	Process: >X53649.1-160_231 _F_ X53649.1-16__231.rfold
+!	Process: >D11467.1-6989_6916 _F_ D11467.1-6989_6916.rfold
+!	Process: >AE008874.1-15640_15730 _F_ AE__8874.1-1564__1573_.rfold
+!	Process: >AC092686.3-29631_29561 _F_ AC_92686.3-29631_29561.rfold
+#Single Thread
+#Single Thread
+#Single Thread
+#Single Thread
+#Single Thread
+CLUSTAL FORMAT for T-COFFEE Version_13.30.4.4e2c658 [http://www.tcoffee.org] [MODE: rcoffee ], CPU=0.00 sec, SCORE=47, Nseq=5, Len=92 
+
+D11467.1-6989_6916      --------GCAUCCAUGGCUGAAUGGUUAA----AGCGCCCAACUCAUAA 38
+AC092686.3-29631_29561  --------GCAUUGGUGGUUCAGUGGU-----AG-AAUUCUCGCCUGCCA 36
+X53649.1-160_231        --------UGGGCUAUGGUGUAAUUGGCAG----CACGACUGAUUC-UGG 37
+AE008874.1-15640_15730  GAAGAUCGUCGUCUCCGGUGAGGCGGCUGGACUUCAAAUCCAGUUGGGGC 50
+X02167.1-268_340        --------CUAAAUAUAUUUCAAUGGUUAG----CAAAAUACGCUUGUGG 38
+                                                 *                        
+
+D11467.1-6989_6916      U-UGGCGAACUCGCGGG----UUCAAUUCCUGCUGGAUGCA- 74
+AC092686.3-29631_29561  C-GCGGGAGGC-CCGGG----UUCGAUUCCCGGCCAAUGCA- 71
+X53649.1-160_231        U-UCAGUUAGU-CUAGG----UUCGAGUCCUGGUAGCCCAG- 72
+AE008874.1-15640_15730  CGCCAGCGGUC-CCGGGCAGGUUCGACUCCUGUGAUCUUCCG 91
+X02167.1-268_340        U-GCGUUAAAU-CUAAG----UUCGAUUCUUAGUAUUUACC- 73
+                                        *    *** * **             
+
+
+
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>stderr</name>
+<content>
+PROGRAM: T-COFFEE Version_13.30.4.4e2c658 (Version_13.30.4.4e2c658)
+-full_log      	S	[0] 
+-genepred_score	S	[0] 	nsd
+-run_name      	S	[1] 	result
+-mem_mode      	S	[0] 	mem
+-extend        	D	[1] 	1 
+-extend_mode   	S	[1] 	rna2
+-max_n_pair    	D	[0] 	10 
+-seq_name_for_quadruplet	S	[0] 	all
+-compact       	S	[0] 	default
+-clean         	S	[0] 	no
+-do_self       	FL	[0] 	0
+-do_normalise  	D	[0] 	1000 
+-template_file 	S	[1] 	RCOFFEE
+-setenv        	S	[0] 	0
+-export        	S	[0] 	0
+-template_mode 	S	[0] 
+-flip          	D	[0] 	0 
+-remove_template_file	D	[0] 	0 
+-profile_template_file	S	[0] 
+-in            	S	[1] 	input-rna.txt
+-seq           	S	[0] 
+-aln           	S	[0] 
+-method_limits 	S	[1] 	consan_pair	5	150
+-method        	S	[1] 	mafft_msa	muscle_msa	probconsRNA_msa
+-lib           	S	[0] 
+-profile       	S	[0] 
+-profile1      	S	[0] 
+-profile2      	S	[0] 
+-pdb           	S	[0] 
+-relax_lib     	D	[1] 	0 
+-filter_lib    	D	[0] 	0 
+-shrink_lib    	D	[0] 	0 
+-out_lib       	W_F	[0] 	no
+-out_lib_mode  	S	[0] 	primary
+-lib_only      	D	[0] 	0 
+-outseqweight  	W_F	[0] 	no
+-seq_source    	S	[0] 	ANY
+-cosmetic_penalty	D	[0] 	0 
+-gapopen       	D	[0] 	0 
+-gapext        	D	[0] 	0 
+-fgapopen      	D	[0] 	0 
+-fgapext       	D	[0] 	0 
+-nomatch       	D	[0] 	0 
+-newtree       	W_F	[0] 	default
+-tree          	W_F	[1] 	default
+-usetree       	R_F	[0] 
+-tree_mode     	S	[0] 	nj
+-distance_matrix_mode	S	[0] 	ktup
+-distance_matrix_sim_mode	S	[0] 	idmat_sim1
+-quicktree     	FL	[0] 	0
+-outfile       	W_F	[0] 	default
+-maximise      	FL	[1] 	1
+-output        	S	[1] 	score_html	clustalw_aln	fasta_aln	phylip
+-len           	D	[0] 	0 
+-infile        	R_F	[0] 
+-matrix        	S	[0] 	default
+-tg_mode       	D	[0] 	1 
+-profile_mode  	S	[0] 	cw_profile_profile
+-profile_comparison	S	[0] 	profile
+-dp_mode       	S	[0] 	linked_pair_wise
+-ktuple        	D	[0] 	1 
+-ndiag         	D	[0] 	0 
+-diag_threshold	D	[0] 	0 
+-diag_mode     	D	[0] 	0 
+-sim_matrix    	S	[0] 	vasiliky
+-transform     	S	[1] 	dna2rna
+-extend_seq    	FL	[0] 	0
+-outorder      	S	[1] 	input
+-inorder       	S	[0] 	aligned
+-seqnos        	S	[1] 	on
+-case          	S	[1] 	upper
+-cpu           	D	[0] 	0 
+-ulimit        	D	[0] 	-1 
+-maxnseq       	D	[1] 	150 
+-maxlen        	D	[1] 	2500 
+-sample_dp     	D	[0] 	0 
+-weight        	S	[0] 	default
+-seq_weight    	S	[0] 	no
+-align         	FL	[1] 	1
+-mocca         	FL	[0] 	0
+-domain        	FL	[0] 	0
+-start         	D	[0] 	0 
+-len           	D	[0] 	0 
+-scale         	D	[0] 	0 
+-mocca_interactive	FL	[0] 	0
+-method_evaluate_mode	S	[0] 	default
+-color_mode    	S	[0] 	new
+-aln_line_length	D	[0] 	0 
+-evaluate_mode 	S	[0] 	triplet
+-get_type      	FL	[0] 	0
+-clean_aln     	D	[0] 	0 
+-clean_threshold	D	[1] 	1 
+-clean_iteration	D	[1] 	1 
+-clean_evaluate_mode	S	[0] 	t_coffee_fast
+-extend_matrix 	FL	[0] 	0
+-prot_min_sim  	D	[40] 	40 
+-prot_max_sim  	D	[90] 	90 
+-prot_trim     	D	[20] 	20 
+-prot_min_cov  	D	[40] 	40 
+-pdb_type      	S	[0] 	d
+-pdb_min_sim   	D	[35] 	35 
+-pdb_max_sim   	D	[100] 	100 
+-pdb_min_cov   	D	[50] 	50 
+-pdb_blast_server	W_F	[0] 	EBI
+-blast         	W_F	[0] 
+-blast_server  	W_F	[0] 	EBI
+-pdb_db        	W_F	[0] 	pdb
+-protein_db    	W_F	[0] 	uniref50
+-method_log    	W_F	[0] 	no
+-struc_to_use  	S	[0] 
+-cache         	W_F	[0] 	use
+-print_cache   	FL	[0] 	0
+-align_pdb_param_file	W_F	[0] 	no
+-align_pdb_hasch_mode	W_F	[0] 	hasch_ca_trace_bubble
+-external_aligner	S	[0] 	NO
+-msa_mode      	S	[0] 	tree
+-et_mode       	S	[0] 	et
+-master        	S	[0] 	no
+-blast_nseq    	D	[0] 	0 
+-lalign_n_top  	D	[0] 	10 
+-iterate       	D	[0] 	0 
+-trim          	D	[0] 	0 
+-split         	D	[0] 	0 
+-trimfile      	S	[0] 	default
+-split         	D	[0] 	0 
+-split_nseq_thres	D	[0] 	0 
+-split_score_thres	D	[0] 	0 
+-check_pdb_status	D	[0] 	0 
+-clean_seq_name	D	[0] 	0 
+-seq_to_keep   	S	[0] 
+-dpa_master_aln	S	[0] 
+-dpa_maxnseq   	D	[0] 	0 
+-dpa_min_score1	D	[0] 
+-dpa_min_score2	D	[0] 
+-dpa_keep_tmpfile	FL	[0] 	0
+-dpa_debug     	D	[0] 	0 
+-multi_core    	S	[0] 	templates_jobs_relax_msa_evaluate
+-n_core        	D	[0] 	1 
+-thread        	D	[0] 	1 
+-max_n_proc    	D	[0] 	0 
+-lib_list      	S	[0] 
+-prune_lib_mode	S	[0] 	5
+-tip           	S	[0] 	none
+-rna_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) input-rna.txt  Format fasta_seq
+	Input File (M) mafft_msa 
+	Input File (M) muscle_msa 
+	Input File (M) probconsRNA_msa 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [RCOFFEE] Mode Or File: [RCOFFEE] [Start
+]
+INPUT SEQUENCES: 5 SEQUENCES  [RNA]
+  Input File input-rna.txt          Seq AC092686.3-29631_29561 Length   71 type RNA Struct Unchecked
+	RNA Fold: Template=AC_92686.3-29631_29561.rfold, File=AC_92686.3-29631_29561.rfold
+  Input File input-rna.txt          Seq AE008874.1-15640_15730 Length   91 type RNA Struct Unchecked
+	RNA Fold: Template=AE__8874.1-1564__1573_.rfold, File=AE__8874.1-1564__1573_.rfold
+  Input File input-rna.txt          Seq D11467.1-6989_6916     Length   74 type RNA Struct Unchecked
+	RNA Fold: Template=D11467.1-6989_6916.rfold, File=D11467.1-6989_6916.rfold
+  Input File input-rna.txt          Seq X02167.1-268_340       Length   73 type RNA Struct Unchecked
+	RNA Fold: Template=X_2167.1-268_34_.rfold, File=X_2167.1-268_34_.rfold
+  Input File input-rna.txt          Seq X53649.1-160_231       Length   72 type RNA Struct Unchecked
+	RNA Fold: Template=X53649.1-16__231.rfold, File=X53649.1-16__231.rfold
+
+	Multi Core Mode: 1 processors:
+ 	0 
+-lib_list      	S	[0] 
+-prune_lib_mode	S	[0] 	5
+-tip           	S	[0] 	none
+-rna_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) input-rna.txt  Format fasta_seq
+	Input File (M) mafft_msa 
+	Input File (M) muscle_msa 
+	Input File (M) probconsRNA_msa 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [RCOFFEE] Mode Or File: [RCOFFEE] [Start
+]
+INPUT SEQUENCES: 5 SEQUENCES  [RNA]
+  Input File input-rna.txt          Seq AC092686.3-29631_29561 Length   71 type RNA Struct Unchecked
+	RNA Fold: Template=AC_92686.3-29631_29561.rfold, File=AC_92686.3-29631_29561.rfold
+  Input File input-rna.txt          Seq AE008874.1-15640_15730 Length   91 type RNA Struct Unchecked
+	RNA Fold: Template=AE__8874.1-1564__1573_.rfold, File=AE__8874.1-1564__1573_.rfold
+  Input File input-rna.txt          Seq D11467.1-6989_6916     Length   74 type RNA Struct Unchecked
+	RNA Fold: Template=D11467.1-6989_6916.rfold, File=D11467.1-6989_6916.rfold
+  Input File input-rna.txt          Seq X02167.1-268_340       Length   73 type RNA Struct Unchecked
+	RNA Fold: Template=X_2167.1-268_34_.rfold, File=X_2167.1-268_34_.rfold
+  Input File input-rna.txt          Seq X53649.1-160_231       Length   72 type RNA Struct Unchecked
+	RNA Fold: Template=X53649.1-16__231.rfold, File=X53649.1-16__231.rfold
+
+	Multi Core Mode: 1 processors:
+
+	--- Process Method/Library/Aln Sinput-rna.txt
+	xxx Retrieved Sinput-rna.txt 	0 
+-lib_list      	S	[0] 
+-prune_lib_mode	S	[0] 	5
+-tip           	S	[0] 	none
+-rna_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) input-rna.txt  Format fasta_seq
+	Input File (M) mafft_msa 
+	Input File (M) muscle_msa 
+	Input File (M) probconsRNA_msa 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [RCOFFEE] Mode Or File: [RCOFFEE] [Start
+]
+INPUT SEQUENCES: 5 SEQUENCES  [RNA]
+  Input File input-rna.txt          Seq AC092686.3-29631_29561 Length   71 type RNA Struct Unchecked
+	RNA Fold: Template=AC_92686.3-29631_29561.rfold, File=AC_92686.3-29631_29561.rfold
+  Input File input-rna.txt          Seq AE008874.1-15640_15730 Length   91 type RNA Struct Unchecked
+	RNA Fold: Template=AE__8874.1-1564__1573_.rfold, File=AE__8874.1-1564__1573_.rfold
+  Input File input-rna.txt          Seq D11467.1-6989_6916     Length   74 type RNA Struct Unchecked
+	RNA Fold: Template=D11467.1-6989_6916.rfold, File=D11467.1-6989_6916.rfold
+  Input File input-rna.txt          Seq X02167.1-268_340       Length   73 type RNA Struct Unchecked
+	RNA Fold: Template=X_2167.1-268_34_.rfold, File=X_2167.1-268_34_.rfold
+  Input File input-rna.txt          Seq X53649.1-160_231       Length   72 type RNA Struct Unchecked
+	RNA Fold: Template=X53649.1-16__231.rfold, File=X53649.1-16__231.rfold
+
+	Multi Core Mode: 1 processors:
+
+	--- Process Method/Library/Aln Sinput-rna.txt
+	xxx Retrieved Sinput-rna.txt 	0 
+-lib_list      	S	[0] 
+-prune_lib_mode	S	[0] 	5
+-tip           	S	[0] 	none
+-rna_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) input-rna.txt  Format fasta_seq
+	Input File (M) mafft_msa 
+	Input File (M) muscle_msa 
+	Input File (M) probconsRNA_msa 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [RCOFFEE] Mode Or File: [RCOFFEE] [Start
+]
+INPUT SEQUENCES: 5 SEQUENCES  [RNA]
+  Input File input-rna.txt          Seq AC092686.3-29631_29561 Length   71 type RNA Struct Unchecked
+	RNA Fold: Template=AC_92686.3-29631_29561.rfold, File=AC_92686.3-29631_29561.rfold
+  Input File input-rna.txt          Seq AE008874.1-15640_15730 Length   91 type RNA Struct Unchecked
+	RNA Fold: Template=AE__8874.1-1564__1573_.rfold, File=AE__8874.1-1564__1573_.rfold
+  Input File input-rna.txt          Seq D11467.1-6989_6916     Length   74 type RNA Struct Unchecked
+	RNA Fold: Template=D11467.1-6989_6916.rfold, File=D11467.1-6989_6916.rfold
+  Input File input-rna.txt          Seq X02167.1-268_340       Length   73 type RNA Struct Unchecked
+	RNA Fold: Template=X_2167.1-268_34_.rfold, File=X_2167.1-268_34_.rfold
+  Input File input-rna.txt          Seq X53649.1-160_231       Length   72 type RNA Struct Unchecked
+	RNA Fold: Template=X53649.1-16__231.rfold, File=X53649.1-16__231.rfold
+
+	Multi Core Mode: 1 processors:
+
+	--- Process Method/Library/Aln Sinput-rna.txt
+	xxx Retrieved Sinput-rna.txt
+	--- Process Method/Library/Aln Mmafft_msa
+	xxx Retrieved Mmafft_msa 	0 
+-lib_list      	S	[0] 
+-prune_lib_mode	S	[0] 	5
+-tip           	S	[0] 	none
+-rna_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) input-rna.txt  Format fasta_seq
+	Input File (M) mafft_msa 
+	Input File (M) muscle_msa 
+	Input File (M) probconsRNA_msa 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [RCOFFEE] Mode Or File: [RCOFFEE] [Start
+]
+INPUT SEQUENCES: 5 SEQUENCES  [RNA]
+  Input File input-rna.txt          Seq AC092686.3-29631_29561 Length   71 type RNA Struct Unchecked
+	RNA Fold: Template=AC_92686.3-29631_29561.rfold, File=AC_92686.3-29631_29561.rfold
+  Input File input-rna.txt          Seq AE008874.1-15640_15730 Length   91 type RNA Struct Unchecked
+	RNA Fold: Template=AE__8874.1-1564__1573_.rfold, File=AE__8874.1-1564__1573_.rfold
+  Input File input-rna.txt          Seq D11467.1-6989_6916     Length   74 type RNA Struct Unchecked
+	RNA Fold: Template=D11467.1-6989_6916.rfold, File=D11467.1-6989_6916.rfold
+  Input File input-rna.txt          Seq X02167.1-268_340       Length   73 type RNA Struct Unchecked
+	RNA Fold: Template=X_2167.1-268_34_.rfold, File=X_2167.1-268_34_.rfold
+  Input File input-rna.txt          Seq X53649.1-160_231       Length   72 type RNA Struct Unchecked
+	RNA Fold: Template=X53649.1-16__231.rfold, File=X53649.1-16__231.rfold
+
+	Multi Core Mode: 1 processors:
+
+	--- Process Method/Library/Aln Sinput-rna.txt
+	xxx Retrieved Sinput-rna.txt
+	--- Process Method/Library/Aln Mmafft_msa
+	xxx Retrieved Mmafft_msash: line 1: 22728 Killed: 9               probconsRNA ./9852822725517 > ./9852822725518 2> /dev/null
+ 	0 
+-lib_list      	S	[0] 
+-prune_lib_mode	S	[0] 	5
+-tip           	S	[0] 	none
+-rna_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) input-rna.txt  Format fasta_seq
+	Input File (M) mafft_msa 
+	Input File (M) muscle_msa 
+	Input File (M) probconsRNA_msa 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [RCOFFEE] Mode Or File: [RCOFFEE] [Start
+]
+INPUT SEQUENCES: 5 SEQUENCES  [RNA]
+  Input File input-rna.txt          Seq AC092686.3-29631_29561 Length   71 type RNA Struct Unchecked
+	RNA Fold: Template=AC_92686.3-29631_29561.rfold, File=AC_92686.3-29631_29561.rfold
+  Input File input-rna.txt          Seq AE008874.1-15640_15730 Length   91 type RNA Struct Unchecked
+	RNA Fold: Template=AE__8874.1-1564__1573_.rfold, File=AE__8874.1-1564__1573_.rfold
+  Input File input-rna.txt          Seq D11467.1-6989_6916     Length   74 type RNA Struct Unchecked
+	RNA Fold: Template=D11467.1-6989_6916.rfold, File=D11467.1-6989_6916.rfold
+  Input File input-rna.txt          Seq X02167.1-268_340       Length   73 type RNA Struct Unchecked
+	RNA Fold: Template=X_2167.1-268_34_.rfold, File=X_2167.1-268_34_.rfold
+  Input File input-rna.txt          Seq X53649.1-160_231       Length   72 type RNA Struct Unchecked
+	RNA Fold: Template=X53649.1-16__231.rfold, File=X53649.1-16__231.rfold
+
+	Multi Core Mode: 1 processors:
+
+	--- Process Method/Library/Aln Sinput-rna.txt
+	xxx Retrieved Sinput-rna.txt
+	--- Process Method/Library/Aln Mmafft_msa
+	xxx Retrieved Mmafft_msa
+	--- Process Method/Library/Aln Mmuscle_msa
+	xxx Retrieved Mmuscle_msa 	0 
+-lib_list      	S	[0] 
+-prune_lib_mode	S	[0] 	5
+-tip           	S	[0] 	none
+-rna_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) input-rna.txt  Format fasta_seq
+	Input File (M) mafft_msa 
+	Input File (M) muscle_msa 
+	Input File (M) probconsRNA_msa 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [RCOFFEE] Mode Or File: [RCOFFEE] [Start
+]
+INPUT SEQUENCES: 5 SEQUENCES  [RNA]
+  Input File input-rna.txt          Seq AC092686.3-29631_29561 Length   71 type RNA Struct Unchecked
+	RNA Fold: Template=AC_92686.3-29631_29561.rfold, File=AC_92686.3-29631_29561.rfold
+  Input File input-rna.txt          Seq AE008874.1-15640_15730 Length   91 type RNA Struct Unchecked
+	RNA Fold: Template=AE__8874.1-1564__1573_.rfold, File=AE__8874.1-1564__1573_.rfold
+  Input File input-rna.txt          Seq D11467.1-6989_6916     Length   74 type RNA Struct Unchecked
+	RNA Fold: Template=D11467.1-6989_6916.rfold, File=D11467.1-6989_6916.rfold
+  Input File input-rna.txt          Seq X02167.1-268_340       Length   73 type RNA Struct Unchecked
+	RNA Fold: Template=X_2167.1-268_34_.rfold, File=X_2167.1-268_34_.rfold
+  Input File input-rna.txt          Seq X53649.1-160_231       Length   72 type RNA Struct Unchecked
+	RNA Fold: Template=X53649.1-16__231.rfold, File=X53649.1-16__231.rfold
+
+	Multi Core Mode: 1 processors:
+
+	--- Process Method/Library/Aln Sinput-rna.txt
+	xxx Retrieved Sinput-rna.txt
+	--- Process Method/Library/Aln Mmafft_msa
+	xxx Retrieved Mmafft_msa
+	--- Process Method/Library/Aln Mmuscle_msa
+	xxx Retrieved Mmuscle_msa 	0 
+-lib_list      	S	[0] 
+-prune_lib_mode	S	[0] 	5
+-tip           	S	[0] 	none
+-rna_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) input-rna.txt  Format fasta_seq
+	Input File (M) mafft_msa 
+	Input File (M) muscle_msa 
+	Input File (M) probconsRNA_msa 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [RCOFFEE] Mode Or File: [RCOFFEE] [Start
+]
+INPUT SEQUENCES: 5 SEQUENCES  [RNA]
+  Input File input-rna.txt          Seq AC092686.3-29631_29561 Length   71 type RNA Struct Unchecked
+	RNA Fold: Template=AC_92686.3-29631_29561.rfold, File=AC_92686.3-29631_29561.rfold
+  Input File input-rna.txt          Seq AE008874.1-15640_15730 Length   91 type RNA Struct Unchecked
+	RNA Fold: Template=AE__8874.1-1564__1573_.rfold, File=AE__8874.1-1564__1573_.rfold
+  Input File input-rna.txt          Seq D11467.1-6989_6916     Length   74 type RNA Struct Unchecked
+	RNA Fold: Template=D11467.1-6989_6916.rfold, File=D11467.1-6989_6916.rfold
+  Input File input-rna.txt          Seq X02167.1-268_340       Length   73 type RNA Struct Unchecked
+	RNA Fold: Template=X_2167.1-268_34_.rfold, File=X_2167.1-268_34_.rfold
+  Input File input-rna.txt          Seq X53649.1-160_231       Length   72 type RNA Struct Unchecked
+	RNA Fold: Template=X53649.1-16__231.rfold, File=X53649.1-16__231.rfold
+
+	Multi Core Mode: 1 processors:
+
+	--- Process Method/Library/Aln Sinput-rna.txt
+	xxx Retrieved Sinput-rna.txt
+	--- Process Method/Library/Aln Mmafft_msa
+	xxx Retrieved Mmafft_msa
+	--- Process Method/Library/Aln Mmuscle_msa
+	xxx Retrieved Mmuscle_msa
+	--- Process Method/Library/Aln MprobconsRNA_msa
+	xxx Retrieved MprobconsRNA_msa
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1022]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: AC092686.3-29631_29561
+Group    2: AE008874.1-15640_15730
+Group    3: D11467.1-6989_6916
+Group    4: X02167.1-268_340
+Group    5: X53649.1-160_231
+
+ 	0 
+-lib_list      	S	[0] 
+-prune_lib_mode	S	[0] 	5
+-tip           	S	[0] 	none
+-rna_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) input-rna.txt  Format fasta_seq
+	Input File (M) mafft_msa 
+	Input File (M) muscle_msa 
+	Input File (M) probconsRNA_msa 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [RCOFFEE] Mode Or File: [RCOFFEE] [Start
+]
+INPUT SEQUENCES: 5 SEQUENCES  [RNA]
+  Input File input-rna.txt          Seq AC092686.3-29631_29561 Length   71 type RNA Struct Unchecked
+	RNA Fold: Template=AC_92686.3-29631_29561.rfold, File=AC_92686.3-29631_29561.rfold
+  Input File input-rna.txt          Seq AE008874.1-15640_15730 Length   91 type RNA Struct Unchecked
+	RNA Fold: Template=AE__8874.1-1564__1573_.rfold, File=AE__8874.1-1564__1573_.rfold
+  Input File input-rna.txt          Seq D11467.1-6989_6916     Length   74 type RNA Struct Unchecked
+	RNA Fold: Template=D11467.1-6989_6916.rfold, File=D11467.1-6989_6916.rfold
+  Input File input-rna.txt          Seq X02167.1-268_340       Length   73 type RNA Struct Unchecked
+	RNA Fold: Template=X_2167.1-268_34_.rfold, File=X_2167.1-268_34_.rfold
+  Input File input-rna.txt          Seq X53649.1-160_231       Length   72 type RNA Struct Unchecked
+	RNA Fold: Template=X53649.1-16__231.rfold, File=X53649.1-16__231.rfold
+
+	Multi Core Mode: 1 processors:
+
+	--- Process Method/Library/Aln Sinput-rna.txt
+	xxx Retrieved Sinput-rna.txt
+	--- Process Method/Library/Aln Mmafft_msa
+	xxx Retrieved Mmafft_msa
+	--- Process Method/Library/Aln Mmuscle_msa
+	xxx Retrieved Mmuscle_msa
+	--- Process Method/Library/Aln MprobconsRNA_msa
+	xxx Retrieved MprobconsRNA_msa
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1022]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: AC092686.3-29631_29561
+Group    2: AE008874.1-15640_15730
+Group    3: D11467.1-6989_6916
+Group    4: X02167.1-268_340
+Group    5: X53649.1-160_231
+
+
+	Group    6: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=   91][PID:22559] 	0 
+-lib_list      	S	[0] 
+-prune_lib_mode	S	[0] 	5
+-tip           	S	[0] 	none
+-rna_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) input-rna.txt  Format fasta_seq
+	Input File (M) mafft_msa 
+	Input File (M) muscle_msa 
+	Input File (M) probconsRNA_msa 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [RCOFFEE] Mode Or File: [RCOFFEE] [Start
+]
+INPUT SEQUENCES: 5 SEQUENCES  [RNA]
+  Input File input-rna.txt          Seq AC092686.3-29631_29561 Length   71 type RNA Struct Unchecked
+	RNA Fold: Template=AC_92686.3-29631_29561.rfold, File=AC_92686.3-29631_29561.rfold
+  Input File input-rna.txt          Seq AE008874.1-15640_15730 Length   91 type RNA Struct Unchecked
+	RNA Fold: Template=AE__8874.1-1564__1573_.rfold, File=AE__8874.1-1564__1573_.rfold
+  Input File input-rna.txt          Seq D11467.1-6989_6916     Length   74 type RNA Struct Unchecked
+	RNA Fold: Template=D11467.1-6989_6916.rfold, File=D11467.1-6989_6916.rfold
+  Input File input-rna.txt          Seq X02167.1-268_340       Length   73 type RNA Struct Unchecked
+	RNA Fold: Template=X_2167.1-268_34_.rfold, File=X_2167.1-268_34_.rfold
+  Input File input-rna.txt          Seq X53649.1-160_231       Length   72 type RNA Struct Unchecked
+	RNA Fold: Template=X53649.1-16__231.rfold, File=X53649.1-16__231.rfold
+
+	Multi Core Mode: 1 processors:
+
+	--- Process Method/Library/Aln Sinput-rna.txt
+	xxx Retrieved Sinput-rna.txt
+	--- Process Method/Library/Aln Mmafft_msa
+	xxx Retrieved Mmafft_msa
+	--- Process Method/Library/Aln Mmuscle_msa
+	xxx Retrieved Mmuscle_msa
+	--- Process Method/Library/Aln MprobconsRNA_msa
+	xxx Retrieved MprobconsRNA_msa
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1022]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: AC092686.3-29631_29561
+Group    2: AE008874.1-15640_15730
+Group    3: D11467.1-6989_6916
+Group    4: X02167.1-268_340
+Group    5: X53649.1-160_231
+
+
+	Group    6: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=   91][PID:22559]
+	Group    7: [Group    5 (   1 seq)] with [Group    6 (   2 seq)]-->[Len=   91][PID:22559] 	0 
+-lib_list      	S	[0] 
+-prune_lib_mode	S	[0] 	5
+-tip           	S	[0] 	none
+-rna_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) input-rna.txt  Format fasta_seq
+	Input File (M) mafft_msa 
+	Input File (M) muscle_msa 
+	Input File (M) probconsRNA_msa 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [RCOFFEE] Mode Or File: [RCOFFEE] [Start
+]
+INPUT SEQUENCES: 5 SEQUENCES  [RNA]
+  Input File input-rna.txt          Seq AC092686.3-29631_29561 Length   71 type RNA Struct Unchecked
+	RNA Fold: Template=AC_92686.3-29631_29561.rfold, File=AC_92686.3-29631_29561.rfold
+  Input File input-rna.txt          Seq AE008874.1-15640_15730 Length   91 type RNA Struct Unchecked
+	RNA Fold: Template=AE__8874.1-1564__1573_.rfold, File=AE__8874.1-1564__1573_.rfold
+  Input File input-rna.txt          Seq D11467.1-6989_6916     Length   74 type RNA Struct Unchecked
+	RNA Fold: Template=D11467.1-6989_6916.rfold, File=D11467.1-6989_6916.rfold
+  Input File input-rna.txt          Seq X02167.1-268_340       Length   73 type RNA Struct Unchecked
+	RNA Fold: Template=X_2167.1-268_34_.rfold, File=X_2167.1-268_34_.rfold
+  Input File input-rna.txt          Seq X53649.1-160_231       Length   72 type RNA Struct Unchecked
+	RNA Fold: Template=X53649.1-16__231.rfold, File=X53649.1-16__231.rfold
+
+	Multi Core Mode: 1 processors:
+
+	--- Process Method/Library/Aln Sinput-rna.txt
+	xxx Retrieved Sinput-rna.txt
+	--- Process Method/Library/Aln Mmafft_msa
+	xxx Retrieved Mmafft_msa
+	--- Process Method/Library/Aln Mmuscle_msa
+	xxx Retrieved Mmuscle_msa
+	--- Process Method/Library/Aln MprobconsRNA_msa
+	xxx Retrieved MprobconsRNA_msa
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1022]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: AC092686.3-29631_29561
+Group    2: AE008874.1-15640_15730
+Group    3: D11467.1-6989_6916
+Group    4: X02167.1-268_340
+Group    5: X53649.1-160_231
+
+
+	Group    6: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=   91][PID:22559]
+	Group    7: [Group    5 (   1 seq)] with [Group    6 (   2 seq)]-->[Len=   91][PID:22559]
+	Group    8: [Group    4 (   1 seq)] with [Group    3 (   1 seq)]-->[Len=   74][PID:22559] 	0 
+-lib_list      	S	[0] 
+-prune_lib_mode	S	[0] 	5
+-tip           	S	[0] 	none
+-rna_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) input-rna.txt  Format fasta_seq
+	Input File (M) mafft_msa 
+	Input File (M) muscle_msa 
+	Input File (M) probconsRNA_msa 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [RCOFFEE] Mode Or File: [RCOFFEE] [Start
+]
+INPUT SEQUENCES: 5 SEQUENCES  [RNA]
+  Input File input-rna.txt          Seq AC092686.3-29631_29561 Length   71 type RNA Struct Unchecked
+	RNA Fold: Template=AC_92686.3-29631_29561.rfold, File=AC_92686.3-29631_29561.rfold
+  Input File input-rna.txt          Seq AE008874.1-15640_15730 Length   91 type RNA Struct Unchecked
+	RNA Fold: Template=AE__8874.1-1564__1573_.rfold, File=AE__8874.1-1564__1573_.rfold
+  Input File input-rna.txt          Seq D11467.1-6989_6916     Length   74 type RNA Struct Unchecked
+	RNA Fold: Template=D11467.1-6989_6916.rfold, File=D11467.1-6989_6916.rfold
+  Input File input-rna.txt          Seq X02167.1-268_340       Length   73 type RNA Struct Unchecked
+	RNA Fold: Template=X_2167.1-268_34_.rfold, File=X_2167.1-268_34_.rfold
+  Input File input-rna.txt          Seq X53649.1-160_231       Length   72 type RNA Struct Unchecked
+	RNA Fold: Template=X53649.1-16__231.rfold, File=X53649.1-16__231.rfold
+
+	Multi Core Mode: 1 processors:
+
+	--- Process Method/Library/Aln Sinput-rna.txt
+	xxx Retrieved Sinput-rna.txt
+	--- Process Method/Library/Aln Mmafft_msa
+	xxx Retrieved Mmafft_msa
+	--- Process Method/Library/Aln Mmuscle_msa
+	xxx Retrieved Mmuscle_msa
+	--- Process Method/Library/Aln MprobconsRNA_msa
+	xxx Retrieved MprobconsRNA_msa
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1022]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: AC092686.3-29631_29561
+Group    2: AE008874.1-15640_15730
+Group    3: D11467.1-6989_6916
+Group    4: X02167.1-268_340
+Group    5: X53649.1-160_231
+
+
+	Group    6: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=   91][PID:22559]
+	Group    7: [Group    5 (   1 seq)] with [Group    6 (   2 seq)]-->[Len=   91][PID:22559]
+	Group    8: [Group    4 (   1 seq)] with [Group    3 (   1 seq)]-->[Len=   74][PID:22559]
+	Group    9: [Group    8 (   2 seq)] with [Group    7 (   3 seq)]-->[Len=   92][PID:22559]
+
+
+!		[Final Evaluation][TOT=   92][  0 %]!		[Final Evaluation][TOT=   92][  2 %]!		[Final Evaluation][TOT=   92][  3 %]!		[Final Evaluation][TOT=   92][  4 %]!		[Final Evaluation][TOT=   92][  5 %]!		[Final Evaluation][TOT=   92][  6 %]!		[Final Evaluation][TOT=   92][  7 %]!		[Final Evaluation][TOT=   92][  8 %]!		[Final Evaluation][TOT=   92][  9 %]!		[Final Evaluation][TOT=   92][ 10 %]!		[Final Evaluation][TOT=   92][ 11 %]!		[Final Evaluation][TOT=   92][ 13 %]!		[Final Evaluation][TOT=   92][ 14 %]!		[Final Evaluation][TOT=   92][ 15 %]!		[Final Evaluation][TOT=   92][ 16 %]!		[Final Evaluation][TOT=   92][ 17 %]!		[Final Evaluation][TOT=   92][ 18 %]!		[Final Evaluation][TOT=   92][ 19 %]!		[Final Evaluation][TOT=   92][ 20 %]!		[Final Evaluation][TOT=   92][ 21 %]!		[Final Evaluation][TOT=   92][ 22 %]!		[Final Evaluation][TOT=   92][ 23 %]!		[Final Evaluation][TOT=   92][ 25 %]!		[Final Evaluation][TOT=   92][ 26 %]!		[Final Evaluation][TOT=   92][ 27 %]!		[Final Evaluation][TOT=   92][ 28 %]!		[Final Evaluation][TOT=   92][ 29 %]!		[Final Evaluation][TOT=   92][ 30 %]!		[Final Evaluation][TOT=   92][ 31 %]!		[Final Evaluation][TOT=   92][ 32 %]!		[Final Evaluation][TOT=   92][ 33 %]!		[Final Evaluation][TOT=   92][ 34 %]!		[Final Evaluation][TOT=   92][ 35 %]!		[Final Evaluation][TOT=   92][ 36 %]!		[Final Evaluation][TOT=   92][ 38 %]!		[Final Evaluation][TOT=   92][ 39 %]!		[Final Evaluation][TOT=   92][ 40 %]!		[Final Evaluation][TOT=   92][ 41 %]!		[Final Evaluation][TOT=   92][ 42 %]!		[Final Evaluation][TOT=   92][ 43 %]!		[Final Evaluation][TOT=   92][ 44 %]!		[Final Evaluation][TOT=   92][ 45 %]!		[Final Evaluation][TOT=   92][ 46 %]!		[Final Evaluation][TOT=   92][ 47 %]!		[Final Evaluation][TOT=   92][ 48 %]!		[Final Evaluation][TOT=   92][ 50 %]!		[Final Evaluation][TOT=   92][ 51 %]!		[Final Evaluation][TOT=   92][ 52 %]!		[Final Evaluation][TOT=   92][ 53 %]!		[Final Evaluation][TOT=   92][ 54 %]!		[Final Evaluation][TOT=   92][ 55 %]!		[Final Evaluation][TOT=   92][ 56 %]!		[Final Evaluation][TOT=   92][ 57 %]!		[Final Evaluation][TOT=   92][ 58 %]!		[Final Evaluation][TOT=   92][ 59 %]!		[Final Evaluation][TOT=   92][ 60 %]!		[Final Evaluation][TOT=   92][ 61 %]!		[Final Evaluation][TOT=   92][ 63 %]!		[Final Evaluation][TOT=   92][ 64 %]!		[Final Evaluation][TOT=   92][ 65 %]!		[Final Evaluation][TOT=   92][ 66 %]!		[Final Evaluation][TOT=   92][ 67 %]!		[Final Evaluation][TOT=   92][ 68 %]!		[Final Evaluation][TOT=   92][ 69 %]!		[Final Evaluation][TOT=   92][ 70 %]!		[Final Evaluation][TOT=   92][ 71 %]!		[Final Evaluation][TOT=   92][ 72 %]!		[Final Evaluation][TOT=   92][ 73 %]!		[Final Evaluation][TOT=   92][ 75 %]!		[Final Evaluation][TOT=   92][ 76 %]!		[Final Evaluation][TOT=   92][ 77 %]!		[Final Evaluation][TOT=   92][ 78 %]!		[Final Evaluation][TOT=   92][ 79 %]!		[Final Evaluation][TOT=   92][ 80 %]!		[Final Evaluation][TOT=   92][ 81 %]!		[Final Evaluation][TOT=   92][ 82 %]!		[Final Evaluation][TOT=   92][ 83 %]!		[Final Evaluation][TOT=   92][ 84 %]!		[Final Evaluation][TOT=   92][ 85 %]!		[Final Evaluation][TOT=   92][ 86 %]!		[Final Evaluation][TOT=   92][ 88 %]!		[Final Evaluation][TOT=   92][ 89 %]!		[Final Evaluation][TOT=   92][ 90 %]!		[Final Evaluation][TOT=   92][ 91 %]!		[Final Evaluation][TOT=   92][ 92 %]!		[Final Evaluation][TOT=   92][ 93 %]!		[Final Evaluation][TOT=   92][ 94 %]!		[Final Evaluation][TOT=   92][ 95 %]!		[Final Evaluation][TOT=   92][ 96 %]!		[Final Evaluation][TOT=   92][ 97 %]!		[Final Evaluation][TOT=   92][ 98 %]!		[Final Evaluation][TOT=   92][100 %]
+
+
+
+OUTPUT RESULTS
+	#### File Type= GUIDE_TREE      Format= newick          Name= result.dnd
+	#### File Type= MSA             Format= score_html      Name= result.score_html
+	#### File Type= MSA             Format= clustalw_aln    Name= result.clustalw_aln
+	#### File Type= MSA             Format= fasta_aln       Name= result.fasta_aln
+	#### File Type= MSA             Format= phylip          Name= result.phylip
+	#### File Type= PHYLOGENIC_TREE Format= newick          Name= result.ph
+	#### File Type= Template_List   Format= fasta_seq       Name= result_rfold1.template_list
+	#### File Type= Template RNA Fold Format= TCOFFEE_LIBRARY Name= AC_92686.3-29631_29561.rfold
+	#### File Type= Template RNA Fold Format= TCOFFEE_LIBRARY Name= AE__8874.1-1564__1573_.rfold
+	#### File Type= Template RNA Fold Format= TCOFFEE_LIBRARY Name= D11467.1-6989_6916.rfold
+	#### File Type= Template RNA Fold Format= TCOFFEE_LIBRARY Name= X_2167.1-268_34_.rfold
+	#### File Type= Template RNA Fold Format= TCOFFEE_LIBRARY Name= X53649.1-16__231.rfold
+
+# Command Line: t_coffee -in input-rna.txt -method mafft_msa muscle_msa probconsRNA_msa -output score_html clustalw_aln fasta_aln phylip -maxnseq 150 -maxlen 2500 -case upper -seqnos on -outorder input -run_name result -tree -special_mode rcoffee -method_limits consan_pair 5 150  [PROGRAM:T-COFFEE]
+# T-COFFEE Memory Usage: Current= 29.440 Mb, Max= 30.419 Mb
+# Results Produced with T-COFFEE Version_13.30.4.4e2c658 (Version_13.30.4.4e2c658)
+# T-COFFEE is available from http://www.tcoffee.org
+# Register on: https://groups.google.com/group/tcoffee/
+</content>
+</file>
+<file>
+<stream>input</stream>
+<name>input-rna.txt</name>
+<content>>D11467.1-6989_6916
+GCAUCCAUGGCUGAAUGGUUAAAGCGCCCAACUCAUAAUUGGCGAACUCGCGGGUUCAAU
+UCCUGCUGGAUGCA
+>AC092686.3-29631_29561
+GCAUUGGUGGUUCAGUGGUAGAAUUCUCGCCUGCCACGCGGGAGGCCCGGGUUCGAUUCC
+CGGCCAAUGCA
+>X53649.1-160_231
+UGGGCUAUGGUGUAAUUGGCAGCACGACUGAUUCUGGUUCAGUUAGUCUAGGUUCGAGUC
+CUGGUAGCCCAG
+>AE008874.1-15640_15730
+GAAGAUCGUCGUCUCCGGUGAGGCGGCUGGACUUCAAAUCCAGUUGGGGCCGCCAGCGGU
+CCCGGGCAGGUUCGACUCCUGUGAUCUUCCG
+>X02167.1-268_340
+CUAAAUAUAUUUCAAUGGUUAGCAAAAUACGCUUGUGGUGCGUUAAAUCUAAGUUCGAUU
+CUUAGUAUUUACC</content>
+</file>
+<file>
+<stream>input</stream>
+<name>result_rfold1.template_list</name>
+<content>>X02167.1-268_340  _F_ X_2167.1-268_34_.rfold
+>X53649.1-160_231  _F_ X53649.1-16__231.rfold
+>D11467.1-6989_6916  _F_ D11467.1-6989_6916.rfold
+>AE008874.1-15640_15730  _F_ AE__8874.1-1564__1573_.rfold
+>AC092686.3-29631_29561  _F_ AC_92686.3-29631_29561.rfold
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>result_rfold1.template_list</name>
+<content>>X02167.1-268_340  _F_ X_2167.1-268_34_.rfold
+>X53649.1-160_231  _F_ X53649.1-16__231.rfold
+>D11467.1-6989_6916  _F_ D11467.1-6989_6916.rfold
+>AE008874.1-15640_15730  _F_ AE__8874.1-1564__1573_.rfold
+>AC092686.3-29631_29561  _F_ AC_92686.3-29631_29561.rfold
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>result.dnd</name>
+<content>(AC092686.3-29631_29561:0.13000,AE008874.1-15640_15730:0.15000,((D11467.1-6989_6916:0.13833,X02167.1-268_340:0.14167):0.00750,X53649.1-160_231:0.13750):0.00250);</content>
+</file>
+<file>
+<stream>input</stream>
+<name>result.dnd</name>
+<content>(AC092686.3-29631_29561:0.13000,AE008874.1-15640_15730:0.15000,((D11467.1-6989_6916:0.13833,X02167.1-268_340:0.14167):0.00750,X53649.1-160_231:0.13750):0.00250);</content>
+</file>
+<file>
+<stream>input</stream>
+<name>AC_92686.3-29631_29561.rfold</name>
+<content>! TC_LIB_FORMAT_01
+1
+AC092686.3-29631_29561 71 GCAUUGGUGGUUCAGUGGUAGAAUUCUCGCCUGCCACGCGGGAGGCCCGGGUUCGAUUCCCGGCCAAUGCA
+!generated by 69365226202.pl on Fri Aug  2 19:14:32 2019
+#1 1
+1 70 100
+2 69 100
+3 68 100
+4 67 100
+5 66 100
+6 65 100
+7 64 100
+8 63 100
+10 61 100
+21 54 100
+22 53 100
+23 52 100
+24 51 100
+25 50 100
+26 49 100
+29 46 100
+30 45 100
+31 44 100
+32 43 100
+34 41 100
+35 40 100
+48 62 100
+49 61 100
+50 60 100
+51 59 100
+! SEQ_1_TO_N
+!CMT: [SOURCE] 2D contact library Generated by RNAPlfold (Vienna Package)
+</content>
+</file>
+<file>
+<stream>input</stream>
+<name>AE__8874.1-1564__1573_.rfold</name>
+<content>! TC_LIB_FORMAT_01
+1
+AE008874.1-15640_15730 91 GAAGAUCGUCGUCUCCGGUGAGGCGGCUGGACUUCAAAUCCAGUUGGGGCCGCCAGCGGUCCCGGGCAGGUUCGACUCCUGUGAUCUUCCG
+!generated by 8129226112.pl on Fri Aug  2 19:14:32 2019
+#1 1
+1 35 100
+2 34 100
+3 33 100
+4 32 100
+4 72 100
+5 71 100
+8 27 100
+9 26 100
+10 25 100
+11 24 100
+12 23 100
+13 22 100
+14 21 100
+15 20 100
+20 89 100
+26 44 100
+27 43 100
+28 42 100
+29 41 100
+30 40 100
+31 39 100
+45 64 100
+46 63 100
+47 62 100
+48 61 100
+49 60 100
+50 59 100
+51 58 100
+52 57 100
+58 86 100
+59 85 100
+60 84 100
+61 83 100
+63 81 100
+64 80 100
+65 79 100
+66 78 100
+66 82 100
+67 81 100
+68 77 100
+68 80 100
+69 76 100
+69 79 100
+70 78 100
+! SEQ_1_TO_N
+!CMT: [SOURCE] 2D contact library Generated by RNAPlfold (Vienna Package)
+</content>
+</file>
+<file>
+<stream>input</stream>
+<name>D11467.1-6989_6916.rfold</name>
+<content>! TC_LIB_FORMAT_01
+1
+D11467.1-6989_6916 74 GCAUCCAUGGCUGAAUGGUUAAAGCGCCCAACUCAUAAUUGGCGAACUCGCGGGUUCAAUUCCUGCUGGAUGCA
+!generated by 66801226022.pl on Fri Aug  2 19:14:31 2019
+#1 1
+3 71 100
+4 70 100
+5 18 100
+5 69 100
+6 17 100
+6 68 100
+7 16 100
+7 67 100
+8 15 100
+8 21 100
+9 20 100
+10 19 100
+11 18 100
+12 17 100
+25 44 100
+26 43 100
+27 42 100
+28 41 100
+30 40 100
+31 39 100
+50 66 100
+51 65 100
+52 64 100
+53 63 100
+54 62 100
+! SEQ_1_TO_N
+!CMT: [SOURCE] 2D contact library Generated by RNAPlfold (Vienna Package)
+</content>
+</file>
+<file>
+<stream>input</stream>
+<name>X_2167.1-268_34_.rfold</name>
+<content>! TC_LIB_FORMAT_01
+1
+X02167.1-268_340 73 CUAAAUAUAUUUCAAUGGUUAGCAAAAUACGCUUGUGGUGCGUUAAAUCUAAGUUCGAUUCUUAGUAUUUACC
+!generated by 74500225842.pl on Fri Aug  2 19:14:31 2019
+#1 1
+1 22 100
+29 43 100
+30 42 100
+31 41 100
+32 40 100
+44 71 100
+45 70 100
+46 69 100
+47 68 100
+48 67 100
+49 65 100
+50 64 100
+51 63 100
+52 62 100
+53 61 100
+! SEQ_1_TO_N
+!CMT: [SOURCE] 2D contact library Generated by RNAPlfold (Vienna Package)
+</content>
+</file>
+<file>
+<stream>input</stream>
+<name>X53649.1-16__231.rfold</name>
+<content>! TC_LIB_FORMAT_01
+1
+X53649.1-160_231 72 UGGGCUAUGGUGUAAUUGGCAGCACGACUGAUUCUGGUUCAGUUAGUCUAGGUUCGAGUCCUGGUAGCCCAG
+!generated by 39636225932.pl on Fri Aug  2 19:14:31 2019
+#1 1
+2 70 100
+3 69 100
+4 68 100
+5 67 100
+6 66 100
+7 65 100
+8 64 100
+10 25 100
+11 24 100
+12 23 100
+13 22 100
+26 44 100
+26 48 100
+27 43 100
+27 47 100
+28 42 100
+28 46 100
+29 41 100
+29 45 100
+30 40 100
+30 44 100
+31 39 100
+31 43 100
+32 42 100
+48 64 100
+49 63 100
+50 62 100
+51 61 100
+52 60 100
+! SEQ_1_TO_N
+!CMT: [SOURCE] 2D contact library Generated by RNAPlfold (Vienna Package)
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>result.score_html</name>
+<content><html>
+<style>
+SPAN { font-family: courier new, courier-new, courier, monospace; font-weight: bold; font-size: 11pt;}
+SPAN { line-height:100%}
+SPAN {	white-space: pre}
+SPAN.value0 {background: #9B92FF}
+SPAN.value1 {background: #B4FFB4}
+SPAN.value2 {background: #BEFFBE}
+SPAN.value3 {background: #C8FFC8}
+SPAN.value4 {background: #FFFFB7}
+SPAN.value5 {background: #FFFFAD}
+SPAN.value6 {background: #FFFFAD}
+SPAN.value7 {background: #FFE6E6}
+SPAN.value8 {background: #FFDCDC}
+SPAN.value9 {background: #FFC8C8}
+SPAN.valuedefault {}
+SPAN.valuegap {}
+SPAN.valueink {background: 000000}
+</style><body><span class=valuedefault>T-COFFEE,&nbsp;Version_13.30.4.4e2c658&nbsp;(Version_13.30.4.4e2c658)</span><br><span class=valuedefault>Cedric&nbsp;Notredame&nbsp;</span><br><span class=valuedefault>CPU&nbsp;TIME:0&nbsp;sec.</span><br><span class=valuedefault>SCORE=47</span><br><span class=valuedefault>*</span><br><span class=valuedefault>&nbsp;</span><span class=value0>B</span><span class=value1>A</span><span class=value2>D</span><span class=value3>&nbsp;</span><span class=value4>A</span><span class=value5>V</span><span class=value6>G</span><span class=value7>&nbsp;</span><span class=value8>G</span><span class=value9>OOD</span><br><span class=valuedefault>*</span><br><span class=value4>D11467.1-6989_6&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;49</span><br><span class=value4>AC092686.3-2963&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;48</span><br><span class=value4>X53649.1-160_23&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;46</span><br><span class=value4>AE008874.1-1564&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;43</span><br><span class=value5>X02167.1-268_34&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;52</span><br><span class=value4>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;&nbsp;4</span><br><br><span class=valuedefault>D11467.1-6989_6&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;</span><span class=valuegap>--------</span><span class=value7>GC</span><span class=value8>A</span><span class=value6>U</span><span class=value4>C</span><span class=value5>CA</span><span class=value4>U</span><span class=value7>G</span><span class=value5>GCU</span><span class=value7>GA</span><span class=value5>A</span><span class=value4>U</span><span class=value3>G</span><span class=value4>GU</span><span class=value5>U</span><span class=value4>A</span><span class=value5>A</span><span class=valuegap>---</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;22&nbsp;</span><br><span class=valuedefault>AC092686.3-2963&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;</span><span class=valuegap>--------</span><span class=value5>G</span><span class=value7>C</span><span class=value8>A</span><span class=value6>U</span><span class=value5>UGGU</span><span class=value9>G</span><span class=value4>G</span><span class=value8>U</span><span class=value6>U</span><span class=value7>CAG</span><span class=value6>UGGU</span><span class=valuegap>-----</span><span class=value2>A</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;20&nbsp;</span><br><span class=valuedefault>X53649.1-160_23&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;</span><span class=valuegap>--------</span><span class=value7>UG</span><span class=value8>G</span><span class=value6>GC</span><span class=value5>UAU</span><span class=value9>G</span><span class=value5>G</span><span class=value7>U</span><span class=value5>G</span><span class=value4>U</span><span class=value7>AAU</span><span class=value8>U</span><span class=value6>GG</span><span class=value5>C</span><span class=value6>A</span><span class=value4>G</span><span class=valuegap>---</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;22&nbsp;</span><br><span class=valuedefault>AE008874.1-1564&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;</span><span class=value2>G</span><span class=value9>AA</span><span class=value4>GA</span><span class=value9>UC</span><span class=value5>G</span><span class=value6>U</span><span class=value7>CG</span><span class=value6>UCU</span><span class=value5>C</span><span class=value6>C</span><span class=value9>G</span><span class=value6>G</span><span class=value8>U</span><span class=value4>G</span><span class=value5>AG</span><span class=value6>GC</span><span class=value5>G</span><span class=value3>GCU</span><span class=value5>G</span><span class=value3>G</span><span class=value1>A</span><span class=value9>CU</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;33&nbsp;</span><br><span class=valuedefault>X02167.1-268_34&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;</span><span class=valuegap>--------</span><span class=value5>C</span><span class=value7>U</span><span class=value8>A</span><span class=value7>A</span><span class=value8>A</span><span class=value7>UAU</span><span class=value9>A</span><span class=value6>U</span><span class=value9>U</span><span class=value6>U</span><span class=value7>CAAU</span><span class=value8>G</span><span class=value6>GU</span><span class=value5>U</span><span class=value6>A</span><span class=value3>G</span><span class=valuegap>---</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;22&nbsp;</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;</span><span class=value1>&nbsp;</span><span class=value9>&nbsp;&nbsp;</span><span class=value2>&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;</span><span class=value2>&nbsp;</span><span class=value5>&nbsp;</span><span class=value7>&nbsp;&nbsp;</span><span class=value5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>&nbsp;</span><span class=value4>&nbsp;</span><span class=value7>&nbsp;</span><span class=value4>&nbsp;</span><span class=value5>&nbsp;</span><span class=value6>&nbsp;&nbsp;</span><span class=value5>&nbsp;&nbsp;</span><span class=value4>*&nbsp;</span><span class=value3>&nbsp;</span><span class=value4>&nbsp;</span><span class=value3>&nbsp;</span><span class=value1>&nbsp;</span><span class=value9>&nbsp;</span><span class=value2>&nbsp;</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;33&nbsp;</span><br><br><br><span class=valuedefault>D11467.1-6989_6&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;23&nbsp;</span><span class=valuegap>-</span><span class=value7>AG</span><span class=value4>C</span><span class=value3>G</span><span class=value4>CC</span><span class=value7>CA</span><span class=value5>AC</span><span class=value6>UC</span><span class=value5>A</span><span class=value4>UA</span><span class=value5>A</span><span class=value3>U</span><span class=valuegap>-</span><span class=value4>U</span><span class=value2>G</span><span class=value3>GCG</span><span class=value4>A</span><span class=value3>ACUC</span><span class=value4>G</span><span class=value8>C</span><span class=value5>G</span><span class=value7>G</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;53&nbsp;</span><br><span class=valuedefault>AC092686.3-2963&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;21&nbsp;</span><span class=value4>G</span><span class=valuegap>-</span><span class=value7>A</span><span class=value6>A</span><span class=value4>U</span><span class=value3>UC</span><span class=value5>UC</span><span class=value3>GCC</span><span class=value4>U</span><span class=value5>G</span><span class=value4>CC</span><span class=value5>A</span><span class=value3>C</span><span class=valuegap>-</span><span class=value4>GC</span><span class=value3>GG</span><span class=value4>GA</span><span class=value3>GG</span><span class=value2>C</span><span class=valuegap>-</span><span class=value3>C</span><span class=value7>C</span><span class=value4>G</span><span class=value5>G</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;50&nbsp;</span><br><span class=valuedefault>X53649.1-160_23&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;23&nbsp;</span><span class=valuegap>-</span><span class=value4>C</span><span class=value7>A</span><span class=value5>C</span><span class=value2>G</span><span class=value3>A</span><span class=value2>C</span><span class=value3>UG</span><span class=value4>AU</span><span class=value6>UC</span><span class=valuegap>-</span><span class=value5>UG</span><span class=value6>GU</span><span class=valuegap>-</span><span class=value3>U</span><span class=value4>C</span><span class=value5>A</span><span class=value2>GUU</span><span class=value3>A</span><span class=value2>GU</span><span class=valuegap>-</span><span class=value4>C</span><span class=value8>U</span><span class=value5>A</span><span class=value7>G</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;51&nbsp;</span><br><span class=valuedefault>AE008874.1-1564&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;34&nbsp;</span><span class=value9>U</span><span class=value4>C</span><span class=value6>A</span><span class=value4>A</span><span class=value3>AUC</span><span class=value4>CAG</span><span class=value3>U</span><span class=value4>U</span><span class=value5>G</span><span class=value4>G</span><span class=value3>GGCC</span><span class=value2>G</span><span class=value4>CCAGC</span><span class=value3>GGUC</span><span class=valuegap>-</span><span class=value4>C</span><span class=value6>C</span><span class=value4>G</span><span class=value6>G</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;65&nbsp;</span><br><span class=valuedefault>X02167.1-268_34&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;23&nbsp;</span><span class=valuegap>-</span><span class=value9>C</span><span class=value6>AA</span><span class=value5>AAU</span><span class=value4>AC</span><span class=value5>GC</span><span class=value4>U</span><span class=value5>U</span><span class=value7>G</span><span class=value5>UG</span><span class=value6>GU</span><span class=valuegap>-</span><span class=value3>GC</span><span class=value5>G</span><span class=value4>U</span><span class=value5>U</span><span class=value4>A</span><span class=value3>AA</span><span class=value2>U</span><span class=valuegap>-</span><span class=value4>C</span><span class=value8>U</span><span class=value5>A</span><span class=value7>A</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;52&nbsp;</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;34&nbsp;</span><span class=value4>&nbsp;&nbsp;</span><span class=value6>&nbsp;</span><span class=value4>&nbsp;</span><span class=value3>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value4>&nbsp;</span><span class=value3>&nbsp;&nbsp;</span><span class=value4>&nbsp;&nbsp;&nbsp;</span><span class=value3>&nbsp;&nbsp;</span><span class=value4>&nbsp;</span><span class=value3>&nbsp;</span><span class=value2>&nbsp;</span><span class=value3>&nbsp;&nbsp;&nbsp;</span><span class=value2>&nbsp;</span><span class=value3>&nbsp;&nbsp;&nbsp;</span><span class=value2>&nbsp;&nbsp;&nbsp;</span><span class=value3>&nbsp;</span><span class=value7>&nbsp;</span><span class=value4>&nbsp;</span><span class=value6>&nbsp;</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;66&nbsp;</span><br><br><br><span class=valuedefault>D11467.1-6989_6&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;54&nbsp;</span><span class=value6>G</span><span class=valuegap>----</span><span class=value8>U</span><span class=value9>U</span><span class=value8>C</span><span class=value9>AA</span><span class=value6>UU</span><span class=value7>C</span><span class=value6>C</span><span class=value5>U</span><span class=value9>G</span><span class=value6>C</span><span class=value5>UGGA</span><span class=value7>U</span><span class=value9>G</span><span class=value7>C</span><span class=value9>A</span><span class=valuegap>-</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;74&nbsp;</span><br><span class=valuedefault>AC092686.3-2963&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;51&nbsp;</span><span class=value5>G</span><span class=valuegap>----</span><span class=value7>U</span><span class=value8>U</span><span class=value7>C</span><span class=value9>GA</span><span class=value7>UUC</span><span class=value5>CC</span><span class=value9>G</span><span class=value7>G</span><span class=value5>C</span><span class=value4>C</span><span class=value5>AA</span><span class=value6>U</span><span class=value7>G</span><span class=value5>C</span><span class=value9>A</span><span class=valuegap>-</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;71&nbsp;</span><br><span class=valuedefault>X53649.1-160_23&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;52&nbsp;</span><span class=value6>G</span><span class=valuegap>----</span><span class=value8>U</span><span class=value9>U</span><span class=value8>C</span><span class=value9>GA</span><span class=value6>GU</span><span class=value7>C</span><span class=value6>C</span><span class=value5>U</span><span class=value9>G</span><span class=value5>GUAGC</span><span class=value7>CCA</span><span class=value9>G</span><span class=valuegap>-</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;72&nbsp;</span><br><span class=valuedefault>AE008874.1-1564&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;66&nbsp;</span><span class=value4>G</span><span class=value3>C</span><span class=value2>A</span><span class=value3>GG</span><span class=value8>U</span><span class=value9>U</span><span class=value8>C</span><span class=value9>GA</span><span class=value4>CU</span><span class=value6>C</span><span class=value5>CU</span><span class=value9>G</span><span class=value7>U</span><span class=value5>G</span><span class=value4>AU</span><span class=value3>C</span><span class=value6>U</span><span class=value7>U</span><span class=value5>C</span><span class=value9>CG</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;91&nbsp;</span><br><span class=valuedefault>X02167.1-268_34&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;53&nbsp;</span><span class=value6>G</span><span class=valuegap>----</span><span class=value8>U</span><span class=value9>U</span><span class=value8>C</span><span class=value9>GA</span><span class=value6>UU</span><span class=value7>C</span><span class=value6>U</span><span class=value5>U</span><span class=value9>A</span><span class=value6>G</span><span class=value7>U</span><span class=value3>AUUU</span><span class=value6>A</span><span class=value7>C</span><span class=value9>C</span><span class=valuegap>-</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;73&nbsp;</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;67&nbsp;</span><span class=value5>*</span><span class=value2>&nbsp;</span><span class=value1>&nbsp;</span><span class=value2>&nbsp;&nbsp;</span><span class=value8>**</span><span class=value7>*</span><span class=value9>&nbsp;*</span><span class=value5>&nbsp;*</span><span class=value6>*</span><span class=value5>&nbsp;&nbsp;</span><span class=value9>&nbsp;</span><span class=value5>&nbsp;&nbsp;</span><span class=value4>&nbsp;&nbsp;&nbsp;</span><span class=value5>&nbsp;</span><span class=value6>&nbsp;</span><span class=value5>&nbsp;</span><span class=value9>&nbsp;&nbsp;</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;92&nbsp;</span><br><br><br><br><br><br></body></html>
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>result.clustalw_aln</name>
+<content>CLUSTAL W (1.83) multiple sequence alignment
+
+D11467.1-6989_6916      --------GCAUCCAUGGCUGAAUGGUUAA----AGCGCCCAACUCAUAA 38
+AC092686.3-29631_29561  --------GCAUUGGUGGUUCAGUGGU-----AG-AAUUCUCGCCUGCCA 36
+X53649.1-160_231        --------UGGGCUAUGGUGUAAUUGGCAG----CACGACUGAUUC-UGG 37
+AE008874.1-15640_15730  GAAGAUCGUCGUCUCCGGUGAGGCGGCUGGACUUCAAAUCCAGUUGGGGC 50
+X02167.1-268_340        --------CUAAAUAUAUUUCAAUGGUUAG----CAAAAUACGCUUGUGG 38
+                                                 *                        
+
+D11467.1-6989_6916      U-UGGCGAACUCGCGGG----UUCAAUUCCUGCUGGAUGCA- 74
+AC092686.3-29631_29561  C-GCGGGAGGC-CCGGG----UUCGAUUCCCGGCCAAUGCA- 71
+X53649.1-160_231        U-UCAGUUAGU-CUAGG----UUCGAGUCCUGGUAGCCCAG- 72
+AE008874.1-15640_15730  CGCCAGCGGUC-CCGGGCAGGUUCGACUCCUGUGAUCUUCCG 91
+X02167.1-268_340        U-GCGUUAAAU-CUAAG----UUCGAUUCUUAGUAUUUACC- 73
+                                        *    *** * **             
+
+
+
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>result.fasta_aln</name>
+<content>>D11467.1-6989_6916  _F_ D11467.1-6989_6916.rfold
+--------GCAUCCAUGGCUGAAUGGUUAA----AGCGCCCAACUCAUAA
+U-UGGCGAACUCGCGGG----UUCAAUUCCUGCUGGAUGCA-
+>AC092686.3-29631_29561  _F_ AC_92686.3-29631_29561.rfold
+--------GCAUUGGUGGUUCAGUGGU-----AG-AAUUCUCGCCUGCCA
+C-GCGGGAGGC-CCGGG----UUCGAUUCCCGGCCAAUGCA-
+>X53649.1-160_231  _F_ X53649.1-16__231.rfold
+--------UGGGCUAUGGUGUAAUUGGCAG----CACGACUGAUUC-UGG
+U-UCAGUUAGU-CUAGG----UUCGAGUCCUGGUAGCCCAG-
+>AE008874.1-15640_15730  _F_ AE__8874.1-1564__1573_.rfold
+GAAGAUCGUCGUCUCCGGUGAGGCGGCUGGACUUCAAAUCCAGUUGGGGC
+CGCCAGCGGUC-CCGGGCAGGUUCGACUCCUGUGAUCUUCCG
+>X02167.1-268_340  _F_ X_2167.1-268_34_.rfold
+--------CUAAAUAUAUUUCAAUGGUUAG----CAAAAUACGCUUGUGG
+U-GCGUUAAAU-CUAAG----UUCGAUUCUUAGUAUUUACC-
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>result.phylip</name>
+<content>    5  92
+D11467.1-6 --------GC AUCCAUGGCU GAAUGGUUAA ----AGCGCC CAACUCAUAA U-UGGCGAAC
+AC092686.3 --------GC AUUGGUGGUU CAGUGGU--- --AG-AAUUC UCGCCUGCCA C-GCGGGAGG
+X53649.1-1 --------UG GGCUAUGGUG UAAUUGGCAG ----CACGAC UGAUUC-UGG U-UCAGUUAG
+AE008874.1 GAAGAUCGUC GUCUCCGGUG AGGCGGCUGG ACUUCAAAUC CAGUUGGGGC CGCCAGCGGU
+X02167.1-2 --------CU AAAUAUAUUU CAAUGGUUAG ----CAAAAU ACGCUUGUGG U-GCGUUAAA
+
+           UCGCGGG--- -UUCAAUUCC UGCUGGAUGC A-
+           C-CCGGG--- -UUCGAUUCC CGGCCAAUGC A-
+           U-CUAGG--- -UUCGAGUCC UGGUAGCCCA G-
+           C-CCGGGCAG GUUCGACUCC UGUGAUCUUC CG
+           U-CUAAG--- -UUCGAUUCU UAGUAUUUAC C-
+
+
+
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>result.ph</name>
+<content>((((D11467.1-6989_6916:0.25167,AC092686.3-29631_29561:0.21833):0.05125,AE008874.1-15640_15730:0.28875):0.02625,X53649.1-160_231:0.23875):0.00000,X02167.1-268_340:0.25125);
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>AC_92686.3-29631_29561.rfold</name>
+<content>! TC_LIB_FORMAT_01
+1
+AC092686.3-29631_29561 71 GCAUUGGUGGUUCAGUGGUAGAAUUCUCGCCUGCCACGCGGGAGGCCCGGGUUCGAUUCCCGGCCAAUGCA
+!generated by 69365226202.pl on Fri Aug  2 19:14:32 2019
+#1 1
+1 70 100
+2 69 100
+3 68 100
+4 67 100
+5 66 100
+6 65 100
+7 64 100
+8 63 100
+10 61 100
+21 54 100
+22 53 100
+23 52 100
+24 51 100
+25 50 100
+26 49 100
+29 46 100
+30 45 100
+31 44 100
+32 43 100
+34 41 100
+35 40 100
+48 62 100
+49 61 100
+50 60 100
+51 59 100
+! SEQ_1_TO_N
+!CMT: [SOURCE] 2D contact library Generated by RNAPlfold (Vienna Package)
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>AE__8874.1-1564__1573_.rfold</name>
+<content>! TC_LIB_FORMAT_01
+1
+AE008874.1-15640_15730 91 GAAGAUCGUCGUCUCCGGUGAGGCGGCUGGACUUCAAAUCCAGUUGGGGCCGCCAGCGGUCCCGGGCAGGUUCGACUCCUGUGAUCUUCCG
+!generated by 8129226112.pl on Fri Aug  2 19:14:32 2019
+#1 1
+1 35 100
+2 34 100
+3 33 100
+4 32 100
+4 72 100
+5 71 100
+8 27 100
+9 26 100
+10 25 100
+11 24 100
+12 23 100
+13 22 100
+14 21 100
+15 20 100
+20 89 100
+26 44 100
+27 43 100
+28 42 100
+29 41 100
+30 40 100
+31 39 100
+45 64 100
+46 63 100
+47 62 100
+48 61 100
+49 60 100
+50 59 100
+51 58 100
+52 57 100
+58 86 100
+59 85 100
+60 84 100
+61 83 100
+63 81 100
+64 80 100
+65 79 100
+66 78 100
+66 82 100
+67 81 100
+68 77 100
+68 80 100
+69 76 100
+69 79 100
+70 78 100
+! SEQ_1_TO_N
+!CMT: [SOURCE] 2D contact library Generated by RNAPlfold (Vienna Package)
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>D11467.1-6989_6916.rfold</name>
+<content>! TC_LIB_FORMAT_01
+1
+D11467.1-6989_6916 74 GCAUCCAUGGCUGAAUGGUUAAAGCGCCCAACUCAUAAUUGGCGAACUCGCGGGUUCAAUUCCUGCUGGAUGCA
+!generated by 66801226022.pl on Fri Aug  2 19:14:31 2019
+#1 1
+3 71 100
+4 70 100
+5 18 100
+5 69 100
+6 17 100
+6 68 100
+7 16 100
+7 67 100
+8 15 100
+8 21 100
+9 20 100
+10 19 100
+11 18 100
+12 17 100
+25 44 100
+26 43 100
+27 42 100
+28 41 100
+30 40 100
+31 39 100
+50 66 100
+51 65 100
+52 64 100
+53 63 100
+54 62 100
+! SEQ_1_TO_N
+!CMT: [SOURCE] 2D contact library Generated by RNAPlfold (Vienna Package)
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>X_2167.1-268_34_.rfold</name>
+<content>! TC_LIB_FORMAT_01
+1
+X02167.1-268_340 73 CUAAAUAUAUUUCAAUGGUUAGCAAAAUACGCUUGUGGUGCGUUAAAUCUAAGUUCGAUUCUUAGUAUUUACC
+!generated by 74500225842.pl on Fri Aug  2 19:14:31 2019
+#1 1
+1 22 100
+29 43 100
+30 42 100
+31 41 100
+32 40 100
+44 71 100
+45 70 100
+46 69 100
+47 68 100
+48 67 100
+49 65 100
+50 64 100
+51 63 100
+52 62 100
+53 61 100
+! SEQ_1_TO_N
+!CMT: [SOURCE] 2D contact library Generated by RNAPlfold (Vienna Package)
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>X53649.1-16__231.rfold</name>
+<content>! TC_LIB_FORMAT_01
+1
+X53649.1-160_231 72 UGGGCUAUGGUGUAAUUGGCAGCACGACUGAUUCUGGUUCAGUUAGUCUAGGUUCGAGUCCUGGUAGCCCAG
+!generated by 39636225932.pl on Fri Aug  2 19:14:31 2019
+#1 1
+2 70 100
+3 69 100
+4 68 100
+5 67 100
+6 66 100
+7 65 100
+8 64 100
+10 25 100
+11 24 100
+12 23 100
+13 22 100
+26 44 100
+26 48 100
+27 43 100
+27 47 100
+28 42 100
+28 46 100
+29 41 100
+29 45 100
+30 40 100
+30 44 100
+31 39 100
+31 43 100
+32 42 100
+48 64 100
+49 63 100
+50 62 100
+51 61 100
+52 60 100
+! SEQ_1_TO_N
+!CMT: [SOURCE] 2D contact library Generated by RNAPlfold (Vienna Package)
+</content>
+</file>
+<environement>
+HOME_4_TCOFFEE=/Users/cnotredame/
+MANPATH=/sw/share/man:/usr/share/man:/usr/local/share/man:/opt/X11/share/man:/Applications/Xcode.app/Contents/Developer/usr/share/man:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/share/man:/sw/lib/perl5/5.18.2/man
+TERM_PROGRAM=Apple_Terminal
+MCOFFEE_4_TCOFFEE=/Users/cnotredame//.t_coffee//mcoffee/
+ROOT_TMP_4_TCOFFEE=/var/tmp/
+SHELL=/bin/bash
+TERM=xterm-256color
+TMPDIR=/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/
+PERL5LIB=/sw/lib/perl5:/sw/lib/perl5/darwin
+Apple_PubSub_Socket_Render=/private/tmp/com.apple.launchd.u7asRiNodS/Render
+TERM_PROGRAM_VERSION=388.1.3
+OSNAME=macosx
+PERL_BIN=/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms::/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices
+TERM_SESSION_ID=08C395F9-69A0-4DC8-9DE9-5914C23D168F
+METHODS_4_TCOFFEE=/Users/cnotredame//.t_coffee//methods/
+VERSIONER_PERL_VERSION=5.18
+XAPPLRESDIR=/sw/etc/app-defaults/
+http_proxy=
+HTTP_proxy=
+USER=cnotredame
+SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.mMz4rqepoV/Listeners
+__CF_USER_TEXT_ENCODING=0x1F6:0x0:0x0
+ENV_4_TCOFFEE=/Users/cnotredame//.t_coffee//.t_coffee_env
+all_proxy=
+ALL_PROXY=
+HTTP_proxy_4_TCOFFEE=
+PATH=/Users/cnotredame//.t_coffee//plugins/macosx/:/opt/local/bin:/opt/local/sbin:/opt/local/bin:/opt/local/sbin:/Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/packages/x3dna-v2.1/bin:/Users/cnotredame/bin/macosx://Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms::/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices:/Users/cnotredame/bin/Scripts/:/Users/cnotredame/Library/Haskell/ghc-7.4.2/lib/epub-tools-2.0.0/bin/:/sw/bin:/sw/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin
+ALN_LINE_LENGTH=60
+_=/usr/bin/printenv
+COLOR_4_TCOFFEE=new
+DIR_4_TCOFFEE=/Users/cnotredame//.t_coffee/
+PWD=/Users/cnotredame/Dropbox/projects/git/tcoffee/tmp/RANDOMSTRINGhqTOfsyLmb092qvmwZTs/tmp/RANDOMSTRINGOlAG2KUDpIEESn4p00UD/data
+CACHE_4_TCOFFEE=/Users/cnotredame//.t_coffee//cache/
+X3DNA=/Users/cnotredame/Dropbox/packages/x3dna-v2.1
+DBUS_LAUNCHD_SESSION_BUS_SOCKET=/private/tmp/com.apple.launchd.CeZrDaslOL/unix_domain_listener
+XPC_FLAGS=0x0
+VERSIONER_PERL_PREFER_32_BIT=no
+XPC_SERVICE_NAME=0
+ERRORFILE_4_TCOFFEE=NO
+PLUGINS_4_TCOFFEE=/Users/cnotredame//.t_coffee//plugins/macosx/
+SHLVL=3
+HOME=/Users/cnotredame
+DUMP_4_TCOFFEE=/Users/cnotredame/Dropbox/projects/git/tcoffee/tmp/RANDOMSTRINGhqTOfsyLmb092qvmwZTs/tmp/RANDOMSTRINGOlAG2KUDpIEESn4p00UD/web.tests.6.dump
+HTTP_PROXY=
+MAFFT_BINARIES=
+BIN=/Users/cnotredame/bin/macosx
+LOGNAME=cnotredame
+EMAIL_4_TCOFFEE=cedric.notredame@gmail.com
+LC_CTYPE=UTF-8
+EMAIL=cedric.notredame@gmail.com
+UPDATED_ENV_4_TCOFFEE=1
+INFOPATH=/sw/share/info:/sw/info:/usr/share/info
+DISPLAY=/private/tmp/com.apple.launchd.MDJPhYnCNw/org.macosforge.xquartz:0
+TC_MASTER_NODE=1
+NUMBER_OF_PROCESSORS=8
+ALL_proxy=
+SECURITYSESSIONID=186a6
+LOCKDIR_4_TCOFFEE=/var/tmp/tco/tco6d8jt2o822559//lck/mkbz6z7eqy/
+TMP_4_TCOFFEE=/var/tmp/tco/tco6d8jt2o822559/
+USER_BIN=/Users/cnotredame/bin/macosx
+SCRIPT_BIN=/Users/cnotredame/bin/Scripts/
+</environement>
+<DumpStatus>OK</DumpStatus>
+<DumpFile>/Users/cnotredame/Dropbox/projects/git/tcoffee/tmp/RANDOMSTRINGhqTOfsyLmb092qvmwZTs/tmp/RANDOMSTRINGOlAG2KUDpIEESn4p00UD/web.tests.6.dump</DumpFile>
+</DumpIO>

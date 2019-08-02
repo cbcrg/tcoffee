@@ -49,6 +49,15 @@ ifndef GIT_DIR
 GIT_DIR=$(HOME)/Dropbox/projects/git/tcoffee/
 endif
 
+ifndef RST_DOC
+RST_DOC=$(GIT_DIR)/docs
+endif
+
+ifndef HTML_DOC
+HTML_DOC=$(RST_DOC)/.html
+endif
+
+
 ifndef BUILD_DIR
 BUILD_DIR=$(GIT_DIR)/build
 endif
@@ -142,7 +151,7 @@ distribution:
 	make -i VERSION=$(VERSION) CC=cc mcoffee
 	make -i VERSION=$(VERSION) CC=cc packing
 
-doc:
+old_doc:
 	cp $(PWD)/../../$(EXECUTABLE)/doc/$(EXECUTABLE)_tutorial.* $(DISTRIB_DOC)
 	antiword -m  "UTF-8" $(PWD)/../../$(EXECUTABLE)/doc/$(EXECUTABLE)_tutorial.doc >$(DISTRIB_DOC)/$(EXECUTABLE)_tutorial.txt
 	cp $(PWD)/../../$(EXECUTABLE)/doc/$(EXECUTABLE)_technical.* $(DISTRIB_DOC)
@@ -152,6 +161,9 @@ doc:
 	cp $(PWD)/../../$(EXECUTABLE)/doc/aln_compare.doc.txt $(DISTRIB_DOC)
 	cp $(PWD)/../../$(EXECUTABLE)/doc/seq_reformat.doc.txt $(DISTRIB_DOC)
 	cp $(PWD)/../../$(EXECUTABLE)/doc/$(EXECUTABLE).pdf $(DISTRIB_DOC)
+
+doc:
+	sphinx-build $(RST_DOC) $(HTML_DOC)
 
 mcoffee:
 	-rm -rf $(DISTRIB_DIR)/mcoffee
@@ -200,8 +212,11 @@ env:
 
 
 general_distribution:
+	make doc
 	-rm -f $(CODE_LIST);
 	mkdir -p $(DISTRIB_DIR)
+	mkdir -p $(DISTRIB_DIR)/doc
+	cp $(HTML_DOC)/* $(DISTRIB_DIR)/doc
 	mkdir -p $(DISTRIB_DIR)/bin
 	mkdir -p $(DISTRIB_DIR)/bin/$(OSNAME)
 	mkdir -p $(DISTRIB_DIR)/bin/macosx	

@@ -1,0 +1,123 @@
+<DumpIO>
+<nature>standard dump</nature>
+<program>T-COFFEE</program>
+<version>Version_13.30.4.4e2c658</version>
+<build>Version_13.30.4.4e2c658</build>
+<cl>t_coffee -other_pg seq_reformat -in sample_aln1.aln -in3 sample_aln1.aln -action +3evaluate boxshade -output color_html </cl>
+<stack>
+</stack>
+<warning>
+</warning>
+<file>
+<stream>output</stream>
+<name>stdout</name>
+<content><html>
+<style>
+SPAN { font-family: courier new, courier-new, courier, monospace; font-weight: bold; font-size: 11pt;}
+SPAN { line-height:100%}
+SPAN {	white-space: pre}
+SPAN.value0 {background: #9B92FF}
+SPAN.value1 {background: #B4FFB4}
+SPAN.value2 {background: #BEFFBE}
+SPAN.value3 {background: #C8FFC8}
+SPAN.value4 {background: #FFFFB7}
+SPAN.value5 {background: #FFFFAD}
+SPAN.value6 {background: #FFFFAD}
+SPAN.value7 {background: #FFE6E6}
+SPAN.value8 {background: #FFDCDC}
+SPAN.value9 {background: #FFC8C8}
+SPAN.valuedefault {}
+SPAN.valuegap {}
+SPAN.valueink {background: 000000}
+</style><body><br><span class=valuedefault>T-COFFEE,&nbsp;Version_13.30.4.4e2c658&nbsp;(Version_13.30.4.4e2c658)</span><br><span class=valuedefault>Cedric&nbsp;Notredame&nbsp;</span><br><br><br><span class=valuedefault>hmgb_chite&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---</span><span class=valuedefault>ad</span><span class=value6>k</span><span class=value9>pkr</span><span class=valuedefault>pl</span><span class=value6>sa</span><span class=value2>ym</span><span class=valuedefault>lwlnsa</span><span class=value6>r</span><span class=value2>e</span><span class=valuedefault>si</span><span class=value6>k</span><span class=valuedefault>re</span><span class=value2>np</span><span class=valuedefault>df</span><span class=value6>k</span><span class=valuegap>-</span><span class=value2>v</span><span class=valuedefault>t</span><span class=value2>ev</span><span class=valuedefault>a</span><br><span class=valuedefault>hmgt_mouse&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-----</span><span class=value6>k</span><span class=value9>pkr</span><span class=valuedefault>pr</span><span class=value6>sa</span><span class=value2>y</span><span class=valuedefault>niyv</span><span class=value2>se</span><span class=valuedefault>sfq</span><span class=value2>e</span><span class=valuedefault>a</span><span class=value6>k</span><span class=valuedefault>ddsaqg</span><span class=value6>k</span><span class=valuegap>-----</span><span class=valuedefault>l</span><br><span class=valuedefault>hmgl_wheat&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value2>d</span><span class=valuedefault>p</span><span class=value2>n</span><span class=value6>k</span><span class=value9>pkr</span><span class=value2>a</span><span class=valuedefault>p</span><span class=value6>sa</span><span class=valuedefault>ffv</span><span class=value2>f</span><span class=valuedefault>mg</span><span class=value2>ef</span><span class=value6>r</span><span class=value2>ee</span><span class=valuedefault>f</span><span class=value6>k</span><span class=valuedefault>qk</span><span class=value2>np</span><span class=valuedefault>kn</span><span class=value6>k</span><span class=value2>sv</span><span class=valuedefault>aa</span><span class=value2>v</span><span class=valuedefault>g</span><br><span class=valuedefault>hmgl_trybr&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>kk</span><span class=value2>d</span><span class=valuedefault>s</span><span class=value2>n</span><span class=valuedefault>a</span><span class=value9>pkr</span><span class=value2>a</span><span class=valuedefault>mtsf</span><span class=value2>m</span><span class=valuedefault>f</span><span class=value2>f</span><span class=valuedefault>s</span><span class=value2>s</span><span class=valuedefault>d</span><span class=value2>f</span><span class=value6>r</span><span class=valuedefault>skhs</span><span class=valuegap>-----</span><span class=valuedefault>dl</span><span class=value2>s</span><span class=valuedefault>iv</span><span class=value2>e</span><span class=valuedefault>ms</span><br><span class=valuedefault>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;***.&nbsp;:::&nbsp;.:&nbsp;..&nbsp;&nbsp;..&nbsp;.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>hmgb_chite&nbsp;&nbsp;&nbsp;</span><span class=value9>k</span><span class=valuedefault>kg</span><span class=value6>ge</span><span class=valuedefault>l</span><span class=value9>w</span><span class=valuedefault>rg</span><span class=value9>l</span><span class=valuedefault>kd</span><span class=valuegap>--</span><span class=value6>k</span><span class=valuedefault>sew</span><span class=value2>eak</span><span class=value9>a</span><span class=valuedefault>ata</span><span class=value6>k</span><span class=valuedefault>qn</span><span class=value9>y</span><span class=valuedefault>i</span><span class=value2>ra</span><span class=valuedefault>lqe</span><span class=value2>ye</span><span class=valuedefault>rn</span><br><span class=valuedefault>hmgt_mouse&nbsp;&nbsp;&nbsp;</span><span class=value9>k</span><span class=valuedefault>lvn</span><span class=value6>e</span><span class=value2>a</span><span class=value9>w</span><span class=value6>k</span><span class=valuedefault>n</span><span class=value9>l</span><span class=value2>spe</span><span class=value6>ek</span><span class=valuedefault>qa</span><span class=value6>y</span><span class=valuedefault>iql</span><span class=value9>a</span><span class=valuedefault>kd</span><span class=value2>d</span><span class=valuedefault>ri</span><span class=value2>r</span><span class=value9>y</span><span class=valuedefault>dne</span><span class=value2>m</span><span class=valuedefault>ksw</span><span class=value2>e</span><span class=valuedefault>eq</span><br><span class=valuedefault>hmgl_wheat&nbsp;&nbsp;&nbsp;</span><span class=value9>k</span><span class=value2>aa</span><span class=value6>ge</span><span class=valuedefault>r</span><span class=value9>w</span><span class=value6>k</span><span class=valuedefault>s</span><span class=value9>l</span><span class=value2>s</span><span class=valuedefault>es</span><span class=value6>ek</span><span class=valuedefault>ap</span><span class=value6>y</span><span class=valuedefault>v</span><span class=value2>ak</span><span class=value9>a</span><span class=valuedefault>n</span><span class=value2>k</span><span class=valuedefault>l</span><span class=value6>k</span><span class=valuedefault>ge</span><span class=value9>y</span><span class=valuedefault>nk</span><span class=value2>a</span><span class=valuedefault>iaa</span><span class=value2>y</span><span class=valuedefault>nkg</span><br><span class=valuedefault>hmgl_trybr&nbsp;&nbsp;&nbsp;</span><span class=value9>k</span><span class=value2>aa</span><span class=value6>g</span><span class=valuedefault>a</span><span class=value2>a</span><span class=value9>w</span><span class=value6>k</span><span class=valuedefault>e</span><span class=value9>l</span><span class=valuedefault>g</span><span class=value2>pe</span><span class=value6>e</span><span class=valuedefault>rkv</span><span class=value6>y</span><span class=value2>e</span><span class=valuedefault>em</span><span class=value9>a</span><span class=valuedefault>e</span><span class=value2>kd</span><span class=value6>k</span><span class=valuedefault>e</span><span class=value2>r</span><span class=value9>y</span><span class=valuedefault>k</span><span class=value2>r</span><span class=valuedefault>e</span><span class=value2>m</span><span class=valuegap>------</span><br><span class=valuedefault>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>*&nbsp;&nbsp;.&nbsp;&nbsp;*:&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;:&nbsp;.*&nbsp;.&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>hmgb_chite&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>gg</span><span class=valuegap>-</span><br><span class=valuedefault>hmgt_mouse&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>mae</span><br><span class=valuedefault>hmgl_wheat&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>esa</span><br><span class=valuedefault>hmgl_trybr&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---</span><br><span class=valuedefault>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;</span><br><br><br><br><br><br></body></html>
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>stderr</name>
+<content></content>
+</file>
+<file>
+<stream>input</stream>
+<name>sample_aln1.aln</name>
+<content>CLUSTAL FORMAT for T-COFFEE Version_2.37, CPU=0.50 sec, SCORE=44, Nseq=4, Len=81
+
+hmgb_chite      ---adkpkrplsaymlwlnsaresikrenpdfk-vtevakkggelwrglk
+hmgt_mouse      -----kpkrprsayniyvsesfqeakddsaqgk-----lklvneawknls
+hmgl_wheat      --dpnkpkrapsaffvfmgefreefkqknpknksvaavgkaagerwksls
+hmgl_trybr      kkdsnapkramtsfmffssdfrskhs-----dlsivemskaagaawkelg
+                      ***. ::: .: ..  .. .             *  .  *: * 
+
+hmgb_chite      d--kseweakaatakqnyiralqeyerngg-
+hmgt_mouse      peekqayiqlakddrirydnemksweeqmae
+hmgl_wheat      esekapyvakanklkgeynkaiaaynkgesa
+hmgl_trybr      peerkvyeemaekdkerykrem---------
+                   :  :   *   : .* . :         
+
+
+
+</content>
+</file>
+<environement>
+HOME_4_TCOFFEE=/Users/cnotredame/
+MANPATH=/sw/share/man:/usr/share/man:/usr/local/share/man:/opt/X11/share/man:/Applications/Xcode.app/Contents/Developer/usr/share/man:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/share/man:/sw/lib/perl5/5.18.2/man
+TERM_PROGRAM=Apple_Terminal
+MCOFFEE_4_TCOFFEE=/Users/cnotredame//.t_coffee//mcoffee/
+ROOT_TMP_4_TCOFFEE=/var/tmp/
+SHELL=/bin/bash
+TERM=xterm-256color
+TMPDIR=/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/
+PERL5LIB=/sw/lib/perl5:/sw/lib/perl5/darwin
+Apple_PubSub_Socket_Render=/private/tmp/com.apple.launchd.u7asRiNodS/Render
+TERM_PROGRAM_VERSION=388.1.3
+OSNAME=macosx
+PERL_BIN=/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms::/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices
+TERM_SESSION_ID=08C395F9-69A0-4DC8-9DE9-5914C23D168F
+METHODS_4_TCOFFEE=/Users/cnotredame//.t_coffee//methods/
+VERSIONER_PERL_VERSION=5.18
+XAPPLRESDIR=/sw/etc/app-defaults/
+http_proxy=
+HTTP_proxy=
+USER=cnotredame
+SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.mMz4rqepoV/Listeners
+__CF_USER_TEXT_ENCODING=0x1F6:0x0:0x0
+ENV_4_TCOFFEE=/Users/cnotredame//.t_coffee//.t_coffee_env
+all_proxy=
+ALL_PROXY=
+HTTP_proxy_4_TCOFFEE=
+PATH=/opt/local/bin:/opt/local/sbin:/opt/local/bin:/opt/local/sbin:/Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/packages/x3dna-v2.1/bin:/Users/cnotredame/bin/macosx://Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms::/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices:/Users/cnotredame/bin/Scripts/:/Users/cnotredame/Library/Haskell/ghc-7.4.2/lib/epub-tools-2.0.0/bin/:/sw/bin:/sw/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin
+_=/usr/bin/printenv
+DIR_4_TCOFFEE=/Users/cnotredame//.t_coffee/
+PWD=/Users/cnotredame/Dropbox/projects/git/tcoffee/tmp/RANDOMSTRINGD9cjwqYdvpoZEJDwNe4Z/tmp/RANDOMSTRINGT3YORjyunF8pGjopkcQb/data
+CACHE_4_TCOFFEE=/Users/cnotredame//.t_coffee//cache/
+X3DNA=/Users/cnotredame/Dropbox/packages/x3dna-v2.1
+DBUS_LAUNCHD_SESSION_BUS_SOCKET=/private/tmp/com.apple.launchd.CeZrDaslOL/unix_domain_listener
+XPC_FLAGS=0x0
+VERSIONER_PERL_PREFER_32_BIT=no
+XPC_SERVICE_NAME=0
+ERRORFILE_4_TCOFFEE=t_coffee.ErrorReport
+PLUGINS_4_TCOFFEE=/Users/cnotredame//.t_coffee//plugins/macosx/
+SHLVL=3
+HOME=/Users/cnotredame
+DUMP_4_TCOFFEE=/Users/cnotredame/Dropbox/projects/git/tcoffee/tmp/RANDOMSTRINGD9cjwqYdvpoZEJDwNe4Z/tmp/RANDOMSTRINGT3YORjyunF8pGjopkcQb/core.tests.21.dump
+HTTP_PROXY=
+BIN=/Users/cnotredame/bin/macosx
+LOGNAME=cnotredame
+EMAIL_4_TCOFFEE=cedric.notredame@gmail.com
+LC_CTYPE=UTF-8
+EMAIL=cedric.notredame@gmail.com
+UPDATED_ENV_4_TCOFFEE=1
+INFOPATH=/sw/share/info:/sw/info:/usr/share/info
+DISPLAY=/private/tmp/com.apple.launchd.MDJPhYnCNw/org.macosforge.xquartz:0
+TC_MASTER_NODE=1
+NUMBER_OF_PROCESSORS=8
+ALL_proxy=
+SECURITYSESSIONID=186a6
+LOCKDIR_4_TCOFFEE=/var/tmp/tco/tco4_8jtysu62104//lck/_7nnoobhlk/
+TMP_4_TCOFFEE=/var/tmp/tco/tco4_8jtysu62104/
+USER_BIN=/Users/cnotredame/bin/macosx
+SCRIPT_BIN=/Users/cnotredame/bin/Scripts/
+</environement>
+<DumpStatus>OK</DumpStatus>
+<DumpFile>/Users/cnotredame/Dropbox/projects/git/tcoffee/tmp/RANDOMSTRINGD9cjwqYdvpoZEJDwNe4Z/tmp/RANDOMSTRINGT3YORjyunF8pGjopkcQb/core.tests.21.dump</DumpFile>
+</DumpIO>

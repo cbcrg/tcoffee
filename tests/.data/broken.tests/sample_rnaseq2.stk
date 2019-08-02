@@ -1,0 +1,83 @@
+# STOCKHOLM 1.0
+
+OTTHUMT00000006707  uacGGAAGCU.UUAGGGAGGUGCUCUGAGACCCGAAACUAGACUCGACUU
+OTTHUMT00000043281  .aucccagcuacucgggagg....cugaggcaggagaau.cacuugaacc
+OTTHUMT00000007987  ................G.GGUGCUCUGAGACCCGAAACUAGACUCGACUU
+#=GC SS_cons        ................((((.....((((.............)))).)))
+
+OTTHUMT00000006707  UAACAGACACAGACGACCCUGAA.....G.....................
+OTTHUMT00000043281  cgggaggcagagguugcaguga.gccgag.....................
+OTTHUMT00000007987  UAACAGACACAGACGACCCUGAAGGCGAGACugucugcuggugggaugcu
+#=GC SS_cons        )..(((.....((((((((((.......(.....................
+
+OTTHUMT00000006707  ..AUGGAAAUGUUUUCUUCCAAAUUGUGC.....UGCACGUUUU.....U
+OTTHUMT00000043281  ..aucgcaccccugcacuccagccugggugacagagcaagacuccaucuc
+OTTHUMT00000007987  ggAUGGAAACGUUUUCUUCCAAAUUGUGC.....UGCACGUUUU.....U
+#=GC SS_cons        ..(.((((....)))).))))...(((((.....(((......(.....(
+
+OTTHUMT00000006707  GGCGAG.AGCAUGGGGCUGUGCGGCGUCCC...CUCCCUGGCGC.....C
+OTTHUMT00000043281  aaaaaaaauaaaggaaaUAUGCGUCGUUGGAUGCUGUAUGACAAUCAAGC
+OTTHUMT00000007987  GGCGAG.AGCAUGGGGCUGUGCGGCGUCCC...CUCCCUGGCGC.....C
+#=GC SS_cons        ((.((.......(((((((.((((((((...........))))).....)
+
+OTTHUMT00000006707  CACCUGUGCCCUGCACACU.G.GCCUGCACUGUGGUGAU.....CUC.GC
+OTTHUMT00000043281  UACUUAUAACAAACAAAAUUGAGAAUGAAGgauuaugauccaaacucAGC
+OTTHUMT00000007987  CACCUGUGCCCUGCACACU.G.GCCUGCACUGUGGUGAU.....CUC.GC
+#=GC SS_cons        ((((.((((...((........))..))))...))))...........))
+
+OTTHUMT00000006707  UUGGCCC....CCACCUGA.......UUCC....UGACA....UACAGCA
+OTTHUMT00000043281  UGGGCCUCCCCUC.CCUGCCCCAGGAUUGUGGAGUGAGAACGUUGCAGCA
+OTTHUMT00000007987  UUGGCCC....CCACCUGA.......UUCC....CGACA....UACAGCA
+#=GC SS_cons        .))))))....)..............)).)....)))..........)))
+
+OTTHUMT00000006707  GA..GGAAG....C..UUAGGCUCAGGUGG..AACA.....GCCUCAACU
+OTTHUMT00000043281  GGAGAGAACAACGCAGCAAAGCACAGCAGGGGAACCGgaaaugcucaccu
+OTTHUMT00000007987  GA..GGAAC....C..UUAGGCUCAGGUGG..AACA.....GCCUCAACU
+#=GC SS_cons        )...(((((.......(((((..(.(((.............)))((....
+
+OTTHUMT00000006707  ...GAUUCAGUCCCUGAACUUCCGUACA..CAGCCCUGGAGUCGUCU...
+OTTHUMT00000043281  uuugacaggguacuuuuaguucuggggccuuaucuuaaggauauuccaac
+OTTHUMT00000007987  ...GAUUCUGUCCCUGAACUUCCGUACA..CAGCCCUGGAGUCGUCU...
+#=GC SS_cons        ...))....)..))))).)))))...))..)).....)).))))))....
+
+OTTHUMT00000006707  .UAGAgc.caugauuuauuua......acuguucuuucauuuuacagaac
+OTTHUMT00000043281  auauacaaaaagauucaugcacagagauauguacuuuaguauuauuuacc
+OTTHUMT00000007987  .UAGAGc.caugauuuauuua......acuguucuuucauuuuacagaac
+#=GC SS_cons        ............((((((((........((((...........))))...
+
+OTTHUMT00000006707  aua..aaauguauuguuuccaa..cuuu.uuuccuaugguaa.....aua
+OTTHUMT00000043281  auaggaaaaaaguuggaaacaauacauuuuauguucuguaaaaugaaaga
+OTTHUMT00000007987  aua..aaauguauuguuuccaa..cuuu.uuuccuaugguaa.....aua
+#=GC SS_cons        .........((((((((((((...............))).)).....)))
+
+OTTHUMT00000006707  auacuaaaguaaau.aucucugug.caugaaucuu....uuuguau..au
+OTTHUMT00000043281  acaguuaaauaaaucauggCUCUAAGACGACUCCAGGGCUGUGUACGGAA
+OTTHUMT00000007987  auacuaaaguaaau.aucucug............................
+#=GC SS_cons        ))))..)))))))).....)))............................
+
+OTTHUMT00000006707  guu..ggaauauccuuaagauaagg......ccccagaacuaaaaguacc
+OTTHUMT00000043281  GUUCAGGGACAGAAUC.AGUUGAGGCUGUUCCACCUGAGCCUAAGCUUCC
+OTTHUMT00000007987  ..................................................
+#=GC SS_cons        ..................................................
+
+OTTHUMT00000006707  .cugucaaa.g...ggug.......a..gcauuuCCG.............
+OTTHUMT00000043281  UCUGCUGUAUGUCGGGAAUCAGGUGGGGGCCAAGCGAGAUCACCACAGUG
+OTTHUMT00000007987  ..................................................
+#=GC SS_cons        ..................................................
+
+OTTHUMT00000006707  ...GUUC.CCCUGCUGUGCUUUGCUGCGUUGUUCUCCC............
+OTTHUMT00000043281  CAGGC.CAGUGUGC.....AGGGCACAGGUGGGCACCAGGGAGGGGACGC
+OTTHUMT00000007987  ..................................................
+#=GC SS_cons        ..................................................
+
+OTTHUMT00000006707  .CUGCUGCAACGUUCUCACUCCACAAUCCUGGGGCAGG.UAGGGG.A...
+OTTHUMT00000043281  CGCACAGCCCCAUGCUCUCGCCAAAAACGUGCAGCACAAUUU.GGAAGAA
+OTTHUMT00000007987  ..................................................
+#=GC SS_cons        ..................................................
+
+OTTHUMT00000006707  ....GGCCCAGCug..aguuuggaucauaauccu...gaaagacaca
+OTTHUMT00000043281  AACAUUUCCAUCUGUUAAUAAAGAGCAAGGGCCUCUGGUCAUAAGUG
+OTTHUMT00000007987  .....................................ugcau..gaa
+#=GC SS_cons        ...............................................
+
+//

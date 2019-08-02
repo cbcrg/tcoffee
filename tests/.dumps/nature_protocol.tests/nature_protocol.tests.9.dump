@@ -1,0 +1,3002 @@
+<DumpIO>
+<nature>standard dump</nature>
+<program>T-COFFEE</program>
+<version>Version_13.30.5.6909e10</version>
+<build>Version_13.30.5.6909e10</build>
+<cl>t_coffee -seq crd.fasta -method mustang_pair -template_file crd.template_file </cl>
+<stack>
+</stack>
+<warning>
+
+
+*************************************************************************************************
+*                        MESSAGES RECAPITULATION                                    
+30526 -- WARNING: _P_ Template |  _P_ 2UWI3.pdb | Could Not Be Found
+
+30526 -- WARNING: _P_ Template |  _P_ 2UWI2.pdb | Could Not Be Found
+
+30526 -- WARNING: _P_ Template |  _P_ 2UWI1.pdb | Could Not Be Found
+
+30526 -- WARNING: _P_ Template |  _P_ 2HEY4.pdb | Could Not Be Found
+
+30526 -- WARNING: _P_ Template |  _P_ 2HEY2.pdb | Could Not Be Found
+
+30526 -- WARNING: _P_ Template |  _P_ 2HEY1.pdb | Could Not Be Found
+
+30526 -- WARNING: _P_ Template |  _P_ 2RPJ1.pdb | Could Not Be Found
+
+30526 -- WARNING: _P_ Template |  _P_ 1XU21.pdb | Could Not Be Found
+
+30526 -- WARNING: _P_ Template |  _P_ 1XU12.pdb | Could Not Be Found
+
+30526 -- WARNING: _P_ Template |  _P_ 1OQE1.pdb | Could Not Be Found
+
+30526 -- WARNING: _P_ Template |  _P_ 1EXT4.pdb | Could Not Be Found
+
+30526 -- WARNING: _P_ Template |  _P_ 1EXT3.pdb | Could Not Be Found
+
+30526 -- WARNING: _P_ Template |  _P_ 1EXT2.pdb | Could Not Be Found
+
+30526 -- WARNING: _P_ Template |  _P_ 1EXT1.pdb | Could Not Be Found
+
+30526 -- WARNING: _P_ Template |  _P_ 3BUKD.pdb | Could Not Be Found
+
+30526 -- WARNING: _P_ Template |  _P_ 3BUKD.pdb | Could Not Be Found
+
+30526 -- WARNING: _P_ Template |  _P_ 3BUKD.pdb | Could Not Be Found
+
+30526 -- WARNING: _P_ Template |  _P_ 3BUKD.pdb | Could Not Be Found
+
+30526 -- WARNING: _P_ Template |  _P_ 1JMA1.pdb | Could Not Be Found
+
+30526 -- WARNING: _P_ Template |  _P_ 1JMA2.pdb | Could Not Be Found
+
+30526 -- WARNING: _P_ Template |  _P_ 1D4V2.pdb | Could Not Be Found
+
+30526 -- WARNING: _P_ Template |  _P_ 1D4V3.pdb | Could Not Be Found
+
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-1 vs CRME-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-1 vs CRME-3], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-1 vs TNFRSF10B-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-1 vs TNFRSF10B-3], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-1 vs TNFRSF12A-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-1 vs TNFRSF13B-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-1 vs TNFRSF13C-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-1 vs TNFRSF14-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-1 vs TNFRSF14-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-1 vs TNFRSF16-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-1 vs TNFRSF16-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-1 vs TNFRSF16-3], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-1 vs TNFRSF16-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-1 vs TNFRSF17-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-1 vs TNFRSF1A-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-1 vs TNFRSF1A-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-1 vs TNFRSF1A-3], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-1 vs TNFRSF1A-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-1 vs TNFRSF4-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-1 vs TNFRSF4-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-1 vs TNFRSF4-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-2 vs CRME-3], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-2 vs TNFRSF10B-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-2 vs TNFRSF10B-3], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-2 vs TNFRSF12A-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-2 vs TNFRSF13B-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-2 vs TNFRSF13C-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-2 vs TNFRSF14-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-2 vs TNFRSF14-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-2 vs TNFRSF16-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-2 vs TNFRSF16-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-2 vs TNFRSF16-3], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-2 vs TNFRSF16-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-2 vs TNFRSF17-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-2 vs TNFRSF1A-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-2 vs TNFRSF1A-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-2 vs TNFRSF1A-3], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-2 vs TNFRSF1A-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-2 vs TNFRSF4-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-2 vs TNFRSF4-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-2 vs TNFRSF4-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-3 vs TNFRSF10B-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-3 vs TNFRSF10B-3], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-3 vs TNFRSF12A-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-3 vs TNFRSF13B-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-3 vs TNFRSF13C-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-3 vs TNFRSF14-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-3 vs TNFRSF14-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-3 vs TNFRSF16-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-3 vs TNFRSF16-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-3 vs TNFRSF16-3], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-3 vs TNFRSF16-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-3 vs TNFRSF17-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-3 vs TNFRSF1A-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-3 vs TNFRSF1A-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-3 vs TNFRSF1A-3], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-3 vs TNFRSF1A-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-3 vs TNFRSF4-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-3 vs TNFRSF4-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-3 vs TNFRSF4-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF10B-2 vs TNFRSF10B-3], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF10B-2 vs TNFRSF12A-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF10B-2 vs TNFRSF13B-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF10B-2 vs TNFRSF13C-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF10B-2 vs TNFRSF14-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF10B-2 vs TNFRSF14-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF10B-2 vs TNFRSF16-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF10B-2 vs TNFRSF16-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF10B-2 vs TNFRSF16-3], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF10B-2 vs TNFRSF16-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF10B-2 vs TNFRSF17-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF10B-2 vs TNFRSF1A-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF10B-2 vs TNFRSF1A-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF10B-2 vs TNFRSF1A-3], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF10B-2 vs TNFRSF1A-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF10B-2 vs TNFRSF4-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF10B-2 vs TNFRSF4-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF10B-2 vs TNFRSF4-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF10B-3 vs TNFRSF12A-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF10B-3 vs TNFRSF13B-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF10B-3 vs TNFRSF13C-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF10B-3 vs TNFRSF14-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF10B-3 vs TNFRSF14-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF10B-3 vs TNFRSF16-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF10B-3 vs TNFRSF16-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF10B-3 vs TNFRSF16-3], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF10B-3 vs TNFRSF16-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF10B-3 vs TNFRSF17-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF10B-3 vs TNFRSF1A-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF10B-3 vs TNFRSF1A-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF10B-3 vs TNFRSF1A-3], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF10B-3 vs TNFRSF1A-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF10B-3 vs TNFRSF4-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF10B-3 vs TNFRSF4-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF10B-3 vs TNFRSF4-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF12A-1 vs TNFRSF13B-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF12A-1 vs TNFRSF13C-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF12A-1 vs TNFRSF14-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF12A-1 vs TNFRSF14-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF12A-1 vs TNFRSF16-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF12A-1 vs TNFRSF16-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF12A-1 vs TNFRSF16-3], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF12A-1 vs TNFRSF16-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF12A-1 vs TNFRSF17-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF12A-1 vs TNFRSF1A-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF12A-1 vs TNFRSF1A-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF12A-1 vs TNFRSF1A-3], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF12A-1 vs TNFRSF1A-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF12A-1 vs TNFRSF4-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF12A-1 vs TNFRSF4-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF12A-1 vs TNFRSF4-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF13B-2 vs TNFRSF13C-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF13B-2 vs TNFRSF14-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF13B-2 vs TNFRSF14-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF13B-2 vs TNFRSF16-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF13B-2 vs TNFRSF16-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF13B-2 vs TNFRSF16-3], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF13B-2 vs TNFRSF16-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF13B-2 vs TNFRSF17-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF13B-2 vs TNFRSF1A-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF13B-2 vs TNFRSF1A-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF13B-2 vs TNFRSF1A-3], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF13B-2 vs TNFRSF1A-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF13B-2 vs TNFRSF4-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF13B-2 vs TNFRSF4-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF13B-2 vs TNFRSF4-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF13C-1 vs TNFRSF14-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF13C-1 vs TNFRSF14-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF13C-1 vs TNFRSF16-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF13C-1 vs TNFRSF16-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF13C-1 vs TNFRSF16-3], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF13C-1 vs TNFRSF16-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF13C-1 vs TNFRSF17-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF13C-1 vs TNFRSF1A-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF13C-1 vs TNFRSF1A-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF13C-1 vs TNFRSF1A-3], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF13C-1 vs TNFRSF1A-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF13C-1 vs TNFRSF4-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF13C-1 vs TNFRSF4-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF13C-1 vs TNFRSF4-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF14-1 vs TNFRSF14-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF14-1 vs TNFRSF16-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF14-1 vs TNFRSF16-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF14-1 vs TNFRSF16-3], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF14-1 vs TNFRSF16-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF14-1 vs TNFRSF17-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF14-1 vs TNFRSF1A-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF14-1 vs TNFRSF1A-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF14-1 vs TNFRSF1A-3], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF14-1 vs TNFRSF1A-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF14-1 vs TNFRSF4-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF14-1 vs TNFRSF4-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF14-1 vs TNFRSF4-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF14-2 vs TNFRSF16-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF14-2 vs TNFRSF16-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF14-2 vs TNFRSF16-3], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF14-2 vs TNFRSF16-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF14-2 vs TNFRSF17-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF14-2 vs TNFRSF1A-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF14-2 vs TNFRSF1A-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF14-2 vs TNFRSF1A-3], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF14-2 vs TNFRSF1A-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF14-2 vs TNFRSF4-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF14-2 vs TNFRSF4-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF14-2 vs TNFRSF4-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF16-1 vs TNFRSF16-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF16-1 vs TNFRSF16-3], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF16-1 vs TNFRSF16-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF16-1 vs TNFRSF17-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF16-1 vs TNFRSF1A-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF16-1 vs TNFRSF1A-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF16-1 vs TNFRSF1A-3], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF16-1 vs TNFRSF1A-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF16-1 vs TNFRSF4-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF16-1 vs TNFRSF4-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF16-1 vs TNFRSF4-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF16-2 vs TNFRSF16-3], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF16-2 vs TNFRSF16-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF16-2 vs TNFRSF17-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF16-2 vs TNFRSF1A-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF16-2 vs TNFRSF1A-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF16-2 vs TNFRSF1A-3], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF16-2 vs TNFRSF1A-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF16-2 vs TNFRSF4-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF16-2 vs TNFRSF4-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF16-2 vs TNFRSF4-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF16-3 vs TNFRSF16-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF16-3 vs TNFRSF17-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF16-3 vs TNFRSF1A-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF16-3 vs TNFRSF1A-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF16-3 vs TNFRSF1A-3], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF16-3 vs TNFRSF1A-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF16-3 vs TNFRSF4-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF16-3 vs TNFRSF4-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF16-3 vs TNFRSF4-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF16-4 vs TNFRSF17-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF16-4 vs TNFRSF1A-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF16-4 vs TNFRSF1A-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF16-4 vs TNFRSF1A-3], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF16-4 vs TNFRSF1A-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF16-4 vs TNFRSF4-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF16-4 vs TNFRSF4-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF16-4 vs TNFRSF4-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF17-1 vs TNFRSF1A-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF17-1 vs TNFRSF1A-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF17-1 vs TNFRSF1A-3], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF17-1 vs TNFRSF1A-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF17-1 vs TNFRSF4-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF17-1 vs TNFRSF4-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF17-1 vs TNFRSF4-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF1A-1 vs TNFRSF1A-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF1A-1 vs TNFRSF1A-3], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF1A-1 vs TNFRSF1A-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF1A-1 vs TNFRSF4-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF1A-1 vs TNFRSF4-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF1A-1 vs TNFRSF4-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF1A-2 vs TNFRSF1A-3], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF1A-2 vs TNFRSF1A-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF1A-2 vs TNFRSF4-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF1A-2 vs TNFRSF4-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF1A-2 vs TNFRSF4-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF1A-3 vs TNFRSF1A-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF1A-3 vs TNFRSF4-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF1A-3 vs TNFRSF4-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF1A-3 vs TNFRSF4-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF1A-4 vs TNFRSF4-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF1A-4 vs TNFRSF4-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF1A-4 vs TNFRSF4-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF4-1 vs TNFRSF4-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF4-1 vs TNFRSF4-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF4-2 vs TNFRSF4-4], proba_pair will be used instead
+*************************************************************************************************
+</warning>
+<file>
+<stream>output</stream>
+<name>stdout</name>
+<content>#Single Thread
+#Single Thread
+#Single Thread
+#Single Thread
+#Single Thread
+#Single Thread
+#Single Thread
+#Single Thread
+#Single Thread
+#Single Thread
+#Single Thread
+#Single Thread
+#Single Thread
+#Single Thread
+#Single Thread
+#Single Thread
+#Single Thread
+#Single Thread
+#Single Thread
+#Single Thread
+#Single Thread
+#Single Thread
+CLUSTAL FORMAT for T-COFFEE Version_13.30.5.6909e10 [http://www.tcoffee.org] [MODE:  ], CPU=0.04 sec, SCORE=48, Nseq=22, Len=48 
+
+CRME-3          CDSNS-YCLLK-ASDGNCVTCAPKTKCGR--GYGKK-GED-EMGNTIC
+CRME-2          CPSDT-FTSIY-NRSPWCHSCRG--PCGT--NRVEVTPCT-PTTNRIC
+CRME-1          CEQGV-SYYN---S-QELKCCK---LCKP--GTYSDHRCD-KYSDTIC
+TNFRSF4-4       CPPGH-FSPGD---NQACKPWT---NCTLA-GKHTLQPAS-NSSDAIC
+TNFRSF4-2       CGPGF-YNDVV--SSKPCKPCT---WCNLRSGSERKQLCT-ATQDTVC
+TNFRSF4-1       CVGDT-YPSN----DRC---CH---ECRPGN--GMVSRCS-RSQNTVC
+TNFRSF12A-1     CSRGS-SWSA---DLDKCMDCA---SCRA--RPH-SDFC------LGC
+TNFRSF17-1      CSQNE-YFDS---LLHACIPCQL--RCSS--NTP-P-----LTCQRYC
+TNFRSF13B-2     CRKEQ-GKFYD-HLLRDCISCAS--ICGQ--HP--------KQCAYFC
+TNFRSF1A-4      CHAGF-FLR-----ENECVSCS---NCKK--SL---------ECTKLC
+TNFRSF13C-1     CVPAE-CFDL---LVRHCVACG---LLRTP--RPKP-----------A
+TNFRSF1A-3      CRKNQ-YRHYWSENLFQCFNCS---LCLN--GTV-HLSCQ-EKQNTVC
+TNFRSF1A-2      CESGS-FTASE-NHLRHCLSCS---KCRKEMGQVEISSCT-VDRDTVC
+TNFRSF1A-1      CPQGK-YIHPQ-NNS---ICCT---KCHK--GTYLYNDCPGPGQDTDC
+TNFRSF16-4      CPEGT-YSDEA-NHVDPCLPCT---VCED--TERQLRECT-PWADAEC
+TNFRSF16-3      CAYGY-YQDE---ETGHCEACS---VCEV--GSGLVFSCQ-DKQNTVC
+TNFRSF16-2      CLDNVTFSDVV-SATEPCKPCT---ECLG--LQSMSAPCV-EADDAVC
+TNFRSF16-1      CSTGL-YTHS----GECC---K---ACNL--GEGVAQPCG-A-NQTVC
+TNFRSF14-2      CPPGT-YIAHL-NGLSKCLQCQ---MCDPAMGLRASRNCS-RTENAVC
+TNFRSF14-1      CKEDE-YPV----GSEC---CP---KCSP--GYRVKEACG-ELTGTVC
+TNFRSF10B-3     CEEGT-FREED--SPEMCRKCRT--GCPR--GMVKVGDCT-PWSDIEC
+TNFRSF10B-2     CKYGQDYSTHW-NDLLFCLRCT---RCDS--GEVELSPCT-TTRNTVC
+                *                                              .
+
+
+
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>stderr</name>
+<content>HERE: DPA=0
+
+PROGRAM: T-COFFEE Version_13.30.5.6909e10 (Version_13.30.5.6909e10)
+-full_log      	S	[0] 
+-genepred_score	S	[0] 	nsd
+-run_name      	S	[0] 
+-mem_mode      	S	[0] 	mem
+-extend        	D	[1] 	1 
+-extend_mode   	S	[0] 	very_fast_triplet
+-max_n_pair    	D	[0] 	10 
+-seq_name_for_quadruplet	S	[0] 	all
+-compact       	S	[0] 	default
+-clean         	S	[0] 	no
+-do_self       	FL	[0] 	0
+-do_normalise  	D	[0] 	1000 
+-template_file 	S	[1] 	crd.template_file
+-setenv        	S	[0] 	0
+-export        	S	[0] 	0
+-template_mode 	S	[0] 
+-flip          	D	[0] 	0 
+-remove_template_file	D	[0] 	0 
+-profile_template_file	S	[0] 
+-in            	S	[0] 
+-seq           	S	[1] 	crd.fasta
+-aln           	S	[0] 
+-method_limits 	S	[0] 
+-method        	S	[1] 	mustang_pair
+-lib           	S	[0] 
+-profile       	S	[0] 
+-profile1      	S	[0] 
+-profile2      	S	[0] 
+-pdb           	S	[0] 
+-relax_lib     	D	[0] 	1 
+-filter_lib    	D	[0] 	0 
+-shrink_lib    	D	[0] 	0 
+-out_lib       	W_F	[0] 	no
+-out_lib_mode  	S	[0] 	primary
+-lib_only      	D	[0] 	0 
+-outseqweight  	W_F	[0] 	no
+-seq_source    	S	[0] 	ANY
+-cosmetic_penalty	D	[0] 	0 
+-gapopen       	D	[0] 	0 
+-gapext        	D	[0] 	0 
+-fgapopen      	D	[0] 	0 
+-fgapext       	D	[0] 	0 
+-nomatch       	D	[0] 	0 
+-newtree       	W_F	[0] 	default
+-tree          	W_F	[0] 	NO
+-usetree       	R_F	[0] 
+-tree_mode     	S	[0] 	nj
+-distance_matrix_mode	S	[0] 	ktup
+-distance_matrix_sim_mode	S	[0] 	idmat_sim1
+-quicktree     	FL	[0] 	0
+-outfile       	W_F	[0] 	default
+-maximise      	FL	[1] 	1
+-output        	S	[0] 	aln	html
+-len           	D	[0] 	0 
+-infile        	R_F	[0] 
+-matrix        	S	[0] 	default
+-tg_mode       	D	[0] 	1 
+-profile_mode  	S	[0] 	cw_profile_profile
+-profile_comparison	S	[0] 	profile
+-dp_mode       	S	[0] 	linked_pair_wise
+-ktuple        	D	[0] 	1 
+-ndiag         	D	[0] 	0 
+-diag_threshold	D	[0] 	0 
+-diag_mode     	D	[0] 	0 
+-sim_matrix    	S	[0] 	vasiliky
+-transform     	S	[0] 
+-extend_seq    	FL	[0] 	0
+-outorder      	S	[0] 	input
+-inorder       	S	[0] 	aligned
+-seqnos        	S	[0] 	off
+-case          	S	[0] 	keep
+-cpu           	D	[0] 	0 
+-ulimit        	D	[0] 	-1 
+-maxnseq       	D	[0] 	-1 
+-maxlen        	D	[0] 	-1 
+-sample_dp     	D	[0] 	0 
+-weight        	S	[0] 	default
+-seq_weight    	S	[0] 	no
+-align         	FL	[1] 	1
+-mocca         	FL	[0] 	0
+-domain        	FL	[0] 	0
+-start         	D	[0] 	0 
+-len           	D	[0] 	0 
+-scale         	D	[0] 	0 
+-mocca_interactive	FL	[0] 	0
+-method_evaluate_mode	S	[0] 	default
+-color_mode    	S	[0] 	new
+-aln_line_length	D	[0] 	0 
+-evaluate_mode 	S	[0] 	triplet
+-get_type      	FL	[0] 	0
+-clean_aln     	D	[0] 	0 
+-clean_threshold	D	[1] 	1 
+-clean_iteration	D	[1] 	1 
+-clean_evaluate_mode	S	[0] 	t_coffee_fast
+-extend_matrix 	FL	[0] 	0
+-prot_min_sim  	D	[40] 	40 
+-prot_max_sim  	D	[90] 	90 
+-prot_trim     	D	[20] 	20 
+-prot_min_cov  	D	[40] 	40 
+-pdb_type      	S	[0] 	d
+-pdb_min_sim   	D	[35] 	35 
+-pdb_max_sim   	D	[100] 	100 
+-pdb_min_cov   	D	[50] 	50 
+-pdb_blast_server	W_F	[0] 	EBI
+-blast         	W_F	[0] 
+-blast_server  	W_F	[0] 	EBI
+-pdb_db        	W_F	[0] 	pdb
+-protein_db    	W_F	[0] 	uniref50
+-method_log    	W_F	[0] 	no
+-struc_to_use  	S	[0] 
+-cache         	W_F	[0] 	use
+-print_cache   	FL	[0] 	0
+-align_pdb_param_file	W_F	[0] 	no
+-align_pdb_hasch_mode	W_F	[0] 	hasch_ca_trace_bubble
+-external_aligner	S	[0] 	NO
+-msa_mode      	S	[0] 	tree
+-et_mode       	S	[0] 	et
+-master        	S	[0] 	no
+-blast_nseq    	D	[0] 	0 
+-lalign_n_top  	D	[0] 	10 
+-iterate       	D	[0] 	0 
+-trim          	D	[0] 	0 
+-split         	D	[0] 	0 
+-trimfile      	S	[0] 	default
+-split         	D	[0] 	0 
+-split_nseq_thres	D	[0] 	0 
+-split_score_thres	D	[0] 	0 
+-check_pdb_status	D	[0] 	0 
+-clean_seq_name	D	[0] 	0 
+-seq_to_keep   	S	[0] 
+-dpa_master_aln	S	[0] 
+-dpa_maxnseq   	D	[0] 	0 
+-dpa_min_score1	D	[0] 
+-dpa_min_score2	D	[0] 
+-dpa_keep_tmpfile	FL	[0] 	0
+-dpa_debug     	D	[0] 	0 
+-multi_core    	S	[0] 	templates_jobs_relax_msa_evaluate
+-n_core        	D	[0] 	1 
+-thread        	D	[0] 	1 
+-max_n_proc    	D	[0] 	0 
+-lib_list      	S	[0] 
+-prune_lib_mode	S	[0] 	5
+-tip           	S	[0] 	none
+-rna_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) crd.fasta  Format fasta_seq
+	Input File (M) mustang_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [crd.template_file] Mode Or File: [crd.template_file] [Start
+pid 30526 -- _P_ Template |  _P_ 2UWI3.pdb | Could Not Be Found
+
+
+pid 30526 -- _P_ Template |  _P_ 2UWI2.pdb | Could Not Be Found
+
+
+pid 30526 -- _P_ Template |  _P_ 2UWI1.pdb | Could Not Be Found
+
+
+pid 30526 -- _P_ Template |  _P_ 2HEY4.pdb | Could Not Be Found
+
+
+pid 30526 -- _P_ Template |  _P_ 2HEY2.pdb | Could Not Be Found
+
+
+pid 30526 -- _P_ Template |  _P_ 2HEY1.pdb | Could Not Be Found
+
+
+pid 30526 -- _P_ Template |  _P_ 2RPJ1.pdb | Could Not Be Found
+
+
+pid 30526 -- _P_ Template |  _P_ 1XU21.pdb | Could Not Be Found
+
+
+pid 30526 -- _P_ Template |  _P_ 1XU12.pdb | Could Not Be Found
+
+
+pid 30526 -- _P_ Template |  _P_ 1OQE1.pdb | Could Not Be Found
+
+
+pid 30526 -- _P_ Template |  _P_ 1EXT4.pdb | Could Not Be Found
+
+
+pid 30526 -- _P_ Template |  _P_ 1EXT3.pdb | Could Not Be Found
+
+
+pid 30526 -- _P_ Template |  _P_ 1EXT2.pdb | Could Not Be Found
+
+
+pid 30526 -- _P_ Template |  _P_ 1EXT1.pdb | Could Not Be Found
+
+
+pid 30526 -- _P_ Template |  _P_ 3BUKD.pdb | Could Not Be Found
+
+
+pid 30526 -- _P_ Template |  _P_ 3BUKD.pdb | Could Not Be Found
+
+
+pid 30526 -- _P_ Template |  _P_ 3BUKD.pdb | Could Not Be Found
+
+
+pid 30526 -- _P_ Template |  _P_ 3BUKD.pdb | Could Not Be Found
+
+
+pid 30526 -- _P_ Template |  _P_ 1JMA1.pdb | Could Not Be Found
+
+
+pid 30526 -- _P_ Template |  _P_ 1JMA2.pdb | Could Not Be Found
+
+
+pid 30526 -- _P_ Template |  _P_ 1D4V2.pdb | Could Not Be Found
+
+
+pid 30526 -- _P_ Template |  _P_ 1D4V3.pdb | Could Not Be Found
+
+]
+INPUT SEQUENCES: 22 SEQUENCES  [PROTEIN]
+  Input File crd.fasta   Seq CRME-1      Length   37 type PROTEIN Struct Unchecked
+  Input File crd.fasta   Seq CRME-2      Length   41 type PROTEIN Struct Unchecked
+  Input File crd.fasta   Seq CRME-3      Length   42 type PROTEIN Struct Unchecked
+  Input File crd.fasta   Seq TNFRSF10B-2 Length   41 type PROTEIN Struct Unchecked
+  Input File crd.fasta   Seq TNFRSF10B-3 Length   40 type PROTEIN Struct Unchecked
+  Input File crd.fasta   Seq TNFRSF12A-1 Length   32 type PROTEIN Struct Unchecked
+  Input File crd.fasta   Seq TNFRSF13B-2 Length   34 type PROTEIN Struct Unchecked
+  Input File crd.fasta   Seq TNFRSF13C-1 Length   28 type PROTEIN Struct Unchecked
+  Input File crd.fasta   Seq TNFRSF14-1  Length   34 type PROTEIN Struct Unchecked
+  Input File crd.fasta   Seq TNFRSF14-2  Length   42 type PROTEIN Struct Unchecked
+  Input File crd.fasta   Seq TNFRSF16-1  Length   33 type PROTEIN Struct Unchecked
+  Input File crd.fasta   Seq TNFRSF16-2  Length   41 type PROTEIN Struct Unchecked
+  Input File crd.fasta   Seq TNFRSF16-3  Length   38 type PROTEIN Struct Unchecked
+  Input File crd.fasta   Seq TNFRSF16-4  Length   40 type PROTEIN Struct Unchecked
+  Input File crd.fasta   Seq TNFRSF17-1  Length   34 type PROTEIN Struct Unchecked
+  Input File crd.fasta   Seq TNFRSF1A-1  Length   38 type PROTEIN Struct Unchecked
+  Input File crd.fasta   Seq TNFRSF1A-2  Length   42 type PROTEIN Struct Unchecked
+  Input File crd.fasta   Seq TNFRSF1A-3  Length   40 type PROTEIN Struct Unchecked
+  Input File crd.fasta   Seq TNFRSF1A-4  Length   28 type PROTEIN Struct Unchecked
+  Input File crd.fasta   Seq TNFRSF4-1   Length   34 type PROTEIN Struct Unchecked
+  Input File crd.fasta   Seq TNFRSF4-2   Length   41 type PROTEIN Struct Unchecked
+  Input File crd.fasta   Seq TNFRSF4-4   Length   39 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 1 processors:
+
+	--- Process Method/Library/Aln S  	S	[0] 	none
+-rna_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) crd.fasta  Format fasta_seq
+	Input File (M) mustang_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [crd.template_file] Mode Or File: [crd.template_file] [Start
+pid 30526 -- _P_ Template |  _P_ 2UWI3.pdb | Could Not Be Found
+
+
+pid 30526 -- _P_ Template |  _P_ 2UWI2.pdb | Could Not Be Found
+
+
+pid 30526 -- _P_ Template |  _P_ 2UWI1.pdb | Could Not Be Found
+
+
+pid 30526 -- _P_ Template |  _P_ 2HEY4.pdb | Could Not Be Found
+
+
+pid 30526 -- _P_ Template |  _P_ 2HEY2.pdb | Could Not Be Found
+
+
+pid 30526 -- _P_ Template |  _P_ 2HEY1.pdb | Could Not Be Found
+
+
+pid 30526 -- _P_ Template |  _P_ 2RPJ1.pdb | Could Not Be Found
+
+
+pid 30526 -- _P_ Template |  _P_ 1XU21.pdb | Could Not Be Found
+
+
+pid 30526 -- _P_ Template |  _P_ 1XU12.pdb | Could Not Be Found
+
+
+pid 30526 -- _P_ Template |  _P_ 1OQE1.pdb | Could Not Be Found
+
+
+pid 30526 -- _P_ Template |  _P_ 1EXT4.pdb | Could Not Be Found
+
+
+pid 30526 -- _P_ Template |  _P_ 1EXT3.pdb | Could Not Be Found
+
+
+pid 30526 -- _P_ Template |  _P_ 1EXT2.pdb | Could Not Be Found
+
+
+pid 30526 -- _P_ Template |  _P_ 1EXT1.pdb | Could Not Be Found
+
+
+pid 30526 -- _P_ Template |  _P_ 3BUKD.pdb | Could Not Be Found
+
+
+pid 30526 -- _P_ Template |  _P_ 3BUKD.pdb | Could Not Be Found
+
+
+pid 30526 -- _P_ Template |  _P_ 3BUKD.pdb | Could Not Be Found
+
+
+pid 30526 -- _P_ Template |  _P_ 3BUKD.pdb | Could Not Be Found
+
+
+pid 30526 -- _P_ Template |  _P_ 1JMA1.pdb | Could Not Be Found
+
+
+pid 30526 -- _P_ Template |  _P_ 1JMA2.pdb | Could Not Be Found
+
+
+pid 30526 -- _P_ Template |  _P_ 1D4V2.pdb | Could Not Be Found
+
+
+pid 30526 -- _P_ Template |  _P_ 1D4V3.pdb | Could Not Be Found
+
+]
+INPUT SEQUENCES: 22 SEQUENCES  [PROTEIN]
+  Input File crd.fasta   Seq CRME-1      Length   37 type PROTEIN Struct Unchecked
+  Input File crd.fasta   Seq CRME-2      Length   41 type PROTEIN Struct Unchecked
+  Input File crd.fasta   Seq CRME-3      Length   42 type PROTEIN Struct Unchecked
+  Input File crd.fasta   Seq TNFRSF10B-2 Length   41 type PROTEIN Struct Unchecked
+  Input File crd.fasta   Seq TNFRSF10B-3 Length   40 type PROTEIN Struct Unchecked
+  Input File crd.fasta   Seq TNFRSF12A-1 Length   32 type PROTEIN Struct Unchecked
+  Input File crd.fasta   Seq TNFRSF13B-2 Length   34 type PROTEIN Struct Unchecked
+  Input File crd.fasta   Seq TNFRSF13C-1 Length   28 type PROTEIN Struct Unchecked
+  Input File crd.fasta   Seq TNFRSF14-1  Length   34 type PROTEIN Struct Unchecked
+  Input File crd.fasta   Seq TNFRSF14-2  Length   42 type PROTEIN Struct Unchecked
+  Input File crd.fasta   Seq TNFRSF16-1  Length   33 type PROTEIN Struct Unchecked
+  Input File crd.fasta   Seq TNFRSF16-2  Length   41 type PROTEIN Struct Unchecked
+  Input File crd.fasta   Seq TNFRSF16-3  Length   38 type PROTEIN Struct Unchecked
+  Input File crd.fasta   Seq TNFRSF16-4  Length   40 type PROTEIN Struct Unchecked
+  Input File crd.fasta   Seq TNFRSF17-1  Length   34 type PROTEIN Struct Unchecked
+  Input File crd.fasta   Seq TNFRSF1A-1  Length   38 type PROTEIN Struct Unchecked
+  Input File crd.fasta   Seq TNFRSF1A-2  Length   42 type PROTEIN Struct Unchecked
+  Input File crd.fasta   Seq TNFRSF1A-3  Length   40 type PROTEIN Struct Unchecked
+  Input File crd.fasta   Seq TNFRSF1A-4  Length   28 type PROTEIN Struct Unchecked
+  Input File crd.fasta   Seq TNFRSF4-1   Length   34 type PROTEIN Struct Unchecked
+  Input File crd.fasta   Seq TNFRSF4-2   Length   41 type PROTEIN Struct Unchecked
+  Input File crd.fasta   Seq TNFRSF4-4   Length   39 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 1 processors:
+crd.fasta
+	xxx Retrieved Scrd.fasta
+pid 30578 -- Method mustang cannot be applied to [CRME-1 vs CRME-2], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [CRME-1 vs CRME-3], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [CRME-1 vs TNFRSF10B-2], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [CRME-1 vs TNFRSF10B-3], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [CRME-1 vs TNFRSF12A-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [CRME-1 vs TNFRSF13B-2], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [CRME-1 vs TNFRSF13C-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [CRME-1 vs TNFRSF14-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [CRME-1 vs TNFRSF14-2], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [CRME-1 vs TNFRSF16-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [CRME-1 vs TNFRSF16-2], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [CRME-1 vs TNFRSF16-3], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [CRME-1 vs TNFRSF16-4], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [CRME-1 vs TNFRSF17-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [CRME-1 vs TNFRSF1A-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [CRME-1 vs TNFRSF1A-2], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [CRME-1 vs TNFRSF1A-3], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [CRME-1 vs TNFRSF1A-4], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [CRME-1 vs TNFRSF4-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [CRME-1 vs TNFRSF4-2], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [CRME-1 vs TNFRSF4-4], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [CRME-2 vs CRME-3], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [CRME-2 vs TNFRSF10B-2], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [CRME-2 vs TNFRSF10B-3], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [CRME-2 vs TNFRSF12A-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [CRME-2 vs TNFRSF13B-2], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [CRME-2 vs TNFRSF13C-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [CRME-2 vs TNFRSF14-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [CRME-2 vs TNFRSF14-2], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [CRME-2 vs TNFRSF16-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [CRME-2 vs TNFRSF16-2], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [CRME-2 vs TNFRSF16-3], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [CRME-2 vs TNFRSF16-4], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [CRME-2 vs TNFRSF17-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [CRME-2 vs TNFRSF1A-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [CRME-2 vs TNFRSF1A-2], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [CRME-2 vs TNFRSF1A-3], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [CRME-2 vs TNFRSF1A-4], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [CRME-2 vs TNFRSF4-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [CRME-2 vs TNFRSF4-2], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [CRME-2 vs TNFRSF4-4], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [CRME-3 vs TNFRSF10B-2], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [CRME-3 vs TNFRSF10B-3], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [CRME-3 vs TNFRSF12A-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [CRME-3 vs TNFRSF13B-2], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [CRME-3 vs TNFRSF13C-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [CRME-3 vs TNFRSF14-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [CRME-3 vs TNFRSF14-2], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [CRME-3 vs TNFRSF16-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [CRME-3 vs TNFRSF16-2], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [CRME-3 vs TNFRSF16-3], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [CRME-3 vs TNFRSF16-4], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [CRME-3 vs TNFRSF17-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [CRME-3 vs TNFRSF1A-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [CRME-3 vs TNFRSF1A-2], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [CRME-3 vs TNFRSF1A-3], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [CRME-3 vs TNFRSF1A-4], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [CRME-3 vs TNFRSF4-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [CRME-3 vs TNFRSF4-2], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [CRME-3 vs TNFRSF4-4], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF10B-2 vs TNFRSF10B-3], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF10B-2 vs TNFRSF12A-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF10B-2 vs TNFRSF13B-2], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF10B-2 vs TNFRSF13C-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF10B-2 vs TNFRSF14-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF10B-2 vs TNFRSF14-2], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF10B-2 vs TNFRSF16-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF10B-2 vs TNFRSF16-2], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF10B-2 vs TNFRSF16-3], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF10B-2 vs TNFRSF16-4], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF10B-2 vs TNFRSF17-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF10B-2 vs TNFRSF1A-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF10B-2 vs TNFRSF1A-2], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF10B-2 vs TNFRSF1A-3], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF10B-2 vs TNFRSF1A-4], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF10B-2 vs TNFRSF4-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF10B-2 vs TNFRSF4-2], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF10B-2 vs TNFRSF4-4], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF10B-3 vs TNFRSF12A-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF10B-3 vs TNFRSF13B-2], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF10B-3 vs TNFRSF13C-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF10B-3 vs TNFRSF14-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF10B-3 vs TNFRSF14-2], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF10B-3 vs TNFRSF16-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF10B-3 vs TNFRSF16-2], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF10B-3 vs TNFRSF16-3], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF10B-3 vs TNFRSF16-4], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF10B-3 vs TNFRSF17-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF10B-3 vs TNFRSF1A-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF10B-3 vs TNFRSF1A-2], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF10B-3 vs TNFRSF1A-3], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF10B-3 vs TNFRSF1A-4], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF10B-3 vs TNFRSF4-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF10B-3 vs TNFRSF4-2], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF10B-3 vs TNFRSF4-4], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF12A-1 vs TNFRSF13B-2], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF12A-1 vs TNFRSF13C-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF12A-1 vs TNFRSF14-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF12A-1 vs TNFRSF14-2], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF12A-1 vs TNFRSF16-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF12A-1 vs TNFRSF16-2], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF12A-1 vs TNFRSF16-3], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF12A-1 vs TNFRSF16-4], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF12A-1 vs TNFRSF17-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF12A-1 vs TNFRSF1A-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF12A-1 vs TNFRSF1A-2], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF12A-1 vs TNFRSF1A-3], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF12A-1 vs TNFRSF1A-4], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF12A-1 vs TNFRSF4-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF12A-1 vs TNFRSF4-2], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF12A-1 vs TNFRSF4-4], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF13B-2 vs TNFRSF13C-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF13B-2 vs TNFRSF14-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF13B-2 vs TNFRSF14-2], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF13B-2 vs TNFRSF16-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF13B-2 vs TNFRSF16-2], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF13B-2 vs TNFRSF16-3], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF13B-2 vs TNFRSF16-4], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF13B-2 vs TNFRSF17-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF13B-2 vs TNFRSF1A-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF13B-2 vs TNFRSF1A-2], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF13B-2 vs TNFRSF1A-3], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF13B-2 vs TNFRSF1A-4], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF13B-2 vs TNFRSF4-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF13B-2 vs TNFRSF4-2], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF13B-2 vs TNFRSF4-4], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF13C-1 vs TNFRSF14-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF13C-1 vs TNFRSF14-2], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF13C-1 vs TNFRSF16-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF13C-1 vs TNFRSF16-2], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF13C-1 vs TNFRSF16-3], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF13C-1 vs TNFRSF16-4], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF13C-1 vs TNFRSF17-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF13C-1 vs TNFRSF1A-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF13C-1 vs TNFRSF1A-2], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF13C-1 vs TNFRSF1A-3], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF13C-1 vs TNFRSF1A-4], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF13C-1 vs TNFRSF4-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF13C-1 vs TNFRSF4-2], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF13C-1 vs TNFRSF4-4], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF14-1 vs TNFRSF14-2], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF14-1 vs TNFRSF16-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF14-1 vs TNFRSF16-2], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF14-1 vs TNFRSF16-3], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF14-1 vs TNFRSF16-4], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF14-1 vs TNFRSF17-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF14-1 vs TNFRSF1A-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF14-1 vs TNFRSF1A-2], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF14-1 vs TNFRSF1A-3], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF14-1 vs TNFRSF1A-4], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF14-1 vs TNFRSF4-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF14-1 vs TNFRSF4-2], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF14-1 vs TNFRSF4-4], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF14-2 vs TNFRSF16-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF14-2 vs TNFRSF16-2], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF14-2 vs TNFRSF16-3], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF14-2 vs TNFRSF16-4], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF14-2 vs TNFRSF17-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF14-2 vs TNFRSF1A-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF14-2 vs TNFRSF1A-2], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF14-2 vs TNFRSF1A-3], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF14-2 vs TNFRSF1A-4], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF14-2 vs TNFRSF4-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF14-2 vs TNFRSF4-2], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF14-2 vs TNFRSF4-4], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF16-1 vs TNFRSF16-2], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF16-1 vs TNFRSF16-3], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF16-1 vs TNFRSF16-4], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF16-1 vs TNFRSF17-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF16-1 vs TNFRSF1A-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF16-1 vs TNFRSF1A-2], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF16-1 vs TNFRSF1A-3], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF16-1 vs TNFRSF1A-4], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF16-1 vs TNFRSF4-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF16-1 vs TNFRSF4-2], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF16-1 vs TNFRSF4-4], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF16-2 vs TNFRSF16-3], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF16-2 vs TNFRSF16-4], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF16-2 vs TNFRSF17-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF16-2 vs TNFRSF1A-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF16-2 vs TNFRSF1A-2], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF16-2 vs TNFRSF1A-3], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF16-2 vs TNFRSF1A-4], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF16-2 vs TNFRSF4-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF16-2 vs TNFRSF4-2], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF16-2 vs TNFRSF4-4], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF16-3 vs TNFRSF16-4], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF16-3 vs TNFRSF17-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF16-3 vs TNFRSF1A-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF16-3 vs TNFRSF1A-2], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF16-3 vs TNFRSF1A-3], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF16-3 vs TNFRSF1A-4], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF16-3 vs TNFRSF4-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF16-3 vs TNFRSF4-2], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF16-3 vs TNFRSF4-4], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF16-4 vs TNFRSF17-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF16-4 vs TNFRSF1A-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF16-4 vs TNFRSF1A-2], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF16-4 vs TNFRSF1A-3], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF16-4 vs TNFRSF1A-4], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF16-4 vs TNFRSF4-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF16-4 vs TNFRSF4-2], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF16-4 vs TNFRSF4-4], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF17-1 vs TNFRSF1A-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF17-1 vs TNFRSF1A-2], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF17-1 vs TNFRSF1A-3], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF17-1 vs TNFRSF1A-4], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF17-1 vs TNFRSF4-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF17-1 vs TNFRSF4-2], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF17-1 vs TNFRSF4-4], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF1A-1 vs TNFRSF1A-2], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF1A-1 vs TNFRSF1A-3], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF1A-1 vs TNFRSF1A-4], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF1A-1 vs TNFRSF4-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF1A-1 vs TNFRSF4-2], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF1A-1 vs TNFRSF4-4], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF1A-2 vs TNFRSF1A-3], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF1A-2 vs TNFRSF1A-4], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF1A-2 vs TNFRSF4-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF1A-2 vs TNFRSF4-2], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF1A-2 vs TNFRSF4-4], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF1A-3 vs TNFRSF1A-4], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF1A-3 vs TNFRSF4-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF1A-3 vs TNFRSF4-2], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF1A-3 vs TNFRSF4-4], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF1A-4 vs TNFRSF4-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF1A-4 vs TNFRSF4-2], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF1A-4 vs TNFRSF4-4], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF4-1 vs TNFRSF4-2], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF4-1 vs TNFRSF4-4], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF4-2 vs TNFRSF4-4], proba_pair will be used instead
+instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF1A-4 vs TNFRSF4-1], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF1A-4 vs TNFRSF4-2], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF1A-4 vs TNFRSF4-4], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF4-1 vs TNFRSF4-2], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF4-1 vs TNFRSF4-4], proba_pair will be used instead
+
+pid 30578 -- Method mustang cannot be applied to [TNFRSF4-2 vs TNFRSF4-4], proba_pair will be used instead
+crd.fasta
+	xxx Retrieved Scrd.fasta
+	--- Process Method/Library/Aln Mmustang_pair
+	xxx Retrieved Mmustang_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [50116]
+
+Library Relaxation: Multi_proc [1]
+ 
+!		[Relax Library][TOT=   22][  0 %]!		[Relax Library][TOT=   22][  9 %]!		[Relax Library][TOT=   22][ 13 %]!		[Relax Library][TOT=   22][ 18 %]!		[Relax Library][TOT=   22][ 22 %]!		[Relax Library][TOT=   22][ 27 %]!		[Relax Library][TOT=   22][ 31 %]!		[Relax Library][TOT=   22][ 36 %]!		[Relax Library][TOT=   22][ 40 %]!		[Relax Library][TOT=   22][ 45 %]!		[Relax Library][TOT=   22][ 50 %]!		[Relax Library][TOT=   22][ 54 %]!		[Relax Library][TOT=   22][ 59 %]!		[Relax Library][TOT=   22][ 63 %]!		[Relax Library][TOT=   22][ 68 %]!		[Relax Library][TOT=   22][ 72 %]!		[Relax Library][TOT=   22][ 77 %]!		[Relax Library][TOT=   22][ 81 %]!		[Relax Library][TOT=   22][ 86 %]!		[Relax Library][TOT=   22][ 90 %]!		[Relax Library][TOT=   22][ 95 %]!		[Relax Library][TOT=   22][100 %]
+crd.fasta
+	xxx Retrieved Scrd.fasta
+	--- Process Method/Library/Aln Mmustang_pair
+	xxx Retrieved Mmustang_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [50116]
+
+Library Relaxation: Multi_proc [1]
+ 
+Relaxation Summary: [50116]--->[44413]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: CRME-1
+Group    2: CRME-2
+Group    3: CRME-3
+Group    4: TNFRSF10B-2
+Group    5: TNFRSF10B-3
+Group    6: TNFRSF12A-1
+Group    7: TNFRSF13B-2
+Group    8: TNFRSF13C-1
+Group    9: TNFRSF14-1
+Group   10: TNFRSF14-2
+Group   11: TNFRSF16-1
+Group   12: TNFRSF16-2
+Group   13: TNFRSF16-3
+Group   14: TNFRSF16-4
+Group   15: TNFRSF17-1
+Group   16: TNFRSF1A-1
+Group   17: TNFRSF1A-2
+Group   18: TNFRSF1A-3
+Group   19: TNFRSF1A-4
+Group   20: TNFRSF4-1
+Group   21: TNFRSF4-2
+Group   22: TNFRSF4-4
+
+crd.fasta
+	xxx Retrieved Scrd.fasta
+	--- Process Method/Library/Aln Mmustang_pair
+	xxx Retrieved Mmustang_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [50116]
+
+Library Relaxation: Multi_proc [1]
+ 
+Relaxation Summary: [50116]--->[44413]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: CRME-1
+Group    2: CRME-2
+Group    3: CRME-3
+Group    4: TNFRSF10B-2
+Group    5: TNFRSF10B-3
+Group    6: TNFRSF12A-1
+Group    7: TNFRSF13B-2
+Group    8: TNFRSF13C-1
+Group    9: TNFRSF14-1
+Group   10: TNFRSF14-2
+Group   11: TNFRSF16-1
+Group   12: TNFRSF16-2
+Group   13: TNFRSF16-3
+Group   14: TNFRSF16-4
+Group   15: TNFRSF17-1
+Group   16: TNFRSF1A-1
+Group   17: TNFRSF1A-2
+Group   18: TNFRSF1A-3
+Group   19: TNFRSF1A-4
+Group   20: TNFRSF4-1
+Group   21: TNFRSF4-2
+Group   22: TNFRSF4-4
+
+
+	Group   23: [Group    7 (   1 seq)] with [Group    3 (   1 seq)]-->[Len=   42][PID:30526]crd.fasta
+	xxx Retrieved Scrd.fasta
+	--- Process Method/Library/Aln Mmustang_pair
+	xxx Retrieved Mmustang_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [50116]
+
+Library Relaxation: Multi_proc [1]
+ 
+Relaxation Summary: [50116]--->[44413]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: CRME-1
+Group    2: CRME-2
+Group    3: CRME-3
+Group    4: TNFRSF10B-2
+Group    5: TNFRSF10B-3
+Group    6: TNFRSF12A-1
+Group    7: TNFRSF13B-2
+Group    8: TNFRSF13C-1
+Group    9: TNFRSF14-1
+Group   10: TNFRSF14-2
+Group   11: TNFRSF16-1
+Group   12: TNFRSF16-2
+Group   13: TNFRSF16-3
+Group   14: TNFRSF16-4
+Group   15: TNFRSF17-1
+Group   16: TNFRSF1A-1
+Group   17: TNFRSF1A-2
+Group   18: TNFRSF1A-3
+Group   19: TNFRSF1A-4
+Group   20: TNFRSF4-1
+Group   21: TNFRSF4-2
+Group   22: TNFRSF4-4
+
+
+	Group   23: [Group    7 (   1 seq)] with [Group    3 (   1 seq)]-->[Len=   42][PID:30526]
+	Group   24: [Group   19 (   1 seq)] with [Group   23 (   2 seq)]-->[Len=   42][PID:30526]crd.fasta
+	xxx Retrieved Scrd.fasta
+	--- Process Method/Library/Aln Mmustang_pair
+	xxx Retrieved Mmustang_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [50116]
+
+Library Relaxation: Multi_proc [1]
+ 
+Relaxation Summary: [50116]--->[44413]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: CRME-1
+Group    2: CRME-2
+Group    3: CRME-3
+Group    4: TNFRSF10B-2
+Group    5: TNFRSF10B-3
+Group    6: TNFRSF12A-1
+Group    7: TNFRSF13B-2
+Group    8: TNFRSF13C-1
+Group    9: TNFRSF14-1
+Group   10: TNFRSF14-2
+Group   11: TNFRSF16-1
+Group   12: TNFRSF16-2
+Group   13: TNFRSF16-3
+Group   14: TNFRSF16-4
+Group   15: TNFRSF17-1
+Group   16: TNFRSF1A-1
+Group   17: TNFRSF1A-2
+Group   18: TNFRSF1A-3
+Group   19: TNFRSF1A-4
+Group   20: TNFRSF4-1
+Group   21: TNFRSF4-2
+Group   22: TNFRSF4-4
+
+
+	Group   23: [Group    7 (   1 seq)] with [Group    3 (   1 seq)]-->[Len=   42][PID:30526]
+	Group   24: [Group   19 (   1 seq)] with [Group   23 (   2 seq)]-->[Len=   42][PID:30526]
+	Group   25: [Group   20 (   1 seq)] with [Group   10 (   1 seq)]-->[Len=   42][PID:30526]crd.fasta
+	xxx Retrieved Scrd.fasta
+	--- Process Method/Library/Aln Mmustang_pair
+	xxx Retrieved Mmustang_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [50116]
+
+Library Relaxation: Multi_proc [1]
+ 
+Relaxation Summary: [50116]--->[44413]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: CRME-1
+Group    2: CRME-2
+Group    3: CRME-3
+Group    4: TNFRSF10B-2
+Group    5: TNFRSF10B-3
+Group    6: TNFRSF12A-1
+Group    7: TNFRSF13B-2
+Group    8: TNFRSF13C-1
+Group    9: TNFRSF14-1
+Group   10: TNFRSF14-2
+Group   11: TNFRSF16-1
+Group   12: TNFRSF16-2
+Group   13: TNFRSF16-3
+Group   14: TNFRSF16-4
+Group   15: TNFRSF17-1
+Group   16: TNFRSF1A-1
+Group   17: TNFRSF1A-2
+Group   18: TNFRSF1A-3
+Group   19: TNFRSF1A-4
+Group   20: TNFRSF4-1
+Group   21: TNFRSF4-2
+Group   22: TNFRSF4-4
+
+
+	Group   23: [Group    7 (   1 seq)] with [Group    3 (   1 seq)]-->[Len=   42][PID:30526]
+	Group   24: [Group   19 (   1 seq)] with [Group   23 (   2 seq)]-->[Len=   42][PID:30526]
+	Group   25: [Group   20 (   1 seq)] with [Group   10 (   1 seq)]-->[Len=   42][PID:30526]
+	Group   26: [Group   21 (   1 seq)] with [Group   12 (   1 seq)]-->[Len=   43][PID:30526]crd.fasta
+	xxx Retrieved Scrd.fasta
+	--- Process Method/Library/Aln Mmustang_pair
+	xxx Retrieved Mmustang_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [50116]
+
+Library Relaxation: Multi_proc [1]
+ 
+Relaxation Summary: [50116]--->[44413]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: CRME-1
+Group    2: CRME-2
+Group    3: CRME-3
+Group    4: TNFRSF10B-2
+Group    5: TNFRSF10B-3
+Group    6: TNFRSF12A-1
+Group    7: TNFRSF13B-2
+Group    8: TNFRSF13C-1
+Group    9: TNFRSF14-1
+Group   10: TNFRSF14-2
+Group   11: TNFRSF16-1
+Group   12: TNFRSF16-2
+Group   13: TNFRSF16-3
+Group   14: TNFRSF16-4
+Group   15: TNFRSF17-1
+Group   16: TNFRSF1A-1
+Group   17: TNFRSF1A-2
+Group   18: TNFRSF1A-3
+Group   19: TNFRSF1A-4
+Group   20: TNFRSF4-1
+Group   21: TNFRSF4-2
+Group   22: TNFRSF4-4
+
+
+	Group   23: [Group    7 (   1 seq)] with [Group    3 (   1 seq)]-->[Len=   42][PID:30526]
+	Group   24: [Group   19 (   1 seq)] with [Group   23 (   2 seq)]-->[Len=   42][PID:30526]
+	Group   25: [Group   20 (   1 seq)] with [Group   10 (   1 seq)]-->[Len=   42][PID:30526]
+	Group   26: [Group   21 (   1 seq)] with [Group   12 (   1 seq)]-->[Len=   43][PID:30526]
+	Group   27: [Group   26 (   2 seq)] with [Group   11 (   1 seq)]-->[Len=   43][PID:30526]crd.fasta
+	xxx Retrieved Scrd.fasta
+	--- Process Method/Library/Aln Mmustang_pair
+	xxx Retrieved Mmustang_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [50116]
+
+Library Relaxation: Multi_proc [1]
+ 
+Relaxation Summary: [50116]--->[44413]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: CRME-1
+Group    2: CRME-2
+Group    3: CRME-3
+Group    4: TNFRSF10B-2
+Group    5: TNFRSF10B-3
+Group    6: TNFRSF12A-1
+Group    7: TNFRSF13B-2
+Group    8: TNFRSF13C-1
+Group    9: TNFRSF14-1
+Group   10: TNFRSF14-2
+Group   11: TNFRSF16-1
+Group   12: TNFRSF16-2
+Group   13: TNFRSF16-3
+Group   14: TNFRSF16-4
+Group   15: TNFRSF17-1
+Group   16: TNFRSF1A-1
+Group   17: TNFRSF1A-2
+Group   18: TNFRSF1A-3
+Group   19: TNFRSF1A-4
+Group   20: TNFRSF4-1
+Group   21: TNFRSF4-2
+Group   22: TNFRSF4-4
+
+
+	Group   23: [Group    7 (   1 seq)] with [Group    3 (   1 seq)]-->[Len=   42][PID:30526]
+	Group   24: [Group   19 (   1 seq)] with [Group   23 (   2 seq)]-->[Len=   42][PID:30526]
+	Group   25: [Group   20 (   1 seq)] with [Group   10 (   1 seq)]-->[Len=   42][PID:30526]
+	Group   26: [Group   21 (   1 seq)] with [Group   12 (   1 seq)]-->[Len=   43][PID:30526]
+	Group   27: [Group   26 (   2 seq)] with [Group   11 (   1 seq)]-->[Len=   43][PID:30526]
+	Group   28: [Group   27 (   3 seq)] with [Group   25 (   2 seq)]-->[Len=   43][PID:30526]crd.fasta
+	xxx Retrieved Scrd.fasta
+	--- Process Method/Library/Aln Mmustang_pair
+	xxx Retrieved Mmustang_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [50116]
+
+Library Relaxation: Multi_proc [1]
+ 
+Relaxation Summary: [50116]--->[44413]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: CRME-1
+Group    2: CRME-2
+Group    3: CRME-3
+Group    4: TNFRSF10B-2
+Group    5: TNFRSF10B-3
+Group    6: TNFRSF12A-1
+Group    7: TNFRSF13B-2
+Group    8: TNFRSF13C-1
+Group    9: TNFRSF14-1
+Group   10: TNFRSF14-2
+Group   11: TNFRSF16-1
+Group   12: TNFRSF16-2
+Group   13: TNFRSF16-3
+Group   14: TNFRSF16-4
+Group   15: TNFRSF17-1
+Group   16: TNFRSF1A-1
+Group   17: TNFRSF1A-2
+Group   18: TNFRSF1A-3
+Group   19: TNFRSF1A-4
+Group   20: TNFRSF4-1
+Group   21: TNFRSF4-2
+Group   22: TNFRSF4-4
+
+
+	Group   23: [Group    7 (   1 seq)] with [Group    3 (   1 seq)]-->[Len=   42][PID:30526]
+	Group   24: [Group   19 (   1 seq)] with [Group   23 (   2 seq)]-->[Len=   42][PID:30526]
+	Group   25: [Group   20 (   1 seq)] with [Group   10 (   1 seq)]-->[Len=   42][PID:30526]
+	Group   26: [Group   21 (   1 seq)] with [Group   12 (   1 seq)]-->[Len=   43][PID:30526]
+	Group   27: [Group   26 (   2 seq)] with [Group   11 (   1 seq)]-->[Len=   43][PID:30526]
+	Group   28: [Group   27 (   3 seq)] with [Group   25 (   2 seq)]-->[Len=   43][PID:30526]
+	Group   29: [Group   28 (   5 seq)] with [Group   24 (   3 seq)]-->[Len=   46][PID:30526]crd.fasta
+	xxx Retrieved Scrd.fasta
+	--- Process Method/Library/Aln Mmustang_pair
+	xxx Retrieved Mmustang_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [50116]
+
+Library Relaxation: Multi_proc [1]
+ 
+Relaxation Summary: [50116]--->[44413]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: CRME-1
+Group    2: CRME-2
+Group    3: CRME-3
+Group    4: TNFRSF10B-2
+Group    5: TNFRSF10B-3
+Group    6: TNFRSF12A-1
+Group    7: TNFRSF13B-2
+Group    8: TNFRSF13C-1
+Group    9: TNFRSF14-1
+Group   10: TNFRSF14-2
+Group   11: TNFRSF16-1
+Group   12: TNFRSF16-2
+Group   13: TNFRSF16-3
+Group   14: TNFRSF16-4
+Group   15: TNFRSF17-1
+Group   16: TNFRSF1A-1
+Group   17: TNFRSF1A-2
+Group   18: TNFRSF1A-3
+Group   19: TNFRSF1A-4
+Group   20: TNFRSF4-1
+Group   21: TNFRSF4-2
+Group   22: TNFRSF4-4
+
+
+	Group   23: [Group    7 (   1 seq)] with [Group    3 (   1 seq)]-->[Len=   42][PID:30526]
+	Group   24: [Group   19 (   1 seq)] with [Group   23 (   2 seq)]-->[Len=   42][PID:30526]
+	Group   25: [Group   20 (   1 seq)] with [Group   10 (   1 seq)]-->[Len=   42][PID:30526]
+	Group   26: [Group   21 (   1 seq)] with [Group   12 (   1 seq)]-->[Len=   43][PID:30526]
+	Group   27: [Group   26 (   2 seq)] with [Group   11 (   1 seq)]-->[Len=   43][PID:30526]
+	Group   28: [Group   27 (   3 seq)] with [Group   25 (   2 seq)]-->[Len=   43][PID:30526]
+	Group   29: [Group   28 (   5 seq)] with [Group   24 (   3 seq)]-->[Len=   46][PID:30526]
+	Group   30: [Group   29 (   8 seq)] with [Group   15 (   1 seq)]-->[Len=   46][PID:30526]crd.fasta
+	xxx Retrieved Scrd.fasta
+	--- Process Method/Library/Aln Mmustang_pair
+	xxx Retrieved Mmustang_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [50116]
+
+Library Relaxation: Multi_proc [1]
+ 
+Relaxation Summary: [50116]--->[44413]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: CRME-1
+Group    2: CRME-2
+Group    3: CRME-3
+Group    4: TNFRSF10B-2
+Group    5: TNFRSF10B-3
+Group    6: TNFRSF12A-1
+Group    7: TNFRSF13B-2
+Group    8: TNFRSF13C-1
+Group    9: TNFRSF14-1
+Group   10: TNFRSF14-2
+Group   11: TNFRSF16-1
+Group   12: TNFRSF16-2
+Group   13: TNFRSF16-3
+Group   14: TNFRSF16-4
+Group   15: TNFRSF17-1
+Group   16: TNFRSF1A-1
+Group   17: TNFRSF1A-2
+Group   18: TNFRSF1A-3
+Group   19: TNFRSF1A-4
+Group   20: TNFRSF4-1
+Group   21: TNFRSF4-2
+Group   22: TNFRSF4-4
+
+
+	Group   23: [Group    7 (   1 seq)] with [Group    3 (   1 seq)]-->[Len=   42][PID:30526]
+	Group   24: [Group   19 (   1 seq)] with [Group   23 (   2 seq)]-->[Len=   42][PID:30526]
+	Group   25: [Group   20 (   1 seq)] with [Group   10 (   1 seq)]-->[Len=   42][PID:30526]
+	Group   26: [Group   21 (   1 seq)] with [Group   12 (   1 seq)]-->[Len=   43][PID:30526]
+	Group   27: [Group   26 (   2 seq)] with [Group   11 (   1 seq)]-->[Len=   43][PID:30526]
+	Group   28: [Group   27 (   3 seq)] with [Group   25 (   2 seq)]-->[Len=   43][PID:30526]
+	Group   29: [Group   28 (   5 seq)] with [Group   24 (   3 seq)]-->[Len=   46][PID:30526]
+	Group   30: [Group   29 (   8 seq)] with [Group   15 (   1 seq)]-->[Len=   46][PID:30526]
+	Group   31: [Group   14 (   1 seq)] with [Group    5 (   1 seq)]-->[Len=   41][PID:30526]crd.fasta
+	xxx Retrieved Scrd.fasta
+	--- Process Method/Library/Aln Mmustang_pair
+	xxx Retrieved Mmustang_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [50116]
+
+Library Relaxation: Multi_proc [1]
+ 
+Relaxation Summary: [50116]--->[44413]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: CRME-1
+Group    2: CRME-2
+Group    3: CRME-3
+Group    4: TNFRSF10B-2
+Group    5: TNFRSF10B-3
+Group    6: TNFRSF12A-1
+Group    7: TNFRSF13B-2
+Group    8: TNFRSF13C-1
+Group    9: TNFRSF14-1
+Group   10: TNFRSF14-2
+Group   11: TNFRSF16-1
+Group   12: TNFRSF16-2
+Group   13: TNFRSF16-3
+Group   14: TNFRSF16-4
+Group   15: TNFRSF17-1
+Group   16: TNFRSF1A-1
+Group   17: TNFRSF1A-2
+Group   18: TNFRSF1A-3
+Group   19: TNFRSF1A-4
+Group   20: TNFRSF4-1
+Group   21: TNFRSF4-2
+Group   22: TNFRSF4-4
+
+
+	Group   23: [Group    7 (   1 seq)] with [Group    3 (   1 seq)]-->[Len=   42][PID:30526]
+	Group   24: [Group   19 (   1 seq)] with [Group   23 (   2 seq)]-->[Len=   42][PID:30526]
+	Group   25: [Group   20 (   1 seq)] with [Group   10 (   1 seq)]-->[Len=   42][PID:30526]
+	Group   26: [Group   21 (   1 seq)] with [Group   12 (   1 seq)]-->[Len=   43][PID:30526]
+	Group   27: [Group   26 (   2 seq)] with [Group   11 (   1 seq)]-->[Len=   43][PID:30526]
+	Group   28: [Group   27 (   3 seq)] with [Group   25 (   2 seq)]-->[Len=   43][PID:30526]
+	Group   29: [Group   28 (   5 seq)] with [Group   24 (   3 seq)]-->[Len=   46][PID:30526]
+	Group   30: [Group   29 (   8 seq)] with [Group   15 (   1 seq)]-->[Len=   46][PID:30526]
+	Group   31: [Group   14 (   1 seq)] with [Group    5 (   1 seq)]-->[Len=   41][PID:30526]
+	Group   32: [Group   18 (   1 seq)] with [Group   13 (   1 seq)]-->[Len=   41][PID:30526]crd.fasta
+	xxx Retrieved Scrd.fasta
+	--- Process Method/Library/Aln Mmustang_pair
+	xxx Retrieved Mmustang_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [50116]
+
+Library Relaxation: Multi_proc [1]
+ 
+Relaxation Summary: [50116]--->[44413]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: CRME-1
+Group    2: CRME-2
+Group    3: CRME-3
+Group    4: TNFRSF10B-2
+Group    5: TNFRSF10B-3
+Group    6: TNFRSF12A-1
+Group    7: TNFRSF13B-2
+Group    8: TNFRSF13C-1
+Group    9: TNFRSF14-1
+Group   10: TNFRSF14-2
+Group   11: TNFRSF16-1
+Group   12: TNFRSF16-2
+Group   13: TNFRSF16-3
+Group   14: TNFRSF16-4
+Group   15: TNFRSF17-1
+Group   16: TNFRSF1A-1
+Group   17: TNFRSF1A-2
+Group   18: TNFRSF1A-3
+Group   19: TNFRSF1A-4
+Group   20: TNFRSF4-1
+Group   21: TNFRSF4-2
+Group   22: TNFRSF4-4
+
+
+	Group   23: [Group    7 (   1 seq)] with [Group    3 (   1 seq)]-->[Len=   42][PID:30526]
+	Group   24: [Group   19 (   1 seq)] with [Group   23 (   2 seq)]-->[Len=   42][PID:30526]
+	Group   25: [Group   20 (   1 seq)] with [Group   10 (   1 seq)]-->[Len=   42][PID:30526]
+	Group   26: [Group   21 (   1 seq)] with [Group   12 (   1 seq)]-->[Len=   43][PID:30526]
+	Group   27: [Group   26 (   2 seq)] with [Group   11 (   1 seq)]-->[Len=   43][PID:30526]
+	Group   28: [Group   27 (   3 seq)] with [Group   25 (   2 seq)]-->[Len=   43][PID:30526]
+	Group   29: [Group   28 (   5 seq)] with [Group   24 (   3 seq)]-->[Len=   46][PID:30526]
+	Group   30: [Group   29 (   8 seq)] with [Group   15 (   1 seq)]-->[Len=   46][PID:30526]
+	Group   31: [Group   14 (   1 seq)] with [Group    5 (   1 seq)]-->[Len=   41][PID:30526]
+	Group   32: [Group   18 (   1 seq)] with [Group   13 (   1 seq)]-->[Len=   41][PID:30526]
+	Group   33: [Group   32 (   2 seq)] with [Group    9 (   1 seq)]-->[Len=   41][PID:30526]crd.fasta
+	xxx Retrieved Scrd.fasta
+	--- Process Method/Library/Aln Mmustang_pair
+	xxx Retrieved Mmustang_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [50116]
+
+Library Relaxation: Multi_proc [1]
+ 
+Relaxation Summary: [50116]--->[44413]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: CRME-1
+Group    2: CRME-2
+Group    3: CRME-3
+Group    4: TNFRSF10B-2
+Group    5: TNFRSF10B-3
+Group    6: TNFRSF12A-1
+Group    7: TNFRSF13B-2
+Group    8: TNFRSF13C-1
+Group    9: TNFRSF14-1
+Group   10: TNFRSF14-2
+Group   11: TNFRSF16-1
+Group   12: TNFRSF16-2
+Group   13: TNFRSF16-3
+Group   14: TNFRSF16-4
+Group   15: TNFRSF17-1
+Group   16: TNFRSF1A-1
+Group   17: TNFRSF1A-2
+Group   18: TNFRSF1A-3
+Group   19: TNFRSF1A-4
+Group   20: TNFRSF4-1
+Group   21: TNFRSF4-2
+Group   22: TNFRSF4-4
+
+
+	Group   23: [Group    7 (   1 seq)] with [Group    3 (   1 seq)]-->[Len=   42][PID:30526]
+	Group   24: [Group   19 (   1 seq)] with [Group   23 (   2 seq)]-->[Len=   42][PID:30526]
+	Group   25: [Group   20 (   1 seq)] with [Group   10 (   1 seq)]-->[Len=   42][PID:30526]
+	Group   26: [Group   21 (   1 seq)] with [Group   12 (   1 seq)]-->[Len=   43][PID:30526]
+	Group   27: [Group   26 (   2 seq)] with [Group   11 (   1 seq)]-->[Len=   43][PID:30526]
+	Group   28: [Group   27 (   3 seq)] with [Group   25 (   2 seq)]-->[Len=   43][PID:30526]
+	Group   29: [Group   28 (   5 seq)] with [Group   24 (   3 seq)]-->[Len=   46][PID:30526]
+	Group   30: [Group   29 (   8 seq)] with [Group   15 (   1 seq)]-->[Len=   46][PID:30526]
+	Group   31: [Group   14 (   1 seq)] with [Group    5 (   1 seq)]-->[Len=   41][PID:30526]
+	Group   32: [Group   18 (   1 seq)] with [Group   13 (   1 seq)]-->[Len=   41][PID:30526]
+	Group   33: [Group   32 (   2 seq)] with [Group    9 (   1 seq)]-->[Len=   41][PID:30526]
+	Group   34: [Group   33 (   3 seq)] with [Group   31 (   2 seq)]-->[Len=   42][PID:30526]crd.fasta
+	xxx Retrieved Scrd.fasta
+	--- Process Method/Library/Aln Mmustang_pair
+	xxx Retrieved Mmustang_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [50116]
+
+Library Relaxation: Multi_proc [1]
+ 
+Relaxation Summary: [50116]--->[44413]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: CRME-1
+Group    2: CRME-2
+Group    3: CRME-3
+Group    4: TNFRSF10B-2
+Group    5: TNFRSF10B-3
+Group    6: TNFRSF12A-1
+Group    7: TNFRSF13B-2
+Group    8: TNFRSF13C-1
+Group    9: TNFRSF14-1
+Group   10: TNFRSF14-2
+Group   11: TNFRSF16-1
+Group   12: TNFRSF16-2
+Group   13: TNFRSF16-3
+Group   14: TNFRSF16-4
+Group   15: TNFRSF17-1
+Group   16: TNFRSF1A-1
+Group   17: TNFRSF1A-2
+Group   18: TNFRSF1A-3
+Group   19: TNFRSF1A-4
+Group   20: TNFRSF4-1
+Group   21: TNFRSF4-2
+Group   22: TNFRSF4-4
+
+
+	Group   23: [Group    7 (   1 seq)] with [Group    3 (   1 seq)]-->[Len=   42][PID:30526]
+	Group   24: [Group   19 (   1 seq)] with [Group   23 (   2 seq)]-->[Len=   42][PID:30526]
+	Group   25: [Group   20 (   1 seq)] with [Group   10 (   1 seq)]-->[Len=   42][PID:30526]
+	Group   26: [Group   21 (   1 seq)] with [Group   12 (   1 seq)]-->[Len=   43][PID:30526]
+	Group   27: [Group   26 (   2 seq)] with [Group   11 (   1 seq)]-->[Len=   43][PID:30526]
+	Group   28: [Group   27 (   3 seq)] with [Group   25 (   2 seq)]-->[Len=   43][PID:30526]
+	Group   29: [Group   28 (   5 seq)] with [Group   24 (   3 seq)]-->[Len=   46][PID:30526]
+	Group   30: [Group   29 (   8 seq)] with [Group   15 (   1 seq)]-->[Len=   46][PID:30526]
+	Group   31: [Group   14 (   1 seq)] with [Group    5 (   1 seq)]-->[Len=   41][PID:30526]
+	Group   32: [Group   18 (   1 seq)] with [Group   13 (   1 seq)]-->[Len=   41][PID:30526]
+	Group   33: [Group   32 (   2 seq)] with [Group    9 (   1 seq)]-->[Len=   41][PID:30526]
+	Group   34: [Group   33 (   3 seq)] with [Group   31 (   2 seq)]-->[Len=   42][PID:30526]
+	Group   35: [Group   34 (   5 seq)] with [Group   30 (   9 seq)]-->[Len=   47][PID:30526]crd.fasta
+	xxx Retrieved Scrd.fasta
+	--- Process Method/Library/Aln Mmustang_pair
+	xxx Retrieved Mmustang_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [50116]
+
+Library Relaxation: Multi_proc [1]
+ 
+Relaxation Summary: [50116]--->[44413]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: CRME-1
+Group    2: CRME-2
+Group    3: CRME-3
+Group    4: TNFRSF10B-2
+Group    5: TNFRSF10B-3
+Group    6: TNFRSF12A-1
+Group    7: TNFRSF13B-2
+Group    8: TNFRSF13C-1
+Group    9: TNFRSF14-1
+Group   10: TNFRSF14-2
+Group   11: TNFRSF16-1
+Group   12: TNFRSF16-2
+Group   13: TNFRSF16-3
+Group   14: TNFRSF16-4
+Group   15: TNFRSF17-1
+Group   16: TNFRSF1A-1
+Group   17: TNFRSF1A-2
+Group   18: TNFRSF1A-3
+Group   19: TNFRSF1A-4
+Group   20: TNFRSF4-1
+Group   21: TNFRSF4-2
+Group   22: TNFRSF4-4
+
+
+	Group   23: [Group    7 (   1 seq)] with [Group    3 (   1 seq)]-->[Len=   42][PID:30526]
+	Group   24: [Group   19 (   1 seq)] with [Group   23 (   2 seq)]-->[Len=   42][PID:30526]
+	Group   25: [Group   20 (   1 seq)] with [Group   10 (   1 seq)]-->[Len=   42][PID:30526]
+	Group   26: [Group   21 (   1 seq)] with [Group   12 (   1 seq)]-->[Len=   43][PID:30526]
+	Group   27: [Group   26 (   2 seq)] with [Group   11 (   1 seq)]-->[Len=   43][PID:30526]
+	Group   28: [Group   27 (   3 seq)] with [Group   25 (   2 seq)]-->[Len=   43][PID:30526]
+	Group   29: [Group   28 (   5 seq)] with [Group   24 (   3 seq)]-->[Len=   46][PID:30526]
+	Group   30: [Group   29 (   8 seq)] with [Group   15 (   1 seq)]-->[Len=   46][PID:30526]
+	Group   31: [Group   14 (   1 seq)] with [Group    5 (   1 seq)]-->[Len=   41][PID:30526]
+	Group   32: [Group   18 (   1 seq)] with [Group   13 (   1 seq)]-->[Len=   41][PID:30526]
+	Group   33: [Group   32 (   2 seq)] with [Group    9 (   1 seq)]-->[Len=   41][PID:30526]
+	Group   34: [Group   33 (   3 seq)] with [Group   31 (   2 seq)]-->[Len=   42][PID:30526]
+	Group   35: [Group   34 (   5 seq)] with [Group   30 (   9 seq)]-->[Len=   47][PID:30526]
+	Group   36: [Group    4 (   1 seq)] with [Group    2 (   1 seq)]-->[Len=   42][PID:30526]crd.fasta
+	xxx Retrieved Scrd.fasta
+	--- Process Method/Library/Aln Mmustang_pair
+	xxx Retrieved Mmustang_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [50116]
+
+Library Relaxation: Multi_proc [1]
+ 
+Relaxation Summary: [50116]--->[44413]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: CRME-1
+Group    2: CRME-2
+Group    3: CRME-3
+Group    4: TNFRSF10B-2
+Group    5: TNFRSF10B-3
+Group    6: TNFRSF12A-1
+Group    7: TNFRSF13B-2
+Group    8: TNFRSF13C-1
+Group    9: TNFRSF14-1
+Group   10: TNFRSF14-2
+Group   11: TNFRSF16-1
+Group   12: TNFRSF16-2
+Group   13: TNFRSF16-3
+Group   14: TNFRSF16-4
+Group   15: TNFRSF17-1
+Group   16: TNFRSF1A-1
+Group   17: TNFRSF1A-2
+Group   18: TNFRSF1A-3
+Group   19: TNFRSF1A-4
+Group   20: TNFRSF4-1
+Group   21: TNFRSF4-2
+Group   22: TNFRSF4-4
+
+
+	Group   23: [Group    7 (   1 seq)] with [Group    3 (   1 seq)]-->[Len=   42][PID:30526]
+	Group   24: [Group   19 (   1 seq)] with [Group   23 (   2 seq)]-->[Len=   42][PID:30526]
+	Group   25: [Group   20 (   1 seq)] with [Group   10 (   1 seq)]-->[Len=   42][PID:30526]
+	Group   26: [Group   21 (   1 seq)] with [Group   12 (   1 seq)]-->[Len=   43][PID:30526]
+	Group   27: [Group   26 (   2 seq)] with [Group   11 (   1 seq)]-->[Len=   43][PID:30526]
+	Group   28: [Group   27 (   3 seq)] with [Group   25 (   2 seq)]-->[Len=   43][PID:30526]
+	Group   29: [Group   28 (   5 seq)] with [Group   24 (   3 seq)]-->[Len=   46][PID:30526]
+	Group   30: [Group   29 (   8 seq)] with [Group   15 (   1 seq)]-->[Len=   46][PID:30526]
+	Group   31: [Group   14 (   1 seq)] with [Group    5 (   1 seq)]-->[Len=   41][PID:30526]
+	Group   32: [Group   18 (   1 seq)] with [Group   13 (   1 seq)]-->[Len=   41][PID:30526]
+	Group   33: [Group   32 (   2 seq)] with [Group    9 (   1 seq)]-->[Len=   41][PID:30526]
+	Group   34: [Group   33 (   3 seq)] with [Group   31 (   2 seq)]-->[Len=   42][PID:30526]
+	Group   35: [Group   34 (   5 seq)] with [Group   30 (   9 seq)]-->[Len=   47][PID:30526]
+	Group   36: [Group    4 (   1 seq)] with [Group    2 (   1 seq)]-->[Len=   42][PID:30526]
+	Group   37: [Group   17 (   1 seq)] with [Group    8 (   1 seq)]-->[Len=   42][PID:30526]crd.fasta
+	xxx Retrieved Scrd.fasta
+	--- Process Method/Library/Aln Mmustang_pair
+	xxx Retrieved Mmustang_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [50116]
+
+Library Relaxation: Multi_proc [1]
+ 
+Relaxation Summary: [50116]--->[44413]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: CRME-1
+Group    2: CRME-2
+Group    3: CRME-3
+Group    4: TNFRSF10B-2
+Group    5: TNFRSF10B-3
+Group    6: TNFRSF12A-1
+Group    7: TNFRSF13B-2
+Group    8: TNFRSF13C-1
+Group    9: TNFRSF14-1
+Group   10: TNFRSF14-2
+Group   11: TNFRSF16-1
+Group   12: TNFRSF16-2
+Group   13: TNFRSF16-3
+Group   14: TNFRSF16-4
+Group   15: TNFRSF17-1
+Group   16: TNFRSF1A-1
+Group   17: TNFRSF1A-2
+Group   18: TNFRSF1A-3
+Group   19: TNFRSF1A-4
+Group   20: TNFRSF4-1
+Group   21: TNFRSF4-2
+Group   22: TNFRSF4-4
+
+
+	Group   23: [Group    7 (   1 seq)] with [Group    3 (   1 seq)]-->[Len=   42][PID:30526]
+	Group   24: [Group   19 (   1 seq)] with [Group   23 (   2 seq)]-->[Len=   42][PID:30526]
+	Group   25: [Group   20 (   1 seq)] with [Group   10 (   1 seq)]-->[Len=   42][PID:30526]
+	Group   26: [Group   21 (   1 seq)] with [Group   12 (   1 seq)]-->[Len=   43][PID:30526]
+	Group   27: [Group   26 (   2 seq)] with [Group   11 (   1 seq)]-->[Len=   43][PID:30526]
+	Group   28: [Group   27 (   3 seq)] with [Group   25 (   2 seq)]-->[Len=   43][PID:30526]
+	Group   29: [Group   28 (   5 seq)] with [Group   24 (   3 seq)]-->[Len=   46][PID:30526]
+	Group   30: [Group   29 (   8 seq)] with [Group   15 (   1 seq)]-->[Len=   46][PID:30526]
+	Group   31: [Group   14 (   1 seq)] with [Group    5 (   1 seq)]-->[Len=   41][PID:30526]
+	Group   32: [Group   18 (   1 seq)] with [Group   13 (   1 seq)]-->[Len=   41][PID:30526]
+	Group   33: [Group   32 (   2 seq)] with [Group    9 (   1 seq)]-->[Len=   41][PID:30526]
+	Group   34: [Group   33 (   3 seq)] with [Group   31 (   2 seq)]-->[Len=   42][PID:30526]
+	Group   35: [Group   34 (   5 seq)] with [Group   30 (   9 seq)]-->[Len=   47][PID:30526]
+	Group   36: [Group    4 (   1 seq)] with [Group    2 (   1 seq)]-->[Len=   42][PID:30526]
+	Group   37: [Group   17 (   1 seq)] with [Group    8 (   1 seq)]-->[Len=   42][PID:30526]
+	Group   38: [Group   37 (   2 seq)] with [Group   36 (   2 seq)]-->[Len=   44][PID:30526]crd.fasta
+	xxx Retrieved Scrd.fasta
+	--- Process Method/Library/Aln Mmustang_pair
+	xxx Retrieved Mmustang_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [50116]
+
+Library Relaxation: Multi_proc [1]
+ 
+Relaxation Summary: [50116]--->[44413]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: CRME-1
+Group    2: CRME-2
+Group    3: CRME-3
+Group    4: TNFRSF10B-2
+Group    5: TNFRSF10B-3
+Group    6: TNFRSF12A-1
+Group    7: TNFRSF13B-2
+Group    8: TNFRSF13C-1
+Group    9: TNFRSF14-1
+Group   10: TNFRSF14-2
+Group   11: TNFRSF16-1
+Group   12: TNFRSF16-2
+Group   13: TNFRSF16-3
+Group   14: TNFRSF16-4
+Group   15: TNFRSF17-1
+Group   16: TNFRSF1A-1
+Group   17: TNFRSF1A-2
+Group   18: TNFRSF1A-3
+Group   19: TNFRSF1A-4
+Group   20: TNFRSF4-1
+Group   21: TNFRSF4-2
+Group   22: TNFRSF4-4
+
+
+	Group   23: [Group    7 (   1 seq)] with [Group    3 (   1 seq)]-->[Len=   42][PID:30526]
+	Group   24: [Group   19 (   1 seq)] with [Group   23 (   2 seq)]-->[Len=   42][PID:30526]
+	Group   25: [Group   20 (   1 seq)] with [Group   10 (   1 seq)]-->[Len=   42][PID:30526]
+	Group   26: [Group   21 (   1 seq)] with [Group   12 (   1 seq)]-->[Len=   43][PID:30526]
+	Group   27: [Group   26 (   2 seq)] with [Group   11 (   1 seq)]-->[Len=   43][PID:30526]
+	Group   28: [Group   27 (   3 seq)] with [Group   25 (   2 seq)]-->[Len=   43][PID:30526]
+	Group   29: [Group   28 (   5 seq)] with [Group   24 (   3 seq)]-->[Len=   46][PID:30526]
+	Group   30: [Group   29 (   8 seq)] with [Group   15 (   1 seq)]-->[Len=   46][PID:30526]
+	Group   31: [Group   14 (   1 seq)] with [Group    5 (   1 seq)]-->[Len=   41][PID:30526]
+	Group   32: [Group   18 (   1 seq)] with [Group   13 (   1 seq)]-->[Len=   41][PID:30526]
+	Group   33: [Group   32 (   2 seq)] with [Group    9 (   1 seq)]-->[Len=   41][PID:30526]
+	Group   34: [Group   33 (   3 seq)] with [Group   31 (   2 seq)]-->[Len=   42][PID:30526]
+	Group   35: [Group   34 (   5 seq)] with [Group   30 (   9 seq)]-->[Len=   47][PID:30526]
+	Group   36: [Group    4 (   1 seq)] with [Group    2 (   1 seq)]-->[Len=   42][PID:30526]
+	Group   37: [Group   17 (   1 seq)] with [Group    8 (   1 seq)]-->[Len=   42][PID:30526]
+	Group   38: [Group   37 (   2 seq)] with [Group   36 (   2 seq)]-->[Len=   44][PID:30526]
+	Group   39: [Group   16 (   1 seq)] with [Group   38 (   4 seq)]-->[Len=   45][PID:30526]crd.fasta
+	xxx Retrieved Scrd.fasta
+	--- Process Method/Library/Aln Mmustang_pair
+	xxx Retrieved Mmustang_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [50116]
+
+Library Relaxation: Multi_proc [1]
+ 
+Relaxation Summary: [50116]--->[44413]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: CRME-1
+Group    2: CRME-2
+Group    3: CRME-3
+Group    4: TNFRSF10B-2
+Group    5: TNFRSF10B-3
+Group    6: TNFRSF12A-1
+Group    7: TNFRSF13B-2
+Group    8: TNFRSF13C-1
+Group    9: TNFRSF14-1
+Group   10: TNFRSF14-2
+Group   11: TNFRSF16-1
+Group   12: TNFRSF16-2
+Group   13: TNFRSF16-3
+Group   14: TNFRSF16-4
+Group   15: TNFRSF17-1
+Group   16: TNFRSF1A-1
+Group   17: TNFRSF1A-2
+Group   18: TNFRSF1A-3
+Group   19: TNFRSF1A-4
+Group   20: TNFRSF4-1
+Group   21: TNFRSF4-2
+Group   22: TNFRSF4-4
+
+
+	Group   23: [Group    7 (   1 seq)] with [Group    3 (   1 seq)]-->[Len=   42][PID:30526]
+	Group   24: [Group   19 (   1 seq)] with [Group   23 (   2 seq)]-->[Len=   42][PID:30526]
+	Group   25: [Group   20 (   1 seq)] with [Group   10 (   1 seq)]-->[Len=   42][PID:30526]
+	Group   26: [Group   21 (   1 seq)] with [Group   12 (   1 seq)]-->[Len=   43][PID:30526]
+	Group   27: [Group   26 (   2 seq)] with [Group   11 (   1 seq)]-->[Len=   43][PID:30526]
+	Group   28: [Group   27 (   3 seq)] with [Group   25 (   2 seq)]-->[Len=   43][PID:30526]
+	Group   29: [Group   28 (   5 seq)] with [Group   24 (   3 seq)]-->[Len=   46][PID:30526]
+	Group   30: [Group   29 (   8 seq)] with [Group   15 (   1 seq)]-->[Len=   46][PID:30526]
+	Group   31: [Group   14 (   1 seq)] with [Group    5 (   1 seq)]-->[Len=   41][PID:30526]
+	Group   32: [Group   18 (   1 seq)] with [Group   13 (   1 seq)]-->[Len=   41][PID:30526]
+	Group   33: [Group   32 (   2 seq)] with [Group    9 (   1 seq)]-->[Len=   41][PID:30526]
+	Group   34: [Group   33 (   3 seq)] with [Group   31 (   2 seq)]-->[Len=   42][PID:30526]
+	Group   35: [Group   34 (   5 seq)] with [Group   30 (   9 seq)]-->[Len=   47][PID:30526]
+	Group   36: [Group    4 (   1 seq)] with [Group    2 (   1 seq)]-->[Len=   42][PID:30526]
+	Group   37: [Group   17 (   1 seq)] with [Group    8 (   1 seq)]-->[Len=   42][PID:30526]
+	Group   38: [Group   37 (   2 seq)] with [Group   36 (   2 seq)]-->[Len=   44][PID:30526]
+	Group   39: [Group   16 (   1 seq)] with [Group   38 (   4 seq)]-->[Len=   45][PID:30526]
+	Group   40: [Group   22 (   1 seq)] with [Group   39 (   5 seq)]-->[Len=   45][PID:30526]crd.fasta
+	xxx Retrieved Scrd.fasta
+	--- Process Method/Library/Aln Mmustang_pair
+	xxx Retrieved Mmustang_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [50116]
+
+Library Relaxation: Multi_proc [1]
+ 
+Relaxation Summary: [50116]--->[44413]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: CRME-1
+Group    2: CRME-2
+Group    3: CRME-3
+Group    4: TNFRSF10B-2
+Group    5: TNFRSF10B-3
+Group    6: TNFRSF12A-1
+Group    7: TNFRSF13B-2
+Group    8: TNFRSF13C-1
+Group    9: TNFRSF14-1
+Group   10: TNFRSF14-2
+Group   11: TNFRSF16-1
+Group   12: TNFRSF16-2
+Group   13: TNFRSF16-3
+Group   14: TNFRSF16-4
+Group   15: TNFRSF17-1
+Group   16: TNFRSF1A-1
+Group   17: TNFRSF1A-2
+Group   18: TNFRSF1A-3
+Group   19: TNFRSF1A-4
+Group   20: TNFRSF4-1
+Group   21: TNFRSF4-2
+Group   22: TNFRSF4-4
+
+
+	Group   23: [Group    7 (   1 seq)] with [Group    3 (   1 seq)]-->[Len=   42][PID:30526]
+	Group   24: [Group   19 (   1 seq)] with [Group   23 (   2 seq)]-->[Len=   42][PID:30526]
+	Group   25: [Group   20 (   1 seq)] with [Group   10 (   1 seq)]-->[Len=   42][PID:30526]
+	Group   26: [Group   21 (   1 seq)] with [Group   12 (   1 seq)]-->[Len=   43][PID:30526]
+	Group   27: [Group   26 (   2 seq)] with [Group   11 (   1 seq)]-->[Len=   43][PID:30526]
+	Group   28: [Group   27 (   3 seq)] with [Group   25 (   2 seq)]-->[Len=   43][PID:30526]
+	Group   29: [Group   28 (   5 seq)] with [Group   24 (   3 seq)]-->[Len=   46][PID:30526]
+	Group   30: [Group   29 (   8 seq)] with [Group   15 (   1 seq)]-->[Len=   46][PID:30526]
+	Group   31: [Group   14 (   1 seq)] with [Group    5 (   1 seq)]-->[Len=   41][PID:30526]
+	Group   32: [Group   18 (   1 seq)] with [Group   13 (   1 seq)]-->[Len=   41][PID:30526]
+	Group   33: [Group   32 (   2 seq)] with [Group    9 (   1 seq)]-->[Len=   41][PID:30526]
+	Group   34: [Group   33 (   3 seq)] with [Group   31 (   2 seq)]-->[Len=   42][PID:30526]
+	Group   35: [Group   34 (   5 seq)] with [Group   30 (   9 seq)]-->[Len=   47][PID:30526]
+	Group   36: [Group    4 (   1 seq)] with [Group    2 (   1 seq)]-->[Len=   42][PID:30526]
+	Group   37: [Group   17 (   1 seq)] with [Group    8 (   1 seq)]-->[Len=   42][PID:30526]
+	Group   38: [Group   37 (   2 seq)] with [Group   36 (   2 seq)]-->[Len=   44][PID:30526]
+	Group   39: [Group   16 (   1 seq)] with [Group   38 (   4 seq)]-->[Len=   45][PID:30526]
+	Group   40: [Group   22 (   1 seq)] with [Group   39 (   5 seq)]-->[Len=   45][PID:30526]
+	Group   41: [Group   40 (   6 seq)] with [Group   35 (  14 seq)]-->[Len=   48][PID:30526]crd.fasta
+	xxx Retrieved Scrd.fasta
+	--- Process Method/Library/Aln Mmustang_pair
+	xxx Retrieved Mmustang_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [50116]
+
+Library Relaxation: Multi_proc [1]
+ 
+Relaxation Summary: [50116]--->[44413]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: CRME-1
+Group    2: CRME-2
+Group    3: CRME-3
+Group    4: TNFRSF10B-2
+Group    5: TNFRSF10B-3
+Group    6: TNFRSF12A-1
+Group    7: TNFRSF13B-2
+Group    8: TNFRSF13C-1
+Group    9: TNFRSF14-1
+Group   10: TNFRSF14-2
+Group   11: TNFRSF16-1
+Group   12: TNFRSF16-2
+Group   13: TNFRSF16-3
+Group   14: TNFRSF16-4
+Group   15: TNFRSF17-1
+Group   16: TNFRSF1A-1
+Group   17: TNFRSF1A-2
+Group   18: TNFRSF1A-3
+Group   19: TNFRSF1A-4
+Group   20: TNFRSF4-1
+Group   21: TNFRSF4-2
+Group   22: TNFRSF4-4
+
+
+	Group   23: [Group    7 (   1 seq)] with [Group    3 (   1 seq)]-->[Len=   42][PID:30526]
+	Group   24: [Group   19 (   1 seq)] with [Group   23 (   2 seq)]-->[Len=   42][PID:30526]
+	Group   25: [Group   20 (   1 seq)] with [Group   10 (   1 seq)]-->[Len=   42][PID:30526]
+	Group   26: [Group   21 (   1 seq)] with [Group   12 (   1 seq)]-->[Len=   43][PID:30526]
+	Group   27: [Group   26 (   2 seq)] with [Group   11 (   1 seq)]-->[Len=   43][PID:30526]
+	Group   28: [Group   27 (   3 seq)] with [Group   25 (   2 seq)]-->[Len=   43][PID:30526]
+	Group   29: [Group   28 (   5 seq)] with [Group   24 (   3 seq)]-->[Len=   46][PID:30526]
+	Group   30: [Group   29 (   8 seq)] with [Group   15 (   1 seq)]-->[Len=   46][PID:30526]
+	Group   31: [Group   14 (   1 seq)] with [Group    5 (   1 seq)]-->[Len=   41][PID:30526]
+	Group   32: [Group   18 (   1 seq)] with [Group   13 (   1 seq)]-->[Len=   41][PID:30526]
+	Group   33: [Group   32 (   2 seq)] with [Group    9 (   1 seq)]-->[Len=   41][PID:30526]
+	Group   34: [Group   33 (   3 seq)] with [Group   31 (   2 seq)]-->[Len=   42][PID:30526]
+	Group   35: [Group   34 (   5 seq)] with [Group   30 (   9 seq)]-->[Len=   47][PID:30526]
+	Group   36: [Group    4 (   1 seq)] with [Group    2 (   1 seq)]-->[Len=   42][PID:30526]
+	Group   37: [Group   17 (   1 seq)] with [Group    8 (   1 seq)]-->[Len=   42][PID:30526]
+	Group   38: [Group   37 (   2 seq)] with [Group   36 (   2 seq)]-->[Len=   44][PID:30526]
+	Group   39: [Group   16 (   1 seq)] with [Group   38 (   4 seq)]-->[Len=   45][PID:30526]
+	Group   40: [Group   22 (   1 seq)] with [Group   39 (   5 seq)]-->[Len=   45][PID:30526]
+	Group   41: [Group   40 (   6 seq)] with [Group   35 (  14 seq)]-->[Len=   48][PID:30526]
+	Group   42: [Group    6 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=   38][PID:30526]crd.fasta
+	xxx Retrieved Scrd.fasta
+	--- Process Method/Library/Aln Mmustang_pair
+	xxx Retrieved Mmustang_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [50116]
+
+Library Relaxation: Multi_proc [1]
+ 
+Relaxation Summary: [50116]--->[44413]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: CRME-1
+Group    2: CRME-2
+Group    3: CRME-3
+Group    4: TNFRSF10B-2
+Group    5: TNFRSF10B-3
+Group    6: TNFRSF12A-1
+Group    7: TNFRSF13B-2
+Group    8: TNFRSF13C-1
+Group    9: TNFRSF14-1
+Group   10: TNFRSF14-2
+Group   11: TNFRSF16-1
+Group   12: TNFRSF16-2
+Group   13: TNFRSF16-3
+Group   14: TNFRSF16-4
+Group   15: TNFRSF17-1
+Group   16: TNFRSF1A-1
+Group   17: TNFRSF1A-2
+Group   18: TNFRSF1A-3
+Group   19: TNFRSF1A-4
+Group   20: TNFRSF4-1
+Group   21: TNFRSF4-2
+Group   22: TNFRSF4-4
+
+
+	Group   23: [Group    7 (   1 seq)] with [Group    3 (   1 seq)]-->[Len=   42][PID:30526]
+	Group   24: [Group   19 (   1 seq)] with [Group   23 (   2 seq)]-->[Len=   42][PID:30526]
+	Group   25: [Group   20 (   1 seq)] with [Group   10 (   1 seq)]-->[Len=   42][PID:30526]
+	Group   26: [Group   21 (   1 seq)] with [Group   12 (   1 seq)]-->[Len=   43][PID:30526]
+	Group   27: [Group   26 (   2 seq)] with [Group   11 (   1 seq)]-->[Len=   43][PID:30526]
+	Group   28: [Group   27 (   3 seq)] with [Group   25 (   2 seq)]-->[Len=   43][PID:30526]
+	Group   29: [Group   28 (   5 seq)] with [Group   24 (   3 seq)]-->[Len=   46][PID:30526]
+	Group   30: [Group   29 (   8 seq)] with [Group   15 (   1 seq)]-->[Len=   46][PID:30526]
+	Group   31: [Group   14 (   1 seq)] with [Group    5 (   1 seq)]-->[Len=   41][PID:30526]
+	Group   32: [Group   18 (   1 seq)] with [Group   13 (   1 seq)]-->[Len=   41][PID:30526]
+	Group   33: [Group   32 (   2 seq)] with [Group    9 (   1 seq)]-->[Len=   41][PID:30526]
+	Group   34: [Group   33 (   3 seq)] with [Group   31 (   2 seq)]-->[Len=   42][PID:30526]
+	Group   35: [Group   34 (   5 seq)] with [Group   30 (   9 seq)]-->[Len=   47][PID:30526]
+	Group   36: [Group    4 (   1 seq)] with [Group    2 (   1 seq)]-->[Len=   42][PID:30526]
+	Group   37: [Group   17 (   1 seq)] with [Group    8 (   1 seq)]-->[Len=   42][PID:30526]
+	Group   38: [Group   37 (   2 seq)] with [Group   36 (   2 seq)]-->[Len=   44][PID:30526]
+	Group   39: [Group   16 (   1 seq)] with [Group   38 (   4 seq)]-->[Len=   45][PID:30526]
+	Group   40: [Group   22 (   1 seq)] with [Group   39 (   5 seq)]-->[Len=   45][PID:30526]
+	Group   41: [Group   40 (   6 seq)] with [Group   35 (  14 seq)]-->[Len=   48][PID:30526]
+	Group   42: [Group    6 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=   38][PID:30526]
+	Group   43: [Group   42 (   2 seq)] with [Group   41 (  20 seq)]-->[Len=   48][PID:30526]
+
+
+!		[Final Evaluation][TOT=   48][  0 %]!		[Final Evaluation][TOT=   48][  4 %]!		[Final Evaluation][TOT=   48][  6 %]!		[Final Evaluation][TOT=   48][  8 %]!		[Final Evaluation][TOT=   48][ 10 %]!		[Final Evaluation][TOT=   48][ 12 %]!		[Final Evaluation][TOT=   48][ 14 %]!		[Final Evaluation][TOT=   48][ 16 %]!		[Final Evaluation][TOT=   48][ 18 %]!		[Final Evaluation][TOT=   48][ 20 %]!		[Final Evaluation][TOT=   48][ 22 %]!		[Final Evaluation][TOT=   48][ 25 %]!		[Final Evaluation][TOT=   48][ 27 %]!		[Final Evaluation][TOT=   48][ 29 %]!		[Final Evaluation][TOT=   48][ 31 %]!		[Final Evaluation][TOT=   48][ 33 %]!		[Final Evaluation][TOT=   48][ 35 %]!		[Final Evaluation][TOT=   48][ 37 %]!		[Final Evaluation][TOT=   48][ 39 %]!		[Final Evaluation][TOT=   48][ 41 %]!		[Final Evaluation][TOT=   48][ 43 %]!		[Final Evaluation][TOT=   48][ 45 %]!		[Final Evaluation][TOT=   48][ 47 %]!		[Final Evaluation][TOT=   48][ 50 %]!		[Final Evaluation][TOT=   48][ 52 %]!		[Final Evaluation][TOT=   48][ 54 %]!		[Final Evaluation][TOT=   48][ 56 %]!		[Final Evaluation][TOT=   48][ 58 %]!		[Final Evaluation][TOT=   48][ 60 %]!		[Final Evaluation][TOT=   48][ 62 %]!		[Final Evaluation][TOT=   48][ 64 %]!		[Final Evaluation][TOT=   48][ 66 %]!		[Final Evaluation][TOT=   48][ 68 %]!		[Final Evaluation][TOT=   48][ 70 %]!		[Final Evaluation][TOT=   48][ 72 %]!		[Final Evaluation][TOT=   48][ 75 %]!		[Final Evaluation][TOT=   48][ 77 %]!		[Final Evaluation][TOT=   48][ 79 %]!		[Final Evaluation][TOT=   48][ 81 %]!		[Final Evaluation][TOT=   48][ 83 %]!		[Final Evaluation][TOT=   48][ 85 %]!		[Final Evaluation][TOT=   48][ 87 %]!		[Final Evaluation][TOT=   48][ 89 %]!		[Final Evaluation][TOT=   48][ 91 %]!		[Final Evaluation][TOT=   48][ 93 %]!		[Final Evaluation][TOT=   48][ 95 %]!		[Final Evaluation][TOT=   48][ 97 %]!		[Final Evaluation][TOT=   48][100 %]
+
+
+
+OUTPUT RESULTS
+	#### File Type= GUIDE_TREE      Format= newick          Name= crd.dnd
+	#### File Type= MSA             Format= aln             Name= crd.aln
+	#### File Type= MSA             Format= html            Name= crd.html
+	#### File Type= Template_List   Format= fasta_seq       Name= crd.template_file
+
+# Command Line: t_coffee -seq crd.fasta -method mustang_pair -template_file crd.template_file  [PROGRAM:T-COFFEE]
+# T-COFFEE Memory Usage: Current= 29.988 Mb, Max= 32.154 Mb
+# Results Produced with T-COFFEE Version_13.30.5.6909e10 (Version_13.30.5.6909e10)
+# T-COFFEE is available from http://www.tcoffee.org
+# Register on: https://groups.google.com/group/tcoffee/
+
+
+*************************************************************************************************
+*                        MESSAGES RECAPITULATION                                    
+30526 -- WARNING: _P_ Template |  _P_ 2UWI3.pdb | Could Not Be Found
+
+30526 -- WARNING: _P_ Template |  _P_ 2UWI2.pdb | Could Not Be Found
+
+30526 -- WARNING: _P_ Template |  _P_ 2UWI1.pdb | Could Not Be Found
+
+30526 -- WARNING: _P_ Template |  _P_ 2HEY4.pdb | Could Not Be Found
+
+30526 -- WARNING: _P_ Template |  _P_ 2HEY2.pdb | Could Not Be Found
+
+30526 -- WARNING: _P_ Template |  _P_ 2HEY1.pdb | Could Not Be Found
+
+30526 -- WARNING: _P_ Template |  _P_ 2RPJ1.pdb | Could Not Be Found
+
+30526 -- WARNING: _P_ Template |  _P_ 1XU21.pdb | Could Not Be Found
+
+30526 -- WARNING: _P_ Template |  _P_ 1XU12.pdb | Could Not Be Found
+
+30526 -- WARNING: _P_ Template |  _P_ 1OQE1.pdb | Could Not Be Found
+
+30526 -- WARNING: _P_ Template |  _P_ 1EXT4.pdb | Could Not Be Found
+
+30526 -- WARNING: _P_ Template |  _P_ 1EXT3.pdb | Could Not Be Found
+
+30526 -- WARNING: _P_ Template |  _P_ 1EXT2.pdb | Could Not Be Found
+
+30526 -- WARNING: _P_ Template |  _P_ 1EXT1.pdb | Could Not Be Found
+
+30526 -- WARNING: _P_ Template |  _P_ 3BUKD.pdb | Could Not Be Found
+
+30526 -- WARNING: _P_ Template |  _P_ 3BUKD.pdb | Could Not Be Found
+
+30526 -- WARNING: _P_ Template |  _P_ 3BUKD.pdb | Could Not Be Found
+
+30526 -- WARNING: _P_ Template |  _P_ 3BUKD.pdb | Could Not Be Found
+
+30526 -- WARNING: _P_ Template |  _P_ 1JMA1.pdb | Could Not Be Found
+
+30526 -- WARNING: _P_ Template |  _P_ 1JMA2.pdb | Could Not Be Found
+
+30526 -- WARNING: _P_ Template |  _P_ 1D4V2.pdb | Could Not Be Found
+
+30526 -- WARNING: _P_ Template |  _P_ 1D4V3.pdb | Could Not Be Found
+
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-1 vs CRME-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-1 vs CRME-3], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-1 vs TNFRSF10B-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-1 vs TNFRSF10B-3], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-1 vs TNFRSF12A-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-1 vs TNFRSF13B-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-1 vs TNFRSF13C-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-1 vs TNFRSF14-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-1 vs TNFRSF14-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-1 vs TNFRSF16-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-1 vs TNFRSF16-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-1 vs TNFRSF16-3], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-1 vs TNFRSF16-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-1 vs TNFRSF17-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-1 vs TNFRSF1A-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-1 vs TNFRSF1A-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-1 vs TNFRSF1A-3], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-1 vs TNFRSF1A-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-1 vs TNFRSF4-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-1 vs TNFRSF4-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-1 vs TNFRSF4-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-2 vs CRME-3], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-2 vs TNFRSF10B-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-2 vs TNFRSF10B-3], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-2 vs TNFRSF12A-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-2 vs TNFRSF13B-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-2 vs TNFRSF13C-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-2 vs TNFRSF14-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-2 vs TNFRSF14-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-2 vs TNFRSF16-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-2 vs TNFRSF16-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-2 vs TNFRSF16-3], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-2 vs TNFRSF16-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-2 vs TNFRSF17-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-2 vs TNFRSF1A-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-2 vs TNFRSF1A-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-2 vs TNFRSF1A-3], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-2 vs TNFRSF1A-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-2 vs TNFRSF4-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-2 vs TNFRSF4-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-2 vs TNFRSF4-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-3 vs TNFRSF10B-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-3 vs TNFRSF10B-3], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-3 vs TNFRSF12A-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-3 vs TNFRSF13B-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-3 vs TNFRSF13C-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-3 vs TNFRSF14-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-3 vs TNFRSF14-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-3 vs TNFRSF16-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-3 vs TNFRSF16-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-3 vs TNFRSF16-3], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-3 vs TNFRSF16-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-3 vs TNFRSF17-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-3 vs TNFRSF1A-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-3 vs TNFRSF1A-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-3 vs TNFRSF1A-3], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-3 vs TNFRSF1A-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-3 vs TNFRSF4-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-3 vs TNFRSF4-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [CRME-3 vs TNFRSF4-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF10B-2 vs TNFRSF10B-3], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF10B-2 vs TNFRSF12A-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF10B-2 vs TNFRSF13B-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF10B-2 vs TNFRSF13C-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF10B-2 vs TNFRSF14-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF10B-2 vs TNFRSF14-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF10B-2 vs TNFRSF16-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF10B-2 vs TNFRSF16-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF10B-2 vs TNFRSF16-3], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF10B-2 vs TNFRSF16-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF10B-2 vs TNFRSF17-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF10B-2 vs TNFRSF1A-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF10B-2 vs TNFRSF1A-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF10B-2 vs TNFRSF1A-3], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF10B-2 vs TNFRSF1A-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF10B-2 vs TNFRSF4-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF10B-2 vs TNFRSF4-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF10B-2 vs TNFRSF4-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF10B-3 vs TNFRSF12A-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF10B-3 vs TNFRSF13B-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF10B-3 vs TNFRSF13C-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF10B-3 vs TNFRSF14-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF10B-3 vs TNFRSF14-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF10B-3 vs TNFRSF16-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF10B-3 vs TNFRSF16-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF10B-3 vs TNFRSF16-3], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF10B-3 vs TNFRSF16-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF10B-3 vs TNFRSF17-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF10B-3 vs TNFRSF1A-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF10B-3 vs TNFRSF1A-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF10B-3 vs TNFRSF1A-3], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF10B-3 vs TNFRSF1A-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF10B-3 vs TNFRSF4-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF10B-3 vs TNFRSF4-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF10B-3 vs TNFRSF4-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF12A-1 vs TNFRSF13B-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF12A-1 vs TNFRSF13C-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF12A-1 vs TNFRSF14-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF12A-1 vs TNFRSF14-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF12A-1 vs TNFRSF16-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF12A-1 vs TNFRSF16-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF12A-1 vs TNFRSF16-3], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF12A-1 vs TNFRSF16-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF12A-1 vs TNFRSF17-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF12A-1 vs TNFRSF1A-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF12A-1 vs TNFRSF1A-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF12A-1 vs TNFRSF1A-3], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF12A-1 vs TNFRSF1A-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF12A-1 vs TNFRSF4-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF12A-1 vs TNFRSF4-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF12A-1 vs TNFRSF4-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF13B-2 vs TNFRSF13C-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF13B-2 vs TNFRSF14-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF13B-2 vs TNFRSF14-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF13B-2 vs TNFRSF16-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF13B-2 vs TNFRSF16-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF13B-2 vs TNFRSF16-3], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF13B-2 vs TNFRSF16-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF13B-2 vs TNFRSF17-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF13B-2 vs TNFRSF1A-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF13B-2 vs TNFRSF1A-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF13B-2 vs TNFRSF1A-3], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF13B-2 vs TNFRSF1A-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF13B-2 vs TNFRSF4-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF13B-2 vs TNFRSF4-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF13B-2 vs TNFRSF4-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF13C-1 vs TNFRSF14-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF13C-1 vs TNFRSF14-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF13C-1 vs TNFRSF16-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF13C-1 vs TNFRSF16-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF13C-1 vs TNFRSF16-3], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF13C-1 vs TNFRSF16-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF13C-1 vs TNFRSF17-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF13C-1 vs TNFRSF1A-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF13C-1 vs TNFRSF1A-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF13C-1 vs TNFRSF1A-3], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF13C-1 vs TNFRSF1A-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF13C-1 vs TNFRSF4-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF13C-1 vs TNFRSF4-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF13C-1 vs TNFRSF4-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF14-1 vs TNFRSF14-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF14-1 vs TNFRSF16-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF14-1 vs TNFRSF16-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF14-1 vs TNFRSF16-3], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF14-1 vs TNFRSF16-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF14-1 vs TNFRSF17-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF14-1 vs TNFRSF1A-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF14-1 vs TNFRSF1A-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF14-1 vs TNFRSF1A-3], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF14-1 vs TNFRSF1A-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF14-1 vs TNFRSF4-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF14-1 vs TNFRSF4-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF14-1 vs TNFRSF4-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF14-2 vs TNFRSF16-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF14-2 vs TNFRSF16-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF14-2 vs TNFRSF16-3], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF14-2 vs TNFRSF16-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF14-2 vs TNFRSF17-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF14-2 vs TNFRSF1A-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF14-2 vs TNFRSF1A-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF14-2 vs TNFRSF1A-3], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF14-2 vs TNFRSF1A-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF14-2 vs TNFRSF4-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF14-2 vs TNFRSF4-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF14-2 vs TNFRSF4-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF16-1 vs TNFRSF16-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF16-1 vs TNFRSF16-3], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF16-1 vs TNFRSF16-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF16-1 vs TNFRSF17-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF16-1 vs TNFRSF1A-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF16-1 vs TNFRSF1A-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF16-1 vs TNFRSF1A-3], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF16-1 vs TNFRSF1A-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF16-1 vs TNFRSF4-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF16-1 vs TNFRSF4-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF16-1 vs TNFRSF4-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF16-2 vs TNFRSF16-3], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF16-2 vs TNFRSF16-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF16-2 vs TNFRSF17-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF16-2 vs TNFRSF1A-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF16-2 vs TNFRSF1A-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF16-2 vs TNFRSF1A-3], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF16-2 vs TNFRSF1A-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF16-2 vs TNFRSF4-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF16-2 vs TNFRSF4-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF16-2 vs TNFRSF4-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF16-3 vs TNFRSF16-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF16-3 vs TNFRSF17-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF16-3 vs TNFRSF1A-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF16-3 vs TNFRSF1A-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF16-3 vs TNFRSF1A-3], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF16-3 vs TNFRSF1A-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF16-3 vs TNFRSF4-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF16-3 vs TNFRSF4-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF16-3 vs TNFRSF4-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF16-4 vs TNFRSF17-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF16-4 vs TNFRSF1A-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF16-4 vs TNFRSF1A-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF16-4 vs TNFRSF1A-3], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF16-4 vs TNFRSF1A-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF16-4 vs TNFRSF4-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF16-4 vs TNFRSF4-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF16-4 vs TNFRSF4-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF17-1 vs TNFRSF1A-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF17-1 vs TNFRSF1A-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF17-1 vs TNFRSF1A-3], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF17-1 vs TNFRSF1A-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF17-1 vs TNFRSF4-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF17-1 vs TNFRSF4-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF17-1 vs TNFRSF4-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF1A-1 vs TNFRSF1A-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF1A-1 vs TNFRSF1A-3], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF1A-1 vs TNFRSF1A-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF1A-1 vs TNFRSF4-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF1A-1 vs TNFRSF4-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF1A-1 vs TNFRSF4-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF1A-2 vs TNFRSF1A-3], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF1A-2 vs TNFRSF1A-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF1A-2 vs TNFRSF4-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF1A-2 vs TNFRSF4-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF1A-2 vs TNFRSF4-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF1A-3 vs TNFRSF1A-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF1A-3 vs TNFRSF4-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF1A-3 vs TNFRSF4-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF1A-3 vs TNFRSF4-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF1A-4 vs TNFRSF4-1], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF1A-4 vs TNFRSF4-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF1A-4 vs TNFRSF4-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF4-1 vs TNFRSF4-2], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF4-1 vs TNFRSF4-4], proba_pair will be used instead
+30578 -- INFORMATION: Method mustang cannot be applied to [TNFRSF4-2 vs TNFRSF4-4], proba_pair will be used instead
+*************************************************************************************************
+</content>
+</file>
+<file>
+<stream>input</stream>
+<name>crd.fasta</name>
+<content>>CRME-3
+CDSNSYCLLKASDGNCVTCAPKTKCGRGYGKKGEDEMGNTIC
+>CRME-2
+CPSDTFTSIYNRSPWCHSCRGPCGTNRVEVTPCTPTTNRIC
+>CRME-1
+CEQGVSYYNSQELKCCKLCKPGTYSDHRCDKYSDTIC
+>TNFRSF4-4
+CPPGHFSPGDNQACKPWTNCTLAGKHTLQPASNSSDAIC
+>TNFRSF4-2
+CGPGFYNDVVSSKPCKPCTWCNLRSGSERKQLCTATQDTVC
+>TNFRSF4-1
+CVGDTYPSNDRCCHECRPGNGMVSRCSRSQNTVC
+>TNFRSF12A-1
+CSRGSSWSADLDKCMDCASCRARPHSDFCLGC
+>TNFRSF17-1
+CSQNEYFDSLLHACIPCQLRCSSNTPPLTCQRYC
+>TNFRSF13B-2
+CRKEQGKFYDHLLRDCISCASICGQHPKQCAYFC
+>TNFRSF1A-4
+CHAGFFLRENECVSCSNCKKSLECTKLC
+>TNFRSF13C-1
+CVPAECFDLLVRHCVACGLLRTPRPKPA
+>TNFRSF1A-3
+CRKNQYRHYWSENLFQCFNCSLCLNGTVHLSCQEKQNTVC
+>TNFRSF1A-2
+CESGSFTASENHLRHCLSCSKCRKEMGQVEISSCTVDRDTVC
+>TNFRSF1A-1
+CPQGKYIHPQNNSICCTKCHKGTYLYNDCPGPGQDTDC
+>TNFRSF16-4
+CPEGTYSDEANHVDPCLPCTVCEDTERQLRECTPWADAEC
+>TNFRSF16-3
+CAYGYYQDEETGHCEACSVCEVGSGLVFSCQDKQNTVC
+>TNFRSF16-2
+CLDNVTFSDVVSATEPCKPCTECLGLQSMSAPCVEADDAVC
+>TNFRSF16-1
+CSTGLYTHSGECCKACNLGEGVAQPCGANQTVC
+>TNFRSF14-2
+CPPGTYIAHLNGLSKCLQCQMCDPAMGLRASRNCSRTENAVC
+>TNFRSF14-1
+CKEDEYPVGSECCPKCSPGYRVKEACGELTGTVC
+>TNFRSF10B-3
+CEEGTFREEDSPEMCRKCRTGCPRGMVKVGDCTPWSDIEC
+>TNFRSF10B-2
+CKYGQDYSTHWNDLLFCLRCTRCDSGEVELSPCTTTRNTVC
+</content>
+</file>
+<file>
+<stream>input</stream>
+<name>crd.template_file</name>
+<content>>CRME-3 _P_ 2UWI3.pdb
+>CRME-2 _P_ 2UWI2.pdb
+>CRME-1 _P_ 2UWI1.pdb
+>TNFRSF4-4 _P_ 2HEY4.pdb
+>TNFRSF4-2 _P_ 2HEY2.pdb
+>TNFRSF4-1 _P_ 2HEY1.pdb
+>TNFRSF12A-1 _P_ 2RPJ1.pdb
+>TNFRSF17-1 _P_ 1XU21.pdb
+>TNFRSF13B-2 _P_ 1XU12.pdb
+>TNFRSF13C-1 _P_ 1OQE1.pdb
+>TNFRSF1A-4 _P_ 1EXT4.pdb
+>TNFRSF1A-3 _P_ 1EXT3.pdb
+>TNFRSF1A-2 _P_ 1EXT2.pdb
+>TNFRSF1A-1 _P_ 1EXT1.pdb
+>TNFRSF16-4 _P_ 3BUKD.pdb
+>TNFRSF16-3 _P_ 3BUKD.pdb
+>TNFRSF16-2 _P_ 3BUKD.pdb
+>TNFRSF16-1 _P_ 3BUKD.pdb
+>TNFRSF14-1 _P_ 1JMA1.pdb
+>TNFRSF14-2 _P_ 1JMA2.pdb
+>TNFRSF10B-2 _P_ 1D4V2.pdb
+>TNFRSF10B-3 _P_ 1D4V3.pdb
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>crd.template_file</name>
+<content>>CRME-3 _P_ 2UWI3.pdb
+>CRME-2 _P_ 2UWI2.pdb
+>CRME-1 _P_ 2UWI1.pdb
+>TNFRSF4-4 _P_ 2HEY4.pdb
+>TNFRSF4-2 _P_ 2HEY2.pdb
+>TNFRSF4-1 _P_ 2HEY1.pdb
+>TNFRSF12A-1 _P_ 2RPJ1.pdb
+>TNFRSF17-1 _P_ 1XU21.pdb
+>TNFRSF13B-2 _P_ 1XU12.pdb
+>TNFRSF13C-1 _P_ 1OQE1.pdb
+>TNFRSF1A-4 _P_ 1EXT4.pdb
+>TNFRSF1A-3 _P_ 1EXT3.pdb
+>TNFRSF1A-2 _P_ 1EXT2.pdb
+>TNFRSF1A-1 _P_ 1EXT1.pdb
+>TNFRSF16-4 _P_ 3BUKD.pdb
+>TNFRSF16-3 _P_ 3BUKD.pdb
+>TNFRSF16-2 _P_ 3BUKD.pdb
+>TNFRSF16-1 _P_ 3BUKD.pdb
+>TNFRSF14-1 _P_ 1JMA1.pdb
+>TNFRSF14-2 _P_ 1JMA2.pdb
+>TNFRSF10B-2 _P_ 1D4V2.pdb
+>TNFRSF10B-3 _P_ 1D4V3.pdb
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>crd.dnd</name>
+<content>((((CRME-1:0.14511,TNFRSF12A-1:0.14489):0.00493,((((CRME-2:0.13441,TNFRSF10B-2:0.13559):0.00906,(TNFRSF13C-1:0.13194,TNFRSF1A-2:0.12806):0.01344):0.00335,TNFRSF1A-1:0.14790):0.00166,TNFRSF4-4:0.14959):0.00038):0.00000,((TNFRSF10B-3:0.14016,TNFRSF16-4:0.13984):0.00925,(TNFRSF14-1:0.14766,(TNFRSF16-3:0.12450,TNFRSF1A-3:0.12550):0.02234):0.00200):0.00058):0.00000,(((CRME-3:0.13950,TNFRSF13B-2:0.14050):0.00475,TNFRSF1A-4:0.14525):0.00445,((TNFRSF14-2:0.13053,TNFRSF4-1:0.12947):0.01507,(TNFRSF16-1:0.14250,(TNFRSF16-2:0.14071,TNFRSF4-2:0.13929):0.00250):0.00243):0.00430):0.00060,TNFRSF17-1:0.15003);</content>
+</file>
+<file>
+<stream>input</stream>
+<name>crd.dnd</name>
+<content>((((CRME-1:0.14511,TNFRSF12A-1:0.14489):0.00493,((((CRME-2:0.13441,TNFRSF10B-2:0.13559):0.00906,(TNFRSF13C-1:0.13194,TNFRSF1A-2:0.12806):0.01344):0.00335,TNFRSF1A-1:0.14790):0.00166,TNFRSF4-4:0.14959):0.00038):0.00000,((TNFRSF10B-3:0.14016,TNFRSF16-4:0.13984):0.00925,(TNFRSF14-1:0.14766,(TNFRSF16-3:0.12450,TNFRSF1A-3:0.12550):0.02234):0.00200):0.00058):0.00000,(((CRME-3:0.13950,TNFRSF13B-2:0.14050):0.00475,TNFRSF1A-4:0.14525):0.00445,((TNFRSF14-2:0.13053,TNFRSF4-1:0.12947):0.01507,(TNFRSF16-1:0.14250,(TNFRSF16-2:0.14071,TNFRSF4-2:0.13929):0.00250):0.00243):0.00430):0.00060,TNFRSF17-1:0.15003);</content>
+</file>
+<file>
+<stream>output</stream>
+<name>crd.aln</name>
+<content>CLUSTAL FORMAT for T-COFFEE Version_13.30.5.6909e10 [http://www.tcoffee.org] [MODE:  ], CPU=0.04 sec, SCORE=48, Nseq=22, Len=48 
+
+CRME-3          CDSNS-YCLLK-ASDGNCVTCAPKTKCGR--GYGKK-GED-EMGNTIC
+CRME-2          CPSDT-FTSIY-NRSPWCHSCRG--PCGT--NRVEVTPCT-PTTNRIC
+CRME-1          CEQGV-SYYN---S-QELKCCK---LCKP--GTYSDHRCD-KYSDTIC
+TNFRSF4-4       CPPGH-FSPGD---NQACKPWT---NCTLA-GKHTLQPAS-NSSDAIC
+TNFRSF4-2       CGPGF-YNDVV--SSKPCKPCT---WCNLRSGSERKQLCT-ATQDTVC
+TNFRSF4-1       CVGDT-YPSN----DRC---CH---ECRPGN--GMVSRCS-RSQNTVC
+TNFRSF12A-1     CSRGS-SWSA---DLDKCMDCA---SCRA--RPH-SDFC------LGC
+TNFRSF17-1      CSQNE-YFDS---LLHACIPCQL--RCSS--NTP-P-----LTCQRYC
+TNFRSF13B-2     CRKEQ-GKFYD-HLLRDCISCAS--ICGQ--HP--------KQCAYFC
+TNFRSF1A-4      CHAGF-FLR-----ENECVSCS---NCKK--SL---------ECTKLC
+TNFRSF13C-1     CVPAE-CFDL---LVRHCVACG---LLRTP--RPKP-----------A
+TNFRSF1A-3      CRKNQ-YRHYWSENLFQCFNCS---LCLN--GTV-HLSCQ-EKQNTVC
+TNFRSF1A-2      CESGS-FTASE-NHLRHCLSCS---KCRKEMGQVEISSCT-VDRDTVC
+TNFRSF1A-1      CPQGK-YIHPQ-NNS---ICCT---KCHK--GTYLYNDCPGPGQDTDC
+TNFRSF16-4      CPEGT-YSDEA-NHVDPCLPCT---VCED--TERQLRECT-PWADAEC
+TNFRSF16-3      CAYGY-YQDE---ETGHCEACS---VCEV--GSGLVFSCQ-DKQNTVC
+TNFRSF16-2      CLDNVTFSDVV-SATEPCKPCT---ECLG--LQSMSAPCV-EADDAVC
+TNFRSF16-1      CSTGL-YTHS----GECC---K---ACNL--GEGVAQPCG-A-NQTVC
+TNFRSF14-2      CPPGT-YIAHL-NGLSKCLQCQ---MCDPAMGLRASRNCS-RTENAVC
+TNFRSF14-1      CKEDE-YPV----GSEC---CP---KCSP--GYRVKEACG-ELTGTVC
+TNFRSF10B-3     CEEGT-FREED--SPEMCRKCRT--GCPR--GMVKVGDCT-PWSDIEC
+TNFRSF10B-2     CKYGQDYSTHW-NDLLFCLRCT---RCDS--GEVELSPCT-TTRNTVC
+                *                                              .
+
+
+
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>crd.html</name>
+<content><html>
+<style>
+SPAN { font-family: courier new, courier-new, courier, monospace; font-weight: bold; font-size: 11pt;}
+SPAN { line-height:100%}
+SPAN {	white-space: pre}
+SPAN.value0 {background: #9B92FF}
+SPAN.value1 {background: #B4FFB4}
+SPAN.value2 {background: #BEFFBE}
+SPAN.value3 {background: #C8FFC8}
+SPAN.value4 {background: #FFFFB7}
+SPAN.value5 {background: #FFFFAD}
+SPAN.value6 {background: #FFFFAD}
+SPAN.value7 {background: #FFE6E6}
+SPAN.value8 {background: #FFDCDC}
+SPAN.value9 {background: #FFC8C8}
+SPAN.valuedefault {}
+SPAN.valuegap {}
+SPAN.valueink {background: 000000}
+</style><body><span class=valuedefault>T-COFFEE,&nbsp;Version_13.30.5.6909e10&nbsp;(Version_13.30.5.6909e10)</span><br><span class=valuedefault>Cedric&nbsp;Notredame&nbsp;</span><br><span class=valuedefault>CPU&nbsp;TIME:0&nbsp;sec.</span><br><span class=valuedefault>SCORE=48</span><br><span class=valuedefault>*</span><br><span class=valuedefault>&nbsp;</span><span class=value0>B</span><span class=value1>A</span><span class=value2>D</span><span class=value3>&nbsp;</span><span class=value4>A</span><span class=value5>V</span><span class=value6>G</span><span class=value7>&nbsp;</span><span class=value8>G</span><span class=value9>OOD</span><br><span class=valuedefault>*</span><br><span class=value4>CRME-3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;45</span><br><span class=value4>CRME-2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;49</span><br><span class=value4>CRME-1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;47</span><br><span class=value5>TNFRSF4-4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;50</span><br><span class=value5>TNFRSF4-2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;50</span><br><span class=value4>TNFRSF4-1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;49</span><br><span class=value4>TNFRSF12A-1&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;41</span><br><span class=value4>TNFRSF17-1&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;44</span><br><span class=value3>TNFRSF13B-2&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;38</span><br><span class=value4>TNFRSF1A-4&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;44</span><br><span class=value4>TNFRSF13C-1&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;40</span><br><span class=value5>TNFRSF1A-3&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;50</span><br><span class=value5>TNFRSF1A-2&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;52</span><br><span class=value5>TNFRSF1A-1&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;51</span><br><span class=value5>TNFRSF16-4&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;54</span><br><span class=value5>TNFRSF16-3&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;54</span><br><span class=value4>TNFRSF16-2&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;48</span><br><span class=value4>TNFRSF16-1&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;49</span><br><span class=value5>TNFRSF14-2&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;50</span><br><span class=value5>TNFRSF14-1&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;51</span><br><span class=value5>TNFRSF10B-3&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;52</span><br><span class=value5>TNFRSF10B-2&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;51</span><br><span class=value4>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;&nbsp;4</span><br><br><span class=valuedefault>CRME-3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>CDS</span><span class=value8>N</span><span class=value7>S</span><span class=valuegap>-</span><span class=value6>Y</span><span class=value4>C</span><span class=value3>L</span><span class=value2>L</span><span class=value1>K</span><span class=valuegap>-</span><span class=value1>AS</span><span class=value2>DG</span><span class=value3>NCVTCA</span><span class=value0>PKT</span><span class=value3>KCGR</span><span class=valuegap>--</span><span class=value2>GYGKK</span><span class=valuegap>-</span><span class=value2>GE</span><br><span class=valuedefault>CRME-2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>CP</span><span class=value8>SD</span><span class=value6>T</span><span class=valuegap>-</span><span class=value6>F</span><span class=value5>T</span><span class=value4>S</span><span class=value3>I</span><span class=value1>Y</span><span class=valuegap>-</span><span class=value1>N</span><span class=value2>RS</span><span class=value3>PWCHS</span><span class=value4>C</span><span class=value3>R</span><span class=value0>G</span><span class=valuegap>--</span><span class=value2>P</span><span class=value3>CG</span><span class=value2>T</span><span class=valuegap>--</span><span class=value2>NRVE</span><span class=value3>VT</span><span class=value4>PC</span><br><span class=valuedefault>CRME-1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>CE</span><span class=value8>QG</span><span class=value6>V</span><span class=valuegap>-</span><span class=value3>S</span><span class=value2>YYN</span><span class=valuegap>---</span><span class=value1>S</span><span class=valuegap>-</span><span class=value1>QELK</span><span class=value2>C</span><span class=value3>C</span><span class=value4>K</span><span class=valuegap>---</span><span class=value4>LCK</span><span class=value3>P</span><span class=valuegap>--</span><span class=value3>GTY</span><span class=value2>S</span><span class=value3>DH</span><span class=value4>R</span><span class=value5>C</span><br><span class=valuedefault>TNFRSF4-4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>CP</span><span class=value8>PG</span><span class=value6>H</span><span class=valuegap>-</span><span class=value5>F</span><span class=value4>S</span><span class=value3>P</span><span class=value2>G</span><span class=value1>D</span><span class=valuegap>---</span><span class=value2>NQ</span><span class=value3>ACK</span><span class=value4>PWT</span><span class=valuegap>---</span><span class=value4>NC</span><span class=value3>T</span><span class=value2>L</span><span class=value0>A</span><span class=valuegap>-</span><span class=value2>GKHT</span><span class=value3>LQP</span><span class=value4>A</span><br><span class=valuedefault>TNFRSF4-2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>CG</span><span class=value8>P</span><span class=value7>G</span><span class=value6>F</span><span class=valuegap>-</span><span class=value5>Y</span><span class=value4>N</span><span class=value3>D</span><span class=value2>V</span><span class=value1>V</span><span class=valuegap>--</span><span class=value1>S</span><span class=value2>SK</span><span class=value3>P</span><span class=value4>CKPCT</span><span class=valuegap>---</span><span class=value4>W</span><span class=value5>C</span><span class=value4>N</span><span class=value3>L</span><span class=value0>RS</span><span class=value2>GSER</span><span class=value3>KQ</span><span class=value4>L</span><span class=value5>C</span><br><span class=valuedefault>TNFRSF4-1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>CV</span><span class=value7>G</span><span class=value6>D</span><span class=value5>T</span><span class=valuegap>-</span><span class=value5>Y</span><span class=value3>P</span><span class=value2>SN</span><span class=valuegap>----</span><span class=value2>DRC</span><span class=valuegap>---</span><span class=value3>CH</span><span class=valuegap>---</span><span class=value4>ECR</span><span class=value3>P</span><span class=value0>GN</span><span class=valuegap>--</span><span class=value3>GMVS</span><span class=value4>RC</span><br><span class=valuedefault>TNFRSF12A-1&nbsp;&nbsp;&nbsp;</span><span class=value9>CS</span><span class=value8>RG</span><span class=value6>S</span><span class=valuegap>-</span><span class=value4>S</span><span class=value3>W</span><span class=value2>SA</span><span class=valuegap>---</span><span class=value1>D</span><span class=value2>L</span><span class=value3>DK</span><span class=value4>CMD</span><span class=value5>C</span><span class=value4>A</span><span class=valuegap>---</span><span class=value4>SCR</span><span class=value2>A</span><span class=valuegap>--</span><span class=value1>RPH</span><span class=valuegap>-</span><span class=value1>SDFC</span><br><span class=valuedefault>TNFRSF17-1&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>CS</span><span class=value8>QN</span><span class=value6>E</span><span class=valuegap>-</span><span class=value5>Y</span><span class=value4>F</span><span class=value3>D</span><span class=value2>S</span><span class=valuegap>---</span><span class=value2>LL</span><span class=value3>HA</span><span class=value4>CIPCQ</span><span class=value0>L</span><span class=valuegap>--</span><span class=value2>R</span><span class=value3>C</span><span class=value2>SS</span><span class=valuegap>--</span><span class=value1>NTP</span><span class=valuegap>-</span><span class=value1>P</span><span class=valuegap>---</span><br><span class=valuedefault>TNFRSF13B-2&nbsp;&nbsp;&nbsp;</span><span class=value9>CR</span><span class=value8>K</span><span class=value5>E</span><span class=value4>Q</span><span class=valuegap>-</span><span class=value3>G</span><span class=value2>KF</span><span class=value1>YD</span><span class=valuegap>-</span><span class=value1>H</span><span class=value2>LL</span><span class=value3>RD</span><span class=value4>CISCA</span><span class=value0>S</span><span class=valuegap>--</span><span class=value2>ICGQ</span><span class=valuegap>--</span><span class=value1>HP</span><span class=valuegap>------</span><br><span class=valuedefault>TNFRSF1A-4&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>CH</span><span class=value8>A</span><span class=value7>G</span><span class=value5>F</span><span class=valuegap>-</span><span class=value4>F</span><span class=value3>L</span><span class=value2>R</span><span class=valuegap>-----</span><span class=value1>E</span><span class=value2>NE</span><span class=value3>CV</span><span class=value4>SCS</span><span class=valuegap>---</span><span class=value4>NC</span><span class=value3>K</span><span class=value2>K</span><span class=valuegap>--</span><span class=value2>SL</span><span class=valuegap>------</span><br><span class=valuedefault>TNFRSF13C-1&nbsp;&nbsp;&nbsp;</span><span class=value9>CV</span><span class=value8>P</span><span class=value7>A</span><span class=value5>E</span><span class=valuegap>-</span><span class=value4>C</span><span class=value3>FD</span><span class=value2>L</span><span class=valuegap>---</span><span class=value1>L</span><span class=value2>V</span><span class=value3>RH</span><span class=value4>CVACG</span><span class=valuegap>---</span><span class=value3>LL</span><span class=value2>RT</span><span class=value0>P</span><span class=valuegap>--</span><span class=value1>RP</span><span class=value0>K</span><span class=value1>P</span><span class=valuegap>---</span><br><span class=valuedefault>TNFRSF1A-3&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>CRK</span><span class=value8>N</span><span class=value7>Q</span><span class=valuegap>-</span><span class=value6>Y</span><span class=value4>R</span><span class=value3>H</span><span class=value2>Y</span><span class=value1>W</span><span class=value0>S</span><span class=value1>EN</span><span class=value2>L</span><span class=value3>FQ</span><span class=value4>CFN</span><span class=value5>CS</span><span class=valuegap>---</span><span class=value4>LC</span><span class=value3>LN</span><span class=valuegap>--</span><span class=value3>G</span><span class=value2>TV</span><span class=valuegap>-</span><span class=value2>HL</span><span class=value3>S</span><span class=value5>C</span><br><span class=valuedefault>TNFRSF1A-2&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>CE</span><span class=value8>SG</span><span class=value7>S</span><span class=valuegap>-</span><span class=value5>F</span><span class=value4>T</span><span class=value3>A</span><span class=value2>S</span><span class=value1>E</span><span class=valuegap>-</span><span class=value1>N</span><span class=value2>H</span><span class=value3>LRH</span><span class=value4>CLS</span><span class=value5>CS</span><span class=valuegap>---</span><span class=value5>KC</span><span class=value4>R</span><span class=value3>K</span><span class=value0>EM</span><span class=value2>GQVE</span><span class=value3>IS</span><span class=value4>S</span><span class=value5>C</span><br><span class=valuedefault>TNFRSF1A-1&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>CPQ</span><span class=value8>G</span><span class=value7>K</span><span class=valuegap>-</span><span class=value6>Y</span><span class=value4>I</span><span class=value3>H</span><span class=value2>P</span><span class=value1>Q</span><span class=valuegap>-</span><span class=value1>NN</span><span class=value2>S</span><span class=valuegap>---</span><span class=value2>IC</span><span class=value4>CT</span><span class=valuegap>---</span><span class=value4>K</span><span class=value5>C</span><span class=value4>HK</span><span class=valuegap>--</span><span class=value3>GTYLYN</span><span class=value4>DC</span><br><span class=valuedefault>TNFRSF16-4&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>CPE</span><span class=value8>G</span><span class=value7>T</span><span class=valuegap>-</span><span class=value6>Y</span><span class=value4>S</span><span class=value3>D</span><span class=value2>E</span><span class=value1>A</span><span class=valuegap>-</span><span class=value1>N</span><span class=value2>HV</span><span class=value3>DP</span><span class=value4>CLP</span><span class=value5>CT</span><span class=valuegap>---</span><span class=value5>VC</span><span class=value4>E</span><span class=value3>D</span><span class=valuegap>--</span><span class=value3>TER</span><span class=value2>Q</span><span class=value3>LR</span><span class=value4>E</span><span class=value5>C</span><br><span class=valuedefault>TNFRSF16-3&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>CA</span><span class=value8>Y</span><span class=value7>G</span><span class=value6>Y</span><span class=valuegap>-</span><span class=value5>Y</span><span class=value4>Q</span><span class=value3>D</span><span class=value2>E</span><span class=valuegap>---</span><span class=value2>ETG</span><span class=value3>H</span><span class=value4>CEA</span><span class=value5>CS</span><span class=valuegap>---</span><span class=value5>VC</span><span class=value4>EV</span><span class=valuegap>--</span><span class=value3>GSG</span><span class=value2>L</span><span class=value3>VF</span><span class=value4>S</span><span class=value5>C</span><br><span class=valuedefault>TNFRSF16-2&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>CL</span><span class=value8>D</span><span class=value7>N</span><span class=value5>V</span><span class=value0>T</span><span class=value3>F</span><span class=value2>SDV</span><span class=value1>V</span><span class=valuegap>-</span><span class=value1>S</span><span class=value2>AT</span><span class=value3>EP</span><span class=value4>CKPCT</span><span class=valuegap>---</span><span class=value4>EC</span><span class=value3>L</span><span class=value2>G</span><span class=valuegap>--</span><span class=value2>LQSM</span><span class=value3>SA</span><span class=value4>P</span><span class=value5>C</span><br><span class=valuedefault>TNFRSF16-1&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>CS</span><span class=value8>T</span><span class=value7>G</span><span class=value6>L</span><span class=valuegap>-</span><span class=value5>Y</span><span class=value3>T</span><span class=value2>H</span><span class=value1>S</span><span class=valuegap>----</span><span class=value2>GECC</span><span class=valuegap>---</span><span class=value3>K</span><span class=valuegap>---</span><span class=value3>A</span><span class=value4>CN</span><span class=value3>L</span><span class=valuegap>--</span><span class=value3>GEG</span><span class=value2>V</span><span class=value3>AQP</span><span class=value4>C</span><br><span class=valuedefault>TNFRSF14-2&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>CPP</span><span class=value8>G</span><span class=value7>T</span><span class=valuegap>-</span><span class=value6>Y</span><span class=value4>I</span><span class=value3>A</span><span class=value2>H</span><span class=value1>L</span><span class=valuegap>-</span><span class=value1>N</span><span class=value2>GL</span><span class=value3>SK</span><span class=value4>CLQ</span><span class=value5>C</span><span class=value4>Q</span><span class=valuegap>---</span><span class=value4>MCD</span><span class=value3>P</span><span class=value0>AM</span><span class=value2>GLRA</span><span class=value3>SR</span><span class=value4>NC</span><br><span class=valuedefault>TNFRSF14-1&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>CK</span><span class=value8>E</span><span class=value7>D</span><span class=value6>E</span><span class=valuegap>-</span><span class=value5>Y</span><span class=value3>P</span><span class=value2>V</span><span class=valuegap>----</span><span class=value1>G</span><span class=value2>SEC</span><span class=valuegap>---</span><span class=value3>CP</span><span class=valuegap>---</span><span class=value3>K</span><span class=value4>C</span><span class=value3>SP</span><span class=valuegap>--</span><span class=value3>GYR</span><span class=value2>V</span><span class=value3>KE</span><span class=value4>A</span><span class=value5>C</span><br><span class=valuedefault>TNFRSF10B-3&nbsp;&nbsp;&nbsp;</span><span class=value9>CEE</span><span class=value8>G</span><span class=value7>T</span><span class=valuegap>-</span><span class=value5>F</span><span class=value4>R</span><span class=value3>E</span><span class=value2>E</span><span class=value1>D</span><span class=valuegap>--</span><span class=value1>S</span><span class=value2>PE</span><span class=value3>M</span><span class=value4>CRKC</span><span class=value3>R</span><span class=value0>T</span><span class=valuegap>--</span><span class=value3>GCPR</span><span class=valuegap>--</span><span class=value3>GMVK</span><span class=value4>VG</span><span class=value5>DC</span><br><span class=valuedefault>TNFRSF10B-2&nbsp;&nbsp;&nbsp;</span><span class=value9>CK</span><span class=value8>YG</span><span class=value6>Q</span><span class=value0>D</span><span class=value3>YS</span><span class=value2>TH</span><span class=value1>W</span><span class=valuegap>-</span><span class=value1>N</span><span class=value2>DL</span><span class=value3>LF</span><span class=value4>CLR</span><span class=value5>CT</span><span class=valuegap>---</span><span class=value4>R</span><span class=value5>C</span><span class=value4>DS</span><span class=valuegap>--</span><span class=value3>GEVELS</span><span class=value4>P</span><span class=value5>C</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>*&nbsp;</span><span class=value8>&nbsp;</span><span class=value7>&nbsp;</span><span class=value6>&nbsp;</span><span class=value0>&nbsp;</span><span class=value5>&nbsp;</span><span class=value3>&nbsp;&nbsp;</span><span class=value2>&nbsp;</span><span class=value1>&nbsp;</span><span class=value0>&nbsp;</span><span class=value1>&nbsp;&nbsp;</span><span class=value2>&nbsp;&nbsp;</span><span class=value3>&nbsp;&nbsp;&nbsp;</span><span class=value4>&nbsp;&nbsp;&nbsp;</span><span class=value0>&nbsp;&nbsp;&nbsp;</span><span class=value4>&nbsp;&nbsp;</span><span class=value3>&nbsp;&nbsp;</span><span class=value0>&nbsp;&nbsp;</span><span class=value2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value3>&nbsp;&nbsp;</span><span class=value4>&nbsp;</span><br><br><br><span class=valuedefault>CRME-3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value3>D</span><span class=valuegap>-</span><span class=value4>E</span><span class=value5>M</span><span class=value6>G</span><span class=value7>N</span><span class=value8>TIC</span><br><span class=valuedefault>CRME-2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value5>T</span><span class=valuegap>-</span><span class=value5>PT</span><span class=value6>T</span><span class=value7>N</span><span class=value8>RIC</span><br><span class=valuedefault>CRME-1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value5>D</span><span class=valuegap>-</span><span class=value5>KY</span><span class=value6>S</span><span class=value7>D</span><span class=value8>TIC</span><br><span class=valuedefault>TNFRSF4-4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value4>S</span><span class=valuegap>-</span><span class=value5>NS</span><span class=value6>S</span><span class=value7>D</span><span class=value8>AIC</span><br><span class=valuedefault>TNFRSF4-2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value6>T</span><span class=valuegap>-</span><span class=value6>AT</span><span class=value7>Q</span><span class=value8>DTVC</span><br><span class=valuedefault>TNFRSF4-1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value5>S</span><span class=valuegap>-</span><span class=value5>RSQ</span><span class=value6>N</span><span class=value7>T</span><span class=value8>VC</span><br><span class=valuedefault>TNFRSF12A-1&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------</span><span class=value3>LGC</span><br><span class=valuedefault>TNFRSF17-1&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value1>LT</span><span class=value2>C</span><span class=value3>Q</span><span class=value5>R</span><span class=value6>YC</span><br><span class=valuedefault>TNFRSF13B-2&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value1>KQC</span><span class=value3>A</span><span class=value4>Y</span><span class=value6>F</span><span class=value5>C</span><br><span class=valuedefault>TNFRSF1A-4&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---</span><span class=value1>EC</span><span class=value2>T</span><span class=value3>K</span><span class=value4>LC</span><br><span class=valuedefault>TNFRSF13C-1&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--------</span><span class=value0>A</span><br><span class=valuedefault>TNFRSF1A-3&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value5>Q</span><span class=valuegap>-</span><span class=value5>EK</span><span class=value6>Q</span><span class=value7>N</span><span class=value8>TVC</span><br><span class=valuedefault>TNFRSF1A-2&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value5>T</span><span class=valuegap>-</span><span class=value5>V</span><span class=value6>DR</span><span class=value7>D</span><span class=value8>TVC</span><br><span class=valuedefault>TNFRSF1A-1&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value4>P</span><span class=value0>G</span><span class=value3>P</span><span class=value4>G</span><span class=value6>Q</span><span class=value7>DT</span><span class=value8>DC</span><br><span class=valuedefault>TNFRSF16-4&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value5>T</span><span class=valuegap>-</span><span class=value5>PW</span><span class=value6>A</span><span class=value7>DA</span><span class=value8>EC</span><br><span class=valuedefault>TNFRSF16-3&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value5>Q</span><span class=valuegap>-</span><span class=value5>DK</span><span class=value6>Q</span><span class=value7>NT</span><span class=value8>VC</span><br><span class=valuedefault>TNFRSF16-2&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value5>V</span><span class=valuegap>-</span><span class=value5>E</span><span class=value6>A</span><span class=value7>DD</span><span class=value8>AVC</span><br><span class=valuedefault>TNFRSF16-1&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value3>G</span><span class=valuegap>-</span><span class=value3>A</span><span class=valuegap>-</span><span class=value3>N</span><span class=value5>Q</span><span class=value7>T</span><span class=value8>VC</span><br><span class=valuedefault>TNFRSF14-2&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value5>S</span><span class=valuegap>-</span><span class=value5>RT</span><span class=value6>E</span><span class=value7>NA</span><span class=value8>VC</span><br><span class=valuedefault>TNFRSF14-1&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value5>G</span><span class=valuegap>-</span><span class=value5>E</span><span class=value6>LT</span><span class=value7>G</span><span class=value8>TVC</span><br><span class=valuedefault>TNFRSF10B-3&nbsp;&nbsp;&nbsp;</span><span class=value6>T</span><span class=valuegap>-</span><span class=value6>PWS</span><span class=value7>D</span><span class=value8>IEC</span><br><span class=valuedefault>TNFRSF10B-2&nbsp;&nbsp;&nbsp;</span><span class=value5>T</span><span class=valuegap>-</span><span class=value5>TT</span><span class=value6>R</span><span class=value7>N</span><span class=value8>TVC</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value5>&nbsp;</span><span class=value0>&nbsp;</span><span class=value4>&nbsp;&nbsp;</span><span class=value5>&nbsp;</span><span class=value6>&nbsp;</span><span class=value7>&nbsp;</span><span class=value8>&nbsp;</span><span class=value7>.</span><br><br><br><br><br><br></body></html>
+</content>
+</file>
+<environement>
+HOME_4_TCOFFEE=/Users/cnotredame/
+MANPATH=/sw/share/man:/usr/share/man:/usr/local/share/man:/opt/X11/share/man:/Applications/Xcode.app/Contents/Developer/usr/share/man:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/share/man:/sw/lib/perl5/5.18.2/man
+TERM_PROGRAM=Apple_Terminal
+MCOFFEE_4_TCOFFEE=/Users/cnotredame//.t_coffee//mcoffee/
+ROOT_TMP_4_TCOFFEE=/var/tmp/
+SHELL=/bin/bash
+TERM=xterm-256color
+TMPDIR=/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/
+PERL5LIB=/sw/lib/perl5:/sw/lib/perl5/darwin
+Apple_PubSub_Socket_Render=/private/tmp/com.apple.launchd.u7asRiNodS/Render
+TERM_PROGRAM_VERSION=388.1.3
+OSNAME=macosx
+PERL_BIN=/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms::/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices
+TERM_SESSION_ID=08C395F9-69A0-4DC8-9DE9-5914C23D168F
+METHODS_4_TCOFFEE=/Users/cnotredame//.t_coffee//methods/
+VERSIONER_PERL_VERSION=5.18
+XAPPLRESDIR=/sw/etc/app-defaults/
+http_proxy=
+HTTP_proxy=
+USER=cnotredame
+SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.mMz4rqepoV/Listeners
+__CF_USER_TEXT_ENCODING=0x1F6:0x0:0x0
+ENV_4_TCOFFEE=/Users/cnotredame//.t_coffee//.t_coffee_env
+all_proxy=
+ALL_PROXY=
+HTTP_proxy_4_TCOFFEE=
+PATH=/Users/cnotredame//.t_coffee//plugins/macosx/:/opt/local/bin:/opt/local/sbin:/opt/local/bin:/opt/local/sbin:/Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/packages/x3dna-v2.1/bin:/Users/cnotredame/bin/macosx://Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms::/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices:/Users/cnotredame/bin/Scripts/:/Users/cnotredame/Library/Haskell/ghc-7.4.2/lib/epub-tools-2.0.0/bin/:/sw/bin:/sw/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin
+_=/usr/bin/printenv
+COLOR_4_TCOFFEE=new
+DIR_4_TCOFFEE=/Users/cnotredame//.t_coffee/
+PWD=/Users/cnotredame/Dropbox/projects/git/tcoffee/tmp/RANDOMSTRINGSdQwCjRiYnOpwt18pA5v/tmp/RANDOMSTRINGoAsdyiwYnq0clMmum9UT/data
+CACHE_4_TCOFFEE=/Users/cnotredame//.t_coffee//cache/
+X3DNA=/Users/cnotredame/Dropbox/packages/x3dna-v2.1
+DBUS_LAUNCHD_SESSION_BUS_SOCKET=/private/tmp/com.apple.launchd.CeZrDaslOL/unix_domain_listener
+XPC_FLAGS=0x0
+VERSIONER_PERL_PREFER_32_BIT=no
+XPC_SERVICE_NAME=0
+ERRORFILE_4_TCOFFEE=NO
+PLUGINS_4_TCOFFEE=/Users/cnotredame//.t_coffee//plugins/macosx/
+SHLVL=3
+HOME=/Users/cnotredame
+DUMP_4_TCOFFEE=/Users/cnotredame/Dropbox/projects/git/tcoffee/tmp/RANDOMSTRINGSdQwCjRiYnOpwt18pA5v/tmp/RANDOMSTRINGoAsdyiwYnq0clMmum9UT/nature_protocol.tests.9.dump
+HTTP_PROXY=
+MAFFT_BINARIES=
+BIN=/Users/cnotredame/bin/macosx
+LOGNAME=cnotredame
+EMAIL_4_TCOFFEE=cedric.notredame@gmail.com
+LC_CTYPE=UTF-8
+EMAIL=cedric.notredame@gmail.com
+UPDATED_ENV_4_TCOFFEE=1
+INFOPATH=/sw/share/info:/sw/info:/usr/share/info
+DISPLAY=/private/tmp/com.apple.launchd.MDJPhYnCNw/org.macosforge.xquartz:0
+TC_MASTER_NODE=1
+NUMBER_OF_PROCESSORS=8
+ALL_proxy=
+SECURITYSESSIONID=186a6
+LOCKDIR_4_TCOFFEE=/var/tmp/tco/tco48hqwv2j30526//lck/9vlnojksbl/
+TMP_4_TCOFFEE=/var/tmp/tco/tco48hqwv2j30526/
+USER_BIN=/Users/cnotredame/bin/macosx
+SCRIPT_BIN=/Users/cnotredame/bin/Scripts/
+</environement>
+<DumpStatus>OK</DumpStatus>
+<DumpFile>/Users/cnotredame/Dropbox/projects/git/tcoffee/tmp/RANDOMSTRINGSdQwCjRiYnOpwt18pA5v/tmp/RANDOMSTRINGoAsdyiwYnq0clMmum9UT/nature_protocol.tests.9.dump</DumpFile>
+</DumpIO>

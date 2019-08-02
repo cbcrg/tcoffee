@@ -1,0 +1,689 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>FAQ &mdash; T-Coffee 11 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Citations &amp; References" href="tcoffee_citations_references.html" />
+    <link rel="prev" title="T-Coffee doc test" href="tcoffee_doctest.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> T-Coffee
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                11
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="tcoffee_installation.html">T-Coffee Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tcoffee_quickstart_regressive.html">Quick Start Regressive Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tcoffee_quickstart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tcoffee_main_documentation.html">T-Coffee Main Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tcoffee_technical_documentation.html">T-Coffee Technical Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tcoffee_webserver.html">T-Coffee Web Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tcoffee_doctest.html">T-Coffee doc test</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">FAQ</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#abnormal-terminations-results">Abnormal Terminations &amp; Results</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#q-the-program-keeps-crashing-when-i-give-my-sequences">Q: The program keeps crashing when I give my sequences</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#q-the-default-alignment-is-not-good-enough">Q: The default alignment is not good enough</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#q-the-alignment-contains-obvious-mistakes">Q: The alignment contains obvious mistakes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#q-the-program-is-crashing">Q: The program is crashing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#q-i-am-running-out-of-memory">Q: I am running out of memory</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#input-output-control">Input/Output control</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#q-how-many-sequences-can-t-coffee-handle-deprecated">Q: How many sequences can T_Coffee handle? [Deprecated]</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#q-can-i-prevent-the-output-of-all-the-warnings">Q: Can I prevent the output of all the warnings?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#q-how-many-ways-to-pass-parameters-to-t-coffee">Q: How many ways to pass parameters to t_coffee?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#q-how-can-i-change-the-default-output-format">Q: How can I change the default output format?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#q-my-sequences-are-slightly-different-between-all-the-alignments">Q: My sequences are slightly different between all the alignments.</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#q-is-it-possible-to-pipe-stuff-out-of-t-coffee">Q: Is it possible to pipe stuff out of T-Coffee?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#q-is-it-possible-to-pipe-stuff-into-t-coffee">Q: Is it possible to pipe stuff into T_Coffee?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#q-can-i-read-my-parameters-from-a-file">Q: Can I read my parameters from a file?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#q-i-want-to-decide-myself-on-the-name-of-the-output-files">Q: I want to decide myself on the name of the output files !!!</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#q-i-want-to-use-the-sequences-in-an-alignment-file">Q: I want to use the sequences in an alignment file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#q-i-only-want-to-produce-a-library">Q: I only want to produce a library</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#q-i-want-to-turn-an-alignment-into-a-library">Q: I want to turn an alignment into a library</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#q-i-want-to-concatenate-two-libraries">Q: I want to concatenate two libraries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#q-what-happens-to-the-gaps-when-an-alignment-is-fed-to-t-coffee">Q: What happens to the gaps when an alignment is fed to T-Coffee?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#q-i-cannot-print-the-html-graphic-display">Q: I cannot print the html graphic display!!!</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#q-i-want-to-output-an-html-file-and-a-regular-file">Q: I want to output an html file and a regular file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#q-i-would-like-to-output-more-than-one-alignment-format-at-the-same-time">Q: I would like to output more than one alignment format at the same time</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#alignment-computation">Alignment computation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#q-is-t-coffee-the-best-why-not-using-muscle-mafft-or-probcons">Q: Is T-Coffee the best? Why not using MUSCLE, MAFFT, or ProbCons???</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#q-can-t-coffee-align-nucleic-acids">Q: Can T_Coffee align nucleic acids ???</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#q-i-do-not-want-to-compute-the-alignment">Q: I do not want to compute the alignment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#q-i-would-like-to-force-some-residues-to-be-aligned">Q: I would like to force some residues to be aligned</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#q-i-would-like-to-use-structural-alignments">Q: I would like to use structural alignments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#q-i-want-to-build-my-own-libraries">Q: I want to build my own libraries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#q-i-want-to-use-my-own-tree">Q: I want to use my own tree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#q-i-want-to-align-coding-dna">Q: I want to align coding DNA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#q-i-do-not-want-to-use-all-the-possible-pairs-when-computing-the-library">Q: I do not want to use all the possible pairs when computing the library</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#q-i-only-want-to-use-specific-pairs-to-compute-the-library">Q: I only want to use specific pairs to compute the library</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#q-there-are-duplicates-or-quasi-duplicates-in-my-set">Q: There are duplicates or quasi-duplicates in my set.</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#using-structures-and-profiles">Using Structures and Profiles</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#q-can-i-align-sequences-to-a-profile-with-t-coffee">Q: Can I align sequences to a profile with T-Coffee?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#q-can-i-align-sequences-two-or-more-profiles">Q: Can I align sequences two or more profiles?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#q-can-i-align-two-profiles-according-to-the-structures-they-contain">Q: Can I align two profiles according to the structures they contain?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#q-t-coffee-becomes-very-slow-when-combining-sequences-and-structures">Q: T-Coffee becomes very slow when combining sequences and structures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#q-can-i-use-a-local-installation-of-pdb">Q: Can I use a local installation of PDB?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#improving-evaluating-your-msas">Improving/Evaluating Your MSAs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#q-how-can-i-edit-my-alignment-manually">Q: How can I edit my alignment manually?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#q-have-i-improved-or-not-my-alignment">Q: Have I improved or not my alignment?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#q-how-good-is-my-alignment">Q: How good is my alignment?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#q-what-is-that-color-index">Q: What is that color index?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#q-can-i-evaluate-alignments-not-produced-with-t-coffee">Q: Can I evaluate alignments NOT produced with T-Coffee?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#q-can-i-compare-two-alignments">Q: Can I compare two alignments?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#q-i-am-aligning-sequences-with-long-regions-of-very-good-overlap">Q: I am aligning sequences with long regions of very good overlap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#q-why-is-t-coffee-changing-the-names-of-my-sequences">Q: Why is T-Coffee changing the names of my sequences!!!!</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#release-notes">Release Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tcoffee_citations_references.html">Citations &amp; References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tcoffee_contacts_adresses.html">Contacts, Adresses &amp; Contributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tcoffee_license.html">License &amp; Terms of Use</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">T-Coffee</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>FAQ</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/tcoffee_faq.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="faq">
+<h1>FAQ<a class="headerlink" href="#faq" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="abnormal-terminations-results">
+<h2>Abnormal Terminations &amp; Results<a class="headerlink" href="#abnormal-terminations-results" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="q-the-program-keeps-crashing-when-i-give-my-sequences">
+<h3>Q: The program keeps crashing when I give my sequences<a class="headerlink" href="#q-the-program-keeps-crashing-when-i-give-my-sequences" title="Permalink to this headline">¶</a></h3>
+<p>A-1: This may be a format problem. Try to reformat your sequences, we recommend the FASTA format. If the problem persists, contact us.</p>
+<p>A-2: Your sequences may not be recognized for what they really are. Normally T-Coffee recognizes the type of your sequences automatically, but if it fails specify the sequence format with <strong>-type</strong> and the type of sequence <strong>DNA, RNA or PROTEIN</strong>.</p>
+<p>A-3: Costly computation or data gathered over the net is stored by T-Coffee in a cache directory. Sometimes, some of these files can be corrupted and cause an abnormal termination. You can either empty the cache ( ~/.t_coffee/cache/), request T-Coffee to run without using it (command 1), or update the files corresponding to your data (command 2).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Command 1: No cache
+$$: t_coffee -pdb=struc1.pdb,struc2.pdb,struc3.pdb -method sap_pair -cache=no
+
+Command 2: Update cache
+$$: t_coffee -pdb=struc1.pdb,struc2.pdb,struc3.pdb -method sap_pair -cache=update
+</pre></div>
+</div>
+</div>
+<div class="section" id="q-the-default-alignment-is-not-good-enough">
+<h3>Q: The default alignment is not good enough<a class="headerlink" href="#q-the-default-alignment-is-not-good-enough" title="Permalink to this headline">¶</a></h3>
+<p>A: see next question</p>
+</div>
+<div class="section" id="q-the-alignment-contains-obvious-mistakes">
+<h3>Q: The alignment contains obvious mistakes<a class="headerlink" href="#q-the-alignment-contains-obvious-mistakes" title="Permalink to this headline">¶</a></h3>
+<p>A: This happens with most multiple alignment procedures. However, wrong alignments are sometimes caused by bugs or an implementation mistake. Please report the most unexpected results to the authors.</p>
+</div>
+<div class="section" id="q-the-program-is-crashing">
+<h3>Q: The program is crashing<a class="headerlink" href="#q-the-program-is-crashing" title="Permalink to this headline">¶</a></h3>
+<p>A: If you get the message <strong>FAILED TO ALLOCATE REQUIRED MEMORY</strong> refer to the next question. Otherwise, if the program crashes check whether you are using the right syntax. If the problem persists, contact us.</p>
+</div>
+<div class="section" id="q-i-am-running-out-of-memory">
+<h3>Q: I am running out of memory<a class="headerlink" href="#q-i-am-running-out-of-memory" title="Permalink to this headline">¶</a></h3>
+<p>A: You can use a more accurate, slower and less memory hungry dynamic programming mode called myers_miller_pair_wise (command 1). Note that this mode will be much less time efficient than the default, although it may be slightly more accurate. In practice the parameterization associate with special mode turns off every memory expensive heuristic within T-Coffee (command 2). If you keep running out of memory, you may also want to reduce the number of sequences using <strong>-maxnseq</strong>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Command 1:
+$$: t_coffee sample_seq1.fasta -mode low_memory
+
+Command 2:
+$$: t_coffee sample_seq1.fasta -method=slow_pair,lalign_id_pair -distance_matrix_mode \
+    =idscore -dp_mode=myers_miller_pair_wise
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="input-output-control">
+<h2>Input/Output control<a class="headerlink" href="#input-output-control" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="q-how-many-sequences-can-t-coffee-handle-deprecated">
+<h3>Q: How many sequences can T_Coffee handle? [Deprecated]<a class="headerlink" href="#q-how-many-sequences-can-t-coffee-handle-deprecated" title="Permalink to this headline">¶</a></h3>
+<p>A: T-Coffee is limited to a maximum of 50 sequences. Above this number, the program automatically switches to a heuristic mode, named DPA, where DPA stands for Double Progressive Alignment. DPA is still in development and the version currently shipped with T-Coffee is only a beta version.</p>
+</div>
+<div class="section" id="q-can-i-prevent-the-output-of-all-the-warnings">
+<h3>Q: Can I prevent the output of all the warnings?<a class="headerlink" href="#q-can-i-prevent-the-output-of-all-the-warnings" title="Permalink to this headline">¶</a></h3>
+<p>A: Yes, by setting <strong>-no_warning</strong>.</p>
+</div>
+<div class="section" id="q-how-many-ways-to-pass-parameters-to-t-coffee">
+<h3>Q: How many ways to pass parameters to t_coffee?<a class="headerlink" href="#q-how-many-ways-to-pass-parameters-to-t-coffee" title="Permalink to this headline">¶</a></h3>
+<p>A: Refer to the <strong>T-Coffee Technical Documentation</strong>, Section <strong>T-Coffee Parameters &amp; Flags</strong>.</p>
+</div>
+<div class="section" id="q-how-can-i-change-the-default-output-format">
+<h3>Q: How can I change the default output format?<a class="headerlink" href="#q-how-can-i-change-the-default-output-format" title="Permalink to this headline">¶</a></h3>
+<p>A: See the <strong>-output</strong> option in the <strong>T-Coffee Main Documentation</strong>; nearly all common output formats are recognized by T-Coffee.</p>
+</div>
+<div class="section" id="q-my-sequences-are-slightly-different-between-all-the-alignments">
+<h3>Q: My sequences are slightly different between all the alignments.<a class="headerlink" href="#q-my-sequences-are-slightly-different-between-all-the-alignments" title="Permalink to this headline">¶</a></h3>
+<p>A: It does not matter. T-Coffee will reconstruct a set of sequences that incorporates all the residues potentially missing in some of the sequences (See flag <strong>-in</strong>).</p>
+</div>
+<div class="section" id="q-is-it-possible-to-pipe-stuff-out-of-t-coffee">
+<h3>Q: Is it possible to pipe stuff out of T-Coffee?<a class="headerlink" href="#q-is-it-possible-to-pipe-stuff-out-of-t-coffee" title="Permalink to this headline">¶</a></h3>
+<p>A: Specify stderr or stdout as output filename, the output will be redirected accordingly. For instance this instruction will output the tree (in Newick format) and the alignment to stdout.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$$: t_coffee sample_seq1.fasta -outfile=stdout -out_lib=stdout
+</pre></div>
+</div>
+</div>
+<div class="section" id="q-is-it-possible-to-pipe-stuff-into-t-coffee">
+<h3>Q: Is it possible to pipe stuff into T_Coffee?<a class="headerlink" href="#q-is-it-possible-to-pipe-stuff-into-t-coffee" title="Permalink to this headline">¶</a></h3>
+<p>A: If as a file name you specify stdin, the content of this file will be expected throught pipe:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$$: cat sample_seq1.fasta | t_coffee -infile=stdin
+
+is equivalent to:
+
+$$: t_coffee sample_seq1.fasta
+</pre></div>
+</div>
+<p>If you do not give any argument to T-Coffee, they will be expected to come from pipe:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$$: cat sample_param_file.param | t_coffee -parameters=stdin
+
+or
+
+$$: echo -seq=sample_seq1.fasta -method=clustalw_pair | t_coffee -parameters=stdin
+</pre></div>
+</div>
+</div>
+<div class="section" id="q-can-i-read-my-parameters-from-a-file">
+<h3>Q: Can I read my parameters from a file?<a class="headerlink" href="#q-can-i-read-my-parameters-from-a-file" title="Permalink to this headline">¶</a></h3>
+<p>A: See the <strong>T-Coffee Technical Documentation</strong>.</p>
+</div>
+<div class="section" id="q-i-want-to-decide-myself-on-the-name-of-the-output-files">
+<h3>Q: I want to decide myself on the name of the output files !!!<a class="headerlink" href="#q-i-want-to-decide-myself-on-the-name-of-the-output-files" title="Permalink to this headline">¶</a></h3>
+<p>A: Use the <strong>-run_name</strong> flag:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$$: t_coffee sample_seq1.fasta -run_name=luke_skywalker
+</pre></div>
+</div>
+</div>
+<div class="section" id="q-i-want-to-use-the-sequences-in-an-alignment-file">
+<h3>Q: I want to use the sequences in an alignment file<a class="headerlink" href="#q-i-want-to-use-the-sequences-in-an-alignment-file" title="Permalink to this headline">¶</a></h3>
+<p>A: Simply fed your alignment any way you like, but do not forget to append the prefix S for sequence:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$$: t_coffee sample_aln1.aln -in proba_pair
+
+$$: t_coffee -seq=sample_aln1.aln -method=slow_pair,lalign_id_pair -outfile=outaln
+</pre></div>
+</div>
+<p>This means that the gaps will be reset and that the alignment you provide will not be considered as an alignment, but as a set of sequences.</p>
+</div>
+<div class="section" id="q-i-only-want-to-produce-a-library">
+<h3>Q: I only want to produce a library<a class="headerlink" href="#q-i-only-want-to-produce-a-library" title="Permalink to this headline">¶</a></h3>
+<p>A: use the <strong>-lib_only</strong> flag; but note that this supersedes the use of the <strong>-convert</strong> flag. Its main advantage is to restrict computation time to the actual library computation.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$$: t_coffee sample_seq1.fasta -out_lib=sample_lib1.tc_lib -lib_only
+</pre></div>
+</div>
+</div>
+<div class="section" id="q-i-want-to-turn-an-alignment-into-a-library">
+<h3>Q: I want to turn an alignment into a library<a class="headerlink" href="#q-i-want-to-turn-an-alignment-into-a-library" title="Permalink to this headline">¶</a></h3>
+<p>A: use the <strong>-lib_only</strong> flag (command 1). It is also possible to control the weight associated with this alignment with the flag <strong>-weight</strong> (command 2).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Command 1:
+$$: t_coffee -in=Asample_aln1.aln -out_lib=sample_lib1.tc_lib -lib_only
+
+Command 2:
+$$: t_coffee -aln=sample_aln1.aln -out_lib=sample_lib1.tc_lib -lib_only -weight=1000
+</pre></div>
+</div>
+</div>
+<div class="section" id="q-i-want-to-concatenate-two-libraries">
+<h3>Q: I want to concatenate two libraries<a class="headerlink" href="#q-i-want-to-concatenate-two-libraries" title="Permalink to this headline">¶</a></h3>
+<p>A: You cannot concatenate these files on their own. You will have to use T-Coffee assuming you want to combine for instance <code class="docutils literal notranslate"><span class="pre">tc_lib1.tc_lib</span></code> and <code class="docutils literal notranslate"><span class="pre">tc_lib2.tc_lib</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$$: t_coffee -lib=sample_lib1.tc_lib,sample_lib2.tc_lib -lib_only -out_lib=sample_lib3.tc_lib
+</pre></div>
+</div>
+</div>
+<div class="section" id="q-what-happens-to-the-gaps-when-an-alignment-is-fed-to-t-coffee">
+<h3>Q: What happens to the gaps when an alignment is fed to T-Coffee?<a class="headerlink" href="#q-what-happens-to-the-gaps-when-an-alignment-is-fed-to-t-coffee" title="Permalink to this headline">¶</a></h3>
+<p>A: An alignment is <strong>ALWAYS</strong> considered as a library <strong>AND</strong> a set of sequences. If you want your alignment to be considered as a library only, use the S identifier; it will be seen as a sequence file, even if it has an alignment format (gaps will be removed).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$$: t_coffee Ssample_aln1.aln -outfile=outaln
+</pre></div>
+</div>
+</div>
+<div class="section" id="q-i-cannot-print-the-html-graphic-display">
+<h3>Q: I cannot print the html graphic display!!!<a class="headerlink" href="#q-i-cannot-print-the-html-graphic-display" title="Permalink to this headline">¶</a></h3>
+<p>A: This is a problem that has to do with your browser. Instead of requesting the score_html output, request the score_ps output that can be read using ghostview:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Postscript
+$$: t_coffee sample_seq1.fasta -output=score_ps
+
+PDF only if you have ps2pdf installed
+$*: t_coffee sample_seq1.fasta -output=score_pdf
+</pre></div>
+</div>
+</div>
+<div class="section" id="q-i-want-to-output-an-html-file-and-a-regular-file">
+<h3>Q: I want to output an html file and a regular file<a class="headerlink" href="#q-i-want-to-output-an-html-file-and-a-regular-file" title="Permalink to this headline">¶</a></h3>
+<p>A: See the next question.</p>
+</div>
+<div class="section" id="q-i-would-like-to-output-more-than-one-alignment-format-at-the-same-time">
+<h3>Q: I would like to output more than one alignment format at the same time<a class="headerlink" href="#q-i-would-like-to-output-more-than-one-alignment-format-at-the-same-time" title="Permalink to this headline">¶</a></h3>
+<p>A: The flag <strong>-output</strong> accepts more than one parameter. For instance this will output four alignment files in the corresponding formats. Alignments’ names will have the format name as an extension.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$$: t_coffee sample_seq1.fasta -output=clustalw,html,score_ps,msf
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Note: you need to have the converter ps2pdf installed on your system (standard under Linux and Cygwin). The latest versions of Internet Explorer and Netscape now allow the user to print the html display. Do not forget to request background printing.</p>
+</div>
+</div>
+</div>
+<div class="section" id="alignment-computation">
+<h2>Alignment computation<a class="headerlink" href="#alignment-computation" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="q-is-t-coffee-the-best-why-not-using-muscle-mafft-or-probcons">
+<h3>Q: Is T-Coffee the best? Why not using MUSCLE, MAFFT, or ProbCons???<a class="headerlink" href="#q-is-t-coffee-the-best-why-not-using-muscle-mafft-or-probcons" title="Permalink to this headline">¶</a></h3>
+<p>A: All these packages are good packages and they sometimes outperform T-Coffee. They also claim to outperform one another… If you have them installed locally, you can have T-Coffee to generate a consensus alignment:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$$: t_coffee sample_seq1.fasta -method muscle_msa,probcons_msa,mafft_msa,lalign_id_pair,slow_pair
+</pre></div>
+</div>
+</div>
+<div class="section" id="q-can-t-coffee-align-nucleic-acids">
+<h3>Q: Can T_Coffee align nucleic acids ???<a class="headerlink" href="#q-can-t-coffee-align-nucleic-acids" title="Permalink to this headline">¶</a></h3>
+<p>A: Normally it can, but check in the log that the program recognises the right type. If this fails, you will need to manually set the type using <strong>-type dna</strong></p>
+</div>
+<div class="section" id="q-i-do-not-want-to-compute-the-alignment">
+<h3>Q: I do not want to compute the alignment<a class="headerlink" href="#q-i-do-not-want-to-compute-the-alignment" title="Permalink to this headline">¶</a></h3>
+<p>A: use the <strong>-convert</strong> flag. This command will read the .aln file and turn it into an .msf alignment.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$$: t_coffee sample_aln1.aln -convert -output=gcg
+</pre></div>
+</div>
+</div>
+<div class="section" id="q-i-would-like-to-force-some-residues-to-be-aligned">
+<h3>Q: I would like to force some residues to be aligned<a class="headerlink" href="#q-i-would-like-to-force-some-residues-to-be-aligned" title="Permalink to this headline">¶</a></h3>
+<p>If you want to brutally force some residues to be aligned, you may use as a post processing, the <strong>+force_aln</strong> function of <strong>seq_reformat</strong>. You can either specify single (command 1) or multiple constraints using a TC_LIB_FORMAT_02 file (command 2). When giving more than one constraint, these will be applied one after the other in the order they are provided. This greedy procedure means that the Nth constraint may disrupt the (N-1)th previously imposed constraint, hence the importance of forcing the constraints in the right order, with the most important coming last. We do not recommend imposing hard constraints on an alignment, and it is much more advisable to use the soft constraints provided by standard T-Coffee libraries (cf. <strong>T-Coffee Technical Documentation</strong>, subsection <strong>Creating your own T-Coffee libraries</strong>).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Command 1: single constraint
+$$: t_coffee -other_pg seq_reformat -in sample_aln3.aln -action +force_aln seq1 5 seq2 6
+
+Command 2: multiple constraints
+$$: t_coffee -other_pg seq_reformat -in sample_aln3.aln -action +force_aln sample_lib3.tc_lib02
+</pre></div>
+</div>
+<p>The TC_LIB_FORMAT_02 is still experimental and unsupported. It can only be used in the context of the force_aln function described here. The tc_lib02 format is as follow:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span><span class="n">TC_LIB_FORMAT_02</span>
+<span class="n">SeqX</span> <span class="n">resY</span> <span class="n">ResY_index</span>  <span class="n">SeqZ</span> <span class="n">ResZ</span> <span class="n">ResZ_index</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="q-i-would-like-to-use-structural-alignments">
+<h3>Q: I would like to use structural alignments<a class="headerlink" href="#q-i-would-like-to-use-structural-alignments" title="Permalink to this headline">¶</a></h3>
+<p>Refer to the <strong>T-Coffee Main Documentation and/or T-Coffee Technical Documentation</strong>.</p>
+</div>
+<div class="section" id="q-i-want-to-build-my-own-libraries">
+<h3>Q: I want to build my own libraries<a class="headerlink" href="#q-i-want-to-build-my-own-libraries" title="Permalink to this headline">¶</a></h3>
+<p>A: Turn your alignment into a library, forcing the residues to have a very good weight, using structure:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$$: t_coffee -aln=sample_seq1.aln -weight=1000 -out_lib=sample_seq1.tc_lib -lib_only
+</pre></div>
+</div>
+<p>The value 1000 is simply a high value that should make it more likely for the substitution found in your alignment to reoccur in the final alignment. This will produce the library sample_aln1.tc_lib that you can later use when aligning all the sequences:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$$: t_coffee -seq=sample_seq1.fasta -lib=sample_seq1.tc_lib -outfile sample_seq1.aln
+</pre></div>
+</div>
+<p>If you only want some of these residues to be aligned, or want to give them individual weights, you will have to edit the library file yourself or use the -force_aln option (cf FAQ: I would like to force some residues to be aligned). A value of N*N * 1000 (N being the number of sequences) usually ensure the respect of a constraint.</p>
+</div>
+<div class="section" id="q-i-want-to-use-my-own-tree">
+<h3>Q: I want to use my own tree<a class="headerlink" href="#q-i-want-to-use-my-own-tree" title="Permalink to this headline">¶</a></h3>
+<p>A: Use the <strong>-usetree=&lt;your own tree&gt;</strong> flag:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$$: t_coffee sample_seq1.fasta -usetree=sample_seq1_tree_nj.nwk
+</pre></div>
+</div>
+</div>
+<div class="section" id="q-i-want-to-align-coding-dna">
+<h3>Q: I want to align coding DNA<a class="headerlink" href="#q-i-want-to-align-coding-dna" title="Permalink to this headline">¶</a></h3>
+<p>A: Use the <strong>fasta_cdna_pair</strong> method that compares two cDNA using the best reading frame and taking frameshifts into account. Notice that in the resulting alignments (command 1), all the gaps are of modulo3, except one small gap in the first line of sequence hmgl_trybr. This is a frameshift made on purpose. You can realign the same sequences while ignoring their coding potential and treating them like standard DNA (command 2).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Command 1:
+$$: t_coffee three_cdna.fasta -method=cdna_fast_pair
+
+Command 2:
+$$: t_coffee three_cdna.fasta
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This method has not yet been fully tested and is only provided ‘as-is’ with no warranty. Any feedback will be much appreciated.</p>
+</div>
+</div>
+<div class="section" id="q-i-do-not-want-to-use-all-the-possible-pairs-when-computing-the-library">
+<h3>Q: I do not want to use all the possible pairs when computing the library<a class="headerlink" href="#q-i-do-not-want-to-use-all-the-possible-pairs-when-computing-the-library" title="Permalink to this headline">¶</a></h3>
+<p>See next question.</p>
+</div>
+<div class="section" id="q-i-only-want-to-use-specific-pairs-to-compute-the-library">
+<h3>Q: I only want to use specific pairs to compute the library<a class="headerlink" href="#q-i-only-want-to-use-specific-pairs-to-compute-the-library" title="Permalink to this headline">¶</a></h3>
+<p>A: Simply write in a file the list of sequence groups you want to use. Pairwise methods (slow_pair, proba_pair, &lt;method&gt;_pair…) will only be applied to list of pairs of sequences, while multiple methods (clustalw_msa, mafft_msa, &lt;method_msa…) will be applied to any dataset having more than two sequences.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$$: t_coffee sample_seq1.fasta -method=clustalw_pair,clustalw_msa -lib_list=sample_list1.lib_list
+
+Format of the list of libraries:
+***************sample_list1.lib_list****
+2 hmgl_trybr hmgt_mouse
+2 hmgl_trybr hmgb_chite
+2 hmgl_trybr hmgl_wheat
+3 hmgl_trybr hmgl_wheat hmgl_mouse
+***************sample_list1.lib_list****
+</pre></div>
+</div>
+</div>
+<div class="section" id="q-there-are-duplicates-or-quasi-duplicates-in-my-set">
+<h3>Q: There are duplicates or quasi-duplicates in my set.<a class="headerlink" href="#q-there-are-duplicates-or-quasi-duplicates-in-my-set" title="Permalink to this headline">¶</a></h3>
+<p>A: If you can remove them, this will make the program run faster, otherwise the T-Coffee scoring scheme should be able to avoid overweighting of overrepresented sequences.</p>
+</div>
+</div>
+<div class="section" id="using-structures-and-profiles">
+<h2>Using Structures and Profiles<a class="headerlink" href="#using-structures-and-profiles" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="q-can-i-align-sequences-to-a-profile-with-t-coffee">
+<h3>Q: Can I align sequences to a profile with T-Coffee?<a class="headerlink" href="#q-can-i-align-sequences-to-a-profile-with-t-coffee" title="Permalink to this headline">¶</a></h3>
+<p>A: Yes, you simply need to indicate that your alignment is a profile with the R tag:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$$: t_coffee sample_seq1.fasta -profile=sample_aln2.aln -outfile chewbacca
+</pre></div>
+</div>
+</div>
+<div class="section" id="q-can-i-align-sequences-two-or-more-profiles">
+<h3>Q: Can I align sequences two or more profiles?<a class="headerlink" href="#q-can-i-align-sequences-two-or-more-profiles" title="Permalink to this headline">¶</a></h3>
+<p>A: Yes, you, simply tag your profiles with the letter R and the program will treat them like standard sequences:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$$: t_coffee -profile=sample_aln1.aln,sample_aln2.aln -outfile han_solo
+</pre></div>
+</div>
+</div>
+<div class="section" id="q-can-i-align-two-profiles-according-to-the-structures-they-contain">
+<h3>Q: Can I align two profiles according to the structures they contain?<a class="headerlink" href="#q-can-i-align-two-profiles-according-to-the-structures-they-contain" title="Permalink to this headline">¶</a></h3>
+<p>A: Yes, as long as the structure sequences are named according to their PDB identifier:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$$: t_coffee -profile=sample_profile1.aln,sample_profile2.aln -mode=3dcoffee
+</pre></div>
+</div>
+</div>
+<div class="section" id="q-t-coffee-becomes-very-slow-when-combining-sequences-and-structures">
+<h3>Q: T-Coffee becomes very slow when combining sequences and structures<a class="headerlink" href="#q-t-coffee-becomes-very-slow-when-combining-sequences-and-structures" title="Permalink to this headline">¶</a></h3>
+<p>A: This is true. By default the structures are fetched through the net using RCSB. The problem arises when T-Coffee looks for the structure of sequences WITHOUT structures. One solution is to install the PDB database locally. In that case you will need to set two environment variables:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Variables</span> <span class="n">to</span> <span class="nb">set</span> <span class="n">up</span><span class="p">:</span>
+<span class="c1">##: setenv (or export) PDB_DIR=&#39;directory containing the pdb structures&#39;</span>
+<span class="c1">##: setenv (or export) NO_REMOTE_PDB_DIR=1</span>
+</pre></div>
+</div>
+<p>Interestingly, the observation that sequences without structures are those that take the most time to be checked is a reminder of the strongest rational argument that I know of against torture: any innocent would require the maximum amount of torture to establish his/her innocence, which sounds…hummmm…strange.. Then again I was never struck by the efficiency of the Bush Jr administration.</p>
+</div>
+<div class="section" id="q-can-i-use-a-local-installation-of-pdb">
+<h3>Q: Can I use a local installation of PDB?<a class="headerlink" href="#q-can-i-use-a-local-installation-of-pdb" title="Permalink to this headline">¶</a></h3>
+<p>A: Yes, T-Coffee supports three types of installations:</p>
+<ul class="simple">
+<li><p><em>Ad hoc</em> installation where all your structures are in a directory under the form pdbid.pdb, pdbid.id.Z or pdbid.pdb.gz. In that case, all you need to do is set the environement variables correctly:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Setting</span> <span class="n">up</span> <span class="n">variable</span>
+<span class="c1">##: setenv (or export) PDB_DIR=&#39;directory containing the pdb structures&#39;</span>
+<span class="c1">##: setenv (or export) NO_REMOTE_PDB_DIR=1</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Full standard PDB installation using the all section of PDB. In that case, you must set the variables to:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Setting</span> <span class="n">up</span> <span class="n">variable</span>
+<span class="c1">##: setenv (or export) PDB_DIR=&#39;&lt;some absolute path&gt;/data/structures/all/pdb/&#39;</span>
+<span class="c1">##: setenv (or export) NO_REMOTE_PDB_DIR=1</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Reduced standard PDB installation using the divided section of pdb:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Setting</span> <span class="n">up</span> <span class="n">the</span> <span class="n">PDB</span><span class="p">:</span>
+<span class="c1">##: setenv (or export) PDB_DIR=&#39;&lt;some absolute path&gt;/data/structures/divided/pdb/</span>
+<span class="c1">##: setenv (or export) NO_REMOTE_PDB_DIR=1</span>
+</pre></div>
+</div>
+<p>If you need to do more clever things, you should know that all the PDB manipulation is made in T-Coffee by a perl script named <strong>extract_from_pdb</strong>. You can then edit the script to suit your needs; T-Coffee will use your edited version if it is in the current directory and issue a warning that it used a local version. If you make extensive modifications, I would appreciate you send me the corrected file so that I can incorporate it in the next distribution. By default, T-Coffee also requires two important PDB files declared using the two following variables. These variables do not need to be set if the considered files are in the cache directory (default behavior):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Found</span> <span class="n">at</span><span class="p">:</span> <span class="n">ftp</span><span class="p">:</span><span class="o">//</span><span class="n">ftp</span><span class="o">.</span><span class="n">wwpdb</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">pub</span><span class="o">/</span><span class="n">pdb</span><span class="o">/</span><span class="n">derived_data</span><span class="o">/</span><span class="n">pdb_entry_type</span><span class="o">.</span><span class="n">txt</span>
+<span class="c1">##: export PDB_ENTRY_TYPE_FILE=&lt;location of the file pdb_entry_type.txt&gt;</span>
+
+<span class="n">Found</span> <span class="n">at</span><span class="p">:</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">rcsb</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">pdb</span><span class="o">/</span><span class="n">rest</span><span class="o">/</span><span class="n">getUnreleased</span>
+<span class="c1">##: export PDB_UNREALEASED_FILE=&lt;location of the file unrealeased.xml&gt;</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Since the file <code class="docutils literal notranslate"><span class="pre">unreleased.xml</span></code> is not part of the PDB distribution, T-Coffee will make an attempt to obtain it even when using the <strong>NO_REMOTE_PDB_DIR=1 mode</strong>. You must therefore make sure that the file <code class="docutils literal notranslate"><span class="pre">PDB_UNREALEASED_FILE</span></code> is pointing to is read and write.</p>
+</div>
+</div>
+</div>
+<div class="section" id="improving-evaluating-your-msas">
+<h2>Improving/Evaluating Your MSAs<a class="headerlink" href="#improving-evaluating-your-msas" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="q-how-can-i-edit-my-alignment-manually">
+<h3>Q: How can I edit my alignment manually?<a class="headerlink" href="#q-how-can-i-edit-my-alignment-manually" title="Permalink to this headline">¶</a></h3>
+<p>A: We recommend to use Jalview, a free program for MSA editing that you can find <a class="reference external" href="http://www.jalview.org">here</a>.</p>
+</div>
+<div class="section" id="q-have-i-improved-or-not-my-alignment">
+<h3>Q: Have I improved or not my alignment?<a class="headerlink" href="#q-have-i-improved-or-not-my-alignment" title="Permalink to this headline">¶</a></h3>
+<p>A: Using structural information is the only way to establish whether you have improved or not your alignment. The CORE index can also give you some information. Refers to the <strong>T-Coffee Main Documentation</strong>, section <strong>Evaluating Your Alignment</strong>.</p>
+</div>
+<div class="section" id="q-how-good-is-my-alignment">
+<h3>Q: How good is my alignment?<a class="headerlink" href="#q-how-good-is-my-alignment" title="Permalink to this headline">¶</a></h3>
+<p>A: Refers to the <strong>T-Coffee Main Documentation</strong>, section <strong>Evaluating Your Alignment</strong>. Or just look at the color index ;-)</p>
+</div>
+<div class="section" id="q-what-is-that-color-index">
+<h3>Q: What is that color index?<a class="headerlink" href="#q-what-is-that-color-index" title="Permalink to this headline">¶</a></h3>
+<p>A: T-Coffee can provide you with a measure of consistency among all the methods used. An html file is produced by default each time you run an alignment. This html file is a colored version of your MSA that you can visualize with any common browser. As alternatives, you can use <strong>score_ps</strong> (postscript), <strong>score_pdf</strong> (pdf file) or <strong>score_ascii</strong> (text file). If you want more information about the CORE index represented by this color index, have a look at this <a class="reference external" href="http://www.tcoffee.org/Publications/Pdf/core.pp.pdf">chapter</a>.</p>
+</div>
+<div class="section" id="q-can-i-evaluate-alignments-not-produced-with-t-coffee">
+<h3>Q: Can I evaluate alignments NOT produced with T-Coffee?<a class="headerlink" href="#q-can-i-evaluate-alignments-not-produced-with-t-coffee" title="Permalink to this headline">¶</a></h3>
+<p>A: Yes !! You may have an alignment produced from any source you like. If you have no library available, the library will be computed on the fly but this can take some time depending on your sample size.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>With a library:
+$$: t_coffee -infile=sample_aln1.aln -lib=sample_aln1.tc_lib -special_mode=evaluate
+
+Without a library:
+$$: t_coffee -infile=sample_aln1.aln -evaluate -method proba_pair
+</pre></div>
+</div>
+</div>
+<div class="section" id="q-can-i-compare-two-alignments">
+<h3>Q: Can I compare two alignments?<a class="headerlink" href="#q-can-i-compare-two-alignments" title="Permalink to this headline">¶</a></h3>
+<p>A: Yes. You can treat one of your alignments as a library and compare it with the second alignment.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$$: t_coffee -infile=sample_aln1_1.aln -aln=sample_aln1_2.aln -special_mode=evaluate
+</pre></div>
+</div>
+</div>
+<div class="section" id="q-i-am-aligning-sequences-with-long-regions-of-very-good-overlap">
+<h3>Q: I am aligning sequences with long regions of very good overlap<a class="headerlink" href="#q-i-am-aligning-sequences-with-long-regions-of-very-good-overlap" title="Permalink to this headline">¶</a></h3>
+<p>A: Increase the ktuple size (up to 4-5 for DNA) and up to 3 for proteins. This will speed up the program. It can be very useful, especially when aligning ESTs.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$$: t_coffee sample_seq1.fasta -ktuple=3
+</pre></div>
+</div>
+</div>
+<div class="section" id="q-why-is-t-coffee-changing-the-names-of-my-sequences">
+<h3>Q: Why is T-Coffee changing the names of my sequences!!!!<a class="headerlink" href="#q-why-is-t-coffee-changing-the-names-of-my-sequences" title="Permalink to this headline">¶</a></h3>
+<p>A: If there is no duplicated name in your sequence set, T-Coffee handles names similarly to Clustalw. If your dataset contains sequences with identical names, these will automatically be renamed by adding an index (integer) to duplicated names even if there are more than 2. Also be careful, if there are spaces in your names, whatever comes after the space is not read.</p>
+<div class="admonition danger">
+<p class="admonition-title">Danger</p>
+<p>The behaviour is undefined when this creates two sequence with a similar names.</p>
+</div>
+</div>
+</div>
+<div class="section" id="release-notes">
+<h2>Release Notes<a class="headerlink" href="#release-notes" title="Permalink to this headline">¶</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This log of modifications is not as thorough and accurate as it should be…but it’s a beginning !</p>
+</div>
+<ul class="simple">
+<li><p>11.00+: extensive update of the documentation, examples; addition of the latest T-Coffee modes (PSI-Coffee, SARA-Coffee, Pro-Coffee, STRIKE, T-RMSD…); creation of an automated procedure for checking command lines from the documentation <strong>doc2test.pl</strong>.</p></li>
+<li><p>9.86 New data structure for the primary library that results in highly improved running times for mcoffee and significantly decreased memory usage.</p></li>
+<li><p>5.80 Novel assembly algorithm (linked_pair_wise) and the primary library is now made of probcons style pairwise alignments (proba_pair)</p></li>
+<li><p>4.30 and upward: the FAQ has moved into a new tutorial document; <strong>-in</strong> can be replaced by the flags <strong>-profile,-method,-aln,-seq,-pdb</strong>.</p></li>
+<li><p>4.02: <strong>-mode=dna</strong> is still available but not any more needed or supported. Use <strong>-type=protein or dna</strong> if you need to force things</p></li>
+<li><p>3.28: corrected a bug that prevents short sequences from being correctly aligned</p></li>
+<li><p>Use of &#64; as a separator when specifying methods parameters</p></li>
+<li><p>The most notable modifications have to do with the structure of the input. From version 2.20, all files must be tagged to indicate their nature (A: alignment, S: Sequence, L: Library…). We are becoming stricter, but that’s for your own good… Another important modification has to do with the flag -matrix: it now controls the matrix being used for the computation</p></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="tcoffee_citations_references.html" class="btn btn-neutral float-right" title="Citations &amp; References" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="tcoffee_doctest.html" class="btn btn-neutral float-left" title="T-Coffee doc test" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Cedric Notredame
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

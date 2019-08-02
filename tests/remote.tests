@@ -1,0 +1,4 @@
+#Tests Requiring Remote access to EBI Blast and PDB database
+t_coffee sample_seq1.fasta -mode accurate
+t_coffee 3d.fasta -special_mode=expresso 
+t_coffee sample_seq1.fasta -template_file EXPRESSO -method TMalign_pair    

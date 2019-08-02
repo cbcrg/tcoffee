@@ -453,8 +453,8 @@ int batch_main ( int argc, char **argv)
 	char **special_mode_list2;
 	int n_special_mode2;
 	/*dpa*/
-	int dpa;
-	int reg;
+	int dpa=0;
+	int reg=0;
 	char *dpa_master_aln;
 	int dpa_min_score1;
 	int dpa_min_score2;
@@ -708,6 +708,7 @@ int batch_main ( int argc, char **argv)
 			    /*Max Value*/ "any"				\
 					  );
 	        /*PARAMETER PROTOTYPE:    INFILE    */
+	       
 	       declare_name (type);
 	       get_cl_param(					\
 			    /*argc*/      argc           ,	\
@@ -784,7 +785,7 @@ int batch_main ( int argc, char **argv)
 		*
 		*/
 	       
-	       
+	       HERE ("DPA=%d", dpa);
 if (dpa)
   {
     dump_io_start (NULL);
