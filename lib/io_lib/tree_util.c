@@ -6313,7 +6313,7 @@ NT_node * tree2node_list (NT_node p, NT_node *L)
   int nn=tree2nnode(p);
   reset_node_count (p);
   
-  if (!L) {L=(NT_node*)vcalloc (nn+1, sizeof (NT_node));}
+  if (!L) {L=(NT_node*)vcalloc (nn+2, sizeof (NT_node));}
   while (p)
     {
       if (!p->visited)L[n++]=p;
@@ -7597,31 +7597,36 @@ float group2tree_score (Sequence *G, char *nwtree)
 	l1[b]=1;
     }
   iL=L=tree2node_list (T, NULL);
-  
+
   while (L && L[0])
     {
-      float c, t,cs;
-      int *l2=(L[0])->lseq2;
-      c=t=0;
-      for (a=0; a<S->nseq; a++)
+      if (L[0]->lseq2)
 	{
-	  if (l1[a]+l2[a]==2)c++;
-	  else if (l2[a])t++;
-	  else if (l1[a]){a=S->nseq; c=0;}
+	  float c, t,cs;
+	  int *l2=(L[0])->lseq2;
+	  c=t=0;
+	  for (a=0; a<S->nseq; a++)
+	    {
+	      int x=l1[a];
+	      int y=l2[a];
+	      if (l1[a]+l2[a]==2)c++;
+	      else if (l2[a])t++;
+	      else if (l1[a]){a=S->nseq; c=0;}
+	    }
+	  
+	  cs=(c>0)?c/(c+t):0;
+	  if (cs>bs){bs=cs;bl2=l2;}
+	  
+	  for (c=0,t=0,a=0; a<S->nseq; a++)l2[a]=1-l2[a];
+	  for (c=0,t=0,a=0; a<S->nseq; a++)
+	    {
+	      if (l1[a]+l2[a]==2)c++;
+	      else if (l2[a])t++;
+	      else if (l1[a]){a=S->nseq; c=0;}
+	    }
+	  cs=(c>0)?c/(c+t):0;
+	  if (cs>bs){bs=cs;bl2=l2;}
 	}
-      
-      cs=(c>0)?c/(c+t):0;
-      if (cs>bs){bs=cs;bl2=l2;}
-      
-      for (c=0,t=0,a=0; a<S->nseq; a++)l2[a]=1-l2[a];
-      for (c=0,t=0,a=0; a<S->nseq; a++)
-	{
-	  if (l1[a]+l2[a]==2)c++;
-	  else if (l2[a])t++;
-	  else if (l1[a]){a=S->nseq; c=0;}
-	}
-      cs=(c>0)?c/(c+t):0;
-      if (cs>bs){bs=cs;bl2=l2;}
       L++;
     }
   

@@ -1,5 +1,0 @@
-<DumpIO><cl>t_coffee -help</cl><stack>#FAILURE -- SHELL ERROR -- Check the Command Line Syntax</stack><file><stream>output</stream><name>stderr</name><content>#FAILURE -- SHELL ERROR -- Check the Command Line Syntax</content></file></DumpIO>
-<ref>
-<source>/Users/cnotredame/Dropbox/projects/git/tcoffee/docs//tcoffee_technical_documentation.rst</source>
-<line>28</line>
-</ref>

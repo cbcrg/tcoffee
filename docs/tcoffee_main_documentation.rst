@@ -1315,7 +1315,7 @@ PSI-Coffee is currently the most accurate mode of T-Coffee but also the slowest.
 ::
 
   Command 1: PSI-Coffee
-  $$: t_coffee proteases_small.fasta -mode psicoffee
+  $$: t_coffee sample_seq1.fasta -mode psicoffee
   
   Command 2: TM-Coffee
   ##: t_coffee proteases_small.fasta -mode psicoffee -template_file PSITM -protein_db <database>
@@ -1389,7 +1389,7 @@ If you want to go further, and be even slower, you can use the accurate mode tha
 
 ::
 
-  $$: t_coffee proteases_small.fasta -mode accurate
+  $$: t_coffee sample_seq1.fasta -mode accurate
 
 Aligning profile using structural information
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

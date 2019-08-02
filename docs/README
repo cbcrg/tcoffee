@@ -1,0 +1,25 @@
+README for T-Coffee installation version 6.70 and higer
+
+UNIX/LINUX/Mac OSX
+
+T-Coffee requires Perl, Makefile and an Internet connection. Other components may be required depending on the installation you need. 
+
+   1. Download and save the Package
+   2. gunzip t_coffee.tar.gz
+   3. tar -xvf t_coffee.tar
+   4. cd T-COFFEE_distribution_Version_X.XX
+   5. ./install tcoffee OR ./install all
+
+This installation procedure is semi-interactive. It will prompt questions here and there. You can interrupt it any time and resume it later.
+The install procedure carries out three distinct tasks: Compilation of T-Coffee (C program), Compilation and Installation of SOAP::Lite (Perl Module), Download/Compilation and Installation of all the T-Coffee companion packages required for all possible T-Coffee flavors (tcoffee,expresso,3dcoffee,mcoffee,rcoffee). Except for T-Coffee, the installer will only install the packages that are NOT already on your computer. If you want a lighter or more specific installation, you can try any of the following:
+		
+
+   1. ./install tcoffee
+   2. ./install rcoffee
+   3. ./install expresso
+   4. ./install 3dcoffee
+   5. ./install 3dcoffee 
+
+Open the doc with a browser in doc/index.html. The files required for the examples are in the example directory.
+
+Contact: cedric.notredame@gmail.com

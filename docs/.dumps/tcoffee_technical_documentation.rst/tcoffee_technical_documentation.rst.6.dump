@@ -1,0 +1,913 @@
+<DumpIO>
+<nature>standard dump</nature>
+<program>T-COFFEE</program>
+<version>Version_13.30.5.6909e10</version>
+<build>Version_13.30.5.6909e10</build>
+<cl>t_coffee -infile sample_seq1.aln -in Lsample_seq1_lib1.tc_lib -mode evaluate </cl>
+<stack>
+</stack>
+<warning>
+</warning>
+<file>
+<stream>output</stream>
+<name>stdout</name>
+<content>
+PROGRAM: T-COFFEE Version_13.30.5.6909e10 (Version_13.30.5.6909e10)
+-full_log      	S	[0] 
+-genepred_score	S	[0] 	nsd
+-run_name      	S	[0] 
+-mem_mode      	S	[0] 	mem
+-extend        	D	[1] 	1 
+-extend_mode   	S	[0] 	very_fast_triplet
+-max_n_pair    	D	[0] 	10 
+-seq_name_for_quadruplet	S	[0] 	all
+-compact       	S	[0] 	default
+-clean         	S	[0] 	no
+-do_self       	FL	[0] 	0
+-do_normalise  	D	[0] 	1000 
+-template_file 	S	[0] 
+-setenv        	S	[0] 	0
+-export        	S	[0] 	0
+-template_mode 	S	[0] 
+-flip          	D	[0] 	0 
+-remove_template_file	D	[0] 	0 
+-profile_template_file	S	[0] 
+-in            	S	[1] 	Lsample_seq1_lib1.tc_lib
+-seq           	S	[0] 
+-aln           	S	[0] 
+-method_limits 	S	[0] 
+-method        	S	[0] 
+-lib           	S	[0] 
+-profile       	S	[0] 
+-profile1      	S	[0] 
+-profile2      	S	[0] 
+-pdb           	S	[0] 
+-relax_lib     	D	[0] 	1 
+-filter_lib    	D	[0] 	0 
+-shrink_lib    	D	[0] 	0 
+-out_lib       	W_F	[0] 	no
+-out_lib_mode  	S	[0] 	primary
+-lib_only      	D	[0] 	0 
+-outseqweight  	W_F	[0] 	no
+-seq_source    	S	[0] 	ANY
+-cosmetic_penalty	D	[0] 	0 
+-gapopen       	D	[0] 	0 
+-gapext        	D	[0] 	0 
+-fgapopen      	D	[0] 	0 
+-fgapext       	D	[0] 	0 
+-nomatch       	D	[0] 	0 
+-newtree       	W_F	[0] 	default
+-tree          	W_F	[0] 	NO
+-usetree       	R_F	[0] 
+-tree_mode     	S	[0] 	nj
+-distance_matrix_mode	S	[0] 	ktup
+-distance_matrix_sim_mode	S	[0] 	idmat_sim1
+-quicktree     	FL	[0] 	0
+-outfile       	W_F	[0] 	default
+-maximise      	FL	[1] 	1
+-output        	S	[1] 	score_ascii	html
+-len           	D	[0] 	0 
+-infile        	R_F	[1] 	sample_seq1.aln
+-matrix        	S	[0] 	default
+-tg_mode       	D	[0] 	1 
+-profile_mode  	S	[0] 	cw_profile_profile
+-profile_comparison	S	[0] 	profile
+-dp_mode       	S	[0] 	linked_pair_wise
+-ktuple        	D	[0] 	1 
+-ndiag         	D	[0] 	0 
+-diag_threshold	D	[0] 	0 
+-diag_mode     	D	[0] 	0 
+-sim_matrix    	S	[0] 	vasiliky
+-transform     	S	[0] 
+-extend_seq    	FL	[0] 	0
+-outorder      	S	[0] 	input
+-inorder       	S	[0] 	aligned
+-seqnos        	S	[0] 	off
+-case          	S	[0] 	keep
+-cpu           	D	[0] 	0 
+-ulimit        	D	[0] 	-1 
+-maxnseq       	D	[0] 	-1 
+-maxlen        	D	[0] 	-1 
+-sample_dp     	D	[0] 	0 
+-weight        	S	[0] 	default
+-seq_weight    	S	[0] 	no
+-align         	FL	[1] 	1
+-mocca         	FL	[0] 	0
+-domain        	FL	[0] 	0
+-start         	D	[0] 	0 
+-len           	D	[0] 	0 
+-scale         	D	[0] 	0 
+-mocca_interactive	FL	[0] 	0
+-method_evaluate_mode	S	[0] 	default
+-color_mode    	S	[0] 	new
+-aln_line_length	D	[0] 	0 
+-evaluate_mode 	S	[0] 	triplet
+-get_type      	FL	[0] 	0
+-clean_aln     	D	[0] 	0 
+-clean_threshold	D	[1] 	1 
+-clean_iteration	D	[1] 	1 
+-clean_evaluate_mode	S	[0] 	t_coffee_fast
+-extend_matrix 	FL	[0] 	0
+-prot_min_sim  	D	[40] 	40 
+-prot_max_sim  	D	[90] 	90 
+-prot_trim     	D	[20] 	20 
+-prot_min_cov  	D	[40] 	40 
+-pdb_type      	S	[0] 	d
+-pdb_min_sim   	D	[35] 	35 
+-pdb_max_sim   	D	[100] 	100 
+-pdb_min_cov   	D	[50] 	50 
+-pdb_blast_server	W_F	[0] 	EBI
+-blast         	W_F	[0] 
+-blast_server  	W_F	[0] 	EBI
+-pdb_db        	W_F	[0] 	pdb
+-protein_db    	W_F	[0] 	uniref50
+-method_log    	W_F	[0] 	no
+-struc_to_use  	S	[0] 
+-cache         	W_F	[0] 	use
+-print_cache   	FL	[0] 	0
+-align_pdb_param_file	W_F	[0] 	no
+-align_pdb_hasch_mode	W_F	[0] 	hasch_ca_trace_bubble
+-external_aligner	S	[0] 	NO
+-msa_mode      	S	[0] 	tree
+-et_mode       	S	[0] 	et
+-master        	S	[0] 	no
+-blast_nseq    	D	[0] 	0 
+-lalign_n_top  	D	[0] 	10 
+-iterate       	D	[1] 	0 
+-trim          	D	[0] 	0 
+-split         	D	[0] 	0 
+-trimfile      	S	[0] 	default
+-split         	D	[0] 	0 
+-split_nseq_thres	D	[0] 	0 
+-split_score_thres	D	[0] 	0 
+-check_pdb_status	D	[0] 	0 
+-clean_seq_name	D	[0] 	0 
+-seq_to_keep   	S	[0] 
+-dpa_master_aln	S	[0] 
+-dpa_maxnseq   	D	[0] 	0 
+-dpa_min_score1	D	[0] 
+-dpa_min_score2	D	[0] 
+-dpa_keep_tmpfile	FL	[0] 	0
+-dpa_debug     	D	[0] 	0 
+-multi_core    	S	[0] 	templates_jobs_relax_msa_evaluate
+-n_core        	D	[0] 	1 
+-thread        	D	[0] 	1 
+-max_n_proc    	D	[0] 	0 
+-lib_list      	S	[0] 
+-prune_lib_mode	S	[0] 	5
+-tip           	S	[0] 	none
+-rna_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (L) sample_seq1_lib1.tc_lib 
+	Input File (S) sample_seq1.aln  Format clustal_aln
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File            Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File            Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File            Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File            Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 1 processors:
+	[0] 	none
+-rna_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (L) sample_seq1_lib1.tc_lib 
+	Input File (S) sample_seq1.aln  Format clustal_aln
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File            Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File            Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File            Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File            Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 1 processors:
+
+	--- Process Method/Library/Aln Lsample_seq1_lib1.tc_lib
+	xxx Retrieved Lsample_seq1_lib1.tc_lib	[0] 	none
+-rna_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (L) sample_seq1_lib1.tc_lib 
+	Input File (S) sample_seq1.aln  Format clustal_aln
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File            Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File            Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File            Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File            Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 1 processors:
+
+	--- Process Method/Library/Aln Lsample_seq1_lib1.tc_lib
+	xxx Retrieved Lsample_seq1_lib1.tc_lib
+	--- Process Method/Library/Aln Ssample_seq1.aln
+	xxx Retrieved Ssample_seq1.aln
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [792]
+
+Library Relaxation: Multi_proc [1]
+ 
+!		[Relax Library][TOT=    4][  0 %]!		[Relax Library][TOT=    4][ 50 %]!		[Relax Library][TOT=    4][ 75 %]!		[Relax Library][TOT=    4][100 %]
+	[0] 	none
+-rna_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (L) sample_seq1_lib1.tc_lib 
+	Input File (S) sample_seq1.aln  Format clustal_aln
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File            Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File            Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File            Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File            Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 1 processors:
+
+	--- Process Method/Library/Aln Lsample_seq1_lib1.tc_lib
+	xxx Retrieved Lsample_seq1_lib1.tc_lib
+	--- Process Method/Library/Aln Ssample_seq1.aln
+	xxx Retrieved Ssample_seq1.aln
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [792]
+
+Library Relaxation: Multi_proc [1]
+ 
+Relaxation Summary: [792]--->[792]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+
+OUTPUT RESULTS
+	#### File Type= MSA             Format= score_ascii     Name= sample_seq1.score_ascii
+	#### File Type= MSA             Format= html            Name= sample_seq1.html
+
+# Command Line: t_coffee -infile sample_seq1.aln -in Lsample_seq1_lib1.tc_lib -mode evaluate  [PROGRAM:T-COFFEE]
+# T-COFFEE Memory Usage: Current= 28.747 Mb, Max= 29.933 Mb
+# Results Produced with T-COFFEE Version_13.30.5.6909e10 (Version_13.30.5.6909e10)
+# T-COFFEE is available from http://www.tcoffee.org
+# Register on: https://groups.google.com/group/tcoffee/
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>stderr</name>
+<content>HERE: DPA=0
+HERE: DPA=0
+HERE: DPA=0
+HERE: DPA=0
+HERE: DPA=0
+
+!		[Final Evaluation][TOT=   85][  0 %]!		[Final Evaluation][TOT=   85][  2 %]!		[Final Evaluation][TOT=   85][  3 %]!		[Final Evaluation][TOT=   85][  4 %]!		[Final Evaluation][TOT=   85][  5 %]!		[Final Evaluation][TOT=   85][  7 %]!		[Final Evaluation][TOT=   85][  8 %]!		[Final Evaluation][TOT=   85][  9 %]!		[Final Evaluation][TOT=   85][ 10 %]!		[Final Evaluation][TOT=   85][ 11 %]!		[Final Evaluation][TOT=   85][ 12 %]!		[Final Evaluation][TOT=   85][ 14 %]!		[Final Evaluation][TOT=   85][ 15 %]!		[Final Evaluation][TOT=   85][ 16 %]!		[Final Evaluation][TOT=   85][ 17 %]!		[Final Evaluation][TOT=   85][ 18 %]!		[Final Evaluation][TOT=   85][ 20 %]!		[Final Evaluation][TOT=   85][ 21 %]!		[Final Evaluation][TOT=   85][ 22 %]!		[Final Evaluation][TOT=   85][ 23 %]!		[Final Evaluation][TOT=   85][ 24 %]!		[Final Evaluation][TOT=   85][ 25 %]!		[Final Evaluation][TOT=   85][ 27 %]!		[Final Evaluation][TOT=   85][ 28 %]!		[Final Evaluation][TOT=   85][ 29 %]!		[Final Evaluation][TOT=   85][ 30 %]!		[Final Evaluation][TOT=   85][ 31 %]!		[Final Evaluation][TOT=   85][ 32 %]!		[Final Evaluation][TOT=   85][ 34 %]!		[Final Evaluation][TOT=   85][ 35 %]!		[Final Evaluation][TOT=   85][ 36 %]!		[Final Evaluation][TOT=   85][ 37 %]!		[Final Evaluation][TOT=   85][ 38 %]!		[Final Evaluation][TOT=   85][ 40 %]!		[Final Evaluation][TOT=   85][ 41 %]!		[Final Evaluation][TOT=   85][ 42 %]!		[Final Evaluation][TOT=   85][ 43 %]!		[Final Evaluation][TOT=   85][ 44 %]!		[Final Evaluation][TOT=   85][ 45 %]!		[Final Evaluation][TOT=   85][ 47 %]!		[Final Evaluation][TOT=   85][ 48 %]!		[Final Evaluation][TOT=   85][ 49 %]!		[Final Evaluation][TOT=   85][ 50 %]!		[Final Evaluation][TOT=   85][ 51 %]!		[Final Evaluation][TOT=   85][ 52 %]!		[Final Evaluation][TOT=   85][ 54 %]!		[Final Evaluation][TOT=   85][ 55 %]!		[Final Evaluation][TOT=   85][ 56 %]!		[Final Evaluation][TOT=   85][ 57 %]!		[Final Evaluation][TOT=   85][ 58 %]!		[Final Evaluation][TOT=   85][ 60 %]!		[Final Evaluation][TOT=   85][ 61 %]!		[Final Evaluation][TOT=   85][ 62 %]!		[Final Evaluation][TOT=   85][ 63 %]!		[Final Evaluation][TOT=   85][ 64 %]!		[Final Evaluation][TOT=   85][ 65 %]!		[Final Evaluation][TOT=   85][ 67 %]!		[Final Evaluation][TOT=   85][ 68 %]!		[Final Evaluation][TOT=   85][ 69 %]!		[Final Evaluation][TOT=   85][ 70 %]!		[Final Evaluation][TOT=   85][ 71 %]!		[Final Evaluation][TOT=   85][ 72 %]!		[Final Evaluation][TOT=   85][ 74 %]!		[Final Evaluation][TOT=   85][ 75 %]!		[Final Evaluation][TOT=   85][ 76 %]!		[Final Evaluation][TOT=   85][ 77 %]!		[Final Evaluation][TOT=   85][ 78 %]!		[Final Evaluation][TOT=   85][ 80 %]!		[Final Evaluation][TOT=   85][ 81 %]!		[Final Evaluation][TOT=   85][ 82 %]!		[Final Evaluation][TOT=   85][ 83 %]!		[Final Evaluation][TOT=   85][ 84 %]!		[Final Evaluation][TOT=   85][ 85 %]!		[Final Evaluation][TOT=   85][ 87 %]!		[Final Evaluation][TOT=   85][ 88 %]!		[Final Evaluation][TOT=   85][ 89 %]!		[Final Evaluation][TOT=   85][ 90 %]!		[Final Evaluation][TOT=   85][ 91 %]!		[Final Evaluation][TOT=   85][ 92 %]!		[Final Evaluation][TOT=   85][ 94 %]!		[Final Evaluation][TOT=   85][ 95 %]!		[Final Evaluation][TOT=   85][ 96 %]!		[Final Evaluation][TOT=   85][ 97 %]!		[Final Evaluation][TOT=   85][ 98 %]!		[Final Evaluation][TOT=   85][100 %]
+
+</content>
+</file>
+<file>
+<stream>input</stream>
+<name>sample_seq1.aln</name>
+<content>CLUSTAL FORMAT for T-COFFEE Version_11.00 [http://www.tcoffee.org] [MODE:  ], CPU=0.00 sec, SCORE=894, Nseq=4, Len=85 
+
+hmgl_trybr      kkdsnapkramtsfmffs----sdfrskhs-----dlsivemskaagaawkelgpeerkvyeemaekdkerykrem---------
+hmgt_mouse      -----kpkrprsayniyv----sesfqeak-----ddsaqgklklvneawknlspeekqayiqlakddrirydnemksweeqmae
+hmgb_chite      ---adkpkrplsaymlwlnsaresikrenp-----dfkvtevakkggelwr--glkdkseweakaatakqnyiralqeyerngg-
+hmgl_wheat      --dpnkpkrapsaffvfm----gefreefkqknpknksvaavgkaagerwkslsesekapyvakanklkgeynkaiaaynkgesa
+                      ***. ::: .:      .   :       : .     *  .  *:  . .::  :   *   : .* . :         
+
+
+
+</content>
+</file>
+<file>
+<stream>input</stream>
+<name>sample_seq1_lib1.tc_lib</name>
+<content>! TC_LIB_FORMAT_01
+4
+hmgb_chite 74 adkpkrplsaymlwlnsaresikrenpdfkvtevakkggelwrglkdkseweakaatakqnyiralqeyerngg
+hmgl_trybr 67 kkdsnapkramtsfmffssdfrskhsdlsivemskaagaawkelgpeerkvyeemaekdkerykrem
+hmgl_wheat 79 dpnkpkrapsaffvfmgefreefkqknpknksvaavgkaagerwkslsesekapyvakanklkgeynkaiaaynkgesa
+hmgt_mouse 71 kpkrprsayniyvsesfqeakddsaqgklklvneawknlspeekqayiqlakddrirydnemksweeqmae
+#1 2
+    1     4  1000     1     0 
+    2     5  1000     1     0 
+    3     6  1000     1     0 
+    4     7  1000     1     0 
+    5     8  1000     1     0 
+    6     9  1000     1     0 
+    7    10  1000     1     0 
+    8    11  1000     1     0 
+    9    12  1000     1     0 
+   10    13  1000     1     0 
+   11    14  1000     1     0 
+   12    15  1000     1     0 
+   13    16  1000     1     0 
+   14    17  1000     1     0 
+   15    18  1000     1     0 
+   16    19  1000     1     0 
+   17    20  1000     1     0 
+   18    21  1000     1     0 
+   19    22  1000     1     0 
+   20    23  1000     1     0 
+   21    24  1000     1     0 
+   22    25  1000     1     0 
+   23    26  1000     1     0 
+   29    27  1000     1     0 
+   30    28  1000     1     0 
+   31    30  1000     1     0 
+   32    31  1000     1     0 
+   33    32  1000     1     0 
+   34    33  1000     1     0 
+   35    34  1000     1     0 
+   36    35  1000     1     0 
+   37    36  1000     1     0 
+   38    37  1000     1     0 
+   39    38  1000     1     0 
+   40    39  1000     1     0 
+   41    40  1000     1     0 
+   42    41  1000     1     0 
+   43    42  1000     1     0 
+   44    43  1000     1     0 
+   45    44  1000     1     0 
+   46    45  1000     1     0 
+   47    46  1000     1     0 
+   48    49  1000     1     0 
+   49    50  1000     1     0 
+   50    51  1000     1     0 
+   51    52  1000     1     0 
+   52    53  1000     1     0 
+   53    54  1000     1     0 
+   54    55  1000     1     0 
+   55    56  1000     1     0 
+   56    57  1000     1     0 
+   57    58  1000     1     0 
+   58    59  1000     1     0 
+   59    60  1000     1     0 
+   60    61  1000     1     0 
+   61    62  1000     1     0 
+   62    63  1000     1     0 
+   63    64  1000     1     0 
+   64    65  1000     1     0 
+   65    66  1000     1     0 
+   66    67  1000     1     0 
+#1 3
+    1     2  1000     1     0 
+    2     3  1000     1     0 
+    3     4  1000     1     0 
+    4     5  1000     1     0 
+    5     6  1000     1     0 
+    6     7  1000     1     0 
+    7     8  1000     1     0 
+    8     9  1000     1     0 
+    9    10  1000     1     0 
+   10    11  1000     1     0 
+   11    12  1000     1     0 
+   12    13  1000     1     0 
+   13    14  1000     1     0 
+   14    15  1000     1     0 
+   15    16  1000     1     0 
+   16    17  1000     1     0 
+   17    18  1000     1     0 
+   18    19  1000     1     0 
+   19    20  1000     1     0 
+   20    21  1000     1     0 
+   21    22  1000     1     0 
+   22    23  1000     1     0 
+   23    24  1000     1     0 
+   24    25  1000     1     0 
+   25    26  1000     1     0 
+   26    27  1000     1     0 
+   27    28  1000     1     0 
+   28    29  1000     1     0 
+   29    30  1000     1     0 
+   30    31  1000     1     0 
+   31    33  1000     1     0 
+   32    34  1000     1     0 
+   33    35  1000     1     0 
+   34    36  1000     1     0 
+   35    37  1000     1     0 
+   36    38  1000     1     0 
+   37    39  1000     1     0 
+   38    40  1000     1     0 
+   39    41  1000     1     0 
+   40    42  1000     1     0 
+   41    43  1000     1     0 
+   42    44  1000     1     0 
+   43    45  1000     1     0 
+   44    46  1000     1     0 
+   45    47  1000     1     0 
+   46    48  1000     1     0 
+   47    49  1000     1     0 
+   48    52  1000     1     0 
+   49    53  1000     1     0 
+   50    54  1000     1     0 
+   51    55  1000     1     0 
+   52    56  1000     1     0 
+   53    57  1000     1     0 
+   54    58  1000     1     0 
+   55    59  1000     1     0 
+   56    60  1000     1     0 
+   57    61  1000     1     0 
+   58    62  1000     1     0 
+   59    63  1000     1     0 
+   60    64  1000     1     0 
+   61    65  1000     1     0 
+   62    66  1000     1     0 
+   63    67  1000     1     0 
+   64    68  1000     1     0 
+   65    69  1000     1     0 
+   66    70  1000     1     0 
+   67    71  1000     1     0 
+   68    72  1000     1     0 
+   69    73  1000     1     0 
+   70    74  1000     1     0 
+   71    75  1000     1     0 
+   72    76  1000     1     0 
+   73    77  1000     1     0 
+   74    78  1000     1     0 
+#1 4
+    3     1  1000     1    81 
+    4     2  1000     1     0 
+    5     3  1000     1     0 
+    6     4  1000     1     0 
+    7     5  1000     1     0 
+    8     6  1000     1     0 
+    9     7  1000     1     0 
+   10     8  1000     1     0 
+   11     9  1000     1     0 
+   12    10  1000     1     0 
+   13    11  1000     1     0 
+   14    12  1000     1     0 
+   15    13  1000     1     0 
+   16    14  1000     1     0 
+   17    15  1000     1     0 
+   18    16  1000     1     0 
+   19    17  1000     1     0 
+   20    18  1000     1     0 
+   21    19  1000     1     0 
+   22    20  1000     1     0 
+   23    21  1000     1     0 
+   24    22  1000     1     0 
+   25    23  1000     1     0 
+   26    24  1000     1     0 
+   27    25  1000     1     0 
+   28    26  1000     1     0 
+   29    27  1000     1     0 
+   30    28  1000     1     0 
+   35    29  1000     1     0 
+   36    30  1000     1     0 
+   37    31  1000     1     0 
+   38    32  1000     1     0 
+   39    33  1000     1     0 
+   40    34  1000     1     0 
+   41    35  1000     1     0 
+   42    36  1000     1     0 
+   43    37  1000     1     0 
+   44    38  1000     1     0 
+   45    39  1000     1     0 
+   46    40  1000     1     0 
+   47    41  1000     1     0 
+   48    44  1000     1     0 
+   49    45  1000     1     0 
+   50    46  1000     1     0 
+   51    47  1000     1     0 
+   52    48  1000     1     0 
+   53    49  1000     1     0 
+   54    50  1000     1     0 
+   55    51  1000     1     0 
+   56    52  1000     1     0 
+   57    53  1000     1     0 
+   58    54  1000     1     0 
+   59    55  1000     1     0 
+   60    56  1000     1     0 
+   61    57  1000     1     0 
+   62    58  1000     1     0 
+   63    59  1000     1     0 
+   64    60  1000     1     0 
+   65    61  1000     1     0 
+   66    62  1000     1     0 
+   67    63  1000     1     0 
+   68    64  1000     1     0 
+   69    65  1000     1     0 
+   70    66  1000     1     0 
+   71    67  1000     1     0 
+   72    68  1000     1     0 
+   73    69  1000     1     0 
+   74    70  1000     1     0 
+#2 3
+    3     1  1000     1    81 
+    4     2  1000     1     0 
+    5     3  1000     1     0 
+    6     4  1000     1     0 
+    7     5  1000     1     0 
+    8     6  1000     1     0 
+    9     7  1000     1     0 
+   10     8  1000     1     0 
+   11     9  1000     1     0 
+   12    10  1000     1     0 
+   13    11  1000     1     0 
+   14    12  1000     1     0 
+   15    13  1000     1     0 
+   16    14  1000     1     0 
+   17    15  1000     1     0 
+   18    16  1000     1     0 
+   19    17  1000     1     0 
+   20    18  1000     1     0 
+   21    19  1000     1     0 
+   22    20  1000     1     0 
+   23    21  1000     1     0 
+   24    22  1000     1     0 
+   25    23  1000     1     0 
+   26    24  1000     1     0 
+   27    30  1000     1     0 
+   28    31  1000     1     0 
+   29    32  1000     1     0 
+   30    33  1000     1     0 
+   31    34  1000     1     0 
+   32    35  1000     1     0 
+   33    36  1000     1     0 
+   34    37  1000     1     0 
+   35    38  1000     1     0 
+   36    39  1000     1     0 
+   37    40  1000     1     0 
+   38    41  1000     1     0 
+   39    42  1000     1     0 
+   40    43  1000     1     0 
+   41    44  1000     1     0 
+   42    45  1000     1     0 
+   43    46  1000     1     0 
+   44    47  1000     1     0 
+   45    48  1000     1     0 
+   46    49  1000     1     0 
+   47    50  1000     1     0 
+   48    51  1000     1     0 
+   49    52  1000     1     0 
+   50    53  1000     1     0 
+   51    54  1000     1     0 
+   52    55  1000     1     0 
+   53    56  1000     1     0 
+   54    57  1000     1     0 
+   55    58  1000     1     0 
+   56    59  1000     1     0 
+   57    60  1000     1     0 
+   58    61  1000     1     0 
+   59    62  1000     1     0 
+   60    63  1000     1     0 
+   61    64  1000     1     0 
+   62    65  1000     1     0 
+   63    66  1000     1     0 
+   64    67  1000     1     0 
+   65    68  1000     1     0 
+   66    69  1000     1     0 
+   67    70  1000     1     0 
+#2 4
+    6     1  1000     1     0 
+    7     2  1000     1     0 
+    8     3  1000     1     0 
+    9     4  1000     1     0 
+   10     5  1000     1     0 
+   11     6  1000     1     0 
+   12     7  1000     1     0 
+   13     8  1000     1     0 
+   14     9  1000     1     0 
+   15    10  1000     1     0 
+   16    11  1000     1     0 
+   17    12  1000     1     0 
+   18    13  1000     1     0 
+   19    14  1000     1     0 
+   20    15  1000     1     0 
+   21    16  1000     1     0 
+   22    17  1000     1     0 
+   23    18  1000     1     0 
+   24    19  1000     1     0 
+   25    20  1000     1     0 
+   26    21  1000     1     0 
+   27    27  1000     1     0 
+   28    28  1000     1     0 
+   34    29  1000     1     0 
+   35    30  1000     1     0 
+   36    31  1000     1     0 
+   37    32  1000     1     0 
+   38    33  1000     1     0 
+   39    34  1000     1     0 
+   40    35  1000     1     0 
+   41    36  1000     1     0 
+   42    37  1000     1     0 
+   43    38  1000     1     0 
+   44    39  1000     1     0 
+   45    40  1000     1     0 
+   46    41  1000     1     0 
+   47    42  1000     1     0 
+   48    43  1000     1     0 
+   49    44  1000     1     0 
+   50    45  1000     1     0 
+   51    46  1000     1     0 
+   52    47  1000     1     0 
+   53    48  1000     1     0 
+   54    49  1000     1     0 
+   55    50  1000     1     0 
+   56    51  1000     1     0 
+   57    52  1000     1     0 
+   58    53  1000     1     0 
+   59    54  1000     1     0 
+   60    55  1000     1     0 
+   61    56  1000     1     0 
+   62    57  1000     1     0 
+   63    58  1000     1     0 
+   64    59  1000     1     0 
+   65    60  1000     1     0 
+   66    61  1000     1     0 
+   67    62  1000     1     0 
+#3 4
+    4     1  1000     1    81 
+    5     2  1000     1     0 
+    6     3  1000     1     0 
+    7     4  1000     1     0 
+    8     5  1000     1     0 
+    9     6  1000     1     0 
+   10     7  1000     1     0 
+   11     8  1000     1     0 
+   12     9  1000     1     0 
+   13    10  1000     1     0 
+   14    11  1000     1     0 
+   15    12  1000     1     0 
+   16    13  1000     1     0 
+   17    14  1000     1     0 
+   18    15  1000     1     0 
+   19    16  1000     1     0 
+   20    17  1000     1     0 
+   21    18  1000     1     0 
+   22    19  1000     1     0 
+   23    20  1000     1     0 
+   24    21  1000     1     0 
+   25    22  1000     1     0 
+   26    23  1000     1     0 
+   27    24  1000     1     0 
+   28    25  1000     1     0 
+   29    26  1000     1     0 
+   30    27  1000     1     0 
+   31    28  1000     1     0 
+   37    29  1000     1     0 
+   38    30  1000     1     0 
+   39    31  1000     1     0 
+   40    32  1000     1     0 
+   41    33  1000     1     0 
+   42    34  1000     1     0 
+   43    35  1000     1     0 
+   44    36  1000     1     0 
+   45    37  1000     1     0 
+   46    38  1000     1     0 
+   47    39  1000     1     0 
+   48    40  1000     1     0 
+   49    41  1000     1     0 
+   50    42  1000     1     0 
+   51    43  1000     1     0 
+   52    44  1000     1     0 
+   53    45  1000     1     0 
+   54    46  1000     1     0 
+   55    47  1000     1     0 
+   56    48  1000     1     0 
+   57    49  1000     1     0 
+   58    50  1000     1     0 
+   59    51  1000     1     0 
+   60    52  1000     1     0 
+   61    53  1000     1     0 
+   62    54  1000     1     0 
+   63    55  1000     1     0 
+   64    56  1000     1     0 
+   65    57  1000     1     0 
+   66    58  1000     1     0 
+   67    59  1000     1     0 
+   68    60  1000     1     0 
+   69    61  1000     1     0 
+   70    62  1000     1     0 
+   71    63  1000     1     0 
+   72    64  1000     1     0 
+   73    65  1000     1     0 
+   74    66  1000     1     0 
+   75    67  1000     1     0 
+   76    68  1000     1     0 
+   77    69  1000     1     0 
+   78    70  1000     1     0 
+   79    71  1000     1     0 
+! CPU 100
+! SEQ_1_TO_N
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>sample_seq1.score_ascii</name>
+<content>T-COFFEE, Version_13.30.5.6909e10 (Version_13.30.5.6909e10)
+Cedric Notredame 
+CPU TIME:0 sec.
+SCORE=90
+*
+ BAD AVG GOOD
+*
+hmgb_chite   :  83
+hmgl_trybr   :  93
+hmgl_wheat   :  92
+hmgt_mouse   :  91
+cons         :   9
+
+hmgb_chite   ---999999999999999444444446666-----6449999999999
+hmgl_trybr   999999999999999999----88888888-----6699999999999
+hmgl_wheat   --9999999999999999----88888888666666699999999999
+hmgt_mouse   -----9999999999999----88888888-----6666644999999
+cons         999999999999999999333366667777555555448877999999
+
+
+hmgb_chite   999--4444999999999999999999999999999-
+hmgl_trybr   9998888999999999999999999999---------
+hmgl_wheat   9998888999999999999999999999999999999
+hmgt_mouse   9998888999999999999999999999999999999
+cons         9997766779999999999999999999999999999
+
+
+
+
+
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>sample_seq1.html</name>
+<content><html>
+<style>
+SPAN { font-family: courier new, courier-new, courier, monospace; font-weight: bold; font-size: 11pt;}
+SPAN { line-height:100%}
+SPAN {	white-space: pre}
+SPAN.value0 {background: #9B92FF}
+SPAN.value1 {background: #B4FFB4}
+SPAN.value2 {background: #BEFFBE}
+SPAN.value3 {background: #C8FFC8}
+SPAN.value4 {background: #FFFFB7}
+SPAN.value5 {background: #FFFFAD}
+SPAN.value6 {background: #FFFFAD}
+SPAN.value7 {background: #FFE6E6}
+SPAN.value8 {background: #FFDCDC}
+SPAN.value9 {background: #FFC8C8}
+SPAN.valuedefault {}
+SPAN.valuegap {}
+SPAN.valueink {background: 000000}
+</style><body><span class=valuedefault>T-COFFEE,&nbsp;Version_13.30.5.6909e10&nbsp;(Version_13.30.5.6909e10)</span><br><span class=valuedefault>Cedric&nbsp;Notredame&nbsp;</span><br><span class=valuedefault>CPU&nbsp;TIME:0&nbsp;sec.</span><br><span class=valuedefault>SCORE=90</span><br><span class=valuedefault>*</span><br><span class=valuedefault>&nbsp;</span><span class=value0>B</span><span class=value1>A</span><span class=value2>D</span><span class=value3>&nbsp;</span><span class=value4>A</span><span class=value5>V</span><span class=value6>G</span><span class=value7>&nbsp;</span><span class=value8>G</span><span class=value9>OOD</span><br><span class=valuedefault>*</span><br><span class=value8>hmgb_chite&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;83</span><br><span class=value9>hmgl_trybr&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;93</span><br><span class=value9>hmgl_wheat&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;92</span><br><span class=value9>hmgt_mouse&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;91</span><br><span class=value9>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;&nbsp;9</span><br><br><span class=valuedefault>hmgb_chite&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---</span><span class=value9>adkpkrplsaymlwl</span><span class=value4>nsaresik</span><span class=value6>renp</span><span class=valuegap>-----</span><span class=value6>d</span><span class=value4>fk</span><span class=value9>v</span><br><span class=valuedefault>hmgl_trybr&nbsp;&nbsp;&nbsp;</span><span class=value9>kkdsnapkramtsfmffs</span><span class=valuegap>----</span><span class=value8>sdfrskhs</span><span class=valuegap>-----</span><span class=value6>dl</span><span class=value9>si</span><br><span class=valuedefault>hmgl_wheat&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value9>dpnkpkrapsaffvfm</span><span class=valuegap>----</span><span class=value8>gefreefk</span><span class=value6>qknpknk</span><span class=value9>sv</span><br><span class=valuedefault>hmgt_mouse&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-----</span><span class=value9>kpkrprsayniyv</span><span class=valuegap>----</span><span class=value8>sesfqeak</span><span class=valuegap>-----</span><span class=value6>ddsa</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;***.&nbsp;:::&nbsp;.:&nbsp;</span><span class=value3>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value6>&nbsp;.&nbsp;&nbsp;</span><span class=value7>&nbsp;:&nbsp;&nbsp;</span><span class=value5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</span><span class=value4>&nbsp;.</span><span class=value8>&nbsp;</span><br><br><br><span class=valuedefault>hmgb_chite&nbsp;&nbsp;&nbsp;</span><span class=value9>tevakkggelwr</span><span class=valuegap>--</span><span class=value4>glkd</span><span class=value9>kseweakaatakqnyiralqe</span><br><span class=valuedefault>hmgl_trybr&nbsp;&nbsp;&nbsp;</span><span class=value9>vemskaagaawk</span><span class=value8>elgp</span><span class=value9>eerkvyeemaekdkerykrem</span><span class=valuegap>--</span><br><span class=valuedefault>hmgl_wheat&nbsp;&nbsp;&nbsp;</span><span class=value9>aavgkaagerwk</span><span class=value8>slse</span><span class=value9>sekapyvakanklkgeynkaiaa</span><br><span class=valuedefault>hmgt_mouse&nbsp;&nbsp;&nbsp;</span><span class=value6>q</span><span class=value4>gk</span><span class=value9>lklvneawk</span><span class=value8>nlsp</span><span class=value9>eekqayiqlakddrirydnemks</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>&nbsp;</span><span class=value7>&nbsp;&nbsp;</span><span class=value9>&nbsp;*&nbsp;&nbsp;.&nbsp;&nbsp;*:</span><span class=value7>&nbsp;&nbsp;</span><span class=value6>.&nbsp;</span><span class=value7>.:</span><span class=value9>:&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;:&nbsp;.*&nbsp;.&nbsp;:&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>hmgb_chite&nbsp;&nbsp;&nbsp;</span><span class=value9>yerngg</span><span class=valuegap>-</span><br><span class=valuedefault>hmgl_trybr&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-------</span><br><span class=valuedefault>hmgl_wheat&nbsp;&nbsp;&nbsp;</span><span class=value9>ynkgesa</span><br><span class=valuedefault>hmgt_mouse&nbsp;&nbsp;&nbsp;</span><span class=value9>weeqmae</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><br><br><br></body></html>
+</content>
+</file>
+<environement>
+HOME_4_TCOFFEE=/Users/cnotredame/
+MANPATH=/sw/share/man:/usr/share/man:/usr/local/share/man:/opt/X11/share/man:/Applications/Xcode.app/Contents/Developer/usr/share/man:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/share/man:/sw/lib/perl5/5.18.2/man
+TERM_PROGRAM=Apple_Terminal
+MCOFFEE_4_TCOFFEE=/Users/cnotredame//.t_coffee//mcoffee/
+ROOT_TMP_4_TCOFFEE=/var/tmp/
+SHELL=/bin/bash
+TERM=xterm-256color
+TMPDIR=/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/
+CONDA_SHLVL=1
+PERL5LIB=/sw/lib/perl5:/sw/lib/perl5/darwin
+Apple_PubSub_Socket_Render=/private/tmp/com.apple.launchd.u7asRiNodS/Render
+CONDA_PROMPT_MODIFIER=(base) 
+TERM_PROGRAM_VERSION=388.1.3
+OSNAME=macosx
+PERL_BIN=/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms::/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices
+TERM_SESSION_ID=76DADF83-46F9-497B-8002-0976C8F1E629
+METHODS_4_TCOFFEE=/Users/cnotredame//.t_coffee//methods/
+VERSIONER_PERL_VERSION=5.18
+XAPPLRESDIR=/sw/etc/app-defaults/
+http_proxy=
+HTTP_proxy=
+USER=cnotredame
+CONDA_EXE=/Users/cnotredame/anaconda3/bin/conda
+SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.mMz4rqepoV/Listeners
+__CF_USER_TEXT_ENCODING=0x1F6:0x0:0x0
+ENV_4_TCOFFEE=/Users/cnotredame//.t_coffee//.t_coffee_env
+_CE_CONDA=
+all_proxy=
+ALL_PROXY=
+HTTP_proxy_4_TCOFFEE=
+PATH=/Users/cnotredame//.t_coffee//plugins/macosx/:/Users/cnotredame/anaconda3/bin:/Users/cnotredame/anaconda3/condabin:/opt/local/bin:/opt/local/sbin:/opt/local/bin:/opt/local/sbin:/Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/packages/x3dna-v2.1/bin:/Users/cnotredame/bin/macosx://Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms:.:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices:/Users/cnotredame/bin/Scripts:/Users/cnotredame/Library/Haskell/ghc-7.4.2/lib/epub-tools-2.0.0/bin:/sw/bin:/sw/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin
+_=/usr/bin/printenv
+CONDA_PREFIX=/Users/cnotredame/anaconda3
+COLOR_4_TCOFFEE=new
+DIR_4_TCOFFEE=/Users/cnotredame//.t_coffee/
+PWD=/Users/cnotredame/Dropbox/projects/git/tcoffee/tmp/RANDOMSTRINGaUpNC3TZ76OSMEvrRgQK/tmp/RANDOMSTRING4jw0FssncqSesodICdW2/data
+CACHE_4_TCOFFEE=/Users/cnotredame//.t_coffee//cache/
+X3DNA=/Users/cnotredame/Dropbox/packages/x3dna-v2.1
+DBUS_LAUNCHD_SESSION_BUS_SOCKET=/private/tmp/com.apple.launchd.CeZrDaslOL/unix_domain_listener
+XPC_FLAGS=0x0
+VERSIONER_PERL_PREFER_32_BIT=no
+_CE_M=
+XPC_SERVICE_NAME=0
+ERRORFILE_4_TCOFFEE=NO
+PLUGINS_4_TCOFFEE=/Users/cnotredame//.t_coffee//plugins/macosx/
+SHLVL=3
+HOME=/Users/cnotredame
+DUMP_4_TCOFFEE=/Users/cnotredame/Dropbox/projects/git/tcoffee/tmp/RANDOMSTRINGaUpNC3TZ76OSMEvrRgQK/tmp/RANDOMSTRING4jw0FssncqSesodICdW2/tcoffee_technical_documentation.rst.6.dump
+HTTP_PROXY=
+MAFFT_BINARIES=
+CONDA_PYTHON_EXE=/Users/cnotredame/anaconda3/bin/python
+BIN=/Users/cnotredame/bin/macosx
+LOGNAME=cnotredame
+EMAIL_4_TCOFFEE=cedric.notredame@gmail.com
+LC_CTYPE=UTF-8
+CONDA_DEFAULT_ENV=base
+EMAIL=cedric.notredame@gmail.com
+UPDATED_ENV_4_TCOFFEE=1
+INFOPATH=/sw/share/info:/sw/info:/usr/share/info
+DISPLAY=/private/tmp/com.apple.launchd.MDJPhYnCNw/org.macosforge.xquartz:0
+TC_MASTER_NODE=1
+NUMBER_OF_PROCESSORS=8
+ALL_proxy=
+SECURITYSESSIONID=186a6
+LOCKDIR_4_TCOFFEE=/var/tmp/tco/tcof0bpcmq562706//lck/nd9ibdmctb/
+TMP_4_TCOFFEE=/var/tmp/tco/tcof0bpcmq562706/
+USER_BIN=/Users/cnotredame/bin/macosx
+SCRIPT_BIN=/Users/cnotredame/bin/Scripts/
+</environement>
+<DumpStatus>OK</DumpStatus>
+<DumpFile>/Users/cnotredame/Dropbox/projects/git/tcoffee/tmp/RANDOMSTRINGaUpNC3TZ76OSMEvrRgQK/tmp/RANDOMSTRING4jw0FssncqSesodICdW2/tcoffee_technical_documentation.rst.6.dump</DumpFile>
+</DumpIO>

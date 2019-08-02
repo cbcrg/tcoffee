@@ -1,1 +1,0 @@
-<DumpIO><cl>t_coffee -other_pg seq_reformat -in block1.aln -in2 block2.aln -action +cat_aln</cl><stack>#FAILURE -- SHELL ERROR -- Check the Command Line Syntax</stack><file><stream>output</stream><name>stderr</name><content>#FAILURE -- SHELL ERROR -- Check the Command Line Syntax</content></file></DumpIO>

@@ -1,4 +1,0 @@
-          t_coffee sample_seq1.fasta -in=Mclustalw_pair,Mclustalw_msa -lib_list=sample_list1.lib_list -outfile=test  
-          t_coffee -infile=sample_aln1.aln - in=Lsample_aln1.tc_lib -special_mode=evaluate  
-          t_coffee sample_seq2fasta -multi_thread 4  
-             t_coffee sample_seq1.fasta -in=Mclustalw_pair,Mclustalw_aln,Mslow_pair -outfile=clustal_text  

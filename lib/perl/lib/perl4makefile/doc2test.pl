@@ -48,6 +48,7 @@ my $clean;
 my $UPDATE;
 my $data="./";
 my $outdir="./";
+my $dump="./";
 my $stream="input";
 my $replay;
 my $unplay;
@@ -90,61 +91,26 @@ if ($ARGV[0] eq "-help")
     print "To check All the commands against the references, use -mode validate\n";
     print "Dumps are containers containing the CL and the input files\n";
     print "flags:\n";
-    print "     -pattern          pattern used to recognize the command lines [def=none]\n";
-    print "                       pattern will be treated as a regexp if -regexp is set\n";
-    print "     -regexp           flag that causes pattern to be treated as a perl regexp\n";
-    print "     -pg               specify the path of the version of T-Coffee (optional)\n";
-    print "     -log              default: validation.log\n";
-    print "     -docslog          default: docs.log\n";
-    print "     -mode=<action>    new|update|failed|check\n";
-    print "                       new    : check ONLY CL w/o ref/dump and create ref/dump\n";
-    print "                       update : check ALL  CL or create new ref/dum\n";
-    print "                       failed : run   ONLY FAILURE as found /failed\n";
-    print "                       check  : run   from dumps in ref";
+    print "     -pattern           pattern used to recognize the command lines [def=none]\n";
+    print "                        pattern will be treated as a regexp if -regexp is set\n";
+    print "     -play   <file>     generates T-Coffee dumps using -dir data and putting all the dumps in -outdir. Existing dumps are updated if -update\n";
+    print "     -check  <start>    prints the status of all the dumps. start: dump, list of dumps, recursive directory\n";
+    print "     -clean  <string>   Removes while checking: ALL, WARNING FAILED, TIMEOUT or MISSING\n";
+    print "     -replay <start>    replay and check existing dumps .   start: dump, list of dumps, recursive directory\n";
     
-    print "     -reset            delete all the dumps [CAUTION]\n";
-    print "     -stop             stop at every FAILURE\n";
-    print "     -clean            examples|dumps\n";
-    print "                       examples: removes files in /examples/ not used by /docs [CAUTION]\n";
-    print "                       dump:     removes files dumps not used by /docs [CAUTION]\n";
-    
-    print "     -rep              specifies a root repository\n";
-    print "     -example          directory containing the sample files\n"; 
-    print "     -docs             directory containing the .rst files\n";
-    print "                       OR .rst file\n";
-    print "                       OR file containing CLs (one per line)\n";
-    print "     -ref              directory containing the reference dumps\n";
-    print "                       OR dump file\n";
-    print "     -failed           directory containing all the failed dumps\n";
-    print "     -tmp              tmp directory\n";
-    print "     -latest           latest directory\n";
-    
-    
-    print "     -play   <file>    generates T-Coffee dumps using -dir data and putting all the dumps in -outdir. Existing dumps are updated if -update\n";
-    print "     -check  <start>   prints the status of all the dumps. start: dump, list of dumps, recursive directory\n";
-    print "     -clean  <string>  Removes while checking: ALL, FAILED, TIMEOUT, MISSING - FAILED removes FAILED+TIMEOUT+MISSING\n";
-    print "     -replay <start>   replay and check existing dumps .   start: dump, list of dumps, recursive directory\n";
-    
-    print "     -unplay <file>    outputs all the input files from the dump files into -outdir, path are respected. Different files with identical names give an error\n";
-    print "     -update           Recompute dumps already in -outdir\n";
+    print "     -unplay <file>     outputs all the input files from the dump files into -outdir, path are respected. Different files with identical names give an error\n";
+    print "     -update            Recompute dumps already in -outdir\n";
 
-    print "     -data   <dir>     directory containing all the data required by -play [def: current dir]\n";
-    print "     -outdir <dir>     target_directory\n";
-    print "     -stream string    stdin|stdout|all when -unplay [default=stdin]\n";
+    print "     -data   <dir>      directory containing all the data required by -play [def: current dir]\n";
+    print "     -outdir|-dump<dir> target_directory\n";
+    print "     -stream string     stdin|stdout|all when -unplay [default=stdin]\n";
 
     
-    print "     -keepreplayed     Keep the dump of the replayed dump. Will be named file.replayed and put in -outdir\n";
-    print "     -strict           Will report failure if one or more replay output files are missing\n";
-    print "     -very_strict      Will report failure if there is any difference between replay output\n";
-    print "     -timeout          Will report failure is time is over this value [Def=$TIMEOUT sec.]\n";
-    print "     -ignore           List of files to be ignoreed: File1 File2 Def: -ignore stdout stderr\n";
-    
-    
-    print "     -max              max number of CL to check [DEBUG]\n";
-    print "     -helppp             display this help message\n";
-    
-    
-    
+    print "     -keepreplayed      Keep the dump of the replayed dump. Will be named file.replayed and put in -outdir\n";
+    print "     -strict            Will report failure if one or more replay output files are missing\n";
+    print "     -very_strict       Will report failure if there is any difference between replay output\n";
+    print "     -timeout           Will report failure is time is over this value [Def=$TIMEOUT sec.]\n";
+    print "     -ignore            List of files to be ignoreed: File1 File2 Def: -ignore stdout stderr\n";
     print "\n";
     print "\n";
     die;
@@ -232,6 +198,11 @@ for (my $a=0; $a<=$#ARGV; $a++)
       {
 	$outdir=$ARGV[++$a];
       }
+    elsif ($ARGV[$a]=~/-dump/)
+      {
+	$outdir=$ARGV[++$a];
+      }
+    
     elsif ($ARGV[$a]=~/-replay/)
       {
 	$replay=$ARGV[++$a];
@@ -289,7 +260,7 @@ if ($check ){$exit_status=check_dump_list ($check,$clean);$infile=$check}
 if ($unplay){$exit_status=unplay_dump_list ($unplay, $stream,$outdir);$infile=$unplay}
 if ($PROCESSED)
   {
-    print "FULL SUMMARY:FILE: $infile TESTED $PROCESSED PASSED: $PASSED WARNING: $WARNING FAILED: $FAILED EXIT: $exit_status\n";
+    print "FULL SUMMARY:STATUS: $exit_status FILE: $infile TESTED $PROCESSED PASSED: $PASSED WARNING: $WARNING FAILED: $FAILED\n";
   }
 exit ($exit_status);
 
@@ -319,34 +290,37 @@ sub unplay_dump
       my %D=dump2report($dump);
       foreach my $f (keys (%{$D{file}}))
 	{
-	 
-	  my $name=$f;
-	  my $cstream=$D{file}{$f}{stream};
-	  my $content=$D{file}{$f}{content};
-	  my $fname="$dir/$name";
-	  
-	  
-	  if ($lu{$stream}{$fname}{name})
+	  if (($stream eq "all" || $D{file}{$f}{stream} eq $stream))
 	    {
-	      if ($lu{$stream}{$fname}{content} eq $content){;}
-	      else 
-		{
-		  my $pdump=$lu{$stream}{$fname}{dump};
-		  printf "ERROR: uplay --- $name appears with different contents in $dump and $pdump [FATAL]\n";
-		}
-	    }
-	  elsif (!$FILE2IGNORE{$f} && (($cstream eq $stream)|| ($stream eq "all")))
-	    {
-	      print "---- unplay $name\n";
+	      my $name=$f;
+	      my $cstream=$D{file}{$f}{stream};
+	      my $content=$D{file}{$f}{content};
+	      my $fname="$dir/$name";
 	      $content=~s/$RETURN/\n/g;
-	      my $f1 = new FileHandle;
-	      open ($f1, ">$dir/$name");
-	      print$f1 "$content";
-	      close ($f1);
-	      $lu{$stream}{$fname}{name}=$fname;
-	      $lu{$stream}{$fname}{stream}=$stream;
-	      $lu{$stream}{$fname}{content}=$content;
-	      $lu{$stream}{$fname}{dump}=$dump;
+	      
+	      if ($lu{$stream}{$fname}{name})
+		{
+		  if ($lu{$stream}{$fname}{content} eq $content){;}
+		  else 
+		    {
+		      my $pdump=$lu{$stream}{$fname}{dump};
+		      printf "ERROR: unplay --- $name appears with different contents in $dump and $pdump [FATAL]\n";
+		      print "-------\n$content\n$lu{$stream}{$fname}{content}\n\n\n\n";
+		    }
+		}
+	      elsif (!$FILE2IGNORE{$f} && (($cstream eq $stream)|| ($stream eq "all")))
+		{
+		  print "---- unplay $name\n";
+		  $content=~s/$RETURN/\n/g;
+		  my $f1 = new FileHandle;
+		  open ($f1, ">$dir/$name");
+		  print$f1 "$content";
+		  close ($f1);
+		  $lu{$stream}{$fname}{name}=$fname;
+		  $lu{$stream}{$fname}{stream}=$stream;
+		  $lu{$stream}{$fname}{content}=$content;
+		  $lu{$stream}{$fname}{dump}=$dump;
+		}
 	    }
 	}
     return;
@@ -389,20 +363,18 @@ sub play_dump_list
     if ($file =~/rst$/)
       {
 	$rdata=$data;
-	$data="$data/\./$ffile/";
+	#$data="$data/\./$ffile/";
 	$rfile="$wdir/$ffile";
 	$routdir="$outdir/$ffile/";
 	system ("mkdir -p $routdir");
 	
 	$PATTERN='\$\$:';
 	shortlines2longlines ($file, $rfile);
-	
-	
       }
     elsif ($file =~/tests$/)
       {
 	$rdata=$data;
-	$data="$data/\./$ffile/";
+	#$data="$data/\./$ffile/";
 	$rfile=$file;
 	$routdir="$outdir/$ffile/";
 	system ("mkdir -p $routdir");
@@ -458,14 +430,15 @@ sub play_dump_list
 	    my %report;
 	    my $target_dump="$routdir/$ddump";
 	    my $cached;
-	    if (-e "$target_dump" && !$UPDATE)
+	    my $pcl=dump2cl($target_dump);
+	    
+	    if (-e "$target_dump" && compare_cl($cl,$pcl) && !$UPDATE)
 	      {
 		%report=dump2report ($target_dump);
 		$cached=1;
 	      }
 	    else
 	      {
-	
 		
 		if (-d $ldata){safe_rmrf($ldata);}#remove leftovers of previous run
 		system ("cp -r $data $ldata");
@@ -479,7 +452,7 @@ sub play_dump_list
 	      }
 	    
 	    my $status=$lu{$cl}{exit}=($TIMEOUT_ERROR)?"TIMEOUT":report2status (%report);
-	    print "FILE: $ffile Line:$line -- Command: $cl -- Dump: $ddump -- $status ";
+	    printf ("STATUS %-7s FILE: $ffile Line:$line -- Command: $cl -- Dump: $ddump ", $status);
 	    if ($cached){print "--- cached\n";}
 	    else {print "\n";}
 	    	    
@@ -511,7 +484,7 @@ sub play_dump_list
     chdir ($cdir);
     safe_rmrf ($wdir);
     
-    print "SUMMARY:FILE $ffile TESTED $n PASSED: $passed WARNING: $warning FAILED: $failed\n";
+    print "SUMMARY: FILE $ffile TESTED $n PASSED: $passed WARNING: $warning FAILED: $failed\n";
     return $shell;
   }
 
@@ -525,12 +498,11 @@ sub check_dump_list
 	  my %report=dump2report ($d);
 	  my $status=report2status (%report);
 	  my $cl=dump2cl ($d);
-	  print "$d -- $cl -- $status";
+	  printf ("STATUS: %-7s Dump: $d Command: $cl", $status);
 	  if ($clean)
 	    {
 	      my $ul=0;
-	      if ($clean eq "ALL"){$ul=1;}
-	      elsif ($clean eq "FAILED" && $status ne "PASSED"){$ul=1;}
+	      if    ($clean eq "ALL"){$ul=1;}
 	      elsif ($clean eq $status){$ul=1;}
 	  
 	      if ( $ul)
@@ -626,6 +598,7 @@ sub replay_dump_file
       {
 	unlink ($replayed);
       }
+    
     return ($SHELL);
   }
   
@@ -830,6 +803,7 @@ sub dump2stack
 sub dump2cl
    {
      my ($file)=@_;
+     if ( !-e $file){return "";}
      my %cl=xml2tag_list ($file, "cl");
      return clean_command ($cl{0}{body});
    }
@@ -1223,3 +1197,30 @@ sub report2status
 	      }
 	  }
 	  
+sub super_trim
+    {
+      my ($string)=@_;
+      $string=~ s/^\s+|\s+$//g ;  
+      $string=~ s/,//g;
+      $string=~ s/;//g;
+      $string=~ s/=//g;
+      $string=~ s/'//g;
+      $string=~ s/ //g;
+      $string=~ s/\>.*$//;
+      $string=~ s/t_coffee-other_pg//g;
+	
+      return $string;
+    }
+sub compare_cl
+      {
+	my ($c1, $c2)=@_;
+	if (!$c1|| !$c2){return 0;}
+	$c1=super_trim($c1);
+	$c2=super_trim($c2);
+
+	if ($c1 eq $c2){return 1;}
+	else 
+	  {
+	    return 0;
+	  }
+	}

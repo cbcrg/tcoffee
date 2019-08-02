@@ -1,438 +1,0 @@
->sp|P08246|ELNE_HUMAN _P_ 1PPGE
->sp|P20160|CAP7_HUMAN _P_ 1AE5 
->sp|P00757|KLKB4_MOUSE _P_ 1SGFX
->sp|Q6H321|KLK2_HORSE _P_ 1GVZA
->sp|P00773|ELA1_RAT _P_ 2D26C
->sp|Q00871|CTRB1_PENVA _P_ 1AZZB
->sp|P21844|MCPT5_MOUSE _P_ 1NN6A
->sp|O35205|GRAK_MOUSE _P_ 1MZDA
->sp|P07338|CTRB1_RAT _P_ 2CGAB
->sp|P80015|CAP7_PIG _P_ 1FY3A
->sp|P03953|CFAD_MOUSE _P_ 1FDPD
->sp|Q7YRZ7|GRAA_BOVIN _P_ 1OP8F
->sp|Q06606|GRZ2_RAT _P_ 1EUFA
->sp|P08884|GRAE_MOUSE _P_ 1FI8B
-
-PROGRAM: T-COFFEE (Version_4.26)
--full_log      	S	[0] 
--run_name      	S	[1] 	Tmp/tcfEXPR48437_4912
--mem_mode      	S	[0] 	mem
--extend        	D	[1] 	1 
--extend_mode   	S	[0] 	very_fast_triplet
--max_n_pair    	D	[0] 	10 
--seq_name_for_quadruplet	S	[0] 	all
--compact       	S	[0] 	default
--clean         	S	[0] 	no
--do_self       	FL	[0] 	0
--do_normalise  	D	[0] 	1000 
--template_file 	S	[1] 	SCRIPT_webblast3d.pl
--in            	S	[1] 	Tmp/tcfEXPR48437_4912.in0	Mlalign_id_pair	Mslow_pair	Msap_pair
--seq           	S	[0] 
--aln           	S	[0] 
--method        	S	[0] 
--lib           	S	[0] 
--profile       	S	[0] 
--profile1      	S	[0] 
--profile2      	S	[0] 
--pdb           	S	[0] 
--out_lib       	W_F	[0] 	no
--lib_only      	D	[0] 	0 
--outseqweight  	W_F	[0] 	no
--seq_source    	S	[0] 	ANY
--cosmetic_penalty	D	[0] 	-50 
--gapopen       	D	[0] 	0 
--gapext        	D	[0] 	0 
--fgapopen      	D	[0] 	0 
--fgapext       	D	[0] 	0 
--nomatch       	D	[0] 	0 
--newtree       	W_F	[0] 	default
--tree          	W_F	[1] 	default
--usetree       	R_F	[0] 
--tree_mode     	S	[0] 	nj
--distance_matrix_mode	S	[0] 	idscore
--quicktree     	FL	[0] 	0
--outfile       	W_F	[0] 	default
--maximise      	FL	[1] 	1
--output        	S	[1] 	msf_aln	score_ascii	score_html	clustalw_aln	fasta_aln
--infile        	R_F	[0] 
--matrix        	S	[0] 	blosum62mt
--tg_mode       	D	[0] 	1 
--profile_mode  	S	[0] 	cw_profile_profile
--profile_comparison	S	[0] 	full50
--dp_mode       	S	[0] 	cfasta_pair_wise
--ktuple        	D	[0] 	1 
--ndiag         	D	[0] 	0 
--diag_threshold	D	[0] 	0 
--diag_mode     	D	[0] 	0 
--sim_matrix    	S	[0] 	vasiliky
--type          	S	[0] 
--outorder      	S	[0] 	aligned
--inorder       	S	[0] 	aligned
--seqnos        	S	[0] 	off
--case          	S	[0] 	keep
--cpu           	D	[0] 	0 
--maxnseq       	D	[0] 	10000 
--maxlen        	D	[1] 	2000 
--weight        	S	[0] 	default
--seq_weight    	S	[0] 	t_coffee
--align         	FL	[1] 	1
--mocca         	FL	[0] 	0
--domain        	FL	[0] 	0
--start         	D	[0] 	0 
--len           	D	[0] 	0 
--scale         	D	[0] 	0 
--mocca_interactive	FL	[0] 	0
--evaluate_mode 	S	[1] 	t_coffee_slow
--get_type      	FL	[0] 	0
--clean_aln     	D	[0] 	0 
--clean_threshold	D	[1] 	1 
--clean_iteration	D	[1] 	1 
--clean_evaluate_mode	S	[0] 	t_coffee_fast
--extend_matrix 	FL	[0] 	0
--prot_min_sim  	D	[40] 	40 
--prot_max_sim  	D	[60] 	60 
--prot_min_cov  	D	[0] 	0 
--pdb_min_sim   	D	[30] 	30 
--pdb_max_sim   	D	[100] 	100 
--pdb_min_cov   	D	[50] 	50 
--pdb_blast_server	W_F	[0] 	SIB
--prot_blast_server	W_F	[0] 	SIB
--pdb_db        	W_F	[0] 	nrl3d
--protein_db    	W_F	[0] 	nr
--method_log    	W_F	[0] 	no
--struc_to_use  	S	[0] 
--cache         	W_F	[1] 	no
--align_pdb_param_file	W_F	[0] 	no
--align_pdb_hasch_mode	W_F	[0] 	hasch_ca_trace_bubble
--msa_mode      	S	[0] 	tree
--lalign_n_top  	D	[0] 	10 
--iterate       	D	[0] 	0 
--trim          	D	[0] 	0 
--split         	D	[0] 	0 
--trimfile      	S	[0] 	default
--split         	D	[0] 	0 
--split_nseq_thres	D	[0] 	0 
--split_score_thres	D	[0] 	0 
--check_pdb_status	D	[1] 	1 
--clean_seq_name	D	[0] 	0 
--seq_to_keep   	S	[0] 
--dpa_master_aln	S	[0] 
--dpa_maxnseq   	D	[0] 	0 
--dpa_min_score1	D	[0] 
--dpa_min_score2	D	[0] 
--dpa_keep_tmpfile	FL	[0] 	0
--dpa_debug     	D	[0] 	0 
--multi_thread  	S	[0] 
--lib_list      	S	[0] 
--tip           	S	[0] 	one
--no_warning    	D	[0] 	0 
-
-INPUT FILES
-	Input File (S) Tmp/tcfEXPR48437_4912.in0  Format fasta_seq
-	Input File (M) lalign_id_pair 
-	Input File (M) slow_pair 
-	Input File (M) sap_pair 
-
-Looking For Sequence Templates:
-
-	Template Type: [SCRIPT_webblast3d.pl] Mode Or File: [SCRIPT_webblast3d.pl] [Start]
-INPUT SEQUENCES: 19 SEQUENCES  [PROTEIN]
-  Input File Tmp/tcfEXPR48437_4912.in0 Seq sp|Q06606|GRZ2_RAT    Length  248 type PROTEIN Struct Yes PDBID 1EUF
-	PDB struc: Template=1EUFA, File=1EUFA.pdb
-  Input File Tmp/tcfEXPR48437_4912.in0 Seq sp|P08884|GRAE_MOUSE  Length  248 type PROTEIN Struct Yes PDBID 1FI8
-	PDB struc: Template=1FI8B, File=1FI8B.pdb
-  Input File Tmp/tcfEXPR48437_4912.in0 Seq sp|P21844|MCPT5_MOUSE Length  247 type PROTEIN Struct Yes PDBID 1NN6
-	PDB struc: Template=1NN6A, File=1NN6A.pdb
-  Input File Tmp/tcfEXPR48437_4912.in0 Seq sp|O35205|GRAK_MOUSE  Length  263 type PROTEIN Struct Yes PDBID 1MZD
-	PDB struc: Template=1MZDA, File=1MZDA.pdb
-  Input File Tmp/tcfEXPR48437_4912.in0 Seq sp|Q9Y5K2|KLK4_HUMAN  Length  254 type PROTEIN Struct No
-  Input File Tmp/tcfEXPR48437_4912.in0 Seq sp|Q7YRZ7|GRAA_BOVIN  Length  258 type PROTEIN Struct Yes PDBID 1OP8
-	PDB struc: Template=1OP8F, File=1OP8F.pdb
-  Input File Tmp/tcfEXPR48437_4912.in0 Seq sp|Q00871|CTRB1_PENVA Length  271 type PROTEIN Struct Yes PDBID 1AZZ
-	PDB struc: Template=1AZZB, File=1AZZB.pdb
-  Input File Tmp/tcfEXPR48437_4912.in0 Seq sp|P08246|ELNE_HUMAN  Length  267 type PROTEIN Struct Yes PDBID 1PPG
-	PDB struc: Template=1PPGE, File=1PPGE.pdb
-  Input File Tmp/tcfEXPR48437_4912.in0 Seq sp|P03953|CFAD_MOUSE  Length  259 type PROTEIN Struct Yes PDBID 1FDP
-	PDB struc: Template=1FDPD, File=1FDPD.pdb
-  Input File Tmp/tcfEXPR48437_4912.in0 Seq sp|Q91VE3|KLK7_MOUSE  Length  249 type PROTEIN Struct No
-  Input File Tmp/tcfEXPR48437_4912.in0 Seq sp|Q6H321|KLK2_HORSE  Length  261 type PROTEIN Struct Yes PDBID 1GVZ
-	PDB struc: Template=1GVZA, File=1GVZA.pdb
-  Input File Tmp/tcfEXPR48437_4912.in0 Seq sp|Q03238|GRAM_RAT    Length  258 type PROTEIN Struct No
-  Input File Tmp/tcfEXPR48437_4912.in0 Seq sp|P20160|CAP7_HUMAN  Length  251 type PROTEIN Struct Yes PDBID 1AE5
-	PDB struc: Template=1AE5, File=1AE5.pdb
-  Input File Tmp/tcfEXPR48437_4912.in0 Seq sp|P07338|CTRB1_RAT   Length  263 type PROTEIN Struct Yes PDBID 2CGA
-	PDB struc: Template=2CGAB, File=2CGAB.pdb
-  Input File Tmp/tcfEXPR48437_4912.in0 Seq sp|P00757|KLKB4_MOUSE Length  256 type PROTEIN Struct Yes PDBID 1SGF
-	PDB struc: Template=1SGFX, File=1SGFX.pdb
-  Input File Tmp/tcfEXPR48437_4912.in0 Seq sp|P80015|CAP7_PIG    Length  219 type PROTEIN Struct Yes PDBID 1FY3
-	PDB struc: Template=1FY3A, File=1FY3A.pdb
-  Input File Tmp/tcfEXPR48437_4912.in0 Seq sp|P29786|TRY3_AEDAE  Length  254 type PROTEIN Struct No
-  Input File Tmp/tcfEXPR48437_4912.in0 Seq sp|P35037|TRY3_ANOGA  Length  275 type PROTEIN Struct No
-  Input File Tmp/tcfEXPR48437_4912.in0 Seq sp|P00773|ELA1_RAT    Length  266 type PROTEIN Struct Yes PDBID 2D26
-	PDB struc: Template=2D26C, File=2D26C.pdb
-
-COMPUTE PAIRWISE SIMILARITY [dp_mode: idscore_pair_wise] [distance_matrix_mode: idscore] 
-
-	sp|O35205|GRAK_MOUSE  sp|P00757|KLKB4_MOUSE identity= 34% score=340
-	sp|O35205|GRAK_MOUSE  sp|P00773|ELA1_RAT    identity= 34% score=340
-	sp|O35205|GRAK_MOUSE  sp|P03953|CFAD_MOUSE  identity= 36% score=360
-	sp|O35205|GRAK_MOUSE  sp|P07338|CTRB1_RAT   identity= 32% score=320
-	sp|O35205|GRAK_MOUSE  sp|P08246|ELNE_HUMAN  identity= 32% score=320
-	sp|O35205|GRAK_MOUSE  sp|P08884|GRAE_MOUSE  identity= 35% score=350
-	sp|O35205|GRAK_MOUSE  sp|P20160|CAP7_HUMAN  identity= 34% score=340
-	sp|O35205|GRAK_MOUSE  sp|P21844|MCPT5_MOUSE identity= 38% score=380
-	sp|O35205|GRAK_MOUSE  sp|P29786|TRY3_AEDAE  identity= 30% score=300
-	sp|O35205|GRAK_MOUSE  sp|P35037|TRY3_ANOGA  identity= 28% score=280
-	sp|O35205|GRAK_MOUSE  sp|P80015|CAP7_PIG    identity= 36% score=360
-	sp|O35205|GRAK_MOUSE  sp|Q00871|CTRB1_PENVA identity= 32% score=320
-	sp|O35205|GRAK_MOUSE  sp|Q03238|GRAM_RAT    identity= 35% score=350
-	sp|O35205|GRAK_MOUSE  sp|Q06606|GRZ2_RAT    identity= 35% score=350
-	sp|O35205|GRAK_MOUSE  sp|Q6H321|KLK2_HORSE  identity= 31% score=310
-	sp|O35205|GRAK_MOUSE  sp|Q7YRZ7|GRAA_BOVIN  identity= 46% score=460
-	sp|O35205|GRAK_MOUSE  sp|Q91VE3|KLK7_MOUSE  identity= 31% score=310
-	sp|O35205|GRAK_MOUSE  sp|Q9Y5K2|KLK4_HUMAN  identity= 38% score=380
-	sp|P00757|KLKB4_MOUSE sp|P00773|ELA1_RAT    identity= 31% score=310
-	sp|P00757|KLKB4_MOUSE sp|P03953|CFAD_MOUSE  identity= 33% score=330
-	sp|P00757|KLKB4_MOUSE sp|P07338|CTRB1_RAT   identity= 36% score=360
-	sp|P00757|KLKB4_MOUSE sp|P08246|ELNE_HUMAN  identity= 29% score=290
-	sp|P00757|KLKB4_MOUSE sp|P08884|GRAE_MOUSE  identity= 33% score=330
-	sp|P00757|KLKB4_MOUSE sp|P20160|CAP7_HUMAN  identity= 28% score=280
-	sp|P00757|KLKB4_MOUSE sp|P21844|MCPT5_MOUSE identity= 33% score=330
-	sp|P00757|KLKB4_MOUSE sp|P29786|TRY3_AEDAE  identity= 33% score=330
-	sp|P00757|KLKB4_MOUSE sp|P35037|TRY3_ANOGA  identity= 31% score=310
-	sp|P00757|KLKB4_MOUSE sp|P80015|CAP7_PIG    identity= 25% score=250
-	sp|P00757|KLKB4_MOUSE sp|Q00871|CTRB1_PENVA identity= 32% score=320
-	sp|P00757|KLKB4_MOUSE sp|Q03238|GRAM_RAT    identity= 32% score=320
-	sp|P00757|KLKB4_MOUSE sp|Q06606|GRZ2_RAT    identity= 33% score=330
-	sp|P00757|KLKB4_MOUSE sp|Q6H321|KLK2_HORSE  identity= 51% score=510
-	sp|P00757|KLKB4_MOUSE sp|Q7YRZ7|GRAA_BOVIN  identity= 36% score=360
-	sp|P00757|KLKB4_MOUSE sp|Q91VE3|KLK7_MOUSE  identity= 39% score=390
-	sp|P00757|KLKB4_MOUSE sp|Q9Y5K2|KLK4_HUMAN  identity= 39% score=390
-	sp|P00773|ELA1_RAT    sp|P03953|CFAD_MOUSE  identity= 32% score=320
-	sp|P00773|ELA1_RAT    sp|P07338|CTRB1_RAT   identity= 35% score=350
-	sp|P00773|ELA1_RAT    sp|P08246|ELNE_HUMAN  identity= 40% score=400
-	sp|P00773|ELA1_RAT    sp|P08884|GRAE_MOUSE  identity= 28% score=280
-	sp|P00773|ELA1_RAT    sp|P20160|CAP7_HUMAN  identity= 33% score=330
-	sp|P00773|ELA1_RAT    sp|P21844|MCPT5_MOUSE identity= 32% score=320
-	sp|P00773|ELA1_RAT    sp|P29786|TRY3_AEDAE  identity= 31% score=310
-	sp|P00773|ELA1_RAT    sp|P35037|TRY3_ANOGA  identity= 30% score=300
-	sp|P00773|ELA1_RAT    sp|P80015|CAP7_PIG    identity= 29% score=290
-	sp|P00773|ELA1_RAT    sp|Q00871|CTRB1_PENVA identity= 37% score=370
-	sp|P00773|ELA1_RAT    sp|Q03238|GRAM_RAT    identity= 37% score=370
-	sp|P00773|ELA1_RAT    sp|Q06606|GRZ2_RAT    identity= 31% score=310
-	sp|P00773|ELA1_RAT    sp|Q6H321|KLK2_HORSE  identity= 32% score=320
-	sp|P00773|ELA1_RAT    sp|Q7YRZ7|GRAA_BOVIN  identity= 29% score=290
-	sp|P00773|ELA1_RAT    sp|Q91VE3|KLK7_MOUSE  identity= 29% score=290
-	sp|P00773|ELA1_RAT    sp|Q9Y5K2|KLK4_HUMAN  identity= 26% score=260
-	sp|P03953|CFAD_MOUSE  sp|P07338|CTRB1_RAT   identity= 33% score=330
-	sp|P03953|CFAD_MOUSE  sp|P08246|ELNE_HUMAN  identity= 30% score=300
-	sp|P03953|CFAD_MOUSE  sp|P08884|GRAE_MOUSE  identity= 31% score=310
-	sp|P03953|CFAD_MOUSE  sp|P20160|CAP7_HUMAN  identity= 32% score=320
-	sp|P03953|CFAD_MOUSE  sp|P21844|MCPT5_MOUSE identity= 33% score=330
-	sp|P03953|CFAD_MOUSE  sp|P29786|TRY3_AEDAE  identity= 32% score=320
-	sp|P03953|CFAD_MOUSE  sp|P35037|TRY3_ANOGA  identity= 34% score=340
-	sp|P03953|CFAD_MOUSE  sp|P80015|CAP7_PIG    identity= 33% score=330
-	sp|P03953|CFAD_MOUSE  sp|Q00871|CTRB1_PENVA identity= 32% score=320
-	sp|P03953|CFAD_MOUSE  sp|Q03238|GRAM_RAT    identity= 34% score=340
-	sp|P03953|CFAD_MOUSE  sp|Q06606|GRZ2_RAT    identity= 33% score=330
-	sp|P03953|CFAD_MOUSE  sp|Q6H321|KLK2_HORSE  identity= 32% score=320
-	sp|P03953|CFAD_MOUSE  sp|Q7YRZ7|GRAA_BOVIN  identity= 36% score=360
-	sp|P03953|CFAD_MOUSE  sp|Q91VE3|KLK7_MOUSE  identity= 30% score=300
-	sp|P03953|CFAD_MOUSE  sp|Q9Y5K2|KLK4_HUMAN  identity= 33% score=330
-	sp|P07338|CTRB1_RAT   sp|P08246|ELNE_HUMAN  identity= 32% score=320
-	sp|P07338|CTRB1_RAT   sp|P08884|GRAE_MOUSE  identity= 31% score=310
-	sp|P07338|CTRB1_RAT   sp|P20160|CAP7_HUMAN  identity= 30% score=300
-	sp|P07338|CTRB1_RAT   sp|P21844|MCPT5_MOUSE identity= 31% score=310
-	sp|P07338|CTRB1_RAT   sp|P29786|TRY3_AEDAE  identity= 35% score=350
-	sp|P07338|CTRB1_RAT   sp|P35037|TRY3_ANOGA  identity= 33% score=330
-	sp|P07338|CTRB1_RAT   sp|P80015|CAP7_PIG    identity= 29% score=290
-	sp|P07338|CTRB1_RAT   sp|Q00871|CTRB1_PENVA identity= 34% score=340
-	sp|P07338|CTRB1_RAT   sp|Q03238|GRAM_RAT    identity= 36% score=360
-	sp|P07338|CTRB1_RAT   sp|Q06606|GRZ2_RAT    identity= 32% score=320
-	sp|P07338|CTRB1_RAT   sp|Q6H321|KLK2_HORSE  identity= 34% score=340
-	sp|P07338|CTRB1_RAT   sp|Q7YRZ7|GRAA_BOVIN  identity= 29% score=290
-	sp|P07338|CTRB1_RAT   sp|Q91VE3|KLK7_MOUSE  identity= 38% score=380
-	sp|P07338|CTRB1_RAT   sp|Q9Y5K2|KLK4_HUMAN  identity= 30% score=300
-	sp|P08246|ELNE_HUMAN  sp|P08884|GRAE_MOUSE  identity= 30% score=300
-	sp|P08246|ELNE_HUMAN  sp|P20160|CAP7_HUMAN  identity= 44% score=440
-	sp|P08246|ELNE_HUMAN  sp|P21844|MCPT5_MOUSE identity= 34% score=340
-	sp|P08246|ELNE_HUMAN  sp|P29786|TRY3_AEDAE  identity= 27% score=270
-	sp|P08246|ELNE_HUMAN  sp|P35037|TRY3_ANOGA  identity= 31% score=310
-	sp|P08246|ELNE_HUMAN  sp|P80015|CAP7_PIG    identity= 40% score=400
-	sp|P08246|ELNE_HUMAN  sp|Q00871|CTRB1_PENVA identity= 33% score=330
-	sp|P08246|ELNE_HUMAN  sp|Q03238|GRAM_RAT    identity= 31% score=310
-	sp|P08246|ELNE_HUMAN  sp|Q06606|GRZ2_RAT    identity= 33% score=330
-	sp|P08246|ELNE_HUMAN  sp|Q6H321|KLK2_HORSE  identity= 31% score=310
-	sp|P08246|ELNE_HUMAN  sp|Q7YRZ7|GRAA_BOVIN  identity= 31% score=310
-	sp|P08246|ELNE_HUMAN  sp|Q91VE3|KLK7_MOUSE  identity= 25% score=250
-	sp|P08246|ELNE_HUMAN  sp|Q9Y5K2|KLK4_HUMAN  identity= 30% score=300
-	sp|P08884|GRAE_MOUSE  sp|P20160|CAP7_HUMAN  identity= 30% score=300
-	sp|P08884|GRAE_MOUSE  sp|P21844|MCPT5_MOUSE identity= 43% score=430
-	sp|P08884|GRAE_MOUSE  sp|P29786|TRY3_AEDAE  identity= 28% score=280
-	sp|P08884|GRAE_MOUSE  sp|P35037|TRY3_ANOGA  identity= 28% score=280
-	sp|P08884|GRAE_MOUSE  sp|P80015|CAP7_PIG    identity= 32% score=320
-	sp|P08884|GRAE_MOUSE  sp|Q00871|CTRB1_PENVA identity= 30% score=300
-	sp|P08884|GRAE_MOUSE  sp|Q03238|GRAM_RAT    identity= 33% score=330
-	sp|P08884|GRAE_MOUSE  sp|Q06606|GRZ2_RAT    identity= 46% score=460
-	sp|P08884|GRAE_MOUSE  sp|Q6H321|KLK2_HORSE  identity= 32% score=320
-	sp|P08884|GRAE_MOUSE  sp|Q7YRZ7|GRAA_BOVIN  identity= 38% score=380
-	sp|P08884|GRAE_MOUSE  sp|Q91VE3|KLK7_MOUSE  identity= 33% score=330
-	sp|P08884|GRAE_MOUSE  sp|Q9Y5K2|KLK4_HUMAN  identity= 29% score=290
-	sp|P20160|CAP7_HUMAN  sp|P21844|MCPT5_MOUSE identity= 31% score=310
-	sp|P20160|CAP7_HUMAN  sp|P29786|TRY3_AEDAE  identity= 30% score=300
-	sp|P20160|CAP7_HUMAN  sp|P35037|TRY3_ANOGA  identity= 31% score=310
-	sp|P20160|CAP7_HUMAN  sp|P80015|CAP7_PIG    identity= 68% score=680
-	sp|P20160|CAP7_HUMAN  sp|Q00871|CTRB1_PENVA identity= 34% score=340
-	sp|P20160|CAP7_HUMAN  sp|Q03238|GRAM_RAT    identity= 33% score=330
-	sp|P20160|CAP7_HUMAN  sp|Q06606|GRZ2_RAT    identity= 32% score=320
-	sp|P20160|CAP7_HUMAN  sp|Q6H321|KLK2_HORSE  identity= 32% score=320
-	sp|P20160|CAP7_HUMAN  sp|Q7YRZ7|GRAA_BOVIN  identity= 33% score=330
-	sp|P20160|CAP7_HUMAN  sp|Q91VE3|KLK7_MOUSE  identity= 27% score=270
-	sp|P20160|CAP7_HUMAN  sp|Q9Y5K2|KLK4_HUMAN  identity= 32% score=320
-	sp|P21844|MCPT5_MOUSE sp|P29786|TRY3_AEDAE  identity= 25% score=250
-	sp|P21844|MCPT5_MOUSE sp|P35037|TRY3_ANOGA  identity= 28% score=280
-	sp|P21844|MCPT5_MOUSE sp|P80015|CAP7_PIG    identity= 29% score=290
-	sp|P21844|MCPT5_MOUSE sp|Q00871|CTRB1_PENVA identity= 30% score=300
-	sp|P21844|MCPT5_MOUSE sp|Q03238|GRAM_RAT    identity= 34% score=340
-	sp|P21844|MCPT5_MOUSE sp|Q06606|GRZ2_RAT    identity= 45% score=450
-	sp|P21844|MCPT5_MOUSE sp|Q6H321|KLK2_HORSE  identity= 34% score=340
-	sp|P21844|MCPT5_MOUSE sp|Q7YRZ7|GRAA_BOVIN  identity= 32% score=320
-	sp|P21844|MCPT5_MOUSE sp|Q91VE3|KLK7_MOUSE  identity= 32% score=320
-	sp|P21844|MCPT5_MOUSE sp|Q9Y5K2|KLK4_HUMAN  identity= 33% score=330
-	sp|P29786|TRY3_AEDAE  sp|P35037|TRY3_ANOGA  identity= 49% score=490
-	sp|P29786|TRY3_AEDAE  sp|P80015|CAP7_PIG    identity= 30% score=300
-	sp|P29786|TRY3_AEDAE  sp|Q00871|CTRB1_PENVA identity= 28% score=280
-	sp|P29786|TRY3_AEDAE  sp|Q03238|GRAM_RAT    identity= 30% score=300
-	sp|P29786|TRY3_AEDAE  sp|Q06606|GRZ2_RAT    identity= 29% score=290
-	sp|P29786|TRY3_AEDAE  sp|Q6H321|KLK2_HORSE  identity= 28% score=280
-	sp|P29786|TRY3_AEDAE  sp|Q7YRZ7|GRAA_BOVIN  identity= 30% score=300
-	sp|P29786|TRY3_AEDAE  sp|Q91VE3|KLK7_MOUSE  identity= 36% score=360
-	sp|P29786|TRY3_AEDAE  sp|Q9Y5K2|KLK4_HUMAN  identity= 33% score=330
-	sp|P35037|TRY3_ANOGA  sp|P80015|CAP7_PIG    identity= 30% score=300
-	sp|P35037|TRY3_ANOGA  sp|Q00871|CTRB1_PENVA identity= 31% score=310
-	sp|P35037|TRY3_ANOGA  sp|Q03238|GRAM_RAT    identity= 33% score=330
-	sp|P35037|TRY3_ANOGA  sp|Q06606|GRZ2_RAT    identity= 28% score=280
-	sp|P35037|TRY3_ANOGA  sp|Q6H321|KLK2_HORSE  identity= 29% score=290
-	sp|P35037|TRY3_ANOGA  sp|Q7YRZ7|GRAA_BOVIN  identity= 31% score=310
-	sp|P35037|TRY3_ANOGA  sp|Q91VE3|KLK7_MOUSE  identity= 35% score=350
-	sp|P35037|TRY3_ANOGA  sp|Q9Y5K2|KLK4_HUMAN  identity= 29% score=290
-	sp|P80015|CAP7_PIG    sp|Q00871|CTRB1_PENVA identity= 31% score=310
-	sp|P80015|CAP7_PIG    sp|Q03238|GRAM_RAT    identity= 30% score=300
-	sp|P80015|CAP7_PIG    sp|Q06606|GRZ2_RAT    identity= 30% score=300
-	sp|P80015|CAP7_PIG    sp|Q6H321|KLK2_HORSE  identity= 30% score=300
-	sp|P80015|CAP7_PIG    sp|Q7YRZ7|GRAA_BOVIN  identity= 34% score=340
-	sp|P80015|CAP7_PIG    sp|Q91VE3|KLK7_MOUSE  identity= 28% score=280
-	sp|P80015|CAP7_PIG    sp|Q9Y5K2|KLK4_HUMAN  identity= 29% score=290
-	sp|Q00871|CTRB1_PENVA sp|Q03238|GRAM_RAT    identity= 30% score=300
-	sp|Q00871|CTRB1_PENVA sp|Q06606|GRZ2_RAT    identity= 37% score=370
-	sp|Q00871|CTRB1_PENVA sp|Q6H321|KLK2_HORSE  identity= 33% score=330
-	sp|Q00871|CTRB1_PENVA sp|Q7YRZ7|GRAA_BOVIN  identity= 29% score=290
-	sp|Q00871|CTRB1_PENVA sp|Q91VE3|KLK7_MOUSE  identity= 32% score=320
-	sp|Q00871|CTRB1_PENVA sp|Q9Y5K2|KLK4_HUMAN  identity= 31% score=310
-	sp|Q03238|GRAM_RAT    sp|Q06606|GRZ2_RAT    identity= 35% score=350
-	sp|Q03238|GRAM_RAT    sp|Q6H321|KLK2_HORSE  identity= 35% score=350
-	sp|Q03238|GRAM_RAT    sp|Q7YRZ7|GRAA_BOVIN  identity= 34% score=340
-	sp|Q03238|GRAM_RAT    sp|Q91VE3|KLK7_MOUSE  identity= 32% score=320
-	sp|Q03238|GRAM_RAT    sp|Q9Y5K2|KLK4_HUMAN  identity= 33% score=330
-	sp|Q06606|GRZ2_RAT    sp|Q6H321|KLK2_HORSE  identity= 35% score=350
-	sp|Q06606|GRZ2_RAT    sp|Q7YRZ7|GRAA_BOVIN  identity= 38% score=380
-	sp|Q06606|GRZ2_RAT    sp|Q91VE3|KLK7_MOUSE  identity= 33% score=330
-	sp|Q06606|GRZ2_RAT    sp|Q9Y5K2|KLK4_HUMAN  identity= 30% score=300
-	sp|Q6H321|KLK2_HORSE  sp|Q7YRZ7|GRAA_BOVIN  identity= 33% score=330
-	sp|Q6H321|KLK2_HORSE  sp|Q91VE3|KLK7_MOUSE  identity= 36% score=360
-	sp|Q6H321|KLK2_HORSE  sp|Q9Y5K2|KLK4_HUMAN  identity= 38% score=380
-	sp|Q7YRZ7|GRAA_BOVIN  sp|Q91VE3|KLK7_MOUSE  identity= 31% score=310
-	sp|Q7YRZ7|GRAA_BOVIN  sp|Q9Y5K2|KLK4_HUMAN  identity= 31% score=310
-	sp|Q91VE3|KLK7_MOUSE  sp|Q9Y5K2|KLK4_HUMAN  identity= 41% score=410
-
-READ/MAKE LIBRARIES:[4]
-
-	lalign_id_pair [method]
-
-		[Submit   Job][TOT=  171][  0 %][ELAPSED TIME:    0 sec.][REMAINING TIME: -1076505272 sec.]		[Submit   Job][TOT=  171][  1 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][  2 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][  3 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][  4 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][  5 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][  6 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][  7 %][ELAPSED TIME:    1 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][  8 %][ELAPSED TIME:    1 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][  9 %][ELAPSED TIME:    1 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 10 %][ELAPSED TIME:    1 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 11 %][ELAPSED TIME:    1 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 12 %][ELAPSED TIME:    1 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 13 %][ELAPSED TIME:    2 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 14 %][ELAPSED TIME:    2 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 15 %][ELAPSED TIME:    2 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 16 %][ELAPSED TIME:    2 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 17 %][ELAPSED TIME:    2 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 18 %][ELAPSED TIME:    2 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 19 %][ELAPSED TIME:    2 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 20 %][ELAPSED TIME:    3 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 21 %][ELAPSED TIME:    3 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 22 %][ELAPSED TIME:    3 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 23 %][ELAPSED TIME:    3 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 24 %][ELAPSED TIME:    3 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 25 %][ELAPSED TIME:    3 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 26 %][ELAPSED TIME:    4 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 27 %][ELAPSED TIME:    4 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 28 %][ELAPSED TIME:    4 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 29 %][ELAPSED TIME:    4 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 30 %][ELAPSED TIME:    4 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 31 %][ELAPSED TIME:    4 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 32 %][ELAPSED TIME:    5 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 33 %][ELAPSED TIME:    5 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 34 %][ELAPSED TIME:    5 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 35 %][ELAPSED TIME:    5 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 36 %][ELAPSED TIME:    5 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 37 %][ELAPSED TIME:    5 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 38 %][ELAPSED TIME:    5 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 39 %][ELAPSED TIME:    6 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 40 %][ELAPSED TIME:    6 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 41 %][ELAPSED TIME:    6 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 42 %][ELAPSED TIME:    6 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 43 %][ELAPSED TIME:    6 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 44 %][ELAPSED TIME:    6 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 45 %][ELAPSED TIME:    7 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 46 %][ELAPSED TIME:    7 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 47 %][ELAPSED TIME:    7 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 48 %][ELAPSED TIME:    7 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 49 %][ELAPSED TIME:    7 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 50 %][ELAPSED TIME:    7 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 51 %][ELAPSED TIME:    8 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 52 %][ELAPSED TIME:    8 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 53 %][ELAPSED TIME:    8 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 54 %][ELAPSED TIME:    8 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 55 %][ELAPSED TIME:    8 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 56 %][ELAPSED TIME:    8 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 57 %][ELAPSED TIME:    8 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 58 %][ELAPSED TIME:    9 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 59 %][ELAPSED TIME:    9 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 60 %][ELAPSED TIME:    9 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 61 %][ELAPSED TIME:    9 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 62 %][ELAPSED TIME:    9 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 63 %][ELAPSED TIME:    9 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 64 %][ELAPSED TIME:   10 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 65 %][ELAPSED TIME:   10 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 66 %][ELAPSED TIME:   10 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 67 %][ELAPSED TIME:   10 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 68 %][ELAPSED TIME:   10 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 69 %][ELAPSED TIME:   10 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 70 %][ELAPSED TIME:   10 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 71 %][ELAPSED TIME:   11 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 72 %][ELAPSED TIME:   11 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 73 %][ELAPSED TIME:   11 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 74 %][ELAPSED TIME:   11 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 75 %][ELAPSED TIME:   11 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 76 %][ELAPSED TIME:   11 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 77 %][ELAPSED TIME:   11 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 78 %][ELAPSED TIME:   12 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 79 %][ELAPSED TIME:   12 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 80 %][ELAPSED TIME:   12 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 81 %][ELAPSED TIME:   12 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 82 %][ELAPSED TIME:   12 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 83 %][ELAPSED TIME:   12 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 84 %][ELAPSED TIME:   13 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 85 %][ELAPSED TIME:   13 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 86 %][ELAPSED TIME:   13 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 87 %][ELAPSED TIME:   13 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 88 %][ELAPSED TIME:   13 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 89 %][ELAPSED TIME:   13 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 90 %][ELAPSED TIME:   14 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 91 %][ELAPSED TIME:   14 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 92 %][ELAPSED TIME:   14 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 93 %][ELAPSED TIME:   14 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 94 %][ELAPSED TIME:   14 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 95 %][ELAPSED TIME:   14 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 96 %][ELAPSED TIME:   15 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 97 %][ELAPSED TIME:   15 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 98 %][ELAPSED TIME:   15 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 99 %][ELAPSED TIME:   15 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][100 %][ELAPSED TIME:   15 sec.][REMAINING TIME:    0 sec.]
-
-		[Retrieve Job][TOT=  171][  0 %][ELAPSED TIME:    0 sec.][REMAINING TIME: -1076505272 sec.]		[Retrieve Job][TOT=  171][  1 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][  2 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][  3 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][  4 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][  5 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][  6 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][  7 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][  8 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][  9 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 10 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 11 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 12 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 13 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 14 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 15 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 16 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 17 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 18 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 19 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 20 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 21 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 22 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 23 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 24 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 25 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 26 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 27 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 28 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 29 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 30 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 31 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 32 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 33 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 34 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 35 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 36 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 37 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 38 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 39 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 40 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 41 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 42 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 43 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 44 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 45 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 46 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 47 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 48 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 49 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 50 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 51 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 52 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 53 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 54 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 55 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 56 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 57 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 58 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 59 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 60 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 61 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 62 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 63 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 64 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 65 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 66 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 67 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 68 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 69 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 70 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 71 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 72 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 73 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 74 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 75 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 76 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 77 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 78 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 79 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 80 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 81 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 82 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 83 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 84 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 85 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 86 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 87 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 88 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 89 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 90 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 91 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 92 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 93 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 94 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 95 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 96 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 97 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 98 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 99 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][100 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]
-	slow_pair [method]
-
-		[Submit   Job][TOT=  171][  0 %][ELAPSED TIME:    0 sec.][REMAINING TIME: -1076505272 sec.]		[Submit   Job][TOT=  171][  1 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][  2 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][  3 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][  4 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][  5 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][  6 %][ELAPSED TIME:    1 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][  7 %][ELAPSED TIME:    1 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][  8 %][ELAPSED TIME:    1 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][  9 %][ELAPSED TIME:    1 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 10 %][ELAPSED TIME:    1 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 11 %][ELAPSED TIME:    1 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 12 %][ELAPSED TIME:    1 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 13 %][ELAPSED TIME:    1 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 14 %][ELAPSED TIME:    1 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 15 %][ELAPSED TIME:    1 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 16 %][ELAPSED TIME:    1 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 17 %][ELAPSED TIME:    1 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 18 %][ELAPSED TIME:    2 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 19 %][ELAPSED TIME:    2 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 20 %][ELAPSED TIME:    2 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 21 %][ELAPSED TIME:    2 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 22 %][ELAPSED TIME:    2 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 23 %][ELAPSED TIME:    2 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 24 %][ELAPSED TIME:    2 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 25 %][ELAPSED TIME:    2 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 26 %][ELAPSED TIME:    2 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 27 %][ELAPSED TIME:    2 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 28 %][ELAPSED TIME:    2 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 29 %][ELAPSED TIME:    2 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 30 %][ELAPSED TIME:    3 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 31 %][ELAPSED TIME:    3 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 32 %][ELAPSED TIME:    3 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 33 %][ELAPSED TIME:    3 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 34 %][ELAPSED TIME:    3 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 35 %][ELAPSED TIME:    3 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 36 %][ELAPSED TIME:    3 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 37 %][ELAPSED TIME:    3 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 38 %][ELAPSED TIME:    3 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 39 %][ELAPSED TIME:    3 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 40 %][ELAPSED TIME:    3 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 41 %][ELAPSED TIME:    3 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 42 %][ELAPSED TIME:    4 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 43 %][ELAPSED TIME:    4 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 44 %][ELAPSED TIME:    4 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 45 %][ELAPSED TIME:    4 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 46 %][ELAPSED TIME:    4 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 47 %][ELAPSED TIME:    4 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 48 %][ELAPSED TIME:    4 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 49 %][ELAPSED TIME:    4 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 50 %][ELAPSED TIME:    4 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 51 %][ELAPSED TIME:    4 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 52 %][ELAPSED TIME:    4 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 53 %][ELAPSED TIME:    4 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 54 %][ELAPSED TIME:    5 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 55 %][ELAPSED TIME:    5 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 56 %][ELAPSED TIME:    5 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 57 %][ELAPSED TIME:    5 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 58 %][ELAPSED TIME:    5 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 59 %][ELAPSED TIME:    5 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 60 %][ELAPSED TIME:    5 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 61 %][ELAPSED TIME:    5 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 62 %][ELAPSED TIME:    5 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 63 %][ELAPSED TIME:    5 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 64 %][ELAPSED TIME:    5 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 65 %][ELAPSED TIME:    5 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 66 %][ELAPSED TIME:    5 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 67 %][ELAPSED TIME:    6 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 68 %][ELAPSED TIME:    6 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 69 %][ELAPSED TIME:    6 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 70 %][ELAPSED TIME:    6 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 71 %][ELAPSED TIME:    6 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 72 %][ELAPSED TIME:    6 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 73 %][ELAPSED TIME:    6 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 74 %][ELAPSED TIME:    6 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 75 %][ELAPSED TIME:    6 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 76 %][ELAPSED TIME:    6 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 77 %][ELAPSED TIME:    6 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 78 %][ELAPSED TIME:    6 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 79 %][ELAPSED TIME:    7 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 80 %][ELAPSED TIME:    7 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 81 %][ELAPSED TIME:    7 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 82 %][ELAPSED TIME:    7 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 83 %][ELAPSED TIME:    7 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 84 %][ELAPSED TIME:    7 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 85 %][ELAPSED TIME:    7 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 86 %][ELAPSED TIME:    7 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 87 %][ELAPSED TIME:    7 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 88 %][ELAPSED TIME:    7 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 89 %][ELAPSED TIME:    7 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 90 %][ELAPSED TIME:    7 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 91 %][ELAPSED TIME:    8 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 92 %][ELAPSED TIME:    8 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 93 %][ELAPSED TIME:    8 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 94 %][ELAPSED TIME:    8 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 95 %][ELAPSED TIME:    8 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 96 %][ELAPSED TIME:    8 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 97 %][ELAPSED TIME:    8 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 98 %][ELAPSED TIME:    8 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][ 99 %][ELAPSED TIME:    8 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=  171][100 %][ELAPSED TIME:    8 sec.][REMAINING TIME:    0 sec.]
-
-		[Retrieve Job][TOT=  171][  0 %][ELAPSED TIME:    0 sec.][REMAINING TIME: -1076505272 sec.]		[Retrieve Job][TOT=  171][  1 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][  2 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][  3 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][  4 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][  5 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][  6 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][  7 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][  8 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][  9 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 10 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 11 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 12 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 13 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 14 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 15 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 16 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 17 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 18 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 19 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 20 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 21 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 22 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 23 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 24 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 25 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 26 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 27 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 28 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 29 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 30 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 31 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 32 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 33 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 34 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 35 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 36 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 37 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 38 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 39 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 40 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 41 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 42 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 43 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 44 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 45 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 46 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 47 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 48 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 49 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 50 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 51 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 52 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 53 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 54 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 55 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 56 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 57 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 58 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 59 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 60 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 61 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 62 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 63 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 64 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 65 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 66 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 67 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 68 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 69 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 70 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 71 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 72 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 73 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 74 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 75 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 76 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 77 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 78 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 79 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 80 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 81 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 82 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 83 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 84 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 85 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 86 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 87 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 88 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 89 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 90 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 91 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 92 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 93 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 94 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 95 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 96 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 97 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 98 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][ 99 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=  171][100 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]
-	sap_pair [method]
-
-		[Submit   Job][TOT=   91][  0 %][ELAPSED TIME:    0 sec.][REMAINING TIME: -1076505272 sec.]		[Submit   Job][TOT=   91][  2 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][  3 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][  4 %][ELAPSED TIME:    1 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][  5 %][ELAPSED TIME:    1 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][  6 %][ELAPSED TIME:    1 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][  7 %][ELAPSED TIME:    1 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][  8 %][ELAPSED TIME:    1 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][  9 %][ELAPSED TIME:    1 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 10 %][ELAPSED TIME:    2 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 12 %][ELAPSED TIME:    2 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 13 %][ELAPSED TIME:    2 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 14 %][ELAPSED TIME:    2 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 15 %][ELAPSED TIME:    2 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 16 %][ELAPSED TIME:    2 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 17 %][ELAPSED TIME:    3 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 18 %][ELAPSED TIME:    3 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 19 %][ELAPSED TIME:    3 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 20 %][ELAPSED TIME:    3 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 21 %][ELAPSED TIME:    3 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 23 %][ELAPSED TIME:    3 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 24 %][ELAPSED TIME:    3 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 25 %][ELAPSED TIME:    4 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 26 %][ELAPSED TIME:    4 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 27 %][ELAPSED TIME:    4 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 28 %][ELAPSED TIME:    4 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 29 %][ELAPSED TIME:    4 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 30 %][ELAPSED TIME:    4 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 31 %][ELAPSED TIME:    5 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 32 %][ELAPSED TIME:    5 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 34 %][ELAPSED TIME:    5 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 35 %][ELAPSED TIME:    5 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 36 %][ELAPSED TIME:    5 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 37 %][ELAPSED TIME:    5 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 38 %][ELAPSED TIME:    6 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 39 %][ELAPSED TIME:    6 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 40 %][ELAPSED TIME:    6 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 41 %][ELAPSED TIME:    6 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 42 %][ELAPSED TIME:    6 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 43 %][ELAPSED TIME:    6 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 45 %][ELAPSED TIME:    6 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 46 %][ELAPSED TIME:    7 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 47 %][ELAPSED TIME:    7 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 48 %][ELAPSED TIME:    7 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 49 %][ELAPSED TIME:    7 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 50 %][ELAPSED TIME:    7 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 51 %][ELAPSED TIME:    7 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 52 %][ELAPSED TIME:    8 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 53 %][ELAPSED TIME:    8 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 54 %][ELAPSED TIME:    8 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 56 %][ELAPSED TIME:    8 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 57 %][ELAPSED TIME:    8 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 58 %][ELAPSED TIME:    8 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 59 %][ELAPSED TIME:    9 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 60 %][ELAPSED TIME:    9 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 61 %][ELAPSED TIME:    9 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 62 %][ELAPSED TIME:    9 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 63 %][ELAPSED TIME:    9 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 64 %][ELAPSED TIME:    9 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 65 %][ELAPSED TIME:   10 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 67 %][ELAPSED TIME:   10 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 68 %][ELAPSED TIME:   10 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 69 %][ELAPSED TIME:   10 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 70 %][ELAPSED TIME:   10 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 71 %][ELAPSED TIME:   10 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 72 %][ELAPSED TIME:   11 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 73 %][ELAPSED TIME:   11 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 74 %][ELAPSED TIME:   11 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 75 %][ELAPSED TIME:   11 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 76 %][ELAPSED TIME:   11 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 78 %][ELAPSED TIME:   12 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 79 %][ELAPSED TIME:   12 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 80 %][ELAPSED TIME:   12 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 81 %][ELAPSED TIME:   12 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 82 %][ELAPSED TIME:   12 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 83 %][ELAPSED TIME:   12 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 84 %][ELAPSED TIME:   13 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 85 %][ELAPSED TIME:   13 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 86 %][ELAPSED TIME:   13 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 87 %][ELAPSED TIME:   13 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 89 %][ELAPSED TIME:   13 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 90 %][ELAPSED TIME:   13 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 91 %][ELAPSED TIME:   14 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 92 %][ELAPSED TIME:   14 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 93 %][ELAPSED TIME:   14 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 94 %][ELAPSED TIME:   14 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 95 %][ELAPSED TIME:   14 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 96 %][ELAPSED TIME:   14 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 97 %][ELAPSED TIME:   15 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][ 98 %][ELAPSED TIME:   15 sec.][REMAINING TIME:    0 sec.]		[Submit   Job][TOT=   91][100 %][ELAPSED TIME:   15 sec.][REMAINING TIME:    0 sec.]
-
-		[Retrieve Job][TOT=   91][  0 %][ELAPSED TIME:    0 sec.][REMAINING TIME: -1076505272 sec.]		[Retrieve Job][TOT=   91][  2 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][  3 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][  4 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][  5 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][  6 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][  7 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][  8 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][  9 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 10 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 12 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 13 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 14 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 15 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 16 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 17 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 18 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 19 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 20 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 21 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 23 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 24 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 25 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 26 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 27 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 28 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 29 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 30 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 31 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 32 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 34 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 35 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 36 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 37 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 38 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 39 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 40 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 41 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 42 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 43 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 45 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 46 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 47 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 48 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 49 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 50 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 51 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 52 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 53 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 54 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 56 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 57 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 58 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 59 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 60 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 61 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 62 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 63 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 64 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 65 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 67 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 68 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 69 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 70 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 71 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 72 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 73 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 74 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 75 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 76 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 78 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 79 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 80 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 81 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 82 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 83 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 84 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 85 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 86 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 87 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 89 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 90 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 91 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 92 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 93 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 94 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 95 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 96 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 97 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][ 98 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]		[Retrieve Job][TOT=   91][100 %][ELAPSED TIME:    0 sec.][REMAINING TIME:    0 sec.]
-
-	Library Total Size: [73509]
-
-	#### File Type=     WEIGHT Format=  tc_weight Name= no | NOT PRODUCED [WARNING:T-COFFEE:Version_4.26]
-
-
-WEIGHTED MODE:t_coffee
-
-	 sp|O35205|GRAK_MOUSE 0.91
-	sp|P00757|KLKB4_MOUSE 0.91
-	   sp|P00773|ELA1_RAT 1.12
-	 sp|P03953|CFAD_MOUSE 1.08
-	  sp|P07338|CTRB1_RAT 1.06
-	 sp|P08246|ELNE_HUMAN 1.05
-	 sp|P08884|GRAE_MOUSE 1.01
-	 sp|P20160|CAP7_HUMAN 0.76
-	sp|P21844|MCPT5_MOUSE 0.98
-	 sp|P29786|TRY3_AEDAE 1.13
-	 sp|P35037|TRY3_ANOGA 1.12
-	   sp|P80015|CAP7_PIG 0.82
-	sp|Q00871|CTRB1_PENVA 1.14
-	   sp|Q03238|GRAM_RAT 1.03
-	   sp|Q06606|GRZ2_RAT 0.90
-	 sp|Q6H321|KLK2_HORSE 0.93
-	 sp|Q7YRZ7|GRAA_BOVIN 0.97
-	 sp|Q91VE3|KLK7_MOUSE 1.04
-	 sp|Q9Y5K2|KLK4_HUMAN 1.06
-
-
-MAKE NEIGHBOR JOINING DENDROGRAM
-	[MODE=nj][DONE]
-
-PROGRESSIVE_ALIGNMENT [Tree Based]
-
-	Group  20: [Group  17 (  1 seq)] with [Group   1 (  1 seq)]-->[Score=  63][Len=  270]
-	Group  21: [Group  15 (  1 seq)] with [Group   7 (  1 seq)]-->[Score=  62][Len=  251]
-	Group  22: [Group   9 (  1 seq)] with [Group  21 (  2 seq)]-->[Score=  62][Len=  252]
-	Group  23: [Group  22 (  3 seq)] with [Group  20 (  2 seq)]-->[Score=  56][Len=  277]
-	Group  24: [Group   4 (  1 seq)] with [Group  23 (  5 seq)]-->[Score=  54][Len=  280]
-	Group  25: [Group  13 (  1 seq)] with [Group   3 (  1 seq)]-->[Score=  53][Len=  287]
-	Group  26: [Group  12 (  1 seq)] with [Group   8 (  1 seq)]-->[Score=  62][Len=  251]
-	Group  27: [Group  26 (  2 seq)] with [Group   6 (  1 seq)]-->[Score=  55][Len=  269]
-	Group  28: [Group  27 (  3 seq)] with [Group  25 (  2 seq)]-->[Score=  46][Len=  310]
-	Group  29: [Group  28 (  5 seq)] with [Group  24 (  6 seq)]-->[Score=  47][Len=  322]
-	Group  30: [Group  14 (  1 seq)] with [Group  29 ( 11 seq)]-->[Score=  38][Len=  324]
-	Group  31: [Group  16 (  1 seq)] with [Group   2 (  1 seq)]-->[Score=  63][Len=  261]
-	Group  32: [Group  19 (  1 seq)] with [Group  18 (  1 seq)]-->[Score=  51][Len=  258]
-	Group  33: [Group  32 (  2 seq)] with [Group  31 (  2 seq)]-->[Score=  46][Len=  270]
-	Group  34: [Group  33 (  4 seq)] with [Group  30 ( 12 seq)]-->[Score=  42][Len=  338]
-	Group  35: [Group  11 (  1 seq)] with [Group  10 (  1 seq)]-->[Score=  49][Len=  276]
-	Group  36: [Group  35 (  2 seq)] with [Group  34 ( 16 seq)]-->[Score=  34][Len=  338]
-	Group  37: [Group   5 (  1 seq)] with [Group  36 ( 18 seq)]-->[Score=  42][Len=  338]
-
-
-
-OUTPUT RESULTS
-	#### File Type= GUIDE_TREE Format=     newick Name= Tmp/tcfEXPR48437_4912.dnd
-	#### File Type=        MSA Format=    msf_aln Name= Tmp/tcfEXPR48437_4912.msf_aln
-	#### File Type=        MSA Format= score_ascii Name= Tmp/tcfEXPR48437_4912.score_ascii
-	#### File Type=        MSA Format= score_html Name= Tmp/tcfEXPR48437_4912.score_html
-	#### File Type=        MSA Format= clustalw_aln Name= Tmp/tcfEXPR48437_4912.clustalw_aln
-	#### File Type=        MSA Format=  fasta_aln Name= Tmp/tcfEXPR48437_4912.fasta_aln
-	#### File Type= PHYLOGENIC_TREE Format=     newick Name= Tmp/tcfEXPR48437_4912.ph
-	#### File Type= Template_List Format=  fasta_seq Name= tcfEXPR48437_4912_1.template_list
-
-
-# TIP :See The Full Documentation on www.tcoffee.org
-# TIP 10:  -version to check for updates
-
-# Command Line: Exe/t_coffee426 -in Tmp/tcfEXPR48437_4912.in0 -in Mlalign_id_pair -in Mslow_pair -in Msap_pair -evaluate_mode t_coffee_slow -output msf_aln score_ascii score_html clustalw_aln fasta_aln -maxlen 2000 -template_file SCRIPT_webblast3d.pl -tree -run_name= Tmp/tcfEXPR48437_4912 -check_pdb_status -cache=no -quiet= stdout  [PROGRAM:T-COFFEE]
-# T-COFFEE Memory Usage: Current= 55.076 Mb, Max= 66.548 Mb
-# T-COFFEE CPU Usage: 81940 millisec
-# Results Produced with T-COFFEE (Version_4.26)
-# T-COFFEE is available from http://www.tcoffee.org

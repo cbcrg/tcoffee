@@ -53,6 +53,10 @@ ifndef RST_DOC
 RST_DOC=$(GIT_DIR)/docs
 endif
 
+ifndef RST_DATA
+RST_DATA=$(GIT_DIR)/docs/.data/
+endif
+
 ifndef HTML_DOC
 HTML_DOC=$(RST_DOC)/.html
 endif
@@ -163,16 +167,20 @@ old_doc:
 	cp $(PWD)/../../$(EXECUTABLE)/doc/$(EXECUTABLE).pdf $(DISTRIB_DOC)
 
 doc:
-	sphinx-build $(RST_DOC) $(HTML_DOC)
 
+	sphinx-build $(RST_DOC) $(HTML_DOC)
+	mkdir -p $(DISTRIB_DIR)/doc/	
+	cp -r $(HTML_DOC)/* $(DISTRIB_DIR)/doc/
+	cp $(RST_DOC)/README  $(DISTRIB_DIR)
 mcoffee:
 	-rm -rf $(DISTRIB_DIR)/mcoffee
 	mkdir -p $(DISTRIB_DIR)/mcoffee
-	cp $(LIB_DIR)/mcoffee/* $(DISTRIB_DIR)/mcoffee
+	cp -r $(LIB_DIR)/mcoffee/* $(DISTRIB_DIR)/mcoffee
 
 examples:
 	mkdir -p $(DISTRIB_DIR)/example/
-	cp $(PWD)/../../$(EXECUTABLE)/doc_test/data/*  $(DISTRIB_DIR)/example/
+	mkdir -p $(DISTRIB_DIR)/example/
+	cp -r $(RST_DATA)/*  $(DISTRIB_DIR)/example/
 
 test:
 	mkdir -p $(DISTRIB_DIR)/test
