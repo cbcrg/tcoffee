@@ -163,6 +163,7 @@ doc:
 	rm -f $(HTML_DOC)/*.html
 	$(PERL4MAKEFILE_LIB)/edit_version.pl -target=$(RST_DOC)/conf.py -mode=conf.py -version=$(VERSION)
 	sphinx-build -b singlehtml $(RST_DOC) $(HTML_DOC)
+	rm -f $(DISTRIB_DIR)/doc/html
 	mkdir -p $(DISTRIB_DIR)/doc/html/	
 	cp -r $(HTML_DOC)/* $(DISTRIB_DIR)/doc/html/
 	rm -f $(WEB_DOC)/*.html
@@ -218,11 +219,9 @@ env:
 
 
 general_distribution:
-	make doc
 	-rm -f $(CODE_LIST);
 	mkdir -p $(DISTRIB_DIR)
-	mkdir -p $(DISTRIB_DIR)/doc
-	cp $(HTML_DOC)/* $(DISTRIB_DIR)/doc
+	make doc
 	mkdir -p $(DISTRIB_DIR)/bin
 	mkdir -p $(DISTRIB_DIR)/bin/$(OSNAME)
 	mkdir -p $(DISTRIB_DIR)/bin/macosx	
