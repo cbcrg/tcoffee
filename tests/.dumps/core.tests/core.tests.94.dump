@@ -1,8 +1,8 @@
 <DumpIO>
 <nature>standard dump</nature>
 <program>T-COFFEE</program>
-<version>Version_13.30.4.4e2c658</version>
-<build>Version_13.30.4.4e2c658</build>
+<version>Version_13.30.12.28864d4</version>
+<build>Version_13.30.12.28864d4</build>
 <cl>t_coffee -aln sample_aln1_1.aln sample_aln1_2.aln -method fast_pair lalign_id_pair -outfile out_aln </cl>
 <stack>
 </stack>
@@ -15,7 +15,7 @@
 #Single Thread
 #Single Thread
 #Single Thread
-CLUSTAL FORMAT for T-COFFEE Version_13.30.4.4e2c658 [http://www.tcoffee.org] [MODE:  ], CPU=0.00 sec, SCORE=40, Nseq=4, Len=81 
+CLUSTAL FORMAT for T-COFFEE Version_13.30.12.28864d4 [http://www.tcoffee.org] [MODE:  ], CPU=0.00 sec, SCORE=40, Nseq=4, Len=81 
 
 hmgb_chite      -A--DKPKRPLSAYMLWLNSARESIKRENPDFK-VTEVAKKGGELWRGLK
 hmgl_wheat      DP--NKPKRAPSAFFVFMGEFREEFKQKNPKNKSVAAVGKAAGERWKSLS
@@ -37,7 +37,7 @@ hmgt_mouse      PEEKQAYIQLAKDDRIRYDNEMKSWEEQMAE
 <stream>output</stream>
 <name>stderr</name>
 <content>
-PROGRAM: T-COFFEE Version_13.30.4.4e2c658 (Version_13.30.4.4e2c658)
+PROGRAM: T-COFFEE Version_13.30.12.28864d4 (Version_13.30.12.28864d4)
 -full_log      	S	[0] 
 -genepred_score	S	[0] 	nsd
 -run_name      	S	[0] 
@@ -215,7 +215,7 @@ INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
   Input File sample_aln1_1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
 
 	Multi Core Mode: 1 processors:
-          	S	[0] 	none
+p           	S	[0] 	none
 -rna_lib       	S	[0] 
 -no_warning    	D	[0] 	0 
 -run_local_script	D	[0] 	0 
@@ -252,46 +252,7 @@ INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
 	Multi Core Mode: 1 processors:
 
 	--- Process Method/Library/Aln Asample_aln1_1.aln
-	xxx Retrieved Asample_aln1_1.aln          	S	[0] 	none
--rna_lib       	S	[0] 
--no_warning    	D	[0] 	0 
--run_local_script	D	[0] 	0 
--proxy         	S	[0] 	unset
--email         	S	[0] 
--clean_overaln 	D	[0] 	0 
--overaln_param 	S	[0] 
--overaln_mode  	S	[0] 
--overaln_model 	S	[0] 
--overaln_threshold	D	[0] 	0 
--overaln_target	D	[0] 	0 
--overaln_P1    	D	[0] 	0 
--overaln_P2    	D	[0] 	0 
--overaln_P3    	D	[0] 	0 
--overaln_P4    	D	[0] 	0 
--exon_boundaries	S	[0] 
--display       	D	[0] 	100 
-
-INPUT FILES
-	Input File (A) sample_aln1_1.aln  Format clustal_aln
-	Input File (A) sample_aln1_2.aln  Format clustal_aln
-	Input File (M) fast_pair 
-	Input File (M) lalign_id_pair 
-
-Identify Master Sequences [no]:
-
-Master Sequences Identified
-INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
-  Input File sample_aln1_1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
-  Input File sample_aln1_1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
-  Input File sample_aln1_1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
-  Input File sample_aln1_1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
-
-	Multi Core Mode: 1 processors:
-
-	--- Process Method/Library/Aln Asample_aln1_1.aln
-	xxx Retrieved Asample_aln1_1.aln
-	--- Process Method/Library/Aln Asample_aln1_2.aln
-	xxx Retrieved Asample_aln1_2.aln          	S	[0] 	none
+	xxx Retrieved Asample_aln1_1.alnp           	S	[0] 	none
 -rna_lib       	S	[0] 
 -no_warning    	D	[0] 	0 
 -run_local_script	D	[0] 	0 
@@ -330,7 +291,7 @@ INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
 	--- Process Method/Library/Aln Asample_aln1_1.aln
 	xxx Retrieved Asample_aln1_1.aln
 	--- Process Method/Library/Aln Asample_aln1_2.aln
-	xxx Retrieved Asample_aln1_2.aln          	S	[0] 	none
+	xxx Retrieved Asample_aln1_2.alnp           	S	[0] 	none
 -rna_lib       	S	[0] 
 -no_warning    	D	[0] 	0 
 -run_local_script	D	[0] 	0 
@@ -369,9 +330,7 @@ INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
 	--- Process Method/Library/Aln Asample_aln1_1.aln
 	xxx Retrieved Asample_aln1_1.aln
 	--- Process Method/Library/Aln Asample_aln1_2.aln
-	xxx Retrieved Asample_aln1_2.aln
-	--- Process Method/Library/Aln Mfast_pair
-	xxx Retrieved Mfast_pair          	S	[0] 	none
+	xxx Retrieved Asample_aln1_2.alnp           	S	[0] 	none
 -rna_lib       	S	[0] 
 -no_warning    	D	[0] 	0 
 -run_local_script	D	[0] 	0 
@@ -412,7 +371,48 @@ INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
 	--- Process Method/Library/Aln Asample_aln1_2.aln
 	xxx Retrieved Asample_aln1_2.aln
 	--- Process Method/Library/Aln Mfast_pair
-	xxx Retrieved Mfast_pair          	S	[0] 	none
+	xxx Retrieved Mfast_pairp           	S	[0] 	none
+-rna_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (A) sample_aln1_1.aln  Format clustal_aln
+	Input File (A) sample_aln1_2.aln  Format clustal_aln
+	Input File (M) fast_pair 
+	Input File (M) lalign_id_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_aln1_1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1_1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1_1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1_1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 1 processors:
+
+	--- Process Method/Library/Aln Asample_aln1_1.aln
+	xxx Retrieved Asample_aln1_1.aln
+	--- Process Method/Library/Aln Asample_aln1_2.aln
+	xxx Retrieved Asample_aln1_2.aln
+	--- Process Method/Library/Aln Mfast_pair
+	xxx Retrieved Mfast_pairp           	S	[0] 	none
 -rna_lib       	S	[0] 
 -no_warning    	D	[0] 	0 
 -run_local_script	D	[0] 	0 
@@ -466,7 +466,7 @@ MANUAL PENALTIES: gapopen=0 gapext=0
 Library Relaxation: Multi_proc [1]
  
 !		[Relax Library][TOT=    4][  0 %]!		[Relax Library][TOT=    4][ 50 %]!		[Relax Library][TOT=    4][ 75 %]!		[Relax Library][TOT=    4][100 %]
-          	S	[0] 	none
+p           	S	[0] 	none
 -rna_lib       	S	[0] 
 -no_warning    	D	[0] 	0 
 -run_local_script	D	[0] 	0 
@@ -534,76 +534,7 @@ Group    2: hmgl_trybr
 Group    3: hmgl_wheat
 Group    4: hmgt_mouse
 
-          	S	[0] 	none
--rna_lib       	S	[0] 
--no_warning    	D	[0] 	0 
--run_local_script	D	[0] 	0 
--proxy         	S	[0] 	unset
--email         	S	[0] 
--clean_overaln 	D	[0] 	0 
--overaln_param 	S	[0] 
--overaln_mode  	S	[0] 
--overaln_model 	S	[0] 
--overaln_threshold	D	[0] 	0 
--overaln_target	D	[0] 	0 
--overaln_P1    	D	[0] 	0 
--overaln_P2    	D	[0] 	0 
--overaln_P3    	D	[0] 	0 
--overaln_P4    	D	[0] 	0 
--exon_boundaries	S	[0] 
--display       	D	[0] 	100 
-
-INPUT FILES
-	Input File (A) sample_aln1_1.aln  Format clustal_aln
-	Input File (A) sample_aln1_2.aln  Format clustal_aln
-	Input File (M) fast_pair 
-	Input File (M) lalign_id_pair 
-
-Identify Master Sequences [no]:
-
-Master Sequences Identified
-INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
-  Input File sample_aln1_1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
-  Input File sample_aln1_1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
-  Input File sample_aln1_1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
-  Input File sample_aln1_1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
-
-	Multi Core Mode: 1 processors:
-
-	--- Process Method/Library/Aln Asample_aln1_1.aln
-	xxx Retrieved Asample_aln1_1.aln
-	--- Process Method/Library/Aln Asample_aln1_2.aln
-	xxx Retrieved Asample_aln1_2.aln
-	--- Process Method/Library/Aln Mfast_pair
-	xxx Retrieved Mfast_pair
-	--- Process Method/Library/Aln Mlalign_id_pair
-	xxx Retrieved Mlalign_id_pair
-
-	All Methods Retrieved
-
-MANUAL PENALTIES: gapopen=0 gapext=0
-
-	Library Total Size: [1987]
-
-Library Relaxation: Multi_proc [1]
- 
-Relaxation Summary: [1987]--->[1845]
-
-
-
-UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
-
-MAKE GUIDE TREE 
-	[MODE=nj][DONE]
-
-PROGRESSIVE_ALIGNMENT [Tree Based]
-Group    1: hmgb_chite
-Group    2: hmgl_trybr
-Group    3: hmgl_wheat
-Group    4: hmgt_mouse
-
-
-	Group    5: [Group    2 (   1 seq)] with [Group    4 (   1 seq)]-->[Len=   77][PID:65407]          	S	[0] 	none
+p           	S	[0] 	none
 -rna_lib       	S	[0] 
 -no_warning    	D	[0] 	0 
 -run_local_script	D	[0] 	0 
@@ -672,8 +603,7 @@ Group    3: hmgl_wheat
 Group    4: hmgt_mouse
 
 
-	Group    5: [Group    2 (   1 seq)] with [Group    4 (   1 seq)]-->[Len=   77][PID:65407]
-	Group    6: [Group    3 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=   79][PID:65407]          	S	[0] 	none
+	Group    5: [Group    2 (   1 seq)] with [Group    4 (   1 seq)]-->[Len=   77][PID:19541]p           	S	[0] 	none
 -rna_lib       	S	[0] 
 -no_warning    	D	[0] 	0 
 -run_local_script	D	[0] 	0 
@@ -742,9 +672,79 @@ Group    3: hmgl_wheat
 Group    4: hmgt_mouse
 
 
-	Group    5: [Group    2 (   1 seq)] with [Group    4 (   1 seq)]-->[Len=   77][PID:65407]
-	Group    6: [Group    3 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=   79][PID:65407]
-	Group    7: [Group    6 (   2 seq)] with [Group    5 (   2 seq)]-->[Len=   81][PID:65407]
+	Group    5: [Group    2 (   1 seq)] with [Group    4 (   1 seq)]-->[Len=   77][PID:19541]
+	Group    6: [Group    3 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=   79][PID:19541]p           	S	[0] 	none
+-rna_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (A) sample_aln1_1.aln  Format clustal_aln
+	Input File (A) sample_aln1_2.aln  Format clustal_aln
+	Input File (M) fast_pair 
+	Input File (M) lalign_id_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_aln1_1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1_1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1_1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1_1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 1 processors:
+
+	--- Process Method/Library/Aln Asample_aln1_1.aln
+	xxx Retrieved Asample_aln1_1.aln
+	--- Process Method/Library/Aln Asample_aln1_2.aln
+	xxx Retrieved Asample_aln1_2.aln
+	--- Process Method/Library/Aln Mfast_pair
+	xxx Retrieved Mfast_pair
+	--- Process Method/Library/Aln Mlalign_id_pair
+	xxx Retrieved Mlalign_id_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1987]
+
+Library Relaxation: Multi_proc [1]
+ 
+Relaxation Summary: [1987]--->[1845]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: hmgb_chite
+Group    2: hmgl_trybr
+Group    3: hmgl_wheat
+Group    4: hmgt_mouse
+
+
+	Group    5: [Group    2 (   1 seq)] with [Group    4 (   1 seq)]-->[Len=   77][PID:19541]
+	Group    6: [Group    3 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=   79][PID:19541]
+	Group    7: [Group    6 (   2 seq)] with [Group    5 (   2 seq)]-->[Len=   81][PID:19541]
 
 
 !		[Final Evaluation][TOT=   81][  0 %]!		[Final Evaluation][TOT=   81][  2 %]!		[Final Evaluation][TOT=   81][  3 %]!		[Final Evaluation][TOT=   81][  4 %]!		[Final Evaluation][TOT=   81][  6 %]!		[Final Evaluation][TOT=   81][  7 %]!		[Final Evaluation][TOT=   81][  8 %]!		[Final Evaluation][TOT=   81][  9 %]!		[Final Evaluation][TOT=   81][ 11 %]!		[Final Evaluation][TOT=   81][ 12 %]!		[Final Evaluation][TOT=   81][ 13 %]!		[Final Evaluation][TOT=   81][ 14 %]!		[Final Evaluation][TOT=   81][ 16 %]!		[Final Evaluation][TOT=   81][ 17 %]!		[Final Evaluation][TOT=   81][ 18 %]!		[Final Evaluation][TOT=   81][ 19 %]!		[Final Evaluation][TOT=   81][ 20 %]!		[Final Evaluation][TOT=   81][ 22 %]!		[Final Evaluation][TOT=   81][ 23 %]!		[Final Evaluation][TOT=   81][ 24 %]!		[Final Evaluation][TOT=   81][ 25 %]!		[Final Evaluation][TOT=   81][ 27 %]!		[Final Evaluation][TOT=   81][ 28 %]!		[Final Evaluation][TOT=   81][ 29 %]!		[Final Evaluation][TOT=   81][ 30 %]!		[Final Evaluation][TOT=   81][ 32 %]!		[Final Evaluation][TOT=   81][ 33 %]!		[Final Evaluation][TOT=   81][ 34 %]!		[Final Evaluation][TOT=   81][ 35 %]!		[Final Evaluation][TOT=   81][ 37 %]!		[Final Evaluation][TOT=   81][ 38 %]!		[Final Evaluation][TOT=   81][ 39 %]!		[Final Evaluation][TOT=   81][ 40 %]!		[Final Evaluation][TOT=   81][ 41 %]!		[Final Evaluation][TOT=   81][ 43 %]!		[Final Evaluation][TOT=   81][ 44 %]!		[Final Evaluation][TOT=   81][ 45 %]!		[Final Evaluation][TOT=   81][ 46 %]!		[Final Evaluation][TOT=   81][ 48 %]!		[Final Evaluation][TOT=   81][ 49 %]!		[Final Evaluation][TOT=   81][ 50 %]!		[Final Evaluation][TOT=   81][ 51 %]!		[Final Evaluation][TOT=   81][ 53 %]!		[Final Evaluation][TOT=   81][ 54 %]!		[Final Evaluation][TOT=   81][ 55 %]!		[Final Evaluation][TOT=   81][ 56 %]!		[Final Evaluation][TOT=   81][ 58 %]!		[Final Evaluation][TOT=   81][ 59 %]!		[Final Evaluation][TOT=   81][ 60 %]!		[Final Evaluation][TOT=   81][ 61 %]!		[Final Evaluation][TOT=   81][ 62 %]!		[Final Evaluation][TOT=   81][ 64 %]!		[Final Evaluation][TOT=   81][ 65 %]!		[Final Evaluation][TOT=   81][ 66 %]!		[Final Evaluation][TOT=   81][ 67 %]!		[Final Evaluation][TOT=   81][ 69 %]!		[Final Evaluation][TOT=   81][ 70 %]!		[Final Evaluation][TOT=   81][ 71 %]!		[Final Evaluation][TOT=   81][ 72 %]!		[Final Evaluation][TOT=   81][ 74 %]!		[Final Evaluation][TOT=   81][ 75 %]!		[Final Evaluation][TOT=   81][ 76 %]!		[Final Evaluation][TOT=   81][ 77 %]!		[Final Evaluation][TOT=   81][ 79 %]!		[Final Evaluation][TOT=   81][ 80 %]!		[Final Evaluation][TOT=   81][ 81 %]!		[Final Evaluation][TOT=   81][ 82 %]!		[Final Evaluation][TOT=   81][ 83 %]!		[Final Evaluation][TOT=   81][ 85 %]!		[Final Evaluation][TOT=   81][ 86 %]!		[Final Evaluation][TOT=   81][ 87 %]!		[Final Evaluation][TOT=   81][ 88 %]!		[Final Evaluation][TOT=   81][ 90 %]!		[Final Evaluation][TOT=   81][ 91 %]!		[Final Evaluation][TOT=   81][ 92 %]!		[Final Evaluation][TOT=   81][ 93 %]!		[Final Evaluation][TOT=   81][ 95 %]!		[Final Evaluation][TOT=   81][ 96 %]!		[Final Evaluation][TOT=   81][ 97 %]!		[Final Evaluation][TOT=   81][ 98 %]!		[Final Evaluation][TOT=   81][100 %]
@@ -757,8 +757,8 @@ OUTPUT RESULTS
 	#### File Type= MSA             Format= html            Name= out_aln.html
 
 # Command Line: t_coffee -aln sample_aln1_1.aln sample_aln1_2.aln -method fast_pair lalign_id_pair -outfile out_aln  [PROGRAM:T-COFFEE]
-# T-COFFEE Memory Usage: Current= 29.602 Mb, Max= 30.548 Mb
-# Results Produced with T-COFFEE Version_13.30.4.4e2c658 (Version_13.30.4.4e2c658)
+# T-COFFEE Memory Usage: Current= 29.604 Mb, Max= 30.551 Mb
+# Results Produced with T-COFFEE Version_13.30.12.28864d4 (Version_13.30.12.28864d4)
 # T-COFFEE is available from http://www.tcoffee.org
 # Register on: https://groups.google.com/group/tcoffee/
 </content>
@@ -814,7 +814,7 @@ hmgt_mouse      AKDDRIRYDNEMKSWEEQMAE
 <file>
 <stream>output</stream>
 <name>out_aln</name>
-<content>CLUSTAL FORMAT for T-COFFEE Version_13.30.4.4e2c658 [http://www.tcoffee.org] [MODE:  ], CPU=0.00 sec, SCORE=40, Nseq=4, Len=81 
+<content>CLUSTAL FORMAT for T-COFFEE Version_13.30.12.28864d4 [http://www.tcoffee.org] [MODE:  ], CPU=0.00 sec, SCORE=40, Nseq=4, Len=81 
 
 hmgb_chite      -A--DKPKRPLSAYMLWLNSARESIKRENPDFK-VTEVAKKGGELWRGLK
 hmgl_wheat      DP--NKPKRAPSAFFVFMGEFREEFKQKNPKNKSVAAVGKAAGERWKSLS
@@ -853,7 +853,7 @@ SPAN.value9 {background: #FFC8C8}
 SPAN.valuedefault {}
 SPAN.valuegap {}
 SPAN.valueink {background: 000000}
-</style><body><span class=valuedefault>T-COFFEE,&nbsp;Version_13.30.4.4e2c658&nbsp;(Version_13.30.4.4e2c658)</span><br><span class=valuedefault>Cedric&nbsp;Notredame&nbsp;</span><br><span class=valuedefault>CPU&nbsp;TIME:0&nbsp;sec.</span><br><span class=valuedefault>SCORE=40</span><br><span class=valuedefault>*</span><br><span class=valuedefault>&nbsp;</span><span class=value0>B</span><span class=value1>A</span><span class=value2>D</span><span class=value3>&nbsp;</span><span class=value4>A</span><span class=value5>V</span><span class=value6>G</span><span class=value7>&nbsp;</span><span class=value8>G</span><span class=value9>OOD</span><br><span class=valuedefault>*</span><br><span class=value4>hmgb_chite&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;41</span><br><span class=value3>hmgl_wheat&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;38</span><br><span class=value4>hmgl_trybr&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;43</span><br><span class=value3>hmgt_mouse&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;39</span><br><span class=value4>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;&nbsp;4</span><br><br><span class=valuedefault>hmgb_chite&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value6>A</span><span class=valuegap>--</span><span class=value7>D</span><span class=value6>K</span><span class=value7>PKRP</span><span class=value8>LSAYMLWL</span><span class=value7>N</span><span class=value6>SAR</span><span class=value5>ESI</span><span class=value4>KR</span><span class=value3>E</span><span class=value4>NPDFK</span><span class=valuegap>-</span><span class=value7>V</span><span class=value6>T</span><span class=value5>EV</span><span class=value4>A</span><br><span class=valuedefault>hmgl_wheat&nbsp;&nbsp;&nbsp;</span><span class=value5>D</span><span class=value6>P</span><span class=valuegap>--</span><span class=value6>NK</span><span class=value7>PKR</span><span class=value8>A</span><span class=value7>P</span><span class=value8>SAFFVF</span><span class=value7>M</span><span class=value6>G</span><span class=value7>EF</span><span class=value6>R</span><span class=value5>EE</span><span class=value4>F</span><span class=value3>KQK</span><span class=value2>N</span><span class=value3>P</span><span class=value4>K</span><span class=value3>NK</span><span class=value4>S</span><span class=value7>V</span><span class=value5>AAV</span><span class=value4>G</span><br><span class=valuedefault>hmgl_trybr&nbsp;&nbsp;&nbsp;</span><span class=value4>K</span><span class=value6>K</span><span class=value4>DS</span><span class=value5>N</span><span class=value6>A</span><span class=value7>PK</span><span class=value8>RA</span><span class=value9>M</span><span class=value8>TSF</span><span class=value6>M</span><span class=value7>FF</span><span class=value6>S</span><span class=value5>S</span><span class=value6>DF</span><span class=value5>RS</span><span class=value6>K</span><span class=value5>H</span><span class=valuegap>----</span><span class=value5>S</span><span class=value4>D</span><span class=valuegap>-</span><span class=value5>LS</span><span class=value7>IV</span><span class=value6>E</span><span class=value5>MS</span><br><span class=valuedefault>hmgt_mouse&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-----</span><span class=value6>K</span><span class=value7>P</span><span class=value6>KR</span><span class=value7>PRSAY</span><span class=value6>N</span><span class=value7>IY</span><span class=value6>VS</span><span class=value5>E</span><span class=value6>S</span><span class=value5>FQE</span><span class=value4>A</span><span class=value3>K</span><span class=valuegap>---</span><span class=value4>D</span><span class=value3>D</span><span class=valuegap>--</span><span class=value3>S</span><span class=value4>A</span><span class=value5>Q</span><span class=value4>GKL</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value1>&nbsp;</span><span class=value3>&nbsp;</span><span class=value1>&nbsp;&nbsp;</span><span class=value4>&nbsp;</span><span class=value5>&nbsp;</span><span class=value6>***</span><span class=value7>.&nbsp;:::</span><span class=value6>&nbsp;.:</span><span class=value5>&nbsp;.</span><span class=value4>.&nbsp;&nbsp;</span><span class=value3>..&nbsp;</span><span class=value2>&nbsp;</span><span class=value1>&nbsp;&nbsp;&nbsp;</span><span class=value2>&nbsp;.</span><span class=value1>&nbsp;</span><span class=value2>&nbsp;&nbsp;</span><span class=value4>&nbsp;&nbsp;</span><span class=value3>&nbsp;</span><span class=value2>&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>hmgb_chite&nbsp;&nbsp;&nbsp;</span><span class=value5>K</span><span class=value6>KGGE</span><span class=value7>L</span><span class=value6>W</span><span class=value5>RGL</span><span class=value4>KD</span><span class=valuegap>--</span><span class=value3>K</span><span class=value4>S</span><span class=value5>E</span><span class=value4>WEAKAATAKQNY</span><span class=value5>IR</span><span class=value6>A</span><span class=value7>L</span><span class=value4>QE</span><span class=value5>YE</span><span class=value6>R</span><span class=value7>N</span><br><span class=valuedefault>hmgl_wheat&nbsp;&nbsp;&nbsp;</span><span class=value6>K</span><span class=value5>AAGERW</span><span class=value4>KSLS</span><span class=value3>E</span><span class=value4>SEKAPYVAKANKLK</span><span class=value5>GEYNK</span><span class=value6>AI</span><span class=value4>AAYN</span><span class=value5>K</span><span class=value7>G</span><br><span class=valuedefault>hmgl_trybr&nbsp;&nbsp;&nbsp;</span><span class=value6>KAAGAA</span><span class=value5>WKELGP</span><span class=value4>EER</span><span class=value5>K</span><span class=value4>VYEEMAEKDK</span><span class=value5>ERYK</span><span class=value6>R</span><span class=value7>EM</span><span class=valuegap>------</span><br><span class=valuedefault>hmgt_mouse&nbsp;&nbsp;&nbsp;</span><span class=value5>K</span><span class=value6>LVNEA</span><span class=value5>WKNL</span><span class=value4>SPE</span><span class=value3>E</span><span class=value4>KQAYIQLAKDDRIR</span><span class=value5>YDNE</span><span class=value6>M</span><span class=value4>KSWE</span><span class=value5>E</span><span class=value6>Q</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value4>*</span><span class=value5>&nbsp;&nbsp;.</span><span class=value4>&nbsp;</span><span class=value5>&nbsp;</span><span class=value4>*:&nbsp;*</span><span class=value3>&nbsp;&nbsp;</span><span class=value2>&nbsp;&nbsp;</span><span class=value3>:&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;:&nbsp;.</span><span class=value4>*&nbsp;.</span><span class=value5>&nbsp;:</span><span class=value2>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value3>&nbsp;</span><span class=value5>&nbsp;</span><br><br><br><span class=valuedefault>hmgb_chite&nbsp;&nbsp;&nbsp;</span><span class=value7>G</span><span class=valuegap>-</span><span class=value7>G</span><br><span class=valuedefault>hmgl_wheat&nbsp;&nbsp;&nbsp;</span><span class=value6>ES</span><span class=value7>A</span><br><span class=valuedefault>hmgl_trybr&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---</span><br><span class=valuedefault>hmgt_mouse&nbsp;&nbsp;&nbsp;</span><span class=value6>MA</span><span class=value9>E</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value4>&nbsp;&nbsp;</span><span class=value6>&nbsp;</span><br><br><br><br><br><br></body></html>
+</style><body><span class=valuedefault>T-COFFEE,&nbsp;Version_13.30.12.28864d4&nbsp;(Version_13.30.12.28864d4)</span><br><span class=valuedefault>Cedric&nbsp;Notredame&nbsp;</span><br><span class=valuedefault>CPU&nbsp;TIME:0&nbsp;sec.</span><br><span class=valuedefault>SCORE=40</span><br><span class=valuedefault>*</span><br><span class=valuedefault>&nbsp;</span><span class=value0>B</span><span class=value1>A</span><span class=value2>D</span><span class=value3>&nbsp;</span><span class=value4>A</span><span class=value5>V</span><span class=value6>G</span><span class=value7>&nbsp;</span><span class=value8>G</span><span class=value9>OOD</span><br><span class=valuedefault>*</span><br><span class=value4>hmgb_chite&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;41</span><br><span class=value3>hmgl_wheat&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;38</span><br><span class=value4>hmgl_trybr&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;43</span><br><span class=value3>hmgt_mouse&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;39</span><br><span class=value4>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;&nbsp;4</span><br><br><span class=valuedefault>hmgb_chite&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value6>A</span><span class=valuegap>--</span><span class=value7>D</span><span class=value6>K</span><span class=value7>PKRP</span><span class=value8>LSAYMLWL</span><span class=value7>N</span><span class=value6>SAR</span><span class=value5>ESI</span><span class=value4>KR</span><span class=value3>E</span><span class=value4>NPDFK</span><span class=valuegap>-</span><span class=value7>V</span><span class=value6>T</span><span class=value5>EV</span><span class=value4>A</span><br><span class=valuedefault>hmgl_wheat&nbsp;&nbsp;&nbsp;</span><span class=value5>D</span><span class=value6>P</span><span class=valuegap>--</span><span class=value6>NK</span><span class=value7>PKR</span><span class=value8>A</span><span class=value7>P</span><span class=value8>SAFFVF</span><span class=value7>M</span><span class=value6>G</span><span class=value7>EF</span><span class=value6>R</span><span class=value5>EE</span><span class=value4>F</span><span class=value3>KQK</span><span class=value2>N</span><span class=value3>P</span><span class=value4>K</span><span class=value3>NK</span><span class=value4>S</span><span class=value7>V</span><span class=value5>AAV</span><span class=value4>G</span><br><span class=valuedefault>hmgl_trybr&nbsp;&nbsp;&nbsp;</span><span class=value4>K</span><span class=value6>K</span><span class=value4>DS</span><span class=value5>N</span><span class=value6>A</span><span class=value7>PK</span><span class=value8>RA</span><span class=value9>M</span><span class=value8>TSF</span><span class=value6>M</span><span class=value7>FF</span><span class=value6>S</span><span class=value5>S</span><span class=value6>DF</span><span class=value5>RS</span><span class=value6>K</span><span class=value5>H</span><span class=valuegap>----</span><span class=value5>S</span><span class=value4>D</span><span class=valuegap>-</span><span class=value5>LS</span><span class=value7>IV</span><span class=value6>E</span><span class=value5>MS</span><br><span class=valuedefault>hmgt_mouse&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-----</span><span class=value6>K</span><span class=value7>P</span><span class=value6>KR</span><span class=value7>PRSAY</span><span class=value6>N</span><span class=value7>IY</span><span class=value6>VS</span><span class=value5>E</span><span class=value6>S</span><span class=value5>FQE</span><span class=value4>A</span><span class=value3>K</span><span class=valuegap>---</span><span class=value4>D</span><span class=value3>D</span><span class=valuegap>--</span><span class=value3>S</span><span class=value4>A</span><span class=value5>Q</span><span class=value4>GKL</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value1>&nbsp;</span><span class=value3>&nbsp;</span><span class=value1>&nbsp;&nbsp;</span><span class=value4>&nbsp;</span><span class=value5>&nbsp;</span><span class=value6>***</span><span class=value7>.&nbsp;:::</span><span class=value6>&nbsp;.:</span><span class=value5>&nbsp;.</span><span class=value4>.&nbsp;&nbsp;</span><span class=value3>..&nbsp;</span><span class=value2>&nbsp;</span><span class=value1>&nbsp;&nbsp;&nbsp;</span><span class=value2>&nbsp;.</span><span class=value1>&nbsp;</span><span class=value2>&nbsp;&nbsp;</span><span class=value4>&nbsp;&nbsp;</span><span class=value3>&nbsp;</span><span class=value2>&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>hmgb_chite&nbsp;&nbsp;&nbsp;</span><span class=value5>K</span><span class=value6>KGGE</span><span class=value7>L</span><span class=value6>W</span><span class=value5>RGL</span><span class=value4>KD</span><span class=valuegap>--</span><span class=value3>K</span><span class=value4>S</span><span class=value5>E</span><span class=value4>WEAKAATAKQNY</span><span class=value5>IR</span><span class=value6>A</span><span class=value7>L</span><span class=value4>QE</span><span class=value5>YE</span><span class=value6>R</span><span class=value7>N</span><br><span class=valuedefault>hmgl_wheat&nbsp;&nbsp;&nbsp;</span><span class=value6>K</span><span class=value5>AAGERW</span><span class=value4>KSLS</span><span class=value3>E</span><span class=value4>SEKAPYVAKANKLK</span><span class=value5>GEYNK</span><span class=value6>AI</span><span class=value4>AAYN</span><span class=value5>K</span><span class=value7>G</span><br><span class=valuedefault>hmgl_trybr&nbsp;&nbsp;&nbsp;</span><span class=value6>KAAGAA</span><span class=value5>WKELGP</span><span class=value4>EER</span><span class=value5>K</span><span class=value4>VYEEMAEKDK</span><span class=value5>ERYK</span><span class=value6>R</span><span class=value7>EM</span><span class=valuegap>------</span><br><span class=valuedefault>hmgt_mouse&nbsp;&nbsp;&nbsp;</span><span class=value5>K</span><span class=value6>LVNEA</span><span class=value5>WKNL</span><span class=value4>SPE</span><span class=value3>E</span><span class=value4>KQAYIQLAKDDRIR</span><span class=value5>YDNE</span><span class=value6>M</span><span class=value4>KSWE</span><span class=value5>E</span><span class=value6>Q</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value4>*</span><span class=value5>&nbsp;&nbsp;.</span><span class=value4>&nbsp;</span><span class=value5>&nbsp;</span><span class=value4>*:&nbsp;*</span><span class=value3>&nbsp;&nbsp;</span><span class=value2>&nbsp;&nbsp;</span><span class=value3>:&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;:&nbsp;.</span><span class=value4>*&nbsp;.</span><span class=value5>&nbsp;:</span><span class=value2>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value3>&nbsp;</span><span class=value5>&nbsp;</span><br><br><br><span class=valuedefault>hmgb_chite&nbsp;&nbsp;&nbsp;</span><span class=value7>G</span><span class=valuegap>-</span><span class=value7>G</span><br><span class=valuedefault>hmgl_wheat&nbsp;&nbsp;&nbsp;</span><span class=value6>ES</span><span class=value7>A</span><br><span class=valuedefault>hmgl_trybr&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---</span><br><span class=valuedefault>hmgt_mouse&nbsp;&nbsp;&nbsp;</span><span class=value6>MA</span><span class=value9>E</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value4>&nbsp;&nbsp;</span><span class=value6>&nbsp;</span><br><br><br><br><br><br></body></html>
 </content>
 </file>
 <environement>
@@ -865,46 +865,54 @@ ROOT_TMP_4_TCOFFEE=/var/tmp/
 SHELL=/bin/bash
 TERM=xterm-256color
 TMPDIR=/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/
+CONDA_SHLVL=1
 PERL5LIB=/sw/lib/perl5:/sw/lib/perl5/darwin
 Apple_PubSub_Socket_Render=/private/tmp/com.apple.launchd.u7asRiNodS/Render
+CONDA_PROMPT_MODIFIER=(base) 
 TERM_PROGRAM_VERSION=388.1.3
 OSNAME=macosx
 PERL_BIN=/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms::/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices
-TERM_SESSION_ID=08C395F9-69A0-4DC8-9DE9-5914C23D168F
+TERM_SESSION_ID=966A65A4-FBA5-4990-991E-01DB7E43DA0A
 METHODS_4_TCOFFEE=/Users/cnotredame//.t_coffee//methods/
 VERSIONER_PERL_VERSION=5.18
 XAPPLRESDIR=/sw/etc/app-defaults/
 http_proxy=
 HTTP_proxy=
 USER=cnotredame
+CONDA_EXE=/Users/cnotredame/anaconda3/bin/conda
 SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.mMz4rqepoV/Listeners
 __CF_USER_TEXT_ENCODING=0x1F6:0x0:0x0
 ENV_4_TCOFFEE=/Users/cnotredame//.t_coffee//.t_coffee_env
+_CE_CONDA=
 all_proxy=
 ALL_PROXY=
 HTTP_proxy_4_TCOFFEE=
-PATH=/Users/cnotredame//.t_coffee//plugins/macosx/:/opt/local/bin:/opt/local/sbin:/opt/local/bin:/opt/local/sbin:/Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/packages/x3dna-v2.1/bin:/Users/cnotredame/bin/macosx://Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms::/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices:/Users/cnotredame/bin/Scripts/:/Users/cnotredame/Library/Haskell/ghc-7.4.2/lib/epub-tools-2.0.0/bin/:/sw/bin:/sw/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin
+PATH=/Users/cnotredame//.t_coffee//plugins/macosx/:/Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/packages/x3dna-v2.1/bin:/Users/cnotredame/bin/macosx://Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms::/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices:/Users/cnotredame/bin/Scripts/:/Users/cnotredame/Library/Haskell/ghc-7.4.2/lib/epub-tools-2.0.0/bin/:/Users/cnotredame/anaconda3/bin:/Users/cnotredame/anaconda3/condabin:/opt/local/bin:/opt/local/sbin:/opt/local/bin:/opt/local/sbin:/Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/packages/x3dna-v2.1/bin:/Users/cnotredame/bin/macosx://Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms:.:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices:/Users/cnotredame/bin/Scripts:/Users/cnotredame/Library/Haskell/ghc-7.4.2/lib/epub-tools-2.0.0/bin:/sw/bin:/sw/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin
 _=/usr/bin/printenv
+CONDA_PREFIX=/Users/cnotredame/anaconda3
 COLOR_4_TCOFFEE=new
 DIR_4_TCOFFEE=/Users/cnotredame//.t_coffee/
-PWD=/Users/cnotredame/Dropbox/projects/git/tcoffee/tmp/RANDOMSTRINGD9cjwqYdvpoZEJDwNe4Z/tmp/RANDOMSTRINGT3YORjyunF8pGjopkcQb/data
+PWD=/Users/cnotredame/Dropbox/projects/git/tcoffee/tmp/RANDOMSTRING7hRVWRF1V6pGa64HVoDP/data
 CACHE_4_TCOFFEE=/Users/cnotredame//.t_coffee//cache/
 X3DNA=/Users/cnotredame/Dropbox/packages/x3dna-v2.1
 DBUS_LAUNCHD_SESSION_BUS_SOCKET=/private/tmp/com.apple.launchd.CeZrDaslOL/unix_domain_listener
 XPC_FLAGS=0x0
 VERSIONER_PERL_PREFER_32_BIT=no
+_CE_M=
 XPC_SERVICE_NAME=0
 ERRORFILE_4_TCOFFEE=NO
 PLUGINS_4_TCOFFEE=/Users/cnotredame//.t_coffee//plugins/macosx/
 SHLVL=3
 HOME=/Users/cnotredame
-DUMP_4_TCOFFEE=/Users/cnotredame/Dropbox/projects/git/tcoffee/tmp/RANDOMSTRINGD9cjwqYdvpoZEJDwNe4Z/tmp/RANDOMSTRINGT3YORjyunF8pGjopkcQb/core.tests.94.dump
+DUMP_4_TCOFFEE=/Users/cnotredame/Dropbox/projects/git/tcoffee/tmp/RANDOMSTRING7hRVWRF1V6pGa64HVoDP/core.tests.94.dump
 HTTP_PROXY=
 MAFFT_BINARIES=
+CONDA_PYTHON_EXE=/Users/cnotredame/anaconda3/bin/python
 BIN=/Users/cnotredame/bin/macosx
 LOGNAME=cnotredame
 EMAIL_4_TCOFFEE=cedric.notredame@gmail.com
 LC_CTYPE=UTF-8
+CONDA_DEFAULT_ENV=base
 EMAIL=cedric.notredame@gmail.com
 UPDATED_ENV_4_TCOFFEE=1
 INFOPATH=/sw/share/info:/sw/info:/usr/share/info
@@ -913,11 +921,11 @@ TC_MASTER_NODE=1
 NUMBER_OF_PROCESSORS=8
 ALL_proxy=
 SECURITYSESSIONID=186a6
-LOCKDIR_4_TCOFFEE=/var/tmp/tco/tcorkt_sizj65407//lck/fg20ncitmv/
-TMP_4_TCOFFEE=/var/tmp/tco/tcorkt_sizj65407/
+LOCKDIR_4_TCOFFEE=/var/tmp/tco/tcol58ag4ep19541//lck/2mo54g5das/
+TMP_4_TCOFFEE=/var/tmp/tco/tcol58ag4ep19541/
 USER_BIN=/Users/cnotredame/bin/macosx
 SCRIPT_BIN=/Users/cnotredame/bin/Scripts/
 </environement>
 <DumpStatus>OK</DumpStatus>
-<DumpFile>/Users/cnotredame/Dropbox/projects/git/tcoffee/tmp/RANDOMSTRINGD9cjwqYdvpoZEJDwNe4Z/tmp/RANDOMSTRINGT3YORjyunF8pGjopkcQb/core.tests.94.dump</DumpFile>
+<DumpFile>/Users/cnotredame/Dropbox/projects/git/tcoffee/tmp/RANDOMSTRING7hRVWRF1V6pGa64HVoDP/core.tests.94.dump</DumpFile>
 </DumpIO>

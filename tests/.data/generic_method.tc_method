@@ -129,7 +129,7 @@ OUT_FLAG		-outfile=
 *If there is more than 1 PARAM line, the lines are
 *concatenated
 *
-PARAM	-mode=seq_msa -method=clustalw
+PARAM	-mode=seq_msa -method=clustalw2
 PARAM   -OUTORDER=INPUT -NEWTREE=core -align -gapopen=-15
 *
 *******************************************************

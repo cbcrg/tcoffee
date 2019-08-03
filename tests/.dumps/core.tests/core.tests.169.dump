@@ -1,8 +1,8 @@
 <DumpIO>
 <nature>standard dump</nature>
 <program>T-COFFEE</program>
-<version>Version_13.30.5.6909e10</version>
-<build>Version_13.30.5.6909e10</build>
+<version>Version_13.30.12.28864d4</version>
+<build>Version_13.30.12.28864d4</build>
 <cl>t_coffee -mode 3dcoffee -seq 3d_sample3.fasta -template_file template_file.template </cl>
 <stack>
 </stack>
@@ -11,38 +11,38 @@
 
 *************************************************************************************************
 *                        MESSAGES RECAPITULATION                                    
-29058 -- WARNING: _P_ Template | hmgb_chite | Could Not Be Found
+23944 -- WARNING: _P_ Template | hmgb_chite | Could Not Be Found
 
-29058 -- WARNING: _P_ Template | hmgl_trybr | Could Not Be Found
+23944 -- WARNING: _P_ Template | hmgl_trybr | Could Not Be Found
 
-29058 -- WARNING: _P_ Template | hmgl_wheat | Could Not Be Found
+23944 -- WARNING: _P_ Template | hmgl_wheat | Could Not Be Found
 
-29058 -- WARNING: _P_ Template | hmgt_mouse | Could Not Be Found
+23944 -- WARNING: _P_ Template | hmgt_mouse | Could Not Be Found
 
-29058 -- WARNING: _P_ Template | seq_1cms | Could Not Be Found
+23944 -- WARNING: _P_ Template | seq_1cms | Could Not Be Found
 
-29058 -- WARNING: _P_ Template | seq_3app | Could Not Be Found
+23944 -- WARNING: _P_ Template | seq_3app | Could Not Be Found
 
-29058 -- WARNING: _P_ Template | seq_4ape | Could Not Be Found
+23944 -- WARNING: _P_ Template | seq_4ape | Could Not Be Found
 
-29539 -- INFORMATION: Method  cannot be applied to [hmgb_chite vs hmgl_trybr], proba_pair will be used instead
-29539 -- INFORMATION: Method  cannot be applied to [hmgb_chite vs hmgl_wheat], proba_pair will be used instead
-29539 -- INFORMATION: Method  cannot be applied to [hmgb_chite vs hmgt_mouse], proba_pair will be used instead
-29539 -- INFORMATION: Method  cannot be applied to [hmgb_chite vs seq_1cms], proba_pair will be used instead
-29539 -- INFORMATION: Method  cannot be applied to [hmgb_chite vs seq_3app], proba_pair will be used instead
-29539 -- INFORMATION: Method  cannot be applied to [hmgb_chite vs seq_4ape], proba_pair will be used instead
-29539 -- INFORMATION: Method  cannot be applied to [hmgl_trybr vs hmgl_wheat], proba_pair will be used instead
-29539 -- INFORMATION: Method  cannot be applied to [hmgl_trybr vs hmgt_mouse], proba_pair will be used instead
-29539 -- INFORMATION: Method  cannot be applied to [hmgl_trybr vs seq_1cms], proba_pair will be used instead
-29539 -- INFORMATION: Method  cannot be applied to [hmgl_trybr vs seq_3app], proba_pair will be used instead
-29539 -- INFORMATION: Method  cannot be applied to [hmgl_trybr vs seq_4ape], proba_pair will be used instead
-29539 -- INFORMATION: Method  cannot be applied to [hmgl_wheat vs hmgt_mouse], proba_pair will be used instead
-29539 -- INFORMATION: Method  cannot be applied to [hmgl_wheat vs seq_1cms], proba_pair will be used instead
-29539 -- INFORMATION: Method  cannot be applied to [hmgl_wheat vs seq_3app], proba_pair will be used instead
-29539 -- INFORMATION: Method  cannot be applied to [hmgl_wheat vs seq_4ape], proba_pair will be used instead
-29539 -- INFORMATION: Method  cannot be applied to [hmgt_mouse vs seq_1cms], proba_pair will be used instead
-29539 -- INFORMATION: Method  cannot be applied to [hmgt_mouse vs seq_3app], proba_pair will be used instead
-29539 -- INFORMATION: Method  cannot be applied to [hmgt_mouse vs seq_4ape], proba_pair will be used instead
+24183 -- INFORMATION: Method  cannot be applied to [hmgb_chite vs hmgl_trybr], proba_pair will be used instead
+24183 -- INFORMATION: Method  cannot be applied to [hmgb_chite vs hmgl_wheat], proba_pair will be used instead
+24183 -- INFORMATION: Method  cannot be applied to [hmgb_chite vs hmgt_mouse], proba_pair will be used instead
+24183 -- INFORMATION: Method  cannot be applied to [hmgb_chite vs seq_1cms], proba_pair will be used instead
+24183 -- INFORMATION: Method  cannot be applied to [hmgb_chite vs seq_3app], proba_pair will be used instead
+24183 -- INFORMATION: Method  cannot be applied to [hmgb_chite vs seq_4ape], proba_pair will be used instead
+24183 -- INFORMATION: Method  cannot be applied to [hmgl_trybr vs hmgl_wheat], proba_pair will be used instead
+24183 -- INFORMATION: Method  cannot be applied to [hmgl_trybr vs hmgt_mouse], proba_pair will be used instead
+24183 -- INFORMATION: Method  cannot be applied to [hmgl_trybr vs seq_1cms], proba_pair will be used instead
+24183 -- INFORMATION: Method  cannot be applied to [hmgl_trybr vs seq_3app], proba_pair will be used instead
+24183 -- INFORMATION: Method  cannot be applied to [hmgl_trybr vs seq_4ape], proba_pair will be used instead
+24183 -- INFORMATION: Method  cannot be applied to [hmgl_wheat vs hmgt_mouse], proba_pair will be used instead
+24183 -- INFORMATION: Method  cannot be applied to [hmgl_wheat vs seq_1cms], proba_pair will be used instead
+24183 -- INFORMATION: Method  cannot be applied to [hmgl_wheat vs seq_3app], proba_pair will be used instead
+24183 -- INFORMATION: Method  cannot be applied to [hmgl_wheat vs seq_4ape], proba_pair will be used instead
+24183 -- INFORMATION: Method  cannot be applied to [hmgt_mouse vs seq_1cms], proba_pair will be used instead
+24183 -- INFORMATION: Method  cannot be applied to [hmgt_mouse vs seq_3app], proba_pair will be used instead
+24183 -- INFORMATION: Method  cannot be applied to [hmgt_mouse vs seq_4ape], proba_pair will be used instead
 *************************************************************************************************
 </warning>
 <file>
@@ -55,7 +55,7 @@
 #Single Thread
 #Single Thread
 #Single Thread
-CLUSTAL FORMAT for T-COFFEE Version_13.30.5.6909e10 [http://www.tcoffee.org] [MODE: 3dcoffee ], CPU=0.00 sec, SCORE=42, Nseq=7, Len=183 
+CLUSTAL FORMAT for T-COFFEE Version_13.30.12.28864d4 [http://www.tcoffee.org] [MODE: 3dcoffee ], CPU=0.00 sec, SCORE=42, Nseq=7, Len=183 
 
 seq_1cms        GEVASVPLTNYL--DSQYFGKIYLGTPPQEFTVLFDTGSSDFWVPSIYCK
 seq_4ape        STG-SATTTPIDSLDDAYITPVQIGTPAQTLNLDFDTGSSDLWVFSSETT
@@ -100,10 +100,8 @@ hmgl_wheat      n-k-l--kgeynkaiaa-ynkges--------a
 <file>
 <stream>output</stream>
 <name>stderr</name>
-<content>HERE: DPA=0
-HERE: DPA=0
-
-PROGRAM: T-COFFEE Version_13.30.5.6909e10 (Version_13.30.5.6909e10)
+<content>
+PROGRAM: T-COFFEE Version_13.30.12.28864d4 (Version_13.30.12.28864d4)
 -full_log      	S	[0] 
 -genepred_score	S	[0] 	nsd
 -run_name      	S	[0] 
@@ -275,25 +273,25 @@ Master Sequences Identified
 Looking For Sequence Templates:
 
 	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
-pid 29058 -- _P_ Template | hmgb_chite | Could Not Be Found
+pid 23944 -- _P_ Template | hmgb_chite | Could Not Be Found
 
 
-pid 29058 -- _P_ Template | hmgl_trybr | Could Not Be Found
+pid 23944 -- _P_ Template | hmgl_trybr | Could Not Be Found
 
 
-pid 29058 -- _P_ Template | hmgl_wheat | Could Not Be Found
+pid 23944 -- _P_ Template | hmgl_wheat | Could Not Be Found
 
 
-pid 29058 -- _P_ Template | hmgt_mouse | Could Not Be Found
+pid 23944 -- _P_ Template | hmgt_mouse | Could Not Be Found
 
 
-pid 29058 -- _P_ Template | seq_1cms | Could Not Be Found
+pid 23944 -- _P_ Template | seq_1cms | Could Not Be Found
 
 
-pid 29058 -- _P_ Template | seq_3app | Could Not Be Found
+pid 23944 -- _P_ Template | seq_3app | Could Not Be Found
 
 
-pid 29058 -- _P_ Template | seq_4ape | Could Not Be Found
+pid 23944 -- _P_ Template | seq_4ape | Could Not Be Found
 
 ]
 	Template Type: [template_file.template] Mode Or File: [template_file.template] [Start]
@@ -313,42 +311,42 @@ INPUT SEQUENCES: 7 SEQUENCES  [PROTEIN]
 
 	Multi Core Mode: 1 processors:
 
-pid 29539 -- Method  cannot be applied to [hmgb_chite vs hmgl_trybr], proba_pair will be used instead
+pid 24183 -- Method  cannot be applied to [hmgb_chite vs hmgl_trybr], proba_pair will be used instead
 
-pid 29539 -- Method  cannot be applied to [hmgb_chite vs hmgl_wheat], proba_pair will be used instead
+pid 24183 -- Method  cannot be applied to [hmgb_chite vs hmgl_wheat], proba_pair will be used instead
 
-pid 29539 -- Method  cannot be applied to [hmgb_chite vs hmgt_mouse], proba_pair will be used instead
+pid 24183 -- Method  cannot be applied to [hmgb_chite vs hmgt_mouse], proba_pair will be used instead
 
-pid 29539 -- Method  cannot be applied to [hmgb_chite vs seq_1cms], proba_pair will be used instead
+pid 24183 -- Method  cannot be applied to [hmgb_chite vs seq_1cms], proba_pair will be used instead
 
-pid 29539 -- Method  cannot be applied to [hmgb_chite vs seq_3app], proba_pair will be used instead
+pid 24183 -- Method  cannot be applied to [hmgb_chite vs seq_3app], proba_pair will be used instead
 
-pid 29539 -- Method  cannot be applied to [hmgb_chite vs seq_4ape], proba_pair will be used instead
+pid 24183 -- Method  cannot be applied to [hmgb_chite vs seq_4ape], proba_pair will be used instead
 
-pid 29539 -- Method  cannot be applied to [hmgl_trybr vs hmgl_wheat], proba_pair will be used instead
+pid 24183 -- Method  cannot be applied to [hmgl_trybr vs hmgl_wheat], proba_pair will be used instead
 
-pid 29539 -- Method  cannot be applied to [hmgl_trybr vs hmgt_mouse], proba_pair will be used instead
+pid 24183 -- Method  cannot be applied to [hmgl_trybr vs hmgt_mouse], proba_pair will be used instead
 
-pid 29539 -- Method  cannot be applied to [hmgl_trybr vs seq_1cms], proba_pair will be used instead
+pid 24183 -- Method  cannot be applied to [hmgl_trybr vs seq_1cms], proba_pair will be used instead
 
-pid 29539 -- Method  cannot be applied to [hmgl_trybr vs seq_3app], proba_pair will be used instead
+pid 24183 -- Method  cannot be applied to [hmgl_trybr vs seq_3app], proba_pair will be used instead
 
-pid 29539 -- Method  cannot be applied to [hmgl_trybr vs seq_4ape], proba_pair will be used instead
+pid 24183 -- Method  cannot be applied to [hmgl_trybr vs seq_4ape], proba_pair will be used instead
 
-pid 29539 -- Method  cannot be applied to [hmgl_wheat vs hmgt_mouse], proba_pair will be used instead
+pid 24183 -- Method  cannot be applied to [hmgl_wheat vs hmgt_mouse], proba_pair will be used instead
 
-pid 29539 -- Method  cannot be applied to [hmgl_wheat vs seq_1cms], proba_pair will be used instead
+pid 24183 -- Method  cannot be applied to [hmgl_wheat vs seq_1cms], proba_pair will be used instead
 
-pid 29539 -- Method  cannot be applied to [hmgl_wheat vs seq_3app], proba_pair will be used instead
+pid 24183 -- Method  cannot be applied to [hmgl_wheat vs seq_3app], proba_pair will be used instead
 
-pid 29539 -- Method  cannot be applied to [hmgl_wheat vs seq_4ape], proba_pair will be used instead
+pid 24183 -- Method  cannot be applied to [hmgl_wheat vs seq_4ape], proba_pair will be used instead
 
-pid 29539 -- Method  cannot be applied to [hmgt_mouse vs seq_1cms], proba_pair will be used instead
+pid 24183 -- Method  cannot be applied to [hmgt_mouse vs seq_1cms], proba_pair will be used instead
 
-pid 29539 -- Method  cannot be applied to [hmgt_mouse vs seq_3app], proba_pair will be used instead
+pid 24183 -- Method  cannot be applied to [hmgt_mouse vs seq_3app], proba_pair will be used instead
 
-pid 29539 -- Method  cannot be applied to [hmgt_mouse vs seq_4ape], proba_pair will be used instead
-de	S	[0] 	5
+pid 24183 -- Method  cannot be applied to [hmgt_mouse vs seq_4ape], proba_pair will be used instead
+5
 -tip           	S	[0] 	none
 -rna_lib       	S	[0] 
 -no_warning    	D	[0] 	0 
@@ -378,25 +376,25 @@ Master Sequences Identified
 Looking For Sequence Templates:
 
 	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
-pid 29058 -- _P_ Template | hmgb_chite | Could Not Be Found
+pid 23944 -- _P_ Template | hmgb_chite | Could Not Be Found
 
 
-pid 29058 -- _P_ Template | hmgl_trybr | Could Not Be Found
+pid 23944 -- _P_ Template | hmgl_trybr | Could Not Be Found
 
 
-pid 29058 -- _P_ Template | hmgl_wheat | Could Not Be Found
+pid 23944 -- _P_ Template | hmgl_wheat | Could Not Be Found
 
 
-pid 29058 -- _P_ Template | hmgt_mouse | Could Not Be Found
+pid 23944 -- _P_ Template | hmgt_mouse | Could Not Be Found
 
 
-pid 29058 -- _P_ Template | seq_1cms | Could Not Be Found
+pid 23944 -- _P_ Template | seq_1cms | Could Not Be Found
 
 
-pid 29058 -- _P_ Template | seq_3app | Could Not Be Found
+pid 23944 -- _P_ Template | seq_3app | Could Not Be Found
 
 
-pid 29058 -- _P_ Template | seq_4ape | Could Not Be Found
+pid 23944 -- _P_ Template | seq_4ape | Could Not Be Found
 
 ]
 	Template Type: [template_file.template] Mode Or File: [template_file.template] [Start]
@@ -416,42 +414,42 @@ INPUT SEQUENCES: 7 SEQUENCES  [PROTEIN]
 
 	Multi Core Mode: 1 processors:
 
-pid 29539 -- Method  cannot be applied to [hmgb_chite vs hmgl_trybr], proba_pair will be used instead
+pid 24183 -- Method  cannot be applied to [hmgb_chite vs hmgl_trybr], proba_pair will be used instead
 
-pid 29539 -- Method  cannot be applied to [hmgb_chite vs hmgl_wheat], proba_pair will be used instead
+pid 24183 -- Method  cannot be applied to [hmgb_chite vs hmgl_wheat], proba_pair will be used instead
 
-pid 29539 -- Method  cannot be applied to [hmgb_chite vs hmgt_mouse], proba_pair will be used instead
+pid 24183 -- Method  cannot be applied to [hmgb_chite vs hmgt_mouse], proba_pair will be used instead
 
-pid 29539 -- Method  cannot be applied to [hmgb_chite vs seq_1cms], proba_pair will be used instead
+pid 24183 -- Method  cannot be applied to [hmgb_chite vs seq_1cms], proba_pair will be used instead
 
-pid 29539 -- Method  cannot be applied to [hmgb_chite vs seq_3app], proba_pair will be used instead
+pid 24183 -- Method  cannot be applied to [hmgb_chite vs seq_3app], proba_pair will be used instead
 
-pid 29539 -- Method  cannot be applied to [hmgb_chite vs seq_4ape], proba_pair will be used instead
+pid 24183 -- Method  cannot be applied to [hmgb_chite vs seq_4ape], proba_pair will be used instead
 
-pid 29539 -- Method  cannot be applied to [hmgl_trybr vs hmgl_wheat], proba_pair will be used instead
+pid 24183 -- Method  cannot be applied to [hmgl_trybr vs hmgl_wheat], proba_pair will be used instead
 
-pid 29539 -- Method  cannot be applied to [hmgl_trybr vs hmgt_mouse], proba_pair will be used instead
+pid 24183 -- Method  cannot be applied to [hmgl_trybr vs hmgt_mouse], proba_pair will be used instead
 
-pid 29539 -- Method  cannot be applied to [hmgl_trybr vs seq_1cms], proba_pair will be used instead
+pid 24183 -- Method  cannot be applied to [hmgl_trybr vs seq_1cms], proba_pair will be used instead
 
-pid 29539 -- Method  cannot be applied to [hmgl_trybr vs seq_3app], proba_pair will be used instead
+pid 24183 -- Method  cannot be applied to [hmgl_trybr vs seq_3app], proba_pair will be used instead
 
-pid 29539 -- Method  cannot be applied to [hmgl_trybr vs seq_4ape], proba_pair will be used instead
+pid 24183 -- Method  cannot be applied to [hmgl_trybr vs seq_4ape], proba_pair will be used instead
 
-pid 29539 -- Method  cannot be applied to [hmgl_wheat vs hmgt_mouse], proba_pair will be used instead
+pid 24183 -- Method  cannot be applied to [hmgl_wheat vs hmgt_mouse], proba_pair will be used instead
 
-pid 29539 -- Method  cannot be applied to [hmgl_wheat vs seq_1cms], proba_pair will be used instead
+pid 24183 -- Method  cannot be applied to [hmgl_wheat vs seq_1cms], proba_pair will be used instead
 
-pid 29539 -- Method  cannot be applied to [hmgl_wheat vs seq_3app], proba_pair will be used instead
+pid 24183 -- Method  cannot be applied to [hmgl_wheat vs seq_3app], proba_pair will be used instead
 
-pid 29539 -- Method  cannot be applied to [hmgl_wheat vs seq_4ape], proba_pair will be used instead
+pid 24183 -- Method  cannot be applied to [hmgl_wheat vs seq_4ape], proba_pair will be used instead
 
-pid 29539 -- Method  cannot be applied to [hmgt_mouse vs seq_1cms], proba_pair will be used instead
+pid 24183 -- Method  cannot be applied to [hmgt_mouse vs seq_1cms], proba_pair will be used instead
 
-pid 29539 -- Method  cannot be applied to [hmgt_mouse vs seq_3app], proba_pair will be used instead
+pid 24183 -- Method  cannot be applied to [hmgt_mouse vs seq_3app], proba_pair will be used instead
 
-pid 29539 -- Method  cannot be applied to [hmgt_mouse vs seq_4ape], proba_pair will be used instead
-de	S	[0] 	5
+pid 24183 -- Method  cannot be applied to [hmgt_mouse vs seq_4ape], proba_pair will be used instead
+5
 -tip           	S	[0] 	none
 -rna_lib       	S	[0] 
 -no_warning    	D	[0] 	0 
@@ -481,25 +479,25 @@ Master Sequences Identified
 Looking For Sequence Templates:
 
 	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
-pid 29058 -- _P_ Template | hmgb_chite | Could Not Be Found
+pid 23944 -- _P_ Template | hmgb_chite | Could Not Be Found
 
 
-pid 29058 -- _P_ Template | hmgl_trybr | Could Not Be Found
+pid 23944 -- _P_ Template | hmgl_trybr | Could Not Be Found
 
 
-pid 29058 -- _P_ Template | hmgl_wheat | Could Not Be Found
+pid 23944 -- _P_ Template | hmgl_wheat | Could Not Be Found
 
 
-pid 29058 -- _P_ Template | hmgt_mouse | Could Not Be Found
+pid 23944 -- _P_ Template | hmgt_mouse | Could Not Be Found
 
 
-pid 29058 -- _P_ Template | seq_1cms | Could Not Be Found
+pid 23944 -- _P_ Template | seq_1cms | Could Not Be Found
 
 
-pid 29058 -- _P_ Template | seq_3app | Could Not Be Found
+pid 23944 -- _P_ Template | seq_3app | Could Not Be Found
 
 
-pid 29058 -- _P_ Template | seq_4ape | Could Not Be Found
+pid 23944 -- _P_ Template | seq_4ape | Could Not Be Found
 
 ]
 	Template Type: [template_file.template] Mode Or File: [template_file.template] [Start]
@@ -520,7 +518,7 @@ INPUT SEQUENCES: 7 SEQUENCES  [PROTEIN]
 	Multi Core Mode: 1 processors:
 
 	--- Process Method/Library/Aln Msap_pair
-	xxx Retrieved Msap_pairde	S	[0] 	5
+	xxx Retrieved Msap_pair5
 -tip           	S	[0] 	none
 -rna_lib       	S	[0] 
 -no_warning    	D	[0] 	0 
@@ -550,25 +548,25 @@ Master Sequences Identified
 Looking For Sequence Templates:
 
 	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
-pid 29058 -- _P_ Template | hmgb_chite | Could Not Be Found
+pid 23944 -- _P_ Template | hmgb_chite | Could Not Be Found
 
 
-pid 29058 -- _P_ Template | hmgl_trybr | Could Not Be Found
+pid 23944 -- _P_ Template | hmgl_trybr | Could Not Be Found
 
 
-pid 29058 -- _P_ Template | hmgl_wheat | Could Not Be Found
+pid 23944 -- _P_ Template | hmgl_wheat | Could Not Be Found
 
 
-pid 29058 -- _P_ Template | hmgt_mouse | Could Not Be Found
+pid 23944 -- _P_ Template | hmgt_mouse | Could Not Be Found
 
 
-pid 29058 -- _P_ Template | seq_1cms | Could Not Be Found
+pid 23944 -- _P_ Template | seq_1cms | Could Not Be Found
 
 
-pid 29058 -- _P_ Template | seq_3app | Could Not Be Found
+pid 23944 -- _P_ Template | seq_3app | Could Not Be Found
 
 
-pid 29058 -- _P_ Template | seq_4ape | Could Not Be Found
+pid 23944 -- _P_ Template | seq_4ape | Could Not Be Found
 
 ]
 	Template Type: [template_file.template] Mode Or File: [template_file.template] [Start]
@@ -602,7 +600,7 @@ MANUAL PENALTIES: gapopen=0 gapext=0
 Library Relaxation: Multi_proc [1]
  
 !		[Relax Library][TOT=    7][  0 %]!		[Relax Library][TOT=    7][ 28 %]!		[Relax Library][TOT=    7][ 42 %]!		[Relax Library][TOT=    7][ 57 %]!		[Relax Library][TOT=    7][ 71 %]!		[Relax Library][TOT=    7][ 85 %]!		[Relax Library][TOT=    7][100 %]
-de	S	[0] 	5
+5
 -tip           	S	[0] 	none
 -rna_lib       	S	[0] 
 -no_warning    	D	[0] 	0 
@@ -632,25 +630,25 @@ Master Sequences Identified
 Looking For Sequence Templates:
 
 	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
-pid 29058 -- _P_ Template | hmgb_chite | Could Not Be Found
+pid 23944 -- _P_ Template | hmgb_chite | Could Not Be Found
 
 
-pid 29058 -- _P_ Template | hmgl_trybr | Could Not Be Found
+pid 23944 -- _P_ Template | hmgl_trybr | Could Not Be Found
 
 
-pid 29058 -- _P_ Template | hmgl_wheat | Could Not Be Found
+pid 23944 -- _P_ Template | hmgl_wheat | Could Not Be Found
 
 
-pid 29058 -- _P_ Template | hmgt_mouse | Could Not Be Found
+pid 23944 -- _P_ Template | hmgt_mouse | Could Not Be Found
 
 
-pid 29058 -- _P_ Template | seq_1cms | Could Not Be Found
+pid 23944 -- _P_ Template | seq_1cms | Could Not Be Found
 
 
-pid 29058 -- _P_ Template | seq_3app | Could Not Be Found
+pid 23944 -- _P_ Template | seq_3app | Could Not Be Found
 
 
-pid 29058 -- _P_ Template | seq_4ape | Could Not Be Found
+pid 23944 -- _P_ Template | seq_4ape | Could Not Be Found
 
 ]
 	Template Type: [template_file.template] Mode Or File: [template_file.template] [Start]
@@ -701,7 +699,7 @@ Group    5: seq_1cms
 Group    6: seq_3app
 Group    7: seq_4ape
 
-de	S	[0] 	5
+5
 -tip           	S	[0] 	none
 -rna_lib       	S	[0] 
 -no_warning    	D	[0] 	0 
@@ -731,125 +729,25 @@ Master Sequences Identified
 Looking For Sequence Templates:
 
 	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
-pid 29058 -- _P_ Template | hmgb_chite | Could Not Be Found
+pid 23944 -- _P_ Template | hmgb_chite | Could Not Be Found
 
 
-pid 29058 -- _P_ Template | hmgl_trybr | Could Not Be Found
+pid 23944 -- _P_ Template | hmgl_trybr | Could Not Be Found
 
 
-pid 29058 -- _P_ Template | hmgl_wheat | Could Not Be Found
+pid 23944 -- _P_ Template | hmgl_wheat | Could Not Be Found
 
 
-pid 29058 -- _P_ Template | hmgt_mouse | Could Not Be Found
+pid 23944 -- _P_ Template | hmgt_mouse | Could Not Be Found
 
 
-pid 29058 -- _P_ Template | seq_1cms | Could Not Be Found
+pid 23944 -- _P_ Template | seq_1cms | Could Not Be Found
 
 
-pid 29058 -- _P_ Template | seq_3app | Could Not Be Found
+pid 23944 -- _P_ Template | seq_3app | Could Not Be Found
 
 
-pid 29058 -- _P_ Template | seq_4ape | Could Not Be Found
-
-]
-	Template Type: [template_file.template] Mode Or File: [template_file.template] [Start]
-Looking For Profile  Templates
-	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start]
-INPUT SEQUENCES: 7 SEQUENCES  [PROTEIN]
-  Input File 3d_sample3.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
-  Input File 3d_sample3.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
-  Input File 3d_sample3.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
-  Input File 3d_sample3.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
-  Input File 3d_sample3.fasta Seq seq_1cms   Length  175 type PROTEIN Struct Unchecked
-	PDB struc: Template=1cms, File=1cms.pdb
-  Input File 3d_sample3.fasta Seq seq_3app   Length  174 type PROTEIN Struct Unchecked
-	PDB struc: Template=3app, File=3app.pdb
-  Input File 3d_sample3.fasta Seq seq_4ape   Length  178 type PROTEIN Struct Unchecked
-	PDB struc: Template=4ape, File=4ape.pdb
-
-	Multi Core Mode: 1 processors:
-
-	--- Process Method/Library/Aln Msap_pair
-	xxx Retrieved Msap_pair
-	--- Process Method/Library/Aln S3d_sample3.fasta
-	xxx Retrieved S3d_sample3.fasta
-
-	All Methods Retrieved
-
-MANUAL PENALTIES: gapopen=0 gapext=0
-
-	Library Total Size: [9908]
-
-Library Relaxation: Multi_proc [1]
- 
-Relaxation Summary: [9908]--->[7249]
-
-
-
-UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
-
-MAKE GUIDE TREE 
-	[MODE=nj][DONE]
-
-PROGRESSIVE_ALIGNMENT [Tree Based]
-Group    1: hmgb_chite
-Group    2: hmgl_trybr
-Group    3: hmgl_wheat
-Group    4: hmgt_mouse
-Group    5: seq_1cms
-Group    6: seq_3app
-Group    7: seq_4ape
-
-
-	Group    8: [Group    4 (   1 seq)] with [Group    2 (   1 seq)]-->[Len=   76][PID:29058]de	S	[0] 	5
--tip           	S	[0] 	none
--rna_lib       	S	[0] 
--no_warning    	D	[0] 	0 
--run_local_script	D	[0] 	0 
--proxy         	S	[0] 	unset
--email         	S	[0] 
--clean_overaln 	D	[0] 	0 
--overaln_param 	S	[0] 
--overaln_mode  	S	[0] 
--overaln_model 	S	[0] 
--overaln_threshold	D	[0] 	0 
--overaln_target	D	[0] 	0 
--overaln_P1    	D	[0] 	0 
--overaln_P2    	D	[0] 	0 
--overaln_P3    	D	[0] 	0 
--overaln_P4    	D	[0] 	0 
--exon_boundaries	S	[0] 
--display       	D	[0] 	100 
-
-INPUT FILES
-	Input File (M) sap_pair 
-	Input File (S) 3d_sample3.fasta  Format fasta_seq
-
-Identify Master Sequences [no]:
-
-Master Sequences Identified
-Looking For Sequence Templates:
-
-	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
-pid 29058 -- _P_ Template | hmgb_chite | Could Not Be Found
-
-
-pid 29058 -- _P_ Template | hmgl_trybr | Could Not Be Found
-
-
-pid 29058 -- _P_ Template | hmgl_wheat | Could Not Be Found
-
-
-pid 29058 -- _P_ Template | hmgt_mouse | Could Not Be Found
-
-
-pid 29058 -- _P_ Template | seq_1cms | Could Not Be Found
-
-
-pid 29058 -- _P_ Template | seq_3app | Could Not Be Found
-
-
-pid 29058 -- _P_ Template | seq_4ape | Could Not Be Found
+pid 23944 -- _P_ Template | seq_4ape | Could Not Be Found
 
 ]
 	Template Type: [template_file.template] Mode Or File: [template_file.template] [Start]
@@ -901,8 +799,7 @@ Group    6: seq_3app
 Group    7: seq_4ape
 
 
-	Group    8: [Group    4 (   1 seq)] with [Group    2 (   1 seq)]-->[Len=   76][PID:29058]
-	Group    9: [Group    8 (   2 seq)] with [Group    1 (   1 seq)]-->[Len=   80][PID:29058]de	S	[0] 	5
+	Group    8: [Group    4 (   1 seq)] with [Group    2 (   1 seq)]-->[Len=   76][PID:23944]5
 -tip           	S	[0] 	none
 -rna_lib       	S	[0] 
 -no_warning    	D	[0] 	0 
@@ -932,25 +829,25 @@ Master Sequences Identified
 Looking For Sequence Templates:
 
 	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
-pid 29058 -- _P_ Template | hmgb_chite | Could Not Be Found
+pid 23944 -- _P_ Template | hmgb_chite | Could Not Be Found
 
 
-pid 29058 -- _P_ Template | hmgl_trybr | Could Not Be Found
+pid 23944 -- _P_ Template | hmgl_trybr | Could Not Be Found
 
 
-pid 29058 -- _P_ Template | hmgl_wheat | Could Not Be Found
+pid 23944 -- _P_ Template | hmgl_wheat | Could Not Be Found
 
 
-pid 29058 -- _P_ Template | hmgt_mouse | Could Not Be Found
+pid 23944 -- _P_ Template | hmgt_mouse | Could Not Be Found
 
 
-pid 29058 -- _P_ Template | seq_1cms | Could Not Be Found
+pid 23944 -- _P_ Template | seq_1cms | Could Not Be Found
 
 
-pid 29058 -- _P_ Template | seq_3app | Could Not Be Found
+pid 23944 -- _P_ Template | seq_3app | Could Not Be Found
 
 
-pid 29058 -- _P_ Template | seq_4ape | Could Not Be Found
+pid 23944 -- _P_ Template | seq_4ape | Could Not Be Found
 
 ]
 	Template Type: [template_file.template] Mode Or File: [template_file.template] [Start]
@@ -1002,9 +899,8 @@ Group    6: seq_3app
 Group    7: seq_4ape
 
 
-	Group    8: [Group    4 (   1 seq)] with [Group    2 (   1 seq)]-->[Len=   76][PID:29058]
-	Group    9: [Group    8 (   2 seq)] with [Group    1 (   1 seq)]-->[Len=   80][PID:29058]
-	Group   10: [Group    3 (   1 seq)] with [Group    9 (   3 seq)]-->[Len=   81][PID:29058]de	S	[0] 	5
+	Group    8: [Group    4 (   1 seq)] with [Group    2 (   1 seq)]-->[Len=   76][PID:23944]
+	Group    9: [Group    8 (   2 seq)] with [Group    1 (   1 seq)]-->[Len=   80][PID:23944]5
 -tip           	S	[0] 	none
 -rna_lib       	S	[0] 
 -no_warning    	D	[0] 	0 
@@ -1034,25 +930,25 @@ Master Sequences Identified
 Looking For Sequence Templates:
 
 	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
-pid 29058 -- _P_ Template | hmgb_chite | Could Not Be Found
+pid 23944 -- _P_ Template | hmgb_chite | Could Not Be Found
 
 
-pid 29058 -- _P_ Template | hmgl_trybr | Could Not Be Found
+pid 23944 -- _P_ Template | hmgl_trybr | Could Not Be Found
 
 
-pid 29058 -- _P_ Template | hmgl_wheat | Could Not Be Found
+pid 23944 -- _P_ Template | hmgl_wheat | Could Not Be Found
 
 
-pid 29058 -- _P_ Template | hmgt_mouse | Could Not Be Found
+pid 23944 -- _P_ Template | hmgt_mouse | Could Not Be Found
 
 
-pid 29058 -- _P_ Template | seq_1cms | Could Not Be Found
+pid 23944 -- _P_ Template | seq_1cms | Could Not Be Found
 
 
-pid 29058 -- _P_ Template | seq_3app | Could Not Be Found
+pid 23944 -- _P_ Template | seq_3app | Could Not Be Found
 
 
-pid 29058 -- _P_ Template | seq_4ape | Could Not Be Found
+pid 23944 -- _P_ Template | seq_4ape | Could Not Be Found
 
 ]
 	Template Type: [template_file.template] Mode Or File: [template_file.template] [Start]
@@ -1104,10 +1000,9 @@ Group    6: seq_3app
 Group    7: seq_4ape
 
 
-	Group    8: [Group    4 (   1 seq)] with [Group    2 (   1 seq)]-->[Len=   76][PID:29058]
-	Group    9: [Group    8 (   2 seq)] with [Group    1 (   1 seq)]-->[Len=   80][PID:29058]
-	Group   10: [Group    3 (   1 seq)] with [Group    9 (   3 seq)]-->[Len=   81][PID:29058]
-	Group   11: [Group    7 (   1 seq)] with [Group    6 (   1 seq)]-->[Len=  180][PID:29058]de	S	[0] 	5
+	Group    8: [Group    4 (   1 seq)] with [Group    2 (   1 seq)]-->[Len=   76][PID:23944]
+	Group    9: [Group    8 (   2 seq)] with [Group    1 (   1 seq)]-->[Len=   80][PID:23944]
+	Group   10: [Group    3 (   1 seq)] with [Group    9 (   3 seq)]-->[Len=   81][PID:23944]5
 -tip           	S	[0] 	none
 -rna_lib       	S	[0] 
 -no_warning    	D	[0] 	0 
@@ -1137,25 +1032,25 @@ Master Sequences Identified
 Looking For Sequence Templates:
 
 	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
-pid 29058 -- _P_ Template | hmgb_chite | Could Not Be Found
+pid 23944 -- _P_ Template | hmgb_chite | Could Not Be Found
 
 
-pid 29058 -- _P_ Template | hmgl_trybr | Could Not Be Found
+pid 23944 -- _P_ Template | hmgl_trybr | Could Not Be Found
 
 
-pid 29058 -- _P_ Template | hmgl_wheat | Could Not Be Found
+pid 23944 -- _P_ Template | hmgl_wheat | Could Not Be Found
 
 
-pid 29058 -- _P_ Template | hmgt_mouse | Could Not Be Found
+pid 23944 -- _P_ Template | hmgt_mouse | Could Not Be Found
 
 
-pid 29058 -- _P_ Template | seq_1cms | Could Not Be Found
+pid 23944 -- _P_ Template | seq_1cms | Could Not Be Found
 
 
-pid 29058 -- _P_ Template | seq_3app | Could Not Be Found
+pid 23944 -- _P_ Template | seq_3app | Could Not Be Found
 
 
-pid 29058 -- _P_ Template | seq_4ape | Could Not Be Found
+pid 23944 -- _P_ Template | seq_4ape | Could Not Be Found
 
 ]
 	Template Type: [template_file.template] Mode Or File: [template_file.template] [Start]
@@ -1207,11 +1102,10 @@ Group    6: seq_3app
 Group    7: seq_4ape
 
 
-	Group    8: [Group    4 (   1 seq)] with [Group    2 (   1 seq)]-->[Len=   76][PID:29058]
-	Group    9: [Group    8 (   2 seq)] with [Group    1 (   1 seq)]-->[Len=   80][PID:29058]
-	Group   10: [Group    3 (   1 seq)] with [Group    9 (   3 seq)]-->[Len=   81][PID:29058]
-	Group   11: [Group    7 (   1 seq)] with [Group    6 (   1 seq)]-->[Len=  180][PID:29058]
-	Group   12: [Group   11 (   2 seq)] with [Group    5 (   1 seq)]-->[Len=  183][PID:29058]de	S	[0] 	5
+	Group    8: [Group    4 (   1 seq)] with [Group    2 (   1 seq)]-->[Len=   76][PID:23944]
+	Group    9: [Group    8 (   2 seq)] with [Group    1 (   1 seq)]-->[Len=   80][PID:23944]
+	Group   10: [Group    3 (   1 seq)] with [Group    9 (   3 seq)]-->[Len=   81][PID:23944]
+	Group   11: [Group    7 (   1 seq)] with [Group    6 (   1 seq)]-->[Len=  180][PID:23944]5
 -tip           	S	[0] 	none
 -rna_lib       	S	[0] 
 -no_warning    	D	[0] 	0 
@@ -1241,25 +1135,25 @@ Master Sequences Identified
 Looking For Sequence Templates:
 
 	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
-pid 29058 -- _P_ Template | hmgb_chite | Could Not Be Found
+pid 23944 -- _P_ Template | hmgb_chite | Could Not Be Found
 
 
-pid 29058 -- _P_ Template | hmgl_trybr | Could Not Be Found
+pid 23944 -- _P_ Template | hmgl_trybr | Could Not Be Found
 
 
-pid 29058 -- _P_ Template | hmgl_wheat | Could Not Be Found
+pid 23944 -- _P_ Template | hmgl_wheat | Could Not Be Found
 
 
-pid 29058 -- _P_ Template | hmgt_mouse | Could Not Be Found
+pid 23944 -- _P_ Template | hmgt_mouse | Could Not Be Found
 
 
-pid 29058 -- _P_ Template | seq_1cms | Could Not Be Found
+pid 23944 -- _P_ Template | seq_1cms | Could Not Be Found
 
 
-pid 29058 -- _P_ Template | seq_3app | Could Not Be Found
+pid 23944 -- _P_ Template | seq_3app | Could Not Be Found
 
 
-pid 29058 -- _P_ Template | seq_4ape | Could Not Be Found
+pid 23944 -- _P_ Template | seq_4ape | Could Not Be Found
 
 ]
 	Template Type: [template_file.template] Mode Or File: [template_file.template] [Start]
@@ -1311,12 +1205,116 @@ Group    6: seq_3app
 Group    7: seq_4ape
 
 
-	Group    8: [Group    4 (   1 seq)] with [Group    2 (   1 seq)]-->[Len=   76][PID:29058]
-	Group    9: [Group    8 (   2 seq)] with [Group    1 (   1 seq)]-->[Len=   80][PID:29058]
-	Group   10: [Group    3 (   1 seq)] with [Group    9 (   3 seq)]-->[Len=   81][PID:29058]
-	Group   11: [Group    7 (   1 seq)] with [Group    6 (   1 seq)]-->[Len=  180][PID:29058]
-	Group   12: [Group   11 (   2 seq)] with [Group    5 (   1 seq)]-->[Len=  183][PID:29058]
-	Group   13: [Group   12 (   3 seq)] with [Group   10 (   4 seq)]-->[Len=  183][PID:29058]
+	Group    8: [Group    4 (   1 seq)] with [Group    2 (   1 seq)]-->[Len=   76][PID:23944]
+	Group    9: [Group    8 (   2 seq)] with [Group    1 (   1 seq)]-->[Len=   80][PID:23944]
+	Group   10: [Group    3 (   1 seq)] with [Group    9 (   3 seq)]-->[Len=   81][PID:23944]
+	Group   11: [Group    7 (   1 seq)] with [Group    6 (   1 seq)]-->[Len=  180][PID:23944]
+	Group   12: [Group   11 (   2 seq)] with [Group    5 (   1 seq)]-->[Len=  183][PID:23944]5
+-tip           	S	[0] 	none
+-rna_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) sap_pair 
+	Input File (S) 3d_sample3.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
+pid 23944 -- _P_ Template | hmgb_chite | Could Not Be Found
+
+
+pid 23944 -- _P_ Template | hmgl_trybr | Could Not Be Found
+
+
+pid 23944 -- _P_ Template | hmgl_wheat | Could Not Be Found
+
+
+pid 23944 -- _P_ Template | hmgt_mouse | Could Not Be Found
+
+
+pid 23944 -- _P_ Template | seq_1cms | Could Not Be Found
+
+
+pid 23944 -- _P_ Template | seq_3app | Could Not Be Found
+
+
+pid 23944 -- _P_ Template | seq_4ape | Could Not Be Found
+
+]
+	Template Type: [template_file.template] Mode Or File: [template_file.template] [Start]
+Looking For Profile  Templates
+	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start]
+INPUT SEQUENCES: 7 SEQUENCES  [PROTEIN]
+  Input File 3d_sample3.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File 3d_sample3.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File 3d_sample3.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File 3d_sample3.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+  Input File 3d_sample3.fasta Seq seq_1cms   Length  175 type PROTEIN Struct Unchecked
+	PDB struc: Template=1cms, File=1cms.pdb
+  Input File 3d_sample3.fasta Seq seq_3app   Length  174 type PROTEIN Struct Unchecked
+	PDB struc: Template=3app, File=3app.pdb
+  Input File 3d_sample3.fasta Seq seq_4ape   Length  178 type PROTEIN Struct Unchecked
+	PDB struc: Template=4ape, File=4ape.pdb
+
+	Multi Core Mode: 1 processors:
+
+	--- Process Method/Library/Aln Msap_pair
+	xxx Retrieved Msap_pair
+	--- Process Method/Library/Aln S3d_sample3.fasta
+	xxx Retrieved S3d_sample3.fasta
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [9908]
+
+Library Relaxation: Multi_proc [1]
+ 
+Relaxation Summary: [9908]--->[7249]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: hmgb_chite
+Group    2: hmgl_trybr
+Group    3: hmgl_wheat
+Group    4: hmgt_mouse
+Group    5: seq_1cms
+Group    6: seq_3app
+Group    7: seq_4ape
+
+
+	Group    8: [Group    4 (   1 seq)] with [Group    2 (   1 seq)]-->[Len=   76][PID:23944]
+	Group    9: [Group    8 (   2 seq)] with [Group    1 (   1 seq)]-->[Len=   80][PID:23944]
+	Group   10: [Group    3 (   1 seq)] with [Group    9 (   3 seq)]-->[Len=   81][PID:23944]
+	Group   11: [Group    7 (   1 seq)] with [Group    6 (   1 seq)]-->[Len=  180][PID:23944]
+	Group   12: [Group   11 (   2 seq)] with [Group    5 (   1 seq)]-->[Len=  183][PID:23944]
+	Group   13: [Group   12 (   3 seq)] with [Group   10 (   4 seq)]-->[Len=  183][PID:23944]
 
 
 !		[Final Evaluation][TOT=  183][  0 %]!		[Final Evaluation][TOT=  183][  1 %]!		[Final Evaluation][TOT=  183][  2 %]!		[Final Evaluation][TOT=  183][  3 %]!		[Final Evaluation][TOT=  183][  4 %]!		[Final Evaluation][TOT=  183][  5 %]!		[Final Evaluation][TOT=  183][  6 %]!		[Final Evaluation][TOT=  183][  7 %]!		[Final Evaluation][TOT=  183][  8 %]!		[Final Evaluation][TOT=  183][  9 %]!		[Final Evaluation][TOT=  183][ 10 %]!		[Final Evaluation][TOT=  183][ 11 %]!		[Final Evaluation][TOT=  183][ 12 %]!		[Final Evaluation][TOT=  183][ 13 %]!		[Final Evaluation][TOT=  183][ 14 %]!		[Final Evaluation][TOT=  183][ 15 %]!		[Final Evaluation][TOT=  183][ 16 %]!		[Final Evaluation][TOT=  183][ 17 %]!		[Final Evaluation][TOT=  183][ 18 %]!		[Final Evaluation][TOT=  183][ 19 %]!		[Final Evaluation][TOT=  183][ 20 %]!		[Final Evaluation][TOT=  183][ 21 %]!		[Final Evaluation][TOT=  183][ 22 %]!		[Final Evaluation][TOT=  183][ 23 %]!		[Final Evaluation][TOT=  183][ 24 %]!		[Final Evaluation][TOT=  183][ 25 %]!		[Final Evaluation][TOT=  183][ 26 %]!		[Final Evaluation][TOT=  183][ 27 %]!		[Final Evaluation][TOT=  183][ 28 %]!		[Final Evaluation][TOT=  183][ 29 %]!		[Final Evaluation][TOT=  183][ 30 %]!		[Final Evaluation][TOT=  183][ 31 %]!		[Final Evaluation][TOT=  183][ 32 %]!		[Final Evaluation][TOT=  183][ 33 %]!		[Final Evaluation][TOT=  183][ 34 %]!		[Final Evaluation][TOT=  183][ 35 %]!		[Final Evaluation][TOT=  183][ 36 %]!		[Final Evaluation][TOT=  183][ 37 %]!		[Final Evaluation][TOT=  183][ 38 %]!		[Final Evaluation][TOT=  183][ 39 %]!		[Final Evaluation][TOT=  183][ 40 %]!		[Final Evaluation][TOT=  183][ 41 %]!		[Final Evaluation][TOT=  183][ 42 %]!		[Final Evaluation][TOT=  183][ 43 %]!		[Final Evaluation][TOT=  183][ 44 %]!		[Final Evaluation][TOT=  183][ 45 %]!		[Final Evaluation][TOT=  183][ 46 %]!		[Final Evaluation][TOT=  183][ 47 %]!		[Final Evaluation][TOT=  183][ 48 %]!		[Final Evaluation][TOT=  183][ 49 %]!		[Final Evaluation][TOT=  183][ 50 %]!		[Final Evaluation][TOT=  183][ 51 %]!		[Final Evaluation][TOT=  183][ 52 %]!		[Final Evaluation][TOT=  183][ 53 %]!		[Final Evaluation][TOT=  183][ 54 %]!		[Final Evaluation][TOT=  183][ 55 %]!		[Final Evaluation][TOT=  183][ 56 %]!		[Final Evaluation][TOT=  183][ 57 %]!		[Final Evaluation][TOT=  183][ 58 %]!		[Final Evaluation][TOT=  183][ 59 %]!		[Final Evaluation][TOT=  183][ 60 %]!		[Final Evaluation][TOT=  183][ 61 %]!		[Final Evaluation][TOT=  183][ 62 %]!		[Final Evaluation][TOT=  183][ 63 %]!		[Final Evaluation][TOT=  183][ 64 %]!		[Final Evaluation][TOT=  183][ 65 %]!		[Final Evaluation][TOT=  183][ 66 %]!		[Final Evaluation][TOT=  183][ 67 %]!		[Final Evaluation][TOT=  183][ 68 %]!		[Final Evaluation][TOT=  183][ 69 %]!		[Final Evaluation][TOT=  183][ 70 %]!		[Final Evaluation][TOT=  183][ 71 %]!		[Final Evaluation][TOT=  183][ 72 %]!		[Final Evaluation][TOT=  183][ 73 %]!		[Final Evaluation][TOT=  183][ 74 %]!		[Final Evaluation][TOT=  183][ 75 %]!		[Final Evaluation][TOT=  183][ 76 %]!		[Final Evaluation][TOT=  183][ 77 %]!		[Final Evaluation][TOT=  183][ 78 %]!		[Final Evaluation][TOT=  183][ 79 %]!		[Final Evaluation][TOT=  183][ 80 %]!		[Final Evaluation][TOT=  183][ 81 %]!		[Final Evaluation][TOT=  183][ 82 %]!		[Final Evaluation][TOT=  183][ 83 %]!		[Final Evaluation][TOT=  183][ 84 %]!		[Final Evaluation][TOT=  183][ 85 %]!		[Final Evaluation][TOT=  183][ 86 %]!		[Final Evaluation][TOT=  183][ 87 %]!		[Final Evaluation][TOT=  183][ 88 %]!		[Final Evaluation][TOT=  183][ 89 %]!		[Final Evaluation][TOT=  183][ 90 %]!		[Final Evaluation][TOT=  183][ 91 %]!		[Final Evaluation][TOT=  183][ 92 %]!		[Final Evaluation][TOT=  183][ 93 %]!		[Final Evaluation][TOT=  183][ 94 %]!		[Final Evaluation][TOT=  183][ 95 %]!		[Final Evaluation][TOT=  183][ 96 %]!		[Final Evaluation][TOT=  183][ 97 %]!		[Final Evaluation][TOT=  183][ 98 %]!		[Final Evaluation][TOT=  183][ 99 %]!		[Final Evaluation][TOT=  183][100 %]
@@ -1330,46 +1328,46 @@ OUTPUT RESULTS
 	#### File Type= Template_List   Format= fasta_seq       Name= template_file.template
 
 # Command Line: t_coffee -mode 3dcoffee -seq 3d_sample3.fasta -template_file template_file.template  [PROGRAM:T-COFFEE]
-# T-COFFEE Memory Usage: Current= 33.992 Mb, Max= 35.132 Mb
-# Results Produced with T-COFFEE Version_13.30.5.6909e10 (Version_13.30.5.6909e10)
+# T-COFFEE Memory Usage: Current= 33.991 Mb, Max= 35.134 Mb
+# Results Produced with T-COFFEE Version_13.30.12.28864d4 (Version_13.30.12.28864d4)
 # T-COFFEE is available from http://www.tcoffee.org
 # Register on: https://groups.google.com/group/tcoffee/
 
 
 *************************************************************************************************
 *                        MESSAGES RECAPITULATION                                    
-29058 -- WARNING: _P_ Template | hmgb_chite | Could Not Be Found
+23944 -- WARNING: _P_ Template | hmgb_chite | Could Not Be Found
 
-29058 -- WARNING: _P_ Template | hmgl_trybr | Could Not Be Found
+23944 -- WARNING: _P_ Template | hmgl_trybr | Could Not Be Found
 
-29058 -- WARNING: _P_ Template | hmgl_wheat | Could Not Be Found
+23944 -- WARNING: _P_ Template | hmgl_wheat | Could Not Be Found
 
-29058 -- WARNING: _P_ Template | hmgt_mouse | Could Not Be Found
+23944 -- WARNING: _P_ Template | hmgt_mouse | Could Not Be Found
 
-29058 -- WARNING: _P_ Template | seq_1cms | Could Not Be Found
+23944 -- WARNING: _P_ Template | seq_1cms | Could Not Be Found
 
-29058 -- WARNING: _P_ Template | seq_3app | Could Not Be Found
+23944 -- WARNING: _P_ Template | seq_3app | Could Not Be Found
 
-29058 -- WARNING: _P_ Template | seq_4ape | Could Not Be Found
+23944 -- WARNING: _P_ Template | seq_4ape | Could Not Be Found
 
-29539 -- INFORMATION: Method  cannot be applied to [hmgb_chite vs hmgl_trybr], proba_pair will be used instead
-29539 -- INFORMATION: Method  cannot be applied to [hmgb_chite vs hmgl_wheat], proba_pair will be used instead
-29539 -- INFORMATION: Method  cannot be applied to [hmgb_chite vs hmgt_mouse], proba_pair will be used instead
-29539 -- INFORMATION: Method  cannot be applied to [hmgb_chite vs seq_1cms], proba_pair will be used instead
-29539 -- INFORMATION: Method  cannot be applied to [hmgb_chite vs seq_3app], proba_pair will be used instead
-29539 -- INFORMATION: Method  cannot be applied to [hmgb_chite vs seq_4ape], proba_pair will be used instead
-29539 -- INFORMATION: Method  cannot be applied to [hmgl_trybr vs hmgl_wheat], proba_pair will be used instead
-29539 -- INFORMATION: Method  cannot be applied to [hmgl_trybr vs hmgt_mouse], proba_pair will be used instead
-29539 -- INFORMATION: Method  cannot be applied to [hmgl_trybr vs seq_1cms], proba_pair will be used instead
-29539 -- INFORMATION: Method  cannot be applied to [hmgl_trybr vs seq_3app], proba_pair will be used instead
-29539 -- INFORMATION: Method  cannot be applied to [hmgl_trybr vs seq_4ape], proba_pair will be used instead
-29539 -- INFORMATION: Method  cannot be applied to [hmgl_wheat vs hmgt_mouse], proba_pair will be used instead
-29539 -- INFORMATION: Method  cannot be applied to [hmgl_wheat vs seq_1cms], proba_pair will be used instead
-29539 -- INFORMATION: Method  cannot be applied to [hmgl_wheat vs seq_3app], proba_pair will be used instead
-29539 -- INFORMATION: Method  cannot be applied to [hmgl_wheat vs seq_4ape], proba_pair will be used instead
-29539 -- INFORMATION: Method  cannot be applied to [hmgt_mouse vs seq_1cms], proba_pair will be used instead
-29539 -- INFORMATION: Method  cannot be applied to [hmgt_mouse vs seq_3app], proba_pair will be used instead
-29539 -- INFORMATION: Method  cannot be applied to [hmgt_mouse vs seq_4ape], proba_pair will be used instead
+24183 -- INFORMATION: Method  cannot be applied to [hmgb_chite vs hmgl_trybr], proba_pair will be used instead
+24183 -- INFORMATION: Method  cannot be applied to [hmgb_chite vs hmgl_wheat], proba_pair will be used instead
+24183 -- INFORMATION: Method  cannot be applied to [hmgb_chite vs hmgt_mouse], proba_pair will be used instead
+24183 -- INFORMATION: Method  cannot be applied to [hmgb_chite vs seq_1cms], proba_pair will be used instead
+24183 -- INFORMATION: Method  cannot be applied to [hmgb_chite vs seq_3app], proba_pair will be used instead
+24183 -- INFORMATION: Method  cannot be applied to [hmgb_chite vs seq_4ape], proba_pair will be used instead
+24183 -- INFORMATION: Method  cannot be applied to [hmgl_trybr vs hmgl_wheat], proba_pair will be used instead
+24183 -- INFORMATION: Method  cannot be applied to [hmgl_trybr vs hmgt_mouse], proba_pair will be used instead
+24183 -- INFORMATION: Method  cannot be applied to [hmgl_trybr vs seq_1cms], proba_pair will be used instead
+24183 -- INFORMATION: Method  cannot be applied to [hmgl_trybr vs seq_3app], proba_pair will be used instead
+24183 -- INFORMATION: Method  cannot be applied to [hmgl_trybr vs seq_4ape], proba_pair will be used instead
+24183 -- INFORMATION: Method  cannot be applied to [hmgl_wheat vs hmgt_mouse], proba_pair will be used instead
+24183 -- INFORMATION: Method  cannot be applied to [hmgl_wheat vs seq_1cms], proba_pair will be used instead
+24183 -- INFORMATION: Method  cannot be applied to [hmgl_wheat vs seq_3app], proba_pair will be used instead
+24183 -- INFORMATION: Method  cannot be applied to [hmgl_wheat vs seq_4ape], proba_pair will be used instead
+24183 -- INFORMATION: Method  cannot be applied to [hmgt_mouse vs seq_1cms], proba_pair will be used instead
+24183 -- INFORMATION: Method  cannot be applied to [hmgt_mouse vs seq_3app], proba_pair will be used instead
+24183 -- INFORMATION: Method  cannot be applied to [hmgt_mouse vs seq_4ape], proba_pair will be used instead
 *************************************************************************************************
 </content>
 </file>
@@ -12303,9 +12301,9 @@ END
 <file>
 <stream>input</stream>
 <name>/Users/cnotredame//.t_coffee//cache/1cms_3app.sap_results</name>
-<content> file1 = 29540_1.6263.sap_tmp
+<content> file1 = 24184_1.6172.sap_tmp
  prot1->Compound =  CHAIN: A;                                                  
- file2 = 29540_2.7548.sap_tmp
+ file2 = 24184_2.3270.sap_tmp
  prot2->Compound =  CHAIN: A;                                                  
 ARNDCQEGHILKMFPSTWYVBZX
 matrix constant = 8
@@ -12315,7 +12313,7 @@ Cycle 3, 36 residues selected
 Cycle 4, 44 residues selected
 Cycle 5, 53 residues selected
 
- score = 12512.033203
+ score = 12227.982422
 
 Percent sel on aln =  100.00
 Percent aln in sel =   31.55
@@ -12487,31 +12485,31 @@ Percent aln in sel =   31.55
   S  172  71.6 173 P  
   S  173  62.6 174 S  
  *K  174  87.7 175 Y* 
-29540_2.7548.sap_tmp Weighted RMSd =   0.800 over 168 atoms 125.164528 20829.080078  26.8 82.555313
-29540_2.7548.sap_tmp Un-weighted RMSd =   0.863 over best 94 atoms ( 20829.080078   26.8 )
-29540_2.7548.sap_tmp Un-weighted RMSd =   0.981 over best 109 atoms ( 20829.080078   26.8 )
-29540_2.7548.sap_tmp Un-weighted RMSd =   1.041 over best 121 atoms ( 20829.080078   26.8 )
-29540_2.7548.sap_tmp Un-weighted RMSd =   1.062 over best 127 atoms ( 20829.080078   26.8 )
-29540_2.7548.sap_tmp Un-weighted RMSd =   1.227 over best 137 atoms ( 20829.080078   26.8 )
-29540_2.7548.sap_tmp Un-weighted RMSd =   1.272 over best 144 atoms ( 20829.080078   26.8 )
-29540_2.7548.sap_tmp Un-weighted RMSd =   1.389 over best 148 atoms ( 20829.080078   26.8 )
-29540_2.7548.sap_tmp Un-weighted RMSd =   1.414 over best 149 atoms ( 20829.080078   26.8 )
-29540_2.7548.sap_tmp Un-weighted RMSd =   1.478 over best 156 atoms ( 20829.080078   26.8 )
-29540_2.7548.sap_tmp Un-weighted RMSd =   1.514 over best 158 atoms ( 20829.080078   26.8 )
-29540_2.7548.sap_tmp Un-weighted RMSd =   1.514 over best 159 atoms ( 20829.080078   26.8 )
-29540_2.7548.sap_tmp Un-weighted RMSd =   1.600 over best 165 atoms ( 20829.080078   26.8 )
-29540_2.7548.sap_tmp Un-weighted RMSd =   1.715 over best 165 atoms ( 20829.080078   26.8 )
-29540_2.7548.sap_tmp Un-weighted RMSd =   1.723 over best 166 atoms ( 20829.080078   26.8 )
-29540_2.7548.sap_tmp Un-weighted RMSd =   1.723 over best 166 atoms ( 20829.080078   26.8 )
-29540_2.7548.sap_tmp Un-weighted RMSd =   1.720 over all 168 matched atoms 125.164528 20829.080078   26.8 82.555313
+24184_2.3270.sap_tmp Weighted RMSd =   0.801 over 168 atoms 125.265762 20829.080078  26.8 82.556313
+24184_2.3270.sap_tmp Un-weighted RMSd =   0.863 over best 94 atoms ( 20829.080078   26.8 )
+24184_2.3270.sap_tmp Un-weighted RMSd =   0.986 over best 110 atoms ( 20829.080078   26.8 )
+24184_2.3270.sap_tmp Un-weighted RMSd =   1.037 over best 120 atoms ( 20829.080078   26.8 )
+24184_2.3270.sap_tmp Un-weighted RMSd =   1.059 over best 127 atoms ( 20829.080078   26.8 )
+24184_2.3270.sap_tmp Un-weighted RMSd =   1.227 over best 138 atoms ( 20829.080078   26.8 )
+24184_2.3270.sap_tmp Un-weighted RMSd =   1.271 over best 145 atoms ( 20829.080078   26.8 )
+24184_2.3270.sap_tmp Un-weighted RMSd =   1.388 over best 149 atoms ( 20829.080078   26.8 )
+24184_2.3270.sap_tmp Un-weighted RMSd =   1.413 over best 150 atoms ( 20829.080078   26.8 )
+24184_2.3270.sap_tmp Un-weighted RMSd =   1.476 over best 157 atoms ( 20829.080078   26.8 )
+24184_2.3270.sap_tmp Un-weighted RMSd =   1.512 over best 160 atoms ( 20829.080078   26.8 )
+24184_2.3270.sap_tmp Un-weighted RMSd =   1.513 over best 160 atoms ( 20829.080078   26.8 )
+24184_2.3270.sap_tmp Un-weighted RMSd =   1.599 over best 165 atoms ( 20829.080078   26.8 )
+24184_2.3270.sap_tmp Un-weighted RMSd =   1.713 over best 166 atoms ( 20829.080078   26.8 )
+24184_2.3270.sap_tmp Un-weighted RMSd =   1.720 over best 168 atoms ( 20829.080078   26.8 )
+24184_2.3270.sap_tmp Un-weighted RMSd =   1.721 over best 167 atoms ( 20829.080078   26.8 )
+24184_2.3270.sap_tmp Un-weighted RMSd =   1.720 over all 168 matched atoms 125.265762 20829.080078   26.8 82.556313
 </content>
 </file>
 <file>
 <stream>input</stream>
 <name>/Users/cnotredame//.t_coffee//cache/1cms_4ape.sap_results</name>
-<content> file1 = 29540_1.9135.sap_tmp
+<content> file1 = 24184_1.8562.sap_tmp
  prot1->Compound =  CHAIN: A;                                                  
- file2 = 29540_2.1101.sap_tmp
+ file2 = 24184_2.1839.sap_tmp
  prot2->Compound =  CHAIN: A;                                                  
 ARNDCQEGHILKMFPSTWYVBZX
 matrix constant = 8
@@ -12521,7 +12519,7 @@ Cycle 3, 36 residues selected
 Cycle 4, 45 residues selected
 Cycle 5, 53 residues selected
 
- score = 13355.020508
+ score = 13317.749023
 
 Percent sel on aln =  100.00
 Percent aln in sel =   30.99
@@ -12696,31 +12694,31 @@ Percent aln in sel =   30.99
   T  173  41.7 173 P  
   T  174  83.2 174 S  
   A  175 108.0 175 Y* 
-29540_2.1101.sap_tmp Weighted RMSd =   0.803 over 171 atoms 130.039169 22469.740234  29.2 79.828087
-29540_2.1101.sap_tmp Un-weighted RMSd =   0.830 over best 98 atoms ( 22469.740234   29.2 )
-29540_2.1101.sap_tmp Un-weighted RMSd =   0.938 over best 115 atoms ( 22469.740234   29.2 )
-29540_2.1101.sap_tmp Un-weighted RMSd =   1.137 over best 123 atoms ( 22469.740234   29.2 )
-29540_2.1101.sap_tmp Un-weighted RMSd =   1.239 over best 130 atoms ( 22469.740234   29.2 )
-29540_2.1101.sap_tmp Un-weighted RMSd =   1.242 over best 135 atoms ( 22469.740234   29.2 )
-29540_2.1101.sap_tmp Un-weighted RMSd =   1.261 over best 137 atoms ( 22469.740234   29.2 )
-29540_2.1101.sap_tmp Un-weighted RMSd =   1.324 over best 143 atoms ( 22469.740234   29.2 )
-29540_2.1101.sap_tmp Un-weighted RMSd =   1.423 over best 149 atoms ( 22469.740234   29.2 )
-29540_2.1101.sap_tmp Un-weighted RMSd =   1.531 over best 156 atoms ( 22469.740234   29.2 )
-29540_2.1101.sap_tmp Un-weighted RMSd =   1.624 over best 161 atoms ( 22469.740234   29.2 )
-29540_2.1101.sap_tmp Un-weighted RMSd =   1.685 over best 164 atoms ( 22469.740234   29.2 )
-29540_2.1101.sap_tmp Un-weighted RMSd =   1.750 over best 168 atoms ( 22469.740234   29.2 )
-29540_2.1101.sap_tmp Un-weighted RMSd =   1.766 over best 170 atoms ( 22469.740234   29.2 )
-29540_2.1101.sap_tmp Un-weighted RMSd =   1.776 over best 171 atoms ( 22469.740234   29.2 )
-29540_2.1101.sap_tmp Un-weighted RMSd =   1.776 over best 171 atoms ( 22469.740234   29.2 )
-29540_2.1101.sap_tmp Un-weighted RMSd =   1.776 over all 171 matched atoms 130.039169 22469.740234   29.2 79.828087
+24184_2.1839.sap_tmp Weighted RMSd =   0.803 over 171 atoms 130.039169 22469.740234  29.2 79.828087
+24184_2.1839.sap_tmp Un-weighted RMSd =   0.830 over best 98 atoms ( 22469.740234   29.2 )
+24184_2.1839.sap_tmp Un-weighted RMSd =   0.938 over best 115 atoms ( 22469.740234   29.2 )
+24184_2.1839.sap_tmp Un-weighted RMSd =   1.137 over best 123 atoms ( 22469.740234   29.2 )
+24184_2.1839.sap_tmp Un-weighted RMSd =   1.239 over best 130 atoms ( 22469.740234   29.2 )
+24184_2.1839.sap_tmp Un-weighted RMSd =   1.242 over best 135 atoms ( 22469.740234   29.2 )
+24184_2.1839.sap_tmp Un-weighted RMSd =   1.261 over best 137 atoms ( 22469.740234   29.2 )
+24184_2.1839.sap_tmp Un-weighted RMSd =   1.324 over best 143 atoms ( 22469.740234   29.2 )
+24184_2.1839.sap_tmp Un-weighted RMSd =   1.423 over best 149 atoms ( 22469.740234   29.2 )
+24184_2.1839.sap_tmp Un-weighted RMSd =   1.531 over best 156 atoms ( 22469.740234   29.2 )
+24184_2.1839.sap_tmp Un-weighted RMSd =   1.624 over best 161 atoms ( 22469.740234   29.2 )
+24184_2.1839.sap_tmp Un-weighted RMSd =   1.685 over best 164 atoms ( 22469.740234   29.2 )
+24184_2.1839.sap_tmp Un-weighted RMSd =   1.750 over best 168 atoms ( 22469.740234   29.2 )
+24184_2.1839.sap_tmp Un-weighted RMSd =   1.766 over best 170 atoms ( 22469.740234   29.2 )
+24184_2.1839.sap_tmp Un-weighted RMSd =   1.776 over best 171 atoms ( 22469.740234   29.2 )
+24184_2.1839.sap_tmp Un-weighted RMSd =   1.776 over best 171 atoms ( 22469.740234   29.2 )
+24184_2.1839.sap_tmp Un-weighted RMSd =   1.776 over all 171 matched atoms 130.039169 22469.740234   29.2 79.828087
 </content>
 </file>
 <file>
 <stream>input</stream>
 <name>/Users/cnotredame//.t_coffee//cache/3app_4ape.sap_results</name>
-<content> file1 = 29540_1.5192.sap_tmp
+<content> file1 = 24184_1.8849.sap_tmp
  prot1->Compound =  CHAIN: A;                                                  
- file2 = 29540_2.8989.sap_tmp
+ file2 = 24184_2.4601.sap_tmp
  prot2->Compound =  CHAIN: A;                                                  
 ARNDCQEGHILKMFPSTWYVBZX
 matrix constant = 8
@@ -12730,7 +12728,7 @@ Cycle 3, 36 residues selected
 Cycle 4, 44 residues selected
 Cycle 5, 53 residues selected
 
- score = 19448.982422
+ score = 19424.806641
 
 Percent sel on aln =  100.00
 Percent aln in sel =   30.99
@@ -12905,23 +12903,23 @@ Percent aln in sel =   30.99
   T  173  69.7 172 S  
   T  174  87.1 173 S  
   A  175 128.5 174 K* 
-29540_2.8989.sap_tmp Weighted RMSd =   0.617 over 171 atoms 146.521652 37015.902344  59.1 91.949593
-29540_2.8989.sap_tmp Un-weighted RMSd =   0.651 over best 123 atoms ( 37015.902344   59.1 )
-29540_2.8989.sap_tmp Un-weighted RMSd =   0.863 over best 149 atoms ( 37015.902344   59.1 )
-29540_2.8989.sap_tmp Un-weighted RMSd =   0.941 over best 156 atoms ( 37015.902344   59.1 )
-29540_2.8989.sap_tmp Un-weighted RMSd =   1.017 over best 162 atoms ( 37015.902344   59.1 )
-29540_2.8989.sap_tmp Un-weighted RMSd =   1.014 over best 164 atoms ( 37015.902344   59.1 )
-29540_2.8989.sap_tmp Un-weighted RMSd =   1.007 over best 167 atoms ( 37015.902344   59.1 )
-29540_2.8989.sap_tmp Un-weighted RMSd =   1.005 over best 168 atoms ( 37015.902344   59.1 )
-29540_2.8989.sap_tmp Un-weighted RMSd =   1.005 over best 168 atoms ( 37015.902344   59.1 )
-29540_2.8989.sap_tmp Un-weighted RMSd =   1.003 over best 169 atoms ( 37015.902344   59.1 )
-29540_2.8989.sap_tmp Un-weighted RMSd =   1.003 over best 169 atoms ( 37015.902344   59.1 )
-29540_2.8989.sap_tmp Un-weighted RMSd =   1.003 over best 169 atoms ( 37015.902344   59.1 )
-29540_2.8989.sap_tmp Un-weighted RMSd =   1.003 over best 169 atoms ( 37015.902344   59.1 )
-29540_2.8989.sap_tmp Un-weighted RMSd =   1.075 over best 171 atoms ( 37015.902344   59.1 )
-29540_2.8989.sap_tmp Un-weighted RMSd =   1.075 over best 171 atoms ( 37015.902344   59.1 )
-29540_2.8989.sap_tmp Un-weighted RMSd =   1.075 over best 171 atoms ( 37015.902344   59.1 )
-29540_2.8989.sap_tmp Un-weighted RMSd =   1.075 over all 171 matched atoms 146.521652 37015.902344   59.1 91.949593
+24184_2.4601.sap_tmp Weighted RMSd =   0.617 over 171 atoms 146.521652 37015.902344  59.1 91.949593
+24184_2.4601.sap_tmp Un-weighted RMSd =   0.651 over best 123 atoms ( 37015.902344   59.1 )
+24184_2.4601.sap_tmp Un-weighted RMSd =   0.863 over best 149 atoms ( 37015.902344   59.1 )
+24184_2.4601.sap_tmp Un-weighted RMSd =   0.941 over best 156 atoms ( 37015.902344   59.1 )
+24184_2.4601.sap_tmp Un-weighted RMSd =   1.017 over best 162 atoms ( 37015.902344   59.1 )
+24184_2.4601.sap_tmp Un-weighted RMSd =   1.014 over best 164 atoms ( 37015.902344   59.1 )
+24184_2.4601.sap_tmp Un-weighted RMSd =   1.007 over best 167 atoms ( 37015.902344   59.1 )
+24184_2.4601.sap_tmp Un-weighted RMSd =   1.005 over best 168 atoms ( 37015.902344   59.1 )
+24184_2.4601.sap_tmp Un-weighted RMSd =   1.005 over best 168 atoms ( 37015.902344   59.1 )
+24184_2.4601.sap_tmp Un-weighted RMSd =   1.003 over best 169 atoms ( 37015.902344   59.1 )
+24184_2.4601.sap_tmp Un-weighted RMSd =   1.003 over best 169 atoms ( 37015.902344   59.1 )
+24184_2.4601.sap_tmp Un-weighted RMSd =   1.003 over best 169 atoms ( 37015.902344   59.1 )
+24184_2.4601.sap_tmp Un-weighted RMSd =   1.003 over best 169 atoms ( 37015.902344   59.1 )
+24184_2.4601.sap_tmp Un-weighted RMSd =   1.075 over best 171 atoms ( 37015.902344   59.1 )
+24184_2.4601.sap_tmp Un-weighted RMSd =   1.075 over best 171 atoms ( 37015.902344   59.1 )
+24184_2.4601.sap_tmp Un-weighted RMSd =   1.075 over best 171 atoms ( 37015.902344   59.1 )
+24184_2.4601.sap_tmp Un-weighted RMSd =   1.075 over all 171 matched atoms 146.521652 37015.902344   59.1 91.949593
 </content>
 </file>
 <file>
@@ -12937,7 +12935,7 @@ Percent aln in sel =   30.99
 <file>
 <stream>output</stream>
 <name>3d_sample3.aln</name>
-<content>CLUSTAL FORMAT for T-COFFEE Version_13.30.5.6909e10 [http://www.tcoffee.org] [MODE: 3dcoffee ], CPU=0.00 sec, SCORE=42, Nseq=7, Len=183 
+<content>CLUSTAL FORMAT for T-COFFEE Version_13.30.12.28864d4 [http://www.tcoffee.org] [MODE: 3dcoffee ], CPU=0.00 sec, SCORE=42, Nseq=7, Len=183 
 
 seq_1cms        GEVASVPLTNYL--DSQYFGKIYLGTPPQEFTVLFDTGSSDFWVPSIYCK
 seq_4ape        STG-SATTTPIDSLDDAYITPVQIGTPAQTLNLDFDTGSSDLWVFSSETT
@@ -13000,7 +12998,7 @@ SPAN.value9 {background: #FFC8C8}
 SPAN.valuedefault {}
 SPAN.valuegap {}
 SPAN.valueink {background: 000000}
-</style><body><span class=valuedefault>T-COFFEE,&nbsp;Version_13.30.5.6909e10&nbsp;(Version_13.30.5.6909e10)</span><br><span class=valuedefault>Cedric&nbsp;Notredame&nbsp;</span><br><span class=valuedefault>CPU&nbsp;TIME:0&nbsp;sec.</span><br><span class=valuedefault>SCORE=42</span><br><span class=valuedefault>*</span><br><span class=valuedefault>&nbsp;</span><span class=value0>B</span><span class=value1>A</span><span class=value2>D</span><span class=value3>&nbsp;</span><span class=value4>A</span><span class=value5>V</span><span class=value6>G</span><span class=value7>&nbsp;</span><span class=value8>G</span><span class=value9>OOD</span><br><span class=valuedefault>*</span><br><span class=value2>seq_1cms&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;25</span><br><span class=value3>seq_4ape&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;37</span><br><span class=value3>seq_3app&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;37</span><br><span class=value5>hmgl_trybr&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;54</span><br><span class=value5>hmgt_mouse&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;50</span><br><span class=value4>hmgb_chite&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;45</span><br><span class=value4>hmgl_wheat&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;48</span><br><span class=value4>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;&nbsp;4</span><br><br><span class=valuedefault>seq_1cms&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value7>G</span><span class=value6>E</span><span class=value3>VA</span><span class=value4>S</span><span class=value3>VPLT</span><span class=value4>NYL</span><span class=valuegap>--</span><span class=value5>DS</span><span class=value4>QYFGK</span><span class=value3>I</span><span class=value4>YLG</span><span class=value3>TPPQE</span><span class=value4>FTV</span><span class=value5>L</span><span class=value4>FD</span><span class=value3>TGS</span><br><span class=valuedefault>seq_4ape&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value7>S</span><span class=value5>T</span><span class=value4>G</span><span class=valuegap>-</span><span class=value4>S</span><span class=value3>AT</span><span class=value4>TTP</span><span class=value5>ID</span><span class=value4>S</span><span class=value5>LDDAYI</span><span class=value4>TPVQ</span><span class=value5>I</span><span class=value4>G</span><span class=value3>TPAQ</span><span class=value4>TLNL</span><span class=value5>DFDTGS</span><br><span class=valuedefault>seq_3app&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value7>A</span><span class=value6>A</span><span class=value4>SG</span><span class=value5>V</span><span class=value3>ATN</span><span class=value4>TP</span><span class=value5>TA</span><span class=value3>N</span><span class=valuegap>-</span><span class=value4>DEE</span><span class=value5>Y</span><span class=value4>I</span><span class=value6>TPVT</span><span class=value7>IG</span><span class=valuegap>--</span><span class=value6>G</span><span class=value5>T</span><span class=value6>TL</span><span class=value5>NLN</span><span class=value4>F</span><span class=value6>D</span><span class=value4>T</span><span class=value5>GS</span><br><span class=valuedefault>hmgl_trybr&nbsp;&nbsp;&nbsp;</span><span class=value7>k</span><span class=value6>k</span><span class=value4>d</span><span class=value3>s</span><span class=value4>n</span><span class=valuegap>---</span><span class=value4>a</span><span class=value5>p</span><span class=value6>kr</span><span class=valuegap>-------------------------</span><span class=value6>am</span><br><span class=valuedefault>hmgt_mouse&nbsp;&nbsp;&nbsp;</span><span class=value4>k</span><span class=valuegap>--------</span><span class=value5>pkr</span><span class=valuegap>-------------------------</span><span class=value5>pr</span><br><span class=valuedefault>hmgb_chite&nbsp;&nbsp;&nbsp;</span><span class=value6>a</span><span class=value5>d</span><span class=valuegap>------</span><span class=value4>k</span><span class=value6>pkr</span><span class=valuegap>-------------------------</span><span class=value6>pl</span><br><span class=valuedefault>hmgl_wheat&nbsp;&nbsp;&nbsp;</span><span class=value7>d</span><span class=value4>p</span><span class=valuegap>--</span><span class=value4>n</span><span class=valuegap>---</span><span class=value4>k</span><span class=value5>p</span><span class=value6>kr</span><span class=valuegap>-------------------------</span><span class=value6>ap</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value6>&nbsp;</span><span class=value4>&nbsp;</span><span class=value2>&nbsp;&nbsp;&nbsp;</span><span class=value1>&nbsp;&nbsp;&nbsp;</span><span class=value3>&nbsp;</span><span class=value4>&nbsp;&nbsp;&nbsp;</span><span class=value1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value2>&nbsp;&nbsp;</span><span class=value0>&nbsp;&nbsp;</span><span class=value1>&nbsp;&nbsp;&nbsp;</span><span class=value2>&nbsp;</span><span class=value1>&nbsp;</span><span class=value2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value4>&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>seq_1cms&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value4>S</span><span class=value3>D</span><span class=value4>FWVPS</span><span class=value5>I</span><span class=value6>YC</span><span class=value7>KS</span><span class=value5>NACKN</span><span class=value4>HQRF</span><span class=value3>DPRKSSTFQNL</span><span class=valuegap>-</span><span class=value3>GKPL</span><span class=value4>SI</span><br><span class=valuedefault>seq_4ape&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value5>SDL</span><span class=value6>WVFSS</span><span class=value5>ETT</span><span class=value4>A</span><span class=value5>S</span><span class=value4>E</span><span class=value3>VD</span><span class=value4>GQTIYTP</span><span class=value3>SKSTT</span><span class=value4>AKLLS</span><span class=value3>G</span><span class=value4>ATWS</span><span class=value5>I</span><br><span class=valuedefault>seq_3app&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value6>A</span><span class=value5>D</span><span class=value6>LWVF</span><span class=value7>ST</span><span class=value6>E</span><span class=value4>LPA</span><span class=value3>SQ</span><span class=value2>QSGHS</span><span class=value3>VYNP</span><span class=value4>SA</span><span class=value5>T</span><span class=valuegap>--</span><span class=value4>GKEL</span><span class=value3>SG</span><span class=value4>YTWS</span><span class=value5>I</span><br><span class=valuedefault>hmgl_trybr&nbsp;&nbsp;&nbsp;</span><span class=value6>t</span><span class=value7>sf</span><span class=value6>mff</span><span class=value5>ss</span><span class=value4>dfr</span><span class=value3>skh</span><span class=valuegap>--------</span><span class=value3>s</span><span class=valuegap>----------------</span><br><span class=valuedefault>hmgt_mouse&nbsp;&nbsp;&nbsp;</span><span class=value6>sayniyv</span><span class=value5>se</span><span class=value4>sf</span><span class=value3>qea</span><span class=valuegap>--------</span><span class=value3>k</span><span class=valuegap>----------------</span><br><span class=valuedefault>hmgb_chite&nbsp;&nbsp;&nbsp;</span><span class=value6>saymlw</span><span class=value5>lns</span><span class=value4>ar</span><span class=value3>esi</span><span class=value2>k</span><span class=valuegap>----</span><span class=value2>r</span><span class=value3>enp</span><span class=valuegap>----------------</span><br><span class=valuedefault>hmgl_wheat&nbsp;&nbsp;&nbsp;</span><span class=value6>sa</span><span class=value7>ff</span><span class=value6>v</span><span class=value7>fm</span><span class=value6>g</span><span class=value5>ef</span><span class=value4>ree</span><span class=value3>fk</span><span class=valuegap>----</span><span class=value2>qkn</span><span class=value3>p</span><span class=value2>k</span><span class=valuegap>---------------</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value5>:&nbsp;&nbsp;&nbsp;.&nbsp;&nbsp;</span><span class=value4>&nbsp;&nbsp;</span><span class=value3>&nbsp;&nbsp;</span><span class=value2>&nbsp;.&nbsp;</span><span class=value1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value2>&nbsp;</span><span class=value1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value2>&nbsp;&nbsp;&nbsp;</span><span class=value1>&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>seq_1cms&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value5>H</span><span class=value4>YG</span><span class=value5>TG</span><span class=value4>S</span><span class=value5>M</span><span class=valuegap>-</span><span class=value5>Q</span><span class=valuegap>-</span><span class=value5>G</span><span class=value6>ILGYDTVTV</span><span class=value5>SNIVDI</span><span class=value6>Q</span><span class=value5>QTV</span><span class=value4>GLSTQE</span><span class=value5>PG</span><span class=value4>D</span><br><span class=valuedefault>seq_4ape&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value6>SYGD</span><span class=value7>G</span><span class=value6>S</span><span class=value5>S</span><span class=valuegap>-</span><span class=value7>S</span><span class=value6>SGDVY</span><span class=value7>TDTVSV</span><span class=value6>GGLTVT</span><span class=value5>GQAVE</span><span class=value4>SAKKVSSS</span><br><span class=valuedefault>seq_3app&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value5>S</span><span class=value6>Y</span><span class=value5>GDGSSA</span><span class=value7>S</span><span class=valuegap>-</span><span class=value7>G</span><span class=value6>NVFT</span><span class=value7>DSVTV</span><span class=value6>GGVTAHG</span><span class=value5>QAV</span><span class=value4>QAA</span><span class=value5>Q</span><span class=value4>QIS</span><span class=value3>AQ</span><br><span class=valuedefault>hmgl_trybr&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------</span><br><span class=valuedefault>hmgt_mouse&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------</span><br><span class=valuedefault>hmgb_chite&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------</span><br><span class=valuedefault>hmgl_wheat&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value3>&nbsp;</span><span class=value0>&nbsp;</span><span class=value2>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value3>&nbsp;&nbsp;</span><span class=value4>&nbsp;</span><span class=value3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value2>&nbsp;</span><span class=value3>&nbsp;</span><span class=value2>&nbsp;&nbsp;</span><span class=value1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>seq_1cms&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value5>VF</span><span class=value4>T</span><span class=value5>YAEFDGI</span><span class=valuegap>---</span><span class=value6>LG</span><span class=value7>M</span><span class=value6>AYPSLA</span><span class=value5>S</span><span class=value6>EYSI</span><span class=value5>PVFDN</span><span class=value4>M</span><span class=value5>M</span><span class=value4>N</span><span class=value7>RHL</span><span class=value6>V</span><br><span class=valuedefault>seq_4ape&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value4>FTE</span><span class=value5>DS</span><span class=value6>TIDGLLG</span><span class=value7>L</span><span class=value6>AF</span><span class=value7>STLN</span><span class=value8>TVSPT</span><span class=value7>QQKTF</span><span class=value6>FDN</span><span class=value5>AK</span><span class=valuegap>-</span><span class=value4>A</span><span class=valuegap>-</span><span class=value4>S</span><span class=value3>L</span><br><span class=valuedefault>seq_3app&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value3>FQQ</span><span class=value5>D</span><span class=value6>TNND</span><span class=value5>G</span><span class=value7>LLGL</span><span class=value6>A</span><span class=value7>FSS</span><span class=value8>INTVQP</span><span class=value9>Q</span><span class=value8>SQTTF</span><span class=value7>FD</span><span class=value6>TVK</span><span class=valuegap>-</span><span class=value6>S</span><span class=valuegap>-</span><span class=value5>S</span><span class=value4>L</span><br><span class=valuedefault>hmgl_trybr&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---</span><span class=value3>dl</span><span class=value4>si</span><span class=value5>vem</span><span class=value6>ska</span><span class=value7>agaawke</span><span class=value8>l</span><span class=value7>gpe</span><span class=value6>e</span><span class=value7>rkvyee</span><span class=value6>m</span><span class=value7>ae</span><span class=valuegap>-</span><span class=value7>k</span><span class=valuegap>-</span><span class=value6>d</span><span class=valuegap>-</span><br><span class=valuedefault>hmgt_mouse&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---</span><span class=value4>ddsa</span><span class=value5>qgkl</span><span class=value6>klvn</span><span class=value7>eaw</span><span class=value8>knls</span><span class=value7>peekqayiq</span><span class=value6>lak</span><span class=valuegap>-</span><span class=value6>d</span><span class=valuegap>-</span><span class=value5>d</span><span class=valuegap>-</span><br><span class=valuedefault>hmgb_chite&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---</span><span class=value3>d</span><span class=value4>fkv</span><span class=value5>tev</span><span class=value6>akkgg</span><span class=value7>elwr</span><span class=value6>g</span><span class=value7>l</span><span class=value6>k</span><span class=valuegap>--</span><span class=value5>dkse</span><span class=value6>weakaa</span><span class=valuegap>-</span><span class=value6>t</span><span class=valuegap>-</span><span class=value5>a</span><span class=valuegap>-</span><br><span class=valuedefault>hmgl_wheat&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---</span><span class=value3>nks</span><span class=value4>v</span><span class=value5>aav</span><span class=value6>gkaa</span><span class=value7>gerwks</span><span class=value8>l</span><span class=value7>ses</span><span class=value6>e</span><span class=value7>kapyv</span><span class=value6>akan</span><span class=valuegap>-</span><span class=value6>k</span><span class=valuegap>-</span><span class=value5>l</span><span class=valuegap>-</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value1>&nbsp;&nbsp;&nbsp;</span><span class=value2>&nbsp;&nbsp;</span><span class=value3>&nbsp;&nbsp;</span><span class=value4>&nbsp;&nbsp;&nbsp;</span><span class=value5>&nbsp;&nbsp;&nbsp;</span><span class=value6>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value7>&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</span><span class=value6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value5>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value1>&nbsp;</span><span class=value5>&nbsp;</span><span class=value0>&nbsp;</span><span class=value4>&nbsp;</span><span class=value1>&nbsp;</span><br><br><br><span class=valuedefault>seq_1cms&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value6>AQ</span><span class=value7>D</span><span class=value6>LFSV</span><span class=value5>YMD</span><span class=value4>RNGQ</span><span class=value5>ESM</span><span class=value6>L</span><span class=value4>T</span><span class=value6>L</span><span class=value5>G</span><span class=value8>AI</span><span class=value9>D</span><span class=value8>PS</span><span class=value6>Y</span><br><span class=valuedefault>seq_4ape&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value3>D</span><span class=value4>S</span><span class=value5>PVFT</span><span class=value6>A</span><span class=value5>DL</span><span class=value4>G</span><span class=value3>Y</span><span class=valuegap>-</span><span class=value4>HA</span><span class=value5>PG</span><span class=value4>T</span><span class=value5>Y</span><span class=value4>N</span><span class=value5>F</span><span class=value4>G</span><span class=value6>F</span><span class=value7>I</span><span class=value5>DT</span><span class=value6>T</span><span class=value4>A</span><br><span class=valuedefault>seq_3app&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value4>A</span><span class=value5>QPL</span><span class=value6>F</span><span class=value5>AVALK</span><span class=value4>H</span><span class=valuegap>-</span><span class=value5>Q</span><span class=value4>QPGVYDF</span><span class=value5>G</span><span class=value6>FIDSS</span><span class=value2>K</span><br><span class=valuedefault>hmgl_trybr&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value6>kerykre</span><span class=value4>m</span><span class=valuegap>------------------</span><br><span class=valuedefault>hmgt_mouse&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value5>rirydnem</span><span class=value4>ks</span><span class=valuegap>-</span><span class=value4>wee</span><span class=value3>qma</span><span class=valuegap>--------</span><span class=value2>e</span><br><span class=valuedefault>hmgb_chite&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value5>k</span><span class=value6>qnyira</span><span class=value5>lq</span><span class=value4>e</span><span class=valuegap>-</span><span class=value4>y</span><span class=value5>e</span><span class=value4>rn</span><span class=value3>g</span><span class=valuegap>---------</span><span class=value2>g</span><br><span class=valuedefault>hmgl_wheat&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value5>kg</span><span class=value6>e</span><span class=value5>y</span><span class=value6>nk</span><span class=value5>ai</span><span class=value4>aa</span><span class=valuegap>-</span><span class=value4>ynk</span><span class=value3>ges</span><span class=valuegap>--------</span><span class=value3>a</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value1>&nbsp;</span><span class=value4>&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;:</span><span class=value2>&nbsp;&nbsp;</span><span class=value1>&nbsp;</span><span class=value2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value3>&nbsp;</span><span class=value4>&nbsp;</span><span class=value3>&nbsp;&nbsp;&nbsp;</span><span class=value2>&nbsp;</span><br><br><br><br><br><br></body></html>
+</style><body><span class=valuedefault>T-COFFEE,&nbsp;Version_13.30.12.28864d4&nbsp;(Version_13.30.12.28864d4)</span><br><span class=valuedefault>Cedric&nbsp;Notredame&nbsp;</span><br><span class=valuedefault>CPU&nbsp;TIME:0&nbsp;sec.</span><br><span class=valuedefault>SCORE=42</span><br><span class=valuedefault>*</span><br><span class=valuedefault>&nbsp;</span><span class=value0>B</span><span class=value1>A</span><span class=value2>D</span><span class=value3>&nbsp;</span><span class=value4>A</span><span class=value5>V</span><span class=value6>G</span><span class=value7>&nbsp;</span><span class=value8>G</span><span class=value9>OOD</span><br><span class=valuedefault>*</span><br><span class=value2>seq_1cms&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;25</span><br><span class=value3>seq_4ape&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;37</span><br><span class=value3>seq_3app&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;37</span><br><span class=value5>hmgl_trybr&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;54</span><br><span class=value5>hmgt_mouse&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;50</span><br><span class=value4>hmgb_chite&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;45</span><br><span class=value4>hmgl_wheat&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;48</span><br><span class=value4>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;&nbsp;4</span><br><br><span class=valuedefault>seq_1cms&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value7>G</span><span class=value6>E</span><span class=value3>VA</span><span class=value4>S</span><span class=value3>VPLT</span><span class=value4>NYL</span><span class=valuegap>--</span><span class=value5>DS</span><span class=value4>QYFGK</span><span class=value3>I</span><span class=value4>YLG</span><span class=value3>TPPQE</span><span class=value4>FTV</span><span class=value5>L</span><span class=value4>FD</span><span class=value3>TGS</span><br><span class=valuedefault>seq_4ape&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value7>S</span><span class=value5>T</span><span class=value4>G</span><span class=valuegap>-</span><span class=value4>S</span><span class=value3>AT</span><span class=value4>TTP</span><span class=value5>ID</span><span class=value4>S</span><span class=value5>LDDAYI</span><span class=value4>TPVQ</span><span class=value5>I</span><span class=value4>G</span><span class=value3>TPAQ</span><span class=value4>TLNL</span><span class=value5>DFDTGS</span><br><span class=valuedefault>seq_3app&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value7>A</span><span class=value6>A</span><span class=value4>SG</span><span class=value5>V</span><span class=value3>ATN</span><span class=value4>TP</span><span class=value5>TA</span><span class=value3>N</span><span class=valuegap>-</span><span class=value4>DEE</span><span class=value5>Y</span><span class=value4>I</span><span class=value6>TPVT</span><span class=value7>IG</span><span class=valuegap>--</span><span class=value6>G</span><span class=value5>T</span><span class=value6>TL</span><span class=value5>NLN</span><span class=value4>F</span><span class=value6>D</span><span class=value4>T</span><span class=value5>GS</span><br><span class=valuedefault>hmgl_trybr&nbsp;&nbsp;&nbsp;</span><span class=value7>k</span><span class=value6>k</span><span class=value4>d</span><span class=value3>s</span><span class=value4>n</span><span class=valuegap>---</span><span class=value4>a</span><span class=value5>p</span><span class=value6>kr</span><span class=valuegap>-------------------------</span><span class=value6>am</span><br><span class=valuedefault>hmgt_mouse&nbsp;&nbsp;&nbsp;</span><span class=value4>k</span><span class=valuegap>--------</span><span class=value5>pkr</span><span class=valuegap>-------------------------</span><span class=value5>pr</span><br><span class=valuedefault>hmgb_chite&nbsp;&nbsp;&nbsp;</span><span class=value6>a</span><span class=value5>d</span><span class=valuegap>------</span><span class=value4>k</span><span class=value6>pkr</span><span class=valuegap>-------------------------</span><span class=value6>pl</span><br><span class=valuedefault>hmgl_wheat&nbsp;&nbsp;&nbsp;</span><span class=value7>d</span><span class=value4>p</span><span class=valuegap>--</span><span class=value4>n</span><span class=valuegap>---</span><span class=value4>k</span><span class=value5>p</span><span class=value6>kr</span><span class=valuegap>-------------------------</span><span class=value6>ap</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value6>&nbsp;</span><span class=value4>&nbsp;</span><span class=value2>&nbsp;&nbsp;&nbsp;</span><span class=value1>&nbsp;&nbsp;&nbsp;</span><span class=value3>&nbsp;</span><span class=value4>&nbsp;&nbsp;&nbsp;</span><span class=value1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value2>&nbsp;&nbsp;</span><span class=value0>&nbsp;&nbsp;</span><span class=value1>&nbsp;&nbsp;&nbsp;</span><span class=value2>&nbsp;</span><span class=value1>&nbsp;</span><span class=value2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value4>&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>seq_1cms&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value4>S</span><span class=value3>D</span><span class=value4>FWVPS</span><span class=value5>I</span><span class=value6>YC</span><span class=value7>KS</span><span class=value5>NACKN</span><span class=value4>HQRF</span><span class=value3>DPRKSSTFQNL</span><span class=valuegap>-</span><span class=value3>GKPL</span><span class=value4>SI</span><br><span class=valuedefault>seq_4ape&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value5>SDL</span><span class=value6>WVFSS</span><span class=value5>ETT</span><span class=value4>A</span><span class=value5>S</span><span class=value4>E</span><span class=value3>VD</span><span class=value4>GQTIYTP</span><span class=value3>SKSTT</span><span class=value4>AKLLS</span><span class=value3>G</span><span class=value4>ATWS</span><span class=value5>I</span><br><span class=valuedefault>seq_3app&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value6>A</span><span class=value5>D</span><span class=value6>LWVF</span><span class=value7>ST</span><span class=value6>E</span><span class=value4>LPA</span><span class=value3>SQ</span><span class=value2>QSGHS</span><span class=value3>VYNP</span><span class=value4>SA</span><span class=value5>T</span><span class=valuegap>--</span><span class=value4>GKEL</span><span class=value3>SG</span><span class=value4>YTWS</span><span class=value5>I</span><br><span class=valuedefault>hmgl_trybr&nbsp;&nbsp;&nbsp;</span><span class=value6>t</span><span class=value7>sf</span><span class=value6>mff</span><span class=value5>ss</span><span class=value4>dfr</span><span class=value3>skh</span><span class=valuegap>--------</span><span class=value3>s</span><span class=valuegap>----------------</span><br><span class=valuedefault>hmgt_mouse&nbsp;&nbsp;&nbsp;</span><span class=value6>sayniyv</span><span class=value5>se</span><span class=value4>sf</span><span class=value3>qea</span><span class=valuegap>--------</span><span class=value3>k</span><span class=valuegap>----------------</span><br><span class=valuedefault>hmgb_chite&nbsp;&nbsp;&nbsp;</span><span class=value6>saymlw</span><span class=value5>lns</span><span class=value4>ar</span><span class=value3>esi</span><span class=value2>k</span><span class=valuegap>----</span><span class=value2>r</span><span class=value3>enp</span><span class=valuegap>----------------</span><br><span class=valuedefault>hmgl_wheat&nbsp;&nbsp;&nbsp;</span><span class=value6>sa</span><span class=value7>ff</span><span class=value6>v</span><span class=value7>fm</span><span class=value6>g</span><span class=value5>ef</span><span class=value4>ree</span><span class=value3>fk</span><span class=valuegap>----</span><span class=value2>qkn</span><span class=value3>p</span><span class=value2>k</span><span class=valuegap>---------------</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value5>:&nbsp;&nbsp;&nbsp;.&nbsp;&nbsp;</span><span class=value4>&nbsp;&nbsp;</span><span class=value3>&nbsp;&nbsp;</span><span class=value2>&nbsp;.&nbsp;</span><span class=value1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value2>&nbsp;</span><span class=value1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value2>&nbsp;&nbsp;&nbsp;</span><span class=value1>&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>seq_1cms&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value5>H</span><span class=value4>YG</span><span class=value5>TG</span><span class=value4>S</span><span class=value5>M</span><span class=valuegap>-</span><span class=value5>Q</span><span class=valuegap>-</span><span class=value5>G</span><span class=value6>ILGYDTVTV</span><span class=value5>SNIVDI</span><span class=value6>Q</span><span class=value5>QTV</span><span class=value4>GLSTQE</span><span class=value5>PG</span><span class=value4>D</span><br><span class=valuedefault>seq_4ape&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value6>SYGD</span><span class=value7>G</span><span class=value6>S</span><span class=value5>S</span><span class=valuegap>-</span><span class=value7>S</span><span class=value6>SGDVY</span><span class=value7>TDTVSV</span><span class=value6>GGLTVT</span><span class=value5>GQAVE</span><span class=value4>SAKKVSSS</span><br><span class=valuedefault>seq_3app&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value5>S</span><span class=value6>Y</span><span class=value5>GDGSSA</span><span class=value7>S</span><span class=valuegap>-</span><span class=value7>G</span><span class=value6>NVFT</span><span class=value7>DSVTV</span><span class=value6>GGVTAHG</span><span class=value5>QAV</span><span class=value4>QAA</span><span class=value5>Q</span><span class=value4>QIS</span><span class=value3>AQ</span><br><span class=valuedefault>hmgl_trybr&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------</span><br><span class=valuedefault>hmgt_mouse&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------</span><br><span class=valuedefault>hmgb_chite&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------</span><br><span class=valuedefault>hmgl_wheat&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value3>&nbsp;</span><span class=value0>&nbsp;</span><span class=value2>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value3>&nbsp;&nbsp;</span><span class=value4>&nbsp;</span><span class=value3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value2>&nbsp;</span><span class=value3>&nbsp;</span><span class=value2>&nbsp;&nbsp;</span><span class=value1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>seq_1cms&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value5>VF</span><span class=value4>T</span><span class=value5>YAEFDGI</span><span class=valuegap>---</span><span class=value6>LG</span><span class=value7>M</span><span class=value6>AYPSLA</span><span class=value5>S</span><span class=value6>EYSI</span><span class=value5>PVFDN</span><span class=value4>M</span><span class=value5>M</span><span class=value4>N</span><span class=value7>RHL</span><span class=value6>V</span><br><span class=valuedefault>seq_4ape&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value4>FTE</span><span class=value5>DS</span><span class=value6>TIDGLLG</span><span class=value7>L</span><span class=value6>AF</span><span class=value7>STLN</span><span class=value8>TVSPT</span><span class=value7>QQKTF</span><span class=value6>FDN</span><span class=value5>AK</span><span class=valuegap>-</span><span class=value4>A</span><span class=valuegap>-</span><span class=value4>S</span><span class=value3>L</span><br><span class=valuedefault>seq_3app&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value3>FQQ</span><span class=value5>D</span><span class=value6>TNND</span><span class=value5>G</span><span class=value7>LLGL</span><span class=value6>A</span><span class=value7>FSS</span><span class=value8>INTVQP</span><span class=value9>Q</span><span class=value8>SQTTF</span><span class=value7>FD</span><span class=value6>TVK</span><span class=valuegap>-</span><span class=value6>S</span><span class=valuegap>-</span><span class=value5>S</span><span class=value4>L</span><br><span class=valuedefault>hmgl_trybr&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---</span><span class=value3>dl</span><span class=value4>si</span><span class=value5>vem</span><span class=value6>ska</span><span class=value7>agaawke</span><span class=value8>l</span><span class=value7>gpe</span><span class=value6>e</span><span class=value7>rkvyee</span><span class=value6>m</span><span class=value7>ae</span><span class=valuegap>-</span><span class=value7>k</span><span class=valuegap>-</span><span class=value6>d</span><span class=valuegap>-</span><br><span class=valuedefault>hmgt_mouse&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---</span><span class=value4>ddsa</span><span class=value5>qgkl</span><span class=value6>klvn</span><span class=value7>eaw</span><span class=value8>knls</span><span class=value7>peekqayiq</span><span class=value6>lak</span><span class=valuegap>-</span><span class=value6>d</span><span class=valuegap>-</span><span class=value5>d</span><span class=valuegap>-</span><br><span class=valuedefault>hmgb_chite&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---</span><span class=value3>d</span><span class=value4>fkv</span><span class=value5>tev</span><span class=value6>akkgg</span><span class=value7>elwr</span><span class=value6>g</span><span class=value7>l</span><span class=value6>k</span><span class=valuegap>--</span><span class=value5>dkse</span><span class=value6>weakaa</span><span class=valuegap>-</span><span class=value6>t</span><span class=valuegap>-</span><span class=value5>a</span><span class=valuegap>-</span><br><span class=valuedefault>hmgl_wheat&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---</span><span class=value3>nks</span><span class=value4>v</span><span class=value5>aav</span><span class=value6>gkaa</span><span class=value7>gerwks</span><span class=value8>l</span><span class=value7>ses</span><span class=value6>e</span><span class=value7>kapyv</span><span class=value6>akan</span><span class=valuegap>-</span><span class=value6>k</span><span class=valuegap>-</span><span class=value5>l</span><span class=valuegap>-</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value1>&nbsp;&nbsp;&nbsp;</span><span class=value2>&nbsp;&nbsp;</span><span class=value3>&nbsp;&nbsp;</span><span class=value4>&nbsp;&nbsp;&nbsp;</span><span class=value5>&nbsp;&nbsp;&nbsp;</span><span class=value6>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value7>&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</span><span class=value6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value5>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value1>&nbsp;</span><span class=value5>&nbsp;</span><span class=value0>&nbsp;</span><span class=value4>&nbsp;</span><span class=value1>&nbsp;</span><br><br><br><span class=valuedefault>seq_1cms&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value6>AQ</span><span class=value7>D</span><span class=value6>LFSV</span><span class=value5>YMD</span><span class=value4>RNGQ</span><span class=value5>ESM</span><span class=value6>L</span><span class=value4>T</span><span class=value6>L</span><span class=value5>G</span><span class=value8>AI</span><span class=value9>D</span><span class=value8>PS</span><span class=value6>Y</span><br><span class=valuedefault>seq_4ape&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value3>D</span><span class=value4>S</span><span class=value5>PVFT</span><span class=value6>A</span><span class=value5>DL</span><span class=value4>G</span><span class=value3>Y</span><span class=valuegap>-</span><span class=value4>HA</span><span class=value5>PG</span><span class=value4>T</span><span class=value5>Y</span><span class=value4>N</span><span class=value5>F</span><span class=value4>G</span><span class=value6>F</span><span class=value7>I</span><span class=value5>DT</span><span class=value6>T</span><span class=value4>A</span><br><span class=valuedefault>seq_3app&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value4>A</span><span class=value5>QPL</span><span class=value6>F</span><span class=value5>AVALK</span><span class=value4>H</span><span class=valuegap>-</span><span class=value5>Q</span><span class=value4>QPGVYDF</span><span class=value5>G</span><span class=value6>FIDSS</span><span class=value2>K</span><br><span class=valuedefault>hmgl_trybr&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value6>kerykre</span><span class=value4>m</span><span class=valuegap>------------------</span><br><span class=valuedefault>hmgt_mouse&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value5>rirydnem</span><span class=value4>ks</span><span class=valuegap>-</span><span class=value4>wee</span><span class=value3>qma</span><span class=valuegap>--------</span><span class=value2>e</span><br><span class=valuedefault>hmgb_chite&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value5>k</span><span class=value6>qnyira</span><span class=value5>lq</span><span class=value4>e</span><span class=valuegap>-</span><span class=value4>y</span><span class=value5>e</span><span class=value4>rn</span><span class=value3>g</span><span class=valuegap>---------</span><span class=value2>g</span><br><span class=valuedefault>hmgl_wheat&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value5>kg</span><span class=value6>e</span><span class=value5>y</span><span class=value6>nk</span><span class=value5>ai</span><span class=value4>aa</span><span class=valuegap>-</span><span class=value4>ynk</span><span class=value3>ges</span><span class=valuegap>--------</span><span class=value3>a</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value1>&nbsp;</span><span class=value4>&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;:</span><span class=value2>&nbsp;&nbsp;</span><span class=value1>&nbsp;</span><span class=value2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value3>&nbsp;</span><span class=value4>&nbsp;</span><span class=value3>&nbsp;&nbsp;&nbsp;</span><span class=value2>&nbsp;</span><br><br><br><br><br><br></body></html>
 </content>
 </file>
 <environement>
@@ -13012,46 +13010,54 @@ ROOT_TMP_4_TCOFFEE=/var/tmp/
 SHELL=/bin/bash
 TERM=xterm-256color
 TMPDIR=/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/
+CONDA_SHLVL=1
 PERL5LIB=/sw/lib/perl5:/sw/lib/perl5/darwin
 Apple_PubSub_Socket_Render=/private/tmp/com.apple.launchd.u7asRiNodS/Render
+CONDA_PROMPT_MODIFIER=(base) 
 TERM_PROGRAM_VERSION=388.1.3
 OSNAME=macosx
 PERL_BIN=/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms::/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices
-TERM_SESSION_ID=08C395F9-69A0-4DC8-9DE9-5914C23D168F
+TERM_SESSION_ID=966A65A4-FBA5-4990-991E-01DB7E43DA0A
 METHODS_4_TCOFFEE=/Users/cnotredame//.t_coffee//methods/
 VERSIONER_PERL_VERSION=5.18
 XAPPLRESDIR=/sw/etc/app-defaults/
 http_proxy=
 HTTP_proxy=
 USER=cnotredame
+CONDA_EXE=/Users/cnotredame/anaconda3/bin/conda
 SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.mMz4rqepoV/Listeners
 __CF_USER_TEXT_ENCODING=0x1F6:0x0:0x0
 ENV_4_TCOFFEE=/Users/cnotredame//.t_coffee//.t_coffee_env
+_CE_CONDA=
 all_proxy=
 ALL_PROXY=
 HTTP_proxy_4_TCOFFEE=
-PATH=/Users/cnotredame//.t_coffee//plugins/macosx/:/opt/local/bin:/opt/local/sbin:/opt/local/bin:/opt/local/sbin:/Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/packages/x3dna-v2.1/bin:/Users/cnotredame/bin/macosx://Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms::/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices:/Users/cnotredame/bin/Scripts/:/Users/cnotredame/Library/Haskell/ghc-7.4.2/lib/epub-tools-2.0.0/bin/:/sw/bin:/sw/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin
+PATH=/Users/cnotredame//.t_coffee//plugins/macosx/:/Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/packages/x3dna-v2.1/bin:/Users/cnotredame/bin/macosx://Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms::/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices:/Users/cnotredame/bin/Scripts/:/Users/cnotredame/Library/Haskell/ghc-7.4.2/lib/epub-tools-2.0.0/bin/:/Users/cnotredame/anaconda3/bin:/Users/cnotredame/anaconda3/condabin:/opt/local/bin:/opt/local/sbin:/opt/local/bin:/opt/local/sbin:/Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/packages/x3dna-v2.1/bin:/Users/cnotredame/bin/macosx://Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms:.:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices:/Users/cnotredame/bin/Scripts:/Users/cnotredame/Library/Haskell/ghc-7.4.2/lib/epub-tools-2.0.0/bin:/sw/bin:/sw/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin
 _=/usr/bin/printenv
+CONDA_PREFIX=/Users/cnotredame/anaconda3
 COLOR_4_TCOFFEE=new
 DIR_4_TCOFFEE=/Users/cnotredame//.t_coffee/
-PWD=/Users/cnotredame/Dropbox/projects/git/tcoffee/tmp/RANDOMSTRINGSdQwCjRiYnOpwt18pA5v/tmp/RANDOMSTRINGUe6b6Eig8pHGzTpQCBUK/data
+PWD=/Users/cnotredame/Dropbox/projects/git/tcoffee/tmp/RANDOMSTRING7hRVWRF1V6pGa64HVoDP/data
 CACHE_4_TCOFFEE=/Users/cnotredame//.t_coffee//cache/
 X3DNA=/Users/cnotredame/Dropbox/packages/x3dna-v2.1
 DBUS_LAUNCHD_SESSION_BUS_SOCKET=/private/tmp/com.apple.launchd.CeZrDaslOL/unix_domain_listener
 XPC_FLAGS=0x0
 VERSIONER_PERL_PREFER_32_BIT=no
+_CE_M=
 XPC_SERVICE_NAME=0
 ERRORFILE_4_TCOFFEE=NO
 PLUGINS_4_TCOFFEE=/Users/cnotredame//.t_coffee//plugins/macosx/
 SHLVL=3
 HOME=/Users/cnotredame
-DUMP_4_TCOFFEE=/Users/cnotredame/Dropbox/projects/git/tcoffee/tmp/RANDOMSTRINGSdQwCjRiYnOpwt18pA5v/tmp/RANDOMSTRINGUe6b6Eig8pHGzTpQCBUK/core.tests.169.dump
+DUMP_4_TCOFFEE=/Users/cnotredame/Dropbox/projects/git/tcoffee/tmp/RANDOMSTRING7hRVWRF1V6pGa64HVoDP/core.tests.169.dump
 HTTP_PROXY=
 MAFFT_BINARIES=
+CONDA_PYTHON_EXE=/Users/cnotredame/anaconda3/bin/python
 BIN=/Users/cnotredame/bin/macosx
 LOGNAME=cnotredame
 EMAIL_4_TCOFFEE=cedric.notredame@gmail.com
 LC_CTYPE=UTF-8
+CONDA_DEFAULT_ENV=base
 EMAIL=cedric.notredame@gmail.com
 UPDATED_ENV_4_TCOFFEE=1
 INFOPATH=/sw/share/info:/sw/info:/usr/share/info
@@ -13060,11 +13066,11 @@ TC_MASTER_NODE=1
 NUMBER_OF_PROCESSORS=8
 ALL_proxy=
 SECURITYSESSIONID=186a6
-LOCKDIR_4_TCOFFEE=/var/tmp/tco/tcouyvarjmj29058//lck/ik16quiqps/
-TMP_4_TCOFFEE=/var/tmp/tco/tcouyvarjmj29058/
+LOCKDIR_4_TCOFFEE=/var/tmp/tco/tconwr_x8ud23944//lck/jp3bcaml1o/
+TMP_4_TCOFFEE=/var/tmp/tco/tconwr_x8ud23944/
 USER_BIN=/Users/cnotredame/bin/macosx
 SCRIPT_BIN=/Users/cnotredame/bin/Scripts/
 </environement>
 <DumpStatus>OK</DumpStatus>
-<DumpFile>/Users/cnotredame/Dropbox/projects/git/tcoffee/tmp/RANDOMSTRINGSdQwCjRiYnOpwt18pA5v/tmp/RANDOMSTRINGUe6b6Eig8pHGzTpQCBUK/core.tests.169.dump</DumpFile>
+<DumpFile>/Users/cnotredame/Dropbox/projects/git/tcoffee/tmp/RANDOMSTRING7hRVWRF1V6pGa64HVoDP/core.tests.169.dump</DumpFile>
 </DumpIO>

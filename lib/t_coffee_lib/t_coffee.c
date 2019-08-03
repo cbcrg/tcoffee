@@ -785,7 +785,7 @@ int batch_main ( int argc, char **argv)
 		*
 		*/
 	       
-	       HERE ("DPA=%d", dpa);
+
 if (dpa)
   {
     dump_io_start (NULL);
@@ -828,6 +828,7 @@ if (t_coffee_defaults_flag)
 
     if (pname)
       {
+	register_file4dump(parameters, "r");
 	argv=push_string (file2string(pname), argv, &argc, 1);
 	t_coffee_defaults=pname;
       }
@@ -837,8 +838,12 @@ if (t_coffee_defaults_flag)
       }
   }
 
- if ( parameters && parameters[0])argv=push_string (file2string (parameters), argv, &argc, 1);
-
+ if ( parameters && parameters[0])
+   {
+     register_file4dump(parameters, "r");
+     argv=push_string (file2string (parameters), argv, &argc, 1);
+   }
+ 
  if (n_special_mode && !type_only)
    {
      char *special_mode;
@@ -3714,7 +3719,7 @@ get_cl_param(\
 			    /*Min_value*/ "0"          ,\
 			    /*Max Value*/ "100"           \
 		   );
-
+	       register_file4dump(lib_list, "r");
 	       /*PARAMETER PROTOTYPE:    lib_list    */
 	       declare_name (prune_lib_mode);
 	       get_cl_param(\

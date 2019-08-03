@@ -156,26 +156,20 @@ distribution:
 	make -i VERSION=$(VERSION) CC=cc mcoffee
 	make -i VERSION=$(VERSION) CC=cc packing
 
-old_doc:
-	cp $(PWD)/../../$(EXECUTABLE)/doc/$(EXECUTABLE)_tutorial.* $(DISTRIB_DOC)
-	antiword -m  "UTF-8" $(PWD)/../../$(EXECUTABLE)/doc/$(EXECUTABLE)_tutorial.doc >$(DISTRIB_DOC)/$(EXECUTABLE)_tutorial.txt
-	cp $(PWD)/../../$(EXECUTABLE)/doc/$(EXECUTABLE)_technical.* $(DISTRIB_DOC)
-	antiword -m "UTF-8" $(PWD)/../../$(EXECUTABLE)/doc/$(EXECUTABLE)_technical.doc >$(DISTRIB_DOC)/$(EXECUTABLE)_technical.txt
-	cp $(PWD)/../../$(EXECUTABLE)/doc/README $(DISTRIB_DIR)
-	cp $(PWD)/../../$(EXECUTABLE)/doc/README $(DISTRIB_DIR)/doc/
-	cp $(PWD)/../../$(EXECUTABLE)/doc/aln_compare.doc.txt $(DISTRIB_DOC)
-	cp $(PWD)/../../$(EXECUTABLE)/doc/seq_reformat.doc.txt $(DISTRIB_DOC)
-	cp $(PWD)/../../$(EXECUTABLE)/doc/$(EXECUTABLE).pdf $(DISTRIB_DOC)
+
 
 doc:
+	cp $(RST_DOC)/README  $(DISTRIB_DIR)
 	rm -f $(HTML_DOC)/*.html
 	$(PERL4MAKEFILE_LIB)/edit_version.pl -target=$(RST_DOC)/conf.py -mode=conf.py -version=$(VERSION)
 	sphinx-build -b singlehtml $(RST_DOC) $(HTML_DOC)
-	mkdir -p $(DISTRIB_DIR)/doc/	
-	cp -r $(HTML_DOC)/* $(DISTRIB_DIR)/doc/
+	mkdir -p $(DISTRIB_DIR)/doc/html/	
+	cp -r $(HTML_DOC)/* $(DISTRIB_DIR)/doc/html/
 	rm -f $(WEB_DOC)/*.html
 	cp -r $(HTML_DOC)/* $(WEB_DOC)
-	cp $(RST_DOC)/README  $(DISTRIB_DIR)
+	mkdir -p $(DISTRIB_DIR)/doc/misc/
+	cp $(RST_DOC)/*.doc $(DISTRIB_DIR)/doc/misc/
+	cp $(RST_DOC)/*.pdf $(DISTRIB_DIR)/doc/misc/
 mcoffee:
 	-rm -rf $(DISTRIB_DIR)/mcoffee
 	mkdir -p $(DISTRIB_DIR)/mcoffee

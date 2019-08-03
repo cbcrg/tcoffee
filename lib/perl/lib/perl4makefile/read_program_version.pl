@@ -56,18 +56,16 @@ if (!-e $minor_versionF){print STDERR "minor_version File [$minor_versionF] coul
 if (!-e $major_versionF){print STDERR "major_version File [$major_versionF] could not be opened [FATAL:read_program_version.pl]\n";die;}
 
 
-
+system ("git branch -v  >$githubF");
 if (($cl=~/-beta/))
   {
     increase ($build_versionF, 1);
-    if ($ENV{'TC_MASTER_NODE'}){system ("git branch -v  >$githubF");}
     circleci2releaseV($circleciF, "0");
   }
 elsif ( ($cl=~/-stable/))
   {
     value2file(0, $build_versionF);
     increase   ($minor_versionF, 1);
-    if ($ENV{'TC_MASTER_NODE'}){system ("git branch -v  >$githubF");}
     circleci2releaseV($circleciF, "1");
   }
 elsif ( ($cl=~/-major/))
@@ -75,7 +73,6 @@ elsif ( ($cl=~/-major/))
     value2file(0, $build_versionF);
     value2file(0, $minor_versionF);
     increase   ($major_versionF, 1);
-    if ($ENV{'TC_MASTER_NODE'}){system ("git branch -v  >$githubF");}
     circleci2releaseV($circleciF, "1");
   }
 

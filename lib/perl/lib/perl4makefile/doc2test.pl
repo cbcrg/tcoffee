@@ -36,8 +36,8 @@ $GCOUNT{MISSING}=0;
 $GCOUNT{TIMEOUT}=0;
 $GCOUNT{FAILED}=0;
 $GCOUNT{TFAILED}=0;
-
-
+my $DEBUG;
+my $TOT_TIME;
 my $max=0;
 my $PATTERN='';
 my $log ;
@@ -252,6 +252,10 @@ for (my $a=0; $a<=$#ARGV; $a++)
       {
 	$STRICT=1;
       }
+    elsif ($ARGV[$a]=~/-debug/)
+      {
+	$DEBUG=1;
+      }
     elsif ($ARGV[$a]=~/-ignore/)
       {
 	$FILE2IGNORE{$ARGV[++$a]}=1;
@@ -261,6 +265,8 @@ for (my $a=0; $a<=$#ARGV; $a++)
 	 }
       }
   }
+
+
 
 # Replay Mode
 my $exit_status;
@@ -278,7 +284,7 @@ if ($GCOUNT{processed})
     my $passed=$GCOUNT{PASSED};
     my $processed=$GCOUNT{processed};
     my $removed =$GCOUNT{removed};
-    print "#SUMMARY:STATUS: $exit_status FILE: $infile TESTED $processed PASSED: $passed WARNING: $warning NEWWARNING: $newwarning FAILED: $tfailed REMOVED: $removed\n";
+    print "#SUMMARY:STATUS: $exit_status FILE: $infile TESTED $processed PASSED: $passed WARNING: $warning NEWWARNING: $newwarning FAILED: $tfailed REMOVED: $removed TIME: $TOT_TIME sec\n";
   }
 exit ($exit_status);
 
@@ -400,6 +406,7 @@ sub play_dump_list
     else
       {
 	$rfile=$file;
+	$routdir=$outdir;
       }
     
     print "#PRODUCE DUMP FILES: $ffile\n";
@@ -431,11 +438,14 @@ sub play_dump_list
 	elsif  ($lu{$cl})#Do not recompute twice the same CL
 	  {
 	    my $dump=$lu{$cl}{dump};
-	    printf ("STATUS: %-7s File: $ffile Line:$line -- Command: $cl -- Dump: $dump\n","SKIPPED");
+	    my %dh=dump2report ($dump);
+	    my $status=report2status(dump2report ($dump));
+	    printf ("STATUS: %-7s*File: %-20s Line:%4d -- Command: $cl -- Dump: $dump\n",$status, $ffile,$line);
 	    $n++;
-	    if ($lu{$cl}{exit} eq "FAILED"){$failed++;}
-	    elsif ($lu{$cl}{exit} eq "WARNING"){$warning++;}
+	    
+	    if ($lu{$cl}{exit} eq "WARNING"){$warning++;}
 	    elsif ($lu{$cl}{exit} eq "PASSED") {$passed++;}
+	    else {$failed++;}
 	  }
 	elsif ( !$lu{$cl})
 	  {
@@ -463,20 +473,24 @@ sub play_dump_list
 		system4tc ("export DUMP_4_TCOFFEE=$dump\;$cl;unset DUMP_4_TCOFFEE");
 		%report=dump2report ($dump);
 		
-		$lu{$cl}{dump}=$dump;
+		
 		chdir ($wdir);
 	      }
 	    
 	    my $status=$lu{$cl}{exit}=($TIMEOUT_ERROR)?"TIMEOUT":report2status (%report);
-	    printf ("STATUS %-7s FILE: $ffile Line:$line -- Command: $cl -- Dump: $ddump ", $status);
+	    printf ("STATUS: %-7s FILE: %-20s Line:%4d -- Command: $cl -- Dump: $ddump ", $status, $ffile,$line);
 	    if ($cached){print "--- cached\n";}
 	    else {print "\n";}
-	    	    
+	    
+	    $lu{$cl}{dump}="$routdir/$ddump";
+	    
 	    if    ($status eq "TIMEOUT"){create_error_dump ("$routdir/$ddump", $cl, "ERROR FATAL TIMEOUT");}
 	    elsif ($status eq "MISSING"){create_error_dump ("$routdir/$ddump", $cl, "ERROR FATAL MISSING");}
 	    elsif ($cached){;}
 	    else 
-	      {system ("mv $dump $routdir/$ddump");}
+	      {
+		system ("mv $dump $routdir/$ddump");
+	      }
 	    
 	    if ($status eq "FAILED" || $status eq "TIMEOUT" || $status eq "MISSING")
 	      {
@@ -514,7 +528,7 @@ sub check_dump_list
 	  my %report=dump2report ($d);
 	  my $status=report2status (%report);
 	  my $cl=dump2cl ($d);
-	  printf ("STATUS: %-7s Dump: $d Command: $cl", $status);
+	  printf ("STATUS: %-7s Dump: %-20s Command: $cl", $d,$status);
 	  
 	  if ($clean)
 	    {
@@ -576,19 +590,22 @@ sub replay_dump_file
     my ($shell,$etime)=dump2run ($replay, $replayed, "quiet");
     my $com=dump2cl ($replay);
     my ($missing, $different, $error, $warning);
-    
+    my $status;
     if (!$name){$name=basename ($replay);}
     
     
     $replayed=path2abs($replayed);
     
     $missing=$warning=$error=$different=0;
-    print "~ ($name) $com $etime ms ";
+    
     my %in =dump2report($replay);
     my %out=dump2report($replayed);
     
     compare_reports (\%in, \%out, "quiet");
-    report2status (%out);
+    $status=report2status (%out);
+    my $shortcom = substr( $com, 0, 50 );
+    printf ("STATUS: %-7s F: %-20s | %-50s | %4d s. ", $status,$name, $shortcom, $etime);
+    
     $missing=$out{MissingOutput};
     $different=$out{N_DifferentOutput};
     $error=$out{error};
@@ -603,22 +620,22 @@ sub replay_dump_file
     print "DIFFERENT_IO $different ";
     print "WARNINGS $warning ";
     print "ERRORS $error ";
+    print "\n";
     
     if    ($STRICT && ($error || $missing)){$shell=1;}
     elsif ($VERY_STRICT && ($error || $missing || $warning || $different)){$shell=1;}
     
-    if (!$shell)
-      {
-	print "PASSED\n";
-      }
-    else
-      {
-	print "FAILED\n";
-      }
+    
     if ($KEEPREPLAYED)
       {
-	print "Replay File: $replayed\n";
-	system ("mv $replayed $outdir");
+	if (-e $replayed)
+	  {
+	    print "\nReplay File Procuced and Kept: $replayed\n";
+	  }
+	else
+	  {
+	    print "\nERROR: replayed file $replayed is MISSING\n";
+	  }
       }
     else
       {
@@ -700,6 +717,8 @@ sub compare_reports
 sub system4tc
     {
       my $com=shift;
+
+      
       system ("t_coffee -clean >/dev/null 2>/dev/null");
       return timeout_system ($com);
     }
@@ -723,10 +742,11 @@ sub dump2run
     if (!$com){$com=dump2cl($idump);}
     $com=dump2cl($idump);
     
-    if ($com =~/.*\|(.*)/)
+    if ($com =~/.*\| (.*)/)
       {
 	$com=$1;
       }
+   
     my %ref=xml2tag_list ($idump, "file");
     
 
@@ -757,7 +777,14 @@ sub dump2run
    
     my $before=time;
     unlink ($odump);
-    if (!$use_stdout)
+
+    if ($DEBUG)
+      {
+	printf ("COM:$com\ncdir: %s\n", cwd);
+	system4tc("$com");
+	exit (0);
+      }
+    elsif (!$use_stdout)
       {
 	$shell=system4tc ("export DUMP_4_TCOFFEE=$odump;$com >/dev/null 2>/dev/null");
       }
@@ -766,8 +793,7 @@ sub dump2run
 	$shell=system4tc ("export DUMP_4_TCOFFEE=$odump;$com >stdout 2>/dev/null");
       }
     my $etime=time - $before;
-    $etime*=1000;
-        
+    my $TOT_TIME+=$etime;
     chdir($cdir);
     safe_rmrf($dir);
     
@@ -779,7 +805,12 @@ sub dump2report
       my ($dump)=shift;
       my $cdir=cwd;
       my %ref;
-      if (!$dump || !-e $dump){return %ref;}
+      if (!$dump || !-e $dump)
+
+	{
+	  $ref{status}="MISSING";
+	  return %ref;
+	}
      
       %ref=xml2tag_list ($dump, "file");
       
@@ -837,10 +868,28 @@ sub dump2cl
 sub clean_command
       {
 	my $c=shift;
+	my $nc;
 	$c=~s/\s+/ /g;
 	$c=~s/^\s+//g;
 	$c=~s/\s+$//g;
-	return $c;
+	$c=~s/=/ /g;
+	$c=~s/,/ /g;
+	$c=~s/;/ /g;
+	
+	#protect pipe symbols with single quotes
+	my @list=split (/\s+/, $c);
+	foreach my $w (@list)
+	  {
+	    if ($w=~/\|/)
+	      {
+		$w="\'$w\'";
+	      }
+	    if ($nc){$nc.=" $w";}
+	    else 
+	      {$nc=$w;}
+	  }
+		
+	return $nc;
       }
 
 #xml parsing
@@ -942,7 +991,8 @@ sub file2string
 	$string.=$l;
       }
     close (F);
-    $string=~s/\r\n//g;
+    $string=~s/\r\n/$RETURN/g;
+    $string=~s/\r/$RETURN/g;
     $string=~s/\n/$RETURN/g;
     return $string;
   }
@@ -1182,12 +1232,13 @@ sub create_error_dump
 sub report2status
 	  {
 	    my (%report)=@_;
+	    my $status;
 	    $GCOUNT{processed}++;
 	    
-	    if    (!%report) 
+	    if    (!%report || $report{status} eq "MISSING") 
 	      {
 		$GCOUNT {MISSING}++;
-		return "MISSING";
+		$status= "MISSING";
 	      }
 	    elsif ($report{error})
 	      {
@@ -1195,31 +1246,33 @@ sub report2status
 		  {
 		    
 		    $GCOUNT{TIMEOUT}++;
-		    return "TIMEOUT";
+		    $status= "TIMEOUT";
 		  }
 		else
 		  {
 		    $GCOUNT{FAILED}++;
-		    return "FAILED";
+		    $status="FAILED";
 		  }
-	      }
-	    elsif ($report{warning})
-	      {
-		$GCOUNT {WARNING}++;
-		return "WARNING";
 	      }
 	    elsif ($report{newwarning})
 	      {
 		$GCOUNT {NEWWARNING}++;
-		return "NEW_WARNING";
+		$status="NEWWARNING";
+	      }
+	    elsif ($report{warning})
+	      {
+		$GCOUNT {WARNING}++;
+		$status= "WARNING";
 	      }
 	    else
 	      {
 		$GCOUNT{PASSED}++;
-		return "PASSED";
+		$status= "PASSED";
 	      }
+	    $report{status}=$status;
+	    return $status;
+	    
 	  }
-	  
 sub super_trim
     {
       my ($string)=@_;

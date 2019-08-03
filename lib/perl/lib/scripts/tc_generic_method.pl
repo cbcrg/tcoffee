@@ -853,6 +853,7 @@ sub seq2msa
       {
 	`clustalo -i seq.pep > result.aln`;
       }
+
     else
       {
 	`$method -infile=seq.pep -outfile=result.aln`;
