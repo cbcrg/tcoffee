@@ -8,7 +8,6 @@ use Cwd;
 use File::Copy;
 use DirHandle;
 use strict;
-use DateTime;
 use File::Basename;
 use File::Find;
 
@@ -20,7 +19,7 @@ my %lu;
 #$GIT=0: no git interaction
 #$GIT=1: Commit all new files, uncommit all deleted files
 #$GIT=2: blank run
-
+my $Version="1.00";
 my $TIMEOUT=1500;#Default Timeout in seconds
 my $TIMEOUT_ERROR=0;
 my $KEEPREPLAYED=0;
