@@ -18,6 +18,7 @@ SHELL := /bin/bash
 ifndef HOME2
 HOME2=$(HOME)/Dropbox
 endif
+#### These paths related to the publishing on the production machine: they can stay relative
 WEB_DIR=$(HOME2)/dropBoxShared/Work/tcoffee.org/public_html/
 WEB_DOC=$(WEB_DIR)/Projects/tcoffee/documentation
 WEB_BIN_DIR=$(HOME2)/dropBoxShared/Work/tcoffee.org/public_html/Packages/Binaries/tcoffee/$(OSNAME)/
@@ -40,6 +41,9 @@ ifdef OPENMP
     KM_FLAGS=-fopenmp
 endif
 
+
+
+##### These paths must be defined relatively to the src directory
 ifndef LIB_DIR
 #LIB_DIR=/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/
 LIB_DIR=$(CURDIR)/../../lib
@@ -114,6 +118,7 @@ CODE_LIST=$(LIB_DIR)/compilation/code_list
 SCRIPT_LIB=$(PERL_LIB_DIR)/scripts
 PERL4MAKEFILE_LIB=$(PERL_LIB_DIR)/perl4makefile
 
+##### End of PATH definition
 
 
 #
@@ -173,7 +178,6 @@ distribution4ci:
 
 doc4ci:
 	cp $(RST_DOC)/README  $(DISTRIB_DIR)
-	rm -f $(HTML_DOC)/*.html
 	rm -f $(DISTRIB_DIR)/doc/html
 	mkdir -p $(DISTRIB_DIR)/doc/html/	
 	cp -r $(HTML_DOC)/* $(DISTRIB_DIR)/doc/html/
@@ -183,7 +187,6 @@ doc4ci:
 
 doc:
 	cp $(RST_DOC)/README  $(DISTRIB_DIR)
-	rm -f $(HTML_DOC)/*.html
 	$(PERL4MAKEFILE_LIB)/edit_version.pl -target=$(RST_DOC)/conf.py -mode=conf.py -version=$(VERSION)
 	sphinx-build -b singlehtml $(RST_DOC) $(HTML_DOC)
 	rm -f $(DISTRIB_DIR)/doc/html
@@ -243,7 +246,7 @@ env:
 
 
 general_distribution:
-	-rm -f $(CODE_LIST);
+	-rm -f $(CODE_LIST)
 	mkdir -p $(DISTRIB_DIR)
 	mkdir -p $(DISTRIB_DIR)/bin
 	mkdir -p $(DISTRIB_DIR)/bin/$(OSNAME)

@@ -544,14 +544,14 @@ t_coffee: $(HEADERS) $(OBJECTS)
 .PHONY: clean
 
 clean:
-	rm *.o_*
-	rm *.script
-	mv install.pl install
-	rm *.pl
-	rm *.h
-	rm *.tc_method
-	rm code_list
-	rm extract_from_pdb
+	rm -f *.o_*
+	rm -f *.script
+	mv -f install.pl install
+	rm -f *.pl
+	rm -f *.h
+	rm -f *.tc_method
+	rm -f code_list
+	rm -f extract_from_pdb
 	rm -rf folders
 
 
