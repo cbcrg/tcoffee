@@ -1,854 +1,0 @@
-<DumpIO>
-<nature>standard dump</nature>
-<program>T-COFFEE</program>
-<version>Version_13.30.7.b7b28e8</version>
-<build>Version_13.30.7.b7b28e8</build>
-<cl>t_coffee -infile proteases_small_g10.aln -output html -score </cl>
-<stack>
-</stack>
-<warning>
-</warning>
-<file>
-<stream>output</stream>
-<name>stdout</name>
-<content>CLUSTAL FORMAT for T-COFFEE Version_13.30.7.b7b28e8 [http://www.tcoffee.org] [MODE:  ], CPU=0.11 sec, SCORE=77, Nseq=19, Len=326 
-
-sp|P29786|TRY3_AEDAE   -----MNQFLFVSFCALLDSAKVSAATLS-----------------SGRI
-sp|P35037|TRY3_ANOGA   -MISNKIAILLAVLVVAVACAQARVAQQHRSVQALPRFLPRPKYDVGHRI
-sp|P03953|CFAD_MOUSE   -----MHSSVYFVALVILGAAVCAAQPRG-------------------RI
-sp|P20160|CAP7_HUMAN   ----MTRLTVLALLAGLLASSRAGSSPLL-------------------DI
-sp|P80015|CAP7_PIG     -------------------------------------------------I
-sp|P08246|ELNE_HUMAN   -MTLGRRLACLFLACVLPALLLGGTALAS-------------------EI
-sp|Q00871|CTRB1_PENVA  ----MIGKLSLLLVCVAVASGNPAAGKPWHWKSPKPLVDPRIHVNATPRI
-sp|P07338|CTRB1_RAT    ------MAFLWLVSCFALVGATFGCG--------VPTIQP--VLTGLSRI
-sp|P00773|ELA1_RAT     -------MLRFLVFASLVLYGHSTQD----------------FPETNARV
-sp|Q06606|GRZ2_RAT     --------MFLFLFFLVAILPVNTEG---------------------GEI
-sp|P08884|GRAE_MOUSE   --------MPPVLILLTLLLPLGAGA---------------------EEI
-sp|P21844|MCPT5_MOUSE  -------MHLLTLHLLLLLLGSSTKA---------------------GEI
-sp|O35205|GRAK_MOUSE   -------MRFSSWALVSLVAGVYMSSECF-----------------HTEI
-sp|Q7YRZ7|GRAA_BOVIN   -MNIPFPFSFPPAICLLLIPGVFPVS--------------------CEGI
-sp|Q9Y5K2|KLK4_HUMAN   MATAGNPWGWFLG-YLILGVAGSLVS-GS-----------------CSQI
-sp|Q91VE3|KLK7_MOUSE   MG------VWLLS-LITVLLSLALETAGQ-----------------GERI
-sp|Q6H321|KLK2_HORSE   --------MWFLVLCLDLSLGETGALPPI-----------------QSRI
-sp|P00757|KLKB4_MOUSE  --------MWFLILFLALSLGGIDAAPPV-----------------QSQV
-sp|Q03238|GRAM_RAT     ------------LLLLLALKTLWAVGNRF-----------------EAQI
-                                                                        :
-
-sp|P29786|TRY3_AEDAE   VGGFQIDIAEVPHQVSLQRSGR----HFCGGSIISPRWVLTRAHCTTNTD
-sp|P35037|TRY3_ANOGA   VGGFEIDVSETPYQVSLQYFNS----HRCGGSVLNSKWILTAAHCTVNLQ
-sp|P03953|CFAD_MOUSE   LGGQEAAAHARPYMASVQVNGT----HVCGGTLLDEQWVLSAAHCMDGVT
-sp|P20160|CAP7_HUMAN   VGGRKARPRQFPFLASIQNQGR----HFCGGALIHARFVMTAASCFQSQN
-sp|P80015|CAP7_PIG     VGGRRAQPQEFPFLASIQKQGR----PFCAGALVHPRFVLTAASCFRGKN
-sp|P08246|ELNE_HUMAN   VGGRRARPHAWPFMVSLQLRGG----HFCGATLIAPNFVMSAAHCVANVN
-sp|Q00871|CTRB1_PENVA  VGGVEATPHSWPHQAALFIDD----MYFCGGSLISSEWVLTAAHCM---D
-sp|P07338|CTRB1_RAT    VNGEDAIPGSWPWQVSLQDKTG---FHFCGGSLISEDWVVTAAHCG---V
-sp|P00773|ELA1_RAT     VGGAEARRNSWPSQISLQYLSGGSWYHTCGGTLIRRNWVMTAAHCV---S
-sp|Q06606|GRZ2_RAT     IWGTESKPHSRPYMAFIKFYDSNSEPHHCGGFLVAKDIVMTAAHCN----
-sp|P08884|GRAE_MOUSE   IGGHVVKPHSRPYMAFVKSVDIEGNRRYCGGFLVQDDFVLTAAHCR----
-sp|P21844|MCPT5_MOUSE  IGGTECIPHSRPYMAYLEIVTSENYLSACSGFLIRRNFVLTAAHCA----
-sp|O35205|GRAK_MOUSE   IGGREVQPHSRPFMASIQYRS----KHICGGVLIHPQWVLTAAHCYSWFP
-sp|Q7YRZ7|GRAA_BOVIN   IGGNEVAPHTRRYMALIKG------LKLCAGALIKENWVLTAAHCD---L
-sp|Q9Y5K2|KLK4_HUMAN   INGEDCSPHSQPWQAALVMEN----ELFCSGVLVHPQWVLSAAHCF----
-sp|Q91VE3|KLK7_MOUSE   IDGYKCKEGSHPWQVALLKGN----QLHCGGVLVDKYWVLTAAHCK----
-sp|Q6H321|KLK2_HORSE   IGGWECEKHSKPWQVAVYHQG----HFQCGGVLVHPQWVLTAAHCM----
-sp|P00757|KLKB4_MOUSE  D----CE-NSQPWHVAVYRFN----KYQCGGVLLDRNWVLTAAHCY----
-sp|Q03238|GRAM_RAT     IGGREAVPHSRPYMVSLQNTK----SHMCGGVLVHQKWVLTAAHCLS--E
-                                       :           *.. ::    ::: * *     
-
-sp|P29786|TRY3_AEDAE   PA-AYTIRAGSTDRTNGG----IIVKVKSVIPHPQYNGDTYNY-------
-sp|P35037|TRY3_ANOGA   PS-SLAVRLGSSRHASGG----TVVRVARVLEHPNYDDSTIDY-------
-sp|P03953|CFAD_MOUSE   DDDSVQVLLGAHSLSAPEP-YKRWYDVQSVVPHPGSRPDSLED-------
-sp|P20160|CAP7_HUMAN   PG-VSTVVLGAYDLRRRER-QSRQTFSISSMSENGYDPQQNLN-------
-sp|P80015|CAP7_PIG     SG-SASVVLGAYDLRQQE--QSRQTFSIRSISQNGYDPRQNLN-------
-sp|P08246|ELNE_HUMAN   VR-AVRVVLGAHNLSRRE--PTRQVFAVQRIFENGYDPVNLLN-------
-sp|Q00871|CTRB1_PENVA  GAGFVEVVLGAHNIRQNEA-SQVSITSTDFFTHENWNSWLLTN-------
-sp|P07338|CTRB1_RAT    KT-SDVVVAGEFDQGSDEE-NIQVLKIAQVFKNPKFNMFTVRN-------
-sp|P00773|ELA1_RAT     SQMTFRVVVGDHNLSQNDG-TEQYVSVQKIMVHPTWNSNNVAAG------
-sp|Q06606|GRZ2_RAT     -GRNIKVTLGAHNIK-KQ-ENTQVISVVKAKPHENYDRDSH---------
-sp|P08884|GRAE_MOUSE   -NRTMTVTLGAHNIKAKE-ETQQIIPVAKAIPHPDYNATAF---------
-sp|P21844|MCPT5_MOUSE  -GRSITVLLGAHNKTSKE-DTWQKLEVEKQFLHPKYDENLV---------
-sp|O35205|GRAK_MOUSE   RGHSPTVVLGAHSLSKNE-PMKQTFEIKKFIPFSRLQSGSA---------
-sp|Q7YRZ7|GRAA_BOVIN   KGN-PQVILGAHSTSHKE-KLDQVFSIKKAIPYPCFDPQTF---------
-sp|Q9Y5K2|KLK4_HUMAN   -QNSYTIGLGLHSLEADQEPGSQMVEASLSVRHPEYNRPLL---------
-sp|Q91VE3|KLK7_MOUSE   -MGQYQVQLGSDKIG-DQ--SAQKIKATKSFRHPGYSTKTH---------
-sp|Q6H321|KLK2_HORSE   -SDDYQIWLGRHNLSEDE-DTAQFHQVSDSFLDPQFDLSLLKKKYLRPYD
-sp|P00757|KLKB4_MOUSE  -NDKYQVWLGKNNFLEDE-PSDQHRLVSKAIPHPDFNMSLLNEHTPQPED
-sp|Q03238|GRAM_RAT     PLQQLKLVFGLHSLHDPQ-DPGLTFYIKQAIKHPGYNLKYEN--------
-                             :  *                                        
-
-sp|P29786|TRY3_AEDAE   ----DFSLLELDESIGFSRSIEAIALPD-ASETVADGAMCTVSGWGDTKN
-sp|P35037|TRY3_ANOGA   ----DFSLMELESELTFSDVVQPVSLPD-QDEAVEDGTMTIVSGWGNTQS
-sp|P03953|CFAD_MOUSE   ----DLILFKLSQNASLGPHVRPLPLQY-EDKEVEPGTLCDVAGWGVVTH
-sp|P20160|CAP7_HUMAN   ----DLMLLQLDREANLTSSVTILPLPL-QNATVEAGTRCQVAGWGSQRS
-sp|P80015|CAP7_PIG     ----DVLLLQLDREARLTPSVALVPLPP-QNATVEAGTNCQVAGWGTQRL
-sp|P08246|ELNE_HUMAN   ----DIVILQLNGSATINANVQVAQLPA-QGRRLGNGVQCLAMGWGLLGR
-sp|Q00871|CTRB1_PENVA  ----DIALIRLPSPVSLNSNIKTVKLP---SSDVSVGTTVTPTGWGRPSD
-sp|P07338|CTRB1_RAT    ----DITLLKLATPAQFSETVSAVCLPN-VDDDFPPGTVCATTGWGKTKY
-sp|P00773|ELA1_RAT     ---YDIALLRLAQSVTLNNYVQLAVLPQ-EGTILANNNPCYITGWGRTRT
-sp|Q06606|GRZ2_RAT     --FNDIMLLKLERKAQLNGVVKTIALPR-SQDWVKPGQVCTVAGWG--RL
-sp|P08884|GRAE_MOUSE   --FSDIMLLKLESKAKRTKAVRPLKLPR-PNARVKPGDVCSVAGWGSRSI
-sp|P21844|MCPT5_MOUSE  --VHDIMLLKLKEKAKLTLGVGTLPLSA-NFNFIPPGRMCRAVGWG-RTN
-sp|O35205|GRAK_MOUSE   --SHDIMLIKLRTAAELNKNVQLLHLG--SKNYLRDGTKCQVTGWGTTKP
-sp|Q7YRZ7|GRAA_BOVIN   --EGDLQLLQLEGKATMTKAVGILQLPR-TEDDVKPHTKCHVAGWGSTKK
-sp|Q9Y5K2|KLK4_HUMAN   --ANDLMLIKLDESVSESDTIRSISIAS-QCPTA--GNSCLVSGWGLLAN
-sp|Q91VE3|KLK7_MOUSE   --VNDIMLVRLDEPVKMSSKVEAVQLPE-HCEPP--GTSCTVSGWGTTTS
-sp|Q6H321|KLK2_HORSE   DISHDLMLLRLAQPARITDAVKILDLPT-QEPKL--GSTCYTSGWGLIST
-sp|P00757|KLKB4_MOUSE  DYSNDLMLLRLSKPADITDVVKPITLPT-EEPKL--GSTCLASGWGSTTP
-sp|Q03238|GRAM_RAT     ----DLALLKLDGRVKPSKNVKPLALPRKPRDKPAEGSRCSTAGWG-ITH
-                           *. :..*         :    :                 ***    
-
-sp|P29786|TRY3_AEDAE   VF-EMNTLLRAVNVPSYNQAECAAALV--NVVPVTEQMICAGYAAGGKDS
-sp|P35037|TRY3_ANOGA   AA-ESNAILRAANVPTVNQKECTIAYS--SSGGITDRMLCAGYKRGGKDA
-sp|P03953|CFAD_MOUSE   AG-RRPDVLHQLRVSIMNRTTCNLRTY--HDGVVTINMMCAESNR--RDT
-sp|P20160|CAP7_HUMAN   GG-RLSRFPRFVNVTVTPEDQCRPNN------------VCTGVLTRRGGI
-sp|P80015|CAP7_PIG     RR-LFSRFPRVLNVTVTS-NPCLPRD------------MCIGVFSRRGRI
-sp|P08246|ELNE_HUMAN   NR-GIASVLQELNVTVVT-SLCRRSN------------VCTLVRGRQAGV
-sp|Q00871|CTRB1_PENVA  SASGISDVLRQVNVPVMTNADCDSV-----YGIVGDGVVCIDGTGGK-ST
-sp|P07338|CTRB1_RAT    NALKTPEKLQQAALPIVSEADCKKS-----WGSKITDVMTCAGASGV-SS
-sp|P00773|ELA1_RAT     NG-QLSQTLQQAYLPSVDYSICSSSSY---WGSTVKTTMVCAGGDGVRSG
-sp|Q06606|GRZ2_RAT     ANCTSSNTLQEVNLEVQKGQKCQD----MSEDYNDSIQLCVGNPSEGKAT
-sp|P08884|GRAE_MOUSE   NDTKASARLREAQLVIQEDEECKK----RFRHYTETTEICAGDLKKIKTP
-sp|P21844|MCPT5_MOUSE  VNEPASDTLQEVKMRLQEPQACK-----HFTSFRHNSQLCVGNPKKMQNV
-sp|O35205|GRAK_MOUSE   DLLTASDTLREVTVTIISRKRCNSQSYYNHKPVITKDMICAGDARGQKDS
-sp|Q7YRZ7|GRAA_BOVIN   DACQMSNALREANVTVIDRKICNDAQHYNFNPVIDLSMICAGGRKGEDDS
-sp|Q9Y5K2|KLK4_HUMAN   --GRMPTVLQCVNVSVVSEEVCSK----LYDPLYHPSMFCAGGGQDQKDS
-sp|Q91VE3|KLK7_MOUSE   PDVTFPSDLMCSDVKLISSRECKK----VYKDLLGKTMLCAGIPDSKTNT
-sp|Q6H321|KLK2_HORSE   FTNRGSGTLQCVELRLQSNEKCAR----AYPEKMTEFVLCATHRDDSGSI
-sp|P00757|KLKB4_MOUSE  IKFKYPDDLQCVNLKLLPNEDCDK----AHEMKVTDAMLCAGEMDGGSYT
-sp|Q03238|GRAM_RAT     QRGQLAKSLQELDLRLLDTRMCNNSR--FWNGVLTDSMLCLKAGAKGQAP
-                                    :       *                .           
-
-sp|P29786|TRY3_AEDAE   CQGDSGGPLVSGD----KLVGVVSWG-KGCALPN-LPGVYARVST-VRQW
-sp|P35037|TRY3_ANOGA   CQGDSGGPLVVDG----KLVGVVSWG-FGCAMPG-YPGVYARVAV-VRDW
-sp|P03953|CFAD_MOUSE   CRGDSGSPLVCGD----AVEGVVTWGSRVCGNGK-KPGVYTRVSS-YRMW
-sp|P20160|CAP7_HUMAN   CNGDGGTPLVCEG----LAHGVASFSLGPCGRG---PDFFTRVAL-FRDW
-sp|P80015|CAP7_PIG     SQGDRGTPLVCNG----LAQGVASFLRRRFRRS---SGFFTRVAL-FRNW
-sp|P08246|ELNE_HUMAN   CFGDSGSPLVCNG----LIHGIASFVRGGCASGL-YPDAFAPVAQ-FVNW
-sp|Q00871|CTRB1_PENVA  CNGDSGGPLNLNG----MTYGITSFGSSAGCEKG-YPAAFTRVYY-YLDW
-sp|P07338|CTRB1_RAT    CMGDSGGPLVCQKDGVWTLAGIVSWG-SGVCSTS-TPAVYSRVTA-LMPW
-sp|P00773|ELA1_RAT     CQGDSGGPLHCLVNGQYSVHGVTSFVSSMGCNVSKKPTVFTRVSA-YISW
-sp|Q06606|GRZ2_RAT     GKGDSGGPFVCD----GVAQGIVSYRL-CTGTL---PRVFTRISS-FIPW
-sp|P08884|GRAE_MOUSE   FKGDSGGPLVCD----NKAYGLLAYAK-NRTIS---SGVFTKIVH-FLPW
-sp|P21844|MCPT5_MOUSE  YKGDSGGPLLCA----GIAQGIASYVH-RNAKP---PAVFTRISH-YRPW
-sp|O35205|GRAK_MOUSE   CKGDSGGPLICK----GIFHALVSQGY-KCGIAK-KPGIYTLLTKKYQTW
-sp|Q7YRZ7|GRAA_BOVIN   CEGDSGSPLICD----NVFRGVTSFG--KCGNPQ-KPGIYILLTKKHLNW
-sp|Q9Y5K2|KLK4_HUMAN   CNGDSGGPLICN----GYLQGLVSFGKAPCGQVG-VPGVYTNLCK-FTEW
-sp|Q91VE3|KLK7_MOUSE   CNGDSGGPLVCN----DTLQGLVSWGTYPCGQPN-DPGVYTQVCK-YKRW
-sp|Q6H321|KLK2_HORSE   CLGDSGGALICD----GVFQGITSWGYSECADFN-DNFVFTKVMP-HLKW
-sp|P00757|KLKB4_MOUSE  CEHDSGGPLICD----GILQGITSWGPEPCGEPT-EPSVYTKLIK-FSSW
-sp|Q03238|GRAM_RAT     CKGDSGGPLVCGK---GKVDGILSFSSKNCTDIF-KPTVATAVAP-YSSW
-                          * * .:           .: :                  :      *
-
-sp|P29786|TRY3_AEDAE   IREVSEV-------------------
-sp|P35037|TRY3_ANOGA   VRENSGA-------------------
-sp|P03953|CFAD_MOUSE   IENITNGNMTS---------------
-sp|P20160|CAP7_HUMAN   IDGVL----NNPGPGPA---------
-sp|P80015|CAP7_PIG     IDSVL----NNP-P------------
-sp|P08246|ELNE_HUMAN   IDSIIQRSEDNPCPHPRDPDPASRTH
-sp|Q00871|CTRB1_PENVA  IQQKTGVTP-----------------
-sp|P07338|CTRB1_RAT    VQQILEAN------------------
-sp|P00773|ELA1_RAT     MNNVIAYT------------------
-sp|Q06606|GRZ2_RAT     IQKTMKVLQQS---------------
-sp|P08884|GRAE_MOUSE   ISRNMKLL------------------
-sp|P21844|MCPT5_MOUSE  INKILREN------------------
-sp|O35205|GRAK_MOUSE   IKSKLAPSRAH---------------
-sp|Q7YRZ7|GRAA_BOVIN   IKKTIAGAI-----------------
-sp|Q9Y5K2|KLK4_HUMAN   IEKTVQAS------------------
-sp|Q91VE3|KLK7_MOUSE   VMETMKTHR-----------------
-sp|Q6H321|KLK2_HORSE   IKETIEKNS-----------------
-sp|P00757|KLKB4_MOUSE  IRETMANNP-----------------
-sp|Q03238|GRAM_RAT     IRKVIGRWSPQPLT------------
-                       :                         
-
-
-
-</content>
-</file>
-<file>
-<stream>output</stream>
-<name>stderr</name>
-<content>HERE: DPA=0
-
-PROGRAM: T-COFFEE Version_13.30.7.b7b28e8 (Version_13.30.7.b7b28e8)
--full_log      	S	[0] 
--genepred_score	S	[0] 	nsd
--run_name      	S	[0] 
--mem_mode      	S	[0] 	mem
--extend        	D	[1] 	1 
--extend_mode   	S	[0] 	very_fast_triplet
--max_n_pair    	D	[0] 	10 
--seq_name_for_quadruplet	S	[0] 	all
--compact       	S	[0] 	default
--clean         	S	[0] 	no
--do_self       	FL	[0] 	0
--do_normalise  	D	[0] 	1000 
--template_file 	S	[0] 
--setenv        	S	[0] 	0
--export        	S	[0] 	0
--template_mode 	S	[0] 
--flip          	D	[0] 	0 
--remove_template_file	D	[0] 	0 
--profile_template_file	S	[0] 
--in            	S	[0] 
--seq           	S	[0] 
--aln           	S	[0] 
--method_limits 	S	[0] 
--method        	S	[0] 
--lib           	S	[0] 
--profile       	S	[0] 
--profile1      	S	[0] 
--profile2      	S	[0] 
--pdb           	S	[0] 
--relax_lib     	D	[0] 	1 
--filter_lib    	D	[0] 	0 
--shrink_lib    	D	[0] 	0 
--out_lib       	W_F	[0] 	no
--out_lib_mode  	S	[0] 	primary
--lib_only      	D	[0] 	0 
--outseqweight  	W_F	[0] 	no
--seq_source    	S	[0] 	ANY
--cosmetic_penalty	D	[0] 	0 
--gapopen       	D	[0] 	0 
--gapext        	D	[0] 	0 
--fgapopen      	D	[0] 	0 
--fgapext       	D	[0] 	0 
--nomatch       	D	[0] 	0 
--newtree       	W_F	[0] 	default
--tree          	W_F	[0] 	NO
--usetree       	R_F	[0] 
--tree_mode     	S	[0] 	nj
--distance_matrix_mode	S	[0] 	ktup
--distance_matrix_sim_mode	S	[0] 	idmat_sim1
--quicktree     	FL	[0] 	0
--outfile       	W_F	[0] 	default
--maximise      	FL	[1] 	1
--output        	S	[1] 	html
--len           	D	[0] 	0 
--infile        	R_F	[1] 	proteases_small_g10.aln
--matrix        	S	[0] 	default
--tg_mode       	D	[0] 	1 
--profile_mode  	S	[0] 	cw_profile_profile
--profile_comparison	S	[0] 	profile
--dp_mode       	S	[0] 	linked_pair_wise
--ktuple        	D	[0] 	1 
--ndiag         	D	[0] 	0 
--diag_threshold	D	[0] 	0 
--diag_mode     	D	[0] 	0 
--sim_matrix    	S	[0] 	vasiliky
--transform     	S	[0] 
--extend_seq    	FL	[0] 	0
--outorder      	S	[0] 	input
--inorder       	S	[0] 	aligned
--seqnos        	S	[0] 	off
--case          	S	[0] 	keep
--cpu           	D	[0] 	0 
--ulimit        	D	[0] 	-1 
--maxnseq       	D	[0] 	-1 
--maxlen        	D	[0] 	-1 
--sample_dp     	D	[0] 	0 
--weight        	S	[0] 	default
--seq_weight    	S	[0] 	no
--align         	FL	[1] 	1
--mocca         	FL	[0] 	0
--domain        	FL	[0] 	0
--start         	D	[0] 	0 
--len           	D	[0] 	0 
--scale         	D	[0] 	0 
--mocca_interactive	FL	[0] 	0
--method_evaluate_mode	S	[0] 	default
--color_mode    	S	[0] 	new
--aln_line_length	D	[0] 	0 
--evaluate_mode 	S	[0] 	triplet
--get_type      	FL	[0] 	0
--clean_aln     	D	[0] 	0 
--clean_threshold	D	[1] 	1 
--clean_iteration	D	[1] 	1 
--clean_evaluate_mode	S	[0] 	t_coffee_fast
--extend_matrix 	FL	[0] 	0
--prot_min_sim  	D	[40] 	40 
--prot_max_sim  	D	[90] 	90 
--prot_trim     	D	[20] 	20 
--prot_min_cov  	D	[40] 	40 
--pdb_type      	S	[0] 	d
--pdb_min_sim   	D	[35] 	35 
--pdb_max_sim   	D	[100] 	100 
--pdb_min_cov   	D	[50] 	50 
--pdb_blast_server	W_F	[0] 	EBI
--blast         	W_F	[0] 
--blast_server  	W_F	[0] 	EBI
--pdb_db        	W_F	[0] 	pdb
--protein_db    	W_F	[0] 	uniref50
--method_log    	W_F	[0] 	no
--struc_to_use  	S	[0] 
--cache         	W_F	[0] 	use
--print_cache   	FL	[0] 	0
--align_pdb_param_file	W_F	[0] 	no
--align_pdb_hasch_mode	W_F	[0] 	hasch_ca_trace_bubble
--external_aligner	S	[0] 	NO
--msa_mode      	S	[0] 	tree
--et_mode       	S	[0] 	et
--master        	S	[0] 	no
--blast_nseq    	D	[0] 	0 
--lalign_n_top  	D	[0] 	10 
--iterate       	D	[0] 	0 
--trim          	D	[0] 	0 
--split         	D	[0] 	0 
--trimfile      	S	[0] 	default
--split         	D	[0] 	0 
--split_nseq_thres	D	[0] 	0 
--split_score_thres	D	[0] 	0 
--check_pdb_status	D	[0] 	0 
--clean_seq_name	D	[0] 	0 
--seq_to_keep   	S	[0] 
--dpa_master_aln	S	[0] 
--dpa_maxnseq   	D	[0] 	0 
--dpa_min_score1	D	[0] 
--dpa_min_score2	D	[0] 
--dpa_keep_tmpfile	FL	[0] 	0
--dpa_debug     	D	[0] 	0 
--multi_core    	S	[0] 	templates_jobs_relax_msa_evaluate
--n_core        	D	[0] 	1 
--thread        	D	[0] 	1 
--max_n_proc    	D	[0] 	0 
--lib_list      	S	[0] 
--prune_lib_mode	S	[0] 	5
--tip           	S	[0] 	none
--rna_lib       	S	[0] 
--no_warning    	D	[0] 	0 
--run_local_script	D	[0] 	0 
--proxy         	S	[0] 	unset
--email         	S	[0] 
--clean_overaln 	D	[0] 	0 
--overaln_param 	S	[0] 
--overaln_mode  	S	[0] 
--overaln_model 	S	[0] 
--overaln_threshold	D	[0] 	0 
--overaln_target	D	[0] 	0 
--overaln_P1    	D	[0] 	0 
--overaln_P2    	D	[0] 	0 
--overaln_P3    	D	[0] 	0 
--overaln_P4    	D	[0] 	0 
--exon_boundaries	S	[0] 
--display       	D	[0] 	100 
-
-INPUT FILES
-	Input File (S) proteases_small_g10.aln  Format clustal_aln
-	Input File (M) proba_pair 
-
-Identify Master Sequences [no]:
-
-Master Sequences Identified
-INPUT SEQUENCES: 19 SEQUENCES  [PROTEIN]
-  Input File proteases_small_g10.aln Seq sp|O35205|GRAK_MOUSE  Length  263 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|P00757|KLKB4_MOUSE Length  256 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|P00773|ELA1_RAT    Length  266 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|P03953|CFAD_MOUSE  Length  259 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|P07338|CTRB1_RAT   Length  263 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|P08246|ELNE_HUMAN  Length  267 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|P08884|GRAE_MOUSE  Length  248 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|P20160|CAP7_HUMAN  Length  251 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|P21844|MCPT5_MOUSE Length  247 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|P29786|TRY3_AEDAE  Length  254 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|P35037|TRY3_ANOGA  Length  275 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|P80015|CAP7_PIG    Length  219 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|Q00871|CTRB1_PENVA Length  271 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|Q03238|GRAM_RAT    Length  258 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|Q06606|GRZ2_RAT    Length  248 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|Q6H321|KLK2_HORSE  Length  261 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|Q7YRZ7|GRAA_BOVIN  Length  258 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|Q91VE3|KLK7_MOUSE  Length  249 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|Q9Y5K2|KLK4_HUMAN  Length  254 type PROTEIN Struct Unchecked
-
-	Multi Core Mode: 1 processors:
-ib       	S	[0] 
--no_warning    	D	[0] 	0 
--run_local_script	D	[0] 	0 
--proxy         	S	[0] 	unset
--email         	S	[0] 
--clean_overaln 	D	[0] 	0 
--overaln_param 	S	[0] 
--overaln_mode  	S	[0] 
--overaln_model 	S	[0] 
--overaln_threshold	D	[0] 	0 
--overaln_target	D	[0] 	0 
--overaln_P1    	D	[0] 	0 
--overaln_P2    	D	[0] 	0 
--overaln_P3    	D	[0] 	0 
--overaln_P4    	D	[0] 	0 
--exon_boundaries	S	[0] 
--display       	D	[0] 	100 
-
-INPUT FILES
-	Input File (S) proteases_small_g10.aln  Format clustal_aln
-	Input File (M) proba_pair 
-
-Identify Master Sequences [no]:
-
-Master Sequences Identified
-INPUT SEQUENCES: 19 SEQUENCES  [PROTEIN]
-  Input File proteases_small_g10.aln Seq sp|O35205|GRAK_MOUSE  Length  263 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|P00757|KLKB4_MOUSE Length  256 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|P00773|ELA1_RAT    Length  266 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|P03953|CFAD_MOUSE  Length  259 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|P07338|CTRB1_RAT   Length  263 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|P08246|ELNE_HUMAN  Length  267 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|P08884|GRAE_MOUSE  Length  248 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|P20160|CAP7_HUMAN  Length  251 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|P21844|MCPT5_MOUSE Length  247 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|P29786|TRY3_AEDAE  Length  254 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|P35037|TRY3_ANOGA  Length  275 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|P80015|CAP7_PIG    Length  219 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|Q00871|CTRB1_PENVA Length  271 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|Q03238|GRAM_RAT    Length  258 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|Q06606|GRZ2_RAT    Length  248 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|Q6H321|KLK2_HORSE  Length  261 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|Q7YRZ7|GRAA_BOVIN  Length  258 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|Q91VE3|KLK7_MOUSE  Length  249 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|Q9Y5K2|KLK4_HUMAN  Length  254 type PROTEIN Struct Unchecked
-
-	Multi Core Mode: 1 processors:
-
-	--- Process Method/Library/Aln Sproteases_small_g10.aln
-	xxx Retrieved Sproteases_small_g10.alnib       	S	[0] 
--no_warning    	D	[0] 	0 
--run_local_script	D	[0] 	0 
--proxy         	S	[0] 	unset
--email         	S	[0] 
--clean_overaln 	D	[0] 	0 
--overaln_param 	S	[0] 
--overaln_mode  	S	[0] 
--overaln_model 	S	[0] 
--overaln_threshold	D	[0] 	0 
--overaln_target	D	[0] 	0 
--overaln_P1    	D	[0] 	0 
--overaln_P2    	D	[0] 	0 
--overaln_P3    	D	[0] 	0 
--overaln_P4    	D	[0] 	0 
--exon_boundaries	S	[0] 
--display       	D	[0] 	100 
-
-INPUT FILES
-	Input File (S) proteases_small_g10.aln  Format clustal_aln
-	Input File (M) proba_pair 
-
-Identify Master Sequences [no]:
-
-Master Sequences Identified
-INPUT SEQUENCES: 19 SEQUENCES  [PROTEIN]
-  Input File proteases_small_g10.aln Seq sp|O35205|GRAK_MOUSE  Length  263 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|P00757|KLKB4_MOUSE Length  256 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|P00773|ELA1_RAT    Length  266 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|P03953|CFAD_MOUSE  Length  259 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|P07338|CTRB1_RAT   Length  263 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|P08246|ELNE_HUMAN  Length  267 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|P08884|GRAE_MOUSE  Length  248 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|P20160|CAP7_HUMAN  Length  251 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|P21844|MCPT5_MOUSE Length  247 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|P29786|TRY3_AEDAE  Length  254 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|P35037|TRY3_ANOGA  Length  275 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|P80015|CAP7_PIG    Length  219 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|Q00871|CTRB1_PENVA Length  271 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|Q03238|GRAM_RAT    Length  258 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|Q06606|GRZ2_RAT    Length  248 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|Q6H321|KLK2_HORSE  Length  261 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|Q7YRZ7|GRAA_BOVIN  Length  258 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|Q91VE3|KLK7_MOUSE  Length  249 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|Q9Y5K2|KLK4_HUMAN  Length  254 type PROTEIN Struct Unchecked
-
-	Multi Core Mode: 1 processors:
-
-	--- Process Method/Library/Aln Sproteases_small_g10.aln
-	xxx Retrieved Sproteases_small_g10.alnib       	S	[0] 
--no_warning    	D	[0] 	0 
--run_local_script	D	[0] 	0 
--proxy         	S	[0] 	unset
--email         	S	[0] 
--clean_overaln 	D	[0] 	0 
--overaln_param 	S	[0] 
--overaln_mode  	S	[0] 
--overaln_model 	S	[0] 
--overaln_threshold	D	[0] 	0 
--overaln_target	D	[0] 	0 
--overaln_P1    	D	[0] 	0 
--overaln_P2    	D	[0] 	0 
--overaln_P3    	D	[0] 	0 
--overaln_P4    	D	[0] 	0 
--exon_boundaries	S	[0] 
--display       	D	[0] 	100 
-
-INPUT FILES
-	Input File (S) proteases_small_g10.aln  Format clustal_aln
-	Input File (M) proba_pair 
-
-Identify Master Sequences [no]:
-
-Master Sequences Identified
-INPUT SEQUENCES: 19 SEQUENCES  [PROTEIN]
-  Input File proteases_small_g10.aln Seq sp|O35205|GRAK_MOUSE  Length  263 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|P00757|KLKB4_MOUSE Length  256 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|P00773|ELA1_RAT    Length  266 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|P03953|CFAD_MOUSE  Length  259 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|P07338|CTRB1_RAT   Length  263 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|P08246|ELNE_HUMAN  Length  267 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|P08884|GRAE_MOUSE  Length  248 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|P20160|CAP7_HUMAN  Length  251 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|P21844|MCPT5_MOUSE Length  247 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|P29786|TRY3_AEDAE  Length  254 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|P35037|TRY3_ANOGA  Length  275 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|P80015|CAP7_PIG    Length  219 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|Q00871|CTRB1_PENVA Length  271 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|Q03238|GRAM_RAT    Length  258 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|Q06606|GRZ2_RAT    Length  248 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|Q6H321|KLK2_HORSE  Length  261 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|Q7YRZ7|GRAA_BOVIN  Length  258 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|Q91VE3|KLK7_MOUSE  Length  249 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|Q9Y5K2|KLK4_HUMAN  Length  254 type PROTEIN Struct Unchecked
-
-	Multi Core Mode: 1 processors:
-
-	--- Process Method/Library/Aln Sproteases_small_g10.aln
-	xxx Retrieved Sproteases_small_g10.aln
-	--- Process Method/Library/Aln Mproba_pair
-	xxx Retrieved Mproba_pair
-
-	All Methods Retrieved
-
-MANUAL PENALTIES: gapopen=0 gapext=0
-
-	Library Total Size: [196138]
-
-Library Relaxation: Multi_proc [1]
- 
-!		[Relax Library][TOT=   19][  0 %]!		[Relax Library][TOT=   19][ 10 %]!		[Relax Library][TOT=   19][ 15 %]!		[Relax Library][TOT=   19][ 21 %]!		[Relax Library][TOT=   19][ 26 %]!		[Relax Library][TOT=   19][ 31 %]!		[Relax Library][TOT=   19][ 36 %]!		[Relax Library][TOT=   19][ 42 %]!		[Relax Library][TOT=   19][ 47 %]!		[Relax Library][TOT=   19][ 52 %]!		[Relax Library][TOT=   19][ 57 %]!		[Relax Library][TOT=   19][ 63 %]!		[Relax Library][TOT=   19][ 68 %]!		[Relax Library][TOT=   19][ 73 %]!		[Relax Library][TOT=   19][ 78 %]!		[Relax Library][TOT=   19][ 84 %]!		[Relax Library][TOT=   19][ 89 %]!		[Relax Library][TOT=   19][ 94 %]!		[Relax Library][TOT=   19][100 %]
-ib       	S	[0] 
--no_warning    	D	[0] 	0 
--run_local_script	D	[0] 	0 
--proxy         	S	[0] 	unset
--email         	S	[0] 
--clean_overaln 	D	[0] 	0 
--overaln_param 	S	[0] 
--overaln_mode  	S	[0] 
--overaln_model 	S	[0] 
--overaln_threshold	D	[0] 	0 
--overaln_target	D	[0] 	0 
--overaln_P1    	D	[0] 	0 
--overaln_P2    	D	[0] 	0 
--overaln_P3    	D	[0] 	0 
--overaln_P4    	D	[0] 	0 
--exon_boundaries	S	[0] 
--display       	D	[0] 	100 
-
-INPUT FILES
-	Input File (S) proteases_small_g10.aln  Format clustal_aln
-	Input File (M) proba_pair 
-
-Identify Master Sequences [no]:
-
-Master Sequences Identified
-INPUT SEQUENCES: 19 SEQUENCES  [PROTEIN]
-  Input File proteases_small_g10.aln Seq sp|O35205|GRAK_MOUSE  Length  263 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|P00757|KLKB4_MOUSE Length  256 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|P00773|ELA1_RAT    Length  266 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|P03953|CFAD_MOUSE  Length  259 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|P07338|CTRB1_RAT   Length  263 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|P08246|ELNE_HUMAN  Length  267 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|P08884|GRAE_MOUSE  Length  248 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|P20160|CAP7_HUMAN  Length  251 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|P21844|MCPT5_MOUSE Length  247 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|P29786|TRY3_AEDAE  Length  254 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|P35037|TRY3_ANOGA  Length  275 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|P80015|CAP7_PIG    Length  219 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|Q00871|CTRB1_PENVA Length  271 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|Q03238|GRAM_RAT    Length  258 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|Q06606|GRZ2_RAT    Length  248 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|Q6H321|KLK2_HORSE  Length  261 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|Q7YRZ7|GRAA_BOVIN  Length  258 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|Q91VE3|KLK7_MOUSE  Length  249 type PROTEIN Struct Unchecked
-  Input File proteases_small_g10.aln Seq sp|Q9Y5K2|KLK4_HUMAN  Length  254 type PROTEIN Struct Unchecked
-
-	Multi Core Mode: 1 processors:
-
-	--- Process Method/Library/Aln Sproteases_small_g10.aln
-	xxx Retrieved Sproteases_small_g10.aln
-	--- Process Method/Library/Aln Mproba_pair
-	xxx Retrieved Mproba_pair
-
-	All Methods Retrieved
-
-MANUAL PENALTIES: gapopen=0 gapext=0
-
-	Library Total Size: [196138]
-
-Library Relaxation: Multi_proc [1]
- 
-Relaxation Summary: [196138]--->[167409]
-
-
-
-UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
-
-!		[Final Evaluation][TOT=  326][  0 %]!		[Final Evaluation][TOT=  326][  1 %]!		[Final Evaluation][TOT=  326][  2 %]!		[Final Evaluation][TOT=  326][  3 %]!		[Final Evaluation][TOT=  326][  4 %]!		[Final Evaluation][TOT=  326][  5 %]!		[Final Evaluation][TOT=  326][  6 %]!		[Final Evaluation][TOT=  326][  7 %]!		[Final Evaluation][TOT=  326][  8 %]!		[Final Evaluation][TOT=  326][  9 %]!		[Final Evaluation][TOT=  326][ 10 %]!		[Final Evaluation][TOT=  326][ 11 %]!		[Final Evaluation][TOT=  326][ 12 %]!		[Final Evaluation][TOT=  326][ 13 %]!		[Final Evaluation][TOT=  326][ 14 %]!		[Final Evaluation][TOT=  326][ 15 %]!		[Final Evaluation][TOT=  326][ 16 %]!		[Final Evaluation][TOT=  326][ 17 %]!		[Final Evaluation][TOT=  326][ 18 %]!		[Final Evaluation][TOT=  326][ 19 %]!		[Final Evaluation][TOT=  326][ 20 %]!		[Final Evaluation][TOT=  326][ 21 %]!		[Final Evaluation][TOT=  326][ 22 %]!		[Final Evaluation][TOT=  326][ 23 %]!		[Final Evaluation][TOT=  326][ 24 %]!		[Final Evaluation][TOT=  326][ 25 %]!		[Final Evaluation][TOT=  326][ 26 %]!		[Final Evaluation][TOT=  326][ 27 %]!		[Final Evaluation][TOT=  326][ 28 %]!		[Final Evaluation][TOT=  326][ 29 %]!		[Final Evaluation][TOT=  326][ 30 %]!		[Final Evaluation][TOT=  326][ 31 %]!		[Final Evaluation][TOT=  326][ 32 %]!		[Final Evaluation][TOT=  326][ 33 %]!		[Final Evaluation][TOT=  326][ 34 %]!		[Final Evaluation][TOT=  326][ 35 %]!		[Final Evaluation][TOT=  326][ 36 %]!		[Final Evaluation][TOT=  326][ 37 %]!		[Final Evaluation][TOT=  326][ 38 %]!		[Final Evaluation][TOT=  326][ 39 %]!		[Final Evaluation][TOT=  326][ 40 %]!		[Final Evaluation][TOT=  326][ 41 %]!		[Final Evaluation][TOT=  326][ 42 %]!		[Final Evaluation][TOT=  326][ 43 %]!		[Final Evaluation][TOT=  326][ 44 %]!		[Final Evaluation][TOT=  326][ 45 %]!		[Final Evaluation][TOT=  326][ 46 %]!		[Final Evaluation][TOT=  326][ 47 %]!		[Final Evaluation][TOT=  326][ 48 %]!		[Final Evaluation][TOT=  326][ 49 %]!		[Final Evaluation][TOT=  326][ 50 %]!		[Final Evaluation][TOT=  326][ 51 %]!		[Final Evaluation][TOT=  326][ 52 %]!		[Final Evaluation][TOT=  326][ 53 %]!		[Final Evaluation][TOT=  326][ 54 %]!		[Final Evaluation][TOT=  326][ 55 %]!		[Final Evaluation][TOT=  326][ 56 %]!		[Final Evaluation][TOT=  326][ 57 %]!		[Final Evaluation][TOT=  326][ 58 %]!		[Final Evaluation][TOT=  326][ 59 %]!		[Final Evaluation][TOT=  326][ 60 %]!		[Final Evaluation][TOT=  326][ 61 %]!		[Final Evaluation][TOT=  326][ 62 %]!		[Final Evaluation][TOT=  326][ 63 %]!		[Final Evaluation][TOT=  326][ 64 %]!		[Final Evaluation][TOT=  326][ 65 %]!		[Final Evaluation][TOT=  326][ 66 %]!		[Final Evaluation][TOT=  326][ 67 %]!		[Final Evaluation][TOT=  326][ 68 %]!		[Final Evaluation][TOT=  326][ 69 %]!		[Final Evaluation][TOT=  326][ 70 %]!		[Final Evaluation][TOT=  326][ 71 %]!		[Final Evaluation][TOT=  326][ 72 %]!		[Final Evaluation][TOT=  326][ 73 %]!		[Final Evaluation][TOT=  326][ 74 %]!		[Final Evaluation][TOT=  326][ 75 %]!		[Final Evaluation][TOT=  326][ 76 %]!		[Final Evaluation][TOT=  326][ 77 %]!		[Final Evaluation][TOT=  326][ 78 %]!		[Final Evaluation][TOT=  326][ 79 %]!		[Final Evaluation][TOT=  326][ 80 %]!		[Final Evaluation][TOT=  326][ 81 %]!		[Final Evaluation][TOT=  326][ 82 %]!		[Final Evaluation][TOT=  326][ 83 %]!		[Final Evaluation][TOT=  326][ 84 %]!		[Final Evaluation][TOT=  326][ 85 %]!		[Final Evaluation][TOT=  326][ 86 %]!		[Final Evaluation][TOT=  326][ 87 %]!		[Final Evaluation][TOT=  326][ 88 %]!		[Final Evaluation][TOT=  326][ 89 %]!		[Final Evaluation][TOT=  326][ 90 %]!		[Final Evaluation][TOT=  326][ 91 %]!		[Final Evaluation][TOT=  326][ 92 %]!		[Final Evaluation][TOT=  326][ 93 %]!		[Final Evaluation][TOT=  326][ 94 %]!		[Final Evaluation][TOT=  326][ 95 %]!		[Final Evaluation][TOT=  326][ 96 %]!		[Final Evaluation][TOT=  326][ 97 %]!		[Final Evaluation][TOT=  326][ 98 %]!		[Final Evaluation][TOT=  326][ 99 %]!		[Final Evaluation][TOT=  326][100 %]
-
-
-
-OUTPUT RESULTS
-	#### File Type= MSA             Format= html            Name= proteases_small_g10.html
-
-# Command Line: t_coffee -infile proteases_small_g10.aln -output html -score  [PROGRAM:T-COFFEE]
-# T-COFFEE Memory Usage: Current= 29.945 Mb, Max= 35.076 Mb
-# Results Produced with T-COFFEE Version_13.30.7.b7b28e8 (Version_13.30.7.b7b28e8)
-# T-COFFEE is available from http://www.tcoffee.org
-# Register on: https://groups.google.com/group/tcoffee/
-</content>
-</file>
-<file>
-<stream>input</stream>
-<name>proteases_small_g10.aln</name>
-<content>CLUSTAL W (1.83) multiple sequence alignment
-
-
-sp|P29786|TRY3_AEDAE       -----MNQFLFVSFCALLDSAKVSAATLS-----------------SGRI
-sp|P35037|TRY3_ANOGA       -MISNKIAILLAVLVVAVACAQARVAQQHRSVQALPRFLPRPKYDVGHRI
-sp|P03953|CFAD_MOUSE       -----MHSSVYFVALVILGAAVCAAQPRG-------------------RI
-sp|P20160|CAP7_HUMAN       ----MTRLTVLALLAGLLASSRAGSSPLL-------------------DI
-sp|P80015|CAP7_PIG         -------------------------------------------------I
-sp|P08246|ELNE_HUMAN       -MTLGRRLACLFLACVLPALLLGGTALAS-------------------EI
-sp|Q00871|CTRB1_PENVA      ----MIGKLSLLLVCVAVASGNPAAGKPWHWKSPKPLVDPRIHVNATPRI
-sp|P07338|CTRB1_RAT        ------MAFLWLVSCFALVGATFGCG--------VPTIQP--VLTGLSRI
-sp|P00773|ELA1_RAT         -------MLRFLVFASLVLYGHSTQD----------------FPETNARV
-sp|Q06606|GRZ2_RAT         --------MFLFLFFLVAILPVNTEG---------------------GEI
-sp|P08884|GRAE_MOUSE       --------MPPVLILLTLLLPLGAGA---------------------EEI
-sp|P21844|MCPT5_MOUSE      -------MHLLTLHLLLLLLGSSTKA---------------------GEI
-sp|O35205|GRAK_MOUSE       -------MRFSSWALVSLVAGVYMSSECF-----------------HTEI
-sp|Q7YRZ7|GRAA_BOVIN       -MNIPFPFSFPPAICLLLIPGVFPVS--------------------CEGI
-sp|Q9Y5K2|KLK4_HUMAN       MATAGNPWGWFLG-YLILGVAGSLVS-GS-----------------CSQI
-sp|Q91VE3|KLK7_MOUSE       MG------VWLLS-LITVLLSLALETAGQ-----------------GERI
-sp|Q6H321|KLK2_HORSE       --------MWFLVLCLDLSLGETGALPPI-----------------QSRI
-sp|P00757|KLKB4_MOUSE      --------MWFLILFLALSLGGIDAAPPV-----------------QSQV
-sp|Q03238|GRAM_RAT         ------------LLLLLALKTLWAVGNRF-----------------EAQI
-                                                                            :
-
-sp|P29786|TRY3_AEDAE       VGGFQIDIAEVPHQVSLQRSGR----HFCGGSIISPRWVLTRAHCTTNTD
-sp|P35037|TRY3_ANOGA       VGGFEIDVSETPYQVSLQYFNS----HRCGGSVLNSKWILTAAHCTVNLQ
-sp|P03953|CFAD_MOUSE       LGGQEAAAHARPYMASVQVNGT----HVCGGTLLDEQWVLSAAHCMDGVT
-sp|P20160|CAP7_HUMAN       VGGRKARPRQFPFLASIQNQGR----HFCGGALIHARFVMTAASCFQSQN
-sp|P80015|CAP7_PIG         VGGRRAQPQEFPFLASIQKQGR----PFCAGALVHPRFVLTAASCFRGKN
-sp|P08246|ELNE_HUMAN       VGGRRARPHAWPFMVSLQLRGG----HFCGATLIAPNFVMSAAHCVANVN
-sp|Q00871|CTRB1_PENVA      VGGVEATPHSWPHQAALFIDD----MYFCGGSLISSEWVLTAAHCM---D
-sp|P07338|CTRB1_RAT        VNGEDAIPGSWPWQVSLQDKTG---FHFCGGSLISEDWVVTAAHCG---V
-sp|P00773|ELA1_RAT         VGGAEARRNSWPSQISLQYLSGGSWYHTCGGTLIRRNWVMTAAHCV---S
-sp|Q06606|GRZ2_RAT         IWGTESKPHSRPYMAFIKFYDSNSEPHHCGGFLVAKDIVMTAAHCN----
-sp|P08884|GRAE_MOUSE       IGGHVVKPHSRPYMAFVKSVDIEGNRRYCGGFLVQDDFVLTAAHCR----
-sp|P21844|MCPT5_MOUSE      IGGTECIPHSRPYMAYLEIVTSENYLSACSGFLIRRNFVLTAAHCA----
-sp|O35205|GRAK_MOUSE       IGGREVQPHSRPFMASIQYRS----KHICGGVLIHPQWVLTAAHCYSWFP
-sp|Q7YRZ7|GRAA_BOVIN       IGGNEVAPHTRRYMALIKG------LKLCAGALIKENWVLTAAHCD---L
-sp|Q9Y5K2|KLK4_HUMAN       INGEDCSPHSQPWQAALVMEN----ELFCSGVLVHPQWVLSAAHCF----
-sp|Q91VE3|KLK7_MOUSE       IDGYKCKEGSHPWQVALLKGN----QLHCGGVLVDKYWVLTAAHCK----
-sp|Q6H321|KLK2_HORSE       IGGWECEKHSKPWQVAVYHQG----HFQCGGVLVHPQWVLTAAHCM----
-sp|P00757|KLKB4_MOUSE      D----CE-NSQPWHVAVYRFN----KYQCGGVLLDRNWVLTAAHCY----
-sp|Q03238|GRAM_RAT         IGGREAVPHSRPYMVSLQNTK----SHMCGGVLVHQKWVLTAAHCLS--E
-                                           :           *.. ::    ::: * *     
-
-sp|P29786|TRY3_AEDAE       PA-AYTIRAGSTDRTNGG----IIVKVKSVIPHPQYNGDTYNY-------
-sp|P35037|TRY3_ANOGA       PS-SLAVRLGSSRHASGG----TVVRVARVLEHPNYDDSTIDY-------
-sp|P03953|CFAD_MOUSE       DDDSVQVLLGAHSLSAPEP-YKRWYDVQSVVPHPGSRPDSLED-------
-sp|P20160|CAP7_HUMAN       PG-VSTVVLGAYDLRRRER-QSRQTFSISSMSENGYDPQQNLN-------
-sp|P80015|CAP7_PIG         SG-SASVVLGAYDLRQQE--QSRQTFSIRSISQNGYDPRQNLN-------
-sp|P08246|ELNE_HUMAN       VR-AVRVVLGAHNLSRRE--PTRQVFAVQRIFENGYDPVNLLN-------
-sp|Q00871|CTRB1_PENVA      GAGFVEVVLGAHNIRQNEA-SQVSITSTDFFTHENWNSWLLTN-------
-sp|P07338|CTRB1_RAT        KT-SDVVVAGEFDQGSDEE-NIQVLKIAQVFKNPKFNMFTVRN-------
-sp|P00773|ELA1_RAT         SQMTFRVVVGDHNLSQNDG-TEQYVSVQKIMVHPTWNSNNVAAG------
-sp|Q06606|GRZ2_RAT         -GRNIKVTLGAHNIK-KQ-ENTQVISVVKAKPHENYDRDSH---------
-sp|P08884|GRAE_MOUSE       -NRTMTVTLGAHNIKAKE-ETQQIIPVAKAIPHPDYNATAF---------
-sp|P21844|MCPT5_MOUSE      -GRSITVLLGAHNKTSKE-DTWQKLEVEKQFLHPKYDENLV---------
-sp|O35205|GRAK_MOUSE       RGHSPTVVLGAHSLSKNE-PMKQTFEIKKFIPFSRLQSGSA---------
-sp|Q7YRZ7|GRAA_BOVIN       KGN-PQVILGAHSTSHKE-KLDQVFSIKKAIPYPCFDPQTF---------
-sp|Q9Y5K2|KLK4_HUMAN       -QNSYTIGLGLHSLEADQEPGSQMVEASLSVRHPEYNRPLL---------
-sp|Q91VE3|KLK7_MOUSE       -MGQYQVQLGSDKIG-DQ--SAQKIKATKSFRHPGYSTKTH---------
-sp|Q6H321|KLK2_HORSE       -SDDYQIWLGRHNLSEDE-DTAQFHQVSDSFLDPQFDLSLLKKKYLRPYD
-sp|P00757|KLKB4_MOUSE      -NDKYQVWLGKNNFLEDE-PSDQHRLVSKAIPHPDFNMSLLNEHTPQPED
-sp|Q03238|GRAM_RAT         PLQQLKLVFGLHSLHDPQ-DPGLTFYIKQAIKHPGYNLKYEN--------
-                                 :  *                                        
-
-sp|P29786|TRY3_AEDAE       ----DFSLLELDESIGFSRSIEAIALPD-ASETVADGAMCTVSGWGDTKN
-sp|P35037|TRY3_ANOGA       ----DFSLMELESELTFSDVVQPVSLPD-QDEAVEDGTMTIVSGWGNTQS
-sp|P03953|CFAD_MOUSE       ----DLILFKLSQNASLGPHVRPLPLQY-EDKEVEPGTLCDVAGWGVVTH
-sp|P20160|CAP7_HUMAN       ----DLMLLQLDREANLTSSVTILPLPL-QNATVEAGTRCQVAGWGSQRS
-sp|P80015|CAP7_PIG         ----DVLLLQLDREARLTPSVALVPLPP-QNATVEAGTNCQVAGWGTQRL
-sp|P08246|ELNE_HUMAN       ----DIVILQLNGSATINANVQVAQLPA-QGRRLGNGVQCLAMGWGLLGR
-sp|Q00871|CTRB1_PENVA      ----DIALIRLPSPVSLNSNIKTVKLP---SSDVSVGTTVTPTGWGRPSD
-sp|P07338|CTRB1_RAT        ----DITLLKLATPAQFSETVSAVCLPN-VDDDFPPGTVCATTGWGKTKY
-sp|P00773|ELA1_RAT         ---YDIALLRLAQSVTLNNYVQLAVLPQ-EGTILANNNPCYITGWGRTRT
-sp|Q06606|GRZ2_RAT         --FNDIMLLKLERKAQLNGVVKTIALPR-SQDWVKPGQVCTVAGWG--RL
-sp|P08884|GRAE_MOUSE       --FSDIMLLKLESKAKRTKAVRPLKLPR-PNARVKPGDVCSVAGWGSRSI
-sp|P21844|MCPT5_MOUSE      --VHDIMLLKLKEKAKLTLGVGTLPLSA-NFNFIPPGRMCRAVGWG-RTN
-sp|O35205|GRAK_MOUSE       --SHDIMLIKLRTAAELNKNVQLLHLG--SKNYLRDGTKCQVTGWGTTKP
-sp|Q7YRZ7|GRAA_BOVIN       --EGDLQLLQLEGKATMTKAVGILQLPR-TEDDVKPHTKCHVAGWGSTKK
-sp|Q9Y5K2|KLK4_HUMAN       --ANDLMLIKLDESVSESDTIRSISIAS-QCPTA--GNSCLVSGWGLLAN
-sp|Q91VE3|KLK7_MOUSE       --VNDIMLVRLDEPVKMSSKVEAVQLPE-HCEPP--GTSCTVSGWGTTTS
-sp|Q6H321|KLK2_HORSE       DISHDLMLLRLAQPARITDAVKILDLPT-QEPKL--GSTCYTSGWGLIST
-sp|P00757|KLKB4_MOUSE      DYSNDLMLLRLSKPADITDVVKPITLPT-EEPKL--GSTCLASGWGSTTP
-sp|Q03238|GRAM_RAT         ----DLALLKLDGRVKPSKNVKPLALPRKPRDKPAEGSRCSTAGWG-ITH
-                               *. :..*         :    :                 ***    
-
-sp|P29786|TRY3_AEDAE       VF-EMNTLLRAVNVPSYNQAECAAALV--NVVPVTEQMICAGYAAGGKDS
-sp|P35037|TRY3_ANOGA       AA-ESNAILRAANVPTVNQKECTIAYS--SSGGITDRMLCAGYKRGGKDA
-sp|P03953|CFAD_MOUSE       AG-RRPDVLHQLRVSIMNRTTCNLRTY--HDGVVTINMMCAESNR--RDT
-sp|P20160|CAP7_HUMAN       GG-RLSRFPRFVNVTVTPEDQCRPNN------------VCTGVLTRRGGI
-sp|P80015|CAP7_PIG         RR-LFSRFPRVLNVTVTS-NPCLPRD------------MCIGVFSRRGRI
-sp|P08246|ELNE_HUMAN       NR-GIASVLQELNVTVVT-SLCRRSN------------VCTLVRGRQAGV
-sp|Q00871|CTRB1_PENVA      SASGISDVLRQVNVPVMTNADCDSV-----YGIVGDGVVCIDGTGGK-ST
-sp|P07338|CTRB1_RAT        NALKTPEKLQQAALPIVSEADCKKS-----WGSKITDVMTCAGASGV-SS
-sp|P00773|ELA1_RAT         NG-QLSQTLQQAYLPSVDYSICSSSSY---WGSTVKTTMVCAGGDGVRSG
-sp|Q06606|GRZ2_RAT         ANCTSSNTLQEVNLEVQKGQKCQD----MSEDYNDSIQLCVGNPSEGKAT
-sp|P08884|GRAE_MOUSE       NDTKASARLREAQLVIQEDEECKK----RFRHYTETTEICAGDLKKIKTP
-sp|P21844|MCPT5_MOUSE      VNEPASDTLQEVKMRLQEPQACK-----HFTSFRHNSQLCVGNPKKMQNV
-sp|O35205|GRAK_MOUSE       DLLTASDTLREVTVTIISRKRCNSQSYYNHKPVITKDMICAGDARGQKDS
-sp|Q7YRZ7|GRAA_BOVIN       DACQMSNALREANVTVIDRKICNDAQHYNFNPVIDLSMICAGGRKGEDDS
-sp|Q9Y5K2|KLK4_HUMAN       --GRMPTVLQCVNVSVVSEEVCSK----LYDPLYHPSMFCAGGGQDQKDS
-sp|Q91VE3|KLK7_MOUSE       PDVTFPSDLMCSDVKLISSRECKK----VYKDLLGKTMLCAGIPDSKTNT
-sp|Q6H321|KLK2_HORSE       FTNRGSGTLQCVELRLQSNEKCAR----AYPEKMTEFVLCATHRDDSGSI
-sp|P00757|KLKB4_MOUSE      IKFKYPDDLQCVNLKLLPNEDCDK----AHEMKVTDAMLCAGEMDGGSYT
-sp|Q03238|GRAM_RAT         QRGQLAKSLQELDLRLLDTRMCNNSR--FWNGVLTDSMLCLKAGAKGQAP
-                                        :       *                .           
-
-sp|P29786|TRY3_AEDAE       CQGDSGGPLVSGD----KLVGVVSWG-KGCALPN-LPGVYARVST-VRQW
-sp|P35037|TRY3_ANOGA       CQGDSGGPLVVDG----KLVGVVSWG-FGCAMPG-YPGVYARVAV-VRDW
-sp|P03953|CFAD_MOUSE       CRGDSGSPLVCGD----AVEGVVTWGSRVCGNGK-KPGVYTRVSS-YRMW
-sp|P20160|CAP7_HUMAN       CNGDGGTPLVCEG----LAHGVASFSLGPCGRG---PDFFTRVAL-FRDW
-sp|P80015|CAP7_PIG         SQGDRGTPLVCNG----LAQGVASFLRRRFRRS---SGFFTRVAL-FRNW
-sp|P08246|ELNE_HUMAN       CFGDSGSPLVCNG----LIHGIASFVRGGCASGL-YPDAFAPVAQ-FVNW
-sp|Q00871|CTRB1_PENVA      CNGDSGGPLNLNG----MTYGITSFGSSAGCEKG-YPAAFTRVYY-YLDW
-sp|P07338|CTRB1_RAT        CMGDSGGPLVCQKDGVWTLAGIVSWG-SGVCSTS-TPAVYSRVTA-LMPW
-sp|P00773|ELA1_RAT         CQGDSGGPLHCLVNGQYSVHGVTSFVSSMGCNVSKKPTVFTRVSA-YISW
-sp|Q06606|GRZ2_RAT         GKGDSGGPFVCD----GVAQGIVSYRL-CTGTL---PRVFTRISS-FIPW
-sp|P08884|GRAE_MOUSE       FKGDSGGPLVCD----NKAYGLLAYAK-NRTIS---SGVFTKIVH-FLPW
-sp|P21844|MCPT5_MOUSE      YKGDSGGPLLCA----GIAQGIASYVH-RNAKP---PAVFTRISH-YRPW
-sp|O35205|GRAK_MOUSE       CKGDSGGPLICK----GIFHALVSQGY-KCGIAK-KPGIYTLLTKKYQTW
-sp|Q7YRZ7|GRAA_BOVIN       CEGDSGSPLICD----NVFRGVTSFG--KCGNPQ-KPGIYILLTKKHLNW
-sp|Q9Y5K2|KLK4_HUMAN       CNGDSGGPLICN----GYLQGLVSFGKAPCGQVG-VPGVYTNLCK-FTEW
-sp|Q91VE3|KLK7_MOUSE       CNGDSGGPLVCN----DTLQGLVSWGTYPCGQPN-DPGVYTQVCK-YKRW
-sp|Q6H321|KLK2_HORSE       CLGDSGGALICD----GVFQGITSWGYSECADFN-DNFVFTKVMP-HLKW
-sp|P00757|KLKB4_MOUSE      CEHDSGGPLICD----GILQGITSWGPEPCGEPT-EPSVYTKLIK-FSSW
-sp|Q03238|GRAM_RAT         CKGDSGGPLVCGK---GKVDGILSFSSKNCTDIF-KPTVATAVAP-YSSW
-                              * * .:           .: :                  :      *
-
-sp|P29786|TRY3_AEDAE       IREVSEV-------------------
-sp|P35037|TRY3_ANOGA       VRENSGA-------------------
-sp|P03953|CFAD_MOUSE       IENITNGNMTS---------------
-sp|P20160|CAP7_HUMAN       IDGVL----NNPGPGPA---------
-sp|P80015|CAP7_PIG         IDSVL----NNP-P------------
-sp|P08246|ELNE_HUMAN       IDSIIQRSEDNPCPHPRDPDPASRTH
-sp|Q00871|CTRB1_PENVA      IQQKTGVTP-----------------
-sp|P07338|CTRB1_RAT        VQQILEAN------------------
-sp|P00773|ELA1_RAT         MNNVIAYT------------------
-sp|Q06606|GRZ2_RAT         IQKTMKVLQQS---------------
-sp|P08884|GRAE_MOUSE       ISRNMKLL------------------
-sp|P21844|MCPT5_MOUSE      INKILREN------------------
-sp|O35205|GRAK_MOUSE       IKSKLAPSRAH---------------
-sp|Q7YRZ7|GRAA_BOVIN       IKKTIAGAI-----------------
-sp|Q9Y5K2|KLK4_HUMAN       IEKTVQAS------------------
-sp|Q91VE3|KLK7_MOUSE       VMETMKTHR-----------------
-sp|Q6H321|KLK2_HORSE       IKETIEKNS-----------------
-sp|P00757|KLKB4_MOUSE      IRETMANNP-----------------
-sp|Q03238|GRAM_RAT         IRKVIGRWSPQPLT------------
-                           :                         
-</content>
-</file>
-<file>
-<stream>output</stream>
-<name>proteases_small_g10.html</name>
-<content><html>
-<style>
-SPAN { font-family: courier new, courier-new, courier, monospace; font-weight: bold; font-size: 11pt;}
-SPAN { line-height:100%}
-SPAN {	white-space: pre}
-SPAN.value0 {background: #9B92FF}
-SPAN.value1 {background: #B4FFB4}
-SPAN.value2 {background: #BEFFBE}
-SPAN.value3 {background: #C8FFC8}
-SPAN.value4 {background: #FFFFB7}
-SPAN.value5 {background: #FFFFAD}
-SPAN.value6 {background: #FFFFAD}
-SPAN.value7 {background: #FFE6E6}
-SPAN.value8 {background: #FFDCDC}
-SPAN.value9 {background: #FFC8C8}
-SPAN.valuedefault {}
-SPAN.valuegap {}
-SPAN.valueink {background: 000000}
-</style><body><span class=valuedefault>T-COFFEE,&nbsp;Version_13.30.7.b7b28e8&nbsp;(Version_13.30.7.b7b28e8)</span><br><span class=valuedefault>Cedric&nbsp;Notredame&nbsp;</span><br><span class=valuedefault>CPU&nbsp;TIME:0&nbsp;sec.</span><br><span class=valuedefault>SCORE=77</span><br><span class=valuedefault>*</span><br><span class=valuedefault>&nbsp;</span><span class=value0>B</span><span class=value1>A</span><span class=value2>D</span><span class=value3>&nbsp;</span><span class=value4>A</span><span class=value5>V</span><span class=value6>G</span><span class=value7>&nbsp;</span><span class=value8>G</span><span class=value9>OOD</span><br><span class=valuedefault>*</span><br><span class=value7>sp|P29786|TRY3_&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;76</span><br><span class=value7>sp|P35037|TRY3_&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;76</span><br><span class=value7>sp|P03953|CFAD_&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;78</span><br><span class=value7>sp|P20160|CAP7_&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;76</span><br><span class=value8>sp|P80015|CAP7_&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;80</span><br><span class=value7>sp|P08246|ELNE_&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;76</span><br><span class=value7>sp|Q00871|CTRB1&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;76</span><br><span class=value7>sp|P07338|CTRB1&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;75</span><br><span class=value7>sp|P00773|ELA1_&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;75</span><br><span class=value7>sp|Q06606|GRZ2_&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;77</span><br><span class=value7>sp|P08884|GRAE_&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;79</span><br><span class=value7>sp|P21844|MCPT5&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;78</span><br><span class=value7>sp|O35205|GRAK_&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;77</span><br><span class=value7>sp|Q7YRZ7|GRAA_&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;77</span><br><span class=value7>sp|Q9Y5K2|KLK4_&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;78</span><br><span class=value7>sp|Q91VE3|KLK7_&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;78</span><br><span class=value7>sp|Q6H321|KLK2_&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;78</span><br><span class=value7>sp|P00757|KLKB4&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;76</span><br><span class=value7>sp|Q03238|GRAM_&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;76</span><br><span class=value7>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;&nbsp;7</span><br><br><span class=valuedefault>sp|P29786|TRY3_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-----</span><span class=value1>MNQFLFVSFCALLDSAKVSAA</span><span class=value0>T</span><span class=value1>LS</span><span class=valuegap>----</span><br><span class=valuedefault>sp|P35037|TRY3_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value1>MI</span><span class=value0>SNKIAILLAVLVVAVACAQ</span><span class=value1>ARVAQQ</span><span class=value2>HR</span><span class=value1>SV</span><span class=value0>Q</span><br><span class=valuedefault>sp|P03953|CFAD_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-----</span><span class=value1>MHSSVYFVALVILGAAVCAAQPRG</span><span class=valuegap>----</span><br><span class=valuedefault>sp|P20160|CAP7_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>----</span><span class=value1>M</span><span class=value0>TRLT</span><span class=value1>VL</span><span class=value0>A</span><span class=value1>L</span><span class=value0>L</span><span class=value1>AGLLASSRAGSSPLL</span><span class=valuegap>----</span><br><span class=valuedefault>sp|P80015|CAP7_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------</span><br><span class=valuedefault>sp|P08246|ELNE_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value1>MTL</span><span class=value0>GRRLA</span><span class=value1>CLFLACVLPALLLGGTA</span><span class=value0>L</span><span class=value1>AS</span><span class=valuegap>----</span><br><span class=valuedefault>sp|Q00871|CTRB1&nbsp;&nbsp;&nbsp;</span><span class=valuegap>----</span><span class=value1>M</span><span class=value0>IGK</span><span class=value1>LSLLLVCVAVASGNPAAGKPW</span><span class=value0>HW</span><span class=value1>KS</span><br><span class=valuedefault>sp|P07338|CTRB1&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------</span><span class=value0>MA</span><span class=value1>FLWLVSCFALVGATFGCG</span><span class=valuegap>-------</span><br><span class=valuedefault>sp|P00773|ELA1_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-------</span><span class=value1>MLRFLVFASLVLYGHSTQD</span><span class=valuegap>-------</span><br><span class=valuedefault>sp|Q06606|GRZ2_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--------</span><span class=value2>M</span><span class=value1>FLFLFFLVAILPVNTEG</span><span class=valuegap>-------</span><br><span class=valuedefault>sp|P08884|GRAE_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--------</span><span class=value2>M</span><span class=value1>PPVLILLTLLLPLGAGA</span><span class=valuegap>-------</span><br><span class=valuedefault>sp|P21844|MCPT5&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-------</span><span class=value1>MHLLTLHLLLLLLGSSTKA</span><span class=valuegap>-------</span><br><span class=valuedefault>sp|O35205|GRAK_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-------</span><span class=value1>MRFSSWALVSLVAGVYMSSECF</span><span class=valuegap>----</span><br><span class=valuedefault>sp|Q7YRZ7|GRAA_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value1>MNI</span><span class=value0>PFPF</span><span class=value1>SFPPAICLLLIPGVFPVS</span><span class=valuegap>-------</span><br><span class=valuedefault>sp|Q9Y5K2|KLK4_&nbsp;&nbsp;&nbsp;</span><span class=value1>MA</span><span class=value0>TAGNP</span><span class=value1>WGWFLG</span><span class=valuegap>-</span><span class=value1>YLILGVAGSLVS</span><span class=valuegap>-</span><span class=value0>G</span><span class=value1>S</span><span class=valuegap>----</span><br><span class=valuedefault>sp|Q91VE3|KLK7_&nbsp;&nbsp;&nbsp;</span><span class=value1>M</span><span class=value0>G</span><span class=valuegap>------</span><span class=value1>VWLLS</span><span class=valuegap>-</span><span class=value1>LITVLLSLALET</span><span class=value0>AG</span><span class=value1>Q</span><span class=valuegap>----</span><br><span class=valuedefault>sp|Q6H321|KLK2_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--------</span><span class=value1>MWFLVLCLDLSLGETGALPPI</span><span class=valuegap>----</span><br><span class=valuedefault>sp|P00757|KLKB4&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--------</span><span class=value1>MWFLILFLALSLGGIDAA</span><span class=value0>PPV</span><span class=valuegap>----</span><br><span class=valuedefault>sp|Q03238|GRAM_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------------</span><span class=value1>L</span><span class=value0>LLLLALKTLWA</span><span class=value1>VG</span><span class=value0>NR</span><span class=value1>F</span><span class=valuegap>----</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value1>&nbsp;&nbsp;&nbsp;</span><span class=value0>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value0>&nbsp;</span><span class=value1>&nbsp;&nbsp;</span><span class=value0>&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>sp|P29786|TRY3_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-------------</span><span class=value2>S</span><span class=value4>G</span><span class=value8>R</span><span class=value9>IVGGFQIDIAEVPHQV</span><span class=value8>S</span><br><span class=valuedefault>sp|P35037|TRY3_&nbsp;&nbsp;&nbsp;</span><span class=value0>ALP</span><span class=value1>RFL</span><span class=value0>PRPKYDV</span><span class=value3>G</span><span class=value5>H</span><span class=value8>R</span><span class=value9>IVGGFEIDVSETPYQV</span><span class=value8>S</span><br><span class=valuedefault>sp|P03953|CFAD_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------</span><span class=value8>R</span><span class=value9>ILGGQEAAAHARPYMA</span><span class=value8>S</span><br><span class=valuedefault>sp|P20160|CAP7_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------</span><span class=value7>D</span><span class=value9>IVGGRKARPRQFPFLA</span><span class=value8>S</span><br><span class=valuedefault>sp|P80015|CAP7_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>----------------</span><span class=value9>IVGGRRAQPQEFPFLA</span><span class=value8>S</span><br><span class=valuedefault>sp|P08246|ELNE_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------</span><span class=value7>E</span><span class=value9>IVGGRRARPHAWPFMV</span><span class=value8>S</span><br><span class=valuedefault>sp|Q00871|CTRB1&nbsp;&nbsp;&nbsp;</span><span class=value0>PKPLVDPRIHVNA</span><span class=value2>T</span><span class=value5>P</span><span class=value8>R</span><span class=value9>IVGGVEATPHSWPHQA</span><span class=value8>A</span><br><span class=valuedefault>sp|P07338|CTRB1&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value0>VPTIQP</span><span class=valuegap>--</span><span class=value0>VLTG</span><span class=value2>L</span><span class=value5>S</span><span class=value8>R</span><span class=value9>IVNGEDAIPGSWPWQV</span><span class=value8>S</span><br><span class=valuedefault>sp|P00773|ELA1_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------</span><span class=value0>FPET</span><span class=value2>N</span><span class=value5>A</span><span class=value8>R</span><span class=value9>VVGGAEARRNSWPSQIS</span><br><span class=valuedefault>sp|Q06606|GRZ2_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--------------</span><span class=value3>G</span><span class=value7>E</span><span class=value9>IIWGTESKPHSRPYMA</span><span class=value8>F</span><br><span class=valuedefault>sp|P08884|GRAE_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--------------</span><span class=value3>E</span><span class=value6>E</span><span class=value9>IIGGHVVKPHSRPYMA</span><span class=value8>F</span><br><span class=valuedefault>sp|P21844|MCPT5&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--------------</span><span class=value3>G</span><span class=value6>E</span><span class=value9>IIGGTECIPHSRPYMAY</span><br><span class=valuedefault>sp|O35205|GRAK_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-------------</span><span class=value2>H</span><span class=value4>T</span><span class=value8>E</span><span class=value9>IIGGREVQPHSRPFMAS</span><br><span class=valuedefault>sp|Q7YRZ7|GRAA_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-------------</span><span class=value1>C</span><span class=value3>E</span><span class=value6>G</span><span class=value9>IIGGNEVAPHTRRY</span><span class=value8>M</span><span class=value7>A</span><span class=value5>L</span><br><span class=valuedefault>sp|Q9Y5K2|KLK4_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-------------</span><span class=value2>C</span><span class=value4>S</span><span class=value7>Q</span><span class=value9>IINGEDCSPHSQPWQA</span><span class=value8>A</span><br><span class=valuedefault>sp|Q91VE3|KLK7_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-------------</span><span class=value2>G</span><span class=value4>E</span><span class=value8>R</span><span class=value9>IIDGYKCKEGSHPWQ</span><span class=value8>VA</span><br><span class=valuedefault>sp|Q6H321|KLK2_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-------------</span><span class=value2>Q</span><span class=value5>S</span><span class=value8>R</span><span class=value9>IIGGWECEKHSKPWQV</span><span class=value8>A</span><br><span class=valuedefault>sp|P00757|KLKB4&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-------------</span><span class=value0>Q</span><span class=value1>SQV</span><span class=value0>D</span><span class=valuegap>----</span><span class=value3>C</span><span class=value2>E</span><span class=valuegap>-</span><span class=value8>N</span><span class=value9>SQPWHV</span><span class=value8>A</span><br><span class=valuedefault>sp|Q03238|GRAM_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-------------</span><span class=value2>E</span><span class=value4>A</span><span class=value7>Q</span><span class=value9>IIGGREAVPHSRPYMV</span><span class=value8>S</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value0>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value2>&nbsp;</span><span class=value4>&nbsp;</span><span class=value7>&nbsp;</span><span class=value8>:</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>&nbsp;</span><br><br><br><span class=valuedefault>sp|P29786|TRY3_&nbsp;&nbsp;&nbsp;</span><span class=value8>L</span><span class=value7>Q</span><span class=value6>R</span><span class=value5>SG</span><span class=value3>R</span><span class=valuegap>----</span><span class=value8>H</span><span class=value9>FCGGSIISPRWVLTRAHC</span><span class=value8>T</span><span class=value3>T</span><span class=value1>NT</span><br><span class=valuedefault>sp|P35037|TRY3_&nbsp;&nbsp;&nbsp;</span><span class=value8>L</span><span class=value7>Q</span><span class=value6>Y</span><span class=value5>FN</span><span class=value2>S</span><span class=valuegap>----</span><span class=value8>H</span><span class=value9>RCGGSVLNSKWILTAAHC</span><span class=value8>T</span><span class=value3>V</span><span class=value2>N</span><span class=value1>L</span><br><span class=valuedefault>sp|P03953|CFAD_&nbsp;&nbsp;&nbsp;</span><span class=value8>V</span><span class=value7>Q</span><span class=value6>V</span><span class=value5>NG</span><span class=value2>T</span><span class=valuegap>----</span><span class=value8>H</span><span class=value9>VCGGTLLDEQWVLSAAHCM</span><span class=value3>D</span><span class=value2>G</span><span class=value1>V</span><br><span class=valuedefault>sp|P20160|CAP7_&nbsp;&nbsp;&nbsp;</span><span class=value8>I</span><span class=value7>Q</span><span class=value5>NQG</span><span class=value3>R</span><span class=valuegap>----</span><span class=value8>H</span><span class=value9>FCGGALIHARFVMTAASCF</span><span class=value3>Q</span><span class=value2>S</span><span class=value1>Q</span><br><span class=valuedefault>sp|P80015|CAP7_&nbsp;&nbsp;&nbsp;</span><span class=value8>I</span><span class=value7>Q</span><span class=value6>K</span><span class=value5>QG</span><span class=value2>R</span><span class=valuegap>----</span><span class=value8>P</span><span class=value9>FCAGALVHPRFVLTAASCF</span><span class=value3>R</span><span class=value2>G</span><span class=value1>K</span><br><span class=valuedefault>sp|P08246|ELNE_&nbsp;&nbsp;&nbsp;</span><span class=value8>L</span><span class=value7>Q</span><span class=value6>L</span><span class=value5>RG</span><span class=value2>G</span><span class=valuegap>----</span><span class=value7>H</span><span class=value9>FCGATLIAPNFVMSAAHCV</span><span class=value3>A</span><span class=value2>N</span><span class=value1>V</span><br><span class=valuedefault>sp|Q00871|CTRB1&nbsp;&nbsp;&nbsp;</span><span class=value8>L</span><span class=value6>F</span><span class=value5>IDD</span><span class=valuegap>----</span><span class=value4>M</span><span class=value8>Y</span><span class=value9>FCGGSLISSEWVLTAAHC</span><span class=value8>M</span><span class=valuegap>---</span><br><span class=valuedefault>sp|P07338|CTRB1&nbsp;&nbsp;&nbsp;</span><span class=value8>L</span><span class=value6>Q</span><span class=value5>D</span><span class=value3>KT</span><span class=value1>G</span><span class=valuegap>---</span><span class=value4>F</span><span class=value8>H</span><span class=value9>FCGGSLISEDWVVTAAHC</span><span class=value7>G</span><span class=valuegap>---</span><br><span class=valuedefault>sp|P00773|ELA1_&nbsp;&nbsp;&nbsp;</span><span class=value8>L</span><span class=value7>Q</span><span class=value6>Y</span><span class=value4>L</span><span class=value3>S</span><span class=value1>G</span><span class=value0>G</span><span class=value1>SW</span><span class=value4>Y</span><span class=value8>H</span><span class=value9>TCGGTLIRRNWVMTAAHC</span><span class=value8>V</span><span class=valuegap>---</span><br><span class=valuedefault>sp|Q06606|GRZ2_&nbsp;&nbsp;&nbsp;</span><span class=value8>I</span><span class=value7>K</span><span class=value5>F</span><span class=value4>Y</span><span class=value3>D</span><span class=value1>S</span><span class=value0>N</span><span class=value1>SE</span><span class=value4>P</span><span class=value8>H</span><span class=value9>HCGGFLVAKDIVMTAAHC</span><span class=value6>N</span><span class=valuegap>---</span><br><span class=valuedefault>sp|P08884|GRAE_&nbsp;&nbsp;&nbsp;</span><span class=value7>V</span><span class=value6>K</span><span class=value4>S</span><span class=value3>V</span><span class=value2>D</span><span class=value1>I</span><span class=value0>EG</span><span class=value1>N</span><span class=value4>R</span><span class=value8>R</span><span class=value9>YCGGFLVQDDFVLTAAHC</span><span class=value7>R</span><span class=valuegap>---</span><br><span class=valuedefault>sp|P21844|MCPT5&nbsp;&nbsp;&nbsp;</span><span class=value8>L</span><span class=value7>E</span><span class=value5>I</span><span class=value3>VT</span><span class=value1>S</span><span class=value0>EN</span><span class=value1>Y</span><span class=value3>L</span><span class=value8>S</span><span class=value9>ACSGFLIRRNFVLTAAHC</span><span class=value7>A</span><span class=valuegap>---</span><br><span class=valuedefault>sp|O35205|GRAK_&nbsp;&nbsp;&nbsp;</span><span class=value8>I</span><span class=value7>Q</span><span class=value6>Y</span><span class=value5>RS</span><span class=valuegap>----</span><span class=value4>K</span><span class=value8>H</span><span class=value9>ICGGVLIHPQWVLTAAHC</span><span class=value8>Y</span><span class=value3>S</span><span class=value1>WF</span><br><span class=valuedefault>sp|Q7YRZ7|GRAA_&nbsp;&nbsp;&nbsp;</span><span class=value4>I</span><span class=value3>K</span><span class=value2>G</span><span class=valuegap>------</span><span class=value3>L</span><span class=value6>K</span><span class=value8>L</span><span class=value9>CAGALIKENWVLTAAHC</span><span class=value7>D</span><span class=valuegap>---</span><br><span class=valuedefault>sp|Q9Y5K2|KLK4_&nbsp;&nbsp;&nbsp;</span><span class=value8>L</span><span class=value7>V</span><span class=value6>M</span><span class=value5>EN</span><span class=valuegap>----</span><span class=value4>E</span><span class=value8>L</span><span class=value9>FCSGVLVHPQWVLSAAHC</span><span class=value8>F</span><span class=valuegap>---</span><br><span class=valuedefault>sp|Q91VE3|KLK7_&nbsp;&nbsp;&nbsp;</span><span class=value7>L</span><span class=value6>L</span><span class=value5>K</span><span class=value4>GN</span><span class=valuegap>----</span><span class=value4>Q</span><span class=value7>L</span><span class=value8>H</span><span class=value9>CGGVLVDKYWVLTAAHC</span><span class=value7>K</span><span class=valuegap>---</span><br><span class=valuedefault>sp|Q6H321|KLK2_&nbsp;&nbsp;&nbsp;</span><span class=value8>V</span><span class=value6>Y</span><span class=value5>HQG</span><span class=valuegap>----</span><span class=value4>H</span><span class=value7>F</span><span class=value9>QCGGVLVHPQWVLTAAHC</span><span class=value8>M</span><span class=valuegap>---</span><br><span class=valuedefault>sp|P00757|KLKB4&nbsp;&nbsp;&nbsp;</span><span class=value8>V</span><span class=value6>Y</span><span class=value5>RFN</span><span class=valuegap>----</span><span class=value4>K</span><span class=value8>Y</span><span class=value9>QCGGVLLDRNWVLTAAHC</span><span class=value8>Y</span><span class=valuegap>---</span><br><span class=valuedefault>sp|Q03238|GRAM_&nbsp;&nbsp;&nbsp;</span><span class=value8>L</span><span class=value7>Q</span><span class=value6>N</span><span class=value5>TK</span><span class=valuegap>----</span><span class=value4>S</span><span class=value8>H</span><span class=value9>MCGGVLVHQKWVLTAAHC</span><span class=value8>L</span><span class=value2>S</span><span class=valuegap>--</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>:</span><span class=value6>&nbsp;</span><span class=value5>&nbsp;</span><span class=value4>&nbsp;&nbsp;</span><span class=value2>&nbsp;</span><span class=value0>&nbsp;&nbsp;</span><span class=value1>&nbsp;</span><span class=value4>&nbsp;</span><span class=value8>&nbsp;</span><span class=value9>&nbsp;*..&nbsp;::&nbsp;&nbsp;&nbsp;&nbsp;:::&nbsp;*&nbsp;*</span><span class=value8>&nbsp;</span><span class=value3>&nbsp;</span><span class=value1>&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>sp|P29786|TRY3_&nbsp;&nbsp;&nbsp;</span><span class=value1>DPA</span><span class=valuegap>-</span><span class=value2>A</span><span class=value3>YTI</span><span class=value4>RAGS</span><span class=value3>T</span><span class=value2>DR</span><span class=value1>TNGG</span><span class=valuegap>----</span><span class=value4>II</span><span class=value5>VK</span><span class=value6>VK</span><span class=value7>SVI</span><span class=value8>P</span><br><span class=valuedefault>sp|P35037|TRY3_&nbsp;&nbsp;&nbsp;</span><span class=value1>QPS</span><span class=valuegap>-</span><span class=value3>SL</span><span class=value4>A</span><span class=value5>VRL</span><span class=value6>G</span><span class=value4>S</span><span class=value3>S</span><span class=value2>RH</span><span class=value1>ASGG</span><span class=valuegap>----</span><span class=value4>T</span><span class=value5>VV</span><span class=value6>RV</span><span class=value7>ARV</span><span class=value8>LE</span><br><span class=valuedefault>sp|P03953|CFAD_&nbsp;&nbsp;&nbsp;</span><span class=value1>TD</span><span class=value2>DD</span><span class=value4>S</span><span class=value5>V</span><span class=value6>Q</span><span class=value7>V</span><span class=value8>LLGAH</span><span class=value7>SL</span><span class=value6>S</span><span class=value5>APE</span><span class=value1>P</span><span class=valuegap>-</span><span class=value4>YK</span><span class=value5>R</span><span class=value6>WY</span><span class=value7>DVQSV</span><span class=value8>VP</span><br><span class=valuedefault>sp|P20160|CAP7_&nbsp;&nbsp;&nbsp;</span><span class=value1>NPG</span><span class=valuegap>-</span><span class=value3>V</span><span class=value4>S</span><span class=value6>T</span><span class=value7>V</span><span class=value8>VL</span><span class=value9>G</span><span class=value8>AY</span><span class=value7>DL</span><span class=value6>R</span><span class=value4>RRE</span><span class=value1>R</span><span class=valuegap>-</span><span class=value3>QSRQTFSI</span><span class=value4>S</span><span class=value5>SM</span><span class=value6>S</span><br><span class=valuedefault>sp|P80015|CAP7_&nbsp;&nbsp;&nbsp;</span><span class=value1>NSG</span><span class=valuegap>-</span><span class=value4>S</span><span class=value5>A</span><span class=value6>S</span><span class=value7>V</span><span class=value8>VLGAY</span><span class=value7>DL</span><span class=value6>R</span><span class=value5>QQE</span><span class=valuegap>--</span><span class=value2>QSRQTFS</span><span class=value3>I</span><span class=value4>RS</span><span class=value6>IS</span><br><span class=valuedefault>sp|P08246|ELNE_&nbsp;&nbsp;&nbsp;</span><span class=value1>NVR</span><span class=valuegap>-</span><span class=value4>A</span><span class=value5>V</span><span class=value7>RV</span><span class=value8>VLGAH</span><span class=value7>NL</span><span class=value6>S</span><span class=value5>RRE</span><span class=valuegap>--</span><span class=value2>PTRQVFAV</span><span class=value3>QR</span><span class=value4>IF</span><br><span class=valuedefault>sp|Q00871|CTRB1&nbsp;&nbsp;&nbsp;</span><span class=value1>DG</span><span class=value2>AG</span><span class=value3>F</span><span class=value4>V</span><span class=value6>E</span><span class=value7>VV</span><span class=value8>LGA</span><span class=value7>HN</span><span class=value6>IR</span><span class=value5>QN</span><span class=value4>E</span><span class=value1>A</span><span class=valuegap>-</span><span class=value4>SQV</span><span class=value5>SIT</span><span class=value6>ST</span><span class=value7>DF</span><span class=value8>FT</span><br><span class=valuedefault>sp|P07338|CTRB1&nbsp;&nbsp;&nbsp;</span><span class=value1>VKT</span><span class=valuegap>-</span><span class=value2>SD</span><span class=value3>V</span><span class=value4>V</span><span class=value5>V</span><span class=value6>A</span><span class=value7>GE</span><span class=value6>FDQ</span><span class=value5>G</span><span class=value4>SDE</span><span class=value1>E</span><span class=valuegap>-</span><span class=value4>N</span><span class=value5>I</span><span class=value6>QVL</span><span class=value7>KIAQV</span><span class=value8>FK</span><br><span class=valuedefault>sp|P00773|ELA1_&nbsp;&nbsp;&nbsp;</span><span class=value1>SS</span><span class=value2>Q</span><span class=value1>M</span><span class=value3>T</span><span class=value4>F</span><span class=value5>R</span><span class=value7>VV</span><span class=value8>VGDH</span><span class=value7>NL</span><span class=value6>S</span><span class=value5>QN</span><span class=value4>D</span><span class=value1>G</span><span class=valuegap>-</span><span class=value4>TE</span><span class=value5>Q</span><span class=value6>YV</span><span class=value7>SVQKIM</span><span class=value8>V</span><br><span class=valuedefault>sp|Q06606|GRZ2_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value2>GR</span><span class=value3>N</span><span class=value4>I</span><span class=value5>K</span><span class=value7>VT</span><span class=value8>LGA</span><span class=value7>HN</span><span class=value6>I</span><span class=value5>K</span><span class=valuegap>-</span><span class=value2>KQ</span><span class=valuegap>-</span><span class=value1>E</span><span class=value3>NT</span><span class=value4>Q</span><span class=value5>VI</span><span class=value6>SVVK</span><span class=value7>AK</span><span class=value8>P</span><br><span class=valuedefault>sp|P08884|GRAE_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value3>N</span><span class=value2>R</span><span class=value3>T</span><span class=value4>M</span><span class=value5>T</span><span class=value7>VTL</span><span class=value8>GA</span><span class=value7>HNI</span><span class=value6>K</span><span class=value5>AKE</span><span class=valuegap>-</span><span class=value2>E</span><span class=value4>T</span><span class=value5>Q</span><span class=value6>QII</span><span class=value7>PVAKA</span><span class=value8>IP</span><br><span class=valuedefault>sp|P21844|MCPT5&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value2>GR</span><span class=value4>S</span><span class=value5>I</span><span class=value6>T</span><span class=value7>VLL</span><span class=value8>GA</span><span class=value7>HNK</span><span class=value6>T</span><span class=value5>SKE</span><span class=valuegap>-</span><span class=value2>D</span><span class=value4>T</span><span class=value5>W</span><span class=value6>QKL</span><span class=value7>EVEKQ</span><span class=value8>FL</span><br><span class=valuedefault>sp|O35205|GRAK_&nbsp;&nbsp;&nbsp;</span><span class=value1>PR</span><span class=value2>GH</span><span class=value3>S</span><span class=value5>P</span><span class=value6>T</span><span class=value7>VVL</span><span class=value8>GA</span><span class=value7>HSL</span><span class=value6>S</span><span class=value5>KNE</span><span class=valuegap>-</span><span class=value2>P</span><span class=value4>M</span><span class=value5>K</span><span class=value6>QT</span><span class=value7>FEIKKF</span><span class=value8>IP</span><br><span class=valuedefault>sp|Q7YRZ7|GRAA_&nbsp;&nbsp;&nbsp;</span><span class=value1>LKGN</span><span class=valuegap>-</span><span class=value4>P</span><span class=value6>Q</span><span class=value7>VIL</span><span class=value8>GAH</span><span class=value7>ST</span><span class=value6>S</span><span class=value5>HKE</span><span class=valuegap>-</span><span class=value2>K</span><span class=value4>L</span><span class=value5>D</span><span class=value6>QVF</span><span class=value7>SIKKA</span><span class=value8>IP</span><br><span class=valuedefault>sp|Q9Y5K2|KLK4_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value3>Q</span><span class=value2>N</span><span class=value3>S</span><span class=value4>Y</span><span class=value5>T</span><span class=value6>I</span><span class=value7>GL</span><span class=value8>GLH</span><span class=value7>S</span><span class=value6>L</span><span class=value5>E</span><span class=value3>ADQ</span><span class=value1>E</span><span class=value2>P</span><span class=value4>GS</span><span class=value5>QM</span><span class=value6>VEAS</span><span class=value7>LS</span><span class=value8>VR</span><br><span class=valuedefault>sp|Q91VE3|KLK7_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value3>M</span><span class=value2>G</span><span class=value3>Q</span><span class=value4>Y</span><span class=value5>Q</span><span class=value7>VQ</span><span class=value8>LG</span><span class=value7>S</span><span class=value6>DK</span><span class=value5>I</span><span class=value3>G</span><span class=valuegap>-</span><span class=value2>DQ</span><span class=valuegap>--</span><span class=value2>S</span><span class=value3>A</span><span class=value4>QK</span><span class=value5>IK</span><span class=value6>AT</span><span class=value7>KS</span><span class=value8>FR</span><br><span class=valuedefault>sp|Q6H321|KLK2_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value3>S</span><span class=value2>D</span><span class=value3>D</span><span class=value4>Y</span><span class=value5>Q</span><span class=value6>I</span><span class=value7>WL</span><span class=value8>GRH</span><span class=value7>NL</span><span class=value6>S</span><span class=value5>EDE</span><span class=valuegap>-</span><span class=value2>D</span><span class=value4>T</span><span class=value5>AQ</span><span class=value6>FHQ</span><span class=value7>VSDSFL</span><br><span class=valuedefault>sp|P00757|KLKB4&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value2>ND</span><span class=value3>K</span><span class=value4>Y</span><span class=value5>Q</span><span class=value6>V</span><span class=value7>WL</span><span class=value8>GK</span><span class=value7>NNF</span><span class=value6>L</span><span class=value5>EDE</span><span class=valuegap>-</span><span class=value2>P</span><span class=value4>SD</span><span class=value5>QH</span><span class=value6>RL</span><span class=value7>VSK</span><span class=value8>AIP</span><br><span class=valuedefault>sp|Q03238|GRAM_&nbsp;&nbsp;&nbsp;</span><span class=value1>EPLQ</span><span class=value3>Q</span><span class=value4>L</span><span class=value5>K</span><span class=value6>L</span><span class=value7>VF</span><span class=value8>GL</span><span class=value7>HSL</span><span class=value6>H</span><span class=value5>D</span><span class=value4>PQ</span><span class=valuegap>-</span><span class=value2>D</span><span class=value4>PG</span><span class=value5>LT</span><span class=value6>FYI</span><span class=value7>KQA</span><span class=value8>IK</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value1>&nbsp;&nbsp;</span><span class=value2>&nbsp;&nbsp;</span><span class=value3>&nbsp;</span><span class=value4>&nbsp;</span><span class=value5>&nbsp;</span><span class=value6>:</span><span class=value7>&nbsp;&nbsp;</span><span class=value8>*</span><span class=value7>&nbsp;&nbsp;</span><span class=value6>&nbsp;&nbsp;</span><span class=value5>&nbsp;</span><span class=value4>&nbsp;&nbsp;&nbsp;</span><span class=value1>&nbsp;</span><span class=value2>&nbsp;</span><span class=value3>&nbsp;</span><span class=value4>&nbsp;&nbsp;</span><span class=value5>&nbsp;&nbsp;</span><span class=value6>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value7>&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>sp|P29786|TRY3_&nbsp;&nbsp;&nbsp;</span><span class=value8>HPQYNG</span><span class=value7>DTY</span><span class=value4>NY</span><span class=valuegap>-----------</span><span class=value9>DFSLLELDESI</span><br><span class=valuedefault>sp|P35037|TRY3_&nbsp;&nbsp;&nbsp;</span><span class=value8>HP</span><span class=value9>NY</span><span class=value8>DD</span><span class=value7>STI</span><span class=value4>DY</span><span class=valuegap>-----------</span><span class=value9>DFSLMELESEL</span><br><span class=valuedefault>sp|P03953|CFAD_&nbsp;&nbsp;&nbsp;</span><span class=value8>HP</span><span class=value9>GS</span><span class=value8>RP</span><span class=value7>DSL</span><span class=value4>ED</span><span class=valuegap>-----------</span><span class=value9>DLILFKLSQNA</span><br><span class=valuedefault>sp|P20160|CAP7_&nbsp;&nbsp;&nbsp;</span><span class=value6>E</span><span class=value7>N</span><span class=value8>GYD</span><span class=value7>P</span><span class=value6>QQN</span><span class=value3>L</span><span class=value4>N</span><span class=valuegap>-----------</span><span class=value9>DLMLLQLDREA</span><br><span class=valuedefault>sp|P80015|CAP7_&nbsp;&nbsp;&nbsp;</span><span class=value7>QN</span><span class=value8>GYD</span><span class=value7>P</span><span class=value6>RQN</span><span class=value3>L</span><span class=value4>N</span><span class=valuegap>-----------</span><span class=value9>DVLLLQLDREA</span><br><span class=valuedefault>sp|P08246|ELNE_&nbsp;&nbsp;&nbsp;</span><span class=value5>EN</span><span class=value7>G</span><span class=value8>YD</span><span class=value7>PV</span><span class=value6>N</span><span class=value7>L</span><span class=value4>LN</span><span class=valuegap>-----------</span><span class=value9>DIVILQLNGSA</span><br><span class=valuedefault>sp|Q00871|CTRB1&nbsp;&nbsp;&nbsp;</span><span class=value8>H</span><span class=value9>ENW</span><span class=value8>NS</span><span class=value7>WLL</span><span class=value4>TN</span><span class=valuegap>-----------</span><span class=value9>DIALIRLPSPV</span><br><span class=valuedefault>sp|P07338|CTRB1&nbsp;&nbsp;&nbsp;</span><span class=value8>NP</span><span class=value9>KF</span><span class=value8>NM</span><span class=value7>FTV</span><span class=value4>RN</span><span class=valuegap>-----------</span><span class=value9>DITLLKLATPA</span><br><span class=valuedefault>sp|P00773|ELA1_&nbsp;&nbsp;&nbsp;</span><span class=value8>HPTW</span><span class=value7>N</span><span class=value6>S</span><span class=value5>N</span><span class=value4>NV</span><span class=value2>A</span><span class=value1>A</span><span class=value0>G</span><span class=valuegap>---------</span><span class=value5>Y</span><span class=value9>DIALLRLAQSV</span><br><span class=valuedefault>sp|Q06606|GRZ2_&nbsp;&nbsp;&nbsp;</span><span class=value8>HE</span><span class=value9>NYD</span><span class=value8>R</span><span class=value7>DSH</span><span class=valuegap>-----------</span><span class=value4>F</span><span class=value5>N</span><span class=value9>DIMLLKLERKA</span><br><span class=valuedefault>sp|P08884|GRAE_&nbsp;&nbsp;&nbsp;</span><span class=value8>H</span><span class=value9>PDYN</span><span class=value8>A</span><span class=value7>TAF</span><span class=valuegap>-----------</span><span class=value4>F</span><span class=value5>S</span><span class=value9>DIMLLKLESKA</span><br><span class=valuedefault>sp|P21844|MCPT5&nbsp;&nbsp;&nbsp;</span><span class=value8>HP</span><span class=value9>KYD</span><span class=value8>E</span><span class=value7>NLV</span><span class=valuegap>-----------</span><span class=value4>V</span><span class=value5>H</span><span class=value9>DIMLLKLKEKA</span><br><span class=valuedefault>sp|O35205|GRAK_&nbsp;&nbsp;&nbsp;</span><span class=value8>FSRLQ</span><span class=value7>SGSA</span><span class=valuegap>-----------</span><span class=value4>S</span><span class=value5>H</span><span class=value9>DIMLIKLRTAA</span><br><span class=valuedefault>sp|Q7YRZ7|GRAA_&nbsp;&nbsp;&nbsp;</span><span class=value8>YP</span><span class=value9>CFD</span><span class=value8>P</span><span class=value7>QTF</span><span class=valuegap>-----------</span><span class=value4>E</span><span class=value5>G</span><span class=value9>DLQLLQLEGKA</span><br><span class=valuedefault>sp|Q9Y5K2|KLK4_&nbsp;&nbsp;&nbsp;</span><span class=value8>HP</span><span class=value9>EY</span><span class=value8>NR</span><span class=value7>PLL</span><span class=valuegap>-----------</span><span class=value4>A</span><span class=value5>N</span><span class=value9>DLMLIKLDESV</span><br><span class=valuedefault>sp|Q91VE3|KLK7_&nbsp;&nbsp;&nbsp;</span><span class=value8>H</span><span class=value9>PGY</span><span class=value8>ST</span><span class=value7>KTH</span><span class=valuegap>-----------</span><span class=value4>V</span><span class=value5>N</span><span class=value9>DIMLVRLDEPV</span><br><span class=valuedefault>sp|Q6H321|KLK2_&nbsp;&nbsp;&nbsp;</span><span class=value8>DPQFD</span><span class=value7>L</span><span class=value6>SL</span><span class=value5>L</span><span class=value3>K</span><span class=value2>K</span><span class=value1>KYL</span><span class=value0>RPYDDI</span><span class=value3>S</span><span class=value4>H</span><span class=value9>DLMLLRLAQPA</span><br><span class=valuedefault>sp|P00757|KLKB4&nbsp;&nbsp;&nbsp;</span><span class=value8>HPDFN</span><span class=value7>M</span><span class=value6>SLL</span><span class=value3>N</span><span class=value2>E</span><span class=value1>HT</span><span class=value0>PQPEDDY</span><span class=value4>S</span><span class=value5>N</span><span class=value9>DLMLLRLSKPA</span><br><span class=valuedefault>sp|Q03238|GRAM_&nbsp;&nbsp;&nbsp;</span><span class=value8>HPGY</span><span class=value7>N</span><span class=value5>L</span><span class=value4>K</span><span class=value2>Y</span><span class=value1>E</span><span class=value0>N</span><span class=valuegap>------------</span><span class=value9>DLALLKLDGRV</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value7>&nbsp;&nbsp;</span><span class=value6>&nbsp;&nbsp;</span><span class=value3>&nbsp;&nbsp;</span><span class=value0>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value4>&nbsp;</span><span class=value5>&nbsp;</span><span class=value9>*.&nbsp;:..*&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>sp|P29786|TRY3_&nbsp;&nbsp;&nbsp;</span><span class=value9>GFSRSIEAIALP</span><span class=value7>D</span><span class=valuegap>-</span><span class=value6>AS</span><span class=value5>ET</span><span class=value6>VA</span><span class=value7>D</span><span class=value9>GAMCTVSGWG</span><span class=value7>D</span><span class=value6>T</span><br><span class=valuedefault>sp|P35037|TRY3_&nbsp;&nbsp;&nbsp;</span><span class=value9>TFSDVVQPVSLP</span><span class=value7>D</span><span class=valuegap>-</span><span class=value6>QD</span><span class=value5>EA</span><span class=value6>VE</span><span class=value7>D</span><span class=value9>GTMTIVSGWG</span><span class=value7>N</span><span class=value6>T</span><br><span class=valuedefault>sp|P03953|CFAD_&nbsp;&nbsp;&nbsp;</span><span class=value9>SLGPHVRPLPL</span><span class=value8>Q</span><span class=value7>Y</span><span class=valuegap>-</span><span class=value6>E</span><span class=value5>DKE</span><span class=value6>VE</span><span class=value7>P</span><span class=value9>GTLCDVAGWG</span><span class=value7>V</span><span class=value6>V</span><br><span class=valuedefault>sp|P20160|CAP7_&nbsp;&nbsp;&nbsp;</span><span class=value9>NLTSSVTILPLP</span><span class=value7>L</span><span class=valuegap>-</span><span class=value6>QN</span><span class=value5>AT</span><span class=value6>VE</span><span class=value7>A</span><span class=value9>GTRCQVAGWG</span><span class=value7>S</span><span class=value6>Q</span><br><span class=valuedefault>sp|P80015|CAP7_&nbsp;&nbsp;&nbsp;</span><span class=value9>RLTPSVALVPLP</span><span class=value7>P</span><span class=valuegap>-</span><span class=value6>QN</span><span class=value5>AT</span><span class=value6>VE</span><span class=value7>A</span><span class=value9>GTNCQVAGWG</span><span class=value7>T</span><span class=value6>Q</span><br><span class=valuedefault>sp|P08246|ELNE_&nbsp;&nbsp;&nbsp;</span><span class=value9>TINANVQVAQLP</span><span class=value7>A</span><span class=valuegap>-</span><span class=value7>Q</span><span class=value6>GR</span><span class=value5>R</span><span class=value6>LGN</span><span class=value9>GVQCLAMGWG</span><span class=value8>L</span><span class=value7>L</span><br><span class=valuedefault>sp|Q00871|CTRB1&nbsp;&nbsp;&nbsp;</span><span class=value9>SLNSNIKTVKL</span><span class=value8>P</span><span class=valuegap>---</span><span class=value1>S</span><span class=value2>S</span><span class=value3>D</span><span class=value4>VS</span><span class=value5>V</span><span class=value8>G</span><span class=value9>TTVTPTGWG</span><span class=value8>R</span><span class=value7>P</span><br><span class=valuedefault>sp|P07338|CTRB1&nbsp;&nbsp;&nbsp;</span><span class=value9>QFSETVSAVCLP</span><span class=value7>N</span><span class=valuegap>-</span><span class=value6>V</span><span class=value5>DDD</span><span class=value6>FP</span><span class=value7>P</span><span class=value9>GTVCATTGWG</span><span class=value8>K</span><span class=value7>T</span><br><span class=valuedefault>sp|P00773|ELA1_&nbsp;&nbsp;&nbsp;</span><span class=value9>TLNNYVQLAVLP</span><span class=value7>Q</span><span class=valuegap>-</span><span class=value6>E</span><span class=value5>GTI</span><span class=value6>LAN</span><span class=value9>NNPCYITGWG</span><span class=value7>R</span><span class=value6>T</span><br><span class=valuedefault>sp|Q06606|GRZ2_&nbsp;&nbsp;&nbsp;</span><span class=value9>QLNGVVKTIALP</span><span class=value7>R</span><span class=valuegap>-</span><span class=value6>S</span><span class=value5>QD</span><span class=value6>WVK</span><span class=value7>P</span><span class=value9>GQVCTVAGWG</span><span class=valuegap>--</span><br><span class=valuedefault>sp|P08884|GRAE_&nbsp;&nbsp;&nbsp;</span><span class=value9>KRTKAVRPLKLP</span><span class=value7>R</span><span class=valuegap>-</span><span class=value6>PN</span><span class=value5>AR</span><span class=value6>VK</span><span class=value7>P</span><span class=value9>GDVCSVAGWG</span><span class=value8>S</span><span class=value6>R</span><br><span class=valuedefault>sp|P21844|MCPT5&nbsp;&nbsp;&nbsp;</span><span class=value9>KLTLGVGTLPL</span><span class=value8>S</span><span class=value7>A</span><span class=valuegap>-</span><span class=value6>N</span><span class=value5>FNF</span><span class=value6>IP</span><span class=value7>P</span><span class=value9>GRMCRAVGWG</span><span class=valuegap>-</span><span class=value1>R</span><br><span class=valuedefault>sp|O35205|GRAK_&nbsp;&nbsp;&nbsp;</span><span class=value9>ELNKNVQLLHL</span><span class=value8>G</span><span class=valuegap>--</span><span class=value2>SK</span><span class=value3>NY</span><span class=value5>LR</span><span class=value6>D</span><span class=value9>GTKCQVTGWG</span><span class=value8>T</span><span class=value7>T</span><br><span class=valuedefault>sp|Q7YRZ7|GRAA_&nbsp;&nbsp;&nbsp;</span><span class=value9>TMTKAVGILQLP</span><span class=value7>R</span><span class=valuegap>-</span><span class=value6>T</span><span class=value5>EDD</span><span class=value6>VKP</span><span class=value9>HTKCHVAGWG</span><span class=value8>S</span><span class=value7>T</span><br><span class=valuedefault>sp|Q9Y5K2|KLK4_&nbsp;&nbsp;&nbsp;</span><span class=value9>SESDTIRSIS</span><span class=value8>I</span><span class=value7>A</span><span class=value5>S</span><span class=valuegap>-</span><span class=value4>Q</span><span class=value3>CPTA</span><span class=valuegap>--</span><span class=value9>GNSCLVSGWG</span><span class=value7>L</span><span class=value5>L</span><br><span class=valuedefault>sp|Q91VE3|KLK7_&nbsp;&nbsp;&nbsp;</span><span class=value9>KMSSKVEAVQL</span><span class=value8>P</span><span class=value6>E</span><span class=valuegap>-</span><span class=value4>HC</span><span class=value3>EP</span><span class=value2>P</span><span class=valuegap>--</span><span class=value9>GTSCTVSGWG</span><span class=value8>T</span><span class=value6>T</span><br><span class=valuedefault>sp|Q6H321|KLK2_&nbsp;&nbsp;&nbsp;</span><span class=value9>RITDAVKILDLP</span><span class=value6>T</span><span class=valuegap>-</span><span class=value5>Q</span><span class=value4>EP</span><span class=value3>KL</span><span class=valuegap>--</span><span class=value8>G</span><span class=value9>STCYTSGWG</span><span class=value8>L</span><span class=value7>I</span><br><span class=valuedefault>sp|P00757|KLKB4&nbsp;&nbsp;&nbsp;</span><span class=value9>DITDVVKPITL</span><span class=value8>P</span><span class=value6>T</span><span class=valuegap>-</span><span class=value5>E</span><span class=value4>EP</span><span class=value3>KL</span><span class=valuegap>--</span><span class=value8>G</span><span class=value9>STCLASGWG</span><span class=value8>S</span><span class=value7>T</span><br><span class=valuedefault>sp|Q03238|GRAM_&nbsp;&nbsp;&nbsp;</span><span class=value9>KPSKNVKPLALP</span><span class=value7>R</span><span class=value0>K</span><span class=value2>PR</span><span class=value3>DK</span><span class=value4>P</span><span class=value5>A</span><span class=value6>E</span><span class=value9>GSRCSTAGWG</span><span class=valuegap>-</span><span class=value1>I</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;</span><span class=value7>&nbsp;</span><span class=value0>&nbsp;</span><span class=value5>&nbsp;</span><span class=value4>&nbsp;&nbsp;&nbsp;</span><span class=value5>&nbsp;</span><span class=value6>&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;***</span><span class=value7>&nbsp;</span><span class=value6>&nbsp;</span><br><br><br><span class=valuedefault>sp|P29786|TRY3_&nbsp;&nbsp;&nbsp;</span><span class=value5>K</span><span class=value4>N</span><span class=value3>VF</span><span class=valuegap>-</span><span class=value5>E</span><span class=value6>M</span><span class=value7>NT</span><span class=value8>L</span><span class=value9>LRAVNVPSY</span><span class=value8>NQA</span><span class=value9>EC</span><span class=value8>A</span><span class=value6>A</span><span class=value3>A</span><span class=value1>LV</span><span class=valuegap>--</span><span class=value1>N</span><span class=value2>V</span><br><span class=valuedefault>sp|P35037|TRY3_&nbsp;&nbsp;&nbsp;</span><span class=value5>Q</span><span class=value4>S</span><span class=value3>AA</span><span class=valuegap>-</span><span class=value5>ES</span><span class=value6>N</span><span class=value7>A</span><span class=value8>I</span><span class=value9>LRAANVPTV</span><span class=value8>NQKE</span><span class=value9>C</span><span class=value8>T</span><span class=value6>I</span><span class=value3>A</span><span class=value1>YS</span><span class=valuegap>--</span><span class=value1>S</span><span class=value2>S</span><br><span class=valuedefault>sp|P03953|CFAD_&nbsp;&nbsp;&nbsp;</span><span class=value5>T</span><span class=value4>H</span><span class=value3>AG</span><span class=valuegap>-</span><span class=value5>R</span><span class=value6>R</span><span class=value7>P</span><span class=value8>DV</span><span class=value9>LHQLRVSIM</span><span class=value8>NRTT</span><span class=value9>C</span><span class=value8>N</span><span class=value5>L</span><span class=value2>R</span><span class=value1>TY</span><span class=valuegap>--</span><span class=value2>HD</span><br><span class=valuedefault>sp|P20160|CAP7_&nbsp;&nbsp;&nbsp;</span><span class=value5>R</span><span class=value4>S</span><span class=value3>GG</span><span class=valuegap>-</span><span class=value5>R</span><span class=value6>L</span><span class=value7>SR</span><span class=value8>FP</span><span class=value9>RFVNVTVT</span><span class=value8>PEDQC</span><span class=value6>R</span><span class=value4>P</span><span class=value2>N</span><span class=value1>N</span><span class=valuegap>-----</span><br><span class=valuedefault>sp|P80015|CAP7_&nbsp;&nbsp;&nbsp;</span><span class=value5>R</span><span class=value4>L</span><span class=value3>RR</span><span class=valuegap>-</span><span class=value4>LF</span><span class=value5>SRF</span><span class=value6>P</span><span class=value7>RVL</span><span class=value8>NV</span><span class=value6>TV</span><span class=value5>T</span><span class=value4>S</span><span class=valuegap>-</span><span class=value3>NP</span><span class=value4>C</span><span class=value2>LP</span><span class=value1>RD</span><span class=valuegap>-----</span><br><span class=valuedefault>sp|P08246|ELNE_&nbsp;&nbsp;&nbsp;</span><span class=value5>G</span><span class=value4>R</span><span class=value3>NR</span><span class=valuegap>-</span><span class=value4>G</span><span class=value5>I</span><span class=value6>A</span><span class=value7>S</span><span class=value8>V</span><span class=value9>LQELNVT</span><span class=value8>V</span><span class=value7>V</span><span class=value5>T</span><span class=valuegap>-</span><span class=value3>S</span><span class=value4>L</span><span class=value5>C</span><span class=value4>R</span><span class=value3>R</span><span class=value1>SN</span><span class=valuegap>-----</span><br><span class=valuedefault>sp|Q00871|CTRB1&nbsp;&nbsp;&nbsp;</span><span class=value5>S</span><span class=value4>D</span><span class=value3>SAS</span><span class=value5>G</span><span class=value6>I</span><span class=value7>S</span><span class=value8>DV</span><span class=value9>LRQVNVPVM</span><span class=value8>TNAD</span><span class=value9>C</span><span class=value7>D</span><span class=value5>S</span><span class=value2>V</span><span class=valuegap>-----</span><span class=value2>Y</span><br><span class=valuedefault>sp|P07338|CTRB1&nbsp;&nbsp;&nbsp;</span><span class=value6>K</span><span class=value5>Y</span><span class=value4>NA</span><span class=value3>L</span><span class=value5>K</span><span class=value6>T</span><span class=value7>PE</span><span class=value8>K</span><span class=value9>LQQAALPIV</span><span class=value8>SEAD</span><span class=value9>C</span><span class=value7>K</span><span class=value5>K</span><span class=value2>S</span><span class=valuegap>-----</span><span class=value1>W</span><br><span class=valuedefault>sp|P00773|ELA1_&nbsp;&nbsp;&nbsp;</span><span class=value5>R</span><span class=value4>TN</span><span class=value3>G</span><span class=valuegap>-</span><span class=value5>Q</span><span class=value6>L</span><span class=value7>S</span><span class=value8>QT</span><span class=value9>LQQAYLPS</span><span class=value8>VDYSI</span><span class=value9>C</span><span class=value8>S</span><span class=value6>S</span><span class=value3>S</span><span class=value1>SY</span><span class=valuegap>---</span><span class=value1>W</span><br><span class=valuedefault>sp|Q06606|GRZ2_&nbsp;&nbsp;&nbsp;</span><span class=value1>RLA</span><span class=value2>NC</span><span class=value4>TS</span><span class=value6>S</span><span class=value7>NT</span><span class=value8>L</span><span class=value9>QEVNLEVQK</span><span class=value8>GQK</span><span class=value9>C</span><span class=value8>Q</span><span class=value6>D</span><span class=valuegap>----</span><span class=value2>MSE</span><br><span class=valuedefault>sp|P08884|GRAE_&nbsp;&nbsp;&nbsp;</span><span class=value5>S</span><span class=value4>IN</span><span class=value3>DT</span><span class=value5>K</span><span class=value6>A</span><span class=value7>SA</span><span class=value8>R</span><span class=value9>LREAQLVIQ</span><span class=value8>EDE</span><span class=value9>EC</span><span class=value8>K</span><span class=value5>K</span><span class=valuegap>----</span><span class=value2>RFR</span><br><span class=valuedefault>sp|P21844|MCPT5&nbsp;&nbsp;&nbsp;</span><span class=value2>TNVNE</span><span class=value5>P</span><span class=value6>A</span><span class=value7>S</span><span class=value8>DTL</span><span class=value9>QEVKMRL</span><span class=value8>QEPQAC</span><span class=value6>K</span><span class=valuegap>-----</span><span class=value1>HF</span><span class=value2>T</span><br><span class=valuedefault>sp|O35205|GRAK_&nbsp;&nbsp;&nbsp;</span><span class=value6>K</span><span class=value4>PD</span><span class=value3>LL</span><span class=value5>T</span><span class=value6>A</span><span class=value7>SD</span><span class=value8>TL</span><span class=value9>REVTVTIIS</span><span class=value8>RK</span><span class=value9>RC</span><span class=value8>N</span><span class=value6>S</span><span class=value3>Q</span><span class=value2>S</span><span class=value1>Y</span><span class=value0>YN</span><span class=value1>H</span><span class=value2>K</span><br><span class=valuedefault>sp|Q7YRZ7|GRAA_&nbsp;&nbsp;&nbsp;</span><span class=value5>K</span><span class=value4>KD</span><span class=value3>AC</span><span class=value6>QM</span><span class=value7>S</span><span class=value8>NA</span><span class=value9>LREANVTVI</span><span class=value8>DRK</span><span class=value9>IC</span><span class=value8>N</span><span class=value6>D</span><span class=value3>A</span><span class=value2>Q</span><span class=value1>H</span><span class=value0>YN</span><span class=value1>F</span><span class=value2>N</span><br><span class=valuedefault>sp|Q9Y5K2|KLK4_&nbsp;&nbsp;&nbsp;</span><span class=value4>A</span><span class=value3>N</span><span class=valuegap>--</span><span class=value2>G</span><span class=value4>R</span><span class=value5>M</span><span class=value6>P</span><span class=value7>T</span><span class=value8>V</span><span class=value9>LQCVNVSVV</span><span class=value8>SEEVC</span><span class=value7>S</span><span class=value5>K</span><span class=valuegap>----</span><span class=value2>LY</span><span class=value3>D</span><br><span class=valuedefault>sp|Q91VE3|KLK7_&nbsp;&nbsp;&nbsp;</span><span class=value5>T</span><span class=value4>S</span><span class=value3>PD</span><span class=value2>V</span><span class=value4>T</span><span class=value5>F</span><span class=value6>PS</span><span class=value7>D</span><span class=value8>LMC</span><span class=value9>SDVKLI</span><span class=value8>SSR</span><span class=value9>EC</span><span class=value7>K</span><span class=value5>K</span><span class=valuegap>----</span><span class=value2>VY</span><span class=value3>K</span><br><span class=valuedefault>sp|Q6H321|KLK2_&nbsp;&nbsp;&nbsp;</span><span class=value6>S</span><span class=value4>T</span><span class=value3>FTN</span><span class=value5>R</span><span class=value6>G</span><span class=value7>SG</span><span class=value8>T</span><span class=value9>LQCVELRLQ</span><span class=value8>SNEK</span><span class=value9>C</span><span class=value7>A</span><span class=value5>R</span><span class=valuegap>----</span><span class=value2>AY</span><span class=value3>P</span><br><span class=valuedefault>sp|P00757|KLKB4&nbsp;&nbsp;&nbsp;</span><span class=value5>T</span><span class=value4>PI</span><span class=value3>KF</span><span class=value5>K</span><span class=value6>Y</span><span class=value7>P</span><span class=value8>DD</span><span class=value9>LQCVNLKLL</span><span class=value8>PNED</span><span class=value9>C</span><span class=value7>D</span><span class=value6>K</span><span class=valuegap>----</span><span class=value2>AH</span><span class=value3>E</span><br><span class=valuedefault>sp|Q03238|GRAM_&nbsp;&nbsp;&nbsp;</span><span class=value2>THQ</span><span class=value3>R</span><span class=value2>G</span><span class=value5>Q</span><span class=value6>L</span><span class=value7>AK</span><span class=value8>S</span><span class=value9>LQELDLRLL</span><span class=value8>DTR</span><span class=value9>MC</span><span class=value8>N</span><span class=value6>N</span><span class=value3>S</span><span class=value1>R</span><span class=valuegap>--</span><span class=value1>F</span><span class=value2>WN</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value4>&nbsp;&nbsp;</span><span class=value3>&nbsp;&nbsp;</span><span class=value2>&nbsp;</span><span class=value5>&nbsp;</span><span class=value6>&nbsp;&nbsp;</span><span class=value7>&nbsp;</span><span class=value8>&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;</span><span class=value8>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*</span><span class=value7>&nbsp;</span><span class=value5>&nbsp;</span><span class=value2>&nbsp;</span><span class=value1>&nbsp;&nbsp;</span><span class=value0>&nbsp;</span><span class=value1>&nbsp;</span><span class=value2>&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>sp|P29786|TRY3_&nbsp;&nbsp;&nbsp;</span><span class=value2>VP</span><span class=value3>V</span><span class=value4>TE</span><span class=value5>Q</span><span class=value6>M</span><span class=value8>ICA</span><span class=value7>G</span><span class=value6>YAAGG</span><span class=value7>K</span><span class=value9>DSCQGDSGGPLVS</span><span class=value8>G</span><span class=value3>D</span><span class=valuegap>-</span><br><span class=valuedefault>sp|P35037|TRY3_&nbsp;&nbsp;&nbsp;</span><span class=value2>G</span><span class=value3>G</span><span class=value4>ITD</span><span class=value5>R</span><span class=value6>M</span><span class=value8>LC</span><span class=value7>AG</span><span class=value6>YK</span><span class=value5>R</span><span class=value6>GG</span><span class=value7>K</span><span class=value9>DACQGDSGGPLVV</span><span class=value8>D</span><span class=value3>G</span><span class=valuegap>-</span><br><span class=valuedefault>sp|P03953|CFAD_&nbsp;&nbsp;&nbsp;</span><span class=value2>G</span><span class=value3>V</span><span class=value4>VTI</span><span class=value5>N</span><span class=value6>M</span><span class=value7>MC</span><span class=value6>A</span><span class=value4>E</span><span class=value3>S</span><span class=value2>NR</span><span class=valuegap>--</span><span class=value5>R</span><span class=value7>D</span><span class=value9>TCRGDSGSPLVC</span><span class=value8>G</span><span class=value3>D</span><span class=valuegap>-</span><br><span class=valuedefault>sp|P20160|CAP7_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-------</span><span class=value6>V</span><span class=value7>CT</span><span class=value6>GV</span><span class=value5>LTRR</span><span class=value6>G</span><span class=value8>G</span><span class=value9>ICNGDGGTPLVC</span><span class=value8>E</span><span class=value3>G</span><span class=valuegap>-</span><br><span class=valuedefault>sp|P80015|CAP7_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-------</span><span class=value6>M</span><span class=value7>CI</span><span class=value6>GV</span><span class=value5>FSRRG</span><span class=value7>R</span><span class=value8>I</span><span class=value9>SQGDRGTPLVC</span><span class=value8>N</span><span class=value3>G</span><span class=valuegap>-</span><br><span class=valuedefault>sp|P08246|ELNE_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-------</span><span class=value6>V</span><span class=value7>C</span><span class=value6>TL</span><span class=value5>V</span><span class=value4>RGR</span><span class=value5>QA</span><span class=value7>G</span><span class=value9>VCFGDSGSPLVC</span><span class=value8>N</span><span class=value3>G</span><span class=valuegap>-</span><br><span class=valuedefault>sp|Q00871|CTRB1&nbsp;&nbsp;&nbsp;</span><span class=value2>GI</span><span class=value3>VG</span><span class=value4>DG</span><span class=value5>V</span><span class=value6>V</span><span class=value7>C</span><span class=value6>I</span><span class=value4>D</span><span class=value3>GT</span><span class=value2>GGK</span><span class=valuegap>-</span><span class=value8>S</span><span class=value9>TCNGDSGGPLNL</span><span class=value8>N</span><span class=value3>G</span><span class=valuegap>-</span><br><span class=valuedefault>sp|P07338|CTRB1&nbsp;&nbsp;&nbsp;</span><span class=value1>GSKITDVMTCAG</span><span class=value2>ASGV</span><span class=valuegap>-</span><span class=value7>S</span><span class=value8>S</span><span class=value9>CMGDSGGPLVC</span><span class=value8>Q</span><span class=value3>K</span><span class=value0>D</span><br><span class=valuedefault>sp|P00773|ELA1_&nbsp;&nbsp;&nbsp;</span><span class=value1>GSTVKTTMVCA</span><span class=value2>G</span><span class=value3>GD</span><span class=value4>GV</span><span class=value5>R</span><span class=value7>S</span><span class=value8>G</span><span class=value9>CQGDSGGPLHC</span><span class=value6>L</span><span class=value2>V</span><span class=value0>N</span><br><span class=valuedefault>sp|Q06606|GRZ2_&nbsp;&nbsp;&nbsp;</span><span class=value2>DYN</span><span class=value3>DS</span><span class=value4>I</span><span class=value5>Q</span><span class=value7>L</span><span class=value8>C</span><span class=value7>VG</span><span class=value6>NP</span><span class=value5>S</span><span class=value6>EG</span><span class=value7>K</span><span class=value8>A</span><span class=value9>TGKGDSGGPFVC</span><span class=value8>D</span><span class=valuegap>--</span><br><span class=valuedefault>sp|P08884|GRAE_&nbsp;&nbsp;&nbsp;</span><span class=value2>H</span><span class=value3>YTE</span><span class=value4>TT</span><span class=value5>E</span><span class=value7>I</span><span class=value8>C</span><span class=value7>AG</span><span class=value6>DL</span><span class=value5>K</span><span class=value6>KI</span><span class=value7>K</span><span class=value8>T</span><span class=value9>PFKGDSGGPLVC</span><span class=value8>D</span><span class=valuegap>--</span><br><span class=valuedefault>sp|P21844|MCPT5&nbsp;&nbsp;&nbsp;</span><span class=value2>SF</span><span class=value3>RH</span><span class=value4>NS</span><span class=value6>Q</span><span class=value8>LCV</span><span class=value7>G</span><span class=value6>NPKKM</span><span class=value7>Q</span><span class=value9>NVYKGDSGGPLLC</span><span class=value8>A</span><span class=valuegap>--</span><br><span class=valuedefault>sp|O35205|GRAK_&nbsp;&nbsp;&nbsp;</span><span class=value3>PV</span><span class=value4>IT</span><span class=value5>KD</span><span class=value6>M</span><span class=value8>IC</span><span class=value7>AG</span><span class=value6>D</span><span class=value5>AR</span><span class=value6>GQ</span><span class=value7>K</span><span class=value8>D</span><span class=value9>SCKGDSGGPLIC</span><span class=value8>K</span><span class=valuegap>--</span><br><span class=valuedefault>sp|Q7YRZ7|GRAA_&nbsp;&nbsp;&nbsp;</span><span class=value2>P</span><span class=value3>V</span><span class=value4>ID</span><span class=value5>LS</span><span class=value6>M</span><span class=value8>ICA</span><span class=value7>G</span><span class=value6>G</span><span class=value5>RK</span><span class=value6>GE</span><span class=value7>D</span><span class=value8>D</span><span class=value9>SCEGDSGSPLIC</span><span class=value8>D</span><span class=valuegap>--</span><br><span class=valuedefault>sp|Q9Y5K2|KLK4_&nbsp;&nbsp;&nbsp;</span><span class=value3>PL</span><span class=value4>YH</span><span class=value5>PS</span><span class=value6>M</span><span class=value8>FCA</span><span class=value7>G</span><span class=value6>GGQDQ</span><span class=value7>K</span><span class=value9>DSCNGDSGGPLIC</span><span class=value8>N</span><span class=valuegap>--</span><br><span class=valuedefault>sp|Q91VE3|KLK7_&nbsp;&nbsp;&nbsp;</span><span class=value3>D</span><span class=value4>LL</span><span class=value5>GK</span><span class=value6>TM</span><span class=value8>LCA</span><span class=value7>G</span><span class=value6>IPDSK</span><span class=value7>T</span><span class=value9>NTCNGDSGGPLVC</span><span class=value8>N</span><span class=valuegap>--</span><br><span class=valuedefault>sp|Q6H321|KLK2_&nbsp;&nbsp;&nbsp;</span><span class=value3>EK</span><span class=value4>MTE</span><span class=value5>F</span><span class=value6>V</span><span class=value7>L</span><span class=value8>C</span><span class=value7>AT</span><span class=value6>HR</span><span class=value5>D</span><span class=value6>DS</span><span class=value7>G</span><span class=value9>SICLGDSGGALIC</span><span class=value8>D</span><span class=valuegap>--</span><br><span class=valuedefault>sp|P00757|KLKB4&nbsp;&nbsp;&nbsp;</span><span class=value3>MK</span><span class=value4>VT</span><span class=value5>DA</span><span class=value6>M</span><span class=value8>LCA</span><span class=value7>G</span><span class=value6>EMDGG</span><span class=value7>S</span><span class=value9>YTCEHDSGGPLIC</span><span class=value8>D</span><span class=valuegap>--</span><br><span class=valuedefault>sp|Q03238|GRAM_&nbsp;&nbsp;&nbsp;</span><span class=value3>GV</span><span class=value4>LT</span><span class=value5>D</span><span class=value6>SM</span><span class=value8>LCL</span><span class=value7>K</span><span class=value5>AGAKG</span><span class=value6>Q</span><span class=value8>A</span><span class=value9>PCKGDSGGPLVC</span><span class=value7>G</span><span class=value1>K</span><span class=valuegap>-</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value2>&nbsp;</span><span class=value3>&nbsp;&nbsp;&nbsp;</span><span class=value4>&nbsp;&nbsp;</span><span class=value5>&nbsp;</span><span class=value7>.&nbsp;</span><span class=value6>&nbsp;&nbsp;</span><span class=value5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value6>&nbsp;</span><span class=value8>&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;*&nbsp;.:&nbsp;&nbsp;</span><span class=value8>&nbsp;</span><span class=value3>&nbsp;</span><span class=value0>&nbsp;</span><br><br><br><span class=valuedefault>sp|P29786|TRY3_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---</span><span class=value8>K</span><span class=value9>LVGVVSW</span><span class=value7>G</span><span class=valuegap>-</span><span class=value2>K</span><span class=value3>G</span><span class=value4>CALP</span><span class=value5>N</span><span class=valuegap>-</span><span class=value6>L</span><span class=value9>PGVYARVS</span><span class=value8>T</span><span class=valuegap>-</span><span class=value9>V</span><br><span class=valuedefault>sp|P35037|TRY3_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---</span><span class=value8>K</span><span class=value9>LVGVVSW</span><span class=value7>G</span><span class=valuegap>-</span><span class=value2>F</span><span class=value3>G</span><span class=value4>CAMP</span><span class=value5>G</span><span class=valuegap>-</span><span class=value6>Y</span><span class=value9>PGVYARVA</span><span class=value8>V</span><span class=valuegap>-</span><span class=value9>V</span><br><span class=valuedefault>sp|P03953|CFAD_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---</span><span class=value8>A</span><span class=value9>VEGVVTW</span><span class=value8>G</span><span class=value5>S</span><span class=value3>R</span><span class=value4>VCGNG</span><span class=value5>K</span><span class=valuegap>-</span><span class=value6>K</span><span class=value9>PGVYTRVS</span><span class=value8>S</span><span class=valuegap>-</span><span class=value9>Y</span><br><span class=valuedefault>sp|P20160|CAP7_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---</span><span class=value8>L</span><span class=value9>AHGVASF</span><span class=value7>S</span><span class=value4>L</span><span class=value3>GP</span><span class=value4>C</span><span class=value3>GRG</span><span class=valuegap>---</span><span class=value8>P</span><span class=value9>DFFTRVA</span><span class=value8>L</span><span class=valuegap>-</span><span class=value9>F</span><br><span class=valuedefault>sp|P80015|CAP7_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---</span><span class=value8>L</span><span class=value9>AQGVASF</span><span class=value7>L</span><span class=value4>R</span><span class=value2>RRFRRS</span><span class=valuegap>---</span><span class=value7>S</span><span class=value8>G</span><span class=value9>FFTRVA</span><span class=value8>L</span><span class=valuegap>-</span><span class=value9>F</span><br><span class=valuedefault>sp|P08246|ELNE_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---</span><span class=value8>L</span><span class=value9>IHGIASF</span><span class=value8>V</span><span class=value5>R</span><span class=value3>G</span><span class=value4>GCASGL</span><span class=valuegap>-</span><span class=value6>Y</span><span class=value9>PDAFAPVA</span><span class=value8>Q</span><span class=valuegap>-</span><span class=value9>F</span><br><span class=valuedefault>sp|Q00871|CTRB1&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---</span><span class=value8>M</span><span class=value9>TYGITSF</span><span class=value8>G</span><span class=value5>S</span><span class=value3>SAGCEKG</span><span class=valuegap>-</span><span class=value5>Y</span><span class=value9>PAAFTRVY</span><span class=value8>Y</span><span class=valuegap>-</span><span class=value9>Y</span><br><span class=valuedefault>sp|P07338|CTRB1&nbsp;&nbsp;&nbsp;</span><span class=value0>GV</span><span class=value2>W</span><span class=value6>T</span><span class=value9>LAGIVSW</span><span class=value8>G</span><span class=valuegap>-</span><span class=value2>S</span><span class=value3>GV</span><span class=value2>C</span><span class=value3>STS</span><span class=valuegap>-</span><span class=value5>T</span><span class=value9>PAVYSRVT</span><span class=value8>A</span><span class=valuegap>-</span><span class=value9>L</span><br><span class=valuedefault>sp|P00773|ELA1_&nbsp;&nbsp;&nbsp;</span><span class=value0>GQ</span><span class=value3>Y</span><span class=value7>S</span><span class=value9>VHGVTS</span><span class=value8>F</span><span class=value7>V</span><span class=value3>S</span><span class=value2>SMG</span><span class=value1>CNVS</span><span class=value0>K</span><span class=value6>K</span><span class=value9>PTVFTRVS</span><span class=value8>A</span><span class=valuegap>-</span><span class=value9>Y</span><br><span class=valuedefault>sp|Q06606|GRZ2_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value5>G</span><span class=value8>V</span><span class=value9>AQGIVS</span><span class=value7>Y</span><span class=value4>R</span><span class=value2>L</span><span class=valuegap>-</span><span class=value2>CTGTL</span><span class=valuegap>---</span><span class=value9>PRVFTRIS</span><span class=value8>S</span><span class=valuegap>-</span><span class=value9>F</span><br><span class=valuedefault>sp|P08884|GRAE_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value4>N</span><span class=value8>K</span><span class=value9>AYGLLA</span><span class=value8>Y</span><span class=value7>A</span><span class=value4>K</span><span class=valuegap>-</span><span class=value2>NRTIS</span><span class=valuegap>---</span><span class=value7>S</span><span class=value8>G</span><span class=value9>VFTKIV</span><span class=value8>H</span><span class=valuegap>-</span><span class=value9>F</span><br><span class=valuedefault>sp|P21844|MCPT5&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value4>G</span><span class=value8>I</span><span class=value9>AQGIAS</span><span class=value8>Y</span><span class=value6>V</span><span class=value3>H</span><span class=valuegap>-</span><span class=value2>RNAKP</span><span class=valuegap>---</span><span class=value9>PAVFTRIS</span><span class=value8>H</span><span class=valuegap>-</span><span class=value9>Y</span><br><span class=valuedefault>sp|O35205|GRAK_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value4>G</span><span class=value8>I</span><span class=value9>FHALVS</span><span class=value8>Q</span><span class=value7>G</span><span class=value3>Y</span><span class=valuegap>-</span><span class=value3>K</span><span class=value4>CGIAK</span><span class=valuegap>-</span><span class=value6>K</span><span class=value9>PGIYTL</span><span class=value8>L</span><span class=value7>T</span><span class=value5>K</span><span class=value0>K</span><span class=value8>Y</span><br><span class=valuedefault>sp|Q7YRZ7|GRAA_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value4>N</span><span class=value8>V</span><span class=value9>FRGVTSF</span><span class=value7>G</span><span class=valuegap>--</span><span class=value2>K</span><span class=value4>CGNPQ</span><span class=valuegap>-</span><span class=value5>K</span><span class=value8>P</span><span class=value9>GIYI</span><span class=value8>L</span><span class=value7>L</span><span class=value6>T</span><span class=value5>K</span><span class=value0>K</span><span class=value8>H</span><br><span class=valuedefault>sp|Q9Y5K2|KLK4_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value4>G</span><span class=value8>Y</span><span class=value9>LQGLVSF</span><span class=value8>G</span><span class=value5>K</span><span class=value3>A</span><span class=value4>PCGQV</span><span class=value5>G</span><span class=valuegap>-</span><span class=value6>V</span><span class=value9>PGVYTNLC</span><span class=value8>K</span><span class=valuegap>-</span><span class=value9>F</span><br><span class=valuedefault>sp|Q91VE3|KLK7_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value4>D</span><span class=value8>T</span><span class=value9>LQGLVSW</span><span class=value8>G</span><span class=value5>T</span><span class=value3>Y</span><span class=value4>PCGQP</span><span class=value5>N</span><span class=valuegap>-</span><span class=value6>D</span><span class=value9>PGVYTQVC</span><span class=value8>K</span><span class=valuegap>-</span><span class=value9>Y</span><br><span class=valuedefault>sp|Q6H321|KLK2_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value4>G</span><span class=value8>V</span><span class=value9>FQGITSW</span><span class=value8>G</span><span class=value5>Y</span><span class=value3>S</span><span class=value4>ECADFN</span><span class=valuegap>-</span><span class=value5>D</span><span class=value8>N</span><span class=value9>FVFTKVM</span><span class=value8>P</span><span class=valuegap>-</span><span class=value9>H</span><br><span class=valuedefault>sp|P00757|KLKB4&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value4>G</span><span class=value8>I</span><span class=value9>LQGITSW</span><span class=value8>G</span><span class=value5>P</span><span class=value3>E</span><span class=value4>PCGEP</span><span class=value5>T</span><span class=valuegap>-</span><span class=value6>E</span><span class=value9>PSVYTKLI</span><span class=value8>K</span><span class=valuegap>-</span><span class=value9>F</span><br><span class=valuedefault>sp|Q03238|GRAM_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value4>G</span><span class=value8>K</span><span class=value9>VDGILSF</span><span class=value8>S</span><span class=value5>S</span><span class=value3>K</span><span class=value4>NCTDIF</span><span class=valuegap>-</span><span class=value6>K</span><span class=value9>PTVATAVA</span><span class=value8>P</span><span class=valuegap>-</span><span class=value9>Y</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value0>&nbsp;&nbsp;</span><span class=value4>&nbsp;</span><span class=value8>&nbsp;</span><span class=value9>&nbsp;&nbsp;.:&nbsp;:&nbsp;</span><span class=value7>&nbsp;</span><span class=value4>&nbsp;</span><span class=value3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value4>&nbsp;</span><span class=value0>&nbsp;</span><span class=value6>&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</span><span class=value8>&nbsp;&nbsp;</span><span class=value0>&nbsp;</span><span class=value9>&nbsp;</span><br><br><br><span class=valuedefault>sp|P29786|TRY3_&nbsp;&nbsp;&nbsp;</span><span class=value9>RQWIRE</span><span class=value8>V</span><span class=value7>S</span><span class=value5>E</span><span class=value4>V</span><span class=valuegap>-------------------</span><br><span class=valuedefault>sp|P35037|TRY3_&nbsp;&nbsp;&nbsp;</span><span class=value9>RDWVR</span><span class=value8>E</span><span class=value6>N</span><span class=value5>S</span><span class=value4>G</span><span class=value3>A</span><span class=valuegap>-------------------</span><br><span class=valuedefault>sp|P03953|CFAD_&nbsp;&nbsp;&nbsp;</span><span class=value9>RMWIEN</span><span class=value8>I</span><span class=value6>T</span><span class=value4>NG</span><span class=value3>N</span><span class=value1>M</span><span class=value0>T</span><span class=value1>S</span><span class=valuegap>---------------</span><br><span class=valuedefault>sp|P20160|CAP7_&nbsp;&nbsp;&nbsp;</span><span class=value9>RDWID</span><span class=value8>G</span><span class=value7>V</span><span class=value6>L</span><span class=valuegap>----</span><span class=value0>NNPGPGPA</span><span class=valuegap>---------</span><br><span class=valuedefault>sp|P80015|CAP7_&nbsp;&nbsp;&nbsp;</span><span class=value9>RNWIDS</span><span class=value8>V</span><span class=value7>L</span><span class=valuegap>----</span><span class=value0>NNP</span><span class=valuegap>-</span><span class=value0>P</span><span class=valuegap>------------</span><br><span class=valuedefault>sp|P08246|ELNE_&nbsp;&nbsp;&nbsp;</span><span class=value9>VNWIDS</span><span class=value8>I</span><span class=value7>I</span><span class=value5>Q</span><span class=value4>R</span><span class=value3>S</span><span class=value1>E</span><span class=value0>D</span><span class=value1>N</span><span class=value0>PC</span><span class=value1>PHP</span><span class=value3>R</span><span class=value1>D</span><span class=value0>PDPA</span><span class=value1>SR</span><span class=value0>T</span><span class=value1>H</span><br><span class=valuedefault>sp|Q00871|CTRB1&nbsp;&nbsp;&nbsp;</span><span class=value9>LDWIQQ</span><span class=value7>K</span><span class=value6>T</span><span class=value5>G</span><span class=value4>V</span><span class=value3>T</span><span class=value2>P</span><span class=valuegap>-----------------</span><br><span class=valuedefault>sp|P07338|CTRB1&nbsp;&nbsp;&nbsp;</span><span class=value9>MPWVQQ</span><span class=value8>I</span><span class=value7>L</span><span class=value6>E</span><span class=value4>AN</span><span class=valuegap>------------------</span><br><span class=valuedefault>sp|P00773|ELA1_&nbsp;&nbsp;&nbsp;</span><span class=value9>ISWMNN</span><span class=value8>V</span><span class=value7>I</span><span class=value5>A</span><span class=value4>YT</span><span class=valuegap>------------------</span><br><span class=valuedefault>sp|Q06606|GRZ2_&nbsp;&nbsp;&nbsp;</span><span class=value9>IPWIQKT</span><span class=value8>M</span><span class=value5>K</span><span class=value4>V</span><span class=value3>L</span><span class=value1>Q</span><span class=value0>Q</span><span class=value1>S</span><span class=valuegap>---------------</span><br><span class=valuedefault>sp|P08884|GRAE_&nbsp;&nbsp;&nbsp;</span><span class=value9>LPWISR</span><span class=value7>N</span><span class=value6>M</span><span class=value4>K</span><span class=value3>LL</span><span class=valuegap>------------------</span><br><span class=valuedefault>sp|P21844|MCPT5&nbsp;&nbsp;&nbsp;</span><span class=value9>RPWINK</span><span class=value8>I</span><span class=value7>L</span><span class=value5>R</span><span class=value4>EN</span><span class=valuegap>------------------</span><br><span class=valuedefault>sp|O35205|GRAK_&nbsp;&nbsp;&nbsp;</span><span class=value9>QTWIK</span><span class=value8>S</span><span class=value7>K</span><span class=value6>L</span><span class=value5>A</span><span class=value4>P</span><span class=value3>S</span><span class=value2>R</span><span class=value1>AH</span><span class=valuegap>---------------</span><br><span class=valuedefault>sp|Q7YRZ7|GRAA_&nbsp;&nbsp;&nbsp;</span><span class=value9>LNWIKK</span><span class=value8>T</span><span class=value7>I</span><span class=value5>A</span><span class=value4>G</span><span class=value3>A</span><span class=value2>I</span><span class=valuegap>-----------------</span><br><span class=valuedefault>sp|Q9Y5K2|KLK4_&nbsp;&nbsp;&nbsp;</span><span class=value9>TEWIEK</span><span class=value8>T</span><span class=value7>V</span><span class=value5>Q</span><span class=value4>AS</span><span class=valuegap>------------------</span><br><span class=valuedefault>sp|Q91VE3|KLK7_&nbsp;&nbsp;&nbsp;</span><span class=value9>KRWVME</span><span class=value8>T</span><span class=value7>M</span><span class=value5>K</span><span class=value4>T</span><span class=value3>H</span><span class=value2>R</span><span class=valuegap>-----------------</span><br><span class=valuedefault>sp|Q6H321|KLK2_&nbsp;&nbsp;&nbsp;</span><span class=value9>LKWIKE</span><span class=value8>T</span><span class=value7>I</span><span class=value5>E</span><span class=value4>K</span><span class=value3>N</span><span class=value2>S</span><span class=valuegap>-----------------</span><br><span class=valuedefault>sp|P00757|KLKB4&nbsp;&nbsp;&nbsp;</span><span class=value9>SSWIRE</span><span class=value8>T</span><span class=value7>M</span><span class=value5>A</span><span class=value4>N</span><span class=value3>NP</span><span class=valuegap>-----------------</span><br><span class=valuedefault>sp|Q03238|GRAM_&nbsp;&nbsp;&nbsp;</span><span class=value9>SSWIRK</span><span class=value8>V</span><span class=value7>I</span><span class=value5>G</span><span class=value4>R</span><span class=value3>W</span><span class=value1>SPQ</span><span class=value0>PLT</span><span class=valuegap>------------</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;*:&nbsp;&nbsp;</span><span class=value8>&nbsp;</span><span class=value7>&nbsp;</span><span class=value5>&nbsp;</span><span class=value4>&nbsp;</span><span class=value3>&nbsp;</span><span class=value2>&nbsp;</span><span class=value0>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><br><br><br></body></html>
-</content>
-</file>
-<environement>
-HOME_4_TCOFFEE=/Users/cnotredame/
-MANPATH=/sw/share/man:/usr/share/man:/usr/local/share/man:/opt/X11/share/man:/Applications/Xcode.app/Contents/Developer/usr/share/man:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/share/man:/sw/lib/perl5/5.18.2/man
-TERM_PROGRAM=Apple_Terminal
-MCOFFEE_4_TCOFFEE=/Users/cnotredame//.t_coffee//mcoffee/
-ROOT_TMP_4_TCOFFEE=/var/tmp/
-SHELL=/bin/bash
-TERM=xterm-256color
-TMPDIR=/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/
-CONDA_SHLVL=1
-PERL5LIB=/sw/lib/perl5:/sw/lib/perl5/darwin
-Apple_PubSub_Socket_Render=/private/tmp/com.apple.launchd.u7asRiNodS/Render
-CONDA_PROMPT_MODIFIER=(base) 
-TERM_PROGRAM_VERSION=388.1.3
-OSNAME=macosx
-PERL_BIN=/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms::/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices
-TERM_SESSION_ID=966A65A4-FBA5-4990-991E-01DB7E43DA0A
-METHODS_4_TCOFFEE=/Users/cnotredame//.t_coffee//methods/
-VERSIONER_PERL_VERSION=5.18
-XAPPLRESDIR=/sw/etc/app-defaults/
-http_proxy=
-HTTP_proxy=
-USER=cnotredame
-CONDA_EXE=/Users/cnotredame/anaconda3/bin/conda
-SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.mMz4rqepoV/Listeners
-__CF_USER_TEXT_ENCODING=0x1F6:0x0:0x0
-ENV_4_TCOFFEE=/Users/cnotredame//.t_coffee//.t_coffee_env
-_CE_CONDA=
-all_proxy=
-ALL_PROXY=
-HTTP_proxy_4_TCOFFEE=
-PATH=/Users/cnotredame//.t_coffee//plugins/macosx/:/Users/cnotredame/anaconda3/bin:/Users/cnotredame/anaconda3/condabin:/opt/local/bin:/opt/local/sbin:/opt/local/bin:/opt/local/sbin:/Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/packages/x3dna-v2.1/bin:/Users/cnotredame/bin/macosx://Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms:.:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices:/Users/cnotredame/bin/Scripts:/Users/cnotredame/Library/Haskell/ghc-7.4.2/lib/epub-tools-2.0.0/bin:/sw/bin:/sw/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin
-_=/usr/bin/printenv
-CONDA_PREFIX=/Users/cnotredame/anaconda3
-COLOR_4_TCOFFEE=new
-DIR_4_TCOFFEE=/Users/cnotredame//.t_coffee/
-PWD=/Users/cnotredame/Dropbox/projects/git/tcoffee/tmp/RANDOMSTRINGzfGLP2spBwzfpVzBRNkz/tmp/RANDOMSTRINGsRzYiLjH1LAAMjhlsgwI/data
-CACHE_4_TCOFFEE=/Users/cnotredame//.t_coffee//cache/
-X3DNA=/Users/cnotredame/Dropbox/packages/x3dna-v2.1
-DBUS_LAUNCHD_SESSION_BUS_SOCKET=/private/tmp/com.apple.launchd.CeZrDaslOL/unix_domain_listener
-XPC_FLAGS=0x0
-VERSIONER_PERL_PREFER_32_BIT=no
-_CE_M=
-XPC_SERVICE_NAME=0
-ERRORFILE_4_TCOFFEE=NO
-PLUGINS_4_TCOFFEE=/Users/cnotredame//.t_coffee//plugins/macosx/
-SHLVL=3
-HOME=/Users/cnotredame
-DUMP_4_TCOFFEE=/Users/cnotredame/Dropbox/projects/git/tcoffee/tmp/RANDOMSTRINGzfGLP2spBwzfpVzBRNkz/tmp/RANDOMSTRINGsRzYiLjH1LAAMjhlsgwI/tcoffee_main_documentation.rst.132.dump
-HTTP_PROXY=
-MAFFT_BINARIES=
-CONDA_PYTHON_EXE=/Users/cnotredame/anaconda3/bin/python
-BIN=/Users/cnotredame/bin/macosx
-LOGNAME=cnotredame
-EMAIL_4_TCOFFEE=cedric.notredame@gmail.com
-LC_CTYPE=UTF-8
-CONDA_DEFAULT_ENV=base
-EMAIL=cedric.notredame@gmail.com
-UPDATED_ENV_4_TCOFFEE=1
-INFOPATH=/sw/share/info:/sw/info:/usr/share/info
-DISPLAY=/private/tmp/com.apple.launchd.MDJPhYnCNw/org.macosforge.xquartz:0
-TC_MASTER_NODE=1
-NUMBER_OF_PROCESSORS=8
-ALL_proxy=
-SECURITYSESSIONID=186a6
-LOCKDIR_4_TCOFFEE=/var/tmp/tco/tcokqdo5o2114582//lck/8_d5xbpec0/
-TMP_4_TCOFFEE=/var/tmp/tco/tcokqdo5o2114582/
-USER_BIN=/Users/cnotredame/bin/macosx
-SCRIPT_BIN=/Users/cnotredame/bin/Scripts/
-</environement>
-<DumpStatus>OK</DumpStatus>
-<DumpFile>/Users/cnotredame/Dropbox/projects/git/tcoffee/tmp/RANDOMSTRINGzfGLP2spBwzfpVzBRNkz/tmp/RANDOMSTRINGsRzYiLjH1LAAMjhlsgwI/tcoffee_main_documentation.rst.132.dump</DumpFile>
-</DumpIO>

@@ -1,885 +1,0 @@
-<DumpIO>
-<nature>standard dump</nature>
-<program>T-COFFEE</program>
-<version>Version_13.30.5.6909e10</version>
-<build>Version_13.30.5.6909e10</build>
-<cl>t_coffee sv.fasta </cl>
-<stack>
-</stack>
-<warning>
-</warning>
-<file>
-<stream>output</stream>
-<name>stdout</name>
-<content>#Single Thread
-#Single Thread
-#Single Thread
-#Single Thread
-CLUSTAL FORMAT for T-COFFEE Version_13.30.5.6909e10 [http://www.tcoffee.org] [MODE:  ], CPU=0.00 sec, SCORE=78, Nseq=4, Len=581 
-
-Q8CAN2_MOUSE    MAAGGRGLIRALHSSPCPTWKRAQSGANGRLKPEYDAVVIGAGHNGLVAA
-Q9D630_MOUSE    MAAGGRGLIRALHSSPCPTWKRAQSGANGRLKPEYDAVVIGAGHNGLVAA
-CJ033_MOUSE     MKRLVLAIDPLLDAAPVDTTA-----------------------------
-CJ033_HUMAN     MAASGRGLCKAVAASPFPAWRRDNTEARGGLKPEYDAVVIGAGHNGLVAA
-                *     .:   : ::*  :                               
-
-Q8CAN2_MOUSE    AYLQRLGVNTAVFERRHVIGGAAVTEEIIPGFKFSRASYLLSLLRPQICT
-Q9D630_MOUSE    AYLQRLGVNTAVFERRHVIGGARVTEEIIPGFKFSRASYLLSLLRPQICT
-CJ033_MOUSE     --------------------------------------------------
-CJ033_HUMAN     AYLQRLGVNTAVFERRHVIGGAAVTEEIIPGFKFSRASYLLSLLRPQIYT
-                                                                  
-
-Q8CAN2_MOUSE    DLELKVDRLAW--------------------PGGW---------------
-Q9D630_MOUSE    DLELKKHGLKLHLRDPYSFTPMLEEGTLNRLPRSLLLGTDMAANQKEISQ
-CJ033_MOUSE     --------------------------------------------------
-CJ033_HUMAN     DLELKKHGLRLHLRNPYSFTPMLEEGAGSKVPRCLLLGTDMAENQKQIAQ
-                                                                  
-
-Q8CAN2_MOUSE    --------------------------------------------------
-Q9D630_MOUSE    FSRKDAQVG-----------------------------------------
-CJ033_MOUSE     ------------------------------------FHHGSLLQRLGALS
-CJ033_HUMAN     FSQKDAQVFPKYEEFMHRLALAIDPLLDAAPVDMAAFQHGSLLQRMRSLS
-                                                                  
-
-Q8CAN2_MOUSE    --------------------------------------------------
-Q9D630_MOUSE    --------------------------------------------------
-CJ033_MOUSE     TLKPLLKAGRTLGAQLPQYCEVLTAPISKVLDQWFESEPLKATLATDAVI
-CJ033_HUMAN     TLKPLLKAGRILGAQLPRYYEVLTAPITKVLDQWFESEPLKATLATDAVI
-                                                                  
-
-Q8CAN2_MOUSE    --------------------------------------------------
-Q9D630_MOUSE    --------------------------------------------------
-CJ033_MOUSE     GAMTSPHTPGSGYVLLHHVMGSLEGTQGAWSYVQGGMGALSDAIASSAAT
-CJ033_HUMAN     GAMTSPHTPGSGYVLLHHVMGGLEGMQGAWGYVQGGMGALSDAIASSATT
-                                                                  
-
-Q8CAN2_MOUSE    --------------------------------------------------
-Q9D630_MOUSE    --------------------------------------------------
-CJ033_MOUSE     RGASIFTEKTVAKVQVNSEGRVQGVTLQDGEEVRSRVVLSCASPQVTFLE
-CJ033_HUMAN     HGASIFTEKTVAKVQVNSEGCVQGVVLEDGTEVRSKMVLSNTSPQITFLK
-                                                                  
-
-Q8CAN2_MOUSE    --------------------------------------------------
-Q9D630_MOUSE    --------------------------------------------------
-CJ033_MOUSE     LTPQEWLPGAFVKRISQLDTQSPVTKINVAVDRLPNFQAAPNAPGDQPQG
-CJ033_HUMAN     LTPQEWLPEEFLERISQLDTRSPVTKINVAVDRLPSFLAAPNAPRGQPLP
-                                                                  
-
-Q8CAN2_MOUSE    --------------------------------------------------
-Q9D630_MOUSE    --------------------------------------------------
-CJ033_MOUSE     HHQCSIHLNCEDTLLLHQAFEDAKGGLPSQKPMIELCIPSSLDPTLAPPG
-CJ033_HUMAN     HHQCSIHLNCEDTLLLHQAFEDAMDGLPSHRPVIELCIPSSLDPTLAPPG
-                                                                  
-
-Q8CAN2_MOUSE    --------------------------------------------------
-Q9D630_MOUSE    --------------------------------------------------
-CJ033_MOUSE     CHVVSLFTQYTPYTLAGGKVWNEQEKNTYADKVFDCIEAYAPGFKRSVLA
-CJ033_HUMAN     CHVVSLFTQYMPYTLAGGKAWDEQERDAYADRVFDCIEVYAPGFKDSVVG
-                                                                  
-
-Q8CAN2_MOUSE    --------------------------------------------------
-Q9D630_MOUSE    --------------------------------------------------
-CJ033_MOUSE     RDILTPPDLERIFRLPGGNIFHGAMSLDQLYFARPVPQHSDYRCPVQGLY
-CJ033_HUMAN     RDILTPPDLERIFGLPGGNIFHCAMSLDQLYFARPVPLHSGYRCPLQGLY
-                                                                  
-
-Q8CAN2_MOUSE    -------------------------------
-Q9D630_MOUSE    ----------KVSGD----------------
-CJ033_MOUSE     LCGSGAHPGGGVMGAAGRNAAHVVFRDLKNM
-CJ033_HUMAN     LCGSGAHPGGGVMGAAGRNAAHVAFRDLKSM
-                                               
-
-
-
-</content>
-</file>
-<file>
-<stream>output</stream>
-<name>stderr</name>
-<content>HERE: DPA=0
-
-PROGRAM: T-COFFEE Version_13.30.5.6909e10 (Version_13.30.5.6909e10)
--full_log      	S	[0] 
--genepred_score	S	[0] 	nsd
--run_name      	S	[0] 
--mem_mode      	S	[0] 	mem
--extend        	D	[1] 	1 
--extend_mode   	S	[0] 	very_fast_triplet
--max_n_pair    	D	[0] 	10 
--seq_name_for_quadruplet	S	[0] 	all
--compact       	S	[0] 	default
--clean         	S	[0] 	no
--do_self       	FL	[0] 	0
--do_normalise  	D	[0] 	1000 
--template_file 	S	[0] 
--setenv        	S	[0] 	0
--export        	S	[0] 	0
--template_mode 	S	[0] 
--flip          	D	[0] 	0 
--remove_template_file	D	[0] 	0 
--profile_template_file	S	[0] 
--in            	S	[0] 
--seq           	S	[1] 	sv.fasta
--aln           	S	[0] 
--method_limits 	S	[0] 
--method        	S	[0] 
--lib           	S	[0] 
--profile       	S	[0] 
--profile1      	S	[0] 
--profile2      	S	[0] 
--pdb           	S	[0] 
--relax_lib     	D	[0] 	1 
--filter_lib    	D	[0] 	0 
--shrink_lib    	D	[0] 	0 
--out_lib       	W_F	[0] 	no
--out_lib_mode  	S	[0] 	primary
--lib_only      	D	[0] 	0 
--outseqweight  	W_F	[0] 	no
--seq_source    	S	[0] 	ANY
--cosmetic_penalty	D	[0] 	0 
--gapopen       	D	[0] 	0 
--gapext        	D	[0] 	0 
--fgapopen      	D	[0] 	0 
--fgapext       	D	[0] 	0 
--nomatch       	D	[0] 	0 
--newtree       	W_F	[0] 	default
--tree          	W_F	[0] 	NO
--usetree       	R_F	[0] 
--tree_mode     	S	[0] 	nj
--distance_matrix_mode	S	[0] 	ktup
--distance_matrix_sim_mode	S	[0] 	idmat_sim1
--quicktree     	FL	[0] 	0
--outfile       	W_F	[0] 	default
--maximise      	FL	[1] 	1
--output        	S	[0] 	aln	html
--len           	D	[0] 	0 
--infile        	R_F	[0] 
--matrix        	S	[0] 	default
--tg_mode       	D	[0] 	1 
--profile_mode  	S	[0] 	cw_profile_profile
--profile_comparison	S	[0] 	profile
--dp_mode       	S	[0] 	linked_pair_wise
--ktuple        	D	[0] 	1 
--ndiag         	D	[0] 	0 
--diag_threshold	D	[0] 	0 
--diag_mode     	D	[0] 	0 
--sim_matrix    	S	[0] 	vasiliky
--transform     	S	[0] 
--extend_seq    	FL	[0] 	0
--outorder      	S	[0] 	input
--inorder       	S	[0] 	aligned
--seqnos        	S	[0] 	off
--case          	S	[0] 	keep
--cpu           	D	[0] 	0 
--ulimit        	D	[0] 	-1 
--maxnseq       	D	[0] 	-1 
--maxlen        	D	[0] 	-1 
--sample_dp     	D	[0] 	0 
--weight        	S	[0] 	default
--seq_weight    	S	[0] 	no
--align         	FL	[1] 	1
--mocca         	FL	[0] 	0
--domain        	FL	[0] 	0
--start         	D	[0] 	0 
--len           	D	[0] 	0 
--scale         	D	[0] 	0 
--mocca_interactive	FL	[0] 	0
--method_evaluate_mode	S	[0] 	default
--color_mode    	S	[0] 	new
--aln_line_length	D	[0] 	0 
--evaluate_mode 	S	[0] 	triplet
--get_type      	FL	[0] 	0
--clean_aln     	D	[0] 	0 
--clean_threshold	D	[1] 	1 
--clean_iteration	D	[1] 	1 
--clean_evaluate_mode	S	[0] 	t_coffee_fast
--extend_matrix 	FL	[0] 	0
--prot_min_sim  	D	[40] 	40 
--prot_max_sim  	D	[90] 	90 
--prot_trim     	D	[20] 	20 
--prot_min_cov  	D	[40] 	40 
--pdb_type      	S	[0] 	d
--pdb_min_sim   	D	[35] 	35 
--pdb_max_sim   	D	[100] 	100 
--pdb_min_cov   	D	[50] 	50 
--pdb_blast_server	W_F	[0] 	EBI
--blast         	W_F	[0] 
--blast_server  	W_F	[0] 	EBI
--pdb_db        	W_F	[0] 	pdb
--protein_db    	W_F	[0] 	uniref50
--method_log    	W_F	[0] 	no
--struc_to_use  	S	[0] 
--cache         	W_F	[0] 	use
--print_cache   	FL	[0] 	0
--align_pdb_param_file	W_F	[0] 	no
--align_pdb_hasch_mode	W_F	[0] 	hasch_ca_trace_bubble
--external_aligner	S	[0] 	NO
--msa_mode      	S	[0] 	tree
--et_mode       	S	[0] 	et
--master        	S	[0] 	no
--blast_nseq    	D	[0] 	0 
--lalign_n_top  	D	[0] 	10 
--iterate       	D	[0] 	0 
--trim          	D	[0] 	0 
--split         	D	[0] 	0 
--trimfile      	S	[0] 	default
--split         	D	[0] 	0 
--split_nseq_thres	D	[0] 	0 
--split_score_thres	D	[0] 	0 
--check_pdb_status	D	[0] 	0 
--clean_seq_name	D	[0] 	0 
--seq_to_keep   	S	[0] 
--dpa_master_aln	S	[0] 
--dpa_maxnseq   	D	[0] 	0 
--dpa_min_score1	D	[0] 
--dpa_min_score2	D	[0] 
--dpa_keep_tmpfile	FL	[0] 	0
--dpa_debug     	D	[0] 	0 
--multi_core    	S	[0] 	templates_jobs_relax_msa_evaluate
--n_core        	D	[0] 	1 
--thread        	D	[0] 	1 
--max_n_proc    	D	[0] 	0 
--lib_list      	S	[0] 
--prune_lib_mode	S	[0] 	5
--tip           	S	[0] 	none
--rna_lib       	S	[0] 
--no_warning    	D	[0] 	0 
--run_local_script	D	[0] 	0 
--proxy         	S	[0] 	unset
--email         	S	[0] 
--clean_overaln 	D	[0] 	0 
--overaln_param 	S	[0] 
--overaln_mode  	S	[0] 
--overaln_model 	S	[0] 
--overaln_threshold	D	[0] 	0 
--overaln_target	D	[0] 	0 
--overaln_P1    	D	[0] 	0 
--overaln_P2    	D	[0] 	0 
--overaln_P3    	D	[0] 	0 
--overaln_P4    	D	[0] 	0 
--exon_boundaries	S	[0] 
--display       	D	[0] 	100 
-
-INPUT FILES
-	Input File (S) sv.fasta  Format fasta_seq
-	Input File (M) proba_pair 
-
-Identify Master Sequences [no]:
-
-Master Sequences Identified
-INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
-  Input File sv.fasta     Seq CJ033_HUMAN  Length  581 type PROTEIN Struct Unchecked
-  Input File sv.fasta     Seq CJ033_MOUSE  Length  416 type PROTEIN Struct Unchecked
-  Input File sv.fasta     Seq Q8CAN2_MOUSE Length  115 type PROTEIN Struct Unchecked
-  Input File sv.fasta     Seq Q9D630_MOUSE Length  164 type PROTEIN Struct Unchecked
-
-	Multi Core Mode: 1 processors:
-	[0] 
--no_warning    	D	[0] 	0 
--run_local_script	D	[0] 	0 
--proxy         	S	[0] 	unset
--email         	S	[0] 
--clean_overaln 	D	[0] 	0 
--overaln_param 	S	[0] 
--overaln_mode  	S	[0] 
--overaln_model 	S	[0] 
--overaln_threshold	D	[0] 	0 
--overaln_target	D	[0] 	0 
--overaln_P1    	D	[0] 	0 
--overaln_P2    	D	[0] 	0 
--overaln_P3    	D	[0] 	0 
--overaln_P4    	D	[0] 	0 
--exon_boundaries	S	[0] 
--display       	D	[0] 	100 
-
-INPUT FILES
-	Input File (S) sv.fasta  Format fasta_seq
-	Input File (M) proba_pair 
-
-Identify Master Sequences [no]:
-
-Master Sequences Identified
-INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
-  Input File sv.fasta     Seq CJ033_HUMAN  Length  581 type PROTEIN Struct Unchecked
-  Input File sv.fasta     Seq CJ033_MOUSE  Length  416 type PROTEIN Struct Unchecked
-  Input File sv.fasta     Seq Q8CAN2_MOUSE Length  115 type PROTEIN Struct Unchecked
-  Input File sv.fasta     Seq Q9D630_MOUSE Length  164 type PROTEIN Struct Unchecked
-
-	Multi Core Mode: 1 processors:
-
-	--- Process Method/Library/Aln Ssv.fasta
-	xxx Retrieved Ssv.fasta	[0] 
--no_warning    	D	[0] 	0 
--run_local_script	D	[0] 	0 
--proxy         	S	[0] 	unset
--email         	S	[0] 
--clean_overaln 	D	[0] 	0 
--overaln_param 	S	[0] 
--overaln_mode  	S	[0] 
--overaln_model 	S	[0] 
--overaln_threshold	D	[0] 	0 
--overaln_target	D	[0] 	0 
--overaln_P1    	D	[0] 	0 
--overaln_P2    	D	[0] 	0 
--overaln_P3    	D	[0] 	0 
--overaln_P4    	D	[0] 	0 
--exon_boundaries	S	[0] 
--display       	D	[0] 	100 
-
-INPUT FILES
-	Input File (S) sv.fasta  Format fasta_seq
-	Input File (M) proba_pair 
-
-Identify Master Sequences [no]:
-
-Master Sequences Identified
-INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
-  Input File sv.fasta     Seq CJ033_HUMAN  Length  581 type PROTEIN Struct Unchecked
-  Input File sv.fasta     Seq CJ033_MOUSE  Length  416 type PROTEIN Struct Unchecked
-  Input File sv.fasta     Seq Q8CAN2_MOUSE Length  115 type PROTEIN Struct Unchecked
-  Input File sv.fasta     Seq Q9D630_MOUSE Length  164 type PROTEIN Struct Unchecked
-
-	Multi Core Mode: 1 processors:
-
-	--- Process Method/Library/Aln Ssv.fasta
-	xxx Retrieved Ssv.fasta	[0] 
--no_warning    	D	[0] 	0 
--run_local_script	D	[0] 	0 
--proxy         	S	[0] 	unset
--email         	S	[0] 
--clean_overaln 	D	[0] 	0 
--overaln_param 	S	[0] 
--overaln_mode  	S	[0] 
--overaln_model 	S	[0] 
--overaln_threshold	D	[0] 	0 
--overaln_target	D	[0] 	0 
--overaln_P1    	D	[0] 	0 
--overaln_P2    	D	[0] 	0 
--overaln_P3    	D	[0] 	0 
--overaln_P4    	D	[0] 	0 
--exon_boundaries	S	[0] 
--display       	D	[0] 	100 
-
-INPUT FILES
-	Input File (S) sv.fasta  Format fasta_seq
-	Input File (M) proba_pair 
-
-Identify Master Sequences [no]:
-
-Master Sequences Identified
-INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
-  Input File sv.fasta     Seq CJ033_HUMAN  Length  581 type PROTEIN Struct Unchecked
-  Input File sv.fasta     Seq CJ033_MOUSE  Length  416 type PROTEIN Struct Unchecked
-  Input File sv.fasta     Seq Q8CAN2_MOUSE Length  115 type PROTEIN Struct Unchecked
-  Input File sv.fasta     Seq Q9D630_MOUSE Length  164 type PROTEIN Struct Unchecked
-
-	Multi Core Mode: 1 processors:
-
-	--- Process Method/Library/Aln Ssv.fasta
-	xxx Retrieved Ssv.fasta
-	--- Process Method/Library/Aln Mproba_pair
-	xxx Retrieved Mproba_pair
-
-	All Methods Retrieved
-
-MANUAL PENALTIES: gapopen=0 gapext=0
-
-	Library Total Size: [4562]
-
-Library Relaxation: Multi_proc [1]
- 
-!		[Relax Library][TOT=    4][  0 %]!		[Relax Library][TOT=    4][ 50 %]!		[Relax Library][TOT=    4][ 75 %]!		[Relax Library][TOT=    4][100 %]
-	[0] 
--no_warning    	D	[0] 	0 
--run_local_script	D	[0] 	0 
--proxy         	S	[0] 	unset
--email         	S	[0] 
--clean_overaln 	D	[0] 	0 
--overaln_param 	S	[0] 
--overaln_mode  	S	[0] 
--overaln_model 	S	[0] 
--overaln_threshold	D	[0] 	0 
--overaln_target	D	[0] 	0 
--overaln_P1    	D	[0] 	0 
--overaln_P2    	D	[0] 	0 
--overaln_P3    	D	[0] 	0 
--overaln_P4    	D	[0] 	0 
--exon_boundaries	S	[0] 
--display       	D	[0] 	100 
-
-INPUT FILES
-	Input File (S) sv.fasta  Format fasta_seq
-	Input File (M) proba_pair 
-
-Identify Master Sequences [no]:
-
-Master Sequences Identified
-INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
-  Input File sv.fasta     Seq CJ033_HUMAN  Length  581 type PROTEIN Struct Unchecked
-  Input File sv.fasta     Seq CJ033_MOUSE  Length  416 type PROTEIN Struct Unchecked
-  Input File sv.fasta     Seq Q8CAN2_MOUSE Length  115 type PROTEIN Struct Unchecked
-  Input File sv.fasta     Seq Q9D630_MOUSE Length  164 type PROTEIN Struct Unchecked
-
-	Multi Core Mode: 1 processors:
-
-	--- Process Method/Library/Aln Ssv.fasta
-	xxx Retrieved Ssv.fasta
-	--- Process Method/Library/Aln Mproba_pair
-	xxx Retrieved Mproba_pair
-
-	All Methods Retrieved
-
-MANUAL PENALTIES: gapopen=0 gapext=0
-
-	Library Total Size: [4562]
-
-Library Relaxation: Multi_proc [1]
- 
-Relaxation Summary: [4562]--->[3982]
-
-
-
-UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
-
-MAKE GUIDE TREE 
-	[MODE=nj][DONE]
-
-PROGRESSIVE_ALIGNMENT [Tree Based]
-Group    1: CJ033_HUMAN
-Group    2: CJ033_MOUSE
-Group    3: Q8CAN2_MOUSE
-Group    4: Q9D630_MOUSE
-
-	[0] 
--no_warning    	D	[0] 	0 
--run_local_script	D	[0] 	0 
--proxy         	S	[0] 	unset
--email         	S	[0] 
--clean_overaln 	D	[0] 	0 
--overaln_param 	S	[0] 
--overaln_mode  	S	[0] 
--overaln_model 	S	[0] 
--overaln_threshold	D	[0] 	0 
--overaln_target	D	[0] 	0 
--overaln_P1    	D	[0] 	0 
--overaln_P2    	D	[0] 	0 
--overaln_P3    	D	[0] 	0 
--overaln_P4    	D	[0] 	0 
--exon_boundaries	S	[0] 
--display       	D	[0] 	100 
-
-INPUT FILES
-	Input File (S) sv.fasta  Format fasta_seq
-	Input File (M) proba_pair 
-
-Identify Master Sequences [no]:
-
-Master Sequences Identified
-INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
-  Input File sv.fasta     Seq CJ033_HUMAN  Length  581 type PROTEIN Struct Unchecked
-  Input File sv.fasta     Seq CJ033_MOUSE  Length  416 type PROTEIN Struct Unchecked
-  Input File sv.fasta     Seq Q8CAN2_MOUSE Length  115 type PROTEIN Struct Unchecked
-  Input File sv.fasta     Seq Q9D630_MOUSE Length  164 type PROTEIN Struct Unchecked
-
-	Multi Core Mode: 1 processors:
-
-	--- Process Method/Library/Aln Ssv.fasta
-	xxx Retrieved Ssv.fasta
-	--- Process Method/Library/Aln Mproba_pair
-	xxx Retrieved Mproba_pair
-
-	All Methods Retrieved
-
-MANUAL PENALTIES: gapopen=0 gapext=0
-
-	Library Total Size: [4562]
-
-Library Relaxation: Multi_proc [1]
- 
-Relaxation Summary: [4562]--->[3982]
-
-
-
-UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
-
-MAKE GUIDE TREE 
-	[MODE=nj][DONE]
-
-PROGRESSIVE_ALIGNMENT [Tree Based]
-Group    1: CJ033_HUMAN
-Group    2: CJ033_MOUSE
-Group    3: Q8CAN2_MOUSE
-Group    4: Q9D630_MOUSE
-
-
-	Group    5: [Group    3 (   1 seq)] with [Group    4 (   1 seq)]-->[Len=  164][PID:55999]	[0] 
--no_warning    	D	[0] 	0 
--run_local_script	D	[0] 	0 
--proxy         	S	[0] 	unset
--email         	S	[0] 
--clean_overaln 	D	[0] 	0 
--overaln_param 	S	[0] 
--overaln_mode  	S	[0] 
--overaln_model 	S	[0] 
--overaln_threshold	D	[0] 	0 
--overaln_target	D	[0] 	0 
--overaln_P1    	D	[0] 	0 
--overaln_P2    	D	[0] 	0 
--overaln_P3    	D	[0] 	0 
--overaln_P4    	D	[0] 	0 
--exon_boundaries	S	[0] 
--display       	D	[0] 	100 
-
-INPUT FILES
-	Input File (S) sv.fasta  Format fasta_seq
-	Input File (M) proba_pair 
-
-Identify Master Sequences [no]:
-
-Master Sequences Identified
-INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
-  Input File sv.fasta     Seq CJ033_HUMAN  Length  581 type PROTEIN Struct Unchecked
-  Input File sv.fasta     Seq CJ033_MOUSE  Length  416 type PROTEIN Struct Unchecked
-  Input File sv.fasta     Seq Q8CAN2_MOUSE Length  115 type PROTEIN Struct Unchecked
-  Input File sv.fasta     Seq Q9D630_MOUSE Length  164 type PROTEIN Struct Unchecked
-
-	Multi Core Mode: 1 processors:
-
-	--- Process Method/Library/Aln Ssv.fasta
-	xxx Retrieved Ssv.fasta
-	--- Process Method/Library/Aln Mproba_pair
-	xxx Retrieved Mproba_pair
-
-	All Methods Retrieved
-
-MANUAL PENALTIES: gapopen=0 gapext=0
-
-	Library Total Size: [4562]
-
-Library Relaxation: Multi_proc [1]
- 
-Relaxation Summary: [4562]--->[3982]
-
-
-
-UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
-
-MAKE GUIDE TREE 
-	[MODE=nj][DONE]
-
-PROGRESSIVE_ALIGNMENT [Tree Based]
-Group    1: CJ033_HUMAN
-Group    2: CJ033_MOUSE
-Group    3: Q8CAN2_MOUSE
-Group    4: Q9D630_MOUSE
-
-
-	Group    5: [Group    3 (   1 seq)] with [Group    4 (   1 seq)]-->[Len=  164][PID:55999]
-	Group    6: [Group    5 (   2 seq)] with [Group    1 (   1 seq)]-->[Len=  581][PID:55999]	[0] 
--no_warning    	D	[0] 	0 
--run_local_script	D	[0] 	0 
--proxy         	S	[0] 	unset
--email         	S	[0] 
--clean_overaln 	D	[0] 	0 
--overaln_param 	S	[0] 
--overaln_mode  	S	[0] 
--overaln_model 	S	[0] 
--overaln_threshold	D	[0] 	0 
--overaln_target	D	[0] 	0 
--overaln_P1    	D	[0] 	0 
--overaln_P2    	D	[0] 	0 
--overaln_P3    	D	[0] 	0 
--overaln_P4    	D	[0] 	0 
--exon_boundaries	S	[0] 
--display       	D	[0] 	100 
-
-INPUT FILES
-	Input File (S) sv.fasta  Format fasta_seq
-	Input File (M) proba_pair 
-
-Identify Master Sequences [no]:
-
-Master Sequences Identified
-INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
-  Input File sv.fasta     Seq CJ033_HUMAN  Length  581 type PROTEIN Struct Unchecked
-  Input File sv.fasta     Seq CJ033_MOUSE  Length  416 type PROTEIN Struct Unchecked
-  Input File sv.fasta     Seq Q8CAN2_MOUSE Length  115 type PROTEIN Struct Unchecked
-  Input File sv.fasta     Seq Q9D630_MOUSE Length  164 type PROTEIN Struct Unchecked
-
-	Multi Core Mode: 1 processors:
-
-	--- Process Method/Library/Aln Ssv.fasta
-	xxx Retrieved Ssv.fasta
-	--- Process Method/Library/Aln Mproba_pair
-	xxx Retrieved Mproba_pair
-
-	All Methods Retrieved
-
-MANUAL PENALTIES: gapopen=0 gapext=0
-
-	Library Total Size: [4562]
-
-Library Relaxation: Multi_proc [1]
- 
-Relaxation Summary: [4562]--->[3982]
-
-
-
-UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
-
-MAKE GUIDE TREE 
-	[MODE=nj][DONE]
-
-PROGRESSIVE_ALIGNMENT [Tree Based]
-Group    1: CJ033_HUMAN
-Group    2: CJ033_MOUSE
-Group    3: Q8CAN2_MOUSE
-Group    4: Q9D630_MOUSE
-
-
-	Group    5: [Group    3 (   1 seq)] with [Group    4 (   1 seq)]-->[Len=  164][PID:55999]
-	Group    6: [Group    5 (   2 seq)] with [Group    1 (   1 seq)]-->[Len=  581][PID:55999]
-	Group    7: [Group    2 (   1 seq)] with [Group    6 (   3 seq)]-->[Len=  581][PID:55999]
-
-
-!		[Final Evaluation][TOT=  581][  0 %]!		[Final Evaluation][TOT=  581][  1 %]!		[Final Evaluation][TOT=  581][  2 %]!		[Final Evaluation][TOT=  581][  3 %]!		[Final Evaluation][TOT=  581][  4 %]!		[Final Evaluation][TOT=  581][  5 %]!		[Final Evaluation][TOT=  581][  6 %]!		[Final Evaluation][TOT=  581][  7 %]!		[Final Evaluation][TOT=  581][  8 %]!		[Final Evaluation][TOT=  581][  9 %]!		[Final Evaluation][TOT=  581][ 10 %]!		[Final Evaluation][TOT=  581][ 11 %]!		[Final Evaluation][TOT=  581][ 12 %]!		[Final Evaluation][TOT=  581][ 13 %]!		[Final Evaluation][TOT=  581][ 14 %]!		[Final Evaluation][TOT=  581][ 15 %]!		[Final Evaluation][TOT=  581][ 16 %]!		[Final Evaluation][TOT=  581][ 17 %]!		[Final Evaluation][TOT=  581][ 18 %]!		[Final Evaluation][TOT=  581][ 19 %]!		[Final Evaluation][TOT=  581][ 20 %]!		[Final Evaluation][TOT=  581][ 21 %]!		[Final Evaluation][TOT=  581][ 22 %]!		[Final Evaluation][TOT=  581][ 23 %]!		[Final Evaluation][TOT=  581][ 24 %]!		[Final Evaluation][TOT=  581][ 25 %]!		[Final Evaluation][TOT=  581][ 26 %]!		[Final Evaluation][TOT=  581][ 27 %]!		[Final Evaluation][TOT=  581][ 28 %]!		[Final Evaluation][TOT=  581][ 29 %]!		[Final Evaluation][TOT=  581][ 30 %]!		[Final Evaluation][TOT=  581][ 31 %]!		[Final Evaluation][TOT=  581][ 32 %]!		[Final Evaluation][TOT=  581][ 33 %]!		[Final Evaluation][TOT=  581][ 34 %]!		[Final Evaluation][TOT=  581][ 35 %]!		[Final Evaluation][TOT=  581][ 36 %]!		[Final Evaluation][TOT=  581][ 37 %]!		[Final Evaluation][TOT=  581][ 38 %]!		[Final Evaluation][TOT=  581][ 39 %]!		[Final Evaluation][TOT=  581][ 40 %]!		[Final Evaluation][TOT=  581][ 41 %]!		[Final Evaluation][TOT=  581][ 42 %]!		[Final Evaluation][TOT=  581][ 43 %]!		[Final Evaluation][TOT=  581][ 44 %]!		[Final Evaluation][TOT=  581][ 45 %]!		[Final Evaluation][TOT=  581][ 46 %]!		[Final Evaluation][TOT=  581][ 47 %]!		[Final Evaluation][TOT=  581][ 48 %]!		[Final Evaluation][TOT=  581][ 49 %]!		[Final Evaluation][TOT=  581][ 50 %]!		[Final Evaluation][TOT=  581][ 51 %]!		[Final Evaluation][TOT=  581][ 52 %]!		[Final Evaluation][TOT=  581][ 53 %]!		[Final Evaluation][TOT=  581][ 54 %]!		[Final Evaluation][TOT=  581][ 55 %]!		[Final Evaluation][TOT=  581][ 56 %]!		[Final Evaluation][TOT=  581][ 57 %]!		[Final Evaluation][TOT=  581][ 58 %]!		[Final Evaluation][TOT=  581][ 59 %]!		[Final Evaluation][TOT=  581][ 60 %]!		[Final Evaluation][TOT=  581][ 61 %]!		[Final Evaluation][TOT=  581][ 62 %]!		[Final Evaluation][TOT=  581][ 63 %]!		[Final Evaluation][TOT=  581][ 64 %]!		[Final Evaluation][TOT=  581][ 65 %]!		[Final Evaluation][TOT=  581][ 66 %]!		[Final Evaluation][TOT=  581][ 67 %]!		[Final Evaluation][TOT=  581][ 68 %]!		[Final Evaluation][TOT=  581][ 69 %]!		[Final Evaluation][TOT=  581][ 70 %]!		[Final Evaluation][TOT=  581][ 71 %]!		[Final Evaluation][TOT=  581][ 72 %]!		[Final Evaluation][TOT=  581][ 73 %]!		[Final Evaluation][TOT=  581][ 74 %]!		[Final Evaluation][TOT=  581][ 75 %]!		[Final Evaluation][TOT=  581][ 76 %]!		[Final Evaluation][TOT=  581][ 77 %]!		[Final Evaluation][TOT=  581][ 78 %]!		[Final Evaluation][TOT=  581][ 79 %]!		[Final Evaluation][TOT=  581][ 80 %]!		[Final Evaluation][TOT=  581][ 81 %]!		[Final Evaluation][TOT=  581][ 82 %]!		[Final Evaluation][TOT=  581][ 83 %]!		[Final Evaluation][TOT=  581][ 84 %]!		[Final Evaluation][TOT=  581][ 85 %]!		[Final Evaluation][TOT=  581][ 86 %]!		[Final Evaluation][TOT=  581][ 87 %]!		[Final Evaluation][TOT=  581][ 88 %]!		[Final Evaluation][TOT=  581][ 89 %]!		[Final Evaluation][TOT=  581][ 90 %]!		[Final Evaluation][TOT=  581][ 91 %]!		[Final Evaluation][TOT=  581][ 92 %]!		[Final Evaluation][TOT=  581][ 93 %]!		[Final Evaluation][TOT=  581][ 94 %]!		[Final Evaluation][TOT=  581][ 95 %]!		[Final Evaluation][TOT=  581][ 96 %]!		[Final Evaluation][TOT=  581][ 97 %]!		[Final Evaluation][TOT=  581][ 98 %]!		[Final Evaluation][TOT=  581][ 99 %]!		[Final Evaluation][TOT=  581][100 %]
-
-
-
-OUTPUT RESULTS
-	#### File Type= GUIDE_TREE      Format= newick          Name= sv.dnd
-	#### File Type= MSA             Format= aln             Name= sv.aln
-	#### File Type= MSA             Format= html            Name= sv.html
-
-# Command Line: t_coffee sv.fasta  [PROGRAM:T-COFFEE]
-# T-COFFEE Memory Usage: Current= 30.862 Mb, Max= 31.941 Mb
-# Results Produced with T-COFFEE Version_13.30.5.6909e10 (Version_13.30.5.6909e10)
-# T-COFFEE is available from http://www.tcoffee.org
-# Register on: https://groups.google.com/group/tcoffee/
-</content>
-</file>
-<file>
-<stream>input</stream>
-<name>sv.fasta</name>
-<content>>Q8CAN2_MOUSE
-MAAGGRGLIRALHSSPCPTWKRAQSGANGRLKPEYDAVVIGAGHNGLVAA
-AYLQRLGVNTAVFERRHVIGGAAVTEEIIPGFKFSRASYLLSLLRPQICT
-DLELKVDRLAWPGGW
->Q9D630_MOUSE
-MAAGGRGLIRALHSSPCPTWKRAQSGANGRLKPEYDAVVIGAGHNGLVAA
-AYLQRLGVNTAVFERRHVIGGARVTEEIIPGFKFSRASYLLSLLRPQICT
-DLELKKHGLKLHLRDPYSFTPMLEEGTLNRLPRSLLLGTDMAANQKEISQ
-FSRKDAQVGKVSGD
->CJ033_MOUSE
-MKRLVLAIDPLLDAAPVDTTAFHHGSLLQRLGALSTLKPLLKAGRTLGAQ
-LPQYCEVLTAPISKVLDQWFESEPLKATLATDAVIGAMTSPHTPGSGYVL
-LHHVMGSLEGTQGAWSYVQGGMGALSDAIASSAATRGASIFTEKTVAKVQ
-VNSEGRVQGVTLQDGEEVRSRVVLSCASPQVTFLELTPQEWLPGAFVKRI
-SQLDTQSPVTKINVAVDRLPNFQAAPNAPGDQPQGHHQCSIHLNCEDTLL
-LHQAFEDAKGGLPSQKPMIELCIPSSLDPTLAPPGCHVVSLFTQYTPYTL
-AGGKVWNEQEKNTYADKVFDCIEAYAPGFKRSVLARDILTPPDLERIFRL
-PGGNIFHGAMSLDQLYFARPVPQHSDYRCPVQGLYLCGSGAHPGGGVMGA
-AGRNAAHVVFRDLKNM
->CJ033_HUMAN
-MAASGRGLCKAVAASPFPAWRRDNTEARGGLKPEYDAVVIGAGHNGLVAA
-AYLQRLGVNTAVFERRHVIGGAAVTEEIIPGFKFSRASYLLSLLRPQIYT
-DLELKKHGLRLHLRNPYSFTPMLEEGAGSKVPRCLLLGTDMAENQKQIAQ
-FSQKDAQVFPKYEEFMHRLALAIDPLLDAAPVDMAAFQHGSLLQRMRSLS
-TLKPLLKAGRILGAQLPRYYEVLTAPITKVLDQWFESEPLKATLATDAVI
-GAMTSPHTPGSGYVLLHHVMGGLEGMQGAWGYVQGGMGALSDAIASSATT
-HGASIFTEKTVAKVQVNSEGCVQGVVLEDGTEVRSKMVLSNTSPQITFLK
-LTPQEWLPEEFLERISQLDTRSPVTKINVAVDRLPSFLAAPNAPRGQPLP
-HHQCSIHLNCEDTLLLHQAFEDAMDGLPSHRPVIELCIPSSLDPTLAPPG
-CHVVSLFTQYMPYTLAGGKAWDEQERDAYADRVFDCIEVYAPGFKDSVVG
-RDILTPPDLERIFGLPGGNIFHCAMSLDQLYFARPVPLHSGYRCPLQGLY
-LCGSGAHPGGGVMGAAGRNAAHVAFRDLKSM
-</content>
-</file>
-<file>
-<stream>output</stream>
-<name>sv.dnd</name>
-<content>((CJ033_HUMAN:-0.01500,CJ033_MOUSE:0.13500):0.11000,Q8CAN2_MOUSE:0.01500,Q9D630_MOUSE:0.02500);</content>
-</file>
-<file>
-<stream>input</stream>
-<name>sv.dnd</name>
-<content>((CJ033_HUMAN:-0.01500,CJ033_MOUSE:0.13500):0.11000,Q8CAN2_MOUSE:0.01500,Q9D630_MOUSE:0.02500);</content>
-</file>
-<file>
-<stream>output</stream>
-<name>sv.aln</name>
-<content>CLUSTAL FORMAT for T-COFFEE Version_13.30.5.6909e10 [http://www.tcoffee.org] [MODE:  ], CPU=0.00 sec, SCORE=78, Nseq=4, Len=581 
-
-Q8CAN2_MOUSE    MAAGGRGLIRALHSSPCPTWKRAQSGANGRLKPEYDAVVIGAGHNGLVAA
-Q9D630_MOUSE    MAAGGRGLIRALHSSPCPTWKRAQSGANGRLKPEYDAVVIGAGHNGLVAA
-CJ033_MOUSE     MKRLVLAIDPLLDAAPVDTTA-----------------------------
-CJ033_HUMAN     MAASGRGLCKAVAASPFPAWRRDNTEARGGLKPEYDAVVIGAGHNGLVAA
-                *     .:   : ::*  :                               
-
-Q8CAN2_MOUSE    AYLQRLGVNTAVFERRHVIGGAAVTEEIIPGFKFSRASYLLSLLRPQICT
-Q9D630_MOUSE    AYLQRLGVNTAVFERRHVIGGARVTEEIIPGFKFSRASYLLSLLRPQICT
-CJ033_MOUSE     --------------------------------------------------
-CJ033_HUMAN     AYLQRLGVNTAVFERRHVIGGAAVTEEIIPGFKFSRASYLLSLLRPQIYT
-                                                                  
-
-Q8CAN2_MOUSE    DLELKVDRLAW--------------------PGGW---------------
-Q9D630_MOUSE    DLELKKHGLKLHLRDPYSFTPMLEEGTLNRLPRSLLLGTDMAANQKEISQ
-CJ033_MOUSE     --------------------------------------------------
-CJ033_HUMAN     DLELKKHGLRLHLRNPYSFTPMLEEGAGSKVPRCLLLGTDMAENQKQIAQ
-                                                                  
-
-Q8CAN2_MOUSE    --------------------------------------------------
-Q9D630_MOUSE    FSRKDAQVG-----------------------------------------
-CJ033_MOUSE     ------------------------------------FHHGSLLQRLGALS
-CJ033_HUMAN     FSQKDAQVFPKYEEFMHRLALAIDPLLDAAPVDMAAFQHGSLLQRMRSLS
-                                                                  
-
-Q8CAN2_MOUSE    --------------------------------------------------
-Q9D630_MOUSE    --------------------------------------------------
-CJ033_MOUSE     TLKPLLKAGRTLGAQLPQYCEVLTAPISKVLDQWFESEPLKATLATDAVI
-CJ033_HUMAN     TLKPLLKAGRILGAQLPRYYEVLTAPITKVLDQWFESEPLKATLATDAVI
-                                                                  
-
-Q8CAN2_MOUSE    --------------------------------------------------
-Q9D630_MOUSE    --------------------------------------------------
-CJ033_MOUSE     GAMTSPHTPGSGYVLLHHVMGSLEGTQGAWSYVQGGMGALSDAIASSAAT
-CJ033_HUMAN     GAMTSPHTPGSGYVLLHHVMGGLEGMQGAWGYVQGGMGALSDAIASSATT
-                                                                  
-
-Q8CAN2_MOUSE    --------------------------------------------------
-Q9D630_MOUSE    --------------------------------------------------
-CJ033_MOUSE     RGASIFTEKTVAKVQVNSEGRVQGVTLQDGEEVRSRVVLSCASPQVTFLE
-CJ033_HUMAN     HGASIFTEKTVAKVQVNSEGCVQGVVLEDGTEVRSKMVLSNTSPQITFLK
-                                                                  
-
-Q8CAN2_MOUSE    --------------------------------------------------
-Q9D630_MOUSE    --------------------------------------------------
-CJ033_MOUSE     LTPQEWLPGAFVKRISQLDTQSPVTKINVAVDRLPNFQAAPNAPGDQPQG
-CJ033_HUMAN     LTPQEWLPEEFLERISQLDTRSPVTKINVAVDRLPSFLAAPNAPRGQPLP
-                                                                  
-
-Q8CAN2_MOUSE    --------------------------------------------------
-Q9D630_MOUSE    --------------------------------------------------
-CJ033_MOUSE     HHQCSIHLNCEDTLLLHQAFEDAKGGLPSQKPMIELCIPSSLDPTLAPPG
-CJ033_HUMAN     HHQCSIHLNCEDTLLLHQAFEDAMDGLPSHRPVIELCIPSSLDPTLAPPG
-                                                                  
-
-Q8CAN2_MOUSE    --------------------------------------------------
-Q9D630_MOUSE    --------------------------------------------------
-CJ033_MOUSE     CHVVSLFTQYTPYTLAGGKVWNEQEKNTYADKVFDCIEAYAPGFKRSVLA
-CJ033_HUMAN     CHVVSLFTQYMPYTLAGGKAWDEQERDAYADRVFDCIEVYAPGFKDSVVG
-                                                                  
-
-Q8CAN2_MOUSE    --------------------------------------------------
-Q9D630_MOUSE    --------------------------------------------------
-CJ033_MOUSE     RDILTPPDLERIFRLPGGNIFHGAMSLDQLYFARPVPQHSDYRCPVQGLY
-CJ033_HUMAN     RDILTPPDLERIFGLPGGNIFHCAMSLDQLYFARPVPLHSGYRCPLQGLY
-                                                                  
-
-Q8CAN2_MOUSE    -------------------------------
-Q9D630_MOUSE    ----------KVSGD----------------
-CJ033_MOUSE     LCGSGAHPGGGVMGAAGRNAAHVVFRDLKNM
-CJ033_HUMAN     LCGSGAHPGGGVMGAAGRNAAHVAFRDLKSM
-                                               
-
-
-
-</content>
-</file>
-<file>
-<stream>output</stream>
-<name>sv.html</name>
-<content><html>
-<style>
-SPAN { font-family: courier new, courier-new, courier, monospace; font-weight: bold; font-size: 11pt;}
-SPAN { line-height:100%}
-SPAN {	white-space: pre}
-SPAN.value0 {background: #9B92FF}
-SPAN.value1 {background: #B4FFB4}
-SPAN.value2 {background: #BEFFBE}
-SPAN.value3 {background: #C8FFC8}
-SPAN.value4 {background: #FFFFB7}
-SPAN.value5 {background: #FFFFAD}
-SPAN.value6 {background: #FFFFAD}
-SPAN.value7 {background: #FFE6E6}
-SPAN.value8 {background: #FFDCDC}
-SPAN.value9 {background: #FFC8C8}
-SPAN.valuedefault {}
-SPAN.valuegap {}
-SPAN.valueink {background: 000000}
-</style><body><span class=valuedefault>T-COFFEE,&nbsp;Version_13.30.5.6909e10&nbsp;(Version_13.30.5.6909e10)</span><br><span class=valuedefault>Cedric&nbsp;Notredame&nbsp;</span><br><span class=valuedefault>CPU&nbsp;TIME:0&nbsp;sec.</span><br><span class=valuedefault>SCORE=78</span><br><span class=valuedefault>*</span><br><span class=valuedefault>&nbsp;</span><span class=value0>B</span><span class=value1>A</span><span class=value2>D</span><span class=value3>&nbsp;</span><span class=value4>A</span><span class=value5>V</span><span class=value6>G</span><span class=value7>&nbsp;</span><span class=value8>G</span><span class=value9>OOD</span><br><span class=valuedefault>*</span><br><span class=value8>Q8CAN2_MOUSE&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;81</span><br><span class=value8>Q9D630_MOUSE&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;81</span><br><span class=value6>CJ033_MOUSE&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;67</span><br><span class=value8>CJ033_HUMAN&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;82</span><br><span class=value7>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;&nbsp;7</span><br><br><span class=valuedefault>Q8CAN2_MOUSE&nbsp;&nbsp;&nbsp;</span><span class=value9>MAAGGRGLIRALHSSPCPTW</span><span class=value8>KRAQSGANGRLKPEYD</span><br><span class=valuedefault>Q9D630_MOUSE&nbsp;&nbsp;&nbsp;</span><span class=value9>MAAGGRGLIRALHSSPCPTW</span><span class=value8>KRAQSGANGRLKPEYD</span><br><span class=valuedefault>CJ033_MOUSE&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>MKRLV</span><span class=value8>L</span><span class=value9>AID</span><span class=value8>PL</span><span class=value9>LDAAPVDTT</span><span class=value8>A</span><span class=valuegap>---------------</span><br><span class=valuedefault>CJ033_HUMAN&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>MAASGRGLCKAVAASPFPAWRRDNTEARG</span><span class=value8>GLKPEYD</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.:&nbsp;&nbsp;&nbsp;:&nbsp;::*&nbsp;&nbsp;:&nbsp;</span><span class=value8>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>Q8CAN2_MOUSE&nbsp;&nbsp;&nbsp;</span><span class=value8>AVVIGAGHNGL</span><span class=value9>V</span><span class=value8>AAAYLQRLGVNTAVFERRHVIGGA</span><br><span class=valuedefault>Q9D630_MOUSE&nbsp;&nbsp;&nbsp;</span><span class=value8>AVVIGAGHNGL</span><span class=value9>V</span><span class=value8>AAAYLQRLGVNTAVFERRHVIGGA</span><br><span class=valuedefault>CJ033_MOUSE&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------------------------------------</span><br><span class=valuedefault>CJ033_HUMAN&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>AV</span><span class=value9>VIGAGHNGLVAAAYLQRLGVNTAVFERRHVIGGA</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;</span><span class=value8>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>Q8CAN2_MOUSE&nbsp;&nbsp;&nbsp;</span><span class=value8>AVTEEIIPGFKFSRASYLLSLLRPQICTDLELK</span><span class=value7>VD</span><span class=value6>R</span><br><span class=valuedefault>Q9D630_MOUSE&nbsp;&nbsp;&nbsp;</span><span class=value8>RVTEEIIPGFKFSRASYLLSLLRPQICTDLELK</span><span class=value7>KHG</span><br><span class=valuedefault>CJ033_MOUSE&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------------------------------------</span><br><span class=valuedefault>CJ033_HUMAN&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>AVT</span><span class=value8>EEIIPGFKFSRASYLLSLLRPQI</span><span class=value9>Y</span><span class=value8>TDLELK</span><span class=value7>KH</span><span class=value6>G</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value7>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value7>&nbsp;</span><span class=value6>&nbsp;&nbsp;</span><span class=value5>&nbsp;</span><br><br><br><span class=valuedefault>Q8CAN2_MOUSE&nbsp;&nbsp;&nbsp;</span><span class=value6>LAW</span><span class=valuegap>--------------------</span><span class=value6>PGG</span><span class=value3>W</span><span class=valuegap>---------</span><br><span class=valuedefault>Q9D630_MOUSE&nbsp;&nbsp;&nbsp;</span><span class=value7>L</span><span class=value6>K</span><span class=value7>LH</span><span class=value8>LRDPYS</span><span class=value7>F</span><span class=value8>TPMLEE</span><span class=value9>GT</span><span class=value8>LN</span><span class=value7>R</span><span class=value6>L</span><span class=value7>PR</span><span class=value8>S</span><span class=value6>L</span><span class=value9>LLGTDMA</span><span class=value8>AN</span><br><span class=valuedefault>CJ033_MOUSE&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------------------------------------</span><br><span class=valuedefault>CJ033_HUMAN&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value6>L</span><span class=value5>RL</span><span class=value6>H</span><span class=value9>LRNPYS</span><span class=value8>F</span><span class=value9>TPMLEEGAGS</span><span class=value8>KVP</span><span class=value7>R</span><span class=value8>C</span><span class=value9>LLLGTDMAEN</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value5>&nbsp;</span><span class=value4>&nbsp;&nbsp;&nbsp;</span><span class=value8>&nbsp;</span><span class=value7>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value6>&nbsp;</span><span class=value8>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value7>&nbsp;&nbsp;</span><span class=value6>&nbsp;</span><span class=value4>&nbsp;</span><span class=value5>&nbsp;&nbsp;</span><span class=value6>&nbsp;</span><span class=value3>&nbsp;</span><span class=value8>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>Q8CAN2_MOUSE&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------------------------------------</span><br><span class=valuedefault>Q9D630_MOUSE&nbsp;&nbsp;&nbsp;</span><span class=value8>QKEISQFSRKDAQV</span><span class=value7>G</span><span class=valuegap>---------------------</span><br><span class=valuedefault>CJ033_MOUSE&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------------------------------------</span><br><span class=valuedefault>CJ033_HUMAN&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>Q</span><span class=value9>KQIAQFSQKDAQV</span><span class=value8>F</span><span class=value7>P</span><span class=value6>K</span><span class=value7>Y</span><span class=value8>E</span><span class=value6>E</span><span class=value9>F</span><span class=value5>MH</span><span class=value6>RLA</span><span class=value7>L</span><span class=value8>A</span><span class=value7>IDPL</span><span class=value8>L</span><span class=value7>DAA</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value7>&nbsp;</span><span class=value8>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value5>&nbsp;</span><span class=value1>&nbsp;&nbsp;</span><span class=value0>&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;</span><span class=value2>&nbsp;&nbsp;</span><span class=value4>&nbsp;</span><span class=value3>&nbsp;</span><span class=value4>&nbsp;</span><span class=value5>&nbsp;</span><span class=value7>&nbsp;</span><span class=value5>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value6>&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>Q8CAN2_MOUSE&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------------------------------------</span><br><span class=valuedefault>Q9D630_MOUSE&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------------------------------------</span><br><span class=valuedefault>CJ033_MOUSE&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------</span><span class=value6>F</span><span class=value7>HHG</span><span class=value8>S</span><span class=value7>LLQRLGALST</span><span class=value6>LK</span><span class=value7>PLLK</span><span class=value6>A</span><span class=value7>G</span><span class=value8>RTL</span><span class=value7>GA</span><span class=value8>Q</span><span class=value7>L</span><br><span class=valuedefault>CJ033_HUMAN&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value7>P</span><span class=value6>VDM</span><span class=value7>AA</span><span class=value8>F</span><span class=value9>QHGSLLQR</span><span class=value8>MRSLSTLKP</span><span class=value9>LLKA</span><span class=value8>GRIL</span><span class=value7>GA</span><span class=value9>QL</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value6>&nbsp;</span><span class=value4>&nbsp;&nbsp;&nbsp;</span><span class=value5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value7>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value7>&nbsp;</span><span class=value6>&nbsp;</span><span class=value5>&nbsp;&nbsp;</span><span class=value6>&nbsp;&nbsp;</span><span class=value5>&nbsp;&nbsp;&nbsp;</span><span class=value7>&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>Q8CAN2_MOUSE&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------------------------------------</span><br><span class=valuedefault>Q9D630_MOUSE&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------------------------------------</span><br><span class=valuedefault>CJ033_MOUSE&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value7>PQYCEV</span><span class=value8>LT</span><span class=value9>APISKVLDQWFESEPLKATLA</span><span class=value8>T</span><span class=value7>DAVIGA</span><br><span class=valuedefault>CJ033_HUMAN&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>PRYYEVLTAPITKVLDQWFESEPLKATLATDAVIGA</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value7>&nbsp;&nbsp;</span><span class=value6>&nbsp;</span><span class=value7>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>&nbsp;</span><span class=value7>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value6>&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>Q8CAN2_MOUSE&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------------------------------------</span><br><span class=valuedefault>Q9D630_MOUSE&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------------------------------------</span><br><span class=valuedefault>CJ033_MOUSE&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value7>M</span><span class=value8>T</span><span class=value9>SPHTPGSGYVL</span><span class=value8>LHH</span><span class=value7>VM</span><span class=value6>G</span><span class=value7>SLEGTQG</span><span class=value6>AWSYVQGG</span><span class=value7>M</span><span class=value6>G</span><br><span class=valuedefault>CJ033_HUMAN&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>MTSPHTPGSGYVLLHHVMGGLEGM</span><span class=value8>QG</span><span class=value7>A</span><span class=value6>W</span><span class=value7>GYVQG</span><span class=value6>G</span><span class=value9>M</span><span class=value8>G</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value6>&nbsp;</span><span class=value7>&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>&nbsp;&nbsp;</span><span class=value7>&nbsp;</span><span class=value5>&nbsp;&nbsp;&nbsp;</span><span class=value6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value5>&nbsp;</span><span class=value4>&nbsp;</span><span class=value3>&nbsp;</span><span class=value4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value6>&nbsp;</span><span class=value5>&nbsp;</span><br><br><br><span class=valuedefault>Q8CAN2_MOUSE&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------------------------------------</span><br><span class=valuedefault>Q9D630_MOUSE&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------------------------------------</span><br><span class=valuedefault>CJ033_MOUSE&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value6>A</span><span class=value5>LSD</span><span class=value6>AIASSAATRGASI</span><span class=value7>F</span><span class=value6>TEKT</span><span class=value5>VAKV</span><span class=value6>Q</span><span class=value5>VN</span><span class=value7>SE</span><span class=value6>GRVQG</span><br><span class=valuedefault>CJ033_HUMAN&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>ALSDAIASSAT</span><span class=value9>T</span><span class=value8>HGASIFTE</span><span class=value9>K</span><span class=value8>TVAKVQVN</span><span class=value9>SE</span><span class=value8>GCVQG</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value4>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value5>&nbsp;</span><span class=value6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value5>&nbsp;</span><span class=value4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value6>&nbsp;&nbsp;</span><span class=value5>&nbsp;&nbsp;&nbsp;</span><span class=value4>&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>Q8CAN2_MOUSE&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------------------------------------</span><br><span class=valuedefault>Q9D630_MOUSE&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------------------------------------</span><br><span class=valuedefault>CJ033_MOUSE&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value6>VTL</span><span class=value7>QDGEE</span><span class=value6>VRSRVVLSCASPQVT</span><span class=value7>F</span><span class=value6>L</span><span class=value7>EL</span><span class=value6>TPQEW</span><span class=value7>LP</span><span class=value6>GA</span><br><span class=valuedefault>CJ033_HUMAN&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>V</span><span class=value9>VLEDGT</span><span class=value8>EV</span><span class=value7>RSKMVLSNTSPQ</span><span class=value8>ITFLKLTPQE</span><span class=value7>W</span><span class=value8>LPEE</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value4>&nbsp;</span><span class=value5>&nbsp;&nbsp;</span><span class=value6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value5>&nbsp;</span><span class=value4>&nbsp;</span><span class=value5>&nbsp;&nbsp;</span><span class=value3>&nbsp;</span><span class=value6>&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>Q8CAN2_MOUSE&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------------------------------------</span><br><span class=valuedefault>Q9D630_MOUSE&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------------------------------------</span><br><span class=valuedefault>CJ033_MOUSE&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value6>FVKRI</span><span class=value7>SQL</span><span class=value8>DTQSPV</span><span class=value7>TKINVA</span><span class=value6>V</span><span class=value7>D</span><span class=value6>R</span><span class=value7>L</span><span class=value6>P</span><span class=value7>N</span><span class=value9>FQAAPNAPGD</span><br><span class=valuedefault>CJ033_HUMAN&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>FLERISQ</span><span class=value9>LDTRSPV</span><span class=value8>TKINV</span><span class=value7>A</span><span class=value6>VDR</span><span class=value7>L</span><span class=value6>P</span><span class=value7>S</span><span class=value9>FLAAPNAPRG</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value6>&nbsp;&nbsp;</span><span class=value4>&nbsp;</span><span class=value5>&nbsp;&nbsp;</span><span class=value6>&nbsp;&nbsp;</span><span class=value7>&nbsp;&nbsp;&nbsp;</span><span class=value8>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value7>&nbsp;</span><span class=value5>&nbsp;</span><span class=value7>&nbsp;&nbsp;</span><span class=value5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value4>&nbsp;</span><span class=value5>&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;</span><span class=value8>&nbsp;</span><br><br><br><span class=valuedefault>Q8CAN2_MOUSE&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------------------------------------</span><br><span class=valuedefault>Q9D630_MOUSE&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------------------------------------</span><br><span class=valuedefault>CJ033_MOUSE&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>QPQ</span><span class=value8>GHHQCSIHLNCED</span><span class=value9>TLLLHQAFEDAKGGLPS</span><span class=value8>QKP</span><br><span class=valuedefault>CJ033_HUMAN&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>QPLPHHQCSIHLNCEDTLLLHQAFEDAMDGLPSHRP</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>Q8CAN2_MOUSE&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------------------------------------</span><br><span class=valuedefault>Q9D630_MOUSE&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------------------------------------</span><br><span class=valuedefault>CJ033_MOUSE&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>MIEL</span><span class=value9>C</span><span class=value8>IPSSLDPTL</span><span class=value7>APP</span><span class=value8>G</span><span class=value9>CHVVSLFTQYTPYTLAGG</span><br><span class=valuedefault>CJ033_HUMAN&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>VIELCIPSSLDP</span><span class=value8>TL</span><span class=value7>AP</span><span class=value8>PGCH</span><span class=value9>VVSLFTQYMPYTLA</span><span class=value8>G</span><span class=value9>G</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value7>&nbsp;</span><span class=value8>&nbsp;</span><span class=value7>&nbsp;</span><span class=value6>&nbsp;</span><span class=value5>&nbsp;</span><span class=value4>&nbsp;</span><span class=value5>&nbsp;&nbsp;</span><span class=value7>&nbsp;</span><span class=value8>&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;</span><span class=value8>&nbsp;</span><span class=value9>&nbsp;</span><br><br><br><span class=valuedefault>Q8CAN2_MOUSE&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------------------------------------</span><br><span class=valuedefault>Q9D630_MOUSE&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------------------------------------</span><br><span class=valuedefault>CJ033_MOUSE&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>KVWNEQEKNTYADKVFDCIEA</span><span class=value8>YAPGFKRSV</span><span class=value9>LAR</span><span class=value8>DIL</span><br><span class=valuedefault>CJ033_HUMAN&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>KA</span><span class=value8>W</span><span class=value9>DEQERDAYADRVFDCIEVYAPGFKDSVVGRDIL</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;</span><span class=value6>&nbsp;</span><span class=value8>&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>&nbsp;</span><span class=value9>&nbsp;&nbsp;</span><span class=value8>&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value7>&nbsp;</span><span class=value6>&nbsp;</span><span class=value7>&nbsp;</span><span class=value8>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value7>&nbsp;</span><span class=value8>&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>Q8CAN2_MOUSE&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------------------------------------</span><br><span class=valuedefault>Q9D630_MOUSE&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------------------------------------</span><br><span class=valuedefault>CJ033_MOUSE&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>T</span><span class=value9>PP</span><span class=value8>DLER</span><span class=value7>IF</span><span class=value6>R</span><span class=value5>L</span><span class=value6>PGG</span><span class=value5>N</span><span class=value8>IFHGAM</span><span class=value7>SL</span><span class=value6>D</span><span class=value8>QLYFARPVPQHS</span><br><span class=valuedefault>CJ033_HUMAN&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>TPPDLE</span><span class=value8>R</span><span class=value9>I</span><span class=value7>F</span><span class=value6>GLPGG</span><span class=value5>N</span><span class=value9>IFHCAM</span><span class=value7>SL</span><span class=value6>D</span><span class=value8>Q</span><span class=value9>LYFARPVPLHS</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>&nbsp;</span><span class=value9>&nbsp;</span><span class=value8>&nbsp;</span><span class=value7>&nbsp;&nbsp;&nbsp;</span><span class=value6>&nbsp;</span><span class=value5>&nbsp;</span><span class=value4>&nbsp;</span><span class=value3>&nbsp;&nbsp;</span><span class=value4>&nbsp;&nbsp;&nbsp;</span><span class=value3>&nbsp;</span><span class=value8>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value7>&nbsp;&nbsp;</span><span class=value5>&nbsp;&nbsp;</span><span class=value4>&nbsp;</span><span class=value8>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value7>&nbsp;</span><br><br><br><span class=valuedefault>Q8CAN2_MOUSE&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------------------------------------</span><br><span class=valuedefault>Q9D630_MOUSE&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--------------------</span><span class=value7>K</span><span class=value8>VSG</span><span class=value4>D</span><span class=valuegap>-----------</span><br><span class=valuedefault>CJ033_MOUSE&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>DY</span><span class=value9>RC</span><span class=value8>PVQG</span><span class=value7>L</span><span class=value8>YLCG</span><span class=value6>S</span><span class=value7>G</span><span class=value6>A</span><span class=value7>HP</span><span class=value6>GG</span><span class=value5>G</span><span class=value8>VMG</span><span class=value6>A</span><span class=value8>AG</span><span class=value7>R</span><span class=value9>NAAHVV</span><span class=value8>FR</span><br><span class=valuedefault>CJ033_HUMAN&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>GYRCPLQGLYLC</span><span class=value8>G</span><span class=value7>S</span><span class=value8>G</span><span class=value6>A</span><span class=value7>HPG</span><span class=value6>G</span><span class=value5>G</span><span class=value7>V</span><span class=value8>MG</span><span class=value6>A</span><span class=value9>A</span><span class=value8>G</span><span class=value7>R</span><span class=value9>NAAHVAFR</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value6>&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;</span><span class=value8>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value7>&nbsp;</span><span class=value8>&nbsp;&nbsp;&nbsp;</span><span class=value6>&nbsp;</span><span class=value4>&nbsp;</span><span class=value5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value3>&nbsp;</span><span class=value6>&nbsp;</span><span class=value7>&nbsp;</span><span class=value6>&nbsp;</span><span class=value3>&nbsp;</span><span class=value8>&nbsp;</span><span class=value6>&nbsp;</span><span class=value4>&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>Q8CAN2_MOUSE&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-----</span><br><span class=valuedefault>Q9D630_MOUSE&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-----</span><br><span class=valuedefault>CJ033_MOUSE&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value6>D</span><span class=value9>LKNM</span><br><span class=valuedefault>CJ033_HUMAN&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value6>D</span><span class=value9>LKSM</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value4>&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><br><br><br></body></html>
-</content>
-</file>
-<environement>
-HOME_4_TCOFFEE=/Users/cnotredame/
-MANPATH=/sw/share/man:/usr/share/man:/usr/local/share/man:/opt/X11/share/man:/Applications/Xcode.app/Contents/Developer/usr/share/man:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/share/man:/sw/lib/perl5/5.18.2/man
-TERM_PROGRAM=Apple_Terminal
-MCOFFEE_4_TCOFFEE=/Users/cnotredame//.t_coffee//mcoffee/
-ROOT_TMP_4_TCOFFEE=/var/tmp/
-SHELL=/bin/bash
-TERM=xterm-256color
-TMPDIR=/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/
-CONDA_SHLVL=1
-PERL5LIB=/sw/lib/perl5:/sw/lib/perl5/darwin
-Apple_PubSub_Socket_Render=/private/tmp/com.apple.launchd.u7asRiNodS/Render
-CONDA_PROMPT_MODIFIER=(base) 
-TERM_PROGRAM_VERSION=388.1.3
-OSNAME=macosx
-PERL_BIN=/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms::/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices
-TERM_SESSION_ID=76DADF83-46F9-497B-8002-0976C8F1E629
-METHODS_4_TCOFFEE=/Users/cnotredame//.t_coffee//methods/
-VERSIONER_PERL_VERSION=5.18
-XAPPLRESDIR=/sw/etc/app-defaults/
-http_proxy=
-HTTP_proxy=
-USER=cnotredame
-CONDA_EXE=/Users/cnotredame/anaconda3/bin/conda
-SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.mMz4rqepoV/Listeners
-__CF_USER_TEXT_ENCODING=0x1F6:0x0:0x0
-ENV_4_TCOFFEE=/Users/cnotredame//.t_coffee//.t_coffee_env
-_CE_CONDA=
-all_proxy=
-ALL_PROXY=
-HTTP_proxy_4_TCOFFEE=
-PATH=/Users/cnotredame//.t_coffee//plugins/macosx/:/Users/cnotredame/anaconda3/bin:/Users/cnotredame/anaconda3/condabin:/opt/local/bin:/opt/local/sbin:/opt/local/bin:/opt/local/sbin:/Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/packages/x3dna-v2.1/bin:/Users/cnotredame/bin/macosx://Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms:.:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices:/Users/cnotredame/bin/Scripts:/Users/cnotredame/Library/Haskell/ghc-7.4.2/lib/epub-tools-2.0.0/bin:/sw/bin:/sw/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin
-_=/usr/bin/printenv
-CONDA_PREFIX=/Users/cnotredame/anaconda3
-COLOR_4_TCOFFEE=new
-DIR_4_TCOFFEE=/Users/cnotredame//.t_coffee/
-PWD=/Users/cnotredame/Dropbox/projects/git/tcoffee/tmp/RANDOMSTRINGaUpNC3TZ76OSMEvrRgQK/tmp/RANDOMSTRING7rJ96hxSbhxJ5gu0klYl/data
-CACHE_4_TCOFFEE=/Users/cnotredame//.t_coffee//cache/
-X3DNA=/Users/cnotredame/Dropbox/packages/x3dna-v2.1
-DBUS_LAUNCHD_SESSION_BUS_SOCKET=/private/tmp/com.apple.launchd.CeZrDaslOL/unix_domain_listener
-XPC_FLAGS=0x0
-VERSIONER_PERL_PREFER_32_BIT=no
-_CE_M=
-XPC_SERVICE_NAME=0
-ERRORFILE_4_TCOFFEE=NO
-PLUGINS_4_TCOFFEE=/Users/cnotredame//.t_coffee//plugins/macosx/
-SHLVL=3
-HOME=/Users/cnotredame
-DUMP_4_TCOFFEE=/Users/cnotredame/Dropbox/projects/git/tcoffee/tmp/RANDOMSTRINGaUpNC3TZ76OSMEvrRgQK/tmp/RANDOMSTRING7rJ96hxSbhxJ5gu0klYl/tcoffee_main_documentation.rst.127.dump
-HTTP_PROXY=
-MAFFT_BINARIES=
-CONDA_PYTHON_EXE=/Users/cnotredame/anaconda3/bin/python
-BIN=/Users/cnotredame/bin/macosx
-LOGNAME=cnotredame
-EMAIL_4_TCOFFEE=cedric.notredame@gmail.com
-LC_CTYPE=UTF-8
-CONDA_DEFAULT_ENV=base
-EMAIL=cedric.notredame@gmail.com
-UPDATED_ENV_4_TCOFFEE=1
-INFOPATH=/sw/share/info:/sw/info:/usr/share/info
-DISPLAY=/private/tmp/com.apple.launchd.MDJPhYnCNw/org.macosforge.xquartz:0
-TC_MASTER_NODE=1
-NUMBER_OF_PROCESSORS=8
-ALL_proxy=
-SECURITYSESSIONID=186a6
-LOCKDIR_4_TCOFFEE=/var/tmp/tco/tcomq94th0v55999//lck/9skzp19xe5/
-TMP_4_TCOFFEE=/var/tmp/tco/tcomq94th0v55999/
-USER_BIN=/Users/cnotredame/bin/macosx
-SCRIPT_BIN=/Users/cnotredame/bin/Scripts/
-</environement>
-<DumpStatus>OK</DumpStatus>
-<DumpFile>/Users/cnotredame/Dropbox/projects/git/tcoffee/tmp/RANDOMSTRINGaUpNC3TZ76OSMEvrRgQK/tmp/RANDOMSTRING7rJ96hxSbhxJ5gu0klYl/tcoffee_main_documentation.rst.127.dump</DumpFile>
-</DumpIO>
