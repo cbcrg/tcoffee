@@ -46,7 +46,7 @@ fi
 #
 # Define the VERSION number 
 
-#export VERSION="`$WORKSPACE/tcoffee/lib/perl/lib/perl4makefile/version/version_number.version`"
+export VERSION="`$WORKSPACE/tcoffee/lib/perl/lib/perl4makefile/version/version_number.version`"
 #export VERSION="`cat $WORKSPACE/tcoffee/lib/version/version_number.version`"
 
 
