@@ -83,6 +83,7 @@ $build_version=file2value($build_versionF);
 $minor_version=file2value($minor_versionF);
 $major_version=file2value($major_versionF);
 $github=github_file2value($githubF);
+#$github=file2value($githubF);
 
 $version_number="Version_$major_version\.$minor_version\.$build_version\.$github\n";
 value2file($version_number, $version_numberF);

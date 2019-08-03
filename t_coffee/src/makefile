@@ -371,7 +371,11 @@ version:
 
 release:
 	make version release_type=$(type)
-	make distribution VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print)	
+	make release2
+
+release2:
+	VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print)	
+	make distribution VERSION=$(VERSION)
 	mkdir -p $(ARCHIVE_SOURCES)
 	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(ARCHIVE_SOURCES)/$(PROGRAM)_distribution_$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print).tar.gz
 	cp $(EXECUTABLE_DIR)/$(EXECUTABLE) $(WEB_BIN_DIR)/$(EXECUTABLE).$(VERSION);
