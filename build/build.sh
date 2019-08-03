@@ -46,7 +46,8 @@ fi
 #
 # Define the VERSION number 
 
-export VERSION="`cat $WORKSPACE/tcoffee/lib/version/version_number.version`"
+#export VERSION="`$WORKSPACE/tcoffee/lib/perl/lib/perl4makefile/version/version_number.version`"
+#export VERSION="`cat $WORKSPACE/tcoffee/lib/version/version_number.version`"
 
 
 
@@ -196,7 +197,7 @@ function build_dist()
 {
 	echo "[ build_dist ]"
 	cd $_SRC
-	make distribution || true
+	make distribution4ci || true
 
 	# check that the distribution file has been  created
 	DIST_FILE=$SANDBOX/distributions/$DIST_NAME

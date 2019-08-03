@@ -3,6 +3,7 @@
 #
 PROGRAM=T-COFFEE
 EXECUTABLE=t_coffee
+
 AUTHOR=Cedric Notredame 
 DATE=$(shell date '+%d %b %Y - %H:%M')
 DISTRIBUTION_ADDRESS=www.tcoffee.org/Packages
@@ -48,6 +49,10 @@ endif
 
 ifndef GIT_DIR
 GIT_DIR=$(HOME)/Dropbox/projects/git/tcoffee/
+endif
+
+ifndef EXECUTABLE_DIR
+EXECUTABLE_DIR=$(HOME)/Dropbox/projects/git/tcoffee/t_coffee/src/
 endif
 
 ifndef RST_DOC
@@ -151,13 +156,30 @@ DISTRIB_DOC=$(DISTRIB_DIR)/doc
 #########################################################
 
 distribution:	
-	echo $VERSION
+	echo $(VERSION)
 	make -i VERSION=$(VERSION) CC=cc general_distribution
 	make -i VERSION=$(VERSION) CC=cc examples
 	make -i VERSION=$(VERSION) CC=cc mcoffee
+	make -i doc	
 	make -i VERSION=$(VERSION) CC=cc packing
 
+distribution4ci:
+	echo $(VERSION)
+	make -i VERSION=$(VERSION) CC=cc general_distribution
+	make -i VERSION=$(VERSION) CC=cc examples
+	make -i VERSION=$(VERSION) CC=cc mcoffee
+	make -i doc4ci
+	make -i VERSION=$(VERSION) CC=cc packing
 
+doc4ci:
+	cp $(RST_DOC)/README  $(DISTRIB_DIR)
+	rm -f $(HTML_DOC)/*.html
+	rm -f $(DISTRIB_DIR)/doc/html
+	mkdir -p $(DISTRIB_DIR)/doc/html/	
+	cp -r $(HTML_DOC)/* $(DISTRIB_DIR)/doc/html/
+	mkdir -p $(DISTRIB_DIR)/doc/misc/
+	cp $(RST_DOC)/*.doc $(DISTRIB_DIR)/doc/misc/
+	cp $(RST_DOC)/*.pdf $(DISTRIB_DIR)/doc/misc/
 
 doc:
 	cp $(RST_DOC)/README  $(DISTRIB_DIR)
@@ -172,6 +194,7 @@ doc:
 	mkdir -p $(DISTRIB_DIR)/doc/misc/
 	cp $(RST_DOC)/*.doc $(DISTRIB_DIR)/doc/misc/
 	cp $(RST_DOC)/*.pdf $(DISTRIB_DIR)/doc/misc/
+
 mcoffee:
 	-rm -rf $(DISTRIB_DIR)/mcoffee
 	mkdir -p $(DISTRIB_DIR)/mcoffee
@@ -222,7 +245,6 @@ env:
 general_distribution:
 	-rm -f $(CODE_LIST);
 	mkdir -p $(DISTRIB_DIR)
-	make doc
 	mkdir -p $(DISTRIB_DIR)/bin
 	mkdir -p $(DISTRIB_DIR)/bin/$(OSNAME)
 	mkdir -p $(DISTRIB_DIR)/bin/macosx	
@@ -231,8 +253,6 @@ general_distribution:
 	mkdir -p $(DISTRIB_DIR)/reference_test
 	echo '' > $(DISTRIB_DIR)/install
 	make -i VERSION=$(VERSION) CC=cc code
-	cp $(EXECUTABLE) $(DISTRIB_DIR)/bin/$(OSNAME)
-	cp $(EXECUTABLE) $(WEB_BIN_DIR)/$(EXECUTABLE).$(VERSION);
 	make -i VERSION=$(VERSION) CC=cc license
 
 library_distribution:
@@ -351,13 +371,12 @@ version:
 
 release:
 	make version release_type=$(type)
-	git commit -a -m '$(m)'	
-	git push
 	make distribution VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print)	
 	mkdir -p $(ARCHIVE_SOURCES)
 	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(ARCHIVE_SOURCES)/$(PROGRAM)_distribution_$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print).tar.gz
-
-
+	cp $(EXECUTABLE_DIR)/$(EXECUTABLE) $(WEB_BIN_DIR)/$(EXECUTABLE).$(VERSION);
+	git commit -a -m '$(m)'	
+	#git push
 
 
 #
