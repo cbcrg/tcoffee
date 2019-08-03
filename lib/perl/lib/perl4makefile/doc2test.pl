@@ -398,8 +398,6 @@ sub play_dump_list
 	$rfile=$file;
 	$routdir="$outdir/$ffile/";
 	system ("mkdir -p $routdir");
-	print "$rfile\n";
-		
       }
     else
       {
