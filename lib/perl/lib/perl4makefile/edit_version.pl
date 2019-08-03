@@ -8,7 +8,6 @@ use Cwd;
 use File::Copy;
 use DirHandle;
 use strict;
-use DateTime;
 use File::Basename;
 use File::Find;
 

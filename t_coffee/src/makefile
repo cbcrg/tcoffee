@@ -48,11 +48,11 @@ endif
 
 
 ifndef GIT_DIR
-GIT_DIR=$(HOME)/Dropbox/projects/git/tcoffee/
+GIT_DIR=$(CURDIR)/../../
 endif
 
 ifndef EXECUTABLE_DIR
-EXECUTABLE_DIR=$(HOME)/Dropbox/projects/git/tcoffee/t_coffee/src/
+EXECUTABLE_DIR=$(CURDIR)
 endif
 
 ifndef RST_DOC
