@@ -79,7 +79,7 @@ $FILE2IGNORE{'stderr'}=1;
 
 if ($ARGV[0] eq "-help")
   {
-    print "docs2test.pl\n";
+    print "docs2test.pl Version $Version\n";
     print "Automaticly checks t_coffee command lines\n";
     print "The github dir structure is expected by default\n";
     print "tcoffee/\n";
@@ -123,6 +123,7 @@ if ($ARGV[0] eq "-help")
     die;
     }
 
+print "#doc2test.pl Version $Version\n";
 @ARGV=clean_cl(@ARGV);
 
 for (my $a=0; $a<=$#ARGV; $a++)
