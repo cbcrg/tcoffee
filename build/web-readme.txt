@@ -1,6 +1,6 @@
 T-Coffee distribution 
 =====================
-our $VERSION="Version_13.30.10.4a0bd8c";#POPULATED by edit_version.pl from #_#UPDATE_VERSION
+our $VERSION="Version_13.30.11.5e39417";#POPULATED by edit_version.pl from #_#UPDATE_VERSION
 The version ID is organized as follows: <Major Release>.<Latest Stable>.<Latest Beta>.<Github version tag>
 Content of this directory: 
 Linux Installation:
