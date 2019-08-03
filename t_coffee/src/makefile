@@ -150,7 +150,8 @@ DISTRIB_DOC=$(DISTRIB_DIR)/doc
 #                                                       #
 #########################################################
 
-distribution:
+distribution:	
+	echo $VERSION
 	make -i VERSION=$(VERSION) CC=cc general_distribution
 	make -i VERSION=$(VERSION) CC=cc examples
 	make -i VERSION=$(VERSION) CC=cc mcoffee
@@ -342,55 +343,21 @@ packing:
 	mv $(DISTRIBUTION_FILE).tar.gz $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz
 
 
-github:
-	git commit -a -m '$(m)'
-	make version release_type=$(release_type)
-#This first commit makes it possible to have the correct branch number (i.e. ahead). 
+
 
 version:
 	$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print -$(release_type) -circleci=$(CIRCLECI_CONFIG)> $(WEB_DIR)/Packages/T-COFFEE.version)
 
-beta_local:
-	make github release_type='beta'
-	make finish_release_local  target_dir=$(BETA_SOURCES) target_file=$(BETA_SOURCES_FILE)
 
-
-stable_local:
-	make github release_type='stable'
-	make finish_release_local  target_dir=$(STABLE_SOURCES) target_file=$(STABLE_SOURCES_FILE)
-
-major_local:
-	make github release_type='major'
-	make finish_release_local  target_dir=$(STABLE_SOURCES) target_file=$(STABLE_SOURCES_FILE)
-
-finish_release_local:
+release:
+	make version release_type=$(type)
+	git commit -a -m '$(m)'	
+	git push
 	make distribution VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print)	
 	mkdir -p $(ARCHIVE_SOURCES)
 	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(ARCHIVE_SOURCES)/$(PROGRAM)_distribution_$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print).tar.gz
-	mkdir -p $(target_dir) 
-	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(target_dir)/$(target_file).tar.gz
-	git commit -a -m '$(m)'
-	git  push
-
-beta:
-	make github release_type='beta'
-	make finish_release  target_dir=$(BETA_SOURCES) target_file=$(BETA_SOURCES_FILE)
 
 
-stable:
-	make github release_type='stable'
-	make finish_release  target_dir=$(STABLE_SOURCES) target_file=$(STABLE_SOURCES_FILE)
-
-major:
-	make github release_type='major'
-	make finish_release  target_dir=$(STABLE_SOURCES) target_file=$(STABLE_SOURCES_FILE)
-
-finish_release:
-	make distribution VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print)	
-	mkdir -p $(ARCHIVE_SOURCES)
-	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(ARCHIVE_SOURCES)/$(PROGRAM)_distribution_$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print).tar.gz
-	git commit -a -m '$(m)'
-	git  push
 
 
 #
