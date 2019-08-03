@@ -28,11 +28,16 @@ my $GIT=0;
 my %FILE2IGNORE;
 my %FILES;
 my @TMP_LIST;
+my %GCOUNT;
+$GCOUNT{processed}=0;
+$GCOUNT{PASSED}=0;
+$GCOUNT{WARNING}=0;
+$GCOUNT{NEWWARNING}=0;
+$GCOUNT{MISSING}=0;
+$GCOUNT{TIMEOUT}=0;
+$GCOUNT{FAILED}=0;
+$GCOUNT{TFAILED}=0;
 
-my $PROCESSED=0;
-my $FAILED=0;
-my $WARNING=0;
-my $PASSED=0;
 
 my $max=0;
 my $PATTERN='';
@@ -45,6 +50,7 @@ my $stop_on_failed;
 my $play;
 my $check;
 my $clean;
+my $CLEAN2;
 my $UPDATE;
 my $data="./";
 my $outdir="./";
@@ -96,6 +102,7 @@ if ($ARGV[0] eq "-help")
     print "     -play   <file>     generates T-Coffee dumps using -dir data and putting all the dumps in -outdir. Existing dumps are updated if -update\n";
     print "     -check  <start>    prints the status of all the dumps. start: dump, list of dumps, recursive directory\n";
     print "     -clean  <string>   Removes while checking: ALL, WARNING FAILED, TIMEOUT or MISSING\n";
+    print "     -clean2 <string>   Removes while checking any dump containing the string\n"; 
     print "     -replay <start>    replay and check existing dumps .   start: dump, list of dumps, recursive directory\n";
     
     print "     -unplay <file>     outputs all the input files from the dump files into -outdir, path are respected. Different files with identical names give an error\n";
@@ -181,6 +188,10 @@ for (my $a=0; $a<=$#ARGV; $a++)
       {
 	$check=$ARGV[++$a];
       }
+    elsif ($ARGV[$a]=~/-clean2/)
+      {
+	$CLEAN2=$ARGV[++$a];
+      } 
     elsif ($ARGV[$a]=~/-clean/)
       {
 	$clean=$ARGV[++$a];
@@ -258,9 +269,18 @@ if ($replay){$exit_status=replay_dump_list ($replay, $outdir);$infile=$replay;}
 if ($play  ){$exit_status=play_dump_list ($play, $data, $outdir);$infile=$play}
 if ($check ){$exit_status=check_dump_list ($check,$clean);$infile=$check}
 if ($unplay){$exit_status=unplay_dump_list ($unplay, $stream,$outdir);$infile=$unplay}
-if ($PROCESSED)
+
+print "***** $GCOUNT{processed}\n";
+
+if ($GCOUNT{processed})
   {
-    print "FULL SUMMARY:STATUS: $exit_status FILE: $infile TESTED $PROCESSED PASSED: $PASSED WARNING: $WARNING FAILED: $FAILED\n";
+    my $tfailed=$GCOUNT{MISSING}+$GCOUNT{TIMEOUT}+$GCOUNT{FAILED};
+    my $warning=$GCOUNT{WARNING};
+    my $newwarning=$GCOUNT{NEWWARNING};
+    my $passed=$GCOUNT{PASSED};
+    my $processed=$GCOUNT{processed};
+    my $removed =$GCOUNT{removed};
+    print "#SUMMARY:STATUS: $exit_status FILE: $infile TESTED $processed PASSED: $passed WARNING: $warning NEWWARNING: $newwarning FAILED: $tfailed REMOVED: $removed\n";
   }
 exit ($exit_status);
 
@@ -415,7 +435,7 @@ sub play_dump_list
 	elsif  ($lu{$cl})#Do not recompute twice the same CL
 	  {
 	    my $dump=$lu{$cl}{dump};
-	    print "File: $ffile Line:$line -- Command: $cl -- Dump: $dump -- SKIPPED\n";
+	    printf ("STATUS: %-7s File: $ffile Line:$line -- Command: $cl -- Dump: $dump\n","SKIPPED");
 	    $n++;
 	    if ($lu{$cl}{exit} eq "FAILED"){$failed++;}
 	    elsif ($lu{$cl}{exit} eq "WARNING"){$warning++;}
@@ -499,6 +519,7 @@ sub check_dump_list
 	  my $status=report2status (%report);
 	  my $cl=dump2cl ($d);
 	  printf ("STATUS: %-7s Dump: $d Command: $cl", $status);
+	  
 	  if ($clean)
 	    {
 	      my $ul=0;
@@ -509,12 +530,19 @@ sub check_dump_list
 		{
 		  print " *** Removed";
 		  unlink ($d);
+		  $GCOUNT{removed}++;
 		}
 	      
 	    }
+	  elsif ($CLEAN2 && dump_contains ($d, $CLEAN2))
+	    {
+	       print " *** Removed";
+	       unlink ($d);
+	       $GCOUNT{removed}++;
+	     }
 	  print "\n";
 	}
-      exit (0);
+      return 0;
     }
 
 sub safe_rmrf
@@ -532,10 +560,11 @@ sub replay_dump_list
     my ($replay_list, $outdir)=@_;
     my $n=0;
     my $shell=0;
-    
+
 
     my @list=string2dump_list ($replay_list);
-    print "* Replay $#list datasets. Start: $replay_list\n";
+    my $nrep=$#list+1;
+    print "* Replay $nrep dataset(s). Start: $replay_list\n";
     foreach my $d (@list)
       {
 	if (replay_dump_file ($d)){$shell=1;}
@@ -950,10 +979,6 @@ sub clean_cl
       return @argl;
     }
 
-# Git functions
-
-
-
 sub dir2file_list
      {
        my ($cd, $pattern)=@_;
@@ -1160,39 +1185,40 @@ sub create_error_dump
 sub report2status
 	  {
 	    my (%report)=@_;
-	    $PROCESSED+=1;
+	    $GCOUNT{processed}++;
 	    
 	    if    (!%report) 
 	      {
-		$FAILED+=1;
+		$GCOUNT {MISSING}++;
 		return "MISSING";
 	      }
 	    elsif ($report{error})
 	      {
 		if ($report{stderr}=~/TIMEOUT/)
 		  {
-		    $FAILED+=1;
+		    
+		    $GCOUNT{TIMEOUT}++;
 		    return "TIMEOUT";
 		  }
 		else
 		  {
-		    $FAILED+=1;
+		    $GCOUNT{FAILED}++;
 		    return "FAILED";
 		  }
 	      }
 	    elsif ($report{warning})
 	      {
-		$WARNING+=1;
+		$GCOUNT {WARNING}++;
 		return "WARNING";
 	      }
 	    elsif ($report{newwarning})
 	      {
-		
+		$GCOUNT {NEWWARNING}++;
 		return "NEW_WARNING";
 	      }
 	    else
 	      {
-		$PASSED+=1;
+		$GCOUNT{PASSED}++;
 		return "PASSED";
 	      }
 	  }
@@ -1223,4 +1249,26 @@ sub compare_cl
 	  {
 	    return 0;
 	  }
+	}
+sub dump_contains
+	{
+	  my ($d,$string)=@_;
+	  
+	  if (!-e $d || !$string){return 0;}
+	  else
+	    {
+	      my $f=new FileHandle();
+	      open ($f, $d);
+	      while (<$f>)
+		{
+		  my $l=$_;
+		  if (($l=~/$string/))
+		    {
+		      close ($f);
+		      return 1;
+		    }
+		}
+	      close ($f);
+	      return 0;
+	    }
 	}

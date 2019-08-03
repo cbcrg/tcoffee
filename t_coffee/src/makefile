@@ -18,6 +18,7 @@ ifndef HOME2
 HOME2=$(HOME)/Dropbox
 endif
 WEB_DIR=$(HOME2)/dropBoxShared/Work/tcoffee.org/public_html/
+WEB_DOC=$(WEB_DIR)/Projects/tcoffee/documentation
 WEB_BIN_DIR=$(HOME2)/dropBoxShared/Work/tcoffee.org/public_html/Packages/Binaries/tcoffee/$(OSNAME)/
 
 ###########################################################
@@ -171,6 +172,8 @@ doc:
 	sphinx-build $(RST_DOC) $(HTML_DOC)
 	mkdir -p $(DISTRIB_DIR)/doc/	
 	cp -r $(HTML_DOC)/* $(DISTRIB_DIR)/doc/
+	cp -r $(HTML_DOC)/* $(WEB_DOC)
+	/Users/cnotredame/Dropbox/dropBoxShared/Work/tcoffee.org/public_html/Projects/tcoffee/documentation
 	cp $(RST_DOC)/README  $(DISTRIB_DIR)
 mcoffee:
 	-rm -rf $(DISTRIB_DIR)/mcoffee
