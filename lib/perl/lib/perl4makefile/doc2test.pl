@@ -625,7 +625,7 @@ sub replay_dump_file
 	unlink ($replayed);
       }
     
-    return ($SHELL);
+    return ($shell);
   }
   
 #End of single replay      
