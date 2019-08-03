@@ -270,8 +270,6 @@ if ($play  ){$exit_status=play_dump_list ($play, $data, $outdir);$infile=$play}
 if ($check ){$exit_status=check_dump_list ($check,$clean);$infile=$check}
 if ($unplay){$exit_status=unplay_dump_list ($unplay, $stream,$outdir);$infile=$unplay}
 
-print "***** $GCOUNT{processed}\n";
-
 if ($GCOUNT{processed})
   {
     my $tfailed=$GCOUNT{MISSING}+$GCOUNT{TIMEOUT}+$GCOUNT{FAILED};
@@ -590,6 +588,7 @@ sub replay_dump_file
     my %out=dump2report($replayed);
     
     compare_reports (\%in, \%out, "quiet");
+    report2status (%out);
     $missing=$out{MissingOutput};
     $different=$out{N_DifferentOutput};
     $error=$out{error};

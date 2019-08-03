@@ -168,12 +168,13 @@ old_doc:
 	cp $(PWD)/../../$(EXECUTABLE)/doc/$(EXECUTABLE).pdf $(DISTRIB_DOC)
 
 doc:
-
-	sphinx-build $(RST_DOC) $(HTML_DOC)
+	rm -f $(HTML_DOC)/*.html
+	$(PERL4MAKEFILE_LIB)/edit_version.pl -target=$(RST_DOC)/conf.py -mode=conf.py -version=$(VERSION)
+	sphinx-build -b singlehtml $(RST_DOC) $(HTML_DOC)
 	mkdir -p $(DISTRIB_DIR)/doc/	
 	cp -r $(HTML_DOC)/* $(DISTRIB_DIR)/doc/
+	rm -f $(WEB_DOC)/*.html
 	cp -r $(HTML_DOC)/* $(WEB_DOC)
-	/Users/cnotredame/Dropbox/dropBoxShared/Work/tcoffee.org/public_html/Projects/tcoffee/documentation
 	cp $(RST_DOC)/README  $(DISTRIB_DIR)
 mcoffee:
 	-rm -rf $(DISTRIB_DIR)/mcoffee
