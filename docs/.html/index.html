@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>T-Coffee Version_13.31.23.0a1e3b2 documentation</title>
+  <title>T-Coffee Version_13.32.0.31526eb documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                Version_13.31.23.0a1e3b2
+                Version_13.32.0.31526eb
               </div>
             
           
@@ -557,7 +557,6 @@
 <li class="toctree-l2"><a class="reference internal" href="index.html#introduction">Introduction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#introducing-a-new-command-to-test">Introducing a new command to test</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#checking-the-documentation">Checking the documentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="index.html#compiling-the-documentation">Compiling the documentation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#validating-a-distribution">Validating a distribution</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#creating-a-new-command">Creating a new command</a></li>
 </ul>
@@ -695,7 +694,7 @@
     
       <li><a href="index.html#document-index">Docs</a> &raquo;</li>
         
-      <li>T-Coffee Version_13.31.23.0a1e3b2 documentation</li>
+      <li>T-Coffee Version_13.32.0.31526eb documentation</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -5543,34 +5542,35 @@ $#: install   <a class="reference external" href="ftp://ftp.ncbi.nlm.nih.gov/bla
 </div>
 <div class="section" id="checking-the-documentation">
 <h3>Checking the documentation<a class="headerlink" href="#checking-the-documentation" title="Permalink to this headline">¶</a></h3>
-<p>The simplest way to check the documentation is to run the following command from the repository root (other locations are possible, but -ref, -docs must be modified accordingly):</p>
+<p>The simplest way to check the documentation is to run the following command from the repository root (other locations are possible, but -ref, -docs must be modified accordingly). Note that the .tests and .rst files can link to other files.</p>
 <blockquote>
-<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">##: ./lib/perl/lib/perl4makefile/doc2test.pl -mode update</span>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#$: ./lib/perl/lib/perl4makefile/doc2test.pl -play &lt;*.rst file or *.tests file or list of cmd&gt; -data &lt;file containing the data&gt; -dumps &lt;target file for dumps&gt;</span>
 </pre></div>
 </div>
 </div></blockquote>
-<p>This script will extract all tcommand lines from the .rst in docs and will run these command lines. When a reference output is available in /testsuite/docs/ref/ it will produce an other output and compare it with the reference. The new output will be put in /testsuite/docs/latest/. The script will eventually produce a global report that is to be found in /testsuite/docs/log/validation.log. The output of the failed scripts will be put in /testsuite/docs/failed</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">##: ./lib/perl/lib/perl4makefile/doc2test.pl -mode new</span>
+<p>You can the check the contents</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#$: ./lib/perl/lib/perl4makefile/doc2test.pl -check &lt;dump directory - recursive&gt;</span>
 </pre></div>
 </div>
-<p>This mode will only run the new command lines and report (defined as those not having a reference output in /testsuite/docs/ref/). This mode is the default mode</p>
+<p>You can the re-run a list of dumps. This is how each distribution gest tested against tests/core.tests with data .in tests/.data and the dumps in tests/.dumps</p>
 <dl class="simple">
-<dt>::</dt><dd><p>##: ./lib/perl/lib/perl4makefile/doc2test.pl -mode failed</p>
+<dt>::</dt><dd><p>#$: ./lib/perl/lib/perl4makefile/doc2test.pl -replay &lt;dump directory, or single dump file&gt;</p>
 </dd>
 </dl>
-<p>This mode will only run the command lines that have previously failed, as indicated by the presence of an output in the failed directory.</p>
-</div>
-<div class="section" id="compiling-the-documentation">
-<h3>Compiling the documentation<a class="headerlink" href="#compiling-the-documentation" title="Permalink to this headline">¶</a></h3>
-<p>The documentation can be compiled using the following command</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">##: ./lib/perl/lib/perl4makefile/doc2test.pl -mode update -stop</span>
+<p>This mode will only run the command lines that have previously failed, as indicated by the presence of an output in the failed directory. Note that you can selectively delete some dumps</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#$: ./lib/perl/lib/perl4makefile/doc2test.pl -check &lt;dump directory - recursive&gt; -clean FAILED or -clean2 &lt;string in dump to be deleted&gt;</span>
 </pre></div>
 </div>
-<p>It will cause the test to stop whenever a failed is encountered</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">##: ./lib/perl/lib/perl4makefile/doc2test.pl -mode reset</span>
+<dl>
+<dt>By default existing dumps will only be recomputed if the command line or the input data has changed. YOu can trigger recomputation:</dt><dd><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#$: ./lib/perl/lib/perl4makefile/doc2test.pl -play &lt;*.rst file or *.tests file or list of cmd&gt; -data &lt;file containing the data&gt; -dumps &lt;target file for dumps&gt; -update</span>
 </pre></div>
 </div>
-<p>Will cause all the reference files to be erased.</p>
+</dd>
+</dl>
+<p>Finalyit is possible to dump the data containned in a dump:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#$: ./lib/perl/lib/perl4makefile/doc2test.pl -unplay &lt;dump file or dump dir&gt; -outdir &lt;dir where data is to be dummped&gt;</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="validating-a-distribution">
 <h3>Validating a distribution<a class="headerlink" href="#validating-a-distribution" title="Permalink to this headline">¶</a></h3>

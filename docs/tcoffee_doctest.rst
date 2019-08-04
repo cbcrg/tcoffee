@@ -38,43 +38,39 @@ Whenvever adding a new command, input files must be added to the repository dire
 Checking the documentation
 **************************
 
-The simplest way to check the documentation is to run the following command from the repository root (other locations are possible, but -ref, -docs must be modified accordingly):
+The simplest way to check the documentation is to run the following command from the repository root (other locations are possible, but -ref, -docs must be modified accordingly). Note that the .tests and .rst files can link to other files. 
 
  ::
 
-  ##: ./lib/perl/lib/perl4makefile/doc2test.pl -mode update
+  #$: ./lib/perl/lib/perl4makefile/doc2test.pl -play <*.rst file or *.tests file or list of cmd> -data <file containing the data> -dumps <target file for dumps>
 
-This script will extract all tcommand lines from the .rst in docs and will run these command lines. When a reference output is available in /testsuite/docs/ref/ it will produce an other output and compare it with the reference. The new output will be put in /testsuite/docs/latest/. The script will eventually produce a global report that is to be found in /testsuite/docs/log/validation.log. The output of the failed scripts will be put in /testsuite/docs/failed
-
-::
-
-  ##: ./lib/perl/lib/perl4makefile/doc2test.pl -mode new
-
-This mode will only run the new command lines and report (defined as those not having a reference output in /testsuite/docs/ref/). This mode is the default mode
-
-::
-  ##: ./lib/perl/lib/perl4makefile/doc2test.pl -mode failed
-
-This mode will only run the command lines that have previously failed, as indicated by the presence of an output in the failed directory.
-
-
-***************************
-Compiling the documentation
-***************************
-
-The documentation can be compiled using the following command
+You can the check the contents
 
 ::
 
-  ##: ./lib/perl/lib/perl4makefile/doc2test.pl -mode update -stop
+  #$: ./lib/perl/lib/perl4makefile/doc2test.pl -check <dump directory - recursive>
 
-It will cause the test to stop whenever a failed is encountered
+You can the re-run a list of dumps. This is how each distribution gest tested against tests/core.tests with data .in tests/.data and the dumps in tests/.dumps
+
+::
+  #$: ./lib/perl/lib/perl4makefile/doc2test.pl -replay <dump directory, or single dump file>
+
+This mode will only run the command lines that have previously failed, as indicated by the presence of an output in the failed directory. Note that you can selectively delete some dumps 
 
 ::
 
-  ##: ./lib/perl/lib/perl4makefile/doc2test.pl -mode reset
+  #$: ./lib/perl/lib/perl4makefile/doc2test.pl -check <dump directory - recursive> -clean FAILED or -clean2 <string in dump to be deleted>
 
-Will cause all the reference files to be erased.
+By default existing dumps will only be recomputed if the command line or the input data has changed. YOu can trigger recomputation:
+ ::
+
+  #$: ./lib/perl/lib/perl4makefile/doc2test.pl -play <*.rst file or *.tests file or list of cmd> -data <file containing the data> -dumps <target file for dumps> -update
+
+Finalyit is possible to dump the data containned in a dump:
+::
+
+  #$: ./lib/perl/lib/perl4makefile/doc2test.pl -unplay <dump file or dump dir> -outdir <dir where data is to be dummped>
+
 
 *************************
 Validating a distribution
