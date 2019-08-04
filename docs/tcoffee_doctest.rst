@@ -7,9 +7,13 @@ Introduction
 ************
 Before the realease of a new T-Coffee version, many command lines in the documentation are programmatically tested. The purpose of this document is to explain which command lines are tested, how new command lines can be added to the documentation and how to perform a documentation check before a new release. 
 
-*********************************
-Introducing a new command to test
-*********************************
+
+****************
+Testline Command
+****************
+
+Introducing a new command to testTet
+====================================
 
 Tests are systematically carried out on all the command lines that start with the symbol $$. For instance, the following CL will has been tested.
 
@@ -34,9 +38,9 @@ These commands are never tested, either because they contain system dependant in
 
 Whenvever adding a new command, input files must be added to the repository directory ./examples/. New commands can be also be built using the existing files, or they can depend on files newly added to the repository.
 
-**************************
-Checking the documentation
-**************************
+
+Checking the documentation command lines
+========================================
 
 The simplest way to check the documentation is to run the following command from the repository root (other locations are possible, but -ref, -docs must be modified accordingly). Note that the .tests and .rst files can link to other files. 
 
@@ -72,9 +76,9 @@ Finalyit is possible to dump the data containned in a dump:
   #$: ./lib/perl/lib/perl4makefile/doc2test.pl -unplay <dump file or dump dir> -outdir <dir where data is to be dummped>
 
 
-*************************
+
 Validating a distribution
-*************************
+=========================
 
 Dump files are safe contained. It is possible to check T-Coffee capacity to reproduce a collection of reference dump files.
 
@@ -90,9 +94,9 @@ It will cause the test to stop whenever a failed is encountered
 
 Will cause all the reference files to be erased.
 
-*************************
-Creating a new command   
-*************************
+
+Creating a new command to be tested  
+===================================
 
 In order to generate a new test command, all you need to do is to run your command while setting an environement variable. This will generate a dump file that can be used to rerun the same call:
 Dump files are very easy to produce yout simply need to run
@@ -121,4 +125,55 @@ Will report failure whenever there is a warning OR whenever an output file diffe
   
   ##: ./lib/perl/lib/perl4makefile/doc2test.pl -replay yourdumpfile -keepreplayed
 
+**************************
+Release Building Procedure
+**************************
+# How T-Coffee build works
 
+T-Coffee is automatically build by using the [Circle CI](https://circleci.com/gh/cbcrg/tcoffee) service. The procedure starts with an update of the version number followed by a git push that triggers the validation of the new release on circleCI and a posting via an amzon instance hosting the T-Coffee web site. All these operations are detailed below.
+
+
+Triggering a release
+====================
+
+- go into t_coffee/src
+- type make release=beta|stable|major m='commit comments -- including [ci skip] if needed
+
+This will trigger 
+	-an  update of the version number in lib/version/version_number.version: Version_<major>.<stable>.<build>.<github Branch Number>
+	-the file .circleci/config.yml will be programmatically edidted by read_program_version.pl to state the kind of release to be done by CircleCI
+ 	-make distribution will run. Amomg othe things this will
+		-check that the distribution procedure is functional - it is a similar procedure that will be used by CircleCI
+		-compile the documentation with sphinx and update docs/.html
+
+
+CircleCI building
+=================
+
+The tcoffee git repoitory is registered to CircleCI via the following hook:
+	https://github.com/cbcrg/tcoffee/settings/hooks		
+
+The Circle build is controlled by the [.circleci/circle.yml](circle.yml) file and processes as follows:
+
+1. The T-Coffee [build/build.sh](build/build.sh) script is executed in the [cbcrg/tcoffee-build-box:1.2](docker/Dockerfile.buildbox) container
+
+2. The T-Coffee binaries produced by the build process are created in the folder 
+  `~/publish/sandbox/build`. This folder is moved under path `build/tcoffee`
+  
+3. A new Docker image named `xcoffee` is created copying the content of the folder `build/tcoffee`. 
+  The image is built by using this [docker/Dockerfile](docker/Dockerfile). 
+  
+4. The new `xcoffee` build is tested by running the [docker/run-tests.sh](docker/run-tests.sh) 
+  tests suite. 
+
+5. The summary of the tests is available on https://circleci.com/gh/cbcrg/tcoffee/tree/master
+  
+5. If all tests are passed the `xcoffee` image is pushed to the [Docker Hub](https://hub.docker.com/r/cbcrg/tcoffee/tags/) 
+  with the names `cbcrg/tcoffee:latest` and `cbcrg/tcoffee:<version.commit-id>`
+
+7. The environment variable `RELEASE=0|1` is used to mark the build as beta or stable 
+  (use the [build/make_release.sh] to trigger a new release build).
+
+Publication
+===========
+Once the build is complete and all tests are passed the distribution is pushed onto the web along with the associated documentation.

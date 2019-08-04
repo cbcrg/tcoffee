@@ -7,25 +7,34 @@ Multiple Alignments of DNA, RNA, Protein Sequences and Structures.
 
 Prerequisites
 --------------
-T-Coffee compilation requires the following tools installed on your system ``make``, ``gcc-c++``, ``g77``, ``Perl`` and ``CPAN``. 
+T-Coffee compilation requires the following tools installed on your system ``make``, ``gcc-c++``, ``g77``, ``Perl``, ``sphinx``, ``CPAN``. 
 
 
 Compile 
 --------
 
-Clone the git repository on your computer with the following command: 
+Note that the git repository is meant to support the packging of new releases. 
+If you simply want to install T-Coffee on your system please download the latest distribution from
+	http://www.tcoffee.org/Projects/tcoffee/index.html#DOWNLOAD
 
-    git clone git@github.com:cbcrg/tcoffee.git tcoffee
+All required installation documentation is available from
+	http://www.tcoffee.org/Projects/tcoffee/documentation/index.html#t-coffee-installation
+
+If you nontheless want to compile from git: 
+
+	Clone the git repository on your computer with the following command: 
+		git clone git@github.com:cbcrg/tcoffee.git tcoffee
+	make sure you have installed all dependencies
+	cd tcoffee/t_coffee/src
+	make t_coffee
+	mv t_coffee <bin location> OR add current dir to your path - not recommended
     
     
 Make sure you have installed the required dependencies listed above. 
 When done, move in the project root folder named ``tcoffee`` and enter the 
 following commands:     
     
-    $ cd compile
+    $ cd t_coffee/src
     $ make t_coffee
     
-
-The binary will be automatically copied to the path specified by the environment 
-variable ``$USER_BIN`` (check that it exists before run the make command).
-
+you will then have to copy the t_coffee executable to the location you find most convenient.
