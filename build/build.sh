@@ -197,7 +197,7 @@ function build_dist()
 {
 	echo "[ build_dist ]"
 	cd $_SRC
-	make distribution4ci || true
+	make distribution || true
 
 	# check that the distribution file has been  created
 	DIST_FILE=$SANDBOX/distributions/$DIST_NAME

@@ -168,32 +168,11 @@ distribution:
 	make -i doc	
 	make -i VERSION=$(VERSION) CC=cc packing
 
-distribution4ci:
-	echo $(VERSION)
-	make -i VERSION=$(VERSION) CC=cc general_distribution
-	make -i VERSION=$(VERSION) CC=cc examples
-	make -i VERSION=$(VERSION) CC=cc mcoffee
-	make -i doc4ci
-	make -i VERSION=$(VERSION) CC=cc packing
-
-doc4ci:
-	cp $(RST_DOC)/README  $(DISTRIB_DIR)
-	rm -f $(DISTRIB_DIR)/doc/html
-	mkdir -p $(DISTRIB_DIR)/doc/html/	
-	cp -r $(HTML_DOC)/* $(DISTRIB_DIR)/doc/html/
-	mkdir -p $(DISTRIB_DIR)/doc/misc/
-	cp $(RST_DOC)/*.doc $(DISTRIB_DIR)/doc/misc/
-	cp $(RST_DOC)/*.pdf $(DISTRIB_DIR)/doc/misc/
-
 doc:
 	cp $(RST_DOC)/README  $(DISTRIB_DIR)
-	$(PERL4MAKEFILE_LIB)/edit_version.pl -target=$(RST_DOC)/conf.py -mode=conf.py -version=$(VERSION)
-	sphinx-build -b singlehtml $(RST_DOC) $(HTML_DOC)
 	rm -f $(DISTRIB_DIR)/doc/html
 	mkdir -p $(DISTRIB_DIR)/doc/html/	
 	cp -r $(HTML_DOC)/* $(DISTRIB_DIR)/doc/html/
-	rm -f $(WEB_DOC)/*.html
-	cp -r $(HTML_DOC)/* $(WEB_DOC)
 	mkdir -p $(DISTRIB_DIR)/doc/misc/
 	cp $(RST_DOC)/*.doc $(DISTRIB_DIR)/doc/misc/
 	cp $(RST_DOC)/*.pdf $(DISTRIB_DIR)/doc/misc/
@@ -375,6 +354,10 @@ version:
 
 release:
 	make version release_type=$(type)
+	$(PERL4MAKEFILE_LIB)/edit_version.pl -target=$(RST_DOC)/conf.py -mode=conf.py -version=$(VERSION)	
+	sphinx-build -b singlehtml $(RST_DOC) $(HTML_DOC)
+	rm -f $(WEB_DOC)/*.html
+	cp -r $(HTML_DOC)/* $(WEB_DOC)
 	make release2
 
 release2:
