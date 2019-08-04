@@ -354,14 +354,14 @@ version:
 
 release:
 	make version release_type=$(type)
-	$(PERL4MAKEFILE_LIB)/edit_version.pl -target=$(RST_DOC)/conf.py -mode=conf.py -version=$(VERSION)	
-	sphinx-build -b singlehtml $(RST_DOC) $(HTML_DOC)
-	rm -f $(WEB_DOC)/*.html
-	cp -r $(HTML_DOC)/* $(WEB_DOC)
 	make release2
 
 release2:
 	VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print)	
+	$(PERL4MAKEFILE_LIB)/edit_version.pl -target=$(RST_DOC)/conf.py -mode=conf.py -version=$(VERSION)	
+	sphinx-build -b singlehtml $(RST_DOC) $(HTML_DOC)
+	rm -f $(WEB_DOC)/*.html
+	cp -r $(HTML_DOC)/* $(WEB_DOC)
 	make distribution VERSION=$(VERSION)
 	mkdir -p $(ARCHIVE_SOURCES)
 	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(ARCHIVE_SOURCES)/$(PROGRAM)_distribution_$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print).tar.gz
