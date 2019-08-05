@@ -270,11 +270,10 @@ code:
 
 install2version:
 	echo $(DISTRIB_DIR)/install
-	$(shell $(PERL4MAKEFILE_LIB)/edit_version.pl -target=$(DISTRIB_DIR)/install -tag="#_#UPDATE_VERSION" -version=$(VERSION))
-	cp $(BUILD_DIR)/web-readme.txt.source $(BUILD_DIR)/webreadme
-	$(PERL4MAKEFILE_LIB)/edit_version.pl -target=$(BUILD_DIR)/webreadme -tag="#_#UPDATE_VERSION" -version=$(VERSION)	
-	mv $(BUILD_DIR)/webreadme $(BUILD_DIR)/web-readme.txt 
-# 
+	$(shell $(PERL4MAKEFILE_LIB)/edit_version.pl -in $(DISTRIB_DIR)/install -tag "#_#UPDATE_VERSION" -string 'our $VERSION=\"$(VERSION))\";'
+	eeetete
+	$(PERL4MAKEFILE_LIB)/edit_version.pl -in $(BUILD_DIR)/web-readme.txt -tag "#_#UPDATE_VERSION" -string "$(VERSION)"	
+ 
 # This target copies T-Coffee sources files from the library folder 
 # to the distribution folder. 
 # This process is a bit tricky to maintaning compatibiltiy with the legacy 
@@ -358,12 +357,13 @@ release:
 
 release2:
 	VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print)	
-	$(PERL4MAKEFILE_LIB)/edit_version.pl -target=$(RST_DOC)/conf.py -mode=conf.py -version=$(VERSION)	
+	$(PERL4MAKEFILE_LIB)/edit_version.pl -in $(RST_DOC)/conf.py -tag "#_#UPDATE_VERSION_TAG1" -string "version = u'$(VERSION)'"
+	$(PERL4MAKEFILE_LIB)/edit_version.pl -in $(RST_DOC)/conf.py -tag "#_#UPDATE_VERSION_TAG2" -string "release = u'$(VERSION)'"	
 	sphinx-build -b singlehtml $(RST_DOC) $(HTML_DOC)
 	make distribution VERSION=$(VERSION)
 	make web
 	git commit -a -m '$(m)'	
-	git push
+#	git push
 
 web:
 	rm -f $(WEB_DOC)/*.html

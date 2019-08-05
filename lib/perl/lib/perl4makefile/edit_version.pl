@@ -11,77 +11,44 @@ use strict;
 use File::Basename;
 use File::Find;
 
+my ($inF,$tag,$string,$outF);
 
-
-my $target;
-my $tag;
-my $versionF;
-my $version;
-my $mode;
-
-my $cl=join( " ", @ARGV);
-if ( ($cl=~/-target=\s*(\S+)/)){$target=$1;}
-if ( ($cl=~/-tag=\s*([^-]+[^-\s])/)){$tag=$1;}
-if ( ($cl=~/-version=\s*(\S+)/)){$version=$1;}
-if ( ($cl=~/-versionF=\s*(\S+)/)){$versionF=$1;}
-if ( ($cl=~/-mode=\s*(\S+)/)){$mode=$1;}
-
-if ($versionF){$version=file2value($versionF);}
-
-
-if (!$mode)
+for (my $i=0; $i<=$#ARGV; $i++)
   {
-    file2edit_file ($target, $tag, $version);
-  }
-elsif ($mode eq "conf.py")
-  {
-   
-    my $in=new FileHandle();
-    my $out=new FileHandle();
-    my $new_file;
-
-    open ($in, $target);
-    while (<$in>)
-     {
-       my $l=$_;
-       if ( $l=~/^version = u\'/)
-	 {
-	   $l="version = u\'$version\'\n";
-	 }
-       elsif ($l=~/^release = u\'/)
-	  {
-	   $l="release = u\'$version\'\n";
-	 }
-      $new_file.=$l;
-     }
-    close ($out);
-    open ($in, ">$target");
-    print $in "$new_file";
-    close ($out);
+    my $cl=$ARGV[$i];
+    if   ($cl eq "-in") {$inF=$ARGV[++$i];}
+    elsif($cl eq "-tag"){$tag =$ARGV[++$i];}
+    elsif($cl eq "-string") {$string   =$ARGV[++$i];}
+    elsif($cl eq "-out"   ) {$outF  =$ARGV[++$i];}
   }
 
-  
+my $in=new FileHandle();
+my $out=new FileHandle();
 
+if (!$tag)   { die "No -tag provided [FATAL:read_program_version.pl\n";}
+if (!$string){ die "No -string Provided [FATAL:read_program_version.pl\n";}
+open ($in, $inF) or die "Could not open file [$in][FATAL:read_program_version.pl\n";
 
-sub file2edit_file
+my $new_file;
+while (<$in>)
+  {
+    my $l=$_;
+    if ( $l=~/$tag/)
       {
-       my ($file, $tag, $version)=@_;
-       my $new_file;
-       open (F, "$file") or die "Could not open file [$file][FATAL:edit_version.pl\n";
-       while (<F>)
-	 {
-	   my $line=$_;
-	  
-	   if ( $line=~/$tag/)
-	     {
-	       
-	       $line=~s/$tag/our \$VERSION=\"$version\";#POPULATED by edit_version.pl from $tag/;
-	     }
-	   $new_file.=$line;
-	 }
-       close (F);
-       open (F, ">$file") or die "Could not open file [$file][FATAL:read_program_version.pl\n";
-       print F "$new_file";
-       close (F);
-       }
+	$l="$string $tag -- Populated by edit_version.pl\n";
+      }
+    $new_file.=$l;
+  }
+close ($in);
+
+
+
+if (!$outF){$outF=$inF;}
+open ($out, ">$outF");
+print $out "$new_file";
+close ($out);
+
+
+
+
 
