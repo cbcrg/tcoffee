@@ -55,7 +55,7 @@ jobs:
           rsync -avzr -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" ~/tcoffee/docs/.html/* ec2-user@tcoffee.org:~/Dropbox/Public/public_html/Projects/tcoffee/documentation/;
           #
           #Published binaries into the binary dir -- in case the macosx is available, publish it as well -- This will be the case when the release is launched from a mac
-          #rsync -avzr -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" ~/tcoffee/binaries/macox/t_coffee ec2-user@tcoffee.org:~/Dropbox/Public/public_html/Packages/Binaries/tcoffee/macosx/t_coffee.$macosx_bversion;
+          #rsync -avzr -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" ~/tcoffee/binaries/macosx/t_coffee ec2-user@tcoffee.org:~/Dropbox/Public/public_html/Packages/Binaries/tcoffee/macosx/t_coffee.$macosx_bversion;
           rsync -avzr -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" ~/tcoffee/binaries/linux/t_coffee ec2-user@tcoffee.org:~/Dropbox/Public/public_html/Packages/Binaries/tcoffee/linux/t_coffee.$linux_bversion;
           #
           #Publish the various distribution files into archives
