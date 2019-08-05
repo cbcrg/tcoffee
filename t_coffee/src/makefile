@@ -10,6 +10,15 @@ DISTRIBUTION_ADDRESS=www.tcoffee.org/Packages
 INSTITUTE=Centro de Regulacio Genomica
 EMAIL=cedric.notredame@gmail.com
 SHELL := /bin/bash
+#
+# Default Releases values
+# 
+
+type=beta
+test=core
+m='undocumented beta release tested with $(type) tests'
+
+
 
 #
 # make it possibile to define HOME2 externally using environment
@@ -23,7 +32,7 @@ WEB_DIR=$(HOME2)/dropBoxShared/Work/tcoffee.org/public_html/
 WEB_DOC=$(WEB_DIR)/Projects/tcoffee/documentation
 WEB_BIN_DIR=$(HOME2)/dropBoxShared/Work/tcoffee.org/public_html/Packages/Binaries/tcoffee/$(OSNAME)/
 WEB_ARCHIVE_SOURCES=$(WEB_DIR)/Packages/Archives/
-TEST="core"
+
 
 ###########################################################
 #                                                         #

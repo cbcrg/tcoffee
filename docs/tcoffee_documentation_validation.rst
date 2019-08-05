@@ -11,13 +11,14 @@ Before the realease of a new T-Coffee version, many command lines in the documen
 Making a new release
 *********************************
 
-In order to make a release:
+In order to make a release. Depending on the release type the correspinding counter will be incremented by 1 <nmajor>.<stable>.<beta>
 	
 	
 ::
 
   $#: cd t_coffee/src
-  $#: make release type=beta|stable|major m='short description of the main feature'  
+  $#: make release type=beta(default)|stable|major m='short description of the main feature' test=core(default)|all|remote|none
+  
 
 
 *********************************
