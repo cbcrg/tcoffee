@@ -235,7 +235,7 @@ general_distribution:
 	echo '' > $(DISTRIB_DIR)/install
 	make VERSION=$(VERSION) CC=cc code
 	cp $(EXECUTABLE) $(DISTRIB_DIR)/bin/$(OSNAME)
-	cp $(EXECUTABLE) $(GIT_BIN)/$(OSNAME)/$(EXECUTABLE).$(VERSION)
+	cp $(EXECUTABLE) $(GIT_BIN)/$(OSNAME)/$(EXECUTABLE)
 	make -i VERSION=$(VERSION) CC=cc license
 
 library_distribution:
