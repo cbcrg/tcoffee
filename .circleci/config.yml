@@ -40,15 +40,13 @@ jobs:
       - run: |
           if [[ $RELEASE == 1 ]]; then MODE=Stable; else MODE=Beta; fi;
           version=$(cat ~/publish/sandbox/.version);
-         
-	  cp ~/tcoffee/build/web-readme.txt ~/publish/sandbox/distributions/$MODE/$version/readme.txt
-	  ssh ec2-user@tcoffee.org "rm  ~/Dropbox/Public/public_html/Packages/$MODE/Latest/*;";		
+          cp ~/tcoffee/build/web-readme.txt ~/publish/sandbox/distributions/$MODE/$version/readme.txt
+          ssh ec2-user@tcoffee.org "rm  ~/Dropbox/Public/public_html/Packages/$MODE/Latest/*;";		
           rsync -avzr -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" ~/publish/sandbox/distributions/$version/* ec2-user@tcoffee.org:~/Dropbox/Public/public_html/Packages/$MODE/Latest;
           rsync -avzr -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" ~/publish/sandbox/tcoffee/docs/.html/* ec2-user@tcoffee.org:~/Dropbox/Public/public_html/Projects/tcoffee/documentation/;
-	  rsync -avzr -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" ~/publish/sandbox/tcoffee/binaries/macox/* ec2-user@tcoffee.org:~/Dropbox/Public/public_html/Packages/Binaries/tcoffee/macosx/;
-	  rsync -avzr -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" ~/publish/sandbox/tcoffee/binaries/linux/* ec2-user@tcoffee.org:~/Dropbox/Public/public_html/Packages/Binaries/tcoffee/linux/;
-	
-	  ssh ec2-user@tcoffee.org "cp -r ~/Dropbox/Public/public_html/Packages/$MODE/Latest/*.tar.gz ~/Dropbox/Public/public_html/Packages/Archives";
+          rsync -avzr -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" ~/publish/sandbox/tcoffee/binaries/macox/* ec2-user@tcoffee.org:~/Dropbox/Public/public_html/Packages/Binaries/tcoffee/macosx/;
+          rsync -avzr -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" ~/publish/sandbox/tcoffee/binaries/linux/* ec2-user@tcoffee.org:~/Dropbox/Public/public_html/Packages/Binaries/tcoffee/linux/;
+          ssh ec2-user@tcoffee.org "cp -r ~/Dropbox/Public/public_html/Packages/$MODE/Latest/*.tar.gz ~/Dropbox/Public/public_html/Packages/Archives";
 		
           # tag and push latest
           docker login -u $DOCKER_USER -p $DOCKER_PASS
