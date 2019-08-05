@@ -130,13 +130,8 @@ PERL4MAKEFILE_LIB=$(PERL_LIB_DIR)/perl4makefile
 # READ VERSION NUMBER as minatined and updated 
 #
 #
-
-
-
-
-#ifndef VERSION
 VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print)
-#endif
+VERSION_F=$(LIB_DIR)/version/version_number.version
 
 
 DISTRIBUTION_FILE=$(PROGRAM)_distribution_$(VERSION)
@@ -236,6 +231,7 @@ general_distribution:
 	make VERSION=$(VERSION) CC=cc code
 	cp $(EXECUTABLE) $(DISTRIB_DIR)/bin/$(OSNAME)
 	cp $(EXECUTABLE) $(GIT_BIN)/$(OSNAME)/$(EXECUTABLE)
+	cp $(VERSION_F) $(GIT_BIN)
 	make -i VERSION=$(VERSION) CC=cc license
 
 library_distribution:
