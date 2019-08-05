@@ -258,6 +258,7 @@ distribute: all
 	rm -f core
 	-rm -f *.o_$(OSNAME)
 code:
+	akakakak
 	echo $(OSNAME) Compilation
 	make clean
 	make CC="g++" $(EXECUTABLE)
