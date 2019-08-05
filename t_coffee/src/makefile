@@ -22,6 +22,7 @@ endif
 WEB_DIR=$(HOME2)/dropBoxShared/Work/tcoffee.org/public_html/
 WEB_DOC=$(WEB_DIR)/Projects/tcoffee/documentation
 WEB_BIN_DIR=$(HOME2)/dropBoxShared/Work/tcoffee.org/public_html/Packages/Binaries/tcoffee/$(OSNAME)/
+WEB_ARCHIVE_SOURCES=$(WEB_DIR)/Packages/Archives/
 
 ###########################################################
 #                                                         #
@@ -135,13 +136,7 @@ VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -p
 
 
 DISTRIBUTION_FILE=$(PROGRAM)_distribution_$(VERSION)
-BETA_SOURCES_FILE=$(PROGRAM)_distribution
-STABLE_SOURCES_FILE=$(PROGRAM)_distribution
 
-
-BETA_SOURCES=$(WEB_DIR)/Packages/Beta/Latest
-STABLE_SOURCES=$(WEB_DIR)/Packages/Stable/Latest
-ARCHIVE_SOURCES=$(WEB_DIR)/Packages/Archives/
 
 
 LATEST_DISTRIBUTION_FILE=$(PROGRAM)_distribution
@@ -349,7 +344,7 @@ packing:
 
 
 version:
-	$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print -$(release_type) -circleci=$(CIRCLECI_CONFIG)> $(WEB_DIR)/Packages/T-COFFEE.version)
+	$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -$(release_type) -circleci=$(CIRCLECI_CONFIG))
 
 
 release:
@@ -360,15 +355,18 @@ release2:
 	VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print)	
 	$(PERL4MAKEFILE_LIB)/edit_version.pl -target=$(RST_DOC)/conf.py -mode=conf.py -version=$(VERSION)	
 	sphinx-build -b singlehtml $(RST_DOC) $(HTML_DOC)
-	rm -f $(WEB_DOC)/*.html
-	cp -r $(HTML_DOC)/* $(WEB_DOC)
 	make distribution VERSION=$(VERSION)
-	mkdir -p $(ARCHIVE_SOURCES)
-	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(ARCHIVE_SOURCES)/$(PROGRAM)_distribution_$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print).tar.gz
-	cp $(EXECUTABLE_DIR)/$(EXECUTABLE) $(WEB_BIN_DIR)/$(EXECUTABLE).$(VERSION);
+	make web
 	git commit -a -m '$(m)'	
 	git push
 
+web:
+	rm -f $(WEB_DOC)/*.html
+	cp -r $(HTML_DOC)/* $(WEB_DOC)
+	cp $(EXECUTABLE_DIR)/$(EXECUTABLE) $(WEB_BIN_DIR)/$(EXECUTABLE).$(VERSION);
+	mkdir -p $(WEB_ARCHIVE_SOURCES)
+	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(WEB_ARCHIVE_SOURCES)/$(PROGRAM)_distribution_$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print).tar.gz
+	cp $(LIB_DIR)/version/version_number.version  $(WEB_DIR)/Packages/T-COFFEE.version
 
 #
 # Include the main T-Coffee makefile
