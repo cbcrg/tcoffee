@@ -1,11 +1,24 @@
 ######################################
-T-Coffee doc test
+T-Coffee doc test and release
 ######################################
 
 ************
 Introduction
 ************
-Before the realease of a new T-Coffee version, many command lines in the documentation are programmatically tested. The purpose of this document is to explain which command lines are tested, how new command lines can be added to the documentation and how to perform a documentation check before a new release. 
+Before the realease of a new T-Coffee version, many command lines in the documentation are programmatically tested. The purpose of this document is to explain which command lines are tested, how new command lines can be added to the documentation and how to perform a documentation check before a new release, and how to make a new release
+
+*********************************
+Making a new release
+*********************************
+
+In order to make a release:
+	
+	
+::
+
+  $#: cd t_coffee/src
+  $#: make release type=beta|stable|major m='short description of the main feature'  
+
 
 *********************************
 Introducing a new command to test

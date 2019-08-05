@@ -38,18 +38,29 @@ jobs:
 
       # publish artifacts 
       - run: |
+          #
+          # This section will publish onto the websites the various elemets produced by make distribution
+          # Note that since the distribution is usualy trigerred by the push in make release, the basic elements (doc, source and binary of the machine in which make release was launched) should already be published
+          #
           if [[ $RELEASE == 1 ]]; then MODE=Stable; else MODE=Beta; fi;
           version=$(cat ~/publish/sandbox/.version);
           cp ~/tcoffee/build/web-readme.txt ~/publish/sandbox/distributions/$MODE/$version/readme.txt
+          #
+          #Start publishing the latest release -- make sure the receiving directory is not enpty before deleting its content 
+          rsync -avzr -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" ~/tcoffee/lib/version/version_number.version ec2-user@tcoffee.org:~/Dropbox/Public/public_html/Packages/$MODE/Latest;
           ssh ec2-user@tcoffee.org "rm  ~/Dropbox/Public/public_html/Packages/$MODE/Latest/*;";		
           rsync -avzr -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" ~/publish/sandbox/distributions/$MODE/$version/* ec2-user@tcoffee.org:~/Dropbox/Public/public_html/Packages/$MODE/Latest;
-          rsync -avzr -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" ~/publish/sandbox/tcoffee/docs/.html/* ec2-user@tcoffee.org:~/Dropbox/Public/public_html/Projects/tcoffee/documentation/;
-          #Export archived binaries
-          macosx_bversion=$(cat ~/publish/sandbox/tcoffee/binaries/macosx/version_number.version);
-          rsync -avzr -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" ~/publish/sandbox/tcoffee/binaries/macox/t_coffee ec2-user@tcoffee.org:~/Dropbox/Public/public_html/Packages/Binaries/tcoffee/macosx/t_coffee.$macosx_bversion;
+          rsync -avzr -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" ~/tcoffee/docs/.html/* ec2-user@tcoffee.org:~/Dropbox/Public/public_html/Projects/tcoffee/documentation/;
+          #
+          #Published binaries into the binary dir -- in case the macosx is available, publish it as well -- This will be the case when the release is launched from a mac
+          macosx_bversion=$(cat ~/tcoffee/binaries/macosx/version_number.version);
+          rsync -avzr -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" ~/tcoffee/binaries/macox/t_coffee ec2-user@tcoffee.org:~/Dropbox/Public/public_html/Packages/Binaries/tcoffee/macosx/t_coffee.$macosx_bversion;
           linux_bversion=$(cat ~/publish/sandbox/tcoffee/binaries/linux/version_number.version);
-          rsync -avzr -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" ~/publish/sandbox/tcoffee/binaries/linux/t_coffee ec2-user@tcoffee.org:~/Dropbox/Public/public_html/Packages/Binaries/tcoffee/linux/t_coffee.$linux_bversion;
+          rsync -avzr -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" ~/tcoffee/binaries/linux/t_coffee ec2-user@tcoffee.org:~/Dropbox/Public/public_html/Packages/Binaries/tcoffee/linux/t_coffee.$linux_bversion;
+          #
+          #Publish the various distribution files into archives
           ssh ec2-user@tcoffee.org "cp -r ~/Dropbox/Public/public_html/Packages/$MODE/Latest/* ~/Dropbox/Public/public_html/Packages/Archives";	
+          #
           # tag and push latest  
           docker login -u $DOCKER_USER -p $DOCKER_PASS
           docker tag xcoffee cbcrg/tcoffee:latest;
