@@ -23,6 +23,7 @@ WEB_DIR=$(HOME2)/dropBoxShared/Work/tcoffee.org/public_html/
 WEB_DOC=$(WEB_DIR)/Projects/tcoffee/documentation
 WEB_BIN_DIR=$(HOME2)/dropBoxShared/Work/tcoffee.org/public_html/Packages/Binaries/tcoffee/$(OSNAME)/
 WEB_ARCHIVE_SOURCES=$(WEB_DIR)/Packages/Archives/
+TEST="core"
 
 ###########################################################
 #                                                         #
@@ -79,6 +80,10 @@ endif
 
 ifndef BUILD_DIR
 BUILD_DIR=$(GIT_DIR)/build
+endif
+
+ifndef DOCKER_DIR
+DOCKER_DIR=$(GIT_DIR)/docker
 endif
 
 ifndef LIB_DIR
@@ -346,9 +351,29 @@ version:
 	$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -$(release_type) -circleci=$(CIRCLECI_CONFIG))
 
 
+beta:
+	make release -release_type=beta 
+stable:
+	make release  -release_type=stable
+major:
+	make release  -release_type=major
+
 release:
 	make version release_type=$(type)
+	make test-$(TEST)
 	make release2
+
+test-core:
+	$(PERL4MAKEFILE_LIB)/edit_version.pl -in $(DOCKER_DIR)/run-tests.sh -tag "#_#UPDATE_RUN_TEST" -string "/root/tcoffee/lib/perl/lib/perl4makefile/doc2test.pl -replay ./tests/.dumps/core.tests/"
+test-all:
+	$(PERL4MAKEFILE_LIB)/edit_version.pl -in $(DOCKER_DIR)/run-tests.sh -tag "#_#UPDATE_RUN_TEST" -string "/root/tcoffee/lib/perl/lib/perl4makefile/doc2test.pl -replay ./tests/.dumps/"
+test-remote:
+	$(PERL4MAKEFILE_LIB)/edit_version.pl -in $(DOCKER_DIR)/run-tests.sh -tag "#_#UPDATE_RUN_TEST" -string "/root/tcoffee/lib/perl/lib/perl4makefile/doc2test.pl -replay ./tests/.dumps/remote.test/"
+test-web:
+	$(PERL4MAKEFILE_LIB)/edit_version.pl -in $(DOCKER_DIR)/run-tests.sh -tag "#_#UPDATE_RUN_TEST" -string "/root/tcoffee/lib/perl/lib/perl4makefile/doc2test.pl -replay ./tests/.dumps/web.test/"
+test-nature:
+	$(PERL4MAKEFILE_LIB)/edit_version.pl -in $(DOCKER_DIR)/run-tests.sh -tag "#_#UPDATE_RUN_TEST" -string "/root/tcoffee/lib/perl/lib/perl4makefile/doc2test.pl -replay ./tests/.dumps/nature_protocol.test/"
+
 
 release2:
 	VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print)	
