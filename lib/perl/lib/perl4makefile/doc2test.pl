@@ -20,7 +20,7 @@ my %lu;
 #$GIT=1: Commit all new files, uncommit all deleted files
 #$GIT=2: blank run
 my $Version="1.00";
-my $TIMEOUT=1500;#Default Timeout in seconds
+my $TIMEOUT=3000;#Default Timeout in seconds
 my $TIMEOUT_ERROR=0;
 my $KEEPREPLAYED=0;
 my $GIT=0;
@@ -1153,9 +1153,10 @@ sub file2dump_list
 sub dir2dump_list
   {
     my ($dir)=@_;
-
+    my @slist;
+    
     find (\&eachDumpFile, $dir);
-    return @TMP_LIST;
+    return sort @TMP_LIST;
   }
   
 sub eachDumpFile 

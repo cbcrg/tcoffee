@@ -1,8 +1,8 @@
 <DumpIO>
 <nature>standard dump</nature>
 <program>T-COFFEE</program>
-<version>Version_13.30.4.4e2c658</version>
-<build>Version_13.30.4.4e2c658</build>
+<version>Version_13.38.3.a77ca2b</version>
+<build>Version_13.38.3.a77ca2b</build>
 <cl>t_coffee -seq sh3.fasta -mode psicoffee </cl>
 <stack>
 </stack>
@@ -11,14 +11,14 @@
 <file>
 <stream>output</stream>
 <name>stdout</name>
-<content>!	Process: >1BB9 _R_ 1BB9.prf [273 Seq.] [EBI/blast/uniref50][COMPUTE CACHE]
-!	Process: >1ABO _R_ 1ABO.prf [297 Seq.] [EBI/blast/uniref50][COMPUTE CACHE]
+<content>!	Process: >1ABO _R_ 1ABO.prf [297 Seq.] [EBI/blast/uniref50][COMPUTE CACHE]
+!	Process: >1BB9 _R_ 1BB9.prf [273 Seq.] [EBI/blast/uniref50][COMPUTE CACHE]
+!	Process: >1FYN _R_ 1FYN.prf [497 Seq.] [EBI/blast/uniref50][COMPUTE CACHE]
+!	Process: >1QCF _R_ 1QCF.prf [503 Seq.] [EBI/blast/uniref50][COMPUTE CACHE]
+!	Process: >1YCS _R_ 1YCS.prf [393 Seq.] [EBI/blast/uniref50][COMPUTE CACHE]
+!	Process: >1PHT _R_ 1PHT.prf [60 Seq.] [EBI/blast/uniref50][COMPUTE CACHE]
 !	Process: >1UHC _R_ 1UHC.prf [250 Seq.] [EBI/blast/uniref50][COMPUTE CACHE]
 !	Process: >1OOT _R_ 1OOT.prf [609 Seq.] [EBI/blast/uniref50][COMPUTE CACHE]
-!	Process: >1FYN _R_ 1FYN.prf [497 Seq.] [EBI/blast/uniref50][COMPUTE CACHE]
-!	Process: >1PHT _R_ 1PHT.prf [60 Seq.] [EBI/blast/uniref50][COMPUTE CACHE]
-!	Process: >1YCS _R_ 1YCS.prf [393 Seq.] [EBI/blast/uniref50][COMPUTE CACHE]
-!	Process: >1QCF _R_ 1QCF.prf [503 Seq.] [EBI/blast/uniref50][COMPUTE CACHE]
 #Single Thread
 #Single Thread
 #Single Thread
@@ -27,7 +27,7 @@
 #Single Thread
 #Single Thread
 #Single Thread
-CLUSTAL FORMAT for T-COFFEE Version_13.30.4.4e2c658 [http://www.tcoffee.org] [MODE: psicoffee ], CPU=0.12 sec, SCORE=89, Nseq=8, Len=81 
+CLUSTAL FORMAT for T-COFFEE Version_13.38.3.a77ca2b [http://www.tcoffee.org] [MODE: psicoffee ], CPU=0.11 sec, SCORE=89, Nseq=8, Len=81 
 
 1PHT            YQYRALYDYKKEREEDIDLHLGDILTVNKGSLVALGFSDGQEARPEEIGW
 1BB9            FKVQAQHDYTATDTDELQLKAGDVVLVIPFQNPE----------EQDEGW
@@ -57,7 +57,7 @@ CLUSTAL FORMAT for T-COFFEE Version_13.30.4.4e2c658 [http://www.tcoffee.org] [MO
 <stream>output</stream>
 <name>stderr</name>
 <content>
-PROGRAM: T-COFFEE Version_13.30.4.4e2c658 (Version_13.30.4.4e2c658)
+PROGRAM: T-COFFEE Version_13.38.3.a77ca2b (Version_13.38.3.a77ca2b)
 -full_log      	S	[0] 
 -genepred_score	S	[0] 	nsd
 -run_name      	S	[0] 
@@ -232,21 +232,21 @@ Looking For Sequence Templates:
 ]
 INPUT SEQUENCES: 8 SEQUENCES  [PROTEIN]
   Input File sh3.fasta Seq 1ABO Length   57 type PROTEIN Struct Unchecked
-	Profile: Template=1ABO.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643131
+	Profile: Template=1ABO.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985130
   Input File sh3.fasta Seq 1BB9 Length   71 type PROTEIN Struct Unchecked
-	Profile: Template=1BB9.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643130
+	Profile: Template=1BB9.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985131
   Input File sh3.fasta Seq 1FYN Length   58 type PROTEIN Struct Unchecked
-	Profile: Template=1FYN.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643134
+	Profile: Template=1FYN.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985132
   Input File sh3.fasta Seq 1OOT Length   57 type PROTEIN Struct Unchecked
-	Profile: Template=1OOT.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643133
+	Profile: Template=1OOT.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985137
   Input File sh3.fasta Seq 1PHT Length   73 type PROTEIN Struct Unchecked
-	Profile: Template=1PHT.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643135
+	Profile: Template=1PHT.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985135
   Input File sh3.fasta Seq 1QCF Length   57 type PROTEIN Struct Unchecked
-	Profile: Template=1QCF.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643137
+	Profile: Template=1QCF.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985133
   Input File sh3.fasta Seq 1UHC Length   60 type PROTEIN Struct Unchecked
-	Profile: Template=1UHC.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643132
+	Profile: Template=1UHC.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985136
   Input File sh3.fasta Seq 1YCS Length   59 type PROTEIN Struct Unchecked
-	Profile: Template=1YCS.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643136
+	Profile: Template=1YCS.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985134
 
 	Multi Core Mode: 1 processors:
      	S	[0] 
@@ -280,21 +280,21 @@ Looking For Sequence Templates:
 ]
 INPUT SEQUENCES: 8 SEQUENCES  [PROTEIN]
   Input File sh3.fasta Seq 1ABO Length   57 type PROTEIN Struct Unchecked
-	Profile: Template=1ABO.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643131
+	Profile: Template=1ABO.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985130
   Input File sh3.fasta Seq 1BB9 Length   71 type PROTEIN Struct Unchecked
-	Profile: Template=1BB9.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643130
+	Profile: Template=1BB9.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985131
   Input File sh3.fasta Seq 1FYN Length   58 type PROTEIN Struct Unchecked
-	Profile: Template=1FYN.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643134
+	Profile: Template=1FYN.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985132
   Input File sh3.fasta Seq 1OOT Length   57 type PROTEIN Struct Unchecked
-	Profile: Template=1OOT.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643133
+	Profile: Template=1OOT.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985137
   Input File sh3.fasta Seq 1PHT Length   73 type PROTEIN Struct Unchecked
-	Profile: Template=1PHT.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643135
+	Profile: Template=1PHT.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985135
   Input File sh3.fasta Seq 1QCF Length   57 type PROTEIN Struct Unchecked
-	Profile: Template=1QCF.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643137
+	Profile: Template=1QCF.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985133
   Input File sh3.fasta Seq 1UHC Length   60 type PROTEIN Struct Unchecked
-	Profile: Template=1UHC.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643132
+	Profile: Template=1UHC.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985136
   Input File sh3.fasta Seq 1YCS Length   59 type PROTEIN Struct Unchecked
-	Profile: Template=1YCS.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643136
+	Profile: Template=1YCS.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985134
 
 	Multi Core Mode: 1 processors:
      	S	[0] 
@@ -328,21 +328,21 @@ Looking For Sequence Templates:
 ]
 INPUT SEQUENCES: 8 SEQUENCES  [PROTEIN]
   Input File sh3.fasta Seq 1ABO Length   57 type PROTEIN Struct Unchecked
-	Profile: Template=1ABO.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643131
+	Profile: Template=1ABO.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985130
   Input File sh3.fasta Seq 1BB9 Length   71 type PROTEIN Struct Unchecked
-	Profile: Template=1BB9.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643130
+	Profile: Template=1BB9.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985131
   Input File sh3.fasta Seq 1FYN Length   58 type PROTEIN Struct Unchecked
-	Profile: Template=1FYN.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643134
+	Profile: Template=1FYN.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985132
   Input File sh3.fasta Seq 1OOT Length   57 type PROTEIN Struct Unchecked
-	Profile: Template=1OOT.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643133
+	Profile: Template=1OOT.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985137
   Input File sh3.fasta Seq 1PHT Length   73 type PROTEIN Struct Unchecked
-	Profile: Template=1PHT.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643135
+	Profile: Template=1PHT.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985135
   Input File sh3.fasta Seq 1QCF Length   57 type PROTEIN Struct Unchecked
-	Profile: Template=1QCF.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643137
+	Profile: Template=1QCF.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985133
   Input File sh3.fasta Seq 1UHC Length   60 type PROTEIN Struct Unchecked
-	Profile: Template=1UHC.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643132
+	Profile: Template=1UHC.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985136
   Input File sh3.fasta Seq 1YCS Length   59 type PROTEIN Struct Unchecked
-	Profile: Template=1YCS.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643136
+	Profile: Template=1YCS.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985134
 
 	Multi Core Mode: 1 processors:
 
@@ -378,21 +378,21 @@ Looking For Sequence Templates:
 ]
 INPUT SEQUENCES: 8 SEQUENCES  [PROTEIN]
   Input File sh3.fasta Seq 1ABO Length   57 type PROTEIN Struct Unchecked
-	Profile: Template=1ABO.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643131
+	Profile: Template=1ABO.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985130
   Input File sh3.fasta Seq 1BB9 Length   71 type PROTEIN Struct Unchecked
-	Profile: Template=1BB9.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643130
+	Profile: Template=1BB9.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985131
   Input File sh3.fasta Seq 1FYN Length   58 type PROTEIN Struct Unchecked
-	Profile: Template=1FYN.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643134
+	Profile: Template=1FYN.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985132
   Input File sh3.fasta Seq 1OOT Length   57 type PROTEIN Struct Unchecked
-	Profile: Template=1OOT.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643133
+	Profile: Template=1OOT.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985137
   Input File sh3.fasta Seq 1PHT Length   73 type PROTEIN Struct Unchecked
-	Profile: Template=1PHT.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643135
+	Profile: Template=1PHT.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985135
   Input File sh3.fasta Seq 1QCF Length   57 type PROTEIN Struct Unchecked
-	Profile: Template=1QCF.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643137
+	Profile: Template=1QCF.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985133
   Input File sh3.fasta Seq 1UHC Length   60 type PROTEIN Struct Unchecked
-	Profile: Template=1UHC.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643132
+	Profile: Template=1UHC.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985136
   Input File sh3.fasta Seq 1YCS Length   59 type PROTEIN Struct Unchecked
-	Profile: Template=1YCS.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643136
+	Profile: Template=1YCS.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985134
 
 	Multi Core Mode: 1 processors:
 
@@ -441,21 +441,21 @@ Looking For Sequence Templates:
 ]
 INPUT SEQUENCES: 8 SEQUENCES  [PROTEIN]
   Input File sh3.fasta Seq 1ABO Length   57 type PROTEIN Struct Unchecked
-	Profile: Template=1ABO.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643131
+	Profile: Template=1ABO.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985130
   Input File sh3.fasta Seq 1BB9 Length   71 type PROTEIN Struct Unchecked
-	Profile: Template=1BB9.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643130
+	Profile: Template=1BB9.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985131
   Input File sh3.fasta Seq 1FYN Length   58 type PROTEIN Struct Unchecked
-	Profile: Template=1FYN.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643134
+	Profile: Template=1FYN.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985132
   Input File sh3.fasta Seq 1OOT Length   57 type PROTEIN Struct Unchecked
-	Profile: Template=1OOT.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643133
+	Profile: Template=1OOT.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985137
   Input File sh3.fasta Seq 1PHT Length   73 type PROTEIN Struct Unchecked
-	Profile: Template=1PHT.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643135
+	Profile: Template=1PHT.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985135
   Input File sh3.fasta Seq 1QCF Length   57 type PROTEIN Struct Unchecked
-	Profile: Template=1QCF.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643137
+	Profile: Template=1QCF.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985133
   Input File sh3.fasta Seq 1UHC Length   60 type PROTEIN Struct Unchecked
-	Profile: Template=1UHC.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643132
+	Profile: Template=1UHC.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985136
   Input File sh3.fasta Seq 1YCS Length   59 type PROTEIN Struct Unchecked
-	Profile: Template=1YCS.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643136
+	Profile: Template=1YCS.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985134
 
 	Multi Core Mode: 1 processors:
 
@@ -522,21 +522,21 @@ Looking For Sequence Templates:
 ]
 INPUT SEQUENCES: 8 SEQUENCES  [PROTEIN]
   Input File sh3.fasta Seq 1ABO Length   57 type PROTEIN Struct Unchecked
-	Profile: Template=1ABO.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643131
+	Profile: Template=1ABO.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985130
   Input File sh3.fasta Seq 1BB9 Length   71 type PROTEIN Struct Unchecked
-	Profile: Template=1BB9.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643130
+	Profile: Template=1BB9.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985131
   Input File sh3.fasta Seq 1FYN Length   58 type PROTEIN Struct Unchecked
-	Profile: Template=1FYN.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643134
+	Profile: Template=1FYN.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985132
   Input File sh3.fasta Seq 1OOT Length   57 type PROTEIN Struct Unchecked
-	Profile: Template=1OOT.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643133
+	Profile: Template=1OOT.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985137
   Input File sh3.fasta Seq 1PHT Length   73 type PROTEIN Struct Unchecked
-	Profile: Template=1PHT.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643135
+	Profile: Template=1PHT.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985135
   Input File sh3.fasta Seq 1QCF Length   57 type PROTEIN Struct Unchecked
-	Profile: Template=1QCF.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643137
+	Profile: Template=1QCF.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985133
   Input File sh3.fasta Seq 1UHC Length   60 type PROTEIN Struct Unchecked
-	Profile: Template=1UHC.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643132
+	Profile: Template=1UHC.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985136
   Input File sh3.fasta Seq 1YCS Length   59 type PROTEIN Struct Unchecked
-	Profile: Template=1YCS.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643136
+	Profile: Template=1YCS.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985134
 
 	Multi Core Mode: 1 processors:
 
@@ -573,7 +573,7 @@ Group    7: 1UHC
 Group    8: 1YCS
 
 
-	Group    9: [Group    3 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=   59][PID:80643]     	S	[0] 
+	Group    9: [Group    3 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=   59][PID:71985]     	S	[0] 
 -no_warning    	D	[0] 	0 
 -run_local_script	D	[0] 	0 
 -proxy         	S	[0] 	unset
@@ -604,21 +604,21 @@ Looking For Sequence Templates:
 ]
 INPUT SEQUENCES: 8 SEQUENCES  [PROTEIN]
   Input File sh3.fasta Seq 1ABO Length   57 type PROTEIN Struct Unchecked
-	Profile: Template=1ABO.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643131
+	Profile: Template=1ABO.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985130
   Input File sh3.fasta Seq 1BB9 Length   71 type PROTEIN Struct Unchecked
-	Profile: Template=1BB9.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643130
+	Profile: Template=1BB9.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985131
   Input File sh3.fasta Seq 1FYN Length   58 type PROTEIN Struct Unchecked
-	Profile: Template=1FYN.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643134
+	Profile: Template=1FYN.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985132
   Input File sh3.fasta Seq 1OOT Length   57 type PROTEIN Struct Unchecked
-	Profile: Template=1OOT.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643133
+	Profile: Template=1OOT.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985137
   Input File sh3.fasta Seq 1PHT Length   73 type PROTEIN Struct Unchecked
-	Profile: Template=1PHT.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643135
+	Profile: Template=1PHT.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985135
   Input File sh3.fasta Seq 1QCF Length   57 type PROTEIN Struct Unchecked
-	Profile: Template=1QCF.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643137
+	Profile: Template=1QCF.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985133
   Input File sh3.fasta Seq 1UHC Length   60 type PROTEIN Struct Unchecked
-	Profile: Template=1UHC.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643132
+	Profile: Template=1UHC.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985136
   Input File sh3.fasta Seq 1YCS Length   59 type PROTEIN Struct Unchecked
-	Profile: Template=1YCS.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643136
+	Profile: Template=1YCS.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985134
 
 	Multi Core Mode: 1 processors:
 
@@ -655,8 +655,8 @@ Group    7: 1UHC
 Group    8: 1YCS
 
 
-	Group    9: [Group    3 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=   59][PID:80643]
-	Group   10: [Group    6 (   1 seq)] with [Group    9 (   2 seq)]-->[Len=   59][PID:80643]     	S	[0] 
+	Group    9: [Group    3 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=   59][PID:71985]
+	Group   10: [Group    6 (   1 seq)] with [Group    9 (   2 seq)]-->[Len=   59][PID:71985]     	S	[0] 
 -no_warning    	D	[0] 	0 
 -run_local_script	D	[0] 	0 
 -proxy         	S	[0] 	unset
@@ -687,21 +687,21 @@ Looking For Sequence Templates:
 ]
 INPUT SEQUENCES: 8 SEQUENCES  [PROTEIN]
   Input File sh3.fasta Seq 1ABO Length   57 type PROTEIN Struct Unchecked
-	Profile: Template=1ABO.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643131
+	Profile: Template=1ABO.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985130
   Input File sh3.fasta Seq 1BB9 Length   71 type PROTEIN Struct Unchecked
-	Profile: Template=1BB9.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643130
+	Profile: Template=1BB9.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985131
   Input File sh3.fasta Seq 1FYN Length   58 type PROTEIN Struct Unchecked
-	Profile: Template=1FYN.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643134
+	Profile: Template=1FYN.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985132
   Input File sh3.fasta Seq 1OOT Length   57 type PROTEIN Struct Unchecked
-	Profile: Template=1OOT.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643133
+	Profile: Template=1OOT.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985137
   Input File sh3.fasta Seq 1PHT Length   73 type PROTEIN Struct Unchecked
-	Profile: Template=1PHT.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643135
+	Profile: Template=1PHT.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985135
   Input File sh3.fasta Seq 1QCF Length   57 type PROTEIN Struct Unchecked
-	Profile: Template=1QCF.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643137
+	Profile: Template=1QCF.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985133
   Input File sh3.fasta Seq 1UHC Length   60 type PROTEIN Struct Unchecked
-	Profile: Template=1UHC.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643132
+	Profile: Template=1UHC.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985136
   Input File sh3.fasta Seq 1YCS Length   59 type PROTEIN Struct Unchecked
-	Profile: Template=1YCS.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643136
+	Profile: Template=1YCS.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985134
 
 	Multi Core Mode: 1 processors:
 
@@ -738,9 +738,9 @@ Group    7: 1UHC
 Group    8: 1YCS
 
 
-	Group    9: [Group    3 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=   59][PID:80643]
-	Group   10: [Group    6 (   1 seq)] with [Group    9 (   2 seq)]-->[Len=   59][PID:80643]
-	Group   11: [Group    7 (   1 seq)] with [Group   10 (   3 seq)]-->[Len=   62][PID:80643]     	S	[0] 
+	Group    9: [Group    3 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=   59][PID:71985]
+	Group   10: [Group    6 (   1 seq)] with [Group    9 (   2 seq)]-->[Len=   59][PID:71985]
+	Group   11: [Group    7 (   1 seq)] with [Group   10 (   3 seq)]-->[Len=   62][PID:71985]     	S	[0] 
 -no_warning    	D	[0] 	0 
 -run_local_script	D	[0] 	0 
 -proxy         	S	[0] 	unset
@@ -771,21 +771,21 @@ Looking For Sequence Templates:
 ]
 INPUT SEQUENCES: 8 SEQUENCES  [PROTEIN]
   Input File sh3.fasta Seq 1ABO Length   57 type PROTEIN Struct Unchecked
-	Profile: Template=1ABO.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643131
+	Profile: Template=1ABO.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985130
   Input File sh3.fasta Seq 1BB9 Length   71 type PROTEIN Struct Unchecked
-	Profile: Template=1BB9.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643130
+	Profile: Template=1BB9.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985131
   Input File sh3.fasta Seq 1FYN Length   58 type PROTEIN Struct Unchecked
-	Profile: Template=1FYN.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643134
+	Profile: Template=1FYN.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985132
   Input File sh3.fasta Seq 1OOT Length   57 type PROTEIN Struct Unchecked
-	Profile: Template=1OOT.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643133
+	Profile: Template=1OOT.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985137
   Input File sh3.fasta Seq 1PHT Length   73 type PROTEIN Struct Unchecked
-	Profile: Template=1PHT.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643135
+	Profile: Template=1PHT.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985135
   Input File sh3.fasta Seq 1QCF Length   57 type PROTEIN Struct Unchecked
-	Profile: Template=1QCF.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643137
+	Profile: Template=1QCF.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985133
   Input File sh3.fasta Seq 1UHC Length   60 type PROTEIN Struct Unchecked
-	Profile: Template=1UHC.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643132
+	Profile: Template=1UHC.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985136
   Input File sh3.fasta Seq 1YCS Length   59 type PROTEIN Struct Unchecked
-	Profile: Template=1YCS.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643136
+	Profile: Template=1YCS.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985134
 
 	Multi Core Mode: 1 processors:
 
@@ -822,10 +822,10 @@ Group    7: 1UHC
 Group    8: 1YCS
 
 
-	Group    9: [Group    3 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=   59][PID:80643]
-	Group   10: [Group    6 (   1 seq)] with [Group    9 (   2 seq)]-->[Len=   59][PID:80643]
-	Group   11: [Group    7 (   1 seq)] with [Group   10 (   3 seq)]-->[Len=   62][PID:80643]
-	Group   12: [Group    5 (   1 seq)] with [Group    4 (   1 seq)]-->[Len=   73][PID:80643]     	S	[0] 
+	Group    9: [Group    3 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=   59][PID:71985]
+	Group   10: [Group    6 (   1 seq)] with [Group    9 (   2 seq)]-->[Len=   59][PID:71985]
+	Group   11: [Group    7 (   1 seq)] with [Group   10 (   3 seq)]-->[Len=   62][PID:71985]
+	Group   12: [Group    5 (   1 seq)] with [Group    4 (   1 seq)]-->[Len=   73][PID:71985]     	S	[0] 
 -no_warning    	D	[0] 	0 
 -run_local_script	D	[0] 	0 
 -proxy         	S	[0] 	unset
@@ -856,21 +856,21 @@ Looking For Sequence Templates:
 ]
 INPUT SEQUENCES: 8 SEQUENCES  [PROTEIN]
   Input File sh3.fasta Seq 1ABO Length   57 type PROTEIN Struct Unchecked
-	Profile: Template=1ABO.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643131
+	Profile: Template=1ABO.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985130
   Input File sh3.fasta Seq 1BB9 Length   71 type PROTEIN Struct Unchecked
-	Profile: Template=1BB9.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643130
+	Profile: Template=1BB9.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985131
   Input File sh3.fasta Seq 1FYN Length   58 type PROTEIN Struct Unchecked
-	Profile: Template=1FYN.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643134
+	Profile: Template=1FYN.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985132
   Input File sh3.fasta Seq 1OOT Length   57 type PROTEIN Struct Unchecked
-	Profile: Template=1OOT.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643133
+	Profile: Template=1OOT.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985137
   Input File sh3.fasta Seq 1PHT Length   73 type PROTEIN Struct Unchecked
-	Profile: Template=1PHT.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643135
+	Profile: Template=1PHT.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985135
   Input File sh3.fasta Seq 1QCF Length   57 type PROTEIN Struct Unchecked
-	Profile: Template=1QCF.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643137
+	Profile: Template=1QCF.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985133
   Input File sh3.fasta Seq 1UHC Length   60 type PROTEIN Struct Unchecked
-	Profile: Template=1UHC.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643132
+	Profile: Template=1UHC.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985136
   Input File sh3.fasta Seq 1YCS Length   59 type PROTEIN Struct Unchecked
-	Profile: Template=1YCS.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643136
+	Profile: Template=1YCS.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985134
 
 	Multi Core Mode: 1 processors:
 
@@ -907,11 +907,11 @@ Group    7: 1UHC
 Group    8: 1YCS
 
 
-	Group    9: [Group    3 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=   59][PID:80643]
-	Group   10: [Group    6 (   1 seq)] with [Group    9 (   2 seq)]-->[Len=   59][PID:80643]
-	Group   11: [Group    7 (   1 seq)] with [Group   10 (   3 seq)]-->[Len=   62][PID:80643]
-	Group   12: [Group    5 (   1 seq)] with [Group    4 (   1 seq)]-->[Len=   73][PID:80643]
-	Group   13: [Group   12 (   2 seq)] with [Group   11 (   4 seq)]-->[Len=   73][PID:80643]     	S	[0] 
+	Group    9: [Group    3 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=   59][PID:71985]
+	Group   10: [Group    6 (   1 seq)] with [Group    9 (   2 seq)]-->[Len=   59][PID:71985]
+	Group   11: [Group    7 (   1 seq)] with [Group   10 (   3 seq)]-->[Len=   62][PID:71985]
+	Group   12: [Group    5 (   1 seq)] with [Group    4 (   1 seq)]-->[Len=   73][PID:71985]
+	Group   13: [Group   12 (   2 seq)] with [Group   11 (   4 seq)]-->[Len=   73][PID:71985]     	S	[0] 
 -no_warning    	D	[0] 	0 
 -run_local_script	D	[0] 	0 
 -proxy         	S	[0] 	unset
@@ -942,21 +942,21 @@ Looking For Sequence Templates:
 ]
 INPUT SEQUENCES: 8 SEQUENCES  [PROTEIN]
   Input File sh3.fasta Seq 1ABO Length   57 type PROTEIN Struct Unchecked
-	Profile: Template=1ABO.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643131
+	Profile: Template=1ABO.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985130
   Input File sh3.fasta Seq 1BB9 Length   71 type PROTEIN Struct Unchecked
-	Profile: Template=1BB9.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643130
+	Profile: Template=1BB9.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985131
   Input File sh3.fasta Seq 1FYN Length   58 type PROTEIN Struct Unchecked
-	Profile: Template=1FYN.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643134
+	Profile: Template=1FYN.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985132
   Input File sh3.fasta Seq 1OOT Length   57 type PROTEIN Struct Unchecked
-	Profile: Template=1OOT.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643133
+	Profile: Template=1OOT.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985137
   Input File sh3.fasta Seq 1PHT Length   73 type PROTEIN Struct Unchecked
-	Profile: Template=1PHT.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643135
+	Profile: Template=1PHT.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985135
   Input File sh3.fasta Seq 1QCF Length   57 type PROTEIN Struct Unchecked
-	Profile: Template=1QCF.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643137
+	Profile: Template=1QCF.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985133
   Input File sh3.fasta Seq 1UHC Length   60 type PROTEIN Struct Unchecked
-	Profile: Template=1UHC.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643132
+	Profile: Template=1UHC.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985136
   Input File sh3.fasta Seq 1YCS Length   59 type PROTEIN Struct Unchecked
-	Profile: Template=1YCS.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643136
+	Profile: Template=1YCS.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985134
 
 	Multi Core Mode: 1 processors:
 
@@ -993,12 +993,12 @@ Group    7: 1UHC
 Group    8: 1YCS
 
 
-	Group    9: [Group    3 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=   59][PID:80643]
-	Group   10: [Group    6 (   1 seq)] with [Group    9 (   2 seq)]-->[Len=   59][PID:80643]
-	Group   11: [Group    7 (   1 seq)] with [Group   10 (   3 seq)]-->[Len=   62][PID:80643]
-	Group   12: [Group    5 (   1 seq)] with [Group    4 (   1 seq)]-->[Len=   73][PID:80643]
-	Group   13: [Group   12 (   2 seq)] with [Group   11 (   4 seq)]-->[Len=   73][PID:80643]
-	Group   14: [Group    8 (   1 seq)] with [Group    2 (   1 seq)]-->[Len=   71][PID:80643]     	S	[0] 
+	Group    9: [Group    3 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=   59][PID:71985]
+	Group   10: [Group    6 (   1 seq)] with [Group    9 (   2 seq)]-->[Len=   59][PID:71985]
+	Group   11: [Group    7 (   1 seq)] with [Group   10 (   3 seq)]-->[Len=   62][PID:71985]
+	Group   12: [Group    5 (   1 seq)] with [Group    4 (   1 seq)]-->[Len=   73][PID:71985]
+	Group   13: [Group   12 (   2 seq)] with [Group   11 (   4 seq)]-->[Len=   73][PID:71985]
+	Group   14: [Group    8 (   1 seq)] with [Group    2 (   1 seq)]-->[Len=   71][PID:71985]     	S	[0] 
 -no_warning    	D	[0] 	0 
 -run_local_script	D	[0] 	0 
 -proxy         	S	[0] 	unset
@@ -1029,21 +1029,21 @@ Looking For Sequence Templates:
 ]
 INPUT SEQUENCES: 8 SEQUENCES  [PROTEIN]
   Input File sh3.fasta Seq 1ABO Length   57 type PROTEIN Struct Unchecked
-	Profile: Template=1ABO.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643131
+	Profile: Template=1ABO.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985130
   Input File sh3.fasta Seq 1BB9 Length   71 type PROTEIN Struct Unchecked
-	Profile: Template=1BB9.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643130
+	Profile: Template=1BB9.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985131
   Input File sh3.fasta Seq 1FYN Length   58 type PROTEIN Struct Unchecked
-	Profile: Template=1FYN.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643134
+	Profile: Template=1FYN.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985132
   Input File sh3.fasta Seq 1OOT Length   57 type PROTEIN Struct Unchecked
-	Profile: Template=1OOT.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643133
+	Profile: Template=1OOT.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985137
   Input File sh3.fasta Seq 1PHT Length   73 type PROTEIN Struct Unchecked
-	Profile: Template=1PHT.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643135
+	Profile: Template=1PHT.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985135
   Input File sh3.fasta Seq 1QCF Length   57 type PROTEIN Struct Unchecked
-	Profile: Template=1QCF.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643137
+	Profile: Template=1QCF.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985133
   Input File sh3.fasta Seq 1UHC Length   60 type PROTEIN Struct Unchecked
-	Profile: Template=1UHC.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643132
+	Profile: Template=1UHC.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985136
   Input File sh3.fasta Seq 1YCS Length   59 type PROTEIN Struct Unchecked
-	Profile: Template=1YCS.prf, File=/var/tmp/tco/tcosfg6crnn80643//9305080643136
+	Profile: Template=1YCS.prf, File=/var/tmp/tco/tcox7npy31z71985//7677171985134
 
 	Multi Core Mode: 1 processors:
 
@@ -1080,13 +1080,13 @@ Group    7: 1UHC
 Group    8: 1YCS
 
 
-	Group    9: [Group    3 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=   59][PID:80643]
-	Group   10: [Group    6 (   1 seq)] with [Group    9 (   2 seq)]-->[Len=   59][PID:80643]
-	Group   11: [Group    7 (   1 seq)] with [Group   10 (   3 seq)]-->[Len=   62][PID:80643]
-	Group   12: [Group    5 (   1 seq)] with [Group    4 (   1 seq)]-->[Len=   73][PID:80643]
-	Group   13: [Group   12 (   2 seq)] with [Group   11 (   4 seq)]-->[Len=   73][PID:80643]
-	Group   14: [Group    8 (   1 seq)] with [Group    2 (   1 seq)]-->[Len=   71][PID:80643]
-	Group   15: [Group   14 (   2 seq)] with [Group   13 (   6 seq)]-->[Len=   81][PID:80643]
+	Group    9: [Group    3 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=   59][PID:71985]
+	Group   10: [Group    6 (   1 seq)] with [Group    9 (   2 seq)]-->[Len=   59][PID:71985]
+	Group   11: [Group    7 (   1 seq)] with [Group   10 (   3 seq)]-->[Len=   62][PID:71985]
+	Group   12: [Group    5 (   1 seq)] with [Group    4 (   1 seq)]-->[Len=   73][PID:71985]
+	Group   13: [Group   12 (   2 seq)] with [Group   11 (   4 seq)]-->[Len=   73][PID:71985]
+	Group   14: [Group    8 (   1 seq)] with [Group    2 (   1 seq)]-->[Len=   71][PID:71985]
+	Group   15: [Group   14 (   2 seq)] with [Group   13 (   6 seq)]-->[Len=   81][PID:71985]
 
 
 !		[Final Evaluation][TOT=   81][  0 %]!		[Final Evaluation][TOT=   81][  2 %]!		[Final Evaluation][TOT=   81][  3 %]!		[Final Evaluation][TOT=   81][  4 %]!		[Final Evaluation][TOT=   81][  6 %]!		[Final Evaluation][TOT=   81][  7 %]!		[Final Evaluation][TOT=   81][  8 %]!		[Final Evaluation][TOT=   81][  9 %]!		[Final Evaluation][TOT=   81][ 11 %]!		[Final Evaluation][TOT=   81][ 12 %]!		[Final Evaluation][TOT=   81][ 13 %]!		[Final Evaluation][TOT=   81][ 14 %]!		[Final Evaluation][TOT=   81][ 16 %]!		[Final Evaluation][TOT=   81][ 17 %]!		[Final Evaluation][TOT=   81][ 18 %]!		[Final Evaluation][TOT=   81][ 19 %]!		[Final Evaluation][TOT=   81][ 20 %]!		[Final Evaluation][TOT=   81][ 22 %]!		[Final Evaluation][TOT=   81][ 23 %]!		[Final Evaluation][TOT=   81][ 24 %]!		[Final Evaluation][TOT=   81][ 25 %]!		[Final Evaluation][TOT=   81][ 27 %]!		[Final Evaluation][TOT=   81][ 28 %]!		[Final Evaluation][TOT=   81][ 29 %]!		[Final Evaluation][TOT=   81][ 30 %]!		[Final Evaluation][TOT=   81][ 32 %]!		[Final Evaluation][TOT=   81][ 33 %]!		[Final Evaluation][TOT=   81][ 34 %]!		[Final Evaluation][TOT=   81][ 35 %]!		[Final Evaluation][TOT=   81][ 37 %]!		[Final Evaluation][TOT=   81][ 38 %]!		[Final Evaluation][TOT=   81][ 39 %]!		[Final Evaluation][TOT=   81][ 40 %]!		[Final Evaluation][TOT=   81][ 41 %]!		[Final Evaluation][TOT=   81][ 43 %]!		[Final Evaluation][TOT=   81][ 44 %]!		[Final Evaluation][TOT=   81][ 45 %]!		[Final Evaluation][TOT=   81][ 46 %]!		[Final Evaluation][TOT=   81][ 48 %]!		[Final Evaluation][TOT=   81][ 49 %]!		[Final Evaluation][TOT=   81][ 50 %]!		[Final Evaluation][TOT=   81][ 51 %]!		[Final Evaluation][TOT=   81][ 53 %]!		[Final Evaluation][TOT=   81][ 54 %]!		[Final Evaluation][TOT=   81][ 55 %]!		[Final Evaluation][TOT=   81][ 56 %]!		[Final Evaluation][TOT=   81][ 58 %]!		[Final Evaluation][TOT=   81][ 59 %]!		[Final Evaluation][TOT=   81][ 60 %]!		[Final Evaluation][TOT=   81][ 61 %]!		[Final Evaluation][TOT=   81][ 62 %]!		[Final Evaluation][TOT=   81][ 64 %]!		[Final Evaluation][TOT=   81][ 65 %]!		[Final Evaluation][TOT=   81][ 66 %]!		[Final Evaluation][TOT=   81][ 67 %]!		[Final Evaluation][TOT=   81][ 69 %]!		[Final Evaluation][TOT=   81][ 70 %]!		[Final Evaluation][TOT=   81][ 71 %]!		[Final Evaluation][TOT=   81][ 72 %]!		[Final Evaluation][TOT=   81][ 74 %]!		[Final Evaluation][TOT=   81][ 75 %]!		[Final Evaluation][TOT=   81][ 76 %]!		[Final Evaluation][TOT=   81][ 77 %]!		[Final Evaluation][TOT=   81][ 79 %]!		[Final Evaluation][TOT=   81][ 80 %]!		[Final Evaluation][TOT=   81][ 81 %]!		[Final Evaluation][TOT=   81][ 82 %]!		[Final Evaluation][TOT=   81][ 83 %]!		[Final Evaluation][TOT=   81][ 85 %]!		[Final Evaluation][TOT=   81][ 86 %]!		[Final Evaluation][TOT=   81][ 87 %]!		[Final Evaluation][TOT=   81][ 88 %]!		[Final Evaluation][TOT=   81][ 90 %]!		[Final Evaluation][TOT=   81][ 91 %]!		[Final Evaluation][TOT=   81][ 92 %]!		[Final Evaluation][TOT=   81][ 93 %]!		[Final Evaluation][TOT=   81][ 95 %]!		[Final Evaluation][TOT=   81][ 96 %]!		[Final Evaluation][TOT=   81][ 97 %]!		[Final Evaluation][TOT=   81][ 98 %]!		[Final Evaluation][TOT=   81][100 %]
@@ -1109,7 +1109,7 @@ OUTPUT RESULTS
 
 # Command Line: t_coffee -seq sh3.fasta -mode psicoffee  [PROGRAM:T-COFFEE]
 # T-COFFEE Memory Usage: Current= 33.875 Mb, Max= 34.979 Mb
-# Results Produced with T-COFFEE Version_13.30.4.4e2c658 (Version_13.30.4.4e2c658)
+# Results Produced with T-COFFEE Version_13.38.3.a77ca2b (Version_13.38.3.a77ca2b)
 # T-COFFEE is available from http://www.tcoffee.org
 # Register on: https://groups.google.com/group/tcoffee/
 </content>
@@ -1138,14 +1138,79 @@ IIVVALYDYEAIHHEDLSFQKGDQMVVLEESGEWWKARSLATRKEGYIPSNYVARVD
 <file>
 <stream>input</stream>
 <name>sh3_prf1.template_list</name>
-<content>>1BB9  _R_ 1BB9.prf
->1ABO  _R_ 1ABO.prf
+<content>>1ABO  _R_ 1ABO.prf
+>1BB9  _R_ 1BB9.prf
+>1FYN  _R_ 1FYN.prf
+>1QCF  _R_ 1QCF.prf
+>1YCS  _R_ 1YCS.prf
+>1PHT  _R_ 1PHT.prf
 >1UHC  _R_ 1UHC.prf
 >1OOT  _R_ 1OOT.prf
->1FYN  _R_ 1FYN.prf
->1PHT  _R_ 1PHT.prf
->1YCS  _R_ 1YCS.prf
->1QCF  _R_ 1QCF.prf
+</content>
+</file>
+<file>
+<stream>input</stream>
+<name>1ABO.prf</name>
+<content>>1ABO
+nlfvalydfvasgdntlsitkgeklrvlgynhngewceaqtkngqgwvps
+nyitpvn
+>1ABO_67  UR050|UniRef50_UPI0010FCA0FF [Eval=4.4E-12][id=48.3%][start=72 end=129]
+sifvaihdfhaassnqltihsgeelailryndtkewcegqarnsvgwipt
+syvkpvn
+>1ABO_80  UR050|UniRef50_A0A1I8C3K1 [Eval=7.1E-8][id=51.1%][start=44 end=88]
+nvfvalydfqgigeeklplrkgdqvkvigynktkewcevqlinrq-----
+-------
+>1ABO_85  UR050|UniRef50_A0A1X7UVT4 [Eval=1.8E-7][id=41.4%][start=110 end=167]
+nlyvvkhdyvtnqsgqlsirkgdkirvtpgrgtgdwvegtnangqgwlpa
+syiakid
+>1ABO_108  UR050|UniRef50_UPI00077AC218 [Eval=8.0E-6][id=42.9%][start=5 end=53]
+----akfafvasqedelsfekgsilnvldkdsdknwckaeqgnqegwipn
+syi----
+>1ABO_115  UR050|UniRef50_A0A183ASQ3 [Eval=1.3E-5][id=42.1%][start=187 end=243]
+nlyvalhdyvkrvdddlnmtkgqtfrildrshcdwwyaectatgqgyvpk
+nhlarv-
+>1ABO_117  UR050|UniRef50_S3DXY2 [Eval=1.5E-5][id=42.9%][start=483 end=530]
+----alydftgegdneisfrkddtltlvkngtng-wcmidngrgkgwaps
+syl----
+>1ABO_149  UR050|UniRef50_A0A480DZM0 [Eval=5.1E-5][id=40.7%][start=64 end=120]
+nlvialhsyepshdgdlgfekgeqlril--eqngewwkaqttglegfipf
+nfvakan
+>1ABO_175  UR050|UniRef50_UPI00077A186A [Eval=1.3E-4][id=40.0%][start=208 end=257]
+---vaiydffgaeqgdlsltkgenltviekqsdhwwiaknssgeqgfips
+nyv----
+>1ABO_194  UR050|UniRef50_A0A1S3QGW8 [Eval=2.4E-4][id=42.0%][start=1 end=49]
+-----mydftakedtdltltqgeeytil-hkqdqlwwraqdkhgkgfips
+nyvt---
+>1ABO_195  UR050|UniRef50_A0A2D0S560 [Eval=2.4E-4][id=41.2%][start=4 end=52]
+---igkfdftataddemsfkkgdvikvlgtkdn--wfraerhglqgfvpr
+nyit---
+>1ABO_198  UR050|UniRef50_A0A401Q1R8 [Eval=2.4E-4][id=40.0%][start=395 end=449]
+-vyyavydfqarcpnelsivnnqrvrilrfngnrewwlaevngrqgyvpa
+tyi----
+>1ABO_208  UR050|UniRef50_A0A0C2JE87 [Eval=2.5E-4][id=40.4%][start=406 end=457]
+---vvlydfmaqgddevtvatgdevivlddrrseewcqvrvkngegvvpl
+syv----
+>1ABO_214  UR050|UniRef50_A0A1G4JT83 [Eval=2.9E-4][id=41.5%][start=114 end=165]
+---valydfvpendnelelhegdtv-ligyrhgqgwlvaeneegtglvpe
+eyvt---
+>1ABO_220  UR050|UniRef50_A0A2N2D8T4 [Eval=3.3E-4][id=46.8%][start=316 end=362]
+-----------sysnlfqvsrgsllsvlnsnpngqwfeiqtdngqgwvsg
+dyivlkn
+>1ABO_223  UR050|UniRef50_Q498M5 [Eval=3.4E-4][id=42.1%][start=386 end=442]
+nmfvalhtysaqgpeeldlkkgegirvlgknqdgwlrgvslvtgrgifps
+dyvipv-
+>1ABO_235  UR050|UniRef50_UPI000D723C82 [Eval=4.4E-4][id=41.2%][start=146 end=194]
+------ydfvarnnnemsvlqgetlevl--dnskkwwkvqnrsgqgyvpy
+nilspl-
+>1ABO_244  UR050|UniRef50_UPI0011303E45 [Eval=4.7E-4][id=40.0%][start=484 end=537]
+-vfvatrshsaqgdreisiskgdkvkvlsvgeggfw-egtvkgrtgwfps
+dcveev-
+>1ABO_279  UR050|UniRef50_W3WRD8 [Eval=8.6E-4][id=41.2%][start=74 end=123]
+-----lydfagrepnelsvkageiieivqkevngwwl-arsvqgqawvps
+tyvdev-
+>1ABO_282  UR050|UniRef50_A0A0L0DBI9 [Eval=8.7E-4][id=41.2%][start=534 end=583]
+---valfdyqagaetqlsfkkgdklriyqddeng-wlvaqigeaygyvpa
+nrvs---
 </content>
 </file>
 <file>
@@ -1215,67 +1280,262 @@ yrvratykytredvdeisfevgdviqvveyddpeeq--fwgigv------
 </file>
 <file>
 <stream>input</stream>
-<name>1ABO.prf</name>
-<content>>1ABO
-nlfvalydfvasgdntlsitkgeklrvlgynhngewceaqtkngqgwvps
-nyitpvn
->1ABO_67  UR050|UniRef50_UPI0010FCA0FF [Eval=4.4E-12][id=48.3%][start=72 end=129]
-sifvaihdfhaassnqltihsgeelailryndtkewcegqarnsvgwipt
-syvkpvn
->1ABO_80  UR050|UniRef50_A0A1I8C3K1 [Eval=7.1E-8][id=51.1%][start=44 end=88]
-nvfvalydfqgigeeklplrkgdqvkvigynktkewcevqlinrq-----
--------
->1ABO_85  UR050|UniRef50_A0A1X7UVT4 [Eval=1.8E-7][id=41.4%][start=110 end=167]
-nlyvvkhdyvtnqsgqlsirkgdkirvtpgrgtgdwvegtnangqgwlpa
-syiakid
->1ABO_108  UR050|UniRef50_UPI00077AC218 [Eval=8.0E-6][id=42.9%][start=5 end=53]
-----akfafvasqedelsfekgsilnvldkdsdknwckaeqgnqegwipn
-syi----
->1ABO_115  UR050|UniRef50_A0A183ASQ3 [Eval=1.3E-5][id=42.1%][start=187 end=243]
-nlyvalhdyvkrvdddlnmtkgqtfrildrshcdwwyaectatgqgyvpk
-nhlarv-
->1ABO_117  UR050|UniRef50_S3DXY2 [Eval=1.5E-5][id=42.9%][start=483 end=530]
-----alydftgegdneisfrkddtltlvkngtng-wcmidngrgkgwaps
-syl----
->1ABO_149  UR050|UniRef50_A0A480DZM0 [Eval=5.1E-5][id=40.7%][start=64 end=120]
-nlvialhsyepshdgdlgfekgeqlril--eqngewwkaqttglegfipf
-nfvakan
->1ABO_175  UR050|UniRef50_UPI00077A186A [Eval=1.3E-4][id=40.0%][start=208 end=257]
----vaiydffgaeqgdlsltkgenltviekqsdhwwiaknssgeqgfips
+<name>1FYN.prf</name>
+<content>>1FYN
+tlfvalydyearteddlsfhkgekfqilnssegdwwearslttgetgyip
+snyvapvd
+>1FYN_145  UR050|UniRef50_A0A3M7Q3N2 [Eval=2.1E-12][id=41.1%][start=137 end=192]
+--yialfdyesatkddmtikkndqlividkshpdwwlaknirtketgyvp
+fnyittid
+>1FYN_173  UR050|UniRef50_G4VQH9 [Eval=8.0E-12][id=50.9%][start=160 end=214]
+--fvalhdyvkrvdddlnmtkgqifnildnshcdwwyaecvstgnrgyvp
+knhlaav-
+>1FYN_191  UR050|UniRef50_A9UQ58 [Eval=1.6E-11][id=47.3%][start=65 end=119]
+-vfvgvynfqgrtepelsfergekltllrrldenwwlmrsqrsgkegyap
+snyiap--
+>1FYN_253  UR050|UniRef50_UPI000E6E32D8 [Eval=3.6E-10][id=46.3%][start=43 end=96]
+-ivtgiysyeareqsdvsflkgdrmevledwesdwwrvlhlttrqeglip
+snfva---
+>1FYN_276  UR050|UniRef50_A0A0R3SEV8 [Eval=8.0E-10][id=42.9%][start=217 end=272]
+--fvaifdykarsdedltvhkgdvviildrsdsdwwlvenasnhshgfvp
+saylaeed
+>1FYN_301  UR050|UniRef50_Q5ZHM7 [Eval=1.9E-9][id=51.9%][start=34 end=84]
+-----lydypsadisqpifhvgeklrvl-sdeggwwrvhslttgrenyip
+gkyvakv-
+>1FYN_312  UR050|UniRef50_UPI0009479C42 [Eval=2.4E-9][id=44.6%][start=841 end=896]
+--ytvlydykaqlpedlsiqegqhlkildyrngrwykaqsldnlevglvp
+ynyvapld
+>1FYN_313  UR050|UniRef50_A7S742 [Eval=2.4E-9][id=43.4%][start=3 end=55]
+-iykacydfqdncetsldfkkgdtfyitqktdtgwwaarnlksnelgyip
+sayv----
+>1FYN_351  UR050|UniRef50_UPI0006D92110 [Eval=6.0E-9][id=48.3%][start=9 end=66]
+tiliavddydakeegdisfqkgnrivflnsmyrelwrgrslvtgeegyfp
+syyvsqv-
+>1FYN_352  UR050|UniRef50_UPI0006D92110 [Eval=1.5E-5][id=42.1%][start=249 end=304]
+-ivialkdynateggflkfqmgdpiaflnef-gkwgrgrslmtgeegffp
+nnyavpvn
+>1FYN_362  UR050|UniRef50_A0A3R7QLR0 [Eval=6.1E-9][id=44.8%][start=123 end=179]
+-lfvalyefraqgenqltlrkgeqvrvlsnksgewceaqa-gsgevgwvp
+snyitpvn
+>1FYN_365  UR050|UniRef50_UPI00096B4F6C [Eval=6.5E-9][id=42.6%][start=108 end=161]
+svfiarydyhattsdrisisegeqleiyekedsfwwkgrslvfgdegfip
+sscv----
+>1FYN_385  UR050|UniRef50_A0A1A8E3Y5 [Eval=1.1E-8][id=40.4%][start=32 end=88]
+tvyvamfpytprkedelelrkgemflvlercqdgwfkgtsmhtgkigvfp
+gnymspv-
+>1FYN_389  UR050|UniRef50_E4X7N8 [Eval=1.1E-8][id=43.4%][start=9 end=61]
+----akfsyepqnadelsltkgdyveifnndedewweariltsndrgwip
+kaylrpl-
+>1FYN_419  UR050|UniRef50_UPI000B90C9AE [Eval=1.9E-8][id=43.6%][start=3 end=57]
+-vyeakydyvkerddvlsftkgekfyitnktndkwwaakkiddntigyvp
+siylkp--
+>1FYN_453  UR050|UniRef50_A0A401PIQ3 [Eval=3.5E-8][id=44.6%][start=33 end=87]
+-mvvalynypsssdsepvirvgeklsvi-seegdwwkvmsmttgkechip
+cnyvakv-
+>1FYN_477  UR050|UniRef50_UPI000C76F6F5 [Eval=4.0E-8][id=41.5%][start=870 end=922]
+-iyavlynftprredelsvsagstvhildknnpdwwrgrctitgstgylp
+styl----
+>1FYN_483  UR050|UniRef50_A0A068S6W2 [Eval=4.0E-8][id=43.4%][start=1233 end=1285]
+--yvtqwaytgqseddlsfeqdetiivlndsdpdwwygthkstgktgyfp
+kayvs---
+>1FYN_492  UR050|UniRef50_A0A444TXT4 [Eval=4.4E-6][id=41.1%][start=996 end=1048]
+--yvaiytyespepgdltfhegdti-lvtqregewws--gcidnrtgifp
+snyvkpkd
+</content>
+</file>
+<file>
+<stream>input</stream>
+<name>1QCF.prf</name>
+<content>>1QCF
+iivvalydyeaihhedlsfqkgdqmvvleesgewwkarslatrkegyips
+nyvarvd
+>1QCF_189  UR050|UniRef50_A0A0R3WFW1 [Eval=1.5E-8][id=42.3%][start=48 end=99]
+-iakaifdfratrpdecdfikgdfllvldassqwwraknfrtkqeglipp
 nyv----
->1ABO_194  UR050|UniRef50_A0A1S3QGW8 [Eval=2.4E-4][id=42.0%][start=1 end=49]
------mydftakedtdltltqgeeytil-hkqdqlwwraqdkhgkgfips
-nyvt---
->1ABO_195  UR050|UniRef50_A0A2D0S560 [Eval=2.4E-4][id=41.2%][start=4 end=52]
----igkfdftataddemsfkkgdvikvlgtkdn--wfraerhglqgfvpr
-nyit---
->1ABO_198  UR050|UniRef50_A0A401Q1R8 [Eval=2.4E-4][id=40.0%][start=395 end=449]
--vyyavydfqarcpnelsivnnqrvrilrfngnrewwlaevngrqgyvpa
-tyi----
->1ABO_208  UR050|UniRef50_A0A0C2JE87 [Eval=2.5E-4][id=40.4%][start=406 end=457]
----vvlydfmaqgddevtvatgdevivlddrrseewcqvrvkngegvvpl
-syv----
->1ABO_214  UR050|UniRef50_A0A1G4JT83 [Eval=2.9E-4][id=41.5%][start=114 end=165]
----valydfvpendnelelhegdtv-ligyrhgqgwlvaeneegtglvpe
-eyvt---
->1ABO_220  UR050|UniRef50_A0A2N2D8T4 [Eval=3.3E-4][id=46.8%][start=316 end=362]
------------sysnlfqvsrgsllsvlnsnpngqwfeiqtdngqgwvsg
-dyivlkn
->1ABO_223  UR050|UniRef50_Q498M5 [Eval=3.4E-4][id=42.1%][start=386 end=442]
-nmfvalhtysaqgpeeldlkkgegirvlgknqdgwlrgvslvtgrgifps
-dyvipv-
->1ABO_235  UR050|UniRef50_UPI000D723C82 [Eval=4.4E-4][id=41.2%][start=146 end=194]
-------ydfvarnnnemsvlqgetlevl--dnskkwwkvqnrsgqgyvpy
-nilspl-
->1ABO_244  UR050|UniRef50_UPI0011303E45 [Eval=4.7E-4][id=40.0%][start=484 end=537]
--vfvatrshsaqgdreisiskgdkvkvlsvgeggfw-egtvkgrtgwfps
-dcveev-
->1ABO_279  UR050|UniRef50_W3WRD8 [Eval=8.6E-4][id=41.2%][start=74 end=123]
------lydfagrepnelsvkageiieivqkevngwwl-arsvqgqawvps
-tyvdev-
->1ABO_282  UR050|UniRef50_A0A0L0DBI9 [Eval=8.7E-4][id=41.2%][start=534 end=583]
----valfdyqagaetqlsfkkgdklriyqddeng-wlvaqigeaygyvpa
-nrvs---
+>1QCF_267  UR050|UniRef50_A0A0L8HLV1 [Eval=1.0E-8][id=42.1%][start=12 end=67]
+-vliglydytgrnne-lsfqkndkmtmidksaewwyvrhnttgeegfvpy
+nyitiad
+>1QCF_287  UR050|UniRef50_UPI0006D92110 [Eval=2.0E-8][id=47.4%][start=248 end=304]
+iivialkdynateggflkfqmgdpiaflnefgkwgrgrslmtgeegffpn
+nyavpvn
+>1QCF_289  UR050|UniRef50_A0A1Y3ERV1 [Eval=2.0E-8][id=43.6%][start=378 end=432]
+vflvalhnyesmadgdlsfkkgeimmlldnsndwwyvkhlstekagyvpr
+tfva---
+>1QCF_296  UR050|UniRef50_A0A0S7HUB9 [Eval=2.9E-8][id=44.4%][start=58 end=111]
+-igvaiysydpkhegdlgfdkgdklkiikddaewylaeslttgqrgyipy
+nfia---
+>1QCF_310  UR050|UniRef50_UPI0003EBC6F8 [Eval=5.1E-8][id=40.0%][start=71 end=130]
+-iytamwpfesrhqeelsfqegdlfrvvsrsgdwwtarkidrnaqgivpn
+nylarae
+>1QCF_333  UR050|UniRef50_A0A2P6KDG0 [Eval=3.3E-4][id=43.1%][start=140 end=188]
+---vvkynyeaqqadeislvkgtrvvvmekssdwwkges--nnqigwfps
+nyv----
+>1QCF_338  UR050|UniRef50_A0A0N0RS47 [Eval=3.4E-4][id=41.5%][start=406 end=457]
+-mvsvlydfeaqgddelsvlendqlvlieendewwklqn-aagqvgvvpa
+tyv----
+>1QCF_409  UR050|UniRef50_Q9U2T9 [Eval=0.0042][id=41.5%][start=786 end=837]
+---iaqfqwrarneedlsfakgdtievlekqemkwkgrnpa-geigwfpk
+syvkev-
+>1QCF_413  UR050|UniRef50_H2LEG6 [Eval=7.8E-7][id=41.8%][start=43 end=97]
+-ivvvledypsaeisepiykmgeklrviaheaywwkvrsfatgkenyipg
+shvakv-
+>1QCF_422  UR050|UniRef50_M3XIR2 [Eval=9.3E-7][id=40.0%][start=26 end=80]
+-ilvalcdypspdisepifrlgeklriisqeggwwrvisfitrrenyipg
+ncvakv-
+>1QCF_424  UR050|UniRef50_A0A336LY25 [Eval=9.7E-7][id=43.9%][start=40 end=96]
+ivhialfdyeakfendisfkkgdlmeissthgdwlmayhlsnkkrgvvps
+iyvael-
+>1QCF_439  UR050|UniRef50_A0A1X7TMH7 [Eval=1.2E-6][id=45.5%][start=148 end=202]
+-iytaridyhgidrndlsfsegeqleiykkngfwwkerslvsrdeglips
+scv----
+>1QCF_442  UR050|UniRef50_UPI00109F26F3 [Eval=1.5E-6][id=41.8%][start=42 end=95]
+-iavavcnfpsghaepilwm-geqlnllsedgewwkvesvttgkgcyvps
+nhvaki-
+>1QCF_472  UR050|UniRef50_A0A3P7LIX4 [Eval=2.1E-6][id=42.0%][start=69 end=118]
+----alypfsaqtdqevsfkkgdtlivfhqsgawleatnmitekrgfipa
+nyi----
+>1QCF_480  UR050|UniRef50_A0A2D4HMD5 [Eval=2.2E-6][id=41.5%][start=239 end=290]
+-vviamydfeptephdlrlergqeyiviekndhwwkakd-kygsqgyips
+nyv----
+>1QCF_481  UR050|UniRef50_A0A1U7RPC7 [Eval=2.2E-6][id=40.0%][start=55 end=109]
+-lfialydftarstnelsvsrgdklcvykdvgeyvlarrlsgdsvgyvpa
+nyvaki-
+>1QCF_492  UR050|UniRef50_UPI00094787DC [Eval=2.2E-6][id=43.1%][start=1023 end=1073]
+--vvalydyqanrsdeltiqrgdritvlykdnenwwfgeledgqqgffps
+nyi----
+>1QCF_497  UR050|UniRef50_A0A0L0DSL7 [Eval=2.2E-6][id=41.8%][start=2096 end=2150]
+-latalyaysdnevarlevevgdqfevlndkgdwwwvyskrlekegyvpg
+nymerv-
+</content>
+</file>
+<file>
+<stream>input</stream>
+<name>1YCS.prf</name>
+<content>>1YCS
+gviyalwdyepqnddelpmkegdcmtiihrededeiewwwarlndkegyv
+prnllglyp
+>1YCS_171  UR050|UniRef50_A0A091CLP1 [Eval=6.1E-15][id=54.5%][start=353 end=407]
+-vvyslwdyeaqngdkltfpegdaitilrcksesetewwwaplgdregyg
+pkscwg---
+>1YCS_220  UR050|UniRef50_A0A1V9XW11 [Eval=2.0E-10][id=47.5%][start=383 end=443]
+grvhamfayekenedeltykqddiltilrrgdgkerewywaestgeegyv
+arnllasyp
+>1YCS_224  UR050|UniRef50_UPI0010BE17FF [Eval=4.5E-9][id=41.7%][start=327 end=386]
+gkvhamfgydkenedeltfdrdeiltvirqgdgkekewywcrsngeegyv
+arnllaafp
+>1YCS_226  UR050|UniRef50_A0A2A2LYW6 [Eval=8.6E-9][id=43.3%][start=423 end=482]
+gkvytaydyeaqyedeldmndgdeikvlsketedqhwwfcerikdkkgla
+prtylalyp
+>1YCS_229  UR050|UniRef50_A0A0V1LTR1 [Eval=1.2E-8][id=41.9%][start=1047 end=1107]
+givyaaysydperddelgfekddqlrvl-akdldgfsgwwrafdpkegyv
+prnylslyp
+>1YCS_241  UR050|UniRef50_A0A0N5DR11 [Eval=1.4E-7][id=41.0%][start=688 end=747]
+grvyagcnydkqredeisfklddelrvlsketeek-nwwwvlatgqegyv
+prnflslyp
+>1YCS_287  UR050|UniRef50_UPI000A334081 [Eval=1.3E-6][id=40.0%][start=1378 end=1429]
+----alwdhvtmddqelgfkagdvievm---datnrewwwgrvtdgegwf
+panfvrvsp
+>1YCS_317  UR050|UniRef50_UPI000A2A7F35 [Eval=0.37][id=40.8%][start=9 end=54]
+------fdyepeqtdelrltvgeiienv--edede-gwckgtlngkvglf
+pnnfv----
+>1YCS_319  UR050|UniRef50_A0A194SCS0 [Eval=4.5E-6][id=43.4%][start=729 end=778]
+gtavalfdfpgvestdlpfkkgdaitilamdde---ewwkgrlrlregmi
+prn------
+>1YCS_331  UR050|UniRef50_A0A397U8D3 [Eval=6.3E-6][id=42.3%][start=78 end=126]
+-vlkavydyeaqsneelsfkedd---ifylydkdeadwylvksndefgyi
+pan------
+>1YCS_332  UR050|UniRef50_A0A397U8D3 [Eval=1.1E-4][id=41.2%][start=334 end=382]
+----alynfdaqgddeisiqegdevwii--ddvssnewwkcrkddeegmv
+pssyi----
+>1YCS_334  UR050|UniRef50_A0A183HJF6 [Eval=6.5E-6][id=40.4%][start=18 end=67]
+-vyralydytaqndnelsfnegdllyv--sdssndaqwwparcrnqtgli
+prn------
+>1YCS_339  UR050|UniRef50_A0A3B3Q789 [Eval=6.8E-4][id=42.6%][start=73 end=123]
+----atfsytpqhkdelelkpgd---vieiteeveegwwegrlngkmgmf
+psnftrky-
+>1YCS_341  UR050|UniRef50_A0A2M4C3E6 [Eval=8.5E-6][id=44.9%][start=70 end=115]
+----alydfepenpgelgfkendlitliqrvden---wfegslngrtgyf
+pqs------
+>1YCS_346  UR050|UniRef50_A0A427XNZ3 [Eval=3.7E-4][id=41.5%][start=335 end=384]
+-----lydfeadgddeltvhegevltivdkend---ewwqvraqgkegvv
+paqyvel--
+>1YCS_370  UR050|UniRef50_L0PH47 [Eval=1.2E-5][id=43.1%][start=1405 end=1450]
+----alydfegqnsnemsfrkneildiihke-----swwlarkngiegwv
+penyl----
+>1YCS_384  UR050|UniRef50_A0A1E4THT9 [Eval=0.03][id=41.7%][start=361 end=406]
+-----lydfdaqssdelsaregdkvfiidssksd--ewwmvkltgkqgvv
+p--------
+>1YCS_386  UR050|UniRef50_A0A0D2X3Q4 [Eval=1.6E-5][id=43.1%][start=1483 end=1540]
+----alfdydandatllplkkgdvitvipeetsdeiewieaeingkegfv
+pr-------
+>1YCS_389  UR050|UniRef50_A0A060VU58 [Eval=6.2][id=40.0%][start=78 end=119]
+--------ysplnedelelvvgetieil-reied--gwwmgmksgkvgaf
+psn------
+</content>
+</file>
+<file>
+<stream>input</stream>
+<name>1PHT.prf</name>
+<content>>1PHT
+yqyralydykkereedidlhlgdiltvnkgslvalgfsdgqearpeeigw
+lngynettgergdfpgtyveyig
+>1PHT_15  UR050|UniRef50_A0A060W6Q5 [Eval=3.1E-23][id=54.8%][start=6 end=78]
+fqfiaiyvynkdwdedldlqpgdiltvsktsltslglkdgdeehpdclgw
+mvgvnkrtkqrgdfpgtyvqyvg
+>1PHT_17  UR050|UniRef50_A0A0S7JME3 [Eval=3.4E-23][id=54.1%][start=6 end=79]
+fqyrvlytftkdqeedldlqpgdlltvskaslmsvqyeegfeehperlgw
+llgynertkqrgdfpgtfvkfvg
+>1PHT_21  UR050|UniRef50_UPI000947E021 [Eval=2.8E-22][id=52.1%][start=7 end=79]
+fqyralypfrrerpedlellpgdvlvvsraalqvlgvaegnercpqsvgw
+mpglnertrqrgdfpgtyveflg
+>1PHT_24  UR050|UniRef50_A0A401P7D7 [Eval=8.4E-22][id=57.5%][start=6 end=76]
+fqfralfeykkereedinllpgdvltvgksvlvtanyqegdeknpk--gw
+lngvnerskdkgdfpgtyvefvg
+>1PHT_31  UR050|UniRef50_O08908 [Eval=5.3E-21][id=53.4%][start=7 end=79]
+fqyravypfrrerpedlellpgdllvvsrvalqalgvadggercphnvgw
+mpgfnertrqrgdfpgtyveflg
+>1PHT_43  UR050|UniRef50_UPI0007427F88 [Eval=1.8E-16][id=47.4%][start=6 end=79]
+fryralfeyrkehkddlslqpgdfltvpkasiisleyqegderspa--gw
+lhgvnerseekgnfpgtfveyvg
+>1PHT_46  UR050|UniRef50_A0A2L2Z5V7 [Eval=3.0E-11][id=45.7%][start=7 end=71]
+--yrsqykysrsddseislevgdilevkkpflftl---egteenpe--gw
+ilgrnqrtnecgyfpgtfveyl-
+>1PHT_47  UR050|UniRef50_L8HJF3 [Eval=2.6E-10][id=43.7%][start=442 end=497]
+-qaralyafrkeqeeeidvnvgdllvvd--------vddgs-------gw
+iygfnqtsgeggrfpanyveyl-
+>1PHT_48  UR050|UniRef50_A0A2G8LD74 [Eval=8.1E-10][id=41.7%][start=7 end=75]
+-ryeamfdynvdkkgdieikvkdilivnt-nivrfsffkgtlekp--lgw
+llgrnertneegtfpgpfvrfig
+>1PHT_49  UR050|UniRef50_UPI0005F058AD [Eval=1.4E-9][id=44.1%][start=6 end=69]
+-kyralhdyeptsdqdiimktgdvlvvenpe--rlpyfkgtvekpes--w
+legknertqekgsfpgtyv----
+>1PHT_50  UR050|UniRef50_UPI000B90EB37 [Eval=2.4E-9][id=41.4%][start=7 end=72]
+--yvamyafekkapqdiemrmgdimtvvnpt--klpyfqgtreepk--gw
+legvnertqesgsfpgtfvkyv-
+>1PHT_51  UR050|UniRef50_A0A087TG25 [Eval=2.7E-9][id=44.3%][start=7 end=71]
+--yrsqykyvkgddseislevgdvlevkkpfqftl---egteenpe--gw
+ilgrnqrtnecgyfpgtfveyl-
+>1PHT_52  UR050|UniRef50_W4YE90 [Eval=1.5E-8][id=44.1%][start=6 end=69]
+-kyralhdyeptsdqdiimktgdvlvvenpe--rlpyfkgtvekpes--w
+legknertqekgsfpgtyv----
+>1PHT_53  UR050|UniRef50_A0A2B4SDP2 [Eval=2.9E-8][id=41.7%][start=7 end=65]
+-qyrviysyqprderdiairegdimvvakpv-------------sdptgw
+ltgentrtkdvgefpgtyveyig
+>1PHT_54  UR050|UniRef50_UPI00077B0613 [Eval=2.6E-7][id=40.3%][start=7 end=65]
+-qfrvlynfeprdrrdiaievgdvmivakp---vsdfcd----------w
+ltghntrtrevgefpgtyveyig
+>1PHT_55  UR050|UniRef50_T1J1N3 [Eval=3.6E-7][id=45.7%][start=7 end=71]
+--ycavdhypkeeeaeislekddivevkkplqftl---dgseeepk--gw
+ligrntrtgetgyfpgpyvtyv-
+>1PHT_56  UR050|UniRef50_UPI0008FA5DE6 [Eval=6.5E-4][id=40.0%][start=339 end=398]
+--yralypfearshdeitihpgdivmv-kgewv-------desqtgepgw
+lgg--eikgktgwfpanyaeki-
+>1PHT_57  UR050|UniRef50_A0A293LGY9 [Eval=0.0012][id=40.0%][start=460 end=512]
+hqcralydycpqqddelalstgdiitvh--------------aktee-gw
+whg--evrgmcglfpatyve---
+>1PHT_58  UR050|UniRef50_A0A146PJ34 [Eval=0.011][id=47.4%][start=1 end=37]
+-----------------------------------gpstsqepqspvv-w
+lhgvndrseergtfpgtfvqyvg
 </content>
 </file>
 <file>
@@ -1409,276 +1669,16 @@ rnylev-
 </content>
 </file>
 <file>
-<stream>input</stream>
-<name>1FYN.prf</name>
-<content>>1FYN
-tlfvalydyearteddlsfhkgekfqilnssegdwwearslttgetgyip
-snyvapvd
->1FYN_145  UR050|UniRef50_A0A3M7Q3N2 [Eval=2.1E-12][id=41.1%][start=137 end=192]
---yialfdyesatkddmtikkndqlividkshpdwwlaknirtketgyvp
-fnyittid
->1FYN_173  UR050|UniRef50_G4VQH9 [Eval=8.0E-12][id=50.9%][start=160 end=214]
---fvalhdyvkrvdddlnmtkgqifnildnshcdwwyaecvstgnrgyvp
-knhlaav-
->1FYN_191  UR050|UniRef50_A9UQ58 [Eval=1.6E-11][id=47.3%][start=65 end=119]
--vfvgvynfqgrtepelsfergekltllrrldenwwlmrsqrsgkegyap
-snyiap--
->1FYN_253  UR050|UniRef50_UPI000E6E32D8 [Eval=3.6E-10][id=46.3%][start=43 end=96]
--ivtgiysyeareqsdvsflkgdrmevledwesdwwrvlhlttrqeglip
-snfva---
->1FYN_276  UR050|UniRef50_A0A0R3SEV8 [Eval=8.0E-10][id=42.9%][start=217 end=272]
---fvaifdykarsdedltvhkgdvviildrsdsdwwlvenasnhshgfvp
-saylaeed
->1FYN_301  UR050|UniRef50_Q5ZHM7 [Eval=1.9E-9][id=51.9%][start=34 end=84]
------lydypsadisqpifhvgeklrvl-sdeggwwrvhslttgrenyip
-gkyvakv-
->1FYN_312  UR050|UniRef50_UPI0009479C42 [Eval=2.4E-9][id=44.6%][start=841 end=896]
---ytvlydykaqlpedlsiqegqhlkildyrngrwykaqsldnlevglvp
-ynyvapld
->1FYN_313  UR050|UniRef50_A7S742 [Eval=2.4E-9][id=43.4%][start=3 end=55]
--iykacydfqdncetsldfkkgdtfyitqktdtgwwaarnlksnelgyip
-sayv----
->1FYN_351  UR050|UniRef50_UPI0006D92110 [Eval=6.0E-9][id=48.3%][start=9 end=66]
-tiliavddydakeegdisfqkgnrivflnsmyrelwrgrslvtgeegyfp
-syyvsqv-
->1FYN_352  UR050|UniRef50_UPI0006D92110 [Eval=1.5E-5][id=42.1%][start=249 end=304]
--ivialkdynateggflkfqmgdpiaflnef-gkwgrgrslmtgeegffp
-nnyavpvn
->1FYN_362  UR050|UniRef50_A0A3R7QLR0 [Eval=6.1E-9][id=44.8%][start=123 end=179]
--lfvalyefraqgenqltlrkgeqvrvlsnksgewceaqa-gsgevgwvp
-snyitpvn
->1FYN_365  UR050|UniRef50_UPI00096B4F6C [Eval=6.5E-9][id=42.6%][start=108 end=161]
-svfiarydyhattsdrisisegeqleiyekedsfwwkgrslvfgdegfip
-sscv----
->1FYN_385  UR050|UniRef50_A0A1A8E3Y5 [Eval=1.1E-8][id=40.4%][start=32 end=88]
-tvyvamfpytprkedelelrkgemflvlercqdgwfkgtsmhtgkigvfp
-gnymspv-
->1FYN_389  UR050|UniRef50_E4X7N8 [Eval=1.1E-8][id=43.4%][start=9 end=61]
-----akfsyepqnadelsltkgdyveifnndedewweariltsndrgwip
-kaylrpl-
->1FYN_419  UR050|UniRef50_UPI000B90C9AE [Eval=1.9E-8][id=43.6%][start=3 end=57]
--vyeakydyvkerddvlsftkgekfyitnktndkwwaakkiddntigyvp
-siylkp--
->1FYN_453  UR050|UniRef50_A0A401PIQ3 [Eval=3.5E-8][id=44.6%][start=33 end=87]
--mvvalynypsssdsepvirvgeklsvi-seegdwwkvmsmttgkechip
-cnyvakv-
->1FYN_477  UR050|UniRef50_UPI000C76F6F5 [Eval=4.0E-8][id=41.5%][start=870 end=922]
--iyavlynftprredelsvsagstvhildknnpdwwrgrctitgstgylp
-styl----
->1FYN_483  UR050|UniRef50_A0A068S6W2 [Eval=4.0E-8][id=43.4%][start=1233 end=1285]
---yvtqwaytgqseddlsfeqdetiivlndsdpdwwygthkstgktgyfp
-kayvs---
->1FYN_492  UR050|UniRef50_A0A444TXT4 [Eval=4.4E-6][id=41.1%][start=996 end=1048]
---yvaiytyespepgdltfhegdti-lvtqregewws--gcidnrtgifp
-snyvkpkd
-</content>
-</file>
-<file>
-<stream>input</stream>
-<name>1PHT.prf</name>
-<content>>1PHT
-yqyralydykkereedidlhlgdiltvnkgslvalgfsdgqearpeeigw
-lngynettgergdfpgtyveyig
->1PHT_15  UR050|UniRef50_A0A060W6Q5 [Eval=3.1E-23][id=54.8%][start=6 end=78]
-fqfiaiyvynkdwdedldlqpgdiltvsktsltslglkdgdeehpdclgw
-mvgvnkrtkqrgdfpgtyvqyvg
->1PHT_17  UR050|UniRef50_A0A0S7JME3 [Eval=3.4E-23][id=54.1%][start=6 end=79]
-fqyrvlytftkdqeedldlqpgdlltvskaslmsvqyeegfeehperlgw
-llgynertkqrgdfpgtfvkfvg
->1PHT_21  UR050|UniRef50_UPI000947E021 [Eval=2.8E-22][id=52.1%][start=7 end=79]
-fqyralypfrrerpedlellpgdvlvvsraalqvlgvaegnercpqsvgw
-mpglnertrqrgdfpgtyveflg
->1PHT_24  UR050|UniRef50_A0A401P7D7 [Eval=8.4E-22][id=57.5%][start=6 end=76]
-fqfralfeykkereedinllpgdvltvgksvlvtanyqegdeknpk--gw
-lngvnerskdkgdfpgtyvefvg
->1PHT_31  UR050|UniRef50_O08908 [Eval=5.3E-21][id=53.4%][start=7 end=79]
-fqyravypfrrerpedlellpgdllvvsrvalqalgvadggercphnvgw
-mpgfnertrqrgdfpgtyveflg
->1PHT_43  UR050|UniRef50_UPI0007427F88 [Eval=1.8E-16][id=47.4%][start=6 end=79]
-fryralfeyrkehkddlslqpgdfltvpkasiisleyqegderspa--gw
-lhgvnerseekgnfpgtfveyvg
->1PHT_46  UR050|UniRef50_A0A2L2Z5V7 [Eval=3.0E-11][id=45.7%][start=7 end=71]
---yrsqykysrsddseislevgdilevkkpflftl---egteenpe--gw
-ilgrnqrtnecgyfpgtfveyl-
->1PHT_47  UR050|UniRef50_L8HJF3 [Eval=2.6E-10][id=43.7%][start=442 end=497]
--qaralyafrkeqeeeidvnvgdllvvd--------vddgs-------gw
-iygfnqtsgeggrfpanyveyl-
->1PHT_48  UR050|UniRef50_A0A2G8LD74 [Eval=8.1E-10][id=41.7%][start=7 end=75]
--ryeamfdynvdkkgdieikvkdilivnt-nivrfsffkgtlekp--lgw
-llgrnertneegtfpgpfvrfig
->1PHT_49  UR050|UniRef50_UPI0005F058AD [Eval=1.4E-9][id=44.1%][start=6 end=69]
--kyralhdyeptsdqdiimktgdvlvvenpe--rlpyfkgtvekpes--w
-legknertqekgsfpgtyv----
->1PHT_50  UR050|UniRef50_UPI000B90EB37 [Eval=2.4E-9][id=41.4%][start=7 end=72]
---yvamyafekkapqdiemrmgdimtvvnpt--klpyfqgtreepk--gw
-legvnertqesgsfpgtfvkyv-
->1PHT_51  UR050|UniRef50_A0A087TG25 [Eval=2.7E-9][id=44.3%][start=7 end=71]
---yrsqykyvkgddseislevgdvlevkkpfqftl---egteenpe--gw
-ilgrnqrtnecgyfpgtfveyl-
->1PHT_52  UR050|UniRef50_W4YE90 [Eval=1.5E-8][id=44.1%][start=6 end=69]
--kyralhdyeptsdqdiimktgdvlvvenpe--rlpyfkgtvekpes--w
-legknertqekgsfpgtyv----
->1PHT_53  UR050|UniRef50_A0A2B4SDP2 [Eval=2.9E-8][id=41.7%][start=7 end=65]
--qyrviysyqprderdiairegdimvvakpv-------------sdptgw
-ltgentrtkdvgefpgtyveyig
->1PHT_54  UR050|UniRef50_UPI00077B0613 [Eval=2.6E-7][id=40.3%][start=7 end=65]
--qfrvlynfeprdrrdiaievgdvmivakp---vsdfcd----------w
-ltghntrtrevgefpgtyveyig
->1PHT_55  UR050|UniRef50_T1J1N3 [Eval=3.6E-7][id=45.7%][start=7 end=71]
---ycavdhypkeeeaeislekddivevkkplqftl---dgseeepk--gw
-ligrntrtgetgyfpgpyvtyv-
->1PHT_56  UR050|UniRef50_UPI0008FA5DE6 [Eval=6.5E-4][id=40.0%][start=339 end=398]
---yralypfearshdeitihpgdivmv-kgewv-------desqtgepgw
-lgg--eikgktgwfpanyaeki-
->1PHT_57  UR050|UniRef50_A0A293LGY9 [Eval=0.0012][id=40.0%][start=460 end=512]
-hqcralydycpqqddelalstgdiitvh--------------aktee-gw
-whg--evrgmcglfpatyve---
->1PHT_58  UR050|UniRef50_A0A146PJ34 [Eval=0.011][id=47.4%][start=1 end=37]
------------------------------------gpstsqepqspvv-w
-lhgvndrseergtfpgtfvqyvg
-</content>
-</file>
-<file>
-<stream>input</stream>
-<name>1YCS.prf</name>
-<content>>1YCS
-gviyalwdyepqnddelpmkegdcmtiihrededeiewwwarlndkegyv
-prnllglyp
->1YCS_171  UR050|UniRef50_A0A091CLP1 [Eval=6.1E-15][id=54.5%][start=353 end=407]
--vvyslwdyeaqngdkltfpegdaitilrcksesetewwwaplgdregyg
-pkscwg---
->1YCS_220  UR050|UniRef50_A0A1V9XW11 [Eval=2.0E-10][id=47.5%][start=383 end=443]
-grvhamfayekenedeltykqddiltilrrgdgkerewywaestgeegyv
-arnllasyp
->1YCS_224  UR050|UniRef50_UPI0010BE17FF [Eval=4.5E-9][id=41.7%][start=327 end=386]
-gkvhamfgydkenedeltfdrdeiltvirqgdgkekewywcrsngeegyv
-arnllaafp
->1YCS_226  UR050|UniRef50_A0A2A2LYW6 [Eval=8.6E-9][id=43.3%][start=423 end=482]
-gkvytaydyeaqyedeldmndgdeikvlsketedqhwwfcerikdkkgla
-prtylalyp
->1YCS_229  UR050|UniRef50_A0A0V1LTR1 [Eval=1.2E-8][id=41.9%][start=1047 end=1107]
-givyaaysydperddelgfekddqlrvl-akdldgfsgwwrafdpkegyv
-prnylslyp
->1YCS_241  UR050|UniRef50_A0A0N5DR11 [Eval=1.4E-7][id=41.0%][start=688 end=747]
-grvyagcnydkqredeisfklddelrvlsketeek-nwwwvlatgqegyv
-prnflslyp
->1YCS_287  UR050|UniRef50_UPI000A334081 [Eval=1.3E-6][id=40.0%][start=1378 end=1429]
-----alwdhvtmddqelgfkagdvievm---datnrewwwgrvtdgegwf
-panfvrvsp
->1YCS_317  UR050|UniRef50_UPI000A2A7F35 [Eval=0.37][id=40.8%][start=9 end=54]
-------fdyepeqtdelrltvgeiienv--edede-gwckgtlngkvglf
-pnnfv----
->1YCS_319  UR050|UniRef50_A0A194SCS0 [Eval=4.5E-6][id=43.4%][start=729 end=778]
-gtavalfdfpgvestdlpfkkgdaitilamdde---ewwkgrlrlregmi
-prn------
->1YCS_331  UR050|UniRef50_A0A397U8D3 [Eval=6.3E-6][id=42.3%][start=78 end=126]
--vlkavydyeaqsneelsfkedd---ifylydkdeadwylvksndefgyi
-pan------
->1YCS_332  UR050|UniRef50_A0A397U8D3 [Eval=1.1E-4][id=41.2%][start=334 end=382]
-----alynfdaqgddeisiqegdevwii--ddvssnewwkcrkddeegmv
-pssyi----
->1YCS_334  UR050|UniRef50_A0A183HJF6 [Eval=6.5E-6][id=40.4%][start=18 end=67]
--vyralydytaqndnelsfnegdllyv--sdssndaqwwparcrnqtgli
-prn------
->1YCS_339  UR050|UniRef50_A0A3B3Q789 [Eval=6.8E-4][id=42.6%][start=73 end=123]
-----atfsytpqhkdelelkpgd---vieiteeveegwwegrlngkmgmf
-psnftrky-
->1YCS_341  UR050|UniRef50_A0A2M4C3E6 [Eval=8.5E-6][id=44.9%][start=70 end=115]
-----alydfepenpgelgfkendlitliqrvden---wfegslngrtgyf
-pqs------
->1YCS_346  UR050|UniRef50_A0A427XNZ3 [Eval=3.7E-4][id=41.5%][start=335 end=384]
------lydfeadgddeltvhegevltivdkend---ewwqvraqgkegvv
-paqyvel--
->1YCS_370  UR050|UniRef50_L0PH47 [Eval=1.2E-5][id=43.1%][start=1405 end=1450]
-----alydfegqnsnemsfrkneildiihke-----swwlarkngiegwv
-penyl----
->1YCS_384  UR050|UniRef50_A0A1E4THT9 [Eval=0.03][id=41.7%][start=361 end=406]
------lydfdaqssdelsaregdkvfiidssksd--ewwmvkltgkqgvv
-p--------
->1YCS_386  UR050|UniRef50_A0A0D2X3Q4 [Eval=1.6E-5][id=43.1%][start=1483 end=1540]
-----alfdydandatllplkkgdvitvipeetsdeiewieaeingkegfv
-pr-------
->1YCS_389  UR050|UniRef50_A0A060VU58 [Eval=6.2][id=40.0%][start=78 end=119]
---------ysplnedelelvvgetieil-reied--gwwmgmksgkvgaf
-psn------
-</content>
-</file>
-<file>
-<stream>input</stream>
-<name>1QCF.prf</name>
-<content>>1QCF
-iivvalydyeaihhedlsfqkgdqmvvleesgewwkarslatrkegyips
-nyvarvd
->1QCF_189  UR050|UniRef50_A0A0R3WFW1 [Eval=1.5E-8][id=42.3%][start=48 end=99]
--iakaifdfratrpdecdfikgdfllvldassqwwraknfrtkqeglipp
-nyv----
->1QCF_267  UR050|UniRef50_A0A0L8HLV1 [Eval=1.0E-8][id=42.1%][start=12 end=67]
--vliglydytgrnne-lsfqkndkmtmidksaewwyvrhnttgeegfvpy
-nyitiad
->1QCF_287  UR050|UniRef50_UPI0006D92110 [Eval=2.0E-8][id=47.4%][start=248 end=304]
-iivialkdynateggflkfqmgdpiaflnefgkwgrgrslmtgeegffpn
-nyavpvn
->1QCF_289  UR050|UniRef50_A0A1Y3ERV1 [Eval=2.0E-8][id=43.6%][start=378 end=432]
-vflvalhnyesmadgdlsfkkgeimmlldnsndwwyvkhlstekagyvpr
-tfva---
->1QCF_296  UR050|UniRef50_A0A0S7HUB9 [Eval=2.9E-8][id=44.4%][start=58 end=111]
--igvaiysydpkhegdlgfdkgdklkiikddaewylaeslttgqrgyipy
-nfia---
->1QCF_310  UR050|UniRef50_UPI0003EBC6F8 [Eval=5.1E-8][id=40.0%][start=71 end=130]
--iytamwpfesrhqeelsfqegdlfrvvsrsgdwwtarkidrnaqgivpn
-nylarae
->1QCF_333  UR050|UniRef50_A0A2P6KDG0 [Eval=3.3E-4][id=43.1%][start=140 end=188]
----vvkynyeaqqadeislvkgtrvvvmekssdwwkges--nnqigwfps
-nyv----
->1QCF_338  UR050|UniRef50_A0A0N0RS47 [Eval=3.4E-4][id=41.5%][start=406 end=457]
--mvsvlydfeaqgddelsvlendqlvlieendewwklqn-aagqvgvvpa
-tyv----
->1QCF_409  UR050|UniRef50_Q9U2T9 [Eval=0.0042][id=41.5%][start=786 end=837]
----iaqfqwrarneedlsfakgdtievlekqemkwkgrnpa-geigwfpk
-syvkev-
->1QCF_413  UR050|UniRef50_H2LEG6 [Eval=7.8E-7][id=41.8%][start=43 end=97]
--ivvvledypsaeisepiykmgeklrviaheaywwkvrsfatgkenyipg
-shvakv-
->1QCF_422  UR050|UniRef50_M3XIR2 [Eval=9.3E-7][id=40.0%][start=26 end=80]
--ilvalcdypspdisepifrlgeklriisqeggwwrvisfitrrenyipg
-ncvakv-
->1QCF_424  UR050|UniRef50_A0A336LY25 [Eval=9.7E-7][id=43.9%][start=40 end=96]
-ivhialfdyeakfendisfkkgdlmeissthgdwlmayhlsnkkrgvvps
-iyvael-
->1QCF_439  UR050|UniRef50_A0A1X7TMH7 [Eval=1.2E-6][id=45.5%][start=148 end=202]
--iytaridyhgidrndlsfsegeqleiykkngfwwkerslvsrdeglips
-scv----
->1QCF_442  UR050|UniRef50_UPI00109F26F3 [Eval=1.5E-6][id=41.8%][start=42 end=95]
--iavavcnfpsghaepilwm-geqlnllsedgewwkvesvttgkgcyvps
-nhvaki-
->1QCF_472  UR050|UniRef50_A0A3P7LIX4 [Eval=2.1E-6][id=42.0%][start=69 end=118]
-----alypfsaqtdqevsfkkgdtlivfhqsgawleatnmitekrgfipa
-nyi----
->1QCF_480  UR050|UniRef50_A0A2D4HMD5 [Eval=2.2E-6][id=41.5%][start=239 end=290]
--vviamydfeptephdlrlergqeyiviekndhwwkakd-kygsqgyips
-nyv----
->1QCF_481  UR050|UniRef50_A0A1U7RPC7 [Eval=2.2E-6][id=40.0%][start=55 end=109]
--lfialydftarstnelsvsrgdklcvykdvgeyvlarrlsgdsvgyvpa
-nyvaki-
->1QCF_492  UR050|UniRef50_UPI00094787DC [Eval=2.2E-6][id=43.1%][start=1023 end=1073]
---vvalydyqanrsdeltiqrgdritvlykdnenwwfgeledgqqgffps
-nyi----
->1QCF_497  UR050|UniRef50_A0A0L0DSL7 [Eval=2.2E-6][id=41.8%][start=2096 end=2150]
--latalyaysdnevarlevevgdqfevlndkgdwwwvyskrlekegyvpg
-nymerv-
-</content>
-</file>
-<file>
 <stream>output</stream>
 <name>sh3_prf1.template_list</name>
-<content>>1BB9  _R_ 1BB9.prf
->1ABO  _R_ 1ABO.prf
+<content>>1ABO  _R_ 1ABO.prf
+>1BB9  _R_ 1BB9.prf
+>1FYN  _R_ 1FYN.prf
+>1QCF  _R_ 1QCF.prf
+>1YCS  _R_ 1YCS.prf
+>1PHT  _R_ 1PHT.prf
 >1UHC  _R_ 1UHC.prf
 >1OOT  _R_ 1OOT.prf
->1FYN  _R_ 1FYN.prf
->1PHT  _R_ 1PHT.prf
->1YCS  _R_ 1YCS.prf
->1QCF  _R_ 1QCF.prf
 </content>
 </file>
 <file>
@@ -1694,7 +1694,7 @@ nymerv-
 <file>
 <stream>output</stream>
 <name>sh3.aln</name>
-<content>CLUSTAL FORMAT for T-COFFEE Version_13.30.4.4e2c658 [http://www.tcoffee.org] [MODE: psicoffee ], CPU=0.12 sec, SCORE=89, Nseq=8, Len=81 
+<content>CLUSTAL FORMAT for T-COFFEE Version_13.38.3.a77ca2b [http://www.tcoffee.org] [MODE: psicoffee ], CPU=0.11 sec, SCORE=89, Nseq=8, Len=81 
 
 1PHT            YQYRALYDYKKEREEDIDLHLGDILTVNKGSLVALGFSDGQEARPEEIGW
 1BB9            FKVQAQHDYTATDTDELQLKAGDVVLVIPFQNPE----------EQDEGW
@@ -1741,7 +1741,7 @@ SPAN.value9 {background: #FFC8C8}
 SPAN.valuedefault {}
 SPAN.valuegap {}
 SPAN.valueink {background: 000000}
-</style><body><span class=valuedefault>T-COFFEE,&nbsp;Version_13.30.4.4e2c658&nbsp;(Version_13.30.4.4e2c658)</span><br><span class=valuedefault>Cedric&nbsp;Notredame&nbsp;</span><br><span class=valuedefault>CPU&nbsp;TIME:0&nbsp;sec.</span><br><span class=valuedefault>SCORE=89</span><br><span class=valuedefault>*</span><br><span class=valuedefault>&nbsp;</span><span class=value0>B</span><span class=value1>A</span><span class=value2>D</span><span class=value3>&nbsp;</span><span class=value4>A</span><span class=value5>V</span><span class=value6>G</span><span class=value7>&nbsp;</span><span class=value8>G</span><span class=value9>OOD</span><br><span class=valuedefault>*</span><br><span class=value8>1PHT&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;86</span><br><span class=value8>1BB9&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;84</span><br><span class=value9>1UHC&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;90</span><br><span class=value8>1YCS&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;89</span><br><span class=value9>1OOT&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;90</span><br><span class=value9>1ABO&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;90</span><br><span class=value9>1FYN&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;90</span><br><span class=value9>1QCF&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;90</span><br><span class=value8>cons&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;&nbsp;8</span><br><br><span class=valuedefault>1PHT&nbsp;&nbsp;&nbsp;</span><span class=value9>YQYRALYDYKKEREEDIDLHLGDILTV</span><span class=value8>N</span><span class=value6>K</span><span class=value5>G</span><span class=value4>S</span><span class=value2>LV</span><span class=value1>A</span><span class=value2>L</span><span class=value3>G</span><span class=value6>F</span><span class=value5>SD</span><span class=value4>G</span><span class=value2>Q</span><span class=value1>E</span><span class=value0>AR</span><span class=value1>P</span><br><span class=valuedefault>1BB9&nbsp;&nbsp;&nbsp;</span><span class=value9>FKVQAQHDYTATDTDELQLKAGDVVLVI</span><span class=value7>P</span><span class=value5>F</span><span class=value4>Q</span><span class=value2>N</span><span class=value1>PE</span><span class=valuegap>----------</span><span class=value1>E</span><br><span class=valuedefault>1UHC&nbsp;&nbsp;&nbsp;</span><span class=value9>QVYFAVYTFKARNPNELSVSANQKLKIL</span><span class=value7>E</span><span class=value5>F</span><span class=value4>K</span><span class=value2>D</span><span class=value1>VT</span><span class=valuegap>-----------</span><br><span class=valuedefault>1YCS&nbsp;&nbsp;&nbsp;</span><span class=value9>GVIYALWDYEPQNDDELPMKEGDCMTII</span><span class=value7>H</span><span class=value5>R</span><span class=value3>E</span><span class=value2>D</span><span class=value1>E</span><span class=valuegap>------------</span><br><span class=valuedefault>1OOT&nbsp;&nbsp;&nbsp;</span><span class=value9>PKAVALYSFAGEESGDLPFRKGDVITI</span><span class=value8>L</span><span class=value6>K</span><span class=value4>K</span><span class=value3>S</span><span class=valuegap>-------------</span><span class=value1>D</span><br><span class=valuedefault>1ABO&nbsp;&nbsp;&nbsp;</span><span class=value9>NLFVALYDFVASGDNTLSITKGEKLRV</span><span class=value8>L</span><span class=value6>G</span><span class=value4>Y</span><span class=value3>N</span><span class=value1>H</span><span class=valuegap>-------------</span><br><span class=valuedefault>1FYN&nbsp;&nbsp;&nbsp;</span><span class=value9>TLFVALYDYEARTEDDLSFHKGEKFQI</span><span class=value8>L</span><span class=value5>N</span><span class=value3>SS</span><span class=value2>E</span><span class=valuegap>-------------</span><br><span class=valuedefault>1QCF&nbsp;&nbsp;&nbsp;</span><span class=value9>IIVVALYDYEAIHHEDLSFQKGDQMVV</span><span class=value7>L</span><span class=value4>E</span><span class=value3>E</span><span class=value2>S</span><span class=valuegap>--------------</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;.&nbsp;&nbsp;.:&nbsp;.&nbsp;:</span><span class=value8>&nbsp;</span><span class=value6>&nbsp;</span><span class=value4>&nbsp;</span><span class=value3>.</span><span class=value1>&nbsp;&nbsp;</span><span class=value0>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>1PHT&nbsp;&nbsp;&nbsp;</span><span class=value1>E</span><span class=value2>E</span><span class=value3>I</span><span class=value4>G</span><span class=value5>W</span><span class=value6>L</span><span class=value5>NG</span><span class=valuegap>--------</span><span class=value3>YN</span><span class=value4>E</span><span class=value6>T</span><span class=value7>T</span><span class=value8>G</span><span class=value9>ERGDFPGTYVEYIG</span><br><span class=valuedefault>1BB9&nbsp;&nbsp;&nbsp;</span><span class=value1>Q</span><span class=value2>D</span><span class=value3>E</span><span class=value4>G</span><span class=value5>W</span><span class=value4>LMG</span><span class=value1>VKESDWNQ</span><span class=value2>HK</span><span class=value4>E</span><span class=value6>L</span><span class=value7>E</span><span class=value8>K</span><span class=value9>CRGVFPENFTERVQ</span><br><span class=valuedefault>1UHC&nbsp;&nbsp;&nbsp;</span><span class=value2>GN</span><span class=value4>T</span><span class=value5>E</span><span class=value6>WW</span><span class=value5>LA</span><span class=valuegap>----------</span><span class=value4>E</span><span class=value6>V</span><span class=value7>N</span><span class=value8>G</span><span class=value9>KKGYVPSNYIRKTE</span><br><span class=valuedefault>1YCS&nbsp;&nbsp;&nbsp;</span><span class=value1>D</span><span class=value2>E</span><span class=value4>I</span><span class=value5>E</span><span class=value6>WW</span><span class=value5>WA</span><span class=valuegap>----------</span><span class=value4>R</span><span class=value6>L</span><span class=value7>N</span><span class=value8>D</span><span class=value9>KEGYVPRNLLGL</span><span class=value8>YP</span><br><span class=valuedefault>1OOT&nbsp;&nbsp;&nbsp;</span><span class=value1>S</span><span class=value2>Q</span><span class=value3>N</span><span class=value5>D</span><span class=value6>WW</span><span class=value5>TG</span><span class=valuegap>--------</span><span class=value2>R</span><span class=valuegap>--</span><span class=value6>V</span><span class=value7>N</span><span class=value8>G</span><span class=value9>REGIFPANYVELV</span><span class=valuegap>-</span><br><span class=valuedefault>1ABO&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value2>N</span><span class=value3>G</span><span class=value4>E</span><span class=value5>WCEA</span><span class=valuegap>----------</span><span class=value4>Q</span><span class=value6>T</span><span class=value7>K</span><span class=value8>NG</span><span class=value9>QGWVPSNYITPVN</span><br><span class=valuedefault>1FYN&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value3>G</span><span class=value4>D</span><span class=value5>WWEA</span><span class=valuegap>--------</span><span class=value3>R</span><span class=value2>S</span><span class=value4>L</span><span class=value6>T</span><span class=value7>T</span><span class=value8>G</span><span class=value9>ETGYIPSNYVAPVD</span><br><span class=valuedefault>1QCF&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value2>G</span><span class=value3>E</span><span class=value4>W</span><span class=value5>WK</span><span class=value4>A</span><span class=valuegap>--------</span><span class=value3>R</span><span class=value2>S</span><span class=value4>L</span><span class=value6>A</span><span class=value7>T</span><span class=value8>R</span><span class=value9>KEGYIPSNYVARVD</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;</span><span class=value1>&nbsp;</span><span class=value2>&nbsp;</span><span class=value3>&nbsp;</span><span class=value4>&nbsp;</span><span class=value5>*&nbsp;&nbsp;.</span><span class=value0>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value2>&nbsp;&nbsp;</span><span class=value4>&nbsp;</span><span class=value5>&nbsp;</span><span class=value7>&nbsp;</span><span class=value8>&nbsp;</span><span class=value9>&nbsp;&nbsp;*&nbsp;.*&nbsp;.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><br><br><br></body></html>
+</style><body><span class=valuedefault>T-COFFEE,&nbsp;Version_13.38.3.a77ca2b&nbsp;(Version_13.38.3.a77ca2b)</span><br><span class=valuedefault>Cedric&nbsp;Notredame&nbsp;</span><br><span class=valuedefault>CPU&nbsp;TIME:0&nbsp;sec.</span><br><span class=valuedefault>SCORE=89</span><br><span class=valuedefault>*</span><br><span class=valuedefault>&nbsp;</span><span class=value0>B</span><span class=value1>A</span><span class=value2>D</span><span class=value3>&nbsp;</span><span class=value4>A</span><span class=value5>V</span><span class=value6>G</span><span class=value7>&nbsp;</span><span class=value8>G</span><span class=value9>OOD</span><br><span class=valuedefault>*</span><br><span class=value8>1PHT&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;86</span><br><span class=value8>1BB9&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;84</span><br><span class=value9>1UHC&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;90</span><br><span class=value8>1YCS&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;89</span><br><span class=value9>1OOT&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;90</span><br><span class=value9>1ABO&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;90</span><br><span class=value9>1FYN&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;90</span><br><span class=value9>1QCF&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;90</span><br><span class=value8>cons&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;&nbsp;8</span><br><br><span class=valuedefault>1PHT&nbsp;&nbsp;&nbsp;</span><span class=value9>YQYRALYDYKKEREEDIDLHLGDILTV</span><span class=value8>N</span><span class=value6>K</span><span class=value5>G</span><span class=value4>S</span><span class=value2>LV</span><span class=value1>A</span><span class=value2>L</span><span class=value3>G</span><span class=value6>F</span><span class=value5>SD</span><span class=value4>G</span><span class=value2>Q</span><span class=value1>E</span><span class=value0>AR</span><span class=value1>P</span><br><span class=valuedefault>1BB9&nbsp;&nbsp;&nbsp;</span><span class=value9>FKVQAQHDYTATDTDELQLKAGDVVLVI</span><span class=value7>P</span><span class=value5>F</span><span class=value4>Q</span><span class=value2>N</span><span class=value1>PE</span><span class=valuegap>----------</span><span class=value1>E</span><br><span class=valuedefault>1UHC&nbsp;&nbsp;&nbsp;</span><span class=value9>QVYFAVYTFKARNPNELSVSANQKLKIL</span><span class=value7>E</span><span class=value5>F</span><span class=value4>K</span><span class=value2>D</span><span class=value1>VT</span><span class=valuegap>-----------</span><br><span class=valuedefault>1YCS&nbsp;&nbsp;&nbsp;</span><span class=value9>GVIYALWDYEPQNDDELPMKEGDCMTII</span><span class=value7>H</span><span class=value5>R</span><span class=value3>E</span><span class=value2>D</span><span class=value1>E</span><span class=valuegap>------------</span><br><span class=valuedefault>1OOT&nbsp;&nbsp;&nbsp;</span><span class=value9>PKAVALYSFAGEESGDLPFRKGDVITI</span><span class=value8>L</span><span class=value6>K</span><span class=value4>K</span><span class=value3>S</span><span class=valuegap>-------------</span><span class=value1>D</span><br><span class=valuedefault>1ABO&nbsp;&nbsp;&nbsp;</span><span class=value9>NLFVALYDFVASGDNTLSITKGEKLRV</span><span class=value8>L</span><span class=value6>G</span><span class=value4>Y</span><span class=value3>N</span><span class=value1>H</span><span class=valuegap>-------------</span><br><span class=valuedefault>1FYN&nbsp;&nbsp;&nbsp;</span><span class=value9>TLFVALYDYEARTEDDLSFHKGEKFQI</span><span class=value8>L</span><span class=value5>N</span><span class=value3>SS</span><span class=value2>E</span><span class=valuegap>-------------</span><br><span class=valuedefault>1QCF&nbsp;&nbsp;&nbsp;</span><span class=value9>IIVVALYDYEAIHHEDLSFQKGDQMVV</span><span class=value7>L</span><span class=value4>E</span><span class=value3>E</span><span class=value2>S</span><span class=valuegap>--------------</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;.&nbsp;&nbsp;.:&nbsp;.&nbsp;:</span><span class=value8>&nbsp;</span><span class=value6>&nbsp;</span><span class=value4>&nbsp;</span><span class=value3>.</span><span class=value1>&nbsp;&nbsp;</span><span class=value0>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>1PHT&nbsp;&nbsp;&nbsp;</span><span class=value1>E</span><span class=value2>E</span><span class=value3>I</span><span class=value4>G</span><span class=value5>W</span><span class=value6>L</span><span class=value5>NG</span><span class=valuegap>--------</span><span class=value3>YN</span><span class=value4>E</span><span class=value6>T</span><span class=value7>T</span><span class=value8>G</span><span class=value9>ERGDFPGTYVEYIG</span><br><span class=valuedefault>1BB9&nbsp;&nbsp;&nbsp;</span><span class=value1>Q</span><span class=value2>D</span><span class=value3>E</span><span class=value4>G</span><span class=value5>W</span><span class=value4>LMG</span><span class=value1>VKESDWNQ</span><span class=value2>HK</span><span class=value4>E</span><span class=value6>L</span><span class=value7>E</span><span class=value8>K</span><span class=value9>CRGVFPENFTERVQ</span><br><span class=valuedefault>1UHC&nbsp;&nbsp;&nbsp;</span><span class=value2>GN</span><span class=value4>T</span><span class=value5>E</span><span class=value6>WW</span><span class=value5>LA</span><span class=valuegap>----------</span><span class=value4>E</span><span class=value6>V</span><span class=value7>N</span><span class=value8>G</span><span class=value9>KKGYVPSNYIRKTE</span><br><span class=valuedefault>1YCS&nbsp;&nbsp;&nbsp;</span><span class=value1>D</span><span class=value2>E</span><span class=value4>I</span><span class=value5>E</span><span class=value6>WW</span><span class=value5>WA</span><span class=valuegap>----------</span><span class=value4>R</span><span class=value6>L</span><span class=value7>N</span><span class=value8>D</span><span class=value9>KEGYVPRNLLGL</span><span class=value8>YP</span><br><span class=valuedefault>1OOT&nbsp;&nbsp;&nbsp;</span><span class=value1>S</span><span class=value2>Q</span><span class=value3>N</span><span class=value5>D</span><span class=value6>WW</span><span class=value5>TG</span><span class=valuegap>--------</span><span class=value2>R</span><span class=valuegap>--</span><span class=value6>V</span><span class=value7>N</span><span class=value8>G</span><span class=value9>REGIFPANYVELV</span><span class=valuegap>-</span><br><span class=valuedefault>1ABO&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value2>N</span><span class=value3>G</span><span class=value4>E</span><span class=value5>WCEA</span><span class=valuegap>----------</span><span class=value4>Q</span><span class=value6>T</span><span class=value7>K</span><span class=value8>NG</span><span class=value9>QGWVPSNYITPVN</span><br><span class=valuedefault>1FYN&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value3>G</span><span class=value4>D</span><span class=value5>WWEA</span><span class=valuegap>--------</span><span class=value3>R</span><span class=value2>S</span><span class=value4>L</span><span class=value6>T</span><span class=value7>T</span><span class=value8>G</span><span class=value9>ETGYIPSNYVAPVD</span><br><span class=valuedefault>1QCF&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value2>G</span><span class=value3>E</span><span class=value4>W</span><span class=value5>WK</span><span class=value4>A</span><span class=valuegap>--------</span><span class=value3>R</span><span class=value2>S</span><span class=value4>L</span><span class=value6>A</span><span class=value7>T</span><span class=value8>R</span><span class=value9>KEGYIPSNYVARVD</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;</span><span class=value1>&nbsp;</span><span class=value2>&nbsp;</span><span class=value3>&nbsp;</span><span class=value4>&nbsp;</span><span class=value5>*&nbsp;&nbsp;.</span><span class=value0>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value2>&nbsp;&nbsp;</span><span class=value4>&nbsp;</span><span class=value5>&nbsp;</span><span class=value7>&nbsp;</span><span class=value8>&nbsp;</span><span class=value9>&nbsp;&nbsp;*&nbsp;.*&nbsp;.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><br><br><br></body></html>
 </content>
 </file>
 <file>
@@ -2273,46 +2273,54 @@ ROOT_TMP_4_TCOFFEE=/var/tmp/
 SHELL=/bin/bash
 TERM=xterm-256color
 TMPDIR=/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/
+CONDA_SHLVL=1
 PERL5LIB=/sw/lib/perl5:/sw/lib/perl5/darwin
 Apple_PubSub_Socket_Render=/private/tmp/com.apple.launchd.u7asRiNodS/Render
+CONDA_PROMPT_MODIFIER=(base) 
 TERM_PROGRAM_VERSION=388.1.3
 OSNAME=macosx
 PERL_BIN=/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms::/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices
-TERM_SESSION_ID=08C395F9-69A0-4DC8-9DE9-5914C23D168F
+TERM_SESSION_ID=98F198FA-FDF9-40DD-A8EF-07E7D5143362
 METHODS_4_TCOFFEE=/Users/cnotredame//.t_coffee//methods/
 VERSIONER_PERL_VERSION=5.18
 XAPPLRESDIR=/sw/etc/app-defaults/
 http_proxy=
 HTTP_proxy=
 USER=cnotredame
+CONDA_EXE=/Users/cnotredame/anaconda3/bin/conda
 SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.mMz4rqepoV/Listeners
 __CF_USER_TEXT_ENCODING=0x1F6:0x0:0x0
 ENV_4_TCOFFEE=/Users/cnotredame//.t_coffee//.t_coffee_env
+_CE_CONDA=
 all_proxy=
 ALL_PROXY=
 HTTP_proxy_4_TCOFFEE=
-PATH=/Users/cnotredame//.t_coffee//plugins/macosx/:/opt/local/bin:/opt/local/sbin:/opt/local/bin:/opt/local/sbin:/Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/packages/x3dna-v2.1/bin:/Users/cnotredame/bin/macosx://Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms::/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices:/Users/cnotredame/bin/Scripts/:/Users/cnotredame/Library/Haskell/ghc-7.4.2/lib/epub-tools-2.0.0/bin/:/sw/bin:/sw/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin
+PATH=/Users/cnotredame//.t_coffee//plugins/macosx/:/Users/cnotredame/anaconda3/bin:/Users/cnotredame/anaconda3/condabin:/opt/local/bin:/opt/local/sbin:/opt/local/bin:/opt/local/sbin:/Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/packages/x3dna-v2.1/bin:/Users/cnotredame/bin/macosx://Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms:.:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices:/Users/cnotredame/bin/Scripts:/Users/cnotredame/Library/Haskell/ghc-7.4.2/lib/epub-tools-2.0.0/bin:/sw/bin:/sw/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin
 _=/usr/bin/printenv
+CONDA_PREFIX=/Users/cnotredame/anaconda3
 COLOR_4_TCOFFEE=new
 DIR_4_TCOFFEE=/Users/cnotredame//.t_coffee/
-PWD=/Users/cnotredame/Dropbox/projects/git/tcoffee/tmp/RANDOMSTRINGhqTOfsyLmb092qvmwZTs/tmp/RANDOMSTRING8zfLD48qCTcIBOaHH9nJ/data
+PWD=/Users/cnotredame/Dropbox/projects/git/tcoffee/tmp/RANDOMSTRINGL1HLNOIwbdsPgkLykZDw/tmp/RANDOMSTRINGyaFEN3w6i2wR45S3KRq4/data
 CACHE_4_TCOFFEE=/Users/cnotredame//.t_coffee//cache/
 X3DNA=/Users/cnotredame/Dropbox/packages/x3dna-v2.1
 DBUS_LAUNCHD_SESSION_BUS_SOCKET=/private/tmp/com.apple.launchd.CeZrDaslOL/unix_domain_listener
 XPC_FLAGS=0x0
 VERSIONER_PERL_PREFER_32_BIT=no
+_CE_M=
 XPC_SERVICE_NAME=0
 ERRORFILE_4_TCOFFEE=NO
 PLUGINS_4_TCOFFEE=/Users/cnotredame//.t_coffee//plugins/macosx/
 SHLVL=3
 HOME=/Users/cnotredame
-DUMP_4_TCOFFEE=/Users/cnotredame/Dropbox/projects/git/tcoffee/tmp/RANDOMSTRINGhqTOfsyLmb092qvmwZTs/tmp/RANDOMSTRING8zfLD48qCTcIBOaHH9nJ/nature_protocol.tests.1.dump
+DUMP_4_TCOFFEE=/Users/cnotredame/Dropbox/projects/git/tcoffee/tmp/RANDOMSTRINGL1HLNOIwbdsPgkLykZDw/tmp/RANDOMSTRINGyaFEN3w6i2wR45S3KRq4/nature_protocol.tests.1.dump
 HTTP_PROXY=
 MAFFT_BINARIES=
+CONDA_PYTHON_EXE=/Users/cnotredame/anaconda3/bin/python
 BIN=/Users/cnotredame/bin/macosx
 LOGNAME=cnotredame
 EMAIL_4_TCOFFEE=cedric.notredame@gmail.com
 LC_CTYPE=UTF-8
+CONDA_DEFAULT_ENV=base
 EMAIL=cedric.notredame@gmail.com
 UPDATED_ENV_4_TCOFFEE=1
 INFOPATH=/sw/share/info:/sw/info:/usr/share/info
@@ -2321,11 +2329,11 @@ TC_MASTER_NODE=1
 NUMBER_OF_PROCESSORS=8
 ALL_proxy=
 SECURITYSESSIONID=186a6
-LOCKDIR_4_TCOFFEE=/var/tmp/tco/tcosfg6crnn80643//lck/q73lmep1fm/
-TMP_4_TCOFFEE=/var/tmp/tco/tcosfg6crnn80643/
+LOCKDIR_4_TCOFFEE=/var/tmp/tco/tcox7npy31z71985//lck/r0j9_zy8dn/
+TMP_4_TCOFFEE=/var/tmp/tco/tcox7npy31z71985/
 USER_BIN=/Users/cnotredame/bin/macosx
 SCRIPT_BIN=/Users/cnotredame/bin/Scripts/
 </environement>
 <DumpStatus>OK</DumpStatus>
-<DumpFile>/Users/cnotredame/Dropbox/projects/git/tcoffee/tmp/RANDOMSTRINGhqTOfsyLmb092qvmwZTs/tmp/RANDOMSTRING8zfLD48qCTcIBOaHH9nJ/nature_protocol.tests.1.dump</DumpFile>
+<DumpFile>/Users/cnotredame/Dropbox/projects/git/tcoffee/tmp/RANDOMSTRINGL1HLNOIwbdsPgkLykZDw/tmp/RANDOMSTRINGyaFEN3w6i2wR45S3KRq4/nature_protocol.tests.1.dump</DumpFile>
 </DumpIO>

@@ -1,8 +1,8 @@
 <DumpIO>
 <nature>standard dump</nature>
 <program>T-COFFEE</program>
-<version>Version_13.30.12.28864d4</version>
-<build>Version_13.30.12.28864d4</build>
+<version>Version_13.38.3.a77ca2b</version>
+<build>Version_13.38.3.a77ca2b</build>
 <cl>t_coffee -infile sample_aln1_1.aln -aln sample_aln1_2.aln -special_mode evaluate </cl>
 <stack>
 </stack>
@@ -12,7 +12,7 @@
 <stream>output</stream>
 <name>stdout</name>
 <content>
-PROGRAM: T-COFFEE Version_13.30.12.28864d4 (Version_13.30.12.28864d4)
+PROGRAM: T-COFFEE Version_13.38.3.a77ca2b (Version_13.38.3.a77ca2b)
 -full_log      	S	[0] 
 -genepred_score	S	[0] 	nsd
 -run_name      	S	[0] 
@@ -188,7 +188,7 @@ INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
   Input File sample_aln1_1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
 
 	Multi Core Mode: 1 processors:
-] 	none
+	none
 -rna_lib       	S	[0] 
 -no_warning    	D	[0] 	0 
 -run_local_script	D	[0] 	0 
@@ -223,7 +223,7 @@ INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
 	Multi Core Mode: 1 processors:
 
 	--- Process Method/Library/Aln Ssample_aln1_1.aln
-	xxx Retrieved Ssample_aln1_1.aln] 	none
+	xxx Retrieved Ssample_aln1_1.aln	none
 -rna_lib       	S	[0] 
 -no_warning    	D	[0] 	0 
 -run_local_script	D	[0] 	0 
@@ -271,7 +271,7 @@ MANUAL PENALTIES: gapopen=0 gapext=0
 Library Relaxation: Multi_proc [1]
  
 !		[Relax Library][TOT=    4][  0 %]!		[Relax Library][TOT=    4][ 50 %]!		[Relax Library][TOT=    4][ 75 %]!		[Relax Library][TOT=    4][100 %]
-] 	none
+	none
 -rna_lib       	S	[0] 
 -no_warning    	D	[0] 	0 
 -run_local_script	D	[0] 	0 
@@ -330,8 +330,8 @@ OUTPUT RESULTS
 	#### File Type= MSA             Format= html            Name= sample_aln1_1.html
 
 # Command Line: t_coffee -infile sample_aln1_1.aln -aln sample_aln1_2.aln -special_mode evaluate  [PROGRAM:T-COFFEE]
-# T-COFFEE Memory Usage: Current= 28.767 Mb, Max= 29.945 Mb
-# Results Produced with T-COFFEE Version_13.30.12.28864d4 (Version_13.30.12.28864d4)
+# T-COFFEE Memory Usage: Current= 28.765 Mb, Max= 29.943 Mb
+# Results Produced with T-COFFEE Version_13.38.3.a77ca2b (Version_13.38.3.a77ca2b)
 # T-COFFEE is available from http://www.tcoffee.org
 # Register on: https://groups.google.com/group/tcoffee/
 </content>
@@ -385,7 +385,7 @@ hmgt_mouse      AKDDRIRYDNEMKSWEEQMAE
 <file>
 <stream>output</stream>
 <name>sample_aln1_1.score_ascii</name>
-<content>T-COFFEE, Version_13.30.12.28864d4 (Version_13.30.12.28864d4)
+<content>T-COFFEE, Version_13.38.3.a77ca2b (Version_13.38.3.a77ca2b)
 Cedric Notredame 
 CPU TIME:0 sec.
 SCORE=91
@@ -438,7 +438,7 @@ SPAN.value9 {background: #FFC8C8}
 SPAN.valuedefault {}
 SPAN.valuegap {}
 SPAN.valueink {background: 000000}
-</style><body><span class=valuedefault>T-COFFEE,&nbsp;Version_13.30.12.28864d4&nbsp;(Version_13.30.12.28864d4)</span><br><span class=valuedefault>Cedric&nbsp;Notredame&nbsp;</span><br><span class=valuedefault>CPU&nbsp;TIME:0&nbsp;sec.</span><br><span class=valuedefault>SCORE=91</span><br><span class=valuedefault>*</span><br><span class=valuedefault>&nbsp;</span><span class=value0>B</span><span class=value1>A</span><span class=value2>D</span><span class=value3>&nbsp;</span><span class=value4>A</span><span class=value5>V</span><span class=value6>G</span><span class=value7>&nbsp;</span><span class=value8>G</span><span class=value9>OOD</span><br><span class=valuedefault>*</span><br><span class=value9>hmgb_chite&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;100</span><br><span class=value8>hmgl_wheat&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;89</span><br><span class=value8>hmgl_trybr&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;88</span><br><span class=value8>hmgt_mouse&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;88</span><br><span class=value9>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;&nbsp;9</span><br><br><span class=valuedefault>hmgb_chite&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value9>AD</span><span class=valuegap>-</span><span class=value9>K</span><span class=valuegap>-</span><span class=value9>PKR</span><span class=valuegap>-</span><span class=value9>PLSAYMLWLNSARESIKRENPDFK</span><span class=valuegap>-</span><span class=value9>VT</span><span class=valuegap>-</span><span class=value9>E</span><br><span class=valuedefault>hmgl_wheat&nbsp;&nbsp;&nbsp;</span><span class=value9>D</span><span class=value8>PN</span><span class=valuegap>-</span><span class=value7>K</span><span class=valuegap>-</span><span class=value9>PKR</span><span class=value7>AP</span><span class=valuegap>-</span><span class=value9>SAFFVFM</span><span class=value7>GEF</span><span class=value9>REEFKQKNPK</span><span class=value8>NK</span><span class=value9>S</span><span class=value8>VA</span><span class=valuegap>-</span><span class=value9>A</span><br><span class=valuedefault>hmgl_trybr&nbsp;&nbsp;&nbsp;</span><span class=value9>KKD</span><span class=value8>SN</span><span class=value7>A</span><span class=value9>PKR</span><span class=valuegap>-</span><span class=value8>AM</span><span class=value9>TSF</span><span class=valuegap>-</span><span class=value9>MFF</span><span class=valuegap>-</span><span class=value8>S</span><span class=valuegap>--</span><span class=value8>SD</span><span class=value9>FRSKHSD</span><span class=value8>LS</span><span class=valuegap>-</span><span class=value8>IV</span><span class=valuegap>-</span><span class=value9>E</span><br><span class=valuedefault>hmgt_mouse&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value7>K</span><span class=valuegap>----</span><span class=value9>PKR</span><span class=valuegap>-</span><span class=value8>PR</span><span class=value9>SAYNIYV</span><span class=valuegap>-</span><span class=value8>S</span><span class=valuegap>--</span><span class=value8>ES</span><span class=value9>FQEAKDD</span><span class=valuegap>-</span><span class=value7>S</span><span class=valuegap>-</span><span class=value7>AQG</span><span class=value9>K</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;</span><span class=value6>&nbsp;</span><span class=value8>&nbsp;</span><span class=value5>&nbsp;</span><span class=value6>&nbsp;</span><span class=value3>&nbsp;</span><span class=value9>***</span><span class=value4>&nbsp;</span><span class=value6>.</span><span class=value7>&nbsp;</span><span class=value9>:::&nbsp;::.</span><span class=value7>&nbsp;</span><span class=value6>.</span><span class=value7>&nbsp;</span><span class=value9>&nbsp;</span><span class=value7>..</span><span class=value9>::&nbsp;&nbsp;:&nbsp;.</span><span class=value7>&nbsp;</span><span class=value6>.</span><span class=value9>&nbsp;</span><span class=value6>&nbsp;&nbsp;</span><span class=value3>&nbsp;</span><span class=value9>&nbsp;</span><br><br><br><span class=valuedefault>hmgb_chite&nbsp;&nbsp;&nbsp;</span><span class=value9>VAKKGGELWRGL</span><span class=valuegap>--</span><span class=value9>K</span><span class=valuegap>-</span><span class=value9>DKSEWEAKAATAKQNYIRALQEY</span><br><span class=valuedefault>hmgl_wheat&nbsp;&nbsp;&nbsp;</span><span class=value9>VGKAAGERWKSLS</span><span class=valuegap>-</span><span class=value7>E</span><span class=value9>SEKAPYVAKANKLKGEY</span><span class=value8>NKAI</span><span class=value9>AAY</span><br><span class=valuedefault>hmgl_trybr&nbsp;&nbsp;&nbsp;</span><span class=value9>MSKAAGAAWKELG</span><span class=value8>P</span><span class=value9>E</span><span class=valuegap>-</span><span class=value9>ERKVYEEMAEKDKERY</span><span class=valuegap>--</span><span class=value7>K</span><span class=valuegap>-</span><span class=value7>R</span><span class=valuegap>--</span><br><span class=valuedefault>hmgt_mouse&nbsp;&nbsp;&nbsp;</span><span class=value9>L</span><span class=valuegap>-</span><span class=value9>KLVNEAWKNLS</span><span class=value8>P</span><span class=value9>E</span><span class=valuegap>-</span><span class=value9>EKQAYIQLAKDDRIRY</span><span class=value8>DNEM</span><span class=value9>KSW</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>:&nbsp;*&nbsp;&nbsp;.&nbsp;&nbsp;*:&nbsp;*&nbsp;</span><span class=value6>&nbsp;</span><span class=value8>:</span><span class=value9>&nbsp;::&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;:&nbsp;.*</span><span class=value8>&nbsp;&nbsp;</span><span class=value6>&nbsp;</span><span class=value8>&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>hmgb_chite&nbsp;&nbsp;&nbsp;</span><span class=value9>ER</span><span class=valuegap>-</span><span class=value9>NGG</span><span class=valuegap>-</span><br><span class=valuedefault>hmgl_wheat&nbsp;&nbsp;&nbsp;</span><span class=value9>NK</span><span class=value8>GES</span><span class=value9>A</span><span class=valuegap>-</span><br><span class=valuedefault>hmgl_trybr&nbsp;&nbsp;&nbsp;</span><span class=value7>E</span><span class=valuegap>---</span><span class=value7>M</span><span class=valuegap>--</span><br><span class=valuedefault>hmgt_mouse&nbsp;&nbsp;&nbsp;</span><span class=value9>EE</span><span class=valuegap>-</span><span class=value8>QMA</span><span class=value9>E</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>:</span><span class=value9>&nbsp;</span><span class=value5>&nbsp;</span><span class=value7>&nbsp;</span><span class=value5>&nbsp;</span><span class=value8>&nbsp;</span><span class=value9>&nbsp;</span><br><br><br><br><br><br></body></html>
+</style><body><span class=valuedefault>T-COFFEE,&nbsp;Version_13.38.3.a77ca2b&nbsp;(Version_13.38.3.a77ca2b)</span><br><span class=valuedefault>Cedric&nbsp;Notredame&nbsp;</span><br><span class=valuedefault>CPU&nbsp;TIME:0&nbsp;sec.</span><br><span class=valuedefault>SCORE=91</span><br><span class=valuedefault>*</span><br><span class=valuedefault>&nbsp;</span><span class=value0>B</span><span class=value1>A</span><span class=value2>D</span><span class=value3>&nbsp;</span><span class=value4>A</span><span class=value5>V</span><span class=value6>G</span><span class=value7>&nbsp;</span><span class=value8>G</span><span class=value9>OOD</span><br><span class=valuedefault>*</span><br><span class=value9>hmgb_chite&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;100</span><br><span class=value8>hmgl_wheat&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;89</span><br><span class=value8>hmgl_trybr&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;88</span><br><span class=value8>hmgt_mouse&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;88</span><br><span class=value9>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;&nbsp;9</span><br><br><span class=valuedefault>hmgb_chite&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value9>AD</span><span class=valuegap>-</span><span class=value9>K</span><span class=valuegap>-</span><span class=value9>PKR</span><span class=valuegap>-</span><span class=value9>PLSAYMLWLNSARESIKRENPDFK</span><span class=valuegap>-</span><span class=value9>VT</span><span class=valuegap>-</span><span class=value9>E</span><br><span class=valuedefault>hmgl_wheat&nbsp;&nbsp;&nbsp;</span><span class=value9>D</span><span class=value8>PN</span><span class=valuegap>-</span><span class=value7>K</span><span class=valuegap>-</span><span class=value9>PKR</span><span class=value7>AP</span><span class=valuegap>-</span><span class=value9>SAFFVFM</span><span class=value7>GEF</span><span class=value9>REEFKQKNPK</span><span class=value8>NK</span><span class=value9>S</span><span class=value8>VA</span><span class=valuegap>-</span><span class=value9>A</span><br><span class=valuedefault>hmgl_trybr&nbsp;&nbsp;&nbsp;</span><span class=value9>KKD</span><span class=value8>SN</span><span class=value7>A</span><span class=value9>PKR</span><span class=valuegap>-</span><span class=value8>AM</span><span class=value9>TSF</span><span class=valuegap>-</span><span class=value9>MFF</span><span class=valuegap>-</span><span class=value8>S</span><span class=valuegap>--</span><span class=value8>SD</span><span class=value9>FRSKHSD</span><span class=value8>LS</span><span class=valuegap>-</span><span class=value8>IV</span><span class=valuegap>-</span><span class=value9>E</span><br><span class=valuedefault>hmgt_mouse&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value7>K</span><span class=valuegap>----</span><span class=value9>PKR</span><span class=valuegap>-</span><span class=value8>PR</span><span class=value9>SAYNIYV</span><span class=valuegap>-</span><span class=value8>S</span><span class=valuegap>--</span><span class=value8>ES</span><span class=value9>FQEAKDD</span><span class=valuegap>-</span><span class=value7>S</span><span class=valuegap>-</span><span class=value7>AQG</span><span class=value9>K</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;</span><span class=value6>&nbsp;</span><span class=value8>&nbsp;</span><span class=value5>&nbsp;</span><span class=value6>&nbsp;</span><span class=value3>&nbsp;</span><span class=value9>***</span><span class=value4>&nbsp;</span><span class=value6>.</span><span class=value7>&nbsp;</span><span class=value9>:::&nbsp;::.</span><span class=value7>&nbsp;</span><span class=value6>.</span><span class=value7>&nbsp;</span><span class=value9>&nbsp;</span><span class=value7>..</span><span class=value9>::&nbsp;&nbsp;:&nbsp;.</span><span class=value7>&nbsp;</span><span class=value6>.</span><span class=value9>&nbsp;</span><span class=value6>&nbsp;&nbsp;</span><span class=value3>&nbsp;</span><span class=value9>&nbsp;</span><br><br><br><span class=valuedefault>hmgb_chite&nbsp;&nbsp;&nbsp;</span><span class=value9>VAKKGGELWRGL</span><span class=valuegap>--</span><span class=value9>K</span><span class=valuegap>-</span><span class=value9>DKSEWEAKAATAKQNYIRALQEY</span><br><span class=valuedefault>hmgl_wheat&nbsp;&nbsp;&nbsp;</span><span class=value9>VGKAAGERWKSLS</span><span class=valuegap>-</span><span class=value7>E</span><span class=value9>SEKAPYVAKANKLKGEY</span><span class=value8>NKAI</span><span class=value9>AAY</span><br><span class=valuedefault>hmgl_trybr&nbsp;&nbsp;&nbsp;</span><span class=value9>MSKAAGAAWKELG</span><span class=value8>P</span><span class=value9>E</span><span class=valuegap>-</span><span class=value9>ERKVYEEMAEKDKERY</span><span class=valuegap>--</span><span class=value7>K</span><span class=valuegap>-</span><span class=value7>R</span><span class=valuegap>--</span><br><span class=valuedefault>hmgt_mouse&nbsp;&nbsp;&nbsp;</span><span class=value9>L</span><span class=valuegap>-</span><span class=value9>KLVNEAWKNLS</span><span class=value8>P</span><span class=value9>E</span><span class=valuegap>-</span><span class=value9>EKQAYIQLAKDDRIRY</span><span class=value8>DNEM</span><span class=value9>KSW</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>:&nbsp;*&nbsp;&nbsp;.&nbsp;&nbsp;*:&nbsp;*&nbsp;</span><span class=value6>&nbsp;</span><span class=value8>:</span><span class=value9>&nbsp;::&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;:&nbsp;.*</span><span class=value8>&nbsp;&nbsp;</span><span class=value6>&nbsp;</span><span class=value8>&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>hmgb_chite&nbsp;&nbsp;&nbsp;</span><span class=value9>ER</span><span class=valuegap>-</span><span class=value9>NGG</span><span class=valuegap>-</span><br><span class=valuedefault>hmgl_wheat&nbsp;&nbsp;&nbsp;</span><span class=value9>NK</span><span class=value8>GES</span><span class=value9>A</span><span class=valuegap>-</span><br><span class=valuedefault>hmgl_trybr&nbsp;&nbsp;&nbsp;</span><span class=value7>E</span><span class=valuegap>---</span><span class=value7>M</span><span class=valuegap>--</span><br><span class=valuedefault>hmgt_mouse&nbsp;&nbsp;&nbsp;</span><span class=value9>EE</span><span class=valuegap>-</span><span class=value8>QMA</span><span class=value9>E</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>:</span><span class=value9>&nbsp;</span><span class=value5>&nbsp;</span><span class=value7>&nbsp;</span><span class=value5>&nbsp;</span><span class=value8>&nbsp;</span><span class=value9>&nbsp;</span><br><br><br><br><br><br></body></html>
 </content>
 </file>
 <environement>
@@ -457,7 +457,7 @@ CONDA_PROMPT_MODIFIER=(base)
 TERM_PROGRAM_VERSION=388.1.3
 OSNAME=macosx
 PERL_BIN=/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms::/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices
-TERM_SESSION_ID=966A65A4-FBA5-4990-991E-01DB7E43DA0A
+TERM_SESSION_ID=98F198FA-FDF9-40DD-A8EF-07E7D5143362
 METHODS_4_TCOFFEE=/Users/cnotredame//.t_coffee//methods/
 VERSIONER_PERL_VERSION=5.18
 XAPPLRESDIR=/sw/etc/app-defaults/
@@ -472,12 +472,12 @@ _CE_CONDA=
 all_proxy=
 ALL_PROXY=
 HTTP_proxy_4_TCOFFEE=
-PATH=/Users/cnotredame//.t_coffee//plugins/macosx/:/Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/packages/x3dna-v2.1/bin:/Users/cnotredame/bin/macosx://Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms::/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices:/Users/cnotredame/bin/Scripts/:/Users/cnotredame/Library/Haskell/ghc-7.4.2/lib/epub-tools-2.0.0/bin/:/Users/cnotredame/anaconda3/bin:/Users/cnotredame/anaconda3/condabin:/opt/local/bin:/opt/local/sbin:/opt/local/bin:/opt/local/sbin:/Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/packages/x3dna-v2.1/bin:/Users/cnotredame/bin/macosx://Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms:.:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices:/Users/cnotredame/bin/Scripts:/Users/cnotredame/Library/Haskell/ghc-7.4.2/lib/epub-tools-2.0.0/bin:/sw/bin:/sw/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin
+PATH=/Users/cnotredame//.t_coffee//plugins/macosx/:/Users/cnotredame/anaconda3/bin:/Users/cnotredame/anaconda3/condabin:/opt/local/bin:/opt/local/sbin:/opt/local/bin:/opt/local/sbin:/Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/packages/x3dna-v2.1/bin:/Users/cnotredame/bin/macosx://Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms:.:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices:/Users/cnotredame/bin/Scripts:/Users/cnotredame/Library/Haskell/ghc-7.4.2/lib/epub-tools-2.0.0/bin:/sw/bin:/sw/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin
 _=/usr/bin/printenv
 CONDA_PREFIX=/Users/cnotredame/anaconda3
 COLOR_4_TCOFFEE=new
 DIR_4_TCOFFEE=/Users/cnotredame//.t_coffee/
-PWD=/Users/cnotredame/Dropbox/projects/git/tcoffee/tmp/RANDOMSTRING7hRVWRF1V6pGa64HVoDP/data
+PWD=/Users/cnotredame/Dropbox/projects/git/tcoffee/tmp/RANDOMSTRINGBfdLgcy5G70t4m91mTfU/tmp/RANDOMSTRINGrG2bBPeaAEy7gNnZxWay/data
 CACHE_4_TCOFFEE=/Users/cnotredame//.t_coffee//cache/
 X3DNA=/Users/cnotredame/Dropbox/packages/x3dna-v2.1
 DBUS_LAUNCHD_SESSION_BUS_SOCKET=/private/tmp/com.apple.launchd.CeZrDaslOL/unix_domain_listener
@@ -489,16 +489,16 @@ ERRORFILE_4_TCOFFEE=NO
 PLUGINS_4_TCOFFEE=/Users/cnotredame//.t_coffee//plugins/macosx/
 SHLVL=3
 HOME=/Users/cnotredame
-DUMP_4_TCOFFEE=/Users/cnotredame/Dropbox/projects/git/tcoffee/tmp/RANDOMSTRING7hRVWRF1V6pGa64HVoDP/core.tests.136.dump
+DUMP_4_TCOFFEE=/Users/cnotredame/Dropbox/projects/git/tcoffee/tmp/RANDOMSTRINGBfdLgcy5G70t4m91mTfU/tmp/RANDOMSTRINGrG2bBPeaAEy7gNnZxWay/core.tests.136.dump
 HTTP_PROXY=
 MAFFT_BINARIES=
 CONDA_PYTHON_EXE=/Users/cnotredame/anaconda3/bin/python
 BIN=/Users/cnotredame/bin/macosx
 LOGNAME=cnotredame
-EMAIL_4_TCOFFEE=cedric.notredame@gmail.com
+EMAIL_4_TCOFFEE=
 LC_CTYPE=UTF-8
 CONDA_DEFAULT_ENV=base
-EMAIL=cedric.notredame@gmail.com
+EMAIL=
 UPDATED_ENV_4_TCOFFEE=1
 INFOPATH=/sw/share/info:/sw/info:/usr/share/info
 DISPLAY=/private/tmp/com.apple.launchd.MDJPhYnCNw/org.macosforge.xquartz:0
@@ -506,11 +506,11 @@ TC_MASTER_NODE=1
 NUMBER_OF_PROCESSORS=8
 ALL_proxy=
 SECURITYSESSIONID=186a6
-LOCKDIR_4_TCOFFEE=/var/tmp/tco/tcotrabndqd21937//lck/_o6akjat2o/
-TMP_4_TCOFFEE=/var/tmp/tco/tcotrabndqd21937/
+LOCKDIR_4_TCOFFEE=/var/tmp/tco/tcok1rzmh0w62914//lck/jgeav9rw68/
+TMP_4_TCOFFEE=/var/tmp/tco/tcok1rzmh0w62914/
 USER_BIN=/Users/cnotredame/bin/macosx
 SCRIPT_BIN=/Users/cnotredame/bin/Scripts/
 </environement>
 <DumpStatus>OK</DumpStatus>
-<DumpFile>/Users/cnotredame/Dropbox/projects/git/tcoffee/tmp/RANDOMSTRING7hRVWRF1V6pGa64HVoDP/core.tests.136.dump</DumpFile>
+<DumpFile>/Users/cnotredame/Dropbox/projects/git/tcoffee/tmp/RANDOMSTRINGBfdLgcy5G70t4m91mTfU/tmp/RANDOMSTRINGrG2bBPeaAEy7gNnZxWay/core.tests.136.dump</DumpFile>
 </DumpIO>

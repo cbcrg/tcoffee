@@ -1,8 +1,8 @@
 <DumpIO>
 <nature>standard dump</nature>
 <program>T-COFFEE</program>
-<version>Version_13.30.12.28864d4</version>
-<build>Version_13.30.12.28864d4</build>
+<version>Version_13.38.3.a77ca2b</version>
+<build>Version_13.38.3.a77ca2b</build>
 <cl>t_coffee -pdb struc1.pdb struc2.pdb struc3.pdb -method sap_pair -cache no </cl>
 <stack>
 </stack>
@@ -14,42 +14,42 @@
 <content>#Single Thread
 #Single Thread
 #Single Thread
-CLUSTAL FORMAT for T-COFFEE Version_13.30.12.28864d4 [http://www.tcoffee.org] [MODE:  ], CPU=0.00 sec, SCORE=98, Nseq=3, Len=326 
+CLUSTAL FORMAT for T-COFFEE Version_13.38.3.a77ca2b [http://www.tcoffee.org] [MODE:  ], CPU=0.00 sec, SCORE=99, Nseq=3, Len=325 
 
-1CMS            EVASVPLTNYL--DQYFGKIYLGTPPEFTVLFDTGSSDWVPSIYCKSNAC
+1CMS            EVASVPLTNY--LDQYFGKIYLGTPPEFTVLFDTGSSDWVPSIYCKSNAC
 4APE            -TGSATTTPIDSLDAYITPVQIGTPQTLNLDFDTGSSLWVFSSETTASED
-3APP            ASGVATNTPTA-NEEYITPVTIGG-T-LNLNFDTGSADLVFSTELPASQQ
+3APP            ASGVATNTPTA-NEEYITPVTIGG--TLNLNFDTGSADLVFSTELPASQQ
                   . .. *     : *:  : :*    :.: *****:  * *    :.  
 
-1CMS            NHQRFDPRKSSTQ-NLGKPLSI-HYGGSMQGILGYDTV-VSNIVDIQQTV
+1CMS            NHQRFDPRKSST-QNLGKPLSIHYG-GSMQGILGYDTV-VSNIVDIQQTV
 4APE            GQTIYTPSKSTAKLLSGATWSIS-GDGSSSGDVYTD-VSVGGLTVTGQA-
-3APP            SHSVYNPSATG-K-ESGYTWSISYGDGSASGNVFTDSVT-GGVTAHGQAV
-                .:  : *  :  :   * . **   .** .* :  * *  ..:.   *: 
+3APP            SHSVYNPSATG-KE-SGYTWSISYGDGSASGNVFTDSVT-GGVTAHGQAV
+                .:  : *  :      * . **  * ** .* :  * *  ..:.   *: 
 
-1CMS            G-STQEPGDVFTYA-FDGILGMAYPSL-SE--Y-S-IPVFDNMMRHLVAQ
-4APE            ESAKKVSSSFTE-STIDGLLGLAFS-LNTVSPT-QQKTF-DNAK-ASLDS
-3APP            QA-QQISAQFQQDTN-DGLLGLAFSSIN-VQPQSQ-TTFFDT-K-SSLAQ
-                    : ....   :  **:**:*:. :       .  .. *.     : .
+1CMS            G-STQEPGDVFTYA-FDGILGMAYPSL-SE--YS-IPVFDNMMRHLVAQD
+4APE            ESAKKVSSSFTE-STIDGLLGLAFS-LNTVSPTQQKTF-DNAK-ASLDSP
+3APP            QA-QQISAQFQQDTN-DGLLGLAFSSIN-VQPQSQTTFFDT-K-SSLAQP
+                    : ....   :  **:**:*:. :      .  .. *.     : . 
 
-1CMS            DLFSVY-DRNGQESMLTLG-IDPSYYTGSLHW-PVT-VQQYWQFTV-SVT
-4APE            PVF-ADLGY-HAPGTYN-GFIDTTAYTGSI-YTAVSTKQGFWE-TSTGYA
-3APP            PLFAVA-KH-QQPGVYDFGF-DSSKYTGSLTYT-VDNSQGFWSFNV-SYT
-                 :* .        .    *  *.: ****: :  *   * :*. .  . :
+1CMS            LFSVY-DRNGQESMLTLG-IDPSYYTGSLHW-PV-TVQQYWQFTV-SVTI
+4APE            VF-ADLGY-HAPGTYN-GFIDTTAYTGSI-YTAVSTKQGFWE-TSTGYAV
+3APP            LFAVA-KH-QQPGVYDFGF-DSSKYTGSLTYT-VDNSQGFWSFNV-SYTA
+                :* .        .    *  *.: ****: :  * . * :*. .  . : 
 
-1CMS            ISGVV-VACEGCQAILDTGTSK-VGPSSDILNIQQ-IGATQNQYGEF-DD
-4APE            VGSGTFST--SIDGIADTGT-LLYLPATVVSAY-AQVSGAKSSSSVG-YV
-3APP            AGSQS-GD--GF-GIADTGTTLLLLD-SVVSQYYSQVSAQ-QDSNAGGYV
-                 ..       .  .* ****       : :      :..  .. .     
+1CMS            SGVV-VACEGCQAILDTGTSK-VGPSSDILNIQQ-IGAT-QNQYGEFD-D
+4APE            GSGTFST--SIDGIADTGT-LLYLPATVVSAY-AQVSGAKSSSSVG-YVF
+3APP            GSQS-GD--GF-GIADTGTTLLLLD-SVVSQYYSQVSAQ-QDSNAGGYVF
+                ..       .  .* ****       : :      :..  ...       
 
-1CMS            -CDNLSYMPTVV-EINGKMYPLTPS-YTSQD--Q-GFCTSG-QSENHSQK
-4APE            FPC-SATLPS-TFGVGSARIVIP-DYIDFGPIST-GS-FGGIQSSAGIGI
-3APP            -FC-STNLPDFSVSI-GYTATVPGSLIN-GPSGDGSTCLGG-QSNSGIGF
-                     : :*     : .    :. .          .   .* **.     
+1CMS            CDNLSYMPTVV-EINGKMYPLTPS-YTSQ--DQG-FCTSG-QSENHSQKW
+4APE            PCSA-TLPS-TFGVGSARIVIP-DYIDFGPISTG--SFGGIQSSAGIGI-
+3APP            -CST-NLPDFSVSI-GYTATVPGSLIN-GPSGDGSTCLGG-QSNSGIGFS
+                  .   :*     : .    :. .       . *  . .* **.      
 
-1CMS            WILGVFIREYYSVFDRNNLVGLAKAI
-4APE            -IFGDVALKAAFVFNGATTPTLGFAK
-3APP            SIFGIFLKSQYVVFDSGPQLGFAPQA
-                 *:* .  .   **:      :.   
+1CMS            ILGVFIREYYSVFDRNNLVGLAKAI
+4APE            IFGDVALKAAFVFNGATTPTLGFAK
+3APP            IFGIFLKSQYVVFDSGPQLGFAPQA
+                *:* .  .   **:      :.   
 
 
 
@@ -59,7 +59,7 @@ CLUSTAL FORMAT for T-COFFEE Version_13.30.12.28864d4 [http://www.tcoffee.org] [M
 <stream>output</stream>
 <name>stderr</name>
 <content>
-PROGRAM: T-COFFEE Version_13.30.12.28864d4 (Version_13.30.12.28864d4)
+PROGRAM: T-COFFEE Version_13.38.3.a77ca2b (Version_13.38.3.a77ca2b)
 -full_log      	S	[0] 
 -genepred_score	S	[0] 	nsd
 -run_name      	S	[0] 
@@ -239,7 +239,7 @@ INPUT SEQUENCES: 3 SEQUENCES  [PROTEIN]
 	PDB struc: Template=struc2.pdb, File=struc2.pdb
 
 	Multi Core Mode: 1 processors:
-none
+ne
 -rna_lib       	S	[0] 
 -no_warning    	D	[0] 	0 
 -run_local_script	D	[0] 	0 
@@ -276,7 +276,7 @@ INPUT SEQUENCES: 3 SEQUENCES  [PROTEIN]
 	PDB struc: Template=struc2.pdb, File=struc2.pdb
 
 	Multi Core Mode: 1 processors:
-none
+ne
 -rna_lib       	S	[0] 
 -no_warning    	D	[0] 	0 
 -run_local_script	D	[0] 	0 
@@ -315,7 +315,7 @@ INPUT SEQUENCES: 3 SEQUENCES  [PROTEIN]
 	Multi Core Mode: 1 processors:
 
 	--- Process Method/Library/Aln Msap_pair
-	xxx Retrieved Msap_pairnone
+	xxx Retrieved Msap_pairne
 -rna_lib       	S	[0] 
 -no_warning    	D	[0] 	0 
 -run_local_script	D	[0] 	0 
@@ -356,7 +356,7 @@ INPUT SEQUENCES: 3 SEQUENCES  [PROTEIN]
 	--- Process Method/Library/Aln Msap_pair
 	xxx Retrieved Msap_pair
 	--- Process Method/Library/Aln Pstruc1.pdb
-	xxx Retrieved Pstruc1.pdbnone
+	xxx Retrieved Pstruc1.pdbne
 -rna_lib       	S	[0] 
 -no_warning    	D	[0] 	0 
 -run_local_script	D	[0] 	0 
@@ -399,7 +399,7 @@ INPUT SEQUENCES: 3 SEQUENCES  [PROTEIN]
 	--- Process Method/Library/Aln Pstruc1.pdb
 	xxx Retrieved Pstruc1.pdb
 	--- Process Method/Library/Aln Pstruc2.pdb
-	xxx Retrieved Pstruc2.pdbnone
+	xxx Retrieved Pstruc2.pdbne
 -rna_lib       	S	[0] 
 -no_warning    	D	[0] 	0 
 -run_local_script	D	[0] 	0 
@@ -450,12 +450,12 @@ INPUT SEQUENCES: 3 SEQUENCES  [PROTEIN]
 
 MANUAL PENALTIES: gapopen=0 gapext=0
 
-	Library Total Size: [1498]
+	Library Total Size: [994]
 
 Library Relaxation: Multi_proc [1]
  
 !		[Relax Library][TOT=    3][  0 %]!		[Relax Library][TOT=    3][ 66 %]!		[Relax Library][TOT=    3][100 %]
-none
+ne
 -rna_lib       	S	[0] 
 -no_warning    	D	[0] 	0 
 -run_local_script	D	[0] 	0 
@@ -506,11 +506,11 @@ INPUT SEQUENCES: 3 SEQUENCES  [PROTEIN]
 
 MANUAL PENALTIES: gapopen=0 gapext=0
 
-	Library Total Size: [1498]
+	Library Total Size: [994]
 
 Library Relaxation: Multi_proc [1]
  
-Relaxation Summary: [1498]--->[1498]
+Relaxation Summary: [994]--->[994]
 
 
 
@@ -524,7 +524,7 @@ Group    1: 1CMS
 Group    2: 3APP
 Group    3: 4APE
 
-none
+ne
 -rna_lib       	S	[0] 
 -no_warning    	D	[0] 	0 
 -run_local_script	D	[0] 	0 
@@ -575,11 +575,11 @@ INPUT SEQUENCES: 3 SEQUENCES  [PROTEIN]
 
 MANUAL PENALTIES: gapopen=0 gapext=0
 
-	Library Total Size: [1498]
+	Library Total Size: [994]
 
 Library Relaxation: Multi_proc [1]
  
-Relaxation Summary: [1498]--->[1498]
+Relaxation Summary: [994]--->[994]
 
 
 
@@ -594,7 +594,7 @@ Group    2: 3APP
 Group    3: 4APE
 
 
-	Group    4: [Group    2 (   1 seq)] with [Group    3 (   1 seq)]-->[Len=  321][PID:19702]none
+	Group    4: [Group    2 (   1 seq)] with [Group    3 (   1 seq)]-->[Len=  320][PID:60685]ne
 -rna_lib       	S	[0] 
 -no_warning    	D	[0] 	0 
 -run_local_script	D	[0] 	0 
@@ -645,11 +645,11 @@ INPUT SEQUENCES: 3 SEQUENCES  [PROTEIN]
 
 MANUAL PENALTIES: gapopen=0 gapext=0
 
-	Library Total Size: [1498]
+	Library Total Size: [994]
 
 Library Relaxation: Multi_proc [1]
  
-Relaxation Summary: [1498]--->[1498]
+Relaxation Summary: [994]--->[994]
 
 
 
@@ -664,11 +664,11 @@ Group    2: 3APP
 Group    3: 4APE
 
 
-	Group    4: [Group    2 (   1 seq)] with [Group    3 (   1 seq)]-->[Len=  321][PID:19702]
-	Group    5: [Group    1 (   1 seq)] with [Group    4 (   2 seq)]-->[Len=  326][PID:19702]
+	Group    4: [Group    2 (   1 seq)] with [Group    3 (   1 seq)]-->[Len=  320][PID:60685]
+	Group    5: [Group    1 (   1 seq)] with [Group    4 (   2 seq)]-->[Len=  325][PID:60685]
 
 
-!		[Final Evaluation][TOT=  326][  0 %]!		[Final Evaluation][TOT=  326][  1 %]!		[Final Evaluation][TOT=  326][  2 %]!		[Final Evaluation][TOT=  326][  3 %]!		[Final Evaluation][TOT=  326][  4 %]!		[Final Evaluation][TOT=  326][  5 %]!		[Final Evaluation][TOT=  326][  6 %]!		[Final Evaluation][TOT=  326][  7 %]!		[Final Evaluation][TOT=  326][  8 %]!		[Final Evaluation][TOT=  326][  9 %]!		[Final Evaluation][TOT=  326][ 10 %]!		[Final Evaluation][TOT=  326][ 11 %]!		[Final Evaluation][TOT=  326][ 12 %]!		[Final Evaluation][TOT=  326][ 13 %]!		[Final Evaluation][TOT=  326][ 14 %]!		[Final Evaluation][TOT=  326][ 15 %]!		[Final Evaluation][TOT=  326][ 16 %]!		[Final Evaluation][TOT=  326][ 17 %]!		[Final Evaluation][TOT=  326][ 18 %]!		[Final Evaluation][TOT=  326][ 19 %]!		[Final Evaluation][TOT=  326][ 20 %]!		[Final Evaluation][TOT=  326][ 21 %]!		[Final Evaluation][TOT=  326][ 22 %]!		[Final Evaluation][TOT=  326][ 23 %]!		[Final Evaluation][TOT=  326][ 24 %]!		[Final Evaluation][TOT=  326][ 25 %]!		[Final Evaluation][TOT=  326][ 26 %]!		[Final Evaluation][TOT=  326][ 27 %]!		[Final Evaluation][TOT=  326][ 28 %]!		[Final Evaluation][TOT=  326][ 29 %]!		[Final Evaluation][TOT=  326][ 30 %]!		[Final Evaluation][TOT=  326][ 31 %]!		[Final Evaluation][TOT=  326][ 32 %]!		[Final Evaluation][TOT=  326][ 33 %]!		[Final Evaluation][TOT=  326][ 34 %]!		[Final Evaluation][TOT=  326][ 35 %]!		[Final Evaluation][TOT=  326][ 36 %]!		[Final Evaluation][TOT=  326][ 37 %]!		[Final Evaluation][TOT=  326][ 38 %]!		[Final Evaluation][TOT=  326][ 39 %]!		[Final Evaluation][TOT=  326][ 40 %]!		[Final Evaluation][TOT=  326][ 41 %]!		[Final Evaluation][TOT=  326][ 42 %]!		[Final Evaluation][TOT=  326][ 43 %]!		[Final Evaluation][TOT=  326][ 44 %]!		[Final Evaluation][TOT=  326][ 45 %]!		[Final Evaluation][TOT=  326][ 46 %]!		[Final Evaluation][TOT=  326][ 47 %]!		[Final Evaluation][TOT=  326][ 48 %]!		[Final Evaluation][TOT=  326][ 49 %]!		[Final Evaluation][TOT=  326][ 50 %]!		[Final Evaluation][TOT=  326][ 51 %]!		[Final Evaluation][TOT=  326][ 52 %]!		[Final Evaluation][TOT=  326][ 53 %]!		[Final Evaluation][TOT=  326][ 54 %]!		[Final Evaluation][TOT=  326][ 55 %]!		[Final Evaluation][TOT=  326][ 56 %]!		[Final Evaluation][TOT=  326][ 57 %]!		[Final Evaluation][TOT=  326][ 58 %]!		[Final Evaluation][TOT=  326][ 59 %]!		[Final Evaluation][TOT=  326][ 60 %]!		[Final Evaluation][TOT=  326][ 61 %]!		[Final Evaluation][TOT=  326][ 62 %]!		[Final Evaluation][TOT=  326][ 63 %]!		[Final Evaluation][TOT=  326][ 64 %]!		[Final Evaluation][TOT=  326][ 65 %]!		[Final Evaluation][TOT=  326][ 66 %]!		[Final Evaluation][TOT=  326][ 67 %]!		[Final Evaluation][TOT=  326][ 68 %]!		[Final Evaluation][TOT=  326][ 69 %]!		[Final Evaluation][TOT=  326][ 70 %]!		[Final Evaluation][TOT=  326][ 71 %]!		[Final Evaluation][TOT=  326][ 72 %]!		[Final Evaluation][TOT=  326][ 73 %]!		[Final Evaluation][TOT=  326][ 74 %]!		[Final Evaluation][TOT=  326][ 75 %]!		[Final Evaluation][TOT=  326][ 76 %]!		[Final Evaluation][TOT=  326][ 77 %]!		[Final Evaluation][TOT=  326][ 78 %]!		[Final Evaluation][TOT=  326][ 79 %]!		[Final Evaluation][TOT=  326][ 80 %]!		[Final Evaluation][TOT=  326][ 81 %]!		[Final Evaluation][TOT=  326][ 82 %]!		[Final Evaluation][TOT=  326][ 83 %]!		[Final Evaluation][TOT=  326][ 84 %]!		[Final Evaluation][TOT=  326][ 85 %]!		[Final Evaluation][TOT=  326][ 86 %]!		[Final Evaluation][TOT=  326][ 87 %]!		[Final Evaluation][TOT=  326][ 88 %]!		[Final Evaluation][TOT=  326][ 89 %]!		[Final Evaluation][TOT=  326][ 90 %]!		[Final Evaluation][TOT=  326][ 91 %]!		[Final Evaluation][TOT=  326][ 92 %]!		[Final Evaluation][TOT=  326][ 93 %]!		[Final Evaluation][TOT=  326][ 94 %]!		[Final Evaluation][TOT=  326][ 95 %]!		[Final Evaluation][TOT=  326][ 96 %]!		[Final Evaluation][TOT=  326][ 97 %]!		[Final Evaluation][TOT=  326][ 98 %]!		[Final Evaluation][TOT=  326][ 99 %]!		[Final Evaluation][TOT=  326][100 %]
+!		[Final Evaluation][TOT=  325][  0 %]!		[Final Evaluation][TOT=  325][  1 %]!		[Final Evaluation][TOT=  325][  2 %]!		[Final Evaluation][TOT=  325][  3 %]!		[Final Evaluation][TOT=  325][  4 %]!		[Final Evaluation][TOT=  325][  5 %]!		[Final Evaluation][TOT=  325][  6 %]!		[Final Evaluation][TOT=  325][  7 %]!		[Final Evaluation][TOT=  325][  8 %]!		[Final Evaluation][TOT=  325][  9 %]!		[Final Evaluation][TOT=  325][ 10 %]!		[Final Evaluation][TOT=  325][ 11 %]!		[Final Evaluation][TOT=  325][ 12 %]!		[Final Evaluation][TOT=  325][ 13 %]!		[Final Evaluation][TOT=  325][ 14 %]!		[Final Evaluation][TOT=  325][ 15 %]!		[Final Evaluation][TOT=  325][ 16 %]!		[Final Evaluation][TOT=  325][ 17 %]!		[Final Evaluation][TOT=  325][ 18 %]!		[Final Evaluation][TOT=  325][ 19 %]!		[Final Evaluation][TOT=  325][ 20 %]!		[Final Evaluation][TOT=  325][ 21 %]!		[Final Evaluation][TOT=  325][ 22 %]!		[Final Evaluation][TOT=  325][ 23 %]!		[Final Evaluation][TOT=  325][ 24 %]!		[Final Evaluation][TOT=  325][ 25 %]!		[Final Evaluation][TOT=  325][ 26 %]!		[Final Evaluation][TOT=  325][ 27 %]!		[Final Evaluation][TOT=  325][ 28 %]!		[Final Evaluation][TOT=  325][ 29 %]!		[Final Evaluation][TOT=  325][ 30 %]!		[Final Evaluation][TOT=  325][ 31 %]!		[Final Evaluation][TOT=  325][ 32 %]!		[Final Evaluation][TOT=  325][ 33 %]!		[Final Evaluation][TOT=  325][ 34 %]!		[Final Evaluation][TOT=  325][ 35 %]!		[Final Evaluation][TOT=  325][ 36 %]!		[Final Evaluation][TOT=  325][ 37 %]!		[Final Evaluation][TOT=  325][ 38 %]!		[Final Evaluation][TOT=  325][ 39 %]!		[Final Evaluation][TOT=  325][ 40 %]!		[Final Evaluation][TOT=  325][ 41 %]!		[Final Evaluation][TOT=  325][ 42 %]!		[Final Evaluation][TOT=  325][ 43 %]!		[Final Evaluation][TOT=  325][ 44 %]!		[Final Evaluation][TOT=  325][ 45 %]!		[Final Evaluation][TOT=  325][ 46 %]!		[Final Evaluation][TOT=  325][ 47 %]!		[Final Evaluation][TOT=  325][ 48 %]!		[Final Evaluation][TOT=  325][ 49 %]!		[Final Evaluation][TOT=  325][ 50 %]!		[Final Evaluation][TOT=  325][ 51 %]!		[Final Evaluation][TOT=  325][ 52 %]!		[Final Evaluation][TOT=  325][ 53 %]!		[Final Evaluation][TOT=  325][ 54 %]!		[Final Evaluation][TOT=  325][ 55 %]!		[Final Evaluation][TOT=  325][ 56 %]!		[Final Evaluation][TOT=  325][ 57 %]!		[Final Evaluation][TOT=  325][ 58 %]!		[Final Evaluation][TOT=  325][ 59 %]!		[Final Evaluation][TOT=  325][ 60 %]!		[Final Evaluation][TOT=  325][ 61 %]!		[Final Evaluation][TOT=  325][ 62 %]!		[Final Evaluation][TOT=  325][ 63 %]!		[Final Evaluation][TOT=  325][ 64 %]!		[Final Evaluation][TOT=  325][ 65 %]!		[Final Evaluation][TOT=  325][ 66 %]!		[Final Evaluation][TOT=  325][ 67 %]!		[Final Evaluation][TOT=  325][ 68 %]!		[Final Evaluation][TOT=  325][ 69 %]!		[Final Evaluation][TOT=  325][ 70 %]!		[Final Evaluation][TOT=  325][ 71 %]!		[Final Evaluation][TOT=  325][ 72 %]!		[Final Evaluation][TOT=  325][ 73 %]!		[Final Evaluation][TOT=  325][ 74 %]!		[Final Evaluation][TOT=  325][ 75 %]!		[Final Evaluation][TOT=  325][ 76 %]!		[Final Evaluation][TOT=  325][ 77 %]!		[Final Evaluation][TOT=  325][ 78 %]!		[Final Evaluation][TOT=  325][ 79 %]!		[Final Evaluation][TOT=  325][ 80 %]!		[Final Evaluation][TOT=  325][ 81 %]!		[Final Evaluation][TOT=  325][ 82 %]!		[Final Evaluation][TOT=  325][ 83 %]!		[Final Evaluation][TOT=  325][ 84 %]!		[Final Evaluation][TOT=  325][ 85 %]!		[Final Evaluation][TOT=  325][ 86 %]!		[Final Evaluation][TOT=  325][ 87 %]!		[Final Evaluation][TOT=  325][ 88 %]!		[Final Evaluation][TOT=  325][ 89 %]!		[Final Evaluation][TOT=  325][ 90 %]!		[Final Evaluation][TOT=  325][ 91 %]!		[Final Evaluation][TOT=  325][ 92 %]!		[Final Evaluation][TOT=  325][ 93 %]!		[Final Evaluation][TOT=  325][ 94 %]!		[Final Evaluation][TOT=  325][ 95 %]!		[Final Evaluation][TOT=  325][ 96 %]!		[Final Evaluation][TOT=  325][ 97 %]!		[Final Evaluation][TOT=  325][ 98 %]!		[Final Evaluation][TOT=  325][ 99 %]!		[Final Evaluation][TOT=  325][100 %]
 
 
 
@@ -682,8 +682,8 @@ OUTPUT RESULTS
 	#### File Type= Template PDB struc Format= pdb             Name= struc2.pdb
 
 # Command Line: t_coffee -pdb struc1.pdb struc2.pdb struc3.pdb -method sap_pair -cache no  [PROGRAM:T-COFFEE]
-# T-COFFEE Memory Usage: Current= 32.983 Mb, Max= 33.973 Mb
-# Results Produced with T-COFFEE Version_13.30.12.28864d4 (Version_13.30.12.28864d4)
+# T-COFFEE Memory Usage: Current= 32.918 Mb, Max= 33.896 Mb
+# Results Produced with T-COFFEE Version_13.38.3.a77ca2b (Version_13.38.3.a77ca2b)
 # T-COFFEE is available from http://www.tcoffee.org
 # Register on: https://groups.google.com/group/tcoffee/
 </content>
@@ -8012,42 +8012,42 @@ ATOM   2366  OXT ALA   323       9.465  22.305  -0.079  1.00 32.52
 <file>
 <stream>output</stream>
 <name>struc1.aln</name>
-<content>CLUSTAL FORMAT for T-COFFEE Version_13.30.12.28864d4 [http://www.tcoffee.org] [MODE:  ], CPU=0.00 sec, SCORE=98, Nseq=3, Len=326 
+<content>CLUSTAL FORMAT for T-COFFEE Version_13.38.3.a77ca2b [http://www.tcoffee.org] [MODE:  ], CPU=0.00 sec, SCORE=99, Nseq=3, Len=325 
 
-1CMS            EVASVPLTNYL--DQYFGKIYLGTPPEFTVLFDTGSSDWVPSIYCKSNAC
+1CMS            EVASVPLTNY--LDQYFGKIYLGTPPEFTVLFDTGSSDWVPSIYCKSNAC
 4APE            -TGSATTTPIDSLDAYITPVQIGTPQTLNLDFDTGSSLWVFSSETTASED
-3APP            ASGVATNTPTA-NEEYITPVTIGG-T-LNLNFDTGSADLVFSTELPASQQ
+3APP            ASGVATNTPTA-NEEYITPVTIGG--TLNLNFDTGSADLVFSTELPASQQ
                   . .. *     : *:  : :*    :.: *****:  * *    :.  
 
-1CMS            NHQRFDPRKSSTQ-NLGKPLSI-HYGGSMQGILGYDTV-VSNIVDIQQTV
+1CMS            NHQRFDPRKSST-QNLGKPLSIHYG-GSMQGILGYDTV-VSNIVDIQQTV
 4APE            GQTIYTPSKSTAKLLSGATWSIS-GDGSSSGDVYTD-VSVGGLTVTGQA-
-3APP            SHSVYNPSATG-K-ESGYTWSISYGDGSASGNVFTDSVT-GGVTAHGQAV
-                .:  : *  :  :   * . **   .** .* :  * *  ..:.   *: 
+3APP            SHSVYNPSATG-KE-SGYTWSISYGDGSASGNVFTDSVT-GGVTAHGQAV
+                .:  : *  :      * . **  * ** .* :  * *  ..:.   *: 
 
-1CMS            G-STQEPGDVFTYA-FDGILGMAYPSL-SE--Y-S-IPVFDNMMRHLVAQ
-4APE            ESAKKVSSSFTE-STIDGLLGLAFS-LNTVSPT-QQKTF-DNAK-ASLDS
-3APP            QA-QQISAQFQQDTN-DGLLGLAFSSIN-VQPQSQ-TTFFDT-K-SSLAQ
-                    : ....   :  **:**:*:. :       .  .. *.     : .
+1CMS            G-STQEPGDVFTYA-FDGILGMAYPSL-SE--YS-IPVFDNMMRHLVAQD
+4APE            ESAKKVSSSFTE-STIDGLLGLAFS-LNTVSPTQQKTF-DNAK-ASLDSP
+3APP            QA-QQISAQFQQDTN-DGLLGLAFSSIN-VQPQSQTTFFDT-K-SSLAQP
+                    : ....   :  **:**:*:. :      .  .. *.     : . 
 
-1CMS            DLFSVY-DRNGQESMLTLG-IDPSYYTGSLHW-PVT-VQQYWQFTV-SVT
-4APE            PVF-ADLGY-HAPGTYN-GFIDTTAYTGSI-YTAVSTKQGFWE-TSTGYA
-3APP            PLFAVA-KH-QQPGVYDFGF-DSSKYTGSLTYT-VDNSQGFWSFNV-SYT
-                 :* .        .    *  *.: ****: :  *   * :*. .  . :
+1CMS            LFSVY-DRNGQESMLTLG-IDPSYYTGSLHW-PV-TVQQYWQFTV-SVTI
+4APE            VF-ADLGY-HAPGTYN-GFIDTTAYTGSI-YTAVSTKQGFWE-TSTGYAV
+3APP            LFAVA-KH-QQPGVYDFGF-DSSKYTGSLTYT-VDNSQGFWSFNV-SYTA
+                :* .        .    *  *.: ****: :  * . * :*. .  . : 
 
-1CMS            ISGVV-VACEGCQAILDTGTSK-VGPSSDILNIQQ-IGATQNQYGEF-DD
-4APE            VGSGTFST--SIDGIADTGT-LLYLPATVVSAY-AQVSGAKSSSSVG-YV
-3APP            AGSQS-GD--GF-GIADTGTTLLLLD-SVVSQYYSQVSAQ-QDSNAGGYV
-                 ..       .  .* ****       : :      :..  .. .     
+1CMS            SGVV-VACEGCQAILDTGTSK-VGPSSDILNIQQ-IGAT-QNQYGEFD-D
+4APE            GSGTFST--SIDGIADTGT-LLYLPATVVSAY-AQVSGAKSSSSVG-YVF
+3APP            GSQS-GD--GF-GIADTGTTLLLLD-SVVSQYYSQVSAQ-QDSNAGGYVF
+                ..       .  .* ****       : :      :..  ...       
 
-1CMS            -CDNLSYMPTVV-EINGKMYPLTPS-YTSQD--Q-GFCTSG-QSENHSQK
-4APE            FPC-SATLPS-TFGVGSARIVIP-DYIDFGPIST-GS-FGGIQSSAGIGI
-3APP            -FC-STNLPDFSVSI-GYTATVPGSLIN-GPSGDGSTCLGG-QSNSGIGF
-                     : :*     : .    :. .          .   .* **.     
+1CMS            CDNLSYMPTVV-EINGKMYPLTPS-YTSQ--DQG-FCTSG-QSENHSQKW
+4APE            PCSA-TLPS-TFGVGSARIVIP-DYIDFGPISTG--SFGGIQSSAGIGI-
+3APP            -CST-NLPDFSVSI-GYTATVPGSLIN-GPSGDGSTCLGG-QSNSGIGFS
+                  .   :*     : .    :. .       . *  . .* **.      
 
-1CMS            WILGVFIREYYSVFDRNNLVGLAKAI
-4APE            -IFGDVALKAAFVFNGATTPTLGFAK
-3APP            SIFGIFLKSQYVVFDSGPQLGFAPQA
-                 *:* .  .   **:      :.   
+1CMS            ILGVFIREYYSVFDRNNLVGLAKAI
+4APE            IFGDVALKAAFVFNGATTPTLGFAK
+3APP            IFGIFLKSQYVVFDSGPQLGFAPQA
+                *:* .  .   **:      :.   
 
 
 
@@ -8074,7 +8074,7 @@ SPAN.value9 {background: #FFC8C8}
 SPAN.valuedefault {}
 SPAN.valuegap {}
 SPAN.valueink {background: 000000}
-</style><body><span class=valuedefault>T-COFFEE,&nbsp;Version_13.30.12.28864d4&nbsp;(Version_13.30.12.28864d4)</span><br><span class=valuedefault>Cedric&nbsp;Notredame&nbsp;</span><br><span class=valuedefault>CPU&nbsp;TIME:0&nbsp;sec.</span><br><span class=valuedefault>SCORE=98</span><br><span class=valuedefault>*</span><br><span class=valuedefault>&nbsp;</span><span class=value0>B</span><span class=value1>A</span><span class=value2>D</span><span class=value3>&nbsp;</span><span class=value4>A</span><span class=value5>V</span><span class=value6>G</span><span class=value7>&nbsp;</span><span class=value8>G</span><span class=value9>OOD</span><br><span class=valuedefault>*</span><br><span class=value9>1CMS&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;98</span><br><span class=value9>4APE&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;98</span><br><span class=value9>3APP&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;97</span><br><span class=value9>cons&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;&nbsp;9</span><br><br><span class=valuedefault>1CMS&nbsp;&nbsp;&nbsp;</span><span class=value9>EVASVPLTNYL</span><span class=valuegap>--</span><span class=value9>DQYFGKIYLGTPPEFTVLFDTGSSDWVPSIYC</span><br><span class=valuedefault>4APE&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value9>TGSATTTPIDSLDAYITPVQIGTPQTLNLDFDTGSSLWVFSSET</span><br><span class=valuedefault>3APP&nbsp;&nbsp;&nbsp;</span><span class=value9>ASGVATNTPTA</span><span class=valuegap>-</span><span class=value9>NEEYITPVTIGG</span><span class=valuegap>-</span><span class=value9>T</span><span class=valuegap>-</span><span class=value9>LNLNFDTGSADLVFSTEL</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;.&nbsp;..&nbsp;*&nbsp;&nbsp;</span><span class=value8>&nbsp;</span><span class=value9>&nbsp;</span><span class=value7>&nbsp;</span><span class=value5>:</span><span class=value9>&nbsp;*:&nbsp;&nbsp;:&nbsp;:*</span><span class=value8>&nbsp;</span><span class=value7>&nbsp;</span><span class=value9>&nbsp;&nbsp;:.:&nbsp;*****:&nbsp;&nbsp;*&nbsp;*&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>1CMS&nbsp;&nbsp;&nbsp;</span><span class=value9>KSNACNHQRFDPRKSSTQ</span><span class=valuegap>-</span><span class=value9>NLGKPLSI</span><span class=valuegap>-</span><span class=value9>HYGGSMQGILGYDTV</span><span class=valuegap>-</span><span class=value9>V</span><br><span class=valuedefault>4APE&nbsp;&nbsp;&nbsp;</span><span class=value9>TASEDGQTIYTPSKSTAKLLSGATWSIS</span><span class=valuegap>-</span><span class=value9>GDGSSSGDVYTD</span><span class=valuegap>-</span><span class=value9>VSV</span><br><span class=valuedefault>3APP&nbsp;&nbsp;&nbsp;</span><span class=value9>PASQQSHSVYNPSATG</span><span class=valuegap>-</span><span class=value9>K</span><span class=valuegap>-</span><span class=value9>ESGYTWSISYGDGSASGNVFTDSVT</span><span class=valuegap>-</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;:.&nbsp;&nbsp;.:&nbsp;&nbsp;:&nbsp;*&nbsp;&nbsp;:&nbsp;&nbsp;</span><span class=value8>:</span><span class=value5>&nbsp;</span><span class=value8>&nbsp;</span><span class=value9>&nbsp;*&nbsp;.&nbsp;**</span><span class=value7>&nbsp;&nbsp;</span><span class=value8>&nbsp;.**</span><span class=value9>&nbsp;.*&nbsp;:&nbsp;&nbsp;*&nbsp;*&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>1CMS&nbsp;&nbsp;&nbsp;</span><span class=value9>SNIVDIQQTVG</span><span class=valuegap>-</span><span class=value9>STQEPGDVFTYA</span><span class=valuegap>-</span><span class=value9>FDGILGMAYPSL</span><span class=valuegap>-</span><span class=value9>SE</span><span class=valuegap>--</span><span class=value9>Y</span><span class=valuegap>-</span><span class=value9>S</span><br><span class=valuedefault>4APE&nbsp;&nbsp;&nbsp;</span><span class=value9>GGLTVTGQA</span><span class=valuegap>-</span><span class=value9>ESAKKVSSSFTE</span><span class=valuegap>-</span><span class=value9>STIDGLLGLAFS</span><span class=valuegap>-</span><span class=value9>LNTVSPT</span><span class=valuegap>-</span><span class=value9>Q</span><br><span class=valuedefault>3APP&nbsp;&nbsp;&nbsp;</span><span class=value9>GGVTAHGQAVQA</span><span class=valuegap>-</span><span class=value9>QQISAQFQQDTN</span><span class=valuegap>-</span><span class=value9>DGLLGLAFSSIN</span><span class=valuegap>-</span><span class=value9>VQPQSQ</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;</span><span class=value9>..:.&nbsp;&nbsp;&nbsp;*:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;....&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;**:**:*:.&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value6>&nbsp;</span><span class=value9>.</span><br><br><br><span class=valuedefault>1CMS&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value9>IPVFDNMMRHLVAQDLFSVY</span><span class=valuegap>-</span><span class=value9>DRNGQESMLTLG</span><span class=valuegap>-</span><span class=value9>IDPSYYTGSL</span><br><span class=valuedefault>4APE&nbsp;&nbsp;&nbsp;</span><span class=value9>QKTF</span><span class=valuegap>-</span><span class=value9>DNAK</span><span class=valuegap>-</span><span class=value9>ASLDSPVF</span><span class=valuegap>-</span><span class=value9>ADLGY</span><span class=valuegap>-</span><span class=value9>HAPGTYN</span><span class=valuegap>-</span><span class=value9>GFIDTTAYTGSI</span><br><span class=valuedefault>3APP&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value9>TTFFDT</span><span class=valuegap>-</span><span class=value9>K</span><span class=valuegap>-</span><span class=value9>SSLAQPLFAVA</span><span class=valuegap>-</span><span class=value9>KH</span><span class=valuegap>-</span><span class=value9>QQPGVYDFGF</span><span class=valuegap>-</span><span class=value9>DSSKYTGSL</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;..&nbsp;*.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;.&nbsp;:*&nbsp;.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;*.:&nbsp;****:</span><br><br><br><span class=valuedefault>1CMS&nbsp;&nbsp;&nbsp;</span><span class=value9>HW</span><span class=valuegap>-</span><span class=value9>PVT</span><span class=valuegap>-</span><span class=value9>VQQYWQFTV</span><span class=valuegap>-</span><span class=value9>SVTISGVV</span><span class=valuegap>-</span><span class=value9>VACEGCQAILDTGTSK</span><span class=valuegap>-</span><span class=value9>VG</span><br><span class=valuedefault>4APE&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value9>YTAVSTKQGFWE</span><span class=valuegap>-</span><span class=value9>TSTGYAVGSGTFST</span><span class=valuegap>--</span><span class=value9>SIDGIADTGT</span><span class=valuegap>-</span><span class=value9>LLYL</span><br><span class=valuedefault>3APP&nbsp;&nbsp;&nbsp;</span><span class=value9>TYT</span><span class=valuegap>-</span><span class=value9>VDNSQGFWSFNV</span><span class=valuegap>-</span><span class=value9>SYTAGSQS</span><span class=valuegap>-</span><span class=value9>GD</span><span class=valuegap>--</span><span class=value9>GF</span><span class=valuegap>-</span><span class=value9>GIADTGTTLLLL</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;:&nbsp;&nbsp;*</span><span class=value7>&nbsp;&nbsp;</span><span class=value9>&nbsp;*&nbsp;:*.&nbsp;.&nbsp;&nbsp;.&nbsp;:&nbsp;..&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.&nbsp;&nbsp;.*&nbsp;****&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>1CMS&nbsp;&nbsp;&nbsp;</span><span class=value9>PSSDILNIQQ</span><span class=valuegap>-</span><span class=value9>IGATQNQYGEF</span><span class=valuegap>-</span><span class=value9>DD</span><span class=valuegap>-</span><span class=value9>CDNLSYMPTVV</span><span class=valuegap>-</span><span class=value9>EINGKMY</span><br><span class=valuedefault>4APE&nbsp;&nbsp;&nbsp;</span><span class=value9>PATVVSAY</span><span class=valuegap>-</span><span class=value9>AQVSGAKSSSSVG</span><span class=valuegap>-</span><span class=value9>YVFPC</span><span class=valuegap>-</span><span class=value9>SATLPS</span><span class=valuegap>-</span><span class=value9>TFGVGSARI</span><br><span class=valuedefault>3APP&nbsp;&nbsp;&nbsp;</span><span class=value9>D</span><span class=valuegap>-</span><span class=value9>SVVSQYYSQVSAQ</span><span class=valuegap>-</span><span class=value9>QDSNAGGYV</span><span class=valuegap>-</span><span class=value9>FC</span><span class=valuegap>-</span><span class=value9>STNLPDFSVSI</span><span class=valuegap>-</span><span class=value9>GYTA</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;:&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:.</span><span class=value8>.</span><span class=value6>&nbsp;</span><span class=value5>&nbsp;</span><span class=value6>..&nbsp;.&nbsp;</span><span class=value8>&nbsp;</span><span class=value6>&nbsp;</span><span class=value9>&nbsp;</span><span class=value8>&nbsp;</span><span class=value5>&nbsp;</span><span class=value8>&nbsp;&nbsp;</span><span class=value5>&nbsp;</span><span class=value6>&nbsp;</span><span class=value8>:</span><span class=value9>&nbsp;:*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;.&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>1CMS&nbsp;&nbsp;&nbsp;</span><span class=value9>PLTPS</span><span class=valuegap>-</span><span class=value9>YTSQD</span><span class=valuegap>--</span><span class=value9>Q</span><span class=valuegap>-</span><span class=value9>GFCTSG</span><span class=valuegap>-</span><span class=value9>QSENHSQKWILGVFIREYYSVFD</span><br><span class=valuedefault>4APE&nbsp;&nbsp;&nbsp;</span><span class=value9>VIP</span><span class=valuegap>-</span><span class=value9>DYIDFGPIST</span><span class=valuegap>-</span><span class=value9>GS</span><span class=valuegap>-</span><span class=value9>FGGIQSSAGIGI</span><span class=valuegap>-</span><span class=value9>IFGDVALKAAFVFN</span><br><span class=valuedefault>3APP&nbsp;&nbsp;&nbsp;</span><span class=value9>TVPGSLIN</span><span class=valuegap>-</span><span class=value9>GPSGDGSTCLGG</span><span class=valuegap>-</span><span class=value9>QSNSGIGFSIFGIFLKSQYVVFD</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;:.&nbsp;.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>&nbsp;</span><span class=value9>&nbsp;</span><span class=value7>&nbsp;</span><span class=value8>&nbsp;</span><span class=value5>&nbsp;</span><span class=value8>.</span><span class=value9>&nbsp;&nbsp;&nbsp;.*&nbsp;**.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*:*&nbsp;.&nbsp;&nbsp;.&nbsp;&nbsp;&nbsp;**:</span><br><br><br><span class=valuedefault>1CMS&nbsp;&nbsp;&nbsp;</span><span class=value9>RNNLVGLAKAI</span><br><span class=valuedefault>4APE&nbsp;&nbsp;&nbsp;</span><span class=value9>GATTPTLGFAK</span><br><span class=valuedefault>3APP&nbsp;&nbsp;&nbsp;</span><span class=value9>SGPQLGFAPQA</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:.&nbsp;&nbsp;&nbsp;</span><br><br><br><br><br><br></body></html>
+</style><body><span class=valuedefault>T-COFFEE,&nbsp;Version_13.38.3.a77ca2b&nbsp;(Version_13.38.3.a77ca2b)</span><br><span class=valuedefault>Cedric&nbsp;Notredame&nbsp;</span><br><span class=valuedefault>CPU&nbsp;TIME:0&nbsp;sec.</span><br><span class=valuedefault>SCORE=99</span><br><span class=valuedefault>*</span><br><span class=valuedefault>&nbsp;</span><span class=value0>B</span><span class=value1>A</span><span class=value2>D</span><span class=value3>&nbsp;</span><span class=value4>A</span><span class=value5>V</span><span class=value6>G</span><span class=value7>&nbsp;</span><span class=value8>G</span><span class=value9>OOD</span><br><span class=valuedefault>*</span><br><span class=value9>1CMS&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;99</span><br><span class=value9>4APE&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;100</span><br><span class=value9>3APP&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;99</span><br><span class=value9>cons&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;&nbsp;9</span><br><br><span class=valuedefault>1CMS&nbsp;&nbsp;&nbsp;</span><span class=value9>EVASVPLTNY</span><span class=valuegap>--</span><span class=value9>LDQYFGKIYLGTPPEFTVLFDTGSSDWVPSIYC</span><br><span class=valuedefault>4APE&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value9>TGSATTTPIDSLDAYITPVQIGTPQTLNLDFDTGSSLWVFSSET</span><br><span class=valuedefault>3APP&nbsp;&nbsp;&nbsp;</span><span class=value9>ASGVATNTPTA</span><span class=valuegap>-</span><span class=value9>NEEYITPVTIGG</span><span class=valuegap>--</span><span class=value9>TLNLNFDTGSADLVFSTEL</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;.&nbsp;..&nbsp;*&nbsp;&nbsp;</span><span class=value7>&nbsp;</span><span class=value9>&nbsp;&nbsp;</span><span class=value5>:</span><span class=value9>&nbsp;*:&nbsp;&nbsp;:&nbsp;:*&nbsp;&nbsp;&nbsp;&nbsp;:.:&nbsp;*****:&nbsp;&nbsp;*&nbsp;*&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>1CMS&nbsp;&nbsp;&nbsp;</span><span class=value9>KSNACNHQRFDPRKSST</span><span class=valuegap>-</span><span class=value9>QNLGKPLSIHYG</span><span class=valuegap>-</span><span class=value9>GSMQGILGYDTV</span><span class=valuegap>-</span><span class=value9>V</span><br><span class=valuedefault>4APE&nbsp;&nbsp;&nbsp;</span><span class=value9>TASEDGQTIYTPSKSTAKLLSGATWSIS</span><span class=valuegap>-</span><span class=value9>GDGSSSGDVYTD</span><span class=valuegap>-</span><span class=value9>VSV</span><br><span class=valuedefault>3APP&nbsp;&nbsp;&nbsp;</span><span class=value9>PASQQSHSVYNPSATG</span><span class=valuegap>-</span><span class=value9>KE</span><span class=valuegap>-</span><span class=value9>SGYTWSISYGDGSASGNVFTDSVT</span><span class=valuegap>-</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;:.&nbsp;&nbsp;.:&nbsp;&nbsp;:&nbsp;*&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;.&nbsp;**&nbsp;&nbsp;*&nbsp;**&nbsp;.*&nbsp;:&nbsp;&nbsp;*&nbsp;*&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>1CMS&nbsp;&nbsp;&nbsp;</span><span class=value9>SNIVDIQQTVG</span><span class=valuegap>-</span><span class=value9>STQEPGDVFTYA</span><span class=valuegap>-</span><span class=value9>FDGILGMAYPSL</span><span class=valuegap>-</span><span class=value9>SE</span><span class=valuegap>--</span><span class=value9>YS</span><span class=valuegap>-</span><br><span class=valuedefault>4APE&nbsp;&nbsp;&nbsp;</span><span class=value9>GGLTVTGQA</span><span class=valuegap>-</span><span class=value9>ESAKKVSSSFTE</span><span class=valuegap>-</span><span class=value9>STIDGLLGLAFS</span><span class=valuegap>-</span><span class=value9>LNTVSPTQQ</span><br><span class=valuedefault>3APP&nbsp;&nbsp;&nbsp;</span><span class=value9>GGVTAHGQAVQA</span><span class=valuegap>-</span><span class=value9>QQISAQFQQDTN</span><span class=valuegap>-</span><span class=value9>DGLLGLAFSSIN</span><span class=valuegap>-</span><span class=value9>VQPQSQ</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;</span><span class=value9>..:.&nbsp;&nbsp;&nbsp;*:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;....&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;**:**:*:.&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value7>.</span><span class=value5>&nbsp;</span><br><br><br><span class=valuedefault>1CMS&nbsp;&nbsp;&nbsp;</span><span class=value9>IPVFDNMMRHLVAQDLFSVY</span><span class=valuegap>-</span><span class=value9>DRNGQESMLTLG</span><span class=valuegap>-</span><span class=value9>IDPSYYTGSLH</span><br><span class=valuedefault>4APE&nbsp;&nbsp;&nbsp;</span><span class=value9>KTF</span><span class=valuegap>-</span><span class=value9>DNAK</span><span class=valuegap>-</span><span class=value9>ASLDSPVF</span><span class=valuegap>-</span><span class=value9>ADLGY</span><span class=valuegap>-</span><span class=value9>HAPGTYN</span><span class=valuegap>-</span><span class=value9>GFIDTTAYTGSI</span><span class=valuegap>-</span><br><span class=valuedefault>3APP&nbsp;&nbsp;&nbsp;</span><span class=value9>TTFFDT</span><span class=valuegap>-</span><span class=value9>K</span><span class=valuegap>-</span><span class=value9>SSLAQPLFAVA</span><span class=valuegap>-</span><span class=value9>KH</span><span class=valuegap>-</span><span class=value9>QQPGVYDFGF</span><span class=valuegap>-</span><span class=value9>DSSKYTGSLT</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;..&nbsp;*.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;.&nbsp;:*&nbsp;.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;*.:&nbsp;****:&nbsp;</span><br><br><br><span class=valuedefault>1CMS&nbsp;&nbsp;&nbsp;</span><span class=value9>W</span><span class=valuegap>-</span><span class=value9>PV</span><span class=valuegap>-</span><span class=value9>TVQQYWQFTV</span><span class=valuegap>-</span><span class=value9>SVTISGVV</span><span class=valuegap>-</span><span class=value9>VACEGCQAILDTGTSK</span><span class=valuegap>-</span><span class=value9>VGP</span><br><span class=valuedefault>4APE&nbsp;&nbsp;&nbsp;</span><span class=value9>YTAVSTKQGFWE</span><span class=valuegap>-</span><span class=value9>TSTGYAVGSGTFST</span><span class=valuegap>--</span><span class=value9>SIDGIADTGT</span><span class=valuegap>-</span><span class=value9>LLYLP</span><br><span class=valuedefault>3APP&nbsp;&nbsp;&nbsp;</span><span class=value9>YT</span><span class=valuegap>-</span><span class=value9>VDNSQGFWSFNV</span><span class=valuegap>-</span><span class=value9>SYTAGSQS</span><span class=valuegap>-</span><span class=value9>GD</span><span class=valuegap>--</span><span class=value9>GF</span><span class=valuegap>-</span><span class=value9>GIADTGTTLLLLD</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;</span><span class=value9>:&nbsp;&nbsp;*&nbsp;.&nbsp;*&nbsp;:*.&nbsp;.&nbsp;&nbsp;.&nbsp;:&nbsp;..&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.&nbsp;&nbsp;.*&nbsp;****&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>1CMS&nbsp;&nbsp;&nbsp;</span><span class=value9>SSDILNIQQ</span><span class=valuegap>-</span><span class=value9>IGAT</span><span class=valuegap>-</span><span class=value9>QNQYGEFD</span><span class=valuegap>-</span><span class=value9>DCDNLSYMPTVV</span><span class=valuegap>-</span><span class=value9>EINGKMYP</span><br><span class=valuedefault>4APE&nbsp;&nbsp;&nbsp;</span><span class=value9>ATVVSAY</span><span class=valuegap>-</span><span class=value9>AQVSGAKSSSSVG</span><span class=valuegap>-</span><span class=value9>YVFPCSA</span><span class=valuegap>-</span><span class=value9>TLPS</span><span class=valuegap>-</span><span class=value9>TFGVGSARIV</span><br><span class=valuedefault>3APP&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value9>SVVSQYYSQVSAQ</span><span class=valuegap>-</span><span class=value9>QDSNAGGYVF</span><span class=valuegap>-</span><span class=value9>CST</span><span class=valuegap>-</span><span class=value9>NLPDFSVSI</span><span class=valuegap>-</span><span class=value9>GYTAT</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;:&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:..&nbsp;&nbsp;...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.&nbsp;&nbsp;&nbsp;:*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;.&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>1CMS&nbsp;&nbsp;&nbsp;</span><span class=value9>LTPS</span><span class=valuegap>-</span><span class=value9>YTSQ</span><span class=valuegap>--</span><span class=value9>DQG</span><span class=valuegap>-</span><span class=value9>FCTSG</span><span class=valuegap>-</span><span class=value9>QSENHSQKWILGVFIREYYSVFDR</span><br><span class=valuedefault>4APE&nbsp;&nbsp;&nbsp;</span><span class=value9>IP</span><span class=valuegap>-</span><span class=value9>DYIDFGPISTG</span><span class=valuegap>--</span><span class=value9>SFGGIQSSAGIGI</span><span class=valuegap>-</span><span class=value9>IFGDVALKAAFVFNG</span><br><span class=valuedefault>3APP&nbsp;&nbsp;&nbsp;</span><span class=value9>VPGSLIN</span><span class=valuegap>-</span><span class=value9>GPSGDGSTCLGG</span><span class=valuegap>-</span><span class=value9>QSNSGIGFSIFGIFLKSQYVVFDS</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;</span><span class=value9>:.&nbsp;.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.&nbsp;*&nbsp;&nbsp;.&nbsp;.*&nbsp;**.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*:*&nbsp;.&nbsp;&nbsp;.&nbsp;&nbsp;&nbsp;**:&nbsp;</span><br><br><br><span class=valuedefault>1CMS&nbsp;&nbsp;&nbsp;</span><span class=value9>NNLVGLAKAI</span><br><span class=valuedefault>4APE&nbsp;&nbsp;&nbsp;</span><span class=value9>ATTPTLGFAK</span><br><span class=valuedefault>3APP&nbsp;&nbsp;&nbsp;</span><span class=value9>GPQLGFAPQA</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:.&nbsp;&nbsp;&nbsp;</span><br><br><br><br><br><br></body></html>
 </content>
 </file>
 <file>
@@ -15396,7 +15396,7 @@ CONDA_PROMPT_MODIFIER=(base)
 TERM_PROGRAM_VERSION=388.1.3
 OSNAME=macosx
 PERL_BIN=/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms::/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices
-TERM_SESSION_ID=966A65A4-FBA5-4990-991E-01DB7E43DA0A
+TERM_SESSION_ID=98F198FA-FDF9-40DD-A8EF-07E7D5143362
 METHODS_4_TCOFFEE=/Users/cnotredame//.t_coffee//methods/
 VERSIONER_PERL_VERSION=5.18
 XAPPLRESDIR=/sw/etc/app-defaults/
@@ -15411,12 +15411,12 @@ _CE_CONDA=
 all_proxy=
 ALL_PROXY=
 HTTP_proxy_4_TCOFFEE=
-PATH=/Users/cnotredame//.t_coffee//plugins/macosx/:/Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/packages/x3dna-v2.1/bin:/Users/cnotredame/bin/macosx://Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms::/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices:/Users/cnotredame/bin/Scripts/:/Users/cnotredame/Library/Haskell/ghc-7.4.2/lib/epub-tools-2.0.0/bin/:/Users/cnotredame/anaconda3/bin:/Users/cnotredame/anaconda3/condabin:/opt/local/bin:/opt/local/sbin:/opt/local/bin:/opt/local/sbin:/Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/packages/x3dna-v2.1/bin:/Users/cnotredame/bin/macosx://Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms:.:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices:/Users/cnotredame/bin/Scripts:/Users/cnotredame/Library/Haskell/ghc-7.4.2/lib/epub-tools-2.0.0/bin:/sw/bin:/sw/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin
+PATH=/Users/cnotredame//.t_coffee//plugins/macosx/:/Users/cnotredame/anaconda3/bin:/Users/cnotredame/anaconda3/condabin:/opt/local/bin:/opt/local/sbin:/opt/local/bin:/opt/local/sbin:/Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/packages/x3dna-v2.1/bin:/Users/cnotredame/bin/macosx://Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms:.:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices:/Users/cnotredame/bin/Scripts:/Users/cnotredame/Library/Haskell/ghc-7.4.2/lib/epub-tools-2.0.0/bin:/sw/bin:/sw/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin
 _=/usr/bin/printenv
 CONDA_PREFIX=/Users/cnotredame/anaconda3
 COLOR_4_TCOFFEE=new
 DIR_4_TCOFFEE=/Users/cnotredame//.t_coffee/
-PWD=/Users/cnotredame/Dropbox/projects/git/tcoffee/tmp/RANDOMSTRING7hRVWRF1V6pGa64HVoDP/data
+PWD=/Users/cnotredame/Dropbox/projects/git/tcoffee/tmp/RANDOMSTRINGBfdLgcy5G70t4m91mTfU/tmp/RANDOMSTRINGrG2bBPeaAEy7gNnZxWay/data
 CACHE_4_TCOFFEE=/Users/cnotredame//.t_coffee//cache/
 X3DNA=/Users/cnotredame/Dropbox/packages/x3dna-v2.1
 DBUS_LAUNCHD_SESSION_BUS_SOCKET=/private/tmp/com.apple.launchd.CeZrDaslOL/unix_domain_listener
@@ -15428,16 +15428,16 @@ ERRORFILE_4_TCOFFEE=NO
 PLUGINS_4_TCOFFEE=/Users/cnotredame//.t_coffee//plugins/macosx/
 SHLVL=3
 HOME=/Users/cnotredame
-DUMP_4_TCOFFEE=/Users/cnotredame/Dropbox/projects/git/tcoffee/tmp/RANDOMSTRING7hRVWRF1V6pGa64HVoDP/core.tests.98.dump
+DUMP_4_TCOFFEE=/Users/cnotredame/Dropbox/projects/git/tcoffee/tmp/RANDOMSTRINGBfdLgcy5G70t4m91mTfU/tmp/RANDOMSTRINGrG2bBPeaAEy7gNnZxWay/core.tests.98.dump
 HTTP_PROXY=
 MAFFT_BINARIES=
 CONDA_PYTHON_EXE=/Users/cnotredame/anaconda3/bin/python
 BIN=/Users/cnotredame/bin/macosx
 LOGNAME=cnotredame
-EMAIL_4_TCOFFEE=cedric.notredame@gmail.com
+EMAIL_4_TCOFFEE=
 LC_CTYPE=UTF-8
 CONDA_DEFAULT_ENV=base
-EMAIL=cedric.notredame@gmail.com
+EMAIL=
 UPDATED_ENV_4_TCOFFEE=1
 INFOPATH=/sw/share/info:/sw/info:/usr/share/info
 DISPLAY=/private/tmp/com.apple.launchd.MDJPhYnCNw/org.macosforge.xquartz:0
@@ -15445,11 +15445,11 @@ TC_MASTER_NODE=1
 NUMBER_OF_PROCESSORS=8
 ALL_proxy=
 SECURITYSESSIONID=186a6
-LOCKDIR_4_TCOFFEE=/var/tmp/tco/tcodyjodi1n19702//lck/bz797ou0fj/
-TMP_4_TCOFFEE=/var/tmp/tco/tcodyjodi1n19702/
+LOCKDIR_4_TCOFFEE=/var/tmp/tco/tcon1h_b5uv60685//lck/y081nfgtez/
+TMP_4_TCOFFEE=/var/tmp/tco/tcon1h_b5uv60685/
 USER_BIN=/Users/cnotredame/bin/macosx
 SCRIPT_BIN=/Users/cnotredame/bin/Scripts/
 </environement>
 <DumpStatus>OK</DumpStatus>
-<DumpFile>/Users/cnotredame/Dropbox/projects/git/tcoffee/tmp/RANDOMSTRING7hRVWRF1V6pGa64HVoDP/core.tests.98.dump</DumpFile>
+<DumpFile>/Users/cnotredame/Dropbox/projects/git/tcoffee/tmp/RANDOMSTRINGBfdLgcy5G70t4m91mTfU/tmp/RANDOMSTRINGrG2bBPeaAEy7gNnZxWay/core.tests.98.dump</DumpFile>
 </DumpIO>

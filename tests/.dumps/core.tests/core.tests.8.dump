@@ -1,8 +1,8 @@
 <DumpIO>
 <nature>standard dump</nature>
 <program>T-COFFEE</program>
-<version>Version_13.30.12.28864d4</version>
-<build>Version_13.30.12.28864d4</build>
+<version>Version_13.38.3.a77ca2b</version>
+<build>Version_13.38.3.a77ca2b</build>
 <cl>t_coffee 3d.fasta -special_mode 3dcoffee </cl>
 <stack>
 </stack>
@@ -14,7 +14,7 @@
 <content>#Single Thread
 #Single Thread
 #Single Thread
-CLUSTAL FORMAT for T-COFFEE Version_13.30.12.28864d4 [http://www.tcoffee.org] [MODE: 3dcoffee ], CPU=0.00 sec, SCORE=98, Nseq=3, Len=183 
+CLUSTAL FORMAT for T-COFFEE Version_13.38.3.a77ca2b [http://www.tcoffee.org] [MODE: 3dcoffee ], CPU=0.00 sec, SCORE=98, Nseq=3, Len=183 
 
 1cms            GEVASVPLTNY--LDSQYFGKIYLGTPPQEFTVLFDTGSSDFWVPSIYCK
 4ape            -STGSATTTPIDSLDDAYITPVQIGTPAQTLNLDFDTGSSDLWVFSSETT
@@ -44,7 +44,7 @@ CLUSTAL FORMAT for T-COFFEE Version_13.30.12.28864d4 [http://www.tcoffee.org] [M
 <stream>output</stream>
 <name>stderr</name>
 <content>
-PROGRAM: T-COFFEE Version_13.30.12.28864d4 (Version_13.30.12.28864d4)
+PROGRAM: T-COFFEE Version_13.38.3.a77ca2b (Version_13.38.3.a77ca2b)
 -full_log      	S	[0] 
 -genepred_score	S	[0] 	nsd
 -run_name      	S	[0] 
@@ -227,7 +227,7 @@ INPUT SEQUENCES: 3 SEQUENCES  [PROTEIN]
 	PDB struc: Template=4ape, File=4ape.pdb
 
 	Multi Core Mode: 1 processors:
-rna_lib       	S	[0] 
+a_lib       	S	[0] 
 -no_warning    	D	[0] 	0 
 -run_local_script	D	[0] 	0 
 -proxy         	S	[0] 	unset
@@ -266,7 +266,7 @@ INPUT SEQUENCES: 3 SEQUENCES  [PROTEIN]
 	PDB struc: Template=4ape, File=4ape.pdb
 
 	Multi Core Mode: 1 processors:
-rna_lib       	S	[0] 
+a_lib       	S	[0] 
 -no_warning    	D	[0] 	0 
 -run_local_script	D	[0] 	0 
 -proxy         	S	[0] 	unset
@@ -307,7 +307,7 @@ INPUT SEQUENCES: 3 SEQUENCES  [PROTEIN]
 	Multi Core Mode: 1 processors:
 
 	--- Process Method/Library/Aln Msap_pair
-	xxx Retrieved Msap_pairrna_lib       	S	[0] 
+	xxx Retrieved Msap_paira_lib       	S	[0] 
 -no_warning    	D	[0] 	0 
 -run_local_script	D	[0] 	0 
 -proxy         	S	[0] 	unset
@@ -361,7 +361,7 @@ MANUAL PENALTIES: gapopen=0 gapext=0
 Library Relaxation: Multi_proc [1]
  
 !		[Relax Library][TOT=    3][  0 %]!		[Relax Library][TOT=    3][ 66 %]!		[Relax Library][TOT=    3][100 %]
-rna_lib       	S	[0] 
+a_lib       	S	[0] 
 -no_warning    	D	[0] 	0 
 -run_local_script	D	[0] 	0 
 -proxy         	S	[0] 	unset
@@ -428,75 +428,7 @@ Group    1: 1cms
 Group    2: 3app
 Group    3: 4ape
 
-rna_lib       	S	[0] 
--no_warning    	D	[0] 	0 
--run_local_script	D	[0] 	0 
--proxy         	S	[0] 	unset
--email         	S	[0] 
--clean_overaln 	D	[0] 	0 
--overaln_param 	S	[0] 
--overaln_mode  	S	[0] 
--overaln_model 	S	[0] 
--overaln_threshold	D	[0] 	0 
--overaln_target	D	[0] 	0 
--overaln_P1    	D	[0] 	0 
--overaln_P2    	D	[0] 	0 
--overaln_P3    	D	[0] 	0 
--overaln_P4    	D	[0] 	0 
--exon_boundaries	S	[0] 
--display       	D	[0] 	100 
-
-INPUT FILES
-	Input File (M) sap_pair 
-	Input File (S) 3d.fasta  Format fasta_seq
-
-Identify Master Sequences [no]:
-
-Master Sequences Identified
-Looking For Sequence Templates:
-
-	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start]
-Looking For Profile  Templates
-	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start]
-INPUT SEQUENCES: 3 SEQUENCES  [PROTEIN]
-  Input File 3d.fasta Seq 1cms Length  175 type PROTEIN Struct Unchecked
-	PDB struc: Template=1cms, File=1cms.pdb
-  Input File 3d.fasta Seq 3app Length  174 type PROTEIN Struct Unchecked
-	PDB struc: Template=3app, File=3app.pdb
-  Input File 3d.fasta Seq 4ape Length  178 type PROTEIN Struct Unchecked
-	PDB struc: Template=4ape, File=4ape.pdb
-
-	Multi Core Mode: 1 processors:
-
-	--- Process Method/Library/Aln Msap_pair
-	xxx Retrieved Msap_pair
-	--- Process Method/Library/Aln S3d.fasta
-	xxx Retrieved S3d.fasta
-
-	All Methods Retrieved
-
-MANUAL PENALTIES: gapopen=0 gapext=0
-
-	Library Total Size: [1020]
-
-Library Relaxation: Multi_proc [1]
- 
-Relaxation Summary: [1020]--->[1020]
-
-
-
-UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
-
-MAKE GUIDE TREE 
-	[MODE=nj][DONE]
-
-PROGRESSIVE_ALIGNMENT [Tree Based]
-Group    1: 1cms
-Group    2: 3app
-Group    3: 4ape
-
-
-	Group    4: [Group    2 (   1 seq)] with [Group    3 (   1 seq)]-->[Len=  180][PID:15964]rna_lib       	S	[0] 
+a_lib       	S	[0] 
 -no_warning    	D	[0] 	0 
 -run_local_script	D	[0] 	0 
 -proxy         	S	[0] 	unset
@@ -564,8 +496,76 @@ Group    2: 3app
 Group    3: 4ape
 
 
-	Group    4: [Group    2 (   1 seq)] with [Group    3 (   1 seq)]-->[Len=  180][PID:15964]
-	Group    5: [Group    1 (   1 seq)] with [Group    4 (   2 seq)]-->[Len=  183][PID:15964]
+	Group    4: [Group    2 (   1 seq)] with [Group    3 (   1 seq)]-->[Len=  180][PID:56850]a_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) sap_pair 
+	Input File (S) 3d.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start]
+Looking For Profile  Templates
+	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start]
+INPUT SEQUENCES: 3 SEQUENCES  [PROTEIN]
+  Input File 3d.fasta Seq 1cms Length  175 type PROTEIN Struct Unchecked
+	PDB struc: Template=1cms, File=1cms.pdb
+  Input File 3d.fasta Seq 3app Length  174 type PROTEIN Struct Unchecked
+	PDB struc: Template=3app, File=3app.pdb
+  Input File 3d.fasta Seq 4ape Length  178 type PROTEIN Struct Unchecked
+	PDB struc: Template=4ape, File=4ape.pdb
+
+	Multi Core Mode: 1 processors:
+
+	--- Process Method/Library/Aln Msap_pair
+	xxx Retrieved Msap_pair
+	--- Process Method/Library/Aln S3d.fasta
+	xxx Retrieved S3d.fasta
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1020]
+
+Library Relaxation: Multi_proc [1]
+ 
+Relaxation Summary: [1020]--->[1020]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: 1cms
+Group    2: 3app
+Group    3: 4ape
+
+
+	Group    4: [Group    2 (   1 seq)] with [Group    3 (   1 seq)]-->[Len=  180][PID:56850]
+	Group    5: [Group    1 (   1 seq)] with [Group    4 (   2 seq)]-->[Len=  183][PID:56850]
 
 
 !		[Final Evaluation][TOT=  183][  0 %]!		[Final Evaluation][TOT=  183][  1 %]!		[Final Evaluation][TOT=  183][  2 %]!		[Final Evaluation][TOT=  183][  3 %]!		[Final Evaluation][TOT=  183][  4 %]!		[Final Evaluation][TOT=  183][  5 %]!		[Final Evaluation][TOT=  183][  6 %]!		[Final Evaluation][TOT=  183][  7 %]!		[Final Evaluation][TOT=  183][  8 %]!		[Final Evaluation][TOT=  183][  9 %]!		[Final Evaluation][TOT=  183][ 10 %]!		[Final Evaluation][TOT=  183][ 11 %]!		[Final Evaluation][TOT=  183][ 12 %]!		[Final Evaluation][TOT=  183][ 13 %]!		[Final Evaluation][TOT=  183][ 14 %]!		[Final Evaluation][TOT=  183][ 15 %]!		[Final Evaluation][TOT=  183][ 16 %]!		[Final Evaluation][TOT=  183][ 17 %]!		[Final Evaluation][TOT=  183][ 18 %]!		[Final Evaluation][TOT=  183][ 19 %]!		[Final Evaluation][TOT=  183][ 20 %]!		[Final Evaluation][TOT=  183][ 21 %]!		[Final Evaluation][TOT=  183][ 22 %]!		[Final Evaluation][TOT=  183][ 23 %]!		[Final Evaluation][TOT=  183][ 24 %]!		[Final Evaluation][TOT=  183][ 25 %]!		[Final Evaluation][TOT=  183][ 26 %]!		[Final Evaluation][TOT=  183][ 27 %]!		[Final Evaluation][TOT=  183][ 28 %]!		[Final Evaluation][TOT=  183][ 29 %]!		[Final Evaluation][TOT=  183][ 30 %]!		[Final Evaluation][TOT=  183][ 31 %]!		[Final Evaluation][TOT=  183][ 32 %]!		[Final Evaluation][TOT=  183][ 33 %]!		[Final Evaluation][TOT=  183][ 34 %]!		[Final Evaluation][TOT=  183][ 35 %]!		[Final Evaluation][TOT=  183][ 36 %]!		[Final Evaluation][TOT=  183][ 37 %]!		[Final Evaluation][TOT=  183][ 38 %]!		[Final Evaluation][TOT=  183][ 39 %]!		[Final Evaluation][TOT=  183][ 40 %]!		[Final Evaluation][TOT=  183][ 41 %]!		[Final Evaluation][TOT=  183][ 42 %]!		[Final Evaluation][TOT=  183][ 43 %]!		[Final Evaluation][TOT=  183][ 44 %]!		[Final Evaluation][TOT=  183][ 45 %]!		[Final Evaluation][TOT=  183][ 46 %]!		[Final Evaluation][TOT=  183][ 47 %]!		[Final Evaluation][TOT=  183][ 48 %]!		[Final Evaluation][TOT=  183][ 49 %]!		[Final Evaluation][TOT=  183][ 50 %]!		[Final Evaluation][TOT=  183][ 51 %]!		[Final Evaluation][TOT=  183][ 52 %]!		[Final Evaluation][TOT=  183][ 53 %]!		[Final Evaluation][TOT=  183][ 54 %]!		[Final Evaluation][TOT=  183][ 55 %]!		[Final Evaluation][TOT=  183][ 56 %]!		[Final Evaluation][TOT=  183][ 57 %]!		[Final Evaluation][TOT=  183][ 58 %]!		[Final Evaluation][TOT=  183][ 59 %]!		[Final Evaluation][TOT=  183][ 60 %]!		[Final Evaluation][TOT=  183][ 61 %]!		[Final Evaluation][TOT=  183][ 62 %]!		[Final Evaluation][TOT=  183][ 63 %]!		[Final Evaluation][TOT=  183][ 64 %]!		[Final Evaluation][TOT=  183][ 65 %]!		[Final Evaluation][TOT=  183][ 66 %]!		[Final Evaluation][TOT=  183][ 67 %]!		[Final Evaluation][TOT=  183][ 68 %]!		[Final Evaluation][TOT=  183][ 69 %]!		[Final Evaluation][TOT=  183][ 70 %]!		[Final Evaluation][TOT=  183][ 71 %]!		[Final Evaluation][TOT=  183][ 72 %]!		[Final Evaluation][TOT=  183][ 73 %]!		[Final Evaluation][TOT=  183][ 74 %]!		[Final Evaluation][TOT=  183][ 75 %]!		[Final Evaluation][TOT=  183][ 76 %]!		[Final Evaluation][TOT=  183][ 77 %]!		[Final Evaluation][TOT=  183][ 78 %]!		[Final Evaluation][TOT=  183][ 79 %]!		[Final Evaluation][TOT=  183][ 80 %]!		[Final Evaluation][TOT=  183][ 81 %]!		[Final Evaluation][TOT=  183][ 82 %]!		[Final Evaluation][TOT=  183][ 83 %]!		[Final Evaluation][TOT=  183][ 84 %]!		[Final Evaluation][TOT=  183][ 85 %]!		[Final Evaluation][TOT=  183][ 86 %]!		[Final Evaluation][TOT=  183][ 87 %]!		[Final Evaluation][TOT=  183][ 88 %]!		[Final Evaluation][TOT=  183][ 89 %]!		[Final Evaluation][TOT=  183][ 90 %]!		[Final Evaluation][TOT=  183][ 91 %]!		[Final Evaluation][TOT=  183][ 92 %]!		[Final Evaluation][TOT=  183][ 93 %]!		[Final Evaluation][TOT=  183][ 94 %]!		[Final Evaluation][TOT=  183][ 95 %]!		[Final Evaluation][TOT=  183][ 96 %]!		[Final Evaluation][TOT=  183][ 97 %]!		[Final Evaluation][TOT=  183][ 98 %]!		[Final Evaluation][TOT=  183][ 99 %]!		[Final Evaluation][TOT=  183][100 %]
@@ -578,8 +578,8 @@ OUTPUT RESULTS
 	#### File Type= MSA             Format= html            Name= 3d.html
 
 # Command Line: t_coffee 3d.fasta -special_mode 3dcoffee  [PROGRAM:T-COFFEE]
-# T-COFFEE Memory Usage: Current= 32.739 Mb, Max= 33.680 Mb
-# Results Produced with T-COFFEE Version_13.30.12.28864d4 (Version_13.30.12.28864d4)
+# T-COFFEE Memory Usage: Current= 32.739 Mb, Max= 33.677 Mb
+# Results Produced with T-COFFEE Version_13.38.3.a77ca2b (Version_13.38.3.a77ca2b)
 # T-COFFEE is available from http://www.tcoffee.org
 # Register on: https://groups.google.com/group/tcoffee/
 </content>
@@ -11486,9 +11486,9 @@ END
 <file>
 <stream>input</stream>
 <name>/Users/cnotredame//.t_coffee//cache/1cms_3app.sap_results</name>
-<content> file1 = 16174_1.1874.sap_tmp
+<content> file1 = 57060_1.6538.sap_tmp
  prot1->Compound =  CHAIN: A;                                                  
- file2 = 16174_2.1320.sap_tmp
+ file2 = 57060_2.6980.sap_tmp
  prot2->Compound =  CHAIN: A;                                                  
 ARNDCQEGHILKMFPSTWYVBZX
 matrix constant = 8
@@ -11498,7 +11498,7 @@ Cycle 3, 36 residues selected
 Cycle 4, 44 residues selected
 Cycle 5, 53 residues selected
 
- score = 12512.047852
+ score = 12227.994141
 
 Percent sel on aln =  100.00
 Percent aln in sel =   31.55
@@ -11670,31 +11670,31 @@ Percent aln in sel =   31.55
   S  172  71.6 173 P  
   S  173  62.6 174 S  
  *K  174  87.7 175 Y* 
-16174_2.1320.sap_tmp Weighted RMSd =   0.801 over 168 atoms 125.265762 20829.080078  26.8 82.556313
-16174_2.1320.sap_tmp Un-weighted RMSd =   0.870 over best 95 atoms ( 20829.080078   26.8 )
-16174_2.1320.sap_tmp Un-weighted RMSd =   0.981 over best 109 atoms ( 20829.080078   26.8 )
-16174_2.1320.sap_tmp Un-weighted RMSd =   1.037 over best 120 atoms ( 20829.080078   26.8 )
-16174_2.1320.sap_tmp Un-weighted RMSd =   1.059 over best 127 atoms ( 20829.080078   26.8 )
-16174_2.1320.sap_tmp Un-weighted RMSd =   1.228 over best 139 atoms ( 20829.080078   26.8 )
-16174_2.1320.sap_tmp Un-weighted RMSd =   1.272 over best 146 atoms ( 20829.080078   26.8 )
-16174_2.1320.sap_tmp Un-weighted RMSd =   1.388 over best 149 atoms ( 20829.080078   26.8 )
-16174_2.1320.sap_tmp Un-weighted RMSd =   1.413 over best 151 atoms ( 20829.080078   26.8 )
-16174_2.1320.sap_tmp Un-weighted RMSd =   1.476 over best 156 atoms ( 20829.080078   26.8 )
-16174_2.1320.sap_tmp Un-weighted RMSd =   1.512 over best 159 atoms ( 20829.080078   26.8 )
-16174_2.1320.sap_tmp Un-weighted RMSd =   1.513 over best 160 atoms ( 20829.080078   26.8 )
-16174_2.1320.sap_tmp Un-weighted RMSd =   1.598 over best 166 atoms ( 20829.080078   26.8 )
-16174_2.1320.sap_tmp Un-weighted RMSd =   1.713 over best 166 atoms ( 20829.080078   26.8 )
-16174_2.1320.sap_tmp Un-weighted RMSd =   1.720 over best 168 atoms ( 20829.080078   26.8 )
-16174_2.1320.sap_tmp Un-weighted RMSd =   1.720 over best 168 atoms ( 20829.080078   26.8 )
-16174_2.1320.sap_tmp Un-weighted RMSd =   1.720 over all 168 matched atoms 125.265762 20829.080078   26.8 82.556313
+57060_2.6980.sap_tmp Weighted RMSd =   0.801 over 168 atoms 125.265762 20829.080078  26.8 82.556313
+57060_2.6980.sap_tmp Un-weighted RMSd =   0.870 over best 95 atoms ( 20829.080078   26.8 )
+57060_2.6980.sap_tmp Un-weighted RMSd =   0.981 over best 109 atoms ( 20829.080078   26.8 )
+57060_2.6980.sap_tmp Un-weighted RMSd =   1.037 over best 120 atoms ( 20829.080078   26.8 )
+57060_2.6980.sap_tmp Un-weighted RMSd =   1.059 over best 127 atoms ( 20829.080078   26.8 )
+57060_2.6980.sap_tmp Un-weighted RMSd =   1.228 over best 139 atoms ( 20829.080078   26.8 )
+57060_2.6980.sap_tmp Un-weighted RMSd =   1.272 over best 146 atoms ( 20829.080078   26.8 )
+57060_2.6980.sap_tmp Un-weighted RMSd =   1.388 over best 149 atoms ( 20829.080078   26.8 )
+57060_2.6980.sap_tmp Un-weighted RMSd =   1.413 over best 151 atoms ( 20829.080078   26.8 )
+57060_2.6980.sap_tmp Un-weighted RMSd =   1.476 over best 156 atoms ( 20829.080078   26.8 )
+57060_2.6980.sap_tmp Un-weighted RMSd =   1.512 over best 159 atoms ( 20829.080078   26.8 )
+57060_2.6980.sap_tmp Un-weighted RMSd =   1.513 over best 160 atoms ( 20829.080078   26.8 )
+57060_2.6980.sap_tmp Un-weighted RMSd =   1.598 over best 166 atoms ( 20829.080078   26.8 )
+57060_2.6980.sap_tmp Un-weighted RMSd =   1.713 over best 166 atoms ( 20829.080078   26.8 )
+57060_2.6980.sap_tmp Un-weighted RMSd =   1.720 over best 168 atoms ( 20829.080078   26.8 )
+57060_2.6980.sap_tmp Un-weighted RMSd =   1.720 over best 168 atoms ( 20829.080078   26.8 )
+57060_2.6980.sap_tmp Un-weighted RMSd =   1.720 over all 168 matched atoms 125.265762 20829.080078   26.8 82.556313
 </content>
 </file>
 <file>
 <stream>input</stream>
 <name>/Users/cnotredame//.t_coffee//cache/1cms_4ape.sap_results</name>
-<content> file1 = 16174_1.5441.sap_tmp
+<content> file1 = 57060_1.723.sap_tmp
  prot1->Compound =  CHAIN: A;                                                  
- file2 = 16174_2.8349.sap_tmp
+ file2 = 57060_2.4948.sap_tmp
  prot2->Compound =  CHAIN: A;                                                  
 ARNDCQEGHILKMFPSTWYVBZX
 matrix constant = 8
@@ -11704,7 +11704,7 @@ Cycle 3, 36 residues selected
 Cycle 4, 45 residues selected
 Cycle 5, 53 residues selected
 
- score = 13317.749023
+ score = 13317.711914
 
 Percent sel on aln =  100.00
 Percent aln in sel =   30.99
@@ -11879,31 +11879,31 @@ Percent aln in sel =   30.99
   T  173  41.7 173 P  
   T  174  83.2 174 S  
   A  175 108.0 175 Y* 
-16174_2.8349.sap_tmp Weighted RMSd =   0.803 over 171 atoms 130.039169 22469.740234  29.2 79.828087
-16174_2.8349.sap_tmp Un-weighted RMSd =   0.830 over best 98 atoms ( 22469.740234   29.2 )
-16174_2.8349.sap_tmp Un-weighted RMSd =   0.938 over best 115 atoms ( 22469.740234   29.2 )
-16174_2.8349.sap_tmp Un-weighted RMSd =   1.137 over best 123 atoms ( 22469.740234   29.2 )
-16174_2.8349.sap_tmp Un-weighted RMSd =   1.239 over best 130 atoms ( 22469.740234   29.2 )
-16174_2.8349.sap_tmp Un-weighted RMSd =   1.242 over best 135 atoms ( 22469.740234   29.2 )
-16174_2.8349.sap_tmp Un-weighted RMSd =   1.261 over best 137 atoms ( 22469.740234   29.2 )
-16174_2.8349.sap_tmp Un-weighted RMSd =   1.324 over best 143 atoms ( 22469.740234   29.2 )
-16174_2.8349.sap_tmp Un-weighted RMSd =   1.423 over best 149 atoms ( 22469.740234   29.2 )
-16174_2.8349.sap_tmp Un-weighted RMSd =   1.531 over best 156 atoms ( 22469.740234   29.2 )
-16174_2.8349.sap_tmp Un-weighted RMSd =   1.624 over best 161 atoms ( 22469.740234   29.2 )
-16174_2.8349.sap_tmp Un-weighted RMSd =   1.685 over best 164 atoms ( 22469.740234   29.2 )
-16174_2.8349.sap_tmp Un-weighted RMSd =   1.750 over best 168 atoms ( 22469.740234   29.2 )
-16174_2.8349.sap_tmp Un-weighted RMSd =   1.766 over best 170 atoms ( 22469.740234   29.2 )
-16174_2.8349.sap_tmp Un-weighted RMSd =   1.776 over best 171 atoms ( 22469.740234   29.2 )
-16174_2.8349.sap_tmp Un-weighted RMSd =   1.776 over best 171 atoms ( 22469.740234   29.2 )
-16174_2.8349.sap_tmp Un-weighted RMSd =   1.776 over all 171 matched atoms 130.039169 22469.740234   29.2 79.828087
+57060_2.4948.sap_tmp Weighted RMSd =   0.803 over 171 atoms 130.039169 22469.740234  29.2 79.828087
+57060_2.4948.sap_tmp Un-weighted RMSd =   0.830 over best 98 atoms ( 22469.740234   29.2 )
+57060_2.4948.sap_tmp Un-weighted RMSd =   0.938 over best 115 atoms ( 22469.740234   29.2 )
+57060_2.4948.sap_tmp Un-weighted RMSd =   1.137 over best 123 atoms ( 22469.740234   29.2 )
+57060_2.4948.sap_tmp Un-weighted RMSd =   1.239 over best 130 atoms ( 22469.740234   29.2 )
+57060_2.4948.sap_tmp Un-weighted RMSd =   1.242 over best 135 atoms ( 22469.740234   29.2 )
+57060_2.4948.sap_tmp Un-weighted RMSd =   1.261 over best 137 atoms ( 22469.740234   29.2 )
+57060_2.4948.sap_tmp Un-weighted RMSd =   1.324 over best 143 atoms ( 22469.740234   29.2 )
+57060_2.4948.sap_tmp Un-weighted RMSd =   1.423 over best 149 atoms ( 22469.740234   29.2 )
+57060_2.4948.sap_tmp Un-weighted RMSd =   1.531 over best 156 atoms ( 22469.740234   29.2 )
+57060_2.4948.sap_tmp Un-weighted RMSd =   1.624 over best 161 atoms ( 22469.740234   29.2 )
+57060_2.4948.sap_tmp Un-weighted RMSd =   1.685 over best 164 atoms ( 22469.740234   29.2 )
+57060_2.4948.sap_tmp Un-weighted RMSd =   1.750 over best 168 atoms ( 22469.740234   29.2 )
+57060_2.4948.sap_tmp Un-weighted RMSd =   1.766 over best 170 atoms ( 22469.740234   29.2 )
+57060_2.4948.sap_tmp Un-weighted RMSd =   1.776 over best 171 atoms ( 22469.740234   29.2 )
+57060_2.4948.sap_tmp Un-weighted RMSd =   1.776 over best 171 atoms ( 22469.740234   29.2 )
+57060_2.4948.sap_tmp Un-weighted RMSd =   1.776 over all 171 matched atoms 130.039169 22469.740234   29.2 79.828087
 </content>
 </file>
 <file>
 <stream>input</stream>
 <name>/Users/cnotredame//.t_coffee//cache/3app_4ape.sap_results</name>
-<content> file1 = 16174_1.2605.sap_tmp
+<content> file1 = 57060_1.8050.sap_tmp
  prot1->Compound =  CHAIN: A;                                                  
- file2 = 16174_2.4949.sap_tmp
+ file2 = 57060_2.5547.sap_tmp
  prot2->Compound =  CHAIN: A;                                                  
 ARNDCQEGHILKMFPSTWYVBZX
 matrix constant = 8
@@ -11913,7 +11913,7 @@ Cycle 3, 36 residues selected
 Cycle 4, 44 residues selected
 Cycle 5, 53 residues selected
 
- score = 19448.984375
+ score = 19448.976562
 
 Percent sel on aln =  100.00
 Percent aln in sel =   30.99
@@ -12088,23 +12088,23 @@ Percent aln in sel =   30.99
   T  173  69.7 172 S  
   T  174  87.1 173 S  
   A  175 128.5 174 K* 
-16174_2.4949.sap_tmp Weighted RMSd =   0.617 over 171 atoms 146.521652 37015.902344  59.1 91.949593
-16174_2.4949.sap_tmp Un-weighted RMSd =   0.651 over best 123 atoms ( 37015.902344   59.1 )
-16174_2.4949.sap_tmp Un-weighted RMSd =   0.863 over best 149 atoms ( 37015.902344   59.1 )
-16174_2.4949.sap_tmp Un-weighted RMSd =   0.941 over best 156 atoms ( 37015.902344   59.1 )
-16174_2.4949.sap_tmp Un-weighted RMSd =   1.017 over best 162 atoms ( 37015.902344   59.1 )
-16174_2.4949.sap_tmp Un-weighted RMSd =   1.014 over best 164 atoms ( 37015.902344   59.1 )
-16174_2.4949.sap_tmp Un-weighted RMSd =   1.007 over best 167 atoms ( 37015.902344   59.1 )
-16174_2.4949.sap_tmp Un-weighted RMSd =   1.005 over best 168 atoms ( 37015.902344   59.1 )
-16174_2.4949.sap_tmp Un-weighted RMSd =   1.005 over best 168 atoms ( 37015.902344   59.1 )
-16174_2.4949.sap_tmp Un-weighted RMSd =   1.003 over best 169 atoms ( 37015.902344   59.1 )
-16174_2.4949.sap_tmp Un-weighted RMSd =   1.003 over best 169 atoms ( 37015.902344   59.1 )
-16174_2.4949.sap_tmp Un-weighted RMSd =   1.003 over best 169 atoms ( 37015.902344   59.1 )
-16174_2.4949.sap_tmp Un-weighted RMSd =   1.003 over best 169 atoms ( 37015.902344   59.1 )
-16174_2.4949.sap_tmp Un-weighted RMSd =   1.075 over best 171 atoms ( 37015.902344   59.1 )
-16174_2.4949.sap_tmp Un-weighted RMSd =   1.075 over best 171 atoms ( 37015.902344   59.1 )
-16174_2.4949.sap_tmp Un-weighted RMSd =   1.075 over best 171 atoms ( 37015.902344   59.1 )
-16174_2.4949.sap_tmp Un-weighted RMSd =   1.075 over all 171 matched atoms 146.521652 37015.902344   59.1 91.949593
+57060_2.5547.sap_tmp Weighted RMSd =   0.617 over 171 atoms 146.521652 37015.902344  59.1 91.949593
+57060_2.5547.sap_tmp Un-weighted RMSd =   0.651 over best 123 atoms ( 37015.902344   59.1 )
+57060_2.5547.sap_tmp Un-weighted RMSd =   0.863 over best 149 atoms ( 37015.902344   59.1 )
+57060_2.5547.sap_tmp Un-weighted RMSd =   0.941 over best 156 atoms ( 37015.902344   59.1 )
+57060_2.5547.sap_tmp Un-weighted RMSd =   1.017 over best 162 atoms ( 37015.902344   59.1 )
+57060_2.5547.sap_tmp Un-weighted RMSd =   1.014 over best 164 atoms ( 37015.902344   59.1 )
+57060_2.5547.sap_tmp Un-weighted RMSd =   1.007 over best 167 atoms ( 37015.902344   59.1 )
+57060_2.5547.sap_tmp Un-weighted RMSd =   1.005 over best 168 atoms ( 37015.902344   59.1 )
+57060_2.5547.sap_tmp Un-weighted RMSd =   1.005 over best 168 atoms ( 37015.902344   59.1 )
+57060_2.5547.sap_tmp Un-weighted RMSd =   1.003 over best 169 atoms ( 37015.902344   59.1 )
+57060_2.5547.sap_tmp Un-weighted RMSd =   1.003 over best 169 atoms ( 37015.902344   59.1 )
+57060_2.5547.sap_tmp Un-weighted RMSd =   1.003 over best 169 atoms ( 37015.902344   59.1 )
+57060_2.5547.sap_tmp Un-weighted RMSd =   1.003 over best 169 atoms ( 37015.902344   59.1 )
+57060_2.5547.sap_tmp Un-weighted RMSd =   1.075 over best 171 atoms ( 37015.902344   59.1 )
+57060_2.5547.sap_tmp Un-weighted RMSd =   1.075 over best 171 atoms ( 37015.902344   59.1 )
+57060_2.5547.sap_tmp Un-weighted RMSd =   1.075 over best 171 atoms ( 37015.902344   59.1 )
+57060_2.5547.sap_tmp Un-weighted RMSd =   1.075 over all 171 matched atoms 146.521652 37015.902344   59.1 91.949593
 </content>
 </file>
 <file>
@@ -12120,7 +12120,7 @@ Percent aln in sel =   30.99
 <file>
 <stream>output</stream>
 <name>3d.aln</name>
-<content>CLUSTAL FORMAT for T-COFFEE Version_13.30.12.28864d4 [http://www.tcoffee.org] [MODE: 3dcoffee ], CPU=0.00 sec, SCORE=98, Nseq=3, Len=183 
+<content>CLUSTAL FORMAT for T-COFFEE Version_13.38.3.a77ca2b [http://www.tcoffee.org] [MODE: 3dcoffee ], CPU=0.00 sec, SCORE=98, Nseq=3, Len=183 
 
 1cms            GEVASVPLTNY--LDSQYFGKIYLGTPPQEFTVLFDTGSSDFWVPSIYCK
 4ape            -STGSATTTPIDSLDDAYITPVQIGTPAQTLNLDFDTGSSDLWVFSSETT
@@ -12167,7 +12167,7 @@ SPAN.value9 {background: #FFC8C8}
 SPAN.valuedefault {}
 SPAN.valuegap {}
 SPAN.valueink {background: 000000}
-</style><body><span class=valuedefault>T-COFFEE,&nbsp;Version_13.30.12.28864d4&nbsp;(Version_13.30.12.28864d4)</span><br><span class=valuedefault>Cedric&nbsp;Notredame&nbsp;</span><br><span class=valuedefault>CPU&nbsp;TIME:0&nbsp;sec.</span><br><span class=valuedefault>SCORE=98</span><br><span class=valuedefault>*</span><br><span class=valuedefault>&nbsp;</span><span class=value0>B</span><span class=value1>A</span><span class=value2>D</span><span class=value3>&nbsp;</span><span class=value4>A</span><span class=value5>V</span><span class=value6>G</span><span class=value7>&nbsp;</span><span class=value8>G</span><span class=value9>OOD</span><br><span class=valuedefault>*</span><br><span class=value9>1cms&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;98</span><br><span class=value9>4ape&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;98</span><br><span class=value9>3app&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;98</span><br><span class=value9>cons&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;&nbsp;9</span><br><br><span class=valuedefault>1cms&nbsp;&nbsp;&nbsp;</span><span class=value9>GEVASVPLTNY</span><span class=valuegap>--</span><span class=value9>LDSQYFGKIYLGTPPQEFTVLFDTGSSDFWVP</span><br><span class=valuedefault>4ape&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value9>STGSATTTPIDSLDDAYITPVQIGTPAQTLNLDFDTGSSDLWVF</span><br><span class=valuedefault>3app&nbsp;&nbsp;&nbsp;</span><span class=value9>AASGVATNTPTA</span><span class=valuegap>-</span><span class=value9>NDEEYITPVTIG</span><span class=valuegap>--</span><span class=value9>GTTLNLNFDTGSADLWVF</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;</span><span class=value7>&nbsp;</span><span class=value8>&nbsp;</span><span class=value9>&nbsp;.&nbsp;..&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*.&nbsp;*:&nbsp;&nbsp;:&nbsp;:*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:.:&nbsp;*****:*:**&nbsp;</span><br><br><br><span class=valuedefault>1cms&nbsp;&nbsp;&nbsp;</span><span class=value9>SIYCKSNACKNHQRFDPRKSST</span><span class=valuegap>-</span><span class=value9>FQNLGKPLSIH</span><span class=valuegap>-</span><span class=value9>YGTGSMQ</span><span class=valuegap>-</span><span class=value9>GI</span><br><span class=valuedefault>4ape&nbsp;&nbsp;&nbsp;</span><span class=value9>SSETTASEVDGQTIYTPSKSTTAKLLSGATWSIS</span><span class=valuegap>-</span><span class=value9>YGDGSSSSGD</span><br><span class=valuedefault>3app&nbsp;&nbsp;&nbsp;</span><span class=value9>STELPASQQSGHSVYNPSATG</span><span class=valuegap>--</span><span class=value9>KELSGYTWSISYGDGSSAS</span><span class=valuegap>-</span><span class=value9>GN</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;</span><span class=value9>*&nbsp;&nbsp;&nbsp;&nbsp;:.&nbsp;&nbsp;..:&nbsp;&nbsp;:&nbsp;*&nbsp;&nbsp;:</span><span class=value8>&nbsp;</span><span class=value9>&nbsp;&nbsp;</span><span class=value6>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>*</span><span class=value9>&nbsp;.&nbsp;**</span><span class=value8>&nbsp;</span><span class=value5>&nbsp;</span><span class=value6>&nbsp;.&nbsp;.*</span><span class=value8>&nbsp;</span><span class=value9>.&nbsp;*&nbsp;</span><br><br><br><span class=valuedefault>1cms&nbsp;&nbsp;&nbsp;</span><span class=value9>LGYDTVTVSNIVDIQQTVGLSTQEPGDVFTYAEFDGILGMAYPSL</span><br><span class=valuedefault>4ape&nbsp;&nbsp;&nbsp;</span><span class=value9>VYTDTVSVGGLTVTGQAVESAKKVSSSFTEDSTIDGLLGLAFSTL</span><br><span class=valuedefault>3app&nbsp;&nbsp;&nbsp;</span><span class=value9>VFTDSVTVGGVTAHGQAVQAAQQISAQFQQDTNNDGLLGLAFSSI</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;</span><span class=value9>:&nbsp;&nbsp;*:*:*..:.&nbsp;&nbsp;&nbsp;*:*&nbsp;&nbsp;:&nbsp;:&nbsp;....&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;**:**:*:.::</span><br><br><br><span class=valuedefault>1cms&nbsp;&nbsp;&nbsp;</span><span class=value9>ASEY</span><span class=valuegap>---</span><span class=value9>SIPVFDNMMNRHLVAQDLFSVYMDRNGQESMLTLGAID</span><br><span class=valuedefault>4ape&nbsp;&nbsp;&nbsp;</span><span class=value9>NTVSPTQQKTFFDNAKA</span><span class=valuegap>--</span><span class=value9>SLDSPVFTADLGY</span><span class=valuegap>-</span><span class=value9>HAPGTYNFGFID</span><br><span class=valuedefault>3app&nbsp;&nbsp;&nbsp;</span><span class=value9>NTVQPQSQTTFFDTVKS</span><span class=valuegap>--</span><span class=value9>SLAQPLFAVALKH</span><span class=valuegap>-</span><span class=value9>QQPGVYDFGFID</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value6>&nbsp;</span><span class=value9>.&nbsp;..**.&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value6>&nbsp;</span><span class=value9>&nbsp;:&nbsp;.&nbsp;:*:.&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.&nbsp;&nbsp;&nbsp;:*&nbsp;**</span><br><br><br><span class=valuedefault>1cms&nbsp;&nbsp;&nbsp;</span><span class=value9>PSY</span><br><span class=valuedefault>4ape&nbsp;&nbsp;&nbsp;</span><span class=value9>TTA</span><br><span class=valuedefault>3app&nbsp;&nbsp;&nbsp;</span><span class=value9>SSK</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;</span><span class=value9>.:&nbsp;</span><br><br><br><br><br><br></body></html>
+</style><body><span class=valuedefault>T-COFFEE,&nbsp;Version_13.38.3.a77ca2b&nbsp;(Version_13.38.3.a77ca2b)</span><br><span class=valuedefault>Cedric&nbsp;Notredame&nbsp;</span><br><span class=valuedefault>CPU&nbsp;TIME:0&nbsp;sec.</span><br><span class=valuedefault>SCORE=98</span><br><span class=valuedefault>*</span><br><span class=valuedefault>&nbsp;</span><span class=value0>B</span><span class=value1>A</span><span class=value2>D</span><span class=value3>&nbsp;</span><span class=value4>A</span><span class=value5>V</span><span class=value6>G</span><span class=value7>&nbsp;</span><span class=value8>G</span><span class=value9>OOD</span><br><span class=valuedefault>*</span><br><span class=value9>1cms&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;98</span><br><span class=value9>4ape&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;98</span><br><span class=value9>3app&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;98</span><br><span class=value9>cons&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;&nbsp;9</span><br><br><span class=valuedefault>1cms&nbsp;&nbsp;&nbsp;</span><span class=value9>GEVASVPLTNY</span><span class=valuegap>--</span><span class=value9>LDSQYFGKIYLGTPPQEFTVLFDTGSSDFWVP</span><br><span class=valuedefault>4ape&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value9>STGSATTTPIDSLDDAYITPVQIGTPAQTLNLDFDTGSSDLWVF</span><br><span class=valuedefault>3app&nbsp;&nbsp;&nbsp;</span><span class=value9>AASGVATNTPTA</span><span class=valuegap>-</span><span class=value9>NDEEYITPVTIG</span><span class=valuegap>--</span><span class=value9>GTTLNLNFDTGSADLWVF</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;</span><span class=value7>&nbsp;</span><span class=value8>&nbsp;</span><span class=value9>&nbsp;.&nbsp;..&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*.&nbsp;*:&nbsp;&nbsp;:&nbsp;:*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:.:&nbsp;*****:*:**&nbsp;</span><br><br><br><span class=valuedefault>1cms&nbsp;&nbsp;&nbsp;</span><span class=value9>SIYCKSNACKNHQRFDPRKSST</span><span class=valuegap>-</span><span class=value9>FQNLGKPLSIH</span><span class=valuegap>-</span><span class=value9>YGTGSMQ</span><span class=valuegap>-</span><span class=value9>GI</span><br><span class=valuedefault>4ape&nbsp;&nbsp;&nbsp;</span><span class=value9>SSETTASEVDGQTIYTPSKSTTAKLLSGATWSIS</span><span class=valuegap>-</span><span class=value9>YGDGSSSSGD</span><br><span class=valuedefault>3app&nbsp;&nbsp;&nbsp;</span><span class=value9>STELPASQQSGHSVYNPSATG</span><span class=valuegap>--</span><span class=value9>KELSGYTWSISYGDGSSAS</span><span class=valuegap>-</span><span class=value9>GN</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;</span><span class=value9>*&nbsp;&nbsp;&nbsp;&nbsp;:.&nbsp;&nbsp;..:&nbsp;&nbsp;:&nbsp;*&nbsp;&nbsp;:</span><span class=value8>&nbsp;</span><span class=value9>&nbsp;&nbsp;</span><span class=value6>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>*</span><span class=value9>&nbsp;.&nbsp;**</span><span class=value8>&nbsp;</span><span class=value5>&nbsp;</span><span class=value6>&nbsp;.&nbsp;.*</span><span class=value8>&nbsp;</span><span class=value9>.&nbsp;*&nbsp;</span><br><br><br><span class=valuedefault>1cms&nbsp;&nbsp;&nbsp;</span><span class=value9>LGYDTVTVSNIVDIQQTVGLSTQEPGDVFTYAEFDGILGMAYPSL</span><br><span class=valuedefault>4ape&nbsp;&nbsp;&nbsp;</span><span class=value9>VYTDTVSVGGLTVTGQAVESAKKVSSSFTEDSTIDGLLGLAFSTL</span><br><span class=valuedefault>3app&nbsp;&nbsp;&nbsp;</span><span class=value9>VFTDSVTVGGVTAHGQAVQAAQQISAQFQQDTNNDGLLGLAFSSI</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;</span><span class=value9>:&nbsp;&nbsp;*:*:*..:.&nbsp;&nbsp;&nbsp;*:*&nbsp;&nbsp;:&nbsp;:&nbsp;....&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;**:**:*:.::</span><br><br><br><span class=valuedefault>1cms&nbsp;&nbsp;&nbsp;</span><span class=value9>ASEY</span><span class=valuegap>---</span><span class=value9>SIPVFDNMMNRHLVAQDLFSVYMDRNGQESMLTLGAID</span><br><span class=valuedefault>4ape&nbsp;&nbsp;&nbsp;</span><span class=value9>NTVSPTQQKTFFDNAKA</span><span class=valuegap>--</span><span class=value9>SLDSPVFTADLGY</span><span class=valuegap>-</span><span class=value9>HAPGTYNFGFID</span><br><span class=valuedefault>3app&nbsp;&nbsp;&nbsp;</span><span class=value9>NTVQPQSQTTFFDTVKS</span><span class=valuegap>--</span><span class=value9>SLAQPLFAVALKH</span><span class=valuegap>-</span><span class=value9>QQPGVYDFGFID</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value6>&nbsp;</span><span class=value9>.&nbsp;..**.&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value6>&nbsp;</span><span class=value9>&nbsp;:&nbsp;.&nbsp;:*:.&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.&nbsp;&nbsp;&nbsp;:*&nbsp;**</span><br><br><br><span class=valuedefault>1cms&nbsp;&nbsp;&nbsp;</span><span class=value9>PSY</span><br><span class=valuedefault>4ape&nbsp;&nbsp;&nbsp;</span><span class=value9>TTA</span><br><span class=valuedefault>3app&nbsp;&nbsp;&nbsp;</span><span class=value9>SSK</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;</span><span class=value9>.:&nbsp;</span><br><br><br><br><br><br></body></html>
 </content>
 </file>
 <environement>
@@ -12186,7 +12186,7 @@ CONDA_PROMPT_MODIFIER=(base)
 TERM_PROGRAM_VERSION=388.1.3
 OSNAME=macosx
 PERL_BIN=/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms::/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices
-TERM_SESSION_ID=966A65A4-FBA5-4990-991E-01DB7E43DA0A
+TERM_SESSION_ID=98F198FA-FDF9-40DD-A8EF-07E7D5143362
 METHODS_4_TCOFFEE=/Users/cnotredame//.t_coffee//methods/
 VERSIONER_PERL_VERSION=5.18
 XAPPLRESDIR=/sw/etc/app-defaults/
@@ -12201,12 +12201,12 @@ _CE_CONDA=
 all_proxy=
 ALL_PROXY=
 HTTP_proxy_4_TCOFFEE=
-PATH=/Users/cnotredame//.t_coffee//plugins/macosx/:/Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/packages/x3dna-v2.1/bin:/Users/cnotredame/bin/macosx://Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms::/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices:/Users/cnotredame/bin/Scripts/:/Users/cnotredame/Library/Haskell/ghc-7.4.2/lib/epub-tools-2.0.0/bin/:/Users/cnotredame/anaconda3/bin:/Users/cnotredame/anaconda3/condabin:/opt/local/bin:/opt/local/sbin:/opt/local/bin:/opt/local/sbin:/Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/packages/x3dna-v2.1/bin:/Users/cnotredame/bin/macosx://Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms:.:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices:/Users/cnotredame/bin/Scripts:/Users/cnotredame/Library/Haskell/ghc-7.4.2/lib/epub-tools-2.0.0/bin:/sw/bin:/sw/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin
+PATH=/Users/cnotredame//.t_coffee//plugins/macosx/:/Users/cnotredame/anaconda3/bin:/Users/cnotredame/anaconda3/condabin:/opt/local/bin:/opt/local/sbin:/opt/local/bin:/opt/local/sbin:/Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/packages/x3dna-v2.1/bin:/Users/cnotredame/bin/macosx://Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms:.:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices:/Users/cnotredame/bin/Scripts:/Users/cnotredame/Library/Haskell/ghc-7.4.2/lib/epub-tools-2.0.0/bin:/sw/bin:/sw/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin
 _=/usr/bin/printenv
 CONDA_PREFIX=/Users/cnotredame/anaconda3
 COLOR_4_TCOFFEE=new
 DIR_4_TCOFFEE=/Users/cnotredame//.t_coffee/
-PWD=/Users/cnotredame/Dropbox/projects/git/tcoffee/tmp/RANDOMSTRING7hRVWRF1V6pGa64HVoDP/data
+PWD=/Users/cnotredame/Dropbox/projects/git/tcoffee/tmp/RANDOMSTRINGBfdLgcy5G70t4m91mTfU/tmp/RANDOMSTRINGrG2bBPeaAEy7gNnZxWay/data
 CACHE_4_TCOFFEE=/Users/cnotredame//.t_coffee//cache/
 X3DNA=/Users/cnotredame/Dropbox/packages/x3dna-v2.1
 DBUS_LAUNCHD_SESSION_BUS_SOCKET=/private/tmp/com.apple.launchd.CeZrDaslOL/unix_domain_listener
@@ -12218,16 +12218,16 @@ ERRORFILE_4_TCOFFEE=NO
 PLUGINS_4_TCOFFEE=/Users/cnotredame//.t_coffee//plugins/macosx/
 SHLVL=3
 HOME=/Users/cnotredame
-DUMP_4_TCOFFEE=/Users/cnotredame/Dropbox/projects/git/tcoffee/tmp/RANDOMSTRING7hRVWRF1V6pGa64HVoDP/core.tests.8.dump
+DUMP_4_TCOFFEE=/Users/cnotredame/Dropbox/projects/git/tcoffee/tmp/RANDOMSTRINGBfdLgcy5G70t4m91mTfU/tmp/RANDOMSTRINGrG2bBPeaAEy7gNnZxWay/core.tests.8.dump
 HTTP_PROXY=
 MAFFT_BINARIES=
 CONDA_PYTHON_EXE=/Users/cnotredame/anaconda3/bin/python
 BIN=/Users/cnotredame/bin/macosx
 LOGNAME=cnotredame
-EMAIL_4_TCOFFEE=cedric.notredame@gmail.com
+EMAIL_4_TCOFFEE=
 LC_CTYPE=UTF-8
 CONDA_DEFAULT_ENV=base
-EMAIL=cedric.notredame@gmail.com
+EMAIL=
 UPDATED_ENV_4_TCOFFEE=1
 INFOPATH=/sw/share/info:/sw/info:/usr/share/info
 DISPLAY=/private/tmp/com.apple.launchd.MDJPhYnCNw/org.macosforge.xquartz:0
@@ -12235,11 +12235,11 @@ TC_MASTER_NODE=1
 NUMBER_OF_PROCESSORS=8
 ALL_proxy=
 SECURITYSESSIONID=186a6
-LOCKDIR_4_TCOFFEE=/var/tmp/tco/tcob1kkqnek15964//lck/4munwq4hcy/
-TMP_4_TCOFFEE=/var/tmp/tco/tcob1kkqnek15964/
+LOCKDIR_4_TCOFFEE=/var/tmp/tco/tcogob4wr2956850//lck/rp9msx7psk/
+TMP_4_TCOFFEE=/var/tmp/tco/tcogob4wr2956850/
 USER_BIN=/Users/cnotredame/bin/macosx
 SCRIPT_BIN=/Users/cnotredame/bin/Scripts/
 </environement>
 <DumpStatus>OK</DumpStatus>
-<DumpFile>/Users/cnotredame/Dropbox/projects/git/tcoffee/tmp/RANDOMSTRING7hRVWRF1V6pGa64HVoDP/core.tests.8.dump</DumpFile>
+<DumpFile>/Users/cnotredame/Dropbox/projects/git/tcoffee/tmp/RANDOMSTRINGBfdLgcy5G70t4m91mTfU/tmp/RANDOMSTRINGrG2bBPeaAEy7gNnZxWay/core.tests.8.dump</DumpFile>
 </DumpIO>

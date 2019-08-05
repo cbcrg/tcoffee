@@ -289,6 +289,7 @@ int aln_compare ( int argc, char *argv[])
 
     
 /*PARAMETERS INPUT*/
+    
 
     for ( a=1; a< argc; a++)
     	{
@@ -334,13 +335,14 @@ int aln_compare ( int argc, char *argv[])
 	else if ( strcmp ( argv[a], "-lib")==0)
     		{
     		sprintf ( lib_file, "%s", argv[++a]);
-		
+		register_file4dump (lib_file, "r");
 		}	
 	else if ( strcmp ( argv[a], "-al")==0)
 		{
     		
     		sprintf ( alignment2_file, "%s", argv[++a]);
 		
+		register_file4dump (alignment2_file, "r");
 		}	
 	//-----END of changes-----
 	else if ( strcmp ( argv[a], "-al1")==0)
@@ -348,6 +350,7 @@ int aln_compare ( int argc, char *argv[])
 		  ++a;
 		  sprintf ( alignment1_file, "%s", argv[a]);
 		  sprintf ( alignment1_file_original, "%s", argv[a]);
+		  register_file4dump (alignment1_file, "r");
 		
 		}	
 	else if ( strcmp ( argv[a], "-al2")==0)
@@ -355,17 +358,19 @@ int aln_compare ( int argc, char *argv[])
 		  ++a;
     		sprintf ( alignment2_file, "%s", argv[a]);
 		sprintf ( alignment2_file_original, "%s", argv[a]);
-		
+		register_file4dump (alignment2_file, "r");
 		}
 	else if (  strcmp ( argv[a], "-pep1")==0)
 	        {
 		pep_compare=1;
 		sprintf ( pep1_file, "%s", argv[++a]);
+		register_file4dump (pep1_file, "r");
 		}
 	else if (  strcmp ( argv[a], "-pep2")==0)
 	        {
 		pep_compare=1;
 		sprintf ( pep2_file, "%s", argv[++a]);
+		register_file4dump (pep2_file, "r");
 		}
 	else if (  strcmp ( argv[a], "-pep")==0)
 	        {
@@ -465,6 +470,7 @@ int aln_compare ( int argc, char *argv[])
 	char *aln1=vtmpnam (NULL);
 	char *aln2=vtmpnam (NULL);
 	int quick_trim=1; // this option was added to trim the MSA in C
+	
 
 	if (quick_trim && trim_aln_file ( alignment1_file, alignment2_file,aln1, aln2))
 	  {
