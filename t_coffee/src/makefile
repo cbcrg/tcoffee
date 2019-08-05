@@ -161,11 +161,11 @@ DISTRIB_DOC=$(DISTRIB_DIR)/doc
 
 distribution:	
 	echo $(VERSION)
-	make -i VERSION=$(VERSION) CC=cc general_distribution
-	make -i VERSION=$(VERSION) CC=cc examples
-	make -i VERSION=$(VERSION) CC=cc mcoffee
-	make -i doc	
-	make -i VERSION=$(VERSION) CC=cc packing
+	make  VERSION=$(VERSION) CC=cc general_distribution
+	make  VERSION=$(VERSION) CC=cc examples
+	make  VERSION=$(VERSION) CC=cc mcoffee
+	make  doc	
+	make  VERSION=$(VERSION) CC=cc packing
 
 doc:
 	cp $(RST_DOC)/README  $(DISTRIB_DIR)
@@ -233,7 +233,6 @@ general_distribution:
 	mkdir -p $(DISTRIB_DIR)/$(EXECUTABLE)_source
 	mkdir -p $(DISTRIB_DIR)/reference_test
 	echo '' > $(DISTRIB_DIR)/install
-	sslslsl
 	make -i VERSION=$(VERSION) CC=cc code
 	cp $(EXECUTABLE) $(DISTRIB_DIR)/bin/$(OSNAME)
 	cp $(EXECUTABLE) $(GIT_BIN)/$(OSNAME)/$(EXECUTABLE).$(VERSION)
