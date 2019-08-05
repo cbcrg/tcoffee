@@ -1,6 +1,6 @@
 T-Coffee distribution 
 =====================
-Version_13.32.33.f5848ff #_#UPDATE_VERSION -- Populated by edit_version.pl
+Version_13.32.51.b9ab419 #_#UPDATE_VERSION -- Populated by edit_version.pl
 The version ID is organized as follows: <Major Release>.<Latest Stable>.<Latest Beta>.<Github version tag>
 Content of this directory: 
 Linux Installation:
@@ -9,5 +9,5 @@ Linux Installation:
       * T-COFFEE_installer_Version_<version>_linux_x64.tar.gz: T-Coffee pre-compiled binaries for Linux. Once downloaded untar this file and add the bin directory to your PATH variable. 
 
 Macosx
-      * T-COFFEE_distribution_Version_<version>.tar.gz: T-Coffee source code distribution. This distribution will either download the excecutables via install OR compile them locally  
-Note: To use T-Coffee on macOS, you will need to compile from sources or to use a containerized version available at this link: https://hub.docker.com/r/cbcrg/tcoffee.
+      * T-COFFEE_distribution_Version_<version>.tar.gz: T-Coffee source code distribution. This distribution will either download the excecutables via install OR compile them locally.  
+

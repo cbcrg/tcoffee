@@ -233,7 +233,7 @@ general_distribution:
 	mkdir -p $(DISTRIB_DIR)/$(EXECUTABLE)_source
 	mkdir -p $(DISTRIB_DIR)/reference_test
 	echo '' > $(DISTRIB_DIR)/install
-	make -i VERSION=$(VERSION) CC=cc code
+	make VERSION=$(VERSION) CC=cc code
 	cp $(EXECUTABLE) $(DISTRIB_DIR)/bin/$(OSNAME)
 	cp $(EXECUTABLE) $(GIT_BIN)/$(OSNAME)/$(EXECUTABLE).$(VERSION)
 	make -i VERSION=$(VERSION) CC=cc license
@@ -258,7 +258,6 @@ distribute: all
 	rm -f core
 	-rm -f *.o_$(OSNAME)
 code:
-	akakakak
 	echo $(OSNAME) Compilation
 	make clean
 	make CC="g++" $(EXECUTABLE)
@@ -271,10 +270,9 @@ code:
 
 install2version:
 	echo $(DISTRIB_DIR)/install
-	$(shell $(PERL4MAKEFILE_LIB)/edit_version.pl -in $(DISTRIB_DIR)/install -tag "#_#UPDATE_VERSION" -string 'our $VERSION=\"$(VERSION))\";'
-	eeetete
-	$(PERL4MAKEFILE_LIB)/edit_version.pl -in $(BUILD_DIR)/web-readme.txt -tag "#_#UPDATE_VERSION" -string "$(VERSION)"	
- 
+	$(PERL4MAKEFILE_LIB)/edit_version.pl -in $(DISTRIB_DIR)/install -tag "#_#UPDATE_VERSION" -string "our #_#DSVERSION=#_#DQ$(VERSION)#_#DQ;"
+	$(PERL4MAKEFILE_LIB)/edit_version.pl -in $(BUILD_DIR)/web-readme.txt -tag "#_#UPDATE_VERSION" -string "$(VERSION)"
+
 # This target copies T-Coffee sources files from the library folder 
 # to the distribution folder. 
 # This process is a bit tricky to maintaning compatibiltiy with the legacy 
@@ -364,7 +362,7 @@ release2:
 	make distribution VERSION=$(VERSION)
 	make web
 	git commit -a -m '$(m)'	
-#	git push
+	git push
 
 web:
 	rm -f $(WEB_DOC)/*.html
