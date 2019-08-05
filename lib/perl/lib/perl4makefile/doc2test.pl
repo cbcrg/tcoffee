@@ -1116,7 +1116,7 @@ sub string2dump_list
 	   dir2dump_list ($string);}
        elsif (-f $string){file2dump_list($string);}
        
-       @dump_list=@TMP_LIST;
+       @dump_list=sort @TMP_LIST;
        @TMP_LIST=();
        return @dump_list;
      }
@@ -1147,7 +1147,7 @@ sub file2dump_list
 	 }
        
        close ($f);
-       return @TMP_LIST;
+       return sort @TMP_LIST;
      }
      
 sub dir2dump_list

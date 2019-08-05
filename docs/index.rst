@@ -18,7 +18,7 @@ Contents:
    tcoffee_technical_documentation
    tcoffee_webserver
    tcoffee_faq    
-   tcoffee_doctest
+   tcoffee_release_guide
    tcoffee_citations_references
    tcoffee_contacts_adresses
    tcoffee_license

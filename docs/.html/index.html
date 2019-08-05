@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>T-Coffee Version_13.38.4.46b2c3f documentation</title>
+  <title>T-Coffee Version_13.38.6.eb989a4 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                Version_13.38.4.46b2c3f
+                Version_13.38.6.eb989a4
               </div>
             
           
@@ -618,19 +618,21 @@
 <li class="toctree-l2"><a class="reference internal" href="index.html#release-notes">Release Notes</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="index.html#document-tcoffee_doctest">T-Coffee doc test</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html#document-tcoffee_release_guide">T-Coffee doc test</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="index.html#introduction">Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="index.html#testline-command">Testline Command</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="index.html#introducing-a-new-command-to-testtet">Introducing a new command to testTet</a></li>
-<li class="toctree-l3"><a class="reference internal" href="index.html#checking-the-documentation-command-lines">Checking the documentation command lines</a></li>
-<li class="toctree-l3"><a class="reference internal" href="index.html#validating-a-distribution">Validating a distribution</a></li>
-<li class="toctree-l3"><a class="reference internal" href="index.html#creating-a-new-command-to-be-tested">Creating a new command to be tested</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#making-a-new-release">Making a new release</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="index.html#beta-release">Beta Release</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#stable-release">Stable Release</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#major-release">Major Release</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#release-building-procedure">Release Building Procedure</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="index.html#triggering-a-release">Triggering a release</a></li>
 <li class="toctree-l3"><a class="reference internal" href="index.html#circleci-building">CircleCI building</a></li>
 <li class="toctree-l3"><a class="reference internal" href="index.html#publication">Publication</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#checking-the-documentation-command-lines">Checking the documentation command lines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#local-validation-of-a-distribution">Local Validation of a distribution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#creating-a-new-command-to-be-tested">Creating a new command to be tested</a></li>
 </ul>
 </li>
 </ul>
@@ -703,7 +705,7 @@
     
       <li><a href="index.html#document-index">Docs</a> &raquo;</li>
         
-      <li>T-Coffee Version_13.38.4.46b2c3f documentation</li>
+      <li>T-Coffee Version_13.38.6.eb989a4 documentation</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -5938,106 +5940,49 @@ $$: t_coffee -infile=sample_aln1.aln -evaluate -method proba_pair
 </ul>
 </div>
 </div>
-<span id="document-tcoffee_doctest"></span><div class="section" id="t-coffee-doc-test">
+<span id="document-tcoffee_release_guide"></span><div class="section" id="t-coffee-doc-test">
 <h2>T-Coffee doc test<a class="headerlink" href="#t-coffee-doc-test" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="introduction">
 <h3>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h3>
-<p>Before the realease of a new T-Coffee version, many command lines in the documentation are programmatically tested. The purpose of this document is to explain which command lines are tested, how new command lines can be added to the documentation and how to perform a documentation check before a new release.</p>
+<p>Before the realease of a new T-Coffee version, many command lines in the documentation are programmatically tested. The purpose of this document is to explain how to make a new release, which command lines are tested, how new command lines can be added to the documentation and how to perform a documentation check before a new release.</p>
 </div>
-<div class="section" id="testline-command">
-<h3>Testline Command<a class="headerlink" href="#testline-command" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="introducing-a-new-command-to-testtet">
-<h4>Introducing a new command to testTet<a class="headerlink" href="#introducing-a-new-command-to-testtet" title="Permalink to this headline">¶</a></h4>
-<p>Tests are systematically carried out on all the command lines that start with the symbol $$. For instance, the following CL will has been tested.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$$: t_coffee
+<div class="section" id="making-a-new-release">
+<h3>Making a new release<a class="headerlink" href="#making-a-new-release" title="Permalink to this headline">¶</a></h3>
+<p>T-Coffee is automatically build by using the [Circle CI](<a class="reference external" href="https://circleci.com/gh/cbcrg/tcoffee">https://circleci.com/gh/cbcrg/tcoffee</a>) service. The procedure starts with an update of the version number followed by a git push that triggers the validation of the new release on circleCI and a posting via an amzon instance hosting the T-Coffee web site. All these operations are detailed below. Depending on the release type the correspinding counter will be incremented by 1 &lt;nmajor&gt;.&lt;stable&gt;.&lt;beta&gt;</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$#: cd t_coffee/src
+$#: make release type=beta(default)|stable|major m=&#39;short description of the main feature&#39; test=core(default)|all|remote|none
 </pre></div>
 </div>
-<p>Other command lines starting with different symbols are not checked. Two types of command lines identifiers are used:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$#: t_coffee
-</pre></div>
-</div>
-<p>For a command that could be tested but will not be, either for the sake of time or because it is currently unstable. When a new release needs to be urgently made available because of a critical fix, it is advisable to comment out this way non critical command lines failing the test.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">##: t_coffee</span>
-</pre></div>
-</div>
-<p>These commands are never tested, either because they contain system dependant information or non programmatic information.</p>
-<p>Whenvever adding a new command, input files must be added to the repository directory ./examples/. New commands can be also be built using the existing files, or they can depend on files newly added to the repository.</p>
-</div>
-<div class="section" id="checking-the-documentation-command-lines">
-<h4>Checking the documentation command lines<a class="headerlink" href="#checking-the-documentation-command-lines" title="Permalink to this headline">¶</a></h4>
-<p>The simplest way to check the documentation is to run the following command from the repository root (other locations are possible, but -ref, -docs must be modified accordingly). Note that the .tests and .rst files can link to other files.</p>
-<blockquote>
-<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#$: ./lib/perl/lib/perl4makefile/doc2test.pl -play &lt;*.rst file or *.tests file or list of cmd&gt; -data &lt;file containing the data&gt; -dumps &lt;target file for dumps&gt;</span>
-</pre></div>
-</div>
-</div></blockquote>
-<p>You can the check the contents</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#$: ./lib/perl/lib/perl4makefile/doc2test.pl -check &lt;dump directory - recursive&gt;</span>
-</pre></div>
-</div>
-<p>You can the re-run a list of dumps. This is how each distribution gest tested against tests/core.tests with data .in tests/.data and the dumps in tests/.dumps</p>
+<div class="section" id="beta-release">
+<h4>Beta Release<a class="headerlink" href="#beta-release" title="Permalink to this headline">¶</a></h4>
+<p>For a beta, the following needs to go through:</p>
 <dl class="simple">
-<dt>::</dt><dd><p>#$: ./lib/perl/lib/perl4makefile/doc2test.pl -replay &lt;dump directory, or single dump file&gt;</p>
+<dt>::</dt><dd><p>$#: make release type=beta test=core|none</p>
 </dd>
 </dl>
-<p>This mode will only run the command lines that have previously failed, as indicated by the presence of an output in the failed directory. Note that you can selectively delete some dumps</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#$: ./lib/perl/lib/perl4makefile/doc2test.pl -check &lt;dump directory - recursive&gt; -clean FAILED or -clean2 &lt;string in dump to be deleted&gt;</span>
-</pre></div>
 </div>
-<dl>
-<dt>By default existing dumps will only be recomputed if the command line or the input data has changed. YOu can trigger recomputation:</dt><dd><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#$: ./lib/perl/lib/perl4makefile/doc2test.pl -play &lt;*.rst file or *.tests file or list of cmd&gt; -data &lt;file containing the data&gt; -dumps &lt;target file for dumps&gt; -update</span>
-</pre></div>
-</div>
+<div class="section" id="stable-release">
+<h4>Stable Release<a class="headerlink" href="#stable-release" title="Permalink to this headline">¶</a></h4>
+<p>For a Stable, the following needs to go through:</p>
+<dl class="simple">
+<dt>::</dt><dd><p>$#: make release type=beta test=core
+$#: make release type=stable teste=none</p>
 </dd>
 </dl>
-<p>Finalyit is possible to dump the data containned in a dump:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#$: ./lib/perl/lib/perl4makefile/doc2test.pl -unplay &lt;dump file or dump dir&gt; -outdir &lt;dir where data is to be dummped&gt;</span>
-</pre></div>
 </div>
-</div>
-<div class="section" id="validating-a-distribution">
-<h4>Validating a distribution<a class="headerlink" href="#validating-a-distribution" title="Permalink to this headline">¶</a></h4>
-<p>Dump files are safe contained. It is possible to check T-Coffee capacity to reproduce a collection of reference dump files.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">##: ./lib/perl/lib/perl4makefile/doc2test.pl -mode check -ref &lt;dir containing dump files&gt;</span>
-</pre></div>
-</div>
-<p>It will cause the test to stop whenever a failed is encountered</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">##: ./lib/perl/lib/perl4makefile/doc2test.pl -mode reset</span>
-</pre></div>
-</div>
-<p>Will cause all the reference files to be erased.</p>
-</div>
-<div class="section" id="creating-a-new-command-to-be-tested">
-<h4>Creating a new command to be tested<a class="headerlink" href="#creating-a-new-command-to-be-tested" title="Permalink to this headline">¶</a></h4>
-<p>In order to generate a new test command, all you need to do is to run your command while setting an environement variable. This will generate a dump file that can be used to rerun the same call:
-Dump files are very easy to produce yout simply need to run</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">##:rm -f &lt;your dump file&gt;;export DUMP_4_TCOFFEE=&lt;your dump file&gt;;t_coffee -in seq</span>
-<span class="n">OR</span>
-<span class="c1">##:rm -f &lt;your dump file&gt;;export DUMP_4_TCOFFEE=&lt;your dump file&gt;;t_coffee -other_pg seq_reformat -in xxxx/xx/s.pep -output fasta_seq &gt; yyy</span>
-</pre></div>
-</div>
-<p>This command will generate a self contained dumpfile. This dumpfile will contain all the information needed ton reprodduce the runn (i.e file name, path, content and T-Coffee parameters). In order to reproduce the call you need to have T-Coffee installed and run:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">##: ./lib/perl/lib/perl4makefile/doc2test.pl -replay yourdumpfile</span>
-</pre></div>
-</div>
-<p>Will allow you to check if the command runs and produces similar files. By default the test is “PASSED” if no error is thrown by the call. This can be refined as follows:</p>
-<blockquote>
-<div><p>##: ./lib/perl/lib/perl4makefile/doc2test.pl -replay yourdumpfile -strict</p>
-</div></blockquote>
-<p>Will report failure whenever an output file is missing or whenever an error is reported.</p>
-<blockquote>
-<div><p>##: ./lib/perl/lib/perl4makefile/doc2test.pl -replay yourdumpfile -very_strict</p>
-</div></blockquote>
-<p>Will report failure whenever there is a warning OR whenever an output file differs (Note that VERSION and CPU are excluded from the comparison as a consequence different versions will not result in different output files). It is possible to visualize the replayed dump for debugging purposes.</p>
-<blockquote>
-<div><p>##: ./lib/perl/lib/perl4makefile/doc2test.pl -replay yourdumpfile -keepreplayed</p>
-</div></blockquote>
+<div class="section" id="major-release">
+<h4>Major Release<a class="headerlink" href="#major-release" title="Permalink to this headline">¶</a></h4>
+<p>For a Major, the following needs to go through. Note that a major implies some important milestone such as a publication</p>
+<dl class="simple">
+<dt>::</dt><dd><p>$#: make release type=beta test=all
+$#: make release type=major teste=none</p>
+</dd>
+</dl>
 </div>
 </div>
 <div class="section" id="release-building-procedure">
 <h3>Release Building Procedure<a class="headerlink" href="#release-building-procedure" title="Permalink to this headline">¶</a></h3>
-<p># How T-Coffee build works</p>
-<p>T-Coffee is automatically build by using the [Circle CI](<a class="reference external" href="https://circleci.com/gh/cbcrg/tcoffee">https://circleci.com/gh/cbcrg/tcoffee</a>) service. The procedure starts with an update of the version number followed by a git push that triggers the validation of the new release on circleCI and a posting via an amzon instance hosting the T-Coffee web site. All these operations are detailed below.</p>
+<p>This section explains how the release procedure works. Roughly speaking, the release is initiated on a local machine using the makefile (t_coffee/src/makefile). It is this procedure that increments the release version number (lib/version/version_number.version). This procedure makes a dummy distribution on the local machine and eventually pushes all the files in github. Thanks to a CircleCI hook, the push then initiates the building of a virtual machine in CircleCI where the final building procedure is carried out amd followed by a test (as specifiled in makefile test=&lt;test type&gt;. If the test is succesful, the procedure finishes with a publishing of the distribution.</p>
 <div class="section" id="triggering-a-release">
 <h4>Triggering a release<a class="headerlink" href="#triggering-a-release" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
@@ -6051,10 +5996,10 @@ Dump files are very easy to produce yout simply need to run</p>
 </dd>
 </dl>
 <p>-the file .circleci/config.yml will be programmatically edidted by read_program_version.pl to state the kind of release to be done by CircleCI
--make distribution will run. Amomg othe things this will</p>
+-make distribution will run. Among othe things it will</p>
 <blockquote>
 <div><p>-check that the distribution procedure is functional - it is a similar procedure that will be used by CircleCI
--compile the documentation with sphinx and update docs/.html</p>
+-compile the documentation with sphinx and update docs/.html – this requires sphinx to be installed on the local machine</p>
 </div></blockquote>
 </dd>
 </dl>
@@ -6104,6 +6049,90 @@ Dump files are very easy to produce yout simply need to run</p>
 <div class="section" id="publication">
 <h4>Publication<a class="headerlink" href="#publication" title="Permalink to this headline">¶</a></h4>
 <p>Once the build is complete and all tests are passed the distribution is pushed onto the web along with the associated documentation.</p>
+<p>Tests are systematically carried out on all the command lines that start with the symbol $$. For instance, the following CL will has been tested.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$$: t_coffee
+</pre></div>
+</div>
+<p>Other command lines starting with different symbols are not checked. Two types of command lines identifiers are used:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$#: t_coffee
+</pre></div>
+</div>
+<p>For a command that could be tested but will not be, either for the sake of time or because it is currently unstable. When a new release needs to be urgently made available because of a critical fix, it is advisable to comment out this way non critical command lines failing the test.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">##: t_coffee</span>
+</pre></div>
+</div>
+<p>These commands are never tested, either because they contain system dependant information or non programmatic information.</p>
+<p>Whenvever adding a new command, input files must be added to the repository directory ./examples/. New commands can be also be built using the existing files, or they can depend on files newly added to the repository.</p>
+</div>
+<div class="section" id="checking-the-documentation-command-lines">
+<h4>Checking the documentation command lines<a class="headerlink" href="#checking-the-documentation-command-lines" title="Permalink to this headline">¶</a></h4>
+<p>The simplest way to check the documentation is to run the following command from the repository root (other locations are possible, but -ref, -docs must be modified accordingly). Note that the .tests and .rst files can link to other files.</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#$: ./lib/perl/lib/perl4makefile/doc2test.pl -play &lt;*.rst file or *.tests file or list of cmd&gt; -data &lt;file containing the data&gt; -dumps &lt;target file for dumps&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>You can the check the contents</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#$: ./lib/perl/lib/perl4makefile/doc2test.pl -check &lt;dump directory - recursive&gt;</span>
+</pre></div>
+</div>
+<p>You can the re-run a list of dumps. This is how each distribution gest tested against tests/core.tests with data .in tests/.data and the dumps in tests/.dumps</p>
+<dl class="simple">
+<dt>::</dt><dd><p>#$: ./lib/perl/lib/perl4makefile/doc2test.pl -replay &lt;dump directory, or single dump file&gt;</p>
+</dd>
+</dl>
+<p>This mode will only run the command lines that have previously failed, as indicated by the presence of an output in the failed directory. Note that you can selectively delete some dumps</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#$: ./lib/perl/lib/perl4makefile/doc2test.pl -check &lt;dump directory - recursive&gt; -clean FAILED or -clean2 &lt;string in dump to be deleted&gt;</span>
+</pre></div>
+</div>
+<dl>
+<dt>By default existing dumps will only be recomputed if the command line or the input data has changed. YOu can trigger recomputation:</dt><dd><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#$: ./lib/perl/lib/perl4makefile/doc2test.pl -play &lt;*.rst file or *.tests file or list of cmd&gt; -data &lt;file containing the data&gt; -dumps &lt;target file for dumps&gt; -update</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<p>Finalyit is possible to dump the data containned in a dump:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#$: ./lib/perl/lib/perl4makefile/doc2test.pl -unplay &lt;dump file or dump dir&gt; -outdir &lt;dir where data is to be dummped&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="local-validation-of-a-distribution">
+<h4>Local Validation of a distribution<a class="headerlink" href="#local-validation-of-a-distribution" title="Permalink to this headline">¶</a></h4>
+<p>Dump files are safe contained. It is possible to check T-Coffee capacity to reproduce a collection of reference dump files.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">##: ./lib/perl/lib/perl4makefile/doc2test.pl -mode check -ref &lt;dir containing dump files&gt;</span>
+</pre></div>
+</div>
+<p>It will cause the test to stop whenever a failed is encountered</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">##: ./lib/perl/lib/perl4makefile/doc2test.pl -mode reset</span>
+</pre></div>
+</div>
+<p>Will cause all the reference files to be erased.</p>
+</div>
+<div class="section" id="creating-a-new-command-to-be-tested">
+<h4>Creating a new command to be tested<a class="headerlink" href="#creating-a-new-command-to-be-tested" title="Permalink to this headline">¶</a></h4>
+<p>In order to generate a new test command, all you need to do is to run your command while setting an environement variable. This will generate a dump file that can be used to rerun the same call:
+Dump files are very easy to produce yout simply need to run</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">##:rm -f &lt;your dump file&gt;;export DUMP_4_TCOFFEE=&lt;your dump file&gt;;t_coffee -in seq</span>
+<span class="n">OR</span>
+<span class="c1">##:rm -f &lt;your dump file&gt;;export DUMP_4_TCOFFEE=&lt;your dump file&gt;;t_coffee -other_pg seq_reformat -in xxxx/xx/s.pep -output fasta_seq &gt; yyy</span>
+</pre></div>
+</div>
+<p>This command will generate a self contained dumpfile. This dumpfile will contain all the information needed ton reprodduce the runn (i.e file name, path, content and T-Coffee parameters). In order to reproduce the call you need to have T-Coffee installed and run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">##: ./lib/perl/lib/perl4makefile/doc2test.pl -replay yourdumpfile</span>
+</pre></div>
+</div>
+<p>Will allow you to check if the command runs and produces similar files. By default the test is “PASSED” if no error is thrown by the call. This can be refined as follows:</p>
+<blockquote>
+<div><p>##: ./lib/perl/lib/perl4makefile/doc2test.pl -replay yourdumpfile -strict</p>
+</div></blockquote>
+<p>Will report failure whenever an output file is missing or whenever an error is reported.</p>
+<blockquote>
+<div><p>##: ./lib/perl/lib/perl4makefile/doc2test.pl -replay yourdumpfile -very_strict</p>
+</div></blockquote>
+<p>Will report failure whenever there is a warning OR whenever an output file differs (Note that VERSION and CPU are excluded from the comparison as a consequence different versions will not result in different output files). It is possible to visualize the replayed dump for debugging purposes.</p>
+<blockquote>
+<div><p>##: ./lib/perl/lib/perl4makefile/doc2test.pl -replay yourdumpfile -keepreplayed</p>
+</div></blockquote>
 </div>
 </div>
 </div>

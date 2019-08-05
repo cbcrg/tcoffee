@@ -4083,6 +4083,7 @@ int get_longest_string (char **array,int n, int *len, int *index)
 	 }
 
      return max_len;
+
      }
 
 int get_shortest_string (char **array,int n, int *len, int *index)
