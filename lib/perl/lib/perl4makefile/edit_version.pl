@@ -38,7 +38,8 @@ while (<$in>)
     my $l=$_;
     if ( $l=~/$tag/)
       {
-	$l="$string $tag -- Populated by edit_version.pl\n";
+	if ($tag=~/#_#/){$l="$string $tag -- Populated by edit_version.pl\n";}
+	else {$l="$string\n";}
       }
     $new_file.=$l;
   }

@@ -360,19 +360,21 @@ major:
 
 release:
 	make version release_type=$(type)
-	make test-$(TEST)
+	make test-$(test)
 	make release2
-
-test-core:
-	$(PERL4MAKEFILE_LIB)/edit_version.pl -in $(DOCKER_DIR)/run-tests.sh -tag "#_#UPDATE_RUN_TEST" -string "/root/tcoffee/lib/perl/lib/perl4makefile/doc2test.pl -replay ./tests/.dumps/core.tests/"
+test-none:
+	$(PERL4MAKEFILE_LIB)/edit_version.pl -in $(DOCKER_DIR)/run-tests.sh -tag "replay" -string "#notest replay"
 test-all:
-	$(PERL4MAKEFILE_LIB)/edit_version.pl -in $(DOCKER_DIR)/run-tests.sh -tag "#_#UPDATE_RUN_TEST" -string "/root/tcoffee/lib/perl/lib/perl4makefile/doc2test.pl -replay ./tests/.dumps/"
+test-core:
+	$(PERL4MAKEFILE_LIB)/edit_version.pl -in $(DOCKER_DIR)/run-tests.sh -tag "replay" -string "/root/tcoffee/lib/perl/lib/perl4makefile/doc2test.pl -replay ./tests/.dumps/core.tests/"
+test-all:
+	$(PERL4MAKEFILE_LIB)/edit_version.pl -in $(DOCKER_DIR)/run-tests.sh -tag "replay" -string "/root/tcoffee/lib/perl/lib/perl4makefile/doc2test.pl -replay ./tests/.dumps/"
 test-remote:
-	$(PERL4MAKEFILE_LIB)/edit_version.pl -in $(DOCKER_DIR)/run-tests.sh -tag "#_#UPDATE_RUN_TEST" -string "/root/tcoffee/lib/perl/lib/perl4makefile/doc2test.pl -replay ./tests/.dumps/remote.test/"
+	$(PERL4MAKEFILE_LIB)/edit_version.pl -in $(DOCKER_DIR)/run-tests.sh -tag "replay" -string "/root/tcoffee/lib/perl/lib/perl4makefile/doc2test.pl -replay ./tests/.dumps/remote.test/"
 test-web:
-	$(PERL4MAKEFILE_LIB)/edit_version.pl -in $(DOCKER_DIR)/run-tests.sh -tag "#_#UPDATE_RUN_TEST" -string "/root/tcoffee/lib/perl/lib/perl4makefile/doc2test.pl -replay ./tests/.dumps/web.test/"
+	$(PERL4MAKEFILE_LIB)/edit_version.pl -in $(DOCKER_DIR)/run-tests.sh -tag "replay" -string "/root/tcoffee/lib/perl/lib/perl4makefile/doc2test.pl -replay ./tests/.dumps/web.test/"
 test-nature:
-	$(PERL4MAKEFILE_LIB)/edit_version.pl -in $(DOCKER_DIR)/run-tests.sh -tag "#_#UPDATE_RUN_TEST" -string "/root/tcoffee/lib/perl/lib/perl4makefile/doc2test.pl -replay ./tests/.dumps/nature_protocol.test/"
+	$(PERL4MAKEFILE_LIB)/edit_version.pl -in $(DOCKER_DIR)/run-tests.sh -tag "replay" -string "/root/tcoffee/lib/perl/lib/perl4makefile/doc2test.pl -replay ./tests/.dumps/nature_protocol.test/"
 
 
 release2:
