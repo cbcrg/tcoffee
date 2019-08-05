@@ -56,6 +56,10 @@ ifndef GIT_DIR
 GIT_DIR=$(CURDIR)/../../
 endif
 
+ifndef GIT_BIN
+GIT_BIN=$(GIT_DIR)/binaries
+endif
+
 ifndef EXECUTABLE_DIR
 EXECUTABLE_DIR=$(CURDIR)
 endif
@@ -230,7 +234,8 @@ general_distribution:
 	mkdir -p $(DISTRIB_DIR)/reference_test
 	echo '' > $(DISTRIB_DIR)/install
 	make -i VERSION=$(VERSION) CC=cc code
-	cp $(EXECUTABLE) $(DISTRIB_DIR)/bin/$(OSNAME) 
+	cp $(EXECUTABLE) $(DISTRIB_DIR)/bin/$(OSNAME)
+	cp $(EXECUTABLE) $(GIT_BIN)/$(OSNAME)/$(EXECUTABLE).$(VERSION)
 	make -i VERSION=$(VERSION) CC=cc license
 
 library_distribution:
