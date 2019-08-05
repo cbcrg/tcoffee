@@ -546,7 +546,6 @@ t_coffee: $(HEADERS) $(OBJECTS)
 clean:
 	rm -f *.o_*
 	rm -f *.script
-	mv -f install.pl install
 	rm -f *.pl
 	rm -f *.h
 	rm -f *.tc_method
