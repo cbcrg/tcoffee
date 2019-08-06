@@ -3,6 +3,7 @@ Release Notes
 #############
 .. Warning:: This log of recent modifications is not as thorough and accurate as it should be.
 
+-14.00 new faster regressive algorithm 
 
 -9.86 New data structure for the primary library that results in highly improved running times for mcoffee and significantly decreased memory usage.
 

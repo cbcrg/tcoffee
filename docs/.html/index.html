@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>T-Coffee Version_13.38.6.eb989a4 documentation</title>
+  <title>T-Coffee Version_13.39.0.d675aed documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                Version_13.38.6.eb989a4
+                Version_13.39.0.d675aed
               </div>
             
           
@@ -618,7 +618,7 @@
 <li class="toctree-l2"><a class="reference internal" href="index.html#release-notes">Release Notes</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="index.html#document-tcoffee_release_guide">T-Coffee doc test</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html#document-tcoffee_release_guide">T-Coffee release guide</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="index.html#introduction">Introduction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#making-a-new-release">Making a new release</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="index.html#beta-release">Beta Release</a></li>
@@ -637,6 +637,7 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#document-tcoffee_release_notes">Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="index.html#document-tcoffee_citations_references">Citations &amp; References</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="index.html#comparative-genomics-biology">Comparative Genomics &amp; Biology</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#t-coffee-alignment-methods">T-Coffee Alignment Methods</a></li>
@@ -705,7 +706,7 @@
     
       <li><a href="index.html#document-index">Docs</a> &raquo;</li>
         
-      <li>T-Coffee Version_13.38.6.eb989a4 documentation</li>
+      <li>T-Coffee Version_13.39.0.d675aed documentation</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -5940,8 +5941,8 @@ $$: t_coffee -infile=sample_aln1.aln -evaluate -method proba_pair
 </ul>
 </div>
 </div>
-<span id="document-tcoffee_release_guide"></span><div class="section" id="t-coffee-doc-test">
-<h2>T-Coffee doc test<a class="headerlink" href="#t-coffee-doc-test" title="Permalink to this headline">¶</a></h2>
+<span id="document-tcoffee_release_guide"></span><div class="section" id="t-coffee-release-guide">
+<h2>T-Coffee release guide<a class="headerlink" href="#t-coffee-release-guide" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="introduction">
 <h3>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h3>
 <p>Before the realease of a new T-Coffee version, many command lines in the documentation are programmatically tested. The purpose of this document is to explain how to make a new release, which command lines are tested, how new command lines can be added to the documentation and how to perform a documentation check before a new release.</p>
@@ -6135,6 +6136,23 @@ Dump files are very easy to produce yout simply need to run</p>
 </div></blockquote>
 </div>
 </div>
+</div>
+<span id="document-tcoffee_release_notes"></span><div class="section" id="release-notes">
+<h2>Release Notes<a class="headerlink" href="#release-notes" title="Permalink to this headline">¶</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This log of recent modifications is not as thorough and accurate as it should be.</p>
+</div>
+<p>-14.00 new faster regressive algorithm</p>
+<p>-9.86 New data structure for the primary library that results in highly improved running times for mcoffee and significantly decreased memory usage.</p>
+<p>-5.80 Novel assembly algorithm (linked_pair_wise) and the primary library is now made of probcons style pairwise alignments (proba_pair)</p>
+<p>-4.30 and upward: the FAQ has moved into a new tutorial document</p>
+<p>-4.30 and upward: -in has will be deprecated and replaced by the flags: -profile,-method,-aln,-seq,-pdb</p>
+<p>-4.02: -mode=dna is still available but not any more needed or supported. Use type=protein or dna if you need to force things</p>
+<p>-3.28: corrected a bug that prevents short sequences from being correctly aligned</p>
+<p>-Use of &#64; as a separator when specifying methods parameters</p>
+<p>-The most notable modifications have to do with the structure of the input. From version 2.20, all files must be tagged to indicate their nature (A: alignment, S: Sequence, L: Library…). We are becoming stricter, but that’s for your own good…</p>
+<p>Another important modification has to do with the flag -matrix: it now controls the matrix being used for the computation</p>
 </div>
 <span id="document-tcoffee_citations_references"></span><div class="section" id="citations-references">
 <h2>Citations &amp; References<a class="headerlink" href="#citations-references" title="Permalink to this headline">¶</a></h2>

@@ -19,6 +19,7 @@ Contents:
    tcoffee_webserver
    tcoffee_faq    
    tcoffee_release_guide
+   tcoffee_release_notes
    tcoffee_citations_references
    tcoffee_contacts_adresses
    tcoffee_license
