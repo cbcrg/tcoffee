@@ -3,7 +3,7 @@
 <program>T-COFFEE</program>
 <version>Version_13.39.0.d675aed</version>
 <build>Version_13.39.0.d675aed</build>
-<cl>t_coffee sample_seq1.fasta </cl>
+<cl>t_coffee sample_seq1.fasta -mode quickaln </cl>
 <stack>
 </stack>
 <warning>
@@ -12,22 +12,19 @@
 <stream>output</stream>
 <name>stdout</name>
 <content>#Single Thread
-#Single Thread
-#Single Thread
-#Single Thread
-CLUSTAL FORMAT for T-COFFEE Version_13.39.0.d675aed [http://www.tcoffee.org] [MODE:  ], CPU=0.00 sec, SCORE=83, Nseq=4, Len=81 
+CLUSTAL FORMAT for T-COFFEE Version_13.39.0.d675aed [http://www.tcoffee.org] [MODE: quickaln ], CPU=0.00 sec, SCORE=873, Nseq=4, Len=82 
 
-hmgl_trybr      kkdsnapkramtsfmffssdfrskhs----d-lsivemskaagaawkelg
-hmgt_mouse      -----kpkrprsayniyvsesfqeak----d-dsaqgklklvneawknls
-hmgb_chite      ---adkpkrplsaymlwlnsaresikrenpd-fkvtevakkggelwrglk
+hmgl_trybr      ---adkpkrplsaymlwlnsaresikrenpdfk-vtevakkggelwrgl-
+hmgt_mouse      --------------------------------------------------
+hmgb_chite      ---adkpkrplsaymlwlnsaresikrenpdfk-vtevakkggelwrgl-
 hmgl_wheat      --dpnkpkrapsaffvfmgefreefkqknpknksvaavgkaagerwksls
-                      ***. ::: .: ..  .. .    .  .     *  .  *: * 
+                                                                  
 
-hmgl_trybr      peerkvyeemaekdkerykrem---------
-hmgt_mouse      peekqayiqlakddrirydnemksweeqmae
-hmgb_chite      --dkseweakaatakqnyiralqeyerng-g
-hmgl_wheat      esekapyvakanklkgeynkaiaaynkgesa
-                  ::  :   *   : .* . :         
+hmgl_trybr      -kdkseweakaatakqnyiralqeyerng--g
+hmgt_mouse      --------------------------------
+hmgb_chite      -kdkseweakaatakqnyiralqeyerng--g
+hmgl_wheat      esekapyvakanklkgeynkaiaaynk-gesa
+                                                
 
 
 
@@ -43,7 +40,7 @@ PROGRAM: T-COFFEE Version_13.39.0.d675aed (Version_13.39.0.d675aed)
 -run_name      	S	[0] 
 -mem_mode      	S	[0] 	mem
 -extend        	D	[1] 	1 
--extend_mode   	S	[0] 	very_fast_triplet
+-extend_mode   	S	[1] 	matrix
 -max_n_pair    	D	[0] 	10 
 -seq_name_for_quadruplet	S	[0] 	all
 -compact       	S	[0] 	default
@@ -57,7 +54,7 @@ PROGRAM: T-COFFEE Version_13.39.0.d675aed (Version_13.39.0.d675aed)
 -flip          	D	[0] 	0 
 -remove_template_file	D	[0] 	0 
 -profile_template_file	S	[0] 
--in            	S	[0] 
+-in            	S	[1] 	Xblosum62mt
 -seq           	S	[1] 	sample_seq1.fasta
 -aln           	S	[0] 
 -method_limits 	S	[0] 
@@ -76,8 +73,8 @@ PROGRAM: T-COFFEE Version_13.39.0.d675aed (Version_13.39.0.d675aed)
 -outseqweight  	W_F	[0] 	no
 -seq_source    	S	[0] 	ANY
 -cosmetic_penalty	D	[0] 	0 
--gapopen       	D	[0] 	0 
--gapext        	D	[0] 	0 
+-gapopen       	D	[1] 	-25 
+-gapext        	D	[1] 	-1 
 -fgapopen      	D	[0] 	0 
 -fgapext       	D	[0] 	0 
 -nomatch       	D	[0] 	0 
@@ -85,7 +82,7 @@ PROGRAM: T-COFFEE Version_13.39.0.d675aed (Version_13.39.0.d675aed)
 -tree          	W_F	[0] 	NO
 -usetree       	R_F	[0] 
 -tree_mode     	S	[0] 	nj
--distance_matrix_mode	S	[0] 	ktup
+-distance_matrix_mode	S	[1] 	ktup
 -distance_matrix_sim_mode	S	[0] 	idmat_sim1
 -quicktree     	FL	[0] 	0
 -outfile       	W_F	[0] 	default
@@ -97,7 +94,7 @@ PROGRAM: T-COFFEE Version_13.39.0.d675aed (Version_13.39.0.d675aed)
 -tg_mode       	D	[0] 	1 
 -profile_mode  	S	[0] 	cw_profile_profile
 -profile_comparison	S	[0] 	profile
--dp_mode       	S	[0] 	linked_pair_wise
+-dp_mode       	S	[1] 	gotoh_pair_wise_lgp
 -ktuple        	D	[0] 	1 
 -ndiag         	D	[0] 	0 
 -diag_threshold	D	[0] 	0 
@@ -111,7 +108,7 @@ PROGRAM: T-COFFEE Version_13.39.0.d675aed (Version_13.39.0.d675aed)
 -case          	S	[0] 	keep
 -cpu           	D	[0] 	0 
 -ulimit        	D	[0] 	-1 
--maxnseq       	D	[0] 	-1 
+-maxnseq       	D	[1] 	10000 
 -maxlen        	D	[0] 	-1 
 -sample_dp     	D	[0] 	0 
 -weight        	S	[0] 	default
@@ -158,7 +155,7 @@ PROGRAM: T-COFFEE Version_13.39.0.d675aed (Version_13.39.0.d675aed)
 -master        	S	[0] 	no
 -blast_nseq    	D	[0] 	0 
 -lalign_n_top  	D	[0] 	10 
--iterate       	D	[0] 	0 
+-iterate       	D	[1] 	0 
 -trim          	D	[0] 	0 
 -split         	D	[0] 	0 
 -trimfile      	S	[0] 	default
@@ -169,7 +166,7 @@ PROGRAM: T-COFFEE Version_13.39.0.d675aed (Version_13.39.0.d675aed)
 -clean_seq_name	D	[0] 	0 
 -seq_to_keep   	S	[0] 
 -dpa_master_aln	S	[0] 
--dpa_maxnseq   	D	[0] 	0 
+-dpa_maxnseq   	D	[1] 	0 
 -dpa_min_score1	D	[0] 
 -dpa_min_score2	D	[0] 
 -dpa_keep_tmpfile	FL	[0] 	0
@@ -200,6 +197,7 @@ PROGRAM: T-COFFEE Version_13.39.0.d675aed (Version_13.39.0.d675aed)
 -display       	D	[0] 	100 
 
 INPUT FILES
+	Input File (X) blosum62mt 
 	Input File (S) sample_seq1.fasta  Format fasta_seq
 	Input File (M) proba_pair 
 
@@ -212,230 +210,11 @@ INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
   Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
   Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
 
-	Multi Core Mode: 1 processors:
-] 
--no_warning    	D	[0] 	0 
--run_local_script	D	[0] 	0 
--proxy         	S	[0] 	unset
--email         	S	[0] 
--clean_overaln 	D	[0] 	0 
--overaln_param 	S	[0] 
--overaln_mode  	S	[0] 
--overaln_model 	S	[0] 
--overaln_threshold	D	[0] 	0 
--overaln_target	D	[0] 	0 
--overaln_P1    	D	[0] 	0 
--overaln_P2    	D	[0] 	0 
--overaln_P3    	D	[0] 	0 
--overaln_P4    	D	[0] 	0 
--exon_boundaries	S	[0] 
--display       	D	[0] 	100 
+	blosum62mt [matrix]
 
-INPUT FILES
-	Input File (S) sample_seq1.fasta  Format fasta_seq
-	Input File (M) proba_pair 
+MANUAL PENALTIES: gapopen=-25 gapext=-1
 
-Identify Master Sequences [no]:
-
-Master Sequences Identified
-INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
-  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
-  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
-  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
-  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
-
-	Multi Core Mode: 1 processors:
-
-	--- Process Method/Library/Aln Ssample_seq1.fasta
-	xxx Retrieved Ssample_seq1.fasta] 
--no_warning    	D	[0] 	0 
--run_local_script	D	[0] 	0 
--proxy         	S	[0] 	unset
--email         	S	[0] 
--clean_overaln 	D	[0] 	0 
--overaln_param 	S	[0] 
--overaln_mode  	S	[0] 
--overaln_model 	S	[0] 
--overaln_threshold	D	[0] 	0 
--overaln_target	D	[0] 	0 
--overaln_P1    	D	[0] 	0 
--overaln_P2    	D	[0] 	0 
--overaln_P3    	D	[0] 	0 
--overaln_P4    	D	[0] 	0 
--exon_boundaries	S	[0] 
--display       	D	[0] 	100 
-
-INPUT FILES
-	Input File (S) sample_seq1.fasta  Format fasta_seq
-	Input File (M) proba_pair 
-
-Identify Master Sequences [no]:
-
-Master Sequences Identified
-INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
-  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
-  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
-  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
-  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
-
-	Multi Core Mode: 1 processors:
-
-	--- Process Method/Library/Aln Ssample_seq1.fasta
-	xxx Retrieved Ssample_seq1.fasta] 
--no_warning    	D	[0] 	0 
--run_local_script	D	[0] 	0 
--proxy         	S	[0] 	unset
--email         	S	[0] 
--clean_overaln 	D	[0] 	0 
--overaln_param 	S	[0] 
--overaln_mode  	S	[0] 
--overaln_model 	S	[0] 
--overaln_threshold	D	[0] 	0 
--overaln_target	D	[0] 	0 
--overaln_P1    	D	[0] 	0 
--overaln_P2    	D	[0] 	0 
--overaln_P3    	D	[0] 	0 
--overaln_P4    	D	[0] 	0 
--exon_boundaries	S	[0] 
--display       	D	[0] 	100 
-
-INPUT FILES
-	Input File (S) sample_seq1.fasta  Format fasta_seq
-	Input File (M) proba_pair 
-
-Identify Master Sequences [no]:
-
-Master Sequences Identified
-INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
-  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
-  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
-  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
-  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
-
-	Multi Core Mode: 1 processors:
-
-	--- Process Method/Library/Aln Ssample_seq1.fasta
-	xxx Retrieved Ssample_seq1.fasta
-	--- Process Method/Library/Aln Mproba_pair
-	xxx Retrieved Mproba_pair
-
-	All Methods Retrieved
-
-MANUAL PENALTIES: gapopen=0 gapext=0
-
-	Library Total Size: [1904]
-
-Library Relaxation: Multi_proc [1]
- 
-!		[Relax Library][TOT=    4][  0 %]!		[Relax Library][TOT=    4][ 50 %]!		[Relax Library][TOT=    4][ 75 %]!		[Relax Library][TOT=    4][100 %]
-] 
--no_warning    	D	[0] 	0 
--run_local_script	D	[0] 	0 
--proxy         	S	[0] 	unset
--email         	S	[0] 
--clean_overaln 	D	[0] 	0 
--overaln_param 	S	[0] 
--overaln_mode  	S	[0] 
--overaln_model 	S	[0] 
--overaln_threshold	D	[0] 	0 
--overaln_target	D	[0] 	0 
--overaln_P1    	D	[0] 	0 
--overaln_P2    	D	[0] 	0 
--overaln_P3    	D	[0] 	0 
--overaln_P4    	D	[0] 	0 
--exon_boundaries	S	[0] 
--display       	D	[0] 	100 
-
-INPUT FILES
-	Input File (S) sample_seq1.fasta  Format fasta_seq
-	Input File (M) proba_pair 
-
-Identify Master Sequences [no]:
-
-Master Sequences Identified
-INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
-  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
-  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
-  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
-  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
-
-	Multi Core Mode: 1 processors:
-
-	--- Process Method/Library/Aln Ssample_seq1.fasta
-	xxx Retrieved Ssample_seq1.fasta
-	--- Process Method/Library/Aln Mproba_pair
-	xxx Retrieved Mproba_pair
-
-	All Methods Retrieved
-
-MANUAL PENALTIES: gapopen=0 gapext=0
-
-	Library Total Size: [1904]
-
-Library Relaxation: Multi_proc [1]
- 
-Relaxation Summary: [1904]--->[1461]
-
-
-
-UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
-
-MAKE GUIDE TREE 
-	[MODE=nj][DONE]
-
-PROGRESSIVE_ALIGNMENT [Tree Based]
-Group    1: hmgb_chite
-Group    2: hmgl_trybr
-Group    3: hmgl_wheat
-Group    4: hmgt_mouse
-
-] 
--no_warning    	D	[0] 	0 
--run_local_script	D	[0] 	0 
--proxy         	S	[0] 	unset
--email         	S	[0] 
--clean_overaln 	D	[0] 	0 
--overaln_param 	S	[0] 
--overaln_mode  	S	[0] 
--overaln_model 	S	[0] 
--overaln_threshold	D	[0] 	0 
--overaln_target	D	[0] 	0 
--overaln_P1    	D	[0] 	0 
--overaln_P2    	D	[0] 	0 
--overaln_P3    	D	[0] 	0 
--overaln_P4    	D	[0] 	0 
--exon_boundaries	S	[0] 
--display       	D	[0] 	100 
-
-INPUT FILES
-	Input File (S) sample_seq1.fasta  Format fasta_seq
-	Input File (M) proba_pair 
-
-Identify Master Sequences [no]:
-
-Master Sequences Identified
-INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
-  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
-  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
-  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
-  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
-
-	Multi Core Mode: 1 processors:
-
-	--- Process Method/Library/Aln Ssample_seq1.fasta
-	xxx Retrieved Ssample_seq1.fasta
-	--- Process Method/Library/Aln Mproba_pair
-	xxx Retrieved Mproba_pair
-
-	All Methods Retrieved
-
-MANUAL PENALTIES: gapopen=0 gapext=0
-
-	Library Total Size: [1904]
-
-Library Relaxation: Multi_proc [1]
- 
-Relaxation Summary: [1904]--->[1461]
+	Library Total Size: [0]
 
 
 
@@ -451,137 +230,9 @@ Group    3: hmgl_wheat
 Group    4: hmgt_mouse
 
 
-	Group    5: [Group    2 (   1 seq)] with [Group    4 (   1 seq)]-->[Len=   76][PID:61369]] 
--no_warning    	D	[0] 	0 
--run_local_script	D	[0] 	0 
--proxy         	S	[0] 	unset
--email         	S	[0] 
--clean_overaln 	D	[0] 	0 
--overaln_param 	S	[0] 
--overaln_mode  	S	[0] 
--overaln_model 	S	[0] 
--overaln_threshold	D	[0] 	0 
--overaln_target	D	[0] 	0 
--overaln_P1    	D	[0] 	0 
--overaln_P2    	D	[0] 	0 
--overaln_P3    	D	[0] 	0 
--overaln_P4    	D	[0] 	0 
--exon_boundaries	S	[0] 
--display       	D	[0] 	100 
-
-INPUT FILES
-	Input File (S) sample_seq1.fasta  Format fasta_seq
-	Input File (M) proba_pair 
-
-Identify Master Sequences [no]:
-
-Master Sequences Identified
-INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
-  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
-  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
-  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
-  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
-
-	Multi Core Mode: 1 processors:
-
-	--- Process Method/Library/Aln Ssample_seq1.fasta
-	xxx Retrieved Ssample_seq1.fasta
-	--- Process Method/Library/Aln Mproba_pair
-	xxx Retrieved Mproba_pair
-
-	All Methods Retrieved
-
-MANUAL PENALTIES: gapopen=0 gapext=0
-
-	Library Total Size: [1904]
-
-Library Relaxation: Multi_proc [1]
- 
-Relaxation Summary: [1904]--->[1461]
-
-
-
-UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
-
-MAKE GUIDE TREE 
-	[MODE=nj][DONE]
-
-PROGRESSIVE_ALIGNMENT [Tree Based]
-Group    1: hmgb_chite
-Group    2: hmgl_trybr
-Group    3: hmgl_wheat
-Group    4: hmgt_mouse
-
-
-	Group    5: [Group    2 (   1 seq)] with [Group    4 (   1 seq)]-->[Len=   76][PID:61369]
-	Group    6: [Group    3 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=   79][PID:61369]] 
--no_warning    	D	[0] 	0 
--run_local_script	D	[0] 	0 
--proxy         	S	[0] 	unset
--email         	S	[0] 
--clean_overaln 	D	[0] 	0 
--overaln_param 	S	[0] 
--overaln_mode  	S	[0] 
--overaln_model 	S	[0] 
--overaln_threshold	D	[0] 	0 
--overaln_target	D	[0] 	0 
--overaln_P1    	D	[0] 	0 
--overaln_P2    	D	[0] 	0 
--overaln_P3    	D	[0] 	0 
--overaln_P4    	D	[0] 	0 
--exon_boundaries	S	[0] 
--display       	D	[0] 	100 
-
-INPUT FILES
-	Input File (S) sample_seq1.fasta  Format fasta_seq
-	Input File (M) proba_pair 
-
-Identify Master Sequences [no]:
-
-Master Sequences Identified
-INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
-  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
-  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
-  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
-  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
-
-	Multi Core Mode: 1 processors:
-
-	--- Process Method/Library/Aln Ssample_seq1.fasta
-	xxx Retrieved Ssample_seq1.fasta
-	--- Process Method/Library/Aln Mproba_pair
-	xxx Retrieved Mproba_pair
-
-	All Methods Retrieved
-
-MANUAL PENALTIES: gapopen=0 gapext=0
-
-	Library Total Size: [1904]
-
-Library Relaxation: Multi_proc [1]
- 
-Relaxation Summary: [1904]--->[1461]
-
-
-
-UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
-
-MAKE GUIDE TREE 
-	[MODE=nj][DONE]
-
-PROGRESSIVE_ALIGNMENT [Tree Based]
-Group    1: hmgb_chite
-Group    2: hmgl_trybr
-Group    3: hmgl_wheat
-Group    4: hmgt_mouse
-
-
-	Group    5: [Group    2 (   1 seq)] with [Group    4 (   1 seq)]-->[Len=   76][PID:61369]
-	Group    6: [Group    3 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=   79][PID:61369]
-	Group    7: [Group    6 (   2 seq)] with [Group    5 (   2 seq)]-->[Len=   81][PID:61369]
-
-
-!		[Final Evaluation][TOT=   81][  0 %]!		[Final Evaluation][TOT=   81][  2 %]!		[Final Evaluation][TOT=   81][  3 %]!		[Final Evaluation][TOT=   81][  4 %]!		[Final Evaluation][TOT=   81][  6 %]!		[Final Evaluation][TOT=   81][  7 %]!		[Final Evaluation][TOT=   81][  8 %]!		[Final Evaluation][TOT=   81][  9 %]!		[Final Evaluation][TOT=   81][ 11 %]!		[Final Evaluation][TOT=   81][ 12 %]!		[Final Evaluation][TOT=   81][ 13 %]!		[Final Evaluation][TOT=   81][ 14 %]!		[Final Evaluation][TOT=   81][ 16 %]!		[Final Evaluation][TOT=   81][ 17 %]!		[Final Evaluation][TOT=   81][ 18 %]!		[Final Evaluation][TOT=   81][ 19 %]!		[Final Evaluation][TOT=   81][ 20 %]!		[Final Evaluation][TOT=   81][ 22 %]!		[Final Evaluation][TOT=   81][ 23 %]!		[Final Evaluation][TOT=   81][ 24 %]!		[Final Evaluation][TOT=   81][ 25 %]!		[Final Evaluation][TOT=   81][ 27 %]!		[Final Evaluation][TOT=   81][ 28 %]!		[Final Evaluation][TOT=   81][ 29 %]!		[Final Evaluation][TOT=   81][ 30 %]!		[Final Evaluation][TOT=   81][ 32 %]!		[Final Evaluation][TOT=   81][ 33 %]!		[Final Evaluation][TOT=   81][ 34 %]!		[Final Evaluation][TOT=   81][ 35 %]!		[Final Evaluation][TOT=   81][ 37 %]!		[Final Evaluation][TOT=   81][ 38 %]!		[Final Evaluation][TOT=   81][ 39 %]!		[Final Evaluation][TOT=   81][ 40 %]!		[Final Evaluation][TOT=   81][ 41 %]!		[Final Evaluation][TOT=   81][ 43 %]!		[Final Evaluation][TOT=   81][ 44 %]!		[Final Evaluation][TOT=   81][ 45 %]!		[Final Evaluation][TOT=   81][ 46 %]!		[Final Evaluation][TOT=   81][ 48 %]!		[Final Evaluation][TOT=   81][ 49 %]!		[Final Evaluation][TOT=   81][ 50 %]!		[Final Evaluation][TOT=   81][ 51 %]!		[Final Evaluation][TOT=   81][ 53 %]!		[Final Evaluation][TOT=   81][ 54 %]!		[Final Evaluation][TOT=   81][ 55 %]!		[Final Evaluation][TOT=   81][ 56 %]!		[Final Evaluation][TOT=   81][ 58 %]!		[Final Evaluation][TOT=   81][ 59 %]!		[Final Evaluation][TOT=   81][ 60 %]!		[Final Evaluation][TOT=   81][ 61 %]!		[Final Evaluation][TOT=   81][ 62 %]!		[Final Evaluation][TOT=   81][ 64 %]!		[Final Evaluation][TOT=   81][ 65 %]!		[Final Evaluation][TOT=   81][ 66 %]!		[Final Evaluation][TOT=   81][ 67 %]!		[Final Evaluation][TOT=   81][ 69 %]!		[Final Evaluation][TOT=   81][ 70 %]!		[Final Evaluation][TOT=   81][ 71 %]!		[Final Evaluation][TOT=   81][ 72 %]!		[Final Evaluation][TOT=   81][ 74 %]!		[Final Evaluation][TOT=   81][ 75 %]!		[Final Evaluation][TOT=   81][ 76 %]!		[Final Evaluation][TOT=   81][ 77 %]!		[Final Evaluation][TOT=   81][ 79 %]!		[Final Evaluation][TOT=   81][ 80 %]!		[Final Evaluation][TOT=   81][ 81 %]!		[Final Evaluation][TOT=   81][ 82 %]!		[Final Evaluation][TOT=   81][ 83 %]!		[Final Evaluation][TOT=   81][ 85 %]!		[Final Evaluation][TOT=   81][ 86 %]!		[Final Evaluation][TOT=   81][ 87 %]!		[Final Evaluation][TOT=   81][ 88 %]!		[Final Evaluation][TOT=   81][ 90 %]!		[Final Evaluation][TOT=   81][ 91 %]!		[Final Evaluation][TOT=   81][ 92 %]!		[Final Evaluation][TOT=   81][ 93 %]!		[Final Evaluation][TOT=   81][ 95 %]!		[Final Evaluation][TOT=   81][ 96 %]!		[Final Evaluation][TOT=   81][ 97 %]!		[Final Evaluation][TOT=   81][ 98 %]!		[Final Evaluation][TOT=   81][100 %]
+	Group    5: [Group    2 (   1 seq)] with [Group    4 (   1 seq)]-->[Len=   77][PID:34441]
+	Group    6: [Group    3 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=   80][PID:34441]
+	Group    7: [Group    6 (   2 seq)] with [Group    5 (   2 seq)]-->[Len=   82][PID:34441]
 
 
 
@@ -590,8 +241,8 @@ OUTPUT RESULTS
 	#### File Type= MSA             Format= aln             Name= sample_seq1.aln
 	#### File Type= MSA             Format= html            Name= sample_seq1.html
 
-# Command Line: t_coffee sample_seq1.fasta  [PROGRAM:T-COFFEE]
-# T-COFFEE Memory Usage: Current= 29.335 Mb, Max= 30.274 Mb
+# Command Line: t_coffee sample_seq1.fasta -mode quickaln  [PROGRAM:T-COFFEE]
+# T-COFFEE Memory Usage: Current= 31.186 Mb, Max= 32.346 Mb
 # Results Produced with T-COFFEE Version_13.39.0.d675aed (Version_13.39.0.d675aed)
 # T-COFFEE is available from http://www.tcoffee.org
 # Register on: https://groups.google.com/group/tcoffee/
@@ -627,19 +278,19 @@ ekapyvakanklkgeynkaiaaynkgesa
 <file>
 <stream>output</stream>
 <name>sample_seq1.aln</name>
-<content>CLUSTAL FORMAT for T-COFFEE Version_13.39.0.d675aed [http://www.tcoffee.org] [MODE:  ], CPU=0.00 sec, SCORE=83, Nseq=4, Len=81 
+<content>CLUSTAL FORMAT for T-COFFEE Version_13.39.0.d675aed [http://www.tcoffee.org] [MODE: quickaln ], CPU=0.00 sec, SCORE=873, Nseq=4, Len=82 
 
-hmgl_trybr      kkdsnapkramtsfmffssdfrskhs----d-lsivemskaagaawkelg
-hmgt_mouse      -----kpkrprsayniyvsesfqeak----d-dsaqgklklvneawknls
-hmgb_chite      ---adkpkrplsaymlwlnsaresikrenpd-fkvtevakkggelwrglk
+hmgl_trybr      ---adkpkrplsaymlwlnsaresikrenpdfk-vtevakkggelwrgl-
+hmgt_mouse      --------------------------------------------------
+hmgb_chite      ---adkpkrplsaymlwlnsaresikrenpdfk-vtevakkggelwrgl-
 hmgl_wheat      --dpnkpkrapsaffvfmgefreefkqknpknksvaavgkaagerwksls
-                      ***. ::: .: ..  .. .    .  .     *  .  *: * 
+                                                                  
 
-hmgl_trybr      peerkvyeemaekdkerykrem---------
-hmgt_mouse      peekqayiqlakddrirydnemksweeqmae
-hmgb_chite      --dkseweakaatakqnyiralqeyerng-g
-hmgl_wheat      esekapyvakanklkgeynkaiaaynkgesa
-                  ::  :   *   : .* . :         
+hmgl_trybr      -kdkseweakaatakqnyiralqeyerng--g
+hmgt_mouse      --------------------------------
+hmgb_chite      -kdkseweakaatakqnyiralqeyerng--g
+hmgl_wheat      esekapyvakanklkgeynkaiaaynk-gesa
+                                                
 
 
 
@@ -666,7 +317,7 @@ SPAN.value9 {background: #FFC8C8}
 SPAN.valuedefault {}
 SPAN.valuegap {}
 SPAN.valueink {background: 000000}
-</style><body><span class=valuedefault>T-COFFEE,&nbsp;Version_13.39.0.d675aed&nbsp;(Version_13.39.0.d675aed)</span><br><span class=valuedefault>Cedric&nbsp;Notredame&nbsp;</span><br><span class=valuedefault>CPU&nbsp;TIME:0&nbsp;sec.</span><br><span class=valuedefault>SCORE=83</span><br><span class=valuedefault>*</span><br><span class=valuedefault>&nbsp;</span><span class=value0>B</span><span class=value1>A</span><span class=value2>D</span><span class=value3>&nbsp;</span><span class=value4>A</span><span class=value5>V</span><span class=value6>G</span><span class=value7>&nbsp;</span><span class=value8>G</span><span class=value9>OOD</span><br><span class=valuedefault>*</span><br><span class=value8>hmgl_trybr&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;86</span><br><span class=value8>hmgt_mouse&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;82</span><br><span class=value8>hmgb_chite&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;82</span><br><span class=value8>hmgl_wheat&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;82</span><br><span class=value8>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;&nbsp;8</span><br><br><span class=valuedefault>hmgl_trybr&nbsp;&nbsp;&nbsp;</span><span class=value5>k</span><span class=value7>k</span><span class=value8>d</span><span class=value9>snapkramtsfmff</span><span class=value8>ss</span><span class=value7>d</span><span class=value6>frs</span><span class=value5>khs</span><span class=valuegap>----</span><span class=value5>d</span><span class=valuegap>-</span><span class=value5>l</span><span class=value6>si</span><span class=value7>vem</span><span class=value8>s</span><br><span class=valuedefault>hmgt_mouse&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-----</span><span class=value9>kpkrprsayniyv</span><span class=value8>s</span><span class=value7>e</span><span class=value6>sfq</span><span class=value5>eak</span><span class=valuegap>----</span><span class=value5>d</span><span class=valuegap>-</span><span class=value5>ds</span><span class=value6>aqgk</span><span class=value7>l</span><br><span class=valuedefault>hmgb_chite&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---</span><span class=value8>a</span><span class=value9>dkpkrplsaymlwl</span><span class=value8>ns</span><span class=value7>ar</span><span class=value6>esi</span><span class=value5>k</span><span class=value4>renp</span><span class=value5>d</span><span class=valuegap>-</span><span class=value5>f</span><span class=value6>kv</span><span class=value7>tev</span><span class=value8>a</span><br><span class=valuedefault>hmgl_wheat&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value6>d</span><span class=value8>p</span><span class=value9>nkpkrapsaffvfm</span><span class=value8>ge</span><span class=value7>fr</span><span class=value6>eef</span><span class=value5>k</span><span class=value4>qknp</span><span class=value5>k</span><span class=value3>n</span><span class=value4>k</span><span class=value5>s</span><span class=value6>v</span><span class=value7>aav</span><span class=value8>g</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value2>&nbsp;&nbsp;</span><span class=value4>&nbsp;</span><span class=value7>&nbsp;</span><span class=value8>&nbsp;</span><span class=value9>&nbsp;***.&nbsp;:::&nbsp;.:&nbsp;</span><span class=value8>.</span><span class=value7>.</span><span class=value6>&nbsp;&nbsp;</span><span class=value5>.</span><span class=value4>.&nbsp;.</span><span class=value2>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value4>.</span><span class=value1>&nbsp;</span><span class=value4>&nbsp;</span><span class=value5>.&nbsp;</span><span class=value6>&nbsp;&nbsp;&nbsp;</span><span class=value8>&nbsp;</span><br><br><br><span class=valuedefault>hmgl_trybr&nbsp;&nbsp;&nbsp;</span><span class=value9>kaagaawkel</span><span class=value8>g</span><span class=value6>pe</span><span class=value7>er</span><span class=value8>k</span><span class=value9>vyeemaekdkerykrem</span><span class=valuegap>------</span><br><span class=valuedefault>hmgt_mouse&nbsp;&nbsp;&nbsp;</span><span class=value8>kl</span><span class=value9>vneawknl</span><span class=value8>s</span><span class=value6>pe</span><span class=value7>ek</span><span class=value8>qa</span><span class=value9>y</span><span class=value8>i</span><span class=value9>qla</span><span class=value8>k</span><span class=value9>ddrirydnemk</span><span class=value8>sw</span><span class=value6>e</span><span class=value5>e</span><span class=value6>q</span><br><span class=valuedefault>hmgb_chite&nbsp;&nbsp;&nbsp;</span><span class=value9>kkggelwrgl</span><span class=value7>k</span><span class=valuegap>--</span><span class=value6>dk</span><span class=value7>se</span><span class=value8>we</span><span class=value9>akaat</span><span class=value8>akq</span><span class=value9>nyiralq</span><span class=value7>e</span><span class=value8>ye</span><span class=value7>r</span><span class=value6>n</span><br><span class=valuedefault>hmgl_wheat&nbsp;&nbsp;&nbsp;</span><span class=value9>kaagerwksl</span><span class=value8>s</span><span class=value6>ese</span><span class=value7>k</span><span class=value8>ap</span><span class=value9>yvakanklkgeynkaiaay</span><span class=value7>n</span><span class=value6>k</span><span class=value5>g</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>*</span><span class=value9>&nbsp;&nbsp;.&nbsp;&nbsp;*:&nbsp;*</span><span class=value7>&nbsp;</span><span class=value6>&nbsp;</span><span class=value5>&nbsp;</span><span class=value6>:</span><span class=value7>:&nbsp;</span><span class=value8>&nbsp;:&nbsp;</span><span class=value9>&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;:&nbsp;.*&nbsp;.&nbsp;:</span><span class=value8>&nbsp;</span><span class=value7>&nbsp;&nbsp;</span><span class=value5>&nbsp;</span><span class=value4>&nbsp;</span><span class=value3>&nbsp;</span><br><br><br><span class=valuedefault>hmgl_trybr&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---</span><br><span class=valuedefault>hmgt_mouse&nbsp;&nbsp;&nbsp;</span><span class=value5>m</span><span class=value4>a</span><span class=value5>e</span><br><span class=valuedefault>hmgb_chite&nbsp;&nbsp;&nbsp;</span><span class=value5>g</span><span class=valuegap>-</span><span class=value4>g</span><br><span class=valuedefault>hmgl_wheat&nbsp;&nbsp;&nbsp;</span><span class=value5>e</span><span class=value4>s</span><span class=value5>a</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value3>&nbsp;</span><span class=value2>&nbsp;</span><span class=value3>&nbsp;</span><br><br><br><br><br><br></body></html>
+</style><body><span class=valuedefault>T-COFFEE,&nbsp;Version_13.39.0.d675aed&nbsp;(Version_13.39.0.d675aed)</span><br><span class=valuedefault>Cedric&nbsp;Notredame&nbsp;</span><br><span class=valuedefault>CPU&nbsp;TIME:0&nbsp;sec.</span><br><span class=valuedefault>SCORE=718</span><br><span class=valuedefault>*</span><br><span class=valuedefault>&nbsp;</span><span class=value0>B</span><span class=value1>A</span><span class=value2>D</span><span class=value3>&nbsp;</span><span class=value4>A</span><span class=value5>V</span><span class=value6>G</span><span class=value7>&nbsp;</span><span class=value8>G</span><span class=value9>OOD</span><br><span class=valuedefault>*</span><br><span class=value7>hmgl_trybr&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;78</span><br><span class=value0>hmgt_mouse&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;&nbsp;0</span><br><span class=value7>hmgb_chite&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;78</span><br><span class=value5>hmgl_wheat&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;57</span><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;71</span><br><br><span class=valuedefault>hmgl_trybr&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value53>a</span><span class=value57>dkpkr</span><span class=value53>pl</span><span class=value57>say</span><span class=value53>m</span><span class=value57>lwl</span><span class=value53>nsa</span><span class=value57>re</span><span class=value53>si</span><span class=value57>krenp</span><span class=value53>df</span><span class=value57>k</span><span class=valuegap>-</span><span class=value57>v</span><span class=value53>te</span><span class=value57>v</span><span class=value53>a</span><br><span class=valuedefault>hmgt_mouse&nbsp;&nbsp;&nbsp;</span><span class=valuegap></span><br><span class=valuedefault>hmgb_chite&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---</span><span class=value5>a</span><span class=value9>dkpkr</span><span class=value5>pl</span><span class=value9>say</span><span class=value5>m</span><span class=value9>lwl</span><span class=value5>nsa</span><span class=value9>re</span><span class=value5>si</span><span class=value9>krenp</span><span class=value5>df</span><span class=value9>k</span><span class=valuegap>-</span><span class=value9>v</span><span class=value5>te</span><span class=value9>v</span><span class=value5>a</span><br><span class=valuedefault>hmgl_wheat&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--d</span><span class=value0>p</span><span class=value9>nkpkr</span><span class=value0>ap</span><span class=value9>saf</span><span class=value0>f</span><span class=value9>vfm</span><span class=value0>gef</span><span class=value9>re</span><span class=value0>ef</span><span class=value9>kqknp</span><span class=value0>kn</span><span class=value9>k</span><span class=valuegap>s</span><span class=value9>v</span><span class=value0>aa</span><span class=value9>v</span><span class=value0>g</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value0>&nbsp;&nbsp;&nbsp;</span><span class=value3>&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value3>&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;</span><span class=value3>&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;</span><span class=value3>&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;</span><span class=value3>&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value3>&nbsp;&nbsp;</span><span class=value9>&nbsp;</span><span class=value0>&nbsp;</span><span class=value9>&nbsp;</span><span class=value3>&nbsp;&nbsp;</span><span class=value9>&nbsp;</span><span class=value3>&nbsp;</span><br><br><br><span class=valuedefault>hmgl_trybr&nbsp;&nbsp;&nbsp;</span><span class=value57>k</span><span class=value53>kg</span><span class=value57>ge</span><span class=value53>l</span><span class=value57>wr</span><span class=value53>g</span><span class=value57>l</span><span class=valuegap>--</span><span class=value53>k</span><span class=value57>dks</span><span class=value53>e</span><span class=value57>w</span><span class=value53>e</span><span class=value57>aka</span><span class=value53>ata</span><span class=value57>k</span><span class=value53>qn</span><span class=value57>y</span><span class=value53>i</span><span class=value57>ral</span><span class=value53>qe</span><span class=value57>y</span><span class=value53>e</span><span class=value57>rn</span><br><span class=valuedefault>hmgt_mouse&nbsp;&nbsp;&nbsp;</span><span class=valuegap></span><br><span class=valuedefault>hmgb_chite&nbsp;&nbsp;&nbsp;</span><span class=value9>k</span><span class=value5>kg</span><span class=value9>ge</span><span class=value5>l</span><span class=value9>wr</span><span class=value5>g</span><span class=value9>l</span><span class=valuegap>--</span><span class=value5>k</span><span class=value9>dks</span><span class=value5>e</span><span class=value9>w</span><span class=value5>e</span><span class=value9>aka</span><span class=value5>ata</span><span class=value9>k</span><span class=value5>qn</span><span class=value9>y</span><span class=value5>i</span><span class=value9>ral</span><span class=value5>qe</span><span class=value9>y</span><span class=value5>e</span><span class=value9>rn</span><br><span class=valuedefault>hmgl_wheat&nbsp;&nbsp;&nbsp;</span><span class=value9>k</span><span class=value0>aa</span><span class=value9>ge</span><span class=value0>r</span><span class=value9>wk</span><span class=value0>s</span><span class=value9>l</span><span class=valuegap>se</span><span class=value0>s</span><span class=value9>eka</span><span class=value0>p</span><span class=value9>y</span><span class=value0>v</span><span class=value9>aka</span><span class=value0>nkl</span><span class=value9>k</span><span class=value0>ge</span><span class=value9>y</span><span class=value0>n</span><span class=value9>kai</span><span class=value0>aa</span><span class=value9>y</span><span class=value0>n</span><span class=value9>k</span><span class=valuegap>-</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;</span><span class=value3>&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;</span><span class=value3>&nbsp;</span><span class=value9>&nbsp;&nbsp;</span><span class=value3>&nbsp;</span><span class=value9>&nbsp;</span><span class=value0>&nbsp;&nbsp;</span><span class=value3>&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;</span><span class=value3>&nbsp;</span><span class=value9>&nbsp;</span><span class=value3>&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;</span><span class=value3>&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;</span><span class=value3>&nbsp;&nbsp;</span><span class=value9>&nbsp;</span><span class=value3>&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;</span><span class=value3>&nbsp;&nbsp;</span><span class=value9>&nbsp;</span><span class=value3>&nbsp;</span><span class=value9>&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>hmgl_trybr&nbsp;&nbsp;&nbsp;</span><span class=value57>g</span><span class=valuegap>--</span><span class=value53>g</span><br><span class=valuedefault>hmgt_mouse&nbsp;&nbsp;&nbsp;</span><span class=valuegap></span><br><span class=valuedefault>hmgb_chite&nbsp;&nbsp;&nbsp;</span><span class=value9>g</span><span class=valuegap>--</span><span class=value5>g</span><br><span class=valuedefault>hmgl_wheat&nbsp;&nbsp;&nbsp;</span><span class=value9>g</span><span class=valuegap>es</span><span class=value0>a</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;</span><span class=value0>&nbsp;&nbsp;</span><span class=value3>&nbsp;</span><br><br><br><br><br><br></body></html>
 </content>
 </file>
 <environement>
@@ -705,7 +356,7 @@ _=/usr/bin/printenv
 CONDA_PREFIX=/Users/cnotredame/anaconda3
 COLOR_4_TCOFFEE=new
 DIR_4_TCOFFEE=/Users/cnotredame//.t_coffee/
-PWD=/private/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/RANDOMSTRINGz1wP6MQTNpOzUVb470T3/data
+PWD=/private/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/RANDOMSTRINGf0nlNh7M6nt5UDCdezCx/data
 CACHE_4_TCOFFEE=/Users/cnotredame//.t_coffee//cache/
 X3DNA=/Users/cnotredame/Dropbox/packages/x3dna-v2.1
 DBUS_LAUNCHD_SESSION_BUS_SOCKET=/private/tmp/com.apple.launchd.DfqaaC2z17/unix_domain_listener
@@ -717,7 +368,7 @@ ERRORFILE_4_TCOFFEE=NO
 PLUGINS_4_TCOFFEE=/Users/cnotredame//.t_coffee//plugins/macosx/
 SHLVL=3
 HOME=/Users/cnotredame
-DUMP_4_TCOFFEE=/private/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/RANDOMSTRINGz1wP6MQTNpOzUVb470T3/core.tests.4.dump
+DUMP_4_TCOFFEE=/private/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/RANDOMSTRINGf0nlNh7M6nt5UDCdezCx/core.tests.4.dump
 HTTP_PROXY=
 MAFFT_BINARIES=
 CONDA_PYTHON_EXE=/Users/cnotredame/anaconda3/bin/python
@@ -733,13 +384,13 @@ DISPLAY=/private/tmp/com.apple.launchd.vef8UzGxBY/org.macosforge.xquartz:0
 TC_MASTER_NODE=1
 NUMBER_OF_PROCESSORS=8
 ALL_proxy=
-LOCKDIR_4_TCOFFEE=/var/tmp/tco/tcomtg0fbp461369//lck/1v3k6b37s6/
-TMP_4_TCOFFEE=/var/tmp/tco/tcomtg0fbp461369/
+LOCKDIR_4_TCOFFEE=/var/tmp/tco/tcot7moenp834441//lck/a1f1ybvg9t/
+TMP_4_TCOFFEE=/var/tmp/tco/tcot7moenp834441/
 USER_BIN=/Users/cnotredame/bin/macosx
 SCRIPT_BIN=/Users/cnotredame/bin/Scripts/
 </environement>
 <DumpStatus>OK</DumpStatus>
-<DumpFile>/private/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/RANDOMSTRINGz1wP6MQTNpOzUVb470T3/core.tests.4.dump</DumpFile>
+<DumpFile>/private/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/RANDOMSTRINGf0nlNh7M6nt5UDCdezCx/core.tests.4.dump</DumpFile>
 <SourceFile>core.tests</SourceFile>
-<SourceLine>11</SourceLine>
+<SourceLine>9</SourceLine>
 </DumpIO>

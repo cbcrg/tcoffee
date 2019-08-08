@@ -22,6 +22,7 @@ my $TIMEOUT=3000;#Default Timeout in seconds
 my $TIMEOUT_ERROR=0;
 my $KEEPREPLAYED=0;
 my $FATAL="FATAL:doc2test.pl";
+my $WARN ="WARNING:doc2test.pl";
 my $WIDTH=0;
 my $VERBOSE=0;
 my $TMPDIR     =$ENV{TMPDIR};
@@ -232,14 +233,18 @@ for (my $a=0; $a<=$#ARGV; $a++)
       }
   }
 
-if ($TMPDIR eq $ENV{TMPDIR} && !-w $TMPDIR)
+if ( !-w $TMPDIR)
   {
-    myprintf ("Default tmpdir [$TMPDIR] cannot be accessed. Provide a tmpdir via the -tmp flag [$FATAL]\n");die;
+    myprintf ("Default tmpdir [$TMPDIR] cannot be accessed. Will crate and use .tmp instead [$WARN]\n");
+    my $cwd=cwd;
+    $TMPDIR=$cwd."/.tmp";
+    system ("mkdir -p $TMPDIR");
+    if ( !-w $TMPDIR)
+      {
+	myprintf ("Default tmpdir [$TMPDIR] cannot be accessed. Provide a tmpdir via the -tmp flag [$FATAL]\n");die;
+      }
   }
-elsif (!-w $TMPDIR)
-  {
-    myprintf ("Provided tmpdir [$TMPDIR] cannot be accessed. Provide a path to a wruttable directory[$FATAL]\n");die;
-  }
+
 
 # Replay Mode
 my $exit_status;

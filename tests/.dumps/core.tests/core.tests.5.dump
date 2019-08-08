@@ -3,7 +3,7 @@
 <program>T-COFFEE</program>
 <version>Version_13.39.0.d675aed</version>
 <build>Version_13.39.0.d675aed</build>
-<cl>t_coffee sample_seq1.fasta -mode quickaln </cl>
+<cl>t_coffee sample_seq1.fasta -mode quickaln -ndiag 10 </cl>
 <stack>
 </stack>
 <warning>
@@ -96,7 +96,7 @@ PROGRAM: T-COFFEE Version_13.39.0.d675aed (Version_13.39.0.d675aed)
 -profile_comparison	S	[0] 	profile
 -dp_mode       	S	[1] 	gotoh_pair_wise_lgp
 -ktuple        	D	[0] 	1 
--ndiag         	D	[0] 	0 
+-ndiag         	D	[1] 	10 
 -diag_threshold	D	[0] 	0 
 -diag_mode     	D	[0] 	0 
 -sim_matrix    	S	[0] 	vasiliky
@@ -230,9 +230,9 @@ Group    3: hmgl_wheat
 Group    4: hmgt_mouse
 
 
-	Group    5: [Group    2 (   1 seq)] with [Group    4 (   1 seq)]-->[Len=   77][PID:61410]
-	Group    6: [Group    3 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=   80][PID:61410]
-	Group    7: [Group    6 (   2 seq)] with [Group    5 (   2 seq)]-->[Len=   82][PID:61410]
+	Group    5: [Group    2 (   1 seq)] with [Group    4 (   1 seq)]-->[Len=   77][PID:34486]
+	Group    6: [Group    3 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=   80][PID:34486]
+	Group    7: [Group    6 (   2 seq)] with [Group    5 (   2 seq)]-->[Len=   82][PID:34486]
 
 
 
@@ -241,8 +241,8 @@ OUTPUT RESULTS
 	#### File Type= MSA             Format= aln             Name= sample_seq1.aln
 	#### File Type= MSA             Format= html            Name= sample_seq1.html
 
-# Command Line: t_coffee sample_seq1.fasta -mode quickaln  [PROGRAM:T-COFFEE]
-# T-COFFEE Memory Usage: Current= 31.186 Mb, Max= 32.346 Mb
+# Command Line: t_coffee sample_seq1.fasta -mode quickaln -ndiag 10  [PROGRAM:T-COFFEE]
+# T-COFFEE Memory Usage: Current= 31.188 Mb, Max= 32.348 Mb
 # Results Produced with T-COFFEE Version_13.39.0.d675aed (Version_13.39.0.d675aed)
 # T-COFFEE is available from http://www.tcoffee.org
 # Register on: https://groups.google.com/group/tcoffee/
@@ -356,7 +356,7 @@ _=/usr/bin/printenv
 CONDA_PREFIX=/Users/cnotredame/anaconda3
 COLOR_4_TCOFFEE=new
 DIR_4_TCOFFEE=/Users/cnotredame//.t_coffee/
-PWD=/private/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/RANDOMSTRINGz1wP6MQTNpOzUVb470T3/data
+PWD=/private/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/RANDOMSTRINGf0nlNh7M6nt5UDCdezCx/data
 CACHE_4_TCOFFEE=/Users/cnotredame//.t_coffee//cache/
 X3DNA=/Users/cnotredame/Dropbox/packages/x3dna-v2.1
 DBUS_LAUNCHD_SESSION_BUS_SOCKET=/private/tmp/com.apple.launchd.DfqaaC2z17/unix_domain_listener
@@ -368,7 +368,7 @@ ERRORFILE_4_TCOFFEE=NO
 PLUGINS_4_TCOFFEE=/Users/cnotredame//.t_coffee//plugins/macosx/
 SHLVL=3
 HOME=/Users/cnotredame
-DUMP_4_TCOFFEE=/private/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/RANDOMSTRINGz1wP6MQTNpOzUVb470T3/core.tests.5.dump
+DUMP_4_TCOFFEE=/private/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/RANDOMSTRINGf0nlNh7M6nt5UDCdezCx/core.tests.5.dump
 HTTP_PROXY=
 MAFFT_BINARIES=
 CONDA_PYTHON_EXE=/Users/cnotredame/anaconda3/bin/python
@@ -384,13 +384,13 @@ DISPLAY=/private/tmp/com.apple.launchd.vef8UzGxBY/org.macosforge.xquartz:0
 TC_MASTER_NODE=1
 NUMBER_OF_PROCESSORS=8
 ALL_proxy=
-LOCKDIR_4_TCOFFEE=/var/tmp/tco/tcor6c1fgm061410//lck/joauxl7n40/
-TMP_4_TCOFFEE=/var/tmp/tco/tcor6c1fgm061410/
+LOCKDIR_4_TCOFFEE=/var/tmp/tco/tcoqrz8alpy34486//lck/3c1nywj62r/
+TMP_4_TCOFFEE=/var/tmp/tco/tcoqrz8alpy34486/
 USER_BIN=/Users/cnotredame/bin/macosx
 SCRIPT_BIN=/Users/cnotredame/bin/Scripts/
 </environement>
 <DumpStatus>OK</DumpStatus>
-<DumpFile>/private/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/RANDOMSTRINGz1wP6MQTNpOzUVb470T3/core.tests.5.dump</DumpFile>
+<DumpFile>/private/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/RANDOMSTRINGf0nlNh7M6nt5UDCdezCx/core.tests.5.dump</DumpFile>
 <SourceFile>core.tests</SourceFile>
-<SourceLine>12</SourceLine>
+<SourceLine>10</SourceLine>
 </DumpIO>

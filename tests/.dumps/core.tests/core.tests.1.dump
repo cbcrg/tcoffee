@@ -11,7 +11,7 @@
 <file>
 <stream>output</stream>
 <name>stdout</name>
-<content># REG memory Usage Memory Usage: Current= 25.737 Mb, Max= 26.631 Mb
+<content># REG memory Usage Memory Usage: Current= 25.738 Mb, Max= 26.633 Mb
 </content>
 </file>
 <file>
@@ -733,7 +733,7 @@ PATH=/Users/cnotredame//.t_coffee//plugins/macosx/:/Users/cnotredame/anaconda3/b
 _=/usr/bin/printenv
 CONDA_PREFIX=/Users/cnotredame/anaconda3
 DIR_4_TCOFFEE=/Users/cnotredame//.t_coffee/
-PWD=/private/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/RANDOMSTRINGz1wP6MQTNpOzUVb470T3/data
+PWD=/private/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/RANDOMSTRINGf0nlNh7M6nt5UDCdezCx/data
 CACHE_4_TCOFFEE=/Users/cnotredame//.t_coffee//cache/
 X3DNA=/Users/cnotredame/Dropbox/packages/x3dna-v2.1
 DBUS_LAUNCHD_SESSION_BUS_SOCKET=/private/tmp/com.apple.launchd.DfqaaC2z17/unix_domain_listener
@@ -745,7 +745,7 @@ ERRORFILE_4_TCOFFEE=t_coffee.ErrorReport
 PLUGINS_4_TCOFFEE=/Users/cnotredame//.t_coffee//plugins/macosx/
 SHLVL=3
 HOME=/Users/cnotredame
-DUMP_4_TCOFFEE=/private/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/RANDOMSTRINGz1wP6MQTNpOzUVb470T3/core.tests.1.dump
+DUMP_4_TCOFFEE=/private/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/RANDOMSTRINGf0nlNh7M6nt5UDCdezCx/core.tests.1.dump
 HTTP_PROXY=
 MAFFT_BINARIES=
 CONDA_PYTHON_EXE=/Users/cnotredame/anaconda3/bin/python
@@ -761,13 +761,13 @@ DISPLAY=/private/tmp/com.apple.launchd.vef8UzGxBY/org.macosforge.xquartz:0
 TC_MASTER_NODE=1
 NUMBER_OF_PROCESSORS=8
 ALL_proxy=
-LOCKDIR_4_TCOFFEE=/var/tmp/tco/tcodvdqsrc061046//lck/1cnzpwpzaw/
-TMP_4_TCOFFEE=/var/tmp/tco/tcodvdqsrc061046/
+LOCKDIR_4_TCOFFEE=/var/tmp/tco/tcoi4_0qdrf34078//lck/w9gum9mkpw/
+TMP_4_TCOFFEE=/var/tmp/tco/tcoi4_0qdrf34078/
 USER_BIN=/Users/cnotredame/bin/macosx
 SCRIPT_BIN=/Users/cnotredame/bin/Scripts/
 </environement>
 <DumpStatus>OK</DumpStatus>
-<DumpFile>/private/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/RANDOMSTRINGz1wP6MQTNpOzUVb470T3/core.tests.1.dump</DumpFile>
+<DumpFile>/private/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/RANDOMSTRINGf0nlNh7M6nt5UDCdezCx/core.tests.1.dump</DumpFile>
 <SourceFile>core.tests</SourceFile>
-<SourceLine>8</SourceLine>
+<SourceLine>6</SourceLine>
 </DumpIO>
