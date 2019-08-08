@@ -373,7 +373,6 @@ release:
 	make release2
 test-none:
 	$(PERL4MAKEFILE_LIB)/edit_version.pl -in $(DOCKER_DIR)/run-tests.sh -tag "replay" -string "#notest replay"
-test-all:
 test-core:
 	$(PERL4MAKEFILE_LIB)/edit_version.pl -in $(DOCKER_DIR)/run-tests.sh -tag "replay" -string "/root/tcoffee/lib/perl/lib/perl4makefile/doc2test.pl -replay ./tests/.dumps/core.tests/"
 test-all:
@@ -384,8 +383,10 @@ test-web:
 	$(PERL4MAKEFILE_LIB)/edit_version.pl -in $(DOCKER_DIR)/run-tests.sh -tag "replay" -string "/root/tcoffee/lib/perl/lib/perl4makefile/doc2test.pl -replay ./tests/.dumps/web.test/"
 test-nature:
 	$(PERL4MAKEFILE_LIB)/edit_version.pl -in $(DOCKER_DIR)/run-tests.sh -tag "replay" -string "/root/tcoffee/lib/perl/lib/perl4makefile/doc2test.pl -replay ./tests/.dumps/nature_protocol.test/"
-
-
+test-full:
+	$(PERL4MAKEFILE_LIB)/edit_version.pl -in $(DOCKER_DIR)/run-tests.sh -tag "replay" -string "/root/tcoffee/lib/perl/lib/perl4makefile/doc2test.pl -replay ."
+test-docs:
+	$(PERL4MAKEFILE_LIB)/edit_version.pl -in $(DOCKER_DIR)/run-tests.sh -tag "replay" -string "/root/tcoffee/lib/perl/lib/perl4makefile/doc2test.pl -replay ./docs/"	
 release2:
 	VERSION=$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print)	
 	$(PERL4MAKEFILE_LIB)/edit_version.pl -in $(RST_DOC)/conf.py -tag "#_#UPDATE_VERSION_TAG1" -string "version = u'$(VERSION)'"

@@ -1,0 +1,935 @@
+<DumpIO>
+<nature>standard dump</nature>
+<program>T-COFFEE</program>
+<version>Version_13.39.0.d675aed</version>
+<build>Version_13.39.0.d675aed</build>
+<cl>t_coffee -profile sample_aln1.aln sample_aln2.aln -outfile han_solo </cl>
+<stack>
+</stack>
+<warning>
+</warning>
+<file>
+<stream>output</stream>
+<name>stdout</name>
+<content>#Single Thread
+#Single Thread
+CLUSTAL FORMAT for T-COFFEE Version_13.39.0.d675aed [http://www.tcoffee.org] [MODE:  ], CPU=0.00 sec, SCORE=95, Nseq=16, Len=217 
+
+hmgb_chite      ad---kpkrplsay------m---------------lwlnsaresi----
+hmgt_mouse      k-----pkrprsay------n---------------iyvsesfqea----
+hmgl_wheat      dp--nkpkrapsaf------f---------------vfmgefreef----
+hmgl_trybr      kkdsnapkramtsf------m---------------ffssdfrskh----
+1cms            GE---VASVPLTNY------LDSQYFGKIYLGTPPQEFTVLFDTGSSDFW
+4pep            -----IGDEPLENY------LDTEYFGTIGIGTPAQDFTVIFDTGSSNLW
+4ape            STG-SATTTPIDS-------LDDAYITPVQIGTPAQTLNLDFDTGSSDLW
+3app            AASGVATNTPTA--------NDEEYITPVTIGG--TTLNLNFDTGSADLW
+2apr            AG---VGTVPMTDYG-----NDIEYYGQVTIGTPGKKFNLDFDTGSSDLW
+1cms_1          YTG-SLHWVPVTVQQYWQFTVDSVTISGVVVACEG-GCQAILDTGTSKLV
+1cms            --GEVASVPLT-------NYLDSQYFGKIYLGTPPQEFTVLFDTGSSDFW
+4pep            ----IGDEPLE-------NYLDTEYFGTIGIGTPAQDFTVIFDTGSSNLW
+4ape            -STGSATTTPI-------DSLDDAYITPVQIGTPAQTLNLDFDTGSSDLW
+3app            AASGVATNTPT-------AN-DEEYITPVTIG--GTTLNLNFDTGSADLW
+2apr            AGVGTVPMTDY-------GN-DIEYYGQVTIGTPGKKFNLDFDTGSSDLW
+1cms_1          ------------------------YTGSLHWVPVTVQQYWQFTVDS---V
+                                                                  
+
+hmgb_chite      --------------krenpdf-kvtevak-kggelwr-------------
+hmgt_mouse      ------------------kdd-saqgklk-lvneawk-------------
+hmgl_wheat      --------------kqknpknksvaavgk-aagerwk-------------
+hmgl_trybr      ------------------sdl-sivemsk-aagaawk-------------
+1cms            VPSIYCKSNACKNHQRFDPRKSS---TFQ-NLGKPLSIHYGTGS-MQGIL
+4pep            VPSVYCSSLACSDHNQFNPDDSS---TFE-ATSQELSITYGTGS-MTGIL
+4ape            VFSSETTASEVDGQTIYTPSKST---TAKLLSGATWSISYGDGSSSSGDV
+3app            VFSTELPASQQSGHSVYNPSA-----TGKELSGYTWSISYGDGSSASGNV
+2apr            IASTLCTN-CGSGQTKYDPNQSS---TYQ-ADGRTWSISYGDGSSASGIL
+1cms_1          GPSS----------------------------------------------
+1cms            VPSIYCKSNACKNHQRFDPR-KSS---TFQNLGKPLSIHYGTG-SMQGIL
+4pep            VPSVYCSSLACSDHNQFNPD-DSS---TFEATSQELSITYGTG-SMTGIL
+4ape            VFSSETTASEVDGQTIYTPSKSTT---AKLLSGATWSISYGDGSSSSGDV
+3app            VFSTELPASQQSGHSVYNP--SAT---GKELSGYTWSISYGDGSSASGNV
+2apr            IASTLCTNCG-SGQTKYDPN-QSS---TYQADGRTWSISYGDGSSASGIL
+1cms_1          TISGVVVACEGGCQAILDTG-TSK---LVGPSSDILNIQQAIG-ATQNQY
+                                                                  
+
+hmgb_chite      -----------------glk--dksewe----------------------
+hmgt_mouse      -----------------nlspeekqayi----------------------
+hmgl_wheat      -----------------slsesekapyv----------------------
+hmgl_trybr      -----------------elgpeerkvye----------------------
+1cms            GYDTVTVSNIVDIQQTVGLSTQEPGDVFTYAEFD--------GILGMAYP
+4pep            GYDTVQVGGISDTNQIFGLSETEPGSFLYYAPFD--------GILGLAYP
+4ape            YTDTVSVGGLTVTGQAVESAKKVSSSFTEDSTID--------GLLGLAFS
+3app            FTDSVTVGGVTAHGQAVQAAQQISAQFQQDTNND--------GLLGLAFS
+2apr            AKDNVNLGGLLIKGQTIELAKREAASFAS-GPND--------GLLGLGFD
+1cms_1          --------DILNIQQAIGATQNQYGEFDIDCDNLSYMPTVVFEINGKMYP
+1cms            GYDTVTVSNIVDIQQTVGLSTQEPGDVFTYAEFD--------GILGMAYP
+4pep            GYDTVQVGGISDTNQIFGLSETEPGSFLYYAPFD--------GILGLAYP
+4ape            YTDTVSVGGLTVTGQAVESAKKVSSSFTEDSTID--------GLLGLAFS
+3app            FTDSVTVGGVTAHGQAVQAAQQISAQFQQDTNND--------GLLGLAFS
+2apr            AKDNVNLGGLLIKGQTIELAKREAASFASGPN-D--------GLLGLGFD
+1cms_1          GEFDIDCDNLSYMPTVVFEINGKMYPLTPSAYTS--------QDQGFCTS
+                                                                  
+
+hmgb_chite      ------------------------aka--at------akqnyiralqeye
+hmgt_mouse      ------------------------qla--kd------drirydnemkswe
+hmgl_wheat      ------------------------aka--nk------lkgeynkaiaayn
+hmgl_trybr      ------------------------ema--ek------dkerykrem----
+1cms            SLASEY---SIPV--------F--DNMMNRH----LVAQDLFSVYM-DRN
+4pep            SISASG---ATPV--------F--DNLWDQG----LVSQDLFSVYL-SSN
+4ape            TLNTVSPTQQKTF--------F--DNA--KA----SLDSPVFTADL-GYH
+3app            SINTVQPQSQTTF--------F--DTV--KS----SLAQPLFAVAL-KHQ
+2apr            TITTVRG--VKTP--------M--DNLISQG----LISRPIFGVYL-GKA
+1cms_1          LTPSAY---TS-QDQGFCTSGFQSENHSQKWILGDVFIREYYSVFD-RAN
+1cms            SLASEY---SIPVFDNM--------------MNRHLVAQDLFSVYMDR-N
+4pep            SISASG---ATPVFDNL--------------WDQGLVSQDLFSVYLSS-N
+4ape            TLNTVSPTQQKTFFDNA--------------KAS--LDSPVFTADLGY-H
+3app            SINTVQPQSQTTFFDTV--------------KSS--LAQPLFAVALKH-Q
+2apr            TITTVR--GVKTPMDNL--------------ISQGLISRPIFGVYLGK-A
+1cms_1          GFQSEN------HSQKW--------------ILGDVFIREYYSVFDRA-N
+                                                         :        
+
+hmgb_chite      r--ng-----------g
+hmgt_mouse      e--qm--a--------e
+hmgl_wheat      k--ge--s--------a
+hmgl_trybr      -----------------
+1cms            G--QESMLTLGAIDPSY
+4pep            DD-SGSVVLLGGIDSSY
+4ape            ---APGTYNFGFIDTTA
+3app            ---QPGVYDFGFIDSSK
+2apr            KNGGGGEYIFGGYDSTK
+1cms_1          N--LVGLA--KAI----
+1cms            GQE--SMLTLGAIDPSY
+4pep            DDSG-SVVLLGGIDSSY
+4ape            APG---TYNFGFIDTTA
+3app            QPG---VYDFGFIDSSK
+2apr            KNGGGGEYIFGGYDSTK
+1cms_1          NLVG----LAKAI----
+                                 
+
+
+
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>stderr</name>
+<content>
+PROGRAM: T-COFFEE Version_13.39.0.d675aed (Version_13.39.0.d675aed)
+-full_log      	S	[0] 
+-genepred_score	S	[0] 	nsd
+-run_name      	S	[0] 
+-mem_mode      	S	[0] 	mem
+-extend        	D	[1] 	1 
+-extend_mode   	S	[0] 	very_fast_triplet
+-max_n_pair    	D	[0] 	10 
+-seq_name_for_quadruplet	S	[0] 	all
+-compact       	S	[0] 	default
+-clean         	S	[0] 	no
+-do_self       	FL	[0] 	0
+-do_normalise  	D	[0] 	1000 
+-template_file 	S	[0] 
+-setenv        	S	[0] 	0
+-export        	S	[0] 	0
+-template_mode 	S	[0] 
+-flip          	D	[0] 	0 
+-remove_template_file	D	[0] 	0 
+-profile_template_file	S	[0] 
+-in            	S	[0] 
+-seq           	S	[0] 
+-aln           	S	[0] 
+-method_limits 	S	[0] 
+-method        	S	[0] 
+-lib           	S	[0] 
+-profile       	S	[1] 	sample_aln1.aln	sample_aln2.aln
+-profile1      	S	[0] 
+-profile2      	S	[0] 
+-pdb           	S	[0] 
+-relax_lib     	D	[0] 	1 
+-filter_lib    	D	[0] 	0 
+-shrink_lib    	D	[0] 	0 
+-out_lib       	W_F	[0] 	no
+-out_lib_mode  	S	[0] 	primary
+-lib_only      	D	[0] 	0 
+-outseqweight  	W_F	[0] 	no
+-seq_source    	S	[0] 	ANY
+-cosmetic_penalty	D	[0] 	0 
+-gapopen       	D	[0] 	0 
+-gapext        	D	[0] 	0 
+-fgapopen      	D	[0] 	0 
+-fgapext       	D	[0] 	0 
+-nomatch       	D	[0] 	0 
+-newtree       	W_F	[0] 	default
+-tree          	W_F	[0] 	NO
+-usetree       	R_F	[0] 
+-tree_mode     	S	[0] 	nj
+-distance_matrix_mode	S	[0] 	ktup
+-distance_matrix_sim_mode	S	[0] 	idmat_sim1
+-quicktree     	FL	[0] 	0
+-outfile       	W_F	[1] 	han_solo
+-maximise      	FL	[1] 	1
+-output        	S	[0] 	aln	html
+-len           	D	[0] 	0 
+-infile        	R_F	[0] 
+-matrix        	S	[0] 	default
+-tg_mode       	D	[0] 	1 
+-profile_mode  	S	[0] 	cw_profile_profile
+-profile_comparison	S	[0] 	profile
+-dp_mode       	S	[0] 	linked_pair_wise
+-ktuple        	D	[0] 	1 
+-ndiag         	D	[0] 	0 
+-diag_threshold	D	[0] 	0 
+-diag_mode     	D	[0] 	0 
+-sim_matrix    	S	[0] 	vasiliky
+-transform     	S	[0] 
+-extend_seq    	FL	[0] 	0
+-outorder      	S	[0] 	input
+-inorder       	S	[0] 	aligned
+-seqnos        	S	[0] 	off
+-case          	S	[0] 	keep
+-cpu           	D	[0] 	0 
+-ulimit        	D	[0] 	-1 
+-maxnseq       	D	[0] 	-1 
+-maxlen        	D	[0] 	-1 
+-sample_dp     	D	[0] 	0 
+-weight        	S	[0] 	default
+-seq_weight    	S	[0] 	no
+-align         	FL	[1] 	1
+-mocca         	FL	[0] 	0
+-domain        	FL	[0] 	0
+-start         	D	[0] 	0 
+-len           	D	[0] 	0 
+-scale         	D	[0] 	0 
+-mocca_interactive	FL	[0] 	0
+-method_evaluate_mode	S	[0] 	default
+-color_mode    	S	[0] 	new
+-aln_line_length	D	[0] 	0 
+-evaluate_mode 	S	[0] 	triplet
+-get_type      	FL	[0] 	0
+-clean_aln     	D	[0] 	0 
+-clean_threshold	D	[1] 	1 
+-clean_iteration	D	[1] 	1 
+-clean_evaluate_mode	S	[0] 	t_coffee_fast
+-extend_matrix 	FL	[0] 	0
+-prot_min_sim  	D	[40] 	40 
+-prot_max_sim  	D	[90] 	90 
+-prot_trim     	D	[20] 	20 
+-prot_min_cov  	D	[40] 	40 
+-pdb_type      	S	[0] 	d
+-pdb_min_sim   	D	[35] 	35 
+-pdb_max_sim   	D	[100] 	100 
+-pdb_min_cov   	D	[50] 	50 
+-pdb_blast_server	W_F	[0] 	EBI
+-blast         	W_F	[0] 
+-blast_server  	W_F	[0] 	EBI
+-pdb_db        	W_F	[0] 	pdb
+-protein_db    	W_F	[0] 	uniref50
+-method_log    	W_F	[0] 	no
+-struc_to_use  	S	[0] 
+-cache         	W_F	[0] 	use
+-print_cache   	FL	[0] 	0
+-align_pdb_param_file	W_F	[0] 	no
+-align_pdb_hasch_mode	W_F	[0] 	hasch_ca_trace_bubble
+-external_aligner	S	[0] 	NO
+-msa_mode      	S	[0] 	tree
+-et_mode       	S	[0] 	et
+-master        	S	[0] 	no
+-blast_nseq    	D	[0] 	0 
+-lalign_n_top  	D	[0] 	10 
+-iterate       	D	[0] 	0 
+-trim          	D	[0] 	0 
+-split         	D	[0] 	0 
+-trimfile      	S	[0] 	default
+-split         	D	[0] 	0 
+-split_nseq_thres	D	[0] 	0 
+-split_score_thres	D	[0] 	0 
+-check_pdb_status	D	[0] 	0 
+-clean_seq_name	D	[0] 	0 
+-seq_to_keep   	S	[0] 
+-dpa_master_aln	S	[0] 
+-dpa_maxnseq   	D	[0] 	0 
+-dpa_min_score1	D	[0] 
+-dpa_min_score2	D	[0] 
+-dpa_keep_tmpfile	FL	[0] 	0
+-dpa_debug     	D	[0] 	0 
+-multi_core    	S	[0] 	templates_jobs_relax_msa_evaluate
+-n_core        	D	[0] 	1 
+-thread        	D	[0] 	1 
+-max_n_proc    	D	[0] 	0 
+-lib_list      	S	[0] 
+-prune_lib_mode	S	[0] 	5
+-tip           	S	[0] 	none
+-rna_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) sample_aln1.aln  Format clustal_aln
+	Input File (R) sample_aln2.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                 Seq sample_aln1.aln Length  217 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln1.aln, File=sample_aln1.aln
+  Input File                 Seq sample_aln2.aln Length  184 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln2.aln, File=sample_aln2.aln
+
+	Multi Core Mode: 1 processors:
+lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) sample_aln1.aln  Format clustal_aln
+	Input File (R) sample_aln2.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                 Seq sample_aln1.aln Length  217 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln1.aln, File=sample_aln1.aln
+  Input File                 Seq sample_aln2.aln Length  184 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln2.aln, File=sample_aln2.aln
+
+	Multi Core Mode: 1 processors:
+
+	--- Process Method/Library/Aln Rsample_aln1.aln
+	xxx Retrieved Rsample_aln1.alnlib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) sample_aln1.aln  Format clustal_aln
+	Input File (R) sample_aln2.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                 Seq sample_aln1.aln Length  217 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln1.aln, File=sample_aln1.aln
+  Input File                 Seq sample_aln2.aln Length  184 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln2.aln, File=sample_aln2.aln
+
+	Multi Core Mode: 1 processors:
+
+	--- Process Method/Library/Aln Rsample_aln1.aln
+	xxx Retrieved Rsample_aln1.aln
+	--- Process Method/Library/Aln Rsample_aln2.aln
+	xxx Retrieved Rsample_aln2.alnlib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) sample_aln1.aln  Format clustal_aln
+	Input File (R) sample_aln2.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                 Seq sample_aln1.aln Length  217 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln1.aln, File=sample_aln1.aln
+  Input File                 Seq sample_aln2.aln Length  184 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln2.aln, File=sample_aln2.aln
+
+	Multi Core Mode: 1 processors:
+
+	--- Process Method/Library/Aln Rsample_aln1.aln
+	xxx Retrieved Rsample_aln1.aln
+	--- Process Method/Library/Aln Rsample_aln2.aln
+	xxx Retrieved Rsample_aln2.alnlib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) sample_aln1.aln  Format clustal_aln
+	Input File (R) sample_aln2.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                 Seq sample_aln1.aln Length  217 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln1.aln, File=sample_aln1.aln
+  Input File                 Seq sample_aln2.aln Length  184 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln2.aln, File=sample_aln2.aln
+
+	Multi Core Mode: 1 processors:
+
+	--- Process Method/Library/Aln Rsample_aln1.aln
+	xxx Retrieved Rsample_aln1.aln
+	--- Process Method/Library/Aln Rsample_aln2.aln
+	xxx Retrieved Rsample_aln2.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [674]
+
+Library Relaxation: Multi_proc [1]
+ 
+!		[Relax Library][TOT=    2][  0 %]!		[Relax Library][TOT=    2][100 %]
+lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) sample_aln1.aln  Format clustal_aln
+	Input File (R) sample_aln2.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                 Seq sample_aln1.aln Length  217 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln1.aln, File=sample_aln1.aln
+  Input File                 Seq sample_aln2.aln Length  184 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln2.aln, File=sample_aln2.aln
+
+	Multi Core Mode: 1 processors:
+
+	--- Process Method/Library/Aln Rsample_aln1.aln
+	xxx Retrieved Rsample_aln1.aln
+	--- Process Method/Library/Aln Rsample_aln2.aln
+	xxx Retrieved Rsample_aln2.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [674]
+
+Library Relaxation: Multi_proc [1]
+ 
+Relaxation Summary: [674]--->[526]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][---Two Sequences Only: Make Dummy Pair-Tree ---]
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: sample_aln1.aln
+Group    2: sample_aln2.aln
+
+lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) sample_aln1.aln  Format clustal_aln
+	Input File (R) sample_aln2.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                 Seq sample_aln1.aln Length  217 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln1.aln, File=sample_aln1.aln
+  Input File                 Seq sample_aln2.aln Length  184 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln2.aln, File=sample_aln2.aln
+
+	Multi Core Mode: 1 processors:
+
+	--- Process Method/Library/Aln Rsample_aln1.aln
+	xxx Retrieved Rsample_aln1.aln
+	--- Process Method/Library/Aln Rsample_aln2.aln
+	xxx Retrieved Rsample_aln2.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [674]
+
+Library Relaxation: Multi_proc [1]
+ 
+Relaxation Summary: [674]--->[526]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][---Two Sequences Only: Make Dummy Pair-Tree ---]
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: sample_aln1.aln
+Group    2: sample_aln2.aln
+
+
+	Group    3: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  217][PID:87999]
+
+
+!		[Final Evaluation][TOT=  217][  0 %]!		[Final Evaluation][TOT=  217][  1 %]!		[Final Evaluation][TOT=  217][  2 %]!		[Final Evaluation][TOT=  217][  3 %]!		[Final Evaluation][TOT=  217][  4 %]!		[Final Evaluation][TOT=  217][  5 %]!		[Final Evaluation][TOT=  217][  6 %]!		[Final Evaluation][TOT=  217][  7 %]!		[Final Evaluation][TOT=  217][  8 %]!		[Final Evaluation][TOT=  217][  9 %]!		[Final Evaluation][TOT=  217][ 10 %]!		[Final Evaluation][TOT=  217][ 11 %]!		[Final Evaluation][TOT=  217][ 12 %]!		[Final Evaluation][TOT=  217][ 13 %]!		[Final Evaluation][TOT=  217][ 14 %]!		[Final Evaluation][TOT=  217][ 15 %]!		[Final Evaluation][TOT=  217][ 16 %]!		[Final Evaluation][TOT=  217][ 17 %]!		[Final Evaluation][TOT=  217][ 18 %]!		[Final Evaluation][TOT=  217][ 19 %]!		[Final Evaluation][TOT=  217][ 20 %]!		[Final Evaluation][TOT=  217][ 21 %]!		[Final Evaluation][TOT=  217][ 22 %]!		[Final Evaluation][TOT=  217][ 23 %]!		[Final Evaluation][TOT=  217][ 24 %]!		[Final Evaluation][TOT=  217][ 25 %]!		[Final Evaluation][TOT=  217][ 26 %]!		[Final Evaluation][TOT=  217][ 27 %]!		[Final Evaluation][TOT=  217][ 28 %]!		[Final Evaluation][TOT=  217][ 29 %]!		[Final Evaluation][TOT=  217][ 30 %]!		[Final Evaluation][TOT=  217][ 31 %]!		[Final Evaluation][TOT=  217][ 32 %]!		[Final Evaluation][TOT=  217][ 33 %]!		[Final Evaluation][TOT=  217][ 34 %]!		[Final Evaluation][TOT=  217][ 35 %]!		[Final Evaluation][TOT=  217][ 36 %]!		[Final Evaluation][TOT=  217][ 37 %]!		[Final Evaluation][TOT=  217][ 38 %]!		[Final Evaluation][TOT=  217][ 39 %]!		[Final Evaluation][TOT=  217][ 40 %]!		[Final Evaluation][TOT=  217][ 41 %]!		[Final Evaluation][TOT=  217][ 42 %]!		[Final Evaluation][TOT=  217][ 43 %]!		[Final Evaluation][TOT=  217][ 44 %]!		[Final Evaluation][TOT=  217][ 45 %]!		[Final Evaluation][TOT=  217][ 46 %]!		[Final Evaluation][TOT=  217][ 47 %]!		[Final Evaluation][TOT=  217][ 48 %]!		[Final Evaluation][TOT=  217][ 49 %]!		[Final Evaluation][TOT=  217][ 50 %]!		[Final Evaluation][TOT=  217][ 51 %]!		[Final Evaluation][TOT=  217][ 52 %]!		[Final Evaluation][TOT=  217][ 53 %]!		[Final Evaluation][TOT=  217][ 54 %]!		[Final Evaluation][TOT=  217][ 55 %]!		[Final Evaluation][TOT=  217][ 56 %]!		[Final Evaluation][TOT=  217][ 57 %]!		[Final Evaluation][TOT=  217][ 58 %]!		[Final Evaluation][TOT=  217][ 59 %]!		[Final Evaluation][TOT=  217][ 60 %]!		[Final Evaluation][TOT=  217][ 61 %]!		[Final Evaluation][TOT=  217][ 62 %]!		[Final Evaluation][TOT=  217][ 63 %]!		[Final Evaluation][TOT=  217][ 64 %]!		[Final Evaluation][TOT=  217][ 65 %]!		[Final Evaluation][TOT=  217][ 66 %]!		[Final Evaluation][TOT=  217][ 67 %]!		[Final Evaluation][TOT=  217][ 68 %]!		[Final Evaluation][TOT=  217][ 69 %]!		[Final Evaluation][TOT=  217][ 70 %]!		[Final Evaluation][TOT=  217][ 71 %]!		[Final Evaluation][TOT=  217][ 72 %]!		[Final Evaluation][TOT=  217][ 73 %]!		[Final Evaluation][TOT=  217][ 74 %]!		[Final Evaluation][TOT=  217][ 75 %]!		[Final Evaluation][TOT=  217][ 76 %]!		[Final Evaluation][TOT=  217][ 77 %]!		[Final Evaluation][TOT=  217][ 78 %]!		[Final Evaluation][TOT=  217][ 79 %]!		[Final Evaluation][TOT=  217][ 80 %]!		[Final Evaluation][TOT=  217][ 81 %]!		[Final Evaluation][TOT=  217][ 82 %]!		[Final Evaluation][TOT=  217][ 83 %]!		[Final Evaluation][TOT=  217][ 84 %]!		[Final Evaluation][TOT=  217][ 85 %]!		[Final Evaluation][TOT=  217][ 86 %]!		[Final Evaluation][TOT=  217][ 87 %]!		[Final Evaluation][TOT=  217][ 88 %]!		[Final Evaluation][TOT=  217][ 89 %]!		[Final Evaluation][TOT=  217][ 90 %]!		[Final Evaluation][TOT=  217][ 91 %]!		[Final Evaluation][TOT=  217][ 92 %]!		[Final Evaluation][TOT=  217][ 93 %]!		[Final Evaluation][TOT=  217][ 94 %]!		[Final Evaluation][TOT=  217][ 95 %]!		[Final Evaluation][TOT=  217][ 96 %]!		[Final Evaluation][TOT=  217][ 97 %]!		[Final Evaluation][TOT=  217][ 98 %]!		[Final Evaluation][TOT=  217][ 99 %]!		[Final Evaluation][TOT=  217][100 %]
+
+
+
+OUTPUT RESULTS
+	#### File Type= MSA             Format= aln             Name= han_solo
+	#### File Type= MSA             Format= html            Name= han_solo.html
+	#### File Type= Template Profile Format= fasta_aln       Name= sample_aln1.aln
+	#### File Type= Template Profile Format= fasta_aln       Name= sample_aln2.aln
+
+# Command Line: t_coffee -profile sample_aln1.aln sample_aln2.aln -outfile han_solo  [PROGRAM:T-COFFEE]
+# T-COFFEE Memory Usage: Current= 32.174 Mb, Max= 33.133 Mb
+# Results Produced with T-COFFEE Version_13.39.0.d675aed (Version_13.39.0.d675aed)
+# T-COFFEE is available from http://www.tcoffee.org
+# Register on: https://groups.google.com/group/tcoffee/
+</content>
+</file>
+<file>
+<stream>input</stream>
+<name>sample_aln1.aln</name>
+<content>CLUSTAL FORMAT for T-COFFEE Version_11.00 [http://www.tcoffee.org] [MODE:  ], CPU=0.00 sec, SCORE=500, Nseq=10, Len=217 
+
+hmgb_chite      ad---kpkrplsay------m---------------lwlnsaresi------------------krenpdf-kvtevak-kggelwr------------------------------glk--dksewe--------------------------------
+hmgt_mouse      k-----pkrprsay------n---------------iyvsesfqea----------------------kdd-saqgklk-lvneawk------------------------------nlspeekqayi--------------------------------
+hmgl_wheat      dp--nkpkrapsaf------f---------------vfmgefreef------------------kqknpknksvaavgk-aagerwk------------------------------slsesekapyv--------------------------------
+hmgl_trybr      kkdsnapkramtsf------m---------------ffssdfrskh----------------------sdl-sivemsk-aagaawk------------------------------elgpeerkvye--------------------------------
+1cms            GE---VASVPLTNY------LDSQYFGKIYLGTPPQEFTVLFDTGSSDFWVPSIYCKSNACKNHQRFDPRKSS---TFQ-NLGKPLSIHYGTGS-MQGILGYDTVTVSNIVDIQQTVGLSTQEPGDVFTYAEFD--------GILGMAYPSLASEY---S
+4pep            -----IGDEPLENY------LDTEYFGTIGIGTPAQDFTVIFDTGSSNLWVPSVYCSSLACSDHNQFNPDDSS---TFE-ATSQELSITYGTGS-MTGILGYDTVQVGGISDTNQIFGLSETEPGSFLYYAPFD--------GILGLAYPSISASG---A
+4ape            STG-SATTTPIDS-------LDDAYITPVQIGTPAQTLNLDFDTGSSDLWVFSSETTASEVDGQTIYTPSKST---TAKLLSGATWSISYGDGSSSSGDVYTDTVSVGGLTVTGQAVESAKKVSSSFTEDSTID--------GLLGLAFSTLNTVSPTQQ
+3app            AASGVATNTPTA--------NDEEYITPVTIGG--TTLNLNFDTGSADLWVFSTELPASQQSGHSVYNPSA-----TGKELSGYTWSISYGDGSSASGNVFTDSVTVGGVTAHGQAVQAAQQISAQFQQDTNND--------GLLGLAFSSINTVQPQSQ
+2apr            AG---VGTVPMTDYG-----NDIEYYGQVTIGTPGKKFNLDFDTGSSDLWIASTLCTN-CGSGQTKYDPNQSS---TYQ-ADGRTWSISYGDGSSASGILAKDNVNLGGLLIKGQTIELAKREAASFAS-GPND--------GLLGLGFDTITTVRG--V
+1cms_1          YTG-SLHWVPVTVQQYWQFTVDSVTISGVVVACEG-GCQAILDTGTSKLVGPSS------------------------------------------------------DILNIQQAIGATQNQYGEFDIDCDNLSYMPTVVFEINGKMYPLTPSAY---T
+                         .                                                                                                                                                      
+
+hmgb_chite      --------------aka--at------akqnyiralqeyer--ng-----------g
+hmgt_mouse      --------------qla--kd------drirydnemkswee--qm--a--------e
+hmgl_wheat      --------------aka--nk------lkgeynkaiaaynk--ge--s--------a
+hmgl_trybr      --------------ema--ek------dkerykrem---------------------
+1cms            IPV--------F--DNMMNRH----LVAQDLFSVYM-DRNG--QESMLTLGAIDPSY
+4pep            TPV--------F--DNLWDQG----LVSQDLFSVYL-SSNDD-SGSVVLLGGIDSSY
+4ape            KTF--------F--DNA--KA----SLDSPVFTADL-GYH---APGTYNFGFIDTTA
+3app            TTF--------F--DTV--KS----SLAQPLFAVAL-KHQ---QPGVYDFGFIDSSK
+2apr            KTP--------M--DNLISQG----LISRPIFGVYL-GKAKNGGGGEYIFGGYDSTK
+1cms_1          S-QDQGFCTSGFQSENHSQKWILGDVFIREYYSVFD-RANN--LVGLA--KAI----
+                                               :                         
+
+
+
+</content>
+</file>
+<file>
+<stream>input</stream>
+<name>sample_aln2.aln</name>
+<content>CLUSTAL W (1.83) multiple sequence alignment
+
+
+1cms            --GEVASVPLTNYLDSQYFGKIYLGTPPQEFTVLFDTGSSDFWVPSIYCKSNACKNHQRF
+4pep            ----IGDEPLENYLDTEYFGTIGIGTPAQDFTVIFDTGSSNLWVPSVYCSSLACSDHNQF
+4ape            -STGSATTTPIDSLDDAYITPVQIGTPAQTLNLDFDTGSSDLWVFSSETTASEVDGQTIY
+3app            AASGVATNTPTAN-DEEYITPVTIG--GTTLNLNFDTGSADLWVFSTELPASQQSGHSVY
+2apr            AGVGTVPMTDYGN-DIEYYGQVTIGTPGKKFNLDFDTGSSDLWIASTLCTNCG-SGQTKY
+1cms_1          -----------------YTGSLHWVPVTVQQYWQFTVDS---VTISGVVVACEGGCQAIL
+                                 *   :            * ..*      *          :   
+
+1cms            DPR-KSSTFQNLGKPLSIHYGTG-SMQGILGYDTVTVSNIVDIQQTVGLSTQEPGDVFTY
+4pep            NPD-DSSTFEATSQELSITYGTG-SMTGILGYDTVQVGGISDTNQIFGLSETEPGSFLYY
+4ape            TPSKSTTAKLLSGATWSISYGDGSSSSGDVYTDTVSVGGLTVTGQAVESAKKVSSSFTED
+3app            NP--SATGKELSGYTWSISYGDGSSASGNVFTDSVTVGGVTAHGQAVQAAQQISAQFQQD
+2apr            DPN-QSSTYQADGRTWSISYGDGSSASGILAKDNVNLGGLLIKGQTIELAKREAASFASG
+1cms_1          DTG-TSKLVGPSSDILNIQQAIG-ATQNQYGEFDIDCDNLSYMPTVVFEINGKMYPLTPS
+                 .   :.     .   .*  . * :  .      :  ..:      .         .   
+
+1cms            AEFDGILGMAYPSLASEY---SIPVFDNMMNRHLVAQDLFSVYMDRNGQE--SMLTLGAI
+4pep            APFDGILGLAYPSISASG---ATPVFDNLWDQGLVSQDLFSVYLSSNDDSG-SVVLLGGI
+4ape            STIDGLLGLAFSTLNTVSPTQQKTFFDNAKAS--LDSPVFTADLGYHAPG---TYNFGFI
+3app            TNNDGLLGLAFSSINTVQPQSQTTFFDTVKSS--LAQPLFAVALKHQQPG---VYDFGFI
+2apr            PN-DGLLGLGFDTITTVR--GVKTPMDNLISQGLISRPIFGVYLGKAKNGGGGEYIFGGY
+1cms_1          AYTSQDQGFCTSGFQSEN------HSQKWILGDVFIREYYSVFDRANNLVG----LAKAI
+                .  .   *:    : :          :.      .    : .                  
+
+1cms            DPSY
+4pep            DSSY
+4ape            DTTA
+3app            DSSK
+2apr            DSTK
+1cms_1          ----
+                    
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>han_solo</name>
+<content>CLUSTAL FORMAT for T-COFFEE Version_13.39.0.d675aed [http://www.tcoffee.org] [MODE:  ], CPU=0.00 sec, SCORE=95, Nseq=16, Len=217 
+
+hmgb_chite      ad---kpkrplsay------m---------------lwlnsaresi----
+hmgt_mouse      k-----pkrprsay------n---------------iyvsesfqea----
+hmgl_wheat      dp--nkpkrapsaf------f---------------vfmgefreef----
+hmgl_trybr      kkdsnapkramtsf------m---------------ffssdfrskh----
+1cms            GE---VASVPLTNY------LDSQYFGKIYLGTPPQEFTVLFDTGSSDFW
+4pep            -----IGDEPLENY------LDTEYFGTIGIGTPAQDFTVIFDTGSSNLW
+4ape            STG-SATTTPIDS-------LDDAYITPVQIGTPAQTLNLDFDTGSSDLW
+3app            AASGVATNTPTA--------NDEEYITPVTIGG--TTLNLNFDTGSADLW
+2apr            AG---VGTVPMTDYG-----NDIEYYGQVTIGTPGKKFNLDFDTGSSDLW
+1cms_1          YTG-SLHWVPVTVQQYWQFTVDSVTISGVVVACEG-GCQAILDTGTSKLV
+1cms            --GEVASVPLT-------NYLDSQYFGKIYLGTPPQEFTVLFDTGSSDFW
+4pep            ----IGDEPLE-------NYLDTEYFGTIGIGTPAQDFTVIFDTGSSNLW
+4ape            -STGSATTTPI-------DSLDDAYITPVQIGTPAQTLNLDFDTGSSDLW
+3app            AASGVATNTPT-------AN-DEEYITPVTIG--GTTLNLNFDTGSADLW
+2apr            AGVGTVPMTDY-------GN-DIEYYGQVTIGTPGKKFNLDFDTGSSDLW
+1cms_1          ------------------------YTGSLHWVPVTVQQYWQFTVDS---V
+                                                                  
+
+hmgb_chite      --------------krenpdf-kvtevak-kggelwr-------------
+hmgt_mouse      ------------------kdd-saqgklk-lvneawk-------------
+hmgl_wheat      --------------kqknpknksvaavgk-aagerwk-------------
+hmgl_trybr      ------------------sdl-sivemsk-aagaawk-------------
+1cms            VPSIYCKSNACKNHQRFDPRKSS---TFQ-NLGKPLSIHYGTGS-MQGIL
+4pep            VPSVYCSSLACSDHNQFNPDDSS---TFE-ATSQELSITYGTGS-MTGIL
+4ape            VFSSETTASEVDGQTIYTPSKST---TAKLLSGATWSISYGDGSSSSGDV
+3app            VFSTELPASQQSGHSVYNPSA-----TGKELSGYTWSISYGDGSSASGNV
+2apr            IASTLCTN-CGSGQTKYDPNQSS---TYQ-ADGRTWSISYGDGSSASGIL
+1cms_1          GPSS----------------------------------------------
+1cms            VPSIYCKSNACKNHQRFDPR-KSS---TFQNLGKPLSIHYGTG-SMQGIL
+4pep            VPSVYCSSLACSDHNQFNPD-DSS---TFEATSQELSITYGTG-SMTGIL
+4ape            VFSSETTASEVDGQTIYTPSKSTT---AKLLSGATWSISYGDGSSSSGDV
+3app            VFSTELPASQQSGHSVYNP--SAT---GKELSGYTWSISYGDGSSASGNV
+2apr            IASTLCTNCG-SGQTKYDPN-QSS---TYQADGRTWSISYGDGSSASGIL
+1cms_1          TISGVVVACEGGCQAILDTG-TSK---LVGPSSDILNIQQAIG-ATQNQY
+                                                                  
+
+hmgb_chite      -----------------glk--dksewe----------------------
+hmgt_mouse      -----------------nlspeekqayi----------------------
+hmgl_wheat      -----------------slsesekapyv----------------------
+hmgl_trybr      -----------------elgpeerkvye----------------------
+1cms            GYDTVTVSNIVDIQQTVGLSTQEPGDVFTYAEFD--------GILGMAYP
+4pep            GYDTVQVGGISDTNQIFGLSETEPGSFLYYAPFD--------GILGLAYP
+4ape            YTDTVSVGGLTVTGQAVESAKKVSSSFTEDSTID--------GLLGLAFS
+3app            FTDSVTVGGVTAHGQAVQAAQQISAQFQQDTNND--------GLLGLAFS
+2apr            AKDNVNLGGLLIKGQTIELAKREAASFAS-GPND--------GLLGLGFD
+1cms_1          --------DILNIQQAIGATQNQYGEFDIDCDNLSYMPTVVFEINGKMYP
+1cms            GYDTVTVSNIVDIQQTVGLSTQEPGDVFTYAEFD--------GILGMAYP
+4pep            GYDTVQVGGISDTNQIFGLSETEPGSFLYYAPFD--------GILGLAYP
+4ape            YTDTVSVGGLTVTGQAVESAKKVSSSFTEDSTID--------GLLGLAFS
+3app            FTDSVTVGGVTAHGQAVQAAQQISAQFQQDTNND--------GLLGLAFS
+2apr            AKDNVNLGGLLIKGQTIELAKREAASFASGPN-D--------GLLGLGFD
+1cms_1          GEFDIDCDNLSYMPTVVFEINGKMYPLTPSAYTS--------QDQGFCTS
+                                                                  
+
+hmgb_chite      ------------------------aka--at------akqnyiralqeye
+hmgt_mouse      ------------------------qla--kd------drirydnemkswe
+hmgl_wheat      ------------------------aka--nk------lkgeynkaiaayn
+hmgl_trybr      ------------------------ema--ek------dkerykrem----
+1cms            SLASEY---SIPV--------F--DNMMNRH----LVAQDLFSVYM-DRN
+4pep            SISASG---ATPV--------F--DNLWDQG----LVSQDLFSVYL-SSN
+4ape            TLNTVSPTQQKTF--------F--DNA--KA----SLDSPVFTADL-GYH
+3app            SINTVQPQSQTTF--------F--DTV--KS----SLAQPLFAVAL-KHQ
+2apr            TITTVRG--VKTP--------M--DNLISQG----LISRPIFGVYL-GKA
+1cms_1          LTPSAY---TS-QDQGFCTSGFQSENHSQKWILGDVFIREYYSVFD-RAN
+1cms            SLASEY---SIPVFDNM--------------MNRHLVAQDLFSVYMDR-N
+4pep            SISASG---ATPVFDNL--------------WDQGLVSQDLFSVYLSS-N
+4ape            TLNTVSPTQQKTFFDNA--------------KAS--LDSPVFTADLGY-H
+3app            SINTVQPQSQTTFFDTV--------------KSS--LAQPLFAVALKH-Q
+2apr            TITTVR--GVKTPMDNL--------------ISQGLISRPIFGVYLGK-A
+1cms_1          GFQSEN------HSQKW--------------ILGDVFIREYYSVFDRA-N
+                                                         :        
+
+hmgb_chite      r--ng-----------g
+hmgt_mouse      e--qm--a--------e
+hmgl_wheat      k--ge--s--------a
+hmgl_trybr      -----------------
+1cms            G--QESMLTLGAIDPSY
+4pep            DD-SGSVVLLGGIDSSY
+4ape            ---APGTYNFGFIDTTA
+3app            ---QPGVYDFGFIDSSK
+2apr            KNGGGGEYIFGGYDSTK
+1cms_1          N--LVGLA--KAI----
+1cms            GQE--SMLTLGAIDPSY
+4pep            DDSG-SVVLLGGIDSSY
+4ape            APG---TYNFGFIDTTA
+3app            QPG---VYDFGFIDSSK
+2apr            KNGGGGEYIFGGYDSTK
+1cms_1          NLVG----LAKAI----
+                                 
+
+
+
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>han_solo.html</name>
+<content><html>
+<style>
+SPAN { font-family: courier new, courier-new, courier, monospace; font-weight: bold; font-size: 11pt;}
+SPAN { line-height:100%}
+SPAN {	white-space: pre}
+SPAN.value0 {background: #9B92FF}
+SPAN.value1 {background: #B4FFB4}
+SPAN.value2 {background: #BEFFBE}
+SPAN.value3 {background: #C8FFC8}
+SPAN.value4 {background: #FFFFB7}
+SPAN.value5 {background: #FFFFAD}
+SPAN.value6 {background: #FFFFAD}
+SPAN.value7 {background: #FFE6E6}
+SPAN.value8 {background: #FFDCDC}
+SPAN.value9 {background: #FFC8C8}
+SPAN.valuedefault {}
+SPAN.valuegap {}
+SPAN.valueink {background: 000000}
+</style><body><span class=valuedefault>T-COFFEE,&nbsp;Version_13.39.0.d675aed&nbsp;(Version_13.39.0.d675aed)</span><br><span class=valuedefault>Cedric&nbsp;Notredame&nbsp;</span><br><span class=valuedefault>CPU&nbsp;TIME:0&nbsp;sec.</span><br><span class=valuedefault>SCORE=95</span><br><span class=valuedefault>*</span><br><span class=valuedefault>&nbsp;</span><span class=value0>B</span><span class=value1>A</span><span class=value2>D</span><span class=value3>&nbsp;</span><span class=value4>A</span><span class=value5>V</span><span class=value6>G</span><span class=value7>&nbsp;</span><span class=value8>G</span><span class=value9>OOD</span><br><span class=valuedefault>*</span><br><span class=value9>hmgb_chite&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;93</span><br><span class=value9>hmgt_mouse&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;93</span><br><span class=value9>hmgl_wheat&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;93</span><br><span class=value9>hmgl_trybr&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;93</span><br><span class=value9>1cms&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;93</span><br><span class=value9>4pep&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;93</span><br><span class=value9>4ape&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;93</span><br><span class=value9>3app&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;93</span><br><span class=value9>2apr&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;93</span><br><span class=value9>1cms_1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;93</span><br><span class=value9>1cms&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;97</span><br><span class=value9>4pep&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;97</span><br><span class=value9>4ape&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;97</span><br><span class=value9>3app&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;97</span><br><span class=value9>2apr&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;97</span><br><span class=value9>1cms_1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;97</span><br><span class=value9>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;&nbsp;9</span><br><br><span class=valuedefault>hmgb_chite&nbsp;&nbsp;&nbsp;</span><span class=value9>ad</span><span class=valuegap>---</span><span class=value9>kpkrp</span><span class=value8>lsa</span><span class=value9>y</span><span class=valuegap>------</span><span class=value9>m</span><span class=valuegap>---------------</span><span class=value9>lwl</span><br><span class=valuedefault>hmgt_mouse&nbsp;&nbsp;&nbsp;</span><span class=value9>k</span><span class=valuegap>-----</span><span class=value9>pkrp</span><span class=value8>rsa</span><span class=value9>y</span><span class=valuegap>------</span><span class=value9>n</span><span class=valuegap>---------------</span><span class=value9>iyv</span><br><span class=valuedefault>hmgl_wheat&nbsp;&nbsp;&nbsp;</span><span class=value9>dp</span><span class=valuegap>--</span><span class=value9>nkpkra</span><span class=value8>psa</span><span class=value9>f</span><span class=valuegap>------</span><span class=value9>f</span><span class=valuegap>---------------</span><span class=value9>vfm</span><br><span class=valuedefault>hmgl_trybr&nbsp;&nbsp;&nbsp;</span><span class=value9>kkdsnapkra</span><span class=value8>mts</span><span class=value9>f</span><span class=valuegap>------</span><span class=value9>m</span><span class=valuegap>---------------</span><span class=value9>ffs</span><br><span class=valuedefault>1cms&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>GE</span><span class=valuegap>---</span><span class=value9>VASVP</span><span class=value8>LTN</span><span class=value9>Y</span><span class=valuegap>------</span><span class=value9>LDSQYFGKIYLGTPPQEFT</span><br><span class=valuedefault>4pep&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-----</span><span class=value9>IGDEP</span><span class=value8>LEN</span><span class=value9>Y</span><span class=valuegap>------</span><span class=value9>LDTEYFGTIGIGTPAQDFT</span><br><span class=valuedefault>4ape&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>STG</span><span class=valuegap>-</span><span class=value9>SATTTP</span><span class=value8>IDS</span><span class=valuegap>-------</span><span class=value9>LDDAYITPVQIGTPAQTLN</span><br><span class=valuedefault>3app&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>AASGVATNTP</span><span class=value8>TA</span><span class=valuegap>--------</span><span class=value9>NDEEYITPVTIGG</span><span class=valuegap>--</span><span class=value9>TTLN</span><br><span class=valuedefault>2apr&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>AG</span><span class=valuegap>---</span><span class=value9>VGTVP</span><span class=value8>MTD</span><span class=value9>YG</span><span class=valuegap>-----</span><span class=value9>NDIEYYGQVTIGTPGKKFN</span><br><span class=valuedefault>1cms_1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>YTG</span><span class=valuegap>-</span><span class=value9>SLHWVP</span><span class=value8>VTV</span><span class=value9>QQYWQ</span><span class=value8>F</span><span class=value9>TVDSVTISGVVVACEG</span><span class=valuegap>-</span><span class=value9>GCQ</span><br><span class=valuedefault>1cms&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value9>GEVASVPLT</span><span class=valuegap>-------</span><span class=value9>NYLDSQYFGKIYLGTPPQEFT</span><br><span class=valuedefault>4pep&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuegap>----</span><span class=value9>IGDEPLE</span><span class=valuegap>-------</span><span class=value9>NYLDTEYFGTIGIGTPAQDFT</span><br><span class=valuedefault>4ape&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value9>STGSATTTPI</span><span class=valuegap>-------</span><span class=value9>DSLDDAYITPVQIGTPAQTLN</span><br><span class=valuedefault>3app&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>AASGVATNTPT</span><span class=valuegap>-------</span><span class=value9>AN</span><span class=valuegap>-</span><span class=value9>DEEYITPVTIG</span><span class=valuegap>--</span><span class=value9>GTTLN</span><br><span class=valuedefault>2apr&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>AGVGTVPMTDY</span><span class=valuegap>-------</span><span class=value9>GN</span><span class=valuegap>-</span><span class=value9>DIEYYGQVTIGTPGKKFN</span><br><span class=valuedefault>1cms_1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------------------------</span><span class=value9>YTGSLHWVPVTVQQY</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>&nbsp;&nbsp;&nbsp;</span><span class=value7>&nbsp;&nbsp;</span><span class=value6>&nbsp;</span><span class=value4>&nbsp;&nbsp;&nbsp;</span><span class=value3>&nbsp;&nbsp;&nbsp;</span><span class=value4>&nbsp;</span><span class=value6>&nbsp;</span><span class=value8>&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>hmgb_chite&nbsp;&nbsp;&nbsp;</span><span class=value9>nsaresi</span><span class=valuegap>------------------</span><span class=value9>krenpdf</span><span class=valuegap>-</span><span class=value9>kvtev</span><span class=value8>a</span><br><span class=valuedefault>hmgt_mouse&nbsp;&nbsp;&nbsp;</span><span class=value9>sesfqea</span><span class=valuegap>----------------------</span><span class=value9>kdd</span><span class=valuegap>-</span><span class=value9>saqgk</span><span class=value8>l</span><br><span class=valuedefault>hmgl_wheat&nbsp;&nbsp;&nbsp;</span><span class=value9>gefreef</span><span class=valuegap>------------------</span><span class=value9>kqknpknksvaav</span><span class=value8>g</span><br><span class=valuedefault>hmgl_trybr&nbsp;&nbsp;&nbsp;</span><span class=value9>sdfrskh</span><span class=valuegap>----------------------</span><span class=value9>sdl</span><span class=valuegap>-</span><span class=value9>sivem</span><span class=value8>s</span><br><span class=valuedefault>1cms&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>VLFDTGSSDFWVPSIYCKSNACKNHQRFDPRKSS</span><span class=valuegap>---</span><span class=value9>T</span><span class=value8>F</span><br><span class=valuedefault>4pep&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>VIFDTGSSNLWVPSVYCSSLACSDHNQFNPDDSS</span><span class=valuegap>---</span><span class=value9>T</span><span class=value8>F</span><br><span class=valuedefault>4ape&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>LDFDTGSSDLWVFSSETTASEVDGQTIYTPSKST</span><span class=valuegap>---</span><span class=value9>T</span><span class=value8>A</span><br><span class=valuedefault>3app&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>LNFDTGSADLWVFSTELPASQQSGHSVYNPSA</span><span class=valuegap>-----</span><span class=value9>T</span><span class=value8>G</span><br><span class=valuedefault>2apr&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>LDFDTGSSDLWIASTLCTN</span><span class=valuegap>-</span><span class=value9>CGSGQTKYDPNQSS</span><span class=valuegap>---</span><span class=value9>T</span><span class=value8>Y</span><br><span class=valuedefault>1cms_1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>AILDTGTSKLVGPSS</span><span class=valuegap>------------------------</span><br><span class=valuedefault>1cms&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>VLFDTGSSDFWVPSIYCKSNACKNHQRFDPR</span><span class=valuegap>-</span><span class=value9>KSS</span><span class=valuegap>---</span><span class=value9>T</span><br><span class=valuedefault>4pep&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>VIFDTGSSNLWVPSVYCSSLACSDHNQFNPD</span><span class=valuegap>-</span><span class=value9>DSS</span><span class=valuegap>---</span><span class=value9>T</span><br><span class=valuedefault>4ape&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>LDFDTGSSDLWVFSSETTASEVDGQTIYTPSKSTT</span><span class=valuegap>---</span><span class=value9>A</span><br><span class=valuedefault>3app&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>LNFDTGSADLWVFSTELPASQQSGHSVYNP</span><span class=valuegap>--</span><span class=value9>SAT</span><span class=valuegap>---</span><span class=value9>G</span><br><span class=valuedefault>2apr&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>LDFDTGSSDLWIASTLCTNCG</span><span class=valuegap>-</span><span class=value9>SGQTKYDPN</span><span class=valuegap>-</span><span class=value9>QSS</span><span class=valuegap>---</span><span class=value9>T</span><br><span class=valuedefault>1cms_1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>WQFTVDS</span><span class=valuegap>---</span><span class=value9>VTISGVVVACEGGCQAILDTG</span><span class=valuegap>-</span><span class=value9>TSK</span><span class=valuegap>---</span><span class=value9>L</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value7>&nbsp;</span><span class=value6>&nbsp;</span><span class=value5>&nbsp;</span><span class=value4>&nbsp;&nbsp;</span><span class=value6>&nbsp;</span><br><br><br><span class=valuedefault>hmgb_chite&nbsp;&nbsp;&nbsp;</span><span class=value9>k</span><span class=valuegap>-</span><span class=value9>kggelwr</span><span class=valuegap>------------------------------</span><br><span class=valuedefault>hmgt_mouse&nbsp;&nbsp;&nbsp;</span><span class=value9>k</span><span class=valuegap>-</span><span class=value9>lvneawk</span><span class=valuegap>------------------------------</span><br><span class=valuedefault>hmgl_wheat&nbsp;&nbsp;&nbsp;</span><span class=value9>k</span><span class=valuegap>-</span><span class=value9>aagerwk</span><span class=valuegap>------------------------------</span><br><span class=valuedefault>hmgl_trybr&nbsp;&nbsp;&nbsp;</span><span class=value9>k</span><span class=valuegap>-</span><span class=value9>aagaawk</span><span class=valuegap>------------------------------</span><br><span class=valuedefault>1cms&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>Q</span><span class=valuegap>-</span><span class=value9>NLGKPLSIHYGTGS</span><span class=valuegap>-</span><span class=value9>MQGILGYDTVTVSNIVDIQQTV</span><br><span class=valuedefault>4pep&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>E</span><span class=valuegap>-</span><span class=value9>ATSQELSITYGTGS</span><span class=valuegap>-</span><span class=value9>MTGILGYDTVQVGGISDTNQIF</span><br><span class=valuedefault>4ape&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>KLLSGATWSISYGDGSSSSGDVYTDTVSVGGLTVTGQAV</span><br><span class=valuedefault>3app&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>KELSGYTWSISYGDGSSASGNVFTDSVTVGGVTAHGQAV</span><br><span class=valuedefault>2apr&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>Q</span><span class=valuegap>-</span><span class=value9>ADGRTWSISYGDGSSASGILAKDNVNLGGLLIKGQTI</span><br><span class=valuedefault>1cms_1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------------------------------</span><span class=value9>DILNIQQAI</span><br><span class=valuedefault>1cms&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>FQNLGKPLSIHYGTG</span><span class=valuegap>-</span><span class=value9>SMQGILGYDTVTVSNIVDIQQTV</span><br><span class=valuedefault>4pep&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>FEATSQELSITYGTG</span><span class=valuegap>-</span><span class=value9>SMTGILGYDTVQVGGISDTNQIF</span><br><span class=valuedefault>4ape&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>KLLSGATWSISYGDGSSSSGDVYTDTVSVGGLTVTGQAV</span><br><span class=valuedefault>3app&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>KELSGYTWSISYGDGSSASGNVFTDSVTVGGVTAHGQAV</span><br><span class=valuedefault>2apr&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>YQADGRTWSISYGDGSSASGILAKDNVNLGGLLIKGQTI</span><br><span class=valuedefault>1cms_1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>VGPSSDILNIQQAIG</span><span class=valuegap>-</span><span class=value9>ATQNQYGEFDIDCDNLSYMPTVV</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value6>&nbsp;</span><span class=value8>&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>hmgb_chite&nbsp;&nbsp;&nbsp;</span><span class=value9>glk</span><span class=valuegap>--</span><span class=value9>dksewe</span><span class=valuegap>----------------------------</span><br><span class=valuedefault>hmgt_mouse&nbsp;&nbsp;&nbsp;</span><span class=value9>nlspeekqayi</span><span class=valuegap>----------------------------</span><br><span class=valuedefault>hmgl_wheat&nbsp;&nbsp;&nbsp;</span><span class=value9>slsesekapyv</span><span class=valuegap>----------------------------</span><br><span class=valuedefault>hmgl_trybr&nbsp;&nbsp;&nbsp;</span><span class=value9>elgpeerkvye</span><span class=valuegap>----------------------------</span><br><span class=valuedefault>1cms&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>GLSTQEPGDVFTYAEFD</span><span class=valuegap>--------</span><span class=value8>G</span><span class=value9>ILGMAYPSLASEY</span><br><span class=valuedefault>4pep&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>GLSETEPGSFLYYAPFD</span><span class=valuegap>--------</span><span class=value8>G</span><span class=value9>ILGLAYPSISASG</span><br><span class=valuedefault>4ape&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>ESAKKVSSSFTEDSTID</span><span class=valuegap>--------</span><span class=value8>G</span><span class=value9>LLGLAFSTLNTVS</span><br><span class=valuedefault>3app&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>QAAQQISAQFQQDTNND</span><span class=valuegap>--------</span><span class=value8>G</span><span class=value9>LLGLAFSSINTVQ</span><br><span class=valuedefault>2apr&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>ELAKREAASFAS</span><span class=valuegap>-</span><span class=value9>GPND</span><span class=valuegap>--------</span><span class=value8>G</span><span class=value9>LLGLGFDTITTVR</span><br><span class=valuedefault>1cms_1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>GATQNQYGEFDIDCDNL</span><span class=value8>S</span><span class=value9>YMPTVV</span><span class=value8>FE</span><span class=value9>INGKMYPLTPSAY</span><br><span class=valuedefault>1cms&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>GLSTQEPGDVFTYAEFD</span><span class=valuegap>--------</span><span class=value9>GILGMAYPSLASEY</span><br><span class=valuedefault>4pep&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>GLSETEPGSFLYYAPFD</span><span class=valuegap>--------</span><span class=value9>GILGLAYPSISASG</span><br><span class=valuedefault>4ape&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>ESAKKVSSSFTEDSTID</span><span class=valuegap>--------</span><span class=value9>GLLGLAFSTLNTVS</span><br><span class=valuedefault>3app&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>QAAQQISAQFQQDTNND</span><span class=valuegap>--------</span><span class=value9>GLLGLAFSSINTVQ</span><br><span class=valuedefault>2apr&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>ELAKREAASFASGPN</span><span class=valuegap>-</span><span class=value9>D</span><span class=valuegap>--------</span><span class=value9>GLLGLGFDTITTVR</span><br><span class=valuedefault>1cms_1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>FEINGKMYPLTPSAYTS</span><span class=valuegap>--------</span><span class=value9>QDQGFCTSGFQSEN</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>hmgb_chite&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------------------</span><span class=value9>aka</span><span class=valuegap>--</span><span class=value8>at</span><span class=valuegap>------</span><span class=value9>akqnyira</span><br><span class=valuedefault>hmgt_mouse&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------------------</span><span class=value9>qla</span><span class=valuegap>--</span><span class=value8>kd</span><span class=valuegap>------</span><span class=value9>drirydne</span><br><span class=valuedefault>hmgl_wheat&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------------------</span><span class=value9>aka</span><span class=valuegap>--</span><span class=value8>nk</span><span class=valuegap>------</span><span class=value9>lkgeynka</span><br><span class=valuedefault>hmgl_trybr&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------------------</span><span class=value9>ema</span><span class=valuegap>--</span><span class=value8>ek</span><span class=valuegap>------</span><span class=value9>dkerykre</span><br><span class=valuedefault>1cms&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---</span><span class=value9>SIPV</span><span class=valuegap>--------</span><span class=value8>F</span><span class=valuegap>--</span><span class=value9>DNM</span><span class=value8>MNRH</span><span class=valuegap>----</span><span class=value9>LVAQDLFSVY</span><br><span class=valuedefault>4pep&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---</span><span class=value9>ATPV</span><span class=valuegap>--------</span><span class=value8>F</span><span class=valuegap>--</span><span class=value9>DNL</span><span class=value8>WDQG</span><span class=valuegap>----</span><span class=value9>LVSQDLFSVY</span><br><span class=valuedefault>4ape&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>PTQQKTF</span><span class=valuegap>--------</span><span class=value8>F</span><span class=valuegap>--</span><span class=value9>DNA</span><span class=valuegap>--</span><span class=value8>KA</span><span class=valuegap>----</span><span class=value9>SLDSPVFTAD</span><br><span class=valuedefault>3app&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>PQSQTTF</span><span class=valuegap>--------</span><span class=value8>F</span><span class=valuegap>--</span><span class=value9>DTV</span><span class=valuegap>--</span><span class=value8>KS</span><span class=valuegap>----</span><span class=value9>SLAQPLFAVA</span><br><span class=valuedefault>2apr&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>G</span><span class=valuegap>--</span><span class=value9>VKTP</span><span class=valuegap>--------</span><span class=value8>M</span><span class=valuegap>--</span><span class=value9>DNL</span><span class=value8>ISQG</span><span class=valuegap>----</span><span class=value9>LISRPIFGVY</span><br><span class=valuedefault>1cms_1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---</span><span class=value9>TS</span><span class=valuegap>-</span><span class=value9>Q</span><span class=value8>DQGFCTSGF</span><span class=value9>QSENH</span><span class=value8>SQKWILGD</span><span class=value9>VFIREYYSVF</span><br><span class=valuedefault>1cms&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---</span><span class=value9>SIPVFDNM</span><span class=valuegap>--------------</span><span class=value9>MNRHLVAQDLFSVY</span><br><span class=valuedefault>4pep&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---</span><span class=value9>ATPVFDNL</span><span class=valuegap>--------------</span><span class=value9>WDQGLVSQDLFSVY</span><br><span class=valuedefault>4ape&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>PTQQKTFFDNA</span><span class=valuegap>--------------</span><span class=value9>KAS</span><span class=valuegap>--</span><span class=value9>LDSPVFTAD</span><br><span class=valuedefault>3app&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>PQSQTTFFDTV</span><span class=valuegap>--------------</span><span class=value9>KSS</span><span class=valuegap>--</span><span class=value9>LAQPLFAVA</span><br><span class=valuedefault>2apr&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value9>GVKTPMDNL</span><span class=valuegap>--------------</span><span class=value9>ISQGLISRPIFGVY</span><br><span class=valuedefault>1cms_1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------</span><span class=value9>HSQKW</span><span class=valuegap>--------------</span><span class=value9>ILGDVFIREYYSVF</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>&nbsp;</span><span class=value7>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value4>&nbsp;</span><span class=value5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value7>&nbsp;&nbsp;&nbsp;</span><span class=value8>&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>hmgb_chite&nbsp;&nbsp;&nbsp;</span><span class=value9>l</span><span class=value8>qe</span><span class=value7>yer</span><span class=valuegap>--</span><span class=value8>n</span><span class=value9>g</span><span class=valuegap>-----------</span><span class=value9>g</span><br><span class=valuedefault>hmgt_mouse&nbsp;&nbsp;&nbsp;</span><span class=value9>m</span><span class=value8>ks</span><span class=value7>wee</span><span class=valuegap>--</span><span class=value8>q</span><span class=value9>m</span><span class=valuegap>--</span><span class=value9>a</span><span class=valuegap>--------</span><span class=value9>e</span><br><span class=valuedefault>hmgl_wheat&nbsp;&nbsp;&nbsp;</span><span class=value9>i</span><span class=value8>aa</span><span class=value7>ynk</span><span class=valuegap>--</span><span class=value8>g</span><span class=value9>e</span><span class=valuegap>--</span><span class=value9>s</span><span class=valuegap>--------</span><span class=value9>a</span><br><span class=valuedefault>hmgl_trybr&nbsp;&nbsp;&nbsp;</span><span class=value9>m</span><span class=valuegap>---------------------</span><br><span class=valuedefault>1cms&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>M</span><span class=valuegap>-</span><span class=value8>D</span><span class=value7>RNG</span><span class=valuegap>--</span><span class=value8>Q</span><span class=value9>ESMLTLGAIDPSY</span><br><span class=valuedefault>4pep&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>L</span><span class=valuegap>-</span><span class=value8>S</span><span class=value7>SND</span><span class=value8>D</span><span class=valuegap>-</span><span class=value8>S</span><span class=value9>GSVVLLGGIDSSY</span><br><span class=valuedefault>4ape&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>L</span><span class=valuegap>-</span><span class=value8>G</span><span class=value7>YH</span><span class=valuegap>---</span><span class=value8>A</span><span class=value9>PGTYNFGFIDTTA</span><br><span class=valuedefault>3app&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>L</span><span class=valuegap>-</span><span class=value8>K</span><span class=value7>HQ</span><span class=valuegap>---</span><span class=value8>Q</span><span class=value9>PGVYDFGFIDSSK</span><br><span class=valuedefault>2apr&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>L</span><span class=valuegap>-</span><span class=value8>G</span><span class=value7>KAK</span><span class=value8>NGG</span><span class=value9>GGEYIFGGYDSTK</span><br><span class=valuedefault>1cms_1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>D</span><span class=valuegap>-</span><span class=value8>R</span><span class=value7>ANN</span><span class=valuegap>--</span><span class=value8>L</span><span class=value9>VGLA</span><span class=valuegap>--</span><span class=value9>KAI</span><span class=valuegap>----</span><br><span class=valuedefault>1cms&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>M</span><span class=value8>DR</span><span class=valuegap>-</span><span class=value7>NG</span><span class=value8>QE</span><span class=valuegap>--</span><span class=value9>SMLTLGAIDPSY</span><br><span class=valuedefault>4pep&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>L</span><span class=value8>SS</span><span class=valuegap>-</span><span class=value7>ND</span><span class=value8>DSG</span><span class=valuegap>-</span><span class=value9>SVVLLGGIDSSY</span><br><span class=valuedefault>4ape&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>L</span><span class=value8>GY</span><span class=valuegap>-</span><span class=value7>HA</span><span class=value8>PG</span><span class=valuegap>---</span><span class=value9>TYNFGFIDTTA</span><br><span class=valuedefault>3app&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>L</span><span class=value8>KH</span><span class=valuegap>-</span><span class=value7>QQ</span><span class=value8>PG</span><span class=valuegap>---</span><span class=value9>VYDFGFIDSSK</span><br><span class=valuedefault>2apr&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>L</span><span class=value8>GK</span><span class=valuegap>-</span><span class=value7>AK</span><span class=value8>NGG</span><span class=value9>GGEYIFGGYDSTK</span><br><span class=valuedefault>1cms_1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>D</span><span class=value8>RA</span><span class=valuegap>-</span><span class=value7>NN</span><span class=value8>LVG</span><span class=valuegap>----</span><span class=value9>LAKAI</span><span class=valuegap>----</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>&nbsp;</span><span class=value7>&nbsp;</span><span class=value5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value6>&nbsp;&nbsp;</span><span class=value7>&nbsp;</span><span class=value8>&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><br><br><br></body></html>
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>sample_aln1.aln</name>
+<content>CLUSTAL FORMAT for T-COFFEE Version_11.00 [http://www.tcoffee.org] [MODE:  ], CPU=0.00 sec, SCORE=500, Nseq=10, Len=217 
+
+hmgb_chite      ad---kpkrplsay------m---------------lwlnsaresi------------------krenpdf-kvtevak-kggelwr------------------------------glk--dksewe--------------------------------
+hmgt_mouse      k-----pkrprsay------n---------------iyvsesfqea----------------------kdd-saqgklk-lvneawk------------------------------nlspeekqayi--------------------------------
+hmgl_wheat      dp--nkpkrapsaf------f---------------vfmgefreef------------------kqknpknksvaavgk-aagerwk------------------------------slsesekapyv--------------------------------
+hmgl_trybr      kkdsnapkramtsf------m---------------ffssdfrskh----------------------sdl-sivemsk-aagaawk------------------------------elgpeerkvye--------------------------------
+1cms            GE---VASVPLTNY------LDSQYFGKIYLGTPPQEFTVLFDTGSSDFWVPSIYCKSNACKNHQRFDPRKSS---TFQ-NLGKPLSIHYGTGS-MQGILGYDTVTVSNIVDIQQTVGLSTQEPGDVFTYAEFD--------GILGMAYPSLASEY---S
+4pep            -----IGDEPLENY------LDTEYFGTIGIGTPAQDFTVIFDTGSSNLWVPSVYCSSLACSDHNQFNPDDSS---TFE-ATSQELSITYGTGS-MTGILGYDTVQVGGISDTNQIFGLSETEPGSFLYYAPFD--------GILGLAYPSISASG---A
+4ape            STG-SATTTPIDS-------LDDAYITPVQIGTPAQTLNLDFDTGSSDLWVFSSETTASEVDGQTIYTPSKST---TAKLLSGATWSISYGDGSSSSGDVYTDTVSVGGLTVTGQAVESAKKVSSSFTEDSTID--------GLLGLAFSTLNTVSPTQQ
+3app            AASGVATNTPTA--------NDEEYITPVTIGG--TTLNLNFDTGSADLWVFSTELPASQQSGHSVYNPSA-----TGKELSGYTWSISYGDGSSASGNVFTDSVTVGGVTAHGQAVQAAQQISAQFQQDTNND--------GLLGLAFSSINTVQPQSQ
+2apr            AG---VGTVPMTDYG-----NDIEYYGQVTIGTPGKKFNLDFDTGSSDLWIASTLCTN-CGSGQTKYDPNQSS---TYQ-ADGRTWSISYGDGSSASGILAKDNVNLGGLLIKGQTIELAKREAASFAS-GPND--------GLLGLGFDTITTVRG--V
+1cms_1          YTG-SLHWVPVTVQQYWQFTVDSVTISGVVVACEG-GCQAILDTGTSKLVGPSS------------------------------------------------------DILNIQQAIGATQNQYGEFDIDCDNLSYMPTVVFEINGKMYPLTPSAY---T
+                         .                                                                                                                                                      
+
+hmgb_chite      --------------aka--at------akqnyiralqeyer--ng-----------g
+hmgt_mouse      --------------qla--kd------drirydnemkswee--qm--a--------e
+hmgl_wheat      --------------aka--nk------lkgeynkaiaaynk--ge--s--------a
+hmgl_trybr      --------------ema--ek------dkerykrem---------------------
+1cms            IPV--------F--DNMMNRH----LVAQDLFSVYM-DRNG--QESMLTLGAIDPSY
+4pep            TPV--------F--DNLWDQG----LVSQDLFSVYL-SSNDD-SGSVVLLGGIDSSY
+4ape            KTF--------F--DNA--KA----SLDSPVFTADL-GYH---APGTYNFGFIDTTA
+3app            TTF--------F--DTV--KS----SLAQPLFAVAL-KHQ---QPGVYDFGFIDSSK
+2apr            KTP--------M--DNLISQG----LISRPIFGVYL-GKAKNGGGGEYIFGGYDSTK
+1cms_1          S-QDQGFCTSGFQSENHSQKWILGDVFIREYYSVFD-RANN--LVGLA--KAI----
+                                               :                         
+
+
+
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>sample_aln2.aln</name>
+<content>CLUSTAL W (1.83) multiple sequence alignment
+
+
+1cms            --GEVASVPLTNYLDSQYFGKIYLGTPPQEFTVLFDTGSSDFWVPSIYCKSNACKNHQRF
+4pep            ----IGDEPLENYLDTEYFGTIGIGTPAQDFTVIFDTGSSNLWVPSVYCSSLACSDHNQF
+4ape            -STGSATTTPIDSLDDAYITPVQIGTPAQTLNLDFDTGSSDLWVFSSETTASEVDGQTIY
+3app            AASGVATNTPTAN-DEEYITPVTIG--GTTLNLNFDTGSADLWVFSTELPASQQSGHSVY
+2apr            AGVGTVPMTDYGN-DIEYYGQVTIGTPGKKFNLDFDTGSSDLWIASTLCTNCG-SGQTKY
+1cms_1          -----------------YTGSLHWVPVTVQQYWQFTVDS---VTISGVVVACEGGCQAIL
+                                 *   :            * ..*      *          :   
+
+1cms            DPR-KSSTFQNLGKPLSIHYGTG-SMQGILGYDTVTVSNIVDIQQTVGLSTQEPGDVFTY
+4pep            NPD-DSSTFEATSQELSITYGTG-SMTGILGYDTVQVGGISDTNQIFGLSETEPGSFLYY
+4ape            TPSKSTTAKLLSGATWSISYGDGSSSSGDVYTDTVSVGGLTVTGQAVESAKKVSSSFTED
+3app            NP--SATGKELSGYTWSISYGDGSSASGNVFTDSVTVGGVTAHGQAVQAAQQISAQFQQD
+2apr            DPN-QSSTYQADGRTWSISYGDGSSASGILAKDNVNLGGLLIKGQTIELAKREAASFASG
+1cms_1          DTG-TSKLVGPSSDILNIQQAIG-ATQNQYGEFDIDCDNLSYMPTVVFEINGKMYPLTPS
+                 .   :.     .   .*  . * :  .      :  ..:      .         .   
+
+1cms            AEFDGILGMAYPSLASEY---SIPVFDNMMNRHLVAQDLFSVYMDRNGQE--SMLTLGAI
+4pep            APFDGILGLAYPSISASG---ATPVFDNLWDQGLVSQDLFSVYLSSNDDSG-SVVLLGGI
+4ape            STIDGLLGLAFSTLNTVSPTQQKTFFDNAKAS--LDSPVFTADLGYHAPG---TYNFGFI
+3app            TNNDGLLGLAFSSINTVQPQSQTTFFDTVKSS--LAQPLFAVALKHQQPG---VYDFGFI
+2apr            PN-DGLLGLGFDTITTVR--GVKTPMDNLISQGLISRPIFGVYLGKAKNGGGGEYIFGGY
+1cms_1          AYTSQDQGFCTSGFQSEN------HSQKWILGDVFIREYYSVFDRANNLVG----LAKAI
+                .  .   *:    : :          :.      .    : .                  
+
+1cms            DPSY
+4pep            DSSY
+4ape            DTTA
+3app            DSSK
+2apr            DSTK
+1cms_1          ----
+                    
+</content>
+</file>
+<environement>
+HOME_4_TCOFFEE=/Users/cnotredame/
+MANPATH=/sw/share/man:/usr/share/man:/usr/local/share/man:/opt/X11/share/man:/Library/TeX/texbin/man:/Applications/Xcode.app/Contents/Developer/usr/share/man:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/share/man:/sw/lib/perl5/5.18.2/man
+TERM_PROGRAM=Apple_Terminal
+MCOFFEE_4_TCOFFEE=/Users/cnotredame//.t_coffee//mcoffee/
+ROOT_TMP_4_TCOFFEE=/var/tmp/
+SHELL=/bin/bash
+TERM=xterm-256color
+TMPDIR=/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/
+CONDA_SHLVL=1
+PERL5LIB=/sw/lib/perl5:/sw/lib/perl5/darwin
+Apple_PubSub_Socket_Render=/private/tmp/com.apple.launchd.6JzhyrtuKp/Render
+CONDA_PROMPT_MODIFIER=(base) 
+TERM_PROGRAM_VERSION=388.1.3
+OSNAME=macosx
+PERL_BIN=/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms::/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices
+TERM_SESSION_ID=9785BD0D-F6F1-4B59-B0BA-9937FD12A1E7
+METHODS_4_TCOFFEE=/Users/cnotredame//.t_coffee//methods/
+VERSIONER_PERL_VERSION=5.18
+XAPPLRESDIR=/sw/etc/app-defaults/
+http_proxy=
+HTTP_proxy=
+USER=cnotredame
+CONDA_EXE=/Users/cnotredame/anaconda3/bin/conda
+SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.U5mTe2o7m7/Listeners
+__CF_USER_TEXT_ENCODING=0x1F6:0x0:0x0
+ENV_4_TCOFFEE=/Users/cnotredame//.t_coffee//.t_coffee_env
+_CE_CONDA=
+all_proxy=
+ALL_PROXY=
+HTTP_proxy_4_TCOFFEE=
+PATH=/Users/cnotredame//.t_coffee//plugins/macosx/:/Users/cnotredame/anaconda3/bin:/Users/cnotredame/anaconda3/condabin:/opt/local/bin:/opt/local/sbin:/opt/local/bin:/opt/local/sbin:/Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/packages/x3dna-v2.1/bin:/Users/cnotredame/bin/macosx://Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms:.:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices:/Users/cnotredame/bin/Scripts:/Users/cnotredame/Library/Haskell/ghc-7.4.2/lib/epub-tools-2.0.0/bin:/sw/bin:/sw/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/Library/TeX/texbin
+_=/usr/bin/printenv
+CONDA_PREFIX=/Users/cnotredame/anaconda3
+COLOR_4_TCOFFEE=new
+DIR_4_TCOFFEE=/Users/cnotredame//.t_coffee/
+PWD=/private/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/RANDOMSTRINGPDA2oq1EDu9vwYfAUYg8/data
+CACHE_4_TCOFFEE=/Users/cnotredame//.t_coffee//cache/
+X3DNA=/Users/cnotredame/Dropbox/packages/x3dna-v2.1
+DBUS_LAUNCHD_SESSION_BUS_SOCKET=/private/tmp/com.apple.launchd.DfqaaC2z17/unix_domain_listener
+XPC_FLAGS=0x0
+VERSIONER_PERL_PREFER_32_BIT=no
+_CE_M=
+XPC_SERVICE_NAME=0
+ERRORFILE_4_TCOFFEE=NO
+PLUGINS_4_TCOFFEE=/Users/cnotredame//.t_coffee//plugins/macosx/
+SHLVL=3
+HOME=/Users/cnotredame
+DUMP_4_TCOFFEE=/private/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/RANDOMSTRINGPDA2oq1EDu9vwYfAUYg8/tcoffee_faq.rst.30.dump
+HTTP_PROXY=
+MAFFT_BINARIES=
+CONDA_PYTHON_EXE=/Users/cnotredame/anaconda3/bin/python
+BIN=/Users/cnotredame/bin/macosx
+LOGNAME=cnotredame
+EMAIL_4_TCOFFEE=cedric.notredame@gmail.com
+LC_CTYPE=UTF-8
+CONDA_DEFAULT_ENV=base
+EMAIL=cedric.notredame@gmail.com
+UPDATED_ENV_4_TCOFFEE=1
+INFOPATH=/sw/share/info:/sw/info:/usr/share/info
+DISPLAY=/private/tmp/com.apple.launchd.vef8UzGxBY/org.macosforge.xquartz:0
+TC_MASTER_NODE=1
+NUMBER_OF_PROCESSORS=8
+ALL_proxy=
+LOCKDIR_4_TCOFFEE=/var/tmp/tco/tcomdmzu1wk87999//lck/jev_h_xvgo/
+TMP_4_TCOFFEE=/var/tmp/tco/tcomdmzu1wk87999/
+USER_BIN=/Users/cnotredame/bin/macosx
+SCRIPT_BIN=/Users/cnotredame/bin/Scripts/
+</environement>
+<DumpStatus>OK</DumpStatus>
+<DumpFile>/private/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/RANDOMSTRINGPDA2oq1EDu9vwYfAUYg8/tcoffee_faq.rst.30.dump</DumpFile>
+<SourceFile>tcoffee_faq.rst</SourceFile>
+<SourceLine>348</SourceLine>
+</DumpIO>

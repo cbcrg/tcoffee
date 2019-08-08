@@ -1,0 +1,404 @@
+<DumpIO>
+<nature>standard dump</nature>
+<program>T-COFFEE</program>
+<version>Version_13.39.0.d675aed</version>
+<build>Version_13.39.0.d675aed</build>
+<cl>t_coffee </cl>
+<stack>
+</stack>
+<warning>
+</warning>
+<file>
+<stream>output</stream>
+<name>stdout</name>
+<content>
+#######   Compiling the list of available methods ... (will take a few seconds)
+
+#######   Methods For which an Interface is available in T-Coffee
+You must install the packages yourself when required (use the provided address)
+Contact us if you need an extra method to be added [cedric.notredame@gmail.com]
+
+****** Pairwise Sequence Alignment Methods:
+--------------------------------------------
+test_pair            built_in                                                   [pg:        t_coffee is  Installed][built_in]
+fast_pair            built_in                                                   [pg:        t_coffee is  Installed][built_in]
+exon3_pair           built_in                                                   [pg:        t_coffee is  Installed][built_in]
+exon2_pair           built_in                                                   [pg:        t_coffee is  Installed][built_in]
+exon_pair            built_in                                                   [pg:        t_coffee is  Installed][built_in]
+blastr_pair          built_in                                                   [pg:        t_coffee is  Installed][built_in]
+promo_pair           built_in                                                   [pg:        t_coffee is  Installed][built_in]
+clean_slow_pair      built_in                                                   [pg:        t_coffee is  Installed][built_in]
+slow_pair            built_in                                                   [pg:        t_coffee is  Installed][built_in]
+hash_pair            built_in                                                   [pg:        t_coffee is  Installed][built_in]
+biphasic_pair        built_in                                                   [pg:        t_coffee is  Installed][built_in]
+proba_prfpair        built_in                                                   [pg:        t_coffee is  Installed][built_in]
+proba_pair           built_in                                                   [pg:        t_coffee is  Installed][built_in]
+best_pair4prot       built_in                                                   [pg:        t_coffee is  Installed][built_in]
+best_pair4rna        built_in                                                   [pg:        t_coffee is  Installed][built_in]
+lalign_id_pair       built_in                                                   [pg:        t_coffee is  Installed][built_in]
+seq_pair             built_in                                                   [pg:        t_coffee is  Installed][built_in]
+externprofile_pair   built_in                                                   [pg:        t_coffee is  Installed][built_in]
+hh_pair              built_in                                                   [pg:        t_coffee is  Installed][built_in]
+co_pair              built_in                                                   [pg:        t_coffee is  Installed][built_in]
+cwprofile_pair       built_in                                                   [pg:        t_coffee is  Installed][built_in]
+cdna_fast_pair       built_in                                                   [pg:        t_coffee is  Installed][built_in]
+cdna_cfast_pair      built_in                                                   [pg:        t_coffee is  Installed][built_in]
+clustalo_pair        http://www.clustal.org/omega/                              [pg:        clustalo is  Installed][/Users/cnotredame//.t_coffee//plugins/macosx//clustalo]
+clustaloNF_pair      http://www.clustal.org/omega/                              [pg:        clustalo is  Installed][/Users/cnotredame//.t_coffee//plugins/macosx//clustalo]
+clustalw2_pair       http://www.clustal.org                                     [pg:       clustalw2 is  Installed][/Users/cnotredame//.t_coffee//plugins/macosx//clustalw2]
+clustalw_pair        http://www.clustal.org                                     [pg:        clustalw is  Installed][/Users/cnotredame//.t_coffee//plugins/macosx//clustalw]
+uppNF_pair           http://www.cs.utexas.edu/users/phylo/software/upp/         [pg:             upp is NOT Installed][]
+upp_pair             http://www.cs.utexas.edu/users/phylo/software/upp/         [pg:             upp is NOT Installed][]
+msa_pair             https://www.ncbi.nlm.nih.gov/CBBresearch/Schaffer/msa.html [pg:             msa is  Installed][/Users/cnotredame/bin/macosx/msa]
+dca_pair             https://bibiserv2.cebitec.uni-bielefeld.de/dca             [pg:             dca is  Installed][/Users/cnotredame/bin/macosx/dca]
+mafftsparsecore_pair http://align.bmr.kyushu-u.ac.jp/mafft/online/server/       [pg:           mafft is  Installed][/Users/cnotredame//.t_coffee//plugins/macosx//mafft]
+maffttest_pair       http://align.bmr.kyushu-u.ac.jp/mafft/online/server/       [pg:           mafft is  Installed][/Users/cnotredame//.t_coffee//plugins/macosx//mafft]
+mafft_pair           http://align.bmr.kyushu-u.ac.jp/mafft/online/server/       [pg:           mafft is  Installed][/Users/cnotredame//.t_coffee//plugins/macosx//mafft]
+mafftparttree1_pair  http://align.bmr.kyushu-u.ac.jp/mafft/online/server/       [pg:           mafft is  Installed][/Users/cnotredame//.t_coffee//plugins/macosx//mafft]
+mafftparttree_pair   http://align.bmr.kyushu-u.ac.jp/mafft/online/server/       [pg:           mafft is  Installed][/Users/cnotredame//.t_coffee//plugins/macosx//mafft]
+mafftlinsi_pair      http://align.bmr.kyushu-u.ac.jp/mafft/online/server/       [pg:           mafft is  Installed][/Users/cnotredame//.t_coffee//plugins/macosx//mafft]
+mafftginsi_pair      http://align.bmr.kyushu-u.ac.jp/mafft/online/server/       [pg:           mafft is  Installed][/Users/cnotredame//.t_coffee//plugins/macosx//mafft]
+maffteinsi_pair      http://align.bmr.kyushu-u.ac.jp/mafft/online/server/       [pg:           mafft is  Installed][/Users/cnotredame//.t_coffee//plugins/macosx//mafft]
+mafftfftnsi_pair     http://align.bmr.kyushu-u.ac.jp/mafft/online/server/       [pg:           mafft is  Installed][/Users/cnotredame//.t_coffee//plugins/macosx//mafft]
+mafftfftns1_pair     http://align.bmr.kyushu-u.ac.jp/mafft/online/server/       [pg:           mafft is  Installed][/Users/cnotredame//.t_coffee//plugins/macosx//mafft]
+mafftfftns_pair      http://align.bmr.kyushu-u.ac.jp/mafft/online/server/       [pg:           mafft is  Installed][/Users/cnotredame//.t_coffee//plugins/macosx//mafft]
+mafftnwns_pair       http://align.bmr.kyushu-u.ac.jp/mafft/online/server/       [pg:           mafft is  Installed][/Users/cnotredame//.t_coffee//plugins/macosx//mafft]
+mafftnwnsi_pair      http://align.bmr.kyushu-u.ac.jp/mafft/online/server/       [pg:           mafft is  Installed][/Users/cnotredame//.t_coffee//plugins/macosx//mafft]
+mafftjtt_pair        http://align.bmr.kyushu-u.ac.jp/mafft/online/server/       [pg:           mafft is  Installed][/Users/cnotredame//.t_coffee//plugins/macosx//mafft]
+mafftgins_pair       http://align.bmr.kyushu-u.ac.jp/mafft/online/server/       [pg:           mafft is  Installed][/Users/cnotredame//.t_coffee//plugins/macosx//mafft]
+dialigntx_pair       http://dialign-tx.gobics.de/                               [pg:      dialign-tx is  Installed][/Users/cnotredame//.t_coffee//plugins/macosx//dialign-tx]
+dialignt_pair        http://dialign-tx.gobics.de/                               [pg:       dialign-t is  Installed][/Users/cnotredame//.t_coffee//plugins/macosx//dialign-t]
+poa_pair             http://www.bioinformatics.ucla.edu/poa/                    [pg:             poa is  Installed][/Users/cnotredame//.t_coffee//plugins/macosx//poa]
+msaprobs_pair        http://msaprobs.sourceforge.net/homepage.htm#latest        [pg:        msaprobs is  Installed][/Users/cnotredame/bin/macosx/msaprobs]
+probcons_pair        http://probcons.stanford.edu/                              [pg:        probcons is  Installed][/Users/cnotredame//.t_coffee//plugins/macosx//probcons]
+probconsRNA_pair     http://probcons.stanford.edu/                              [pg:     probconsRNA is  Installed][/Users/cnotredame//.t_coffee//plugins/macosx//probconsRNA]
+muscle_pair          http://www.drive5.com/muscle/                              [pg:          muscle is  Installed][/Users/cnotredame//.t_coffee//plugins/macosx//muscle]
+mus4_pair            http://www.drive5.com/muscle/                              [pg:            mus4 is  Installed][/Users/cnotredame/bin/macosx/mus4]
+t_coffee_pair        http://www.tcoffee.org                                     [pg:        t_coffee is  Installed][/Users/cnotredame/bin/macosx/t_coffee]
+pcma_pair            http://prodata.swmed.edu/pcma/pcma.php                     [pg:            pcma is  Installed][/Users/cnotredame//.t_coffee//plugins/macosx//pcma]
+kalign_pair          http://msa.cgb.ki.se                                       [pg:          kalign is  Installed][/Users/cnotredame//.t_coffee//plugins/macosx//kalign]
+amap_pair            http://bio.math.berkeley.edu/amap/                         [pg:            amap is NOT Installed][]
+proda_pair           http://proda.stanford.edu                                  [pg:           proda is  Installed][/Users/cnotredame//.t_coffee//plugins/macosx//proda]
+prank_pair           http://www.ebi.ac.uk/goldman-srv/prank/                    [pg:           prank is  Installed][/Users/cnotredame//.t_coffee//plugins/macosx//prank]
+fsa_pair             http://fsa.sourceforge.net/                                [pg:             fsa is  Installed][/Users/cnotredame/bin/macosx/fsa]
+consan_pair          http://selab.janelia.org/software/consan/                  [pg:           sfold is NOT Installed][]
+
+****** Pairwise Structural Alignment Methods:
+--------------------------------------------
+align_pdbpair        built_in                                                   [pg:        t_coffee is  Installed][built_in]
+lalign_pdbpair       built_in                                                   [pg:        t_coffee is  Installed][built_in]
+extern_pdbpair       built_in                                                   [pg:        t_coffee is  Installed][built_in]
+thread_pair          built_in                                                   [pg:        t_coffee is  Installed][built_in]
+fugue_pair           http://mizuguchilab.org/fugue/                             [pg:        fugueali is NOT Installed][]
+pdb_pair             built_in                                                   [pg:        t_coffee is  Installed][built_in]
+sap_pair             https://mathbio.crick.ac.uk/wiki/Software#SAP              [pg:             sap is  Installed][/Users/cnotredame//.t_coffee//plugins/macosx//sap]
+sara_pair            built_in                                                   [pg:        t_coffee is  Installed][built_in]
+daliweb_pair         built_in                                                   [pg:     dalilite.pl is  Installed][built_in]
+dali_pair            built_in                                                   [pg:     dalilite.pl is  Installed][built_in]
+mustang_pair         http://lcb.infotech.monash.edu.au/mustang/                 [pg:         mustang is  Installed][/Users/cnotredame//.t_coffee//plugins/macosx//mustang]
+TMalign_pair         http://zhanglab.ccmb.med.umich.edu/TM-align/TMalign.f      [pg:         TMalign is  Installed][/Users/cnotredame//.t_coffee//plugins/macosx//TMalign]
+
+****** Multiple Sequence Alignment Methods:
+--------------------------------------------
+ktup_msa             built_in                                                   [pg:        t_coffee is  Installed][built_in]
+blastp_msa           ftp://ftp.ncbi.nih.gov/blast/executables/LATEST            [pg: legacy_blast.pl is NOT Installed][]
+clustalo_msa         http://www.clustal.org/omega/                              [pg:        clustalo is  Installed][/Users/cnotredame//.t_coffee//plugins/macosx//clustalo]
+clustaloNF_msa       http://www.clustal.org/omega/                              [pg:        clustalo is  Installed][/Users/cnotredame//.t_coffee//plugins/macosx//clustalo]
+clustalw2_msa        http://www.clustal.org                                     [pg:       clustalw2 is  Installed][/Users/cnotredame//.t_coffee//plugins/macosx//clustalw2]
+clustalw_msa         http://www.clustal.org                                     [pg:        clustalw is  Installed][/Users/cnotredame//.t_coffee//plugins/macosx//clustalw]
+uppNF_msa            http://www.cs.utexas.edu/users/phylo/software/upp/         [pg:             upp is NOT Installed][]
+upp_msa              http://www.cs.utexas.edu/users/phylo/software/upp/         [pg:             upp is NOT Installed][]
+msa_msa              https://www.ncbi.nlm.nih.gov/CBBresearch/Schaffer/msa.html [pg:             msa is  Installed][/Users/cnotredame/bin/macosx/msa]
+dca_msa              https://bibiserv2.cebitec.uni-bielefeld.de/dca             [pg:             dca is  Installed][/Users/cnotredame/bin/macosx/dca]
+mafftsparsecore_msa  http://align.bmr.kyushu-u.ac.jp/mafft/online/server/       [pg:           mafft is  Installed][/Users/cnotredame//.t_coffee//plugins/macosx//mafft]
+maffttest_msa        http://align.bmr.kyushu-u.ac.jp/mafft/online/server/       [pg:           mafft is  Installed][/Users/cnotredame//.t_coffee//plugins/macosx//mafft]
+mafft_msa            http://align.bmr.kyushu-u.ac.jp/mafft/online/server/       [pg:           mafft is  Installed][/Users/cnotredame//.t_coffee//plugins/macosx//mafft]
+mafftparttree1_msa   http://align.bmr.kyushu-u.ac.jp/mafft/online/server/       [pg:           mafft is  Installed][/Users/cnotredame//.t_coffee//plugins/macosx//mafft]
+mafftparttree_msa    http://align.bmr.kyushu-u.ac.jp/mafft/online/server/       [pg:           mafft is  Installed][/Users/cnotredame//.t_coffee//plugins/macosx//mafft]
+mafftlinsi_msa       http://align.bmr.kyushu-u.ac.jp/mafft/online/server/       [pg:           mafft is  Installed][/Users/cnotredame//.t_coffee//plugins/macosx//mafft]
+mafftginsi_msa       http://align.bmr.kyushu-u.ac.jp/mafft/online/server/       [pg:           mafft is  Installed][/Users/cnotredame//.t_coffee//plugins/macosx//mafft]
+maffteinsi_msa       http://align.bmr.kyushu-u.ac.jp/mafft/online/server/       [pg:           mafft is  Installed][/Users/cnotredame//.t_coffee//plugins/macosx//mafft]
+mafftfftnsi_msa      http://align.bmr.kyushu-u.ac.jp/mafft/online/server/       [pg:           mafft is  Installed][/Users/cnotredame//.t_coffee//plugins/macosx//mafft]
+mafftfftns1_msa      http://align.bmr.kyushu-u.ac.jp/mafft/online/server/       [pg:           mafft is  Installed][/Users/cnotredame//.t_coffee//plugins/macosx//mafft]
+mafftfftns_msa       http://align.bmr.kyushu-u.ac.jp/mafft/online/server/       [pg:           mafft is  Installed][/Users/cnotredame//.t_coffee//plugins/macosx//mafft]
+mafftnwns_msa        http://align.bmr.kyushu-u.ac.jp/mafft/online/server/       [pg:           mafft is  Installed][/Users/cnotredame//.t_coffee//plugins/macosx//mafft]
+mafftnwnsi_msa       http://align.bmr.kyushu-u.ac.jp/mafft/online/server/       [pg:           mafft is  Installed][/Users/cnotredame//.t_coffee//plugins/macosx//mafft]
+mafftjtt_msa         http://align.bmr.kyushu-u.ac.jp/mafft/online/server/       [pg:           mafft is  Installed][/Users/cnotredame//.t_coffee//plugins/macosx//mafft]
+mafftgins_msa        http://align.bmr.kyushu-u.ac.jp/mafft/online/server/       [pg:           mafft is  Installed][/Users/cnotredame//.t_coffee//plugins/macosx//mafft]
+dialigntx_msa        http://dialign-tx.gobics.de/                               [pg:      dialign-tx is  Installed][/Users/cnotredame//.t_coffee//plugins/macosx//dialign-tx]
+dialignt_msa         http://dialign-tx.gobics.de/                               [pg:       dialign-t is  Installed][/Users/cnotredame//.t_coffee//plugins/macosx//dialign-t]
+poa_msa              http://www.bioinformatics.ucla.edu/poa/                    [pg:             poa is  Installed][/Users/cnotredame//.t_coffee//plugins/macosx//poa]
+msaprobs_msa         http://msaprobs.sourceforge.net/homepage.htm#latest        [pg:        msaprobs is  Installed][/Users/cnotredame/bin/macosx/msaprobs]
+probcons_msa         http://probcons.stanford.edu/                              [pg:        probcons is  Installed][/Users/cnotredame//.t_coffee//plugins/macosx//probcons]
+probconsRNA_msa      http://probcons.stanford.edu/                              [pg:     probconsRNA is  Installed][/Users/cnotredame//.t_coffee//plugins/macosx//probconsRNA]
+muscle_msa           http://www.drive5.com/muscle/                              [pg:          muscle is  Installed][/Users/cnotredame//.t_coffee//plugins/macosx//muscle]
+mus4_msa             http://www.drive5.com/muscle/                              [pg:            mus4 is  Installed][/Users/cnotredame/bin/macosx/mus4]
+t_coffee_msa         http://www.tcoffee.org                                     [pg:        t_coffee is  Installed][/Users/cnotredame/bin/macosx/t_coffee]
+pcma_msa             http://prodata.swmed.edu/pcma/pcma.php                     [pg:            pcma is  Installed][/Users/cnotredame//.t_coffee//plugins/macosx//pcma]
+kalign_msa           http://msa.cgb.ki.se                                       [pg:          kalign is  Installed][/Users/cnotredame//.t_coffee//plugins/macosx//kalign]
+amap_msa             http://bio.math.berkeley.edu/amap/                         [pg:            amap is NOT Installed][]
+proda_msa            http://proda.stanford.edu                                  [pg:           proda is  Installed][/Users/cnotredame//.t_coffee//plugins/macosx//proda]
+fsa_msa              http://fsa.sourceforge.net/                                [pg:             fsa is  Installed][/Users/cnotredame/bin/macosx/fsa]
+tblastx_msa          ftp://ftp.ncbi.nih.gov/blast/executables/LATEST            [pg: legacy_blast.pl is NOT Installed][]
+tblastpx_msa         ftp://ftp.ncbi.nih.gov/blast/executables/LATEST            [pg: legacy_blast.pl is NOT Installed][]
+plib_msa             www.tcoffee.org                                            [pg:        t_coffee is  Installed][/Users/cnotredame/bin/macosx/t_coffee]
+
+#######   Prediction Methods available to generate Templates
+-------------------------------------------------------------
+RNAplfold            http://www.tbi.univie.ac.at/RNA/                           [pg:       RNAplfold is  Installed][/Users/cnotredame//.t_coffee//plugins/macosx//RNAplfold]
+HMMtop               www.enzim.hu/hmmtop/                                       [pg:          hmmtop is  Installed][/Users/cnotredame/bin/macosx/hmmtop]
+GOR4                 http://mig.jouy.inra.fr/logiciels/gorIV/                   [pg:           gorIV is  Installed][/Users/cnotredame/bin/macosx/gorIV]
+wublast_client       built_in                                                   [pg:      wublast.pl is  Installed][built_in]
+blastpgp_client      built_in                                                   [pg:     blastpgp.pl is  Installed][built_in]
+local_ncbiblast      ftp://ftp.ncbi.nih.gov/blast/executables/LATEST            [pg: legacy_blast.pl is NOT Installed][]
+
+
+
+All these Methods are supported by T-Coffee, but you HAVE to install them yourself [use the provided address]
+
+
+These methods were selected because they are freeware opensource, easy to install and well supported
+Contact us if you need an extra method to be added [cedric.notredame@gmail.com]
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>stderr</name>
+<content>
+PROGRAM: T-COFFEE Version_13.39.0.d675aed (Version_13.39.0.d675aed)
+-full_log      	S	[0] 
+-genepred_score	S	[0] 	nsd
+-run_name      	S	[0] 
+-mem_mode      	S	[0] 	mem
+-extend        	D	[1] 	1 
+-extend_mode   	S	[0] 	very_fast_triplet
+-max_n_pair    	D	[0] 	10 
+-seq_name_for_quadruplet	S	[0] 	all
+-compact       	S	[0] 	default
+-clean         	S	[0] 	no
+-do_self       	FL	[0] 	0
+-do_normalise  	D	[0] 	1000 
+-template_file 	S	[0] 
+-setenv        	S	[0] 	0
+-export        	S	[0] 	0
+-template_mode 	S	[0] 
+-flip          	D	[0] 	0 
+-remove_template_file	D	[0] 	0 
+-profile_template_file	S	[0] 
+-in            	S	[0] 
+-seq           	S	[0] 
+-aln           	S	[0] 
+-method_limits 	S	[0] 
+-method        	S	[0] 
+-lib           	S	[0] 
+-profile       	S	[0] 
+-profile1      	S	[0] 
+-profile2      	S	[0] 
+-pdb           	S	[0] 
+-relax_lib     	D	[0] 	1 
+-filter_lib    	D	[0] 	0 
+-shrink_lib    	D	[0] 	0 
+-out_lib       	W_F	[0] 	no
+-out_lib_mode  	S	[0] 	primary
+-lib_only      	D	[0] 	0 
+-outseqweight  	W_F	[0] 	no
+-seq_source    	S	[0] 	ANY
+-cosmetic_penalty	D	[0] 	0 
+-gapopen       	D	[0] 	0 
+-gapext        	D	[0] 	0 
+-fgapopen      	D	[0] 	0 
+-fgapext       	D	[0] 	0 
+-nomatch       	D	[0] 	0 
+-newtree       	W_F	[0] 	default
+-tree          	W_F	[0] 	NO
+-usetree       	R_F	[0] 
+-tree_mode     	S	[0] 	nj
+-distance_matrix_mode	S	[0] 	ktup
+-distance_matrix_sim_mode	S	[0] 	idmat_sim1
+-quicktree     	FL	[0] 	0
+-outfile       	W_F	[0] 	default
+-maximise      	FL	[1] 	1
+-output        	S	[0] 	aln	html
+-len           	D	[0] 	0 
+-infile        	R_F	[0] 
+-matrix        	S	[0] 	default
+-tg_mode       	D	[0] 	1 
+-profile_mode  	S	[0] 	cw_profile_profile
+-profile_comparison	S	[0] 	profile
+-dp_mode       	S	[0] 	linked_pair_wise
+-ktuple        	D	[0] 	1 
+-ndiag         	D	[0] 	0 
+-diag_threshold	D	[0] 	0 
+-diag_mode     	D	[0] 	0 
+-sim_matrix    	S	[0] 	vasiliky
+-transform     	S	[0] 
+-extend_seq    	FL	[0] 	0
+-outorder      	S	[0] 	input
+-inorder       	S	[0] 	aligned
+-seqnos        	S	[0] 	off
+-case          	S	[0] 	keep
+-cpu           	D	[0] 	0 
+-ulimit        	D	[0] 	-1 
+-maxnseq       	D	[0] 	-1 
+-maxlen        	D	[0] 	-1 
+-sample_dp     	D	[0] 	0 
+-weight        	S	[0] 	default
+-seq_weight    	S	[0] 	no
+-align         	FL	[1] 	1
+-mocca         	FL	[0] 	0
+-domain        	FL	[0] 	0
+-start         	D	[0] 	0 
+-len           	D	[0] 	0 
+-scale         	D	[0] 	0 
+-mocca_interactive	FL	[0] 	0
+-method_evaluate_mode	S	[0] 	default
+-color_mode    	S	[0] 	new
+-aln_line_length	D	[0] 	0 
+-evaluate_mode 	S	[0] 	triplet
+-get_type      	FL	[0] 	0
+-clean_aln     	D	[0] 	0 
+-clean_threshold	D	[1] 	1 
+-clean_iteration	D	[1] 	1 
+-clean_evaluate_mode	S	[0] 	t_coffee_fast
+-extend_matrix 	FL	[0] 	0
+-prot_min_sim  	D	[40] 	40 
+-prot_max_sim  	D	[90] 	90 
+-prot_trim     	D	[20] 	20 
+-prot_min_cov  	D	[40] 	40 
+-pdb_type      	S	[0] 	d
+-pdb_min_sim   	D	[35] 	35 
+-pdb_max_sim   	D	[100] 	100 
+-pdb_min_cov   	D	[50] 	50 
+-pdb_blast_server	W_F	[0] 	EBI
+-blast         	W_F	[0] 
+-blast_server  	W_F	[0] 	EBI
+-pdb_db        	W_F	[0] 	pdb
+-protein_db    	W_F	[0] 	uniref50
+-method_log    	W_F	[0] 	no
+-struc_to_use  	S	[0] 
+-cache         	W_F	[0] 	use
+-print_cache   	FL	[0] 	0
+-align_pdb_param_file	W_F	[0] 	no
+-align_pdb_hasch_mode	W_F	[0] 	hasch_ca_trace_bubble
+-external_aligner	S	[0] 	NO
+-msa_mode      	S	[0] 	tree
+-et_mode       	S	[0] 	et
+-master        	S	[0] 	no
+-blast_nseq    	D	[0] 	0 
+-lalign_n_top  	D	[0] 	10 
+-iterate       	D	[0] 	0 
+-trim          	D	[0] 	0 
+-split         	D	[0] 	0 
+-trimfile      	S	[0] 	default
+-split         	D	[0] 	0 
+-split_nseq_thres	D	[0] 	0 
+-split_score_thres	D	[0] 	0 
+-check_pdb_status	D	[0] 	0 
+-clean_seq_name	D	[0] 	0 
+-seq_to_keep   	S	[0] 
+-dpa_master_aln	S	[0] 
+-dpa_maxnseq   	D	[0] 	0 
+-dpa_min_score1	D	[0] 
+-dpa_min_score2	D	[0] 
+-dpa_keep_tmpfile	FL	[0] 	0
+-dpa_debug     	D	[0] 	0 
+-multi_core    	S	[0] 	templates_jobs_relax_msa_evaluate
+-n_core        	D	[0] 	1 
+-thread        	D	[0] 	1 
+-max_n_proc    	D	[0] 	0 
+-lib_list      	S	[0] 
+-prune_lib_mode	S	[0] 	5
+-tip           	S	[0] 	none
+-rna_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+</content>
+</file>
+<environement>
+HOME_4_TCOFFEE=/Users/cnotredame/
+MANPATH=/sw/share/man:/usr/share/man:/usr/local/share/man:/opt/X11/share/man:/Library/TeX/texbin/man:/Applications/Xcode.app/Contents/Developer/usr/share/man:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/share/man:/sw/lib/perl5/5.18.2/man
+TERM_PROGRAM=Apple_Terminal
+MCOFFEE_4_TCOFFEE=/Users/cnotredame//.t_coffee//mcoffee/
+ROOT_TMP_4_TCOFFEE=/var/tmp/
+SHELL=/bin/bash
+TERM=xterm-256color
+TMPDIR=/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/
+CONDA_SHLVL=1
+PERL5LIB=/sw/lib/perl5:/sw/lib/perl5/darwin
+Apple_PubSub_Socket_Render=/private/tmp/com.apple.launchd.6JzhyrtuKp/Render
+CONDA_PROMPT_MODIFIER=(base) 
+TERM_PROGRAM_VERSION=388.1.3
+OSNAME=macosx
+PERL_BIN=/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms::/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices
+TERM_SESSION_ID=9785BD0D-F6F1-4B59-B0BA-9937FD12A1E7
+METHODS_4_TCOFFEE=/Users/cnotredame//.t_coffee//methods/
+VERSIONER_PERL_VERSION=5.18
+XAPPLRESDIR=/sw/etc/app-defaults/
+http_proxy=
+HTTP_proxy=
+USER=cnotredame
+CONDA_EXE=/Users/cnotredame/anaconda3/bin/conda
+SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.U5mTe2o7m7/Listeners
+__CF_USER_TEXT_ENCODING=0x1F6:0x0:0x0
+ENV_4_TCOFFEE=/Users/cnotredame//.t_coffee//.t_coffee_env
+_CE_CONDA=
+all_proxy=
+ALL_PROXY=
+HTTP_proxy_4_TCOFFEE=
+PATH=/Users/cnotredame//.t_coffee//plugins/macosx/:/Users/cnotredame/anaconda3/bin:/Users/cnotredame/anaconda3/condabin:/opt/local/bin:/opt/local/sbin:/opt/local/bin:/opt/local/sbin:/Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/packages/x3dna-v2.1/bin:/Users/cnotredame/bin/macosx://Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms:.:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices:/Users/cnotredame/bin/Scripts:/Users/cnotredame/Library/Haskell/ghc-7.4.2/lib/epub-tools-2.0.0/bin:/sw/bin:/sw/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/Library/TeX/texbin
+_=/usr/bin/printenv
+CONDA_PREFIX=/Users/cnotredame/anaconda3
+COLOR_4_TCOFFEE=new
+DIR_4_TCOFFEE=/Users/cnotredame//.t_coffee/
+PWD=/private/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/RANDOMSTRING842cd8DXTT0aXmAPVG7l/data
+CACHE_4_TCOFFEE=/Users/cnotredame//.t_coffee//cache/
+X3DNA=/Users/cnotredame/Dropbox/packages/x3dna-v2.1
+DBUS_LAUNCHD_SESSION_BUS_SOCKET=/private/tmp/com.apple.launchd.DfqaaC2z17/unix_domain_listener
+XPC_FLAGS=0x0
+VERSIONER_PERL_PREFER_32_BIT=no
+_CE_M=
+XPC_SERVICE_NAME=0
+ERRORFILE_4_TCOFFEE=NO
+PLUGINS_4_TCOFFEE=/Users/cnotredame//.t_coffee//plugins/macosx/
+SHLVL=3
+HOME=/Users/cnotredame
+DUMP_4_TCOFFEE=/private/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/RANDOMSTRING842cd8DXTT0aXmAPVG7l/tcoffee_installation.rst.2.dump
+HTTP_PROXY=
+MAFFT_BINARIES=
+CONDA_PYTHON_EXE=/Users/cnotredame/anaconda3/bin/python
+BIN=/Users/cnotredame/bin/macosx
+LOGNAME=cnotredame
+EMAIL_4_TCOFFEE=cedric.notredame@gmail.com
+LC_CTYPE=UTF-8
+CONDA_DEFAULT_ENV=base
+EMAIL=cedric.notredame@gmail.com
+UPDATED_ENV_4_TCOFFEE=1
+INFOPATH=/sw/share/info:/sw/info:/usr/share/info
+DISPLAY=/private/tmp/com.apple.launchd.vef8UzGxBY/org.macosforge.xquartz:0
+TC_MASTER_NODE=1
+NUMBER_OF_PROCESSORS=8
+ALL_proxy=
+LOCKDIR_4_TCOFFEE=/var/tmp/tco/tcob53qq9yh67471//lck/41epz8gopi/
+TMP_4_TCOFFEE=/var/tmp/tco/tcob53qq9yh67471/
+USER_BIN=/Users/cnotredame/bin/macosx
+SCRIPT_BIN=/Users/cnotredame/bin/Scripts/
+</environement>
+<DumpStatus>OK</DumpStatus>
+<DumpFile>/private/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/RANDOMSTRING842cd8DXTT0aXmAPVG7l/tcoffee_installation.rst.2.dump</DumpFile>
+<SourceFile>tcoffee_installation.rst</SourceFile>
+<SourceLine>193</SourceLine>
+</DumpIO>

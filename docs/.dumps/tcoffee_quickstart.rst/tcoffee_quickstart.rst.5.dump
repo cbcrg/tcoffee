@@ -1,0 +1,1354 @@
+<DumpIO>
+<nature>standard dump</nature>
+<program>T-COFFEE</program>
+<version>Version_13.39.0.d675aed</version>
+<build>Version_13.39.0.d675aed</build>
+<cl>t_coffee sample_seq1.fasta -mode psicoffee </cl>
+<stack>
+</stack>
+<warning>
+</warning>
+<file>
+<stream>output</stream>
+<name>stdout</name>
+<content>!	Process: >hmgb_chite _R_ hmgb_chite.prf [272 Seq.] [EBI/blast/uniref50][COMPUTE CACHE]
+!	Process: >hmgl_trybr _R_ hmgl_trybr.prf [280 Seq.] [EBI/blast/uniref50][COMPUTE CACHE]
+!	Process: >hmgl_wheat _R_ hmgl_wheat.prf [432 Seq.] [EBI/blast/uniref50][COMPUTE CACHE]
+!	Process: >hmgt_mouse _R_ hmgt_mouse.prf [68 Seq.] [EBI/blast/uniref50][COMPUTE CACHE]
+#Single Thread
+#Single Thread
+#Single Thread
+#Single Thread
+CLUSTAL FORMAT for T-COFFEE Version_13.39.0.d675aed [http://www.tcoffee.org] [MODE: psicoffee ], CPU=0.04 sec, SCORE=92, Nseq=4, Len=81 
+
+hmgl_trybr      kkdsnapkramtsfmffssdfrskhsdl-----sivemskaagaawkelg
+hmgt_mouse      -----kpkrprsayniyvsesfqeakdd-----saqgklklvneawknls
+hmgb_chite      ---adkpkrplsaymlwlnsaresikrenpd-fkvtevakkggelwrglk
+hmgl_wheat      --dpnkpkrapsaffvfmgefreefkqknpknksvaavgkaagerwksls
+                      ***. ::: .: ..  .. .       .     *  .  *: * 
+
+hmgl_trybr      peerkvyeemaekdkerykrem---------
+hmgt_mouse      peekqayiqlakddrirydnemksweeqmae
+hmgb_chite      --dkseweakaatakqnyiralqeyerng-g
+hmgl_wheat      esekapyvakanklkgeynkaiaaynkgesa
+                  ::  :   *   : .* . :         
+
+
+
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>stderr</name>
+<content>
+PROGRAM: T-COFFEE Version_13.39.0.d675aed (Version_13.39.0.d675aed)
+-full_log      	S	[0] 
+-genepred_score	S	[0] 	nsd
+-run_name      	S	[0] 
+-mem_mode      	S	[0] 	mem
+-extend        	D	[1] 	1 
+-extend_mode   	S	[0] 	very_fast_triplet
+-max_n_pair    	D	[0] 	10 
+-seq_name_for_quadruplet	S	[0] 	all
+-compact       	S	[0] 	default
+-clean         	S	[0] 	no
+-do_self       	FL	[0] 	0
+-do_normalise  	D	[0] 	1000 
+-template_file 	S	[1] 	BLAST
+-setenv        	S	[0] 	0
+-export        	S	[0] 	0
+-template_mode 	S	[0] 
+-flip          	D	[0] 	0 
+-remove_template_file	D	[0] 	0 
+-profile_template_file	S	[0] 
+-in            	S	[1] 	Mproba_pair
+-seq           	S	[1] 	sample_seq1.fasta
+-aln           	S	[0] 
+-method_limits 	S	[0] 
+-method        	S	[0] 
+-lib           	S	[0] 
+-profile       	S	[0] 
+-profile1      	S	[0] 
+-profile2      	S	[0] 
+-pdb           	S	[0] 
+-relax_lib     	D	[0] 	1 
+-filter_lib    	D	[0] 	0 
+-shrink_lib    	D	[0] 	0 
+-out_lib       	W_F	[0] 	no
+-out_lib_mode  	S	[0] 	primary
+-lib_only      	D	[0] 	0 
+-outseqweight  	W_F	[0] 	no
+-seq_source    	S	[0] 	ANY
+-cosmetic_penalty	D	[0] 	0 
+-gapopen       	D	[0] 	0 
+-gapext        	D	[0] 	0 
+-fgapopen      	D	[0] 	0 
+-fgapext       	D	[0] 	0 
+-nomatch       	D	[0] 	0 
+-newtree       	W_F	[0] 	default
+-tree          	W_F	[0] 	NO
+-usetree       	R_F	[0] 
+-tree_mode     	S	[0] 	nj
+-distance_matrix_mode	S	[0] 	ktup
+-distance_matrix_sim_mode	S	[0] 	idmat_sim1
+-quicktree     	FL	[0] 	0
+-outfile       	W_F	[0] 	default
+-maximise      	FL	[1] 	1
+-output        	S	[0] 	aln	html
+-len           	D	[0] 	0 
+-infile        	R_F	[0] 
+-matrix        	S	[0] 	default
+-tg_mode       	D	[0] 	1 
+-profile_mode  	S	[0] 	cw_profile_profile
+-profile_comparison	S	[0] 	profile
+-dp_mode       	S	[0] 	linked_pair_wise
+-ktuple        	D	[0] 	1 
+-ndiag         	D	[0] 	0 
+-diag_threshold	D	[0] 	0 
+-diag_mode     	D	[0] 	0 
+-sim_matrix    	S	[0] 	vasiliky
+-transform     	S	[0] 
+-extend_seq    	FL	[0] 	0
+-outorder      	S	[0] 	input
+-inorder       	S	[0] 	aligned
+-seqnos        	S	[0] 	off
+-case          	S	[0] 	keep
+-cpu           	D	[0] 	0 
+-ulimit        	D	[0] 	-1 
+-maxnseq       	D	[0] 	-1 
+-maxlen        	D	[0] 	-1 
+-sample_dp     	D	[0] 	0 
+-weight        	S	[0] 	default
+-seq_weight    	S	[0] 	no
+-align         	FL	[1] 	1
+-mocca         	FL	[0] 	0
+-domain        	FL	[0] 	0
+-start         	D	[0] 	0 
+-len           	D	[0] 	0 
+-scale         	D	[0] 	0 
+-mocca_interactive	FL	[0] 	0
+-method_evaluate_mode	S	[0] 	default
+-color_mode    	S	[0] 	new
+-aln_line_length	D	[0] 	0 
+-evaluate_mode 	S	[0] 	triplet
+-get_type      	FL	[0] 	0
+-clean_aln     	D	[0] 	0 
+-clean_threshold	D	[1] 	1 
+-clean_iteration	D	[1] 	1 
+-clean_evaluate_mode	S	[0] 	t_coffee_fast
+-extend_matrix 	FL	[0] 	0
+-prot_min_sim  	D	[40] 	40 
+-prot_max_sim  	D	[90] 	90 
+-prot_trim     	D	[20] 	20 
+-prot_min_cov  	D	[40] 	40 
+-pdb_type      	S	[0] 	d
+-pdb_min_sim   	D	[35] 	35 
+-pdb_max_sim   	D	[100] 	100 
+-pdb_min_cov   	D	[50] 	50 
+-pdb_blast_server	W_F	[0] 	EBI
+-blast         	W_F	[0] 
+-blast_server  	W_F	[0] 	EBI
+-pdb_db        	W_F	[0] 	pdb
+-protein_db    	W_F	[0] 	uniref50
+-method_log    	W_F	[0] 	no
+-struc_to_use  	S	[0] 
+-cache         	W_F	[0] 	use
+-print_cache   	FL	[0] 	0
+-align_pdb_param_file	W_F	[0] 	no
+-align_pdb_hasch_mode	W_F	[0] 	hasch_ca_trace_bubble
+-external_aligner	S	[0] 	NO
+-msa_mode      	S	[0] 	tree
+-et_mode       	S	[0] 	et
+-master        	S	[0] 	no
+-blast_nseq    	D	[0] 	0 
+-lalign_n_top  	D	[0] 	10 
+-iterate       	D	[0] 	0 
+-trim          	D	[0] 	0 
+-split         	D	[0] 	0 
+-trimfile      	S	[0] 	default
+-split         	D	[0] 	0 
+-split_nseq_thres	D	[0] 	0 
+-split_score_thres	D	[0] 	0 
+-check_pdb_status	D	[0] 	0 
+-clean_seq_name	D	[0] 	0 
+-seq_to_keep   	S	[0] 
+-dpa_master_aln	S	[0] 
+-dpa_maxnseq   	D	[0] 	0 
+-dpa_min_score1	D	[0] 
+-dpa_min_score2	D	[0] 
+-dpa_keep_tmpfile	FL	[0] 	0
+-dpa_debug     	D	[0] 	0 
+-multi_core    	S	[0] 	templates_jobs_relax_msa_evaluate
+-n_core        	D	[0] 	1 
+-thread        	D	[0] 	1 
+-max_n_proc    	D	[0] 	0 
+-lib_list      	S	[0] 
+-prune_lib_mode	S	[0] 	5
+-tip           	S	[0] 	none
+-rna_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) proba_pair 
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [BLAST] Mode Or File: [BLAST] [Start
+]
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+	Profile: Template=hmgb_chite.prf, File=/var/tmp/tco/tcohzs8n8tb69365//1038969365130
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+	Profile: Template=hmgl_trybr.prf, File=/var/tmp/tco/tcohzs8n8tb69365//1038969365131
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+	Profile: Template=hmgl_wheat.prf, File=/var/tmp/tco/tcohzs8n8tb69365//1038969365132
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+	Profile: Template=hmgt_mouse.prf, File=/var/tmp/tco/tcohzs8n8tb69365//1038969365133
+
+	Multi Core Mode: 1 processors:
+na_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) proba_pair 
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [BLAST] Mode Or File: [BLAST] [Start
+]
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+	Profile: Template=hmgb_chite.prf, File=/var/tmp/tco/tcohzs8n8tb69365//1038969365130
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+	Profile: Template=hmgl_trybr.prf, File=/var/tmp/tco/tcohzs8n8tb69365//1038969365131
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+	Profile: Template=hmgl_wheat.prf, File=/var/tmp/tco/tcohzs8n8tb69365//1038969365132
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+	Profile: Template=hmgt_mouse.prf, File=/var/tmp/tco/tcohzs8n8tb69365//1038969365133
+
+	Multi Core Mode: 1 processors:
+na_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) proba_pair 
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [BLAST] Mode Or File: [BLAST] [Start
+]
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+	Profile: Template=hmgb_chite.prf, File=/var/tmp/tco/tcohzs8n8tb69365//1038969365130
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+	Profile: Template=hmgl_trybr.prf, File=/var/tmp/tco/tcohzs8n8tb69365//1038969365131
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+	Profile: Template=hmgl_wheat.prf, File=/var/tmp/tco/tcohzs8n8tb69365//1038969365132
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+	Profile: Template=hmgt_mouse.prf, File=/var/tmp/tco/tcohzs8n8tb69365//1038969365133
+
+	Multi Core Mode: 1 processors:
+
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Mproba_pairna_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) proba_pair 
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [BLAST] Mode Or File: [BLAST] [Start
+]
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+	Profile: Template=hmgb_chite.prf, File=/var/tmp/tco/tcohzs8n8tb69365//1038969365130
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+	Profile: Template=hmgl_trybr.prf, File=/var/tmp/tco/tcohzs8n8tb69365//1038969365131
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+	Profile: Template=hmgl_wheat.prf, File=/var/tmp/tco/tcohzs8n8tb69365//1038969365132
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+	Profile: Template=hmgt_mouse.prf, File=/var/tmp/tco/tcohzs8n8tb69365//1038969365133
+
+	Multi Core Mode: 1 processors:
+
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Mproba_pair
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	xxx Retrieved Ssample_seq1.fasta
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1442]
+
+Library Relaxation: Multi_proc [1]
+ 
+!		[Relax Library][TOT=    4][  0 %]!		[Relax Library][TOT=    4][ 50 %]!		[Relax Library][TOT=    4][ 75 %]!		[Relax Library][TOT=    4][100 %]
+na_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) proba_pair 
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [BLAST] Mode Or File: [BLAST] [Start
+]
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+	Profile: Template=hmgb_chite.prf, File=/var/tmp/tco/tcohzs8n8tb69365//1038969365130
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+	Profile: Template=hmgl_trybr.prf, File=/var/tmp/tco/tcohzs8n8tb69365//1038969365131
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+	Profile: Template=hmgl_wheat.prf, File=/var/tmp/tco/tcohzs8n8tb69365//1038969365132
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+	Profile: Template=hmgt_mouse.prf, File=/var/tmp/tco/tcohzs8n8tb69365//1038969365133
+
+	Multi Core Mode: 1 processors:
+
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Mproba_pair
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	xxx Retrieved Ssample_seq1.fasta
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1442]
+
+Library Relaxation: Multi_proc [1]
+ 
+Relaxation Summary: [1442]--->[1175]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: hmgb_chite
+Group    2: hmgl_trybr
+Group    3: hmgl_wheat
+Group    4: hmgt_mouse
+
+na_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) proba_pair 
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [BLAST] Mode Or File: [BLAST] [Start
+]
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+	Profile: Template=hmgb_chite.prf, File=/var/tmp/tco/tcohzs8n8tb69365//1038969365130
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+	Profile: Template=hmgl_trybr.prf, File=/var/tmp/tco/tcohzs8n8tb69365//1038969365131
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+	Profile: Template=hmgl_wheat.prf, File=/var/tmp/tco/tcohzs8n8tb69365//1038969365132
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+	Profile: Template=hmgt_mouse.prf, File=/var/tmp/tco/tcohzs8n8tb69365//1038969365133
+
+	Multi Core Mode: 1 processors:
+
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Mproba_pair
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	xxx Retrieved Ssample_seq1.fasta
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1442]
+
+Library Relaxation: Multi_proc [1]
+ 
+Relaxation Summary: [1442]--->[1175]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: hmgb_chite
+Group    2: hmgl_trybr
+Group    3: hmgl_wheat
+Group    4: hmgt_mouse
+
+
+	Group    5: [Group    2 (   1 seq)] with [Group    4 (   1 seq)]-->[Len=   76][PID:69365]na_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) proba_pair 
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [BLAST] Mode Or File: [BLAST] [Start
+]
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+	Profile: Template=hmgb_chite.prf, File=/var/tmp/tco/tcohzs8n8tb69365//1038969365130
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+	Profile: Template=hmgl_trybr.prf, File=/var/tmp/tco/tcohzs8n8tb69365//1038969365131
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+	Profile: Template=hmgl_wheat.prf, File=/var/tmp/tco/tcohzs8n8tb69365//1038969365132
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+	Profile: Template=hmgt_mouse.prf, File=/var/tmp/tco/tcohzs8n8tb69365//1038969365133
+
+	Multi Core Mode: 1 processors:
+
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Mproba_pair
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	xxx Retrieved Ssample_seq1.fasta
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1442]
+
+Library Relaxation: Multi_proc [1]
+ 
+Relaxation Summary: [1442]--->[1175]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: hmgb_chite
+Group    2: hmgl_trybr
+Group    3: hmgl_wheat
+Group    4: hmgt_mouse
+
+
+	Group    5: [Group    2 (   1 seq)] with [Group    4 (   1 seq)]-->[Len=   76][PID:69365]
+	Group    6: [Group    3 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=   79][PID:69365]na_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) proba_pair 
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [BLAST] Mode Or File: [BLAST] [Start
+]
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+	Profile: Template=hmgb_chite.prf, File=/var/tmp/tco/tcohzs8n8tb69365//1038969365130
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+	Profile: Template=hmgl_trybr.prf, File=/var/tmp/tco/tcohzs8n8tb69365//1038969365131
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+	Profile: Template=hmgl_wheat.prf, File=/var/tmp/tco/tcohzs8n8tb69365//1038969365132
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+	Profile: Template=hmgt_mouse.prf, File=/var/tmp/tco/tcohzs8n8tb69365//1038969365133
+
+	Multi Core Mode: 1 processors:
+
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Mproba_pair
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	xxx Retrieved Ssample_seq1.fasta
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1442]
+
+Library Relaxation: Multi_proc [1]
+ 
+Relaxation Summary: [1442]--->[1175]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: hmgb_chite
+Group    2: hmgl_trybr
+Group    3: hmgl_wheat
+Group    4: hmgt_mouse
+
+
+	Group    5: [Group    2 (   1 seq)] with [Group    4 (   1 seq)]-->[Len=   76][PID:69365]
+	Group    6: [Group    3 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=   79][PID:69365]
+	Group    7: [Group    6 (   2 seq)] with [Group    5 (   2 seq)]-->[Len=   81][PID:69365]
+
+
+!		[Final Evaluation][TOT=   81][  0 %]!		[Final Evaluation][TOT=   81][  2 %]!		[Final Evaluation][TOT=   81][  3 %]!		[Final Evaluation][TOT=   81][  4 %]!		[Final Evaluation][TOT=   81][  6 %]!		[Final Evaluation][TOT=   81][  7 %]!		[Final Evaluation][TOT=   81][  8 %]!		[Final Evaluation][TOT=   81][  9 %]!		[Final Evaluation][TOT=   81][ 11 %]!		[Final Evaluation][TOT=   81][ 12 %]!		[Final Evaluation][TOT=   81][ 13 %]!		[Final Evaluation][TOT=   81][ 14 %]!		[Final Evaluation][TOT=   81][ 16 %]!		[Final Evaluation][TOT=   81][ 17 %]!		[Final Evaluation][TOT=   81][ 18 %]!		[Final Evaluation][TOT=   81][ 19 %]!		[Final Evaluation][TOT=   81][ 20 %]!		[Final Evaluation][TOT=   81][ 22 %]!		[Final Evaluation][TOT=   81][ 23 %]!		[Final Evaluation][TOT=   81][ 24 %]!		[Final Evaluation][TOT=   81][ 25 %]!		[Final Evaluation][TOT=   81][ 27 %]!		[Final Evaluation][TOT=   81][ 28 %]!		[Final Evaluation][TOT=   81][ 29 %]!		[Final Evaluation][TOT=   81][ 30 %]!		[Final Evaluation][TOT=   81][ 32 %]!		[Final Evaluation][TOT=   81][ 33 %]!		[Final Evaluation][TOT=   81][ 34 %]!		[Final Evaluation][TOT=   81][ 35 %]!		[Final Evaluation][TOT=   81][ 37 %]!		[Final Evaluation][TOT=   81][ 38 %]!		[Final Evaluation][TOT=   81][ 39 %]!		[Final Evaluation][TOT=   81][ 40 %]!		[Final Evaluation][TOT=   81][ 41 %]!		[Final Evaluation][TOT=   81][ 43 %]!		[Final Evaluation][TOT=   81][ 44 %]!		[Final Evaluation][TOT=   81][ 45 %]!		[Final Evaluation][TOT=   81][ 46 %]!		[Final Evaluation][TOT=   81][ 48 %]!		[Final Evaluation][TOT=   81][ 49 %]!		[Final Evaluation][TOT=   81][ 50 %]!		[Final Evaluation][TOT=   81][ 51 %]!		[Final Evaluation][TOT=   81][ 53 %]!		[Final Evaluation][TOT=   81][ 54 %]!		[Final Evaluation][TOT=   81][ 55 %]!		[Final Evaluation][TOT=   81][ 56 %]!		[Final Evaluation][TOT=   81][ 58 %]!		[Final Evaluation][TOT=   81][ 59 %]!		[Final Evaluation][TOT=   81][ 60 %]!		[Final Evaluation][TOT=   81][ 61 %]!		[Final Evaluation][TOT=   81][ 62 %]!		[Final Evaluation][TOT=   81][ 64 %]!		[Final Evaluation][TOT=   81][ 65 %]!		[Final Evaluation][TOT=   81][ 66 %]!		[Final Evaluation][TOT=   81][ 67 %]!		[Final Evaluation][TOT=   81][ 69 %]!		[Final Evaluation][TOT=   81][ 70 %]!		[Final Evaluation][TOT=   81][ 71 %]!		[Final Evaluation][TOT=   81][ 72 %]!		[Final Evaluation][TOT=   81][ 74 %]!		[Final Evaluation][TOT=   81][ 75 %]!		[Final Evaluation][TOT=   81][ 76 %]!		[Final Evaluation][TOT=   81][ 77 %]!		[Final Evaluation][TOT=   81][ 79 %]!		[Final Evaluation][TOT=   81][ 80 %]!		[Final Evaluation][TOT=   81][ 81 %]!		[Final Evaluation][TOT=   81][ 82 %]!		[Final Evaluation][TOT=   81][ 83 %]!		[Final Evaluation][TOT=   81][ 85 %]!		[Final Evaluation][TOT=   81][ 86 %]!		[Final Evaluation][TOT=   81][ 87 %]!		[Final Evaluation][TOT=   81][ 88 %]!		[Final Evaluation][TOT=   81][ 90 %]!		[Final Evaluation][TOT=   81][ 91 %]!		[Final Evaluation][TOT=   81][ 92 %]!		[Final Evaluation][TOT=   81][ 93 %]!		[Final Evaluation][TOT=   81][ 95 %]!		[Final Evaluation][TOT=   81][ 96 %]!		[Final Evaluation][TOT=   81][ 97 %]!		[Final Evaluation][TOT=   81][ 98 %]!		[Final Evaluation][TOT=   81][100 %]
+
+
+
+OUTPUT RESULTS
+	#### File Type= GUIDE_TREE      Format= newick          Name= sample_seq1.dnd
+	#### File Type= MSA             Format= aln             Name= sample_seq1.aln
+	#### File Type= MSA             Format= html            Name= sample_seq1.html
+	#### File Type= Template_List   Format= fasta_seq       Name= sample_seq1_prf1.template_list
+	#### File Type= Template Profile Format= fasta_aln       Name= hmgb_chite.prf
+	#### File Type= Template Profile Format= fasta_aln       Name= hmgl_trybr.prf
+	#### File Type= Template Profile Format= fasta_aln       Name= hmgl_wheat.prf
+	#### File Type= Template Profile Format= fasta_aln       Name= hmgt_mouse.prf
+
+# Command Line: t_coffee sample_seq1.fasta -mode psicoffee  [PROGRAM:T-COFFEE]
+# T-COFFEE Memory Usage: Current= 31.709 Mb, Max= 32.705 Mb
+# Results Produced with T-COFFEE Version_13.39.0.d675aed (Version_13.39.0.d675aed)
+# T-COFFEE is available from http://www.tcoffee.org
+# Register on: https://groups.google.com/group/tcoffee/
+</content>
+</file>
+<file>
+<stream>input</stream>
+<name>sample_seq1.fasta</name>
+<content>>hmgl_trybr
+kkdsnapkramtsfmffssdfrskhsdlsivemskaagaawkelgpeerk
+vyeemaekdkerykrem
+>hmgt_mouse
+kpkrprsayniyvsesfqeakddsaqgklklvneawknlspeekqayiql
+akddrirydnemksweeqmae
+>hmgb_chite
+adkpkrplsaymlwlnsaresikrenpdfkvtevakkggelwrglkdkse
+weakaatakqnyiralqeyerngg
+>hmgl_wheat
+dpnkpkrapsaffvfmgefreefkqknpknksvaavgkaagerwkslses
+ekapyvakanklkgeynkaiaaynkgesa
+</content>
+</file>
+<file>
+<stream>input</stream>
+<name>sample_seq1_prf1.template_list</name>
+<content>>hmgb_chite  _R_ hmgb_chite.prf
+>hmgl_trybr  _R_ hmgl_trybr.prf
+>hmgl_wheat  _R_ hmgl_wheat.prf
+>hmgt_mouse  _R_ hmgt_mouse.prf
+</content>
+</file>
+<file>
+<stream>input</stream>
+<name>hmgb_chite.prf</name>
+<content>>hmgb_chite
+adkpkrplsaymlwlnsaresikrenpdfkvtevakkggelwrglkdkse
+weakaatakqnyiralqeyerngg
+>hmgb_chite_68  UR050|UniRef50_UPI0007E74946 [Eval=1.8E-13][id=47.2%][start=9 end=80]
+----kkpmssflmwlnsgreqiktenpdlsvrevcvkggevwrgieeksy
+wqaneamgkykevkklqksqr---
+>hmgb_chite_77  UR050|UniRef50_B3LZZ3 [Eval=6.1E-13][id=44.9%][start=8 end=76]
+---pkkpmgsfmiwmstcrkkikaehpdykvtevaslggkiwhqmedkfv
+wkkkaalarsdyssqlqly-----
+>hmgb_chite_79  UR050|UniRef50_A0A183AEH0 [Eval=1.1E-12][id=40.6%][start=38 end=106]
+-dapkkalsafflfcqderpkvrsehpdwkvseiakelgkrwehcknksk
+yesqaqvekqryekamakyk----
+>hmgb_chite_83  UR050|UniRef50_A0A0L7KV35 [Eval=2.4E-12][id=46.7%][start=1 end=59]
+------------mwlnaersnikaqysglkiteiarkggdlwrsl-dktp
+weqkakaameiynrqmevydan--
+>hmgb_chite_104  UR050|UniRef50_D8QLM7 [Eval=8.8E-11][id=42.6%][start=14 end=81]
+---pkrpatsyilyqndcrqsmkeknpglhntellryisetwkslqekss
+yeakaaklkhdyedavrey-----
+>hmgb_chite_119  UR050|UniRef50_A0A2A6BPT7 [Eval=0.0033][id=41.3%][start=1276 end=1321]
+------------------------------vadvakkagalwktiterkk
+wedkaaedrvryeremkefnengg
+>hmgb_chite_122  UR050|UniRef50_A0A2U1PBR0 [Eval=5.8E-6][id=42.2%][start=149 end=212]
+-nkpkrplsaffifleefretfkkenptvkasavgkaggekwrslsdaae
+ddeeseksk---------------
+>hmgb_chite_147  UR050|UniRef50_R9PE03 [Eval=2.5E-9][id=40.0%][start=366 end=435]
+--kprrplsayllfvnsvrsqrqtqnpdmplteltaeiaaewreleqrtk
+weaeasllrqqydtaldawk----
+>hmgb_chite_185  UR050|UniRef50_A0A1Q9DT98 [Eval=1.0E-7][id=40.3%][start=198 end=269]
+--qpkrpptawmlwlqenrekiaaalppghvtdvskeagqrwkgaeqkap
+fekkadaekakylkemqhye----
+>hmgb_chite_192  UR050|UniRef50_A0A1I8AQK9 [Eval=5.6E-8][id=42.9%][start=92 end=158]
+---pkrgqsaymfwl--aenrarltepgkpvtevtkkagaewrvltertk
+weemarkdkerydremaef-kng-
+>hmgb_chite_193  UR050|UniRef50_E1Z8L4 [Eval=5.6E-8][id=40.6%][start=306 end=374]
+apkvkrplnaymqyvnanrgqvkadhpelgnkeltsklgelyrgleekkk
+yedaaaadkqryveeve-------
+>hmgb_chite_200  UR050|UniRef50_A0A2U1LND1 [Eval=7.3E-8][id=43.5%][start=100 end=168]
+-nkpkkppsaffvfleefrktfkkenptikvsavgkaggekwkfmsdkap
+yeakaakrskneiigyq-------
+>hmgb_chite_209  UR050|UniRef50_G4LWM1 [Eval=1.0E-7][id=41.9%][start=546 end=619]
+---ptrplsayflwfnenrekiknlggqnsvaevakaageiwrnmdskss
+yqsrvdelkkkyqedlriyqsnlg
+>hmgb_chite_218  UR050|UniRef50_L1IQS6 [Eval=1.7E-7][id=41.4%][start=119 end=176]
+----kksisaywlwshqareeirkenpkmpmkevmqrmgerwkkieekhe
+wedkarsene--------------
+>hmgb_chite_219  UR050|UniRef50_A0A1I7STW3 [Eval=1.9E-7][id=41.5%][start=67 end=131]
+----krplnaymiwtrharddilkknphlkmnevsktmgemwkklddkkp
+fflmarkaaakhkkale-------
+>hmgb_chite_226  UR050|UniRef50_A0A0L0DGI8 [Eval=0.0022][id=40.0%][start=96 end=160]
+atgpkrplnayqvyskrhrdrvtaanpdakhtemfgllseew---knase
+tereackaeaarlra--eye----
+>hmgb_chite_241  UR050|UniRef50_K2SD54 [Eval=4.8E-7][id=42.9%][start=128 end=195]
+---perpasayvifsnqmreslkgqelsf--teiaklvgerwqtlspnsr
+cerqaaaakekyyaelaeykk---
+>hmgb_chite_261  UR050|UniRef50_M7BCL4 [Eval=1.2E-6][id=41.4%][start=39 end=96]
+----krplsafflfmaahrsalkrsnpgwtmveiakklgtmwhqqkdkek
+ykqqaaqlrq--------------
+>hmgb_chite_267  UR050|UniRef50_A0A481YXU9 [Eval=1.4E-6][id=41.4%][start=65 end=122]
+----kgrisgyilfsnenredvnesnpdlkftdvgkelgrmwrelddknd
+wntkaaaqne--------------
+</content>
+</file>
+<file>
+<stream>input</stream>
+<name>hmgl_trybr.prf</name>
+<content>>hmgl_trybr
+kkdsnapkramtsfmffssdfrskhsdlsivemskaagaawkelgpeerk
+vyeemaekdkerykrem
+>hmgl_trybr_69  UR050|UniRef50_A0A2P6NRN2 [Eval=2.1E-8][id=40.3%][start=224 end=290]
+kkdpnqpkrpttsfmffanefkekfpklkmteltaklseawkaitptekq
+tfidkaqkdtvry----
+>hmgl_trybr_77  UR050|UniRef50_A0A0J9XI96 [Eval=2.1E-11][id=41.5%][start=67 end=131]
+-kdplkpkgrvtaysfflkayakehnitkvtelgkavgaawksmspqert
+kyeqldredkvryere-
+>hmgl_trybr_85  UR050|UniRef50_A0A158NEW2 [Eval=3.1E-6][id=41.7%][start=95 end=165]
+-kdsk-prgrmtayaffrqehkkkhpeekivefskkcamrwktmsdiekk
+rfhemaekdkkrydtem
+>hmgl_trybr_88  UR050|UniRef50_A0A168SC01 [Eval=3.3E-11][id=40.8%][start=50 end=120]
+krdanapkknvtsylhysnmhrdrhpdlpqteiarllgtewraltpeekq
+vyvkmavddkarfdkem
+>hmgl_trybr_169  UR050|UniRef50_A0A1I8CH36 [Eval=8.5E-10][id=41.4%][start=92 end=161]
+-kdpnepkkaltsyfiwlsanreknpgasatdiaraagkewkelgpddkk
+twelkaaedkiryskam
+>hmgl_trybr_181  UR050|UniRef50_A0A183GK90 [Eval=1.2E-9][id=40.6%][start=12 end=78]
+kkdpnapkraqsaymlwlnemrpkkpgmsvvdvsraagvewatvkdksr-
+-wekmaaeekkryekem
+>hmgl_trybr_194  UR050|UniRef50_B8LC25 [Eval=1.6E-9][id=40.8%][start=5 end=75]
+kkdpnapkrnqsafflyssdvkaaqpdlafgqvaqeisknfkalpdeerk
+ywdekaaadkdryqrem
+>hmgl_trybr_200  UR050|UniRef50_A0A397GP52 [Eval=2.3E-9][id=41.5%][start=263 end=327]
+-kdpkapkkpkspyllfltsimddfrdlkvterskeaakrwnelkpedkk
+pyeelylkdqarykae-
+>hmgl_trybr_223  UR050|UniRef50_A0A316VFA3 [Eval=7.8E-9][id=46.2%][start=234 end=298]
+-rdptkpkapktpffqffsdfrskssdlsvpeaakragaawknltteeke
+pyykihaeereky----
+>hmgl_trybr_230  UR050|UniRef50_A0A0A9WFV4 [Eval=9.6E-9][id=41.4%][start=119 end=188]
+-kdsnapkrpipaffqfskverrrvkemnaveiskelgrlwaeadasvkr
+kyqeladqdkaryerem
+>hmgl_trybr_232  UR050|UniRef50_A0A1U7LRZ3 [Eval=1.1E-8][id=42.9%][start=205 end=274]
+-kdphapkrpanaflkfcdrvrsenegvegfemtkamgvawqnldeegrk
+pyydlyeqdkqryerem
+>hmgl_trybr_234  UR050|UniRef50_R7YSR2 [Eval=1.2E-8][id=40.6%][start=118 end=186]
+kpdenaperpasayvifsndmrekgqdlsfteiaktvgerwqvlspnyrd
+kyerqaaaakekyytel
+>hmgl_trybr_242  UR050|UniRef50_L1JE76 [Eval=2.2E-8][id=41.2%][start=6 end=73]
+kkekegpkralsaymlfsedkrqehkdagnttplkmaaamwkelgdeakk
+pwvdraeelkaqykeq-
+>hmgl_trybr_245  UR050|UniRef50_A0A1C7MZB3 [Eval=2.2E-8][id=40.6%][start=261 end=329]
+kpdkhapikpssayimfsndarskhknmsfvemaklvgdrwkslsneqkq
+dyertamkakdeylnam
+>hmgl_trybr_262  UR050|UniRef50_K0SGR4 [Eval=4.9E-8][id=40.0%][start=47 end=111]
+------pkraraayhyfydatraehpdctlsemsklvsaawkdtpdeeke
+ayramaapdqerygrdl
+>hmgl_trybr_270  UR050|UniRef50_A0A0J1B1R2 [Eval=9.2E-8][id=44.6%][start=1 end=56]
+--------------mffvqdwrsenqdaafadigrllgakwkemspaerk
+pyeekahadkdraare-
+>hmgl_trybr_273  UR050|UniRef50_D5AE07 [Eval=1.0E-7][id=41.1%][start=204 end=273]
+krdpnhpkpnrsgynff---faeqharlkaleiskmigelwnklneeerg
+vyqdfglkdkerykkem
+>hmgl_trybr_275  UR050|UniRef50_S5MXG2 [Eval=4.6E-7][id=40.3%][start=4 end=75]
+-kdknrpkppmtpyacfreehrkkhptgnviefskkcaekwklmnmeqrk
+cfeemakldterfnrem
+>hmgl_trybr_278  UR050|UniRef50_A0A4D8Y739 [Eval=2.8E-7][id=40.8%][start=659 end=729]
+-kdpnkpkrppsaffvfmedfrkqysnksvaavgkaggdkwksltegeka
+pyvaeaekrkeayernm
+</content>
+</file>
+<file>
+<stream>input</stream>
+<name>hmgl_wheat.prf</name>
+<content>>hmgl_wheat
+dpnkpkrapsaffvfmgefreefkqknpknksvaavgkaagerwkslses
+ekapyvakanklkgeynkaiaaynkgesa
+>hmgl_wheat_63  UR050|UniRef50_UPI000E6F9214 [Eval=1.1E-9][id=46.0%][start=1 end=63]
+---------------meefsetfkhehpnyksfaivgkaggekwrsmspa
+ergvyeakaearrthyinsiqasdedes-
+>hmgl_wheat_95  UR050|UniRef50_M1BDX1 [Eval=5.3E-5][id=44.4%][start=16 end=60]
+------------------------------ksfdaveklvrdkwkqmsda
+ekapyiaetekrrveyakvlnsynq----
+>hmgl_wheat_181  UR050|UniRef50_A0A2G2XCD7 [Eval=9.0E-15][id=46.8%][start=218 end=295]
+dpekpkmparsiyi-krerrkqfmkdnpknkfetavnragaekwkqlsaa
+ekgpymaeakrkmeeynksnaaynkrvaa
+>hmgl_wheat_199  UR050|UniRef50_A0A2P5DJ49 [Eval=4.0E-14][id=40.5%][start=37 end=113]
+dpnkpkkpakslllfvnefkeqykkehpnepf--alfrrahdkwksmsha
+erapfvgkarkmafeydknmhayllaega
+>hmgl_wheat_261  UR050|UniRef50_A0A2U1MQV0 [Eval=3.0E-12][id=40.8%][start=3 end=73]
+----pkkpptaffyyledfrkefqeqnphvksmsevgkacgekwktmtye
+ekiqyydiatekrakfekdmmdyvk----
+>hmgl_wheat_268  UR050|UniRef50_A0A0E0LQB4 [Eval=2.3E-5][id=44.7%][start=59 end=105]
+-------spsafflfmddfrkdyeekhpadkqvyeigmagdeawksmsdd
+vsa--------------------------
+>hmgl_wheat_286  UR050|UniRef50_I7MKS6 [Eval=1.5E-11][id=40.0%][start=56 end=129]
+dpnapkkpmsaylifcqtrqpeikaknp-dlsfseiskvvgqewrdlsqd
+kkqgyikkeeqlkkeynsklaefnk----
+>hmgl_wheat_304  UR050|UniRef50_V3YWG6 [Eval=2.4E-11][id=41.3%][start=105 end=176]
+denkpkrpqsayflfladfrkkmkgkdienrell---kqagvewgklskd
+qkkpfeklsevekgkydaamaiynk----
+>hmgl_wheat_311  UR050|UniRef50_G4TQG0 [Eval=2.9E-11][id=40.5%][start=114 end=191]
+dpnapkrppsayllyqnairkeikdknptmtyaevlgeis-kmwsglsae
+ekkpyldateiakgeyekskaayeadhta
+>hmgl_wheat_314  UR050|UniRef50_UPI000C7734B6 [Eval=3.7E-11][id=41.6%][start=32 end=107]
+dpnkpkqgmtafflfmnkkrercmaanp-dfsvtevakvlsrqwkemsee
+mkapymlqqekdkirfakemesykqqe--
+>hmgl_wheat_315  UR050|UniRef50_A0A2P6NRN2 [Eval=4.2E-11][id=41.8%][start=226 end=303]
+dpnqpkrpttsfmffanekrpefkekfpklkmteltakls-eawkaitpt
+ekqtfidkaqkdtvryneakkayeegraa
+>hmgl_wheat_346  UR050|UniRef50_A0A1Q9DQJ7 [Eval=2.1E-10][id=40.8%][start=167 end=242]
+dpdapkraggaygiflaenrdkiiktlpkgykiteiskaagvqwkalsek
+eqkpyqekyqkknaeykaameeyqk----
+>hmgl_wheat_350  UR050|UniRef50_UPI000719E288 [Eval=1.3E-8][id=42.5%][start=110 end=186]
+dpnkpkrplsayfrfmaefr---kqvadkgmsvtdiaklggatwtamtes
+ekkpylevdmkifnevnntpgvgkrge--
+>hmgl_wheat_354  UR050|UniRef50_L9KF69 [Eval=2.9E-10][id=41.0%][start=15 end=91]
+dsnapkrppsgfflffsefhpkikssn-hgisirdvaktlgemwnnlsds
+kkqsyitkpaklkerdekdvtdfskgk--
+>hmgl_wheat_360  UR050|UniRef50_UPI000989D17B [Eval=4.1E-10][id=42.1%][start=11 end=85]
+---kpkrppgsflvfmedfrnefnlknp-nqpagfasqagakqwkqmkdd
+ekapfqrkvkelaleyfekkrcynnmes-
+>hmgl_wheat_370  UR050|UniRef50_I0YNS1 [Eval=5.7E-10][id=43.5%][start=20 end=88]
+----prrpksaymffmaefrekwkvdhpevnrvsdvgvaageawrsltpe
+qkavyeeqsvgskatyaaeiaey------
+>hmgl_wheat_389  UR050|UniRef50_A0A2H5PWP4 [Eval=1.2E-9][id=42.0%][start=38 end=118]
+dsnapkrplsayfifmedfrksfkesfpdnksvaangngagdswkstses
+gksssseindeaeqevssqvssyfmg---
+>hmgl_wheat_396  UR050|UniRef50_P87057 [Eval=1.6E-9][id=40.5%][start=12 end=84]
+dpntpkrnmsafmffsienrekmktdnp-datfgqlgsllgkrwkeltst
+erepyeekarqdkeryererkeyd-----
+>hmgl_wheat_405  UR050|UniRef50_A0A3Q2NTM4 [Eval=2.6E-9][id=42.0%][start=28 end=95]
+---------saffvfcseyrpsvkqqyp-glsigdcakklgemwsklsqs
+eklpyeekaqklrekydrvsgssrtsen-
+</content>
+</file>
+<file>
+<stream>input</stream>
+<name>hmgt_mouse.prf</name>
+<content>>hmgt_mouse
+kpkrprsayniyvsesfqeakddsaqgklklvneawknlspeekqayiql
+akddrirydnemksweeqmae
+>hmgt_mouse_34  UR050|UniRef50_UPI000333B2AD [Eval=9.6E-19][id=56.3%][start=154 end=224]
+kpkkartayniflseyiqssegatiqdkwksayenwknmsssqkqvyeql
+ahddrvryyneiksweeqmie
+>hmgt_mouse_39  UR050|UniRef50_A0A3B3QYB6 [Eval=1.7E-15][id=46.5%][start=148 end=218]
+kpkrpktglfifiaekypetkgatmltktktlmeewkklnttqkqvylqq
+aedekiryknemkaweehmre
+>hmgt_mouse_43  UR050|UniRef50_A0A1A6GI08 [Eval=1.5E-13][id=72.1%][start=114 end=156]
+--------------ksgknakdesaqgklrtinqawknlssderqayiql
+akddrir--------------
+>hmgt_mouse_44  UR050|UniRef50_S4RPM2 [Eval=4.9E-13][id=43.7%][start=146 end=216]
+kpkrpsvpfnifmadnfkrmtgssqpeklirlrdewsglddmqkqkyqql
+aeddrvrytremaawreqmre
+>hmgt_mouse_46  UR050|UniRef50_A0A1Y3NCY0 [Eval=7.1E-12][id=41.3%][start=16 end=90]
+qpkhpssaflfylregyvaqhptkslgfikliskawkelsdeekaiyvkk
+seedkirynnekkiweeemak
+>hmgt_mouse_48  UR050|UniRef50_A0A3Q0RXS4 [Eval=7.5E-10][id=47.6%][start=80 end=141]
+kpkrpcspfsifmsepfeearvms-qakmkslleewrnlfshekkvytql
+aeddkiyhmveie--------
+>hmgt_mouse_49  UR050|UniRef50_B5X652 [Eval=9.2E-10][id=47.9%][start=150 end=197]
+kpkrprssfnifmaehfeeskgtttqgkmkmlredwtklstsqqqvyv--
+---------------------
+>hmgt_mouse_50  UR050|UniRef50_A0A3Q2US89 [Eval=4.0E-9][id=40.8%][start=271 end=341]
+kpkgkppayaffvadfykehkkkhpeakvklcsekwksmspeekakfkem
+akndkrrydqemksy------
+>hmgt_mouse_51  UR050|UniRef50_V5I0N7 [Eval=0.29][id=43.2%][start=25 end=61]
+---------------------------rvklaamewkaadaetkqkyvql
+aredaaryareykn-------
+>hmgt_mouse_52  UR050|UniRef50_A0A0G4J3E4 [Eval=2.6E-8][id=42.4%][start=35 end=100]
+kpkrplsafmlwskdarpkvkedaafgqlkllgamwkdlsdedkapyvkm
+agedrarydtel---------
+>hmgt_mouse_53  UR050|UniRef50_A7TI63 [Eval=5.8E-8][id=40.3%][start=94 end=155]
+-pkrptnayllfcevnkekirqsgtqdvtkalaeawknlseedrkpyykl
+ysddrerykreme--------
+>hmgt_mouse_55  UR050|UniRef50_A0A498N7L4 [Eval=9.4E-8][id=51.1%][start=101 end=145]
+kpkrprsafnifmsehfdeakgnnmqtkmkslrddwerfsatqkq-----
+---------------------
+>hmgt_mouse_56  UR050|UniRef50_A0A397V5L7 [Eval=5.6E-7][id=41.3%][start=118 end=180]
+-pkrprsafnyfmreifssaahvlpkdrlklvrkkwnelsdsdkdkyfem
+ahadrkryerei---------
+>hmgt_mouse_57  UR050|UniRef50_S9XXD4 [Eval=8.1E-7][id=42.9%][start=106 end=170]
+-pkkpmtsyvrfskeqlplfkaqnpetllfs-----pplymhnskvyiql
+akddkiryynemksweeqmve
+>hmgt_mouse_59  UR050|UniRef50_A0A3B1JD94 [Eval=1.4E-6][id=45.1%][start=7 end=77]
+kpkgrtsayaffvlssrdelkkkspggkfkkcsedwkaltpsekkkfedl
+akadkarydeemksy------
+>hmgt_mouse_60  UR050|UniRef50_A0A077WUB3 [Eval=3.9E-6][id=41.5%][start=59 end=123]
+-pklpksaylifsmehrreakqetdrgkvtllaqkwqalspeekepytvk
+amqekeryirem---------
+>hmgt_mouse_61  UR050|UniRef50_A0A3M7MYG4 [Eval=4.2E-6][id=40.6%][start=155 end=218]
+-pklpqnqfslflqerfqdlkgqsiaeagkrvaqewkdlsptekkayder
+faadriryqdeyk--------
+>hmgt_mouse_62  UR050|UniRef50_A0A1S3K0B4 [Eval=1.9E-5][id=42.3%][start=31 end=101]
+-pkrpttayfyylaeqfqegkhvsnvgafkevskqwrelsasekkpfeal
+sdddrkrydremnmyrk----
+>hmgt_mouse_66  UR050|UniRef50_A0A2S2QEJ1 [Eval=4.4E-4][id=42.9%][start=150 end=211]
+---rpksaymiyymdilqktkkkhpdlkmqviaekyknlspekkqyyidq
+aqklrtey-nem---------
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>sample_seq1_prf1.template_list</name>
+<content>>hmgb_chite  _R_ hmgb_chite.prf
+>hmgl_trybr  _R_ hmgl_trybr.prf
+>hmgl_wheat  _R_ hmgl_wheat.prf
+>hmgt_mouse  _R_ hmgt_mouse.prf
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>sample_seq1.dnd</name>
+<content>((hmgb_chite:0.14250,hmgl_wheat:0.14750):0.00750,hmgl_trybr:0.13250,hmgt_mouse:0.14750);</content>
+</file>
+<file>
+<stream>input</stream>
+<name>sample_seq1.dnd</name>
+<content>((hmgb_chite:0.14250,hmgl_wheat:0.14750):0.00750,hmgl_trybr:0.13250,hmgt_mouse:0.14750);</content>
+</file>
+<file>
+<stream>output</stream>
+<name>sample_seq1.aln</name>
+<content>CLUSTAL FORMAT for T-COFFEE Version_13.39.0.d675aed [http://www.tcoffee.org] [MODE: psicoffee ], CPU=0.04 sec, SCORE=92, Nseq=4, Len=81 
+
+hmgl_trybr      kkdsnapkramtsfmffssdfrskhsdl-----sivemskaagaawkelg
+hmgt_mouse      -----kpkrprsayniyvsesfqeakdd-----saqgklklvneawknls
+hmgb_chite      ---adkpkrplsaymlwlnsaresikrenpd-fkvtevakkggelwrglk
+hmgl_wheat      --dpnkpkrapsaffvfmgefreefkqknpknksvaavgkaagerwksls
+                      ***. ::: .: ..  .. .       .     *  .  *: * 
+
+hmgl_trybr      peerkvyeemaekdkerykrem---------
+hmgt_mouse      peekqayiqlakddrirydnemksweeqmae
+hmgb_chite      --dkseweakaatakqnyiralqeyerng-g
+hmgl_wheat      esekapyvakanklkgeynkaiaaynkgesa
+                  ::  :   *   : .* . :         
+
+
+
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>sample_seq1.html</name>
+<content><html>
+<style>
+SPAN { font-family: courier new, courier-new, courier, monospace; font-weight: bold; font-size: 11pt;}
+SPAN { line-height:100%}
+SPAN {	white-space: pre}
+SPAN.value0 {background: #9B92FF}
+SPAN.value1 {background: #B4FFB4}
+SPAN.value2 {background: #BEFFBE}
+SPAN.value3 {background: #C8FFC8}
+SPAN.value4 {background: #FFFFB7}
+SPAN.value5 {background: #FFFFAD}
+SPAN.value6 {background: #FFFFAD}
+SPAN.value7 {background: #FFE6E6}
+SPAN.value8 {background: #FFDCDC}
+SPAN.value9 {background: #FFC8C8}
+SPAN.valuedefault {}
+SPAN.valuegap {}
+SPAN.valueink {background: 000000}
+</style><body><span class=valuedefault>T-COFFEE,&nbsp;Version_13.39.0.d675aed&nbsp;(Version_13.39.0.d675aed)</span><br><span class=valuedefault>Cedric&nbsp;Notredame&nbsp;</span><br><span class=valuedefault>CPU&nbsp;TIME:0&nbsp;sec.</span><br><span class=valuedefault>SCORE=92</span><br><span class=valuedefault>*</span><br><span class=valuedefault>&nbsp;</span><span class=value0>B</span><span class=value1>A</span><span class=value2>D</span><span class=value3>&nbsp;</span><span class=value4>A</span><span class=value5>V</span><span class=value6>G</span><span class=value7>&nbsp;</span><span class=value8>G</span><span class=value9>OOD</span><br><span class=valuedefault>*</span><br><span class=value9>hmgl_trybr&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;93</span><br><span class=value9>hmgt_mouse&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;92</span><br><span class=value9>hmgb_chite&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;91</span><br><span class=value9>hmgl_wheat&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;91</span><br><span class=value9>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;&nbsp;9</span><br><br><span class=valuedefault>hmgl_trybr&nbsp;&nbsp;&nbsp;</span><span class=value5>k</span><span class=value8>k</span><span class=value7>d</span><span class=value8>s</span><span class=value9>napkramtsfmffssdfr</span><span class=value8>sk</span><span class=value7>h</span><span class=value6>sd</span><span class=value5>l</span><span class=valuegap>-----</span><span class=value6>si</span><span class=value7>vem</span><span class=value8>s</span><br><span class=valuedefault>hmgt_mouse&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-----</span><span class=value9>kpkrprsayniyvsesfq</span><span class=value8>ea</span><span class=value7>k</span><span class=value6>dd</span><span class=valuegap>-----</span><span class=value6>saqgk</span><span class=value7>l</span><br><span class=valuedefault>hmgb_chite&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---</span><span class=value7>a</span><span class=value9>dkpkrplsaymlwlnsares</span><span class=value8>i</span><span class=value7>k</span><span class=value6>re</span><span class=value4>npd</span><span class=valuegap>-</span><span class=value4>f</span><span class=value5>k</span><span class=value6>v</span><span class=value7>te</span><span class=value8>va</span><br><span class=valuedefault>hmgl_wheat&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value6>d</span><span class=value8>p</span><span class=value9>nkpkrapsaffvfmgefree</span><span class=value8>fk</span><span class=value7>q</span><span class=value6>k</span><span class=value4>npk</span><span class=value3>nk</span><span class=value5>s</span><span class=value6>v</span><span class=value7>aa</span><span class=value8>vg</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value2>&nbsp;&nbsp;</span><span class=value4>&nbsp;</span><span class=value7>&nbsp;</span><span class=value9>&nbsp;&nbsp;***.&nbsp;:::&nbsp;.:&nbsp;..&nbsp;&nbsp;</span><span class=value8>..&nbsp;</span><span class=value6>.</span><span class=value5>&nbsp;&nbsp;</span><span class=value3>&nbsp;&nbsp;</span><span class=value2>&nbsp;</span><span class=value1>&nbsp;</span><span class=value2>&nbsp;</span><span class=value4>.</span><span class=value5>&nbsp;</span><span class=value6>&nbsp;&nbsp;</span><span class=value7>&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>hmgl_trybr&nbsp;&nbsp;&nbsp;</span><span class=value9>kaagaawkel</span><span class=value8>g</span><span class=value7>p</span><span class=value6>e</span><span class=value8>er</span><span class=value9>kvyeemaekdkerykrem</span><span class=valuegap>------</span><br><span class=valuedefault>hmgt_mouse&nbsp;&nbsp;&nbsp;</span><span class=value8>kl</span><span class=value9>vneawknl</span><span class=value8>s</span><span class=value7>p</span><span class=value6>e</span><span class=value8>ek</span><span class=value9>qayiqlakddrirydnemkswee</span><span class=value8>q</span><br><span class=valuedefault>hmgb_chite&nbsp;&nbsp;&nbsp;</span><span class=value9>kkggelwrg</span><span class=value8>l</span><span class=value7>k</span><span class=valuegap>--</span><span class=value7>dk</span><span class=value8>s</span><span class=value9>eweakaatakqnyiralqeyer</span><span class=value8>n</span><br><span class=valuedefault>hmgl_wheat&nbsp;&nbsp;&nbsp;</span><span class=value9>kaagerwksl</span><span class=value8>s</span><span class=value7>e</span><span class=value6>s</span><span class=value8>ek</span><span class=value9>apyvakanklkgeynkaiaaynk</span><span class=value8>g</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>*</span><span class=value9>&nbsp;&nbsp;.&nbsp;&nbsp;*:&nbsp;*</span><span class=value7>&nbsp;</span><span class=value6>&nbsp;&nbsp;</span><span class=value7>:</span><span class=value8>:&nbsp;</span><span class=value9>&nbsp;:&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;:&nbsp;.*&nbsp;.&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value7>&nbsp;</span><br><br><br><span class=valuedefault>hmgl_trybr&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---</span><br><span class=valuedefault>hmgt_mouse&nbsp;&nbsp;&nbsp;</span><span class=value8>m</span><span class=value6>a</span><span class=value7>e</span><br><span class=valuedefault>hmgb_chite&nbsp;&nbsp;&nbsp;</span><span class=value7>g</span><span class=valuegap>-</span><span class=value6>g</span><br><span class=valuedefault>hmgl_wheat&nbsp;&nbsp;&nbsp;</span><span class=value7>e</span><span class=value6>s</span><span class=value7>a</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value6>&nbsp;</span><span class=value4>&nbsp;</span><span class=value5>&nbsp;</span><br><br><br><br><br><br></body></html>
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>hmgb_chite.prf</name>
+<content>>hmgb_chite
+adkpkrplsaymlwlnsaresikrenpdfkvtevakkggelwrglkdkse
+weakaatakqnyiralqeyerngg
+>hmgb_chite_68  UR050|UniRef50_UPI0007E74946 [Eval=1.8E-13][id=47.2%][start=9 end=80]
+----kkpmssflmwlnsgreqiktenpdlsvrevcvkggevwrgieeksy
+wqaneamgkykevkklqksqr---
+>hmgb_chite_77  UR050|UniRef50_B3LZZ3 [Eval=6.1E-13][id=44.9%][start=8 end=76]
+---pkkpmgsfmiwmstcrkkikaehpdykvtevaslggkiwhqmedkfv
+wkkkaalarsdyssqlqly-----
+>hmgb_chite_79  UR050|UniRef50_A0A183AEH0 [Eval=1.1E-12][id=40.6%][start=38 end=106]
+-dapkkalsafflfcqderpkvrsehpdwkvseiakelgkrwehcknksk
+yesqaqvekqryekamakyk----
+>hmgb_chite_83  UR050|UniRef50_A0A0L7KV35 [Eval=2.4E-12][id=46.7%][start=1 end=59]
+------------mwlnaersnikaqysglkiteiarkggdlwrsl-dktp
+weqkakaameiynrqmevydan--
+>hmgb_chite_104  UR050|UniRef50_D8QLM7 [Eval=8.8E-11][id=42.6%][start=14 end=81]
+---pkrpatsyilyqndcrqsmkeknpglhntellryisetwkslqekss
+yeakaaklkhdyedavrey-----
+>hmgb_chite_119  UR050|UniRef50_A0A2A6BPT7 [Eval=0.0033][id=41.3%][start=1276 end=1321]
+------------------------------vadvakkagalwktiterkk
+wedkaaedrvryeremkefnengg
+>hmgb_chite_122  UR050|UniRef50_A0A2U1PBR0 [Eval=5.8E-6][id=42.2%][start=149 end=212]
+-nkpkrplsaffifleefretfkkenptvkasavgkaggekwrslsdaae
+ddeeseksk---------------
+>hmgb_chite_147  UR050|UniRef50_R9PE03 [Eval=2.5E-9][id=40.0%][start=366 end=435]
+--kprrplsayllfvnsvrsqrqtqnpdmplteltaeiaaewreleqrtk
+weaeasllrqqydtaldawk----
+>hmgb_chite_185  UR050|UniRef50_A0A1Q9DT98 [Eval=1.0E-7][id=40.3%][start=198 end=269]
+--qpkrpptawmlwlqenrekiaaalppghvtdvskeagqrwkgaeqkap
+fekkadaekakylkemqhye----
+>hmgb_chite_192  UR050|UniRef50_A0A1I8AQK9 [Eval=5.6E-8][id=42.9%][start=92 end=158]
+---pkrgqsaymfwl--aenrarltepgkpvtevtkkagaewrvltertk
+weemarkdkerydremaef-kng-
+>hmgb_chite_193  UR050|UniRef50_E1Z8L4 [Eval=5.6E-8][id=40.6%][start=306 end=374]
+apkvkrplnaymqyvnanrgqvkadhpelgnkeltsklgelyrgleekkk
+yedaaaadkqryveeve-------
+>hmgb_chite_200  UR050|UniRef50_A0A2U1LND1 [Eval=7.3E-8][id=43.5%][start=100 end=168]
+-nkpkkppsaffvfleefrktfkkenptikvsavgkaggekwkfmsdkap
+yeakaakrskneiigyq-------
+>hmgb_chite_209  UR050|UniRef50_G4LWM1 [Eval=1.0E-7][id=41.9%][start=546 end=619]
+---ptrplsayflwfnenrekiknlggqnsvaevakaageiwrnmdskss
+yqsrvdelkkkyqedlriyqsnlg
+>hmgb_chite_218  UR050|UniRef50_L1IQS6 [Eval=1.7E-7][id=41.4%][start=119 end=176]
+----kksisaywlwshqareeirkenpkmpmkevmqrmgerwkkieekhe
+wedkarsene--------------
+>hmgb_chite_219  UR050|UniRef50_A0A1I7STW3 [Eval=1.9E-7][id=41.5%][start=67 end=131]
+----krplnaymiwtrharddilkknphlkmnevsktmgemwkklddkkp
+fflmarkaaakhkkale-------
+>hmgb_chite_226  UR050|UniRef50_A0A0L0DGI8 [Eval=0.0022][id=40.0%][start=96 end=160]
+atgpkrplnayqvyskrhrdrvtaanpdakhtemfgllseew---knase
+tereackaeaarlra--eye----
+>hmgb_chite_241  UR050|UniRef50_K2SD54 [Eval=4.8E-7][id=42.9%][start=128 end=195]
+---perpasayvifsnqmreslkgqelsf--teiaklvgerwqtlspnsr
+cerqaaaakekyyaelaeykk---
+>hmgb_chite_261  UR050|UniRef50_M7BCL4 [Eval=1.2E-6][id=41.4%][start=39 end=96]
+----krplsafflfmaahrsalkrsnpgwtmveiakklgtmwhqqkdkek
+ykqqaaqlrq--------------
+>hmgb_chite_267  UR050|UniRef50_A0A481YXU9 [Eval=1.4E-6][id=41.4%][start=65 end=122]
+----kgrisgyilfsnenredvnesnpdlkftdvgkelgrmwrelddknd
+wntkaaaqne--------------
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>hmgl_trybr.prf</name>
+<content>>hmgl_trybr
+kkdsnapkramtsfmffssdfrskhsdlsivemskaagaawkelgpeerk
+vyeemaekdkerykrem
+>hmgl_trybr_69  UR050|UniRef50_A0A2P6NRN2 [Eval=2.1E-8][id=40.3%][start=224 end=290]
+kkdpnqpkrpttsfmffanefkekfpklkmteltaklseawkaitptekq
+tfidkaqkdtvry----
+>hmgl_trybr_77  UR050|UniRef50_A0A0J9XI96 [Eval=2.1E-11][id=41.5%][start=67 end=131]
+-kdplkpkgrvtaysfflkayakehnitkvtelgkavgaawksmspqert
+kyeqldredkvryere-
+>hmgl_trybr_85  UR050|UniRef50_A0A158NEW2 [Eval=3.1E-6][id=41.7%][start=95 end=165]
+-kdsk-prgrmtayaffrqehkkkhpeekivefskkcamrwktmsdiekk
+rfhemaekdkkrydtem
+>hmgl_trybr_88  UR050|UniRef50_A0A168SC01 [Eval=3.3E-11][id=40.8%][start=50 end=120]
+krdanapkknvtsylhysnmhrdrhpdlpqteiarllgtewraltpeekq
+vyvkmavddkarfdkem
+>hmgl_trybr_169  UR050|UniRef50_A0A1I8CH36 [Eval=8.5E-10][id=41.4%][start=92 end=161]
+-kdpnepkkaltsyfiwlsanreknpgasatdiaraagkewkelgpddkk
+twelkaaedkiryskam
+>hmgl_trybr_181  UR050|UniRef50_A0A183GK90 [Eval=1.2E-9][id=40.6%][start=12 end=78]
+kkdpnapkraqsaymlwlnemrpkkpgmsvvdvsraagvewatvkdksr-
+-wekmaaeekkryekem
+>hmgl_trybr_194  UR050|UniRef50_B8LC25 [Eval=1.6E-9][id=40.8%][start=5 end=75]
+kkdpnapkrnqsafflyssdvkaaqpdlafgqvaqeisknfkalpdeerk
+ywdekaaadkdryqrem
+>hmgl_trybr_200  UR050|UniRef50_A0A397GP52 [Eval=2.3E-9][id=41.5%][start=263 end=327]
+-kdpkapkkpkspyllfltsimddfrdlkvterskeaakrwnelkpedkk
+pyeelylkdqarykae-
+>hmgl_trybr_223  UR050|UniRef50_A0A316VFA3 [Eval=7.8E-9][id=46.2%][start=234 end=298]
+-rdptkpkapktpffqffsdfrskssdlsvpeaakragaawknltteeke
+pyykihaeereky----
+>hmgl_trybr_230  UR050|UniRef50_A0A0A9WFV4 [Eval=9.6E-9][id=41.4%][start=119 end=188]
+-kdsnapkrpipaffqfskverrrvkemnaveiskelgrlwaeadasvkr
+kyqeladqdkaryerem
+>hmgl_trybr_232  UR050|UniRef50_A0A1U7LRZ3 [Eval=1.1E-8][id=42.9%][start=205 end=274]
+-kdphapkrpanaflkfcdrvrsenegvegfemtkamgvawqnldeegrk
+pyydlyeqdkqryerem
+>hmgl_trybr_234  UR050|UniRef50_R7YSR2 [Eval=1.2E-8][id=40.6%][start=118 end=186]
+kpdenaperpasayvifsndmrekgqdlsfteiaktvgerwqvlspnyrd
+kyerqaaaakekyytel
+>hmgl_trybr_242  UR050|UniRef50_L1JE76 [Eval=2.2E-8][id=41.2%][start=6 end=73]
+kkekegpkralsaymlfsedkrqehkdagnttplkmaaamwkelgdeakk
+pwvdraeelkaqykeq-
+>hmgl_trybr_245  UR050|UniRef50_A0A1C7MZB3 [Eval=2.2E-8][id=40.6%][start=261 end=329]
+kpdkhapikpssayimfsndarskhknmsfvemaklvgdrwkslsneqkq
+dyertamkakdeylnam
+>hmgl_trybr_262  UR050|UniRef50_K0SGR4 [Eval=4.9E-8][id=40.0%][start=47 end=111]
+------pkraraayhyfydatraehpdctlsemsklvsaawkdtpdeeke
+ayramaapdqerygrdl
+>hmgl_trybr_270  UR050|UniRef50_A0A0J1B1R2 [Eval=9.2E-8][id=44.6%][start=1 end=56]
+--------------mffvqdwrsenqdaafadigrllgakwkemspaerk
+pyeekahadkdraare-
+>hmgl_trybr_273  UR050|UniRef50_D5AE07 [Eval=1.0E-7][id=41.1%][start=204 end=273]
+krdpnhpkpnrsgynff---faeqharlkaleiskmigelwnklneeerg
+vyqdfglkdkerykkem
+>hmgl_trybr_275  UR050|UniRef50_S5MXG2 [Eval=4.6E-7][id=40.3%][start=4 end=75]
+-kdknrpkppmtpyacfreehrkkhptgnviefskkcaekwklmnmeqrk
+cfeemakldterfnrem
+>hmgl_trybr_278  UR050|UniRef50_A0A4D8Y739 [Eval=2.8E-7][id=40.8%][start=659 end=729]
+-kdpnkpkrppsaffvfmedfrkqysnksvaavgkaggdkwksltegeka
+pyvaeaekrkeayernm
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>hmgl_wheat.prf</name>
+<content>>hmgl_wheat
+dpnkpkrapsaffvfmgefreefkqknpknksvaavgkaagerwkslses
+ekapyvakanklkgeynkaiaaynkgesa
+>hmgl_wheat_63  UR050|UniRef50_UPI000E6F9214 [Eval=1.1E-9][id=46.0%][start=1 end=63]
+---------------meefsetfkhehpnyksfaivgkaggekwrsmspa
+ergvyeakaearrthyinsiqasdedes-
+>hmgl_wheat_95  UR050|UniRef50_M1BDX1 [Eval=5.3E-5][id=44.4%][start=16 end=60]
+------------------------------ksfdaveklvrdkwkqmsda
+ekapyiaetekrrveyakvlnsynq----
+>hmgl_wheat_181  UR050|UniRef50_A0A2G2XCD7 [Eval=9.0E-15][id=46.8%][start=218 end=295]
+dpekpkmparsiyi-krerrkqfmkdnpknkfetavnragaekwkqlsaa
+ekgpymaeakrkmeeynksnaaynkrvaa
+>hmgl_wheat_199  UR050|UniRef50_A0A2P5DJ49 [Eval=4.0E-14][id=40.5%][start=37 end=113]
+dpnkpkkpakslllfvnefkeqykkehpnepf--alfrrahdkwksmsha
+erapfvgkarkmafeydknmhayllaega
+>hmgl_wheat_261  UR050|UniRef50_A0A2U1MQV0 [Eval=3.0E-12][id=40.8%][start=3 end=73]
+----pkkpptaffyyledfrkefqeqnphvksmsevgkacgekwktmtye
+ekiqyydiatekrakfekdmmdyvk----
+>hmgl_wheat_268  UR050|UniRef50_A0A0E0LQB4 [Eval=2.3E-5][id=44.7%][start=59 end=105]
+-------spsafflfmddfrkdyeekhpadkqvyeigmagdeawksmsdd
+vsa--------------------------
+>hmgl_wheat_286  UR050|UniRef50_I7MKS6 [Eval=1.5E-11][id=40.0%][start=56 end=129]
+dpnapkkpmsaylifcqtrqpeikaknp-dlsfseiskvvgqewrdlsqd
+kkqgyikkeeqlkkeynsklaefnk----
+>hmgl_wheat_304  UR050|UniRef50_V3YWG6 [Eval=2.4E-11][id=41.3%][start=105 end=176]
+denkpkrpqsayflfladfrkkmkgkdienrell---kqagvewgklskd
+qkkpfeklsevekgkydaamaiynk----
+>hmgl_wheat_311  UR050|UniRef50_G4TQG0 [Eval=2.9E-11][id=40.5%][start=114 end=191]
+dpnapkrppsayllyqnairkeikdknptmtyaevlgeis-kmwsglsae
+ekkpyldateiakgeyekskaayeadhta
+>hmgl_wheat_314  UR050|UniRef50_UPI000C7734B6 [Eval=3.7E-11][id=41.6%][start=32 end=107]
+dpnkpkqgmtafflfmnkkrercmaanp-dfsvtevakvlsrqwkemsee
+mkapymlqqekdkirfakemesykqqe--
+>hmgl_wheat_315  UR050|UniRef50_A0A2P6NRN2 [Eval=4.2E-11][id=41.8%][start=226 end=303]
+dpnqpkrpttsfmffanekrpefkekfpklkmteltakls-eawkaitpt
+ekqtfidkaqkdtvryneakkayeegraa
+>hmgl_wheat_346  UR050|UniRef50_A0A1Q9DQJ7 [Eval=2.1E-10][id=40.8%][start=167 end=242]
+dpdapkraggaygiflaenrdkiiktlpkgykiteiskaagvqwkalsek
+eqkpyqekyqkknaeykaameeyqk----
+>hmgl_wheat_350  UR050|UniRef50_UPI000719E288 [Eval=1.3E-8][id=42.5%][start=110 end=186]
+dpnkpkrplsayfrfmaefr---kqvadkgmsvtdiaklggatwtamtes
+ekkpylevdmkifnevnntpgvgkrge--
+>hmgl_wheat_354  UR050|UniRef50_L9KF69 [Eval=2.9E-10][id=41.0%][start=15 end=91]
+dsnapkrppsgfflffsefhpkikssn-hgisirdvaktlgemwnnlsds
+kkqsyitkpaklkerdekdvtdfskgk--
+>hmgl_wheat_360  UR050|UniRef50_UPI000989D17B [Eval=4.1E-10][id=42.1%][start=11 end=85]
+---kpkrppgsflvfmedfrnefnlknp-nqpagfasqagakqwkqmkdd
+ekapfqrkvkelaleyfekkrcynnmes-
+>hmgl_wheat_370  UR050|UniRef50_I0YNS1 [Eval=5.7E-10][id=43.5%][start=20 end=88]
+----prrpksaymffmaefrekwkvdhpevnrvsdvgvaageawrsltpe
+qkavyeeqsvgskatyaaeiaey------
+>hmgl_wheat_389  UR050|UniRef50_A0A2H5PWP4 [Eval=1.2E-9][id=42.0%][start=38 end=118]
+dsnapkrplsayfifmedfrksfkesfpdnksvaangngagdswkstses
+gksssseindeaeqevssqvssyfmg---
+>hmgl_wheat_396  UR050|UniRef50_P87057 [Eval=1.6E-9][id=40.5%][start=12 end=84]
+dpntpkrnmsafmffsienrekmktdnp-datfgqlgsllgkrwkeltst
+erepyeekarqdkeryererkeyd-----
+>hmgl_wheat_405  UR050|UniRef50_A0A3Q2NTM4 [Eval=2.6E-9][id=42.0%][start=28 end=95]
+---------saffvfcseyrpsvkqqyp-glsigdcakklgemwsklsqs
+eklpyeekaqklrekydrvsgssrtsen-
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>hmgt_mouse.prf</name>
+<content>>hmgt_mouse
+kpkrprsayniyvsesfqeakddsaqgklklvneawknlspeekqayiql
+akddrirydnemksweeqmae
+>hmgt_mouse_34  UR050|UniRef50_UPI000333B2AD [Eval=9.6E-19][id=56.3%][start=154 end=224]
+kpkkartayniflseyiqssegatiqdkwksayenwknmsssqkqvyeql
+ahddrvryyneiksweeqmie
+>hmgt_mouse_39  UR050|UniRef50_A0A3B3QYB6 [Eval=1.7E-15][id=46.5%][start=148 end=218]
+kpkrpktglfifiaekypetkgatmltktktlmeewkklnttqkqvylqq
+aedekiryknemkaweehmre
+>hmgt_mouse_43  UR050|UniRef50_A0A1A6GI08 [Eval=1.5E-13][id=72.1%][start=114 end=156]
+--------------ksgknakdesaqgklrtinqawknlssderqayiql
+akddrir--------------
+>hmgt_mouse_44  UR050|UniRef50_S4RPM2 [Eval=4.9E-13][id=43.7%][start=146 end=216]
+kpkrpsvpfnifmadnfkrmtgssqpeklirlrdewsglddmqkqkyqql
+aeddrvrytremaawreqmre
+>hmgt_mouse_46  UR050|UniRef50_A0A1Y3NCY0 [Eval=7.1E-12][id=41.3%][start=16 end=90]
+qpkhpssaflfylregyvaqhptkslgfikliskawkelsdeekaiyvkk
+seedkirynnekkiweeemak
+>hmgt_mouse_48  UR050|UniRef50_A0A3Q0RXS4 [Eval=7.5E-10][id=47.6%][start=80 end=141]
+kpkrpcspfsifmsepfeearvms-qakmkslleewrnlfshekkvytql
+aeddkiyhmveie--------
+>hmgt_mouse_49  UR050|UniRef50_B5X652 [Eval=9.2E-10][id=47.9%][start=150 end=197]
+kpkrprssfnifmaehfeeskgtttqgkmkmlredwtklstsqqqvyv--
+---------------------
+>hmgt_mouse_50  UR050|UniRef50_A0A3Q2US89 [Eval=4.0E-9][id=40.8%][start=271 end=341]
+kpkgkppayaffvadfykehkkkhpeakvklcsekwksmspeekakfkem
+akndkrrydqemksy------
+>hmgt_mouse_51  UR050|UniRef50_V5I0N7 [Eval=0.29][id=43.2%][start=25 end=61]
+---------------------------rvklaamewkaadaetkqkyvql
+aredaaryareykn-------
+>hmgt_mouse_52  UR050|UniRef50_A0A0G4J3E4 [Eval=2.6E-8][id=42.4%][start=35 end=100]
+kpkrplsafmlwskdarpkvkedaafgqlkllgamwkdlsdedkapyvkm
+agedrarydtel---------
+>hmgt_mouse_53  UR050|UniRef50_A7TI63 [Eval=5.8E-8][id=40.3%][start=94 end=155]
+-pkrptnayllfcevnkekirqsgtqdvtkalaeawknlseedrkpyykl
+ysddrerykreme--------
+>hmgt_mouse_55  UR050|UniRef50_A0A498N7L4 [Eval=9.4E-8][id=51.1%][start=101 end=145]
+kpkrprsafnifmsehfdeakgnnmqtkmkslrddwerfsatqkq-----
+---------------------
+>hmgt_mouse_56  UR050|UniRef50_A0A397V5L7 [Eval=5.6E-7][id=41.3%][start=118 end=180]
+-pkrprsafnyfmreifssaahvlpkdrlklvrkkwnelsdsdkdkyfem
+ahadrkryerei---------
+>hmgt_mouse_57  UR050|UniRef50_S9XXD4 [Eval=8.1E-7][id=42.9%][start=106 end=170]
+-pkkpmtsyvrfskeqlplfkaqnpetllfs-----pplymhnskvyiql
+akddkiryynemksweeqmve
+>hmgt_mouse_59  UR050|UniRef50_A0A3B1JD94 [Eval=1.4E-6][id=45.1%][start=7 end=77]
+kpkgrtsayaffvlssrdelkkkspggkfkkcsedwkaltpsekkkfedl
+akadkarydeemksy------
+>hmgt_mouse_60  UR050|UniRef50_A0A077WUB3 [Eval=3.9E-6][id=41.5%][start=59 end=123]
+-pklpksaylifsmehrreakqetdrgkvtllaqkwqalspeekepytvk
+amqekeryirem---------
+>hmgt_mouse_61  UR050|UniRef50_A0A3M7MYG4 [Eval=4.2E-6][id=40.6%][start=155 end=218]
+-pklpqnqfslflqerfqdlkgqsiaeagkrvaqewkdlsptekkayder
+faadriryqdeyk--------
+>hmgt_mouse_62  UR050|UniRef50_A0A1S3K0B4 [Eval=1.9E-5][id=42.3%][start=31 end=101]
+-pkrpttayfyylaeqfqegkhvsnvgafkevskqwrelsasekkpfeal
+sdddrkrydremnmyrk----
+>hmgt_mouse_66  UR050|UniRef50_A0A2S2QEJ1 [Eval=4.4E-4][id=42.9%][start=150 end=211]
+---rpksaymiyymdilqktkkkhpdlkmqviaekyknlspekkqyyidq
+aqklrtey-nem---------
+</content>
+</file>
+<environement>
+HOME_4_TCOFFEE=/Users/cnotredame/
+MANPATH=/sw/share/man:/usr/share/man:/usr/local/share/man:/opt/X11/share/man:/Library/TeX/texbin/man:/Applications/Xcode.app/Contents/Developer/usr/share/man:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/share/man:/sw/lib/perl5/5.18.2/man
+TERM_PROGRAM=Apple_Terminal
+MCOFFEE_4_TCOFFEE=/Users/cnotredame//.t_coffee//mcoffee/
+ROOT_TMP_4_TCOFFEE=/var/tmp/
+SHELL=/bin/bash
+TERM=xterm-256color
+TMPDIR=/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/
+CONDA_SHLVL=1
+PERL5LIB=/sw/lib/perl5:/sw/lib/perl5/darwin
+Apple_PubSub_Socket_Render=/private/tmp/com.apple.launchd.6JzhyrtuKp/Render
+CONDA_PROMPT_MODIFIER=(base) 
+TERM_PROGRAM_VERSION=388.1.3
+OSNAME=macosx
+PERL_BIN=/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms::/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices
+TERM_SESSION_ID=9785BD0D-F6F1-4B59-B0BA-9937FD12A1E7
+METHODS_4_TCOFFEE=/Users/cnotredame//.t_coffee//methods/
+VERSIONER_PERL_VERSION=5.18
+XAPPLRESDIR=/sw/etc/app-defaults/
+http_proxy=
+HTTP_proxy=
+USER=cnotredame
+CONDA_EXE=/Users/cnotredame/anaconda3/bin/conda
+SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.U5mTe2o7m7/Listeners
+__CF_USER_TEXT_ENCODING=0x1F6:0x0:0x0
+ENV_4_TCOFFEE=/Users/cnotredame//.t_coffee//.t_coffee_env
+_CE_CONDA=
+all_proxy=
+ALL_PROXY=
+HTTP_proxy_4_TCOFFEE=
+PATH=/Users/cnotredame//.t_coffee//plugins/macosx/:/Users/cnotredame/anaconda3/bin:/Users/cnotredame/anaconda3/condabin:/opt/local/bin:/opt/local/sbin:/opt/local/bin:/opt/local/sbin:/Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/packages/x3dna-v2.1/bin:/Users/cnotredame/bin/macosx://Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms:.:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices:/Users/cnotredame/bin/Scripts:/Users/cnotredame/Library/Haskell/ghc-7.4.2/lib/epub-tools-2.0.0/bin:/sw/bin:/sw/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/Library/TeX/texbin
+_=/usr/bin/printenv
+CONDA_PREFIX=/Users/cnotredame/anaconda3
+COLOR_4_TCOFFEE=new
+DIR_4_TCOFFEE=/Users/cnotredame//.t_coffee/
+PWD=/private/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/RANDOMSTRINGOgI5ithFcDHPECNQ3I34/data
+CACHE_4_TCOFFEE=/Users/cnotredame//.t_coffee//cache/
+X3DNA=/Users/cnotredame/Dropbox/packages/x3dna-v2.1
+DBUS_LAUNCHD_SESSION_BUS_SOCKET=/private/tmp/com.apple.launchd.DfqaaC2z17/unix_domain_listener
+XPC_FLAGS=0x0
+VERSIONER_PERL_PREFER_32_BIT=no
+_CE_M=
+XPC_SERVICE_NAME=0
+ERRORFILE_4_TCOFFEE=NO
+PLUGINS_4_TCOFFEE=/Users/cnotredame//.t_coffee//plugins/macosx/
+SHLVL=3
+HOME=/Users/cnotredame
+DUMP_4_TCOFFEE=/private/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/RANDOMSTRINGOgI5ithFcDHPECNQ3I34/tcoffee_quickstart.rst.5.dump
+HTTP_PROXY=
+MAFFT_BINARIES=
+CONDA_PYTHON_EXE=/Users/cnotredame/anaconda3/bin/python
+BIN=/Users/cnotredame/bin/macosx
+LOGNAME=cnotredame
+EMAIL_4_TCOFFEE=cedric.notredame@gmail.com
+LC_CTYPE=UTF-8
+CONDA_DEFAULT_ENV=base
+EMAIL=cedric.notredame@gmail.com
+UPDATED_ENV_4_TCOFFEE=1
+INFOPATH=/sw/share/info:/sw/info:/usr/share/info
+DISPLAY=/private/tmp/com.apple.launchd.vef8UzGxBY/org.macosforge.xquartz:0
+TC_MASTER_NODE=1
+NUMBER_OF_PROCESSORS=8
+ALL_proxy=
+LOCKDIR_4_TCOFFEE=/var/tmp/tco/tcohzs8n8tb69365//lck/4lz6pc6ltd/
+TMP_4_TCOFFEE=/var/tmp/tco/tcohzs8n8tb69365/
+USER_BIN=/Users/cnotredame/bin/macosx
+SCRIPT_BIN=/Users/cnotredame/bin/Scripts/
+</environement>
+<DumpStatus>OK</DumpStatus>
+<DumpFile>/private/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/RANDOMSTRINGOgI5ithFcDHPECNQ3I34/tcoffee_quickstart.rst.5.dump</DumpFile>
+<SourceFile>tcoffee_quickstart.rst</SourceFile>
+<SourceLine>48</SourceLine>
+</DumpIO>

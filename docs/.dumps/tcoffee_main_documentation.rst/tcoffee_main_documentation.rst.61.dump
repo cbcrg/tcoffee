@@ -1,0 +1,853 @@
+<DumpIO>
+<nature>standard dump</nature>
+<program>T-COFFEE</program>
+<version>Version_13.39.0.d675aed</version>
+<build>Version_13.39.0.d675aed</build>
+<cl>t_coffee three_cdna.fasta </cl>
+<stack>
+</stack>
+<warning>
+</warning>
+<file>
+<stream>output</stream>
+<name>stdout</name>
+<content>#Single Thread
+#Single Thread
+#Single Thread
+CLUSTAL FORMAT for T-COFFEE Version_13.39.0.d675aed [http://www.tcoffee.org] [MODE:  ], CPU=0.00 sec, SCORE=68, Nseq=3, Len=824 
+
+sp|O35205|GRAK_MOUSE   atgagattctccagttgggcgctagtatctttagtggcaggggtgtatat
+sp|P08884|GRAE_MOUSE   atgcccc----cagt-----gctcata---ctactgactc---ttctttt
+sp|P21844|MCPT5_MOUSE  atgcacttattgactctgcaccttctattattact---------------
+                       ***         * *      **  **    ** *               
+
+sp|O35205|GRAK_MOUSE   gtcctcagaatg------cttcca-ca-ctgagatcataggcggtcgaga
+sp|P08884|GRAE_MOUSE   g-cccctgggcg------ccggcg-cagaggaaataataggagggcatgt
+sp|P21844|MCPT5_MOUSE  ----cttgggatcttcaactaaagccg-gagaaatcataggcgggaccga
+                              *          *      *    ** ** ***** **    * 
+
+sp|O35205|GRAK_MOUSE   ggtgca-acctcatagccgcccgtttatggcctcaatc-------cag-t
+sp|P08884|GRAE_MOUSE   tgtgaa-gccgcactctaggccctatatggcctttgtaaaaagtgtagat
+sp|P21844|MCPT5_MOUSE  -gtgtattccgcacagtcgtccatacatggcttaccttgaaattgtgact
+                        *** *  ** **     * ** *  ***** *   *            *
+
+sp|O35205|GRAK_MOUSE   atcgg-tctaagc---atatttgtggtggggttctaattcacccccaatg
+sp|P08884|GRAE_MOUSE   atcgagggtaatcgccgttattgcggcggttttctagtacaagacgactt
+sp|P21844|MCPT5_MOUSE  tcggaaaactatctgagcgcgtgttctggttttttaatccgcagaaattt
+                          *      * *        **    **  ** ** * *      * * 
+
+sp|O35205|GRAK_MOUSE   ggttttgacggctgcgcactgttactcttggtttcctagaggacattccc
+sp|P08884|GRAE_MOUSE   tgtcctgacggcagcacactgtcggaat---------------cgaacca
+sp|P21844|MCPT5_MOUSE  tgtccttacggcggctcactgtgccgga---------------cgttcta
+                        **  * ***** ** ******                     *   *  
+
+sp|O35205|GRAK_MOUSE   ccactgtggttttaggcgcgcattctctgtcgaaaaatgaaccgatgaag
+sp|P08884|GRAE_MOUSE   tgacggtcaccctcggtgcgcacaacatcaaagctaaagaggagacccaa
+sp|P21844|MCPT5_MOUSE  ttacggttctccttggagcacacaataagacatctaaggaggatacgtgg
+                         ** **     * ** ** **             ** **    *     
+
+sp|O35205|GRAK_MOUSE   cagacatttgagataa-agaagtttattcctttttccagactccaatcag
+sp|P08884|GRAE_MOUSE   cagataatacctgtggcaaaag-ccattcct-cacccggactataacgca
+sp|P21844|MCPT5_MOUSE  caaaaactggaagtcg-aaaag-caattcctacaccctaagtacgatgag
+                       ** * * *     *   * ***   ******    **  * *   *    
+
+sp|O35205|GRAK_MOUSE   gatc-ggccagccacgacattatgttgatcaagctgcgaacggctgccga
+sp|P08884|GRAE_MOUSE   actgcattcttttcagatatcatgttgcttaagcttgagagcaaagcaaa
+sp|P21844|MCPT5_MOUSE  aacctagtggtgcatgatatcatgttgttgaaattgaaagagaaagccaa
+                                      ** ** ****** * **  *          **  *
+
+sp|O35205|GRAK_MOUSE   gctcaataagaacgtgcaattgcttcatctaggctctaaaa--actatct
+sp|P08884|GRAE_MOUSE   gcgcacaaaagcggtaagacctctgaagctccccc-gaccg--aacgcca
+sp|P21844|MCPT5_MOUSE  attaacgttaggtgttggaacactgcctttgtccgctaacttcaatttca
+                           *        **   *   **     *   *   *     *    * 
+
+sp|O35205|GRAK_MOUSE   acgtgatg---gtac-gaagtgtcaagtaacaggatggggaacgacgaaa
+sp|P08884|GRAE_MOUSE   gggtgaagcctggagatgtgtgctccgttgccggctggggatcg-cgaag
+sp|P21844|MCPT5_MOUSE  tccc---acccgggcgtatgtgtagggccgttggctggggcagaacgaat
+                                  *       ***    *     ** *****     **** 
+
+sp|O35205|GRAK_MOUSE   c-cagattt-gctcacggcttcggacaccttgcgcgaagtgacagtgact
+sp|P08884|GRAE_MOUSE   cattaacgatactaaggcctctgcacgg-ctgcgggaggcacaac---tt
+sp|P21844|MCPT5_MOUSE  g-tcaatgagcctgcaagc----gataccctgcaagaggtgaaaa---t-
+                            *     **     *     *     ***  ** *    *      
+
+sp|O35205|GRAK_MOUSE   atcatttcaaggaaacgctgcaattcaca-atcttactacaatcacaaac
+sp|P08884|GRAE_MOUSE   gtca-tacaagaagacgaagagtgtaaaa-agcgttttaga--cattata
+sp|P21844|MCPT5_MOUSE  gcgg-ctccaggaaccacaggcatgcaaacactttactagt--t-tt---
+                              * ** *  *   *      * * *   *  **           
+
+sp|O35205|GRAK_MOUSE   ctgtcatcacgaagg--atatgatctgtgcaggagatg-caagaggccaa
+sp|P08884|GRAE_MOUSE   ctga---gacgacgg--aa---atttgtgccggcgatctgaagaagatc-
+sp|P21844|MCPT5_MOUSE  -cga---cataacagtcaa---ctttgcgtcggcaatcccaagaaaatg-
+                         *     *  *  *  *     * ** *  **  **   ****      
+
+sp|O35205|GRAK_MOUSE   aaggactcttgtaaaggtgattcaggaggcccgttgatctgtaaagggat
+sp|P08884|GRAE_MOUSE   aagacccccttcaaaggtgacagtggaggcccgttagtgtgcgataacaa
+sp|P21844|MCPT5_MOUSE  cagaacgtatacaaaggggacagtgggggaccattgttgtgcgcgggcat
+                        **  *   *  ***** **    ** ** ** **  * **       * 
+
+sp|O35205|GRAK_MOUSE   atttcatgccctcgtctcacagggatacaagtgtggaattgccaaaaagc
+sp|P08884|GRAE_MOUSE   agcctacggcctattagcgtacgcaaaaaa---c---agaacaataagtt
+sp|P21844|MCPT5_MOUSE  cgcccaaggaattgcctcttatgtccaccg---t---aatgcgaaacccc
+                            * *   *     *  * *   *          *   * * *    
+
+sp|O35205|GRAK_MOUSE   caggtatctacacgctcctaacaaagaagtatcagacttggattaagtct
+sp|P08884|GRAE_MOUSE   cgggggttttcacca---agatcgtgcactttctgccctggata-agccg
+sp|P21844|MCPT5_MOUSE  ctgctgtcttcacta---gaatttcacactaccgcccatggatt-aataa
+                       * *   * * ***       *      * *  *   * *****  *    
+
+sp|O35205|GRAK_MOUSE   aagcttgctcctagtcgtgcgcat
+sp|P08884|GRAE_MOUSE   caacatg----aag----ctgtta
+sp|P21844|MCPT5_MOUSE  gattctc----agg----gaaaac
+                        *   *       *          
+
+
+
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>stderr</name>
+<content>
+PROGRAM: T-COFFEE Version_13.39.0.d675aed (Version_13.39.0.d675aed)
+-full_log      	S	[0] 
+-genepred_score	S	[0] 	nsd
+-run_name      	S	[0] 
+-mem_mode      	S	[0] 	mem
+-extend        	D	[1] 	1 
+-extend_mode   	S	[0] 	very_fast_triplet
+-max_n_pair    	D	[0] 	10 
+-seq_name_for_quadruplet	S	[0] 	all
+-compact       	S	[0] 	default
+-clean         	S	[0] 	no
+-do_self       	FL	[0] 	0
+-do_normalise  	D	[0] 	1000 
+-template_file 	S	[0] 
+-setenv        	S	[0] 	0
+-export        	S	[0] 	0
+-template_mode 	S	[0] 
+-flip          	D	[0] 	0 
+-remove_template_file	D	[0] 	0 
+-profile_template_file	S	[0] 
+-in            	S	[0] 
+-seq           	S	[1] 	three_cdna.fasta
+-aln           	S	[0] 
+-method_limits 	S	[0] 
+-method        	S	[0] 
+-lib           	S	[0] 
+-profile       	S	[0] 
+-profile1      	S	[0] 
+-profile2      	S	[0] 
+-pdb           	S	[0] 
+-relax_lib     	D	[0] 	1 
+-filter_lib    	D	[0] 	0 
+-shrink_lib    	D	[0] 	0 
+-out_lib       	W_F	[0] 	no
+-out_lib_mode  	S	[0] 	primary
+-lib_only      	D	[0] 	0 
+-outseqweight  	W_F	[0] 	no
+-seq_source    	S	[0] 	ANY
+-cosmetic_penalty	D	[0] 	0 
+-gapopen       	D	[0] 	0 
+-gapext        	D	[0] 	0 
+-fgapopen      	D	[0] 	0 
+-fgapext       	D	[0] 	0 
+-nomatch       	D	[0] 	0 
+-newtree       	W_F	[0] 	default
+-tree          	W_F	[0] 	NO
+-usetree       	R_F	[0] 
+-tree_mode     	S	[0] 	nj
+-distance_matrix_mode	S	[0] 	ktup
+-distance_matrix_sim_mode	S	[0] 	idmat_sim1
+-quicktree     	FL	[0] 	0
+-outfile       	W_F	[0] 	default
+-maximise      	FL	[1] 	1
+-output        	S	[0] 	aln	html
+-len           	D	[0] 	0 
+-infile        	R_F	[0] 
+-matrix        	S	[0] 	default
+-tg_mode       	D	[0] 	1 
+-profile_mode  	S	[0] 	cw_profile_profile
+-profile_comparison	S	[0] 	profile
+-dp_mode       	S	[0] 	linked_pair_wise
+-ktuple        	D	[0] 	1 
+-ndiag         	D	[0] 	0 
+-diag_threshold	D	[0] 	0 
+-diag_mode     	D	[0] 	0 
+-sim_matrix    	S	[0] 	vasiliky
+-transform     	S	[0] 
+-extend_seq    	FL	[0] 	0
+-outorder      	S	[0] 	input
+-inorder       	S	[0] 	aligned
+-seqnos        	S	[0] 	off
+-case          	S	[0] 	keep
+-cpu           	D	[0] 	0 
+-ulimit        	D	[0] 	-1 
+-maxnseq       	D	[0] 	-1 
+-maxlen        	D	[0] 	-1 
+-sample_dp     	D	[0] 	0 
+-weight        	S	[0] 	default
+-seq_weight    	S	[0] 	no
+-align         	FL	[1] 	1
+-mocca         	FL	[0] 	0
+-domain        	FL	[0] 	0
+-start         	D	[0] 	0 
+-len           	D	[0] 	0 
+-scale         	D	[0] 	0 
+-mocca_interactive	FL	[0] 	0
+-method_evaluate_mode	S	[0] 	default
+-color_mode    	S	[0] 	new
+-aln_line_length	D	[0] 	0 
+-evaluate_mode 	S	[0] 	triplet
+-get_type      	FL	[0] 	0
+-clean_aln     	D	[0] 	0 
+-clean_threshold	D	[1] 	1 
+-clean_iteration	D	[1] 	1 
+-clean_evaluate_mode	S	[0] 	t_coffee_fast
+-extend_matrix 	FL	[0] 	0
+-prot_min_sim  	D	[40] 	40 
+-prot_max_sim  	D	[90] 	90 
+-prot_trim     	D	[20] 	20 
+-prot_min_cov  	D	[40] 	40 
+-pdb_type      	S	[0] 	d
+-pdb_min_sim   	D	[35] 	35 
+-pdb_max_sim   	D	[100] 	100 
+-pdb_min_cov   	D	[50] 	50 
+-pdb_blast_server	W_F	[0] 	EBI
+-blast         	W_F	[0] 
+-blast_server  	W_F	[0] 	EBI
+-pdb_db        	W_F	[0] 	pdb
+-protein_db    	W_F	[0] 	uniref50
+-method_log    	W_F	[0] 	no
+-struc_to_use  	S	[0] 
+-cache         	W_F	[0] 	use
+-print_cache   	FL	[0] 	0
+-align_pdb_param_file	W_F	[0] 	no
+-align_pdb_hasch_mode	W_F	[0] 	hasch_ca_trace_bubble
+-external_aligner	S	[0] 	NO
+-msa_mode      	S	[0] 	tree
+-et_mode       	S	[0] 	et
+-master        	S	[0] 	no
+-blast_nseq    	D	[0] 	0 
+-lalign_n_top  	D	[0] 	10 
+-iterate       	D	[0] 	0 
+-trim          	D	[0] 	0 
+-split         	D	[0] 	0 
+-trimfile      	S	[0] 	default
+-split         	D	[0] 	0 
+-split_nseq_thres	D	[0] 	0 
+-split_score_thres	D	[0] 	0 
+-check_pdb_status	D	[0] 	0 
+-clean_seq_name	D	[0] 	0 
+-seq_to_keep   	S	[0] 
+-dpa_master_aln	S	[0] 
+-dpa_maxnseq   	D	[0] 	0 
+-dpa_min_score1	D	[0] 
+-dpa_min_score2	D	[0] 
+-dpa_keep_tmpfile	FL	[0] 	0
+-dpa_debug     	D	[0] 	0 
+-multi_core    	S	[0] 	templates_jobs_relax_msa_evaluate
+-n_core        	D	[0] 	1 
+-thread        	D	[0] 	1 
+-max_n_proc    	D	[0] 	0 
+-lib_list      	S	[0] 
+-prune_lib_mode	S	[0] 	5
+-tip           	S	[0] 	none
+-rna_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) three_cdna.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 3 SEQUENCES  [DNA]
+  Input File three_cdna.fasta      Seq sp|O35205|GRAK_MOUSE  Length  789 type DNA Struct Unchecked
+  Input File three_cdna.fasta      Seq sp|P08884|GRAE_MOUSE  Length  744 type DNA Struct Unchecked
+  Input File three_cdna.fasta      Seq sp|P21844|MCPT5_MOUSE Length  741 type DNA Struct Unchecked
+
+	Multi Core Mode: 1 processors:
+ 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) three_cdna.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 3 SEQUENCES  [DNA]
+  Input File three_cdna.fasta      Seq sp|O35205|GRAK_MOUSE  Length  789 type DNA Struct Unchecked
+  Input File three_cdna.fasta      Seq sp|P08884|GRAE_MOUSE  Length  744 type DNA Struct Unchecked
+  Input File three_cdna.fasta      Seq sp|P21844|MCPT5_MOUSE Length  741 type DNA Struct Unchecked
+
+	Multi Core Mode: 1 processors:
+
+	--- Process Method/Library/Aln Sthree_cdna.fasta
+	xxx Retrieved Sthree_cdna.fasta 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) three_cdna.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 3 SEQUENCES  [DNA]
+  Input File three_cdna.fasta      Seq sp|O35205|GRAK_MOUSE  Length  789 type DNA Struct Unchecked
+  Input File three_cdna.fasta      Seq sp|P08884|GRAE_MOUSE  Length  744 type DNA Struct Unchecked
+  Input File three_cdna.fasta      Seq sp|P21844|MCPT5_MOUSE Length  741 type DNA Struct Unchecked
+
+	Multi Core Mode: 1 processors:
+
+	--- Process Method/Library/Aln Sthree_cdna.fasta
+	xxx Retrieved Sthree_cdna.fasta 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) three_cdna.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 3 SEQUENCES  [DNA]
+  Input File three_cdna.fasta      Seq sp|O35205|GRAK_MOUSE  Length  789 type DNA Struct Unchecked
+  Input File three_cdna.fasta      Seq sp|P08884|GRAE_MOUSE  Length  744 type DNA Struct Unchecked
+  Input File three_cdna.fasta      Seq sp|P21844|MCPT5_MOUSE Length  741 type DNA Struct Unchecked
+
+	Multi Core Mode: 1 processors:
+
+	--- Process Method/Library/Aln Sthree_cdna.fasta
+	xxx Retrieved Sthree_cdna.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [16698]
+
+Library Relaxation: Multi_proc [1]
+ 
+!		[Relax Library][TOT=    3][  0 %]!		[Relax Library][TOT=    3][ 66 %]!		[Relax Library][TOT=    3][100 %]
+ 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) three_cdna.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 3 SEQUENCES  [DNA]
+  Input File three_cdna.fasta      Seq sp|O35205|GRAK_MOUSE  Length  789 type DNA Struct Unchecked
+  Input File three_cdna.fasta      Seq sp|P08884|GRAE_MOUSE  Length  744 type DNA Struct Unchecked
+  Input File three_cdna.fasta      Seq sp|P21844|MCPT5_MOUSE Length  741 type DNA Struct Unchecked
+
+	Multi Core Mode: 1 processors:
+
+	--- Process Method/Library/Aln Sthree_cdna.fasta
+	xxx Retrieved Sthree_cdna.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [16698]
+
+Library Relaxation: Multi_proc [1]
+ 
+Relaxation Summary: [16698]--->[10790]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: sp|O35205|GRAK_MOUSE
+Group    2: sp|P08884|GRAE_MOUSE
+Group    3: sp|P21844|MCPT5_MOUSE
+
+ 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) three_cdna.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 3 SEQUENCES  [DNA]
+  Input File three_cdna.fasta      Seq sp|O35205|GRAK_MOUSE  Length  789 type DNA Struct Unchecked
+  Input File three_cdna.fasta      Seq sp|P08884|GRAE_MOUSE  Length  744 type DNA Struct Unchecked
+  Input File three_cdna.fasta      Seq sp|P21844|MCPT5_MOUSE Length  741 type DNA Struct Unchecked
+
+	Multi Core Mode: 1 processors:
+
+	--- Process Method/Library/Aln Sthree_cdna.fasta
+	xxx Retrieved Sthree_cdna.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [16698]
+
+Library Relaxation: Multi_proc [1]
+ 
+Relaxation Summary: [16698]--->[10790]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: sp|O35205|GRAK_MOUSE
+Group    2: sp|P08884|GRAE_MOUSE
+Group    3: sp|P21844|MCPT5_MOUSE
+
+
+	Group    4: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  811][PID:82359] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) three_cdna.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 3 SEQUENCES  [DNA]
+  Input File three_cdna.fasta      Seq sp|O35205|GRAK_MOUSE  Length  789 type DNA Struct Unchecked
+  Input File three_cdna.fasta      Seq sp|P08884|GRAE_MOUSE  Length  744 type DNA Struct Unchecked
+  Input File three_cdna.fasta      Seq sp|P21844|MCPT5_MOUSE Length  741 type DNA Struct Unchecked
+
+	Multi Core Mode: 1 processors:
+
+	--- Process Method/Library/Aln Sthree_cdna.fasta
+	xxx Retrieved Sthree_cdna.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [16698]
+
+Library Relaxation: Multi_proc [1]
+ 
+Relaxation Summary: [16698]--->[10790]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: sp|O35205|GRAK_MOUSE
+Group    2: sp|P08884|GRAE_MOUSE
+Group    3: sp|P21844|MCPT5_MOUSE
+
+
+	Group    4: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  811][PID:82359]
+	Group    5: [Group    3 (   1 seq)] with [Group    4 (   2 seq)]-->[Len=  824][PID:82359]
+
+
+!		[Final Evaluation][TOT=  824][  0 %]!		[Final Evaluation][TOT=  824][  1 %]!		[Final Evaluation][TOT=  824][  2 %]!		[Final Evaluation][TOT=  824][  3 %]!		[Final Evaluation][TOT=  824][  4 %]!		[Final Evaluation][TOT=  824][  5 %]!		[Final Evaluation][TOT=  824][  6 %]!		[Final Evaluation][TOT=  824][  7 %]!		[Final Evaluation][TOT=  824][  8 %]!		[Final Evaluation][TOT=  824][  9 %]!		[Final Evaluation][TOT=  824][ 10 %]!		[Final Evaluation][TOT=  824][ 11 %]!		[Final Evaluation][TOT=  824][ 12 %]!		[Final Evaluation][TOT=  824][ 13 %]!		[Final Evaluation][TOT=  824][ 14 %]!		[Final Evaluation][TOT=  824][ 15 %]!		[Final Evaluation][TOT=  824][ 16 %]!		[Final Evaluation][TOT=  824][ 17 %]!		[Final Evaluation][TOT=  824][ 18 %]!		[Final Evaluation][TOT=  824][ 19 %]!		[Final Evaluation][TOT=  824][ 20 %]!		[Final Evaluation][TOT=  824][ 21 %]!		[Final Evaluation][TOT=  824][ 22 %]!		[Final Evaluation][TOT=  824][ 23 %]!		[Final Evaluation][TOT=  824][ 24 %]!		[Final Evaluation][TOT=  824][ 25 %]!		[Final Evaluation][TOT=  824][ 26 %]!		[Final Evaluation][TOT=  824][ 27 %]!		[Final Evaluation][TOT=  824][ 28 %]!		[Final Evaluation][TOT=  824][ 29 %]!		[Final Evaluation][TOT=  824][ 30 %]!		[Final Evaluation][TOT=  824][ 31 %]!		[Final Evaluation][TOT=  824][ 32 %]!		[Final Evaluation][TOT=  824][ 33 %]!		[Final Evaluation][TOT=  824][ 34 %]!		[Final Evaluation][TOT=  824][ 35 %]!		[Final Evaluation][TOT=  824][ 36 %]!		[Final Evaluation][TOT=  824][ 37 %]!		[Final Evaluation][TOT=  824][ 38 %]!		[Final Evaluation][TOT=  824][ 39 %]!		[Final Evaluation][TOT=  824][ 40 %]!		[Final Evaluation][TOT=  824][ 41 %]!		[Final Evaluation][TOT=  824][ 42 %]!		[Final Evaluation][TOT=  824][ 43 %]!		[Final Evaluation][TOT=  824][ 44 %]!		[Final Evaluation][TOT=  824][ 45 %]!		[Final Evaluation][TOT=  824][ 46 %]!		[Final Evaluation][TOT=  824][ 47 %]!		[Final Evaluation][TOT=  824][ 48 %]!		[Final Evaluation][TOT=  824][ 49 %]!		[Final Evaluation][TOT=  824][ 50 %]!		[Final Evaluation][TOT=  824][ 51 %]!		[Final Evaluation][TOT=  824][ 52 %]!		[Final Evaluation][TOT=  824][ 53 %]!		[Final Evaluation][TOT=  824][ 54 %]!		[Final Evaluation][TOT=  824][ 55 %]!		[Final Evaluation][TOT=  824][ 56 %]!		[Final Evaluation][TOT=  824][ 57 %]!		[Final Evaluation][TOT=  824][ 58 %]!		[Final Evaluation][TOT=  824][ 59 %]!		[Final Evaluation][TOT=  824][ 60 %]!		[Final Evaluation][TOT=  824][ 61 %]!		[Final Evaluation][TOT=  824][ 62 %]!		[Final Evaluation][TOT=  824][ 63 %]!		[Final Evaluation][TOT=  824][ 64 %]!		[Final Evaluation][TOT=  824][ 65 %]!		[Final Evaluation][TOT=  824][ 66 %]!		[Final Evaluation][TOT=  824][ 67 %]!		[Final Evaluation][TOT=  824][ 68 %]!		[Final Evaluation][TOT=  824][ 69 %]!		[Final Evaluation][TOT=  824][ 70 %]!		[Final Evaluation][TOT=  824][ 71 %]!		[Final Evaluation][TOT=  824][ 72 %]!		[Final Evaluation][TOT=  824][ 73 %]!		[Final Evaluation][TOT=  824][ 74 %]!		[Final Evaluation][TOT=  824][ 75 %]!		[Final Evaluation][TOT=  824][ 76 %]!		[Final Evaluation][TOT=  824][ 77 %]!		[Final Evaluation][TOT=  824][ 78 %]!		[Final Evaluation][TOT=  824][ 79 %]!		[Final Evaluation][TOT=  824][ 80 %]!		[Final Evaluation][TOT=  824][ 81 %]!		[Final Evaluation][TOT=  824][ 82 %]!		[Final Evaluation][TOT=  824][ 83 %]!		[Final Evaluation][TOT=  824][ 84 %]!		[Final Evaluation][TOT=  824][ 85 %]!		[Final Evaluation][TOT=  824][ 86 %]!		[Final Evaluation][TOT=  824][ 87 %]!		[Final Evaluation][TOT=  824][ 88 %]!		[Final Evaluation][TOT=  824][ 89 %]!		[Final Evaluation][TOT=  824][ 90 %]!		[Final Evaluation][TOT=  824][ 91 %]!		[Final Evaluation][TOT=  824][ 92 %]!		[Final Evaluation][TOT=  824][ 93 %]!		[Final Evaluation][TOT=  824][ 94 %]!		[Final Evaluation][TOT=  824][ 95 %]!		[Final Evaluation][TOT=  824][ 96 %]!		[Final Evaluation][TOT=  824][ 97 %]!		[Final Evaluation][TOT=  824][ 98 %]!		[Final Evaluation][TOT=  824][ 99 %]!		[Final Evaluation][TOT=  824][100 %]
+
+
+
+OUTPUT RESULTS
+	#### File Type= GUIDE_TREE      Format= newick          Name= three_cdna.dnd
+	#### File Type= MSA             Format= aln             Name= three_cdna.aln
+	#### File Type= MSA             Format= html            Name= three_cdna.html
+
+# Command Line: t_coffee three_cdna.fasta  [PROGRAM:T-COFFEE]
+# T-COFFEE Memory Usage: Current= 32.199 Mb, Max= 33.484 Mb
+# Results Produced with T-COFFEE Version_13.39.0.d675aed (Version_13.39.0.d675aed)
+# T-COFFEE is available from http://www.tcoffee.org
+# Register on: https://groups.google.com/group/tcoffee/
+</content>
+</file>
+<file>
+<stream>input</stream>
+<name>three_cdna.fasta</name>
+<content>>sp|O35205|GRAK_MOUSE
+atgagattctccagttgggcgctagtatctttagtggcaggggtgtatat
+gtcctcagaatgcttccacactgagatcataggcggtcgagaggtgcaac
+ctcatagccgcccgtttatggcctcaatccagtatcggtctaagcatatt
+tgtggtggggttctaattcacccccaatgggttttgacggctgcgcactg
+ttactcttggtttcctagaggacattcccccactgtggttttaggcgcgc
+attctctgtcgaaaaatgaaccgatgaagcagacatttgagataaagaag
+tttattcctttttccagactccaatcaggatcggccagccacgacattat
+gttgatcaagctgcgaacggctgccgagctcaataagaacgtgcaattgc
+ttcatctaggctctaaaaactatctacgtgatggtacgaagtgtcaagta
+acaggatggggaacgacgaaaccagatttgctcacggcttcggacacctt
+gcgcgaagtgacagtgactatcatttcaaggaaacgctgcaattcacaat
+cttactacaatcacaaacctgtcatcacgaaggatatgatctgtgcagga
+gatgcaagaggccaaaaggactcttgtaaaggtgattcaggaggcccgtt
+gatctgtaaagggatatttcatgccctcgtctcacagggatacaagtgtg
+gaattgccaaaaagccaggtatctacacgctcctaacaaagaagtatcag
+acttggattaagtctaagcttgctcctagtcgtgcgcat
+>sp|P08884|GRAE_MOUSE
+atgcccccagtgctcatactactgactcttcttttgcccctgggcgccgg
+cgcagaggaaataataggagggcatgttgtgaagccgcactctaggccct
+atatggcctttgtaaaaagtgtagatatcgagggtaatcgccgttattgc
+ggcggttttctagtacaagacgactttgtcctgacggcagcacactgtcg
+gaatcgaaccatgacggtcaccctcggtgcgcacaacatcaaagctaaag
+aggagacccaacagataatacctgtggcaaaagccattcctcacccggac
+tataacgcaactgcattcttttcagatatcatgttgcttaagcttgagag
+caaagcaaagcgcacaaaagcggtaagacctctgaagctcccccgaccga
+acgccagggtgaagcctggagatgtgtgctccgttgccggctggggatcg
+cgaagcattaacgatactaaggcctctgcacggctgcgggaggcacaact
+tgtcatacaagaagacgaagagtgtaaaaagcgttttagacattatactg
+agacgacggaaatttgtgccggcgatctgaagaagatcaagacccccttc
+aaaggtgacagtggaggcccgttagtgtgcgataacaaagcctacggcct
+attagcgtacgcaaaaaacagaacaataagttcgggggttttcaccaaga
+tcgtgcactttctgccctggataagccgcaacatgaagctgtta
+>sp|P21844|MCPT5_MOUSE
+atgcacttattgactctgcaccttctattattactcttgggatcttcaac
+taaagccggagaaatcataggcgggaccgagtgtattccgcacagtcgtc
+catacatggcttaccttgaaattgtgacttcggaaaactatctgagcgcg
+tgttctggttttttaatccgcagaaattttgtccttacggcggctcactg
+tgccggacgttctattacggttctccttggagcacacaataagacatcta
+aggaggatacgtggcaaaaactggaagtcgaaaagcaattcctacaccct
+aagtacgatgagaacctagtggtgcatgatatcatgttgttgaaattgaa
+agagaaagccaaattaacgttaggtgttggaacactgcctttgtccgcta
+acttcaatttcatcccacccgggcgtatgtgtagggccgttggctggggc
+agaacgaatgtcaatgagcctgcaagcgataccctgcaagaggtgaaaat
+gcggctccaggaaccacaggcatgcaaacactttactagttttcgacata
+acagtcaactttgcgtcggcaatcccaagaaaatgcagaacgtatacaaa
+ggggacagtgggggaccattgttgtgcgcgggcatcgcccaaggaattgc
+ctcttatgtccaccgtaatgcgaaaccccctgctgtcttcactagaattt
+cacactaccgcccatggattaataagattctcagggaaaac
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>three_cdna.dnd</name>
+<content>(sp|O35205|GRAK_MOUSE:0.12000,sp|P08884|GRAE_MOUSE:0.12000,sp|P21844|MCPT5_MOUSE:0.13000);</content>
+</file>
+<file>
+<stream>input</stream>
+<name>three_cdna.dnd</name>
+<content>(sp|O35205|GRAK_MOUSE:0.12000,sp|P08884|GRAE_MOUSE:0.12000,sp|P21844|MCPT5_MOUSE:0.13000);</content>
+</file>
+<file>
+<stream>output</stream>
+<name>three_cdna.aln</name>
+<content>CLUSTAL FORMAT for T-COFFEE Version_13.39.0.d675aed [http://www.tcoffee.org] [MODE:  ], CPU=0.00 sec, SCORE=68, Nseq=3, Len=824 
+
+sp|O35205|GRAK_MOUSE   atgagattctccagttgggcgctagtatctttagtggcaggggtgtatat
+sp|P08884|GRAE_MOUSE   atgcccc----cagt-----gctcata---ctactgactc---ttctttt
+sp|P21844|MCPT5_MOUSE  atgcacttattgactctgcaccttctattattact---------------
+                       ***         * *      **  **    ** *               
+
+sp|O35205|GRAK_MOUSE   gtcctcagaatg------cttcca-ca-ctgagatcataggcggtcgaga
+sp|P08884|GRAE_MOUSE   g-cccctgggcg------ccggcg-cagaggaaataataggagggcatgt
+sp|P21844|MCPT5_MOUSE  ----cttgggatcttcaactaaagccg-gagaaatcataggcgggaccga
+                              *          *      *    ** ** ***** **    * 
+
+sp|O35205|GRAK_MOUSE   ggtgca-acctcatagccgcccgtttatggcctcaatc-------cag-t
+sp|P08884|GRAE_MOUSE   tgtgaa-gccgcactctaggccctatatggcctttgtaaaaagtgtagat
+sp|P21844|MCPT5_MOUSE  -gtgtattccgcacagtcgtccatacatggcttaccttgaaattgtgact
+                        *** *  ** **     * ** *  ***** *   *            *
+
+sp|O35205|GRAK_MOUSE   atcgg-tctaagc---atatttgtggtggggttctaattcacccccaatg
+sp|P08884|GRAE_MOUSE   atcgagggtaatcgccgttattgcggcggttttctagtacaagacgactt
+sp|P21844|MCPT5_MOUSE  tcggaaaactatctgagcgcgtgttctggttttttaatccgcagaaattt
+                          *      * *        **    **  ** ** * *      * * 
+
+sp|O35205|GRAK_MOUSE   ggttttgacggctgcgcactgttactcttggtttcctagaggacattccc
+sp|P08884|GRAE_MOUSE   tgtcctgacggcagcacactgtcggaat---------------cgaacca
+sp|P21844|MCPT5_MOUSE  tgtccttacggcggctcactgtgccgga---------------cgttcta
+                        **  * ***** ** ******                     *   *  
+
+sp|O35205|GRAK_MOUSE   ccactgtggttttaggcgcgcattctctgtcgaaaaatgaaccgatgaag
+sp|P08884|GRAE_MOUSE   tgacggtcaccctcggtgcgcacaacatcaaagctaaagaggagacccaa
+sp|P21844|MCPT5_MOUSE  ttacggttctccttggagcacacaataagacatctaaggaggatacgtgg
+                         ** **     * ** ** **             ** **    *     
+
+sp|O35205|GRAK_MOUSE   cagacatttgagataa-agaagtttattcctttttccagactccaatcag
+sp|P08884|GRAE_MOUSE   cagataatacctgtggcaaaag-ccattcct-cacccggactataacgca
+sp|P21844|MCPT5_MOUSE  caaaaactggaagtcg-aaaag-caattcctacaccctaagtacgatgag
+                       ** * * *     *   * ***   ******    **  * *   *    
+
+sp|O35205|GRAK_MOUSE   gatc-ggccagccacgacattatgttgatcaagctgcgaacggctgccga
+sp|P08884|GRAE_MOUSE   actgcattcttttcagatatcatgttgcttaagcttgagagcaaagcaaa
+sp|P21844|MCPT5_MOUSE  aacctagtggtgcatgatatcatgttgttgaaattgaaagagaaagccaa
+                                      ** ** ****** * **  *          **  *
+
+sp|O35205|GRAK_MOUSE   gctcaataagaacgtgcaattgcttcatctaggctctaaaa--actatct
+sp|P08884|GRAE_MOUSE   gcgcacaaaagcggtaagacctctgaagctccccc-gaccg--aacgcca
+sp|P21844|MCPT5_MOUSE  attaacgttaggtgttggaacactgcctttgtccgctaacttcaatttca
+                           *        **   *   **     *   *   *     *    * 
+
+sp|O35205|GRAK_MOUSE   acgtgatg---gtac-gaagtgtcaagtaacaggatggggaacgacgaaa
+sp|P08884|GRAE_MOUSE   gggtgaagcctggagatgtgtgctccgttgccggctggggatcg-cgaag
+sp|P21844|MCPT5_MOUSE  tccc---acccgggcgtatgtgtagggccgttggctggggcagaacgaat
+                                  *       ***    *     ** *****     **** 
+
+sp|O35205|GRAK_MOUSE   c-cagattt-gctcacggcttcggacaccttgcgcgaagtgacagtgact
+sp|P08884|GRAE_MOUSE   cattaacgatactaaggcctctgcacgg-ctgcgggaggcacaac---tt
+sp|P21844|MCPT5_MOUSE  g-tcaatgagcctgcaagc----gataccctgcaagaggtgaaaa---t-
+                            *     **     *     *     ***  ** *    *      
+
+sp|O35205|GRAK_MOUSE   atcatttcaaggaaacgctgcaattcaca-atcttactacaatcacaaac
+sp|P08884|GRAE_MOUSE   gtca-tacaagaagacgaagagtgtaaaa-agcgttttaga--cattata
+sp|P21844|MCPT5_MOUSE  gcgg-ctccaggaaccacaggcatgcaaacactttactagt--t-tt---
+                              * ** *  *   *      * * *   *  **           
+
+sp|O35205|GRAK_MOUSE   ctgtcatcacgaagg--atatgatctgtgcaggagatg-caagaggccaa
+sp|P08884|GRAE_MOUSE   ctga---gacgacgg--aa---atttgtgccggcgatctgaagaagatc-
+sp|P21844|MCPT5_MOUSE  -cga---cataacagtcaa---ctttgcgtcggcaatcccaagaaaatg-
+                         *     *  *  *  *     * ** *  **  **   ****      
+
+sp|O35205|GRAK_MOUSE   aaggactcttgtaaaggtgattcaggaggcccgttgatctgtaaagggat
+sp|P08884|GRAE_MOUSE   aagacccccttcaaaggtgacagtggaggcccgttagtgtgcgataacaa
+sp|P21844|MCPT5_MOUSE  cagaacgtatacaaaggggacagtgggggaccattgttgtgcgcgggcat
+                        **  *   *  ***** **    ** ** ** **  * **       * 
+
+sp|O35205|GRAK_MOUSE   atttcatgccctcgtctcacagggatacaagtgtggaattgccaaaaagc
+sp|P08884|GRAE_MOUSE   agcctacggcctattagcgtacgcaaaaaa---c---agaacaataagtt
+sp|P21844|MCPT5_MOUSE  cgcccaaggaattgcctcttatgtccaccg---t---aatgcgaaacccc
+                            * *   *     *  * *   *          *   * * *    
+
+sp|O35205|GRAK_MOUSE   caggtatctacacgctcctaacaaagaagtatcagacttggattaagtct
+sp|P08884|GRAE_MOUSE   cgggggttttcacca---agatcgtgcactttctgccctggata-agccg
+sp|P21844|MCPT5_MOUSE  ctgctgtcttcacta---gaatttcacactaccgcccatggatt-aataa
+                       * *   * * ***       *      * *  *   * *****  *    
+
+sp|O35205|GRAK_MOUSE   aagcttgctcctagtcgtgcgcat
+sp|P08884|GRAE_MOUSE   caacatg----aag----ctgtta
+sp|P21844|MCPT5_MOUSE  gattctc----agg----gaaaac
+                        *   *       *          
+
+
+
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>three_cdna.html</name>
+<content><html>
+<style>
+SPAN { font-family: courier new, courier-new, courier, monospace; font-weight: bold; font-size: 11pt;}
+SPAN { line-height:100%}
+SPAN {	white-space: pre}
+SPAN.value0 {background: #9B92FF}
+SPAN.value1 {background: #B4FFB4}
+SPAN.value2 {background: #BEFFBE}
+SPAN.value3 {background: #C8FFC8}
+SPAN.value4 {background: #FFFFB7}
+SPAN.value5 {background: #FFFFAD}
+SPAN.value6 {background: #FFFFAD}
+SPAN.value7 {background: #FFE6E6}
+SPAN.value8 {background: #FFDCDC}
+SPAN.value9 {background: #FFC8C8}
+SPAN.valuedefault {}
+SPAN.valuegap {}
+SPAN.valueink {background: 000000}
+</style><body><span class=valuedefault>T-COFFEE,&nbsp;Version_13.39.0.d675aed&nbsp;(Version_13.39.0.d675aed)</span><br><span class=valuedefault>Cedric&nbsp;Notredame&nbsp;</span><br><span class=valuedefault>CPU&nbsp;TIME:0&nbsp;sec.</span><br><span class=valuedefault>SCORE=68</span><br><span class=valuedefault>*</span><br><span class=valuedefault>&nbsp;</span><span class=value0>B</span><span class=value1>A</span><span class=value2>D</span><span class=value3>&nbsp;</span><span class=value4>A</span><span class=value5>V</span><span class=value6>G</span><span class=value7>&nbsp;</span><span class=value8>G</span><span class=value9>OOD</span><br><span class=valuedefault>*</span><br><span class=value6>sp|O35205|GRAK_&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;67</span><br><span class=value6>sp|P08884|GRAE_&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;68</span><br><span class=value6>sp|P21844|MCPT5&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;69</span><br><span class=value6>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;&nbsp;6</span><br><br><span class=valuedefault>sp|O35205|GRAK_&nbsp;&nbsp;&nbsp;</span><span class=value9>atgagat</span><span class=value7>tctcc</span><span class=value8>agt</span><span class=value7>tggg</span><span class=value6>cg</span><span class=value7>ctagtat</span><span class=value8>cttta</span><br><span class=valuedefault>sp|P08884|GRAE_&nbsp;&nbsp;&nbsp;</span><span class=value9>atgccc</span><span class=value8>c</span><span class=valuegap>----</span><span class=value8>cag</span><span class=value7>t</span><span class=valuegap>-----</span><span class=value7>gctc</span><span class=value8>a</span><span class=value7>ta</span><span class=valuegap>---</span><span class=value7>cta</span><br><span class=valuedefault>sp|P21844|MCPT5&nbsp;&nbsp;&nbsp;</span><span class=value9>atgcac</span><span class=value8>tt</span><span class=value7>att</span><span class=value8>ga</span><span class=value7>c</span><span class=value8>t</span><span class=value7>ctg</span><span class=value6>c</span><span class=value7>ac</span><span class=value8>cttctat</span><span class=value9>tatta</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>***&nbsp;</span><span class=value8>&nbsp;&nbsp;</span><span class=value7>&nbsp;</span><span class=value4>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value6>&nbsp;*</span><span class=value5>&nbsp;*</span><span class=value3>&nbsp;&nbsp;&nbsp;</span><span class=value2>&nbsp;&nbsp;</span><span class=value3>&nbsp;*</span><span class=value4>*&nbsp;</span><span class=value5>&nbsp;**</span><span class=value4>&nbsp;&nbsp;</span><span class=value5>&nbsp;</span><span class=value4>&nbsp;</span><span class=value5>**</span><br><br><br><span class=valuedefault>sp|O35205|GRAK_&nbsp;&nbsp;&nbsp;</span><span class=value8>gtggcaggggt</span><span class=value7>gt</span><span class=value8>atatg</span><span class=value7>t</span><span class=value6>cctc</span><span class=value7>agaa</span><span class=value8>tg</span><span class=valuegap>----</span><br><span class=valuedefault>sp|P08884|GRAE_&nbsp;&nbsp;&nbsp;</span><span class=value8>ctgactc</span><span class=valuegap>---</span><span class=value7>tt</span><span class=value8>cttttg</span><span class=valuegap>-</span><span class=value7>cc</span><span class=value6>cc</span><span class=value7>tgggcg</span><span class=valuegap>----</span><br><span class=valuedefault>sp|P21844|MCPT5&nbsp;&nbsp;&nbsp;</span><span class=value9>ct</span><span class=valuegap>-------------------</span><span class=value8>cttgggat</span><span class=value7>c</span><span class=value6>ttc</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value5>&nbsp;*</span><span class=value4>&nbsp;&nbsp;</span><span class=value3>&nbsp;&nbsp;&nbsp;</span><span class=value2>&nbsp;&nbsp;&nbsp;</span><span class=value3>&nbsp;</span><span class=value2>&nbsp;&nbsp;</span><span class=value3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value2>&nbsp;&nbsp;&nbsp;</span><span class=value3>&nbsp;&nbsp;&nbsp;*&nbsp;</span><span class=value4>&nbsp;&nbsp;</span><span class=value3>&nbsp;</span><span class=value2>&nbsp;</span><span class=value1>&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>sp|O35205|GRAK_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value7>c</span><span class=value8>ttcca</span><span class=valuegap>-</span><span class=value7>c</span><span class=value6>a</span><span class=valuegap>-</span><span class=value7>ct</span><span class=value8>g</span><span class=value9>agatcataggcgg</span><span class=value8>t</span><span class=value7>cg</span><span class=value6>ag</span><br><span class=valuedefault>sp|P08884|GRAE_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value7>c</span><span class=value8>cggcg</span><span class=valuegap>-</span><span class=value8>c</span><span class=value7>a</span><span class=value6>ga</span><span class=value7>g</span><span class=value8>g</span><span class=value9>aaataataggagg</span><span class=value8>g</span><span class=value7>c</span><span class=value6>atg</span><br><span class=valuedefault>sp|P21844|MCPT5&nbsp;&nbsp;&nbsp;</span><span class=value6>aa</span><span class=value7>ct</span><span class=value8>aaa</span><span class=value9>g</span><span class=value7>ccg</span><span class=valuegap>-</span><span class=value6>g</span><span class=value7>a</span><span class=value8>g</span><span class=value9>aaatcataggcgg</span><span class=value8>g</span><span class=value7>a</span><span class=value6>ccg</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value1>&nbsp;</span><span class=value2>&nbsp;</span><span class=value3>*</span><span class=value4>&nbsp;</span><span class=value5>&nbsp;&nbsp;</span><span class=value4>&nbsp;</span><span class=value5>&nbsp;</span><span class=value3>&nbsp;</span><span class=value4>*&nbsp;</span><span class=value2>&nbsp;</span><span class=value4>&nbsp;</span><span class=value5>&nbsp;</span><span class=value7>*</span><span class=value8>*</span><span class=value9>&nbsp;**&nbsp;*****&nbsp;*</span><span class=value8>*</span><span class=value7>&nbsp;</span><span class=value6>&nbsp;</span><span class=value5>&nbsp;&nbsp;*</span><br><br><br><span class=valuedefault>sp|O35205|GRAK_&nbsp;&nbsp;&nbsp;</span><span class=value6>a</span><span class=value5>g</span><span class=value6>g</span><span class=value7>tg</span><span class=value6>ca</span><span class=valuegap>-</span><span class=value7>a</span><span class=value8>c</span><span class=value9>ctcatagccgcccgtttatggcc</span><br><span class=valuedefault>sp|P08884|GRAE_&nbsp;&nbsp;&nbsp;</span><span class=value6>t</span><span class=value5>t</span><span class=value6>gt</span><span class=value7>g</span><span class=value6>aa</span><span class=valuegap>-</span><span class=value7>g</span><span class=value8>c</span><span class=value9>cgcactctaggccctatatggcc</span><br><span class=valuedefault>sp|P21844|MCPT5&nbsp;&nbsp;&nbsp;</span><span class=value5>a</span><span class=valuegap>-</span><span class=value6>gtgta</span><span class=value5>t</span><span class=value7>t</span><span class=value8>c</span><span class=value9>cgcacagtcgtccatacatggct</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value4>&nbsp;</span><span class=value3>&nbsp;</span><span class=value5>***&nbsp;*</span><span class=value3>&nbsp;</span><span class=value6>&nbsp;</span><span class=value8>*</span><span class=value9>*&nbsp;**&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;**&nbsp;*&nbsp;&nbsp;*****&nbsp;</span><br><br><br><span class=valuedefault>sp|O35205|GRAK_&nbsp;&nbsp;&nbsp;</span><span class=value8>t</span><span class=value7>c</span><span class=value5>aatc</span><span class=valuegap>-------</span><span class=value5>cag</span><span class=valuegap>-</span><span class=value5>tatcg</span><span class=value4>g</span><span class=valuegap>-</span><span class=value4>tct</span><span class=value5>aagc</span><span class=valuegap>--</span><br><span class=valuedefault>sp|P08884|GRAE_&nbsp;&nbsp;&nbsp;</span><span class=value9>t</span><span class=value8>t</span><span class=value7>t</span><span class=value6>gta</span><span class=value5>aaaagtg</span><span class=value6>t</span><span class=value5>agatatcgaggg</span><span class=value6>ta</span><span class=value7>at</span><span class=value8>c</span><span class=value7>gc</span><br><span class=valuedefault>sp|P21844|MCPT5&nbsp;&nbsp;&nbsp;</span><span class=value8>t</span><span class=value7>a</span><span class=value6>cctt</span><span class=value5>ga</span><span class=value4>a</span><span class=value5>attgt</span><span class=value4>g</span><span class=value5>a</span><span class=value4>c</span><span class=value5>ttcggaa</span><span class=value6>aa</span><span class=value8>ctatctg</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>*</span><span class=value6>&nbsp;</span><span class=value4>&nbsp;&nbsp;</span><span class=value3>*&nbsp;</span><span class=value2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*</span><span class=value3>&nbsp;</span><span class=value2>&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value3>&nbsp;*&nbsp;*&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>sp|O35205|GRAK_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value6>a</span><span class=value7>ta</span><span class=value8>tttgtggtgggg</span><span class=value9>t</span><span class=value8>tctaattc</span><span class=value7>acccc</span><span class=value8>caa</span><br><span class=valuedefault>sp|P08884|GRAE_&nbsp;&nbsp;&nbsp;</span><span class=value7>c</span><span class=value8>g</span><span class=value7>t</span><span class=value8>tattgcggcggtt</span><span class=value9>ttctagtac</span><span class=value8>a</span><span class=value7>agac</span><span class=value8>gac</span><br><span class=valuedefault>sp|P21844|MCPT5&nbsp;&nbsp;&nbsp;</span><span class=value8>agcgcgtgttctggttttttaatccg</span><span class=value7>caga</span><span class=value8>aat</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value3>&nbsp;&nbsp;</span><span class=value4>&nbsp;&nbsp;</span><span class=value5>&nbsp;</span><span class=value6>&nbsp;**&nbsp;&nbsp;&nbsp;</span><span class=value7>&nbsp;**&nbsp;&nbsp;</span><span class=value8>**&nbsp;**&nbsp;</span><span class=value7>*&nbsp;*</span><span class=value6>&nbsp;</span><span class=value5>&nbsp;&nbsp;&nbsp;</span><span class=value6>&nbsp;&nbsp;*</span><span class=value7>&nbsp;</span><br><br><br><span class=valuedefault>sp|O35205|GRAK_&nbsp;&nbsp;&nbsp;</span><span class=value8>tgggttt</span><span class=value9>tgacggctgcgc</span><span class=value8>actgtt</span><span class=value7>actct</span><span class=value6>tgg</span><br><span class=valuedefault>sp|P08884|GRAE_&nbsp;&nbsp;&nbsp;</span><span class=value8>t</span><span class=value9>ttgtcctgacggcagcac</span><span class=value8>a</span><span class=value9>ct</span><span class=value8>gt</span><span class=value7>cggaat</span><span class=valuegap>---</span><br><span class=valuedefault>sp|P21844|MCPT5&nbsp;&nbsp;&nbsp;</span><span class=value8>tt</span><span class=value9>t</span><span class=value8>gtcctt</span><span class=value9>acggcggctc</span><span class=value8>actgt</span><span class=value7>g</span><span class=value6>cc</span><span class=value7>gg</span><span class=value6>a</span><span class=valuegap>---</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value7>*&nbsp;</span><span class=value8>&nbsp;**&nbsp;&nbsp;*&nbsp;****</span><span class=value9>*</span><span class=value8>&nbsp;</span><span class=value9>*</span><span class=value8>*&nbsp;*</span><span class=value7>*</span><span class=value8>**</span><span class=value7>**</span><span class=value4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value2>&nbsp;&nbsp;</span><span class=value3>&nbsp;</span><br><br><br><span class=valuedefault>sp|O35205|GRAK_&nbsp;&nbsp;&nbsp;</span><span class=value7>tt</span><span class=value6>tcc</span><span class=value7>t</span><span class=value6>a</span><span class=value7>gagg</span><span class=value6>acat</span><span class=value7>tcccc</span><span class=value8>c</span><span class=value7>actgtg</span><span class=value8>gtt</span><span class=value9>tta</span><br><span class=valuedefault>sp|P08884|GRAE_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------------</span><span class=value8>c</span><span class=value7>g</span><span class=value8>a</span><span class=value7>ac</span><span class=value8>catg</span><span class=value7>acg</span><span class=value8>gtcacc</span><span class=value9>ctc</span><br><span class=valuedefault>sp|P21844|MCPT5&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------------</span><span class=value7>cgttcta</span><span class=value8>tt</span><span class=value7>acg</span><span class=value8>gt</span><span class=value7>t</span><span class=value8>ctc</span><span class=value9>ctt</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value2>&nbsp;</span><span class=value1>&nbsp;&nbsp;&nbsp;</span><span class=value2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value3>&nbsp;</span><span class=value4>&nbsp;</span><span class=value3>&nbsp;</span><span class=value4>*&nbsp;</span><span class=value5>&nbsp;&nbsp;</span><span class=value6>*&nbsp;&nbsp;&nbsp;</span><span class=value7>&nbsp;</span><span class=value6>**&nbsp;**&nbsp;&nbsp;&nbsp;</span><span class=value7>&nbsp;</span><span class=value8>&nbsp;*&nbsp;</span><br><br><br><span class=valuedefault>sp|O35205|GRAK_&nbsp;&nbsp;&nbsp;</span><span class=value9>g</span><span class=value7>gcg</span><span class=value6>cgcat</span><span class=value7>tctctgtcga</span><span class=value6>aaaatga</span><span class=value7>accg</span><span class=value8>atg</span><br><span class=valuedefault>sp|P08884|GRAE_&nbsp;&nbsp;&nbsp;</span><span class=value9>g</span><span class=value8>gt</span><span class=value7>gcgcacaaca</span><span class=value8>tcaa</span><span class=value7>agctaa</span><span class=value6>a</span><span class=value7>gaggagacc</span><br><span class=valuedefault>sp|P21844|MCPT5&nbsp;&nbsp;&nbsp;</span><span class=value9>g</span><span class=value8>ga</span><span class=value7>gcacacaataag</span><span class=value8>ac</span><span class=value7>atctaaggagga</span><span class=value8>tacg</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>*</span><span class=value6>*&nbsp;*</span><span class=value5>*&nbsp;**&nbsp;</span><span class=value6>&nbsp;&nbsp;</span><span class=value5>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value6>&nbsp;&nbsp;</span><span class=value5>&nbsp;&nbsp;&nbsp;&nbsp;**&nbsp;**&nbsp;&nbsp;&nbsp;</span><span class=value6>&nbsp;*</span><span class=value7>&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>sp|O35205|GRAK_&nbsp;&nbsp;&nbsp;</span><span class=value7>a</span><span class=value8>agca</span><span class=value7>gacatt</span><span class=value6>t</span><span class=value7>g</span><span class=value6>agataa</span><span class=valuegap>-</span><span class=value6>aga</span><span class=value7>ag</span><span class=value5>t</span><span class=value7>t</span><span class=value8>t</span><span class=value9>attcc</span><br><span class=valuedefault>sp|P08884|GRAE_&nbsp;&nbsp;&nbsp;</span><span class=value7>c</span><span class=value8>aaca</span><span class=value7>gata</span><span class=value6>atacctgtgg</span><span class=value5>c</span><span class=value6>aaa</span><span class=value7>a</span><span class=value8>g</span><span class=valuegap>-</span><span class=value7>c</span><span class=value8>c</span><span class=value9>attcc</span><br><span class=valuedefault>sp|P21844|MCPT5&nbsp;&nbsp;&nbsp;</span><span class=value8>t</span><span class=value9>ggca</span><span class=value8>a</span><span class=value7>aaactgga</span><span class=value6>agtcg</span><span class=valuegap>-</span><span class=value6>aaa</span><span class=value7>a</span><span class=value8>g</span><span class=valuegap>-</span><span class=value8>ca</span><span class=value9>attcc</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value6>&nbsp;</span><span class=value7>&nbsp;</span><span class=value8>&nbsp;*</span><span class=value7>*</span><span class=value6>&nbsp;*&nbsp;</span><span class=value5>*&nbsp;*&nbsp;&nbsp;&nbsp;</span><span class=value4>&nbsp;&nbsp;*&nbsp;&nbsp;</span><span class=value2>&nbsp;</span><span class=value4>*&nbsp;</span><span class=value5>*</span><span class=value6>*</span><span class=value7>*</span><span class=value3>&nbsp;</span><span class=value6>&nbsp;</span><span class=value7>&nbsp;</span><span class=value9>****</span><span class=value8>*</span><br><br><br><span class=valuedefault>sp|O35205|GRAK_&nbsp;&nbsp;&nbsp;</span><span class=value8>t</span><span class=value6>t</span><span class=value7>t</span><span class=value8>t</span><span class=value9>tccagactccaat</span><span class=value8>c</span><span class=value7>a</span><span class=value6>gg</span><span class=value5>atc</span><span class=valuegap>-</span><span class=value5>ggccag</span><span class=value6>c</span><span class=value7>c</span><br><span class=valuedefault>sp|P08884|GRAE_&nbsp;&nbsp;&nbsp;</span><span class=value8>t</span><span class=valuegap>-</span><span class=value7>c</span><span class=value8>a</span><span class=value9>cccggactataac</span><span class=value8>g</span><span class=value6>caa</span><span class=value5>ctgca</span><span class=value6>t</span><span class=value5>tct</span><span class=value6>tt</span><span class=value7>t</span><br><span class=valuedefault>sp|P21844|MCPT5&nbsp;&nbsp;&nbsp;</span><span class=value8>t</span><span class=value6>a</span><span class=value7>c</span><span class=value9>accctaagtacgat</span><span class=value8>g</span><span class=value7>ag</span><span class=value6>aa</span><span class=value5>cc</span><span class=value4>t</span><span class=value5>agtgg</span><span class=value6>tg</span><span class=value7>c</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value7>*</span><span class=value5>&nbsp;</span><span class=value6>&nbsp;</span><span class=value8>&nbsp;</span><span class=value9>&nbsp;**&nbsp;&nbsp;*&nbsp;*&nbsp;&nbsp;&nbsp;*</span><span class=value8>&nbsp;</span><span class=value7>&nbsp;</span><span class=value5>&nbsp;&nbsp;</span><span class=value4>&nbsp;</span><span class=value3>&nbsp;&nbsp;&nbsp;</span><span class=value2>&nbsp;</span><span class=value3>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value4>&nbsp;&nbsp;</span><span class=value5>&nbsp;</span><span class=value6>&nbsp;</span><br><br><br><span class=valuedefault>sp|O35205|GRAK_&nbsp;&nbsp;&nbsp;</span><span class=value8>a</span><span class=value9>cgacattatgttgatcaa</span><span class=value8>gc</span><span class=value7>tg</span><span class=value6>cg</span><span class=value5>aac</span><span class=value6>g</span><span class=value7>gc</span><span class=value8>t</span><span class=value9>g</span><br><span class=valuedefault>sp|P08884|GRAE_&nbsp;&nbsp;&nbsp;</span><span class=value7>c</span><span class=value8>a</span><span class=value9>gatatcatgttgcttaag</span><span class=value7>ct</span><span class=value6>t</span><span class=value5>gagagc</span><span class=value6>a</span><span class=value7>a</span><span class=value8>a</span><span class=value9>g</span><br><span class=valuedefault>sp|P21844|MCPT5&nbsp;&nbsp;&nbsp;</span><span class=value8>at</span><span class=value9>gatatcatgttgttgaa</span><span class=value8>at</span><span class=value7>t</span><span class=value6>ga</span><span class=value5>aaga</span><span class=value6>g</span><span class=value7>aa</span><span class=value8>a</span><span class=value9>g</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value7>&nbsp;</span><span class=value8>&nbsp;</span><span class=value9>**&nbsp;**&nbsp;******&nbsp;*&nbsp;**</span><span class=value8>&nbsp;</span><span class=value7>&nbsp;</span><span class=value6>*</span><span class=value5>&nbsp;</span><span class=value4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value5>&nbsp;</span><span class=value6>&nbsp;</span><span class=value7>&nbsp;</span><span class=value8>*</span><br><br><br><span class=valuedefault>sp|O35205|GRAK_&nbsp;&nbsp;&nbsp;</span><span class=value9>ccg</span><span class=value8>agctc</span><span class=value7>a</span><span class=value6>a</span><span class=value5>taagaac</span><span class=value6>gtgcaat</span><span class=value7>tg</span><span class=value8>cttcat</span><span class=value7>c</span><br><span class=valuedefault>sp|P08884|GRAE_&nbsp;&nbsp;&nbsp;</span><span class=value9>caa</span><span class=value8>agcgca</span><span class=value6>c</span><span class=value5>aaaagc</span><span class=value6>ggtaagac</span><span class=value7>ct</span><span class=value8>ctg</span><span class=value9>a</span><span class=value8>ag</span><span class=value7>c</span><br><span class=valuedefault>sp|P21844|MCPT5&nbsp;&nbsp;&nbsp;</span><span class=value9>ccaa</span><span class=value8>attaa</span><span class=value6>c</span><span class=value5>gttaggt</span><span class=value6>gttggaac</span><span class=value7>act</span><span class=value8>gcc</span><span class=value7>tt</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>*&nbsp;&nbsp;*&nbsp;</span><span class=value7>&nbsp;&nbsp;&nbsp;</span><span class=value6>*</span><span class=value4>&nbsp;</span><span class=value3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value4>**&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;</span><span class=value5>&nbsp;</span><span class=value6>**&nbsp;&nbsp;&nbsp;</span><span class=value5>&nbsp;</span><span class=value4>&nbsp;</span><br><br><br><span class=valuedefault>sp|O35205|GRAK_&nbsp;&nbsp;&nbsp;</span><span class=value7>ta</span><span class=value6>gg</span><span class=value5>ctct</span><span class=value6>a</span><span class=value5>aaa</span><span class=valuegap>--</span><span class=value5>actatcta</span><span class=value6>cgtg</span><span class=value5>atg</span><span class=valuegap>---</span><span class=value5>g</span><br><span class=valuedefault>sp|P08884|GRAE_&nbsp;&nbsp;&nbsp;</span><span class=value7>t</span><span class=value6>cc</span><span class=value5>ccc</span><span class=valuegap>-</span><span class=value5>gaccg</span><span class=valuegap>--</span><span class=value5>aacgccag</span><span class=value6>ggtgaagc</span><span class=value5>ctg</span><br><span class=valuedefault>sp|P21844|MCPT5&nbsp;&nbsp;&nbsp;</span><span class=value7>t</span><span class=value6>gt</span><span class=value5>ccgc</span><span class=value6>taa</span><span class=value5>c</span><span class=value6>t</span><span class=value5>tcaatttcat</span><span class=value6>cc</span><span class=value5>c</span><span class=valuegap>---</span><span class=value5>a</span><span class=value6>ccc</span><span class=value5>g</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value4>*</span><span class=value3>&nbsp;&nbsp;</span><span class=value2>&nbsp;*&nbsp;&nbsp;&nbsp;</span><span class=value3>*</span><span class=value2>&nbsp;&nbsp;&nbsp;</span><span class=value1>&nbsp;&nbsp;</span><span class=value2>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;</span><span class=value3>&nbsp;</span><span class=value2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*</span><br><br><br><span class=valuedefault>sp|O35205|GRAK_&nbsp;&nbsp;&nbsp;</span><span class=value5>tac</span><span class=valuegap>-</span><span class=value5>gaa</span><span class=value6>gtg</span><span class=value7>tca</span><span class=value8>a</span><span class=value9>gtaacaggatgggg</span><span class=value8>a</span><span class=value7>acga</span><br><span class=valuedefault>sp|P08884|GRAE_&nbsp;&nbsp;&nbsp;</span><span class=value5>gag</span><span class=value4>a</span><span class=value5>tg</span><span class=value6>tgtgc</span><span class=value7>t</span><span class=value8>c</span><span class=value9>cgttgccggctggg</span><span class=value8>ga</span><span class=value7>tcg</span><span class=valuegap>-</span><br><span class=valuedefault>sp|P21844|MCPT5&nbsp;&nbsp;&nbsp;</span><span class=value5>ggc</span><span class=value4>g</span><span class=value5>ta</span><span class=value6>tg</span><span class=value7>tgtag</span><span class=value8>g</span><span class=value9>gccgttggctgggg</span><span class=value8>ca</span><span class=value7>gaa</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value3>&nbsp;</span><span class=value4>&nbsp;*</span><span class=value5>**&nbsp;&nbsp;</span><span class=value6>&nbsp;</span><span class=value7>&nbsp;</span><span class=value8>*</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**&nbsp;****</span><span class=value8>*</span><span class=value7>&nbsp;</span><span class=value6>&nbsp;&nbsp;</span><span class=value5>&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>sp|O35205|GRAK_&nbsp;&nbsp;&nbsp;</span><span class=value8>cga</span><span class=value7>a</span><span class=value6>a</span><span class=value5>c</span><span class=valuegap>-</span><span class=value6>cagatt</span><span class=value7>t</span><span class=valuegap>-</span><span class=value6>gctc</span><span class=value5>ac</span><span class=value4>g</span><span class=value5>gcttcg</span><span class=value6>gacac</span><br><span class=valuedefault>sp|P08884|GRAE_&nbsp;&nbsp;&nbsp;</span><span class=value7>c</span><span class=value8>g</span><span class=value7>aa</span><span class=value6>gc</span><span class=value4>a</span><span class=value6>tt</span><span class=value7>aacga</span><span class=value6>tacta</span><span class=value5>aggcctctg</span><span class=value6>cacgg</span><br><span class=valuedefault>sp|P21844|MCPT5&nbsp;&nbsp;&nbsp;</span><span class=value8>cg</span><span class=value7>aa</span><span class=value6>t</span><span class=value5>g</span><span class=valuegap>-</span><span class=value6>tca</span><span class=value7>atga</span><span class=value6>gc</span><span class=value5>ctgcaagc</span><span class=valuegap>----</span><span class=value6>gatac</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value7>**</span><span class=value6>*</span><span class=value5>*</span><span class=value4>&nbsp;</span><span class=value3>&nbsp;</span><span class=value1>&nbsp;</span><span class=value4>&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;</span><span class=value5>&nbsp;</span><span class=value3>&nbsp;</span><span class=value4>&nbsp;**</span><span class=value3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*</span><span class=value2>&nbsp;</span><span class=value3>&nbsp;&nbsp;&nbsp;</span><span class=value4>&nbsp;*&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>sp|O35205|GRAK_&nbsp;&nbsp;&nbsp;</span><span class=value6>c</span><span class=value7>t</span><span class=value9>tgcgcga</span><span class=value8>ag</span><span class=value7>t</span><span class=value6>gac</span><span class=value5>a</span><span class=value6>g</span><span class=value5>t</span><span class=value4>gact</span><span class=value5>atca</span><span class=value4>t</span><span class=value5>t</span><span class=value6>tcaa</span><span class=value7>g</span><br><span class=valuedefault>sp|P08884|GRAE_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value7>c</span><span class=value9>tgcggga</span><span class=value8>g</span><span class=value7>gc</span><span class=value6>a</span><span class=value5>caac</span><span class=valuegap>---</span><span class=value5>t</span><span class=value4>tg</span><span class=value5>tca</span><span class=valuegap>-</span><span class=value5>t</span><span class=value6>aca</span><span class=value7>ag</span><br><span class=valuedefault>sp|P21844|MCPT5&nbsp;&nbsp;&nbsp;</span><span class=value5>c</span><span class=value7>c</span><span class=value9>tgcaaga</span><span class=value8>gg</span><span class=value7>t</span><span class=value6>gaaa</span><span class=value5>a</span><span class=valuegap>---</span><span class=value5>t</span><span class=valuegap>-</span><span class=value5>g</span><span class=value4>cgg</span><span class=valuegap>-</span><span class=value5>ct</span><span class=value6>ccag</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value4>&nbsp;</span><span class=value6>&nbsp;</span><span class=value8>*</span><span class=value9>**&nbsp;&nbsp;**</span><span class=value8>&nbsp;</span><span class=value7>*</span><span class=value6>&nbsp;</span><span class=value5>&nbsp;</span><span class=value4>&nbsp;&nbsp;*</span><span class=value3>&nbsp;</span><span class=value2>&nbsp;</span><span class=value1>&nbsp;&nbsp;</span><span class=value3>&nbsp;</span><span class=value2>&nbsp;&nbsp;&nbsp;</span><span class=value3>&nbsp;&nbsp;</span><span class=value2>&nbsp;</span><span class=value4>&nbsp;&nbsp;</span><span class=value5>*&nbsp;*</span><span class=value6>*</span><br><br><br><span class=valuedefault>sp|O35205|GRAK_&nbsp;&nbsp;&nbsp;</span><span class=value7>g</span><span class=value8>aaacgc</span><span class=value6>tgcaatt</span><span class=value5>caca</span><span class=valuegap>-</span><span class=value5>atctta</span><span class=value6>c</span><span class=value5>t</span><span class=value6>a</span><span class=value5>c</span><span class=value4>a</span><span class=value3>atc</span><br><span class=valuedefault>sp|P08884|GRAE_&nbsp;&nbsp;&nbsp;</span><span class=value7>a</span><span class=value8>agacg</span><span class=value7>a</span><span class=value6>a</span><span class=value5>gagtgtaaaa</span><span class=valuegap>-</span><span class=value5>agcgttt</span><span class=value6>ta</span><span class=value5>g</span><span class=value4>a</span><span class=valuegap>--</span><span class=value4>c</span><br><span class=valuedefault>sp|P21844|MCPT5&nbsp;&nbsp;&nbsp;</span><span class=value7>g</span><span class=value8>aacca</span><span class=value7>c</span><span class=value6>a</span><span class=value5>ggcatgcaaa</span><span class=value4>ca</span><span class=value5>c</span><span class=value4>t</span><span class=value5>ttac</span><span class=value4>tag</span><span class=value3>t</span><span class=valuegap>--</span><span class=value3>t</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value6>&nbsp;</span><span class=value8>*</span><span class=value7>&nbsp;&nbsp;*&nbsp;</span><span class=value6>&nbsp;</span><span class=value5>&nbsp;</span><span class=value4>*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value3>&nbsp;*&nbsp;*</span><span class=value1>&nbsp;</span><span class=value3>*&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;**</span><span class=value2>&nbsp;&nbsp;</span><span class=value1>&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>sp|O35205|GRAK_&nbsp;&nbsp;&nbsp;</span><span class=value3>ac</span><span class=value4>aaacct</span><span class=value5>gt</span><span class=value4>cat</span><span class=value5>cacgaagg</span><span class=valuegap>--</span><span class=value5>at</span><span class=value4>a</span><span class=value5>t</span><span class=value6>g</span><span class=value7>a</span><span class=value8>tc</span><span class=value9>tg</span><br><span class=valuedefault>sp|P08884|GRAE_&nbsp;&nbsp;&nbsp;</span><span class=value3>attat</span><span class=value4>ac</span><span class=value5>t</span><span class=value6>g</span><span class=value5>a</span><span class=valuegap>---</span><span class=value5>g</span><span class=value6>acgac</span><span class=value5>gg</span><span class=valuegap>--</span><span class=value5>aa</span><span class=valuegap>---</span><span class=value6>a</span><span class=value7>tt</span><span class=value9>tg</span><br><span class=valuedefault>sp|P21844|MCPT5&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value3>tt</span><span class=valuegap>----</span><span class=value4>c</span><span class=value5>ga</span><span class=valuegap>---</span><span class=value5>cataacag</span><span class=value4>tc</span><span class=value5>aa</span><span class=valuegap>---</span><span class=value6>c</span><span class=value7>t</span><span class=value8>t</span><span class=value9>tg</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value2>&nbsp;</span><span class=value3>*&nbsp;</span><span class=value1>&nbsp;&nbsp;&nbsp;</span><span class=value3>&nbsp;*&nbsp;&nbsp;*&nbsp;&nbsp;</span><span class=value2>*</span><span class=value1>&nbsp;&nbsp;</span><span class=value2>*</span><span class=value3>&nbsp;</span><span class=value1>&nbsp;&nbsp;&nbsp;</span><span class=value4>&nbsp;</span><span class=value5>*</span><span class=value6>&nbsp;</span><span class=value8>*</span><span class=value9>*</span><br><br><br><span class=valuedefault>sp|O35205|GRAK_&nbsp;&nbsp;&nbsp;</span><span class=value9>tgcaggaga</span><span class=value8>t</span><span class=value7>g</span><span class=valuegap>-</span><span class=value6>c</span><span class=value7>aaga</span><span class=value6>ggc</span><span class=value5>ca</span><span class=value4>a</span><span class=value5>a</span><span class=value6>ag</span><span class=value7>gac</span><span class=value8>tct</span><span class=value9>t</span><br><span class=valuedefault>sp|P08884|GRAE_&nbsp;&nbsp;&nbsp;</span><span class=value9>tgccggcgat</span><span class=value8>c</span><span class=value6>t</span><span class=value7>gaagaa</span><span class=value6>gat</span><span class=value5>c</span><span class=valuegap>-</span><span class=value6>aag</span><span class=value7>acc</span><span class=value8>ccc</span><span class=value9>t</span><br><span class=valuedefault>sp|P21844|MCPT5&nbsp;&nbsp;&nbsp;</span><span class=value9>cgtcggcaa</span><span class=value8>tc</span><span class=value6>c</span><span class=value7>c</span><span class=value8>aaga</span><span class=value7>aa</span><span class=value6>atg</span><span class=valuegap>-</span><span class=value5>c</span><span class=value6>a</span><span class=value7>gaa</span><span class=value8>cgta</span><span class=value9>t</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;*&nbsp;&nbsp;**&nbsp;</span><span class=value8>&nbsp;**</span><span class=value6>&nbsp;</span><span class=value4>&nbsp;</span><span class=value5>&nbsp;</span><span class=value6>****</span><span class=value5>&nbsp;&nbsp;</span><span class=value4>&nbsp;&nbsp;</span><span class=value3>&nbsp;</span><span class=value1>&nbsp;</span><span class=value3>&nbsp;</span><span class=value4>*</span><span class=value5>*&nbsp;</span><span class=value6>&nbsp;*</span><span class=value7>&nbsp;&nbsp;</span><span class=value8>&nbsp;*</span><br><br><br><span class=valuedefault>sp|O35205|GRAK_&nbsp;&nbsp;&nbsp;</span><span class=value9>gtaaaggtgattcaggaggcccgttgatctgta</span><br><span class=valuedefault>sp|P08884|GRAE_&nbsp;&nbsp;&nbsp;</span><span class=value9>tcaaaggtgacagtggaggcccgttagtgtgcg</span><br><span class=valuedefault>sp|P21844|MCPT5&nbsp;&nbsp;&nbsp;</span><span class=value9>acaaaggggacagtgggggaccattgttgtgcg</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;*****&nbsp;**&nbsp;&nbsp;&nbsp;&nbsp;**&nbsp;**&nbsp;**&nbsp;**&nbsp;&nbsp;*&nbsp;**&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>sp|O35205|GRAK_&nbsp;&nbsp;&nbsp;</span><span class=value9>aagggatatttcatgccct</span><span class=value8>cgtctcaca</span><span class=value7>gg</span><span class=value6>ga</span><span class=value5>t</span><br><span class=valuedefault>sp|P08884|GRAE_&nbsp;&nbsp;&nbsp;</span><span class=value9>ataacaaagcctacgg</span><span class=value8>cctatta</span><span class=value7>gcgt</span><span class=value6>acg</span><span class=value5>ca</span><span class=value4>a</span><br><span class=valuedefault>sp|P21844|MCPT5&nbsp;&nbsp;&nbsp;</span><span class=value9>cgggcatcgcccaaggaat</span><span class=value8>tgcctctt</span><span class=value7>a</span><span class=value6>tgt</span><span class=value5>c</span><span class=value4>c</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;*&nbsp;</span><span class=value8>&nbsp;&nbsp;*&nbsp;</span><span class=value7>&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;</span><span class=value6>&nbsp;</span><span class=value5>*&nbsp;</span><span class=value4>*&nbsp;</span><span class=value3>&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>sp|O35205|GRAK_&nbsp;&nbsp;&nbsp;</span><span class=value5>a</span><span class=value4>caa</span><span class=value3>gtg</span><span class=value4>t</span><span class=value3>g</span><span class=value4>ga</span><span class=value5>at</span><span class=value7>t</span><span class=value8>gc</span><span class=value7>caaaaagc</span><span class=value8>ca</span><span class=value9>ggtatct</span><br><span class=valuedefault>sp|P08884|GRAE_&nbsp;&nbsp;&nbsp;</span><span class=value4>aaaa</span><span class=valuegap>---</span><span class=value4>c</span><span class=valuegap>---</span><span class=value4>a</span><span class=value5>ga</span><span class=value6>a</span><span class=value7>caataagt</span><span class=value8>tcg</span><span class=value9>ggggttt</span><br><span class=valuedefault>sp|P21844|MCPT5&nbsp;&nbsp;&nbsp;</span><span class=value4>accg</span><span class=valuegap>---</span><span class=value4>t</span><span class=valuegap>---</span><span class=value4>a</span><span class=value5>a</span><span class=value6>t</span><span class=value7>g</span><span class=value8>cg</span><span class=value7>aaaccc</span><span class=value8>cc</span><span class=value9>tgctgtct</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value2>*&nbsp;&nbsp;&nbsp;</span><span class=value1>&nbsp;</span><span class=value0>&nbsp;</span><span class=value1>&nbsp;</span><span class=value2>&nbsp;</span><span class=value1>&nbsp;&nbsp;&nbsp;</span><span class=value2>*&nbsp;</span><span class=value3>&nbsp;</span><span class=value5>&nbsp;</span><span class=value6>*</span><span class=value5>&nbsp;*&nbsp;*&nbsp;&nbsp;&nbsp;</span><span class=value6>&nbsp;</span><span class=value7>*</span><span class=value8>&nbsp;*</span><span class=value9>&nbsp;&nbsp;&nbsp;*&nbsp;*</span><br><br><br><span class=valuedefault>sp|O35205|GRAK_&nbsp;&nbsp;&nbsp;</span><span class=value9>aca</span><span class=value8>cg</span><span class=value7>c</span><span class=value6>t</span><span class=value5>cctaa</span><span class=value6>caa</span><span class=value7>ag</span><span class=value8>aa</span><span class=value9>gtatcagacttgga</span><br><span class=valuedefault>sp|P08884|GRAE_&nbsp;&nbsp;&nbsp;</span><span class=value9>tcac</span><span class=value7>c</span><span class=value6>a</span><span class=valuegap>---</span><span class=value6>agatcg</span><span class=value7>tgc</span><span class=value8>a</span><span class=value9>ctttctgccctgga</span><br><span class=valuedefault>sp|P21844|MCPT5&nbsp;&nbsp;&nbsp;</span><span class=value9>tca</span><span class=value8>c</span><span class=value7>t</span><span class=value6>a</span><span class=valuegap>---</span><span class=value6>gaattt</span><span class=value7>cac</span><span class=value8>a</span><span class=value9>ctaccgcccatgga</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;**</span><span class=value8>*</span><span class=value5>&nbsp;</span><span class=value4>&nbsp;</span><span class=value2>&nbsp;&nbsp;&nbsp;</span><span class=value3>&nbsp;&nbsp;</span><span class=value4>*&nbsp;&nbsp;&nbsp;</span><span class=value5>&nbsp;</span><span class=value6>&nbsp;&nbsp;</span><span class=value8>*</span><span class=value9>&nbsp;*&nbsp;&nbsp;</span><span class=value8>*&nbsp;&nbsp;&nbsp;</span><span class=value9>*&nbsp;****</span><br><br><br><span class=valuedefault>sp|O35205|GRAK_&nbsp;&nbsp;&nbsp;</span><span class=value9>t</span><span class=value7>t</span><span class=value5>aa</span><span class=value6>g</span><span class=value8>tc</span><span class=value7>ta</span><span class=value8>agct</span><span class=value7>t</span><span class=value8>g</span><span class=value6>ctc</span><span class=value5>c</span><span class=value6>tagtc</span><span class=value5>g</span><span class=value6>t</span><span class=value7>g</span><span class=value8>c</span><span class=value9>gcat</span><br><span class=valuedefault>sp|P08884|GRAE_&nbsp;&nbsp;&nbsp;</span><span class=value8>t</span><span class=value6>a</span><span class=valuegap>-</span><span class=value6>ag</span><span class=value8>cc</span><span class=value7>gcaacatg</span><span class=valuegap>----</span><span class=value6>aag</span><span class=valuegap>----</span><span class=value7>ct</span><span class=value8>g</span><span class=value9>tta</span><br><span class=valuedefault>sp|P21844|MCPT5&nbsp;&nbsp;&nbsp;</span><span class=value9>t</span><span class=value7>t</span><span class=valuegap>-</span><span class=value6>aa</span><span class=value7>t</span><span class=value8>aaga</span><span class=value7>t</span><span class=value8>t</span><span class=value7>ctc</span><span class=valuegap>----</span><span class=value6>agg</span><span class=valuegap>----</span><span class=value7>g</span><span class=value8>aa</span><span class=value9>aac</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>*</span><span class=value6>&nbsp;</span><span class=value3>&nbsp;</span><span class=value5>*&nbsp;</span><span class=value6>&nbsp;&nbsp;</span><span class=value5>&nbsp;&nbsp;*&nbsp;&nbsp;</span><span class=value4>&nbsp;*&nbsp;</span><span class=value2>&nbsp;&nbsp;&nbsp;</span><span class=value1>&nbsp;</span><span class=value3>&nbsp;&nbsp;*</span><span class=value1>&nbsp;</span><span class=value2>&nbsp;</span><span class=value1>&nbsp;</span><span class=value2>&nbsp;</span><span class=value5>&nbsp;</span><span class=value6>&nbsp;</span><span class=value7>&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;</span><br><br><br><br><br><br></body></html>
+</content>
+</file>
+<environement>
+HOME_4_TCOFFEE=/Users/cnotredame/
+MANPATH=/sw/share/man:/usr/share/man:/usr/local/share/man:/opt/X11/share/man:/Library/TeX/texbin/man:/Applications/Xcode.app/Contents/Developer/usr/share/man:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/share/man:/sw/lib/perl5/5.18.2/man
+TERM_PROGRAM=Apple_Terminal
+MCOFFEE_4_TCOFFEE=/Users/cnotredame//.t_coffee//mcoffee/
+ROOT_TMP_4_TCOFFEE=/var/tmp/
+SHELL=/bin/bash
+TERM=xterm-256color
+TMPDIR=/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/
+CONDA_SHLVL=1
+PERL5LIB=/sw/lib/perl5:/sw/lib/perl5/darwin
+Apple_PubSub_Socket_Render=/private/tmp/com.apple.launchd.6JzhyrtuKp/Render
+CONDA_PROMPT_MODIFIER=(base) 
+TERM_PROGRAM_VERSION=388.1.3
+OSNAME=macosx
+PERL_BIN=/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms::/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices
+TERM_SESSION_ID=9785BD0D-F6F1-4B59-B0BA-9937FD12A1E7
+METHODS_4_TCOFFEE=/Users/cnotredame//.t_coffee//methods/
+VERSIONER_PERL_VERSION=5.18
+XAPPLRESDIR=/sw/etc/app-defaults/
+http_proxy=
+HTTP_proxy=
+USER=cnotredame
+CONDA_EXE=/Users/cnotredame/anaconda3/bin/conda
+SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.U5mTe2o7m7/Listeners
+__CF_USER_TEXT_ENCODING=0x1F6:0x0:0x0
+ENV_4_TCOFFEE=/Users/cnotredame//.t_coffee//.t_coffee_env
+_CE_CONDA=
+all_proxy=
+ALL_PROXY=
+HTTP_proxy_4_TCOFFEE=
+PATH=/Users/cnotredame//.t_coffee//plugins/macosx/:/Users/cnotredame/anaconda3/bin:/Users/cnotredame/anaconda3/condabin:/opt/local/bin:/opt/local/sbin:/opt/local/bin:/opt/local/sbin:/Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/packages/x3dna-v2.1/bin:/Users/cnotredame/bin/macosx://Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms:.:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices:/Users/cnotredame/bin/Scripts:/Users/cnotredame/Library/Haskell/ghc-7.4.2/lib/epub-tools-2.0.0/bin:/sw/bin:/sw/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/Library/TeX/texbin
+_=/usr/bin/printenv
+CONDA_PREFIX=/Users/cnotredame/anaconda3
+COLOR_4_TCOFFEE=new
+DIR_4_TCOFFEE=/Users/cnotredame//.t_coffee/
+PWD=/private/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/RANDOMSTRINGW23SwrY0aBtCuMRxf4IB/data
+CACHE_4_TCOFFEE=/Users/cnotredame//.t_coffee//cache/
+X3DNA=/Users/cnotredame/Dropbox/packages/x3dna-v2.1
+DBUS_LAUNCHD_SESSION_BUS_SOCKET=/private/tmp/com.apple.launchd.DfqaaC2z17/unix_domain_listener
+XPC_FLAGS=0x0
+VERSIONER_PERL_PREFER_32_BIT=no
+_CE_M=
+XPC_SERVICE_NAME=0
+ERRORFILE_4_TCOFFEE=NO
+PLUGINS_4_TCOFFEE=/Users/cnotredame//.t_coffee//plugins/macosx/
+SHLVL=3
+HOME=/Users/cnotredame
+DUMP_4_TCOFFEE=/private/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/RANDOMSTRINGW23SwrY0aBtCuMRxf4IB/tcoffee_main_documentation.rst.61.dump
+HTTP_PROXY=
+MAFFT_BINARIES=
+CONDA_PYTHON_EXE=/Users/cnotredame/anaconda3/bin/python
+BIN=/Users/cnotredame/bin/macosx
+LOGNAME=cnotredame
+EMAIL_4_TCOFFEE=cedric.notredame@gmail.com
+LC_CTYPE=UTF-8
+CONDA_DEFAULT_ENV=base
+EMAIL=cedric.notredame@gmail.com
+UPDATED_ENV_4_TCOFFEE=1
+INFOPATH=/sw/share/info:/sw/info:/usr/share/info
+DISPLAY=/private/tmp/com.apple.launchd.vef8UzGxBY/org.macosforge.xquartz:0
+TC_MASTER_NODE=1
+NUMBER_OF_PROCESSORS=8
+ALL_proxy=
+LOCKDIR_4_TCOFFEE=/var/tmp/tco/tcom2keoa2e82359//lck/4slxlyos6a/
+TMP_4_TCOFFEE=/var/tmp/tco/tcom2keoa2e82359/
+USER_BIN=/Users/cnotredame/bin/macosx
+SCRIPT_BIN=/Users/cnotredame/bin/Scripts/
+</environement>
+<DumpStatus>OK</DumpStatus>
+<DumpFile>/private/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/RANDOMSTRINGW23SwrY0aBtCuMRxf4IB/tcoffee_main_documentation.rst.61.dump</DumpFile>
+<SourceFile>tcoffee_main_documentation.rst</SourceFile>
+<SourceLine>1627</SourceLine>
+</DumpIO>

@@ -1,0 +1,1737 @@
+<DumpIO>
+<nature>standard dump</nature>
+<program>T-COFFEE</program>
+<version>Version_13.39.0.d675aed</version>
+<build>Version_13.39.0.d675aed</build>
+<cl>t_coffee sample_seq1.fasta -outfile stdout -out_lib stdout </cl>
+<stack>
+</stack>
+<warning>
+</warning>
+<file>
+<stream>output</stream>
+<name>stdout</name>
+<content>! TC_LIB_FORMAT_01
+4
+hmgb_chite 74 adkpkrplsaymlwlnsaresikrenpdfkvtevakkggelwrglkdkseweakaatakqnyiralqeyerngg
+hmgl_trybr 67 kkdsnapkramtsfmffssdfrskhsdlsivemskaagaawkelgpeerkvyeemaekdkerykrem
+hmgl_wheat 79 dpnkpkrapsaffvfmgefreefkqknpknksvaavgkaagerwkslsesekapyvakanklkgeynkaiaaynkgesa
+hmgt_mouse 71 kpkrprsayniyvsesfqeakddsaqgklklvneawknlspeekqayiqlakddrirydnemksweeqmae
+#1 2
+    1     1   111     1     0
+    1     2    24     1     0
+    1     4   839     1     0
+    2     2    58     1     0
+    2     3    30     1     0
+    2     5   887     1     0
+    3     3    33     1     0
+    3     4    17     1     0
+    3     6   927     1     0
+    4     7   990     1     0
+    5     8   993     1     0
+    6     9   993     1     0
+    7    10   993     1     0
+    8    11   993     1     0
+    9    12   992     1     0
+   10    13   990     1     0
+   11    14   986     1     0
+   12    15   974     1     0
+   13    15    16     1     0
+   13    16   920     1     0
+   14    16    49     1     0
+   14    17   857     1     0
+   15    16    10     1     0
+   15    17    72     1     0
+   15    18   694     1     0
+   16    17    18     1     0
+   16    18    97     1     0
+   16    19   624     1     0
+   17    16    11     1     0
+   17    18    47     1     0
+   17    19   101     1     0
+   17    20   553     1     0
+   18    17    35     1     0
+   18    18    19     1     0
+   18    19    40     1     0
+   18    20    69     1     0
+   18    21   484     1     0
+   19    18   118     1     0
+   19    19    19     1     0
+   19    20    25     1     0
+   19    21    52     1     0
+   19    22   448     1     0
+   20    18    11     1     0
+   20    19   184     1     0
+   20    20    22     1     0
+   20    21    16     1     0
+   20    22    46     1     0
+   20    23   306     1     0
+   21    19    14     1     0
+   21    20   293     1     0
+   21    21    14     1     0
+   21    22    14     1     0
+   21    23    58     1     0
+   21    24   153     1     0
+   22    20    10     1     0
+   22    21   400     1     0
+   22    23    23     1     0
+   22    24    24     1     0
+   22    25    60     1     0
+   23    21    11     1     0
+   23    22   450     1     0
+   23    23    19     1     0
+   23    24    44     1     0
+   23    25    16     1     0
+   23    26    34     1     0
+   24    22    14     1     0
+   24    23   559     1     0
+   24    24    25     1     0
+   24    25    32     1     0
+   25    23    10     1     0
+   25    24   723     1     0
+   25    25    20     1     0
+   25    26    20     1     0
+   26    25   848     1     0
+   26    26    14     1     0
+   27    26   907     1     0
+   28    27   979     1     0
+   29    28   988     1     0
+   30    29   992     1     0
+   31    30   995     1     0
+   32    31   995     1     0
+   33    32   996     1     0
+   34    33   996     1     0
+   35    34   996     1     0
+   36    35   996     1     0
+   37    36   996     1     0
+   38    37   996     1     0
+   39    38   996     1     0
+   40    39   996     1     0
+   41    40   995     1     0
+   42    41   994     1     0
+   43    42   905     1     0
+   43    44    86     1     0
+   44    43   564     1     0
+   44    45   427     1     0
+   45    44   537     1     0
+   45    46   452     1     0
+   46    45   285     1     0
+   46    46    14     1     0
+   46    47   682     1     0
+   47    46   170     1     0
+   47    47    21     1     0
+   47    48   785     1     0
+   48    47   127     1     0
+   48    48    19     1     0
+   48    49   826     1     0
+   49    48    96     1     0
+   49    49    17     1     0
+   49    50   854     1     0
+   50    48    13     1     0
+   50    49    69     1     0
+   50    50    17     1     0
+   50    51   884     1     0
+   51    50    18     1     0
+   51    52   954     1     0
+   52    53   971     1     0
+   53    54   971     1     0
+   54    55   973     1     0
+   55    56   977     1     0
+   56    57   977     1     0
+   57    58   978     1     0
+   58    59   980     1     0
+   59    60   983     1     0
+   60    61   983     1     0
+   61    62   983     1     0
+   62    63   983     1     0
+   63    64   977     1     0
+   64    65   973     1     0
+   65    66   955     1     0
+   66    67   947     1     0
+   68    66    16     1     0
+   69    67    17     1     0
+#1 3
+    1     1   274     1     0
+    1     2   701     1     0
+    2     1    19     1     0
+    2     2    90     1     0
+    2     3   885     1     0
+    3     3    16     1     0
+    3     4   978     1     0
+    4     5   997     1     0
+    5     6   999     1     0
+    6     7   999     1     0
+    7     8   996     1     0
+    8     9   996     1     0
+    9    10   998     1     0
+   10    11   999     1     0
+   11    12   999     1     0
+   12    13   999     1     0
+   13    14   999     1     0
+   14    15   999     1     0
+   15    16   999     1     0
+   16    17   999     1     0
+   17    18   998     1     0
+   18    19   998     1     0
+   19    20   998     1     0
+   20    21   998     1     0
+   21    22   998     1     0
+   22    23   998     1     0
+   23    24   998     1     0
+   24    25   998     1     0
+   25    26   998     1     0
+   26    27   997     1     0
+   27    28   990     1     0
+   28    29   858     1     0
+   28    30   135     1     0
+   29    30   788     1     0
+   29    31   203     1     0
+   30    31   700     1     0
+   30    32   291     1     0
+   31    32   246     1     0
+   31    33   744     1     0
+   32    33   179     1     0
+   32    34   810     1     0
+   33    34   116     1     0
+   33    35   873     1     0
+   34    35    54     1     0
+   34    36   938     1     0
+   35    36    40     1     0
+   35    37   953     1     0
+   36    37    26     1     0
+   36    38   970     1     0
+   37    38    24     1     0
+   37    39   972     1     0
+   38    39    13     1     0
+   38    40   984     1     0
+   39    41   996     1     0
+   40    42   998     1     0
+   41    43   998     1     0
+   42    44   998     1     0
+   43    45   990     1     0
+   44    46   962     1     0
+   44    48    31     1     0
+   45    47   934     1     0
+   45    49    57     1     0
+   46    48   674     1     0
+   46    49    14     1     0
+   46    50   291     1     0
+   47    48    10     1     0
+   47    49   427     1     0
+   47    50    11     1     0
+   47    51   533     1     0
+   48    49    18     1     0
+   48    50   178     1     0
+   48    52   775     1     0
+   49    50    28     1     0
+   49    51   128     1     0
+   49    53   825     1     0
+   50    51    28     1     0
+   50    52    97     1     0
+   50    54   858     1     0
+   51    52    13     1     0
+   51    53    40     1     0
+   51    55   934     1     0
+   52    53    10     1     0
+   52    54    27     1     0
+   52    56   950     1     0
+   53    57   980     1     0
+   54    58   985     1     0
+   55    59   985     1     0
+   56    60   985     1     0
+   57    61   986     1     0
+   58    62   987     1     0
+   59    63   990     1     0
+   60    64   990     1     0
+   61    65   992     1     0
+   62    66   995     1     0
+   63    67   995     1     0
+   64    68   995     1     0
+   65    69   995     1     0
+   66    70   994     1     0
+   67    71   988     1     0
+   68    72   981     1     0
+   69    73   973     1     0
+   70    74   844     1     0
+   70    75    14     1     0
+   71    73    14     1     0
+   71    74    27     1     0
+   71    75   794     1     0
+   71    76    22     1     0
+   72    74    97     1     0
+   72    75    52     1     0
+   72    76   664     1     0
+   72    77    57     1     0
+   72    78    14     1     0
+   73    75   107     1     0
+   73    76    98     1     0
+   73    77   621     1     0
+   73    78    90     1     0
+   73    79    20     1     0
+   74    76   147     1     0
+   74    77   100     1     0
+   74    78   603     1     0
+   74    79   112     1     0
+#1 4
+    1     1    29     1     0
+    3     1   972     1     0
+    4     2   999     1     0
+    5     3   999     1     0
+    6     4   999     1     0
+    7     5   999     1     0
+    8     6   999     1     0
+    9     7   999     1     0
+   10     8   999     1     0
+   11     9   999     1     0
+   12    10   998     1     0
+   13    11   996     1     0
+   14    12   987     1     0
+   15    13   958     1     0
+   16    14   911     1     0
+   16    15    11     1     0
+   17    15   853     1     0
+   17    16    19     1     0
+   18    13    28     1     0
+   18    16   837     1     0
+   18    17    20     1     0
+   19    14    55     1     0
+   19    17   818     1     0
+   19    18    24     1     0
+   20    15   102     1     0
+   20    18   806     1     0
+   20    19    24     1     0
+   21    16   110     1     0
+   21    19   791     1     0
+   21    20    19     1     0
+   22    17   107     1     0
+   22    20   789     1     0
+   23    17    22     1     0
+   23    18    93     1     0
+   23    21   793     1     0
+   24    18    47     1     0
+   24    19    77     1     0
+   24    22   770     1     0
+   25    19    75     1     0
+   25    20    75     1     0
+   25    23   763     1     0
+   26    20    80     1     0
+   26    21    72     1     0
+   26    24   748     1     0
+   27    21    87     1     0
+   27    22    70     1     0
+   27    25   731     1     0
+   27    41    11     1     0
+   28    22   108     1     0
+   28    23    72     1     0
+   28    26   715     1     0
+   28    28    15     1     0
+   28    42    11     1     0
+   29    23   109     1     0
+   29    24    59     1     0
+   29    27   696     1     0
+   29    29    21     1     0
+   29    43    11     1     0
+   30    24   127     1     0
+   30    25    52     1     0
+   30    28   688     1     0
+   30    30    21     1     0
+   30    44    11     1     0
+   31    25   142     1     0
+   31    26    48     1     0
+   31    29   624     1     0
+   31    31    20     1     0
+   31    45    11     1     0
+   32    26   154     1     0
+   32    27    47     1     0
+   32    29    12     1     0
+   32    30   500     1     0
+   32    32    18     1     0
+   33    27   165     1     0
+   33    28    45     1     0
+   33    30    22     1     0
+   33    31   468     1     0
+   33    33    13     1     0
+   34    28   176     1     0
+   34    29    38     1     0
+   34    31    29     1     0
+   34    32   447     1     0
+   35    29   236     1     0
+   35    30    18     1     0
+   35    32    28     1     0
+   35    33   241     1     0
+   36    30   365     1     0
+   36    31    16     1     0
+   36    33    24     1     0
+   36    34   100     1     0
+   37    31   390     1     0
+   37    32    13     1     0
+   37    34    12     1     0
+   37    35    58     1     0
+   38    32   422     1     0
+   38    33    11     1     0
+   38    36    12     1     0
+   39    33   637     1     0
+   39    37    11     1     0
+   39    53    11     1     0
+   40    34   813     1     0
+   40    54    12     1     0
+   41    35   854     1     0
+   41    55    12     1     0
+   42    36   914     1     0
+   42    56    13     1     0
+   43    37   906     1     0
+   43    57    14     1     0
+   44    38   893     1     0
+   44    58    14     1     0
+   45    39   871     1     0
+   45    59    15     1     0
+   46    39    26     1     0
+   46    40   685     1     0
+   46    42    33     1     0
+   46    60    20     1     0
+   47    40   162     1     0
+   47    41   520     1     0
+   47    42    13     1     0
+   47    43    49     1     0
+   47    61    25     1     0
+   48    33    12     1     0
+   48    41   290     1     0
+   48    42   384     1     0
+   48    43    11     1     0
+   48    44    55     1     0
+   48    62    27     1     0
+   49    34    18     1     0
+   49    40    14     1     0
+   49    42   411     1     0
+   49    43   199     1     0
+   49    44    11     1     0
+   49    45    54     1     0
+   49    63    33     1     0
+   50    35    27     1     0
+   50    41    12     1     0
+   50    43   589     1     0
+   50    44   159     1     0
+   50    46    53     1     0
+   50    64    38     1     0
+   51    36    41     1     0
+   51    42    12     1     0
+   51    44   619     1     0
+   51    45    56     1     0
+   51    47    55     1     0
+   51    65    48     1     0
+   52    37    42     1     0
+   52    43    16     1     0
+   52    45   719     1     0
+   52    46    28     1     0
+   52    48    54     1     0
+   52    66    47     1     0
+   53    38    42     1     0
+   53    44    15     1     0
+   53    46   752     1     0
+   53    47    20     1     0
+   53    49    55     1     0
+   53    67    46     1     0
+   54    39    42     1     0
+   54    45    15     1     0
+   54    47   757     1     0
+   54    48    14     1     0
+   54    50    57     1     0
+   54    68    46     1     0
+   55    40    46     1     0
+   55    46    15     1     0
+   55    48   762     1     0
+   55    51    60     1     0
+   55    69    44     1     0
+   56    41    49     1     0
+   56    49   772     1     0
+   56    52    60     1     0
+   56    70    43     1     0
+   57    42    52     1     0
+   57    50   784     1     0
+   57    53    62     1     0
+   57    71    41     1     0
+   58    43    56     1     0
+   58    51   796     1     0
+   58    54    63     1     0
+   59    44    63     1     0
+   59    52   798     1     0
+   59    55    66     1     0
+   60    45    64     1     0
+   60    53   790     1     0
+   60    56    70     1     0
+   61    46    64     1     0
+   61    54   779     1     0
+   61    57    81     1     0
+   61    60    11     1     0
+   62    47    65     1     0
+   62    55   761     1     0
+   62    58    96     1     0
+   62    61    12     1     0
+   63    48    63     1     0
+   63    56   759     1     0
+   63    59    97     1     0
+   63    62    13     1     0
+   64    49    54     1     0
+   64    57   739     1     0
+   64    60   109     1     0
+   64    63    16     1     0
+   65    50    39     1     0
+   65    58   593     1     0
+   65    61   187     1     0
+   65    64    24     1     0
+   65    68    14     1     0
+   66    51    34     1     0
+   66    59   503     1     0
+   66    62   246     1     0
+   66    65    26     1     0
+   66    67    13     1     0
+   66    69    22     1     0
+   67    52    30     1     0
+   67    58    15     1     0
+   67    60   480     1     0
+   67    63   256     1     0
+   67    66    27     1     0
+   67    68    19     1     0
+   67    70    24     1     0
+   68    53    25     1     0
+   68    59    25     1     0
+   68    61   464     1     0
+   68    64   262     1     0
+   68    67    28     1     0
+   68    69    20     1     0
+   68    71    27     1     0
+   69    54    16     1     0
+   69    58    21     1     0
+   69    60    27     1     0
+   69    62   392     1     0
+   69    65   300     1     0
+   69    66    13     1     0
+   69    68    26     1     0
+   69    70    28     1     0
+   70    54    10     1     0
+   70    55    13     1     0
+   70    59    21     1     0
+   70    61    31     1     0
+   70    62    17     1     0
+   70    63   335     1     0
+   70    66   310     1     0
+   70    67    29     1     0
+   70    69    25     1     0
+   70    71    39     1     0
+   71    55    11     1     0
+   71    57    12     1     0
+   71    60    19     1     0
+   71    62    32     1     0
+   71    63    29     1     0
+   71    64   301     1     0
+   71    67   305     1     0
+   71    68    35     1     0
+   71    70    27     1     0
+   71    71    11     1     0
+   72    58    12     1     0
+   72    61    18     1     0
+   72    63    35     1     0
+   72    64    36     1     0
+   72    65   278     1     0
+   72    66    16     1     0
+   72    68   300     1     0
+   72    69    39     1     0
+   72    71    31     1     0
+   73    59    12     1     0
+   73    62    18     1     0
+   73    64    39     1     0
+   73    65    39     1     0
+   73    66   268     1     0
+   73    67    20     1     0
+   73    68    11     1     0
+   73    69   294     1     0
+   73    70    43     1     0
+   73    71    12     1     0
+   74    60    13     1     0
+   74    63    19     1     0
+   74    64    14     1     0
+   74    65    43     1     0
+   74    66    43     1     0
+   74    67   264     1     0
+   74    68    24     1     0
+   74    69    14     1     0
+   74    70   296     1     0
+   74    71    46     1     0
+#2 3
+    1     1    45     1     0
+    2     2    25     1     0
+    3     1   948     1     0
+    4     2   968     1     0
+    5     3   987     1     0
+    6     4   991     1     0
+    7     5   997     1     0
+    8     6   997     1     0
+    9     7   997     1     0
+   10     8   997     1     0
+   11     9   995     1     0
+   12    10   994     1     0
+   13    11   993     1     0
+   14    12   987     1     0
+   15    13   978     1     0
+   15    14    11     1     0
+   16    14   968     1     0
+   16    15    14     1     0
+   16    18    10     1     0
+   17    15   955     1     0
+   17    19    35     1     0
+   18    16   939     1     0
+   18    20    51     1     0
+   19    17   927     1     0
+   19    21    65     1     0
+   20    18   916     1     0
+   20    22    78     1     0
+   21    19   904     1     0
+   21    23    90     1     0
+   22    20   871     1     0
+   22    24    99     1     0
+   22    25    16     1     0
+   23    21   716     1     0
+   23    23    22     1     0
+   23    25   132     1     0
+   23    26    84     1     0
+   23    28    12     1     0
+   24    22   554     1     0
+   24    24    59     1     0
+   24    25    14     1     0
+   24    26   163     1     0
+   24    27   153     1     0
+   24    29    23     1     0
+   25    23   432     1     0
+   25    25    62     1     0
+   25    26    17     1     0
+   25    27   153     1     0
+   25    28   264     1     0
+   25    30    22     1     0
+   26    24   304     1     0
+   26    26    51     1     0
+   26    27    16     1     0
+   26    28   105     1     0
+   26    29   450     1     0
+   26    31    20     1     0
+   27    25   184     1     0
+   27    27    38     1     0
+   27    29    63     1     0
+   27    30   641     1     0
+   27    32    14     1     0
+   28    26   111     1     0
+   28    28    21     1     0
+   28    30    40     1     0
+   28    31   766     1     0
+   28    33    13     1     0
+   29    27    41     1     0
+   29    31    20     1     0
+   29    32   900     1     0
+   29    34    12     1     0
+   30    28    19     1     0
+   30    32    16     1     0
+   30    33   938     1     0
+   30    35    10     1     0
+   31    29    14     1     0
+   31    33    16     1     0
+   31    34   945     1     0
+   32    30    12     1     0
+   32    34    11     1     0
+   32    35   955     1     0
+   33    31    10     1     0
+   33    36   967     1     0
+   34    37   980     1     0
+   35    38   994     1     0
+   36    39   996     1     0
+   37    40   996     1     0
+   38    41   996     1     0
+   39    42   996     1     0
+   40    43   996     1     0
+   41    44   996     1     0
+   42    45   996     1     0
+   43    46   996     1     0
+   44    47   996     1     0
+   45    48   995     1     0
+   46    49   993     1     0
+   47    50   993     1     0
+   48    51   994     1     0
+   49    52   993     1     0
+   50    53   993     1     0
+   51    54   994     1     0
+   52    55   996     1     0
+   53    56   994     1     0
+   54    57   994     1     0
+   55    58   994     1     0
+   56    59   995     1     0
+   57    60   995     1     0
+   58    61   995     1     0
+   59    62   994     1     0
+   60    63   994     1     0
+   61    64   990     1     0
+   62    65   990     1     0
+   63    66   991     1     0
+   64    67   977     1     0
+   65    68   969     1     0
+   66    69   952     1     0
+   67    69    12     1     0
+   67    70   941     1     0
+   67    71    13     1     0
+#2 4
+    1     1   255     1     0
+    2     2    28     1     0
+    3     3    12     1     0
+    5     1    10     1     0
+    5     3    12     1     0
+    6     1   712     1     0
+    6     4    15     1     0
+    7     2   956     1     0
+    7     5    20     1     0
+    8     3   970     1     0
+    8     6    19     1     0
+    9     4   972     1     0
+    9     7    18     1     0
+   10     5   969     1     0
+   10     8    17     1     0
+   11     6   965     1     0
+   11     9    15     1     0
+   12     7   963     1     0
+   12     8    12     1     0
+   12    10    12     1     0
+   13     8   957     1     0
+   13     9    20     1     0
+   14     9   944     1     0
+   14    10    37     1     0
+   15    10   859     1     0
+   15    11   128     1     0
+   16    11   823     1     0
+   16    12   166     1     0
+   17    12   810     1     0
+   17    13   181     1     0
+   18    13   766     1     0
+   18    14   227     1     0
+   19    14   760     1     0
+   19    15   233     1     0
+   20    15   733     1     0
+   20    16   260     1     0
+   21    16   680     1     0
+   21    17   309     1     0
+   22    17   676     1     0
+   22    18   295     1     0
+   23    18   690     1     0
+   23    19   270     1     0
+   24    19   711     1     0
+   24    20   253     1     0
+   25    20   726     1     0
+   25    21   234     1     0
+   26    21   746     1     0
+   26    22   219     1     0
+   27    22   767     1     0
+   27    23   217     1     0
+   28    23   767     1     0
+   28    24   164     1     0
+   29    24   818     1     0
+   29    25   157     1     0
+   30    25   820     1     0
+   30    26   143     1     0
+   31    26   829     1     0
+   31    27   133     1     0
+   32    27   838     1     0
+   32    28   128     1     0
+   33    28   848     1     0
+   33    29   114     1     0
+   34    29   865     1     0
+   34    30    49     1     0
+   35    30   936     1     0
+   35    31    36     1     0
+   36    31   950     1     0
+   36    32    26     1     0
+   37    32   962     1     0
+   37    33    16     1     0
+   38    33   975     1     0
+   39    34   985     1     0
+   40    35   993     1     0
+   41    36   999     1     0
+   42    37   999     1     0
+   43    38   999     1     0
+   44    39   999     1     0
+   45    40   999     1     0
+   46    41   999     1     0
+   47    42   999     1     0
+   48    43   999     1     0
+   49    44   999     1     0
+   50    45   999     1     0
+   51    46   999     1     0
+   52    47   999     1     0
+   53    48   999     1     0
+   54    49   999     1     0
+   55    50   999     1     0
+   56    51   999     1     0
+   57    52   998     1     0
+   58    53   998     1     0
+   59    54   998     1     0
+   60    55   998     1     0
+   61    56   998     1     0
+   62    57   998     1     0
+   63    58   998     1     0
+   64    59   998     1     0
+   65    60   997     1     0
+   66    61   996     1     0
+   67    62   993     1     0
+#3 4
+    1     1   169     1     0
+    2     2   155     1     0
+    3     3   139     1     0
+    4     1   828     1     0
+    4     4   136     1     0
+    5     2   845     1     0
+    5     5   134     1     0
+    6     3   860     1     0
+    6     6   113     1     0
+    7     4   863     1     0
+    7     7    57     1     0
+    8     5   861     1     0
+    8     8    46     1     0
+    9     6   876     1     0
+    9     9    32     1     0
+   10     7   937     1     0
+   10    10    29     1     0
+   11     8   949     1     0
+   11    11    23     1     0
+   12     9   959     1     0
+   12    12    19     1     0
+   13    10   958     1     0
+   13    13    12     1     0
+   14    11   962     1     0
+   15    12   956     1     0
+   16    13   933     1     0
+   17    14   896     1     0
+   17    15    15     1     0
+   18    15   852     1     0
+   18    16    26     1     0
+   19    13    30     1     0
+   19    16   737     1     0
+   19    17    88     1     0
+   20    14    61     1     0
+   20    17   707     1     0
+   20    18    81     1     0
+   21    15    96     1     0
+   21    18   696     1     0
+   21    19    74     1     0
+   22    15    10     1     0
+   22    16   125     1     0
+   22    19   684     1     0
+   22    20    42     1     0
+   23    16    11     1     0
+   23    17   140     1     0
+   23    20   607     1     0
+   24    16    23     1     0
+   24    17    12     1     0
+   24    18   115     1     0
+   24    21   561     1     0
+   25    17    33     1     0
+   25    18    21     1     0
+   25    19    95     1     0
+   25    22   503     1     0
+   26    18    66     1     0
+   26    19    19     1     0
+   26    20    58     1     0
+   26    21    12     1     0
+   26    23   462     1     0
+   27    19   104     1     0
+   27    20    14     1     0
+   27    21    22     1     0
+   27    22    11     1     0
+   27    23    12     1     0
+   27    24   418     1     0
+   28    20   232     1     0
+   28    22    14     1     0
+   28    24    11     1     0
+   28    25   391     1     0
+   29    19    10     1     0
+   29    21   338     1     0
+   29    22    10     1     0
+   29    23    11     1     0
+   29    25    11     1     0
+   29    26   376     1     0
+   29    28    10     1     0
+   30    20    21     1     0
+   30    22   391     1     0
+   30    23    13     1     0
+   30    26    13     1     0
+   30    27   352     1     0
+   30    29    10     1     0
+   31    21    33     1     0
+   31    23   423     1     0
+   31    24    11     1     0
+   31    27    15     1     0
+   31    28   334     1     0
+   31    30    11     1     0
+   32    22    39     1     0
+   32    24   457     1     0
+   32    25    12     1     0
+   32    28    18     1     0
+   32    29   209     1     0
+   32    31    10     1     0
+   33    23    45     1     0
+   33    25   463     1     0
+   33    26    11     1     0
+   33    29    37     1     0
+   33    30    62     1     0
+   33    32    10     1     0
+   34    24    63     1     0
+   34    26   470     1     0
+   34    27    13     1     0
+   34    30    32     1     0
+   34    31    42     1     0
+   35    25    81     1     0
+   35    27   484     1     0
+   35    28    14     1     0
+   35    31    33     1     0
+   35    32    24     1     0
+   36    26    84     1     0
+   36    28   498     1     0
+   36    29    20     1     0
+   36    32    35     1     0
+   37    27    93     1     0
+   37    29   593     1     0
+   37    33    26     1     0
+   38    28    71     1     0
+   38    30   789     1     0
+   38    34    17     1     0
+   39    29    48     1     0
+   39    31   834     1     0
+   39    35    14     1     0
+   40    30    25     1     0
+   40    32   883     1     0
+   41    33   937     1     0
+   42    34   972     1     0
+   43    35   977     1     0
+   44    36   998     1     0
+   45    37   998     1     0
+   46    38   998     1     0
+   47    39   998     1     0
+   48    40   998     1     0
+   49    41   997     1     0
+   50    42   997     1     0
+   51    43   997     1     0
+   52    44   997     1     0
+   53    45   997     1     0
+   54    46   997     1     0
+   55    47   997     1     0
+   56    48   985     1     0
+   56    50    13     1     0
+   57    49   961     1     0
+   57    51    34     1     0
+   58    50   956     1     0
+   58    52    39     1     0
+   59    51   956     1     0
+   59    53    38     1     0
+   60    52   947     1     0
+   60    54    41     1     0
+   61    53   943     1     0
+   61    55    41     1     0
+   62    54   943     1     0
+   62    56    40     1     0
+   63    55   945     1     0
+   63    57    32     1     0
+   64    56   946     1     0
+   64    58    13     1     0
+   65    57   956     1     0
+   65    59    12     1     0
+   66    58   974     1     0
+   67    59   967     1     0
+   68    60   960     1     0
+   69    61   955     1     0
+   70    62   950     1     0
+   71    63   939     1     0
+   72    64   930     1     0
+   72    66    11     1     0
+   73    65   915     1     0
+   73    67    16     1     0
+   74    65    13     1     0
+   74    66   851     1     0
+   74    67    10     1     0
+   74    68    30     1     0
+   75    66    39     1     0
+   75    67   798     1     0
+   75    68    13     1     0
+   75    69    44     1     0
+   76    66    15     1     0
+   76    67    56     1     0
+   76    68   718     1     0
+   76    69    13     1     0
+   76    70    70     1     0
+   77    66    15     1     0
+   77    67    31     1     0
+   77    68   102     1     0
+   77    69   686     1     0
+   77    70    16     1     0
+   77    71    84     1     0
+   78    67    16     1     0
+   78    68    33     1     0
+   78    69   117     1     0
+   78    70   672     1     0
+   78    71    19     1     0
+   79    68    17     1     0
+   79    69    34     1     0
+   79    70   131     1     0
+   79    71   673     1     0
+! CPU 0
+! SEQ_1_TO_N
+1    84     1     0
+   78    67    16     1     0
+   78    68    33     1     0
+   78    69   117     1     0
+   78    70   672     1     0
+   78    71    19     1     0
+   79    68    17     1     0
+   79    69    34     1     0
+   79    70   131     1     0
+   79    71   673     1     0
+! CPU 0
+! SEQ_1_TO_N
+#Single Thread
+1    84     1     0
+   78    67    16     1     0
+   78    68    33     1     0
+   78    69   117     1     0
+   78    70   672     1     0
+   78    71    19     1     0
+   79    68    17     1     0
+   79    69    34     1     0
+   79    70   131     1     0
+   79    71   673     1     0
+! CPU 0
+! SEQ_1_TO_N
+#Single Thread
+1    84     1     0
+   78    67    16     1     0
+   78    68    33     1     0
+   78    69   117     1     0
+   78    70   672     1     0
+   78    71    19     1     0
+   79    68    17     1     0
+   79    69    34     1     0
+   79    70   131     1     0
+   79    71   673     1     0
+! CPU 0
+! SEQ_1_TO_N
+#Single Thread
+1    84     1     0
+   78    67    16     1     0
+   78    68    33     1     0
+   78    69   117     1     0
+   78    70   672     1     0
+   78    71    19     1     0
+   79    68    17     1     0
+   79    69    34     1     0
+   79    70   131     1     0
+   79    71   673     1     0
+! CPU 0
+! SEQ_1_TO_N
+#Single Thread
+CLUSTAL FORMAT for T-COFFEE Version_13.39.0.d675aed [http://www.tcoffee.org] [MODE:  ], CPU=0.00 sec, SCORE=83, Nseq=4, Len=81 
+
+hmgl_trybr      kkdsnapkramtsfmffssdfrskhs----d-lsivemskaagaawkelg
+hmgt_mouse      -----kpkrprsayniyvsesfqeak----d-dsaqgklklvneawknls
+hmgb_chite      ---adkpkrplsaymlwlnsaresikrenpd-fkvtevakkggelwrglk
+hmgl_wheat      --dpnkpkrapsaffvfmgefreefkqknpknksvaavgkaagerwksls
+                      ***. ::: .: ..  .. .    .  .     *  .  *: * 
+
+hmgl_trybr      peerkvyeemaekdkerykrem---------
+hmgt_mouse      peekqayiqlakddrirydnemksweeqmae
+hmgb_chite      --dkseweakaatakqnyiralqeyerng-g
+hmgl_wheat      esekapyvakanklkgeynkaiaaynkgesa
+                  ::  :   *   : .* . :         
+
+
+
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>stderr</name>
+<content>
+PROGRAM: T-COFFEE Version_13.39.0.d675aed (Version_13.39.0.d675aed)
+-full_log      	S	[0] 
+-genepred_score	S	[0] 	nsd
+-run_name      	S	[0] 
+-mem_mode      	S	[0] 	mem
+-extend        	D	[1] 	1 
+-extend_mode   	S	[0] 	very_fast_triplet
+-max_n_pair    	D	[0] 	10 
+-seq_name_for_quadruplet	S	[0] 	all
+-compact       	S	[0] 	default
+-clean         	S	[0] 	no
+-do_self       	FL	[0] 	0
+-do_normalise  	D	[0] 	1000 
+-template_file 	S	[0] 
+-setenv        	S	[0] 	0
+-export        	S	[0] 	0
+-template_mode 	S	[0] 
+-flip          	D	[0] 	0 
+-remove_template_file	D	[0] 	0 
+-profile_template_file	S	[0] 
+-in            	S	[0] 
+-seq           	S	[1] 	sample_seq1.fasta
+-aln           	S	[0] 
+-method_limits 	S	[0] 
+-method        	S	[0] 
+-lib           	S	[0] 
+-profile       	S	[0] 
+-profile1      	S	[0] 
+-profile2      	S	[0] 
+-pdb           	S	[0] 
+-relax_lib     	D	[0] 	1 
+-filter_lib    	D	[0] 	0 
+-shrink_lib    	D	[0] 	0 
+-out_lib       	W_F	[1] 	stdout
+-out_lib_mode  	S	[0] 	primary
+-lib_only      	D	[0] 	0 
+-outseqweight  	W_F	[0] 	no
+-seq_source    	S	[0] 	ANY
+-cosmetic_penalty	D	[0] 	0 
+-gapopen       	D	[0] 	0 
+-gapext        	D	[0] 	0 
+-fgapopen      	D	[0] 	0 
+-fgapext       	D	[0] 	0 
+-nomatch       	D	[0] 	0 
+-newtree       	W_F	[0] 	default
+-tree          	W_F	[0] 	NO
+-usetree       	R_F	[0] 
+-tree_mode     	S	[0] 	nj
+-distance_matrix_mode	S	[0] 	ktup
+-distance_matrix_sim_mode	S	[0] 	idmat_sim1
+-quicktree     	FL	[0] 	0
+-outfile       	W_F	[1] 	stdout
+-maximise      	FL	[1] 	1
+-output        	S	[0] 	aln	html
+-len           	D	[0] 	0 
+-infile        	R_F	[0] 
+-matrix        	S	[0] 	default
+-tg_mode       	D	[0] 	1 
+-profile_mode  	S	[0] 	cw_profile_profile
+-profile_comparison	S	[0] 	profile
+-dp_mode       	S	[0] 	linked_pair_wise
+-ktuple        	D	[0] 	1 
+-ndiag         	D	[0] 	0 
+-diag_threshold	D	[0] 	0 
+-diag_mode     	D	[0] 	0 
+-sim_matrix    	S	[0] 	vasiliky
+-transform     	S	[0] 
+-extend_seq    	FL	[0] 	0
+-outorder      	S	[0] 	input
+-inorder       	S	[0] 	aligned
+-seqnos        	S	[0] 	off
+-case          	S	[0] 	keep
+-cpu           	D	[0] 	0 
+-ulimit        	D	[0] 	-1 
+-maxnseq       	D	[0] 	-1 
+-maxlen        	D	[0] 	-1 
+-sample_dp     	D	[0] 	0 
+-weight        	S	[0] 	default
+-seq_weight    	S	[0] 	no
+-align         	FL	[1] 	1
+-mocca         	FL	[0] 	0
+-domain        	FL	[0] 	0
+-start         	D	[0] 	0 
+-len           	D	[0] 	0 
+-scale         	D	[0] 	0 
+-mocca_interactive	FL	[0] 	0
+-method_evaluate_mode	S	[0] 	default
+-color_mode    	S	[0] 	new
+-aln_line_length	D	[0] 	0 
+-evaluate_mode 	S	[0] 	triplet
+-get_type      	FL	[0] 	0
+-clean_aln     	D	[0] 	0 
+-clean_threshold	D	[1] 	1 
+-clean_iteration	D	[1] 	1 
+-clean_evaluate_mode	S	[0] 	t_coffee_fast
+-extend_matrix 	FL	[0] 	0
+-prot_min_sim  	D	[40] 	40 
+-prot_max_sim  	D	[90] 	90 
+-prot_trim     	D	[20] 	20 
+-prot_min_cov  	D	[40] 	40 
+-pdb_type      	S	[0] 	d
+-pdb_min_sim   	D	[35] 	35 
+-pdb_max_sim   	D	[100] 	100 
+-pdb_min_cov   	D	[50] 	50 
+-pdb_blast_server	W_F	[0] 	EBI
+-blast         	W_F	[0] 
+-blast_server  	W_F	[0] 	EBI
+-pdb_db        	W_F	[0] 	pdb
+-protein_db    	W_F	[0] 	uniref50
+-method_log    	W_F	[0] 	no
+-struc_to_use  	S	[0] 
+-cache         	W_F	[0] 	use
+-print_cache   	FL	[0] 	0
+-align_pdb_param_file	W_F	[0] 	no
+-align_pdb_hasch_mode	W_F	[0] 	hasch_ca_trace_bubble
+-external_aligner	S	[0] 	NO
+-msa_mode      	S	[0] 	tree
+-et_mode       	S	[0] 	et
+-master        	S	[0] 	no
+-blast_nseq    	D	[0] 	0 
+-lalign_n_top  	D	[0] 	10 
+-iterate       	D	[0] 	0 
+-trim          	D	[0] 	0 
+-split         	D	[0] 	0 
+-trimfile      	S	[0] 	default
+-split         	D	[0] 	0 
+-split_nseq_thres	D	[0] 	0 
+-split_score_thres	D	[0] 	0 
+-check_pdb_status	D	[0] 	0 
+-clean_seq_name	D	[0] 	0 
+-seq_to_keep   	S	[0] 
+-dpa_master_aln	S	[0] 
+-dpa_maxnseq   	D	[0] 	0 
+-dpa_min_score1	D	[0] 
+-dpa_min_score2	D	[0] 
+-dpa_keep_tmpfile	FL	[0] 	0
+-dpa_debug     	D	[0] 	0 
+-multi_core    	S	[0] 	templates_jobs_relax_msa_evaluate
+-n_core        	D	[0] 	1 
+-thread        	D	[0] 	1 
+-max_n_proc    	D	[0] 	0 
+-lib_list      	S	[0] 
+-prune_lib_mode	S	[0] 	5
+-tip           	S	[0] 	none
+-rna_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 1 processors:
+	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 1 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	xxx Retrieved Ssample_seq1.fasta	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 1 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	xxx Retrieved Ssample_seq1.fasta	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 1 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	xxx Retrieved Ssample_seq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [1]
+ 
+!		[Relax Library][TOT=    4][  0 %]!		[Relax Library][TOT=    4][ 50 %]!		[Relax Library][TOT=    4][ 75 %]!		[Relax Library][TOT=    4][100 %]
+	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 1 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	xxx Retrieved Ssample_seq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [1]
+ 
+Relaxation Summary: [1904]--->[1461]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: hmgb_chite
+Group    2: hmgl_trybr
+Group    3: hmgl_wheat
+Group    4: hmgt_mouse
+
+	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 1 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	xxx Retrieved Ssample_seq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [1]
+ 
+Relaxation Summary: [1904]--->[1461]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: hmgb_chite
+Group    2: hmgl_trybr
+Group    3: hmgl_wheat
+Group    4: hmgt_mouse
+
+
+	Group    5: [Group    2 (   1 seq)] with [Group    4 (   1 seq)]-->[Len=   76][PID:87014]	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 1 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	xxx Retrieved Ssample_seq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [1]
+ 
+Relaxation Summary: [1904]--->[1461]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: hmgb_chite
+Group    2: hmgl_trybr
+Group    3: hmgl_wheat
+Group    4: hmgt_mouse
+
+
+	Group    5: [Group    2 (   1 seq)] with [Group    4 (   1 seq)]-->[Len=   76][PID:87014]
+	Group    6: [Group    3 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=   79][PID:87014]	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 1 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	xxx Retrieved Ssample_seq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [1]
+ 
+Relaxation Summary: [1904]--->[1461]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: hmgb_chite
+Group    2: hmgl_trybr
+Group    3: hmgl_wheat
+Group    4: hmgt_mouse
+
+
+	Group    5: [Group    2 (   1 seq)] with [Group    4 (   1 seq)]-->[Len=   76][PID:87014]
+	Group    6: [Group    3 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=   79][PID:87014]
+	Group    7: [Group    6 (   2 seq)] with [Group    5 (   2 seq)]-->[Len=   81][PID:87014]
+
+
+!		[Final Evaluation][TOT=   81][  0 %]!		[Final Evaluation][TOT=   81][  2 %]!		[Final Evaluation][TOT=   81][  3 %]!		[Final Evaluation][TOT=   81][  4 %]!		[Final Evaluation][TOT=   81][  6 %]!		[Final Evaluation][TOT=   81][  7 %]!		[Final Evaluation][TOT=   81][  8 %]!		[Final Evaluation][TOT=   81][  9 %]!		[Final Evaluation][TOT=   81][ 11 %]!		[Final Evaluation][TOT=   81][ 12 %]!		[Final Evaluation][TOT=   81][ 13 %]!		[Final Evaluation][TOT=   81][ 14 %]!		[Final Evaluation][TOT=   81][ 16 %]!		[Final Evaluation][TOT=   81][ 17 %]!		[Final Evaluation][TOT=   81][ 18 %]!		[Final Evaluation][TOT=   81][ 19 %]!		[Final Evaluation][TOT=   81][ 20 %]!		[Final Evaluation][TOT=   81][ 22 %]!		[Final Evaluation][TOT=   81][ 23 %]!		[Final Evaluation][TOT=   81][ 24 %]!		[Final Evaluation][TOT=   81][ 25 %]!		[Final Evaluation][TOT=   81][ 27 %]!		[Final Evaluation][TOT=   81][ 28 %]!		[Final Evaluation][TOT=   81][ 29 %]!		[Final Evaluation][TOT=   81][ 30 %]!		[Final Evaluation][TOT=   81][ 32 %]!		[Final Evaluation][TOT=   81][ 33 %]!		[Final Evaluation][TOT=   81][ 34 %]!		[Final Evaluation][TOT=   81][ 35 %]!		[Final Evaluation][TOT=   81][ 37 %]!		[Final Evaluation][TOT=   81][ 38 %]!		[Final Evaluation][TOT=   81][ 39 %]!		[Final Evaluation][TOT=   81][ 40 %]!		[Final Evaluation][TOT=   81][ 41 %]!		[Final Evaluation][TOT=   81][ 43 %]!		[Final Evaluation][TOT=   81][ 44 %]!		[Final Evaluation][TOT=   81][ 45 %]!		[Final Evaluation][TOT=   81][ 46 %]!		[Final Evaluation][TOT=   81][ 48 %]!		[Final Evaluation][TOT=   81][ 49 %]!		[Final Evaluation][TOT=   81][ 50 %]!		[Final Evaluation][TOT=   81][ 51 %]!		[Final Evaluation][TOT=   81][ 53 %]!		[Final Evaluation][TOT=   81][ 54 %]!		[Final Evaluation][TOT=   81][ 55 %]!		[Final Evaluation][TOT=   81][ 56 %]!		[Final Evaluation][TOT=   81][ 58 %]!		[Final Evaluation][TOT=   81][ 59 %]!		[Final Evaluation][TOT=   81][ 60 %]!		[Final Evaluation][TOT=   81][ 61 %]!		[Final Evaluation][TOT=   81][ 62 %]!		[Final Evaluation][TOT=   81][ 64 %]!		[Final Evaluation][TOT=   81][ 65 %]!		[Final Evaluation][TOT=   81][ 66 %]!		[Final Evaluation][TOT=   81][ 67 %]!		[Final Evaluation][TOT=   81][ 69 %]!		[Final Evaluation][TOT=   81][ 70 %]!		[Final Evaluation][TOT=   81][ 71 %]!		[Final Evaluation][TOT=   81][ 72 %]!		[Final Evaluation][TOT=   81][ 74 %]!		[Final Evaluation][TOT=   81][ 75 %]!		[Final Evaluation][TOT=   81][ 76 %]!		[Final Evaluation][TOT=   81][ 77 %]!		[Final Evaluation][TOT=   81][ 79 %]!		[Final Evaluation][TOT=   81][ 80 %]!		[Final Evaluation][TOT=   81][ 81 %]!		[Final Evaluation][TOT=   81][ 82 %]!		[Final Evaluation][TOT=   81][ 83 %]!		[Final Evaluation][TOT=   81][ 85 %]!		[Final Evaluation][TOT=   81][ 86 %]!		[Final Evaluation][TOT=   81][ 87 %]!		[Final Evaluation][TOT=   81][ 88 %]!		[Final Evaluation][TOT=   81][ 90 %]!		[Final Evaluation][TOT=   81][ 91 %]!		[Final Evaluation][TOT=   81][ 92 %]!		[Final Evaluation][TOT=   81][ 93 %]!		[Final Evaluation][TOT=   81][ 95 %]!		[Final Evaluation][TOT=   81][ 96 %]!		[Final Evaluation][TOT=   81][ 97 %]!		[Final Evaluation][TOT=   81][ 98 %]!		[Final Evaluation][TOT=   81][100 %]
+
+
+
+OUTPUT RESULTS
+	#### File Type= GUIDE_TREE      Format= newick          Name= sample_seq1.dnd
+	#### File Type= MSA             Format= html            Name= stdout.html
+
+# Command Line: t_coffee sample_seq1.fasta -outfile stdout -out_lib stdout  [PROGRAM:T-COFFEE]
+# T-COFFEE Memory Usage: Current= 29.321 Mb, Max= 30.262 Mb
+# Results Produced with T-COFFEE Version_13.39.0.d675aed (Version_13.39.0.d675aed)
+# T-COFFEE is available from http://www.tcoffee.org
+# Register on: https://groups.google.com/group/tcoffee/
+</content>
+</file>
+<file>
+<stream>input</stream>
+<name>sample_seq1.fasta</name>
+<content>>hmgl_trybr
+kkdsnapkramtsfmffssdfrskhsdlsivemskaagaawkelgpeerk
+vyeemaekdkerykrem
+>hmgt_mouse
+kpkrprsayniyvsesfqeakddsaqgklklvneawknlspeekqayiql
+akddrirydnemksweeqmae
+>hmgb_chite
+adkpkrplsaymlwlnsaresikrenpdfkvtevakkggelwrglkdkse
+weakaatakqnyiralqeyerngg
+>hmgl_wheat
+dpnkpkrapsaffvfmgefreefkqknpknksvaavgkaagerwkslses
+ekapyvakanklkgeynkaiaaynkgesa
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>sample_seq1.dnd</name>
+<content>((hmgb_chite:0.14250,hmgl_wheat:0.14750):0.00750,hmgl_trybr:0.13250,hmgt_mouse:0.14750);</content>
+</file>
+<file>
+<stream>input</stream>
+<name>sample_seq1.dnd</name>
+<content>((hmgb_chite:0.14250,hmgl_wheat:0.14750):0.00750,hmgl_trybr:0.13250,hmgt_mouse:0.14750);</content>
+</file>
+<file>
+<stream>output</stream>
+<name>stdout</name>
+<content><html>
+<style>
+SPAN { font-family: courier new, courier-new, courier, monospace; font-weight: bold; font-size: 11pt;}
+SPAN { line-height:100%}
+SPAN {	white-space: pre}
+SPAN.value0 {background: #9B92FF}
+SPAN.value1 {background: #B4FFB4}
+SPAN.value2 {background: #BEFFBE}
+SPAN.value3 {background: #C8FFC8}
+SPAN.value4 {background: #FFFFB7}
+SPAN.value5 {background: #FFFFAD}
+SPAN.value6 {background: #FFFFAD}
+SPAN.value7 {background: #FFE6E6}
+SPAN.value8 {background: #FFDCDC}
+SPAN.value9 {background: #FFC8C8}
+SPAN.valuedefault {}
+SPAN.valuegap {}
+SPAN.valueink {background: 000000}
+</style><body><span class=valuedefault>T-COFFEE,&nbsp;Version_13.39.0.d675aed&nbsp;(Version_13.39.0.d675aed)</span><br><span class=valuedefault>Cedric&nbsp;Notredame&nbsp;</span><br><span class=valuedefault>CPU&nbsp;TIME:0&nbsp;sec.</span><br><span class=valuedefault>SCORE=83</span><br><span class=valuedefault>*</span><br><span class=valuedefault>&nbsp;</span><span class=value0>B</span><span class=value1>A</span><span class=value2>D</span><span class=value3>&nbsp;</span><span class=value4>A</span><span class=value5>V</span><span class=value6>G</span><span class=value7>&nbsp;</span><span class=value8>G</span><span class=value9>OOD</span><br><span class=valuedefault>*</span><br><span class=value8>hmgl_trybr&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;86</span><br><span class=value8>hmgt_mouse&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;82</span><br><span class=value8>hmgb_chite&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;82</span><br><span class=value8>hmgl_wheat&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;82</span><br><span class=value8>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;&nbsp;8</span><br><br><span class=valuedefault>hmgl_trybr&nbsp;&nbsp;&nbsp;</span><span class=value5>k</span><span class=value7>k</span><span class=value8>d</span><span class=value9>snapkramtsfmff</span><span class=value8>ss</span><span class=value7>d</span><span class=value6>frs</span><span class=value5>khs</span><span class=valuegap>----</span><span class=value5>d</span><span class=valuegap>-</span><span class=value5>l</span><span class=value6>si</span><span class=value7>vem</span><span class=value8>s</span><br><span class=valuedefault>hmgt_mouse&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-----</span><span class=value9>kpkrprsayniyv</span><span class=value8>s</span><span class=value7>e</span><span class=value6>sfq</span><span class=value5>eak</span><span class=valuegap>----</span><span class=value5>d</span><span class=valuegap>-</span><span class=value5>ds</span><span class=value6>aqgk</span><span class=value7>l</span><br><span class=valuedefault>hmgb_chite&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---</span><span class=value8>a</span><span class=value9>dkpkrplsaymlwl</span><span class=value8>ns</span><span class=value7>ar</span><span class=value6>esi</span><span class=value5>k</span><span class=value4>renp</span><span class=value5>d</span><span class=valuegap>-</span><span class=value5>f</span><span class=value6>kv</span><span class=value7>tev</span><span class=value8>a</span><br><span class=valuedefault>hmgl_wheat&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value6>d</span><span class=value8>p</span><span class=value9>nkpkrapsaffvfm</span><span class=value8>ge</span><span class=value7>fr</span><span class=value6>eef</span><span class=value5>k</span><span class=value4>qknp</span><span class=value5>k</span><span class=value3>n</span><span class=value4>k</span><span class=value5>s</span><span class=value6>v</span><span class=value7>aav</span><span class=value8>g</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value2>&nbsp;&nbsp;</span><span class=value4>&nbsp;</span><span class=value7>&nbsp;</span><span class=value8>&nbsp;</span><span class=value9>&nbsp;***.&nbsp;:::&nbsp;.:&nbsp;</span><span class=value8>.</span><span class=value7>.</span><span class=value6>&nbsp;&nbsp;</span><span class=value5>.</span><span class=value4>.&nbsp;.</span><span class=value2>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value4>.</span><span class=value1>&nbsp;</span><span class=value4>&nbsp;</span><span class=value5>.&nbsp;</span><span class=value6>&nbsp;&nbsp;&nbsp;</span><span class=value8>&nbsp;</span><br><br><br><span class=valuedefault>hmgl_trybr&nbsp;&nbsp;&nbsp;</span><span class=value9>kaagaawkel</span><span class=value8>g</span><span class=value6>pe</span><span class=value7>er</span><span class=value8>k</span><span class=value9>vyeemaekdkerykrem</span><span class=valuegap>------</span><br><span class=valuedefault>hmgt_mouse&nbsp;&nbsp;&nbsp;</span><span class=value8>kl</span><span class=value9>vneawknl</span><span class=value8>s</span><span class=value6>pe</span><span class=value7>ek</span><span class=value8>qa</span><span class=value9>y</span><span class=value8>i</span><span class=value9>qla</span><span class=value8>k</span><span class=value9>ddrirydnemk</span><span class=value8>sw</span><span class=value6>e</span><span class=value5>e</span><span class=value6>q</span><br><span class=valuedefault>hmgb_chite&nbsp;&nbsp;&nbsp;</span><span class=value9>kkggelwrgl</span><span class=value7>k</span><span class=valuegap>--</span><span class=value6>dk</span><span class=value7>se</span><span class=value8>we</span><span class=value9>akaat</span><span class=value8>akq</span><span class=value9>nyiralq</span><span class=value7>e</span><span class=value8>ye</span><span class=value7>r</span><span class=value6>n</span><br><span class=valuedefault>hmgl_wheat&nbsp;&nbsp;&nbsp;</span><span class=value9>kaagerwksl</span><span class=value8>s</span><span class=value6>ese</span><span class=value7>k</span><span class=value8>ap</span><span class=value9>yvakanklkgeynkaiaay</span><span class=value7>n</span><span class=value6>k</span><span class=value5>g</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>*</span><span class=value9>&nbsp;&nbsp;.&nbsp;&nbsp;*:&nbsp;*</span><span class=value7>&nbsp;</span><span class=value6>&nbsp;</span><span class=value5>&nbsp;</span><span class=value6>:</span><span class=value7>:&nbsp;</span><span class=value8>&nbsp;:&nbsp;</span><span class=value9>&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;:&nbsp;.*&nbsp;.&nbsp;:</span><span class=value8>&nbsp;</span><span class=value7>&nbsp;&nbsp;</span><span class=value5>&nbsp;</span><span class=value4>&nbsp;</span><span class=value3>&nbsp;</span><br><br><br><span class=valuedefault>hmgl_trybr&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---</span><br><span class=valuedefault>hmgt_mouse&nbsp;&nbsp;&nbsp;</span><span class=value5>m</span><span class=value4>a</span><span class=value5>e</span><br><span class=valuedefault>hmgb_chite&nbsp;&nbsp;&nbsp;</span><span class=value5>g</span><span class=valuegap>-</span><span class=value4>g</span><br><span class=valuedefault>hmgl_wheat&nbsp;&nbsp;&nbsp;</span><span class=value5>e</span><span class=value4>s</span><span class=value5>a</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value3>&nbsp;</span><span class=value2>&nbsp;</span><span class=value3>&nbsp;</span><br><br><br><br><br><br></body></html>
+</content>
+</file>
+<environement>
+HOME_4_TCOFFEE=/Users/cnotredame/
+MANPATH=/sw/share/man:/usr/share/man:/usr/local/share/man:/opt/X11/share/man:/Library/TeX/texbin/man:/Applications/Xcode.app/Contents/Developer/usr/share/man:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/share/man:/sw/lib/perl5/5.18.2/man
+TERM_PROGRAM=Apple_Terminal
+MCOFFEE_4_TCOFFEE=/Users/cnotredame//.t_coffee//mcoffee/
+ROOT_TMP_4_TCOFFEE=/var/tmp/
+SHELL=/bin/bash
+TERM=xterm-256color
+TMPDIR=/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/
+CONDA_SHLVL=1
+PERL5LIB=/sw/lib/perl5:/sw/lib/perl5/darwin
+Apple_PubSub_Socket_Render=/private/tmp/com.apple.launchd.6JzhyrtuKp/Render
+CONDA_PROMPT_MODIFIER=(base) 
+TERM_PROGRAM_VERSION=388.1.3
+OSNAME=macosx
+PERL_BIN=/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms::/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices
+TERM_SESSION_ID=9785BD0D-F6F1-4B59-B0BA-9937FD12A1E7
+METHODS_4_TCOFFEE=/Users/cnotredame//.t_coffee//methods/
+VERSIONER_PERL_VERSION=5.18
+XAPPLRESDIR=/sw/etc/app-defaults/
+http_proxy=
+HTTP_proxy=
+USER=cnotredame
+CONDA_EXE=/Users/cnotredame/anaconda3/bin/conda
+SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.U5mTe2o7m7/Listeners
+__CF_USER_TEXT_ENCODING=0x1F6:0x0:0x0
+ENV_4_TCOFFEE=/Users/cnotredame//.t_coffee//.t_coffee_env
+_CE_CONDA=
+all_proxy=
+ALL_PROXY=
+HTTP_proxy_4_TCOFFEE=
+PATH=/Users/cnotredame//.t_coffee//plugins/macosx/:/Users/cnotredame/anaconda3/bin:/Users/cnotredame/anaconda3/condabin:/opt/local/bin:/opt/local/sbin:/opt/local/bin:/opt/local/sbin:/Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/packages/x3dna-v2.1/bin:/Users/cnotredame/bin/macosx://Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms:.:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices:/Users/cnotredame/bin/Scripts:/Users/cnotredame/Library/Haskell/ghc-7.4.2/lib/epub-tools-2.0.0/bin:/sw/bin:/sw/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/Library/TeX/texbin
+_=/usr/bin/printenv
+CONDA_PREFIX=/Users/cnotredame/anaconda3
+COLOR_4_TCOFFEE=new
+DIR_4_TCOFFEE=/Users/cnotredame//.t_coffee/
+PWD=/private/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/RANDOMSTRINGPDA2oq1EDu9vwYfAUYg8/data
+CACHE_4_TCOFFEE=/Users/cnotredame//.t_coffee//cache/
+X3DNA=/Users/cnotredame/Dropbox/packages/x3dna-v2.1
+DBUS_LAUNCHD_SESSION_BUS_SOCKET=/private/tmp/com.apple.launchd.DfqaaC2z17/unix_domain_listener
+XPC_FLAGS=0x0
+VERSIONER_PERL_PREFER_32_BIT=no
+_CE_M=
+XPC_SERVICE_NAME=0
+ERRORFILE_4_TCOFFEE=NO
+PLUGINS_4_TCOFFEE=/Users/cnotredame//.t_coffee//plugins/macosx/
+SHLVL=3
+HOME=/Users/cnotredame
+DUMP_4_TCOFFEE=/private/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/RANDOMSTRINGPDA2oq1EDu9vwYfAUYg8/tcoffee_faq.rst.4.dump
+HTTP_PROXY=
+MAFFT_BINARIES=
+CONDA_PYTHON_EXE=/Users/cnotredame/anaconda3/bin/python
+BIN=/Users/cnotredame/bin/macosx
+LOGNAME=cnotredame
+EMAIL_4_TCOFFEE=cedric.notredame@gmail.com
+LC_CTYPE=UTF-8
+CONDA_DEFAULT_ENV=base
+EMAIL=cedric.notredame@gmail.com
+UPDATED_ENV_4_TCOFFEE=1
+INFOPATH=/sw/share/info:/sw/info:/usr/share/info
+DISPLAY=/private/tmp/com.apple.launchd.vef8UzGxBY/org.macosforge.xquartz:0
+TC_MASTER_NODE=1
+NUMBER_OF_PROCESSORS=8
+ALL_proxy=
+LOCKDIR_4_TCOFFEE=/var/tmp/tco/tconq0g0fhb87014//lck/pxkhjjurt9/
+TMP_4_TCOFFEE=/var/tmp/tco/tconq0g0fhb87014/
+USER_BIN=/Users/cnotredame/bin/macosx
+SCRIPT_BIN=/Users/cnotredame/bin/Scripts/
+</environement>
+<DumpStatus>OK</DumpStatus>
+<DumpFile>/private/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/RANDOMSTRINGPDA2oq1EDu9vwYfAUYg8/tcoffee_faq.rst.4.dump</DumpFile>
+<SourceFile>tcoffee_faq.rst</SourceFile>
+<SourceLine>82</SourceLine>
+</DumpIO>

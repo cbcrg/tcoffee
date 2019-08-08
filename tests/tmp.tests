@@ -1,0 +1,2 @@
+cat sample_seq1.fasta | t_coffee -infile=stdin    
+#t_coffee -infile=sample_seq1.fasta

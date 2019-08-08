@@ -1,8 +1,8 @@
 <DumpIO>
 <nature>standard dump</nature>
 <program>T-COFFEE</program>
-<version>Version_13.38.3.a77ca2b</version>
-<build>Version_13.38.3.a77ca2b</build>
+<version>Version_13.39.0.d675aed</version>
+<build>Version_13.39.0.d675aed</build>
 <cl>t_coffee -seq RNA_set.fa -mode rcoffee -outfile RNA_rcoffee.aln </cl>
 <stack>
 </stack>
@@ -11,14 +11,14 @@
 <file>
 <stream>output</stream>
 <name>stdout</name>
-<content>!	Process: >1F6X_A _F_ 1F6X_A.rfold
-!	Process: >1JP0_A _F_ 1JP__A.rfold
-!	Process: >1JOX_A _F_ 1JOX_A.rfold
+<content>!	Process: >1F7F_A _F_ 1F7F_A.rfold
 !	Process: >1F78_A _F_ 1F78_A.rfold
-!	Process: >1F7H_A _F_ 1F7H_A.rfold
-!	Process: >1XSG_A _F_ 1XSG_A.rfold
-!	Process: >1F7F_A _F_ 1F7F_A.rfold
 !	Process: >1XST_A _F_ 1XST_A.rfold
+!	Process: >1JOX_A _F_ 1JOX_A.rfold
+!	Process: >1XSG_A _F_ 1XSG_A.rfold
+!	Process: >1F6X_A _F_ 1F6X_A.rfold
+!	Process: >1F7H_A _F_ 1F7H_A.rfold
+!	Process: >1JP0_A _F_ 1JP__A.rfold
 #Single Thread
 #Single Thread
 #Single Thread
@@ -27,7 +27,7 @@
 #Single Thread
 #Single Thread
 #Single Thread
-CLUSTAL FORMAT for T-COFFEE Version_13.38.3.a77ca2b [http://www.tcoffee.org] [MODE: rcoffee ], CPU=0.00 sec, SCORE=62, Nseq=8, Len=27 
+CLUSTAL FORMAT for T-COFFEE Version_13.39.0.d675aed [http://www.tcoffee.org] [MODE: rcoffee ], CPU=0.00 sec, SCORE=62, Nseq=8, Len=27 
 
 1F6X_A          GGAAGUCCGGUCUUCGGACCGGCUUCC
 1F78_A          GGAAGUCCGGUCUUCGGACCGGCUUCC
@@ -47,7 +47,7 @@ CLUSTAL FORMAT for T-COFFEE Version_13.38.3.a77ca2b [http://www.tcoffee.org] [MO
 <stream>output</stream>
 <name>stderr</name>
 <content>
-PROGRAM: T-COFFEE Version_13.38.3.a77ca2b (Version_13.38.3.a77ca2b)
+PROGRAM: T-COFFEE Version_13.39.0.d675aed (Version_13.39.0.d675aed)
 -full_log      	S	[0] 
 -genepred_score	S	[0] 	nsd
 -run_name      	S	[0] 
@@ -494,7 +494,7 @@ Group    7: 1XSG_A
 Group    8: 1XST_A
 
 
-	Group    9: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=   27][PID:68146]S	[0] 
+	Group    9: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=   27][PID:76696]S	[0] 
 -no_warning    	D	[0] 	0 
 -run_local_script	D	[0] 	0 
 -proxy         	S	[0] 	unset
@@ -572,8 +572,8 @@ Group    7: 1XSG_A
 Group    8: 1XST_A
 
 
-	Group    9: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=   27][PID:68146]
-	Group   10: [Group    3 (   1 seq)] with [Group    9 (   2 seq)]-->[Len=   27][PID:68146]S	[0] 
+	Group    9: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=   27][PID:76696]
+	Group   10: [Group    3 (   1 seq)] with [Group    9 (   2 seq)]-->[Len=   27][PID:76696]S	[0] 
 -no_warning    	D	[0] 	0 
 -run_local_script	D	[0] 	0 
 -proxy         	S	[0] 	unset
@@ -651,9 +651,9 @@ Group    7: 1XSG_A
 Group    8: 1XST_A
 
 
-	Group    9: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=   27][PID:68146]
-	Group   10: [Group    3 (   1 seq)] with [Group    9 (   2 seq)]-->[Len=   27][PID:68146]
-	Group   11: [Group    4 (   1 seq)] with [Group   10 (   3 seq)]-->[Len=   27][PID:68146]S	[0] 
+	Group    9: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=   27][PID:76696]
+	Group   10: [Group    3 (   1 seq)] with [Group    9 (   2 seq)]-->[Len=   27][PID:76696]
+	Group   11: [Group    4 (   1 seq)] with [Group   10 (   3 seq)]-->[Len=   27][PID:76696]S	[0] 
 -no_warning    	D	[0] 	0 
 -run_local_script	D	[0] 	0 
 -proxy         	S	[0] 	unset
@@ -731,10 +731,10 @@ Group    7: 1XSG_A
 Group    8: 1XST_A
 
 
-	Group    9: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=   27][PID:68146]
-	Group   10: [Group    3 (   1 seq)] with [Group    9 (   2 seq)]-->[Len=   27][PID:68146]
-	Group   11: [Group    4 (   1 seq)] with [Group   10 (   3 seq)]-->[Len=   27][PID:68146]
-	Group   12: [Group    8 (   1 seq)] with [Group    7 (   1 seq)]-->[Len=   27][PID:68146]S	[0] 
+	Group    9: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=   27][PID:76696]
+	Group   10: [Group    3 (   1 seq)] with [Group    9 (   2 seq)]-->[Len=   27][PID:76696]
+	Group   11: [Group    4 (   1 seq)] with [Group   10 (   3 seq)]-->[Len=   27][PID:76696]
+	Group   12: [Group    8 (   1 seq)] with [Group    7 (   1 seq)]-->[Len=   27][PID:76696]S	[0] 
 -no_warning    	D	[0] 	0 
 -run_local_script	D	[0] 	0 
 -proxy         	S	[0] 	unset
@@ -812,11 +812,11 @@ Group    7: 1XSG_A
 Group    8: 1XST_A
 
 
-	Group    9: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=   27][PID:68146]
-	Group   10: [Group    3 (   1 seq)] with [Group    9 (   2 seq)]-->[Len=   27][PID:68146]
-	Group   11: [Group    4 (   1 seq)] with [Group   10 (   3 seq)]-->[Len=   27][PID:68146]
-	Group   12: [Group    8 (   1 seq)] with [Group    7 (   1 seq)]-->[Len=   27][PID:68146]
-	Group   13: [Group   12 (   2 seq)] with [Group   11 (   4 seq)]-->[Len=   27][PID:68146]S	[0] 
+	Group    9: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=   27][PID:76696]
+	Group   10: [Group    3 (   1 seq)] with [Group    9 (   2 seq)]-->[Len=   27][PID:76696]
+	Group   11: [Group    4 (   1 seq)] with [Group   10 (   3 seq)]-->[Len=   27][PID:76696]
+	Group   12: [Group    8 (   1 seq)] with [Group    7 (   1 seq)]-->[Len=   27][PID:76696]
+	Group   13: [Group   12 (   2 seq)] with [Group   11 (   4 seq)]-->[Len=   27][PID:76696]S	[0] 
 -no_warning    	D	[0] 	0 
 -run_local_script	D	[0] 	0 
 -proxy         	S	[0] 	unset
@@ -894,12 +894,12 @@ Group    7: 1XSG_A
 Group    8: 1XST_A
 
 
-	Group    9: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=   27][PID:68146]
-	Group   10: [Group    3 (   1 seq)] with [Group    9 (   2 seq)]-->[Len=   27][PID:68146]
-	Group   11: [Group    4 (   1 seq)] with [Group   10 (   3 seq)]-->[Len=   27][PID:68146]
-	Group   12: [Group    8 (   1 seq)] with [Group    7 (   1 seq)]-->[Len=   27][PID:68146]
-	Group   13: [Group   12 (   2 seq)] with [Group   11 (   4 seq)]-->[Len=   27][PID:68146]
-	Group   14: [Group    6 (   1 seq)] with [Group    5 (   1 seq)]-->[Len=   21][PID:68146]S	[0] 
+	Group    9: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=   27][PID:76696]
+	Group   10: [Group    3 (   1 seq)] with [Group    9 (   2 seq)]-->[Len=   27][PID:76696]
+	Group   11: [Group    4 (   1 seq)] with [Group   10 (   3 seq)]-->[Len=   27][PID:76696]
+	Group   12: [Group    8 (   1 seq)] with [Group    7 (   1 seq)]-->[Len=   27][PID:76696]
+	Group   13: [Group   12 (   2 seq)] with [Group   11 (   4 seq)]-->[Len=   27][PID:76696]
+	Group   14: [Group    6 (   1 seq)] with [Group    5 (   1 seq)]-->[Len=   21][PID:76696]S	[0] 
 -no_warning    	D	[0] 	0 
 -run_local_script	D	[0] 	0 
 -proxy         	S	[0] 	unset
@@ -977,13 +977,13 @@ Group    7: 1XSG_A
 Group    8: 1XST_A
 
 
-	Group    9: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=   27][PID:68146]
-	Group   10: [Group    3 (   1 seq)] with [Group    9 (   2 seq)]-->[Len=   27][PID:68146]
-	Group   11: [Group    4 (   1 seq)] with [Group   10 (   3 seq)]-->[Len=   27][PID:68146]
-	Group   12: [Group    8 (   1 seq)] with [Group    7 (   1 seq)]-->[Len=   27][PID:68146]
-	Group   13: [Group   12 (   2 seq)] with [Group   11 (   4 seq)]-->[Len=   27][PID:68146]
-	Group   14: [Group    6 (   1 seq)] with [Group    5 (   1 seq)]-->[Len=   21][PID:68146]
-	Group   15: [Group   14 (   2 seq)] with [Group   13 (   6 seq)]-->[Len=   27][PID:68146]
+	Group    9: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=   27][PID:76696]
+	Group   10: [Group    3 (   1 seq)] with [Group    9 (   2 seq)]-->[Len=   27][PID:76696]
+	Group   11: [Group    4 (   1 seq)] with [Group   10 (   3 seq)]-->[Len=   27][PID:76696]
+	Group   12: [Group    8 (   1 seq)] with [Group    7 (   1 seq)]-->[Len=   27][PID:76696]
+	Group   13: [Group   12 (   2 seq)] with [Group   11 (   4 seq)]-->[Len=   27][PID:76696]
+	Group   14: [Group    6 (   1 seq)] with [Group    5 (   1 seq)]-->[Len=   21][PID:76696]
+	Group   15: [Group   14 (   2 seq)] with [Group   13 (   6 seq)]-->[Len=   27][PID:76696]
 
 
 !		[Final Evaluation][TOT=   27][  0 %]!		[Final Evaluation][TOT=   27][  7 %]!		[Final Evaluation][TOT=   27][ 11 %]!		[Final Evaluation][TOT=   27][ 14 %]!		[Final Evaluation][TOT=   27][ 18 %]!		[Final Evaluation][TOT=   27][ 22 %]!		[Final Evaluation][TOT=   27][ 25 %]!		[Final Evaluation][TOT=   27][ 29 %]!		[Final Evaluation][TOT=   27][ 33 %]!		[Final Evaluation][TOT=   27][ 37 %]!		[Final Evaluation][TOT=   27][ 40 %]!		[Final Evaluation][TOT=   27][ 44 %]!		[Final Evaluation][TOT=   27][ 48 %]!		[Final Evaluation][TOT=   27][ 51 %]!		[Final Evaluation][TOT=   27][ 55 %]!		[Final Evaluation][TOT=   27][ 59 %]!		[Final Evaluation][TOT=   27][ 62 %]!		[Final Evaluation][TOT=   27][ 66 %]!		[Final Evaluation][TOT=   27][ 70 %]!		[Final Evaluation][TOT=   27][ 74 %]!		[Final Evaluation][TOT=   27][ 77 %]!		[Final Evaluation][TOT=   27][ 81 %]!		[Final Evaluation][TOT=   27][ 85 %]!		[Final Evaluation][TOT=   27][ 88 %]!		[Final Evaluation][TOT=   27][ 92 %]!		[Final Evaluation][TOT=   27][ 96 %]!		[Final Evaluation][TOT=   27][100 %]
@@ -1005,8 +1005,8 @@ OUTPUT RESULTS
 	#### File Type= Template RNA Fold Format= TCOFFEE_LIBRARY Name= 1XST_A.rfold
 
 # Command Line: t_coffee -seq RNA_set.fa -mode rcoffee -outfile RNA_rcoffee.aln  [PROGRAM:T-COFFEE]
-# T-COFFEE Memory Usage: Current= 29.108 Mb, Max= 30.415 Mb
-# Results Produced with T-COFFEE Version_13.38.3.a77ca2b (Version_13.38.3.a77ca2b)
+# T-COFFEE Memory Usage: Current= 29.104 Mb, Max= 30.414 Mb
+# Results Produced with T-COFFEE Version_13.39.0.d675aed (Version_13.39.0.d675aed)
 # T-COFFEE is available from http://www.tcoffee.org
 # Register on: https://groups.google.com/group/tcoffee/
 </content>
@@ -1035,27 +1035,27 @@ GGAAGACCGGUCUUCGGACCGGCUUCC
 <file>
 <stream>input</stream>
 <name>RNA_set_rfold1.template_list</name>
-<content>>1F6X_A  _F_ 1F6X_A.rfold
->1JP0_A  _F_ 1JP__A.rfold
->1JOX_A  _F_ 1JOX_A.rfold
+<content>>1F7F_A  _F_ 1F7F_A.rfold
 >1F78_A  _F_ 1F78_A.rfold
->1F7H_A  _F_ 1F7H_A.rfold
->1XSG_A  _F_ 1XSG_A.rfold
->1F7F_A  _F_ 1F7F_A.rfold
 >1XST_A  _F_ 1XST_A.rfold
+>1JOX_A  _F_ 1JOX_A.rfold
+>1XSG_A  _F_ 1XSG_A.rfold
+>1F6X_A  _F_ 1F6X_A.rfold
+>1F7H_A  _F_ 1F7H_A.rfold
+>1JP0_A  _F_ 1JP__A.rfold
 </content>
 </file>
 <file>
 <stream>output</stream>
 <name>RNA_set_rfold1.template_list</name>
-<content>>1F6X_A  _F_ 1F6X_A.rfold
->1JP0_A  _F_ 1JP__A.rfold
->1JOX_A  _F_ 1JOX_A.rfold
+<content>>1F7F_A  _F_ 1F7F_A.rfold
 >1F78_A  _F_ 1F78_A.rfold
->1F7H_A  _F_ 1F7H_A.rfold
->1XSG_A  _F_ 1XSG_A.rfold
->1F7F_A  _F_ 1F7F_A.rfold
 >1XST_A  _F_ 1XST_A.rfold
+>1JOX_A  _F_ 1JOX_A.rfold
+>1XSG_A  _F_ 1XSG_A.rfold
+>1F6X_A  _F_ 1F6X_A.rfold
+>1F7H_A  _F_ 1F7H_A.rfold
+>1JP0_A  _F_ 1JP__A.rfold
 </content>
 </file>
 <file>
@@ -1074,7 +1074,7 @@ GGAAGACCGGUCUUCGGACCGGCUUCC
 <content>! TC_LIB_FORMAT_01
 1
 1F6X_A 27 GGAAGUCCGGUCUUCGGACCGGCUUCC
-!generated by 90411681712.pl on Mon Aug  5 20:45:44 2019
+!generated by 31199767662.pl on Wed Aug  7 19:12:34 2019
 #1 1
 1 27 100
 2 26 100
@@ -1097,7 +1097,7 @@ GGAAGACCGGUCUUCGGACCGGCUUCC
 <content>! TC_LIB_FORMAT_01
 1
 1F78_A 27 GGAAGUCCGGUCUUCGGACCGGCUUCC
-!generated by 2024681982.pl on Mon Aug  5 20:45:44 2019
+!generated by 37710767302.pl on Wed Aug  7 19:12:34 2019
 #1 1
 1 27 100
 2 26 100
@@ -1120,7 +1120,7 @@ GGAAGACCGGUCUUCGGACCGGCUUCC
 <content>! TC_LIB_FORMAT_01
 1
 1F7F_A 27 GGAAGUCCGGUCUUCGGACCGGCUUCC
-!generated by 97039682252.pl on Mon Aug  5 20:45:44 2019
+!generated by 76178767212.pl on Wed Aug  7 19:12:34 2019
 #1 1
 1 27 100
 2 26 100
@@ -1143,7 +1143,7 @@ GGAAGACCGGUCUUCGGACCGGCUUCC
 <content>! TC_LIB_FORMAT_01
 1
 1F7H_A 27 GGAAGUCCGGUCUUCGGACCGGCUUCC
-!generated by 92934682072.pl on Mon Aug  5 20:45:44 2019
+!generated by 21402767752.pl on Wed Aug  7 19:12:35 2019
 #1 1
 1 27 100
 2 26 100
@@ -1166,7 +1166,7 @@ GGAAGACCGGUCUUCGGACCGGCUUCC
 <content>! TC_LIB_FORMAT_01
 1
 1JOX_A 21 GGCGGUGCUGAGAUGCCCGUC
-!generated by 7569681892.pl on Mon Aug  5 20:45:44 2019
+!generated by 96829767482.pl on Wed Aug  7 19:12:34 2019
 #1 1
 1 21 100
 2 20 100
@@ -1185,7 +1185,7 @@ GGAAGACCGGUCUUCGGACCGGCUUCC
 <content>! TC_LIB_FORMAT_01
 1
 1JP0_A 21 GGCGGUGCUGAGAUGCCCGUC
-!generated by 73377681802.pl on Mon Aug  5 20:45:44 2019
+!generated by 32821767842.pl on Wed Aug  7 19:12:35 2019
 #1 1
 1 21 100
 2 20 100
@@ -1204,7 +1204,7 @@ GGAAGACCGGUCUUCGGACCGGCUUCC
 <content>! TC_LIB_FORMAT_01
 1
 1XSG_A 27 GGAAGACCGGUCUUCGGACCGGCUUCC
-!generated by 43285682162.pl on Mon Aug  5 20:45:44 2019
+!generated by 83520767572.pl on Wed Aug  7 19:12:34 2019
 #1 1
 1 27 100
 2 26 100
@@ -1227,7 +1227,7 @@ GGAAGACCGGUCUUCGGACCGGCUUCC
 <content>! TC_LIB_FORMAT_01
 1
 1XST_A 27 GGAAGACCGGUCUUCGGACCGGCUUCC
-!generated by 63972682342.pl on Mon Aug  5 20:45:44 2019
+!generated by 73641767392.pl on Wed Aug  7 19:12:34 2019
 #1 1
 1 27 100
 2 26 100
@@ -1247,7 +1247,7 @@ GGAAGACCGGUCUUCGGACCGGCUUCC
 <file>
 <stream>output</stream>
 <name>RNA_rcoffee.aln</name>
-<content>CLUSTAL FORMAT for T-COFFEE Version_13.38.3.a77ca2b [http://www.tcoffee.org] [MODE: rcoffee ], CPU=0.00 sec, SCORE=62, Nseq=8, Len=27 
+<content>CLUSTAL FORMAT for T-COFFEE Version_13.39.0.d675aed [http://www.tcoffee.org] [MODE: rcoffee ], CPU=0.00 sec, SCORE=62, Nseq=8, Len=27 
 
 1F6X_A          GGAAGUCCGGUCUUCGGACCGGCUUCC
 1F78_A          GGAAGUCCGGUCUUCGGACCGGCUUCC
@@ -1284,7 +1284,7 @@ SPAN.value9 {background: #FFC8C8}
 SPAN.valuedefault {}
 SPAN.valuegap {}
 SPAN.valueink {background: 000000}
-</style><body><span class=valuedefault>T-COFFEE,&nbsp;Version_13.38.3.a77ca2b&nbsp;(Version_13.38.3.a77ca2b)</span><br><span class=valuedefault>Cedric&nbsp;Notredame&nbsp;</span><br><span class=valuedefault>CPU&nbsp;TIME:0&nbsp;sec.</span><br><span class=valuedefault>SCORE=62</span><br><span class=valuedefault>*</span><br><span class=valuedefault>&nbsp;</span><span class=value0>B</span><span class=value1>A</span><span class=value2>D</span><span class=value3>&nbsp;</span><span class=value4>A</span><span class=value5>V</span><span class=value6>G</span><span class=value7>&nbsp;</span><span class=value8>G</span><span class=value9>OOD</span><br><span class=valuedefault>*</span><br><span class=value6>1F6X_A&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;65</span><br><span class=value6>1F78_A&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;65</span><br><span class=value6>1F7F_A&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;65</span><br><span class=value6>1F7H_A&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;65</span><br><span class=value5>1JOX_A&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;52</span><br><span class=value5>1JP0_A&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;52</span><br><span class=value6>1XSG_A&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;64</span><br><span class=value6>1XST_A&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;64</span><br><span class=value6>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;&nbsp;6</span><br><br><span class=valuedefault>1F6X_A&nbsp;&nbsp;&nbsp;</span><span class=value9>G</span><span class=value7>GA</span><span class=value5>AG</span><span class=value6>U</span><span class=value4>CC</span><span class=value6>GG</span><span class=value7>U</span><span class=value6>C</span><span class=value7>U</span><span class=value8>UC</span><span class=value7>G</span><span class=value6>G</span><span class=value7>A</span><span class=value5>CCGG</span><span class=value6>CU</span><span class=value7>U</span><span class=value8>C</span><span class=value9>C</span><br><span class=valuedefault>1F78_A&nbsp;&nbsp;&nbsp;</span><span class=value9>G</span><span class=value7>GA</span><span class=value5>AG</span><span class=value6>U</span><span class=value4>CC</span><span class=value6>GG</span><span class=value7>U</span><span class=value6>C</span><span class=value7>U</span><span class=value8>UC</span><span class=value7>G</span><span class=value6>G</span><span class=value7>A</span><span class=value5>CCGG</span><span class=value6>CU</span><span class=value7>U</span><span class=value8>C</span><span class=value9>C</span><br><span class=valuedefault>1F7F_A&nbsp;&nbsp;&nbsp;</span><span class=value9>G</span><span class=value7>GA</span><span class=value5>AG</span><span class=value6>U</span><span class=value4>CC</span><span class=value6>GG</span><span class=value7>U</span><span class=value6>C</span><span class=value7>U</span><span class=value8>UC</span><span class=value7>G</span><span class=value6>G</span><span class=value7>A</span><span class=value5>CCGG</span><span class=value6>CU</span><span class=value7>U</span><span class=value8>C</span><span class=value9>C</span><br><span class=valuedefault>1F7H_A&nbsp;&nbsp;&nbsp;</span><span class=value9>G</span><span class=value7>GA</span><span class=value5>AG</span><span class=value6>U</span><span class=value4>CC</span><span class=value6>GG</span><span class=value7>U</span><span class=value6>C</span><span class=value7>U</span><span class=value8>UC</span><span class=value7>G</span><span class=value6>G</span><span class=value7>A</span><span class=value5>CCGG</span><span class=value6>CU</span><span class=value7>U</span><span class=value8>C</span><span class=value9>C</span><br><span class=valuedefault>1JOX_A&nbsp;&nbsp;&nbsp;</span><span class=value7>G</span><span class=value5>G</span><span class=value4>C</span><span class=valuegap>-----</span><span class=value4>GG</span><span class=value7>U</span><span class=value4>GC</span><span class=value6>UGA</span><span class=value5>G</span><span class=value6>A</span><span class=value4>U</span><span class=valuegap>-</span><span class=value4>G</span><span class=value3>C</span><span class=value4>CCG</span><span class=value6>U</span><span class=value7>C</span><br><span class=valuedefault>1JP0_A&nbsp;&nbsp;&nbsp;</span><span class=value7>G</span><span class=value5>G</span><span class=value4>C</span><span class=valuegap>-----</span><span class=value4>GG</span><span class=value7>U</span><span class=value4>GC</span><span class=value6>UGA</span><span class=value5>G</span><span class=value6>A</span><span class=value4>U</span><span class=valuegap>-</span><span class=value4>G</span><span class=value3>C</span><span class=value4>CCG</span><span class=value6>U</span><span class=value7>C</span><br><span class=valuedefault>1XSG_A&nbsp;&nbsp;&nbsp;</span><span class=value9>G</span><span class=value7>G</span><span class=value6>A</span><span class=value5>A</span><span class=value4>G</span><span class=value6>A</span><span class=value4>CC</span><span class=value5>G</span><span class=value7>G</span><span class=value8>U</span><span class=value7>CU</span><span class=value8>UCG</span><span class=value6>G</span><span class=value7>A</span><span class=value5>C</span><span class=value4>C</span><span class=value5>GGC</span><span class=value6>U</span><span class=value7>U</span><span class=value8>C</span><span class=value9>C</span><br><span class=valuedefault>1XST_A&nbsp;&nbsp;&nbsp;</span><span class=value9>G</span><span class=value7>G</span><span class=value6>A</span><span class=value5>A</span><span class=value4>G</span><span class=value6>A</span><span class=value4>CC</span><span class=value5>G</span><span class=value7>G</span><span class=value8>U</span><span class=value7>CU</span><span class=value8>UCG</span><span class=value6>G</span><span class=value7>A</span><span class=value5>C</span><span class=value4>C</span><span class=value5>GGC</span><span class=value6>U</span><span class=value7>U</span><span class=value8>C</span><span class=value9>C</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>*</span><span class=value7>*</span><span class=value6>&nbsp;</span><span class=value5>&nbsp;</span><span class=value4>&nbsp;</span><span class=value6>&nbsp;</span><span class=value4>&nbsp;&nbsp;</span><span class=value5>*</span><span class=value6>*</span><span class=value7>*</span><span class=value6>&nbsp;&nbsp;</span><span class=value7>*&nbsp;&nbsp;</span><span class=value6>*</span><span class=value7>*</span><span class=value5>&nbsp;&nbsp;*&nbsp;*&nbsp;</span><span class=value6>&nbsp;</span><span class=value7>&nbsp;</span><span class=value8>*</span><br><br><br><br><br><br></body></html>
+</style><body><span class=valuedefault>T-COFFEE,&nbsp;Version_13.39.0.d675aed&nbsp;(Version_13.39.0.d675aed)</span><br><span class=valuedefault>Cedric&nbsp;Notredame&nbsp;</span><br><span class=valuedefault>CPU&nbsp;TIME:0&nbsp;sec.</span><br><span class=valuedefault>SCORE=62</span><br><span class=valuedefault>*</span><br><span class=valuedefault>&nbsp;</span><span class=value0>B</span><span class=value1>A</span><span class=value2>D</span><span class=value3>&nbsp;</span><span class=value4>A</span><span class=value5>V</span><span class=value6>G</span><span class=value7>&nbsp;</span><span class=value8>G</span><span class=value9>OOD</span><br><span class=valuedefault>*</span><br><span class=value6>1F6X_A&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;65</span><br><span class=value6>1F78_A&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;65</span><br><span class=value6>1F7F_A&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;65</span><br><span class=value6>1F7H_A&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;65</span><br><span class=value5>1JOX_A&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;52</span><br><span class=value5>1JP0_A&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;52</span><br><span class=value6>1XSG_A&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;64</span><br><span class=value6>1XST_A&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;64</span><br><span class=value6>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;&nbsp;6</span><br><br><span class=valuedefault>1F6X_A&nbsp;&nbsp;&nbsp;</span><span class=value9>G</span><span class=value7>GA</span><span class=value5>AG</span><span class=value6>U</span><span class=value4>CC</span><span class=value6>GG</span><span class=value7>U</span><span class=value6>C</span><span class=value7>U</span><span class=value8>UC</span><span class=value7>G</span><span class=value6>G</span><span class=value7>A</span><span class=value5>CCGG</span><span class=value6>CU</span><span class=value7>U</span><span class=value8>C</span><span class=value9>C</span><br><span class=valuedefault>1F78_A&nbsp;&nbsp;&nbsp;</span><span class=value9>G</span><span class=value7>GA</span><span class=value5>AG</span><span class=value6>U</span><span class=value4>CC</span><span class=value6>GG</span><span class=value7>U</span><span class=value6>C</span><span class=value7>U</span><span class=value8>UC</span><span class=value7>G</span><span class=value6>G</span><span class=value7>A</span><span class=value5>CCGG</span><span class=value6>CU</span><span class=value7>U</span><span class=value8>C</span><span class=value9>C</span><br><span class=valuedefault>1F7F_A&nbsp;&nbsp;&nbsp;</span><span class=value9>G</span><span class=value7>GA</span><span class=value5>AG</span><span class=value6>U</span><span class=value4>CC</span><span class=value6>GG</span><span class=value7>U</span><span class=value6>C</span><span class=value7>U</span><span class=value8>UC</span><span class=value7>G</span><span class=value6>G</span><span class=value7>A</span><span class=value5>CCGG</span><span class=value6>CU</span><span class=value7>U</span><span class=value8>C</span><span class=value9>C</span><br><span class=valuedefault>1F7H_A&nbsp;&nbsp;&nbsp;</span><span class=value9>G</span><span class=value7>GA</span><span class=value5>AG</span><span class=value6>U</span><span class=value4>CC</span><span class=value6>GG</span><span class=value7>U</span><span class=value6>C</span><span class=value7>U</span><span class=value8>UC</span><span class=value7>G</span><span class=value6>G</span><span class=value7>A</span><span class=value5>CCGG</span><span class=value6>CU</span><span class=value7>U</span><span class=value8>C</span><span class=value9>C</span><br><span class=valuedefault>1JOX_A&nbsp;&nbsp;&nbsp;</span><span class=value7>G</span><span class=value5>G</span><span class=value4>C</span><span class=valuegap>-----</span><span class=value4>GG</span><span class=value7>U</span><span class=value4>GC</span><span class=value6>UGA</span><span class=value5>G</span><span class=value6>A</span><span class=value4>U</span><span class=valuegap>-</span><span class=value4>G</span><span class=value3>C</span><span class=value4>CCG</span><span class=value6>U</span><span class=value7>C</span><br><span class=valuedefault>1JP0_A&nbsp;&nbsp;&nbsp;</span><span class=value7>G</span><span class=value5>G</span><span class=value4>C</span><span class=valuegap>-----</span><span class=value4>GG</span><span class=value7>U</span><span class=value4>GC</span><span class=value6>UGA</span><span class=value5>G</span><span class=value6>A</span><span class=value4>U</span><span class=valuegap>-</span><span class=value4>G</span><span class=value3>C</span><span class=value4>CCG</span><span class=value6>U</span><span class=value7>C</span><br><span class=valuedefault>1XSG_A&nbsp;&nbsp;&nbsp;</span><span class=value9>G</span><span class=value7>G</span><span class=value6>A</span><span class=value5>A</span><span class=value4>G</span><span class=value6>A</span><span class=value4>CC</span><span class=value5>G</span><span class=value7>G</span><span class=value8>U</span><span class=value7>CU</span><span class=value8>UCG</span><span class=value6>G</span><span class=value7>A</span><span class=value5>C</span><span class=value4>C</span><span class=value5>GGC</span><span class=value6>U</span><span class=value7>U</span><span class=value8>C</span><span class=value9>C</span><br><span class=valuedefault>1XST_A&nbsp;&nbsp;&nbsp;</span><span class=value9>G</span><span class=value7>G</span><span class=value6>A</span><span class=value5>A</span><span class=value4>G</span><span class=value6>A</span><span class=value4>CC</span><span class=value5>G</span><span class=value7>G</span><span class=value8>U</span><span class=value7>CU</span><span class=value8>UCG</span><span class=value6>G</span><span class=value7>A</span><span class=value5>C</span><span class=value4>C</span><span class=value5>GGC</span><span class=value6>U</span><span class=value7>U</span><span class=value8>C</span><span class=value9>C</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>*</span><span class=value7>*</span><span class=value6>&nbsp;</span><span class=value5>&nbsp;</span><span class=value4>&nbsp;</span><span class=value6>&nbsp;</span><span class=value4>&nbsp;&nbsp;</span><span class=value5>*</span><span class=value6>*</span><span class=value7>*</span><span class=value6>&nbsp;&nbsp;</span><span class=value7>*&nbsp;&nbsp;</span><span class=value6>*</span><span class=value7>*</span><span class=value5>&nbsp;&nbsp;*&nbsp;*&nbsp;</span><span class=value6>&nbsp;</span><span class=value7>&nbsp;</span><span class=value8>*</span><br><br><br><br><br><br></body></html>
 </content>
 </file>
 <file>
@@ -1293,7 +1293,7 @@ SPAN.valueink {background: 000000}
 <content>! TC_LIB_FORMAT_01
 1
 1F6X_A 27 GGAAGUCCGGUCUUCGGACCGGCUUCC
-!generated by 90411681712.pl on Mon Aug  5 20:45:44 2019
+!generated by 31199767662.pl on Wed Aug  7 19:12:34 2019
 #1 1
 1 27 100
 2 26 100
@@ -1316,7 +1316,7 @@ SPAN.valueink {background: 000000}
 <content>! TC_LIB_FORMAT_01
 1
 1F78_A 27 GGAAGUCCGGUCUUCGGACCGGCUUCC
-!generated by 2024681982.pl on Mon Aug  5 20:45:44 2019
+!generated by 37710767302.pl on Wed Aug  7 19:12:34 2019
 #1 1
 1 27 100
 2 26 100
@@ -1339,7 +1339,7 @@ SPAN.valueink {background: 000000}
 <content>! TC_LIB_FORMAT_01
 1
 1F7F_A 27 GGAAGUCCGGUCUUCGGACCGGCUUCC
-!generated by 97039682252.pl on Mon Aug  5 20:45:44 2019
+!generated by 76178767212.pl on Wed Aug  7 19:12:34 2019
 #1 1
 1 27 100
 2 26 100
@@ -1362,7 +1362,7 @@ SPAN.valueink {background: 000000}
 <content>! TC_LIB_FORMAT_01
 1
 1F7H_A 27 GGAAGUCCGGUCUUCGGACCGGCUUCC
-!generated by 92934682072.pl on Mon Aug  5 20:45:44 2019
+!generated by 21402767752.pl on Wed Aug  7 19:12:35 2019
 #1 1
 1 27 100
 2 26 100
@@ -1385,7 +1385,7 @@ SPAN.valueink {background: 000000}
 <content>! TC_LIB_FORMAT_01
 1
 1JOX_A 21 GGCGGUGCUGAGAUGCCCGUC
-!generated by 7569681892.pl on Mon Aug  5 20:45:44 2019
+!generated by 96829767482.pl on Wed Aug  7 19:12:34 2019
 #1 1
 1 21 100
 2 20 100
@@ -1404,7 +1404,7 @@ SPAN.valueink {background: 000000}
 <content>! TC_LIB_FORMAT_01
 1
 1JP0_A 21 GGCGGUGCUGAGAUGCCCGUC
-!generated by 73377681802.pl on Mon Aug  5 20:45:44 2019
+!generated by 32821767842.pl on Wed Aug  7 19:12:35 2019
 #1 1
 1 21 100
 2 20 100
@@ -1423,7 +1423,7 @@ SPAN.valueink {background: 000000}
 <content>! TC_LIB_FORMAT_01
 1
 1XSG_A 27 GGAAGACCGGUCUUCGGACCGGCUUCC
-!generated by 43285682162.pl on Mon Aug  5 20:45:44 2019
+!generated by 83520767572.pl on Wed Aug  7 19:12:34 2019
 #1 1
 1 27 100
 2 26 100
@@ -1446,7 +1446,7 @@ SPAN.valueink {background: 000000}
 <content>! TC_LIB_FORMAT_01
 1
 1XST_A 27 GGAAGACCGGUCUUCGGACCGGCUUCC
-!generated by 63972682342.pl on Mon Aug  5 20:45:44 2019
+!generated by 73641767392.pl on Wed Aug  7 19:12:34 2019
 #1 1
 1 27 100
 2 26 100
@@ -1465,7 +1465,7 @@ SPAN.valueink {background: 000000}
 </file>
 <environement>
 HOME_4_TCOFFEE=/Users/cnotredame/
-MANPATH=/sw/share/man:/usr/share/man:/usr/local/share/man:/opt/X11/share/man:/Applications/Xcode.app/Contents/Developer/usr/share/man:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/share/man:/sw/lib/perl5/5.18.2/man
+MANPATH=/sw/share/man:/usr/share/man:/usr/local/share/man:/opt/X11/share/man:/Library/TeX/texbin/man:/Applications/Xcode.app/Contents/Developer/usr/share/man:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/share/man:/sw/lib/perl5/5.18.2/man
 TERM_PROGRAM=Apple_Terminal
 MCOFFEE_4_TCOFFEE=/Users/cnotredame//.t_coffee//mcoffee/
 ROOT_TMP_4_TCOFFEE=/var/tmp/
@@ -1474,12 +1474,12 @@ TERM=xterm-256color
 TMPDIR=/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/
 CONDA_SHLVL=1
 PERL5LIB=/sw/lib/perl5:/sw/lib/perl5/darwin
-Apple_PubSub_Socket_Render=/private/tmp/com.apple.launchd.u7asRiNodS/Render
+Apple_PubSub_Socket_Render=/private/tmp/com.apple.launchd.6JzhyrtuKp/Render
 CONDA_PROMPT_MODIFIER=(base) 
 TERM_PROGRAM_VERSION=388.1.3
 OSNAME=macosx
 PERL_BIN=/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms::/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices
-TERM_SESSION_ID=98F198FA-FDF9-40DD-A8EF-07E7D5143362
+TERM_SESSION_ID=9785BD0D-F6F1-4B59-B0BA-9937FD12A1E7
 METHODS_4_TCOFFEE=/Users/cnotredame//.t_coffee//methods/
 VERSIONER_PERL_VERSION=5.18
 XAPPLRESDIR=/sw/etc/app-defaults/
@@ -1487,22 +1487,22 @@ http_proxy=
 HTTP_proxy=
 USER=cnotredame
 CONDA_EXE=/Users/cnotredame/anaconda3/bin/conda
-SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.mMz4rqepoV/Listeners
+SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.U5mTe2o7m7/Listeners
 __CF_USER_TEXT_ENCODING=0x1F6:0x0:0x0
 ENV_4_TCOFFEE=/Users/cnotredame//.t_coffee//.t_coffee_env
 _CE_CONDA=
 all_proxy=
 ALL_PROXY=
 HTTP_proxy_4_TCOFFEE=
-PATH=/Users/cnotredame//.t_coffee//plugins/macosx/:/Users/cnotredame/anaconda3/bin:/Users/cnotredame/anaconda3/condabin:/opt/local/bin:/opt/local/sbin:/opt/local/bin:/opt/local/sbin:/Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/packages/x3dna-v2.1/bin:/Users/cnotredame/bin/macosx://Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms:.:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices:/Users/cnotredame/bin/Scripts:/Users/cnotredame/Library/Haskell/ghc-7.4.2/lib/epub-tools-2.0.0/bin:/sw/bin:/sw/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin
+PATH=/Users/cnotredame//.t_coffee//plugins/macosx/:/Users/cnotredame/anaconda3/bin:/Users/cnotredame/anaconda3/condabin:/opt/local/bin:/opt/local/sbin:/opt/local/bin:/opt/local/sbin:/Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/packages/x3dna-v2.1/bin:/Users/cnotredame/bin/macosx://Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms:.:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices:/Users/cnotredame/bin/Scripts:/Users/cnotredame/Library/Haskell/ghc-7.4.2/lib/epub-tools-2.0.0/bin:/sw/bin:/sw/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/Library/TeX/texbin
 _=/usr/bin/printenv
 CONDA_PREFIX=/Users/cnotredame/anaconda3
 COLOR_4_TCOFFEE=new
 DIR_4_TCOFFEE=/Users/cnotredame//.t_coffee/
-PWD=/Users/cnotredame/Dropbox/projects/git/tcoffee/tmp/RANDOMSTRINGBfdLgcy5G70t4m91mTfU/tmp/RANDOMSTRINGaPjAcE9VDMEWAzvFjxlg/data
+PWD=/private/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/RANDOMSTRINGCVwv8rclD5eoWeJa5GTL/data
 CACHE_4_TCOFFEE=/Users/cnotredame//.t_coffee//cache/
 X3DNA=/Users/cnotredame/Dropbox/packages/x3dna-v2.1
-DBUS_LAUNCHD_SESSION_BUS_SOCKET=/private/tmp/com.apple.launchd.CeZrDaslOL/unix_domain_listener
+DBUS_LAUNCHD_SESSION_BUS_SOCKET=/private/tmp/com.apple.launchd.DfqaaC2z17/unix_domain_listener
 XPC_FLAGS=0x0
 VERSIONER_PERL_PREFER_32_BIT=no
 _CE_M=
@@ -1511,28 +1511,29 @@ ERRORFILE_4_TCOFFEE=NO
 PLUGINS_4_TCOFFEE=/Users/cnotredame//.t_coffee//plugins/macosx/
 SHLVL=3
 HOME=/Users/cnotredame
-DUMP_4_TCOFFEE=/Users/cnotredame/Dropbox/projects/git/tcoffee/tmp/RANDOMSTRINGBfdLgcy5G70t4m91mTfU/tmp/RANDOMSTRINGaPjAcE9VDMEWAzvFjxlg/nature_protocol.tests.11.dump
+DUMP_4_TCOFFEE=/private/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/RANDOMSTRINGCVwv8rclD5eoWeJa5GTL/nature_protocol.tests.11.dump
 HTTP_PROXY=
 MAFFT_BINARIES=
 CONDA_PYTHON_EXE=/Users/cnotredame/anaconda3/bin/python
 BIN=/Users/cnotredame/bin/macosx
 LOGNAME=cnotredame
-EMAIL_4_TCOFFEE=
+EMAIL_4_TCOFFEE=cedric.notredame@gmail.com
 LC_CTYPE=UTF-8
 CONDA_DEFAULT_ENV=base
-EMAIL=
+EMAIL=cedric.notredame@gmail.com
 UPDATED_ENV_4_TCOFFEE=1
 INFOPATH=/sw/share/info:/sw/info:/usr/share/info
-DISPLAY=/private/tmp/com.apple.launchd.MDJPhYnCNw/org.macosforge.xquartz:0
+DISPLAY=/private/tmp/com.apple.launchd.vef8UzGxBY/org.macosforge.xquartz:0
 TC_MASTER_NODE=1
 NUMBER_OF_PROCESSORS=8
 ALL_proxy=
-SECURITYSESSIONID=186a6
-LOCKDIR_4_TCOFFEE=/var/tmp/tco/tcoo9pjq3a268146//lck/lsl30u0o0b/
-TMP_4_TCOFFEE=/var/tmp/tco/tcoo9pjq3a268146/
+LOCKDIR_4_TCOFFEE=/var/tmp/tco/tcotfdul_v_76696//lck/twn4d0v4dp/
+TMP_4_TCOFFEE=/var/tmp/tco/tcotfdul_v_76696/
 USER_BIN=/Users/cnotredame/bin/macosx
 SCRIPT_BIN=/Users/cnotredame/bin/Scripts/
 </environement>
 <DumpStatus>OK</DumpStatus>
-<DumpFile>/Users/cnotredame/Dropbox/projects/git/tcoffee/tmp/RANDOMSTRINGBfdLgcy5G70t4m91mTfU/tmp/RANDOMSTRINGaPjAcE9VDMEWAzvFjxlg/nature_protocol.tests.11.dump</DumpFile>
+<DumpFile>/private/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/RANDOMSTRINGCVwv8rclD5eoWeJa5GTL/nature_protocol.tests.11.dump</DumpFile>
+<SourceFile>nature_protocol.tests</SourceFile>
+<SourceLine>12</SourceLine>
 </DumpIO>

@@ -664,6 +664,7 @@ FILE *get_stdout1(char *name);
 FILE * vtmpfile();
 void initiate_vtmpnam (char *s);
 int     vtmpnam_size ();
+int     isvtmpnam( char *s);
 char *  vtmpnam ( char *s);
 char *  vtmpnamH( );
 char *alp2random_string (char*s);

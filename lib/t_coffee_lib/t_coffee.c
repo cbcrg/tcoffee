@@ -521,7 +521,7 @@ int batch_main ( int argc, char **argv)
 	if (argc>=3 && strm (argv[1], "-other_pg"))
 	  {
 	    set_string_variable ("-other_pg", "set");
-	    return run_other_pg (argc-2, argv+2);
+	    myexit(run_other_pg (argc-2, argv+2));
 	  }
 	else if ( name_is_in_list ("kmcoffee", argv, argc, 100)!=-1)
 	  {
@@ -2149,7 +2149,7 @@ if ( !do_evaluate)
 			    /*Max Value*/ "any"           \
 		   );
 
-
+	       
 	       /*PARAMETER PROTOTYPE:    INFILE    */
 	       declare_name (infile);
 	       get_cl_param(\
@@ -2168,10 +2168,8 @@ if ( !do_evaluate)
 			    /*Min_value*/ "any"          ,\
 			    /*Max Value*/ "any"           \
 		   );
-	       //HERE ("REMOVE THIS");
-	       //sprintf (infile, "proteases_small.aln");
 	       
-/*PARAMETER PROTOTYPE:    INFILE    */
+	       /*PARAMETER PROTOTYPE:    INFILE    */
 	       declare_name (matrix);
 	       get_cl_param(\
 			    /*argc*/      argc           ,\
@@ -4100,6 +4098,7 @@ get_cl_param(\
 		   fprintf (stdout, "%s\n", get_cache_dir());
 		   myexit (EXIT_SUCCESS);
 		 }
+	       
 
 /*******************************************************************************************************/
 /*                                                                                                     */
@@ -4163,12 +4162,13 @@ get_cl_param(\
 /*Re-introduce the sequences introduced with -infile*/
 /*Standard*/
 
+	       
 	       if ( infile[0] && !do_evaluate)
 		   {
 		   sprintf ( list_file[n_list++], "%s",infile);
 		   
 		   }
-	       
+	      
 /*DO EVALUATE: The aln to evaluate must be provided via -infile*/
 	       else  if (do_evaluate)
 	           {
@@ -4333,7 +4333,9 @@ get_cl_param(\
 			   else if ( is_lib (list_file[a]))nn['L']++;
 			   else if ( is_method (list_file[a]))nn['M']++;
 			   else
-			     add_warning (stderr, "\nWARNING: File %s was not properly tagged. Potential ambiguity\n",list_file[a]);
+			     {
+			       add_warning (stderr, "\nWARNING: File %s was not properly tagged. Potential ambiguity\n",list_file[a]);
+			     }
 			 }
 		     }
 		   
@@ -4352,15 +4354,16 @@ get_cl_param(\
 		 }
 	      
 /*FILL THE F STRUCTURE (Contains Information for Output names For the defaults)*/
-	        
+	      
+	       	       
 	       if (n_list==0 || argc<=1)
 		 {
 		   fprintf ( stderr, "\nERROR: You have NOT provided enough arguments [FATAL:%s]", PROGRAM);
 		   myexit (EXIT_FAILURE);
 		 }
-
 	       
-	    /**
+	       
+	       /**
 	     * Check the content of each input file and report possible errors.
 	     */
 	       else if ( argv[1][0]!='-' && (check_file_exists( argv[1]) || check_file_exists(argv[1]+1)))
@@ -4368,13 +4371,20 @@ get_cl_param(\
 
 		   if (check_file_exists(argv[1]))F=parse_fname(argv[1]);
 		   else if ( check_file_exists(argv[1]+1))F=parse_fname(argv[1]+1);
-
+		 
 		 }
 	       else if (infile[0])
 		 {
-
-		   if ( check_file_exists (infile))F=parse_fname(infile);
+		   
+		   
+		   if (isvtmpnam (infile))
+		     {
+		       F=parse_fname("output");
+		     }
+		   else if ( strstr (infile,"stdin"))F=parse_fname(infile);
+		   else if ( check_file_exists (infile))F=parse_fname(infile);
 		   else if (check_file_exists (infile+1))F =parse_fname(infile+1);
+		   
 		 }
 	       else if ( exon_boundaries && exon_boundaries[0])
 		 {
@@ -4432,7 +4442,8 @@ get_cl_param(\
 		       sprintf(list_file[a], "P%s",is_pdb_struc (buf));
 		     }
 		 }
-
+	       
+	       
 	       /*FATAL: NO SEQUENCES*/
 
 	       if (!F)
@@ -4543,7 +4554,7 @@ get_cl_param(\
 	          {
 		  for (a=0; a< n_out_aln_format; a++)
 		    {
-
+		      
 		      sprintf ( tot_out_aln[a]   ,"%s%s.%s"      ,F->path,F->name,out_aln_format[a]);
 		    }
 		  }
@@ -6096,17 +6107,10 @@ int run_other_pg ( int argc, char *argv[])
     {
       return quantile ( argc, argv);
     }
-  else if ( strm (argv[0], "cherry"))
-    {
-      return cherry ( argc, argv);
-    }
   else if ( strstr ( argv[0], "unpack_"))
     {
+      char buf;
       unpack_all_perl_script (argv[0]+strlen ("unpack_"));
-    }
-  else if ( strstr ( argv[0], "fastal"))
-    {
-      return fastal_main(argc, argv);
     }
   else if ( strstr ( argv[0], "mat2process"))
     {
@@ -6116,7 +6120,6 @@ int run_other_pg ( int argc, char *argv[])
     {
       return my_system_cl (argc, argv);
     }
-  return EXIT_FAILURE;
 }
 
 FILE * t_coffee_tip (FILE *fp,char *mode)

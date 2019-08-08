@@ -30,8 +30,7 @@ FILE * compare_al_to_lib ( Constraint_list *CL, int start, char *fname, Sequence
 				(CL->S)->len[a]=-1;
 				translation [a]=-1;
 			}
-			else
-			{
+			else			{
 				translation[a]=b++;
 			}
 		}
@@ -285,7 +284,7 @@ int aln_compare ( int argc, char *argv[])
     sprintf ( output_aln_modif, "lower");
 /*END OF INITIALIZATION*/
     
-   
+    
 
     
 /*PARAMETERS INPUT*/
@@ -407,6 +406,8 @@ int aln_compare ( int argc, char *argv[])
 	else if ( strcmp ( argv[a], "-st")==0)
 		{
     		sprintf ( struct_file  [n_structure], "%s", argv[++a]);
+		register_file4dump(struct_file[n_structure], "r");
+		
 		if (!NEXT_ARG_IS_FLAG && is_a_struc_format (argv[a+1]))
 		    sprintf ( struct_format[n_structure], "%s", argv[++a]);
 		else
@@ -947,8 +948,8 @@ if ( aln_compare==1)pep_compare=0;
        fp=vfopen ( io_file, "w");      
        fp=output_format (io_format, fp, R);
        vfclose ( fp); 
-
-
+       
+       
      /*Rewriting of Alignment A*/
        if ( output_aln)
 	 {
@@ -965,7 +966,7 @@ if ( aln_compare==1)pep_compare=0;
 	       aln_output_count[entry[SEQ1]][entry[R1]]+=entry[MISC];
 	       aln_output_count[entry[SEQ2]][entry[R2]]+=entry[MISC];
 	     }
-	  
+	   
 	   for ( a=0; a< A->nseq; a++)
 	     {
 	       
@@ -977,7 +978,7 @@ if ( aln_compare==1)pep_compare=0;
 		       if ( aln_output_tot[a][c] && ((aln_output_count[a][c]*100)/aln_output_tot[a][c])<output_aln_threshold)
 			 { 
 			   if ( strm (output_aln_modif, "lower"))
-				A->seq_al[a][b]=tolower(A->seq_al[a][b]);
+			     A->seq_al[a][b]=tolower(A->seq_al[a][b]);
 			   else
 			     A->seq_al[a][b]=output_aln_modif[0];
 			 }
@@ -995,7 +996,8 @@ if ( aln_compare==1)pep_compare=0;
 	 }
        }
        }
-    return EXIT_SUCCESS;
+
+       return EXIT_SUCCESS;
     }   
 /************************************************************************************/
 /*                                                                                  */

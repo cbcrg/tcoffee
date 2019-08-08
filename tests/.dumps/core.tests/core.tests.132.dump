@@ -1,8 +1,8 @@
 <DumpIO>
 <nature>standard dump</nature>
 <program>T-COFFEE</program>
-<version>Version_13.38.3.a77ca2b</version>
-<build>Version_13.38.3.a77ca2b</build>
+<version>Version_13.39.0.d675aed</version>
+<build>Version_13.39.0.d675aed</build>
 <cl>t_coffee -profile sample_profile1.aln sample_profile2.aln -special_mode 3dcoffee -outfile aligne_prf.aln </cl>
 <stack>
 </stack>
@@ -11,11 +11,11 @@
 
 *************************************************************************************************
 *                        MESSAGES RECAPITULATION                                    
-62490 -- WARNING: _P_ Template | sequence1 | Could Not Be Found
+67190 -- WARNING: _P_ Template | sequence1 | Could Not Be Found
 
-62490 -- WARNING: _P_ Template | sequence2 | Could Not Be Found
+67190 -- WARNING: _P_ Template | sequence2 | Could Not Be Found
 
-62490 -- WARNING: _P_ Template | sequence4 | Could Not Be Found
+67190 -- WARNING: _P_ Template | sequence4 | Could Not Be Found
 
 *************************************************************************************************
 </warning>
@@ -24,7 +24,7 @@
 <name>stdout</name>
 <content>#Single Thread
 #Single Thread
-CLUSTAL FORMAT for T-COFFEE Version_13.38.3.a77ca2b [http://www.tcoffee.org] [MODE: 3dcoffee ], CPU=0.00 sec, SCORE=100, Nseq=5, Len=187 
+CLUSTAL FORMAT for T-COFFEE Version_13.39.0.d675aed [http://www.tcoffee.org] [MODE: 3dcoffee ], CPU=0.00 sec, SCORE=100, Nseq=5, Len=187 
 
 sequence1       -STGSATTTPIDS-L-DDAYITPVQIGTPAQTLNLDFDTGSSDLWVFSSE
 sequence2       AASGVATNTPTAN---DEEYITPVTIG--GTTLNLNFDTGSADLWVFSTE
@@ -62,7 +62,7 @@ sequence4       NLISQGLISRPIFGVYLGKAKNGGGGEYIFGGYDSTK
 <stream>output</stream>
 <name>stderr</name>
 <content>
-PROGRAM: T-COFFEE Version_13.38.3.a77ca2b (Version_13.38.3.a77ca2b)
+PROGRAM: T-COFFEE Version_13.39.0.d675aed (Version_13.39.0.d675aed)
 -full_log      	S	[0] 
 -genepred_score	S	[0] 	nsd
 -run_name      	S	[0] 
@@ -237,62 +237,13 @@ Looking For Sequence Templates:
 	Template Type: [PDB struc] Mode Or File: [SELF_P_] [StartCould Not Fill _P_ template for sequence |sample_profile1.aln|Could Not Fill _P_ template for sequence |sample_profile2.aln|]
 Looking For Profile  Templates
 	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
-pid 62490 -- _P_ Template | sequence1 | Could Not Be Found
+pid 67190 -- _P_ Template | sequence1 | Could Not Be Found
 
 
-pid 62490 -- _P_ Template | sequence2 | Could Not Be Found
+pid 67190 -- _P_ Template | sequence2 | Could Not Be Found
 
 
-pid 62490 -- _P_ Template | sequence4 | Could Not Be Found
-
-]
-INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
-  Input File                     Seq sample_profile1.aln Length  183 type PROTEIN Struct Unchecked
-	Profile: Template=sample_profile1.aln, File=sample_profile1.aln
-  Input File                     Seq sample_profile2.aln Length  180 type PROTEIN Struct Unchecked
-	Profile: Template=sample_profile2.aln, File=sample_profile2.aln
-
-	Multi Core Mode: 1 processors:
-[0] 	5
--tip           	S	[0] 	none
--rna_lib       	S	[0] 
--no_warning    	D	[0] 	0 
--run_local_script	D	[0] 	0 
--proxy         	S	[0] 	unset
--email         	S	[0] 
--clean_overaln 	D	[0] 	0 
--overaln_param 	S	[0] 
--overaln_mode  	S	[0] 
--overaln_model 	S	[0] 
--overaln_threshold	D	[0] 	0 
--overaln_target	D	[0] 	0 
--overaln_P1    	D	[0] 	0 
--overaln_P2    	D	[0] 	0 
--overaln_P3    	D	[0] 	0 
--overaln_P4    	D	[0] 	0 
--exon_boundaries	S	[0] 
--display       	D	[0] 	100 
-
-INPUT FILES
-	Input File (M) sap_pair 
-	Input File (R) sample_profile1.aln  Format clustal_aln
-	Input File (R) sample_profile2.aln  Format clustal_aln
-
-Identify Master Sequences [no]:
-
-Master Sequences Identified
-Looking For Sequence Templates:
-
-	Template Type: [PDB struc] Mode Or File: [SELF_P_] [StartCould Not Fill _P_ template for sequence |sample_profile1.aln|Could Not Fill _P_ template for sequence |sample_profile2.aln|]
-Looking For Profile  Templates
-	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
-pid 62490 -- _P_ Template | sequence1 | Could Not Be Found
-
-
-pid 62490 -- _P_ Template | sequence2 | Could Not Be Found
-
-
-pid 62490 -- _P_ Template | sequence4 | Could Not Be Found
+pid 67190 -- _P_ Template | sequence4 | Could Not Be Found
 
 ]
 INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
@@ -335,13 +286,62 @@ Looking For Sequence Templates:
 	Template Type: [PDB struc] Mode Or File: [SELF_P_] [StartCould Not Fill _P_ template for sequence |sample_profile1.aln|Could Not Fill _P_ template for sequence |sample_profile2.aln|]
 Looking For Profile  Templates
 	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
-pid 62490 -- _P_ Template | sequence1 | Could Not Be Found
+pid 67190 -- _P_ Template | sequence1 | Could Not Be Found
 
 
-pid 62490 -- _P_ Template | sequence2 | Could Not Be Found
+pid 67190 -- _P_ Template | sequence2 | Could Not Be Found
 
 
-pid 62490 -- _P_ Template | sequence4 | Could Not Be Found
+pid 67190 -- _P_ Template | sequence4 | Could Not Be Found
+
+]
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                     Seq sample_profile1.aln Length  183 type PROTEIN Struct Unchecked
+	Profile: Template=sample_profile1.aln, File=sample_profile1.aln
+  Input File                     Seq sample_profile2.aln Length  180 type PROTEIN Struct Unchecked
+	Profile: Template=sample_profile2.aln, File=sample_profile2.aln
+
+	Multi Core Mode: 1 processors:
+[0] 	5
+-tip           	S	[0] 	none
+-rna_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) sap_pair 
+	Input File (R) sample_profile1.aln  Format clustal_aln
+	Input File (R) sample_profile2.aln  Format clustal_aln
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [PDB struc] Mode Or File: [SELF_P_] [StartCould Not Fill _P_ template for sequence |sample_profile1.aln|Could Not Fill _P_ template for sequence |sample_profile2.aln|]
+Looking For Profile  Templates
+	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
+pid 67190 -- _P_ Template | sequence1 | Could Not Be Found
+
+
+pid 67190 -- _P_ Template | sequence2 | Could Not Be Found
+
+
+pid 67190 -- _P_ Template | sequence4 | Could Not Be Found
 
 ]
 INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
@@ -386,13 +386,13 @@ Looking For Sequence Templates:
 	Template Type: [PDB struc] Mode Or File: [SELF_P_] [StartCould Not Fill _P_ template for sequence |sample_profile1.aln|Could Not Fill _P_ template for sequence |sample_profile2.aln|]
 Looking For Profile  Templates
 	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
-pid 62490 -- _P_ Template | sequence1 | Could Not Be Found
+pid 67190 -- _P_ Template | sequence1 | Could Not Be Found
 
 
-pid 62490 -- _P_ Template | sequence2 | Could Not Be Found
+pid 67190 -- _P_ Template | sequence2 | Could Not Be Found
 
 
-pid 62490 -- _P_ Template | sequence4 | Could Not Be Found
+pid 67190 -- _P_ Template | sequence4 | Could Not Be Found
 
 ]
 INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
@@ -439,13 +439,13 @@ Looking For Sequence Templates:
 	Template Type: [PDB struc] Mode Or File: [SELF_P_] [StartCould Not Fill _P_ template for sequence |sample_profile1.aln|Could Not Fill _P_ template for sequence |sample_profile2.aln|]
 Looking For Profile  Templates
 	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
-pid 62490 -- _P_ Template | sequence1 | Could Not Be Found
+pid 67190 -- _P_ Template | sequence1 | Could Not Be Found
 
 
-pid 62490 -- _P_ Template | sequence2 | Could Not Be Found
+pid 67190 -- _P_ Template | sequence2 | Could Not Be Found
 
 
-pid 62490 -- _P_ Template | sequence4 | Could Not Be Found
+pid 67190 -- _P_ Template | sequence4 | Could Not Be Found
 
 ]
 INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
@@ -505,13 +505,13 @@ Looking For Sequence Templates:
 	Template Type: [PDB struc] Mode Or File: [SELF_P_] [StartCould Not Fill _P_ template for sequence |sample_profile1.aln|Could Not Fill _P_ template for sequence |sample_profile2.aln|]
 Looking For Profile  Templates
 	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
-pid 62490 -- _P_ Template | sequence1 | Could Not Be Found
+pid 67190 -- _P_ Template | sequence1 | Could Not Be Found
 
 
-pid 62490 -- _P_ Template | sequence2 | Could Not Be Found
+pid 67190 -- _P_ Template | sequence2 | Could Not Be Found
 
 
-pid 62490 -- _P_ Template | sequence4 | Could Not Be Found
+pid 67190 -- _P_ Template | sequence4 | Could Not Be Found
 
 ]
 INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
@@ -582,13 +582,13 @@ Looking For Sequence Templates:
 	Template Type: [PDB struc] Mode Or File: [SELF_P_] [StartCould Not Fill _P_ template for sequence |sample_profile1.aln|Could Not Fill _P_ template for sequence |sample_profile2.aln|]
 Looking For Profile  Templates
 	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
-pid 62490 -- _P_ Template | sequence1 | Could Not Be Found
+pid 67190 -- _P_ Template | sequence1 | Could Not Be Found
 
 
-pid 62490 -- _P_ Template | sequence2 | Could Not Be Found
+pid 67190 -- _P_ Template | sequence2 | Could Not Be Found
 
 
-pid 62490 -- _P_ Template | sequence4 | Could Not Be Found
+pid 67190 -- _P_ Template | sequence4 | Could Not Be Found
 
 ]
 INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
@@ -627,7 +627,7 @@ Group    1: sample_profile1.aln
 Group    2: sample_profile2.aln
 
 
-	Group    3: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  187][PID:62490]
+	Group    3: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  187][PID:67190]
 
 
 !		[Final Evaluation][TOT=  187][  0 %]!		[Final Evaluation][TOT=  187][  1 %]!		[Final Evaluation][TOT=  187][  2 %]!		[Final Evaluation][TOT=  187][  3 %]!		[Final Evaluation][TOT=  187][  4 %]!		[Final Evaluation][TOT=  187][  5 %]!		[Final Evaluation][TOT=  187][  6 %]!		[Final Evaluation][TOT=  187][  7 %]!		[Final Evaluation][TOT=  187][  8 %]!		[Final Evaluation][TOT=  187][  9 %]!		[Final Evaluation][TOT=  187][ 10 %]!		[Final Evaluation][TOT=  187][ 11 %]!		[Final Evaluation][TOT=  187][ 12 %]!		[Final Evaluation][TOT=  187][ 13 %]!		[Final Evaluation][TOT=  187][ 14 %]!		[Final Evaluation][TOT=  187][ 15 %]!		[Final Evaluation][TOT=  187][ 16 %]!		[Final Evaluation][TOT=  187][ 17 %]!		[Final Evaluation][TOT=  187][ 18 %]!		[Final Evaluation][TOT=  187][ 19 %]!		[Final Evaluation][TOT=  187][ 20 %]!		[Final Evaluation][TOT=  187][ 21 %]!		[Final Evaluation][TOT=  187][ 22 %]!		[Final Evaluation][TOT=  187][ 23 %]!		[Final Evaluation][TOT=  187][ 24 %]!		[Final Evaluation][TOT=  187][ 25 %]!		[Final Evaluation][TOT=  187][ 26 %]!		[Final Evaluation][TOT=  187][ 27 %]!		[Final Evaluation][TOT=  187][ 28 %]!		[Final Evaluation][TOT=  187][ 29 %]!		[Final Evaluation][TOT=  187][ 30 %]!		[Final Evaluation][TOT=  187][ 31 %]!		[Final Evaluation][TOT=  187][ 32 %]!		[Final Evaluation][TOT=  187][ 33 %]!		[Final Evaluation][TOT=  187][ 34 %]!		[Final Evaluation][TOT=  187][ 35 %]!		[Final Evaluation][TOT=  187][ 36 %]!		[Final Evaluation][TOT=  187][ 37 %]!		[Final Evaluation][TOT=  187][ 38 %]!		[Final Evaluation][TOT=  187][ 39 %]!		[Final Evaluation][TOT=  187][ 40 %]!		[Final Evaluation][TOT=  187][ 41 %]!		[Final Evaluation][TOT=  187][ 42 %]!		[Final Evaluation][TOT=  187][ 43 %]!		[Final Evaluation][TOT=  187][ 44 %]!		[Final Evaluation][TOT=  187][ 45 %]!		[Final Evaluation][TOT=  187][ 46 %]!		[Final Evaluation][TOT=  187][ 47 %]!		[Final Evaluation][TOT=  187][ 48 %]!		[Final Evaluation][TOT=  187][ 49 %]!		[Final Evaluation][TOT=  187][ 50 %]!		[Final Evaluation][TOT=  187][ 51 %]!		[Final Evaluation][TOT=  187][ 52 %]!		[Final Evaluation][TOT=  187][ 53 %]!		[Final Evaluation][TOT=  187][ 54 %]!		[Final Evaluation][TOT=  187][ 55 %]!		[Final Evaluation][TOT=  187][ 56 %]!		[Final Evaluation][TOT=  187][ 57 %]!		[Final Evaluation][TOT=  187][ 58 %]!		[Final Evaluation][TOT=  187][ 59 %]!		[Final Evaluation][TOT=  187][ 60 %]!		[Final Evaluation][TOT=  187][ 61 %]!		[Final Evaluation][TOT=  187][ 62 %]!		[Final Evaluation][TOT=  187][ 63 %]!		[Final Evaluation][TOT=  187][ 64 %]!		[Final Evaluation][TOT=  187][ 65 %]!		[Final Evaluation][TOT=  187][ 66 %]!		[Final Evaluation][TOT=  187][ 67 %]!		[Final Evaluation][TOT=  187][ 68 %]!		[Final Evaluation][TOT=  187][ 69 %]!		[Final Evaluation][TOT=  187][ 70 %]!		[Final Evaluation][TOT=  187][ 71 %]!		[Final Evaluation][TOT=  187][ 72 %]!		[Final Evaluation][TOT=  187][ 73 %]!		[Final Evaluation][TOT=  187][ 74 %]!		[Final Evaluation][TOT=  187][ 75 %]!		[Final Evaluation][TOT=  187][ 76 %]!		[Final Evaluation][TOT=  187][ 77 %]!		[Final Evaluation][TOT=  187][ 78 %]!		[Final Evaluation][TOT=  187][ 79 %]!		[Final Evaluation][TOT=  187][ 80 %]!		[Final Evaluation][TOT=  187][ 81 %]!		[Final Evaluation][TOT=  187][ 82 %]!		[Final Evaluation][TOT=  187][ 83 %]!		[Final Evaluation][TOT=  187][ 84 %]!		[Final Evaluation][TOT=  187][ 85 %]!		[Final Evaluation][TOT=  187][ 86 %]!		[Final Evaluation][TOT=  187][ 87 %]!		[Final Evaluation][TOT=  187][ 88 %]!		[Final Evaluation][TOT=  187][ 89 %]!		[Final Evaluation][TOT=  187][ 90 %]!		[Final Evaluation][TOT=  187][ 91 %]!		[Final Evaluation][TOT=  187][ 92 %]!		[Final Evaluation][TOT=  187][ 93 %]!		[Final Evaluation][TOT=  187][ 94 %]!		[Final Evaluation][TOT=  187][ 95 %]!		[Final Evaluation][TOT=  187][ 96 %]!		[Final Evaluation][TOT=  187][ 97 %]!		[Final Evaluation][TOT=  187][ 98 %]!		[Final Evaluation][TOT=  187][ 99 %]!		[Final Evaluation][TOT=  187][100 %]
@@ -641,19 +641,19 @@ OUTPUT RESULTS
 	#### File Type= Template Profile Format= fasta_aln       Name= sample_profile2.aln
 
 # Command Line: t_coffee -profile sample_profile1.aln sample_profile2.aln -special_mode 3dcoffee -outfile aligne_prf.aln  [PROGRAM:T-COFFEE]
-# T-COFFEE Memory Usage: Current= 34.287 Mb, Max= 35.188 Mb
-# Results Produced with T-COFFEE Version_13.38.3.a77ca2b (Version_13.38.3.a77ca2b)
+# T-COFFEE Memory Usage: Current= 34.286 Mb, Max= 35.187 Mb
+# Results Produced with T-COFFEE Version_13.39.0.d675aed (Version_13.39.0.d675aed)
 # T-COFFEE is available from http://www.tcoffee.org
 # Register on: https://groups.google.com/group/tcoffee/
 
 
 *************************************************************************************************
 *                        MESSAGES RECAPITULATION                                    
-62490 -- WARNING: _P_ Template | sequence1 | Could Not Be Found
+67190 -- WARNING: _P_ Template | sequence1 | Could Not Be Found
 
-62490 -- WARNING: _P_ Template | sequence2 | Could Not Be Found
+67190 -- WARNING: _P_ Template | sequence2 | Could Not Be Found
 
-62490 -- WARNING: _P_ Template | sequence4 | Could Not Be Found
+67190 -- WARNING: _P_ Template | sequence4 | Could Not Be Found
 
 *************************************************************************************************
 </content>
@@ -7928,9 +7928,9 @@ END
 <file>
 <stream>input</stream>
 <name>/Users/cnotredame//.t_coffee//cache/1cms_4pep.sap_results</name>
-<content> file1 = 62673_1.7862.sap_tmp
+<content> file1 = 67375_1.5813.sap_tmp
  prot1->Compound =  CHAIN: A;                                                  
- file2 = 62673_2.7248.sap_tmp
+ file2 = 67375_2.6075.sap_tmp
  prot2->Compound =  CHAIN: A;                                                  
 ARNDCQEGHILKMFPSTWYVBZX
 matrix constant = 8
@@ -7940,7 +7940,7 @@ Cycle 3, 36 residues selected
 Cycle 4, 44 residues selected
 Cycle 5, 53 residues selected
 
- score = 19087.310547
+ score = 19455.292969
 
 Percent sel on aln =  100.00
 Percent aln in sel =   30.64
@@ -8117,29 +8117,29 @@ Percent aln in sel =   30.64
   S  172  41.0 173 P  
   S  173  50.5 174 S  
   Y  174  66.4 175 Y* 
-62673_2.7248.sap_tmp Weighted RMSd =   0.660 over 173 atoms 149.184296 37353.382812  57.8 91.190323
-62673_2.7248.sap_tmp Un-weighted RMSd =   0.674 over best 127 atoms ( 37353.382812   57.8 )
-62673_2.7248.sap_tmp Un-weighted RMSd =   0.806 over best 148 atoms ( 37353.382812   57.8 )
-62673_2.7248.sap_tmp Un-weighted RMSd =   0.903 over best 158 atoms ( 37353.382812   57.8 )
-62673_2.7248.sap_tmp Un-weighted RMSd =   0.915 over best 161 atoms ( 37353.382812   57.8 )
-62673_2.7248.sap_tmp Un-weighted RMSd =   0.950 over best 164 atoms ( 37353.382812   57.8 )
-62673_2.7248.sap_tmp Un-weighted RMSd =   0.978 over best 167 atoms ( 37353.382812   57.8 )
-62673_2.7248.sap_tmp Un-weighted RMSd =   0.979 over best 168 atoms ( 37353.382812   57.8 )
-62673_2.7248.sap_tmp Un-weighted RMSd =   0.979 over best 168 atoms ( 37353.382812   57.8 )
-62673_2.7248.sap_tmp Un-weighted RMSd =   1.003 over best 170 atoms ( 37353.382812   57.8 )
-62673_2.7248.sap_tmp Un-weighted RMSd =   1.049 over best 171 atoms ( 37353.382812   57.8 )
-62673_2.7248.sap_tmp Un-weighted RMSd =   1.046 over best 172 atoms ( 37353.382812   57.8 )
-62673_2.7248.sap_tmp Un-weighted RMSd =   1.046 over best 172 atoms ( 37353.382812   57.8 )
-62673_2.7248.sap_tmp Un-weighted RMSd =   1.046 over best 172 atoms ( 37353.382812   57.8 )
-62673_2.7248.sap_tmp Un-weighted RMSd =   1.045 over best 173 atoms ( 37353.382812   57.8 )
-62673_2.7248.sap_tmp Un-weighted RMSd =   1.045 over best 173 atoms ( 37353.382812   57.8 )
-62673_2.7248.sap_tmp Un-weighted RMSd =   1.045 over all 173 matched atoms 149.184296 37353.382812   57.8 91.190323
+67375_2.6075.sap_tmp Weighted RMSd =   0.660 over 173 atoms 149.184296 37353.382812  57.8 91.190323
+67375_2.6075.sap_tmp Un-weighted RMSd =   0.674 over best 127 atoms ( 37353.382812   57.8 )
+67375_2.6075.sap_tmp Un-weighted RMSd =   0.806 over best 148 atoms ( 37353.382812   57.8 )
+67375_2.6075.sap_tmp Un-weighted RMSd =   0.903 over best 158 atoms ( 37353.382812   57.8 )
+67375_2.6075.sap_tmp Un-weighted RMSd =   0.915 over best 161 atoms ( 37353.382812   57.8 )
+67375_2.6075.sap_tmp Un-weighted RMSd =   0.950 over best 164 atoms ( 37353.382812   57.8 )
+67375_2.6075.sap_tmp Un-weighted RMSd =   0.978 over best 167 atoms ( 37353.382812   57.8 )
+67375_2.6075.sap_tmp Un-weighted RMSd =   0.979 over best 168 atoms ( 37353.382812   57.8 )
+67375_2.6075.sap_tmp Un-weighted RMSd =   0.979 over best 168 atoms ( 37353.382812   57.8 )
+67375_2.6075.sap_tmp Un-weighted RMSd =   1.003 over best 170 atoms ( 37353.382812   57.8 )
+67375_2.6075.sap_tmp Un-weighted RMSd =   1.049 over best 171 atoms ( 37353.382812   57.8 )
+67375_2.6075.sap_tmp Un-weighted RMSd =   1.046 over best 172 atoms ( 37353.382812   57.8 )
+67375_2.6075.sap_tmp Un-weighted RMSd =   1.046 over best 172 atoms ( 37353.382812   57.8 )
+67375_2.6075.sap_tmp Un-weighted RMSd =   1.046 over best 172 atoms ( 37353.382812   57.8 )
+67375_2.6075.sap_tmp Un-weighted RMSd =   1.045 over best 173 atoms ( 37353.382812   57.8 )
+67375_2.6075.sap_tmp Un-weighted RMSd =   1.045 over best 173 atoms ( 37353.382812   57.8 )
+67375_2.6075.sap_tmp Un-weighted RMSd =   1.045 over all 173 matched atoms 149.184296 37353.382812   57.8 91.190323
 </content>
 </file>
 <file>
 <stream>output</stream>
 <name>aligne_prf.aln</name>
-<content>CLUSTAL FORMAT for T-COFFEE Version_13.38.3.a77ca2b [http://www.tcoffee.org] [MODE: 3dcoffee ], CPU=0.01 sec, SCORE=100, Nseq=5, Len=187 
+<content>CLUSTAL FORMAT for T-COFFEE Version_13.39.0.d675aed [http://www.tcoffee.org] [MODE: 3dcoffee ], CPU=0.01 sec, SCORE=100, Nseq=5, Len=187 
 
 sequence1       -STGSATTTPIDS-L-DDAYITPVQIGTPAQTLNLDFDTGSSDLWVFSSE
 sequence2       AASGVATNTPTAN---DEEYITPVTIG--GTTLNLNFDTGSADLWVFSTE
@@ -8194,7 +8194,7 @@ SPAN.value9 {background: #FFC8C8}
 SPAN.valuedefault {}
 SPAN.valuegap {}
 SPAN.valueink {background: 000000}
-</style><body><span class=valuedefault>T-COFFEE,&nbsp;Version_13.38.3.a77ca2b&nbsp;(Version_13.38.3.a77ca2b)</span><br><span class=valuedefault>Cedric&nbsp;Notredame&nbsp;</span><br><span class=valuedefault>CPU&nbsp;TIME:0&nbsp;sec.</span><br><span class=valuedefault>SCORE=100</span><br><span class=valuedefault>*</span><br><span class=valuedefault>&nbsp;</span><span class=value0>B</span><span class=value1>A</span><span class=value2>D</span><span class=value3>&nbsp;</span><span class=value4>A</span><span class=value5>V</span><span class=value6>G</span><span class=value7>&nbsp;</span><span class=value8>G</span><span class=value9>OOD</span><br><span class=valuedefault>*</span><br><span class=value9>sequence1&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;100</span><br><span class=value9>sequence2&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;100</span><br><span class=value9>1cms&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;100</span><br><span class=value9>sequence4&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;100</span><br><span class=value9>4pep&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;100</span><br><span class=value9>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;10</span><br><br><span class=valuedefault>sequence1&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value9>STGSATTTPIDS</span><span class=valuegap>-</span><span class=value9>L</span><span class=valuegap>-</span><span class=value9>DDAYITPVQIGTPAQTLNLDFDT</span><br><span class=valuedefault>sequence2&nbsp;&nbsp;&nbsp;</span><span class=value9>AASGVATNTPTAN</span><span class=valuegap>---</span><span class=value9>DEEYITPVTIG</span><span class=valuegap>--</span><span class=value9>GTTLNLNFDT</span><br><span class=valuedefault>1cms&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---</span><span class=value9>GEVASVPLTNYL</span><span class=valuegap>-</span><span class=value9>DSQYFGKIYLGTPPQEFTVLFDT</span><br><span class=valuedefault>sequence4&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---</span><span class=value9>AGVGTVPMTDYGNDIEYYGQVTIGTPGKKFNLDFDT</span><br><span class=valuedefault>4pep&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-----</span><span class=value9>IGDEPLENYL</span><span class=valuegap>-</span><span class=value9>DTEYFGTIGIGTPAQDFTVIFDT</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;.&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;:&nbsp;:*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:.:&nbsp;***</span><br><br><br><span class=valuedefault>sequence1&nbsp;&nbsp;&nbsp;</span><span class=value9>GSSDLWVFSSETTASEVDGQTIYTPSKSTTAKLLSGATW</span><br><span class=valuedefault>sequence2&nbsp;&nbsp;&nbsp;</span><span class=value9>GSADLWVFSTELPASQQSGHSVYNP</span><span class=valuegap>--</span><span class=value9>SATGKELSGYTW</span><br><span class=valuedefault>1cms&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>GSSDFWVPSIYCKSNACKNHQRFDPRKSSTFQNL</span><span class=valuegap>-</span><span class=value9>GKPL</span><br><span class=valuedefault>sequence4&nbsp;&nbsp;&nbsp;</span><span class=value9>GSSDLWIASTLCTNCG</span><span class=valuegap>-</span><span class=value9>SGQTKYDPNQSSTYQAD</span><span class=valuegap>-</span><span class=value9>GRTW</span><br><span class=valuedefault>4pep&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>GSSNLWVPSVYCSSLACSDHNQFNPDDSSTFEAT</span><span class=valuegap>-</span><span class=value9>SQEL</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>**:::*:&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;..:&nbsp;&nbsp;:&nbsp;*&nbsp;&nbsp;*:*&nbsp;:&nbsp;&nbsp;&nbsp;.&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>sequence1&nbsp;&nbsp;&nbsp;</span><span class=value9>SISYGDGS</span><span class=valuegap>-</span><span class=value9>SSSGDVYTDTVSVGGLTVTGQAVESAKKVS</span><br><span class=valuedefault>sequence2&nbsp;&nbsp;&nbsp;</span><span class=value9>SISYGDGS</span><span class=valuegap>-</span><span class=value9>SASGNVFTDSVTVGGVTAHGQAVQAAQQIS</span><br><span class=valuedefault>1cms&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>SIHYGTGS</span><span class=valuegap>-</span><span class=value9>MQ</span><span class=valuegap>-</span><span class=value9>GILGYDTVTVSNIVDIQQTVGLSTQEP</span><br><span class=valuedefault>sequence4&nbsp;&nbsp;&nbsp;</span><span class=value9>SISYGDGSSAS</span><span class=valuegap>-</span><span class=value9>GILAKDNVNLGGLLIKGQTIELAKREA</span><br><span class=valuedefault>4pep&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>SITYGTGS</span><span class=valuegap>-</span><span class=value9>MT</span><span class=valuegap>-</span><span class=value9>GILGYDTVQVGGISDTNQIFGLSETEP</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>**&nbsp;**&nbsp;**&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;:&nbsp;&nbsp;*.*&nbsp;:..:&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;.&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;.</span><br><br><br><span class=valuedefault>sequence1&nbsp;&nbsp;&nbsp;</span><span class=value9>SSFTEDSTIDGLLGLAFSTLNTVSPTQQKTFFDNA</span><span class=valuegap>--</span><span class=value9>KA</span><br><span class=valuedefault>sequence2&nbsp;&nbsp;&nbsp;</span><span class=value9>AQFQQDTNNDGLLGLAFSSINTVQPQSQTTFFDTV</span><span class=valuegap>--</span><span class=value9>KS</span><br><span class=valuedefault>1cms&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>GDVFTYAEFDGILGMAYPSLAS</span><span class=valuegap>---</span><span class=value9>EYSIPVFDNMMNRH</span><br><span class=valuedefault>sequence4&nbsp;&nbsp;&nbsp;</span><span class=value9>ASFAS</span><span class=valuegap>-</span><span class=value9>GPNDGLLGLGFDTITT</span><span class=valuegap>--</span><span class=value9>VRGVKTPMDNLISQG</span><br><span class=valuedefault>4pep&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>GSFLYYAPFDGILGLAYPSISA</span><span class=valuegap>---</span><span class=value9>SGATPVFDNLWDQG</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**:**:.:&nbsp;::&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.&nbsp;:*.&nbsp;&nbsp;&nbsp;:&nbsp;</span><br><br><br><span class=valuedefault>sequence1&nbsp;&nbsp;&nbsp;</span><span class=value9>SLDSPVFTADL</span><span class=valuegap>--</span><span class=value9>GYH</span><span class=valuegap>-</span><span class=value9>APGTYNFGFIDTTA</span><br><span class=valuedefault>sequence2&nbsp;&nbsp;&nbsp;</span><span class=value9>SLAQPLFAVAL</span><span class=valuegap>--</span><span class=value9>KHQ</span><span class=valuegap>-</span><span class=value9>QPGVYDFGFIDSSK</span><br><span class=valuedefault>1cms&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>LVAQDLFSVYMD</span><span class=valuegap>-</span><span class=value9>RNG</span><span class=valuegap>-</span><span class=value9>QESMLTLGAIDPSY</span><br><span class=valuedefault>sequence4&nbsp;&nbsp;&nbsp;</span><span class=value9>LISRPIFGVYLGKAKNGGGGEYIFGGYDSTK</span><br><span class=valuedefault>4pep&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>LVSQDLFSVYLS</span><span class=valuegap>-</span><span class=value9>SNDDSGSVVLLGGIDSSY</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;:&nbsp;&nbsp;&nbsp;:*&nbsp;.&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.&nbsp;&nbsp;&nbsp;:*&nbsp;&nbsp;*.:&nbsp;</span><br><br><br><br><br><br></body></html>
+</style><body><span class=valuedefault>T-COFFEE,&nbsp;Version_13.39.0.d675aed&nbsp;(Version_13.39.0.d675aed)</span><br><span class=valuedefault>Cedric&nbsp;Notredame&nbsp;</span><br><span class=valuedefault>CPU&nbsp;TIME:0&nbsp;sec.</span><br><span class=valuedefault>SCORE=100</span><br><span class=valuedefault>*</span><br><span class=valuedefault>&nbsp;</span><span class=value0>B</span><span class=value1>A</span><span class=value2>D</span><span class=value3>&nbsp;</span><span class=value4>A</span><span class=value5>V</span><span class=value6>G</span><span class=value7>&nbsp;</span><span class=value8>G</span><span class=value9>OOD</span><br><span class=valuedefault>*</span><br><span class=value9>sequence1&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;100</span><br><span class=value9>sequence2&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;100</span><br><span class=value9>1cms&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;100</span><br><span class=value9>sequence4&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;100</span><br><span class=value9>4pep&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;100</span><br><span class=value9>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;10</span><br><br><span class=valuedefault>sequence1&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value9>STGSATTTPIDS</span><span class=valuegap>-</span><span class=value9>L</span><span class=valuegap>-</span><span class=value9>DDAYITPVQIGTPAQTLNLDFDT</span><br><span class=valuedefault>sequence2&nbsp;&nbsp;&nbsp;</span><span class=value9>AASGVATNTPTAN</span><span class=valuegap>---</span><span class=value9>DEEYITPVTIG</span><span class=valuegap>--</span><span class=value9>GTTLNLNFDT</span><br><span class=valuedefault>1cms&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---</span><span class=value9>GEVASVPLTNYL</span><span class=valuegap>-</span><span class=value9>DSQYFGKIYLGTPPQEFTVLFDT</span><br><span class=valuedefault>sequence4&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---</span><span class=value9>AGVGTVPMTDYGNDIEYYGQVTIGTPGKKFNLDFDT</span><br><span class=valuedefault>4pep&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-----</span><span class=value9>IGDEPLENYL</span><span class=valuegap>-</span><span class=value9>DTEYFGTIGIGTPAQDFTVIFDT</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;.&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;:&nbsp;:*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:.:&nbsp;***</span><br><br><br><span class=valuedefault>sequence1&nbsp;&nbsp;&nbsp;</span><span class=value9>GSSDLWVFSSETTASEVDGQTIYTPSKSTTAKLLSGATW</span><br><span class=valuedefault>sequence2&nbsp;&nbsp;&nbsp;</span><span class=value9>GSADLWVFSTELPASQQSGHSVYNP</span><span class=valuegap>--</span><span class=value9>SATGKELSGYTW</span><br><span class=valuedefault>1cms&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>GSSDFWVPSIYCKSNACKNHQRFDPRKSSTFQNL</span><span class=valuegap>-</span><span class=value9>GKPL</span><br><span class=valuedefault>sequence4&nbsp;&nbsp;&nbsp;</span><span class=value9>GSSDLWIASTLCTNCG</span><span class=valuegap>-</span><span class=value9>SGQTKYDPNQSSTYQAD</span><span class=valuegap>-</span><span class=value9>GRTW</span><br><span class=valuedefault>4pep&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>GSSNLWVPSVYCSSLACSDHNQFNPDDSSTFEAT</span><span class=valuegap>-</span><span class=value9>SQEL</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>**:::*:&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;..:&nbsp;&nbsp;:&nbsp;*&nbsp;&nbsp;*:*&nbsp;:&nbsp;&nbsp;&nbsp;.&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>sequence1&nbsp;&nbsp;&nbsp;</span><span class=value9>SISYGDGS</span><span class=valuegap>-</span><span class=value9>SSSGDVYTDTVSVGGLTVTGQAVESAKKVS</span><br><span class=valuedefault>sequence2&nbsp;&nbsp;&nbsp;</span><span class=value9>SISYGDGS</span><span class=valuegap>-</span><span class=value9>SASGNVFTDSVTVGGVTAHGQAVQAAQQIS</span><br><span class=valuedefault>1cms&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>SIHYGTGS</span><span class=valuegap>-</span><span class=value9>MQ</span><span class=valuegap>-</span><span class=value9>GILGYDTVTVSNIVDIQQTVGLSTQEP</span><br><span class=valuedefault>sequence4&nbsp;&nbsp;&nbsp;</span><span class=value9>SISYGDGSSAS</span><span class=valuegap>-</span><span class=value9>GILAKDNVNLGGLLIKGQTIELAKREA</span><br><span class=valuedefault>4pep&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>SITYGTGS</span><span class=valuegap>-</span><span class=value9>MT</span><span class=valuegap>-</span><span class=value9>GILGYDTVQVGGISDTNQIFGLSETEP</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>**&nbsp;**&nbsp;**&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;:&nbsp;&nbsp;*.*&nbsp;:..:&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;.&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;.</span><br><br><br><span class=valuedefault>sequence1&nbsp;&nbsp;&nbsp;</span><span class=value9>SSFTEDSTIDGLLGLAFSTLNTVSPTQQKTFFDNA</span><span class=valuegap>--</span><span class=value9>KA</span><br><span class=valuedefault>sequence2&nbsp;&nbsp;&nbsp;</span><span class=value9>AQFQQDTNNDGLLGLAFSSINTVQPQSQTTFFDTV</span><span class=valuegap>--</span><span class=value9>KS</span><br><span class=valuedefault>1cms&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>GDVFTYAEFDGILGMAYPSLAS</span><span class=valuegap>---</span><span class=value9>EYSIPVFDNMMNRH</span><br><span class=valuedefault>sequence4&nbsp;&nbsp;&nbsp;</span><span class=value9>ASFAS</span><span class=valuegap>-</span><span class=value9>GPNDGLLGLGFDTITT</span><span class=valuegap>--</span><span class=value9>VRGVKTPMDNLISQG</span><br><span class=valuedefault>4pep&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>GSFLYYAPFDGILGLAYPSISA</span><span class=valuegap>---</span><span class=value9>SGATPVFDNLWDQG</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**:**:.:&nbsp;::&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.&nbsp;:*.&nbsp;&nbsp;&nbsp;:&nbsp;</span><br><br><br><span class=valuedefault>sequence1&nbsp;&nbsp;&nbsp;</span><span class=value9>SLDSPVFTADL</span><span class=valuegap>--</span><span class=value9>GYH</span><span class=valuegap>-</span><span class=value9>APGTYNFGFIDTTA</span><br><span class=valuedefault>sequence2&nbsp;&nbsp;&nbsp;</span><span class=value9>SLAQPLFAVAL</span><span class=valuegap>--</span><span class=value9>KHQ</span><span class=valuegap>-</span><span class=value9>QPGVYDFGFIDSSK</span><br><span class=valuedefault>1cms&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>LVAQDLFSVYMD</span><span class=valuegap>-</span><span class=value9>RNG</span><span class=valuegap>-</span><span class=value9>QESMLTLGAIDPSY</span><br><span class=valuedefault>sequence4&nbsp;&nbsp;&nbsp;</span><span class=value9>LISRPIFGVYLGKAKNGGGGEYIFGGYDSTK</span><br><span class=valuedefault>4pep&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>LVSQDLFSVYLS</span><span class=valuegap>-</span><span class=value9>SNDDSGSVVLLGGIDSSY</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;:&nbsp;&nbsp;&nbsp;:*&nbsp;.&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.&nbsp;&nbsp;&nbsp;:*&nbsp;&nbsp;*.:&nbsp;</span><br><br><br><br><br><br></body></html>
 </content>
 </file>
 <file>
@@ -8253,7 +8253,7 @@ sequence4       ISRPIFGVYLGKAKNGGGGEYIFGGYDSTK
 </file>
 <environement>
 HOME_4_TCOFFEE=/Users/cnotredame/
-MANPATH=/sw/share/man:/usr/share/man:/usr/local/share/man:/opt/X11/share/man:/Applications/Xcode.app/Contents/Developer/usr/share/man:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/share/man:/sw/lib/perl5/5.18.2/man
+MANPATH=/sw/share/man:/usr/share/man:/usr/local/share/man:/opt/X11/share/man:/Library/TeX/texbin/man:/Applications/Xcode.app/Contents/Developer/usr/share/man:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/share/man:/sw/lib/perl5/5.18.2/man
 TERM_PROGRAM=Apple_Terminal
 MCOFFEE_4_TCOFFEE=/Users/cnotredame//.t_coffee//mcoffee/
 ROOT_TMP_4_TCOFFEE=/var/tmp/
@@ -8262,12 +8262,12 @@ TERM=xterm-256color
 TMPDIR=/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/
 CONDA_SHLVL=1
 PERL5LIB=/sw/lib/perl5:/sw/lib/perl5/darwin
-Apple_PubSub_Socket_Render=/private/tmp/com.apple.launchd.u7asRiNodS/Render
+Apple_PubSub_Socket_Render=/private/tmp/com.apple.launchd.6JzhyrtuKp/Render
 CONDA_PROMPT_MODIFIER=(base) 
 TERM_PROGRAM_VERSION=388.1.3
 OSNAME=macosx
 PERL_BIN=/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms::/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices
-TERM_SESSION_ID=98F198FA-FDF9-40DD-A8EF-07E7D5143362
+TERM_SESSION_ID=9785BD0D-F6F1-4B59-B0BA-9937FD12A1E7
 METHODS_4_TCOFFEE=/Users/cnotredame//.t_coffee//methods/
 VERSIONER_PERL_VERSION=5.18
 XAPPLRESDIR=/sw/etc/app-defaults/
@@ -8275,22 +8275,22 @@ http_proxy=
 HTTP_proxy=
 USER=cnotredame
 CONDA_EXE=/Users/cnotredame/anaconda3/bin/conda
-SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.mMz4rqepoV/Listeners
+SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.U5mTe2o7m7/Listeners
 __CF_USER_TEXT_ENCODING=0x1F6:0x0:0x0
 ENV_4_TCOFFEE=/Users/cnotredame//.t_coffee//.t_coffee_env
 _CE_CONDA=
 all_proxy=
 ALL_PROXY=
 HTTP_proxy_4_TCOFFEE=
-PATH=/Users/cnotredame//.t_coffee//plugins/macosx/:/Users/cnotredame/anaconda3/bin:/Users/cnotredame/anaconda3/condabin:/opt/local/bin:/opt/local/sbin:/opt/local/bin:/opt/local/sbin:/Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/packages/x3dna-v2.1/bin:/Users/cnotredame/bin/macosx://Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms:.:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices:/Users/cnotredame/bin/Scripts:/Users/cnotredame/Library/Haskell/ghc-7.4.2/lib/epub-tools-2.0.0/bin:/sw/bin:/sw/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin
+PATH=/Users/cnotredame//.t_coffee//plugins/macosx/:/Users/cnotredame/anaconda3/bin:/Users/cnotredame/anaconda3/condabin:/opt/local/bin:/opt/local/sbin:/opt/local/bin:/opt/local/sbin:/Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/packages/x3dna-v2.1/bin:/Users/cnotredame/bin/macosx://Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms:.:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices:/Users/cnotredame/bin/Scripts:/Users/cnotredame/Library/Haskell/ghc-7.4.2/lib/epub-tools-2.0.0/bin:/sw/bin:/sw/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/Library/TeX/texbin
 _=/usr/bin/printenv
 CONDA_PREFIX=/Users/cnotredame/anaconda3
 COLOR_4_TCOFFEE=new
 DIR_4_TCOFFEE=/Users/cnotredame//.t_coffee/
-PWD=/Users/cnotredame/Dropbox/projects/git/tcoffee/tmp/RANDOMSTRINGBfdLgcy5G70t4m91mTfU/tmp/RANDOMSTRINGrG2bBPeaAEy7gNnZxWay/data
+PWD=/private/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/RANDOMSTRINGz1wP6MQTNpOzUVb470T3/data
 CACHE_4_TCOFFEE=/Users/cnotredame//.t_coffee//cache/
 X3DNA=/Users/cnotredame/Dropbox/packages/x3dna-v2.1
-DBUS_LAUNCHD_SESSION_BUS_SOCKET=/private/tmp/com.apple.launchd.CeZrDaslOL/unix_domain_listener
+DBUS_LAUNCHD_SESSION_BUS_SOCKET=/private/tmp/com.apple.launchd.DfqaaC2z17/unix_domain_listener
 XPC_FLAGS=0x0
 VERSIONER_PERL_PREFER_32_BIT=no
 _CE_M=
@@ -8299,28 +8299,29 @@ ERRORFILE_4_TCOFFEE=NO
 PLUGINS_4_TCOFFEE=/Users/cnotredame//.t_coffee//plugins/macosx/
 SHLVL=3
 HOME=/Users/cnotredame
-DUMP_4_TCOFFEE=/Users/cnotredame/Dropbox/projects/git/tcoffee/tmp/RANDOMSTRINGBfdLgcy5G70t4m91mTfU/tmp/RANDOMSTRINGrG2bBPeaAEy7gNnZxWay/core.tests.132.dump
+DUMP_4_TCOFFEE=/private/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/RANDOMSTRINGz1wP6MQTNpOzUVb470T3/core.tests.132.dump
 HTTP_PROXY=
 MAFFT_BINARIES=
 CONDA_PYTHON_EXE=/Users/cnotredame/anaconda3/bin/python
 BIN=/Users/cnotredame/bin/macosx
 LOGNAME=cnotredame
-EMAIL_4_TCOFFEE=
+EMAIL_4_TCOFFEE=cedric.notredame@gmail.com
 LC_CTYPE=UTF-8
 CONDA_DEFAULT_ENV=base
-EMAIL=
+EMAIL=cedric.notredame@gmail.com
 UPDATED_ENV_4_TCOFFEE=1
 INFOPATH=/sw/share/info:/sw/info:/usr/share/info
-DISPLAY=/private/tmp/com.apple.launchd.MDJPhYnCNw/org.macosforge.xquartz:0
+DISPLAY=/private/tmp/com.apple.launchd.vef8UzGxBY/org.macosforge.xquartz:0
 TC_MASTER_NODE=1
 NUMBER_OF_PROCESSORS=8
 ALL_proxy=
-SECURITYSESSIONID=186a6
-LOCKDIR_4_TCOFFEE=/var/tmp/tco/tcovzh_rmzs62490//lck/e99xsqc2s_/
-TMP_4_TCOFFEE=/var/tmp/tco/tcovzh_rmzs62490/
+LOCKDIR_4_TCOFFEE=/var/tmp/tco/tcocz9ez3g067190//lck/oqp4mzsocm/
+TMP_4_TCOFFEE=/var/tmp/tco/tcocz9ez3g067190/
 USER_BIN=/Users/cnotredame/bin/macosx
 SCRIPT_BIN=/Users/cnotredame/bin/Scripts/
 </environement>
 <DumpStatus>OK</DumpStatus>
-<DumpFile>/Users/cnotredame/Dropbox/projects/git/tcoffee/tmp/RANDOMSTRINGBfdLgcy5G70t4m91mTfU/tmp/RANDOMSTRINGrG2bBPeaAEy7gNnZxWay/core.tests.132.dump</DumpFile>
+<DumpFile>/private/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/RANDOMSTRINGz1wP6MQTNpOzUVb470T3/core.tests.132.dump</DumpFile>
+<SourceFile>core.tests</SourceFile>
+<SourceLine>139</SourceLine>
 </DumpIO>

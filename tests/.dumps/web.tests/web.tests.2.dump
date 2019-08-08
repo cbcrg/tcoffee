@@ -1,8 +1,8 @@
 <DumpIO>
 <nature>standard dump</nature>
 <program>T-COFFEE</program>
-<version>Version_13.38.3.a77ca2b</version>
-<build>Version_13.38.3.a77ca2b</build>
+<version>Version_13.39.0.d675aed</version>
+<build>Version_13.39.0.d675aed</build>
 <cl>t_coffee -in input-fasta.txt -mode psicoffee -output score_html clustalw_aln fasta_aln phylip -maxnseq 150 -maxlen 2500 -case upper -seqnos on -outorder input -run_name result </cl>
 <stack>
 </stack>
@@ -12,16 +12,16 @@
 <stream>output</stream>
 <name>stdout</name>
 <content>!	Process: >1aboA _R_ 1aboA.prf [297 Seq.] [EBI/blast/uniref50][COMPUTE CACHE]
+!	Process: >1ihvA _R_ 1ihvA.prf [35 Seq.] [EBI/blast/uniref50][COMPUTE CACHE]
 !	Process: >1ycsB _R_ 1ycsB.prf [394 Seq.] [EBI/blast/uniref50][COMPUTE CACHE]
 !	Process: >1pht _R_ 1pht.prf [59 Seq.] [EBI/blast/uniref50][COMPUTE CACHE]
-!	Process: >1ihvA _R_ 1ihvA.prf [35 Seq.] [EBI/blast/uniref50][COMPUTE CACHE]
 !	Process: >1vie _R_ 1vie.prf [35 Seq.] [EBI/blast/uniref50][COMPUTE CACHE]
 #Single Thread
 #Single Thread
 #Single Thread
 #Single Thread
 #Single Thread
-CLUSTAL FORMAT for T-COFFEE Version_13.38.3.a77ca2b [http://www.tcoffee.org] [MODE: psicoffee ], CPU=0.06 sec, SCORE=57, Nseq=5, Len=95 
+CLUSTAL FORMAT for T-COFFEE Version_13.39.0.d675aed [http://www.tcoffee.org] [MODE: psicoffee ], CPU=0.06 sec, SCORE=57, Nseq=5, Len=95 
 
 1aboA           NLF------------VALYDFVA----SGDNTLSITKGEKLRVLGYNH-- 32
 1ycsB           KGVI-----------YALWDYEP----QNDDELPMKEGDCMTIIHRED-- 33
@@ -45,7 +45,7 @@ CLUSTAL FORMAT for T-COFFEE Version_13.38.3.a77ca2b [http://www.tcoffee.org] [MO
 <stream>output</stream>
 <name>stderr</name>
 <content>
-PROGRAM: T-COFFEE Version_13.38.3.a77ca2b (Version_13.38.3.a77ca2b)
+PROGRAM: T-COFFEE Version_13.39.0.d675aed (Version_13.39.0.d675aed)
 -full_log      	S	[0] 
 -genepred_score	S	[0] 	nsd
 -run_name      	S	[1] 	result
@@ -220,15 +220,15 @@ Looking For Sequence Templates:
 ]
 INPUT SEQUENCES: 5 SEQUENCES  [PROTEIN]
   Input File input-fasta.txt Seq 1aboA Length   57 type PROTEIN Struct Unchecked
-	Profile: Template=1aboA.prf, File=/var/tmp/tco/tcozc4xaj5r79123//7327179123255
+	Profile: Template=1aboA.prf, File=/var/tmp/tco/tcosaus0afd81050//8493481050255
   Input File input-fasta.txt Seq 1ihvA Length   49 type PROTEIN Struct Unchecked
-	Profile: Template=1ihvA.prf, File=/var/tmp/tco/tcozc4xaj5r79123//7327179123258
+	Profile: Template=1ihvA.prf, File=/var/tmp/tco/tcosaus0afd81050//8493481050256
   Input File input-fasta.txt Seq 1pht  Length   80 type PROTEIN Struct Unchecked
-	Profile: Template=1pht.prf, File=/var/tmp/tco/tcozc4xaj5r79123//7327179123257
+	Profile: Template=1pht.prf, File=/var/tmp/tco/tcosaus0afd81050//8493481050258
   Input File input-fasta.txt Seq 1vie  Length   51 type PROTEIN Struct Unchecked
-	Profile: Template=1vie.prf, File=/var/tmp/tco/tcozc4xaj5r79123//7327179123259
+	Profile: Template=1vie.prf, File=/var/tmp/tco/tcosaus0afd81050//8493481050259
   Input File input-fasta.txt Seq 1ycsB Length   60 type PROTEIN Struct Unchecked
-	Profile: Template=1ycsB.prf, File=/var/tmp/tco/tcozc4xaj5r79123//7327179123256
+	Profile: Template=1ycsB.prf, File=/var/tmp/tco/tcosaus0afd81050//8493481050257
 
 	Multi Core Mode: 1 processors:
 	S	[0] 	5
@@ -264,15 +264,15 @@ Looking For Sequence Templates:
 ]
 INPUT SEQUENCES: 5 SEQUENCES  [PROTEIN]
   Input File input-fasta.txt Seq 1aboA Length   57 type PROTEIN Struct Unchecked
-	Profile: Template=1aboA.prf, File=/var/tmp/tco/tcozc4xaj5r79123//7327179123255
+	Profile: Template=1aboA.prf, File=/var/tmp/tco/tcosaus0afd81050//8493481050255
   Input File input-fasta.txt Seq 1ihvA Length   49 type PROTEIN Struct Unchecked
-	Profile: Template=1ihvA.prf, File=/var/tmp/tco/tcozc4xaj5r79123//7327179123258
+	Profile: Template=1ihvA.prf, File=/var/tmp/tco/tcosaus0afd81050//8493481050256
   Input File input-fasta.txt Seq 1pht  Length   80 type PROTEIN Struct Unchecked
-	Profile: Template=1pht.prf, File=/var/tmp/tco/tcozc4xaj5r79123//7327179123257
+	Profile: Template=1pht.prf, File=/var/tmp/tco/tcosaus0afd81050//8493481050258
   Input File input-fasta.txt Seq 1vie  Length   51 type PROTEIN Struct Unchecked
-	Profile: Template=1vie.prf, File=/var/tmp/tco/tcozc4xaj5r79123//7327179123259
+	Profile: Template=1vie.prf, File=/var/tmp/tco/tcosaus0afd81050//8493481050259
   Input File input-fasta.txt Seq 1ycsB Length   60 type PROTEIN Struct Unchecked
-	Profile: Template=1ycsB.prf, File=/var/tmp/tco/tcozc4xaj5r79123//7327179123256
+	Profile: Template=1ycsB.prf, File=/var/tmp/tco/tcosaus0afd81050//8493481050257
 
 	Multi Core Mode: 1 processors:
 	S	[0] 	5
@@ -308,15 +308,15 @@ Looking For Sequence Templates:
 ]
 INPUT SEQUENCES: 5 SEQUENCES  [PROTEIN]
   Input File input-fasta.txt Seq 1aboA Length   57 type PROTEIN Struct Unchecked
-	Profile: Template=1aboA.prf, File=/var/tmp/tco/tcozc4xaj5r79123//7327179123255
+	Profile: Template=1aboA.prf, File=/var/tmp/tco/tcosaus0afd81050//8493481050255
   Input File input-fasta.txt Seq 1ihvA Length   49 type PROTEIN Struct Unchecked
-	Profile: Template=1ihvA.prf, File=/var/tmp/tco/tcozc4xaj5r79123//7327179123258
+	Profile: Template=1ihvA.prf, File=/var/tmp/tco/tcosaus0afd81050//8493481050256
   Input File input-fasta.txt Seq 1pht  Length   80 type PROTEIN Struct Unchecked
-	Profile: Template=1pht.prf, File=/var/tmp/tco/tcozc4xaj5r79123//7327179123257
+	Profile: Template=1pht.prf, File=/var/tmp/tco/tcosaus0afd81050//8493481050258
   Input File input-fasta.txt Seq 1vie  Length   51 type PROTEIN Struct Unchecked
-	Profile: Template=1vie.prf, File=/var/tmp/tco/tcozc4xaj5r79123//7327179123259
+	Profile: Template=1vie.prf, File=/var/tmp/tco/tcosaus0afd81050//8493481050259
   Input File input-fasta.txt Seq 1ycsB Length   60 type PROTEIN Struct Unchecked
-	Profile: Template=1ycsB.prf, File=/var/tmp/tco/tcozc4xaj5r79123//7327179123256
+	Profile: Template=1ycsB.prf, File=/var/tmp/tco/tcosaus0afd81050//8493481050257
 
 	Multi Core Mode: 1 processors:
 
@@ -354,15 +354,15 @@ Looking For Sequence Templates:
 ]
 INPUT SEQUENCES: 5 SEQUENCES  [PROTEIN]
   Input File input-fasta.txt Seq 1aboA Length   57 type PROTEIN Struct Unchecked
-	Profile: Template=1aboA.prf, File=/var/tmp/tco/tcozc4xaj5r79123//7327179123255
+	Profile: Template=1aboA.prf, File=/var/tmp/tco/tcosaus0afd81050//8493481050255
   Input File input-fasta.txt Seq 1ihvA Length   49 type PROTEIN Struct Unchecked
-	Profile: Template=1ihvA.prf, File=/var/tmp/tco/tcozc4xaj5r79123//7327179123258
+	Profile: Template=1ihvA.prf, File=/var/tmp/tco/tcosaus0afd81050//8493481050256
   Input File input-fasta.txt Seq 1pht  Length   80 type PROTEIN Struct Unchecked
-	Profile: Template=1pht.prf, File=/var/tmp/tco/tcozc4xaj5r79123//7327179123257
+	Profile: Template=1pht.prf, File=/var/tmp/tco/tcosaus0afd81050//8493481050258
   Input File input-fasta.txt Seq 1vie  Length   51 type PROTEIN Struct Unchecked
-	Profile: Template=1vie.prf, File=/var/tmp/tco/tcozc4xaj5r79123//7327179123259
+	Profile: Template=1vie.prf, File=/var/tmp/tco/tcosaus0afd81050//8493481050259
   Input File input-fasta.txt Seq 1ycsB Length   60 type PROTEIN Struct Unchecked
-	Profile: Template=1ycsB.prf, File=/var/tmp/tco/tcozc4xaj5r79123//7327179123256
+	Profile: Template=1ycsB.prf, File=/var/tmp/tco/tcosaus0afd81050//8493481050257
 
 	Multi Core Mode: 1 processors:
 
@@ -413,15 +413,15 @@ Looking For Sequence Templates:
 ]
 INPUT SEQUENCES: 5 SEQUENCES  [PROTEIN]
   Input File input-fasta.txt Seq 1aboA Length   57 type PROTEIN Struct Unchecked
-	Profile: Template=1aboA.prf, File=/var/tmp/tco/tcozc4xaj5r79123//7327179123255
+	Profile: Template=1aboA.prf, File=/var/tmp/tco/tcosaus0afd81050//8493481050255
   Input File input-fasta.txt Seq 1ihvA Length   49 type PROTEIN Struct Unchecked
-	Profile: Template=1ihvA.prf, File=/var/tmp/tco/tcozc4xaj5r79123//7327179123258
+	Profile: Template=1ihvA.prf, File=/var/tmp/tco/tcosaus0afd81050//8493481050256
   Input File input-fasta.txt Seq 1pht  Length   80 type PROTEIN Struct Unchecked
-	Profile: Template=1pht.prf, File=/var/tmp/tco/tcozc4xaj5r79123//7327179123257
+	Profile: Template=1pht.prf, File=/var/tmp/tco/tcosaus0afd81050//8493481050258
   Input File input-fasta.txt Seq 1vie  Length   51 type PROTEIN Struct Unchecked
-	Profile: Template=1vie.prf, File=/var/tmp/tco/tcozc4xaj5r79123//7327179123259
+	Profile: Template=1vie.prf, File=/var/tmp/tco/tcosaus0afd81050//8493481050259
   Input File input-fasta.txt Seq 1ycsB Length   60 type PROTEIN Struct Unchecked
-	Profile: Template=1ycsB.prf, File=/var/tmp/tco/tcozc4xaj5r79123//7327179123256
+	Profile: Template=1ycsB.prf, File=/var/tmp/tco/tcosaus0afd81050//8493481050257
 
 	Multi Core Mode: 1 processors:
 
@@ -487,15 +487,15 @@ Looking For Sequence Templates:
 ]
 INPUT SEQUENCES: 5 SEQUENCES  [PROTEIN]
   Input File input-fasta.txt Seq 1aboA Length   57 type PROTEIN Struct Unchecked
-	Profile: Template=1aboA.prf, File=/var/tmp/tco/tcozc4xaj5r79123//7327179123255
+	Profile: Template=1aboA.prf, File=/var/tmp/tco/tcosaus0afd81050//8493481050255
   Input File input-fasta.txt Seq 1ihvA Length   49 type PROTEIN Struct Unchecked
-	Profile: Template=1ihvA.prf, File=/var/tmp/tco/tcozc4xaj5r79123//7327179123258
+	Profile: Template=1ihvA.prf, File=/var/tmp/tco/tcosaus0afd81050//8493481050256
   Input File input-fasta.txt Seq 1pht  Length   80 type PROTEIN Struct Unchecked
-	Profile: Template=1pht.prf, File=/var/tmp/tco/tcozc4xaj5r79123//7327179123257
+	Profile: Template=1pht.prf, File=/var/tmp/tco/tcosaus0afd81050//8493481050258
   Input File input-fasta.txt Seq 1vie  Length   51 type PROTEIN Struct Unchecked
-	Profile: Template=1vie.prf, File=/var/tmp/tco/tcozc4xaj5r79123//7327179123259
+	Profile: Template=1vie.prf, File=/var/tmp/tco/tcosaus0afd81050//8493481050259
   Input File input-fasta.txt Seq 1ycsB Length   60 type PROTEIN Struct Unchecked
-	Profile: Template=1ycsB.prf, File=/var/tmp/tco/tcozc4xaj5r79123//7327179123256
+	Profile: Template=1ycsB.prf, File=/var/tmp/tco/tcosaus0afd81050//8493481050257
 
 	Multi Core Mode: 1 processors:
 
@@ -529,7 +529,7 @@ Group    4: 1vie
 Group    5: 1ycsB
 
 
-	Group    6: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=   62][PID:79123]	S	[0] 	5
+	Group    6: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=   62][PID:81050]	S	[0] 	5
 -tip           	S	[0] 	none
 -rna_lib       	S	[0] 
 -no_warning    	D	[0] 	0 
@@ -562,15 +562,15 @@ Looking For Sequence Templates:
 ]
 INPUT SEQUENCES: 5 SEQUENCES  [PROTEIN]
   Input File input-fasta.txt Seq 1aboA Length   57 type PROTEIN Struct Unchecked
-	Profile: Template=1aboA.prf, File=/var/tmp/tco/tcozc4xaj5r79123//7327179123255
+	Profile: Template=1aboA.prf, File=/var/tmp/tco/tcosaus0afd81050//8493481050255
   Input File input-fasta.txt Seq 1ihvA Length   49 type PROTEIN Struct Unchecked
-	Profile: Template=1ihvA.prf, File=/var/tmp/tco/tcozc4xaj5r79123//7327179123258
+	Profile: Template=1ihvA.prf, File=/var/tmp/tco/tcosaus0afd81050//8493481050256
   Input File input-fasta.txt Seq 1pht  Length   80 type PROTEIN Struct Unchecked
-	Profile: Template=1pht.prf, File=/var/tmp/tco/tcozc4xaj5r79123//7327179123257
+	Profile: Template=1pht.prf, File=/var/tmp/tco/tcosaus0afd81050//8493481050258
   Input File input-fasta.txt Seq 1vie  Length   51 type PROTEIN Struct Unchecked
-	Profile: Template=1vie.prf, File=/var/tmp/tco/tcozc4xaj5r79123//7327179123259
+	Profile: Template=1vie.prf, File=/var/tmp/tco/tcosaus0afd81050//8493481050259
   Input File input-fasta.txt Seq 1ycsB Length   60 type PROTEIN Struct Unchecked
-	Profile: Template=1ycsB.prf, File=/var/tmp/tco/tcozc4xaj5r79123//7327179123256
+	Profile: Template=1ycsB.prf, File=/var/tmp/tco/tcosaus0afd81050//8493481050257
 
 	Multi Core Mode: 1 processors:
 
@@ -604,8 +604,8 @@ Group    4: 1vie
 Group    5: 1ycsB
 
 
-	Group    6: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=   62][PID:79123]
-	Group    7: [Group    3 (   1 seq)] with [Group    6 (   2 seq)]-->[Len=   84][PID:79123]	S	[0] 	5
+	Group    6: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=   62][PID:81050]
+	Group    7: [Group    3 (   1 seq)] with [Group    6 (   2 seq)]-->[Len=   84][PID:81050]	S	[0] 	5
 -tip           	S	[0] 	none
 -rna_lib       	S	[0] 
 -no_warning    	D	[0] 	0 
@@ -638,15 +638,15 @@ Looking For Sequence Templates:
 ]
 INPUT SEQUENCES: 5 SEQUENCES  [PROTEIN]
   Input File input-fasta.txt Seq 1aboA Length   57 type PROTEIN Struct Unchecked
-	Profile: Template=1aboA.prf, File=/var/tmp/tco/tcozc4xaj5r79123//7327179123255
+	Profile: Template=1aboA.prf, File=/var/tmp/tco/tcosaus0afd81050//8493481050255
   Input File input-fasta.txt Seq 1ihvA Length   49 type PROTEIN Struct Unchecked
-	Profile: Template=1ihvA.prf, File=/var/tmp/tco/tcozc4xaj5r79123//7327179123258
+	Profile: Template=1ihvA.prf, File=/var/tmp/tco/tcosaus0afd81050//8493481050256
   Input File input-fasta.txt Seq 1pht  Length   80 type PROTEIN Struct Unchecked
-	Profile: Template=1pht.prf, File=/var/tmp/tco/tcozc4xaj5r79123//7327179123257
+	Profile: Template=1pht.prf, File=/var/tmp/tco/tcosaus0afd81050//8493481050258
   Input File input-fasta.txt Seq 1vie  Length   51 type PROTEIN Struct Unchecked
-	Profile: Template=1vie.prf, File=/var/tmp/tco/tcozc4xaj5r79123//7327179123259
+	Profile: Template=1vie.prf, File=/var/tmp/tco/tcosaus0afd81050//8493481050259
   Input File input-fasta.txt Seq 1ycsB Length   60 type PROTEIN Struct Unchecked
-	Profile: Template=1ycsB.prf, File=/var/tmp/tco/tcozc4xaj5r79123//7327179123256
+	Profile: Template=1ycsB.prf, File=/var/tmp/tco/tcosaus0afd81050//8493481050257
 
 	Multi Core Mode: 1 processors:
 
@@ -680,9 +680,9 @@ Group    4: 1vie
 Group    5: 1ycsB
 
 
-	Group    6: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=   62][PID:79123]
-	Group    7: [Group    3 (   1 seq)] with [Group    6 (   2 seq)]-->[Len=   84][PID:79123]
-	Group    8: [Group    5 (   1 seq)] with [Group    7 (   3 seq)]-->[Len=   84][PID:79123]	S	[0] 	5
+	Group    6: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=   62][PID:81050]
+	Group    7: [Group    3 (   1 seq)] with [Group    6 (   2 seq)]-->[Len=   84][PID:81050]
+	Group    8: [Group    5 (   1 seq)] with [Group    7 (   3 seq)]-->[Len=   84][PID:81050]	S	[0] 	5
 -tip           	S	[0] 	none
 -rna_lib       	S	[0] 
 -no_warning    	D	[0] 	0 
@@ -715,15 +715,15 @@ Looking For Sequence Templates:
 ]
 INPUT SEQUENCES: 5 SEQUENCES  [PROTEIN]
   Input File input-fasta.txt Seq 1aboA Length   57 type PROTEIN Struct Unchecked
-	Profile: Template=1aboA.prf, File=/var/tmp/tco/tcozc4xaj5r79123//7327179123255
+	Profile: Template=1aboA.prf, File=/var/tmp/tco/tcosaus0afd81050//8493481050255
   Input File input-fasta.txt Seq 1ihvA Length   49 type PROTEIN Struct Unchecked
-	Profile: Template=1ihvA.prf, File=/var/tmp/tco/tcozc4xaj5r79123//7327179123258
+	Profile: Template=1ihvA.prf, File=/var/tmp/tco/tcosaus0afd81050//8493481050256
   Input File input-fasta.txt Seq 1pht  Length   80 type PROTEIN Struct Unchecked
-	Profile: Template=1pht.prf, File=/var/tmp/tco/tcozc4xaj5r79123//7327179123257
+	Profile: Template=1pht.prf, File=/var/tmp/tco/tcosaus0afd81050//8493481050258
   Input File input-fasta.txt Seq 1vie  Length   51 type PROTEIN Struct Unchecked
-	Profile: Template=1vie.prf, File=/var/tmp/tco/tcozc4xaj5r79123//7327179123259
+	Profile: Template=1vie.prf, File=/var/tmp/tco/tcosaus0afd81050//8493481050259
   Input File input-fasta.txt Seq 1ycsB Length   60 type PROTEIN Struct Unchecked
-	Profile: Template=1ycsB.prf, File=/var/tmp/tco/tcozc4xaj5r79123//7327179123256
+	Profile: Template=1ycsB.prf, File=/var/tmp/tco/tcosaus0afd81050//8493481050257
 
 	Multi Core Mode: 1 processors:
 
@@ -757,10 +757,10 @@ Group    4: 1vie
 Group    5: 1ycsB
 
 
-	Group    6: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=   62][PID:79123]
-	Group    7: [Group    3 (   1 seq)] with [Group    6 (   2 seq)]-->[Len=   84][PID:79123]
-	Group    8: [Group    5 (   1 seq)] with [Group    7 (   3 seq)]-->[Len=   84][PID:79123]
-	Group    9: [Group    4 (   1 seq)] with [Group    8 (   4 seq)]-->[Len=   95][PID:79123]
+	Group    6: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=   62][PID:81050]
+	Group    7: [Group    3 (   1 seq)] with [Group    6 (   2 seq)]-->[Len=   84][PID:81050]
+	Group    8: [Group    5 (   1 seq)] with [Group    7 (   3 seq)]-->[Len=   84][PID:81050]
+	Group    9: [Group    4 (   1 seq)] with [Group    8 (   4 seq)]-->[Len=   95][PID:81050]
 
 
 !		[Final Evaluation][TOT=   95][  0 %]!		[Final Evaluation][TOT=   95][  2 %]!		[Final Evaluation][TOT=   95][  3 %]!		[Final Evaluation][TOT=   95][  4 %]!		[Final Evaluation][TOT=   95][  5 %]!		[Final Evaluation][TOT=   95][  6 %]!		[Final Evaluation][TOT=   95][  7 %]!		[Final Evaluation][TOT=   95][  8 %]!		[Final Evaluation][TOT=   95][  9 %]!		[Final Evaluation][TOT=   95][ 10 %]!		[Final Evaluation][TOT=   95][ 11 %]!		[Final Evaluation][TOT=   95][ 12 %]!		[Final Evaluation][TOT=   95][ 13 %]!		[Final Evaluation][TOT=   95][ 14 %]!		[Final Evaluation][TOT=   95][ 15 %]!		[Final Evaluation][TOT=   95][ 16 %]!		[Final Evaluation][TOT=   95][ 17 %]!		[Final Evaluation][TOT=   95][ 18 %]!		[Final Evaluation][TOT=   95][ 20 %]!		[Final Evaluation][TOT=   95][ 21 %]!		[Final Evaluation][TOT=   95][ 22 %]!		[Final Evaluation][TOT=   95][ 23 %]!		[Final Evaluation][TOT=   95][ 24 %]!		[Final Evaluation][TOT=   95][ 25 %]!		[Final Evaluation][TOT=   95][ 26 %]!		[Final Evaluation][TOT=   95][ 27 %]!		[Final Evaluation][TOT=   95][ 28 %]!		[Final Evaluation][TOT=   95][ 29 %]!		[Final Evaluation][TOT=   95][ 30 %]!		[Final Evaluation][TOT=   95][ 31 %]!		[Final Evaluation][TOT=   95][ 32 %]!		[Final Evaluation][TOT=   95][ 33 %]!		[Final Evaluation][TOT=   95][ 34 %]!		[Final Evaluation][TOT=   95][ 35 %]!		[Final Evaluation][TOT=   95][ 36 %]!		[Final Evaluation][TOT=   95][ 37 %]!		[Final Evaluation][TOT=   95][ 38 %]!		[Final Evaluation][TOT=   95][ 40 %]!		[Final Evaluation][TOT=   95][ 41 %]!		[Final Evaluation][TOT=   95][ 42 %]!		[Final Evaluation][TOT=   95][ 43 %]!		[Final Evaluation][TOT=   95][ 44 %]!		[Final Evaluation][TOT=   95][ 45 %]!		[Final Evaluation][TOT=   95][ 46 %]!		[Final Evaluation][TOT=   95][ 47 %]!		[Final Evaluation][TOT=   95][ 48 %]!		[Final Evaluation][TOT=   95][ 49 %]!		[Final Evaluation][TOT=   95][ 50 %]!		[Final Evaluation][TOT=   95][ 51 %]!		[Final Evaluation][TOT=   95][ 52 %]!		[Final Evaluation][TOT=   95][ 53 %]!		[Final Evaluation][TOT=   95][ 54 %]!		[Final Evaluation][TOT=   95][ 55 %]!		[Final Evaluation][TOT=   95][ 56 %]!		[Final Evaluation][TOT=   95][ 57 %]!		[Final Evaluation][TOT=   95][ 58 %]!		[Final Evaluation][TOT=   95][ 60 %]!		[Final Evaluation][TOT=   95][ 61 %]!		[Final Evaluation][TOT=   95][ 62 %]!		[Final Evaluation][TOT=   95][ 63 %]!		[Final Evaluation][TOT=   95][ 64 %]!		[Final Evaluation][TOT=   95][ 65 %]!		[Final Evaluation][TOT=   95][ 66 %]!		[Final Evaluation][TOT=   95][ 67 %]!		[Final Evaluation][TOT=   95][ 68 %]!		[Final Evaluation][TOT=   95][ 69 %]!		[Final Evaluation][TOT=   95][ 70 %]!		[Final Evaluation][TOT=   95][ 71 %]!		[Final Evaluation][TOT=   95][ 72 %]!		[Final Evaluation][TOT=   95][ 73 %]!		[Final Evaluation][TOT=   95][ 74 %]!		[Final Evaluation][TOT=   95][ 75 %]!		[Final Evaluation][TOT=   95][ 76 %]!		[Final Evaluation][TOT=   95][ 77 %]!		[Final Evaluation][TOT=   95][ 78 %]!		[Final Evaluation][TOT=   95][ 80 %]!		[Final Evaluation][TOT=   95][ 81 %]!		[Final Evaluation][TOT=   95][ 82 %]!		[Final Evaluation][TOT=   95][ 83 %]!		[Final Evaluation][TOT=   95][ 84 %]!		[Final Evaluation][TOT=   95][ 85 %]!		[Final Evaluation][TOT=   95][ 86 %]!		[Final Evaluation][TOT=   95][ 87 %]!		[Final Evaluation][TOT=   95][ 88 %]!		[Final Evaluation][TOT=   95][ 89 %]!		[Final Evaluation][TOT=   95][ 90 %]!		[Final Evaluation][TOT=   95][ 91 %]!		[Final Evaluation][TOT=   95][ 92 %]!		[Final Evaluation][TOT=   95][ 93 %]!		[Final Evaluation][TOT=   95][ 94 %]!		[Final Evaluation][TOT=   95][ 95 %]!		[Final Evaluation][TOT=   95][ 96 %]!		[Final Evaluation][TOT=   95][ 97 %]!		[Final Evaluation][TOT=   95][ 98 %]!		[Final Evaluation][TOT=   95][100 %]
@@ -781,8 +781,8 @@ OUTPUT RESULTS
 	#### File Type= Template Profile Format= fasta_aln       Name= 1ycsB.prf
 
 # Command Line: t_coffee -in input-fasta.txt -mode psicoffee -output score_html clustalw_aln fasta_aln phylip -maxnseq 150 -maxlen 2500 -case upper -seqnos on -outorder input -run_name result  [PROGRAM:T-COFFEE]
-# T-COFFEE Memory Usage: Current= 32.266 Mb, Max= 33.237 Mb
-# Results Produced with T-COFFEE Version_13.38.3.a77ca2b (Version_13.38.3.a77ca2b)
+# T-COFFEE Memory Usage: Current= 32.262 Mb, Max= 33.235 Mb
+# Results Produced with T-COFFEE Version_13.39.0.d675aed (Version_13.39.0.d675aed)
 # T-COFFEE is available from http://www.tcoffee.org
 # Register on: https://groups.google.com/group/tcoffee/
 </content>
@@ -809,9 +809,9 @@ NFRVYYRDSRDPVWKGPAKLLWKGEGAVVIQDNSDIKVVPRRKAKIIRD</content>
 <stream>input</stream>
 <name>result_prf1.template_list</name>
 <content>>1aboA  _R_ 1aboA.prf
+>1ihvA  _R_ 1ihvA.prf
 >1ycsB  _R_ 1ycsB.prf
 >1pht  _R_ 1pht.prf
->1ihvA  _R_ 1ihvA.prf
 >1vie  _R_ 1vie.prf
 </content>
 </file>
@@ -878,6 +878,51 @@ tyvdev-
 >1aboA_282  UR050|UniRef50_A0A0L0DBI9 [Eval=8.7E-4][id=41.2%][start=534 end=583]
 ---valfdyqagaetqlsfkkgdklriyqddeng-wlvaqigeaygyvpa
 nrvs---
+</content>
+</file>
+<file>
+<stream>input</stream>
+<name>1ihvA.prf</name>
+<content>>1ihvA
+nfrvyyrdsrdpvwkgpakllwkgegavviqdnsdikvvprrkakiird
+>1ihvA_6  UR050|UniRef50_O11783 [Eval=8.7E-20][id=71.4%][start=33 end=81]
+nfrvyyregrdqlwkgpgellwkgegavilkvgtnikvvprrkakiikd
+>1ihvA_13  UR050|UniRef50_A0A059UDK7 [Eval=4.9E-6][id=41.9%][start=32 end=74]
+---iyykdrkdkswkgpvqvqywgdgavlvkddsdkyiiprrrir----
+>1ihvA_14  UR050|UniRef50_Q84809 [Eval=1.0E-5][id=44.2%][start=1020 end=1062]
+---iyykdrkdklwkgptqvyywgegavlikdnnkylliprrrir----
+>1ihvA_17  UR050|UniRef50_Q8J8R9 [Eval=2.8E-4][id=40.9%][start=30 end=73]
+----fykipgehdwkgptrvlwkgdgavvvndrkgiiavpltrtkll--
+>1ihvA_18  UR050|UniRef50_A0A411K8A1 [Eval=4.5E-4][id=52.8%][start=786 end=821]
+-------------wkgptqvlwkgegaivvkdiesekvipykdakfi--
+>1ihvA_19  UR050|UniRef50_Q66733 [Eval=0.0016][id=40.9%][start=375 end=418]
+----fykipgehdwkgptrvlwkgdgavvvndgkgiiavpltrtkll--
+>1ihvA_21  UR050|UniRef50_UPI0000131EC9 [Eval=0.0055][id=40.5%][start=1003 end=1044]
+-----yvrnrrkewkgpykvlwdgdgaavieeegktalyphrhmrfi--
+>1ihvA_22  UR050|UniRef50_P19560 [Eval=0.0055][id=40.5%][start=1422 end=1463]
+-----yvrnrrkewkgpykvlwdgdgaavieeegktalyphrhmrfi--
+>1ihvA_23  UR050|UniRef50_A0A2D4IZB1 [Eval=0.007][id=45.2%][start=48 end=89]
+---vyyrelpdmtwkgpaklvtwgrgyaaiqledrvlwvparhvr----
+>1ihvA_24  UR050|UniRef50_UPI000775EB3E [Eval=0.019][id=46.2%][start=734 end=772]
+---vyfkrlpdptwkgpaelitwgwgyaaiqtngetlwvpgr-------
+>1ihvA_25  UR050|UniRef50_A0A3Q9T7Z1 [Eval=0.02][id=40.9%][start=1055 end=1098]
+----fyrlpnskdwkgpttifwkgegavvidpekgiislpqrhvrmv--
+>1ihvA_26  UR050|UniRef50_P16901 [Eval=0.05][id=40.0%][start=1042 end=1081]
+-------------wlgptqvlwegegaivikdkndvkfipqpk------
+>1ihvA_27  UR050|UniRef50_Q8AGY0 [Eval=0.069][id=46.2%][start=1551 end=1589]
+---vyyrclpdpawrgpaqlitwgrgyaaiqlpdkvlwvpgr-------
+>1ihvA_28  UR050|UniRef50_UPI000775AC23 [Eval=0.094][id=45.9%][start=637 end=673]
+---vyyrqlpdpewkgpaelitwgrgyaalqlpdkvlwvp---------
+>1ihvA_29  UR050|UniRef50_A0A1G1VPX9 [Eval=0.34][id=56.0%][start=65 end=89]
+------------------------edlmyvidnedikvvpkrkvkvvrd
+>1ihvA_30  UR050|UniRef50_UPI0006B1DB24 [Eval=0.63][id=45.0%][start=798 end=837]
+---vlyrtppdptwkgpaelltwgrgyaavkdnkplwvpar--------
+>1ihvA_31  UR050|UniRef50_A0A023B434 [Eval=4.2][id=40.6%][start=634 end=665]
+-----------plwagaeepcwreegawvrnetsdipappkkk------
+>1ihvA_32  UR050|UniRef50_A0A0M6XLI7 [Eval=7.7][id=42.9%][start=122 end=149]
+------------vwkgpvhlhrsgagkvavedaadvpalp---------
+>1ihvA_33  UR050|UniRef50_A0A397F9J1 [Eval=7.9][id=40.5%][start=489 end=525]
+------khslnpvwketlrlswdgasplvvqvysynklqpdrk------
 </content>
 </file>
 <file>
@@ -1012,51 +1057,6 @@ wlhgvndrseergtfpgtfvqyvg------
 </file>
 <file>
 <stream>input</stream>
-<name>1ihvA.prf</name>
-<content>>1ihvA
-nfrvyyrdsrdpvwkgpakllwkgegavviqdnsdikvvprrkakiird
->1ihvA_6  UR050|UniRef50_O11783 [Eval=8.7E-20][id=71.4%][start=33 end=81]
-nfrvyyregrdqlwkgpgellwkgegavilkvgtnikvvprrkakiikd
->1ihvA_13  UR050|UniRef50_A0A059UDK7 [Eval=4.9E-6][id=41.9%][start=32 end=74]
----iyykdrkdkswkgpvqvqywgdgavlvkddsdkyiiprrrir----
->1ihvA_14  UR050|UniRef50_Q84809 [Eval=1.0E-5][id=44.2%][start=1020 end=1062]
----iyykdrkdklwkgptqvyywgegavlikdnnkylliprrrir----
->1ihvA_17  UR050|UniRef50_Q8J8R9 [Eval=2.8E-4][id=40.9%][start=30 end=73]
-----fykipgehdwkgptrvlwkgdgavvvndrkgiiavpltrtkll--
->1ihvA_18  UR050|UniRef50_A0A411K8A1 [Eval=4.5E-4][id=52.8%][start=786 end=821]
--------------wkgptqvlwkgegaivvkdiesekvipykdakfi--
->1ihvA_19  UR050|UniRef50_Q66733 [Eval=0.0016][id=40.9%][start=375 end=418]
-----fykipgehdwkgptrvlwkgdgavvvndgkgiiavpltrtkll--
->1ihvA_21  UR050|UniRef50_UPI0000131EC9 [Eval=0.0055][id=40.5%][start=1003 end=1044]
------yvrnrrkewkgpykvlwdgdgaavieeegktalyphrhmrfi--
->1ihvA_22  UR050|UniRef50_P19560 [Eval=0.0055][id=40.5%][start=1422 end=1463]
------yvrnrrkewkgpykvlwdgdgaavieeegktalyphrhmrfi--
->1ihvA_23  UR050|UniRef50_A0A2D4IZB1 [Eval=0.007][id=45.2%][start=48 end=89]
----vyyrelpdmtwkgpaklvtwgrgyaaiqledrvlwvparhvr----
->1ihvA_24  UR050|UniRef50_UPI000775EB3E [Eval=0.019][id=46.2%][start=734 end=772]
----vyfkrlpdptwkgpaelitwgwgyaaiqtngetlwvpgr-------
->1ihvA_25  UR050|UniRef50_A0A3Q9T7Z1 [Eval=0.02][id=40.9%][start=1055 end=1098]
-----fyrlpnskdwkgpttifwkgegavvidpekgiislpqrhvrmv--
->1ihvA_26  UR050|UniRef50_P16901 [Eval=0.05][id=40.0%][start=1042 end=1081]
--------------wlgptqvlwegegaivikdkndvkfipqpk------
->1ihvA_27  UR050|UniRef50_Q8AGY0 [Eval=0.069][id=46.2%][start=1551 end=1589]
----vyyrclpdpawrgpaqlitwgrgyaaiqlpdkvlwvpgr-------
->1ihvA_28  UR050|UniRef50_UPI000775AC23 [Eval=0.094][id=45.9%][start=637 end=673]
----vyyrqlpdpewkgpaelitwgrgyaalqlpdkvlwvp---------
->1ihvA_29  UR050|UniRef50_A0A1G1VPX9 [Eval=0.34][id=56.0%][start=65 end=89]
-------------------------edlmyvidnedikvvpkrkvkvvrd
->1ihvA_30  UR050|UniRef50_UPI0006B1DB24 [Eval=0.63][id=45.0%][start=798 end=837]
----vlyrtppdptwkgpaelltwgrgyaavkdnkplwvpar--------
->1ihvA_31  UR050|UniRef50_A0A023B434 [Eval=4.2][id=40.6%][start=634 end=665]
------------plwagaeepcwreegawvrnetsdipappkkk------
->1ihvA_32  UR050|UniRef50_A0A0M6XLI7 [Eval=7.7][id=42.9%][start=122 end=149]
-------------vwkgpvhlhrsgagkvavedaadvpalp---------
->1ihvA_33  UR050|UniRef50_A0A397F9J1 [Eval=7.9][id=40.5%][start=489 end=525]
-------khslnpvwketlrlswdgasplvvqvysynklqpdrk------
-</content>
-</file>
-<file>
-<stream>input</stream>
 <name>1vie.prf</name>
 <content>>1vie
 drvrkksgaawqgqivgwyctnltpegyaveseahpgsvqiypvaaleri
@@ -1124,9 +1124,9 @@ n
 <stream>output</stream>
 <name>result_prf1.template_list</name>
 <content>>1aboA  _R_ 1aboA.prf
+>1ihvA  _R_ 1ihvA.prf
 >1ycsB  _R_ 1ycsB.prf
 >1pht  _R_ 1pht.prf
->1ihvA  _R_ 1ihvA.prf
 >1vie  _R_ 1vie.prf
 </content>
 </file>
@@ -1161,7 +1161,7 @@ SPAN.value9 {background: #FFC8C8}
 SPAN.valuedefault {}
 SPAN.valuegap {}
 SPAN.valueink {background: 000000}
-</style><body><span class=valuedefault>T-COFFEE,&nbsp;Version_13.38.3.a77ca2b&nbsp;(Version_13.38.3.a77ca2b)</span><br><span class=valuedefault>Cedric&nbsp;Notredame&nbsp;</span><br><span class=valuedefault>CPU&nbsp;TIME:0&nbsp;sec.</span><br><span class=valuedefault>SCORE=57</span><br><span class=valuedefault>*</span><br><span class=valuedefault>&nbsp;</span><span class=value0>B</span><span class=value1>A</span><span class=value2>D</span><span class=value3>&nbsp;</span><span class=value4>A</span><span class=value5>V</span><span class=value6>G</span><span class=value7>&nbsp;</span><span class=value8>G</span><span class=value9>OOD</span><br><span class=valuedefault>*</span><br><span class=value6>1aboA&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;63</span><br><span class=value6>1ycsB&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;60</span><br><span class=value5>1pht&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;59</span><br><span class=value5>1vie&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;50</span><br><span class=value4>1ihvA&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;48</span><br><span class=value5>cons&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;&nbsp;5</span><br><br><span class=valuedefault>1aboA&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;</span><span class=value7>N</span><span class=value6>L</span><span class=value5>F</span><span class=valuegap>------------</span><span class=value5>VA</span><span class=value6>L</span><span class=value7>YDFV</span><span class=value8>A</span><span class=valuegap>----</span><span class=value7>S</span><span class=value8>GDNTLSITKG</span><span class=value7>EK</span><span class=value8>L</span><span class=value7>RV</span><span class=value6>LG</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;29&nbsp;</span><br><span class=valuedefault>1ycsB&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;</span><span class=value8>K</span><span class=value6>GV</span><span class=value5>I</span><span class=valuegap>-----------</span><span class=value6>YA</span><span class=value7>LWDY</span><span class=value8>EP</span><span class=valuegap>----</span><span class=value7>Q</span><span class=value8>NDDELPMKEG</span><span class=value7>DCMTII</span><span class=value6>H</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;30&nbsp;</span><br><span class=valuedefault>1pht&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;</span><span class=value8>G</span><span class=value7>Y</span><span class=value6>Q</span><span class=value5>Y</span><span class=valuegap>-----------</span><span class=value6>RA</span><span class=value7>LYDYKK</span><span class=valuegap>----</span><span class=value7>E</span><span class=value8>REEDIDLH</span><span class=value9>L</span><span class=value8>GDILTVNK</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;30&nbsp;</span><br><span class=valuedefault>1vie&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;</span><span class=value7>D</span><span class=value6>RV</span><span class=value4>RKKSG</span><span class=value5>AAWQ</span><span class=value4>G</span><span class=value5>QIVG</span><span class=value6>WY</span><span class=value7>C</span><span class=value8>TNL</span><span class=valuegap>----</span><span class=value7>TP</span><span class=valuegap>-------</span><span class=value7>E</span><span class=value6>GYA</span><span class=value8>V</span><span class=value7>E</span><span class=value6>S</span><span class=valuegap>--</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;32&nbsp;</span><br><span class=valuedefault>1ihvA&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;</span><span class=value8>N</span><span class=value7>F</span><span class=value6>R</span><span class=valuegap>------------</span><span class=value5>V</span><span class=valuegap>-</span><span class=value5>YYRDSR</span><span class=value4>DP</span><span class=value5>VWKGP</span><span class=value6>A</span><span class=value7>KL</span><span class=valuegap>-</span><span class=value6>LW</span><span class=value7>K</span><span class=value8>G</span><span class=value6>EG</span><span class=value7>A</span><span class=value6>VV</span><span class=valuegap>--</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;29&nbsp;</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;</span><span class=value7>&nbsp;</span><span class=value5>&nbsp;</span><span class=value4>&nbsp;</span><span class=value3>&nbsp;</span><span class=value1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value4>&nbsp;&nbsp;</span><span class=value5>&nbsp;:&nbsp;</span><span class=value6>&nbsp;&nbsp;&nbsp;</span><span class=value1>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value5>&nbsp;</span><span class=value6>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value7>&nbsp;&nbsp;</span><span class=value6>&nbsp;&nbsp;&nbsp;</span><span class=value7>*</span><span class=value6>&nbsp;</span><span class=value5>&nbsp;</span><span class=value6>&nbsp;</span><span class=value5>&nbsp;&nbsp;&nbsp;</span><span class=value4>&nbsp;</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;45&nbsp;</span><br><br><br><span class=valuedefault>1aboA&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;30&nbsp;</span><span class=value5>YNH</span><span class=valuegap>--------------</span><span class=value5>NG</span><span class=value6>EWCEA</span><span class=valuegap>--</span><span class=value6>Q</span><span class=value7>TKN</span><span class=value8>GQ</span><span class=value7>G</span><span class=value8>WVP</span><span class=value9>SNYIT</span><span class=value8>PV</span><span class=valuegap>-</span><span class=value3>N</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;57&nbsp;</span><br><span class=valuedefault>1ycsB&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;31&nbsp;</span><span class=value6>RE</span><span class=value5>D</span><span class=valuegap>------------</span><span class=value4>ED</span><span class=value5>E</span><span class=value6>IEWWW</span><span class=value7>A</span><span class=valuegap>--</span><span class=value7>RLND</span><span class=value8>KE</span><span class=value7>G</span><span class=value8>YVP</span><span class=value9>R</span><span class=value8>NLL</span><span class=value7>GLY</span><span class=valuegap>--</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;59&nbsp;</span><br><span class=valuedefault>1pht&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;31&nbsp;</span><span class=value7>GS</span><span class=value6>LV</span><span class=value7>AL</span><span class=value8>G</span><span class=value7>FS</span><span class=value8>DG</span><span class=value9>Q</span><span class=value6>E</span><span class=value5>A</span><span class=value4>R</span><span class=value5>P</span><span class=value4>E</span><span class=value5>EI</span><span class=value6>GWL</span><span class=value7>NG</span><span class=value5>YN</span><span class=value6>E</span><span class=value7>TT</span><span class=value8>GERGDFP</span><span class=value9>G</span><span class=value8>TYVEYI</span><span class=value4>G</span><span class=value6>R</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;75&nbsp;</span><br><span class=valuedefault>1vie&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;33&nbsp;</span><span class=valuegap>-----------------------</span><span class=value7>E</span><span class=valuegap>--</span><span class=value7>AHPG</span><span class=value8>S</span><span class=value7>VQI</span><span class=value8>Y</span><span class=value7>P</span><span class=value9>VAALERI</span><span class=value5>N</span><span class=valuegap>-</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;51&nbsp;</span><br><span class=valuedefault>1ihvA&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;30&nbsp;</span><span class=valuegap>-----------------------</span><span class=value6>I</span><span class=valuegap>--</span><span class=value6>QD</span><span class=value7>N</span><span class=value6>S</span><span class=value7>DIKVVP</span><span class=value9>R</span><span class=value8>RKAK</span><span class=value7>II</span><span class=value4>R</span><span class=value3>D</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;49&nbsp;</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;46&nbsp;</span><span class=value3>&nbsp;&nbsp;</span><span class=value2>&nbsp;</span><span class=value1>&nbsp;&nbsp;&nbsp;</span><span class=value0>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value1>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value2>&nbsp;&nbsp;</span><span class=value3>&nbsp;&nbsp;</span><span class=value4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value1>&nbsp;&nbsp;</span><span class=value4>&nbsp;</span><span class=value5>&nbsp;&nbsp;.</span><span class=value6>&nbsp;&nbsp;&nbsp;</span><span class=value7>&nbsp;&nbsp;*</span><span class=value9>&nbsp;</span><span class=value8>&nbsp;&nbsp;&nbsp;</span><span class=value7>&nbsp;&nbsp;&nbsp;</span><span class=value3>&nbsp;</span><span class=value2>&nbsp;</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;90&nbsp;</span><br><br><br><span class=valuedefault>1aboA&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;58&nbsp;</span><span class=valuegap>-----</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;57&nbsp;</span><br><span class=valuedefault>1ycsB&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;60&nbsp;</span><span class=valuegap>----</span><span class=value3>P</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;60&nbsp;</span><br><span class=valuedefault>1pht&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;76&nbsp;</span><span class=value6>K</span><span class=value5>KI</span><span class=value4>S</span><span class=value3>P</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;80&nbsp;</span><br><span class=valuedefault>1vie&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;52&nbsp;</span><span class=valuegap>-----</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;51&nbsp;</span><br><span class=valuedefault>1ihvA&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;50&nbsp;</span><span class=valuegap>-----</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;49&nbsp;</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;91&nbsp;</span><span class=value1>&nbsp;&nbsp;</span><span class=value2>&nbsp;</span><span class=value1>&nbsp;</span><span class=value2>&nbsp;</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;95&nbsp;</span><br><br><br><br><br><br></body></html>
+</style><body><span class=valuedefault>T-COFFEE,&nbsp;Version_13.39.0.d675aed&nbsp;(Version_13.39.0.d675aed)</span><br><span class=valuedefault>Cedric&nbsp;Notredame&nbsp;</span><br><span class=valuedefault>CPU&nbsp;TIME:0&nbsp;sec.</span><br><span class=valuedefault>SCORE=57</span><br><span class=valuedefault>*</span><br><span class=valuedefault>&nbsp;</span><span class=value0>B</span><span class=value1>A</span><span class=value2>D</span><span class=value3>&nbsp;</span><span class=value4>A</span><span class=value5>V</span><span class=value6>G</span><span class=value7>&nbsp;</span><span class=value8>G</span><span class=value9>OOD</span><br><span class=valuedefault>*</span><br><span class=value6>1aboA&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;63</span><br><span class=value6>1ycsB&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;60</span><br><span class=value5>1pht&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;59</span><br><span class=value5>1vie&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;50</span><br><span class=value4>1ihvA&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;48</span><br><span class=value5>cons&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;&nbsp;5</span><br><br><span class=valuedefault>1aboA&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;</span><span class=value7>N</span><span class=value6>L</span><span class=value5>F</span><span class=valuegap>------------</span><span class=value5>VA</span><span class=value6>L</span><span class=value7>YDFV</span><span class=value8>A</span><span class=valuegap>----</span><span class=value7>S</span><span class=value8>GDNTLSITKG</span><span class=value7>EK</span><span class=value8>L</span><span class=value7>RV</span><span class=value6>LG</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;29&nbsp;</span><br><span class=valuedefault>1ycsB&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;</span><span class=value8>K</span><span class=value6>GV</span><span class=value5>I</span><span class=valuegap>-----------</span><span class=value6>YA</span><span class=value7>LWDY</span><span class=value8>EP</span><span class=valuegap>----</span><span class=value7>Q</span><span class=value8>NDDELPMKEG</span><span class=value7>DCMTII</span><span class=value6>H</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;30&nbsp;</span><br><span class=valuedefault>1pht&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;</span><span class=value8>G</span><span class=value7>Y</span><span class=value6>Q</span><span class=value5>Y</span><span class=valuegap>-----------</span><span class=value6>RA</span><span class=value7>LYDYKK</span><span class=valuegap>----</span><span class=value7>E</span><span class=value8>REEDIDLH</span><span class=value9>L</span><span class=value8>GDILTVNK</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;30&nbsp;</span><br><span class=valuedefault>1vie&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;</span><span class=value7>D</span><span class=value6>RV</span><span class=value4>RKKSG</span><span class=value5>AAWQ</span><span class=value4>G</span><span class=value5>QIVG</span><span class=value6>WY</span><span class=value7>C</span><span class=value8>TNL</span><span class=valuegap>----</span><span class=value7>TP</span><span class=valuegap>-------</span><span class=value7>E</span><span class=value6>GYA</span><span class=value8>V</span><span class=value7>E</span><span class=value6>S</span><span class=valuegap>--</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;32&nbsp;</span><br><span class=valuedefault>1ihvA&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;</span><span class=value8>N</span><span class=value7>F</span><span class=value6>R</span><span class=valuegap>------------</span><span class=value5>V</span><span class=valuegap>-</span><span class=value5>YYRDSR</span><span class=value4>DP</span><span class=value5>VWKGP</span><span class=value6>A</span><span class=value7>KL</span><span class=valuegap>-</span><span class=value6>LW</span><span class=value7>K</span><span class=value8>G</span><span class=value6>EG</span><span class=value7>A</span><span class=value6>VV</span><span class=valuegap>--</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;29&nbsp;</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;</span><span class=value7>&nbsp;</span><span class=value5>&nbsp;</span><span class=value4>&nbsp;</span><span class=value3>&nbsp;</span><span class=value1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value4>&nbsp;&nbsp;</span><span class=value5>&nbsp;:&nbsp;</span><span class=value6>&nbsp;&nbsp;&nbsp;</span><span class=value1>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value5>&nbsp;</span><span class=value6>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value7>&nbsp;&nbsp;</span><span class=value6>&nbsp;&nbsp;&nbsp;</span><span class=value7>*</span><span class=value6>&nbsp;</span><span class=value5>&nbsp;</span><span class=value6>&nbsp;</span><span class=value5>&nbsp;&nbsp;&nbsp;</span><span class=value4>&nbsp;</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;45&nbsp;</span><br><br><br><span class=valuedefault>1aboA&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;30&nbsp;</span><span class=value5>YNH</span><span class=valuegap>--------------</span><span class=value5>NG</span><span class=value6>EWCEA</span><span class=valuegap>--</span><span class=value6>Q</span><span class=value7>TKN</span><span class=value8>GQ</span><span class=value7>G</span><span class=value8>WVP</span><span class=value9>SNYIT</span><span class=value8>PV</span><span class=valuegap>-</span><span class=value3>N</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;57&nbsp;</span><br><span class=valuedefault>1ycsB&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;31&nbsp;</span><span class=value6>RE</span><span class=value5>D</span><span class=valuegap>------------</span><span class=value4>ED</span><span class=value5>E</span><span class=value6>IEWWW</span><span class=value7>A</span><span class=valuegap>--</span><span class=value7>RLND</span><span class=value8>KE</span><span class=value7>G</span><span class=value8>YVP</span><span class=value9>R</span><span class=value8>NLL</span><span class=value7>GLY</span><span class=valuegap>--</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;59&nbsp;</span><br><span class=valuedefault>1pht&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;31&nbsp;</span><span class=value7>GS</span><span class=value6>LV</span><span class=value7>AL</span><span class=value8>G</span><span class=value7>FS</span><span class=value8>DG</span><span class=value9>Q</span><span class=value6>E</span><span class=value5>A</span><span class=value4>R</span><span class=value5>P</span><span class=value4>E</span><span class=value5>EI</span><span class=value6>GWL</span><span class=value7>NG</span><span class=value5>YN</span><span class=value6>E</span><span class=value7>TT</span><span class=value8>GERGDFP</span><span class=value9>G</span><span class=value8>TYVEYI</span><span class=value4>G</span><span class=value6>R</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;75&nbsp;</span><br><span class=valuedefault>1vie&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;33&nbsp;</span><span class=valuegap>-----------------------</span><span class=value7>E</span><span class=valuegap>--</span><span class=value7>AHPG</span><span class=value8>S</span><span class=value7>VQI</span><span class=value8>Y</span><span class=value7>P</span><span class=value9>VAALERI</span><span class=value5>N</span><span class=valuegap>-</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;51&nbsp;</span><br><span class=valuedefault>1ihvA&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;30&nbsp;</span><span class=valuegap>-----------------------</span><span class=value6>I</span><span class=valuegap>--</span><span class=value6>QD</span><span class=value7>N</span><span class=value6>S</span><span class=value7>DIKVVP</span><span class=value9>R</span><span class=value8>RKAK</span><span class=value7>II</span><span class=value4>R</span><span class=value3>D</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;49&nbsp;</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;46&nbsp;</span><span class=value3>&nbsp;&nbsp;</span><span class=value2>&nbsp;</span><span class=value1>&nbsp;&nbsp;&nbsp;</span><span class=value0>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value1>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value2>&nbsp;&nbsp;</span><span class=value3>&nbsp;&nbsp;</span><span class=value4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value1>&nbsp;&nbsp;</span><span class=value4>&nbsp;</span><span class=value5>&nbsp;&nbsp;.</span><span class=value6>&nbsp;&nbsp;&nbsp;</span><span class=value7>&nbsp;&nbsp;*</span><span class=value9>&nbsp;</span><span class=value8>&nbsp;&nbsp;&nbsp;</span><span class=value7>&nbsp;&nbsp;&nbsp;</span><span class=value3>&nbsp;</span><span class=value2>&nbsp;</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;90&nbsp;</span><br><br><br><span class=valuedefault>1aboA&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;58&nbsp;</span><span class=valuegap>-----</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;57&nbsp;</span><br><span class=valuedefault>1ycsB&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;60&nbsp;</span><span class=valuegap>----</span><span class=value3>P</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;60&nbsp;</span><br><span class=valuedefault>1pht&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;76&nbsp;</span><span class=value6>K</span><span class=value5>KI</span><span class=value4>S</span><span class=value3>P</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;80&nbsp;</span><br><span class=valuedefault>1vie&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;52&nbsp;</span><span class=valuegap>-----</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;51&nbsp;</span><br><span class=valuedefault>1ihvA&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;50&nbsp;</span><span class=valuegap>-----</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;49&nbsp;</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;91&nbsp;</span><span class=value1>&nbsp;&nbsp;</span><span class=value2>&nbsp;</span><span class=value1>&nbsp;</span><span class=value2>&nbsp;</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;95&nbsp;</span><br><br><br><br><br><br></body></html>
 </content>
 </file>
 <file>
@@ -1534,7 +1534,7 @@ vpr-------
 </file>
 <environement>
 HOME_4_TCOFFEE=/Users/cnotredame/
-MANPATH=/sw/share/man:/usr/share/man:/usr/local/share/man:/opt/X11/share/man:/Applications/Xcode.app/Contents/Developer/usr/share/man:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/share/man:/sw/lib/perl5/5.18.2/man
+MANPATH=/sw/share/man:/usr/share/man:/usr/local/share/man:/opt/X11/share/man:/Library/TeX/texbin/man:/Applications/Xcode.app/Contents/Developer/usr/share/man:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/share/man:/sw/lib/perl5/5.18.2/man
 TERM_PROGRAM=Apple_Terminal
 MCOFFEE_4_TCOFFEE=/Users/cnotredame//.t_coffee//mcoffee/
 ROOT_TMP_4_TCOFFEE=/var/tmp/
@@ -1543,12 +1543,12 @@ TERM=xterm-256color
 TMPDIR=/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/
 CONDA_SHLVL=1
 PERL5LIB=/sw/lib/perl5:/sw/lib/perl5/darwin
-Apple_PubSub_Socket_Render=/private/tmp/com.apple.launchd.u7asRiNodS/Render
+Apple_PubSub_Socket_Render=/private/tmp/com.apple.launchd.6JzhyrtuKp/Render
 CONDA_PROMPT_MODIFIER=(base) 
 TERM_PROGRAM_VERSION=388.1.3
 OSNAME=macosx
 PERL_BIN=/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms::/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices
-TERM_SESSION_ID=98F198FA-FDF9-40DD-A8EF-07E7D5143362
+TERM_SESSION_ID=9785BD0D-F6F1-4B59-B0BA-9937FD12A1E7
 METHODS_4_TCOFFEE=/Users/cnotredame//.t_coffee//methods/
 VERSIONER_PERL_VERSION=5.18
 XAPPLRESDIR=/sw/etc/app-defaults/
@@ -1556,23 +1556,23 @@ http_proxy=
 HTTP_proxy=
 USER=cnotredame
 CONDA_EXE=/Users/cnotredame/anaconda3/bin/conda
-SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.mMz4rqepoV/Listeners
+SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.U5mTe2o7m7/Listeners
 __CF_USER_TEXT_ENCODING=0x1F6:0x0:0x0
 ENV_4_TCOFFEE=/Users/cnotredame//.t_coffee//.t_coffee_env
 _CE_CONDA=
 all_proxy=
 ALL_PROXY=
 HTTP_proxy_4_TCOFFEE=
-PATH=/Users/cnotredame//.t_coffee//plugins/macosx/:/Users/cnotredame/anaconda3/bin:/Users/cnotredame/anaconda3/condabin:/opt/local/bin:/opt/local/sbin:/opt/local/bin:/opt/local/sbin:/Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/packages/x3dna-v2.1/bin:/Users/cnotredame/bin/macosx://Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms:.:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices:/Users/cnotredame/bin/Scripts:/Users/cnotredame/Library/Haskell/ghc-7.4.2/lib/epub-tools-2.0.0/bin:/sw/bin:/sw/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin
+PATH=/Users/cnotredame//.t_coffee//plugins/macosx/:/Users/cnotredame/anaconda3/bin:/Users/cnotredame/anaconda3/condabin:/opt/local/bin:/opt/local/sbin:/opt/local/bin:/opt/local/sbin:/Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/packages/x3dna-v2.1/bin:/Users/cnotredame/bin/macosx://Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms:.:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices:/Users/cnotredame/bin/Scripts:/Users/cnotredame/Library/Haskell/ghc-7.4.2/lib/epub-tools-2.0.0/bin:/sw/bin:/sw/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/Library/TeX/texbin
 ALN_LINE_LENGTH=60
 _=/usr/bin/printenv
 CONDA_PREFIX=/Users/cnotredame/anaconda3
 COLOR_4_TCOFFEE=new
 DIR_4_TCOFFEE=/Users/cnotredame//.t_coffee/
-PWD=/Users/cnotredame/Dropbox/projects/git/tcoffee/tmp/RANDOMSTRINGL1HLNOIwbdsPgkLykZDw/tmp/RANDOMSTRINGbLr1lwsQ4OGyuUKlbm0p/data
+PWD=/private/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/RANDOMSTRINGWS1YirGo1QtBL1DUElje/data
 CACHE_4_TCOFFEE=/Users/cnotredame//.t_coffee//cache/
 X3DNA=/Users/cnotredame/Dropbox/packages/x3dna-v2.1
-DBUS_LAUNCHD_SESSION_BUS_SOCKET=/private/tmp/com.apple.launchd.CeZrDaslOL/unix_domain_listener
+DBUS_LAUNCHD_SESSION_BUS_SOCKET=/private/tmp/com.apple.launchd.DfqaaC2z17/unix_domain_listener
 XPC_FLAGS=0x0
 VERSIONER_PERL_PREFER_32_BIT=no
 _CE_M=
@@ -1581,7 +1581,7 @@ ERRORFILE_4_TCOFFEE=NO
 PLUGINS_4_TCOFFEE=/Users/cnotredame//.t_coffee//plugins/macosx/
 SHLVL=3
 HOME=/Users/cnotredame
-DUMP_4_TCOFFEE=/Users/cnotredame/Dropbox/projects/git/tcoffee/tmp/RANDOMSTRINGL1HLNOIwbdsPgkLykZDw/tmp/RANDOMSTRINGbLr1lwsQ4OGyuUKlbm0p/web.tests.2.dump
+DUMP_4_TCOFFEE=/private/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/RANDOMSTRINGWS1YirGo1QtBL1DUElje/web.tests.2.dump
 HTTP_PROXY=
 MAFFT_BINARIES=
 CONDA_PYTHON_EXE=/Users/cnotredame/anaconda3/bin/python
@@ -1593,16 +1593,17 @@ CONDA_DEFAULT_ENV=base
 EMAIL=cedric.notredame@gmail.com
 UPDATED_ENV_4_TCOFFEE=1
 INFOPATH=/sw/share/info:/sw/info:/usr/share/info
-DISPLAY=/private/tmp/com.apple.launchd.MDJPhYnCNw/org.macosforge.xquartz:0
+DISPLAY=/private/tmp/com.apple.launchd.vef8UzGxBY/org.macosforge.xquartz:0
 TC_MASTER_NODE=1
 NUMBER_OF_PROCESSORS=8
 ALL_proxy=
-SECURITYSESSIONID=186a6
-LOCKDIR_4_TCOFFEE=/var/tmp/tco/tcozc4xaj5r79123//lck/gyrey4seog/
-TMP_4_TCOFFEE=/var/tmp/tco/tcozc4xaj5r79123/
+LOCKDIR_4_TCOFFEE=/var/tmp/tco/tcosaus0afd81050//lck/bsxd6ytsar/
+TMP_4_TCOFFEE=/var/tmp/tco/tcosaus0afd81050/
 USER_BIN=/Users/cnotredame/bin/macosx
 SCRIPT_BIN=/Users/cnotredame/bin/Scripts/
 </environement>
 <DumpStatus>OK</DumpStatus>
-<DumpFile>/Users/cnotredame/Dropbox/projects/git/tcoffee/tmp/RANDOMSTRINGL1HLNOIwbdsPgkLykZDw/tmp/RANDOMSTRINGbLr1lwsQ4OGyuUKlbm0p/web.tests.2.dump</DumpFile>
+<DumpFile>/private/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/RANDOMSTRINGWS1YirGo1QtBL1DUElje/web.tests.2.dump</DumpFile>
+<SourceFile>web.tests</SourceFile>
+<SourceLine>3</SourceLine>
 </DumpIO>

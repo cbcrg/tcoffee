@@ -13,7 +13,7 @@ T-Coffee compilation requires the following tools installed on your system ``mak
 Compile 
 --------
 
-Note that the git repository is meant to support the packging of new releases. 
+Note that the git repository is meant to support the packaging of new releases. 
 If you simply want to install T-Coffee on your system please download the latest distribution from
 	http://www.tcoffee.org/Projects/tcoffee/index.html#DOWNLOAD
 
@@ -28,13 +28,4 @@ If you nontheless want to compile from git:
 	cd tcoffee/t_coffee/src
 	make t_coffee
 	mv t_coffee <bin location> OR add current dir to your path - not recommended
-    
-    
-Make sure you have installed the required dependencies listed above. 
-When done, move in the project root folder named ``tcoffee`` and enter the 
-following commands:     
-    
-    $ cd t_coffee/src
-    $ make t_coffee
-    
-you will then have to copy the t_coffee executable to the location you find most convenient.
+

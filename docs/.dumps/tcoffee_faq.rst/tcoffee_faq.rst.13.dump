@@ -1,0 +1,1512 @@
+<DumpIO>
+<nature>standard dump</nature>
+<program>T-COFFEE</program>
+<version>Version_13.39.0.d675aed</version>
+<build>Version_13.39.0.d675aed</build>
+<cl>t_coffee -in Asample_aln1.aln -out_lib sample_lib1.tc_lib -lib_only </cl>
+<stack>
+</stack>
+<warning>
+</warning>
+<file>
+<stream>output</stream>
+<name>stdout</name>
+<content></content>
+</file>
+<file>
+<stream>output</stream>
+<name>stderr</name>
+<content>
+PROGRAM: T-COFFEE Version_13.39.0.d675aed (Version_13.39.0.d675aed)
+-full_log      	S	[0] 
+-genepred_score	S	[0] 	nsd
+-run_name      	S	[0] 
+-mem_mode      	S	[0] 	mem
+-extend        	D	[1] 	1 
+-extend_mode   	S	[0] 	very_fast_triplet
+-max_n_pair    	D	[0] 	10 
+-seq_name_for_quadruplet	S	[0] 	all
+-compact       	S	[0] 	default
+-clean         	S	[0] 	no
+-do_self       	FL	[0] 	0
+-do_normalise  	D	[0] 	1000 
+-template_file 	S	[0] 
+-setenv        	S	[0] 	0
+-export        	S	[0] 	0
+-template_mode 	S	[0] 
+-flip          	D	[0] 	0 
+-remove_template_file	D	[0] 	0 
+-profile_template_file	S	[0] 
+-in            	S	[1] 	Asample_aln1.aln
+-seq           	S	[0] 
+-aln           	S	[0] 
+-method_limits 	S	[0] 
+-method        	S	[0] 
+-lib           	S	[0] 
+-profile       	S	[0] 
+-profile1      	S	[0] 
+-profile2      	S	[0] 
+-pdb           	S	[0] 
+-relax_lib     	D	[0] 	1 
+-filter_lib    	D	[0] 	0 
+-shrink_lib    	D	[0] 	0 
+-out_lib       	W_F	[1] 	sample_lib1.tc_lib
+-out_lib_mode  	S	[0] 	primary
+-lib_only      	D	[1] 	1 
+-outseqweight  	W_F	[0] 	no
+-seq_source    	S	[0] 	ANY
+-cosmetic_penalty	D	[0] 	0 
+-gapopen       	D	[0] 	0 
+-gapext        	D	[0] 	0 
+-fgapopen      	D	[0] 	0 
+-fgapext       	D	[0] 	0 
+-nomatch       	D	[0] 	0 
+-newtree       	W_F	[0] 	default
+-tree          	W_F	[0] 	NO
+-usetree       	R_F	[0] 
+-tree_mode     	S	[0] 	nj
+-distance_matrix_mode	S	[0] 	ktup
+-distance_matrix_sim_mode	S	[0] 	idmat_sim1
+-quicktree     	FL	[0] 	0
+-outfile       	W_F	[0] 	default
+-maximise      	FL	[1] 	1
+-output        	S	[0] 	aln	html
+-len           	D	[0] 	0 
+-infile        	R_F	[0] 
+-matrix        	S	[0] 	default
+-tg_mode       	D	[0] 	1 
+-profile_mode  	S	[0] 	cw_profile_profile
+-profile_comparison	S	[0] 	profile
+-dp_mode       	S	[0] 	linked_pair_wise
+-ktuple        	D	[0] 	1 
+-ndiag         	D	[0] 	0 
+-diag_threshold	D	[0] 	0 
+-diag_mode     	D	[0] 	0 
+-sim_matrix    	S	[0] 	vasiliky
+-transform     	S	[0] 
+-extend_seq    	FL	[0] 	0
+-outorder      	S	[0] 	input
+-inorder       	S	[0] 	aligned
+-seqnos        	S	[0] 	off
+-case          	S	[0] 	keep
+-cpu           	D	[0] 	0 
+-ulimit        	D	[0] 	-1 
+-maxnseq       	D	[0] 	-1 
+-maxlen        	D	[0] 	-1 
+-sample_dp     	D	[0] 	0 
+-weight        	S	[0] 	default
+-seq_weight    	S	[0] 	no
+-align         	FL	[1] 	1
+-mocca         	FL	[0] 	0
+-domain        	FL	[0] 	0
+-start         	D	[0] 	0 
+-len           	D	[0] 	0 
+-scale         	D	[0] 	0 
+-mocca_interactive	FL	[0] 	0
+-method_evaluate_mode	S	[0] 	default
+-color_mode    	S	[0] 	new
+-aln_line_length	D	[0] 	0 
+-evaluate_mode 	S	[0] 	triplet
+-get_type      	FL	[0] 	0
+-clean_aln     	D	[0] 	0 
+-clean_threshold	D	[1] 	1 
+-clean_iteration	D	[1] 	1 
+-clean_evaluate_mode	S	[0] 	t_coffee_fast
+-extend_matrix 	FL	[0] 	0
+-prot_min_sim  	D	[40] 	40 
+-prot_max_sim  	D	[90] 	90 
+-prot_trim     	D	[20] 	20 
+-prot_min_cov  	D	[40] 	40 
+-pdb_type      	S	[0] 	d
+-pdb_min_sim   	D	[35] 	35 
+-pdb_max_sim   	D	[100] 	100 
+-pdb_min_cov   	D	[50] 	50 
+-pdb_blast_server	W_F	[0] 	EBI
+-blast         	W_F	[0] 
+-blast_server  	W_F	[0] 	EBI
+-pdb_db        	W_F	[0] 	pdb
+-protein_db    	W_F	[0] 	uniref50
+-method_log    	W_F	[0] 	no
+-struc_to_use  	S	[0] 
+-cache         	W_F	[0] 	use
+-print_cache   	FL	[0] 	0
+-align_pdb_param_file	W_F	[0] 	no
+-align_pdb_hasch_mode	W_F	[0] 	hasch_ca_trace_bubble
+-external_aligner	S	[0] 	NO
+-msa_mode      	S	[0] 	tree
+-et_mode       	S	[0] 	et
+-master        	S	[0] 	no
+-blast_nseq    	D	[0] 	0 
+-lalign_n_top  	D	[0] 	10 
+-iterate       	D	[0] 	0 
+-trim          	D	[0] 	0 
+-split         	D	[0] 	0 
+-trimfile      	S	[0] 	default
+-split         	D	[0] 	0 
+-split_nseq_thres	D	[0] 	0 
+-split_score_thres	D	[0] 	0 
+-check_pdb_status	D	[0] 	0 
+-clean_seq_name	D	[0] 	0 
+-seq_to_keep   	S	[0] 
+-dpa_master_aln	S	[0] 
+-dpa_maxnseq   	D	[0] 	0 
+-dpa_min_score1	D	[0] 
+-dpa_min_score2	D	[0] 
+-dpa_keep_tmpfile	FL	[0] 	0
+-dpa_debug     	D	[0] 	0 
+-multi_core    	S	[0] 	templates_jobs_relax_msa_evaluate
+-n_core        	D	[0] 	1 
+-thread        	D	[0] 	1 
+-max_n_proc    	D	[0] 	0 
+-lib_list      	S	[0] 
+-prune_lib_mode	S	[0] 	5
+-tip           	S	[0] 	none
+-rna_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (A) sample_aln1.aln  Format clustal_aln
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 1 processors:
+lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (A) sample_aln1.aln  Format clustal_aln
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 1 processors:
+
+	--- Process Method/Library/Aln Asample_aln1.aln
+	xxx Retrieved Asample_aln1.aln
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [2202]
+
+	#### File Type= TCLIB           Format= tc_lib_format_01 Name= sample_lib1.tc_lib</content>
+</file>
+<file>
+<stream>input</stream>
+<name>sample_aln1.aln</name>
+<content>CLUSTAL FORMAT for T-COFFEE Version_11.00 [http://www.tcoffee.org] [MODE:  ], CPU=0.00 sec, SCORE=500, Nseq=10, Len=217 
+
+hmgb_chite      ad---kpkrplsay------m---------------lwlnsaresi------------------krenpdf-kvtevak-kggelwr------------------------------glk--dksewe--------------------------------
+hmgt_mouse      k-----pkrprsay------n---------------iyvsesfqea----------------------kdd-saqgklk-lvneawk------------------------------nlspeekqayi--------------------------------
+hmgl_wheat      dp--nkpkrapsaf------f---------------vfmgefreef------------------kqknpknksvaavgk-aagerwk------------------------------slsesekapyv--------------------------------
+hmgl_trybr      kkdsnapkramtsf------m---------------ffssdfrskh----------------------sdl-sivemsk-aagaawk------------------------------elgpeerkvye--------------------------------
+1cms            GE---VASVPLTNY------LDSQYFGKIYLGTPPQEFTVLFDTGSSDFWVPSIYCKSNACKNHQRFDPRKSS---TFQ-NLGKPLSIHYGTGS-MQGILGYDTVTVSNIVDIQQTVGLSTQEPGDVFTYAEFD--------GILGMAYPSLASEY---S
+4pep            -----IGDEPLENY------LDTEYFGTIGIGTPAQDFTVIFDTGSSNLWVPSVYCSSLACSDHNQFNPDDSS---TFE-ATSQELSITYGTGS-MTGILGYDTVQVGGISDTNQIFGLSETEPGSFLYYAPFD--------GILGLAYPSISASG---A
+4ape            STG-SATTTPIDS-------LDDAYITPVQIGTPAQTLNLDFDTGSSDLWVFSSETTASEVDGQTIYTPSKST---TAKLLSGATWSISYGDGSSSSGDVYTDTVSVGGLTVTGQAVESAKKVSSSFTEDSTID--------GLLGLAFSTLNTVSPTQQ
+3app            AASGVATNTPTA--------NDEEYITPVTIGG--TTLNLNFDTGSADLWVFSTELPASQQSGHSVYNPSA-----TGKELSGYTWSISYGDGSSASGNVFTDSVTVGGVTAHGQAVQAAQQISAQFQQDTNND--------GLLGLAFSSINTVQPQSQ
+2apr            AG---VGTVPMTDYG-----NDIEYYGQVTIGTPGKKFNLDFDTGSSDLWIASTLCTN-CGSGQTKYDPNQSS---TYQ-ADGRTWSISYGDGSSASGILAKDNVNLGGLLIKGQTIELAKREAASFAS-GPND--------GLLGLGFDTITTVRG--V
+1cms_1          YTG-SLHWVPVTVQQYWQFTVDSVTISGVVVACEG-GCQAILDTGTSKLVGPSS------------------------------------------------------DILNIQQAIGATQNQYGEFDIDCDNLSYMPTVVFEINGKMYPLTPSAY---T
+                         .                                                                                                                                                      
+
+hmgb_chite      --------------aka--at------akqnyiralqeyer--ng-----------g
+hmgt_mouse      --------------qla--kd------drirydnemkswee--qm--a--------e
+hmgl_wheat      --------------aka--nk------lkgeynkaiaaynk--ge--s--------a
+hmgl_trybr      --------------ema--ek------dkerykrem---------------------
+1cms            IPV--------F--DNMMNRH----LVAQDLFSVYM-DRNG--QESMLTLGAIDPSY
+4pep            TPV--------F--DNLWDQG----LVSQDLFSVYL-SSNDD-SGSVVLLGGIDSSY
+4ape            KTF--------F--DNA--KA----SLDSPVFTADL-GYH---APGTYNFGFIDTTA
+3app            TTF--------F--DTV--KS----SLAQPLFAVAL-KHQ---QPGVYDFGFIDSSK
+2apr            KTP--------M--DNLISQG----LISRPIFGVYL-GKAKNGGGGEYIFGGYDSTK
+1cms_1          S-QDQGFCTSGFQSENHSQKWILGDVFIREYYSVFD-RANN--LVGLA--KAI----
+                                               :                         
+
+
+
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>sample_lib1.tc_lib</name>
+<content>! TC_LIB_FORMAT_01
+10
+1cms 175 GEVASVPLTNYLDSQYFGKIYLGTPPQEFTVLFDTGSSDFWVPSIYCKSNACKNHQRFDPRKSSTFQNLGKPLSIHYGTGSMQGILGYDTVTVSNIVDIQQTVGLSTQEPGDVFTYAEFDGILGMAYPSLASEYSIPVFDNMMNRHLVAQDLFSVYMDRNGQESMLTLGAIDPSY
+1cms_1 148 YTGSLHWVPVTVQQYWQFTVDSVTISGVVVACEGGCQAILDTGTSKLVGPSSDILNIQQAIGATQNQYGEFDIDCDNLSYMPTVVFEINGKMYPLTPSAYTSQDQGFCTSGFQSENHSQKWILGDVFIREYYSVFDRANNLVGLAKAI
+2apr 178 AGVGTVPMTDYGNDIEYYGQVTIGTPGKKFNLDFDTGSSDLWIASTLCTNCGSGQTKYDPNQSSTYQADGRTWSISYGDGSSASGILAKDNVNLGGLLIKGQTIELAKREAASFASGPNDGLLGLGFDTITTVRGVKTPMDNLISQGLISRPIFGVYLGKAKNGGGGEYIFGGYDSTK
+3app 174 AASGVATNTPTANDEEYITPVTIGGTTLNLNFDTGSADLWVFSTELPASQQSGHSVYNPSATGKELSGYTWSISYGDGSSASGNVFTDSVTVGGVTAHGQAVQAAQQISAQFQQDTNNDGLLGLAFSSINTVQPQSQTTFFDTVKSSLAQPLFAVALKHQQPGVYDFGFIDSSK
+4ape 178 STGSATTTPIDSLDDAYITPVQIGTPAQTLNLDFDTGSSDLWVFSSETTASEVDGQTIYTPSKSTTAKLLSGATWSISYGDGSSSSGDVYTDTVSVGGLTVTGQAVESAKKVSSSFTEDSTIDGLLGLAFSTLNTVSPTQQKTFFDNAKASLDSPVFTADLGYHAPGTYNFGFIDTTA
+4pep 174 IGDEPLENYLDTEYFGTIGIGTPAQDFTVIFDTGSSNLWVPSVYCSSLACSDHNQFNPDDSSTFEATSQELSITYGTGSMTGILGYDTVQVGGISDTNQIFGLSETEPGSFLYYAPFDGILGLAYPSISASGATPVFDNLWDQGLVSQDLFSVYLSSNDDSGSVVLLGGIDSSY
+hmgb_chite 74 adkpkrplsaymlwlnsaresikrenpdfkvtevakkggelwrglkdkseweakaatakqnyiralqeyerngg
+hmgl_trybr 67 kkdsnapkramtsfmffssdfrskhsdlsivemskaagaawkelgpeerkvyeemaekdkerykrem
+hmgl_wheat 79 dpnkpkrapsaffvfmgefreefkqknpknksvaavgkaagerwkslsesekapyvakanklkgeynkaiaaynkgesa
+hmgt_mouse 71 kpkrprsayniyvsesfqeakddsaqgklklvneawknlspeekqayiqlakddrirydnemksweeqmae
+#1 2
+   13    21   250     1     0
+   14    22   250     1     0
+   15    23   250     1     0
+   16    24   250     1     0
+   17    25   250     1     0
+   18    26   250     1     0
+   19    27   250     1     0
+   20    28   250     1     0
+   21    29   250     1     0
+   22    30   250     1     0
+   23    31   250     1     0
+   24    32   250     1     0
+   25    33   250     1     0
+   26    34   250     1     0
+   38    45   250     1     0
+   39    46   250     1     0
+   40    47   250     1     0
+   41    48   250     1     0
+   42    49   250     1     0
+   43    50   250     1     0
+   44    51   250     1     0
+   45    52   250     1     0
+   95    53   250     1     0
+   96    54   250     1     0
+   97    55   250     1     0
+   98    56   250     1     0
+   99    57   250     1     0
+  100    58   250     1     0
+  101    59   250     1     0
+  102    60   250     1     0
+  103    61   250     1     0
+  115    73   250     1     0
+  116    74   250     1     0
+  117    75   250     1     0
+  118    76   250     1     0
+  119    77   250     1     0
+  120    78   250     1     0
+  121    87   250     1     0
+  122    88   250     1     0
+  123    89   250     1     0
+  124    90   250     1     0
+  125    91   250     1     0
+  126    92   250     1     0
+  127    93   250     1     0
+  128    94   250     1     0
+  129    95   250     1     0
+  130    96   250     1     0
+  131    97   250     1     0
+  132    98   250     1     0
+  133    99   250     1     0
+  134   100   250     1     0
+  135   101   250     1     0
+  136   102   250     1     0
+  138   103   250     1     0
+  139   112   250     1     0
+  143   118   250     1     0
+  144   119   250     1     0
+  147   126   250     1     0
+  148   127   250     1     0
+  164   143   250     1     0
+  165   144   250     1     0
+  169   146   250     1     0
+  170   147   250     1     0
+  171   148   250     1     0
+#1 3
+   13    14   320     1     0
+   14    15   320     1     0
+   15    16   320     1     0
+   16    17   320     1     0
+   17    18   320     1     0
+   18    19   320     1     0
+   19    20   320     1     0
+   20    21   320     1     0
+   21    22   320     1     0
+   22    23   320     1     0
+   23    24   320     1     0
+   24    25   320     1     0
+   25    26   320     1     0
+   26    27   320     1     0
+   27    28   320     1     0
+   38    39   320     1     0
+   39    40   320     1     0
+   40    41   320     1     0
+   41    42   320     1     0
+   42    43   320     1     0
+   43    44   320     1     0
+   44    45   320     1     0
+   45    46   320     1     0
+   46    47   320     1     0
+   47    48   320     1     0
+   48    49   320     1     0
+   49    50   320     1     0
+   51    51   320     1     0
+   52    52   320     1     0
+   53    53   320     1     0
+   54    54   320     1     0
+   55    55   320     1     0
+   75    75   320     1     0
+   76    76   320     1     0
+   77    77   320     1     0
+   78    78   320     1     0
+   79    79   320     1     0
+   80    80   320     1     0
+   81    81   320     1     0
+   82    83   320     1     0
+   83    84   320     1     0
+   84    85   320     1     0
+   85    86   320     1     0
+   86    87   320     1     0
+   87    88   320     1     0
+   88    89   320     1     0
+   89    90   320     1     0
+   90    91   320     1     0
+   91    92   320     1     0
+   92    93   320     1     0
+   93    94   320     1     0
+   94    95   320     1     0
+   95    96   320     1     0
+   96    97   320     1     0
+   97    98   320     1     0
+   98    99   320     1     0
+   99   100   320     1     0
+  100   101   320     1     0
+  101   102   320     1     0
+  102   103   320     1     0
+  103   104   320     1     0
+  115   116   320     1     0
+  117   117   320     1     0
+  118   118   320     1     0
+  119   119   320     1     0
+  120   120   320     1     0
+  121   121   320     1     0
+  122   122   320     1     0
+  123   123   320     1     0
+  124   124   320     1     0
+  125   125   320     1     0
+  126   126   320     1     0
+  127   127   320     1     0
+  128   128   320     1     0
+  129   129   320     1     0
+  130   130   320     1     0
+  131   131   320     1     0
+  132   132   320     1     0
+  133   133   320     1     0
+  134   134   320     1     0
+  135   136   320     1     0
+  136   137   320     1     0
+  137   138   320     1     0
+  138   139   320     1     0
+  139   140   320     1     0
+  143   144   320     1     0
+  144   145   320     1     0
+  147   148   320     1     0
+  148   149   320     1     0
+  164   167   320     1     0
+  165   168   320     1     0
+  167   170   320     1     0
+  168   171   320     1     0
+  169   172   320     1     0
+  170   173   320     1     0
+  171   174   320     1     0
+  172   175   320     1     0
+  173   176   320     1     0
+  174   177   320     1     0
+#1 4
+   13    14   290     1     0
+   14    15   290     1     0
+   15    16   290     1     0
+   16    17   290     1     0
+   17    18   290     1     0
+   18    19   290     1     0
+   19    20   290     1     0
+   20    21   290     1     0
+   21    22   290     1     0
+   22    23   290     1     0
+   23    24   290     1     0
+   24    25   290     1     0
+   27    26   290     1     0
+   38    37   290     1     0
+   39    38   290     1     0
+   40    39   290     1     0
+   41    40   290     1     0
+   42    41   290     1     0
+   43    42   290     1     0
+   44    43   290     1     0
+   45    44   290     1     0
+   46    45   290     1     0
+   47    46   290     1     0
+   48    47   290     1     0
+   49    48   290     1     0
+   50    49   290     1     0
+   51    50   290     1     0
+   52    51   290     1     0
+   53    52   290     1     0
+   54    53   290     1     0
+   55    54   290     1     0
+   75    73   290     1     0
+   76    74   290     1     0
+   77    75   290     1     0
+   78    76   290     1     0
+   79    77   290     1     0
+   80    78   290     1     0
+   81    79   290     1     0
+   82    81   290     1     0
+   83    82   290     1     0
+   84    83   290     1     0
+   85    84   290     1     0
+   86    85   290     1     0
+   87    86   290     1     0
+   88    87   290     1     0
+   89    88   290     1     0
+   90    89   290     1     0
+   91    90   290     1     0
+   92    91   290     1     0
+   93    92   290     1     0
+   94    93   290     1     0
+   95    94   290     1     0
+   96    95   290     1     0
+   97    96   290     1     0
+   98    97   290     1     0
+   99    98   290     1     0
+  100    99   290     1     0
+  101   100   290     1     0
+  102   101   290     1     0
+  103   102   290     1     0
+  115   114   290     1     0
+  116   115   290     1     0
+  117   116   290     1     0
+  118   117   290     1     0
+  119   118   290     1     0
+  120   119   290     1     0
+  121   120   290     1     0
+  122   121   290     1     0
+  123   122   290     1     0
+  124   123   290     1     0
+  125   124   290     1     0
+  126   125   290     1     0
+  127   126   290     1     0
+  128   127   290     1     0
+  129   128   290     1     0
+  130   129   290     1     0
+  131   130   290     1     0
+  132   131   290     1     0
+  133   132   290     1     0
+  134   133   290     1     0
+  135   137   290     1     0
+  136   138   290     1     0
+  137   139   290     1     0
+  138   140   290     1     0
+  139   141   290     1     0
+  147   147   290     1     0
+  148   148   290     1     0
+  164   163   290     1     0
+  165   164   290     1     0
+  167   166   290     1     0
+  168   167   290     1     0
+  169   168   290     1     0
+  170   169   290     1     0
+  171   170   290     1     0
+  172   171   290     1     0
+  173   172   290     1     0
+  174   173   290     1     0
+#1 5
+   13    14   280     1     0
+   14    15   280     1     0
+   15    16   280     1     0
+   16    17   280     1     0
+   17    18   280     1     0
+   18    19   280     1     0
+   19    20   280     1     0
+   20    21   280     1     0
+   21    22   280     1     0
+   22    23   280     1     0
+   23    24   280     1     0
+   24    25   280     1     0
+   25    26   280     1     0
+   26    27   280     1     0
+   27    28   280     1     0
+   38    39   280     1     0
+   39    40   280     1     0
+   40    41   280     1     0
+   41    42   280     1     0
+   42    43   280     1     0
+   43    44   280     1     0
+   44    45   280     1     0
+   45    46   280     1     0
+   46    47   280     1     0
+   47    48   280     1     0
+   48    49   280     1     0
+   49    50   280     1     0
+   50    51   280     1     0
+   51    52   280     1     0
+   52    53   280     1     0
+   53    54   280     1     0
+   54    55   280     1     0
+   55    56   280     1     0
+   75    77   280     1     0
+   76    78   280     1     0
+   77    79   280     1     0
+   78    80   280     1     0
+   79    81   280     1     0
+   80    82   280     1     0
+   81    83   280     1     0
+   82    85   280     1     0
+   83    86   280     1     0
+   84    87   280     1     0
+   85    88   280     1     0
+   86    89   280     1     0
+   87    90   280     1     0
+   88    91   280     1     0
+   89    92   280     1     0
+   90    93   280     1     0
+   91    94   280     1     0
+   92    95   280     1     0
+   93    96   280     1     0
+   94    97   280     1     0
+   95    98   280     1     0
+   96    99   280     1     0
+   97   100   280     1     0
+   98   101   280     1     0
+   99   102   280     1     0
+  100   103   280     1     0
+  101   104   280     1     0
+  102   105   280     1     0
+  103   106   280     1     0
+  115   118   280     1     0
+  116   119   280     1     0
+  117   120   280     1     0
+  118   121   280     1     0
+  119   122   280     1     0
+  120   123   280     1     0
+  121   124   280     1     0
+  122   125   280     1     0
+  123   126   280     1     0
+  124   127   280     1     0
+  125   128   280     1     0
+  126   129   280     1     0
+  127   130   280     1     0
+  128   131   280     1     0
+  129   132   280     1     0
+  130   133   280     1     0
+  131   134   280     1     0
+  132   135   280     1     0
+  133   136   280     1     0
+  134   137   280     1     0
+  135   141   280     1     0
+  136   142   280     1     0
+  137   143   280     1     0
+  138   144   280     1     0
+  139   145   280     1     0
+  147   151   280     1     0
+  148   152   280     1     0
+  164   167   280     1     0
+  165   168   280     1     0
+  167   170   280     1     0
+  168   171   280     1     0
+  169   172   280     1     0
+  170   173   280     1     0
+  171   174   280     1     0
+  172   175   280     1     0
+  173   176   280     1     0
+  174   177   280     1     0
+#1 6
+   13    11   570     1     0
+   14    12   570     1     0
+   15    13   570     1     0
+   16    14   570     1     0
+   17    15   570     1     0
+   18    16   570     1     0
+   19    17   570     1     0
+   20    18   570     1     0
+   21    19   570     1     0
+   22    20   570     1     0
+   23    21   570     1     0
+   24    22   570     1     0
+   25    23   570     1     0
+   26    24   570     1     0
+   27    25   570     1     0
+   38    36   570     1     0
+   39    37   570     1     0
+   40    38   570     1     0
+   41    39   570     1     0
+   42    40   570     1     0
+   43    41   570     1     0
+   44    42   570     1     0
+   45    43   570     1     0
+   46    44   570     1     0
+   47    45   570     1     0
+   48    46   570     1     0
+   49    47   570     1     0
+   50    48   570     1     0
+   51    49   570     1     0
+   52    50   570     1     0
+   53    51   570     1     0
+   54    52   570     1     0
+   55    53   570     1     0
+   75    73   570     1     0
+   76    74   570     1     0
+   77    75   570     1     0
+   78    76   570     1     0
+   79    77   570     1     0
+   80    78   570     1     0
+   81    79   570     1     0
+   82    80   570     1     0
+   83    81   570     1     0
+   84    82   570     1     0
+   85    83   570     1     0
+   86    84   570     1     0
+   87    85   570     1     0
+   88    86   570     1     0
+   89    87   570     1     0
+   90    88   570     1     0
+   91    89   570     1     0
+   92    90   570     1     0
+   93    91   570     1     0
+   94    92   570     1     0
+   95    93   570     1     0
+   96    94   570     1     0
+   97    95   570     1     0
+   98    96   570     1     0
+   99    97   570     1     0
+  100    98   570     1     0
+  101    99   570     1     0
+  102   100   570     1     0
+  103   101   570     1     0
+  115   113   570     1     0
+  116   114   570     1     0
+  117   115   570     1     0
+  118   116   570     1     0
+  119   117   570     1     0
+  120   118   570     1     0
+  121   119   570     1     0
+  122   120   570     1     0
+  123   121   570     1     0
+  124   122   570     1     0
+  125   123   570     1     0
+  126   124   570     1     0
+  127   125   570     1     0
+  128   126   570     1     0
+  129   127   570     1     0
+  130   128   570     1     0
+  131   129   570     1     0
+  132   130   570     1     0
+  133   131   570     1     0
+  134   132   570     1     0
+  135   133   570     1     0
+  136   134   570     1     0
+  137   135   570     1     0
+  138   136   570     1     0
+  139   137   570     1     0
+  143   141   570     1     0
+  144   142   570     1     0
+  147   145   570     1     0
+  148   146   570     1     0
+  164   163   570     1     0
+  165   164   570     1     0
+  167   166   570     1     0
+  168   167   570     1     0
+  169   168   570     1     0
+  170   169   570     1     0
+  171   170   570     1     0
+  172   171   570     1     0
+  173   172   570     1     0
+  174   173   570     1     0
+#1 7
+    1     1   120     1     0
+    2     2   120     1     0
+    3     3   120     1     0
+    4     4   120     1     0
+    5     5   120     1     0
+    6     6   120     1     0
+    7     7   120     1     0
+    8     8   120     1     0
+    9     9   120     1     0
+   10    10   120     1     0
+   11    11   120     1     0
+   12    12   120     1     0
+   28    13   120     1     0
+   29    14   120     1     0
+   30    15   120     1     0
+   31    16   120     1     0
+   32    17   120     1     0
+   33    18   120     1     0
+   34    19   120     1     0
+   35    20   120     1     0
+   36    21   120     1     0
+   37    22   120     1     0
+   56    23   120     1     0
+   57    24   120     1     0
+   58    25   120     1     0
+   59    26   120     1     0
+   60    27   120     1     0
+   61    28   120     1     0
+   62    29   120     1     0
+   64    30   120     1     0
+   65    34   120     1     0
+   66    35   120     1     0
+   67    36   120     1     0
+   68    37   120     1     0
+   69    38   120     1     0
+   70    39   120     1     0
+   71    40   120     1     0
+   72    41   120     1     0
+   73    42   120     1     0
+   74    43   120     1     0
+  104    44   120     1     0
+  105    45   120     1     0
+  106    46   120     1     0
+  109    47   120     1     0
+  110    48   120     1     0
+  111    49   120     1     0
+  112    50   120     1     0
+  113    51   120     1     0
+  114    52   120     1     0
+  140    53   120     1     0
+  141    54   120     1     0
+  142    55   120     1     0
+  145    56   120     1     0
+  146    57   120     1     0
+  149    58   120     1     0
+  150    59   120     1     0
+  151    60   120     1     0
+  152    61   120     1     0
+  153    62   120     1     0
+  154    63   120     1     0
+  155    64   120     1     0
+  156    65   120     1     0
+  157    66   120     1     0
+  158    68   120     1     0
+  159    69   120     1     0
+  160    70   120     1     0
+  161    71   120     1     0
+  162    72   120     1     0
+  163    73   120     1     0
+  175    74   120     1     0
+#1 9
+   63    31   130     1     0
+#1 10
+  107    41   110     1     0
+  108    42   110     1     0
+  166    70   110     1     0
+#2 3
+   14    12   180     1     0
+#2 7
+    1     1    70     1     0
+    2     2    70     1     0
+    5     3    70     1     0
+    6     4    70     1     0
+    7     5    70     1     0
+    8     6    70     1     0
+    9     7    70     1     0
+   10     8    70     1     0
+   11     9    70     1     0
+   12    10    70     1     0
+   13    11    70     1     0
+   20    12    70     1     0
+   35    13    70     1     0
+   36    14    70     1     0
+   37    15    70     1     0
+   38    16    70     1     0
+   39    17    70     1     0
+   40    18    70     1     0
+   41    19    70     1     0
+   42    20    70     1     0
+   43    21    70     1     0
+   44    22    70     1     0
+   62    44    70     1     0
+   63    45    70     1     0
+   64    46    70     1     0
+   67    47    70     1     0
+   68    48    70     1     0
+   69    49    70     1     0
+   70    50    70     1     0
+   71    51    70     1     0
+   72    52    70     1     0
+  115    53    70     1     0
+  116    54    70     1     0
+  117    55    70     1     0
+  120    56    70     1     0
+  121    57    70     1     0
+  128    58    70     1     0
+  129    59    70     1     0
+  130    60    70     1     0
+  131    61    70     1     0
+  132    62    70     1     0
+  133    63    70     1     0
+  134    64    70     1     0
+  135    65    70     1     0
+  136    66    70     1     0
+  137    68    70     1     0
+  138    69    70     1     0
+  139    70    70     1     0
+  140    71    70     1     0
+  141    72    70     1     0
+  142    73    70     1     0
+#2 8
+    3     3    80     1     0
+#2 9
+    4     3    30     1     0
+#2 10
+   65    41    90     1     0
+   66    42    90     1     0
+  145    70    90     1     0
+#3 5
+   82    84   460     1     0
+  135   138   460     1     0
+#3 6
+  163   160   400     1     0
+#3 7
+    1     1   120     1     0
+    2     2   120     1     0
+    3     3   120     1     0
+    4     4   120     1     0
+    5     5   120     1     0
+    6     6   120     1     0
+    7     7   120     1     0
+    8     8   120     1     0
+    9     9   120     1     0
+   10    10   120     1     0
+   11    11   120     1     0
+   13    12   120     1     0
+   29    13   120     1     0
+   30    14   120     1     0
+   31    15   120     1     0
+   32    16   120     1     0
+   33    17   120     1     0
+   34    18   120     1     0
+   35    19   120     1     0
+   36    20   120     1     0
+   37    21   120     1     0
+   38    22   120     1     0
+   56    23   120     1     0
+   57    24   120     1     0
+   58    25   120     1     0
+   59    26   120     1     0
+   60    27   120     1     0
+   61    28   120     1     0
+   62    29   120     1     0
+   64    30   120     1     0
+   65    34   120     1     0
+   66    35   120     1     0
+   67    36   120     1     0
+   68    37   120     1     0
+   69    38   120     1     0
+   70    39   120     1     0
+   71    40   120     1     0
+   72    41   120     1     0
+   73    42   120     1     0
+   74    43   120     1     0
+  105    44   120     1     0
+  106    45   120     1     0
+  107    46   120     1     0
+  110    47   120     1     0
+  111    48   120     1     0
+  112    49   120     1     0
+  113    50   120     1     0
+  114    51   120     1     0
+  115    52   120     1     0
+  141    53   120     1     0
+  142    54   120     1     0
+  143    55   120     1     0
+  146    56   120     1     0
+  147    57   120     1     0
+  150    58   120     1     0
+  151    59   120     1     0
+  152    60   120     1     0
+  153    61   120     1     0
+  154    62   120     1     0
+  155    63   120     1     0
+  156    64   120     1     0
+  157    65   120     1     0
+  158    66   120     1     0
+  159    68   120     1     0
+  160    69   120     1     0
+  161    70   120     1     0
+  162    71   120     1     0
+  165    72   120     1     0
+  166    73   120     1     0
+  178    74   120     1     0
+#3 9
+   63    31   160     1     0
+#3 10
+  108    41   110     1     0
+  109    42   110     1     0
+  169    70   110     1     0
+#4 5
+   65    69   570     1     0
+   80    84   570     1     0
+  134   138   570     1     0
+  135   139   570     1     0
+  136   140   570     1     0
+#4 7
+    1     1   150     1     0
+    2     2   150     1     0
+    6     3   150     1     0
+    7     4   150     1     0
+    8     5   150     1     0
+    9     6   150     1     0
+   10     7   150     1     0
+   11     8   150     1     0
+   12     9   150     1     0
+   13    12   150     1     0
+   27    13   150     1     0
+   28    14   150     1     0
+   29    15   150     1     0
+   30    16   150     1     0
+   31    17   150     1     0
+   32    18   150     1     0
+   33    19   150     1     0
+   34    20   150     1     0
+   35    21   150     1     0
+   36    22   150     1     0
+   55    23   150     1     0
+   56    24   150     1     0
+   57    25   150     1     0
+   58    26   150     1     0
+   59    27   150     1     0
+   60    28   150     1     0
+   61    29   150     1     0
+   62    34   150     1     0
+   63    35   150     1     0
+   64    36   150     1     0
+   66    37   150     1     0
+   67    38   150     1     0
+   68    39   150     1     0
+   69    40   150     1     0
+   70    41   150     1     0
+   71    42   150     1     0
+   72    43   150     1     0
+  103    44   150     1     0
+  104    45   150     1     0
+  105    46   150     1     0
+  108    47   150     1     0
+  109    48   150     1     0
+  110    49   150     1     0
+  111    50   150     1     0
+  112    51   150     1     0
+  113    52   150     1     0
+  142    53   150     1     0
+  143    54   150     1     0
+  144    55   150     1     0
+  145    56   150     1     0
+  146    57   150     1     0
+  149    58   150     1     0
+  150    59   150     1     0
+  151    60   150     1     0
+  152    61   150     1     0
+  153    62   150     1     0
+  154    63   150     1     0
+  155    64   150     1     0
+  156    65   150     1     0
+  157    66   150     1     0
+  158    68   150     1     0
+  159    69   150     1     0
+  160    70   150     1     0
+  161    72   150     1     0
+  162    73   150     1     0
+  174    74   150     1     0
+#4 8
+    3     3    80     1     0
+    4     4    80     1     0
+#4 9
+    5     3   120     1     0
+#4 10
+  106    41   110     1     0
+  107    42   110     1     0
+  165    70   110     1     0
+#5 7
+    1     1   140     1     0
+    2     2   140     1     0
+    5     3   140     1     0
+    6     4   140     1     0
+    7     5   140     1     0
+    8     6   140     1     0
+    9     7   140     1     0
+   10     8   140     1     0
+   11     9   140     1     0
+   12    10   140     1     0
+   13    12   140     1     0
+   29    13   140     1     0
+   30    14   140     1     0
+   31    15   140     1     0
+   32    16   140     1     0
+   33    17   140     1     0
+   34    18   140     1     0
+   35    19   140     1     0
+   36    20   140     1     0
+   37    21   140     1     0
+   38    22   140     1     0
+   57    23   140     1     0
+   58    24   140     1     0
+   59    25   140     1     0
+   60    26   140     1     0
+   61    27   140     1     0
+   62    28   140     1     0
+   63    29   140     1     0
+   65    30   140     1     0
+   66    34   140     1     0
+   67    35   140     1     0
+   68    36   140     1     0
+   70    37   140     1     0
+   71    38   140     1     0
+   72    39   140     1     0
+   73    40   140     1     0
+   74    41   140     1     0
+   75    42   140     1     0
+   76    43   140     1     0
+  107    44   140     1     0
+  108    45   140     1     0
+  109    46   140     1     0
+  112    47   140     1     0
+  113    48   140     1     0
+  114    49   140     1     0
+  115    50   140     1     0
+  116    51   140     1     0
+  117    52   140     1     0
+  146    53   140     1     0
+  147    54   140     1     0
+  148    55   140     1     0
+  149    56   140     1     0
+  150    57   140     1     0
+  153    58   140     1     0
+  154    59   140     1     0
+  155    60   140     1     0
+  156    61   140     1     0
+  157    62   140     1     0
+  158    63   140     1     0
+  159    64   140     1     0
+  160    65   140     1     0
+  161    66   140     1     0
+  162    68   140     1     0
+  163    69   140     1     0
+  164    70   140     1     0
+  165    72   140     1     0
+  166    73   140     1     0
+  178    74   140     1     0
+#5 8
+    3     3   170     1     0
+#5 9
+    4     3   100     1     0
+   64    31   100     1     0
+#5 10
+  110    41   100     1     0
+  111    42   100     1     0
+  169    70   100     1     0
+#6 7
+    1     3   140     1     0
+    2     4   140     1     0
+    3     5   140     1     0
+    4     6   140     1     0
+    5     7   140     1     0
+    6     8   140     1     0
+    7     9   140     1     0
+    8    10   140     1     0
+    9    11   140     1     0
+   10    12   140     1     0
+   26    13   140     1     0
+   27    14   140     1     0
+   28    15   140     1     0
+   29    16   140     1     0
+   30    17   140     1     0
+   31    18   140     1     0
+   32    19   140     1     0
+   33    20   140     1     0
+   34    21   140     1     0
+   35    22   140     1     0
+   54    23   140     1     0
+   55    24   140     1     0
+   56    25   140     1     0
+   57    26   140     1     0
+   58    27   140     1     0
+   59    28   140     1     0
+   60    29   140     1     0
+   62    30   140     1     0
+   63    34   140     1     0
+   64    35   140     1     0
+   65    36   140     1     0
+   66    37   140     1     0
+   67    38   140     1     0
+   68    39   140     1     0
+   69    40   140     1     0
+   70    41   140     1     0
+   71    42   140     1     0
+   72    43   140     1     0
+  102    44   140     1     0
+  103    45   140     1     0
+  104    46   140     1     0
+  107    47   140     1     0
+  108    48   140     1     0
+  109    49   140     1     0
+  110    50   140     1     0
+  111    51   140     1     0
+  112    52   140     1     0
+  138    53   140     1     0
+  139    54   140     1     0
+  140    55   140     1     0
+  143    56   140     1     0
+  144    57   140     1     0
+  147    58   140     1     0
+  148    59   140     1     0
+  149    60   140     1     0
+  150    61   140     1     0
+  151    62   140     1     0
+  152    63   140     1     0
+  153    64   140     1     0
+  154    65   140     1     0
+  155    66   140     1     0
+  156    68   140     1     0
+  157    69   140     1     0
+  158    70   140     1     0
+  159    71   140     1     0
+  161    72   140     1     0
+  162    73   140     1     0
+  174    74   140     1     0
+#6 9
+   61    31   160     1     0
+#6 10
+  105    41   130     1     0
+  106    42   130     1     0
+  165    70   130     1     0
+#7 8
+    1     1   250     1     0
+    2     2   250     1     0
+    3     6   250     1     0
+    4     7   250     1     0
+    5     8   250     1     0
+    6     9   250     1     0
+    7    10   250     1     0
+    8    11   250     1     0
+    9    12   250     1     0
+   10    13   250     1     0
+   11    14   250     1     0
+   12    15   250     1     0
+   13    16   250     1     0
+   14    17   250     1     0
+   15    18   250     1     0
+   16    19   250     1     0
+   17    20   250     1     0
+   18    21   250     1     0
+   19    22   250     1     0
+   20    23   250     1     0
+   21    24   250     1     0
+   22    25   250     1     0
+   27    26   250     1     0
+   28    27   250     1     0
+   29    28   250     1     0
+   30    29   250     1     0
+   31    30   250     1     0
+   32    31   250     1     0
+   33    32   250     1     0
+   34    33   250     1     0
+   35    34   250     1     0
+   36    35   250     1     0
+   37    36   250     1     0
+   38    37   250     1     0
+   39    38   250     1     0
+   40    39   250     1     0
+   41    40   250     1     0
+   42    41   250     1     0
+   43    42   250     1     0
+   44    43   250     1     0
+   45    44   250     1     0
+   46    45   250     1     0
+   47    48   250     1     0
+   48    49   250     1     0
+   49    50   250     1     0
+   50    51   250     1     0
+   51    52   250     1     0
+   52    53   250     1     0
+   53    54   250     1     0
+   54    55   250     1     0
+   55    56   250     1     0
+   56    57   250     1     0
+   57    58   250     1     0
+   58    59   250     1     0
+   59    60   250     1     0
+   60    61   250     1     0
+   61    62   250     1     0
+   62    63   250     1     0
+   63    64   250     1     0
+   64    65   250     1     0
+   65    66   250     1     0
+   66    67   250     1     0
+#7 9
+    1     1   350     1     0
+    2     2   350     1     0
+    3     4   350     1     0
+    4     5   350     1     0
+    5     6   350     1     0
+    6     7   350     1     0
+    7     8   350     1     0
+    8     9   350     1     0
+    9    10   350     1     0
+   10    11   350     1     0
+   11    12   350     1     0
+   12    13   350     1     0
+   13    14   350     1     0
+   14    15   350     1     0
+   15    16   350     1     0
+   16    17   350     1     0
+   17    18   350     1     0
+   18    19   350     1     0
+   19    20   350     1     0
+   20    21   350     1     0
+   21    22   350     1     0
+   22    23   350     1     0
+   23    24   350     1     0
+   24    25   350     1     0
+   25    26   350     1     0
+   26    27   350     1     0
+   27    28   350     1     0
+   28    29   350     1     0
+   29    30   350     1     0
+   30    32   350     1     0
+   31    33   350     1     0
+   32    34   350     1     0
+   33    35   350     1     0
+   34    36   350     1     0
+   35    37   350     1     0
+   36    38   350     1     0
+   37    39   350     1     0
+   38    40   350     1     0
+   39    41   350     1     0
+   40    42   350     1     0
+   41    43   350     1     0
+   42    44   350     1     0
+   43    45   350     1     0
+   44    46   350     1     0
+   45    47   350     1     0
+   46    48   350     1     0
+   47    51   350     1     0
+   48    52   350     1     0
+   49    53   350     1     0
+   50    54   350     1     0
+   51    55   350     1     0
+   52    56   350     1     0
+   53    57   350     1     0
+   54    58   350     1     0
+   55    59   350     1     0
+   56    60   350     1     0
+   57    61   350     1     0
+   58    62   350     1     0
+   59    63   350     1     0
+   60    64   350     1     0
+   61    65   350     1     0
+   62    66   350     1     0
+   63    67   350     1     0
+   64    68   350     1     0
+   65    69   350     1     0
+   66    70   350     1     0
+   67    71   350     1     0
+   68    72   350     1     0
+   69    73   350     1     0
+   70    74   350     1     0
+   71    75   350     1     0
+   72    76   350     1     0
+   73    77   350     1     0
+   74    79   350     1     0
+#7 10
+    1     1   230     1     0
+    4     2   230     1     0
+    5     3   230     1     0
+    6     4   230     1     0
+    7     5   230     1     0
+    8     6   230     1     0
+    9     7   230     1     0
+   10     8   230     1     0
+   11     9   230     1     0
+   12    10   230     1     0
+   13    11   230     1     0
+   14    12   230     1     0
+   15    13   230     1     0
+   16    14   230     1     0
+   17    15   230     1     0
+   18    16   230     1     0
+   19    17   230     1     0
+   20    18   230     1     0
+   21    19   230     1     0
+   22    20   230     1     0
+   27    21   230     1     0
+   28    22   230     1     0
+   29    23   230     1     0
+   30    24   230     1     0
+   31    25   230     1     0
+   32    26   230     1     0
+   33    27   230     1     0
+   34    28   230     1     0
+   35    29   230     1     0
+   36    30   230     1     0
+   37    31   230     1     0
+   38    32   230     1     0
+   39    33   230     1     0
+   40    34   230     1     0
+   41    35   230     1     0
+   42    36   230     1     0
+   43    37   230     1     0
+   44    38   230     1     0
+   45    39   230     1     0
+   46    40   230     1     0
+   47    43   230     1     0
+   48    44   230     1     0
+   49    45   230     1     0
+   50    46   230     1     0
+   51    47   230     1     0
+   52    48   230     1     0
+   53    49   230     1     0
+   54    50   230     1     0
+   55    51   230     1     0
+   56    52   230     1     0
+   57    53   230     1     0
+   58    54   230     1     0
+   59    55   230     1     0
+   60    56   230     1     0
+   61    57   230     1     0
+   62    58   230     1     0
+   63    59   230     1     0
+   64    60   230     1     0
+   65    61   230     1     0
+   66    62   230     1     0
+   67    63   230     1     0
+   68    64   230     1     0
+   69    65   230     1     0
+   70    66   230     1     0
+   71    67   230     1     0
+   72    68   230     1     0
+   73    69   230     1     0
+   74    71   230     1     0
+#8 9
+    5     3   350     1     0
+#8 10
+   46    41   350     1     0
+   47    42   350     1     0
+#9 10
+   49    41   260     1     0
+   50    42   260     1     0
+   78    70   260     1     0
+! CPU 0
+! SEQ_1_TO_N
+</content>
+</file>
+<environement>
+HOME_4_TCOFFEE=/Users/cnotredame/
+MANPATH=/sw/share/man:/usr/share/man:/usr/local/share/man:/opt/X11/share/man:/Library/TeX/texbin/man:/Applications/Xcode.app/Contents/Developer/usr/share/man:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/share/man:/sw/lib/perl5/5.18.2/man
+TERM_PROGRAM=Apple_Terminal
+MCOFFEE_4_TCOFFEE=/Users/cnotredame//.t_coffee//mcoffee/
+ROOT_TMP_4_TCOFFEE=/var/tmp/
+SHELL=/bin/bash
+TERM=xterm-256color
+TMPDIR=/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/
+CONDA_SHLVL=1
+PERL5LIB=/sw/lib/perl5:/sw/lib/perl5/darwin
+Apple_PubSub_Socket_Render=/private/tmp/com.apple.launchd.6JzhyrtuKp/Render
+CONDA_PROMPT_MODIFIER=(base) 
+TERM_PROGRAM_VERSION=388.1.3
+OSNAME=macosx
+PERL_BIN=/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms::/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices
+TERM_SESSION_ID=9785BD0D-F6F1-4B59-B0BA-9937FD12A1E7
+METHODS_4_TCOFFEE=/Users/cnotredame//.t_coffee//methods/
+VERSIONER_PERL_VERSION=5.18
+XAPPLRESDIR=/sw/etc/app-defaults/
+http_proxy=
+HTTP_proxy=
+USER=cnotredame
+CONDA_EXE=/Users/cnotredame/anaconda3/bin/conda
+SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.U5mTe2o7m7/Listeners
+__CF_USER_TEXT_ENCODING=0x1F6:0x0:0x0
+ENV_4_TCOFFEE=/Users/cnotredame//.t_coffee//.t_coffee_env
+_CE_CONDA=
+all_proxy=
+ALL_PROXY=
+HTTP_proxy_4_TCOFFEE=
+PATH=/Users/cnotredame//.t_coffee//plugins/macosx/:/Users/cnotredame/anaconda3/bin:/Users/cnotredame/anaconda3/condabin:/opt/local/bin:/opt/local/sbin:/opt/local/bin:/opt/local/sbin:/Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/packages/x3dna-v2.1/bin:/Users/cnotredame/bin/macosx://Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms:.:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices:/Users/cnotredame/bin/Scripts:/Users/cnotredame/Library/Haskell/ghc-7.4.2/lib/epub-tools-2.0.0/bin:/sw/bin:/sw/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/Library/TeX/texbin
+_=/usr/bin/printenv
+CONDA_PREFIX=/Users/cnotredame/anaconda3
+COLOR_4_TCOFFEE=new
+DIR_4_TCOFFEE=/Users/cnotredame//.t_coffee/
+PWD=/private/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/RANDOMSTRINGPDA2oq1EDu9vwYfAUYg8/data
+CACHE_4_TCOFFEE=/Users/cnotredame//.t_coffee//cache/
+X3DNA=/Users/cnotredame/Dropbox/packages/x3dna-v2.1
+DBUS_LAUNCHD_SESSION_BUS_SOCKET=/private/tmp/com.apple.launchd.DfqaaC2z17/unix_domain_listener
+XPC_FLAGS=0x0
+VERSIONER_PERL_PREFER_32_BIT=no
+_CE_M=
+XPC_SERVICE_NAME=0
+ERRORFILE_4_TCOFFEE=NO
+PLUGINS_4_TCOFFEE=/Users/cnotredame//.t_coffee//plugins/macosx/
+SHLVL=3
+HOME=/Users/cnotredame
+DUMP_4_TCOFFEE=/private/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/RANDOMSTRINGPDA2oq1EDu9vwYfAUYg8/tcoffee_faq.rst.13.dump
+HTTP_PROXY=
+MAFFT_BINARIES=
+CONDA_PYTHON_EXE=/Users/cnotredame/anaconda3/bin/python
+BIN=/Users/cnotredame/bin/macosx
+LOGNAME=cnotredame
+EMAIL_4_TCOFFEE=cedric.notredame@gmail.com
+LC_CTYPE=UTF-8
+CONDA_DEFAULT_ENV=base
+EMAIL=cedric.notredame@gmail.com
+UPDATED_ENV_4_TCOFFEE=1
+INFOPATH=/sw/share/info:/sw/info:/usr/share/info
+DISPLAY=/private/tmp/com.apple.launchd.vef8UzGxBY/org.macosforge.xquartz:0
+TC_MASTER_NODE=1
+NUMBER_OF_PROCESSORS=8
+ALL_proxy=
+LOCKDIR_4_TCOFFEE=/var/tmp/tco/tcoo1pzissj87279//lck/my591mema5/
+TMP_4_TCOFFEE=/var/tmp/tco/tcoo1pzissj87279/
+USER_BIN=/Users/cnotredame/bin/macosx
+SCRIPT_BIN=/Users/cnotredame/bin/Scripts/
+</environement>
+<DumpStatus>OK</DumpStatus>
+<DumpFile>/private/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/RANDOMSTRINGPDA2oq1EDu9vwYfAUYg8/tcoffee_faq.rst.13.dump</DumpFile>
+<SourceFile>tcoffee_faq.rst</SourceFile>
+<SourceLine>154</SourceLine>
+</DumpIO>

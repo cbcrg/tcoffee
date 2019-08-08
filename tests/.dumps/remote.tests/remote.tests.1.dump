@@ -1,8 +1,8 @@
 <DumpIO>
 <nature>standard dump</nature>
 <program>T-COFFEE</program>
-<version>Version_13.38.3.a77ca2b</version>
-<build>Version_13.38.3.a77ca2b</build>
+<version>Version_13.39.0.d675aed</version>
+<build>Version_13.39.0.d675aed</build>
 <cl>t_coffee sample_seq1.fasta -mode accurate </cl>
 <stack>
 </stack>
@@ -11,19 +11,17 @@
 
 *************************************************************************************************
 *                        MESSAGES RECAPITULATION                                    
-75800 -- INFORMATION: _P_  Template 6CIMN Could Not be Used for Sequence hmgl_trybr: Similarity too low [35, Min=35]
-75800 -- INFORMATION: If you want to include hmgl_trybr in anycase,add -pdb_min_sim=35 to the command line
+77612 -- INFORMATION: _P_  Template 6CIMN Could Not be Used for Sequence hmgl_trybr: Similarity too low [35, Min=35]
+77612 -- INFORMATION: If you want to include hmgl_trybr in anycase,add -pdb_min_sim=35 to the command line
 *************************************************************************************************
 </warning>
 <file>
 <stream>output</stream>
 <name>stdout</name>
-<content>!	Process: >hmgl_wheat _R_ hmgl_wheat.prf [432 Seq.] [EBI/blast/uniref50][COMPUTE CACHE]
+<content>!	Process: >hmgt_mouse _R_ hmgt_mouse.prf [68 Seq.] [EBI/blast/uniref50][COMPUTE CACHE]
 !	Process: >hmgl_trybr _R_ hmgl_trybr.prf [280 Seq.] [EBI/blast/uniref50][COMPUTE CACHE]
 !	Process: >hmgb_chite _R_ hmgb_chite.prf [272 Seq.] [EBI/blast/uniref50][COMPUTE CACHE]
-!	Process: >hmgt_mouse _R_ hmgt_mouse.prf [68 Seq.] [EBI/blast/uniref50][COMPUTE CACHE]
-!	Process: >hmgt_mouse [EBI/blast/pdb][COMPUTE CACHE]
-		 >hmgt_mouse _P_ 6ERQG
+!	Process: >hmgl_wheat _R_ hmgl_wheat.prf [432 Seq.] [EBI/blast/uniref50][COMPUTE CACHE]
 !	Process: >hmgl_trybr [EBI/blast/pdb][COMPUTE CACHE]
 		**1LWMA [NMR cannot be used (expected: diffraction )]
 		**1J5NA [NMR cannot be used (expected: diffraction )]
@@ -37,8 +35,6 @@
 		**2GZKA [NMR cannot be used (expected: diffraction )]
 		**2MRCA [NMR cannot be used (expected: diffraction )]
 		 >hmgl_trybr _P_ 6CIMN
-!	Process: >hmgb_chite [EBI/blast/pdb][COMPUTE CACHE]
-		 >hmgb_chite _P_ 1QRVB
 !	Process: >hmgl_wheat [EBI/blast/pdb][COMPUTE CACHE]
 		**2YQIA [NMR cannot be used (expected: diffraction )]
 		**1HMFA [NMR cannot be used (expected: diffraction )]
@@ -47,11 +43,15 @@
 		**1J3DA [NMR cannot be used (expected: diffraction )]
 		**2GZKA [NMR cannot be used (expected: diffraction )]
 		 >hmgl_wheat _P_ 6CIMN
+!	Process: >hmgt_mouse [EBI/blast/pdb][COMPUTE CACHE]
+		 >hmgt_mouse _P_ 6ERQG
+!	Process: >hmgb_chite [EBI/blast/pdb][COMPUTE CACHE]
+		 >hmgb_chite _P_ 1QRVB
 #Single Thread
 #Single Thread
 #Single Thread
 #Single Thread
-CLUSTAL FORMAT for T-COFFEE Version_13.38.3.a77ca2b [http://www.tcoffee.org] [MODE: accurate ], CPU=0.14 sec, SCORE=96, Nseq=4, Len=81 
+CLUSTAL FORMAT for T-COFFEE Version_13.39.0.d675aed [http://www.tcoffee.org] [MODE: accurate ], CPU=0.14 sec, SCORE=96, Nseq=4, Len=81 
 
 hmgl_trybr      kkdsnapkramtsfmffssdfrskh----s-dlsivemskaagaawkelg
 hmgt_mouse      -----kpkrprsayniyvsesfqea----k-ddsaqgklklvneawknls
@@ -73,7 +73,7 @@ hmgl_wheat      esekapyvakanklkgeynkaiaaynkgesa
 <stream>output</stream>
 <name>stderr</name>
 <content>
-PROGRAM: T-COFFEE Version_13.38.3.a77ca2b (Version_13.38.3.a77ca2b)
+PROGRAM: T-COFFEE Version_13.39.0.d675aed (Version_13.39.0.d675aed)
 -full_log      	S	[0] 
 -genepred_score	S	[0] 	nsd
 -run_name      	S	[0] 
@@ -248,9 +248,9 @@ Looking For Sequence Templates:
 ]
 	Template Type: [EXPRESSO] Mode Or File: [EXPRESSO] [Start
 
-pid 75800 -- _P_  Template 6CIMN Could Not be Used for Sequence hmgl_trybr: Similarity too low [35, Min=35]
+pid 77612 -- _P_  Template 6CIMN Could Not be Used for Sequence hmgl_trybr: Similarity too low [35, Min=35]
 
-pid 75800 -- If you want to include hmgl_trybr in anycase,add -pdb_min_sim=35 to the command line
+pid 77612 -- If you want to include hmgl_trybr in anycase,add -pdb_min_sim=35 to the command line
 
 seq             -----------------------kk---dsnapkramtsfmffs---sdf
 pdb             fvqtcreehkkkhpdasvnfsefskkcserrpp---safflfcseyrpki
@@ -267,15 +267,15 @@ HERE: SKIPPED:hmgl_trybr  _P_ 6CIMN
 INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
   Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
 	PDB struc: Template=1QRVB, File=1QRVB.pdb
-	Profile: Template=hmgb_chite.prf, File=/var/tmp/tco/tcoojbh9sqs75800//7745375800132
+	Profile: Template=hmgb_chite.prf, File=/var/tmp/tco/tcoi8htt0xe77612//1876377612132
   Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
-	Profile: Template=hmgl_trybr.prf, File=/var/tmp/tco/tcoojbh9sqs75800//7745375800131
+	Profile: Template=hmgl_trybr.prf, File=/var/tmp/tco/tcoi8htt0xe77612//1876377612131
   Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
 	PDB struc: Template=6CIMN, File=6CIMN.pdb
-	Profile: Template=hmgl_wheat.prf, File=/var/tmp/tco/tcoojbh9sqs75800//7745375800130
+	Profile: Template=hmgl_wheat.prf, File=/var/tmp/tco/tcoi8htt0xe77612//1876377612133
   Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
 	PDB struc: Template=6ERQG, File=6ERQG.pdb
-	Profile: Template=hmgt_mouse.prf, File=/var/tmp/tco/tcoojbh9sqs75800//7745375800133
+	Profile: Template=hmgt_mouse.prf, File=/var/tmp/tco/tcoi8htt0xe77612//1876377612130
 
 	Multi Core Mode: 1 processors:
 
@@ -322,9 +322,9 @@ Looking For Sequence Templates:
 ]
 	Template Type: [EXPRESSO] Mode Or File: [EXPRESSO] [Start
 
-pid 75800 -- _P_  Template 6CIMN Could Not be Used for Sequence hmgl_trybr: Similarity too low [35, Min=35]
+pid 77612 -- _P_  Template 6CIMN Could Not be Used for Sequence hmgl_trybr: Similarity too low [35, Min=35]
 
-pid 75800 -- If you want to include hmgl_trybr in anycase,add -pdb_min_sim=35 to the command line
+pid 77612 -- If you want to include hmgl_trybr in anycase,add -pdb_min_sim=35 to the command line
 
 seq             -----------------------kk---dsnapkramtsfmffs---sdf
 pdb             fvqtcreehkkkhpdasvnfsefskkcserrpp---safflfcseyrpki
@@ -341,15 +341,15 @@ HERE: SKIPPED:hmgl_trybr  _P_ 6CIMN
 INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
   Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
 	PDB struc: Template=1QRVB, File=1QRVB.pdb
-	Profile: Template=hmgb_chite.prf, File=/var/tmp/tco/tcoojbh9sqs75800//7745375800132
+	Profile: Template=hmgb_chite.prf, File=/var/tmp/tco/tcoi8htt0xe77612//1876377612132
   Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
-	Profile: Template=hmgl_trybr.prf, File=/var/tmp/tco/tcoojbh9sqs75800//7745375800131
+	Profile: Template=hmgl_trybr.prf, File=/var/tmp/tco/tcoi8htt0xe77612//1876377612131
   Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
 	PDB struc: Template=6CIMN, File=6CIMN.pdb
-	Profile: Template=hmgl_wheat.prf, File=/var/tmp/tco/tcoojbh9sqs75800//7745375800130
+	Profile: Template=hmgl_wheat.prf, File=/var/tmp/tco/tcoi8htt0xe77612//1876377612133
   Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
 	PDB struc: Template=6ERQG, File=6ERQG.pdb
-	Profile: Template=hmgt_mouse.prf, File=/var/tmp/tco/tcoojbh9sqs75800//7745375800133
+	Profile: Template=hmgt_mouse.prf, File=/var/tmp/tco/tcoi8htt0xe77612//1876377612130
 
 	Multi Core Mode: 1 processors:
 p           	S	[0] 	none
@@ -384,9 +384,9 @@ Looking For Sequence Templates:
 ]
 	Template Type: [EXPRESSO] Mode Or File: [EXPRESSO] [Start
 
-pid 75800 -- _P_  Template 6CIMN Could Not be Used for Sequence hmgl_trybr: Similarity too low [35, Min=35]
+pid 77612 -- _P_  Template 6CIMN Could Not be Used for Sequence hmgl_trybr: Similarity too low [35, Min=35]
 
-pid 75800 -- If you want to include hmgl_trybr in anycase,add -pdb_min_sim=35 to the command line
+pid 77612 -- If you want to include hmgl_trybr in anycase,add -pdb_min_sim=35 to the command line
 
 seq             -----------------------kk---dsnapkramtsfmffs---sdf
 pdb             fvqtcreehkkkhpdasvnfsefskkcserrpp---safflfcseyrpki
@@ -403,15 +403,15 @@ HERE: SKIPPED:hmgl_trybr  _P_ 6CIMN
 INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
   Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
 	PDB struc: Template=1QRVB, File=1QRVB.pdb
-	Profile: Template=hmgb_chite.prf, File=/var/tmp/tco/tcoojbh9sqs75800//7745375800132
+	Profile: Template=hmgb_chite.prf, File=/var/tmp/tco/tcoi8htt0xe77612//1876377612132
   Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
-	Profile: Template=hmgl_trybr.prf, File=/var/tmp/tco/tcoojbh9sqs75800//7745375800131
+	Profile: Template=hmgl_trybr.prf, File=/var/tmp/tco/tcoi8htt0xe77612//1876377612131
   Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
 	PDB struc: Template=6CIMN, File=6CIMN.pdb
-	Profile: Template=hmgl_wheat.prf, File=/var/tmp/tco/tcoojbh9sqs75800//7745375800130
+	Profile: Template=hmgl_wheat.prf, File=/var/tmp/tco/tcoi8htt0xe77612//1876377612133
   Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
 	PDB struc: Template=6ERQG, File=6ERQG.pdb
-	Profile: Template=hmgt_mouse.prf, File=/var/tmp/tco/tcoojbh9sqs75800//7745375800133
+	Profile: Template=hmgt_mouse.prf, File=/var/tmp/tco/tcoi8htt0xe77612//1876377612130
 
 	Multi Core Mode: 1 processors:
 
@@ -448,9 +448,9 @@ Looking For Sequence Templates:
 ]
 	Template Type: [EXPRESSO] Mode Or File: [EXPRESSO] [Start
 
-pid 75800 -- _P_  Template 6CIMN Could Not be Used for Sequence hmgl_trybr: Similarity too low [35, Min=35]
+pid 77612 -- _P_  Template 6CIMN Could Not be Used for Sequence hmgl_trybr: Similarity too low [35, Min=35]
 
-pid 75800 -- If you want to include hmgl_trybr in anycase,add -pdb_min_sim=35 to the command line
+pid 77612 -- If you want to include hmgl_trybr in anycase,add -pdb_min_sim=35 to the command line
 
 seq             -----------------------kk---dsnapkramtsfmffs---sdf
 pdb             fvqtcreehkkkhpdasvnfsefskkcserrpp---safflfcseyrpki
@@ -467,15 +467,15 @@ HERE: SKIPPED:hmgl_trybr  _P_ 6CIMN
 INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
   Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
 	PDB struc: Template=1QRVB, File=1QRVB.pdb
-	Profile: Template=hmgb_chite.prf, File=/var/tmp/tco/tcoojbh9sqs75800//7745375800132
+	Profile: Template=hmgb_chite.prf, File=/var/tmp/tco/tcoi8htt0xe77612//1876377612132
   Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
-	Profile: Template=hmgl_trybr.prf, File=/var/tmp/tco/tcoojbh9sqs75800//7745375800131
+	Profile: Template=hmgl_trybr.prf, File=/var/tmp/tco/tcoi8htt0xe77612//1876377612131
   Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
 	PDB struc: Template=6CIMN, File=6CIMN.pdb
-	Profile: Template=hmgl_wheat.prf, File=/var/tmp/tco/tcoojbh9sqs75800//7745375800130
+	Profile: Template=hmgl_wheat.prf, File=/var/tmp/tco/tcoi8htt0xe77612//1876377612133
   Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
 	PDB struc: Template=6ERQG, File=6ERQG.pdb
-	Profile: Template=hmgt_mouse.prf, File=/var/tmp/tco/tcoojbh9sqs75800//7745375800133
+	Profile: Template=hmgt_mouse.prf, File=/var/tmp/tco/tcoi8htt0xe77612//1876377612130
 
 	Multi Core Mode: 1 processors:
 
@@ -525,9 +525,9 @@ Looking For Sequence Templates:
 ]
 	Template Type: [EXPRESSO] Mode Or File: [EXPRESSO] [Start
 
-pid 75800 -- _P_  Template 6CIMN Could Not be Used for Sequence hmgl_trybr: Similarity too low [35, Min=35]
+pid 77612 -- _P_  Template 6CIMN Could Not be Used for Sequence hmgl_trybr: Similarity too low [35, Min=35]
 
-pid 75800 -- If you want to include hmgl_trybr in anycase,add -pdb_min_sim=35 to the command line
+pid 77612 -- If you want to include hmgl_trybr in anycase,add -pdb_min_sim=35 to the command line
 
 seq             -----------------------kk---dsnapkramtsfmffs---sdf
 pdb             fvqtcreehkkkhpdasvnfsefskkcserrpp---safflfcseyrpki
@@ -544,15 +544,15 @@ HERE: SKIPPED:hmgl_trybr  _P_ 6CIMN
 INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
   Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
 	PDB struc: Template=1QRVB, File=1QRVB.pdb
-	Profile: Template=hmgb_chite.prf, File=/var/tmp/tco/tcoojbh9sqs75800//7745375800132
+	Profile: Template=hmgb_chite.prf, File=/var/tmp/tco/tcoi8htt0xe77612//1876377612132
   Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
-	Profile: Template=hmgl_trybr.prf, File=/var/tmp/tco/tcoojbh9sqs75800//7745375800131
+	Profile: Template=hmgl_trybr.prf, File=/var/tmp/tco/tcoi8htt0xe77612//1876377612131
   Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
 	PDB struc: Template=6CIMN, File=6CIMN.pdb
-	Profile: Template=hmgl_wheat.prf, File=/var/tmp/tco/tcoojbh9sqs75800//7745375800130
+	Profile: Template=hmgl_wheat.prf, File=/var/tmp/tco/tcoi8htt0xe77612//1876377612133
   Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
 	PDB struc: Template=6ERQG, File=6ERQG.pdb
-	Profile: Template=hmgt_mouse.prf, File=/var/tmp/tco/tcoojbh9sqs75800//7745375800133
+	Profile: Template=hmgt_mouse.prf, File=/var/tmp/tco/tcoi8htt0xe77612//1876377612130
 
 	Multi Core Mode: 1 processors:
 
@@ -616,9 +616,9 @@ Looking For Sequence Templates:
 ]
 	Template Type: [EXPRESSO] Mode Or File: [EXPRESSO] [Start
 
-pid 75800 -- _P_  Template 6CIMN Could Not be Used for Sequence hmgl_trybr: Similarity too low [35, Min=35]
+pid 77612 -- _P_  Template 6CIMN Could Not be Used for Sequence hmgl_trybr: Similarity too low [35, Min=35]
 
-pid 75800 -- If you want to include hmgl_trybr in anycase,add -pdb_min_sim=35 to the command line
+pid 77612 -- If you want to include hmgl_trybr in anycase,add -pdb_min_sim=35 to the command line
 
 seq             -----------------------kk---dsnapkramtsfmffs---sdf
 pdb             fvqtcreehkkkhpdasvnfsefskkcserrpp---safflfcseyrpki
@@ -635,15 +635,15 @@ HERE: SKIPPED:hmgl_trybr  _P_ 6CIMN
 INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
   Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
 	PDB struc: Template=1QRVB, File=1QRVB.pdb
-	Profile: Template=hmgb_chite.prf, File=/var/tmp/tco/tcoojbh9sqs75800//7745375800132
+	Profile: Template=hmgb_chite.prf, File=/var/tmp/tco/tcoi8htt0xe77612//1876377612132
   Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
-	Profile: Template=hmgl_trybr.prf, File=/var/tmp/tco/tcoojbh9sqs75800//7745375800131
+	Profile: Template=hmgl_trybr.prf, File=/var/tmp/tco/tcoi8htt0xe77612//1876377612131
   Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
 	PDB struc: Template=6CIMN, File=6CIMN.pdb
-	Profile: Template=hmgl_wheat.prf, File=/var/tmp/tco/tcoojbh9sqs75800//7745375800130
+	Profile: Template=hmgl_wheat.prf, File=/var/tmp/tco/tcoi8htt0xe77612//1876377612133
   Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
 	PDB struc: Template=6ERQG, File=6ERQG.pdb
-	Profile: Template=hmgt_mouse.prf, File=/var/tmp/tco/tcoojbh9sqs75800//7745375800133
+	Profile: Template=hmgt_mouse.prf, File=/var/tmp/tco/tcoi8htt0xe77612//1876377612130
 
 	Multi Core Mode: 1 processors:
 
@@ -676,7 +676,7 @@ Group    3: hmgl_wheat
 Group    4: hmgt_mouse
 
 
-	Group    5: [Group    2 (   1 seq)] with [Group    4 (   1 seq)]-->[Len=   76][PID:75800]p           	S	[0] 	none
+	Group    5: [Group    2 (   1 seq)] with [Group    4 (   1 seq)]-->[Len=   76][PID:77612]p           	S	[0] 	none
 -rna_lib       	S	[0] 
 -no_warning    	D	[0] 	0 
 -run_local_script	D	[0] 	0 
@@ -708,9 +708,9 @@ Looking For Sequence Templates:
 ]
 	Template Type: [EXPRESSO] Mode Or File: [EXPRESSO] [Start
 
-pid 75800 -- _P_  Template 6CIMN Could Not be Used for Sequence hmgl_trybr: Similarity too low [35, Min=35]
+pid 77612 -- _P_  Template 6CIMN Could Not be Used for Sequence hmgl_trybr: Similarity too low [35, Min=35]
 
-pid 75800 -- If you want to include hmgl_trybr in anycase,add -pdb_min_sim=35 to the command line
+pid 77612 -- If you want to include hmgl_trybr in anycase,add -pdb_min_sim=35 to the command line
 
 seq             -----------------------kk---dsnapkramtsfmffs---sdf
 pdb             fvqtcreehkkkhpdasvnfsefskkcserrpp---safflfcseyrpki
@@ -727,15 +727,15 @@ HERE: SKIPPED:hmgl_trybr  _P_ 6CIMN
 INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
   Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
 	PDB struc: Template=1QRVB, File=1QRVB.pdb
-	Profile: Template=hmgb_chite.prf, File=/var/tmp/tco/tcoojbh9sqs75800//7745375800132
+	Profile: Template=hmgb_chite.prf, File=/var/tmp/tco/tcoi8htt0xe77612//1876377612132
   Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
-	Profile: Template=hmgl_trybr.prf, File=/var/tmp/tco/tcoojbh9sqs75800//7745375800131
+	Profile: Template=hmgl_trybr.prf, File=/var/tmp/tco/tcoi8htt0xe77612//1876377612131
   Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
 	PDB struc: Template=6CIMN, File=6CIMN.pdb
-	Profile: Template=hmgl_wheat.prf, File=/var/tmp/tco/tcoojbh9sqs75800//7745375800130
+	Profile: Template=hmgl_wheat.prf, File=/var/tmp/tco/tcoi8htt0xe77612//1876377612133
   Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
 	PDB struc: Template=6ERQG, File=6ERQG.pdb
-	Profile: Template=hmgt_mouse.prf, File=/var/tmp/tco/tcoojbh9sqs75800//7745375800133
+	Profile: Template=hmgt_mouse.prf, File=/var/tmp/tco/tcoi8htt0xe77612//1876377612130
 
 	Multi Core Mode: 1 processors:
 
@@ -768,8 +768,8 @@ Group    3: hmgl_wheat
 Group    4: hmgt_mouse
 
 
-	Group    5: [Group    2 (   1 seq)] with [Group    4 (   1 seq)]-->[Len=   76][PID:75800]
-	Group    6: [Group    3 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=   79][PID:75800]p           	S	[0] 	none
+	Group    5: [Group    2 (   1 seq)] with [Group    4 (   1 seq)]-->[Len=   76][PID:77612]
+	Group    6: [Group    3 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=   79][PID:77612]p           	S	[0] 	none
 -rna_lib       	S	[0] 
 -no_warning    	D	[0] 	0 
 -run_local_script	D	[0] 	0 
@@ -801,9 +801,9 @@ Looking For Sequence Templates:
 ]
 	Template Type: [EXPRESSO] Mode Or File: [EXPRESSO] [Start
 
-pid 75800 -- _P_  Template 6CIMN Could Not be Used for Sequence hmgl_trybr: Similarity too low [35, Min=35]
+pid 77612 -- _P_  Template 6CIMN Could Not be Used for Sequence hmgl_trybr: Similarity too low [35, Min=35]
 
-pid 75800 -- If you want to include hmgl_trybr in anycase,add -pdb_min_sim=35 to the command line
+pid 77612 -- If you want to include hmgl_trybr in anycase,add -pdb_min_sim=35 to the command line
 
 seq             -----------------------kk---dsnapkramtsfmffs---sdf
 pdb             fvqtcreehkkkhpdasvnfsefskkcserrpp---safflfcseyrpki
@@ -820,15 +820,15 @@ HERE: SKIPPED:hmgl_trybr  _P_ 6CIMN
 INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
   Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
 	PDB struc: Template=1QRVB, File=1QRVB.pdb
-	Profile: Template=hmgb_chite.prf, File=/var/tmp/tco/tcoojbh9sqs75800//7745375800132
+	Profile: Template=hmgb_chite.prf, File=/var/tmp/tco/tcoi8htt0xe77612//1876377612132
   Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
-	Profile: Template=hmgl_trybr.prf, File=/var/tmp/tco/tcoojbh9sqs75800//7745375800131
+	Profile: Template=hmgl_trybr.prf, File=/var/tmp/tco/tcoi8htt0xe77612//1876377612131
   Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
 	PDB struc: Template=6CIMN, File=6CIMN.pdb
-	Profile: Template=hmgl_wheat.prf, File=/var/tmp/tco/tcoojbh9sqs75800//7745375800130
+	Profile: Template=hmgl_wheat.prf, File=/var/tmp/tco/tcoi8htt0xe77612//1876377612133
   Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
 	PDB struc: Template=6ERQG, File=6ERQG.pdb
-	Profile: Template=hmgt_mouse.prf, File=/var/tmp/tco/tcoojbh9sqs75800//7745375800133
+	Profile: Template=hmgt_mouse.prf, File=/var/tmp/tco/tcoi8htt0xe77612//1876377612130
 
 	Multi Core Mode: 1 processors:
 
@@ -861,9 +861,9 @@ Group    3: hmgl_wheat
 Group    4: hmgt_mouse
 
 
-	Group    5: [Group    2 (   1 seq)] with [Group    4 (   1 seq)]-->[Len=   76][PID:75800]
-	Group    6: [Group    3 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=   79][PID:75800]
-	Group    7: [Group    6 (   2 seq)] with [Group    5 (   2 seq)]-->[Len=   81][PID:75800]
+	Group    5: [Group    2 (   1 seq)] with [Group    4 (   1 seq)]-->[Len=   76][PID:77612]
+	Group    6: [Group    3 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=   79][PID:77612]
+	Group    7: [Group    6 (   2 seq)] with [Group    5 (   2 seq)]-->[Len=   81][PID:77612]
 
 
 !		[Final Evaluation][TOT=   81][  0 %]!		[Final Evaluation][TOT=   81][  2 %]!		[Final Evaluation][TOT=   81][  3 %]!		[Final Evaluation][TOT=   81][  4 %]!		[Final Evaluation][TOT=   81][  6 %]!		[Final Evaluation][TOT=   81][  7 %]!		[Final Evaluation][TOT=   81][  8 %]!		[Final Evaluation][TOT=   81][  9 %]!		[Final Evaluation][TOT=   81][ 11 %]!		[Final Evaluation][TOT=   81][ 12 %]!		[Final Evaluation][TOT=   81][ 13 %]!		[Final Evaluation][TOT=   81][ 14 %]!		[Final Evaluation][TOT=   81][ 16 %]!		[Final Evaluation][TOT=   81][ 17 %]!		[Final Evaluation][TOT=   81][ 18 %]!		[Final Evaluation][TOT=   81][ 19 %]!		[Final Evaluation][TOT=   81][ 20 %]!		[Final Evaluation][TOT=   81][ 22 %]!		[Final Evaluation][TOT=   81][ 23 %]!		[Final Evaluation][TOT=   81][ 24 %]!		[Final Evaluation][TOT=   81][ 25 %]!		[Final Evaluation][TOT=   81][ 27 %]!		[Final Evaluation][TOT=   81][ 28 %]!		[Final Evaluation][TOT=   81][ 29 %]!		[Final Evaluation][TOT=   81][ 30 %]!		[Final Evaluation][TOT=   81][ 32 %]!		[Final Evaluation][TOT=   81][ 33 %]!		[Final Evaluation][TOT=   81][ 34 %]!		[Final Evaluation][TOT=   81][ 35 %]!		[Final Evaluation][TOT=   81][ 37 %]!		[Final Evaluation][TOT=   81][ 38 %]!		[Final Evaluation][TOT=   81][ 39 %]!		[Final Evaluation][TOT=   81][ 40 %]!		[Final Evaluation][TOT=   81][ 41 %]!		[Final Evaluation][TOT=   81][ 43 %]!		[Final Evaluation][TOT=   81][ 44 %]!		[Final Evaluation][TOT=   81][ 45 %]!		[Final Evaluation][TOT=   81][ 46 %]!		[Final Evaluation][TOT=   81][ 48 %]!		[Final Evaluation][TOT=   81][ 49 %]!		[Final Evaluation][TOT=   81][ 50 %]!		[Final Evaluation][TOT=   81][ 51 %]!		[Final Evaluation][TOT=   81][ 53 %]!		[Final Evaluation][TOT=   81][ 54 %]!		[Final Evaluation][TOT=   81][ 55 %]!		[Final Evaluation][TOT=   81][ 56 %]!		[Final Evaluation][TOT=   81][ 58 %]!		[Final Evaluation][TOT=   81][ 59 %]!		[Final Evaluation][TOT=   81][ 60 %]!		[Final Evaluation][TOT=   81][ 61 %]!		[Final Evaluation][TOT=   81][ 62 %]!		[Final Evaluation][TOT=   81][ 64 %]!		[Final Evaluation][TOT=   81][ 65 %]!		[Final Evaluation][TOT=   81][ 66 %]!		[Final Evaluation][TOT=   81][ 67 %]!		[Final Evaluation][TOT=   81][ 69 %]!		[Final Evaluation][TOT=   81][ 70 %]!		[Final Evaluation][TOT=   81][ 71 %]!		[Final Evaluation][TOT=   81][ 72 %]!		[Final Evaluation][TOT=   81][ 74 %]!		[Final Evaluation][TOT=   81][ 75 %]!		[Final Evaluation][TOT=   81][ 76 %]!		[Final Evaluation][TOT=   81][ 77 %]!		[Final Evaluation][TOT=   81][ 79 %]!		[Final Evaluation][TOT=   81][ 80 %]!		[Final Evaluation][TOT=   81][ 81 %]!		[Final Evaluation][TOT=   81][ 82 %]!		[Final Evaluation][TOT=   81][ 83 %]!		[Final Evaluation][TOT=   81][ 85 %]!		[Final Evaluation][TOT=   81][ 86 %]!		[Final Evaluation][TOT=   81][ 87 %]!		[Final Evaluation][TOT=   81][ 88 %]!		[Final Evaluation][TOT=   81][ 90 %]!		[Final Evaluation][TOT=   81][ 91 %]!		[Final Evaluation][TOT=   81][ 92 %]!		[Final Evaluation][TOT=   81][ 93 %]!		[Final Evaluation][TOT=   81][ 95 %]!		[Final Evaluation][TOT=   81][ 96 %]!		[Final Evaluation][TOT=   81][ 97 %]!		[Final Evaluation][TOT=   81][ 98 %]!		[Final Evaluation][TOT=   81][100 %]
@@ -882,16 +882,16 @@ OUTPUT RESULTS
 	#### File Type= Template Profile Format= fasta_aln       Name= hmgt_mouse.prf
 
 # Command Line: t_coffee sample_seq1.fasta -mode accurate  [PROGRAM:T-COFFEE]
-# T-COFFEE Memory Usage: Current= 34.395 Mb, Max= 35.787 Mb
-# Results Produced with T-COFFEE Version_13.38.3.a77ca2b (Version_13.38.3.a77ca2b)
+# T-COFFEE Memory Usage: Current= 34.391 Mb, Max= 35.786 Mb
+# Results Produced with T-COFFEE Version_13.39.0.d675aed (Version_13.39.0.d675aed)
 # T-COFFEE is available from http://www.tcoffee.org
 # Register on: https://groups.google.com/group/tcoffee/
 
 
 *************************************************************************************************
 *                        MESSAGES RECAPITULATION                                    
-75800 -- INFORMATION: _P_  Template 6CIMN Could Not be Used for Sequence hmgl_trybr: Similarity too low [35, Min=35]
-75800 -- INFORMATION: If you want to include hmgl_trybr in anycase,add -pdb_min_sim=35 to the command line
+77612 -- INFORMATION: _P_  Template 6CIMN Could Not be Used for Sequence hmgl_trybr: Similarity too low [35, Min=35]
+77612 -- INFORMATION: If you want to include hmgl_trybr in anycase,add -pdb_min_sim=35 to the command line
 *************************************************************************************************
 </content>
 </file>
@@ -915,75 +915,75 @@ ekapyvakanklkgeynkaiaaynkgesa
 <file>
 <stream>input</stream>
 <name>sample_seq1_prf1.template_list</name>
-<content>>hmgl_wheat  _R_ hmgl_wheat.prf
+<content>>hmgt_mouse  _R_ hmgt_mouse.prf
 >hmgl_trybr  _R_ hmgl_trybr.prf
 >hmgb_chite  _R_ hmgb_chite.prf
->hmgt_mouse  _R_ hmgt_mouse.prf
+>hmgl_wheat  _R_ hmgl_wheat.prf
 </content>
 </file>
 <file>
 <stream>input</stream>
-<name>hmgl_wheat.prf</name>
-<content>>hmgl_wheat
-dpnkpkrapsaffvfmgefreefkqknpknksvaavgkaagerwkslses
-ekapyvakanklkgeynkaiaaynkgesa
->hmgl_wheat_63  UR050|UniRef50_UPI000E6F9214 [Eval=1.1E-9][id=46.0%][start=1 end=63]
----------------meefsetfkhehpnyksfaivgkaggekwrsmspa
-ergvyeakaearrthyinsiqasdedes-
->hmgl_wheat_95  UR050|UniRef50_M1BDX1 [Eval=5.3E-5][id=44.4%][start=16 end=60]
-------------------------------ksfdaveklvrdkwkqmsda
-ekapyiaetekrrveyakvlnsynq----
->hmgl_wheat_181  UR050|UniRef50_A0A2G2XCD7 [Eval=9.0E-15][id=46.8%][start=218 end=295]
-dpekpkmparsiyi-krerrkqfmkdnpknkfetavnragaekwkqlsaa
-ekgpymaeakrkmeeynksnaaynkrvaa
->hmgl_wheat_199  UR050|UniRef50_A0A2P5DJ49 [Eval=4.0E-14][id=40.5%][start=37 end=113]
-dpnkpkkpakslllfvnefkeqykkehpnepf--alfrrahdkwksmsha
-erapfvgkarkmafeydknmhayllaega
->hmgl_wheat_261  UR050|UniRef50_A0A2U1MQV0 [Eval=3.0E-12][id=40.8%][start=3 end=73]
-----pkkpptaffyyledfrkefqeqnphvksmsevgkacgekwktmtye
-ekiqyydiatekrakfekdmmdyvk----
->hmgl_wheat_268  UR050|UniRef50_A0A0E0LQB4 [Eval=2.3E-5][id=44.7%][start=59 end=105]
--------spsafflfmddfrkdyeekhpadkqvyeigmagdeawksmsdd
-vsa--------------------------
->hmgl_wheat_286  UR050|UniRef50_I7MKS6 [Eval=1.5E-11][id=40.0%][start=56 end=129]
-dpnapkkpmsaylifcqtrqpeikaknp-dlsfseiskvvgqewrdlsqd
-kkqgyikkeeqlkkeynsklaefnk----
->hmgl_wheat_304  UR050|UniRef50_V3YWG6 [Eval=2.4E-11][id=41.3%][start=105 end=176]
-denkpkrpqsayflfladfrkkmkgkdienrell---kqagvewgklskd
-qkkpfeklsevekgkydaamaiynk----
->hmgl_wheat_311  UR050|UniRef50_G4TQG0 [Eval=2.9E-11][id=40.5%][start=114 end=191]
-dpnapkrppsayllyqnairkeikdknptmtyaevlgeis-kmwsglsae
-ekkpyldateiakgeyekskaayeadhta
->hmgl_wheat_314  UR050|UniRef50_UPI000C7734B6 [Eval=3.7E-11][id=41.6%][start=32 end=107]
-dpnkpkqgmtafflfmnkkrercmaanp-dfsvtevakvlsrqwkemsee
-mkapymlqqekdkirfakemesykqqe--
->hmgl_wheat_315  UR050|UniRef50_A0A2P6NRN2 [Eval=4.2E-11][id=41.8%][start=226 end=303]
-dpnqpkrpttsfmffanekrpefkekfpklkmteltakls-eawkaitpt
-ekqtfidkaqkdtvryneakkayeegraa
->hmgl_wheat_346  UR050|UniRef50_A0A1Q9DQJ7 [Eval=2.1E-10][id=40.8%][start=167 end=242]
-dpdapkraggaygiflaenrdkiiktlpkgykiteiskaagvqwkalsek
-eqkpyqekyqkknaeykaameeyqk----
->hmgl_wheat_350  UR050|UniRef50_UPI000719E288 [Eval=1.3E-8][id=42.5%][start=110 end=186]
-dpnkpkrplsayfrfmaefr---kqvadkgmsvtdiaklggatwtamtes
-ekkpylevdmkifnevnntpgvgkrge--
->hmgl_wheat_354  UR050|UniRef50_L9KF69 [Eval=2.9E-10][id=41.0%][start=15 end=91]
-dsnapkrppsgfflffsefhpkikssn-hgisirdvaktlgemwnnlsds
-kkqsyitkpaklkerdekdvtdfskgk--
->hmgl_wheat_360  UR050|UniRef50_UPI000989D17B [Eval=4.1E-10][id=42.1%][start=11 end=85]
----kpkrppgsflvfmedfrnefnlknp-nqpagfasqagakqwkqmkdd
-ekapfqrkvkelaleyfekkrcynnmes-
->hmgl_wheat_370  UR050|UniRef50_I0YNS1 [Eval=5.7E-10][id=43.5%][start=20 end=88]
-----prrpksaymffmaefrekwkvdhpevnrvsdvgvaageawrsltpe
-qkavyeeqsvgskatyaaeiaey------
->hmgl_wheat_389  UR050|UniRef50_A0A2H5PWP4 [Eval=1.2E-9][id=42.0%][start=38 end=118]
-dsnapkrplsayfifmedfrksfkesfpdnksvaangngagdswkstses
-gksssseindeaeqevssqvssyfmg---
->hmgl_wheat_396  UR050|UniRef50_P87057 [Eval=1.6E-9][id=40.5%][start=12 end=84]
-dpntpkrnmsafmffsienrekmktdnp-datfgqlgsllgkrwkeltst
-erepyeekarqdkeryererkeyd-----
->hmgl_wheat_405  UR050|UniRef50_A0A3Q2NTM4 [Eval=2.6E-9][id=42.0%][start=28 end=95]
----------saffvfcseyrpsvkqqyp-glsigdcakklgemwsklsqs
-eklpyeekaqklrekydrvsgssrtsen-
+<name>hmgt_mouse.prf</name>
+<content>>hmgt_mouse
+kpkrprsayniyvsesfqeakddsaqgklklvneawknlspeekqayiql
+akddrirydnemksweeqmae
+>hmgt_mouse_34  UR050|UniRef50_UPI000333B2AD [Eval=9.6E-19][id=56.3%][start=154 end=224]
+kpkkartayniflseyiqssegatiqdkwksayenwknmsssqkqvyeql
+ahddrvryyneiksweeqmie
+>hmgt_mouse_39  UR050|UniRef50_A0A3B3QYB6 [Eval=1.7E-15][id=46.5%][start=148 end=218]
+kpkrpktglfifiaekypetkgatmltktktlmeewkklnttqkqvylqq
+aedekiryknemkaweehmre
+>hmgt_mouse_43  UR050|UniRef50_A0A1A6GI08 [Eval=1.5E-13][id=72.1%][start=114 end=156]
+--------------ksgknakdesaqgklrtinqawknlssderqayiql
+akddrir--------------
+>hmgt_mouse_44  UR050|UniRef50_S4RPM2 [Eval=4.9E-13][id=43.7%][start=146 end=216]
+kpkrpsvpfnifmadnfkrmtgssqpeklirlrdewsglddmqkqkyqql
+aeddrvrytremaawreqmre
+>hmgt_mouse_46  UR050|UniRef50_A0A1Y3NCY0 [Eval=7.1E-12][id=41.3%][start=16 end=90]
+qpkhpssaflfylregyvaqhptkslgfikliskawkelsdeekaiyvkk
+seedkirynnekkiweeemak
+>hmgt_mouse_48  UR050|UniRef50_A0A3Q0RXS4 [Eval=7.5E-10][id=47.6%][start=80 end=141]
+kpkrpcspfsifmsepfeearvms-qakmkslleewrnlfshekkvytql
+aeddkiyhmveie--------
+>hmgt_mouse_49  UR050|UniRef50_B5X652 [Eval=9.2E-10][id=47.9%][start=150 end=197]
+kpkrprssfnifmaehfeeskgtttqgkmkmlredwtklstsqqqvyv--
+---------------------
+>hmgt_mouse_50  UR050|UniRef50_A0A3Q2US89 [Eval=4.0E-9][id=40.8%][start=271 end=341]
+kpkgkppayaffvadfykehkkkhpeakvklcsekwksmspeekakfkem
+akndkrrydqemksy------
+>hmgt_mouse_51  UR050|UniRef50_V5I0N7 [Eval=0.29][id=43.2%][start=25 end=61]
+---------------------------rvklaamewkaadaetkqkyvql
+aredaaryareykn-------
+>hmgt_mouse_52  UR050|UniRef50_A0A0G4J3E4 [Eval=2.6E-8][id=42.4%][start=35 end=100]
+kpkrplsafmlwskdarpkvkedaafgqlkllgamwkdlsdedkapyvkm
+agedrarydtel---------
+>hmgt_mouse_53  UR050|UniRef50_A7TI63 [Eval=5.8E-8][id=40.3%][start=94 end=155]
+-pkrptnayllfcevnkekirqsgtqdvtkalaeawknlseedrkpyykl
+ysddrerykreme--------
+>hmgt_mouse_55  UR050|UniRef50_A0A498N7L4 [Eval=9.4E-8][id=51.1%][start=101 end=145]
+kpkrprsafnifmsehfdeakgnnmqtkmkslrddwerfsatqkq-----
+---------------------
+>hmgt_mouse_56  UR050|UniRef50_A0A397V5L7 [Eval=5.6E-7][id=41.3%][start=118 end=180]
+-pkrprsafnyfmreifssaahvlpkdrlklvrkkwnelsdsdkdkyfem
+ahadrkryerei---------
+>hmgt_mouse_57  UR050|UniRef50_S9XXD4 [Eval=8.1E-7][id=42.9%][start=106 end=170]
+-pkkpmtsyvrfskeqlplfkaqnpetllfs-----pplymhnskvyiql
+akddkiryynemksweeqmve
+>hmgt_mouse_59  UR050|UniRef50_A0A3B1JD94 [Eval=1.4E-6][id=45.1%][start=7 end=77]
+kpkgrtsayaffvlssrdelkkkspggkfkkcsedwkaltpsekkkfedl
+akadkarydeemksy------
+>hmgt_mouse_60  UR050|UniRef50_A0A077WUB3 [Eval=3.9E-6][id=41.5%][start=59 end=123]
+-pklpksaylifsmehrreakqetdrgkvtllaqkwqalspeekepytvk
+amqekeryirem---------
+>hmgt_mouse_61  UR050|UniRef50_A0A3M7MYG4 [Eval=4.2E-6][id=40.6%][start=155 end=218]
+-pklpqnqfslflqerfqdlkgqsiaeagkrvaqewkdlsptekkayder
+faadriryqdeyk--------
+>hmgt_mouse_62  UR050|UniRef50_A0A1S3K0B4 [Eval=1.9E-5][id=42.3%][start=31 end=101]
+-pkrpttayfyylaeqfqegkhvsnvgafkevskqwrelsasekkpfeal
+sdddrkrydremnmyrk----
+>hmgt_mouse_66  UR050|UniRef50_A0A2S2QEJ1 [Eval=4.4E-4][id=42.9%][start=150 end=211]
+---rpksaymiyymdilqktkkkhpdlkmqviaekyknlspekkqyyidq
+aqklrtey-nem---------
 </content>
 </file>
 <file>
@@ -1118,84 +1118,659 @@ wntkaaaqne--------------
 </file>
 <file>
 <stream>input</stream>
-<name>hmgt_mouse.prf</name>
-<content>>hmgt_mouse
-kpkrprsayniyvsesfqeakddsaqgklklvneawknlspeekqayiql
-akddrirydnemksweeqmae
->hmgt_mouse_34  UR050|UniRef50_UPI000333B2AD [Eval=9.6E-19][id=56.3%][start=154 end=224]
-kpkkartayniflseyiqssegatiqdkwksayenwknmsssqkqvyeql
-ahddrvryyneiksweeqmie
->hmgt_mouse_39  UR050|UniRef50_A0A3B3QYB6 [Eval=1.7E-15][id=46.5%][start=148 end=218]
-kpkrpktglfifiaekypetkgatmltktktlmeewkklnttqkqvylqq
-aedekiryknemkaweehmre
->hmgt_mouse_43  UR050|UniRef50_A0A1A6GI08 [Eval=1.5E-13][id=72.1%][start=114 end=156]
---------------ksgknakdesaqgklrtinqawknlssderqayiql
-akddrir--------------
->hmgt_mouse_44  UR050|UniRef50_S4RPM2 [Eval=4.9E-13][id=43.7%][start=146 end=216]
-kpkrpsvpfnifmadnfkrmtgssqpeklirlrdewsglddmqkqkyqql
-aeddrvrytremaawreqmre
->hmgt_mouse_46  UR050|UniRef50_A0A1Y3NCY0 [Eval=7.1E-12][id=41.3%][start=16 end=90]
-qpkhpssaflfylregyvaqhptkslgfikliskawkelsdeekaiyvkk
-seedkirynnekkiweeemak
->hmgt_mouse_48  UR050|UniRef50_A0A3Q0RXS4 [Eval=7.5E-10][id=47.6%][start=80 end=141]
-kpkrpcspfsifmsepfeearvms-qakmkslleewrnlfshekkvytql
-aeddkiyhmveie--------
->hmgt_mouse_49  UR050|UniRef50_B5X652 [Eval=9.2E-10][id=47.9%][start=150 end=197]
-kpkrprssfnifmaehfeeskgtttqgkmkmlredwtklstsqqqvyv--
----------------------
->hmgt_mouse_50  UR050|UniRef50_A0A3Q2US89 [Eval=4.0E-9][id=40.8%][start=271 end=341]
-kpkgkppayaffvadfykehkkkhpeakvklcsekwksmspeekakfkem
-akndkrrydqemksy------
->hmgt_mouse_51  UR050|UniRef50_V5I0N7 [Eval=0.29][id=43.2%][start=25 end=61]
----------------------------rvklaamewkaadaetkqkyvql
-aredaaryareykn-------
->hmgt_mouse_52  UR050|UniRef50_A0A0G4J3E4 [Eval=2.6E-8][id=42.4%][start=35 end=100]
-kpkrplsafmlwskdarpkvkedaafgqlkllgamwkdlsdedkapyvkm
-agedrarydtel---------
->hmgt_mouse_53  UR050|UniRef50_A7TI63 [Eval=5.8E-8][id=40.3%][start=94 end=155]
--pkrptnayllfcevnkekirqsgtqdvtkalaeawknlseedrkpyykl
-ysddrerykreme--------
->hmgt_mouse_55  UR050|UniRef50_A0A498N7L4 [Eval=9.4E-8][id=51.1%][start=101 end=145]
-kpkrprsafnifmsehfdeakgnnmqtkmkslrddwerfsatqkq-----
----------------------
->hmgt_mouse_56  UR050|UniRef50_A0A397V5L7 [Eval=5.6E-7][id=41.3%][start=118 end=180]
--pkrprsafnyfmreifssaahvlpkdrlklvrkkwnelsdsdkdkyfem
-ahadrkryerei---------
->hmgt_mouse_57  UR050|UniRef50_S9XXD4 [Eval=8.1E-7][id=42.9%][start=106 end=170]
--pkkpmtsyvrfskeqlplfkaqnpetllfs-----pplymhnskvyiql
-akddkiryynemksweeqmve
->hmgt_mouse_59  UR050|UniRef50_A0A3B1JD94 [Eval=1.4E-6][id=45.1%][start=7 end=77]
-kpkgrtsayaffvlssrdelkkkspggkfkkcsedwkaltpsekkkfedl
-akadkarydeemksy------
->hmgt_mouse_60  UR050|UniRef50_A0A077WUB3 [Eval=3.9E-6][id=41.5%][start=59 end=123]
--pklpksaylifsmehrreakqetdrgkvtllaqkwqalspeekepytvk
-amqekeryirem---------
->hmgt_mouse_61  UR050|UniRef50_A0A3M7MYG4 [Eval=4.2E-6][id=40.6%][start=155 end=218]
--pklpqnqfslflqerfqdlkgqsiaeagkrvaqewkdlsptekkayder
-faadriryqdeyk--------
->hmgt_mouse_62  UR050|UniRef50_A0A1S3K0B4 [Eval=1.9E-5][id=42.3%][start=31 end=101]
--pkrpttayfyylaeqfqegkhvsnvgafkevskqwrelsasekkpfeal
-sdddrkrydremnmyrk----
->hmgt_mouse_66  UR050|UniRef50_A0A2S2QEJ1 [Eval=4.4E-4][id=42.9%][start=150 end=211]
----rpksaymiyymdilqktkkkhpdlkmqviaekyknlspekkqyyidq
-aqklrtey-nem---------
+<name>hmgl_wheat.prf</name>
+<content>>hmgl_wheat
+dpnkpkrapsaffvfmgefreefkqknpknksvaavgkaagerwkslses
+ekapyvakanklkgeynkaiaaynkgesa
+>hmgl_wheat_63  UR050|UniRef50_UPI000E6F9214 [Eval=1.1E-9][id=46.0%][start=1 end=63]
+---------------meefsetfkhehpnyksfaivgkaggekwrsmspa
+ergvyeakaearrthyinsiqasdedes-
+>hmgl_wheat_95  UR050|UniRef50_M1BDX1 [Eval=5.3E-5][id=44.4%][start=16 end=60]
+------------------------------ksfdaveklvrdkwkqmsda
+ekapyiaetekrrveyakvlnsynq----
+>hmgl_wheat_181  UR050|UniRef50_A0A2G2XCD7 [Eval=9.0E-15][id=46.8%][start=218 end=295]
+dpekpkmparsiyi-krerrkqfmkdnpknkfetavnragaekwkqlsaa
+ekgpymaeakrkmeeynksnaaynkrvaa
+>hmgl_wheat_199  UR050|UniRef50_A0A2P5DJ49 [Eval=4.0E-14][id=40.5%][start=37 end=113]
+dpnkpkkpakslllfvnefkeqykkehpnepf--alfrrahdkwksmsha
+erapfvgkarkmafeydknmhayllaega
+>hmgl_wheat_261  UR050|UniRef50_A0A2U1MQV0 [Eval=3.0E-12][id=40.8%][start=3 end=73]
+----pkkpptaffyyledfrkefqeqnphvksmsevgkacgekwktmtye
+ekiqyydiatekrakfekdmmdyvk----
+>hmgl_wheat_268  UR050|UniRef50_A0A0E0LQB4 [Eval=2.3E-5][id=44.7%][start=59 end=105]
+-------spsafflfmddfrkdyeekhpadkqvyeigmagdeawksmsdd
+vsa--------------------------
+>hmgl_wheat_286  UR050|UniRef50_I7MKS6 [Eval=1.5E-11][id=40.0%][start=56 end=129]
+dpnapkkpmsaylifcqtrqpeikaknp-dlsfseiskvvgqewrdlsqd
+kkqgyikkeeqlkkeynsklaefnk----
+>hmgl_wheat_304  UR050|UniRef50_V3YWG6 [Eval=2.4E-11][id=41.3%][start=105 end=176]
+denkpkrpqsayflfladfrkkmkgkdienrell---kqagvewgklskd
+qkkpfeklsevekgkydaamaiynk----
+>hmgl_wheat_311  UR050|UniRef50_G4TQG0 [Eval=2.9E-11][id=40.5%][start=114 end=191]
+dpnapkrppsayllyqnairkeikdknptmtyaevlgeis-kmwsglsae
+ekkpyldateiakgeyekskaayeadhta
+>hmgl_wheat_314  UR050|UniRef50_UPI000C7734B6 [Eval=3.7E-11][id=41.6%][start=32 end=107]
+dpnkpkqgmtafflfmnkkrercmaanp-dfsvtevakvlsrqwkemsee
+mkapymlqqekdkirfakemesykqqe--
+>hmgl_wheat_315  UR050|UniRef50_A0A2P6NRN2 [Eval=4.2E-11][id=41.8%][start=226 end=303]
+dpnqpkrpttsfmffanekrpefkekfpklkmteltakls-eawkaitpt
+ekqtfidkaqkdtvryneakkayeegraa
+>hmgl_wheat_346  UR050|UniRef50_A0A1Q9DQJ7 [Eval=2.1E-10][id=40.8%][start=167 end=242]
+dpdapkraggaygiflaenrdkiiktlpkgykiteiskaagvqwkalsek
+eqkpyqekyqkknaeykaameeyqk----
+>hmgl_wheat_350  UR050|UniRef50_UPI000719E288 [Eval=1.3E-8][id=42.5%][start=110 end=186]
+dpnkpkrplsayfrfmaefr---kqvadkgmsvtdiaklggatwtamtes
+ekkpylevdmkifnevnntpgvgkrge--
+>hmgl_wheat_354  UR050|UniRef50_L9KF69 [Eval=2.9E-10][id=41.0%][start=15 end=91]
+dsnapkrppsgfflffsefhpkikssn-hgisirdvaktlgemwnnlsds
+kkqsyitkpaklkerdekdvtdfskgk--
+>hmgl_wheat_360  UR050|UniRef50_UPI000989D17B [Eval=4.1E-10][id=42.1%][start=11 end=85]
+---kpkrppgsflvfmedfrnefnlknp-nqpagfasqagakqwkqmkdd
+ekapfqrkvkelaleyfekkrcynnmes-
+>hmgl_wheat_370  UR050|UniRef50_I0YNS1 [Eval=5.7E-10][id=43.5%][start=20 end=88]
+----prrpksaymffmaefrekwkvdhpevnrvsdvgvaageawrsltpe
+qkavyeeqsvgskatyaaeiaey------
+>hmgl_wheat_389  UR050|UniRef50_A0A2H5PWP4 [Eval=1.2E-9][id=42.0%][start=38 end=118]
+dsnapkrplsayfifmedfrksfkesfpdnksvaangngagdswkstses
+gksssseindeaeqevssqvssyfmg---
+>hmgl_wheat_396  UR050|UniRef50_P87057 [Eval=1.6E-9][id=40.5%][start=12 end=84]
+dpntpkrnmsafmffsienrekmktdnp-datfgqlgsllgkrwkeltst
+erepyeekarqdkeryererkeyd-----
+>hmgl_wheat_405  UR050|UniRef50_A0A3Q2NTM4 [Eval=2.6E-9][id=42.0%][start=28 end=95]
+---------saffvfcseyrpsvkqqyp-glsigdcakklgemwsklsqs
+eklpyeekaqklrekydrvsgssrtsen-
 </content>
 </file>
 <file>
 <stream>output</stream>
 <name>sample_seq1_prf1.template_list</name>
-<content>>hmgl_wheat  _R_ hmgl_wheat.prf
+<content>>hmgt_mouse  _R_ hmgt_mouse.prf
 >hmgl_trybr  _R_ hmgl_trybr.prf
 >hmgb_chite  _R_ hmgb_chite.prf
->hmgt_mouse  _R_ hmgt_mouse.prf
+>hmgl_wheat  _R_ hmgl_wheat.prf
 </content>
 </file>
 <file>
 <stream>input</stream>
 <name>sample_seq1_pdb2.template_list</name>
-<content>>hmgt_mouse  _P_ 6ERQG
+<content>>hmgl_wheat  _P_ 6CIMN
+>hmgt_mouse  _P_ 6ERQG
 >hmgb_chite  _P_ 1QRVB
->hmgl_wheat  _P_ 6CIMN
+</content>
+</file>
+<file>
+<stream>input</stream>
+<name>/Users/cnotredame//.t_coffee//cache/6CIMN.pdb</name>
+<content>HEADER    RECOMBINATION/DNA                       24-FEB-18   6CIM              
+COMPND   1 CHAIN: N;
+REMARK Output of the program extract_from_pdb (Version 2.43)
+REMARK Legal PDB format not Guaranteed
+REMARK This format is not meant to be used in place of the PDB format
+REMARK The header refers to the original entry
+REMARK The sequence from the original file has been taken in the field: ATOM
+REMARK extract_from_pdb, 2001, 2002, 2003, 2004, 2005 2006 (c) CNRS and Cedric Notredame
+REMARK Contains Coordinates of: 
+SEQRES   1 N   90  PHE VAL GLN THR CYS ARG GLU GLU HIS LYS LYS LYS HIS 
+SEQRES   2 N   90  PRO ASP ALA SER VAL ASN PHE SER GLU PHE SER LYS LYS 
+SEQRES   3 N   90  CYS SER GLU ARG ARG PRO PRO SER ALA PHE PHE LEU PHE 
+SEQRES   4 N   90  CYS SER GLU TYR ARG PRO LYS ILE LYS GLY GLU HIS PRO 
+SEQRES   5 N   90  GLY LEU SER ILE GLY ASP VAL ALA LYS LYS LEU GLY GLU 
+SEQRES   6 N   90  MET TRP ASN ASN THR ASP LYS GLN PRO TYR GLU LYS LYS 
+SEQRES   7 N   90  ALA ALA LYS LEU LYS GLU LYS TYR GLU LYS ASP ILE 
+ATOM      1  N   PHE N   1     -35.320  46.656  92.358  1.00 171.53
+ATOM      2  CA  PHE N   1     -34.963  47.364  93.581  1.00 182.43
+ATOM      3  C   PHE N   1     -35.546  46.672  94.808  1.00 187.53
+ATOM      4  O   PHE N   1     -34.842  46.492  95.800  1.00 187.22
+ATOM      5  CB  PHE N   1     -35.439  48.822  93.519  1.00 163.93
+ATOM      6  N   VAL N   2     -36.817  46.253  94.697  1.00 188.93
+ATOM      7  CA  VAL N   2     -37.591  45.732  95.823  1.00 186.93
+ATOM      8  C   VAL N   2     -36.854  44.640  96.603  1.00 192.22
+ATOM      9  O   VAL N   2     -36.896  44.627  97.843  1.00 198.70
+ATOM     10  CB  VAL N   2     -38.965  45.244  95.333  1.00 181.06
+ATOM     11  N   GLN N   3     -36.171  43.718  95.912  1.00 189.60
+ATOM     12  CA  GLN N   3     -35.396  42.688  96.607  1.00 192.10
+ATOM     13  C   GLN N   3     -34.338  43.302  97.497  1.00 191.19
+ATOM     14  O   GLN N   3     -34.168  42.880  98.645  1.00 193.63
+ATOM     15  CB  GLN N   3     -34.730  41.739  95.613  1.00 192.33
+ATOM     16  N   THR N   4     -33.600  44.280  96.974  1.00 187.14
+ATOM     17  CA  THR N   4     -32.541  44.894  97.759  1.00 189.71
+ATOM     18  C   THR N   4     -33.112  45.629  98.960  1.00 200.01
+ATOM     19  O   THR N   4     -32.575  45.501 100.063  1.00 196.43
+ATOM     20  CB  THR N   4     -31.713  45.838  96.888  1.00 182.96
+ATOM     21  N   CYS N   5     -34.203  46.386  98.752  1.00 205.15
+ATOM     22  CA  CYS N   5     -34.915  47.068  99.831  1.00 194.63
+ATOM     23  C   CYS N   5     -35.293  46.095 100.925  1.00 195.08
+ATOM     24  O   CYS N   5     -35.056  46.349 102.112  1.00 193.97
+ATOM     25  CB  CYS N   5     -36.180  47.743  99.300  1.00 180.95
+ATOM     26  N   ARG N   6     -35.890  44.972 100.546  1.00 194.08
+ATOM     27  CA  ARG N   6     -36.315  44.028 101.562  1.00 194.08
+ATOM     28  C   ARG N   6     -35.107  43.391 102.229  1.00 198.67
+ATOM     29  O   ARG N   6     -35.090  43.196 103.451  1.00 200.16
+ATOM     30  CB  ARG N   6     -37.237  42.972 100.957  1.00 190.19
+ATOM     31  N   GLU N   7     -34.058  43.099 101.457  1.00 199.43
+ATOM     32  CA  GLU N   7     -32.856  42.554 102.077  1.00 200.44
+ATOM     33  C   GLU N   7     -32.271  43.541 103.083  1.00 205.51
+ATOM     34  O   GLU N   7     -31.884  43.149 104.187  1.00 202.69
+ATOM     35  CB  GLU N   7     -31.826  42.151 101.022  1.00 192.58
+ATOM     36  N   GLU N   8     -32.261  44.834 102.755  1.00 199.77
+ATOM     37  CA  GLU N   8     -31.742  45.818 103.700  1.00 194.34
+ATOM     38  C   GLU N   8     -32.615  45.867 104.952  1.00 198.10
+ATOM     39  O   GLU N   8     -32.105  45.874 106.080  1.00 196.78
+ATOM     40  CB  GLU N   8     -31.635  47.194 103.041  1.00 186.01
+ATOM     41  N   HIS N   9     -33.941  45.834 104.768  1.00 198.95
+ATOM     42  CA  HIS N   9     -34.904  45.840 105.867  1.00 198.71
+ATOM     43  C   HIS N   9     -34.925  44.555 106.712  1.00 197.13
+ATOM     44  O   HIS N   9     -35.628  44.550 107.727  1.00 196.06
+ATOM     45  CB  HIS N   9     -36.315  46.106 105.330  1.00 193.64
+ATOM     46  N   LYS N  10     -34.246  43.470 106.309  1.00 197.06
+ATOM     47  CA  LYS N  10     -34.188  42.267 107.152  1.00 194.10
+ATOM     48  C   LYS N  10     -33.665  42.557 108.554  1.00 194.33
+ATOM     49  O   LYS N  10     -33.995  41.842 109.509  1.00 178.50
+ATOM     50  CB  LYS N  10     -33.292  41.207 106.515  1.00 188.26
+ATOM     51  N   LYS N  11     -32.787  43.539 108.679  1.00 203.64
+ATOM     52  CA  LYS N  11     -32.262  43.920 109.974  1.00 202.31
+ATOM     53  C   LYS N  11     -32.993  45.122 110.520  1.00 202.88
+ATOM     54  O   LYS N  11     -33.023  45.319 111.738  1.00 198.15
+ATOM     55  CB  LYS N  11     -30.769  44.235 109.872  1.00 197.79
+ATOM     56  N   LYS N  12     -33.562  45.939 109.630  1.00 205.18
+ATOM     57  CA  LYS N  12     -34.311  47.107 110.072  1.00 200.22
+ATOM     58  C   LYS N  12     -35.487  46.655 110.922  1.00 195.32
+ATOM     59  O   LYS N  12     -35.631  47.039 112.089  1.00 187.76
+ATOM     60  CB  LYS N  12     -34.767  47.927 108.861  1.00 188.56
+ATOM     61  N   HIS N  13     -36.310  45.799 110.355  1.00 195.42
+ATOM     62  CA  HIS N  13     -37.281  45.057 111.131  1.00 190.05
+ATOM     63  C   HIS N  13     -36.582  43.813 111.664  1.00 190.28
+ATOM     64  O   HIS N  13     -36.176  42.933 110.890  1.00 186.18
+ATOM     65  CB  HIS N  13     -38.502  44.712 110.280  1.00 192.32
+ATOM     66  N   PRO N  14     -36.387  43.744 112.982  1.00 192.13
+ATOM     67  CA  PRO N  14     -35.510  42.703 113.546  1.00 195.65
+ATOM     68  C   PRO N  14     -35.863  41.275 113.117  1.00 192.38
+ATOM     69  O   PRO N  14     -34.977  40.548 112.649  1.00 191.24
+ATOM     70  CB  PRO N  14     -35.659  42.941 115.060  1.00 182.39
+ATOM     71  N   ASP N  15     -37.139  40.865 113.211  1.00 185.10
+ATOM     72  CA  ASP N  15     -37.506  39.501 112.838  1.00 179.80
+ATOM     73  C   ASP N  15     -38.905  39.401 112.237  1.00 184.60
+ATOM     74  O   ASP N  15     -39.476  38.304 112.198  1.00 180.64
+ATOM     75  CB  ASP N  15     -37.417  38.569 114.044  1.00 169.88
+ATOM     76  N   ALA N  16     -39.463  40.513 111.767  1.00 185.90
+ATOM     77  CA  ALA N  16     -40.833  40.546 111.277  1.00 185.47
+ATOM     78  C   ALA N  16     -40.915  40.053 109.837  1.00 184.98
+ATOM     79  O   ALA N  16     -40.036  40.335 109.017  1.00 183.90
+ATOM     80  CB  ALA N  16     -41.383  41.969 111.372  1.00 179.07
+ATOM     81  N   SER N  17     -41.978  39.310 109.534  1.00 182.43
+ATOM     82  CA  SER N  17     -42.303  38.938 108.162  1.00 176.40
+ATOM     83  C   SER N  17     -43.333  39.942 107.654  1.00 170.75
+ATOM     84  O   SER N  17     -44.477  39.956 108.126  1.00 160.99
+ATOM     85  CB  SER N  17     -42.830  37.509 108.098  1.00 167.48
+ATOM     86  N   VAL N  18     -42.922  40.781 106.689  1.00 172.07
+ATOM     87  CA  VAL N  18     -43.672  41.981 106.319  1.00 165.21
+ATOM     88  C   VAL N  18     -44.739  41.648 105.282  1.00 164.94
+ATOM     89  O   VAL N  18     -44.675  40.638 104.574  1.00 162.21
+ATOM     90  CB  VAL N  18     -42.726  43.090 105.814  1.00 159.30
+ATOM     91  N   ASN N  19     -45.724  42.536 105.189  1.00 160.50
+ATOM     92  CA  ASN N  19     -46.894  42.305 104.356  1.00 161.65
+ATOM     93  C   ASN N  19     -46.551  42.549 102.898  1.00 161.66
+ATOM     94  O   ASN N  19     -45.583  43.233 102.572  1.00 167.94
+ATOM     95  CB  ASN N  19     -48.038  43.229 104.795  1.00 160.05
+ATOM     96  CG  ASN N  19     -49.357  42.921 104.106  1.00 161.90
+ATOM     97  OD1 ASN N  19     -49.534  41.842 103.532  1.00 168.46
+ATOM     98  ND2 ASN N  19     -50.296  43.869 104.168  1.00 149.23
+ATOM     99  N   PHE N  20     -47.344  41.964 102.012  1.00 156.83
+ATOM    100  CA  PHE N  20     -47.101  42.183 100.594  1.00 154.13
+ATOM    101  C   PHE N  20     -47.610  43.550 100.176  1.00 158.81
+ATOM    102  O   PHE N  20     -46.919  44.305  99.483  1.00 163.36
+ATOM    103  CB  PHE N  20     -47.743  41.060  99.774  1.00 170.42
+ATOM    104  N   SER N  21     -48.812  43.900 100.612  1.00 155.41
+ATOM    105  CA  SER N  21     -49.379  45.175 100.195  1.00 165.56
+ATOM    106  C   SER N  21     -48.584  46.357 100.751  1.00 176.50
+ATOM    107  O   SER N  21     -48.264  47.313 100.030  1.00 171.05
+ATOM    108  CB  SER N  21     -50.850  45.264 100.613  1.00 161.85
+ATOM    109  N   GLU N  22     -48.210  46.288 102.025  1.00 181.02
+ATOM    110  CA  GLU N  22     -47.541  47.426 102.657  1.00 173.25
+ATOM    111  C   GLU N  22     -46.098  47.563 102.198  1.00 172.21
+ATOM    112  O   GLU N  22     -45.585  48.676 102.047  1.00 174.71
+ATOM    113  CB  GLU N  22     -47.595  47.295 104.176  1.00 177.53
+ATOM    114  N   PHE N  23     -45.431  46.436 101.975  1.00 180.08
+ATOM    115  CA  PHE N  23     -44.057  46.447 101.480  1.00 182.38
+ATOM    116  C   PHE N  23     -43.979  46.994 100.061  1.00 183.78
+ATOM    117  O   PHE N  23     -43.022  47.692  99.704  1.00 183.59
+ATOM    118  CB  PHE N  23     -43.470  45.035 101.530  1.00 174.68
+ATOM    119  N   SER N  24     -44.974  46.658  99.231  1.00 184.61
+ATOM    120  CA  SER N  24     -45.111  47.257  97.904  1.00 185.27
+ATOM    121  C   SER N  24     -45.236  48.764  97.987  1.00 189.11
+ATOM    122  O   SER N  24     -44.549  49.493  97.266  1.00 196.27
+ATOM    123  CB  SER N  24     -46.347  46.697  97.207  1.00 190.30
+ATOM    124  N   LYS N  25     -46.142  49.232  98.858  1.00 190.72
+ATOM    125  CA  LYS N  25     -46.342  50.661  99.106  1.00 188.46
+ATOM    126  C   LYS N  25     -45.052  51.360  99.510  1.00 191.79
+ATOM    127  O   LYS N  25     -44.772  52.466  99.039  1.00 192.08
+ATOM    128  CB  LYS N  25     -47.397  50.844 100.194  1.00 179.21
+ATOM    129  N   LYS N  26     -44.265  50.726 100.385  1.00 197.20
+ATOM    130  CA  LYS N  26     -43.037  51.327 100.900  1.00 193.78
+ATOM    131  C   LYS N  26     -41.961  51.390  99.838  1.00 194.96
+ATOM    132  O   LYS N  26     -41.334  52.434  99.647  1.00 194.19
+ATOM    133  CB  LYS N  26     -42.531  50.553 102.115  1.00 187.73
+ATOM    134  N   CYS N  27     -41.738  50.284  99.132  1.00 197.89
+ATOM    135  CA  CYS N  27     -40.774  50.311  98.040  1.00 200.13
+ATOM    136  C   CYS N  27     -41.225  51.296  96.975  1.00 196.88
+ATOM    137  O   CYS N  27     -40.415  52.034  96.406  1.00 192.30
+ATOM    138  CB  CYS N  27     -40.577  48.913  97.447  1.00 190.06
+ATOM    139  N   SER N  28     -42.535  51.376  96.752  1.00 197.39
+ATOM    140  CA  SER N  28     -43.071  52.354  95.822  1.00 198.99
+ATOM    141  C   SER N  28     -42.756  53.767  96.285  1.00 203.36
+ATOM    142  O   SER N  28     -42.290  54.588  95.495  1.00 205.74
+ATOM    143  CB  SER N  28     -44.579  52.173  95.662  1.00 204.79
+ATOM    144  N   GLU N  29     -42.948  54.051  97.579  1.00 203.18
+ATOM    145  CA  GLU N  29     -42.853  55.421  98.086  1.00 195.37
+ATOM    146  C   GLU N  29     -41.432  55.990  98.029  1.00 200.48
+ATOM    147  O   GLU N  29     -41.271  57.213  97.962  1.00 204.10
+ATOM    148  CB  GLU N  29     -43.382  55.483  99.520  1.00 191.49
+ATOM    149  N   ARG N  30     -40.398  55.143  98.066  1.00 202.85
+ATOM    150  CA  ARG N  30     -39.006  55.592  97.923  1.00 197.52
+ATOM    151  C   ARG N  30     -38.699  55.946  96.471  1.00 199.85
+ATOM    152  O   ARG N  30     -39.117  56.992  95.984  1.00 200.98
+ATOM    153  CB  ARG N  30     -38.017  54.537  98.424  1.00 181.89
+ATOM    154  N   ARG N  31     -51.006  -8.267  89.142  1.00 109.03
+ATOM    155  CA  ARG N  31     -49.989  -9.272  89.425  1.00 126.91
+ATOM    156  C   ARG N  31     -50.111  -9.754  90.871  1.00 131.94
+ATOM    157  O   ARG N  31     -50.528  -8.996  91.741  1.00 129.43
+ATOM    158  CB  ARG N  31     -48.589  -8.709  89.152  1.00 117.19
+ATOM    159  N   PRO N  32     -49.783 -11.020  91.122  1.00 137.37
+ATOM    160  CA  PRO N  32     -49.765 -11.522  92.499  1.00 134.78
+ATOM    161  C   PRO N  32     -48.426 -11.238  93.152  1.00 141.31
+ATOM    162  O   PRO N  32     -47.387 -11.221  92.476  1.00 155.07
+ATOM    163  CB  PRO N  32     -49.987 -13.028  92.323  1.00 143.13
+ATOM    164  CG  PRO N  32     -49.342 -13.325  91.016  1.00 147.62
+ATOM    165  CD  PRO N  32     -49.543 -12.098  90.144  1.00 136.69
+ATOM    166  N   PRO N  33     -48.401 -11.025  94.461  1.00 131.25
+ATOM    167  CA  PRO N  33     -47.152 -10.647  95.125  1.00 135.13
+ATOM    168  C   PRO N  33     -46.245 -11.843  95.372  1.00 136.20
+ATOM    169  O   PRO N  33     -46.702 -12.975  95.557  1.00 135.61
+ATOM    170  CB  PRO N  33     -47.635 -10.043  96.446  1.00 144.18
+ATOM    171  CG  PRO N  33     -48.909 -10.778  96.728  1.00 140.82
+ATOM    172  CD  PRO N  33     -49.540 -11.068  95.393  1.00 130.30
+ATOM    173  N   SER N  34     -44.937 -11.570  95.368  1.00 135.07
+ATOM    174  CA  SER N  34     -43.954 -12.587  95.713  1.00 137.17
+ATOM    175  C   SER N  34     -44.226 -13.098  97.116  1.00 142.38
+ATOM    176  O   SER N  34     -44.864 -12.429  97.929  1.00 156.61
+ATOM    177  CB  SER N  34     -42.532 -12.028  95.655  1.00 133.69
+ATOM    178  N   ALA N  35     -43.736 -14.306  97.393  1.00 136.03
+ATOM    179  CA  ALA N  35     -43.846 -14.851  98.741  1.00 150.49
+ATOM    180  C   ALA N  35     -43.359 -13.835  99.767  1.00 155.41
+ATOM    181  O   ALA N  35     -44.079 -13.485 100.715  1.00 155.38
+ATOM    182  CB  ALA N  35     -43.052 -16.156  98.838  1.00 163.74
+ATOM    183  N   PHE N  36     -42.153 -13.307  99.546  1.00 149.02
+ATOM    184  CA  PHE N  36     -41.602 -12.267 100.402  1.00 141.31
+ATOM    185  C   PHE N  36     -42.532 -11.072 100.514  1.00 140.40
+ATOM    186  O   PHE N  36     -42.587 -10.429 101.564  1.00 149.47
+ATOM    187  CB  PHE N  36     -40.239 -11.841  99.860  1.00 132.98
+ATOM    188  CG  PHE N  36     -39.761 -10.516 100.375  1.00 131.43
+ATOM    189  CD1 PHE N  36     -39.272 -10.386 101.665  1.00 132.03
+ATOM    190  CD2 PHE N  36     -39.778  -9.402  99.558  1.00 135.92
+ATOM    191  CE1 PHE N  36     -38.827  -9.165 102.131  1.00 131.67
+ATOM    192  CE2 PHE N  36     -39.331  -8.175 100.019  1.00 134.41
+ATOM    193  CZ  PHE N  36     -38.855  -8.059 101.306  1.00 133.73
+ATOM    194  N   PHE N  37     -43.315 -10.795  99.470  1.00 145.59
+ATOM    195  CA  PHE N  37     -44.137  -9.585  99.445  1.00 143.59
+ATOM    196  C   PHE N  37     -45.381  -9.730 100.324  1.00 155.45
+ATOM    197  O   PHE N  37     -45.723  -8.824 101.102  1.00 163.10
+ATOM    198  CB  PHE N  37     -44.519  -9.262  98.000  1.00 136.24
+ATOM    199  CG  PHE N  37     -44.249  -7.850  97.617  1.00 127.16
+ATOM    200  CD1 PHE N  37     -45.267  -7.037  97.150  1.00 132.00
+ATOM    201  CD2 PHE N  37     -42.977  -7.320  97.757  1.00 120.25
+ATOM    202  CE1 PHE N  37     -45.014  -5.712  96.807  1.00 137.06
+ATOM    203  CE2 PHE N  37     -42.711  -6.005  97.426  1.00 121.02
+ATOM    204  CZ  PHE N  37     -43.729  -5.194  96.946  1.00 130.66
+ATOM    205  N   LEU N  38     -46.086 -10.859 100.197  1.00 152.66
+ATOM    206  CA  LEU N  38     -47.201 -11.149 101.093  1.00 156.23
+ATOM    207  C   LEU N  38     -46.721 -11.265 102.537  1.00 156.00
+ATOM    208  O   LEU N  38     -47.382 -10.778 103.470  1.00 158.20
+ATOM    209  CB  LEU N  38     -47.901 -12.432 100.640  1.00 142.48
+ATOM    210  N   PHE N  39     -45.569 -11.913 102.736  1.00 146.02
+ATOM    211  CA  PHE N  39     -44.927 -11.928 104.045  1.00 145.20
+ATOM    212  C   PHE N  39     -44.753 -10.518 104.592  1.00 151.75
+ATOM    213  O   PHE N  39     -45.046 -10.247 105.762  1.00 156.76
+ATOM    214  CB  PHE N  39     -43.570 -12.622 103.937  1.00 145.22
+ATOM    215  CG  PHE N  39     -42.694 -12.435 105.144  1.00 149.43
+ATOM    216  CD1 PHE N  39     -42.718 -13.357 106.177  1.00 157.16
+ATOM    217  CD2 PHE N  39     -41.844 -11.344 105.246  1.00 148.73
+ATOM    218  CE1 PHE N  39     -41.915 -13.196 107.289  1.00 154.34
+ATOM    219  CE2 PHE N  39     -41.041 -11.174 106.361  1.00 152.23
+ATOM    220  CZ  PHE N  39     -41.072 -12.104 107.381  1.00 150.29
+ATOM    221  N   CYS N  40     -44.228  -9.620 103.757  1.00 154.26
+ATOM    222  CA  CYS N  40     -43.962  -8.248 104.168  1.00 149.19
+ATOM    223  C   CYS N  40     -45.247  -7.538 104.571  1.00 156.42
+ATOM    224  O   CYS N  40     -45.274  -6.794 105.561  1.00 163.15
+ATOM    225  CB  CYS N  40     -43.271  -7.513 103.020  1.00 146.04
+ATOM    226  SG  CYS N  40     -41.905  -6.428 103.460  1.00 163.22
+ATOM    227  N   SER N  41     -46.325  -7.756 103.812  1.00 157.52
+ATOM    228  CA  SER N  41     -47.599  -7.130 104.159  1.00 163.50
+ATOM    229  C   SER N  41     -48.128  -7.654 105.493  1.00 164.64
+ATOM    230  O   SER N  41     -48.701  -6.892 106.285  1.00 169.41
+ATOM    231  CB  SER N  41     -48.623  -7.350 103.044  1.00 158.80
+ATOM    232  OG  SER N  41     -49.155  -8.659 103.091  1.00 154.12
+ATOM    233  N   GLU N  42     -47.927  -8.951 105.767  1.00 159.17
+ATOM    234  CA  GLU N  42     -48.398  -9.536 107.025  1.00 159.23
+ATOM    235  C   GLU N  42     -47.541  -9.123 108.223  1.00 159.15
+ATOM    236  O   GLU N  42     -48.060  -9.008 109.340  1.00 164.96
+ATOM    237  CB  GLU N  42     -48.432 -11.058 106.911  1.00 154.86
+ATOM    238  N   TYR N  43     -46.241  -8.907 108.019  1.00 157.75
+ATOM    239  CA  TYR N  43     -45.319  -8.537 109.091  1.00 157.08
+ATOM    240  C   TYR N  43     -45.138  -7.031 109.260  1.00 161.22
+ATOM    241  O   TYR N  43     -44.405  -6.612 110.165  1.00 158.03
+ATOM    242  CB  TYR N  43     -43.944  -9.159 108.850  1.00 149.48
+ATOM    243  CG  TYR N  43     -43.803 -10.561 109.357  1.00 144.48
+ATOM    244  CD1 TYR N  43     -42.714 -10.923 110.135  1.00 145.99
+ATOM    245  CD2 TYR N  43     -44.756 -11.525 109.065  1.00 150.33
+ATOM    246  CE1 TYR N  43     -42.569 -12.210 110.602  1.00 152.07
+ATOM    247  CE2 TYR N  43     -44.623 -12.820 109.531  1.00 158.86
+ATOM    248  CZ  TYR N  43     -43.524 -13.155 110.302  1.00 154.50
+ATOM    249  OH  TYR N  43     -43.365 -14.435 110.779  1.00 147.25
+ATOM    250  N   ARG N  44     -45.736  -6.212 108.395  1.00 162.18
+ATOM    251  CA  ARG N  44     -45.733  -4.768 108.623  1.00 149.26
+ATOM    252  C   ARG N  44     -46.251  -4.375 110.002  1.00 152.26
+ATOM    253  O   ARG N  44     -45.567  -3.601 110.689  1.00 155.11
+ATOM    254  CB  ARG N  44     -46.528  -4.077 107.505  1.00 150.78
+ATOM    255  N   PRO N  45     -47.407  -4.861 110.476  1.00 149.15
+ATOM    256  CA  PRO N  45     -47.873  -4.430 111.807  1.00 148.73
+ATOM    257  C   PRO N  45     -46.952  -4.825 112.957  1.00 148.99
+ATOM    258  O   PRO N  45     -46.830  -4.045 113.904  1.00 149.62
+ATOM    259  CB  PRO N  45     -49.250  -5.098 111.933  1.00 158.65
+ATOM    260  CG  PRO N  45     -49.212  -6.232 110.962  1.00 162.97
+ATOM    261  CD  PRO N  45     -48.404  -5.721 109.815  1.00 160.31
+ATOM    262  N   LYS N  46     -46.294  -5.988 112.917  1.00 148.76
+ATOM    263  CA  LYS N  46     -45.396  -6.376 114.010  1.00 148.55
+ATOM    264  C   LYS N  46     -44.225  -5.398 114.140  1.00 154.85
+ATOM    265  O   LYS N  46     -43.995  -4.793 115.204  1.00 159.87
+ATOM    266  CB  LYS N  46     -44.878  -7.802 113.785  1.00 150.53
+ATOM    267  CG  LYS N  46     -44.031  -8.339 114.941  1.00 157.08
+ATOM    268  CD  LYS N  46     -43.227  -9.572 114.548  1.00 156.50
+ATOM    269  CE  LYS N  46     -44.119 -10.637 113.933  1.00 156.77
+ATOM    270  NZ  LYS N  46     -43.378 -11.901 113.661  1.00 161.71
+ATOM    271  N   ILE N  47     -43.466  -5.243 113.050  1.00 155.55
+ATOM    272  CA  ILE N  47     -42.334  -4.323 113.012  1.00 148.69
+ATOM    273  C   ILE N  47     -42.780  -2.888 113.278  1.00 148.64
+ATOM    274  O   ILE N  47     -42.015  -2.091 113.832  1.00 144.62
+ATOM    275  CB  ILE N  47     -41.604  -4.461 111.658  1.00 139.59
+ATOM    276  N   LYS N  48     -44.017  -2.533 112.906  1.00 152.04
+ATOM    277  CA  LYS N  48     -44.514  -1.180 113.157  1.00 147.74
+ATOM    278  C   LYS N  48     -44.852  -0.967 114.627  1.00 153.51
+ATOM    279  O   LYS N  48     -44.618   0.114 115.179  1.00 153.63
+ATOM    280  CB  LYS N  48     -45.746  -0.902 112.299  1.00 147.06
+ATOM    281  N   GLY N  49     -45.449  -1.970 115.268  1.00 158.25
+ATOM    282  CA  GLY N  49     -45.858  -1.805 116.653  1.00 151.42
+ATOM    283  C   GLY N  49     -44.663  -1.715 117.574  1.00 152.87
+ATOM    284  O   GLY N  49     -44.686  -1.000 118.581  1.00 148.43
+ATOM    285  N   GLU N  50     -43.589  -2.425 117.223  1.00 160.16
+ATOM    286  CA  GLU N  50     -42.382  -2.407 118.044  1.00 158.09
+ATOM    287  C   GLU N  50     -41.577  -1.121 117.869  1.00 151.43
+ATOM    288  O   GLU N  50     -41.031  -0.588 118.845  1.00 147.96
+ATOM    289  CB  GLU N  50     -41.555  -3.655 117.710  1.00 161.93
+ATOM    290  CG  GLU N  50     -42.270  -4.899 118.240  1.00 164.10
+ATOM    291  CD  GLU N  50     -42.939  -4.518 119.577  1.00 163.03
+ATOM    292  OE1 GLU N  50     -42.183  -4.273 120.534  1.00 163.67
+ATOM    293  OE2 GLU N  50     -44.193  -4.390 119.676  1.00 162.79
+ATOM    294  N   HIS N  51     -41.502  -0.625 116.641  1.00 149.26
+ATOM    295  CA  HIS N  51     -40.834   0.629 116.310  1.00 146.99
+ATOM    296  C   HIS N  51     -41.790   1.433 115.429  1.00 150.21
+ATOM    297  O   HIS N  51     -42.003   1.055 114.258  1.00 154.53
+ATOM    298  CB  HIS N  51     -39.508   0.353 115.601  1.00 152.08
+ATOM    299  CG  HIS N  51     -38.508  -0.401 116.433  1.00 149.45
+ATOM    300  ND1 HIS N  51     -38.627  -1.746 116.714  1.00 150.82
+ATOM    301  CD2 HIS N  51     -37.360   0.007 117.025  1.00 142.78
+ATOM    302  CE1 HIS N  51     -37.600  -2.130 117.453  1.00 154.41
+ATOM    303  NE2 HIS N  51     -36.817  -1.084 117.656  1.00 148.94
+ATOM    304  N   PRO N  52     -42.402   2.532 115.942  1.00 150.90
+ATOM    305  CA  PRO N  52     -43.398   3.287 115.153  1.00 148.04
+ATOM    306  C   PRO N  52     -42.833   4.264 114.123  1.00 150.74
+ATOM    307  O   PRO N  52     -43.453   4.482 113.076  1.00 147.95
+ATOM    308  CB  PRO N  52     -44.185   4.045 116.229  1.00 137.67
+ATOM    309  CG  PRO N  52     -43.219   4.194 117.350  1.00 137.81
+ATOM    310  CD  PRO N  52     -42.369   2.966 117.349  1.00 148.95
+ATOM    311  N   GLY N  53     -41.683   4.876 114.405  1.00 147.89
+ATOM    312  CA  GLY N  53     -41.137   5.883 113.513  1.00 149.40
+ATOM    313  C   GLY N  53     -40.123   5.385 112.504  1.00 151.28
+ATOM    314  O   GLY N  53     -39.460   6.185 111.832  1.00 150.43
+ATOM    315  N   LEU N  54     -39.993   4.068 112.382  1.00 142.63
+ATOM    316  CA  LEU N  54     -39.006   3.515 111.470  1.00 135.92
+ATOM    317  C   LEU N  54     -39.360   3.900 110.038  1.00 140.89
+ATOM    318  O   LEU N  54     -40.529   3.839 109.640  1.00 140.33
+ATOM    319  CB  LEU N  54     -38.942   1.997 111.639  1.00 122.97
+ATOM    320  CG  LEU N  54     -37.527   1.436 111.759  1.00 122.03
+ATOM    321  CD1 LEU N  54     -36.675   2.389 112.566  1.00 133.13
+ATOM    322  CD2 LEU N  54     -37.544   0.070 112.408  1.00 129.51
+ATOM    323  N   SER N  55     -38.356   4.337 109.274  1.00 139.63
+ATOM    324  CA  SER N  55     -38.612   4.772 107.906  1.00 137.49
+ATOM    325  C   SER N  55     -38.857   3.573 106.997  1.00 127.32
+ATOM    326  O   SER N  55     -38.573   2.419 107.333  1.00 123.62
+ATOM    327  CB  SER N  55     -37.451   5.602 107.349  1.00 141.12
+ATOM    328  OG  SER N  55     -37.660   5.938 105.976  1.00 144.08
+ATOM    329  N   ILE N  56     -39.394   3.881 105.818  1.00 129.96
+ATOM    330  CA  ILE N  56     -39.659   2.858 104.815  1.00 125.57
+ATOM    331  C   ILE N  56     -38.381   2.135 104.442  1.00 124.32
+ATOM    332  O   ILE N  56     -38.360   0.904 104.324  1.00 119.54
+ATOM    333  CB  ILE N  56     -40.330   3.491 103.588  1.00 129.17
+ATOM    334  CG1 ILE N  56     -41.748   3.894 103.937  1.00 134.36
+ATOM    335  CG2 ILE N  56     -40.358   2.521 102.464  1.00 128.65
+ATOM    336  CD1 ILE N  56     -42.070   5.222 103.527  1.00 145.55
+ATOM    337  N   GLY N  57     -37.300   2.887 104.240  1.00 130.37
+ATOM    338  CA  GLY N  57     -36.006   2.259 104.047  1.00 133.94
+ATOM    339  C   GLY N  57     -35.623   1.389 105.224  1.00 134.75
+ATOM    340  O   GLY N  57     -35.199   0.245 105.056  1.00 131.18
+ATOM    341  N   ASP N  58     -35.817   1.904 106.440  1.00 133.08
+ATOM    342  CA  ASP N  58     -35.451   1.146 107.632  1.00 129.36
+ATOM    343  C   ASP N  58     -36.349  -0.080 107.813  1.00 126.35
+ATOM    344  O   ASP N  58     -35.850  -1.194 108.018  1.00 119.48
+ATOM    345  CB  ASP N  58     -35.499   2.060 108.858  1.00 124.53
+ATOM    346  N   VAL N  59     -37.675   0.106 107.742  1.00 127.96
+ATOM    347  CA  VAL N  59     -38.607  -1.009 107.932  1.00 119.19
+ATOM    348  C   VAL N  59     -38.355  -2.101 106.898  1.00 129.40
+ATOM    349  O   VAL N  59     -38.312  -3.296 107.223  1.00 126.63
+ATOM    350  CB  VAL N  59     -40.064  -0.517 107.877  1.00 99.70
+ATOM    351  N   ALA N  60     -38.188  -1.707 105.633  1.00 132.49
+ATOM    352  CA  ALA N  60     -37.960  -2.693 104.588  1.00 124.20
+ATOM    353  C   ALA N  60     -36.589  -3.342 104.729  1.00 122.04
+ATOM    354  O   ALA N  60     -36.452  -4.550 104.512  1.00 124.82
+ATOM    355  CB  ALA N  60     -38.123  -2.044 103.217  1.00 125.29
+ATOM    356  N   LYS N  61     -35.563  -2.567 105.099  1.00 119.72
+ATOM    357  CA  LYS N  61     -34.246  -3.145 105.340  1.00 124.97
+ATOM    358  C   LYS N  61     -34.315  -4.213 106.418  1.00 133.88
+ATOM    359  O   LYS N  61     -33.777  -5.314 106.248  1.00 130.78
+ATOM    360  CB  LYS N  61     -33.261  -2.048 105.742  1.00 118.85
+ATOM    361  CG  LYS N  61     -31.877  -2.151 105.121  1.00 115.15
+ATOM    362  CD  LYS N  61     -31.280  -0.756 104.996  1.00 126.05
+ATOM    363  CE  LYS N  61     -29.889  -0.752 104.385  1.00 132.25
+ATOM    364  NZ  LYS N  61     -29.472   0.645 104.032  1.00 126.43
+ATOM    365  N   LYS N  62     -34.984  -3.909 107.532  1.00 141.01
+ATOM    366  CA  LYS N  62     -35.168  -4.908 108.580  1.00 139.41
+ATOM    367  C   LYS N  62     -35.873  -6.132 108.022  1.00 133.73
+ATOM    368  O   LYS N  62     -35.280  -7.213 107.931  1.00 130.53
+ATOM    369  CB  LYS N  62     -35.955  -4.318 109.753  1.00 132.87
+ATOM    370  N   LEU N  63     -37.123  -5.950 107.572  1.00 133.69
+ATOM    371  CA  LEU N  63     -37.933  -7.045 107.045  1.00 133.27
+ATOM    372  C   LEU N  63     -37.127  -7.945 106.126  1.00 136.21
+ATOM    373  O   LEU N  63     -37.099  -9.171 106.292  1.00 135.97
+ATOM    374  CB  LEU N  63     -39.146  -6.475 106.308  1.00 125.72
+ATOM    375  CG  LEU N  63     -40.239  -5.901 107.207  1.00 136.74
+ATOM    376  CD1 LEU N  63     -41.029  -4.790 106.525  1.00 141.85
+ATOM    377  CD2 LEU N  63     -41.165  -7.016 107.639  1.00 147.61
+ATOM    378  N   GLY N  64     -36.422  -7.338 105.172  1.00 135.18
+ATOM    379  CA  GLY N  64     -35.603  -8.111 104.267  1.00 141.81
+ATOM    380  C   GLY N  64     -34.478  -8.840 104.963  1.00 146.92
+ATOM    381  O   GLY N  64     -34.232 -10.007 104.671  1.00 140.27
+ATOM    382  N   GLU N  65     -33.810  -8.183 105.916  1.00 152.04
+ATOM    383  CA  GLU N  65     -32.680  -8.793 106.612  1.00 155.23
+ATOM    384  C   GLU N  65     -33.120 -10.013 107.421  1.00 155.97
+ATOM    385  O   GLU N  65     -32.575 -11.113 107.256  1.00 151.50
+ATOM    386  CB  GLU N  65     -32.010  -7.748 107.511  1.00 140.03
+ATOM    387  N   MET N  66     -34.126  -9.834 108.289  1.00 155.08
+ATOM    388  CA  MET N  66     -34.571 -10.920 109.167  1.00 148.20
+ATOM    389  C   MET N  66     -35.269 -12.033 108.384  1.00 150.40
+ATOM    390  O   MET N  66     -35.057 -13.221 108.666  1.00 147.24
+ATOM    391  CB  MET N  66     -35.479 -10.380 110.278  1.00 136.61
+ATOM    392  CG  MET N  66     -36.556  -9.409 109.826  1.00 135.06
+ATOM    393  SD  MET N  66     -38.239  -9.918 110.224  1.00 133.19
+ATOM    394  CE  MET N  66     -38.988  -8.333 110.604  1.00 130.62
+ATOM    395  N   TRP N  67     -36.111 -11.675 107.402  1.00 147.08
+ATOM    396  CA  TRP N  67     -36.684 -12.676 106.509  1.00 151.34
+ATOM    397  C   TRP N  67     -35.612 -13.367 105.664  1.00 153.35
+ATOM    398  O   TRP N  67     -35.739 -14.557 105.352  1.00 150.58
+ATOM    399  CB  TRP N  67     -37.739 -12.019 105.612  1.00 145.16
+ATOM    400  CG  TRP N  67     -38.447 -12.977 104.684  1.00 147.45
+ATOM    401  CD1 TRP N  67     -39.661 -13.567 104.884  1.00 144.35
+ATOM    402  CD2 TRP N  67     -37.972 -13.466 103.421  1.00 142.92
+ATOM    403  NE1 TRP N  67     -39.981 -14.378 103.822  1.00 141.94
+ATOM    404  CE2 TRP N  67     -38.957 -14.341 102.914  1.00 139.76
+ATOM    405  CE3 TRP N  67     -36.812 -13.252 102.672  1.00 132.65
+ATOM    406  CZ2 TRP N  67     -38.815 -14.997 101.695  1.00 128.47
+ATOM    407  CZ3 TRP N  67     -36.675 -13.905 101.466  1.00 128.37
+ATOM    408  CH2 TRP N  67     -37.671 -14.765 100.988  1.00 125.83
+ATOM    409  N   ASN N  68     -34.555 -12.648 105.281  1.00 147.72
+ATOM    410  CA  ASN N  68     -33.475 -13.247 104.515  1.00 147.84
+ATOM    411  C   ASN N  68     -32.725 -14.260 105.363  1.00 153.83
+ATOM    412  O   ASN N  68     -32.354 -15.335 104.879  1.00 152.20
+ATOM    413  CB  ASN N  68     -32.546 -12.138 104.011  1.00 144.06
+ATOM    414  CG  ASN N  68     -31.623 -12.591 102.886  1.00 158.34
+ATOM    415  OD1 ASN N  68     -31.952 -13.491 102.108  1.00 163.36
+ATOM    416  ND2 ASN N  68     -30.456 -11.958 102.797  1.00 154.58
+ATOM    417  N   ASN N  69     -32.529 -13.948 106.647  1.00 158.70
+ATOM    418  CA  ASN N  69     -31.828 -14.870 107.535  1.00 160.81
+ATOM    419  C   ASN N  69     -32.618 -16.166 107.759  1.00 165.05
+ATOM    420  O   ASN N  69     -32.010 -17.222 107.973  1.00 160.73
+ATOM    421  CB  ASN N  69     -31.512 -14.175 108.865  1.00 146.14
+ATOM    422  N   THR N  70     -33.954 -16.121 107.668  1.00 160.37
+ATOM    423  CA  THR N  70     -34.806 -17.304 107.903  1.00 156.69
+ATOM    424  C   THR N  70     -34.561 -18.446 106.914  1.00 153.31
+ATOM    425  O   THR N  70     -33.976 -18.252 105.852  1.00 158.84
+ATOM    426  CB  THR N  70     -36.327 -16.964 107.852  1.00 159.67
+ATOM    427  OG1 THR N  70     -37.043 -17.845 108.733  1.00 173.68
+ATOM    428  CG2 THR N  70     -36.884 -17.147 106.437  1.00 153.26
+ATOM    429  N   ASP N  71     -38.818 -22.561 107.011  1.00 174.63
+ATOM    430  CA  ASP N  71     -39.629 -21.687 107.851  1.00 176.79
+ATOM    431  C   ASP N  71     -40.574 -20.847 106.999  1.00 179.88
+ATOM    432  O   ASP N  71     -41.744 -20.670 107.333  1.00 180.72
+ATOM    433  CB  ASP N  71     -38.742 -20.774 108.697  1.00 164.53
+ATOM    434  N   LYS N  72     -40.035 -20.339 105.892  1.00 178.51
+ATOM    435  CA  LYS N  72     -40.753 -19.467 104.977  1.00 176.46
+ATOM    436  C   LYS N  72     -41.461 -20.233 103.862  1.00 183.14
+ATOM    437  O   LYS N  72     -41.885 -19.620 102.876  1.00 188.26
+ATOM    438  CB  LYS N  72     -39.795 -18.435 104.378  1.00 161.63
+ATOM    439  N   GLN N  73     -41.602 -21.551 103.992  1.00 184.98
+ATOM    440  CA  GLN N  73     -42.247 -22.327 102.936  1.00 188.94
+ATOM    441  C   GLN N  73     -43.726 -21.992 102.730  1.00 191.72
+ATOM    442  O   GLN N  73     -44.150 -21.931 101.561  1.00 194.17
+ATOM    443  CB  GLN N  73     -42.051 -23.823 103.215  1.00 172.10
+ATOM    444  CG  GLN N  73     -42.384 -24.733 102.038  1.00 158.39
+ATOM    445  CD  GLN N  73     -43.718 -25.438 102.198  1.00 152.53
+ATOM    446  OE1 GLN N  73     -44.556 -25.035 103.008  1.00 163.22
+ATOM    447  NE2 GLN N  73     -43.919 -26.500 101.429  1.00 135.57
+ATOM    448  N   PRO N  74     -44.555 -21.777 103.767  1.00 175.70
+ATOM    449  CA  PRO N  74     -45.960 -21.411 103.495  1.00 176.94
+ATOM    450  C   PRO N  74     -46.114 -20.137 102.677  1.00 180.72
+ATOM    451  O   PRO N  74     -47.084 -20.012 101.912  1.00 175.33
+ATOM    452  CB  PRO N  74     -46.566 -21.262 104.901  1.00 178.08
+ATOM    453  CG  PRO N  74     -45.400 -21.094 105.813  1.00 177.16
+ATOM    454  CD  PRO N  74     -44.325 -21.940 105.214  1.00 175.55
+ATOM    455  N   TYR N  75     -45.185 -19.188 102.812  1.00 183.34
+ATOM    456  CA  TYR N  75     -45.196 -18.013 101.947  1.00 174.90
+ATOM    457  C   TYR N  75     -45.047 -18.413 100.482  1.00 176.47
+ATOM    458  O   TYR N  75     -45.796 -17.938  99.621  1.00 181.23
+ATOM    459  CB  TYR N  75     -44.088 -17.046 102.366  1.00 165.30
+ATOM    460  N   GLU N  76     -44.086 -19.295 100.178  1.00 170.67
+ATOM    461  CA  GLU N  76     -43.907 -19.734  98.797  1.00 163.11
+ATOM    462  C   GLU N  76     -45.128 -20.498  98.299  1.00 167.93
+ATOM    463  O   GLU N  76     -45.494 -20.402  97.121  1.00 166.11
+ATOM    464  CB  GLU N  76     -42.649 -20.592  98.670  1.00 161.76
+ATOM    465  N   LYS N  77     -45.776 -21.260  99.184  1.00 180.60
+ATOM    466  CA  LYS N  77     -46.997 -21.962  98.796  1.00 176.90
+ATOM    467  C   LYS N  77     -48.091 -20.982  98.393  1.00 175.48
+ATOM    468  O   LYS N  77     -48.692 -21.107  97.316  1.00 176.26
+ATOM    469  CB  LYS N  77     -47.479 -22.847  99.943  1.00 168.79
+ATOM    470  CG  LYS N  77     -46.447 -23.817 100.457  1.00 158.28
+ATOM    471  CD  LYS N  77     -46.206 -24.922  99.467  1.00 144.55
+ATOM    472  CE  LYS N  77     -44.935 -24.686  98.680  1.00 148.40
+ATOM    473  NZ  LYS N  77     -45.236 -24.670  97.225  1.00 148.10
+ATOM    474  N   LYS N  78     -48.390 -20.022  99.275  1.00 169.44
+ATOM    475  CA  LYS N  78     -49.400 -19.018  98.961  1.00 163.94
+ATOM    476  C   LYS N  78     -49.047 -18.280  97.678  1.00 163.66
+ATOM    477  O   LYS N  78     -49.928 -17.971  96.865  1.00 157.20
+ATOM    478  CB  LYS N  78     -49.553 -18.041 100.126  1.00 163.03
+ATOM    479  N   ALA N  79     -47.757 -18.006  97.472  1.00 166.32
+ATOM    480  CA  ALA N  79     -47.340 -17.319  96.258  1.00 161.23
+ATOM    481  C   ALA N  79     -47.641 -18.156  95.024  1.00 165.37
+ATOM    482  O   ALA N  79     -48.176 -17.639  94.040  1.00 171.56
+ATOM    483  CB  ALA N  79     -45.854 -16.972  96.329  1.00 162.03
+ATOM    484  N   ALA N  80     -47.318 -19.452  95.058  1.00 164.86
+ATOM    485  CA  ALA N  80     -47.599 -20.306  93.906  1.00 161.26
+ATOM    486  C   ALA N  80     -49.096 -20.384  93.631  1.00 162.13
+ATOM    487  O   ALA N  80     -49.531 -20.343  92.469  1.00 162.78
+ATOM    488  CB  ALA N  80     -47.022 -21.702  94.130  1.00 163.58
+ATOM    489  N   LYS N  81     -49.900 -20.489  94.691  1.00 159.83
+ATOM    490  CA  LYS N  81     -51.346 -20.558  94.510  1.00 157.56
+ATOM    491  C   LYS N  81     -51.872 -19.288  93.852  1.00 159.88
+ATOM    492  O   LYS N  81     -52.590 -19.349  92.845  1.00 160.24
+ATOM    493  CB  LYS N  81     -52.033 -20.803  95.852  1.00 164.32
+ATOM    494  N   LEU N  82     -51.518 -18.124  94.407  1.00 158.47
+ATOM    495  CA  LEU N  82     -51.968 -16.864  93.823  1.00 155.88
+ATOM    496  C   LEU N  82     -51.453 -16.706  92.400  1.00 160.47
+ATOM    497  O   LEU N  82     -52.142 -16.147  91.538  1.00 153.52
+ATOM    498  CB  LEU N  82     -51.508 -15.682  94.674  1.00 155.10
+ATOM    499  CG  LEU N  82     -51.956 -15.551  96.127  1.00 151.59
+ATOM    500  CD1 LEU N  82     -52.145 -14.075  96.473  1.00 144.71
+ATOM    501  CD2 LEU N  82     -53.218 -16.347  96.409  1.00 157.19
+ATOM    502  N   LYS N  83     -50.240 -17.196  92.139  1.00 163.85
+ATOM    503  CA  LYS N  83     -49.672 -17.141  90.800  1.00 161.86
+ATOM    504  C   LYS N  83     -50.565 -17.862  89.805  1.00 167.84
+ATOM    505  O   LYS N  83     -50.993 -17.277  88.807  1.00 171.99
+ATOM    506  CB  LYS N  83     -48.265 -17.745  90.800  1.00 162.86
+ATOM    507  CG  LYS N  83     -47.768 -18.218  89.433  1.00 158.82
+ATOM    508  CD  LYS N  83     -46.608 -19.203  89.591  1.00 161.20
+ATOM    509  CE  LYS N  83     -46.716 -20.382  88.622  1.00 155.20
+ATOM    510  NZ  LYS N  83     -45.636 -21.398  88.828  1.00 137.44
+ATOM    511  N   GLU N  84     -50.862 -19.138  90.063  1.00 171.27
+ATOM    512  CA  GLU N  84     -51.677 -19.880  89.102  1.00 166.83
+ATOM    513  C   GLU N  84     -53.093 -19.319  89.019  1.00 168.81
+ATOM    514  O   GLU N  84     -53.698 -19.313  87.934  1.00 172.34
+ATOM    515  CB  GLU N  84     -51.689 -21.371  89.440  1.00 160.98
+ATOM    516  CG  GLU N  84     -51.998 -21.725  90.885  1.00 163.47
+ATOM    517  CD  GLU N  84     -51.480 -23.110  91.260  1.00 162.01
+ATOM    518  OE1 GLU N  84     -50.247 -23.324  91.186  1.00 158.90
+ATOM    519  OE2 GLU N  84     -52.301 -23.985  91.618  1.00 150.29
+ATOM    520  N   LYS N  85     -53.622 -18.814  90.137  1.00 165.60
+ATOM    521  CA  LYS N  85     -54.903 -18.121  90.089  1.00 165.90
+ATOM    522  C   LYS N  85     -54.857 -16.956  89.110  1.00 169.10
+ATOM    523  O   LYS N  85     -55.772 -16.781  88.298  1.00 173.21
+ATOM    524  CB  LYS N  85     -55.292 -17.633  91.483  1.00 165.33
+ATOM    525  N   TYR N  86     -53.791 -16.156  89.160  1.00 172.95
+ATOM    526  CA  TYR N  86     -53.684 -15.024  88.244  1.00 177.07
+ATOM    527  C   TYR N  86     -53.464 -15.494  86.813  1.00 170.97
+ATOM    528  O   TYR N  86     -53.948 -14.865  85.865  1.00 173.17
+ATOM    529  CB  TYR N  86     -52.556 -14.091  88.682  1.00 177.51
+ATOM    530  N   GLU N  87     -52.723 -16.588  86.641  1.00 175.84
+ATOM    531  CA  GLU N  87     -52.527 -17.159  85.314  1.00 172.55
+ATOM    532  C   GLU N  87     -53.867 -17.431  84.658  1.00 176.08
+ATOM    533  O   GLU N  87     -54.113 -17.019  83.518  1.00 176.49
+ATOM    534  CB  GLU N  87     -51.708 -18.449  85.405  1.00 175.17
+ATOM    535  CG  GLU N  87     -50.323 -18.278  85.995  1.00 169.59
+ATOM    536  CD  GLU N  87     -49.305 -17.832  84.972  1.00 159.66
+ATOM    537  OE1 GLU N  87     -48.452 -18.658  84.591  1.00 155.54
+ATOM    538  OE2 GLU N  87     -49.359 -16.661  84.544  1.00 163.67
+ATOM    539  N   LYS N  88     -54.762 -18.101  85.390  1.00 181.32
+ATOM    540  CA  LYS N  88     -56.085 -18.400  84.850  1.00 172.66
+ATOM    541  C   LYS N  88     -56.804 -17.132  84.383  1.00 171.62
+ATOM    542  O   LYS N  88     -57.409 -17.122  83.305  1.00 166.92
+ATOM    543  CB  LYS N  88     -56.911 -19.158  85.891  1.00 166.46
+ATOM    544  N   ASP N  89     -56.716 -16.043  85.155  1.00 179.43
+ATOM    545  CA  ASP N  89     -57.363 -14.775  84.809  1.00 172.22
+ATOM    546  C   ASP N  89     -56.923 -14.236  83.451  1.00 172.92
+ATOM    547  O   ASP N  89     -55.775 -13.816  83.276  1.00 169.63
+ATOM    548  CB  ASP N  89     -57.089 -13.721  85.886  1.00 165.57
+ATOM    549  N   ILE N  90     -57.845 -14.212  82.496  1.00 173.55
+ATOM    550  CA  ILE N  90     -57.569 -13.777  81.135  1.00 167.04
+ATOM    551  C   ILE N  90     -57.994 -12.327  80.965  1.00 160.30
+ATOM    552  O   ILE N  90     -58.560 -11.733  81.881  1.00 158.92
+ATOM    553  CB  ILE N  90     -58.283 -14.689  80.117  1.00 155.03
+
 </content>
 </file>
 <file>
@@ -2845,581 +3420,6 @@ ATOM   1615  CG2 THR G 192      49.946 -99.512 -55.582  1.00 366.25
 </file>
 <file>
 <stream>input</stream>
-<name>/Users/cnotredame//.t_coffee//cache/6CIMN.pdb</name>
-<content>HEADER    RECOMBINATION/DNA                       24-FEB-18   6CIM              
-COMPND   1 CHAIN: N;
-REMARK Output of the program extract_from_pdb (Version 2.43)
-REMARK Legal PDB format not Guaranteed
-REMARK This format is not meant to be used in place of the PDB format
-REMARK The header refers to the original entry
-REMARK The sequence from the original file has been taken in the field: ATOM
-REMARK extract_from_pdb, 2001, 2002, 2003, 2004, 2005 2006 (c) CNRS and Cedric Notredame
-REMARK Contains Coordinates of: 
-SEQRES   1 N   90  PHE VAL GLN THR CYS ARG GLU GLU HIS LYS LYS LYS HIS 
-SEQRES   2 N   90  PRO ASP ALA SER VAL ASN PHE SER GLU PHE SER LYS LYS 
-SEQRES   3 N   90  CYS SER GLU ARG ARG PRO PRO SER ALA PHE PHE LEU PHE 
-SEQRES   4 N   90  CYS SER GLU TYR ARG PRO LYS ILE LYS GLY GLU HIS PRO 
-SEQRES   5 N   90  GLY LEU SER ILE GLY ASP VAL ALA LYS LYS LEU GLY GLU 
-SEQRES   6 N   90  MET TRP ASN ASN THR ASP LYS GLN PRO TYR GLU LYS LYS 
-SEQRES   7 N   90  ALA ALA LYS LEU LYS GLU LYS TYR GLU LYS ASP ILE 
-ATOM      1  N   PHE N   1     -35.320  46.656  92.358  1.00 171.53
-ATOM      2  CA  PHE N   1     -34.963  47.364  93.581  1.00 182.43
-ATOM      3  C   PHE N   1     -35.546  46.672  94.808  1.00 187.53
-ATOM      4  O   PHE N   1     -34.842  46.492  95.800  1.00 187.22
-ATOM      5  CB  PHE N   1     -35.439  48.822  93.519  1.00 163.93
-ATOM      6  N   VAL N   2     -36.817  46.253  94.697  1.00 188.93
-ATOM      7  CA  VAL N   2     -37.591  45.732  95.823  1.00 186.93
-ATOM      8  C   VAL N   2     -36.854  44.640  96.603  1.00 192.22
-ATOM      9  O   VAL N   2     -36.896  44.627  97.843  1.00 198.70
-ATOM     10  CB  VAL N   2     -38.965  45.244  95.333  1.00 181.06
-ATOM     11  N   GLN N   3     -36.171  43.718  95.912  1.00 189.60
-ATOM     12  CA  GLN N   3     -35.396  42.688  96.607  1.00 192.10
-ATOM     13  C   GLN N   3     -34.338  43.302  97.497  1.00 191.19
-ATOM     14  O   GLN N   3     -34.168  42.880  98.645  1.00 193.63
-ATOM     15  CB  GLN N   3     -34.730  41.739  95.613  1.00 192.33
-ATOM     16  N   THR N   4     -33.600  44.280  96.974  1.00 187.14
-ATOM     17  CA  THR N   4     -32.541  44.894  97.759  1.00 189.71
-ATOM     18  C   THR N   4     -33.112  45.629  98.960  1.00 200.01
-ATOM     19  O   THR N   4     -32.575  45.501 100.063  1.00 196.43
-ATOM     20  CB  THR N   4     -31.713  45.838  96.888  1.00 182.96
-ATOM     21  N   CYS N   5     -34.203  46.386  98.752  1.00 205.15
-ATOM     22  CA  CYS N   5     -34.915  47.068  99.831  1.00 194.63
-ATOM     23  C   CYS N   5     -35.293  46.095 100.925  1.00 195.08
-ATOM     24  O   CYS N   5     -35.056  46.349 102.112  1.00 193.97
-ATOM     25  CB  CYS N   5     -36.180  47.743  99.300  1.00 180.95
-ATOM     26  N   ARG N   6     -35.890  44.972 100.546  1.00 194.08
-ATOM     27  CA  ARG N   6     -36.315  44.028 101.562  1.00 194.08
-ATOM     28  C   ARG N   6     -35.107  43.391 102.229  1.00 198.67
-ATOM     29  O   ARG N   6     -35.090  43.196 103.451  1.00 200.16
-ATOM     30  CB  ARG N   6     -37.237  42.972 100.957  1.00 190.19
-ATOM     31  N   GLU N   7     -34.058  43.099 101.457  1.00 199.43
-ATOM     32  CA  GLU N   7     -32.856  42.554 102.077  1.00 200.44
-ATOM     33  C   GLU N   7     -32.271  43.541 103.083  1.00 205.51
-ATOM     34  O   GLU N   7     -31.884  43.149 104.187  1.00 202.69
-ATOM     35  CB  GLU N   7     -31.826  42.151 101.022  1.00 192.58
-ATOM     36  N   GLU N   8     -32.261  44.834 102.755  1.00 199.77
-ATOM     37  CA  GLU N   8     -31.742  45.818 103.700  1.00 194.34
-ATOM     38  C   GLU N   8     -32.615  45.867 104.952  1.00 198.10
-ATOM     39  O   GLU N   8     -32.105  45.874 106.080  1.00 196.78
-ATOM     40  CB  GLU N   8     -31.635  47.194 103.041  1.00 186.01
-ATOM     41  N   HIS N   9     -33.941  45.834 104.768  1.00 198.95
-ATOM     42  CA  HIS N   9     -34.904  45.840 105.867  1.00 198.71
-ATOM     43  C   HIS N   9     -34.925  44.555 106.712  1.00 197.13
-ATOM     44  O   HIS N   9     -35.628  44.550 107.727  1.00 196.06
-ATOM     45  CB  HIS N   9     -36.315  46.106 105.330  1.00 193.64
-ATOM     46  N   LYS N  10     -34.246  43.470 106.309  1.00 197.06
-ATOM     47  CA  LYS N  10     -34.188  42.267 107.152  1.00 194.10
-ATOM     48  C   LYS N  10     -33.665  42.557 108.554  1.00 194.33
-ATOM     49  O   LYS N  10     -33.995  41.842 109.509  1.00 178.50
-ATOM     50  CB  LYS N  10     -33.292  41.207 106.515  1.00 188.26
-ATOM     51  N   LYS N  11     -32.787  43.539 108.679  1.00 203.64
-ATOM     52  CA  LYS N  11     -32.262  43.920 109.974  1.00 202.31
-ATOM     53  C   LYS N  11     -32.993  45.122 110.520  1.00 202.88
-ATOM     54  O   LYS N  11     -33.023  45.319 111.738  1.00 198.15
-ATOM     55  CB  LYS N  11     -30.769  44.235 109.872  1.00 197.79
-ATOM     56  N   LYS N  12     -33.562  45.939 109.630  1.00 205.18
-ATOM     57  CA  LYS N  12     -34.311  47.107 110.072  1.00 200.22
-ATOM     58  C   LYS N  12     -35.487  46.655 110.922  1.00 195.32
-ATOM     59  O   LYS N  12     -35.631  47.039 112.089  1.00 187.76
-ATOM     60  CB  LYS N  12     -34.767  47.927 108.861  1.00 188.56
-ATOM     61  N   HIS N  13     -36.310  45.799 110.355  1.00 195.42
-ATOM     62  CA  HIS N  13     -37.281  45.057 111.131  1.00 190.05
-ATOM     63  C   HIS N  13     -36.582  43.813 111.664  1.00 190.28
-ATOM     64  O   HIS N  13     -36.176  42.933 110.890  1.00 186.18
-ATOM     65  CB  HIS N  13     -38.502  44.712 110.280  1.00 192.32
-ATOM     66  N   PRO N  14     -36.387  43.744 112.982  1.00 192.13
-ATOM     67  CA  PRO N  14     -35.510  42.703 113.546  1.00 195.65
-ATOM     68  C   PRO N  14     -35.863  41.275 113.117  1.00 192.38
-ATOM     69  O   PRO N  14     -34.977  40.548 112.649  1.00 191.24
-ATOM     70  CB  PRO N  14     -35.659  42.941 115.060  1.00 182.39
-ATOM     71  N   ASP N  15     -37.139  40.865 113.211  1.00 185.10
-ATOM     72  CA  ASP N  15     -37.506  39.501 112.838  1.00 179.80
-ATOM     73  C   ASP N  15     -38.905  39.401 112.237  1.00 184.60
-ATOM     74  O   ASP N  15     -39.476  38.304 112.198  1.00 180.64
-ATOM     75  CB  ASP N  15     -37.417  38.569 114.044  1.00 169.88
-ATOM     76  N   ALA N  16     -39.463  40.513 111.767  1.00 185.90
-ATOM     77  CA  ALA N  16     -40.833  40.546 111.277  1.00 185.47
-ATOM     78  C   ALA N  16     -40.915  40.053 109.837  1.00 184.98
-ATOM     79  O   ALA N  16     -40.036  40.335 109.017  1.00 183.90
-ATOM     80  CB  ALA N  16     -41.383  41.969 111.372  1.00 179.07
-ATOM     81  N   SER N  17     -41.978  39.310 109.534  1.00 182.43
-ATOM     82  CA  SER N  17     -42.303  38.938 108.162  1.00 176.40
-ATOM     83  C   SER N  17     -43.333  39.942 107.654  1.00 170.75
-ATOM     84  O   SER N  17     -44.477  39.956 108.126  1.00 160.99
-ATOM     85  CB  SER N  17     -42.830  37.509 108.098  1.00 167.48
-ATOM     86  N   VAL N  18     -42.922  40.781 106.689  1.00 172.07
-ATOM     87  CA  VAL N  18     -43.672  41.981 106.319  1.00 165.21
-ATOM     88  C   VAL N  18     -44.739  41.648 105.282  1.00 164.94
-ATOM     89  O   VAL N  18     -44.675  40.638 104.574  1.00 162.21
-ATOM     90  CB  VAL N  18     -42.726  43.090 105.814  1.00 159.30
-ATOM     91  N   ASN N  19     -45.724  42.536 105.189  1.00 160.50
-ATOM     92  CA  ASN N  19     -46.894  42.305 104.356  1.00 161.65
-ATOM     93  C   ASN N  19     -46.551  42.549 102.898  1.00 161.66
-ATOM     94  O   ASN N  19     -45.583  43.233 102.572  1.00 167.94
-ATOM     95  CB  ASN N  19     -48.038  43.229 104.795  1.00 160.05
-ATOM     96  CG  ASN N  19     -49.357  42.921 104.106  1.00 161.90
-ATOM     97  OD1 ASN N  19     -49.534  41.842 103.532  1.00 168.46
-ATOM     98  ND2 ASN N  19     -50.296  43.869 104.168  1.00 149.23
-ATOM     99  N   PHE N  20     -47.344  41.964 102.012  1.00 156.83
-ATOM    100  CA  PHE N  20     -47.101  42.183 100.594  1.00 154.13
-ATOM    101  C   PHE N  20     -47.610  43.550 100.176  1.00 158.81
-ATOM    102  O   PHE N  20     -46.919  44.305  99.483  1.00 163.36
-ATOM    103  CB  PHE N  20     -47.743  41.060  99.774  1.00 170.42
-ATOM    104  N   SER N  21     -48.812  43.900 100.612  1.00 155.41
-ATOM    105  CA  SER N  21     -49.379  45.175 100.195  1.00 165.56
-ATOM    106  C   SER N  21     -48.584  46.357 100.751  1.00 176.50
-ATOM    107  O   SER N  21     -48.264  47.313 100.030  1.00 171.05
-ATOM    108  CB  SER N  21     -50.850  45.264 100.613  1.00 161.85
-ATOM    109  N   GLU N  22     -48.210  46.288 102.025  1.00 181.02
-ATOM    110  CA  GLU N  22     -47.541  47.426 102.657  1.00 173.25
-ATOM    111  C   GLU N  22     -46.098  47.563 102.198  1.00 172.21
-ATOM    112  O   GLU N  22     -45.585  48.676 102.047  1.00 174.71
-ATOM    113  CB  GLU N  22     -47.595  47.295 104.176  1.00 177.53
-ATOM    114  N   PHE N  23     -45.431  46.436 101.975  1.00 180.08
-ATOM    115  CA  PHE N  23     -44.057  46.447 101.480  1.00 182.38
-ATOM    116  C   PHE N  23     -43.979  46.994 100.061  1.00 183.78
-ATOM    117  O   PHE N  23     -43.022  47.692  99.704  1.00 183.59
-ATOM    118  CB  PHE N  23     -43.470  45.035 101.530  1.00 174.68
-ATOM    119  N   SER N  24     -44.974  46.658  99.231  1.00 184.61
-ATOM    120  CA  SER N  24     -45.111  47.257  97.904  1.00 185.27
-ATOM    121  C   SER N  24     -45.236  48.764  97.987  1.00 189.11
-ATOM    122  O   SER N  24     -44.549  49.493  97.266  1.00 196.27
-ATOM    123  CB  SER N  24     -46.347  46.697  97.207  1.00 190.30
-ATOM    124  N   LYS N  25     -46.142  49.232  98.858  1.00 190.72
-ATOM    125  CA  LYS N  25     -46.342  50.661  99.106  1.00 188.46
-ATOM    126  C   LYS N  25     -45.052  51.360  99.510  1.00 191.79
-ATOM    127  O   LYS N  25     -44.772  52.466  99.039  1.00 192.08
-ATOM    128  CB  LYS N  25     -47.397  50.844 100.194  1.00 179.21
-ATOM    129  N   LYS N  26     -44.265  50.726 100.385  1.00 197.20
-ATOM    130  CA  LYS N  26     -43.037  51.327 100.900  1.00 193.78
-ATOM    131  C   LYS N  26     -41.961  51.390  99.838  1.00 194.96
-ATOM    132  O   LYS N  26     -41.334  52.434  99.647  1.00 194.19
-ATOM    133  CB  LYS N  26     -42.531  50.553 102.115  1.00 187.73
-ATOM    134  N   CYS N  27     -41.738  50.284  99.132  1.00 197.89
-ATOM    135  CA  CYS N  27     -40.774  50.311  98.040  1.00 200.13
-ATOM    136  C   CYS N  27     -41.225  51.296  96.975  1.00 196.88
-ATOM    137  O   CYS N  27     -40.415  52.034  96.406  1.00 192.30
-ATOM    138  CB  CYS N  27     -40.577  48.913  97.447  1.00 190.06
-ATOM    139  N   SER N  28     -42.535  51.376  96.752  1.00 197.39
-ATOM    140  CA  SER N  28     -43.071  52.354  95.822  1.00 198.99
-ATOM    141  C   SER N  28     -42.756  53.767  96.285  1.00 203.36
-ATOM    142  O   SER N  28     -42.290  54.588  95.495  1.00 205.74
-ATOM    143  CB  SER N  28     -44.579  52.173  95.662  1.00 204.79
-ATOM    144  N   GLU N  29     -42.948  54.051  97.579  1.00 203.18
-ATOM    145  CA  GLU N  29     -42.853  55.421  98.086  1.00 195.37
-ATOM    146  C   GLU N  29     -41.432  55.990  98.029  1.00 200.48
-ATOM    147  O   GLU N  29     -41.271  57.213  97.962  1.00 204.10
-ATOM    148  CB  GLU N  29     -43.382  55.483  99.520  1.00 191.49
-ATOM    149  N   ARG N  30     -40.398  55.143  98.066  1.00 202.85
-ATOM    150  CA  ARG N  30     -39.006  55.592  97.923  1.00 197.52
-ATOM    151  C   ARG N  30     -38.699  55.946  96.471  1.00 199.85
-ATOM    152  O   ARG N  30     -39.117  56.992  95.984  1.00 200.98
-ATOM    153  CB  ARG N  30     -38.017  54.537  98.424  1.00 181.89
-ATOM    154  N   ARG N  31     -51.006  -8.267  89.142  1.00 109.03
-ATOM    155  CA  ARG N  31     -49.989  -9.272  89.425  1.00 126.91
-ATOM    156  C   ARG N  31     -50.111  -9.754  90.871  1.00 131.94
-ATOM    157  O   ARG N  31     -50.528  -8.996  91.741  1.00 129.43
-ATOM    158  CB  ARG N  31     -48.589  -8.709  89.152  1.00 117.19
-ATOM    159  N   PRO N  32     -49.783 -11.020  91.122  1.00 137.37
-ATOM    160  CA  PRO N  32     -49.765 -11.522  92.499  1.00 134.78
-ATOM    161  C   PRO N  32     -48.426 -11.238  93.152  1.00 141.31
-ATOM    162  O   PRO N  32     -47.387 -11.221  92.476  1.00 155.07
-ATOM    163  CB  PRO N  32     -49.987 -13.028  92.323  1.00 143.13
-ATOM    164  CG  PRO N  32     -49.342 -13.325  91.016  1.00 147.62
-ATOM    165  CD  PRO N  32     -49.543 -12.098  90.144  1.00 136.69
-ATOM    166  N   PRO N  33     -48.401 -11.025  94.461  1.00 131.25
-ATOM    167  CA  PRO N  33     -47.152 -10.647  95.125  1.00 135.13
-ATOM    168  C   PRO N  33     -46.245 -11.843  95.372  1.00 136.20
-ATOM    169  O   PRO N  33     -46.702 -12.975  95.557  1.00 135.61
-ATOM    170  CB  PRO N  33     -47.635 -10.043  96.446  1.00 144.18
-ATOM    171  CG  PRO N  33     -48.909 -10.778  96.728  1.00 140.82
-ATOM    172  CD  PRO N  33     -49.540 -11.068  95.393  1.00 130.30
-ATOM    173  N   SER N  34     -44.937 -11.570  95.368  1.00 135.07
-ATOM    174  CA  SER N  34     -43.954 -12.587  95.713  1.00 137.17
-ATOM    175  C   SER N  34     -44.226 -13.098  97.116  1.00 142.38
-ATOM    176  O   SER N  34     -44.864 -12.429  97.929  1.00 156.61
-ATOM    177  CB  SER N  34     -42.532 -12.028  95.655  1.00 133.69
-ATOM    178  N   ALA N  35     -43.736 -14.306  97.393  1.00 136.03
-ATOM    179  CA  ALA N  35     -43.846 -14.851  98.741  1.00 150.49
-ATOM    180  C   ALA N  35     -43.359 -13.835  99.767  1.00 155.41
-ATOM    181  O   ALA N  35     -44.079 -13.485 100.715  1.00 155.38
-ATOM    182  CB  ALA N  35     -43.052 -16.156  98.838  1.00 163.74
-ATOM    183  N   PHE N  36     -42.153 -13.307  99.546  1.00 149.02
-ATOM    184  CA  PHE N  36     -41.602 -12.267 100.402  1.00 141.31
-ATOM    185  C   PHE N  36     -42.532 -11.072 100.514  1.00 140.40
-ATOM    186  O   PHE N  36     -42.587 -10.429 101.564  1.00 149.47
-ATOM    187  CB  PHE N  36     -40.239 -11.841  99.860  1.00 132.98
-ATOM    188  CG  PHE N  36     -39.761 -10.516 100.375  1.00 131.43
-ATOM    189  CD1 PHE N  36     -39.272 -10.386 101.665  1.00 132.03
-ATOM    190  CD2 PHE N  36     -39.778  -9.402  99.558  1.00 135.92
-ATOM    191  CE1 PHE N  36     -38.827  -9.165 102.131  1.00 131.67
-ATOM    192  CE2 PHE N  36     -39.331  -8.175 100.019  1.00 134.41
-ATOM    193  CZ  PHE N  36     -38.855  -8.059 101.306  1.00 133.73
-ATOM    194  N   PHE N  37     -43.315 -10.795  99.470  1.00 145.59
-ATOM    195  CA  PHE N  37     -44.137  -9.585  99.445  1.00 143.59
-ATOM    196  C   PHE N  37     -45.381  -9.730 100.324  1.00 155.45
-ATOM    197  O   PHE N  37     -45.723  -8.824 101.102  1.00 163.10
-ATOM    198  CB  PHE N  37     -44.519  -9.262  98.000  1.00 136.24
-ATOM    199  CG  PHE N  37     -44.249  -7.850  97.617  1.00 127.16
-ATOM    200  CD1 PHE N  37     -45.267  -7.037  97.150  1.00 132.00
-ATOM    201  CD2 PHE N  37     -42.977  -7.320  97.757  1.00 120.25
-ATOM    202  CE1 PHE N  37     -45.014  -5.712  96.807  1.00 137.06
-ATOM    203  CE2 PHE N  37     -42.711  -6.005  97.426  1.00 121.02
-ATOM    204  CZ  PHE N  37     -43.729  -5.194  96.946  1.00 130.66
-ATOM    205  N   LEU N  38     -46.086 -10.859 100.197  1.00 152.66
-ATOM    206  CA  LEU N  38     -47.201 -11.149 101.093  1.00 156.23
-ATOM    207  C   LEU N  38     -46.721 -11.265 102.537  1.00 156.00
-ATOM    208  O   LEU N  38     -47.382 -10.778 103.470  1.00 158.20
-ATOM    209  CB  LEU N  38     -47.901 -12.432 100.640  1.00 142.48
-ATOM    210  N   PHE N  39     -45.569 -11.913 102.736  1.00 146.02
-ATOM    211  CA  PHE N  39     -44.927 -11.928 104.045  1.00 145.20
-ATOM    212  C   PHE N  39     -44.753 -10.518 104.592  1.00 151.75
-ATOM    213  O   PHE N  39     -45.046 -10.247 105.762  1.00 156.76
-ATOM    214  CB  PHE N  39     -43.570 -12.622 103.937  1.00 145.22
-ATOM    215  CG  PHE N  39     -42.694 -12.435 105.144  1.00 149.43
-ATOM    216  CD1 PHE N  39     -42.718 -13.357 106.177  1.00 157.16
-ATOM    217  CD2 PHE N  39     -41.844 -11.344 105.246  1.00 148.73
-ATOM    218  CE1 PHE N  39     -41.915 -13.196 107.289  1.00 154.34
-ATOM    219  CE2 PHE N  39     -41.041 -11.174 106.361  1.00 152.23
-ATOM    220  CZ  PHE N  39     -41.072 -12.104 107.381  1.00 150.29
-ATOM    221  N   CYS N  40     -44.228  -9.620 103.757  1.00 154.26
-ATOM    222  CA  CYS N  40     -43.962  -8.248 104.168  1.00 149.19
-ATOM    223  C   CYS N  40     -45.247  -7.538 104.571  1.00 156.42
-ATOM    224  O   CYS N  40     -45.274  -6.794 105.561  1.00 163.15
-ATOM    225  CB  CYS N  40     -43.271  -7.513 103.020  1.00 146.04
-ATOM    226  SG  CYS N  40     -41.905  -6.428 103.460  1.00 163.22
-ATOM    227  N   SER N  41     -46.325  -7.756 103.812  1.00 157.52
-ATOM    228  CA  SER N  41     -47.599  -7.130 104.159  1.00 163.50
-ATOM    229  C   SER N  41     -48.128  -7.654 105.493  1.00 164.64
-ATOM    230  O   SER N  41     -48.701  -6.892 106.285  1.00 169.41
-ATOM    231  CB  SER N  41     -48.623  -7.350 103.044  1.00 158.80
-ATOM    232  OG  SER N  41     -49.155  -8.659 103.091  1.00 154.12
-ATOM    233  N   GLU N  42     -47.927  -8.951 105.767  1.00 159.17
-ATOM    234  CA  GLU N  42     -48.398  -9.536 107.025  1.00 159.23
-ATOM    235  C   GLU N  42     -47.541  -9.123 108.223  1.00 159.15
-ATOM    236  O   GLU N  42     -48.060  -9.008 109.340  1.00 164.96
-ATOM    237  CB  GLU N  42     -48.432 -11.058 106.911  1.00 154.86
-ATOM    238  N   TYR N  43     -46.241  -8.907 108.019  1.00 157.75
-ATOM    239  CA  TYR N  43     -45.319  -8.537 109.091  1.00 157.08
-ATOM    240  C   TYR N  43     -45.138  -7.031 109.260  1.00 161.22
-ATOM    241  O   TYR N  43     -44.405  -6.612 110.165  1.00 158.03
-ATOM    242  CB  TYR N  43     -43.944  -9.159 108.850  1.00 149.48
-ATOM    243  CG  TYR N  43     -43.803 -10.561 109.357  1.00 144.48
-ATOM    244  CD1 TYR N  43     -42.714 -10.923 110.135  1.00 145.99
-ATOM    245  CD2 TYR N  43     -44.756 -11.525 109.065  1.00 150.33
-ATOM    246  CE1 TYR N  43     -42.569 -12.210 110.602  1.00 152.07
-ATOM    247  CE2 TYR N  43     -44.623 -12.820 109.531  1.00 158.86
-ATOM    248  CZ  TYR N  43     -43.524 -13.155 110.302  1.00 154.50
-ATOM    249  OH  TYR N  43     -43.365 -14.435 110.779  1.00 147.25
-ATOM    250  N   ARG N  44     -45.736  -6.212 108.395  1.00 162.18
-ATOM    251  CA  ARG N  44     -45.733  -4.768 108.623  1.00 149.26
-ATOM    252  C   ARG N  44     -46.251  -4.375 110.002  1.00 152.26
-ATOM    253  O   ARG N  44     -45.567  -3.601 110.689  1.00 155.11
-ATOM    254  CB  ARG N  44     -46.528  -4.077 107.505  1.00 150.78
-ATOM    255  N   PRO N  45     -47.407  -4.861 110.476  1.00 149.15
-ATOM    256  CA  PRO N  45     -47.873  -4.430 111.807  1.00 148.73
-ATOM    257  C   PRO N  45     -46.952  -4.825 112.957  1.00 148.99
-ATOM    258  O   PRO N  45     -46.830  -4.045 113.904  1.00 149.62
-ATOM    259  CB  PRO N  45     -49.250  -5.098 111.933  1.00 158.65
-ATOM    260  CG  PRO N  45     -49.212  -6.232 110.962  1.00 162.97
-ATOM    261  CD  PRO N  45     -48.404  -5.721 109.815  1.00 160.31
-ATOM    262  N   LYS N  46     -46.294  -5.988 112.917  1.00 148.76
-ATOM    263  CA  LYS N  46     -45.396  -6.376 114.010  1.00 148.55
-ATOM    264  C   LYS N  46     -44.225  -5.398 114.140  1.00 154.85
-ATOM    265  O   LYS N  46     -43.995  -4.793 115.204  1.00 159.87
-ATOM    266  CB  LYS N  46     -44.878  -7.802 113.785  1.00 150.53
-ATOM    267  CG  LYS N  46     -44.031  -8.339 114.941  1.00 157.08
-ATOM    268  CD  LYS N  46     -43.227  -9.572 114.548  1.00 156.50
-ATOM    269  CE  LYS N  46     -44.119 -10.637 113.933  1.00 156.77
-ATOM    270  NZ  LYS N  46     -43.378 -11.901 113.661  1.00 161.71
-ATOM    271  N   ILE N  47     -43.466  -5.243 113.050  1.00 155.55
-ATOM    272  CA  ILE N  47     -42.334  -4.323 113.012  1.00 148.69
-ATOM    273  C   ILE N  47     -42.780  -2.888 113.278  1.00 148.64
-ATOM    274  O   ILE N  47     -42.015  -2.091 113.832  1.00 144.62
-ATOM    275  CB  ILE N  47     -41.604  -4.461 111.658  1.00 139.59
-ATOM    276  N   LYS N  48     -44.017  -2.533 112.906  1.00 152.04
-ATOM    277  CA  LYS N  48     -44.514  -1.180 113.157  1.00 147.74
-ATOM    278  C   LYS N  48     -44.852  -0.967 114.627  1.00 153.51
-ATOM    279  O   LYS N  48     -44.618   0.114 115.179  1.00 153.63
-ATOM    280  CB  LYS N  48     -45.746  -0.902 112.299  1.00 147.06
-ATOM    281  N   GLY N  49     -45.449  -1.970 115.268  1.00 158.25
-ATOM    282  CA  GLY N  49     -45.858  -1.805 116.653  1.00 151.42
-ATOM    283  C   GLY N  49     -44.663  -1.715 117.574  1.00 152.87
-ATOM    284  O   GLY N  49     -44.686  -1.000 118.581  1.00 148.43
-ATOM    285  N   GLU N  50     -43.589  -2.425 117.223  1.00 160.16
-ATOM    286  CA  GLU N  50     -42.382  -2.407 118.044  1.00 158.09
-ATOM    287  C   GLU N  50     -41.577  -1.121 117.869  1.00 151.43
-ATOM    288  O   GLU N  50     -41.031  -0.588 118.845  1.00 147.96
-ATOM    289  CB  GLU N  50     -41.555  -3.655 117.710  1.00 161.93
-ATOM    290  CG  GLU N  50     -42.270  -4.899 118.240  1.00 164.10
-ATOM    291  CD  GLU N  50     -42.939  -4.518 119.577  1.00 163.03
-ATOM    292  OE1 GLU N  50     -42.183  -4.273 120.534  1.00 163.67
-ATOM    293  OE2 GLU N  50     -44.193  -4.390 119.676  1.00 162.79
-ATOM    294  N   HIS N  51     -41.502  -0.625 116.641  1.00 149.26
-ATOM    295  CA  HIS N  51     -40.834   0.629 116.310  1.00 146.99
-ATOM    296  C   HIS N  51     -41.790   1.433 115.429  1.00 150.21
-ATOM    297  O   HIS N  51     -42.003   1.055 114.258  1.00 154.53
-ATOM    298  CB  HIS N  51     -39.508   0.353 115.601  1.00 152.08
-ATOM    299  CG  HIS N  51     -38.508  -0.401 116.433  1.00 149.45
-ATOM    300  ND1 HIS N  51     -38.627  -1.746 116.714  1.00 150.82
-ATOM    301  CD2 HIS N  51     -37.360   0.007 117.025  1.00 142.78
-ATOM    302  CE1 HIS N  51     -37.600  -2.130 117.453  1.00 154.41
-ATOM    303  NE2 HIS N  51     -36.817  -1.084 117.656  1.00 148.94
-ATOM    304  N   PRO N  52     -42.402   2.532 115.942  1.00 150.90
-ATOM    305  CA  PRO N  52     -43.398   3.287 115.153  1.00 148.04
-ATOM    306  C   PRO N  52     -42.833   4.264 114.123  1.00 150.74
-ATOM    307  O   PRO N  52     -43.453   4.482 113.076  1.00 147.95
-ATOM    308  CB  PRO N  52     -44.185   4.045 116.229  1.00 137.67
-ATOM    309  CG  PRO N  52     -43.219   4.194 117.350  1.00 137.81
-ATOM    310  CD  PRO N  52     -42.369   2.966 117.349  1.00 148.95
-ATOM    311  N   GLY N  53     -41.683   4.876 114.405  1.00 147.89
-ATOM    312  CA  GLY N  53     -41.137   5.883 113.513  1.00 149.40
-ATOM    313  C   GLY N  53     -40.123   5.385 112.504  1.00 151.28
-ATOM    314  O   GLY N  53     -39.460   6.185 111.832  1.00 150.43
-ATOM    315  N   LEU N  54     -39.993   4.068 112.382  1.00 142.63
-ATOM    316  CA  LEU N  54     -39.006   3.515 111.470  1.00 135.92
-ATOM    317  C   LEU N  54     -39.360   3.900 110.038  1.00 140.89
-ATOM    318  O   LEU N  54     -40.529   3.839 109.640  1.00 140.33
-ATOM    319  CB  LEU N  54     -38.942   1.997 111.639  1.00 122.97
-ATOM    320  CG  LEU N  54     -37.527   1.436 111.759  1.00 122.03
-ATOM    321  CD1 LEU N  54     -36.675   2.389 112.566  1.00 133.13
-ATOM    322  CD2 LEU N  54     -37.544   0.070 112.408  1.00 129.51
-ATOM    323  N   SER N  55     -38.356   4.337 109.274  1.00 139.63
-ATOM    324  CA  SER N  55     -38.612   4.772 107.906  1.00 137.49
-ATOM    325  C   SER N  55     -38.857   3.573 106.997  1.00 127.32
-ATOM    326  O   SER N  55     -38.573   2.419 107.333  1.00 123.62
-ATOM    327  CB  SER N  55     -37.451   5.602 107.349  1.00 141.12
-ATOM    328  OG  SER N  55     -37.660   5.938 105.976  1.00 144.08
-ATOM    329  N   ILE N  56     -39.394   3.881 105.818  1.00 129.96
-ATOM    330  CA  ILE N  56     -39.659   2.858 104.815  1.00 125.57
-ATOM    331  C   ILE N  56     -38.381   2.135 104.442  1.00 124.32
-ATOM    332  O   ILE N  56     -38.360   0.904 104.324  1.00 119.54
-ATOM    333  CB  ILE N  56     -40.330   3.491 103.588  1.00 129.17
-ATOM    334  CG1 ILE N  56     -41.748   3.894 103.937  1.00 134.36
-ATOM    335  CG2 ILE N  56     -40.358   2.521 102.464  1.00 128.65
-ATOM    336  CD1 ILE N  56     -42.070   5.222 103.527  1.00 145.55
-ATOM    337  N   GLY N  57     -37.300   2.887 104.240  1.00 130.37
-ATOM    338  CA  GLY N  57     -36.006   2.259 104.047  1.00 133.94
-ATOM    339  C   GLY N  57     -35.623   1.389 105.224  1.00 134.75
-ATOM    340  O   GLY N  57     -35.199   0.245 105.056  1.00 131.18
-ATOM    341  N   ASP N  58     -35.817   1.904 106.440  1.00 133.08
-ATOM    342  CA  ASP N  58     -35.451   1.146 107.632  1.00 129.36
-ATOM    343  C   ASP N  58     -36.349  -0.080 107.813  1.00 126.35
-ATOM    344  O   ASP N  58     -35.850  -1.194 108.018  1.00 119.48
-ATOM    345  CB  ASP N  58     -35.499   2.060 108.858  1.00 124.53
-ATOM    346  N   VAL N  59     -37.675   0.106 107.742  1.00 127.96
-ATOM    347  CA  VAL N  59     -38.607  -1.009 107.932  1.00 119.19
-ATOM    348  C   VAL N  59     -38.355  -2.101 106.898  1.00 129.40
-ATOM    349  O   VAL N  59     -38.312  -3.296 107.223  1.00 126.63
-ATOM    350  CB  VAL N  59     -40.064  -0.517 107.877  1.00 99.70
-ATOM    351  N   ALA N  60     -38.188  -1.707 105.633  1.00 132.49
-ATOM    352  CA  ALA N  60     -37.960  -2.693 104.588  1.00 124.20
-ATOM    353  C   ALA N  60     -36.589  -3.342 104.729  1.00 122.04
-ATOM    354  O   ALA N  60     -36.452  -4.550 104.512  1.00 124.82
-ATOM    355  CB  ALA N  60     -38.123  -2.044 103.217  1.00 125.29
-ATOM    356  N   LYS N  61     -35.563  -2.567 105.099  1.00 119.72
-ATOM    357  CA  LYS N  61     -34.246  -3.145 105.340  1.00 124.97
-ATOM    358  C   LYS N  61     -34.315  -4.213 106.418  1.00 133.88
-ATOM    359  O   LYS N  61     -33.777  -5.314 106.248  1.00 130.78
-ATOM    360  CB  LYS N  61     -33.261  -2.048 105.742  1.00 118.85
-ATOM    361  CG  LYS N  61     -31.877  -2.151 105.121  1.00 115.15
-ATOM    362  CD  LYS N  61     -31.280  -0.756 104.996  1.00 126.05
-ATOM    363  CE  LYS N  61     -29.889  -0.752 104.385  1.00 132.25
-ATOM    364  NZ  LYS N  61     -29.472   0.645 104.032  1.00 126.43
-ATOM    365  N   LYS N  62     -34.984  -3.909 107.532  1.00 141.01
-ATOM    366  CA  LYS N  62     -35.168  -4.908 108.580  1.00 139.41
-ATOM    367  C   LYS N  62     -35.873  -6.132 108.022  1.00 133.73
-ATOM    368  O   LYS N  62     -35.280  -7.213 107.931  1.00 130.53
-ATOM    369  CB  LYS N  62     -35.955  -4.318 109.753  1.00 132.87
-ATOM    370  N   LEU N  63     -37.123  -5.950 107.572  1.00 133.69
-ATOM    371  CA  LEU N  63     -37.933  -7.045 107.045  1.00 133.27
-ATOM    372  C   LEU N  63     -37.127  -7.945 106.126  1.00 136.21
-ATOM    373  O   LEU N  63     -37.099  -9.171 106.292  1.00 135.97
-ATOM    374  CB  LEU N  63     -39.146  -6.475 106.308  1.00 125.72
-ATOM    375  CG  LEU N  63     -40.239  -5.901 107.207  1.00 136.74
-ATOM    376  CD1 LEU N  63     -41.029  -4.790 106.525  1.00 141.85
-ATOM    377  CD2 LEU N  63     -41.165  -7.016 107.639  1.00 147.61
-ATOM    378  N   GLY N  64     -36.422  -7.338 105.172  1.00 135.18
-ATOM    379  CA  GLY N  64     -35.603  -8.111 104.267  1.00 141.81
-ATOM    380  C   GLY N  64     -34.478  -8.840 104.963  1.00 146.92
-ATOM    381  O   GLY N  64     -34.232 -10.007 104.671  1.00 140.27
-ATOM    382  N   GLU N  65     -33.810  -8.183 105.916  1.00 152.04
-ATOM    383  CA  GLU N  65     -32.680  -8.793 106.612  1.00 155.23
-ATOM    384  C   GLU N  65     -33.120 -10.013 107.421  1.00 155.97
-ATOM    385  O   GLU N  65     -32.575 -11.113 107.256  1.00 151.50
-ATOM    386  CB  GLU N  65     -32.010  -7.748 107.511  1.00 140.03
-ATOM    387  N   MET N  66     -34.126  -9.834 108.289  1.00 155.08
-ATOM    388  CA  MET N  66     -34.571 -10.920 109.167  1.00 148.20
-ATOM    389  C   MET N  66     -35.269 -12.033 108.384  1.00 150.40
-ATOM    390  O   MET N  66     -35.057 -13.221 108.666  1.00 147.24
-ATOM    391  CB  MET N  66     -35.479 -10.380 110.278  1.00 136.61
-ATOM    392  CG  MET N  66     -36.556  -9.409 109.826  1.00 135.06
-ATOM    393  SD  MET N  66     -38.239  -9.918 110.224  1.00 133.19
-ATOM    394  CE  MET N  66     -38.988  -8.333 110.604  1.00 130.62
-ATOM    395  N   TRP N  67     -36.111 -11.675 107.402  1.00 147.08
-ATOM    396  CA  TRP N  67     -36.684 -12.676 106.509  1.00 151.34
-ATOM    397  C   TRP N  67     -35.612 -13.367 105.664  1.00 153.35
-ATOM    398  O   TRP N  67     -35.739 -14.557 105.352  1.00 150.58
-ATOM    399  CB  TRP N  67     -37.739 -12.019 105.612  1.00 145.16
-ATOM    400  CG  TRP N  67     -38.447 -12.977 104.684  1.00 147.45
-ATOM    401  CD1 TRP N  67     -39.661 -13.567 104.884  1.00 144.35
-ATOM    402  CD2 TRP N  67     -37.972 -13.466 103.421  1.00 142.92
-ATOM    403  NE1 TRP N  67     -39.981 -14.378 103.822  1.00 141.94
-ATOM    404  CE2 TRP N  67     -38.957 -14.341 102.914  1.00 139.76
-ATOM    405  CE3 TRP N  67     -36.812 -13.252 102.672  1.00 132.65
-ATOM    406  CZ2 TRP N  67     -38.815 -14.997 101.695  1.00 128.47
-ATOM    407  CZ3 TRP N  67     -36.675 -13.905 101.466  1.00 128.37
-ATOM    408  CH2 TRP N  67     -37.671 -14.765 100.988  1.00 125.83
-ATOM    409  N   ASN N  68     -34.555 -12.648 105.281  1.00 147.72
-ATOM    410  CA  ASN N  68     -33.475 -13.247 104.515  1.00 147.84
-ATOM    411  C   ASN N  68     -32.725 -14.260 105.363  1.00 153.83
-ATOM    412  O   ASN N  68     -32.354 -15.335 104.879  1.00 152.20
-ATOM    413  CB  ASN N  68     -32.546 -12.138 104.011  1.00 144.06
-ATOM    414  CG  ASN N  68     -31.623 -12.591 102.886  1.00 158.34
-ATOM    415  OD1 ASN N  68     -31.952 -13.491 102.108  1.00 163.36
-ATOM    416  ND2 ASN N  68     -30.456 -11.958 102.797  1.00 154.58
-ATOM    417  N   ASN N  69     -32.529 -13.948 106.647  1.00 158.70
-ATOM    418  CA  ASN N  69     -31.828 -14.870 107.535  1.00 160.81
-ATOM    419  C   ASN N  69     -32.618 -16.166 107.759  1.00 165.05
-ATOM    420  O   ASN N  69     -32.010 -17.222 107.973  1.00 160.73
-ATOM    421  CB  ASN N  69     -31.512 -14.175 108.865  1.00 146.14
-ATOM    422  N   THR N  70     -33.954 -16.121 107.668  1.00 160.37
-ATOM    423  CA  THR N  70     -34.806 -17.304 107.903  1.00 156.69
-ATOM    424  C   THR N  70     -34.561 -18.446 106.914  1.00 153.31
-ATOM    425  O   THR N  70     -33.976 -18.252 105.852  1.00 158.84
-ATOM    426  CB  THR N  70     -36.327 -16.964 107.852  1.00 159.67
-ATOM    427  OG1 THR N  70     -37.043 -17.845 108.733  1.00 173.68
-ATOM    428  CG2 THR N  70     -36.884 -17.147 106.437  1.00 153.26
-ATOM    429  N   ASP N  71     -38.818 -22.561 107.011  1.00 174.63
-ATOM    430  CA  ASP N  71     -39.629 -21.687 107.851  1.00 176.79
-ATOM    431  C   ASP N  71     -40.574 -20.847 106.999  1.00 179.88
-ATOM    432  O   ASP N  71     -41.744 -20.670 107.333  1.00 180.72
-ATOM    433  CB  ASP N  71     -38.742 -20.774 108.697  1.00 164.53
-ATOM    434  N   LYS N  72     -40.035 -20.339 105.892  1.00 178.51
-ATOM    435  CA  LYS N  72     -40.753 -19.467 104.977  1.00 176.46
-ATOM    436  C   LYS N  72     -41.461 -20.233 103.862  1.00 183.14
-ATOM    437  O   LYS N  72     -41.885 -19.620 102.876  1.00 188.26
-ATOM    438  CB  LYS N  72     -39.795 -18.435 104.378  1.00 161.63
-ATOM    439  N   GLN N  73     -41.602 -21.551 103.992  1.00 184.98
-ATOM    440  CA  GLN N  73     -42.247 -22.327 102.936  1.00 188.94
-ATOM    441  C   GLN N  73     -43.726 -21.992 102.730  1.00 191.72
-ATOM    442  O   GLN N  73     -44.150 -21.931 101.561  1.00 194.17
-ATOM    443  CB  GLN N  73     -42.051 -23.823 103.215  1.00 172.10
-ATOM    444  CG  GLN N  73     -42.384 -24.733 102.038  1.00 158.39
-ATOM    445  CD  GLN N  73     -43.718 -25.438 102.198  1.00 152.53
-ATOM    446  OE1 GLN N  73     -44.556 -25.035 103.008  1.00 163.22
-ATOM    447  NE2 GLN N  73     -43.919 -26.500 101.429  1.00 135.57
-ATOM    448  N   PRO N  74     -44.555 -21.777 103.767  1.00 175.70
-ATOM    449  CA  PRO N  74     -45.960 -21.411 103.495  1.00 176.94
-ATOM    450  C   PRO N  74     -46.114 -20.137 102.677  1.00 180.72
-ATOM    451  O   PRO N  74     -47.084 -20.012 101.912  1.00 175.33
-ATOM    452  CB  PRO N  74     -46.566 -21.262 104.901  1.00 178.08
-ATOM    453  CG  PRO N  74     -45.400 -21.094 105.813  1.00 177.16
-ATOM    454  CD  PRO N  74     -44.325 -21.940 105.214  1.00 175.55
-ATOM    455  N   TYR N  75     -45.185 -19.188 102.812  1.00 183.34
-ATOM    456  CA  TYR N  75     -45.196 -18.013 101.947  1.00 174.90
-ATOM    457  C   TYR N  75     -45.047 -18.413 100.482  1.00 176.47
-ATOM    458  O   TYR N  75     -45.796 -17.938  99.621  1.00 181.23
-ATOM    459  CB  TYR N  75     -44.088 -17.046 102.366  1.00 165.30
-ATOM    460  N   GLU N  76     -44.086 -19.295 100.178  1.00 170.67
-ATOM    461  CA  GLU N  76     -43.907 -19.734  98.797  1.00 163.11
-ATOM    462  C   GLU N  76     -45.128 -20.498  98.299  1.00 167.93
-ATOM    463  O   GLU N  76     -45.494 -20.402  97.121  1.00 166.11
-ATOM    464  CB  GLU N  76     -42.649 -20.592  98.670  1.00 161.76
-ATOM    465  N   LYS N  77     -45.776 -21.260  99.184  1.00 180.60
-ATOM    466  CA  LYS N  77     -46.997 -21.962  98.796  1.00 176.90
-ATOM    467  C   LYS N  77     -48.091 -20.982  98.393  1.00 175.48
-ATOM    468  O   LYS N  77     -48.692 -21.107  97.316  1.00 176.26
-ATOM    469  CB  LYS N  77     -47.479 -22.847  99.943  1.00 168.79
-ATOM    470  CG  LYS N  77     -46.447 -23.817 100.457  1.00 158.28
-ATOM    471  CD  LYS N  77     -46.206 -24.922  99.467  1.00 144.55
-ATOM    472  CE  LYS N  77     -44.935 -24.686  98.680  1.00 148.40
-ATOM    473  NZ  LYS N  77     -45.236 -24.670  97.225  1.00 148.10
-ATOM    474  N   LYS N  78     -48.390 -20.022  99.275  1.00 169.44
-ATOM    475  CA  LYS N  78     -49.400 -19.018  98.961  1.00 163.94
-ATOM    476  C   LYS N  78     -49.047 -18.280  97.678  1.00 163.66
-ATOM    477  O   LYS N  78     -49.928 -17.971  96.865  1.00 157.20
-ATOM    478  CB  LYS N  78     -49.553 -18.041 100.126  1.00 163.03
-ATOM    479  N   ALA N  79     -47.757 -18.006  97.472  1.00 166.32
-ATOM    480  CA  ALA N  79     -47.340 -17.319  96.258  1.00 161.23
-ATOM    481  C   ALA N  79     -47.641 -18.156  95.024  1.00 165.37
-ATOM    482  O   ALA N  79     -48.176 -17.639  94.040  1.00 171.56
-ATOM    483  CB  ALA N  79     -45.854 -16.972  96.329  1.00 162.03
-ATOM    484  N   ALA N  80     -47.318 -19.452  95.058  1.00 164.86
-ATOM    485  CA  ALA N  80     -47.599 -20.306  93.906  1.00 161.26
-ATOM    486  C   ALA N  80     -49.096 -20.384  93.631  1.00 162.13
-ATOM    487  O   ALA N  80     -49.531 -20.343  92.469  1.00 162.78
-ATOM    488  CB  ALA N  80     -47.022 -21.702  94.130  1.00 163.58
-ATOM    489  N   LYS N  81     -49.900 -20.489  94.691  1.00 159.83
-ATOM    490  CA  LYS N  81     -51.346 -20.558  94.510  1.00 157.56
-ATOM    491  C   LYS N  81     -51.872 -19.288  93.852  1.00 159.88
-ATOM    492  O   LYS N  81     -52.590 -19.349  92.845  1.00 160.24
-ATOM    493  CB  LYS N  81     -52.033 -20.803  95.852  1.00 164.32
-ATOM    494  N   LEU N  82     -51.518 -18.124  94.407  1.00 158.47
-ATOM    495  CA  LEU N  82     -51.968 -16.864  93.823  1.00 155.88
-ATOM    496  C   LEU N  82     -51.453 -16.706  92.400  1.00 160.47
-ATOM    497  O   LEU N  82     -52.142 -16.147  91.538  1.00 153.52
-ATOM    498  CB  LEU N  82     -51.508 -15.682  94.674  1.00 155.10
-ATOM    499  CG  LEU N  82     -51.956 -15.551  96.127  1.00 151.59
-ATOM    500  CD1 LEU N  82     -52.145 -14.075  96.473  1.00 144.71
-ATOM    501  CD2 LEU N  82     -53.218 -16.347  96.409  1.00 157.19
-ATOM    502  N   LYS N  83     -50.240 -17.196  92.139  1.00 163.85
-ATOM    503  CA  LYS N  83     -49.672 -17.141  90.800  1.00 161.86
-ATOM    504  C   LYS N  83     -50.565 -17.862  89.805  1.00 167.84
-ATOM    505  O   LYS N  83     -50.993 -17.277  88.807  1.00 171.99
-ATOM    506  CB  LYS N  83     -48.265 -17.745  90.800  1.00 162.86
-ATOM    507  CG  LYS N  83     -47.768 -18.218  89.433  1.00 158.82
-ATOM    508  CD  LYS N  83     -46.608 -19.203  89.591  1.00 161.20
-ATOM    509  CE  LYS N  83     -46.716 -20.382  88.622  1.00 155.20
-ATOM    510  NZ  LYS N  83     -45.636 -21.398  88.828  1.00 137.44
-ATOM    511  N   GLU N  84     -50.862 -19.138  90.063  1.00 171.27
-ATOM    512  CA  GLU N  84     -51.677 -19.880  89.102  1.00 166.83
-ATOM    513  C   GLU N  84     -53.093 -19.319  89.019  1.00 168.81
-ATOM    514  O   GLU N  84     -53.698 -19.313  87.934  1.00 172.34
-ATOM    515  CB  GLU N  84     -51.689 -21.371  89.440  1.00 160.98
-ATOM    516  CG  GLU N  84     -51.998 -21.725  90.885  1.00 163.47
-ATOM    517  CD  GLU N  84     -51.480 -23.110  91.260  1.00 162.01
-ATOM    518  OE1 GLU N  84     -50.247 -23.324  91.186  1.00 158.90
-ATOM    519  OE2 GLU N  84     -52.301 -23.985  91.618  1.00 150.29
-ATOM    520  N   LYS N  85     -53.622 -18.814  90.137  1.00 165.60
-ATOM    521  CA  LYS N  85     -54.903 -18.121  90.089  1.00 165.90
-ATOM    522  C   LYS N  85     -54.857 -16.956  89.110  1.00 169.10
-ATOM    523  O   LYS N  85     -55.772 -16.781  88.298  1.00 173.21
-ATOM    524  CB  LYS N  85     -55.292 -17.633  91.483  1.00 165.33
-ATOM    525  N   TYR N  86     -53.791 -16.156  89.160  1.00 172.95
-ATOM    526  CA  TYR N  86     -53.684 -15.024  88.244  1.00 177.07
-ATOM    527  C   TYR N  86     -53.464 -15.494  86.813  1.00 170.97
-ATOM    528  O   TYR N  86     -53.948 -14.865  85.865  1.00 173.17
-ATOM    529  CB  TYR N  86     -52.556 -14.091  88.682  1.00 177.51
-ATOM    530  N   GLU N  87     -52.723 -16.588  86.641  1.00 175.84
-ATOM    531  CA  GLU N  87     -52.527 -17.159  85.314  1.00 172.55
-ATOM    532  C   GLU N  87     -53.867 -17.431  84.658  1.00 176.08
-ATOM    533  O   GLU N  87     -54.113 -17.019  83.518  1.00 176.49
-ATOM    534  CB  GLU N  87     -51.708 -18.449  85.405  1.00 175.17
-ATOM    535  CG  GLU N  87     -50.323 -18.278  85.995  1.00 169.59
-ATOM    536  CD  GLU N  87     -49.305 -17.832  84.972  1.00 159.66
-ATOM    537  OE1 GLU N  87     -48.452 -18.658  84.591  1.00 155.54
-ATOM    538  OE2 GLU N  87     -49.359 -16.661  84.544  1.00 163.67
-ATOM    539  N   LYS N  88     -54.762 -18.101  85.390  1.00 181.32
-ATOM    540  CA  LYS N  88     -56.085 -18.400  84.850  1.00 172.66
-ATOM    541  C   LYS N  88     -56.804 -17.132  84.383  1.00 171.62
-ATOM    542  O   LYS N  88     -57.409 -17.122  83.305  1.00 166.92
-ATOM    543  CB  LYS N  88     -56.911 -19.158  85.891  1.00 166.46
-ATOM    544  N   ASP N  89     -56.716 -16.043  85.155  1.00 179.43
-ATOM    545  CA  ASP N  89     -57.363 -14.775  84.809  1.00 172.22
-ATOM    546  C   ASP N  89     -56.923 -14.236  83.451  1.00 172.92
-ATOM    547  O   ASP N  89     -55.775 -13.816  83.276  1.00 169.63
-ATOM    548  CB  ASP N  89     -57.089 -13.721  85.886  1.00 165.57
-ATOM    549  N   ILE N  90     -57.845 -14.212  82.496  1.00 173.55
-ATOM    550  CA  ILE N  90     -57.569 -13.777  81.135  1.00 167.04
-ATOM    551  C   ILE N  90     -57.994 -12.327  80.965  1.00 160.30
-ATOM    552  O   ILE N  90     -58.560 -11.733  81.881  1.00 158.92
-ATOM    553  CB  ILE N  90     -58.283 -14.689  80.117  1.00 155.03
-
-</content>
-</file>
-<file>
-<stream>input</stream>
 <name>/Users/cnotredame//.t_coffee//cache/1QRVB.pdb</name>
 <content>HEADER    GENE REGULATION/DNA                     15-JUN-99   1QRV              
 COMPND   1 CHAIN: B;
@@ -4019,17 +4019,17 @@ ATOM    577  ND2 ASN B  71       7.006 -15.595 -21.021  1.00 80.90
 <file>
 <stream>output</stream>
 <name>sample_seq1_pdb2.template_list</name>
-<content>>hmgt_mouse  _P_ 6ERQG
+<content>>hmgl_wheat  _P_ 6CIMN
+>hmgt_mouse  _P_ 6ERQG
 >hmgb_chite  _P_ 1QRVB
->hmgl_wheat  _P_ 6CIMN
 </content>
 </file>
 <file>
 <stream>input</stream>
 <name>/Users/cnotredame//.t_coffee//cache/1QRVB_6CIMN.sap_results</name>
-<content> file1 = 76752_1.3894.sap_tmp
+<content> file1 = 78626_1.1408.sap_tmp
  prot1->Compound =  CHAIN: B;                                                  
- file2 = 76752_2.2836.sap_tmp
+ file2 = 78626_2.2400.sap_tmp
  prot2->Compound =  CHAIN: N;                                                  
 ARNDCQEGHILKMFPSTWYVBZX
 matrix constant = 8
@@ -4039,7 +4039,7 @@ Cycle 3, 20 residues selected
 Cycle 4, 24 residues selected
 Cycle 5, 27 residues selected
 
- score = 2372.263672
+ score = 2382.213867
 
 Percent sel on aln =  100.00
 Percent aln in sel =   42.19
@@ -4107,31 +4107,31 @@ Percent aln in sel =   42.19
   K   68  23.4  63 R  
  *D   69   0.3  64 A  
   I   70   0.0  65 V* 
-76752_2.2836.sap_tmp Weighted RMSd =     nan over 64 atoms 46.860996 3148.777100  40.6 2.662126
-76752_2.2836.sap_tmp Un-weighted RMSd =   0.664 over best 38 atoms ( 3148.777100   40.6 )
-76752_2.2836.sap_tmp Un-weighted RMSd =   0.891 over best 48 atoms ( 3148.777100   40.6 )
-76752_2.2836.sap_tmp Un-weighted RMSd =   0.940 over best 52 atoms ( 3148.777100   40.6 )
-76752_2.2836.sap_tmp Un-weighted RMSd =   0.945 over best 54 atoms ( 3148.777100   40.6 )
-76752_2.2836.sap_tmp Un-weighted RMSd =   1.007 over best 56 atoms ( 3148.777100   40.6 )
-76752_2.2836.sap_tmp Un-weighted RMSd =   1.007 over best 56 atoms ( 3148.777100   40.6 )
-76752_2.2836.sap_tmp Un-weighted RMSd =   1.011 over best 58 atoms ( 3148.777100   40.6 )
-76752_2.2836.sap_tmp Un-weighted RMSd =   1.128 over best 59 atoms ( 3148.777100   40.6 )
-76752_2.2836.sap_tmp Un-weighted RMSd =   1.128 over best 59 atoms ( 3148.777100   40.6 )
-76752_2.2836.sap_tmp Un-weighted RMSd =   1.128 over best 59 atoms ( 3148.777100   40.6 )
-76752_2.2836.sap_tmp Un-weighted RMSd =   1.128 over best 59 atoms ( 3148.777100   40.6 )
-76752_2.2836.sap_tmp Un-weighted RMSd =  11.310 over best 61 atoms ( 3148.777100   40.6 )
-76752_2.2836.sap_tmp Un-weighted RMSd =  11.310 over best 61 atoms ( 3148.777100   40.6 )
-76752_2.2836.sap_tmp Un-weighted RMSd =  11.310 over best 61 atoms ( 3148.777100   40.6 )
-76752_2.2836.sap_tmp Un-weighted RMSd =  11.310 over best 61 atoms ( 3148.777100   40.6 )
-76752_2.2836.sap_tmp Un-weighted RMSd =  14.131 over all 64 matched atoms 46.860996 3148.777100   40.6 2.662126
+78626_2.2400.sap_tmp Weighted RMSd =     nan over 64 atoms 46.860996 3148.777100  40.6 2.662126
+78626_2.2400.sap_tmp Un-weighted RMSd =   0.664 over best 38 atoms ( 3148.777100   40.6 )
+78626_2.2400.sap_tmp Un-weighted RMSd =   0.891 over best 48 atoms ( 3148.777100   40.6 )
+78626_2.2400.sap_tmp Un-weighted RMSd =   0.940 over best 52 atoms ( 3148.777100   40.6 )
+78626_2.2400.sap_tmp Un-weighted RMSd =   0.945 over best 54 atoms ( 3148.777100   40.6 )
+78626_2.2400.sap_tmp Un-weighted RMSd =   1.007 over best 56 atoms ( 3148.777100   40.6 )
+78626_2.2400.sap_tmp Un-weighted RMSd =   1.007 over best 56 atoms ( 3148.777100   40.6 )
+78626_2.2400.sap_tmp Un-weighted RMSd =   1.011 over best 58 atoms ( 3148.777100   40.6 )
+78626_2.2400.sap_tmp Un-weighted RMSd =   1.128 over best 59 atoms ( 3148.777100   40.6 )
+78626_2.2400.sap_tmp Un-weighted RMSd =   1.128 over best 59 atoms ( 3148.777100   40.6 )
+78626_2.2400.sap_tmp Un-weighted RMSd =   1.128 over best 59 atoms ( 3148.777100   40.6 )
+78626_2.2400.sap_tmp Un-weighted RMSd =   1.128 over best 59 atoms ( 3148.777100   40.6 )
+78626_2.2400.sap_tmp Un-weighted RMSd =  11.310 over best 61 atoms ( 3148.777100   40.6 )
+78626_2.2400.sap_tmp Un-weighted RMSd =  11.310 over best 61 atoms ( 3148.777100   40.6 )
+78626_2.2400.sap_tmp Un-weighted RMSd =  11.310 over best 61 atoms ( 3148.777100   40.6 )
+78626_2.2400.sap_tmp Un-weighted RMSd =  11.310 over best 61 atoms ( 3148.777100   40.6 )
+78626_2.2400.sap_tmp Un-weighted RMSd =  14.131 over all 64 matched atoms 46.860996 3148.777100   40.6 2.662126
 </content>
 </file>
 <file>
 <stream>input</stream>
 <name>/Users/cnotredame//.t_coffee//cache/1QRVB_6ERQG.sap_results</name>
-<content> file1 = 76752_1.1176.sap_tmp
+<content> file1 = 78626_1.1737.sap_tmp
  prot1->Compound =  CHAIN: B;                                                  
- file2 = 76752_2.1222.sap_tmp
+ file2 = 78626_2.9545.sap_tmp
  prot2->Compound =  CHAIN: G;                                                  
 ARNDCQEGHILKMFPSTWYVBZX
 matrix constant = 8
@@ -4211,31 +4211,31 @@ Percent aln in sel =   40.91
  *E   66  35.6  69 E  
   E   67  25.6  70 A  
  *Q   68   0.0  71 N  
-76752_2.1222.sap_tmp Weighted RMSd =   0.943 over 66 atoms 56.105255 3452.654541  28.8 87.010040
-76752_2.1222.sap_tmp Un-weighted RMSd =   0.982 over best 50 atoms ( 3452.654541   28.8 )
-76752_2.1222.sap_tmp Un-weighted RMSd =   1.041 over best 56 atoms ( 3452.654541   28.8 )
-76752_2.1222.sap_tmp Un-weighted RMSd =   1.036 over best 57 atoms ( 3452.654541   28.8 )
-76752_2.1222.sap_tmp Un-weighted RMSd =   1.102 over best 58 atoms ( 3452.654541   28.8 )
-76752_2.1222.sap_tmp Un-weighted RMSd =   1.096 over best 59 atoms ( 3452.654541   28.8 )
-76752_2.1222.sap_tmp Un-weighted RMSd =   1.143 over best 63 atoms ( 3452.654541   28.8 )
-76752_2.1222.sap_tmp Un-weighted RMSd =   1.143 over best 63 atoms ( 3452.654541   28.8 )
-76752_2.1222.sap_tmp Un-weighted RMSd =   1.143 over best 63 atoms ( 3452.654541   28.8 )
-76752_2.1222.sap_tmp Un-weighted RMSd =   1.143 over best 63 atoms ( 3452.654541   28.8 )
-76752_2.1222.sap_tmp Un-weighted RMSd =   1.143 over best 63 atoms ( 3452.654541   28.8 )
-76752_2.1222.sap_tmp Un-weighted RMSd =   1.143 over best 63 atoms ( 3452.654541   28.8 )
-76752_2.1222.sap_tmp Un-weighted RMSd =   1.311 over best 66 atoms ( 3452.654541   28.8 )
-76752_2.1222.sap_tmp Un-weighted RMSd =   1.311 over best 66 atoms ( 3452.654541   28.8 )
-76752_2.1222.sap_tmp Un-weighted RMSd =   1.311 over best 66 atoms ( 3452.654541   28.8 )
-76752_2.1222.sap_tmp Un-weighted RMSd =   1.311 over best 66 atoms ( 3452.654541   28.8 )
-76752_2.1222.sap_tmp Un-weighted RMSd =   1.311 over all 66 matched atoms 56.105255 3452.654541   28.8 87.010040
+78626_2.9545.sap_tmp Weighted RMSd =   0.943 over 66 atoms 56.105255 3452.654541  28.8 87.010040
+78626_2.9545.sap_tmp Un-weighted RMSd =   0.982 over best 50 atoms ( 3452.654541   28.8 )
+78626_2.9545.sap_tmp Un-weighted RMSd =   1.041 over best 56 atoms ( 3452.654541   28.8 )
+78626_2.9545.sap_tmp Un-weighted RMSd =   1.036 over best 57 atoms ( 3452.654541   28.8 )
+78626_2.9545.sap_tmp Un-weighted RMSd =   1.102 over best 58 atoms ( 3452.654541   28.8 )
+78626_2.9545.sap_tmp Un-weighted RMSd =   1.096 over best 59 atoms ( 3452.654541   28.8 )
+78626_2.9545.sap_tmp Un-weighted RMSd =   1.143 over best 63 atoms ( 3452.654541   28.8 )
+78626_2.9545.sap_tmp Un-weighted RMSd =   1.143 over best 63 atoms ( 3452.654541   28.8 )
+78626_2.9545.sap_tmp Un-weighted RMSd =   1.143 over best 63 atoms ( 3452.654541   28.8 )
+78626_2.9545.sap_tmp Un-weighted RMSd =   1.143 over best 63 atoms ( 3452.654541   28.8 )
+78626_2.9545.sap_tmp Un-weighted RMSd =   1.143 over best 63 atoms ( 3452.654541   28.8 )
+78626_2.9545.sap_tmp Un-weighted RMSd =   1.143 over best 63 atoms ( 3452.654541   28.8 )
+78626_2.9545.sap_tmp Un-weighted RMSd =   1.311 over best 66 atoms ( 3452.654541   28.8 )
+78626_2.9545.sap_tmp Un-weighted RMSd =   1.311 over best 66 atoms ( 3452.654541   28.8 )
+78626_2.9545.sap_tmp Un-weighted RMSd =   1.311 over best 66 atoms ( 3452.654541   28.8 )
+78626_2.9545.sap_tmp Un-weighted RMSd =   1.311 over best 66 atoms ( 3452.654541   28.8 )
+78626_2.9545.sap_tmp Un-weighted RMSd =   1.311 over all 66 matched atoms 56.105255 3452.654541   28.8 87.010040
 </content>
 </file>
 <file>
 <stream>input</stream>
 <name>/Users/cnotredame//.t_coffee//cache/6CIMN_6ERQG.sap_results</name>
-<content> file1 = 76752_1.7137.sap_tmp
+<content> file1 = 78626_1.1257.sap_tmp
  prot1->Compound =  CHAIN: N;                                                  
- file2 = 76752_2.4669.sap_tmp
+ file2 = 78626_2.6363.sap_tmp
  prot2->Compound =  CHAIN: G;                                                  
 ARNDCQEGHILKMFPSTWYVBZX
 matrix constant = 8
@@ -4245,7 +4245,7 @@ Cycle 3, 20 residues selected
 Cycle 4, 24 residues selected
 Cycle 5, 27 residues selected
 
- score = 1343.075195
+ score = 1343.074463
 
 Percent sel on aln =  100.00
 Percent aln in sel =   45.76
@@ -4308,23 +4308,23 @@ Percent aln in sel =   45.76
   N   60  19.3  68 K  
  *E   61   0.2  69 D* 
  *M   62   0.0  70 I  
-76752_2.4669.sap_tmp Weighted RMSd =   1.057 over 59 atoms 46.201115 2072.752930  27.1 77.168976
-76752_2.4669.sap_tmp Un-weighted RMSd =   1.082 over best 37 atoms ( 2072.752930   27.1 )
-76752_2.4669.sap_tmp Un-weighted RMSd =   1.111 over best 44 atoms ( 2072.752930   27.1 )
-76752_2.4669.sap_tmp Un-weighted RMSd =   1.159 over best 47 atoms ( 2072.752930   27.1 )
-76752_2.4669.sap_tmp Un-weighted RMSd =   1.208 over best 48 atoms ( 2072.752930   27.1 )
-76752_2.4669.sap_tmp Un-weighted RMSd =   1.381 over best 49 atoms ( 2072.752930   27.1 )
-76752_2.4669.sap_tmp Un-weighted RMSd =   1.381 over best 49 atoms ( 2072.752930   27.1 )
-76752_2.4669.sap_tmp Un-weighted RMSd =   1.371 over best 50 atoms ( 2072.752930   27.1 )
-76752_2.4669.sap_tmp Un-weighted RMSd =   1.561 over best 52 atoms ( 2072.752930   27.1 )
-76752_2.4669.sap_tmp Un-weighted RMSd =   1.561 over best 52 atoms ( 2072.752930   27.1 )
-76752_2.4669.sap_tmp Un-weighted RMSd =   1.561 over best 52 atoms ( 2072.752930   27.1 )
-76752_2.4669.sap_tmp Un-weighted RMSd =   1.712 over best 55 atoms ( 2072.752930   27.1 )
-76752_2.4669.sap_tmp Un-weighted RMSd =   1.712 over best 55 atoms ( 2072.752930   27.1 )
-76752_2.4669.sap_tmp Un-weighted RMSd =   1.712 over best 55 atoms ( 2072.752930   27.1 )
-76752_2.4669.sap_tmp Un-weighted RMSd =   8.665 over best 56 atoms ( 2072.752930   27.1 )
-76752_2.4669.sap_tmp Un-weighted RMSd =   8.665 over best 56 atoms ( 2072.752930   27.1 )
-76752_2.4669.sap_tmp Un-weighted RMSd =  13.437 over all 59 matched atoms 46.201115 2072.752930   27.1 77.168976
+78626_2.6363.sap_tmp Weighted RMSd =   1.057 over 59 atoms 46.201115 2072.752930  27.1 77.168976
+78626_2.6363.sap_tmp Un-weighted RMSd =   1.082 over best 37 atoms ( 2072.752930   27.1 )
+78626_2.6363.sap_tmp Un-weighted RMSd =   1.111 over best 44 atoms ( 2072.752930   27.1 )
+78626_2.6363.sap_tmp Un-weighted RMSd =   1.159 over best 47 atoms ( 2072.752930   27.1 )
+78626_2.6363.sap_tmp Un-weighted RMSd =   1.208 over best 48 atoms ( 2072.752930   27.1 )
+78626_2.6363.sap_tmp Un-weighted RMSd =   1.381 over best 49 atoms ( 2072.752930   27.1 )
+78626_2.6363.sap_tmp Un-weighted RMSd =   1.381 over best 49 atoms ( 2072.752930   27.1 )
+78626_2.6363.sap_tmp Un-weighted RMSd =   1.371 over best 50 atoms ( 2072.752930   27.1 )
+78626_2.6363.sap_tmp Un-weighted RMSd =   1.561 over best 52 atoms ( 2072.752930   27.1 )
+78626_2.6363.sap_tmp Un-weighted RMSd =   1.561 over best 52 atoms ( 2072.752930   27.1 )
+78626_2.6363.sap_tmp Un-weighted RMSd =   1.561 over best 52 atoms ( 2072.752930   27.1 )
+78626_2.6363.sap_tmp Un-weighted RMSd =   1.712 over best 55 atoms ( 2072.752930   27.1 )
+78626_2.6363.sap_tmp Un-weighted RMSd =   1.712 over best 55 atoms ( 2072.752930   27.1 )
+78626_2.6363.sap_tmp Un-weighted RMSd =   1.712 over best 55 atoms ( 2072.752930   27.1 )
+78626_2.6363.sap_tmp Un-weighted RMSd =   8.665 over best 56 atoms ( 2072.752930   27.1 )
+78626_2.6363.sap_tmp Un-weighted RMSd =   8.665 over best 56 atoms ( 2072.752930   27.1 )
+78626_2.6363.sap_tmp Un-weighted RMSd =  13.437 over all 59 matched atoms 46.201115 2072.752930   27.1 77.168976
 </content>
 </file>
 <file>
@@ -4340,7 +4340,7 @@ Percent aln in sel =   45.76
 <file>
 <stream>output</stream>
 <name>sample_seq1.aln</name>
-<content>CLUSTAL FORMAT for T-COFFEE Version_13.38.3.a77ca2b [http://www.tcoffee.org] [MODE: accurate ], CPU=0.14 sec, SCORE=96, Nseq=4, Len=81 
+<content>CLUSTAL FORMAT for T-COFFEE Version_13.39.0.d675aed [http://www.tcoffee.org] [MODE: accurate ], CPU=0.14 sec, SCORE=96, Nseq=4, Len=81 
 
 hmgl_trybr      kkdsnapkramtsfmffssdfrskh----s-dlsivemskaagaawkelg
 hmgt_mouse      -----kpkrprsayniyvsesfqea----k-ddsaqgklklvneawknls
@@ -4427,64 +4427,64 @@ egekapyvaeaekrkeayernm---------
 >hmgl_wheat
 -----kpkrprsayniyvsesfqea----k-ddsaqgklklvneawknls
 peekqayiqlakddrirydnemksweeqmae
->tmpname_64
+>tmpname_1
 -----kpkrprsayniyvsesfqea----k-ddsaqgklklvneawknls
 peekqayiqlakddrirydnemksweeqmae
->tmpname_65   UR050|UniRef50_UPI000333B2AD [Eval=9.6E-19][id=56.3%][start=154 end=224]
+>tmpname_2   UR050|UniRef50_UPI000333B2AD [Eval=9.6E-19][id=56.3%][start=154 end=224]
 -----kpkkartayniflseyiqss----e-gatiqdkwksayenwknms
 ssqkqvyeqlahddrvryyneiksweeqmie
->tmpname_66   UR050|UniRef50_A0A3B3QYB6 [Eval=1.7E-15][id=46.5%][start=148 end=218]
+>tmpname_3   UR050|UniRef50_A0A3B3QYB6 [Eval=1.7E-15][id=46.5%][start=148 end=218]
 -----kpkrpktglfifiaekypet----k-gatmltktktlmeewkkln
 ttqkqvylqqaedekiryknemkaweehmre
->tmpname_67   UR050|UniRef50_A0A1A6GI08 [Eval=1.5E-13][id=72.1%][start=114 end=156]
+>tmpname_4   UR050|UniRef50_A0A1A6GI08 [Eval=1.5E-13][id=72.1%][start=114 end=156]
 -------------------ksgkna----k-desaqgklrtinqawknls
 sderqayiqlakddrir--------------
->tmpname_68   UR050|UniRef50_S4RPM2 [Eval=4.9E-13][id=43.7%][start=146 end=216]
+>tmpname_5   UR050|UniRef50_S4RPM2 [Eval=4.9E-13][id=43.7%][start=146 end=216]
 -----kpkrpsvpfnifmadnfkrm----t-gssqpeklirlrdewsgld
 dmqkqkyqqlaeddrvrytremaawreqmre
->tmpname_69   UR050|UniRef50_A0A1Y3NCY0 [Eval=7.1E-12][id=41.3%][start=16 end=90]
+>tmpname_6   UR050|UniRef50_A0A1Y3NCY0 [Eval=7.1E-12][id=41.3%][start=16 end=90]
 -----qpkhpssaflfylregyvaq----h-ptkslgfikliskawkels
 deekaiyvkkseedkirynnekkiweeemak
->tmpname_70   UR050|UniRef50_A0A3Q0RXS4 [Eval=7.5E-10][id=47.6%][start=80 end=141]
+>tmpname_7   UR050|UniRef50_A0A3Q0RXS4 [Eval=7.5E-10][id=47.6%][start=80 end=141]
 -----kpkrpcspfsifmsepfeea----r-vms-qakmkslleewrnlf
 shekkvytqlaeddkiyhmveie--------
->tmpname_71   UR050|UniRef50_B5X652 [Eval=9.2E-10][id=47.9%][start=150 end=197]
+>tmpname_8   UR050|UniRef50_B5X652 [Eval=9.2E-10][id=47.9%][start=150 end=197]
 -----kpkrprssfnifmaehfees----k-gtttqgkmkmlredwtkls
 tsqqqvyv-----------------------
->tmpname_72   UR050|UniRef50_A0A3Q2US89 [Eval=4.0E-9][id=40.8%][start=271 end=341]
+>tmpname_9   UR050|UniRef50_A0A3Q2US89 [Eval=4.0E-9][id=40.8%][start=271 end=341]
 -----kpkgkppayaffvadfykeh----k-kkhpeakvklcsekwksms
 peekakfkemakndkrrydqemksy------
->tmpname_73   UR050|UniRef50_V5I0N7 [Eval=0.29][id=43.2%][start=25 end=61]
+>tmpname_10   UR050|UniRef50_V5I0N7 [Eval=0.29][id=43.2%][start=25 end=61]
 -------------------------------------rvklaamewkaad
 aetkqkyvqlaredaaryareykn-------
->tmpname_74   UR050|UniRef50_A0A0G4J3E4 [Eval=2.6E-8][id=42.4%][start=35 end=100]
+>tmpname_11   UR050|UniRef50_A0A0G4J3E4 [Eval=2.6E-8][id=42.4%][start=35 end=100]
 -----kpkrplsafmlwskdarpkv----k-edaafgqlkllgamwkdls
 dedkapyvkmagedrarydtel---------
->tmpname_75   UR050|UniRef50_A7TI63 [Eval=5.8E-8][id=40.3%][start=94 end=155]
+>tmpname_12   UR050|UniRef50_A7TI63 [Eval=5.8E-8][id=40.3%][start=94 end=155]
 ------pkrptnayllfcevnkeki----r-qsgtqdvtkalaeawknls
 eedrkpyyklysddrerykreme--------
->tmpname_76   UR050|UniRef50_A0A498N7L4 [Eval=9.4E-8][id=51.1%][start=101 end=145]
+>tmpname_13   UR050|UniRef50_A0A498N7L4 [Eval=9.4E-8][id=51.1%][start=101 end=145]
 -----kpkrprsafnifmsehfdea----k-gnnmqtkmkslrddwerfs
 atqkq--------------------------
->tmpname_77   UR050|UniRef50_A0A397V5L7 [Eval=5.6E-7][id=41.3%][start=118 end=180]
+>tmpname_14   UR050|UniRef50_A0A397V5L7 [Eval=5.6E-7][id=41.3%][start=118 end=180]
 ------pkrprsafnyfmreifssa----a-hvlpkdrlklvrkkwnels
 dsdkdkyfemahadrkryerei---------
->tmpname_78   UR050|UniRef50_S9XXD4 [Eval=8.1E-7][id=42.9%][start=106 end=170]
+>tmpname_15   UR050|UniRef50_S9XXD4 [Eval=8.1E-7][id=42.9%][start=106 end=170]
 ------pkkpmtsyvrfskeqlplf----k-aqnpetllfs-----pply
 mhnskvyiqlakddkiryynemksweeqmve
->tmpname_79   UR050|UniRef50_A0A3B1JD94 [Eval=1.4E-6][id=45.1%][start=7 end=77]
+>tmpname_16   UR050|UniRef50_A0A3B1JD94 [Eval=1.4E-6][id=45.1%][start=7 end=77]
 -----kpkgrtsayaffvlssrdel----k-kkspggkfkkcsedwkalt
 psekkkfedlakadkarydeemksy------
->tmpname_80   UR050|UniRef50_A0A077WUB3 [Eval=3.9E-6][id=41.5%][start=59 end=123]
+>tmpname_17   UR050|UniRef50_A0A077WUB3 [Eval=3.9E-6][id=41.5%][start=59 end=123]
 ------pklpksaylifsmehrrea----k-qetdrgkvtllaqkwqals
 peekepytvkamqekeryirem---------
->tmpname_81   UR050|UniRef50_A0A3M7MYG4 [Eval=4.2E-6][id=40.6%][start=155 end=218]
+>tmpname_18   UR050|UniRef50_A0A3M7MYG4 [Eval=4.2E-6][id=40.6%][start=155 end=218]
 ------pklpqnqfslflqerfqdl----k-gqsiaeagkrvaqewkdls
 ptekkayderfaadriryqdeyk--------
->tmpname_82   UR050|UniRef50_A0A1S3K0B4 [Eval=1.9E-5][id=42.3%][start=31 end=101]
+>tmpname_19   UR050|UniRef50_A0A1S3K0B4 [Eval=1.9E-5][id=42.3%][start=31 end=101]
 ------pkrpttayfyylaeqfqeg----k-hvsnvgafkevskqwrels
 asekkpfealsdddrkrydremnmyrk----
->tmpname_83   UR050|UniRef50_A0A2S2QEJ1 [Eval=4.4E-4][id=42.9%][start=150 end=211]
+>tmpname_20   UR050|UniRef50_A0A2S2QEJ1 [Eval=4.4E-4][id=42.9%][start=150 end=211]
 --------rpksaymiyymdilqkt----k-kkhpdlkmqviaekyknls
 pekkqyyidqaqklrtey-nem---------
 >hmgl_trybr
@@ -4553,64 +4553,64 @@ pekkqyyidqaqklrtey-nem---------
 >hmgb_chite
 --dpnkpkrapsaffvfmgefreefkqknpknksvaavgkaagerwksls
 esekapyvakanklkgeynkaiaaynkgesa
->tmpname_1
+>tmpname_64
 --dpnkpkrapsaffvfmgefreefkqknpknksvaavgkaagerwksls
 esekapyvakanklkgeynkaiaaynkgesa
->tmpname_2   UR050|UniRef50_UPI000E6F9214 [Eval=1.1E-9][id=46.0%][start=1 end=63]
+>tmpname_65   UR050|UniRef50_UPI000E6F9214 [Eval=1.1E-9][id=46.0%][start=1 end=63]
 -----------------meefsetfkhehpnyksfaivgkaggekwrsms
 paergvyeakaearrthyinsiqasdedes-
->tmpname_3   UR050|UniRef50_M1BDX1 [Eval=5.3E-5][id=44.4%][start=16 end=60]
+>tmpname_66   UR050|UniRef50_M1BDX1 [Eval=5.3E-5][id=44.4%][start=16 end=60]
 --------------------------------ksfdaveklvrdkwkqms
 daekapyiaetekrrveyakvlnsynq----
->tmpname_4   UR050|UniRef50_A0A2G2XCD7 [Eval=9.0E-15][id=46.8%][start=218 end=295]
+>tmpname_67   UR050|UniRef50_A0A2G2XCD7 [Eval=9.0E-15][id=46.8%][start=218 end=295]
 --dpekpkmparsiyi-krerrkqfmkdnpknkfetavnragaekwkqls
 aaekgpymaeakrkmeeynksnaaynkrvaa
->tmpname_5   UR050|UniRef50_A0A2P5DJ49 [Eval=4.0E-14][id=40.5%][start=37 end=113]
+>tmpname_68   UR050|UniRef50_A0A2P5DJ49 [Eval=4.0E-14][id=40.5%][start=37 end=113]
 --dpnkpkkpakslllfvnefkeqykkehpnepf--alfrrahdkwksms
 haerapfvgkarkmafeydknmhayllaega
->tmpname_6   UR050|UniRef50_A0A2U1MQV0 [Eval=3.0E-12][id=40.8%][start=3 end=73]
+>tmpname_69   UR050|UniRef50_A0A2U1MQV0 [Eval=3.0E-12][id=40.8%][start=3 end=73]
 ------pkkpptaffyyledfrkefqeqnphvksmsevgkacgekwktmt
 yeekiqyydiatekrakfekdmmdyvk----
->tmpname_7   UR050|UniRef50_A0A0E0LQB4 [Eval=2.3E-5][id=44.7%][start=59 end=105]
+>tmpname_70   UR050|UniRef50_A0A0E0LQB4 [Eval=2.3E-5][id=44.7%][start=59 end=105]
 ---------spsafflfmddfrkdyeekhpadkqvyeigmagdeawksms
 ddvsa--------------------------
->tmpname_8   UR050|UniRef50_I7MKS6 [Eval=1.5E-11][id=40.0%][start=56 end=129]
+>tmpname_71   UR050|UniRef50_I7MKS6 [Eval=1.5E-11][id=40.0%][start=56 end=129]
 --dpnapkkpmsaylifcqtrqpeikaknp-dlsfseiskvvgqewrdls
 qdkkqgyikkeeqlkkeynsklaefnk----
->tmpname_9   UR050|UniRef50_V3YWG6 [Eval=2.4E-11][id=41.3%][start=105 end=176]
+>tmpname_72   UR050|UniRef50_V3YWG6 [Eval=2.4E-11][id=41.3%][start=105 end=176]
 --denkpkrpqsayflfladfrkkmkgkdienrell---kqagvewgkls
 kdqkkpfeklsevekgkydaamaiynk----
->tmpname_10   UR050|UniRef50_G4TQG0 [Eval=2.9E-11][id=40.5%][start=114 end=191]
+>tmpname_73   UR050|UniRef50_G4TQG0 [Eval=2.9E-11][id=40.5%][start=114 end=191]
 --dpnapkrppsayllyqnairkeikdknptmtyaevlgeis-kmwsgls
 aeekkpyldateiakgeyekskaayeadhta
->tmpname_11   UR050|UniRef50_UPI000C7734B6 [Eval=3.7E-11][id=41.6%][start=32 end=107]
+>tmpname_74   UR050|UniRef50_UPI000C7734B6 [Eval=3.7E-11][id=41.6%][start=32 end=107]
 --dpnkpkqgmtafflfmnkkrercmaanp-dfsvtevakvlsrqwkems
 eemkapymlqqekdkirfakemesykqqe--
->tmpname_12   UR050|UniRef50_A0A2P6NRN2 [Eval=4.2E-11][id=41.8%][start=226 end=303]
+>tmpname_75   UR050|UniRef50_A0A2P6NRN2 [Eval=4.2E-11][id=41.8%][start=226 end=303]
 --dpnqpkrpttsfmffanekrpefkekfpklkmteltakls-eawkait
 ptekqtfidkaqkdtvryneakkayeegraa
->tmpname_13   UR050|UniRef50_A0A1Q9DQJ7 [Eval=2.1E-10][id=40.8%][start=167 end=242]
+>tmpname_76   UR050|UniRef50_A0A1Q9DQJ7 [Eval=2.1E-10][id=40.8%][start=167 end=242]
 --dpdapkraggaygiflaenrdkiiktlpkgykiteiskaagvqwkals
 ekeqkpyqekyqkknaeykaameeyqk----
->tmpname_14   UR050|UniRef50_UPI000719E288 [Eval=1.3E-8][id=42.5%][start=110 end=186]
+>tmpname_77   UR050|UniRef50_UPI000719E288 [Eval=1.3E-8][id=42.5%][start=110 end=186]
 --dpnkpkrplsayfrfmaefr---kqvadkgmsvtdiaklggatwtamt
 esekkpylevdmkifnevnntpgvgkrge--
->tmpname_15   UR050|UniRef50_L9KF69 [Eval=2.9E-10][id=41.0%][start=15 end=91]
+>tmpname_78   UR050|UniRef50_L9KF69 [Eval=2.9E-10][id=41.0%][start=15 end=91]
 --dsnapkrppsgfflffsefhpkikssn-hgisirdvaktlgemwnnls
 dskkqsyitkpaklkerdekdvtdfskgk--
->tmpname_16   UR050|UniRef50_UPI000989D17B [Eval=4.1E-10][id=42.1%][start=11 end=85]
+>tmpname_79   UR050|UniRef50_UPI000989D17B [Eval=4.1E-10][id=42.1%][start=11 end=85]
 -----kpkrppgsflvfmedfrnefnlknp-nqpagfasqagakqwkqmk
 ddekapfqrkvkelaleyfekkrcynnmes-
->tmpname_17   UR050|UniRef50_I0YNS1 [Eval=5.7E-10][id=43.5%][start=20 end=88]
+>tmpname_80   UR050|UniRef50_I0YNS1 [Eval=5.7E-10][id=43.5%][start=20 end=88]
 ------prrpksaymffmaefrekwkvdhpevnrvsdvgvaageawrslt
 peqkavyeeqsvgskatyaaeiaey------
->tmpname_18   UR050|UniRef50_A0A2H5PWP4 [Eval=1.2E-9][id=42.0%][start=38 end=118]
+>tmpname_81   UR050|UniRef50_A0A2H5PWP4 [Eval=1.2E-9][id=42.0%][start=38 end=118]
 --dsnapkrplsayfifmedfrksfkesfpdnksvaangngagdswksts
 esgksssseindeaeqevssqvssyfmg---
->tmpname_19   UR050|UniRef50_P87057 [Eval=1.6E-9][id=40.5%][start=12 end=84]
+>tmpname_82   UR050|UniRef50_P87057 [Eval=1.6E-9][id=40.5%][start=12 end=84]
 --dpntpkrnmsafmffsienrekmktdnp-datfgqlgsllgkrwkelt
 sterepyeekarqdkeryererkeyd-----
->tmpname_20   UR050|UniRef50_A0A3Q2NTM4 [Eval=2.6E-9][id=42.0%][start=28 end=95]
+>tmpname_83   UR050|UniRef50_A0A3Q2NTM4 [Eval=2.6E-9][id=42.0%][start=28 end=95]
 -----------saffvfcseyrpsvkqqyp-glsigdcakklgemwskls
 qseklpyeekaqklrekydrvsgssrtsen-
 </content>
@@ -4877,7 +4877,7 @@ aqklrtey-nem---------
 </file>
 <environement>
 HOME_4_TCOFFEE=/Users/cnotredame/
-MANPATH=/sw/share/man:/usr/share/man:/usr/local/share/man:/opt/X11/share/man:/Applications/Xcode.app/Contents/Developer/usr/share/man:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/share/man:/sw/lib/perl5/5.18.2/man
+MANPATH=/sw/share/man:/usr/share/man:/usr/local/share/man:/opt/X11/share/man:/Library/TeX/texbin/man:/Applications/Xcode.app/Contents/Developer/usr/share/man:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/share/man:/sw/lib/perl5/5.18.2/man
 TERM_PROGRAM=Apple_Terminal
 MCOFFEE_4_TCOFFEE=/Users/cnotredame//.t_coffee//mcoffee/
 ROOT_TMP_4_TCOFFEE=/var/tmp/
@@ -4886,12 +4886,12 @@ TERM=xterm-256color
 TMPDIR=/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/
 CONDA_SHLVL=1
 PERL5LIB=/sw/lib/perl5:/sw/lib/perl5/darwin
-Apple_PubSub_Socket_Render=/private/tmp/com.apple.launchd.u7asRiNodS/Render
+Apple_PubSub_Socket_Render=/private/tmp/com.apple.launchd.6JzhyrtuKp/Render
 CONDA_PROMPT_MODIFIER=(base) 
 TERM_PROGRAM_VERSION=388.1.3
 OSNAME=macosx
 PERL_BIN=/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms::/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices
-TERM_SESSION_ID=98F198FA-FDF9-40DD-A8EF-07E7D5143362
+TERM_SESSION_ID=9785BD0D-F6F1-4B59-B0BA-9937FD12A1E7
 METHODS_4_TCOFFEE=/Users/cnotredame//.t_coffee//methods/
 VERSIONER_PERL_VERSION=5.18
 XAPPLRESDIR=/sw/etc/app-defaults/
@@ -4899,22 +4899,22 @@ http_proxy=
 HTTP_proxy=
 USER=cnotredame
 CONDA_EXE=/Users/cnotredame/anaconda3/bin/conda
-SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.mMz4rqepoV/Listeners
+SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.U5mTe2o7m7/Listeners
 __CF_USER_TEXT_ENCODING=0x1F6:0x0:0x0
 ENV_4_TCOFFEE=/Users/cnotredame//.t_coffee//.t_coffee_env
 _CE_CONDA=
 all_proxy=
 ALL_PROXY=
 HTTP_proxy_4_TCOFFEE=
-PATH=/Users/cnotredame//.t_coffee//plugins/macosx/:/Users/cnotredame/anaconda3/bin:/Users/cnotredame/anaconda3/condabin:/opt/local/bin:/opt/local/sbin:/opt/local/bin:/opt/local/sbin:/Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/packages/x3dna-v2.1/bin:/Users/cnotredame/bin/macosx://Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms:.:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices:/Users/cnotredame/bin/Scripts:/Users/cnotredame/Library/Haskell/ghc-7.4.2/lib/epub-tools-2.0.0/bin:/sw/bin:/sw/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin
+PATH=/Users/cnotredame//.t_coffee//plugins/macosx/:/Users/cnotredame/anaconda3/bin:/Users/cnotredame/anaconda3/condabin:/opt/local/bin:/opt/local/sbin:/opt/local/bin:/opt/local/sbin:/Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/packages/x3dna-v2.1/bin:/Users/cnotredame/bin/macosx://Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms:.:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices:/Users/cnotredame/bin/Scripts:/Users/cnotredame/Library/Haskell/ghc-7.4.2/lib/epub-tools-2.0.0/bin:/sw/bin:/sw/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/Library/TeX/texbin
 _=/usr/bin/printenv
 CONDA_PREFIX=/Users/cnotredame/anaconda3
 COLOR_4_TCOFFEE=new
 DIR_4_TCOFFEE=/Users/cnotredame//.t_coffee/
-PWD=/Users/cnotredame/Dropbox/projects/git/tcoffee/tmp/RANDOMSTRINGL1HLNOIwbdsPgkLykZDw/tmp/RANDOMSTRINGvNYTJC2UDD3kmPTjPCaZ/data
+PWD=/private/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/RANDOMSTRING8p2a9fO8yu5lDgxYUmQ3/data
 CACHE_4_TCOFFEE=/Users/cnotredame//.t_coffee//cache/
 X3DNA=/Users/cnotredame/Dropbox/packages/x3dna-v2.1
-DBUS_LAUNCHD_SESSION_BUS_SOCKET=/private/tmp/com.apple.launchd.CeZrDaslOL/unix_domain_listener
+DBUS_LAUNCHD_SESSION_BUS_SOCKET=/private/tmp/com.apple.launchd.DfqaaC2z17/unix_domain_listener
 XPC_FLAGS=0x0
 VERSIONER_PERL_PREFER_32_BIT=no
 _CE_M=
@@ -4923,7 +4923,7 @@ ERRORFILE_4_TCOFFEE=NO
 PLUGINS_4_TCOFFEE=/Users/cnotredame//.t_coffee//plugins/macosx/
 SHLVL=3
 HOME=/Users/cnotredame
-DUMP_4_TCOFFEE=/Users/cnotredame/Dropbox/projects/git/tcoffee/tmp/RANDOMSTRINGL1HLNOIwbdsPgkLykZDw/tmp/RANDOMSTRINGvNYTJC2UDD3kmPTjPCaZ/remote.tests.1.dump
+DUMP_4_TCOFFEE=/private/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/RANDOMSTRING8p2a9fO8yu5lDgxYUmQ3/remote.tests.1.dump
 HTTP_PROXY=
 MAFFT_BINARIES=
 CONDA_PYTHON_EXE=/Users/cnotredame/anaconda3/bin/python
@@ -4935,16 +4935,17 @@ CONDA_DEFAULT_ENV=base
 EMAIL=cedric.notredame@gmail.com
 UPDATED_ENV_4_TCOFFEE=1
 INFOPATH=/sw/share/info:/sw/info:/usr/share/info
-DISPLAY=/private/tmp/com.apple.launchd.MDJPhYnCNw/org.macosforge.xquartz:0
+DISPLAY=/private/tmp/com.apple.launchd.vef8UzGxBY/org.macosforge.xquartz:0
 TC_MASTER_NODE=1
 NUMBER_OF_PROCESSORS=8
 ALL_proxy=
-SECURITYSESSIONID=186a6
-LOCKDIR_4_TCOFFEE=/var/tmp/tco/tcoojbh9sqs75800//lck/8zrubeu2fc/
-TMP_4_TCOFFEE=/var/tmp/tco/tcoojbh9sqs75800/
+LOCKDIR_4_TCOFFEE=/var/tmp/tco/tcoi8htt0xe77612//lck/m1f5duvlry/
+TMP_4_TCOFFEE=/var/tmp/tco/tcoi8htt0xe77612/
 USER_BIN=/Users/cnotredame/bin/macosx
 SCRIPT_BIN=/Users/cnotredame/bin/Scripts/
 </environement>
 <DumpStatus>OK</DumpStatus>
-<DumpFile>/Users/cnotredame/Dropbox/projects/git/tcoffee/tmp/RANDOMSTRINGL1HLNOIwbdsPgkLykZDw/tmp/RANDOMSTRINGvNYTJC2UDD3kmPTjPCaZ/remote.tests.1.dump</DumpFile>
+<DumpFile>/private/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/RANDOMSTRING8p2a9fO8yu5lDgxYUmQ3/remote.tests.1.dump</DumpFile>
+<SourceFile>remote.tests</SourceFile>
+<SourceLine>2</SourceLine>
 </DumpIO>

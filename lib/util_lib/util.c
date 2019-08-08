@@ -6388,7 +6388,7 @@ void dump_io(char *target, char *nature)
       fprintf (fp, "<build>%s</build>\n",BUILD_INFO);
       if ((f=strstr (in_cl, "-dump")))f[0]='\0';
       
-      if (get_string_variable ("-other_pg"))
+      if (get_string_variable ("-other_pg") && !strstr (in_cl, "-other_pg"))
 	fprintf (fp, "<cl>t_coffee -other_pg %s</cl>\n",in_cl);
       else 
 	fprintf (fp, "<cl>%s</cl>\n",in_cl);
@@ -6446,7 +6446,7 @@ void dump_io(char *target, char *nature)
 		  
 		  fprintf (fp, "<content>");
 		  if (strm (file, "stdin"))file=get_string_variable ("stdin");
-		  
+		  		  
 		  fp2=fopen (file, "r");
 		  while ((c=fgetc(fp2))!=EOF)fprintf ( fp, "%c", c);
 		  fclose (fp2);
@@ -6648,7 +6648,7 @@ char *add2file2remove_list (char *name)
   if ( !tmpname || !name)ntmpname=tmpname=(Tmpname*)vcalloc ( 1, sizeof (Tmpname));
   else if (!ntmpname->name);
   else ntmpname=ntmpname->next=(Tmpname*)vcalloc ( 1, sizeof (Tmpname));
-
+  
   if (!name) return NULL;
 
   ntmpname->name=(char*)vcalloc(strlen(name)+1, sizeof (char));
@@ -6691,6 +6691,19 @@ char *alp2random_string (char*s)
  
   return s;
 }
+
+int isvtmpnam ( char *s)
+  {
+  Tmpname *ltmpname=tmpname;
+  if (!tmpname)return 0;
+  while (ltmpname)
+    {
+      if (strstr (ltmpname->name, s))return 1;
+      ltmpname=ltmpname->next;
+    }
+  return 0;
+}
+  
 char *vtmpnam ( char *s1)
 {
   char *s,*s2;
@@ -9964,16 +9977,6 @@ char ** standard_initialisation  (char **in_argv, int *in_argc)
   string_putenv (s); //let Command line update go through //Twice in case an executable dir not created
 
   if (!getenv ("ENV_4_TCOFFEE"))cputenv ("ENV_4_TCOFFEE=%s/.t_coffee_env", get_dir_4_tcoffee());
-
-
-  if (1==2 && !getenv ("UPDATED_ENV_4_TCOFFEE"))
-    {
-      cputenv4path ("/usr/local/t_coffee/plugins");
-      sprintf (buf, "%s/.t_coffee/plugins", getenv ("HOME"));
-      cputenv4path (buf);
-      cputenv4path ("./.plugins");
-      if ( getenv ("PLUGINS_4_TCOFFEE"))cputenv4path (getenv ("PLUGINS_4_TCOFFEE"));
-    }
   cputenv ("UPDATED_ENV_4_TCOFFEE=1");
 
   if ( debug_lock){fprintf ( stderr, "\n*************** LOCKDIR: %s *************\n", get_lockdir_4_tcoffee());}
@@ -10182,18 +10185,20 @@ void clean_exit ()
 	}
       else 
 	{
-	  
-	  if (isdir(start->name))
+	  if ( start && start->name)
 	    {
-	      rrmdir (start->name);
-	    }
-	  else
-	    {
-	      char test[10000];
-	      vremove (start->name);
-	      if (start->name)sprintf (test, "%s.dnd", start->name);vremove (test);
-	      if (start->name)sprintf (test, "%s.html",start->name);vremove (test);
-	      
+	      if (isdir(start->name))
+		{
+		  rrmdir (start->name);
+		}
+	      else
+		{
+		  char test[10000];
+		  vremove (start->name);
+		  if (start->name)sprintf (test, "%s.dnd", start->name);vremove (test);
+		  if (start->name)sprintf (test, "%s.html",start->name);vremove (test);
+		  
+		}
 	    }
 	      
 	}

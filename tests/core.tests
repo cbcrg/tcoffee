@@ -84,7 +84,7 @@ t_coffee -other_pg seq_reformat -in sample_rnaseq2.stk -action +alifold2analyze 
 t_coffee -other_pg seq_reformat -in sample_rnaseq2.stk -action +alifold2analyze list    
 t_coffee -other_pg seq_reformat -in sample_rnaseq2.aln -action +alifold2analyze aln    
 t_coffee -other_pg seq_reformat -in sample_rnaseq2.aln -action +alifold2analyze color_htm    
-t_coffee -other_pg seq_reformat sproteases_small.fasta -output sim_idscore | grep TOP |sort -rnk3    
+t_coffee -other_pg seq_reformat sproteases_small.fasta -output sim_idscore    
 t_coffee -infile sproteases_small.aln -lib  charge_relay_lib.tc_lib  -score -output html    
 t_coffee -seq sample_seq1.fasta -method fast_pair,lalign_id_pair    
 t_coffee sample_seq1.fasta -method slow_pair@EP@MATRIX@pam250mt@GOP@-10@GEP@-1    
@@ -108,10 +108,7 @@ t_coffee sample_seq1.fasta -special_mode low_memory
 t_coffee  sample_seq1.fasta -method=slow_pair,lalign_id_pair -distance_matrix_mode=idscore -dp_mode=myers_miller_pair_wise    
 t_coffee sample_seq1.fasta -output=msf,fasta_aln    
 t_coffee sample_seq1.fasta -outfile=stdout -out_lib=stdout    
-cat sample_seq1.fasta | t_coffee -infile=stdin    
 t_coffee sample_seq1.fasta    
-cat sample_param_file.param  | t_coffee -parameters=stdin    
-echo -seq=sample_seq1.fasta -method=clustalw_pair | t_coffee -parameters=stdin    
 t_coffee sample_seq1.fasta -run_name=guacamole    
 t_coffee Ssample_aln1.aln    
 t_coffee -infile=Ssample_aln1.aln    
@@ -188,4 +185,7 @@ t_coffee -mode 3dcoffee -in Sseq.fas P2PTC
 t_coffee -mode 3dcoffee -in S2seqs.fas -template_file SELF_P_   
 t_coffee -in Msap_pair Ssample_seq7.fasta -template_file template_file7.template -weight 1001 -out_lib test_lib7.tc_lib -lib_only    
 t_coffee -in Asample_aln5.aln -outfile test.aln    
+cat sample_param_file.param  | t_coffee -parameters=stdin    
+cat sample_seq1.fasta | t_coffee -infile=stdin    
+echo -seq=sample_seq1.fasta -method=clustalw_pair | t_coffee -parameters=stdin    
 

@@ -1,0 +1,851 @@
+<DumpIO>
+<nature>standard dump</nature>
+<program>T-COFFEE</program>
+<version>Version_13.39.0.d675aed</version>
+<build>Version_13.39.0.d675aed</build>
+<cl>t_coffee sample_rnaseq1.fasta </cl>
+<stack>
+</stack>
+<warning>
+</warning>
+<file>
+<stream>output</stream>
+<name>stdout</name>
+<content>#Single Thread
+#Single Thread
+#Single Thread
+#Single Thread
+#Single Thread
+CLUSTAL FORMAT for T-COFFEE Version_13.39.0.d675aed [http://www.tcoffee.org] [MODE:  ], CPU=0.00 sec, SCORE=55, Nseq=5, Len=129 
+
+AC068303.10-12902_12788  AACUCUUGUUUCUCUUCAG-----AUCAUGUAAAUCUUUCGCCUUUUAUU
+AC097725.2-33800_33915   A-CUCUGGUUUCUCUUCAAU---UGUCGAAUAAAUCUUUCGCCUUUUACU
+X15934.1-3_121           A-GCCGUGUG-AUGAUGACA---UAGCGAACUAUUCUUUCGCCUUUUACU
+AC000104.1-17376_17496   A-GCCAUGUG-GUGAGCACA---UAGCGAACUAUUCUUUCGCCUUUUACU
+AL023594.2-7651_7766     G-UCAAAGCA-CUUUGCAAAAGCUAACGUAUCUGUUUCUUGCCUUUUACC
+                                *    *    *        *       * * * ********  
+
+AC068303.10-12902_12788  AAAGAUUUCCAUGGGGAGGAACA--GUUAUGAGUCUUUAUCCAAUUUCU-
+AC097725.2-33800_33915   AAAGAUUUCCGUGGAGAGGAACACUCUAAUGAGUCUAA-AAUAAUUUUUA
+X15934.1-3_121           AAAGAAUACCGUGUCA-GCGUCACAAUUAGCGGCAUAC-GCUAGUUUUUG
+AC000104.1-17376_17496   AAAGAAUACCGUGUGC-UCUCCACGCUAAGUGGCAUAC-GCCUAUUUUUG
+AL023594.2-7651_7766     AGAAACAGCCGUUUGU-AAGGUGUGCUAAUUUGACUGU--AUAGUUUUUG
+                         * * *   ** *              * *   *  *        *** * 
+
+AC068303.10-12902_12788  GAGG-CCUCGU-GUUU--CACC--AGGCU
+AC097725.2-33800_33915   GUAG-UGCCCU-G--U--CGCA--AGACU
+X15934.1-3_121           GAAGAGUUCUCAAUUU--UGAG-GGCUCU
+AC000104.1-17376_17496   GAGG-GUUCCCACUUUACUGUGGGUCCCA
+AL023594.2-7651_7766     UAA--UCUUUU-U-CU--UGAA--ACAUU
+                                        *             
+
+
+
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>stderr</name>
+<content>
+PROGRAM: T-COFFEE Version_13.39.0.d675aed (Version_13.39.0.d675aed)
+-full_log      	S	[0] 
+-genepred_score	S	[0] 	nsd
+-run_name      	S	[0] 
+-mem_mode      	S	[0] 	mem
+-extend        	D	[1] 	1 
+-extend_mode   	S	[0] 	very_fast_triplet
+-max_n_pair    	D	[0] 	10 
+-seq_name_for_quadruplet	S	[0] 	all
+-compact       	S	[0] 	default
+-clean         	S	[0] 	no
+-do_self       	FL	[0] 	0
+-do_normalise  	D	[0] 	1000 
+-template_file 	S	[0] 
+-setenv        	S	[0] 	0
+-export        	S	[0] 	0
+-template_mode 	S	[0] 
+-flip          	D	[0] 	0 
+-remove_template_file	D	[0] 	0 
+-profile_template_file	S	[0] 
+-in            	S	[0] 
+-seq           	S	[1] 	sample_rnaseq1.fasta
+-aln           	S	[0] 
+-method_limits 	S	[0] 
+-method        	S	[0] 
+-lib           	S	[0] 
+-profile       	S	[0] 
+-profile1      	S	[0] 
+-profile2      	S	[0] 
+-pdb           	S	[0] 
+-relax_lib     	D	[0] 	1 
+-filter_lib    	D	[0] 	0 
+-shrink_lib    	D	[0] 	0 
+-out_lib       	W_F	[0] 	no
+-out_lib_mode  	S	[0] 	primary
+-lib_only      	D	[0] 	0 
+-outseqweight  	W_F	[0] 	no
+-seq_source    	S	[0] 	ANY
+-cosmetic_penalty	D	[0] 	0 
+-gapopen       	D	[0] 	0 
+-gapext        	D	[0] 	0 
+-fgapopen      	D	[0] 	0 
+-fgapext       	D	[0] 	0 
+-nomatch       	D	[0] 	0 
+-newtree       	W_F	[0] 	default
+-tree          	W_F	[0] 	NO
+-usetree       	R_F	[0] 
+-tree_mode     	S	[0] 	nj
+-distance_matrix_mode	S	[0] 	ktup
+-distance_matrix_sim_mode	S	[0] 	idmat_sim1
+-quicktree     	FL	[0] 	0
+-outfile       	W_F	[0] 	default
+-maximise      	FL	[1] 	1
+-output        	S	[0] 	aln	html
+-len           	D	[0] 	0 
+-infile        	R_F	[0] 
+-matrix        	S	[0] 	default
+-tg_mode       	D	[0] 	1 
+-profile_mode  	S	[0] 	cw_profile_profile
+-profile_comparison	S	[0] 	profile
+-dp_mode       	S	[0] 	linked_pair_wise
+-ktuple        	D	[0] 	1 
+-ndiag         	D	[0] 	0 
+-diag_threshold	D	[0] 	0 
+-diag_mode     	D	[0] 	0 
+-sim_matrix    	S	[0] 	vasiliky
+-transform     	S	[0] 
+-extend_seq    	FL	[0] 	0
+-outorder      	S	[0] 	input
+-inorder       	S	[0] 	aligned
+-seqnos        	S	[0] 	off
+-case          	S	[0] 	keep
+-cpu           	D	[0] 	0 
+-ulimit        	D	[0] 	-1 
+-maxnseq       	D	[0] 	-1 
+-maxlen        	D	[0] 	-1 
+-sample_dp     	D	[0] 	0 
+-weight        	S	[0] 	default
+-seq_weight    	S	[0] 	no
+-align         	FL	[1] 	1
+-mocca         	FL	[0] 	0
+-domain        	FL	[0] 	0
+-start         	D	[0] 	0 
+-len           	D	[0] 	0 
+-scale         	D	[0] 	0 
+-mocca_interactive	FL	[0] 	0
+-method_evaluate_mode	S	[0] 	default
+-color_mode    	S	[0] 	new
+-aln_line_length	D	[0] 	0 
+-evaluate_mode 	S	[0] 	triplet
+-get_type      	FL	[0] 	0
+-clean_aln     	D	[0] 	0 
+-clean_threshold	D	[1] 	1 
+-clean_iteration	D	[1] 	1 
+-clean_evaluate_mode	S	[0] 	t_coffee_fast
+-extend_matrix 	FL	[0] 	0
+-prot_min_sim  	D	[40] 	40 
+-prot_max_sim  	D	[90] 	90 
+-prot_trim     	D	[20] 	20 
+-prot_min_cov  	D	[40] 	40 
+-pdb_type      	S	[0] 	d
+-pdb_min_sim   	D	[35] 	35 
+-pdb_max_sim   	D	[100] 	100 
+-pdb_min_cov   	D	[50] 	50 
+-pdb_blast_server	W_F	[0] 	EBI
+-blast         	W_F	[0] 
+-blast_server  	W_F	[0] 	EBI
+-pdb_db        	W_F	[0] 	pdb
+-protein_db    	W_F	[0] 	uniref50
+-method_log    	W_F	[0] 	no
+-struc_to_use  	S	[0] 
+-cache         	W_F	[0] 	use
+-print_cache   	FL	[0] 	0
+-align_pdb_param_file	W_F	[0] 	no
+-align_pdb_hasch_mode	W_F	[0] 	hasch_ca_trace_bubble
+-external_aligner	S	[0] 	NO
+-msa_mode      	S	[0] 	tree
+-et_mode       	S	[0] 	et
+-master        	S	[0] 	no
+-blast_nseq    	D	[0] 	0 
+-lalign_n_top  	D	[0] 	10 
+-iterate       	D	[0] 	0 
+-trim          	D	[0] 	0 
+-split         	D	[0] 	0 
+-trimfile      	S	[0] 	default
+-split         	D	[0] 	0 
+-split_nseq_thres	D	[0] 	0 
+-split_score_thres	D	[0] 	0 
+-check_pdb_status	D	[0] 	0 
+-clean_seq_name	D	[0] 	0 
+-seq_to_keep   	S	[0] 
+-dpa_master_aln	S	[0] 
+-dpa_maxnseq   	D	[0] 	0 
+-dpa_min_score1	D	[0] 
+-dpa_min_score2	D	[0] 
+-dpa_keep_tmpfile	FL	[0] 	0
+-dpa_debug     	D	[0] 	0 
+-multi_core    	S	[0] 	templates_jobs_relax_msa_evaluate
+-n_core        	D	[0] 	1 
+-thread        	D	[0] 	1 
+-max_n_proc    	D	[0] 	0 
+-lib_list      	S	[0] 
+-prune_lib_mode	S	[0] 	5
+-tip           	S	[0] 	none
+-rna_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_rnaseq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 5 SEQUENCES  [RNA]
+  Input File sample_rnaseq1.fasta    Seq AC000104.1-17376_17496  Length  121 type RNA Struct Unchecked
+  Input File sample_rnaseq1.fasta    Seq AC068303.10-12902_12788 Length  115 type RNA Struct Unchecked
+  Input File sample_rnaseq1.fasta    Seq AC097725.2-33800_33915  Length  116 type RNA Struct Unchecked
+  Input File sample_rnaseq1.fasta    Seq AL023594.2-7651_7766    Length  116 type RNA Struct Unchecked
+  Input File sample_rnaseq1.fasta    Seq X15934.1-3_121          Length  119 type RNA Struct Unchecked
+
+	Multi Core Mode: 1 processors:
+	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_rnaseq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 5 SEQUENCES  [RNA]
+  Input File sample_rnaseq1.fasta    Seq AC000104.1-17376_17496  Length  121 type RNA Struct Unchecked
+  Input File sample_rnaseq1.fasta    Seq AC068303.10-12902_12788 Length  115 type RNA Struct Unchecked
+  Input File sample_rnaseq1.fasta    Seq AC097725.2-33800_33915  Length  116 type RNA Struct Unchecked
+  Input File sample_rnaseq1.fasta    Seq AL023594.2-7651_7766    Length  116 type RNA Struct Unchecked
+  Input File sample_rnaseq1.fasta    Seq X15934.1-3_121          Length  119 type RNA Struct Unchecked
+
+	Multi Core Mode: 1 processors:
+
+	--- Process Method/Library/Aln Ssample_rnaseq1.fasta
+	xxx Retrieved Ssample_rnaseq1.fasta	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_rnaseq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 5 SEQUENCES  [RNA]
+  Input File sample_rnaseq1.fasta    Seq AC000104.1-17376_17496  Length  121 type RNA Struct Unchecked
+  Input File sample_rnaseq1.fasta    Seq AC068303.10-12902_12788 Length  115 type RNA Struct Unchecked
+  Input File sample_rnaseq1.fasta    Seq AC097725.2-33800_33915  Length  116 type RNA Struct Unchecked
+  Input File sample_rnaseq1.fasta    Seq AL023594.2-7651_7766    Length  116 type RNA Struct Unchecked
+  Input File sample_rnaseq1.fasta    Seq X15934.1-3_121          Length  119 type RNA Struct Unchecked
+
+	Multi Core Mode: 1 processors:
+
+	--- Process Method/Library/Aln Ssample_rnaseq1.fasta
+	xxx Retrieved Ssample_rnaseq1.fasta	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_rnaseq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 5 SEQUENCES  [RNA]
+  Input File sample_rnaseq1.fasta    Seq AC000104.1-17376_17496  Length  121 type RNA Struct Unchecked
+  Input File sample_rnaseq1.fasta    Seq AC068303.10-12902_12788 Length  115 type RNA Struct Unchecked
+  Input File sample_rnaseq1.fasta    Seq AC097725.2-33800_33915  Length  116 type RNA Struct Unchecked
+  Input File sample_rnaseq1.fasta    Seq AL023594.2-7651_7766    Length  116 type RNA Struct Unchecked
+  Input File sample_rnaseq1.fasta    Seq X15934.1-3_121          Length  119 type RNA Struct Unchecked
+
+	Multi Core Mode: 1 processors:
+
+	--- Process Method/Library/Aln Ssample_rnaseq1.fasta
+	xxx Retrieved Ssample_rnaseq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [7026]
+
+Library Relaxation: Multi_proc [1]
+ 
+!		[Relax Library][TOT=    5][  0 %]!		[Relax Library][TOT=    5][ 40 %]!		[Relax Library][TOT=    5][ 60 %]!		[Relax Library][TOT=    5][ 80 %]!		[Relax Library][TOT=    5][100 %]
+	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_rnaseq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 5 SEQUENCES  [RNA]
+  Input File sample_rnaseq1.fasta    Seq AC000104.1-17376_17496  Length  121 type RNA Struct Unchecked
+  Input File sample_rnaseq1.fasta    Seq AC068303.10-12902_12788 Length  115 type RNA Struct Unchecked
+  Input File sample_rnaseq1.fasta    Seq AC097725.2-33800_33915  Length  116 type RNA Struct Unchecked
+  Input File sample_rnaseq1.fasta    Seq AL023594.2-7651_7766    Length  116 type RNA Struct Unchecked
+  Input File sample_rnaseq1.fasta    Seq X15934.1-3_121          Length  119 type RNA Struct Unchecked
+
+	Multi Core Mode: 1 processors:
+
+	--- Process Method/Library/Aln Ssample_rnaseq1.fasta
+	xxx Retrieved Ssample_rnaseq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [7026]
+
+Library Relaxation: Multi_proc [1]
+ 
+Relaxation Summary: [7026]--->[6314]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: AC000104.1-17376_17496
+Group    2: AC068303.10-12902_12788
+Group    3: AC097725.2-33800_33915
+Group    4: AL023594.2-7651_7766
+Group    5: X15934.1-3_121
+
+	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_rnaseq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 5 SEQUENCES  [RNA]
+  Input File sample_rnaseq1.fasta    Seq AC000104.1-17376_17496  Length  121 type RNA Struct Unchecked
+  Input File sample_rnaseq1.fasta    Seq AC068303.10-12902_12788 Length  115 type RNA Struct Unchecked
+  Input File sample_rnaseq1.fasta    Seq AC097725.2-33800_33915  Length  116 type RNA Struct Unchecked
+  Input File sample_rnaseq1.fasta    Seq AL023594.2-7651_7766    Length  116 type RNA Struct Unchecked
+  Input File sample_rnaseq1.fasta    Seq X15934.1-3_121          Length  119 type RNA Struct Unchecked
+
+	Multi Core Mode: 1 processors:
+
+	--- Process Method/Library/Aln Ssample_rnaseq1.fasta
+	xxx Retrieved Ssample_rnaseq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [7026]
+
+Library Relaxation: Multi_proc [1]
+ 
+Relaxation Summary: [7026]--->[6314]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: AC000104.1-17376_17496
+Group    2: AC068303.10-12902_12788
+Group    3: AC097725.2-33800_33915
+Group    4: AL023594.2-7651_7766
+Group    5: X15934.1-3_121
+
+
+	Group    6: [Group    5 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  122][PID:70865]	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_rnaseq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 5 SEQUENCES  [RNA]
+  Input File sample_rnaseq1.fasta    Seq AC000104.1-17376_17496  Length  121 type RNA Struct Unchecked
+  Input File sample_rnaseq1.fasta    Seq AC068303.10-12902_12788 Length  115 type RNA Struct Unchecked
+  Input File sample_rnaseq1.fasta    Seq AC097725.2-33800_33915  Length  116 type RNA Struct Unchecked
+  Input File sample_rnaseq1.fasta    Seq AL023594.2-7651_7766    Length  116 type RNA Struct Unchecked
+  Input File sample_rnaseq1.fasta    Seq X15934.1-3_121          Length  119 type RNA Struct Unchecked
+
+	Multi Core Mode: 1 processors:
+
+	--- Process Method/Library/Aln Ssample_rnaseq1.fasta
+	xxx Retrieved Ssample_rnaseq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [7026]
+
+Library Relaxation: Multi_proc [1]
+ 
+Relaxation Summary: [7026]--->[6314]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: AC000104.1-17376_17496
+Group    2: AC068303.10-12902_12788
+Group    3: AC097725.2-33800_33915
+Group    4: AL023594.2-7651_7766
+Group    5: X15934.1-3_121
+
+
+	Group    6: [Group    5 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  122][PID:70865]
+	Group    7: [Group    3 (   1 seq)] with [Group    2 (   1 seq)]-->[Len=  120][PID:70865]	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_rnaseq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 5 SEQUENCES  [RNA]
+  Input File sample_rnaseq1.fasta    Seq AC000104.1-17376_17496  Length  121 type RNA Struct Unchecked
+  Input File sample_rnaseq1.fasta    Seq AC068303.10-12902_12788 Length  115 type RNA Struct Unchecked
+  Input File sample_rnaseq1.fasta    Seq AC097725.2-33800_33915  Length  116 type RNA Struct Unchecked
+  Input File sample_rnaseq1.fasta    Seq AL023594.2-7651_7766    Length  116 type RNA Struct Unchecked
+  Input File sample_rnaseq1.fasta    Seq X15934.1-3_121          Length  119 type RNA Struct Unchecked
+
+	Multi Core Mode: 1 processors:
+
+	--- Process Method/Library/Aln Ssample_rnaseq1.fasta
+	xxx Retrieved Ssample_rnaseq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [7026]
+
+Library Relaxation: Multi_proc [1]
+ 
+Relaxation Summary: [7026]--->[6314]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: AC000104.1-17376_17496
+Group    2: AC068303.10-12902_12788
+Group    3: AC097725.2-33800_33915
+Group    4: AL023594.2-7651_7766
+Group    5: X15934.1-3_121
+
+
+	Group    6: [Group    5 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  122][PID:70865]
+	Group    7: [Group    3 (   1 seq)] with [Group    2 (   1 seq)]-->[Len=  120][PID:70865]
+	Group    8: [Group    7 (   2 seq)] with [Group    6 (   2 seq)]-->[Len=  126][PID:70865]	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_rnaseq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 5 SEQUENCES  [RNA]
+  Input File sample_rnaseq1.fasta    Seq AC000104.1-17376_17496  Length  121 type RNA Struct Unchecked
+  Input File sample_rnaseq1.fasta    Seq AC068303.10-12902_12788 Length  115 type RNA Struct Unchecked
+  Input File sample_rnaseq1.fasta    Seq AC097725.2-33800_33915  Length  116 type RNA Struct Unchecked
+  Input File sample_rnaseq1.fasta    Seq AL023594.2-7651_7766    Length  116 type RNA Struct Unchecked
+  Input File sample_rnaseq1.fasta    Seq X15934.1-3_121          Length  119 type RNA Struct Unchecked
+
+	Multi Core Mode: 1 processors:
+
+	--- Process Method/Library/Aln Ssample_rnaseq1.fasta
+	xxx Retrieved Ssample_rnaseq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [7026]
+
+Library Relaxation: Multi_proc [1]
+ 
+Relaxation Summary: [7026]--->[6314]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: AC000104.1-17376_17496
+Group    2: AC068303.10-12902_12788
+Group    3: AC097725.2-33800_33915
+Group    4: AL023594.2-7651_7766
+Group    5: X15934.1-3_121
+
+
+	Group    6: [Group    5 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  122][PID:70865]
+	Group    7: [Group    3 (   1 seq)] with [Group    2 (   1 seq)]-->[Len=  120][PID:70865]
+	Group    8: [Group    7 (   2 seq)] with [Group    6 (   2 seq)]-->[Len=  126][PID:70865]
+	Group    9: [Group    4 (   1 seq)] with [Group    8 (   4 seq)]-->[Len=  129][PID:70865]
+
+
+!		[Final Evaluation][TOT=  129][  0 %]!		[Final Evaluation][TOT=  129][  1 %]!		[Final Evaluation][TOT=  129][  2 %]!		[Final Evaluation][TOT=  129][  3 %]!		[Final Evaluation][TOT=  129][  4 %]!		[Final Evaluation][TOT=  129][  5 %]!		[Final Evaluation][TOT=  129][  6 %]!		[Final Evaluation][TOT=  129][  7 %]!		[Final Evaluation][TOT=  129][  8 %]!		[Final Evaluation][TOT=  129][  9 %]!		[Final Evaluation][TOT=  129][ 10 %]!		[Final Evaluation][TOT=  129][ 11 %]!		[Final Evaluation][TOT=  129][ 12 %]!		[Final Evaluation][TOT=  129][ 13 %]!		[Final Evaluation][TOT=  129][ 14 %]!		[Final Evaluation][TOT=  129][ 15 %]!		[Final Evaluation][TOT=  129][ 16 %]!		[Final Evaluation][TOT=  129][ 17 %]!		[Final Evaluation][TOT=  129][ 18 %]!		[Final Evaluation][TOT=  129][ 19 %]!		[Final Evaluation][TOT=  129][ 20 %]!		[Final Evaluation][TOT=  129][ 21 %]!		[Final Evaluation][TOT=  129][ 22 %]!		[Final Evaluation][TOT=  129][ 23 %]!		[Final Evaluation][TOT=  129][ 24 %]!		[Final Evaluation][TOT=  129][ 25 %]!		[Final Evaluation][TOT=  129][ 26 %]!		[Final Evaluation][TOT=  129][ 27 %]!		[Final Evaluation][TOT=  129][ 28 %]!		[Final Evaluation][TOT=  129][ 29 %]!		[Final Evaluation][TOT=  129][ 30 %]!		[Final Evaluation][TOT=  129][ 31 %]!		[Final Evaluation][TOT=  129][ 32 %]!		[Final Evaluation][TOT=  129][ 33 %]!		[Final Evaluation][TOT=  129][ 34 %]!		[Final Evaluation][TOT=  129][ 35 %]!		[Final Evaluation][TOT=  129][ 36 %]!		[Final Evaluation][TOT=  129][ 37 %]!		[Final Evaluation][TOT=  129][ 38 %]!		[Final Evaluation][TOT=  129][ 39 %]!		[Final Evaluation][TOT=  129][ 40 %]!		[Final Evaluation][TOT=  129][ 41 %]!		[Final Evaluation][TOT=  129][ 42 %]!		[Final Evaluation][TOT=  129][ 43 %]!		[Final Evaluation][TOT=  129][ 44 %]!		[Final Evaluation][TOT=  129][ 45 %]!		[Final Evaluation][TOT=  129][ 46 %]!		[Final Evaluation][TOT=  129][ 47 %]!		[Final Evaluation][TOT=  129][ 48 %]!		[Final Evaluation][TOT=  129][ 49 %]!		[Final Evaluation][TOT=  129][ 50 %]!		[Final Evaluation][TOT=  129][ 51 %]!		[Final Evaluation][TOT=  129][ 52 %]!		[Final Evaluation][TOT=  129][ 53 %]!		[Final Evaluation][TOT=  129][ 54 %]!		[Final Evaluation][TOT=  129][ 55 %]!		[Final Evaluation][TOT=  129][ 56 %]!		[Final Evaluation][TOT=  129][ 57 %]!		[Final Evaluation][TOT=  129][ 58 %]!		[Final Evaluation][TOT=  129][ 59 %]!		[Final Evaluation][TOT=  129][ 60 %]!		[Final Evaluation][TOT=  129][ 61 %]!		[Final Evaluation][TOT=  129][ 62 %]!		[Final Evaluation][TOT=  129][ 63 %]!		[Final Evaluation][TOT=  129][ 64 %]!		[Final Evaluation][TOT=  129][ 65 %]!		[Final Evaluation][TOT=  129][ 66 %]!		[Final Evaluation][TOT=  129][ 67 %]!		[Final Evaluation][TOT=  129][ 68 %]!		[Final Evaluation][TOT=  129][ 69 %]!		[Final Evaluation][TOT=  129][ 70 %]!		[Final Evaluation][TOT=  129][ 71 %]!		[Final Evaluation][TOT=  129][ 72 %]!		[Final Evaluation][TOT=  129][ 73 %]!		[Final Evaluation][TOT=  129][ 74 %]!		[Final Evaluation][TOT=  129][ 75 %]!		[Final Evaluation][TOT=  129][ 76 %]!		[Final Evaluation][TOT=  129][ 77 %]!		[Final Evaluation][TOT=  129][ 78 %]!		[Final Evaluation][TOT=  129][ 79 %]!		[Final Evaluation][TOT=  129][ 80 %]!		[Final Evaluation][TOT=  129][ 81 %]!		[Final Evaluation][TOT=  129][ 82 %]!		[Final Evaluation][TOT=  129][ 83 %]!		[Final Evaluation][TOT=  129][ 84 %]!		[Final Evaluation][TOT=  129][ 85 %]!		[Final Evaluation][TOT=  129][ 86 %]!		[Final Evaluation][TOT=  129][ 87 %]!		[Final Evaluation][TOT=  129][ 88 %]!		[Final Evaluation][TOT=  129][ 89 %]!		[Final Evaluation][TOT=  129][ 90 %]!		[Final Evaluation][TOT=  129][ 91 %]!		[Final Evaluation][TOT=  129][ 92 %]!		[Final Evaluation][TOT=  129][ 93 %]!		[Final Evaluation][TOT=  129][ 94 %]!		[Final Evaluation][TOT=  129][ 95 %]!		[Final Evaluation][TOT=  129][ 96 %]!		[Final Evaluation][TOT=  129][ 97 %]!		[Final Evaluation][TOT=  129][ 98 %]!		[Final Evaluation][TOT=  129][ 99 %]!		[Final Evaluation][TOT=  129][100 %]
+
+
+
+OUTPUT RESULTS
+	#### File Type= GUIDE_TREE      Format= newick          Name= sample_rnaseq1.dnd
+	#### File Type= MSA             Format= aln             Name= sample_rnaseq1.aln
+	#### File Type= MSA             Format= html            Name= sample_rnaseq1.html
+
+# Command Line: t_coffee sample_rnaseq1.fasta  [PROGRAM:T-COFFEE]
+# T-COFFEE Memory Usage: Current= 29.319 Mb, Max= 30.391 Mb
+# Results Produced with T-COFFEE Version_13.39.0.d675aed (Version_13.39.0.d675aed)
+# T-COFFEE is available from http://www.tcoffee.org
+# Register on: https://groups.google.com/group/tcoffee/
+</content>
+</file>
+<file>
+<stream>input</stream>
+<name>sample_rnaseq1.fasta</name>
+<content>>AC068303.10-12902_12788
+AACUCUUGUUUCUCUUCAGAUCAUGUAAAUCUUUCGCCUUUUAUUAAAGA
+UUUCCAUGGGGAGGAACAGUUAUGAGUCUUUAUCCAAUUUCUGAGGCCUC
+GUGUUUCACCAGGCU
+>AC097725.2-33800_33915
+ACUCUGGUUUCUCUUCAAUUGUCGAAUAAAUCUUUCGCCUUUUACUAAAG
+AUUUCCGUGGAGAGGAACACUCUAAUGAGUCUAAAAUAAUUUUUAGUAGU
+GCCCUGUCGCAAGACU
+>X15934.1-3_121
+AGCCGUGUGAUGAUGACAUAGCGAACUAUUCUUUCGCCUUUUACUAAAGA
+AUACCGUGUCAGCGUCACAAUUAGCGGCAUACGCUAGUUUUUGGAAGAGU
+UCUCAAUUUUGAGGGCUCU
+>AC000104.1-17376_17496
+AGCCAUGUGGUGAGCACAUAGCGAACUAUUCUUUCGCCUUUUACUAAAGA
+AUACCGUGUGCUCUCCACGCUAAGUGGCAUACGCCUAUUUUUGGAGGGUU
+CCCACUUUACUGUGGGUCCCA
+>AL023594.2-7651_7766
+GUCAAAGCACUUUGCAAAAGCUAACGUAUCUGUUUCUUGCCUUUUACCAG
+AAACAGCCGUUUGUAAGGUGUGCUAAUUUGACUGUAUAGUUUUUGUAAUC
+UUUUUCUUGAAACAUU
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>sample_rnaseq1.dnd</name>
+<content>((AC000104.1-17376_17496:0.08500,X15934.1-3_121:0.08500):0.04500,(AC068303.10-12902_12788:0.11500,AC097725.2-33800_33915:0.10500):0.02000,AL023594.2-7651_7766:0.15000);</content>
+</file>
+<file>
+<stream>input</stream>
+<name>sample_rnaseq1.dnd</name>
+<content>((AC000104.1-17376_17496:0.08500,X15934.1-3_121:0.08500):0.04500,(AC068303.10-12902_12788:0.11500,AC097725.2-33800_33915:0.10500):0.02000,AL023594.2-7651_7766:0.15000);</content>
+</file>
+<file>
+<stream>output</stream>
+<name>sample_rnaseq1.aln</name>
+<content>CLUSTAL FORMAT for T-COFFEE Version_13.39.0.d675aed [http://www.tcoffee.org] [MODE:  ], CPU=0.00 sec, SCORE=55, Nseq=5, Len=129 
+
+AC068303.10-12902_12788  AACUCUUGUUUCUCUUCAG-----AUCAUGUAAAUCUUUCGCCUUUUAUU
+AC097725.2-33800_33915   A-CUCUGGUUUCUCUUCAAU---UGUCGAAUAAAUCUUUCGCCUUUUACU
+X15934.1-3_121           A-GCCGUGUG-AUGAUGACA---UAGCGAACUAUUCUUUCGCCUUUUACU
+AC000104.1-17376_17496   A-GCCAUGUG-GUGAGCACA---UAGCGAACUAUUCUUUCGCCUUUUACU
+AL023594.2-7651_7766     G-UCAAAGCA-CUUUGCAAAAGCUAACGUAUCUGUUUCUUGCCUUUUACC
+                                *    *    *        *       * * * ********  
+
+AC068303.10-12902_12788  AAAGAUUUCCAUGGGGAGGAACA--GUUAUGAGUCUUUAUCCAAUUUCU-
+AC097725.2-33800_33915   AAAGAUUUCCGUGGAGAGGAACACUCUAAUGAGUCUAA-AAUAAUUUUUA
+X15934.1-3_121           AAAGAAUACCGUGUCA-GCGUCACAAUUAGCGGCAUAC-GCUAGUUUUUG
+AC000104.1-17376_17496   AAAGAAUACCGUGUGC-UCUCCACGCUAAGUGGCAUAC-GCCUAUUUUUG
+AL023594.2-7651_7766     AGAAACAGCCGUUUGU-AAGGUGUGCUAAUUUGACUGU--AUAGUUUUUG
+                         * * *   ** *              * *   *  *        *** * 
+
+AC068303.10-12902_12788  GAGG-CCUCGU-GUUU--CACC--AGGCU
+AC097725.2-33800_33915   GUAG-UGCCCU-G--U--CGCA--AGACU
+X15934.1-3_121           GAAGAGUUCUCAAUUU--UGAG-GGCUCU
+AC000104.1-17376_17496   GAGG-GUUCCCACUUUACUGUGGGUCCCA
+AL023594.2-7651_7766     UAA--UCUUUU-U-CU--UGAA--ACAUU
+                                        *             
+
+
+
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>sample_rnaseq1.html</name>
+<content><html>
+<style>
+SPAN { font-family: courier new, courier-new, courier, monospace; font-weight: bold; font-size: 11pt;}
+SPAN { line-height:100%}
+SPAN {	white-space: pre}
+SPAN.value0 {background: #9B92FF}
+SPAN.value1 {background: #B4FFB4}
+SPAN.value2 {background: #BEFFBE}
+SPAN.value3 {background: #C8FFC8}
+SPAN.value4 {background: #FFFFB7}
+SPAN.value5 {background: #FFFFAD}
+SPAN.value6 {background: #FFFFAD}
+SPAN.value7 {background: #FFE6E6}
+SPAN.value8 {background: #FFDCDC}
+SPAN.value9 {background: #FFC8C8}
+SPAN.valuedefault {}
+SPAN.valuegap {}
+SPAN.valueink {background: 000000}
+</style><body><span class=valuedefault>T-COFFEE,&nbsp;Version_13.39.0.d675aed&nbsp;(Version_13.39.0.d675aed)</span><br><span class=valuedefault>Cedric&nbsp;Notredame&nbsp;</span><br><span class=valuedefault>CPU&nbsp;TIME:0&nbsp;sec.</span><br><span class=valuedefault>SCORE=55</span><br><span class=valuedefault>*</span><br><span class=valuedefault>&nbsp;</span><span class=value0>B</span><span class=value1>A</span><span class=value2>D</span><span class=value3>&nbsp;</span><span class=value4>A</span><span class=value5>V</span><span class=value6>G</span><span class=value7>&nbsp;</span><span class=value8>G</span><span class=value9>OOD</span><br><span class=valuedefault>*</span><br><span class=value5>AC068303.10-129&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;54</span><br><span class=value5>AC097725.2-3380&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;56</span><br><span class=value5>X15934.1-3_121&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;56</span><br><span class=value5>AC000104.1-1737&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;56</span><br><span class=value5>AL023594.2-7651&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;52</span><br><span class=value5>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;&nbsp;5</span><br><br><span class=valuedefault>AC068303.10-129&nbsp;&nbsp;&nbsp;</span><span class=value5>A</span><span class=value2>A</span><span class=value4>CUCUUG</span><span class=value3>UU</span><span class=value2>U</span><span class=value3>CUCUU</span><span class=value4>C</span><span class=value3>AG</span><span class=valuegap>-----</span><span class=value3>A</span><span class=value4>UCAUG</span><span class=value5>U</span><span class=value4>A</span><span class=value5>A</span><br><span class=valuedefault>AC097725.2-3380&nbsp;&nbsp;&nbsp;</span><span class=value5>A</span><span class=valuegap>-</span><span class=value4>CUCUGG</span><span class=value3>UU</span><span class=value2>U</span><span class=value4>CUCUUCA</span><span class=value3>AU</span><span class=valuegap>---</span><span class=value3>U</span><span class=value4>G</span><span class=value5>UCGAAUAA</span><br><span class=valuedefault>X15934.1-3_121&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value5>A</span><span class=valuegap>-</span><span class=value4>GCCGUG</span><span class=value3>UG</span><span class=valuegap>-</span><span class=value3>A</span><span class=value4>UGAUGAC</span><span class=value3>A</span><span class=valuegap>---</span><span class=value4>U</span><span class=value5>AG</span><span class=value6>CG</span><span class=value5>A</span><span class=value6>A</span><span class=value5>CUA</span><br><span class=valuedefault>AC000104.1-1737&nbsp;&nbsp;&nbsp;</span><span class=value5>A</span><span class=valuegap>-</span><span class=value4>GCCAUGUG</span><span class=valuegap>-</span><span class=value4>GUGAG</span><span class=value5>C</span><span class=value4>AC</span><span class=value3>A</span><span class=valuegap>---</span><span class=value4>UA</span><span class=value5>GC</span><span class=value6>G</span><span class=value5>A</span><span class=value6>A</span><span class=value5>CUA</span><br><span class=valuedefault>AL023594.2-7651&nbsp;&nbsp;&nbsp;</span><span class=value4>G</span><span class=valuegap>-</span><span class=value4>UCAA</span><span class=value3>AGCA</span><span class=valuegap>-</span><span class=value3>CUUUG</span><span class=value4>C</span><span class=value3>AA</span><span class=value2>A</span><span class=value1>AG</span><span class=value2>C</span><span class=value3>UAA</span><span class=value4>CGU</span><span class=value3>AUC</span><span class=value4>U</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value5>&nbsp;</span><span class=value1>&nbsp;</span><span class=value4>&nbsp;&nbsp;&nbsp;</span><span class=value3>&nbsp;&nbsp;*&nbsp;</span><span class=value2>&nbsp;</span><span class=value1>&nbsp;</span><span class=value3>&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;</span><span class=value2>&nbsp;</span><span class=value1>&nbsp;&nbsp;&nbsp;</span><span class=value3>&nbsp;&nbsp;</span><span class=value4>&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>AC068303.10-129&nbsp;&nbsp;&nbsp;</span><span class=value6>AU</span><span class=value7>CUU</span><span class=value8>U</span><span class=value9>CGCCUUUUAUUAAAGAUUUCCA</span><span class=value8>U</span><span class=value7>G</span><span class=value5>G</span><span class=value4>GG</span><br><span class=valuedefault>AC097725.2-3380&nbsp;&nbsp;&nbsp;</span><span class=value6>A</span><span class=value7>UCUU</span><span class=value8>U</span><span class=value9>CGCCUUUUACUAAAGAUUUCCG</span><span class=value8>U</span><span class=value7>G</span><span class=value5>G</span><span class=value4>AG</span><br><span class=valuedefault>X15934.1-3_121&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value6>UU</span><span class=value7>CUU</span><span class=value8>U</span><span class=value9>CGCCUUUUACUAAAGAAUACCG</span><span class=value8>U</span><span class=value6>G</span><span class=value5>U</span><span class=value4>CA</span><br><span class=valuedefault>AC000104.1-1737&nbsp;&nbsp;&nbsp;</span><span class=value5>U</span><span class=value6>U</span><span class=value7>CUU</span><span class=value8>U</span><span class=value9>CGCCUUUUACUAAAGAAUACCGU</span><span class=value7>G</span><span class=value6>U</span><span class=value4>GC</span><br><span class=valuedefault>AL023594.2-7651&nbsp;&nbsp;&nbsp;</span><span class=value4>G</span><span class=value5>UU</span><span class=value6>UC</span><span class=value8>U</span><span class=value9>UGCCUUUUACCAGAAACAGCCGU</span><span class=value7>U</span><span class=value5>U</span><span class=value4>G</span><span class=value3>U</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value5>&nbsp;</span><span class=value6>*&nbsp;*</span><span class=value7>&nbsp;</span><span class=value8>*</span><span class=value9>&nbsp;********&nbsp;&nbsp;*&nbsp;*&nbsp;*&nbsp;&nbsp;&nbsp;**&nbsp;</span><span class=value8>*</span><span class=value6>&nbsp;</span><span class=value4>&nbsp;&nbsp;</span><span class=value3>&nbsp;</span><br><br><br><span class=valuedefault>AC068303.10-129&nbsp;&nbsp;&nbsp;</span><span class=value3>A</span><span class=value4>GGA</span><span class=value3>A</span><span class=value4>CA</span><span class=valuegap>--</span><span class=value5>G</span><span class=value4>U</span><span class=value5>UAUGAGUC</span><span class=value4>UU</span><span class=value3>U</span><span class=value2>A</span><span class=value3>U</span><span class=value4>C</span><span class=value5>CAAUUUCU</span><br><span class=valuedefault>AC097725.2-3380&nbsp;&nbsp;&nbsp;</span><span class=value2>A</span><span class=value4>GGAA</span><span class=value5>CA</span><span class=value4>CU</span><span class=value5>C</span><span class=value6>U</span><span class=value5>A</span><span class=value6>A</span><span class=value5>UGAGUCU</span><span class=value4>AA</span><span class=valuegap>-</span><span class=value3>A</span><span class=value4>A</span><span class=value5>UAAUUUUU</span><br><span class=valuedefault>X15934.1-3_121&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value4>GCGU</span><span class=value5>CAC</span><span class=value4>A</span><span class=value5>AUUA</span><span class=value4>GC</span><span class=value5>GG</span><span class=value4>CAUAC</span><span class=valuegap>-</span><span class=value4>GC</span><span class=value6>UAGUUUU</span><span class=value5>U</span><br><span class=valuedefault>AC000104.1-1737&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value4>UCUC</span><span class=value5>CACG</span><span class=value6>CUAA</span><span class=value5>GUGGCA</span><span class=value4>UAC</span><span class=valuegap>-</span><span class=value4>GC</span><span class=value5>CUAUUUUU</span><br><span class=valuedefault>AL023594.2-7651&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value3>AA</span><span class=value4>GGUGUG</span><span class=value5>CUA</span><span class=value6>A</span><span class=value5>UUUG</span><span class=value4>ACU</span><span class=value3>GU</span><span class=valuegap>--</span><span class=value3>A</span><span class=value4>U</span><span class=value5>AG</span><span class=value6>U</span><span class=value5>UUUU</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value2>&nbsp;</span><span class=value3>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value4>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value5>&nbsp;*&nbsp;*</span><span class=value4>&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;*</span><span class=value3>&nbsp;&nbsp;</span><span class=value1>&nbsp;</span><span class=value3>&nbsp;&nbsp;</span><span class=value4>&nbsp;</span><span class=value5>&nbsp;&nbsp;***&nbsp;</span><span class=value4>*</span><br><br><br><span class=valuedefault>AC068303.10-129&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value4>GA</span><span class=value3>GG</span><span class=valuegap>-</span><span class=value3>CCUCG</span><span class=value2>U</span><span class=valuegap>-</span><span class=value2>GUU</span><span class=value3>U</span><span class=valuegap>--</span><span class=value3>CACC</span><span class=valuegap>--</span><span class=value3>AG</span><span class=value4>G</span><span class=value5>C</span><span class=value7>U</span><br><span class=valuedefault>AC097725.2-3380&nbsp;&nbsp;&nbsp;</span><span class=value4>AGU</span><span class=value3>A</span><span class=value2>G</span><span class=valuegap>-</span><span class=value3>U</span><span class=value2>GCCCU</span><span class=valuegap>-</span><span class=value2>G</span><span class=valuegap>--</span><span class=value2>U</span><span class=valuegap>--</span><span class=value2>CG</span><span class=value3>CA</span><span class=valuegap>--</span><span class=value3>AG</span><span class=value4>A</span><span class=value5>C</span><span class=value7>U</span><br><span class=valuedefault>X15934.1-3_121&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value5>GG</span><span class=value4>AA</span><span class=value3>G</span><span class=value1>A</span><span class=value3>G</span><span class=value2>UUCUC</span><span class=value1>A</span><span class=value2>AUU</span><span class=value3>U</span><span class=valuegap>--</span><span class=value2>U</span><span class=value3>GAG</span><span class=valuegap>-</span><span class=value2>G</span><span class=value3>G</span><span class=value4>CU</span><span class=value6>C</span><span class=value8>U</span><br><span class=valuedefault>AC000104.1-1737&nbsp;&nbsp;&nbsp;</span><span class=value4>GGAG</span><span class=value3>G</span><span class=valuegap>-</span><span class=value3>GUU</span><span class=value2>CCC</span><span class=value1>A</span><span class=value2>CUUU</span><span class=value1>AC</span><span class=value3>UGUG</span><span class=value1>G</span><span class=value2>GU</span><span class=value3>CC</span><span class=value5>C</span><span class=value7>A</span><br><span class=valuedefault>AL023594.2-7651&nbsp;&nbsp;&nbsp;</span><span class=value4>GU</span><span class=value3>AA</span><span class=valuegap>--</span><span class=value3>UC</span><span class=value2>UUUU</span><span class=valuegap>-</span><span class=value2>U</span><span class=valuegap>-</span><span class=value2>CU</span><span class=valuegap>--</span><span class=value3>UGAA</span><span class=valuegap>--</span><span class=value3>A</span><span class=value4>CA</span><span class=value6>U</span><span class=value7>U</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value3>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value2>&nbsp;</span><span class=value0>&nbsp;</span><span class=value2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value1>&nbsp;</span><span class=value2>&nbsp;</span><span class=value1>&nbsp;&nbsp;</span><span class=value2>*</span><span class=value0>&nbsp;&nbsp;</span><span class=value2>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value0>&nbsp;</span><span class=value1>&nbsp;</span><span class=value2>&nbsp;</span><span class=value3>&nbsp;&nbsp;</span><span class=value5>&nbsp;</span><span class=value7>&nbsp;</span><br><br><br><br><br><br></body></html>
+</content>
+</file>
+<environement>
+HOME_4_TCOFFEE=/Users/cnotredame/
+MANPATH=/sw/share/man:/usr/share/man:/usr/local/share/man:/opt/X11/share/man:/Library/TeX/texbin/man:/Applications/Xcode.app/Contents/Developer/usr/share/man:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/share/man:/sw/lib/perl5/5.18.2/man
+TERM_PROGRAM=Apple_Terminal
+MCOFFEE_4_TCOFFEE=/Users/cnotredame//.t_coffee//mcoffee/
+ROOT_TMP_4_TCOFFEE=/var/tmp/
+SHELL=/bin/bash
+TERM=xterm-256color
+TMPDIR=/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/
+CONDA_SHLVL=1
+PERL5LIB=/sw/lib/perl5:/sw/lib/perl5/darwin
+Apple_PubSub_Socket_Render=/private/tmp/com.apple.launchd.6JzhyrtuKp/Render
+CONDA_PROMPT_MODIFIER=(base) 
+TERM_PROGRAM_VERSION=388.1.3
+OSNAME=macosx
+PERL_BIN=/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms::/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices
+TERM_SESSION_ID=9785BD0D-F6F1-4B59-B0BA-9937FD12A1E7
+METHODS_4_TCOFFEE=/Users/cnotredame//.t_coffee//methods/
+VERSIONER_PERL_VERSION=5.18
+XAPPLRESDIR=/sw/etc/app-defaults/
+http_proxy=
+HTTP_proxy=
+USER=cnotredame
+CONDA_EXE=/Users/cnotredame/anaconda3/bin/conda
+SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.U5mTe2o7m7/Listeners
+__CF_USER_TEXT_ENCODING=0x1F6:0x0:0x0
+ENV_4_TCOFFEE=/Users/cnotredame//.t_coffee//.t_coffee_env
+_CE_CONDA=
+all_proxy=
+ALL_PROXY=
+HTTP_proxy_4_TCOFFEE=
+PATH=/Users/cnotredame//.t_coffee//plugins/macosx/:/Users/cnotredame/anaconda3/bin:/Users/cnotredame/anaconda3/condabin:/opt/local/bin:/opt/local/sbin:/opt/local/bin:/opt/local/sbin:/Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/packages/x3dna-v2.1/bin:/Users/cnotredame/bin/macosx://Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms:.:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices:/Users/cnotredame/bin/Scripts:/Users/cnotredame/Library/Haskell/ghc-7.4.2/lib/epub-tools-2.0.0/bin:/sw/bin:/sw/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/Library/TeX/texbin
+_=/usr/bin/printenv
+CONDA_PREFIX=/Users/cnotredame/anaconda3
+COLOR_4_TCOFFEE=new
+DIR_4_TCOFFEE=/Users/cnotredame//.t_coffee/
+PWD=/private/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/RANDOMSTRINGOgI5ithFcDHPECNQ3I34/data
+CACHE_4_TCOFFEE=/Users/cnotredame//.t_coffee//cache/
+X3DNA=/Users/cnotredame/Dropbox/packages/x3dna-v2.1
+DBUS_LAUNCHD_SESSION_BUS_SOCKET=/private/tmp/com.apple.launchd.DfqaaC2z17/unix_domain_listener
+XPC_FLAGS=0x0
+VERSIONER_PERL_PREFER_32_BIT=no
+_CE_M=
+XPC_SERVICE_NAME=0
+ERRORFILE_4_TCOFFEE=NO
+PLUGINS_4_TCOFFEE=/Users/cnotredame//.t_coffee//plugins/macosx/
+SHLVL=3
+HOME=/Users/cnotredame
+DUMP_4_TCOFFEE=/private/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/RANDOMSTRINGOgI5ithFcDHPECNQ3I34/tcoffee_quickstart.rst.9.dump
+HTTP_PROXY=
+MAFFT_BINARIES=
+CONDA_PYTHON_EXE=/Users/cnotredame/anaconda3/bin/python
+BIN=/Users/cnotredame/bin/macosx
+LOGNAME=cnotredame
+EMAIL_4_TCOFFEE=cedric.notredame@gmail.com
+LC_CTYPE=UTF-8
+CONDA_DEFAULT_ENV=base
+EMAIL=cedric.notredame@gmail.com
+UPDATED_ENV_4_TCOFFEE=1
+INFOPATH=/sw/share/info:/sw/info:/usr/share/info
+DISPLAY=/private/tmp/com.apple.launchd.vef8UzGxBY/org.macosforge.xquartz:0
+TC_MASTER_NODE=1
+NUMBER_OF_PROCESSORS=8
+ALL_proxy=
+LOCKDIR_4_TCOFFEE=/var/tmp/tco/tcoeupl_ior70865//lck/tk_us0natr/
+TMP_4_TCOFFEE=/var/tmp/tco/tcoeupl_ior70865/
+USER_BIN=/Users/cnotredame/bin/macosx
+SCRIPT_BIN=/Users/cnotredame/bin/Scripts/
+</environement>
+<DumpStatus>OK</DumpStatus>
+<DumpFile>/private/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/RANDOMSTRINGOgI5ithFcDHPECNQ3I34/tcoffee_quickstart.rst.9.dump</DumpFile>
+<SourceFile>tcoffee_quickstart.rst</SourceFile>
+<SourceLine>88</SourceLine>
+</DumpIO>

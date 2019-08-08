@@ -1,0 +1,301 @@
+<DumpIO>
+<nature>standard dump</nature>
+<program>T-COFFEE</program>
+<version>Version_13.39.0.d675aed</version>
+<build>Version_13.39.0.d675aed</build>
+<cl>t_coffee -other_pg seq_reformat -in b11.score_ascii -input number_aln -action +convert 0123456i 789c -output fasta_seq </cl>
+<stack>
+</stack>
+<warning>
+</warning>
+<file>
+<stream>output</stream>
+<name>stdout</name>
+<content>>sp|P03953|CFAD_MOUSE
+cciiiiiiiiiiiiiiiiiiiiiicccccccccccccccccccccccccc
+ccccccccccccccccccciiiiiiiiiiicccciiiiiiiiiiiicccc
+iccccccciiiiccccccccccccccccccccccccccciiiiccccccc
+cccccccciiiiicccccccccccccccccciiiiiiiiiiiccccciii
+iiccccccccccccccicccccccccciiciiiccccccccccccccccc
+ccciiiiii
+>sp|Q91VE3|KLK7_MOUSE
+ciiiiiiiiiiiiiiiiiiiiiiicccccccccccccccccccccicccc
+cccccccccccccccccciiiiiiiccciiiiiiiiiiiiiiiicccccc
+cciiicccccccccccccccccccccccccciiiiiccccccccccccci
+iiiiiiccccccccccccccccciiiiiiiiicccccciiiiiccccccc
+ccccccccicccccccccciiciiicccccccccccccccccccciiii
+>sp|Q6H321|KLK2_HORSE
+iiiiiiiiiiiiiiiiiiiiiiiccccccccccccccccccccccccccc
+ccccccccccccccccciiiiiiiiccciiiiiiiiiiiiiccciccccc
+cciiiiiiiiiiiiiiicccccccccccccccccccccccccciiiiicc
+cccccccccciiiiiiiiccccccccccccccccciiiiiiiiccccccc
+iiiiicccccccccccccccicccccccccciiciiiicccccccccccc
+ccccccciiii
+>sp|Q03238|GRAM_RAT
+iiiiiiiiiiiiiiiiiiiccccccccccccccccccccccccccccccc
+ccccccccccccciiiiiiiiiiiciiiiiiiiiiiiiiicccicccccc
+iiiiiccccccccccccccccccccccccciiiiiiiccccccccccccc
+ciiiiiccccccccccccccccccciiiiiiiiiccccccciiiiicccc
+cccccccccciiicccccccccciiciiiiccccccccccccccccccci
+iiiiiiii
+>sp|P20160|CAP7_HUMAN
+cciiiiiiiiiiiiiiiiiiiiiiiicccccccccccccccccccccccc
+cccccccccccccccccccciiiiiiiiiccccciiiiiiiiiiiiiiii
+iiiiicciiiiiicccccccccccccccccccccccccciiiiicccccc
+ccccccccciiiicccccccccccccccccciiicccciiiiiicccccc
+ccccccccicccccccccciiiiiicccccccccccccccccciiiiiii
+i
+>sp|P07338|CTRB1_RAT
+ciiiiiiiiiiiiiiiiiiiiiiiiiiiiiiicccccccccccccccccc
+ccciiiccccccccccccccccccccciiiiiiiiiiiiiiiiiiiiiii
+icccciccccccciiiiccccccccccccccccccccccccccciiiiic
+ccccccccccccciiiiiicccccccccccccccccciiiiiiiiccccc
+ciiiiicccccccccccccciiiiicccccccccciiiiiiccccccccc
+cccccccccccii
+>sp|P00757|KLKB4_MOUSE
+ciiiiiiiiiiiiiiiiiiiiiiiiiiicccccccccccccccccccccc
+cccccccccccciiiiiiiicciiiiiiiiiiiiiiccciccccccciii
+iiiiiiiiiiiicccccccccccccccccccccccccciiiiiccccccc
+cccccciiiiiccccccccccccccccccciiiiiiicccccccciiiii
+cccccccccccccccccccccccccciicciiiccccccccccccccccc
+cciiii
+>sp|P80015|CAP7_PIG
+cccccccccccccccccccccccccccccccccccccccccccciiiiii
+iiiccccciiiiiiiiiiiiiiiiiiiicciiiiiicccccccccccccc
+cccccccccccciiiiicccccccccccccciiiiiiiiiiiccciiiii
+iiiiiiiccciiiiiicccccccccccccciccccccccciiiiiiiccc
+ccccccccccccccciiii
+>sp|P29786|TRY3_AEDAE
+ciiiiiiiiiiiiiiiiiiiiiiiiicccccccccccccccccccccccc
+cccccccccccccccccccciiiiiiiiiiiiiiiiiiiiiiiiiiiiic
+cccccciiiiccccccccccccccccccccccccccciiiiccccccccc
+cccccciiiiiccccccccccccccccccciiiiiiiiiccccccciiii
+iccccccccccccccciccccccccciiiiiicccccccccccccccccc
+ccii
+>sp|P35037|TRY3_ANOGA
+cciiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiccc
+cccccccccccccccccccccccccccccccccccccccccciiiiiiii
+iiiiiiiiiiiiiiiiicciccccccciiiiccccccccccccccccccc
+cccccccciiiiicccccccccccccciiiiicccccccccccccccccc
+ciiiiiiiiiccccccciiiiiccccccccccccccciccccccccciii
+iiiicccccccccccccccccciii
+>sp|P00773|ELA1_RAT
+ciiiiiiiiiiiiiiiiiiiiiiiiccccccccccccccccccccciiii
+iiccccccccccccccccccccciiiiiiiiicccciiiiiiiiiiiicc
+cciccccccciiiiiiccccccccccccccccccccccccccciiiiicc
+cccccccccccciiiiicccccccccccccccccciiiiiiiiiiccccc
+cciiiiiccccccccccccciiiiiiccccccccciiiiiiiiccccccc
+ccccccccccccciii
+>cons
+ciiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii
+iiiiicccccccccccccccccccccciiiiicccccccccccccccccc
+ccciiiiiiiiiiiiicciiiiiiiiiiiiiiiiiiiccccccciiiiii
+iiiiiiiiiiiccccccccccccccccccccccccccciiiiiicccccc
+cccccccciiiiiicccccccccccccccccciiiiiiiiiiccccccci
+iiiiicccccccccccccciiiiiccccccccciiiiiiiiicccccccc
+ccccccccccciiiiiiiii
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>stderr</name>
+<content></content>
+</file>
+<file>
+<stream>input</stream>
+<name>b11.score_ascii</name>
+<content>T-COFFEE, Version_11.00 (Version_11.00)
+Cedric Notredame 
+CPU TIME:0 sec.
+SCORE=807
+*
+ BAD AVG GOOD
+*
+sp|P03953|CFAD_MOUSE    :  82
+sp|Q91VE3|KLK7_MOUSE    :  80
+sp|Q6H321|KLK2_HORSE    :  80
+sp|Q03238|GRAM_RAT      :  79
+sp|P20160|CAP7_HUMAN    :  78
+sp|P07338|CTRB1_RAT     :  81
+sp|P00757|KLKB4_MOUSE   :  80
+sp|P80015|CAP7_PIG      :  83
+sp|P29786|TRY3_AEDAE    :  80
+sp|P35037|TRY3_ANOGA    :  80
+sp|P00773|ELA1_RAT      :  80
+cons                    :  80
+
+sp|P03953|CFAD_MOUSE    975432222221-12111--------------11--------11----
+sp|Q91VE3|KLK7_MOUSE    86432221111-0111110000--------------------------
+sp|Q6H321|KLK2_HORSE    64222111111--11-11--------------11-1------11----
+sp|Q03238|GRAM_RAT      32111111111------1--------------00--------11----
+sp|P20160|CAP7_HUMAN    8743222211100111110011--------------------------
+sp|P07338|CTRB1_RAT     864332222221-11111--------------110100000011----
+sp|P00757|KLKB4_MOUSE   75322221111--11-11--------------11-0------11----
+sp|P80015|CAP7_PIG      ------------------------------------------------
+sp|P29786|TRY3_AEDAE    86432222111-11111100000-------------------------
+sp|P35037|TRY3_ANOGA    87543221111-0111110000000001232122-2------221211
+sp|P00773|ELA1_RAT      865332222221-12111--------------11-1------11----
+cons                    753222111110011111000000000000000100000000110000
+
+
+sp|P03953|CFAD_MOUSE    ----2357888988889999999999987-7---79999999999999
+sp|Q91VE3|KLK7_MOUSE    ----1247888998999999999999976-7---78899999999999
+sp|Q6H321|KLK2_HORSE    ----2368999999999999999999987-7---78999999999999
+sp|Q03238|GRAM_RAT      ----2247889999899999999999987-7---78999999999999
+sp|P20160|CAP7_HUMAN    ----2346888988889999999999987-7---78999999999999
+sp|P07338|CTRB1_RAT     ----235788898888999999999997515---78999999999999
+sp|P00757|KLKB4_MOUSE   ---------22333446899999999987-7---78999999999999
+sp|P80015|CAP7_PIG      --------889998889999999999987-7---88999999999999
+sp|P29786|TRY3_AEDAE    ---02357889988889999999999987-7---89999999999999
+sp|P35037|TRY3_ANOGA    00013468999998889999999999987-7---79999999999999
+sp|P00773|ELA1_RAT      ----23678888888899999999999851300078999999999999
+cons                    000023578888888899999999999871600078999999999999
+
+
+sp|P03953|CFAD_MOUSE    99999997531012235667887654334-344566777767888887
+sp|Q91VE3|KLK7_MOUSE    9999997543-----34567775542--21-23334556667889988
+sp|Q6H321|KLK2_HORSE    9999998543-----34556777664334-344556677767788877
+sp|Q03238|GRAM_RAT      9999998643--11234556766554333-234455677767788876
+sp|P20160|CAP7_HUMAN    99999997541-1223567888766432312233344444-4556776
+sp|P07338|CTRB1_RAT     9999997533---11-2345666554333-344556777767778887
+sp|P00757|KLKB4_MOUSE   9999998543-----34556776654333-344445677767788877
+sp|P80015|CAP7_PIG      99999997541-12245677887654333-3444555654-5566776
+sp|P29786|TRY3_AEDAE    99999986531-1223445565432---21-23344566667778887
+sp|P35037|TRY3_ANOGA    99999987541-1223455665432---21-33345567767788887
+sp|P00773|ELA1_RAT      9999998643---1234567777654333-344456777767778877
+cons                    999999864310112345567765443331233445666667778877
+
+
+sp|P03953|CFAD_MOUSE    65-----------56--79999999999999999999999988765-4
+sp|Q91VE3|KLK7_MOUSE    76-----------56--79999999999999999999999997544--
+sp|Q6H321|KLK2_HORSE    651111222211146--79999999999999999999999997654--
+sp|Q03238|GRAM_RAT      43------------4--6899999999999999999999999864302
+sp|P20160|CAP7_HUMAN    54-----------45--68999999999999999999999998765-4
+sp|P07338|CTRB1_RAT     65-----------56--79999999999999999999999999865-4
+sp|P00757|KLKB4_MOUSE   651111222111146--79999999999999999999999997544--
+sp|P80015|CAP7_PIG      54-----------45--68999999999999999999999998765-4
+sp|P29786|TRY3_AEDAE    65-----------56--79999999999999999999999999866-4
+sp|P35037|TRY3_ANOGA    65-----------56--79999999999999999999999998765-4
+sp|P00773|ELA1_RAT      54-----------330079999999999999999999999998765-4
+cons                    641000011100045007999999999999999999999999875504
+
+
+sp|P03953|CFAD_MOUSE    4789999999999987655-6678889999998888888864223345
+sp|Q91VE3|KLK7_MOUSE    -4699999999999876542566778888999888889976422--55
+sp|Q6H321|KLK2_HORSE    -56899999999998654425667889999998888888764--3345
+sp|Q03238|GRAM_RAT      3579999999999987665-6678899999999888888875333456
+sp|P20160|CAP7_HUMAN    4689999999999988765-667788889999888888875-------
+sp|P07338|CTRB1_RAT     468999999999998765425677888889988888888764--3445
+sp|P00757|KLKB4_MOUSE   -56899999999998765426778889888988888888765--3355
+sp|P80015|CAP7_PIG      4689999999999987654-455566667775443-34432-------
+sp|P29786|TRY3_AEDAE    4789999999999987655-6677889999998988899875323345
+sp|P35037|TRY3_ANOGA    4689999999999987655-6678899999988888888875333345
+sp|P00773|ELA1_RAT      4679999999999987665-6677888888888888888765333455
+cons                    467999999999998765425677888889988888888764223345
+
+
+sp|P03953|CFAD_MOUSE    6668899854--45679999999999997--6--7899999997-567
+sp|Q91VE3|KLK7_MOUSE    66678999864566789999999999997--6--7999999997-567
+sp|Q6H321|KLK2_HORSE    66788999864466789999999999997--6--7899999997-567
+sp|Q03238|GRAM_RAT      66788999854456789999999999996-15--7899999997-567
+sp|P20160|CAP7_HUMAN    ---45787764455679999999999997--6--7899999987-566
+sp|P07338|CTRB1_RAT     6678889864--45678999999999998114117999999987-556
+sp|P00757|KLKB4_MOUSE   67789999864456799999999999997--7--7899999997-567
+sp|P80015|CAP7_PIG      ---45687764455678999999999997--6--7899999986-444
+sp|P29786|TRY3_AEDAE    66788999864456789999999999997--6--7899999985--46
+sp|P35037|TRY3_ANOGA    66788998864456789999999999997--6--7899999986--46
+sp|P00773|ELA1_RAT      6678899874-3456789999999999951141179999999850356
+cons                    667788987544556899999999999970160178999999860556
+
+
+sp|P03953|CFAD_MOUSE    6557899999999999999998754321---2
+sp|Q91VE3|KLK7_MOUSE    65578999999999999999987643-----2
+sp|Q6H321|KLK2_HORSE    655678999999999999999876432-----
+sp|Q03238|GRAM_RAT      65568999999999999999998653211122
+sp|P20160|CAP7_HUMAN    5--458999999999999999876432111-2
+sp|P07338|CTRB1_RAT     53-5799999999999999999875------2
+sp|P00757|KLKB4_MOUSE   755689999999999999999876433-----
+sp|P80015|CAP7_PIG      3--45799999999999999987643-----2
+sp|P29786|TRY3_AEDAE    655789999999999999999986-------1
+sp|P35037|TRY3_ANOGA    655689999999999999998755-------1
+sp|P00773|ELA1_RAT      6557899999999999999999764------2
+cons                    65567999999999999999987643200001
+
+
+
+
+
+</content>
+</file>
+<environement>
+HOME_4_TCOFFEE=/Users/cnotredame/
+MANPATH=/sw/share/man:/usr/share/man:/usr/local/share/man:/opt/X11/share/man:/Library/TeX/texbin/man:/Applications/Xcode.app/Contents/Developer/usr/share/man:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/share/man:/sw/lib/perl5/5.18.2/man
+TERM_PROGRAM=Apple_Terminal
+MCOFFEE_4_TCOFFEE=/Users/cnotredame//.t_coffee//mcoffee/
+ROOT_TMP_4_TCOFFEE=/var/tmp/
+SHELL=/bin/bash
+TERM=xterm-256color
+TMPDIR=/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/
+CONDA_SHLVL=1
+PERL5LIB=/sw/lib/perl5:/sw/lib/perl5/darwin
+Apple_PubSub_Socket_Render=/private/tmp/com.apple.launchd.6JzhyrtuKp/Render
+CONDA_PROMPT_MODIFIER=(base) 
+TERM_PROGRAM_VERSION=388.1.3
+OSNAME=macosx
+PERL_BIN=/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms::/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices
+TERM_SESSION_ID=9785BD0D-F6F1-4B59-B0BA-9937FD12A1E7
+METHODS_4_TCOFFEE=/Users/cnotredame//.t_coffee//methods/
+VERSIONER_PERL_VERSION=5.18
+XAPPLRESDIR=/sw/etc/app-defaults/
+http_proxy=
+HTTP_proxy=
+USER=cnotredame
+CONDA_EXE=/Users/cnotredame/anaconda3/bin/conda
+SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.U5mTe2o7m7/Listeners
+__CF_USER_TEXT_ENCODING=0x1F6:0x0:0x0
+ENV_4_TCOFFEE=/Users/cnotredame//.t_coffee//.t_coffee_env
+_CE_CONDA=
+all_proxy=
+ALL_PROXY=
+HTTP_proxy_4_TCOFFEE=
+PATH=/Users/cnotredame/anaconda3/bin:/Users/cnotredame/anaconda3/condabin:/opt/local/bin:/opt/local/sbin:/opt/local/bin:/opt/local/sbin:/Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/packages/x3dna-v2.1/bin:/Users/cnotredame/bin/macosx://Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms:.:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices:/Users/cnotredame/bin/Scripts:/Users/cnotredame/Library/Haskell/ghc-7.4.2/lib/epub-tools-2.0.0/bin:/sw/bin:/sw/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/Library/TeX/texbin
+_=/usr/bin/printenv
+CONDA_PREFIX=/Users/cnotredame/anaconda3
+DIR_4_TCOFFEE=/Users/cnotredame//.t_coffee/
+PWD=/private/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/RANDOMSTRINGW23SwrY0aBtCuMRxf4IB/data
+CACHE_4_TCOFFEE=/Users/cnotredame//.t_coffee//cache/
+X3DNA=/Users/cnotredame/Dropbox/packages/x3dna-v2.1
+DBUS_LAUNCHD_SESSION_BUS_SOCKET=/private/tmp/com.apple.launchd.DfqaaC2z17/unix_domain_listener
+XPC_FLAGS=0x0
+VERSIONER_PERL_PREFER_32_BIT=no
+_CE_M=
+XPC_SERVICE_NAME=0
+ERRORFILE_4_TCOFFEE=t_coffee.ErrorReport
+PLUGINS_4_TCOFFEE=/Users/cnotredame//.t_coffee//plugins/macosx/
+SHLVL=3
+HOME=/Users/cnotredame
+DUMP_4_TCOFFEE=/private/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/RANDOMSTRINGW23SwrY0aBtCuMRxf4IB/tcoffee_main_documentation.rst.30.dump
+HTTP_PROXY=
+CONDA_PYTHON_EXE=/Users/cnotredame/anaconda3/bin/python
+BIN=/Users/cnotredame/bin/macosx
+LOGNAME=cnotredame
+EMAIL_4_TCOFFEE=cedric.notredame@gmail.com
+LC_CTYPE=UTF-8
+CONDA_DEFAULT_ENV=base
+EMAIL=cedric.notredame@gmail.com
+UPDATED_ENV_4_TCOFFEE=1
+INFOPATH=/sw/share/info:/sw/info:/usr/share/info
+DISPLAY=/private/tmp/com.apple.launchd.vef8UzGxBY/org.macosforge.xquartz:0
+TC_MASTER_NODE=1
+NUMBER_OF_PROCESSORS=8
+ALL_proxy=
+LOCKDIR_4_TCOFFEE=/var/tmp/tco/tco1w_r5elx74646//lck/v7ikgpjc_h/
+TMP_4_TCOFFEE=/var/tmp/tco/tco1w_r5elx74646/
+USER_BIN=/Users/cnotredame/bin/macosx
+SCRIPT_BIN=/Users/cnotredame/bin/Scripts/
+</environement>
+<DumpStatus>OK</DumpStatus>
+<DumpFile>/private/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/RANDOMSTRINGW23SwrY0aBtCuMRxf4IB/tcoffee_main_documentation.rst.30.dump</DumpFile>
+<SourceFile>tcoffee_main_documentation.rst</SourceFile>
+<SourceLine>1132</SourceLine>
+</DumpIO>

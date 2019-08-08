@@ -1518,8 +1518,6 @@ Alignment * main_read_aln ( char *name, Alignment *A)
 	   A=seq2aln (S, A, 0);
 	   //read_aln ( name, A);
 
-           vfree(tmp_name1);
-	   vfree(tmp_name2);
 	 }
        
        else if (format && strm (format, "conc_aln"))A=input_conc_aln (name,NULL);
