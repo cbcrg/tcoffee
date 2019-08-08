@@ -24,7 +24,7 @@ my $KEEPREPLAYED=0;
 my $FATAL="FATAL:doc2test.pl";
 my $WIDTH=0;
 my $VERBOSE=0;
-$TMPDIR     =$ENV{TMPDIR};
+my $TMPDIR     =$ENV{TMPDIR};
 
 my %FILE2IGNORE;
 my %FILES;
@@ -489,6 +489,7 @@ sub play_dump_list
 		{
 		  $target_dump=$DCL{$tcl}{dump};
 		  %report=dump2report ($target_dump);
+		  $DCL{$tcl}{used}=1;
 		  $cached=1;
 		}
 #Not needed anymore
@@ -525,6 +526,8 @@ sub play_dump_list
 		%report=dump2report ($dump);
 		$DCL{$tcl}{dump}=$target_dump;
 		$DCL{$tcl}{new}=1;
+		$DCL{$tcl}{used}=1;
+		$DCL{$tcl}{cl}=$cl;
 		
 		chdir ($wdir);
 	      }
@@ -567,6 +570,18 @@ sub play_dump_list
       }
     close ($f);
     
+    #Purge Files that are not any more linked to the documentation
+    foreach my $cl (keys (%DCL))
+      {
+	if (!$DCL{$cl}{used})
+	 {
+	   my $f=  $DCL{$cl}{dump};
+	   my $icl=$DCL{$cl}{cl};
+	   print "#PLAY -- PURGE -- $icl -- unlink $f\n";
+	   unlink ($f);
+	 }
+      }
+
     chdir ($cdir);
     safe_rmrf ($wdir);
     
@@ -1548,11 +1563,13 @@ sub dumps2cl
 	  my @list=string2dump_list ($string);
 	  foreach my $d (@list)
 	    {
-	      my $cl=super_trim (dump2cl($d));
+	      my $pcl=dump2cl($d);
+	      my $cl=super_trim ($pcl);
 	      $lu{$cl}{dump}=$d;
 	      $lu{$cl}{new}=0;
+	      $lu{$cl}{used}=0;
+	      $lu{$cl}{cl}=$pcl;
 	      
 	    }
 	  return %lu;
 	}
-	      
