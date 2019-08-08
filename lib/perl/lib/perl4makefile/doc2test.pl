@@ -29,7 +29,9 @@ my $TMPDIR     =$ENV{TMPDIR};
 
 my %FILE2IGNORE;
 my %FILES;
-my %DUMPLU;
+my %DCL;
+my %OUTDIRL;
+
 my @TMP_LIST;
 my %GCOUNT;
 $GCOUNT{processed}=0;
@@ -46,10 +48,6 @@ my $TOT_TIME=time;
 my $max=0;
 my $PATTERN='';
 my $log ;
-my $docslog;
-my $regexp;
-my $reset;
-my $stop_on_failed;
 
 my $play;
 my $check;
@@ -250,7 +248,26 @@ if ( !-w $TMPDIR)
 my $exit_status;
 my $infile;
 if ($replay){$exit_status=replay_dump_list ($replay, $outdir);$infile=$replay;}
-elsif ($play  ){$exit_status=play_dump_list ($play, $data, $outdir);$infile=$play}
+elsif ($play  )
+  {
+    $exit_status=play_dump_list ($play, $data, $outdir, %DCL);$infile=$play;
+    
+    #Purge Files that are not any more linked to the documentation
+    
+    foreach my $cl (keys (%DCL))
+      {
+	
+	my $f=$DCL{$cl}{dump};
+	my $path= cleanpath(dirname($f));
+	if ($OUTDIRL{$path} && !$DCL{$cl}{used})
+	  {
+	    my $f=  $DCL{$cl}{dump};
+	    my $icl=$DCL{$cl}{cl};
+	    print "#PLAY -- PURGE -- $icl -- unlink $f\n";
+	    unlink ($f);
+	  }
+      }
+  }
 elsif ($check ){$exit_status=check_dump_list ($check,$clean);$infile=$check}
 elsif ($unplay){$exit_status=unplay_dump_list ($unplay, $stream,$outdir);$infile=$unplay}
 else
@@ -341,11 +358,11 @@ sub unplay_dump
 	
 sub play_dump_list
   {
-    my ($file, $data,$outdir)=@_;
+    my ($file, $data,$outdir, %dcl)=@_;
     my ($passed, $warning, $failed, $shell);
     my ($cdir, $wdir, $ldata,$n, $line, $cl, $rdata, $rfile, $routdir);
     my $f= new FileHandle;
-    my %DCL;
+    
         
     $file  =path2abs  ($file);
     $outdir=path2abs  ($outdir);
@@ -359,8 +376,8 @@ sub play_dump_list
     if (!-d $data){myprintf ("Data directory must be provided  (try -data) [$FATAL]\n");die;}
     if (!-e $file){myprintf ("List of command must be provided (try -play) [$FATAL]\n");die;}
 
-#collects all the Command Lines of all tze dumps in -outfir. Unless -update is on, no dump will be recomputed   
-    %DCL=dumps2cl($outdir);
+#collects all the Command Lines of all the dumps in -outfir. Unless -update is on, no dump will be recomputed   
+    %dcl=dumps2cl($outdir,%dcl);
     
 
     $cdir=cwd;
@@ -378,6 +395,7 @@ sub play_dump_list
 	$routdir="$outdir/$ffile/";
 	system ("mkdir -p $routdir");
 	
+	
 	$PATTERN='\$\$:';
 	shortlines2longlines ($file, $rfile);
       }
@@ -394,6 +412,7 @@ sub play_dump_list
 	$rfile=$file;
 	$routdir=$outdir;
       }
+    $OUTDIRL{cleanpath($routdir)}=1;
     
     myprint ("#PLAY DUMP FILES: $ffile\n");
 
@@ -417,7 +436,7 @@ sub play_dump_list
 	if ($l=~/rst$/ || $l=~/tests$/)
 	  {
 
-	    my $exit=play_dump_list ("$path/$l", $rdata, $outdir);
+	    my $exit=play_dump_list ("$path/$l", $rdata, $outdir, %dcl);
 	    if ($exit){$shell=1;}
 	  }
 	elsif ($l=~/^#/ || !($l=~/\w/) || !$cl){;}#skip
@@ -484,23 +503,27 @@ sub play_dump_list
 	    $dump=path2abs($dump);
 	    my $ddump=basename($dump);
 	    my %report;
-	    my $target_dump="$routdir/$ddump";
+	    my $target_dump=cleanpath("$routdir/$ddump");
 	    my $cached;
 	    my $pcl=dump2cl($target_dump);
 	    my $tcl=super_trim ($cl);
-
-	    
-	    if ($DCL{$tcl}{dump} && (!$UPDATE ||$DCL{$tcl}{new}))
+	    	    
+	    if ($dcl{$tcl}{dump} && (!$UPDATE ||$dcl{$tcl}{new}))
 		{
-		  $target_dump=$DCL{$tcl}{dump};
+		  if ($target_dump ne $dcl{$tcl}{dump})
+		    {
+		      system ("cp $dcl{$tcl}{dump} $target_dump");
+		    }
+		  $target_dump=
 		  %report=dump2report ($target_dump);
-		  $DCL{$tcl}{used}=1;
+		  $dcl{$tcl}{used}=1;
 		  $cached=1;
 		}
 #Not needed anymore
 	    elsif (-e "$target_dump" && compare_cl($cl,$pcl) && !$UPDATE)
 	      {
 		%report=dump2report ($target_dump);
+		$dcl{$tcl}{used}=1;
 		$cached=1;
 	      }
 	    else
@@ -529,10 +552,10 @@ sub play_dump_list
 		    add2dump($dump,"<SourceFile>$ffile\</SourceFile>\n<SourceLine>$line\</SourceLine>\n");
 		  }
 		%report=dump2report ($dump);
-		$DCL{$tcl}{dump}=$target_dump;
-		$DCL{$tcl}{new}=1;
-		$DCL{$tcl}{used}=1;
-		$DCL{$tcl}{cl}=$cl;
+		$dcl{$tcl}{dump}=$target_dump;
+		$dcl{$tcl}{new}=1;
+		$dcl{$tcl}{used}=1;
+		$dcl{$tcl}{cl}=$cl;
 		
 		chdir ($wdir);
 	      }
@@ -575,17 +598,7 @@ sub play_dump_list
       }
     close ($f);
     
-    #Purge Files that are not any more linked to the documentation
-    foreach my $cl (keys (%DCL))
-      {
-	if (!$DCL{$cl}{used})
-	 {
-	   my $f=  $DCL{$cl}{dump};
-	   my $icl=$DCL{$cl}{cl};
-	   print "#PLAY -- PURGE -- $icl -- unlink $f\n";
-	   unlink ($f);
-	 }
-      }
+
 
     chdir ($cdir);
     safe_rmrf ($wdir);
@@ -1563,8 +1576,7 @@ sub ignore_file
       }
 sub dumps2cl
 	{
-	  my $string=shift @_;
-	  my %lu;
+	  my ($string,%lu)=@_;
 	  my @list=string2dump_list ($string);
 	  foreach my $d (@list)
 	    {
@@ -1578,3 +1590,11 @@ sub dumps2cl
 	    }
 	  return %lu;
 	}
+sub cleanpath
+	  {
+	    my $path=shift @_;
+	    while ($path=~s/\/\//\//g){;}
+	    $path=~s/\/$//;
+	    return $path;
+	  }
+	    

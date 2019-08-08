@@ -230,9 +230,9 @@ Group    3: hmgl_wheat
 Group    4: hmgt_mouse
 
 
-	Group    5: [Group    2 (   1 seq)] with [Group    4 (   1 seq)]-->[Len=   77][PID:34486]
-	Group    6: [Group    3 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=   80][PID:34486]
-	Group    7: [Group    6 (   2 seq)] with [Group    5 (   2 seq)]-->[Len=   82][PID:34486]
+	Group    5: [Group    2 (   1 seq)] with [Group    4 (   1 seq)]-->[Len=   77][PID:65857]
+	Group    6: [Group    3 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=   80][PID:65857]
+	Group    7: [Group    6 (   2 seq)] with [Group    5 (   2 seq)]-->[Len=   82][PID:65857]
 
 
 
@@ -356,7 +356,7 @@ _=/usr/bin/printenv
 CONDA_PREFIX=/Users/cnotredame/anaconda3
 COLOR_4_TCOFFEE=new
 DIR_4_TCOFFEE=/Users/cnotredame//.t_coffee/
-PWD=/private/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/RANDOMSTRINGf0nlNh7M6nt5UDCdezCx/data
+PWD=/private/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/RANDOMSTRINGX1EXNjAcVXRfOYiE9JRw/data
 CACHE_4_TCOFFEE=/Users/cnotredame//.t_coffee//cache/
 X3DNA=/Users/cnotredame/Dropbox/packages/x3dna-v2.1
 DBUS_LAUNCHD_SESSION_BUS_SOCKET=/private/tmp/com.apple.launchd.DfqaaC2z17/unix_domain_listener
@@ -368,7 +368,7 @@ ERRORFILE_4_TCOFFEE=NO
 PLUGINS_4_TCOFFEE=/Users/cnotredame//.t_coffee//plugins/macosx/
 SHLVL=3
 HOME=/Users/cnotredame
-DUMP_4_TCOFFEE=/private/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/RANDOMSTRINGf0nlNh7M6nt5UDCdezCx/core.tests.5.dump
+DUMP_4_TCOFFEE=/private/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/RANDOMSTRINGX1EXNjAcVXRfOYiE9JRw/core.tests.5.dump
 HTTP_PROXY=
 MAFFT_BINARIES=
 CONDA_PYTHON_EXE=/Users/cnotredame/anaconda3/bin/python
@@ -384,13 +384,13 @@ DISPLAY=/private/tmp/com.apple.launchd.vef8UzGxBY/org.macosforge.xquartz:0
 TC_MASTER_NODE=1
 NUMBER_OF_PROCESSORS=8
 ALL_proxy=
-LOCKDIR_4_TCOFFEE=/var/tmp/tco/tcoqrz8alpy34486//lck/3c1nywj62r/
-TMP_4_TCOFFEE=/var/tmp/tco/tcoqrz8alpy34486/
+LOCKDIR_4_TCOFFEE=/var/tmp/tco/tcozsrmmp_c65857//lck/g977aaggp4/
+TMP_4_TCOFFEE=/var/tmp/tco/tcozsrmmp_c65857/
 USER_BIN=/Users/cnotredame/bin/macosx
 SCRIPT_BIN=/Users/cnotredame/bin/Scripts/
 </environement>
 <DumpStatus>OK</DumpStatus>
-<DumpFile>/private/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/RANDOMSTRINGf0nlNh7M6nt5UDCdezCx/core.tests.5.dump</DumpFile>
+<DumpFile>/private/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/RANDOMSTRINGX1EXNjAcVXRfOYiE9JRw/core.tests.5.dump</DumpFile>
 <SourceFile>core.tests</SourceFile>
 <SourceLine>10</SourceLine>
 </DumpIO>
