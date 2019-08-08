@@ -1,0 +1,1967 @@
+<DumpIO>
+<nature>standard dump</nature>
+<program>T-COFFEE</program>
+<version>Version_13.39.0.d675aed</version>
+<build>Version_13.39.0.d675aed</build>
+<cl>t_coffee -in Asample_aln5.aln -outfile test.aln </cl>
+<stack>
+</stack>
+<warning>
+</warning>
+<file>
+<stream>output</stream>
+<name>stdout</name>
+<content>#Single Thread
+#Single Thread
+#Single Thread
+#Single Thread
+#Single Thread
+#Single Thread
+#Single Thread
+#Single Thread
+#Single Thread
+#Single Thread
+#Single Thread
+#Single Thread
+CLUSTAL FORMAT for T-COFFEE Version_13.39.0.d675aed [http://www.tcoffee.org] [MODE:  ], CPU=0.00 sec, SCORE=97, Nseq=12, Len=1024 
+
+s22             --------------------------------------------------
+s23             --------------------------------------------------
+s24             --------------------------------------------------
+s25             LPVDKYPVLKDQPAEVLFREN---NPTVLECIIEGNDQGVKYSWKKDGKS
+s26             --RSYGPVFEEQPAHTLFPEGSAEEKVTLTCRA-RANPPATYRWKMNGTE
+s27             --------------------------------------------------
+s28             MTTQAPTFTQPLQSVVVLEGSTATFEAHISGFPVPEVSWFRDGQVISTST
+s29             --------------------------------------------------
+s30             --M-----------------------------------------------
+s31             --------------------------------------------------
+s32             WNI-----------------------------------------------
+s33             --------------------------------------------------
+                                                                  
+
+s22             --------------------------------------------------
+s23             --------------------------------------------------
+s24             --------------------------------------------------
+s25             YNWQ-EHNAALRKDEGSLVFLRPQ-ASDEGHYQCFAETPAGVASSRVISF
+s26             LKMGPDSRYRLV--AGDLVISNPVKAKDAGSYQCVATNARGTVVSREASL
+s27             --------------------------------------------------
+s28             LPGVQISFSDGR--------------------------------------
+s29             --------------------------------------------------
+s30             --------------------------------------------------
+s31             --------------------------------------------------
+s32             --------------------------------------------------
+s33             --------------------------------------------------
+                                                                  
+
+s22             --------------------------------------------------
+s23             --------------------------------------------------
+s24             --------------------------------------------------
+s25             RKTYLIASPAKTH-EKTPIEGRPFQLDCVLPNAYPKPLITWKK---RLSG
+s26             RFGFLQEFSAEERDPVKITEGWGVMFTCSPPPHYPALSYRWLLNEFPN--
+s27             --------------------------------------------------
+s28             --------------------------------------------------
+s29             --------------------------------------------------
+s30             --------------------------------------------------
+s31             --------------------------------------------------
+s32             --------------------------------------------------
+s33             --------------------------------------------------
+                                                                  
+
+s22             --------------------------------------------------
+s23             --------------------------------------------------
+s24             --------------------------------------------------
+s25             ADPNADVTDFDRRITAG-PDGNLYFTIVTKEDVSDIYKYVCTAKNAAVDE
+s26             ------FIPADGRRFVSQTTGNLYIAKTEASDLGN--YSCFATSHIDFIT
+s27             -------------------------------ISGMSGRKASGSSPTSPIN
+s28             -------------------------------AKLTIPAVTKANSGRYSLK
+s29             --------------------------------------------------
+s30             --------------------------------------------------
+s31             --------------------------------------------------
+s32             --------------------------------------------------
+s33             --------------------------------------------------
+                                                                  
+
+s22             ----------------------ARVDQT----PRSVTKETG-ESLTINCV
+s23             ---------------------GDQVEQS----PSALSLHEG-TDSALRCN
+s24             --------------------RVLQVDIV----PSQGEISVG-ESKFFLCQ
+s25             EVVLVEYEIKGVTKDNSGYKGEPVPQYV----SKDMMAKAG-DVTMIYCM
+s26             KSVFSKFSQLSLAAED-ARQYAPSIKAK----FPADTYALTGQMVTLECF
+s27             ANKVENEDAFLEEVAEEKPHVKPYFTKT----ILDMEVVEG-SAARFDCK
+s28             ATNGSGQATSTAELLVKAETAPPNFVQR----LQSMTVRQG-SQVRLQVR
+s29             -----------GSSGSSGTDVSSWIVYPSG--KVYVAAVRL-ERVVLTCE
+s30             ---------------HHHHHHSSRILTK----PRSMTVYEG-ESARFSCD
+s31             --------------------LKPKILTA----SRKIKIKAG-FTHNLEVD
+s32             ---------------HGKESCDVQLYIKR---QSEHSILAG-DPFELECP
+s33             --------------MNSNNKRAPYWTNTEKMEKRLHAVPAA-NTVKFRCP
+                                                              :   
+
+s22             LRDASY-ALGSTCWYRKKSGEGNEESIS-------KGGRYVET---VNSG
+s23             FT---T-TMRSVQWFRQN-SRGSLISLFYLASGTKENGRLKSA--FDSER
+s24             VA--GDAKDKDISWFSPN-----GEKLS------PNQQRISVV--WND--
+s25             YG--S-NPMGYPNYFKNG-----KDVN------GNPEDRITRHNRTS---
+s26             AF---GNPVPQIKWRKLD--GSQTSKWL----------------------
+s27             VE--GY-PDPEVMWFKDD-----NPVKE--------SRHFQID--YDEEG
+s28             VT---GIPTPVVKFYRDG--A---EIQS--------SLDFQIS--QEG-D
+s29             LC--R--PWAEVRWTKDG-----EEVVE--------SPALLLQKEDT---
+s30             TD--G-EPVPTVTWLRKG-----QVLST------S--ARHQVT--TTK--
+s31             FI---GAPDPTATWTVGDSGA---ALAP----------ELLVD--AKS-S
+s32             VK--YCANRPHVTWCKLNGTT--CVKLE----------DRQTS--WKEEK
+s33             AG--G-NPMPTMRWLKNG-----KEFK----QEHR--IGGYKV--RNQ-H
+                             :                                    
+
+s22             -SKSFSLRINDLTVEDGGTYRCGLGVAGGYCDYALCSS---RYAECGDGT
+s23             -ARYSTLHIRDAQLEDSGTYFCAAE-----------ASSGSWQLIFGSGT
+s24             -DDSSTLTIYNANIDDAGIYKCVVT-----------AEDG--TQSEA-TV
+s25             ---GKRLLFKTTLPEDEGVYTCEVD-----------NGVG--KPQKH-SL
+s26             -SSEPLLHIQNVDFEDEGTYECEAE-----------NIK---GRDTY-QG
+s27             ---NCSLTISEVCGDDDAKYTCKAV-----------NS---LGEATC-TA
+s28             ---LYSLLIAEAYPEDSGTYSVNAT-----------NS---VGRATS-TA
+s29             ---VRRLVLPAVQLEDSGEYLCEID------------------DESA-SF
+s30             --YKSTFEISSVQASDEGNYSVVVE-----------NS-E--GKQEA-EF
+s31             ---TTSIFFPSAKRADSGNYKLKVK-----------NE---LGEDEA-IF
+s32             NISFFILHFEPVLPNDNGSYRCSAN-----------FQSN--LIESH-ST
+s33             ---WSLIMESV-VPSDKGNYTCVVE-----------NE-Y--GSINH-TY
+                      :        * . *                              
+
+s22             AVTVN---------------------------------------------
+s23             QLTVMPVT------------------------------------------
+s24             NVKIFQKLMFK-NAPTPQEFKEG--EDAVIVCDVVSSLPPTIIWKHKGRD
+s25             KLTVVSAPKYEQKPEKVIVVKQG--QDVTIPCKVTGLPAPNVVWSHNAKP
+s26             RIIIHAQPDWLDVI---TDTEADIGSDLRWSCVASGKPRPAVRWLRDGQP
+s27             ELLVETMGKEGEGEGEGEEDEEEEEE------------------------
+s28             ELLVQGETREEF--------------------------------------
+s29             TVTVTEPPVRI-IYSGPSSG------------------------------
+s30             TLTIQK--------------------------------------------
+s31             EVIVQ---------------------------------------------
+s32             TLYVTDVKHHHHHHHH----------------------------------
+s33             HLDVV---------------------------------------------
+                 : :                                              
+
+s22             --------------------------------------------------
+s23             --------------------------------------------------
+s24             VILKKDVRFIVLSNNYLQIRGIKKTDEGTYRCEGRILARGEINFKDIQVI
+s25             L---SGGRATVT-DSGLVIKGVKNGDKGYYGCRATN--EHGDKYFETLVQ
+s26             L--ASQNRIEVS-GGELRFSKLVLEDSGMYQCVAEN--KHG-TVYASAEL
+s27             --------------------------------------------------
+s28             --------------------------------------------------
+s29             --------------------------------------------------
+s30             --------------------------------------------------
+s31             --------------------------------------------------
+s32             --------------------------------------------------
+s33             --------------------------------------------------
+                                                                  
+
+s22             --------------------------------------------------
+s23             --------------------------------------------------
+s24             VRVLQVDIVPSQGEISVGESKFFLCQVAGDAKDKDISWFSPNGEKLSPNQ
+s25             VN------------------------------------------------
+s26             TVQA----------------------------------------------
+s27             --------------------------------------------------
+s28             --------------------------------------------------
+s29             --------------------------------------------------
+s30             --------------------------------------------------
+s31             --------------------------------------------------
+s32             --------------------------------------------------
+s33             --------------------------------------------------
+                                                                  
+
+s22             --------------------------------------------------
+s23             --------------------------------------------------
+s24             QRISVVWNDDDSSTLTIYNANIDDAGIYKCVVTAEDGTQSEATVNVKIFQ
+s25             --------------------------------------------------
+s26             --------------------------------------------------
+s27             --------------------------------------------------
+s28             --------------------------------------------------
+s29             --------------------------------------------------
+s30             --------------------------------------------------
+s31             --------------------------------------------------
+s32             --------------------------------------------------
+s33             --------------------------------------------------
+                                                                  
+
+s22             --------------------------------------------------
+s23             --------------------------------------------------
+s24             KLMFKNAPTPQEFKEGEDAVIVCDVVSSLPPTIIWKHKGRDVILKKDVRF
+s25             --------------------------------------------------
+s26             --------------------------------------------------
+s27             --------------------------------------------------
+s28             --------------------------------------------------
+s29             --------------------------------------------------
+s30             --------------------------------------------------
+s31             --------------------------------------------------
+s32             --------------------------------------------------
+s33             --------------------------------------------------
+                                                                  
+
+s22             --------------------------------------------------
+s23             --------------------------------------------------
+s24             IVLSNNYLQIRGIKKTDEGTYRCEGRILARGEINFKDIQVIVRVLQVDIV
+s25             --------------------------------------------------
+s26             --------------------------------------------------
+s27             --------------------------------------------------
+s28             --------------------------------------------------
+s29             --------------------------------------------------
+s30             --------------------------------------------------
+s31             --------------------------------------------------
+s32             --------------------------------------------------
+s33             --------------------------------------------------
+                                                                  
+
+s22             --------------------------------------------------
+s23             --------------------------------------------------
+s24             PSQGEISVGESKFFLCQVAGDAKDKDISWFSPNGEKLSPNQQRISVVWND
+s25             --------------------------------------------------
+s26             --------------------------------------------------
+s27             --------------------------------------------------
+s28             --------------------------------------------------
+s29             --------------------------------------------------
+s30             --------------------------------------------------
+s31             --------------------------------------------------
+s32             --------------------------------------------------
+s33             --------------------------------------------------
+                                                                  
+
+s22             --------------------------------------------------
+s23             --------------------------------------------------
+s24             DDSSTLTIYNANIDDAGIYKCVVTAEDGTQSEATVNVKIFQKLMFKNAPT
+s25             --------------------------------------------------
+s26             --------------------------------------------------
+s27             --------------------------------------------------
+s28             --------------------------------------------------
+s29             --------------------------------------------------
+s30             --------------------------------------------------
+s31             --------------------------------------------------
+s32             --------------------------------------------------
+s33             --------------------------------------------------
+                                                                  
+
+s22             --------------------------------------------------
+s23             --------------------------------------------------
+s24             PQEFKEGEDAVIVCDVVSSLPPTIIWKHKGRDVILKKDVRFIVLSNNYLQ
+s25             --------------------------------------------------
+s26             --------------------------------------------------
+s27             --------------------------------------------------
+s28             --------------------------------------------------
+s29             --------------------------------------------------
+s30             --------------------------------------------------
+s31             --------------------------------------------------
+s32             --------------------------------------------------
+s33             --------------------------------------------------
+                                                                  
+
+s22             --------------------------------------------------
+s23             --------------------------------------------------
+s24             IRGIKKTDEGTYRCEGRILARGEINFKDIQVIVRVLQVDIVPSQGEISVG
+s25             --------------------------------------------------
+s26             --------------------------------------------------
+s27             --------------------------------------------------
+s28             --------------------------------------------------
+s29             --------------------------------------------------
+s30             --------------------------------------------------
+s31             --------------------------------------------------
+s32             --------------------------------------------------
+s33             --------------------------------------------------
+                                                                  
+
+s22             --------------------------------------------------
+s23             --------------------------------------------------
+s24             ESKFFLCQVAGDAKDKDISWFSPNGEKLSPNQQRISVVWNDDDSSTLTIY
+s25             --------------------------------------------------
+s26             --------------------------------------------------
+s27             --------------------------------------------------
+s28             --------------------------------------------------
+s29             --------------------------------------------------
+s30             --------------------------------------------------
+s31             --------------------------------------------------
+s32             --------------------------------------------------
+s33             --------------------------------------------------
+                                                                  
+
+s22             --------------------------------------------------
+s23             --------------------------------------------------
+s24             NANIDDAGIYKCVVTAEDGTQSEATVNVKIFQKLMFKNAPTPQEFKEGED
+s25             --------------------------------------------------
+s26             --------------------------------------------------
+s27             --------------------------------------------------
+s28             --------------------------------------------------
+s29             --------------------------------------------------
+s30             --------------------------------------------------
+s31             --------------------------------------------------
+s32             --------------------------------------------------
+s33             --------------------------------------------------
+                                                                  
+
+s22             --------------------------------------------------
+s23             --------------------------------------------------
+s24             AVIVCDVVSSLPPTIIWKHKGRDVILKKDVRFIVLSNNYLQIRGIKKTDE
+s25             --------------------------------------------------
+s26             --------------------------------------------------
+s27             --------------------------------------------------
+s28             --------------------------------------------------
+s29             --------------------------------------------------
+s30             --------------------------------------------------
+s31             --------------------------------------------------
+s32             --------------------------------------------------
+s33             --------------------------------------------------
+                                                                  
+
+s22             ------------------------
+s23             ------------------------
+s24             GTYRCEGRILARGEINFKDIQVIV
+s25             ------------------------
+s26             ------------------------
+s27             ------------------------
+s28             ------------------------
+s29             ------------------------
+s30             ------------------------
+s31             ------------------------
+s32             ------------------------
+s33             ------------------------
+                                        
+
+
+
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>stderr</name>
+<content>
+PROGRAM: T-COFFEE Version_13.39.0.d675aed (Version_13.39.0.d675aed)
+-full_log      	S	[0] 
+-genepred_score	S	[0] 	nsd
+-run_name      	S	[0] 
+-mem_mode      	S	[0] 	mem
+-extend        	D	[1] 	1 
+-extend_mode   	S	[0] 	very_fast_triplet
+-max_n_pair    	D	[0] 	10 
+-seq_name_for_quadruplet	S	[0] 	all
+-compact       	S	[0] 	default
+-clean         	S	[0] 	no
+-do_self       	FL	[0] 	0
+-do_normalise  	D	[0] 	1000 
+-template_file 	S	[0] 
+-setenv        	S	[0] 	0
+-export        	S	[0] 	0
+-template_mode 	S	[0] 
+-flip          	D	[0] 	0 
+-remove_template_file	D	[0] 	0 
+-profile_template_file	S	[0] 
+-in            	S	[1] 	Asample_aln5.aln
+-seq           	S	[0] 
+-aln           	S	[0] 
+-method_limits 	S	[0] 
+-method        	S	[0] 
+-lib           	S	[0] 
+-profile       	S	[0] 
+-profile1      	S	[0] 
+-profile2      	S	[0] 
+-pdb           	S	[0] 
+-relax_lib     	D	[0] 	1 
+-filter_lib    	D	[0] 	0 
+-shrink_lib    	D	[0] 	0 
+-out_lib       	W_F	[0] 	no
+-out_lib_mode  	S	[0] 	primary
+-lib_only      	D	[0] 	0 
+-outseqweight  	W_F	[0] 	no
+-seq_source    	S	[0] 	ANY
+-cosmetic_penalty	D	[0] 	0 
+-gapopen       	D	[0] 	0 
+-gapext        	D	[0] 	0 
+-fgapopen      	D	[0] 	0 
+-fgapext       	D	[0] 	0 
+-nomatch       	D	[0] 	0 
+-newtree       	W_F	[0] 	default
+-tree          	W_F	[0] 	NO
+-usetree       	R_F	[0] 
+-tree_mode     	S	[0] 	nj
+-distance_matrix_mode	S	[0] 	ktup
+-distance_matrix_sim_mode	S	[0] 	idmat_sim1
+-quicktree     	FL	[0] 	0
+-outfile       	W_F	[1] 	test.aln
+-maximise      	FL	[1] 	1
+-output        	S	[0] 	aln	html
+-len           	D	[0] 	0 
+-infile        	R_F	[0] 
+-matrix        	S	[0] 	default
+-tg_mode       	D	[0] 	1 
+-profile_mode  	S	[0] 	cw_profile_profile
+-profile_comparison	S	[0] 	profile
+-dp_mode       	S	[0] 	linked_pair_wise
+-ktuple        	D	[0] 	1 
+-ndiag         	D	[0] 	0 
+-diag_threshold	D	[0] 	0 
+-diag_mode     	D	[0] 	0 
+-sim_matrix    	S	[0] 	vasiliky
+-transform     	S	[0] 
+-extend_seq    	FL	[0] 	0
+-outorder      	S	[0] 	input
+-inorder       	S	[0] 	aligned
+-seqnos        	S	[0] 	off
+-case          	S	[0] 	keep
+-cpu           	D	[0] 	0 
+-ulimit        	D	[0] 	-1 
+-maxnseq       	D	[0] 	-1 
+-maxlen        	D	[0] 	-1 
+-sample_dp     	D	[0] 	0 
+-weight        	S	[0] 	default
+-seq_weight    	S	[0] 	no
+-align         	FL	[1] 	1
+-mocca         	FL	[0] 	0
+-domain        	FL	[0] 	0
+-start         	D	[0] 	0 
+-len           	D	[0] 	0 
+-scale         	D	[0] 	0 
+-mocca_interactive	FL	[0] 	0
+-method_evaluate_mode	S	[0] 	default
+-color_mode    	S	[0] 	new
+-aln_line_length	D	[0] 	0 
+-evaluate_mode 	S	[0] 	triplet
+-get_type      	FL	[0] 	0
+-clean_aln     	D	[0] 	0 
+-clean_threshold	D	[1] 	1 
+-clean_iteration	D	[1] 	1 
+-clean_evaluate_mode	S	[0] 	t_coffee_fast
+-extend_matrix 	FL	[0] 	0
+-prot_min_sim  	D	[40] 	40 
+-prot_max_sim  	D	[90] 	90 
+-prot_trim     	D	[20] 	20 
+-prot_min_cov  	D	[40] 	40 
+-pdb_type      	S	[0] 	d
+-pdb_min_sim   	D	[35] 	35 
+-pdb_max_sim   	D	[100] 	100 
+-pdb_min_cov   	D	[50] 	50 
+-pdb_blast_server	W_F	[0] 	EBI
+-blast         	W_F	[0] 
+-blast_server  	W_F	[0] 	EBI
+-pdb_db        	W_F	[0] 	pdb
+-protein_db    	W_F	[0] 	uniref50
+-method_log    	W_F	[0] 	no
+-struc_to_use  	S	[0] 
+-cache         	W_F	[0] 	use
+-print_cache   	FL	[0] 	0
+-align_pdb_param_file	W_F	[0] 	no
+-align_pdb_hasch_mode	W_F	[0] 	hasch_ca_trace_bubble
+-external_aligner	S	[0] 	NO
+-msa_mode      	S	[0] 	tree
+-et_mode       	S	[0] 	et
+-master        	S	[0] 	no
+-blast_nseq    	D	[0] 	0 
+-lalign_n_top  	D	[0] 	10 
+-iterate       	D	[0] 	0 
+-trim          	D	[0] 	0 
+-split         	D	[0] 	0 
+-trimfile      	S	[0] 	default
+-split         	D	[0] 	0 
+-split_nseq_thres	D	[0] 	0 
+-split_score_thres	D	[0] 	0 
+-check_pdb_status	D	[0] 	0 
+-clean_seq_name	D	[0] 	0 
+-seq_to_keep   	S	[0] 
+-dpa_master_aln	S	[0] 
+-dpa_maxnseq   	D	[0] 	0 
+-dpa_min_score1	D	[0] 
+-dpa_min_score2	D	[0] 
+-dpa_keep_tmpfile	FL	[0] 	0
+-dpa_debug     	D	[0] 	0 
+-multi_core    	S	[0] 	templates_jobs_relax_msa_evaluate
+-n_core        	D	[0] 	1 
+-thread        	D	[0] 	1 
+-max_n_proc    	D	[0] 	0 
+-lib_list      	S	[0] 
+-prune_lib_mode	S	[0] 	5
+-tip           	S	[0] 	none
+-rna_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (A) sample_aln5.aln  Format clustal_aln
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 12 SEQUENCES  [PROTEIN]
+  Input File sample_aln5.aln Seq s22 Length  113 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s23 Length  113 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s24 Length  764 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s25 Length  395 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s26 Length  382 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s27 Length  154 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s28 Length  201 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s29 Length  113 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s30 Length  100 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s31 Length   93 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s32 Length  120 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s33 Length  104 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 1 processors:
+] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (A) sample_aln5.aln  Format clustal_aln
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 12 SEQUENCES  [PROTEIN]
+  Input File sample_aln5.aln Seq s22 Length  113 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s23 Length  113 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s24 Length  764 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s25 Length  395 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s26 Length  382 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s27 Length  154 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s28 Length  201 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s29 Length  113 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s30 Length  100 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s31 Length   93 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s32 Length  120 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s33 Length  104 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 1 processors:
+
+	--- Process Method/Library/Aln Asample_aln5.aln
+	xxx Retrieved Asample_aln5.aln
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [3236]
+
+Library Relaxation: Multi_proc [1]
+ 
+!		[Relax Library][TOT=   12][  0 %]!		[Relax Library][TOT=   12][ 16 %]!		[Relax Library][TOT=   12][ 25 %]!		[Relax Library][TOT=   12][ 33 %]!		[Relax Library][TOT=   12][ 41 %]!		[Relax Library][TOT=   12][ 50 %]!		[Relax Library][TOT=   12][ 58 %]!		[Relax Library][TOT=   12][ 66 %]!		[Relax Library][TOT=   12][ 75 %]!		[Relax Library][TOT=   12][ 83 %]!		[Relax Library][TOT=   12][ 91 %]!		[Relax Library][TOT=   12][100 %]
+] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (A) sample_aln5.aln  Format clustal_aln
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 12 SEQUENCES  [PROTEIN]
+  Input File sample_aln5.aln Seq s22 Length  113 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s23 Length  113 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s24 Length  764 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s25 Length  395 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s26 Length  382 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s27 Length  154 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s28 Length  201 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s29 Length  113 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s30 Length  100 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s31 Length   93 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s32 Length  120 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s33 Length  104 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 1 processors:
+
+	--- Process Method/Library/Aln Asample_aln5.aln
+	xxx Retrieved Asample_aln5.aln
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [3236]
+
+Library Relaxation: Multi_proc [1]
+ 
+Relaxation Summary: [3236]--->[3236]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: s22
+Group    2: s23
+Group    3: s24
+Group    4: s25
+Group    5: s26
+Group    6: s27
+Group    7: s28
+Group    8: s29
+Group    9: s30
+Group   10: s31
+Group   11: s32
+Group   12: s33
+
+] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (A) sample_aln5.aln  Format clustal_aln
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 12 SEQUENCES  [PROTEIN]
+  Input File sample_aln5.aln Seq s22 Length  113 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s23 Length  113 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s24 Length  764 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s25 Length  395 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s26 Length  382 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s27 Length  154 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s28 Length  201 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s29 Length  113 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s30 Length  100 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s31 Length   93 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s32 Length  120 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s33 Length  104 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 1 processors:
+
+	--- Process Method/Library/Aln Asample_aln5.aln
+	xxx Retrieved Asample_aln5.aln
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [3236]
+
+Library Relaxation: Multi_proc [1]
+ 
+Relaxation Summary: [3236]--->[3236]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: s22
+Group    2: s23
+Group    3: s24
+Group    4: s25
+Group    5: s26
+Group    6: s27
+Group    7: s28
+Group    8: s29
+Group    9: s30
+Group   10: s31
+Group   11: s32
+Group   12: s33
+
+
+	Group   13: [Group    8 (   1 seq)] with [Group    6 (   1 seq)]-->[Len=  158][PID:75231]] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (A) sample_aln5.aln  Format clustal_aln
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 12 SEQUENCES  [PROTEIN]
+  Input File sample_aln5.aln Seq s22 Length  113 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s23 Length  113 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s24 Length  764 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s25 Length  395 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s26 Length  382 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s27 Length  154 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s28 Length  201 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s29 Length  113 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s30 Length  100 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s31 Length   93 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s32 Length  120 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s33 Length  104 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 1 processors:
+
+	--- Process Method/Library/Aln Asample_aln5.aln
+	xxx Retrieved Asample_aln5.aln
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [3236]
+
+Library Relaxation: Multi_proc [1]
+ 
+Relaxation Summary: [3236]--->[3236]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: s22
+Group    2: s23
+Group    3: s24
+Group    4: s25
+Group    5: s26
+Group    6: s27
+Group    7: s28
+Group    8: s29
+Group    9: s30
+Group   10: s31
+Group   11: s32
+Group   12: s33
+
+
+	Group   13: [Group    8 (   1 seq)] with [Group    6 (   1 seq)]-->[Len=  158][PID:75231]
+	Group   14: [Group   13 (   2 seq)] with [Group    1 (   1 seq)]-->[Len=  180][PID:75231]] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (A) sample_aln5.aln  Format clustal_aln
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 12 SEQUENCES  [PROTEIN]
+  Input File sample_aln5.aln Seq s22 Length  113 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s23 Length  113 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s24 Length  764 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s25 Length  395 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s26 Length  382 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s27 Length  154 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s28 Length  201 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s29 Length  113 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s30 Length  100 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s31 Length   93 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s32 Length  120 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s33 Length  104 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 1 processors:
+
+	--- Process Method/Library/Aln Asample_aln5.aln
+	xxx Retrieved Asample_aln5.aln
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [3236]
+
+Library Relaxation: Multi_proc [1]
+ 
+Relaxation Summary: [3236]--->[3236]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: s22
+Group    2: s23
+Group    3: s24
+Group    4: s25
+Group    5: s26
+Group    6: s27
+Group    7: s28
+Group    8: s29
+Group    9: s30
+Group   10: s31
+Group   11: s32
+Group   12: s33
+
+
+	Group   13: [Group    8 (   1 seq)] with [Group    6 (   1 seq)]-->[Len=  158][PID:75231]
+	Group   14: [Group   13 (   2 seq)] with [Group    1 (   1 seq)]-->[Len=  180][PID:75231]
+	Group   15: [Group    5 (   1 seq)] with [Group    2 (   1 seq)]-->[Len=  407][PID:75231]] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (A) sample_aln5.aln  Format clustal_aln
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 12 SEQUENCES  [PROTEIN]
+  Input File sample_aln5.aln Seq s22 Length  113 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s23 Length  113 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s24 Length  764 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s25 Length  395 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s26 Length  382 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s27 Length  154 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s28 Length  201 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s29 Length  113 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s30 Length  100 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s31 Length   93 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s32 Length  120 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s33 Length  104 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 1 processors:
+
+	--- Process Method/Library/Aln Asample_aln5.aln
+	xxx Retrieved Asample_aln5.aln
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [3236]
+
+Library Relaxation: Multi_proc [1]
+ 
+Relaxation Summary: [3236]--->[3236]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: s22
+Group    2: s23
+Group    3: s24
+Group    4: s25
+Group    5: s26
+Group    6: s27
+Group    7: s28
+Group    8: s29
+Group    9: s30
+Group   10: s31
+Group   11: s32
+Group   12: s33
+
+
+	Group   13: [Group    8 (   1 seq)] with [Group    6 (   1 seq)]-->[Len=  158][PID:75231]
+	Group   14: [Group   13 (   2 seq)] with [Group    1 (   1 seq)]-->[Len=  180][PID:75231]
+	Group   15: [Group    5 (   1 seq)] with [Group    2 (   1 seq)]-->[Len=  407][PID:75231]
+	Group   16: [Group   10 (   1 seq)] with [Group    7 (   1 seq)]-->[Len=  203][PID:75231]] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (A) sample_aln5.aln  Format clustal_aln
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 12 SEQUENCES  [PROTEIN]
+  Input File sample_aln5.aln Seq s22 Length  113 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s23 Length  113 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s24 Length  764 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s25 Length  395 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s26 Length  382 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s27 Length  154 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s28 Length  201 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s29 Length  113 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s30 Length  100 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s31 Length   93 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s32 Length  120 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s33 Length  104 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 1 processors:
+
+	--- Process Method/Library/Aln Asample_aln5.aln
+	xxx Retrieved Asample_aln5.aln
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [3236]
+
+Library Relaxation: Multi_proc [1]
+ 
+Relaxation Summary: [3236]--->[3236]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: s22
+Group    2: s23
+Group    3: s24
+Group    4: s25
+Group    5: s26
+Group    6: s27
+Group    7: s28
+Group    8: s29
+Group    9: s30
+Group   10: s31
+Group   11: s32
+Group   12: s33
+
+
+	Group   13: [Group    8 (   1 seq)] with [Group    6 (   1 seq)]-->[Len=  158][PID:75231]
+	Group   14: [Group   13 (   2 seq)] with [Group    1 (   1 seq)]-->[Len=  180][PID:75231]
+	Group   15: [Group    5 (   1 seq)] with [Group    2 (   1 seq)]-->[Len=  407][PID:75231]
+	Group   16: [Group   10 (   1 seq)] with [Group    7 (   1 seq)]-->[Len=  203][PID:75231]
+	Group   17: [Group   16 (   2 seq)] with [Group   15 (   2 seq)]-->[Len=  414][PID:75231]] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (A) sample_aln5.aln  Format clustal_aln
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 12 SEQUENCES  [PROTEIN]
+  Input File sample_aln5.aln Seq s22 Length  113 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s23 Length  113 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s24 Length  764 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s25 Length  395 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s26 Length  382 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s27 Length  154 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s28 Length  201 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s29 Length  113 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s30 Length  100 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s31 Length   93 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s32 Length  120 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s33 Length  104 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 1 processors:
+
+	--- Process Method/Library/Aln Asample_aln5.aln
+	xxx Retrieved Asample_aln5.aln
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [3236]
+
+Library Relaxation: Multi_proc [1]
+ 
+Relaxation Summary: [3236]--->[3236]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: s22
+Group    2: s23
+Group    3: s24
+Group    4: s25
+Group    5: s26
+Group    6: s27
+Group    7: s28
+Group    8: s29
+Group    9: s30
+Group   10: s31
+Group   11: s32
+Group   12: s33
+
+
+	Group   13: [Group    8 (   1 seq)] with [Group    6 (   1 seq)]-->[Len=  158][PID:75231]
+	Group   14: [Group   13 (   2 seq)] with [Group    1 (   1 seq)]-->[Len=  180][PID:75231]
+	Group   15: [Group    5 (   1 seq)] with [Group    2 (   1 seq)]-->[Len=  407][PID:75231]
+	Group   16: [Group   10 (   1 seq)] with [Group    7 (   1 seq)]-->[Len=  203][PID:75231]
+	Group   17: [Group   16 (   2 seq)] with [Group   15 (   2 seq)]-->[Len=  414][PID:75231]
+	Group   18: [Group   17 (   4 seq)] with [Group   14 (   3 seq)]-->[Len=  435][PID:75231]] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (A) sample_aln5.aln  Format clustal_aln
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 12 SEQUENCES  [PROTEIN]
+  Input File sample_aln5.aln Seq s22 Length  113 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s23 Length  113 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s24 Length  764 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s25 Length  395 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s26 Length  382 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s27 Length  154 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s28 Length  201 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s29 Length  113 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s30 Length  100 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s31 Length   93 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s32 Length  120 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s33 Length  104 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 1 processors:
+
+	--- Process Method/Library/Aln Asample_aln5.aln
+	xxx Retrieved Asample_aln5.aln
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [3236]
+
+Library Relaxation: Multi_proc [1]
+ 
+Relaxation Summary: [3236]--->[3236]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: s22
+Group    2: s23
+Group    3: s24
+Group    4: s25
+Group    5: s26
+Group    6: s27
+Group    7: s28
+Group    8: s29
+Group    9: s30
+Group   10: s31
+Group   11: s32
+Group   12: s33
+
+
+	Group   13: [Group    8 (   1 seq)] with [Group    6 (   1 seq)]-->[Len=  158][PID:75231]
+	Group   14: [Group   13 (   2 seq)] with [Group    1 (   1 seq)]-->[Len=  180][PID:75231]
+	Group   15: [Group    5 (   1 seq)] with [Group    2 (   1 seq)]-->[Len=  407][PID:75231]
+	Group   16: [Group   10 (   1 seq)] with [Group    7 (   1 seq)]-->[Len=  203][PID:75231]
+	Group   17: [Group   16 (   2 seq)] with [Group   15 (   2 seq)]-->[Len=  414][PID:75231]
+	Group   18: [Group   17 (   4 seq)] with [Group   14 (   3 seq)]-->[Len=  435][PID:75231]
+	Group   19: [Group   12 (   1 seq)] with [Group    4 (   1 seq)]-->[Len=  403][PID:75231]] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (A) sample_aln5.aln  Format clustal_aln
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 12 SEQUENCES  [PROTEIN]
+  Input File sample_aln5.aln Seq s22 Length  113 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s23 Length  113 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s24 Length  764 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s25 Length  395 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s26 Length  382 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s27 Length  154 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s28 Length  201 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s29 Length  113 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s30 Length  100 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s31 Length   93 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s32 Length  120 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s33 Length  104 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 1 processors:
+
+	--- Process Method/Library/Aln Asample_aln5.aln
+	xxx Retrieved Asample_aln5.aln
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [3236]
+
+Library Relaxation: Multi_proc [1]
+ 
+Relaxation Summary: [3236]--->[3236]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: s22
+Group    2: s23
+Group    3: s24
+Group    4: s25
+Group    5: s26
+Group    6: s27
+Group    7: s28
+Group    8: s29
+Group    9: s30
+Group   10: s31
+Group   11: s32
+Group   12: s33
+
+
+	Group   13: [Group    8 (   1 seq)] with [Group    6 (   1 seq)]-->[Len=  158][PID:75231]
+	Group   14: [Group   13 (   2 seq)] with [Group    1 (   1 seq)]-->[Len=  180][PID:75231]
+	Group   15: [Group    5 (   1 seq)] with [Group    2 (   1 seq)]-->[Len=  407][PID:75231]
+	Group   16: [Group   10 (   1 seq)] with [Group    7 (   1 seq)]-->[Len=  203][PID:75231]
+	Group   17: [Group   16 (   2 seq)] with [Group   15 (   2 seq)]-->[Len=  414][PID:75231]
+	Group   18: [Group   17 (   4 seq)] with [Group   14 (   3 seq)]-->[Len=  435][PID:75231]
+	Group   19: [Group   12 (   1 seq)] with [Group    4 (   1 seq)]-->[Len=  403][PID:75231]
+	Group   20: [Group   19 (   2 seq)] with [Group   18 (   7 seq)]-->[Len=  448][PID:75231]] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (A) sample_aln5.aln  Format clustal_aln
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 12 SEQUENCES  [PROTEIN]
+  Input File sample_aln5.aln Seq s22 Length  113 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s23 Length  113 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s24 Length  764 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s25 Length  395 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s26 Length  382 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s27 Length  154 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s28 Length  201 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s29 Length  113 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s30 Length  100 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s31 Length   93 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s32 Length  120 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s33 Length  104 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 1 processors:
+
+	--- Process Method/Library/Aln Asample_aln5.aln
+	xxx Retrieved Asample_aln5.aln
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [3236]
+
+Library Relaxation: Multi_proc [1]
+ 
+Relaxation Summary: [3236]--->[3236]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: s22
+Group    2: s23
+Group    3: s24
+Group    4: s25
+Group    5: s26
+Group    6: s27
+Group    7: s28
+Group    8: s29
+Group    9: s30
+Group   10: s31
+Group   11: s32
+Group   12: s33
+
+
+	Group   13: [Group    8 (   1 seq)] with [Group    6 (   1 seq)]-->[Len=  158][PID:75231]
+	Group   14: [Group   13 (   2 seq)] with [Group    1 (   1 seq)]-->[Len=  180][PID:75231]
+	Group   15: [Group    5 (   1 seq)] with [Group    2 (   1 seq)]-->[Len=  407][PID:75231]
+	Group   16: [Group   10 (   1 seq)] with [Group    7 (   1 seq)]-->[Len=  203][PID:75231]
+	Group   17: [Group   16 (   2 seq)] with [Group   15 (   2 seq)]-->[Len=  414][PID:75231]
+	Group   18: [Group   17 (   4 seq)] with [Group   14 (   3 seq)]-->[Len=  435][PID:75231]
+	Group   19: [Group   12 (   1 seq)] with [Group    4 (   1 seq)]-->[Len=  403][PID:75231]
+	Group   20: [Group   19 (   2 seq)] with [Group   18 (   7 seq)]-->[Len=  448][PID:75231]
+	Group   21: [Group    9 (   1 seq)] with [Group    3 (   1 seq)]-->[Len=  770][PID:75231]] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (A) sample_aln5.aln  Format clustal_aln
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 12 SEQUENCES  [PROTEIN]
+  Input File sample_aln5.aln Seq s22 Length  113 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s23 Length  113 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s24 Length  764 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s25 Length  395 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s26 Length  382 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s27 Length  154 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s28 Length  201 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s29 Length  113 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s30 Length  100 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s31 Length   93 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s32 Length  120 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s33 Length  104 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 1 processors:
+
+	--- Process Method/Library/Aln Asample_aln5.aln
+	xxx Retrieved Asample_aln5.aln
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [3236]
+
+Library Relaxation: Multi_proc [1]
+ 
+Relaxation Summary: [3236]--->[3236]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: s22
+Group    2: s23
+Group    3: s24
+Group    4: s25
+Group    5: s26
+Group    6: s27
+Group    7: s28
+Group    8: s29
+Group    9: s30
+Group   10: s31
+Group   11: s32
+Group   12: s33
+
+
+	Group   13: [Group    8 (   1 seq)] with [Group    6 (   1 seq)]-->[Len=  158][PID:75231]
+	Group   14: [Group   13 (   2 seq)] with [Group    1 (   1 seq)]-->[Len=  180][PID:75231]
+	Group   15: [Group    5 (   1 seq)] with [Group    2 (   1 seq)]-->[Len=  407][PID:75231]
+	Group   16: [Group   10 (   1 seq)] with [Group    7 (   1 seq)]-->[Len=  203][PID:75231]
+	Group   17: [Group   16 (   2 seq)] with [Group   15 (   2 seq)]-->[Len=  414][PID:75231]
+	Group   18: [Group   17 (   4 seq)] with [Group   14 (   3 seq)]-->[Len=  435][PID:75231]
+	Group   19: [Group   12 (   1 seq)] with [Group    4 (   1 seq)]-->[Len=  403][PID:75231]
+	Group   20: [Group   19 (   2 seq)] with [Group   18 (   7 seq)]-->[Len=  448][PID:75231]
+	Group   21: [Group    9 (   1 seq)] with [Group    3 (   1 seq)]-->[Len=  770][PID:75231]
+	Group   22: [Group   11 (   1 seq)] with [Group   21 (   2 seq)]-->[Len=  780][PID:75231]] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (A) sample_aln5.aln  Format clustal_aln
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 12 SEQUENCES  [PROTEIN]
+  Input File sample_aln5.aln Seq s22 Length  113 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s23 Length  113 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s24 Length  764 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s25 Length  395 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s26 Length  382 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s27 Length  154 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s28 Length  201 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s29 Length  113 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s30 Length  100 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s31 Length   93 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s32 Length  120 type PROTEIN Struct Unchecked
+  Input File sample_aln5.aln Seq s33 Length  104 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 1 processors:
+
+	--- Process Method/Library/Aln Asample_aln5.aln
+	xxx Retrieved Asample_aln5.aln
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [3236]
+
+Library Relaxation: Multi_proc [1]
+ 
+Relaxation Summary: [3236]--->[3236]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: s22
+Group    2: s23
+Group    3: s24
+Group    4: s25
+Group    5: s26
+Group    6: s27
+Group    7: s28
+Group    8: s29
+Group    9: s30
+Group   10: s31
+Group   11: s32
+Group   12: s33
+
+
+	Group   13: [Group    8 (   1 seq)] with [Group    6 (   1 seq)]-->[Len=  158][PID:75231]
+	Group   14: [Group   13 (   2 seq)] with [Group    1 (   1 seq)]-->[Len=  180][PID:75231]
+	Group   15: [Group    5 (   1 seq)] with [Group    2 (   1 seq)]-->[Len=  407][PID:75231]
+	Group   16: [Group   10 (   1 seq)] with [Group    7 (   1 seq)]-->[Len=  203][PID:75231]
+	Group   17: [Group   16 (   2 seq)] with [Group   15 (   2 seq)]-->[Len=  414][PID:75231]
+	Group   18: [Group   17 (   4 seq)] with [Group   14 (   3 seq)]-->[Len=  435][PID:75231]
+	Group   19: [Group   12 (   1 seq)] with [Group    4 (   1 seq)]-->[Len=  403][PID:75231]
+	Group   20: [Group   19 (   2 seq)] with [Group   18 (   7 seq)]-->[Len=  448][PID:75231]
+	Group   21: [Group    9 (   1 seq)] with [Group    3 (   1 seq)]-->[Len=  770][PID:75231]
+	Group   22: [Group   11 (   1 seq)] with [Group   21 (   2 seq)]-->[Len=  780][PID:75231]
+	Group   23: [Group   22 (   3 seq)] with [Group   20 (   9 seq)]-->[Len= 1024][PID:75231]
+
+
+!		[Final Evaluation][TOT= 1024][  0 %]!		[Final Evaluation][TOT= 1024][  1 %]!		[Final Evaluation][TOT= 1024][  2 %]!		[Final Evaluation][TOT= 1024][  3 %]!		[Final Evaluation][TOT= 1024][  4 %]!		[Final Evaluation][TOT= 1024][  5 %]!		[Final Evaluation][TOT= 1024][  6 %]!		[Final Evaluation][TOT= 1024][  7 %]!		[Final Evaluation][TOT= 1024][  8 %]!		[Final Evaluation][TOT= 1024][  9 %]!		[Final Evaluation][TOT= 1024][ 10 %]!		[Final Evaluation][TOT= 1024][ 11 %]!		[Final Evaluation][TOT= 1024][ 12 %]!		[Final Evaluation][TOT= 1024][ 13 %]!		[Final Evaluation][TOT= 1024][ 14 %]!		[Final Evaluation][TOT= 1024][ 15 %]!		[Final Evaluation][TOT= 1024][ 16 %]!		[Final Evaluation][TOT= 1024][ 17 %]!		[Final Evaluation][TOT= 1024][ 18 %]!		[Final Evaluation][TOT= 1024][ 19 %]!		[Final Evaluation][TOT= 1024][ 20 %]!		[Final Evaluation][TOT= 1024][ 21 %]!		[Final Evaluation][TOT= 1024][ 22 %]!		[Final Evaluation][TOT= 1024][ 23 %]!		[Final Evaluation][TOT= 1024][ 24 %]!		[Final Evaluation][TOT= 1024][ 25 %]!		[Final Evaluation][TOT= 1024][ 26 %]!		[Final Evaluation][TOT= 1024][ 27 %]!		[Final Evaluation][TOT= 1024][ 28 %]!		[Final Evaluation][TOT= 1024][ 29 %]!		[Final Evaluation][TOT= 1024][ 30 %]!		[Final Evaluation][TOT= 1024][ 31 %]!		[Final Evaluation][TOT= 1024][ 32 %]!		[Final Evaluation][TOT= 1024][ 33 %]!		[Final Evaluation][TOT= 1024][ 34 %]!		[Final Evaluation][TOT= 1024][ 35 %]!		[Final Evaluation][TOT= 1024][ 36 %]!		[Final Evaluation][TOT= 1024][ 37 %]!		[Final Evaluation][TOT= 1024][ 38 %]!		[Final Evaluation][TOT= 1024][ 39 %]!		[Final Evaluation][TOT= 1024][ 40 %]!		[Final Evaluation][TOT= 1024][ 41 %]!		[Final Evaluation][TOT= 1024][ 42 %]!		[Final Evaluation][TOT= 1024][ 43 %]!		[Final Evaluation][TOT= 1024][ 44 %]!		[Final Evaluation][TOT= 1024][ 45 %]!		[Final Evaluation][TOT= 1024][ 46 %]!		[Final Evaluation][TOT= 1024][ 47 %]!		[Final Evaluation][TOT= 1024][ 48 %]!		[Final Evaluation][TOT= 1024][ 49 %]!		[Final Evaluation][TOT= 1024][ 50 %]!		[Final Evaluation][TOT= 1024][ 51 %]!		[Final Evaluation][TOT= 1024][ 52 %]!		[Final Evaluation][TOT= 1024][ 53 %]!		[Final Evaluation][TOT= 1024][ 54 %]!		[Final Evaluation][TOT= 1024][ 55 %]!		[Final Evaluation][TOT= 1024][ 56 %]!		[Final Evaluation][TOT= 1024][ 57 %]!		[Final Evaluation][TOT= 1024][ 58 %]!		[Final Evaluation][TOT= 1024][ 59 %]!		[Final Evaluation][TOT= 1024][ 60 %]!		[Final Evaluation][TOT= 1024][ 61 %]!		[Final Evaluation][TOT= 1024][ 62 %]!		[Final Evaluation][TOT= 1024][ 63 %]!		[Final Evaluation][TOT= 1024][ 64 %]!		[Final Evaluation][TOT= 1024][ 65 %]!		[Final Evaluation][TOT= 1024][ 66 %]!		[Final Evaluation][TOT= 1024][ 67 %]!		[Final Evaluation][TOT= 1024][ 68 %]!		[Final Evaluation][TOT= 1024][ 69 %]!		[Final Evaluation][TOT= 1024][ 70 %]!		[Final Evaluation][TOT= 1024][ 71 %]!		[Final Evaluation][TOT= 1024][ 72 %]!		[Final Evaluation][TOT= 1024][ 73 %]!		[Final Evaluation][TOT= 1024][ 74 %]!		[Final Evaluation][TOT= 1024][ 75 %]!		[Final Evaluation][TOT= 1024][ 76 %]!		[Final Evaluation][TOT= 1024][ 77 %]!		[Final Evaluation][TOT= 1024][ 78 %]!		[Final Evaluation][TOT= 1024][ 79 %]!		[Final Evaluation][TOT= 1024][ 80 %]!		[Final Evaluation][TOT= 1024][ 81 %]!		[Final Evaluation][TOT= 1024][ 82 %]!		[Final Evaluation][TOT= 1024][ 83 %]!		[Final Evaluation][TOT= 1024][ 84 %]!		[Final Evaluation][TOT= 1024][ 85 %]!		[Final Evaluation][TOT= 1024][ 86 %]!		[Final Evaluation][TOT= 1024][ 87 %]!		[Final Evaluation][TOT= 1024][ 88 %]!		[Final Evaluation][TOT= 1024][ 89 %]!		[Final Evaluation][TOT= 1024][ 90 %]!		[Final Evaluation][TOT= 1024][ 91 %]!		[Final Evaluation][TOT= 1024][ 92 %]!		[Final Evaluation][TOT= 1024][ 93 %]!		[Final Evaluation][TOT= 1024][ 94 %]!		[Final Evaluation][TOT= 1024][ 95 %]!		[Final Evaluation][TOT= 1024][ 96 %]!		[Final Evaluation][TOT= 1024][ 97 %]!		[Final Evaluation][TOT= 1024][ 98 %]!		[Final Evaluation][TOT= 1024][ 99 %]!		[Final Evaluation][TOT= 1024][100 %]
+
+
+
+OUTPUT RESULTS
+	#### File Type= GUIDE_TREE      Format= newick          Name= sample_aln5.dnd
+	#### File Type= MSA             Format= aln             Name= test.aln
+	#### File Type= MSA             Format= html            Name= test.aln.html
+
+# Command Line: t_coffee -in Asample_aln5.aln -outfile test.aln  [PROGRAM:T-COFFEE]
+# T-COFFEE Memory Usage: Current= 30.026 Mb, Max= 31.399 Mb
+# Results Produced with T-COFFEE Version_13.39.0.d675aed (Version_13.39.0.d675aed)
+# T-COFFEE is available from http://www.tcoffee.org
+# Register on: https://groups.google.com/group/tcoffee/
+</content>
+</file>
+<file>
+<stream>input</stream>
+<name>sample_aln5.aln</name>
+<content>CLUSTAL
+
+s22   ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ARVDQT----PRSVTKETG-ESLTINCVLRDASY--ALGSTCWYRKKSGEGNE---ESI--S-------KGGRYVET--V-NSG-SKSFSLRINDLTVEDGGTYRCGLG----VAGGYCDYALCSSRYAECGDGTAVTVN------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+s23   -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------GDQVEQS----PSALSLHEG-TDSALRCNFT---T--TMRSVQWFRQN-SRGSL---ISL--FYLASGTKENGRLKSA--FDSER-ARYSTLHIRDAQLEDSGTYFCAAEASSGSW------------QLIFGSGTQLTV-M-PVT-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+s24   ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------RVLQVDIV----PSQGEISVG-ESKFFLCQVA---GDAKDKDISWFSPN-----G---EKL--S------PNQQRISVV--WND---DDSSTLTIYNANIDDAGIYKCVVTAEDG--------------TQSEA-TVNVKI-F-QKLMFK-NAPTPQEFKEG--EDAVIVCDVVSSLPPTIIWKHKGRDV-ILKKDVRFIVLSNNYLQIRGIKKTDEGTYRCEGRILARGEINFKDIQVIVRVLQVDIVPSQGEISVGESKFFLCQVAGDAKDKDISWFSPNGEKLSPNQQRISVVWNDDDSSTLTIYNANIDDAGIYKCVVTAEDGTQSEATVNVKIFQKLMFKNAPTPQEFKEGEDAVIVCDVVSSLPPTIIWKHKGRDVILKKDVRFIVLSNNYLQIRGIKKTDEGTYRCEGRILARGEINFKDIQVIVRVLQVDIVPSQGEISVGESKFFLCQVAGDAKDKDISWFSPNGEKLSPNQQRISVVWNDDDSSTLTIYNANIDDAGIYKCVVTAEDGTQSEATVNVKIFQKLMFKNAPTPQEFKEGEDAVIVCDVVSSLPPTIIWKHKGRDVILKKDVRFIVLSNNYLQIRGIKKTDEGTYRCEGRILARGEINFKDIQVIVRVLQVDIVPSQGEISVGESKFFLCQVAGDAKDKDISWFSPNGEKLSPNQQRISVVWNDDDSSTLTIYNANIDDAGIYKCVVTAEDGTQSEATVNVKIFQKLMFKNAPTPQEFKEGEDAVIVCDVVSSLPPTIIWKHKGRDVILKKDVRFIVLSNNYLQIRGIKKTDEGTYRCEGRILARGEINFKDIQVIV
+s25   LPVDKYPVLKDQPAEVLFREN---NPTVLECIIEGNDQGVKYSWKKDGKSYNWQ-EHNAALRKDEGSLVFLRPQ-ASDEGHYQCFAETPAGVASSRVISFRKTYLIASPAKTH-EKTPIEGRPFQLDCVLPNAYPKPLITWKK---RLSGADPNADVTDFDRRITAG-PDGNLYFTIVTKEDVSDIYKYVCTAKNAAVDEEVVLVEYEIKGVTKDNSGYKGEPVPQYV----SKDMMAKAG-DVTMIYCMYG---S-NPMGYPNYFKNG-----K---DVN--G------NPEDRITRHNRTS------GKRLLFKTTLPEDEGVYTCEVDNGVG--------------KPQKH-SLKLTV-V-SAPKYEQKPEKVIVVKQG--QDVTIPCKVTGLPAPNVVWSHNAKPL-S---GGRATVT-DSGLVIKGVKNGDKGYYGCRATN--EHGDKYFETLVQVN--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+s26   --RSYGPVFEEQPAHTLFPEGSAEEKVTLTCRA-RANPPATYRWKMNGTELKMGPDSRYRLV--AGDLVISNPVKAKDAGSYQCVATNARGTVVSREASLRFGFLQEFSAEERDPVKITEGWGVMFTCSPPPHYPALSYRWLLNEFPN--------FIPADGRRFVSQTTGNLYIAKTEASDLGN--YSCFATSHIDFITKSVFSKFSQLSLAAED-ARQYAPSIKAK----FPADTYALTGQMVTLECFAF---G-NPVPQIKWRKLD-----GSQTSKW--L------S-----------S------EPLLHIQNVDFEDEGTYECEAENIK---------------GRDTY-QGRIII-H-AQPDWLDVI---TDTEADIGSDLRWSCVASGKPRPAVRWLRDGQPLAS---QNRIEVS-GGELRFSKLVLEDSGMYQCVAEN--KHG-TVYASAELTVQA------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+s27   -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ISGMSGRKASGSSPTSPINANKVENEDAFLEEVAEEKPHVKPYFTKT----ILDMEVVEG-SAARFDCKVE---G-YPDPEVMWFKDD-----N---PVK--E------S--RHFQID--YDEEG---NCSLTISEVCGDDDAKYTCKAVNS-L--------------GEATC-TAELLV-E-TMGKEGEGEGEGEEDEEEEEE-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+s28   MTTQAPTFTQPLQSVVVLEGSTATFEAHISGFPVPEVSWFRDGQVISTSTLPGVQISFSDGR-----------------------------------------------------------------------------------------------------------------------AKLTIPAVTKANSGRYSLKATNGSGQATSTAELLVKAETAPPNFVQR----LQSMTVRQG-SQVRLQVRVT---G-IPTPVVKFYRDG-----A---EIQ--S------S--LDFQIS--QE-GD---LYSLLIAEAYPEDSGTYSVNATNS-V--------------GRATS-TAELLV-Q-GETREEF---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+s29   -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------GSSGSSGTDVSSWIVYPSG--KVYVAAVRL-ERVVLTCELC---R--PWAEVRWTKDG-----E---EVV--E------S--PALLLQKEDT------VRRLVLPAVQLEDSGEYLCEID-------------------DESA-SFTVTV-T-EPPVRI-IYSGPSSG-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+s30   ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------MHHHHHHSSRILTK----PRSMTVYEG-ESARFSCDTD---G-EPVPTVTWLRKG-----Q---VLS--T------S--ARHQVT--TTK-Y---KSTFEISSVQASDEGNYSVVVENS-E--------------GKQEA-EFTLTI-QK----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+s31   ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------LKPKILTA----SRKIKIKAG-FTHNLEVDFI---G-APDPTATWTVGDSG---A---ALA--P----------ELLVD--AKS-S---TTSIFFPSAKRADSGNYKLKVKNE-L--------------GEDEA-IFEVIVQ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+s32   WNIHGKES--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------CDVQLYIKR---QSEHSILAG-DPFELECPVK---YCANRPHVTWCKLNGTT--C---VKL--E----------DRQTS--WKEEKNISFFILHFEPVLPNDNGSYRCSANFQSN--------------LIESH-STTLYV-T-DVKHHHHHHHH-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+s33   ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------MNSNNKRAPYWTNTEKMEKRLHAVPAA-NTVKFRCPAG---G-NPMPTMRWLKNG-----K---EFKQEH------R--IGGYKV--RNQ-H---WSLIMESV-VPSDKGNYTCVVENE-Y--------------GSINH-TYHLDVV------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>sample_aln5.dnd</name>
+<content>((s22:0.14500,(s27:0.13929,s29:0.14071):0.00500):0.00109,((s23:0.13722,s26:0.13278):0.00362,(s28:0.12300,s31:0.12700):0.01138):0.00391,(((s24:0.13969,s30:0.14031):0.00271,s32:0.14729):0.00510,(s25:0.13250,s33:0.14750):0.00240):0.00141);</content>
+</file>
+<file>
+<stream>input</stream>
+<name>sample_aln5.dnd</name>
+<content>((s22:0.14500,(s27:0.13929,s29:0.14071):0.00500):0.00109,((s23:0.13722,s26:0.13278):0.00362,(s28:0.12300,s31:0.12700):0.01138):0.00391,(((s24:0.13969,s30:0.14031):0.00271,s32:0.14729):0.00510,(s25:0.13250,s33:0.14750):0.00240):0.00141);</content>
+</file>
+<file>
+<stream>output</stream>
+<name>test.aln</name>
+<content>CLUSTAL FORMAT for T-COFFEE Version_13.39.0.d675aed [http://www.tcoffee.org] [MODE:  ], CPU=0.00 sec, SCORE=97, Nseq=12, Len=1024 
+
+s22             --------------------------------------------------
+s23             --------------------------------------------------
+s24             --------------------------------------------------
+s25             LPVDKYPVLKDQPAEVLFREN---NPTVLECIIEGNDQGVKYSWKKDGKS
+s26             --RSYGPVFEEQPAHTLFPEGSAEEKVTLTCRA-RANPPATYRWKMNGTE
+s27             --------------------------------------------------
+s28             MTTQAPTFTQPLQSVVVLEGSTATFEAHISGFPVPEVSWFRDGQVISTST
+s29             --------------------------------------------------
+s30             --M-----------------------------------------------
+s31             --------------------------------------------------
+s32             WNI-----------------------------------------------
+s33             --------------------------------------------------
+                                                                  
+
+s22             --------------------------------------------------
+s23             --------------------------------------------------
+s24             --------------------------------------------------
+s25             YNWQ-EHNAALRKDEGSLVFLRPQ-ASDEGHYQCFAETPAGVASSRVISF
+s26             LKMGPDSRYRLV--AGDLVISNPVKAKDAGSYQCVATNARGTVVSREASL
+s27             --------------------------------------------------
+s28             LPGVQISFSDGR--------------------------------------
+s29             --------------------------------------------------
+s30             --------------------------------------------------
+s31             --------------------------------------------------
+s32             --------------------------------------------------
+s33             --------------------------------------------------
+                                                                  
+
+s22             --------------------------------------------------
+s23             --------------------------------------------------
+s24             --------------------------------------------------
+s25             RKTYLIASPAKTH-EKTPIEGRPFQLDCVLPNAYPKPLITWKK---RLSG
+s26             RFGFLQEFSAEERDPVKITEGWGVMFTCSPPPHYPALSYRWLLNEFPN--
+s27             --------------------------------------------------
+s28             --------------------------------------------------
+s29             --------------------------------------------------
+s30             --------------------------------------------------
+s31             --------------------------------------------------
+s32             --------------------------------------------------
+s33             --------------------------------------------------
+                                                                  
+
+s22             --------------------------------------------------
+s23             --------------------------------------------------
+s24             --------------------------------------------------
+s25             ADPNADVTDFDRRITAG-PDGNLYFTIVTKEDVSDIYKYVCTAKNAAVDE
+s26             ------FIPADGRRFVSQTTGNLYIAKTEASDLGN--YSCFATSHIDFIT
+s27             -------------------------------ISGMSGRKASGSSPTSPIN
+s28             -------------------------------AKLTIPAVTKANSGRYSLK
+s29             --------------------------------------------------
+s30             --------------------------------------------------
+s31             --------------------------------------------------
+s32             --------------------------------------------------
+s33             --------------------------------------------------
+                                                                  
+
+s22             ----------------------ARVDQT----PRSVTKETG-ESLTINCV
+s23             ---------------------GDQVEQS----PSALSLHEG-TDSALRCN
+s24             --------------------RVLQVDIV----PSQGEISVG-ESKFFLCQ
+s25             EVVLVEYEIKGVTKDNSGYKGEPVPQYV----SKDMMAKAG-DVTMIYCM
+s26             KSVFSKFSQLSLAAED-ARQYAPSIKAK----FPADTYALTGQMVTLECF
+s27             ANKVENEDAFLEEVAEEKPHVKPYFTKT----ILDMEVVEG-SAARFDCK
+s28             ATNGSGQATSTAELLVKAETAPPNFVQR----LQSMTVRQG-SQVRLQVR
+s29             -----------GSSGSSGTDVSSWIVYPSG--KVYVAAVRL-ERVVLTCE
+s30             ---------------HHHHHHSSRILTK----PRSMTVYEG-ESARFSCD
+s31             --------------------LKPKILTA----SRKIKIKAG-FTHNLEVD
+s32             ---------------HGKESCDVQLYIKR---QSEHSILAG-DPFELECP
+s33             --------------MNSNNKRAPYWTNTEKMEKRLHAVPAA-NTVKFRCP
+                                                              :   
+
+s22             LRDASY-ALGSTCWYRKKSGEGNEESIS-------KGGRYVET---VNSG
+s23             FT---T-TMRSVQWFRQN-SRGSLISLFYLASGTKENGRLKSA--FDSER
+s24             VA--GDAKDKDISWFSPN-----GEKLS------PNQQRISVV--WND--
+s25             YG--S-NPMGYPNYFKNG-----KDVN------GNPEDRITRHNRTS---
+s26             AF---GNPVPQIKWRKLD--GSQTSKWL----------------------
+s27             VE--GY-PDPEVMWFKDD-----NPVKE--------SRHFQID--YDEEG
+s28             VT---GIPTPVVKFYRDG--A---EIQS--------SLDFQIS--QEG-D
+s29             LC--R--PWAEVRWTKDG-----EEVVE--------SPALLLQKEDT---
+s30             TD--G-EPVPTVTWLRKG-----QVLST------S--ARHQVT--TTK--
+s31             FI---GAPDPTATWTVGDSGA---ALAP----------ELLVD--AKS-S
+s32             VK--YCANRPHVTWCKLNGTT--CVKLE----------DRQTS--WKEEK
+s33             AG--G-NPMPTMRWLKNG-----KEFK----QEHR--IGGYKV--RNQ-H
+                             :                                    
+
+s22             -SKSFSLRINDLTVEDGGTYRCGLGVAGGYCDYALCSS---RYAECGDGT
+s23             -ARYSTLHIRDAQLEDSGTYFCAAE-----------ASSGSWQLIFGSGT
+s24             -DDSSTLTIYNANIDDAGIYKCVVT-----------AEDG--TQSEA-TV
+s25             ---GKRLLFKTTLPEDEGVYTCEVD-----------NGVG--KPQKH-SL
+s26             -SSEPLLHIQNVDFEDEGTYECEAE-----------NIK---GRDTY-QG
+s27             ---NCSLTISEVCGDDDAKYTCKAV-----------NS---LGEATC-TA
+s28             ---LYSLLIAEAYPEDSGTYSVNAT-----------NS---VGRATS-TA
+s29             ---VRRLVLPAVQLEDSGEYLCEID------------------DESA-SF
+s30             --YKSTFEISSVQASDEGNYSVVVE-----------NS-E--GKQEA-EF
+s31             ---TTSIFFPSAKRADSGNYKLKVK-----------NE---LGEDEA-IF
+s32             NISFFILHFEPVLPNDNGSYRCSAN-----------FQSN--LIESH-ST
+s33             ---WSLIMESV-VPSDKGNYTCVVE-----------NE-Y--GSINH-TY
+                      :        * . *                              
+
+s22             AVTVN---------------------------------------------
+s23             QLTVMPVT------------------------------------------
+s24             NVKIFQKLMFK-NAPTPQEFKEG--EDAVIVCDVVSSLPPTIIWKHKGRD
+s25             KLTVVSAPKYEQKPEKVIVVKQG--QDVTIPCKVTGLPAPNVVWSHNAKP
+s26             RIIIHAQPDWLDVI---TDTEADIGSDLRWSCVASGKPRPAVRWLRDGQP
+s27             ELLVETMGKEGEGEGEGEEDEEEEEE------------------------
+s28             ELLVQGETREEF--------------------------------------
+s29             TVTVTEPPVRI-IYSGPSSG------------------------------
+s30             TLTIQK--------------------------------------------
+s31             EVIVQ---------------------------------------------
+s32             TLYVTDVKHHHHHHHH----------------------------------
+s33             HLDVV---------------------------------------------
+                 : :                                              
+
+s22             --------------------------------------------------
+s23             --------------------------------------------------
+s24             VILKKDVRFIVLSNNYLQIRGIKKTDEGTYRCEGRILARGEINFKDIQVI
+s25             L---SGGRATVT-DSGLVIKGVKNGDKGYYGCRATN--EHGDKYFETLVQ
+s26             L--ASQNRIEVS-GGELRFSKLVLEDSGMYQCVAEN--KHG-TVYASAEL
+s27             --------------------------------------------------
+s28             --------------------------------------------------
+s29             --------------------------------------------------
+s30             --------------------------------------------------
+s31             --------------------------------------------------
+s32             --------------------------------------------------
+s33             --------------------------------------------------
+                                                                  
+
+s22             --------------------------------------------------
+s23             --------------------------------------------------
+s24             VRVLQVDIVPSQGEISVGESKFFLCQVAGDAKDKDISWFSPNGEKLSPNQ
+s25             VN------------------------------------------------
+s26             TVQA----------------------------------------------
+s27             --------------------------------------------------
+s28             --------------------------------------------------
+s29             --------------------------------------------------
+s30             --------------------------------------------------
+s31             --------------------------------------------------
+s32             --------------------------------------------------
+s33             --------------------------------------------------
+                                                                  
+
+s22             --------------------------------------------------
+s23             --------------------------------------------------
+s24             QRISVVWNDDDSSTLTIYNANIDDAGIYKCVVTAEDGTQSEATVNVKIFQ
+s25             --------------------------------------------------
+s26             --------------------------------------------------
+s27             --------------------------------------------------
+s28             --------------------------------------------------
+s29             --------------------------------------------------
+s30             --------------------------------------------------
+s31             --------------------------------------------------
+s32             --------------------------------------------------
+s33             --------------------------------------------------
+                                                                  
+
+s22             --------------------------------------------------
+s23             --------------------------------------------------
+s24             KLMFKNAPTPQEFKEGEDAVIVCDVVSSLPPTIIWKHKGRDVILKKDVRF
+s25             --------------------------------------------------
+s26             --------------------------------------------------
+s27             --------------------------------------------------
+s28             --------------------------------------------------
+s29             --------------------------------------------------
+s30             --------------------------------------------------
+s31             --------------------------------------------------
+s32             --------------------------------------------------
+s33             --------------------------------------------------
+                                                                  
+
+s22             --------------------------------------------------
+s23             --------------------------------------------------
+s24             IVLSNNYLQIRGIKKTDEGTYRCEGRILARGEINFKDIQVIVRVLQVDIV
+s25             --------------------------------------------------
+s26             --------------------------------------------------
+s27             --------------------------------------------------
+s28             --------------------------------------------------
+s29             --------------------------------------------------
+s30             --------------------------------------------------
+s31             --------------------------------------------------
+s32             --------------------------------------------------
+s33             --------------------------------------------------
+                                                                  
+
+s22             --------------------------------------------------
+s23             --------------------------------------------------
+s24             PSQGEISVGESKFFLCQVAGDAKDKDISWFSPNGEKLSPNQQRISVVWND
+s25             --------------------------------------------------
+s26             --------------------------------------------------
+s27             --------------------------------------------------
+s28             --------------------------------------------------
+s29             --------------------------------------------------
+s30             --------------------------------------------------
+s31             --------------------------------------------------
+s32             --------------------------------------------------
+s33             --------------------------------------------------
+                                                                  
+
+s22             --------------------------------------------------
+s23             --------------------------------------------------
+s24             DDSSTLTIYNANIDDAGIYKCVVTAEDGTQSEATVNVKIFQKLMFKNAPT
+s25             --------------------------------------------------
+s26             --------------------------------------------------
+s27             --------------------------------------------------
+s28             --------------------------------------------------
+s29             --------------------------------------------------
+s30             --------------------------------------------------
+s31             --------------------------------------------------
+s32             --------------------------------------------------
+s33             --------------------------------------------------
+                                                                  
+
+s22             --------------------------------------------------
+s23             --------------------------------------------------
+s24             PQEFKEGEDAVIVCDVVSSLPPTIIWKHKGRDVILKKDVRFIVLSNNYLQ
+s25             --------------------------------------------------
+s26             --------------------------------------------------
+s27             --------------------------------------------------
+s28             --------------------------------------------------
+s29             --------------------------------------------------
+s30             --------------------------------------------------
+s31             --------------------------------------------------
+s32             --------------------------------------------------
+s33             --------------------------------------------------
+                                                                  
+
+s22             --------------------------------------------------
+s23             --------------------------------------------------
+s24             IRGIKKTDEGTYRCEGRILARGEINFKDIQVIVRVLQVDIVPSQGEISVG
+s25             --------------------------------------------------
+s26             --------------------------------------------------
+s27             --------------------------------------------------
+s28             --------------------------------------------------
+s29             --------------------------------------------------
+s30             --------------------------------------------------
+s31             --------------------------------------------------
+s32             --------------------------------------------------
+s33             --------------------------------------------------
+                                                                  
+
+s22             --------------------------------------------------
+s23             --------------------------------------------------
+s24             ESKFFLCQVAGDAKDKDISWFSPNGEKLSPNQQRISVVWNDDDSSTLTIY
+s25             --------------------------------------------------
+s26             --------------------------------------------------
+s27             --------------------------------------------------
+s28             --------------------------------------------------
+s29             --------------------------------------------------
+s30             --------------------------------------------------
+s31             --------------------------------------------------
+s32             --------------------------------------------------
+s33             --------------------------------------------------
+                                                                  
+
+s22             --------------------------------------------------
+s23             --------------------------------------------------
+s24             NANIDDAGIYKCVVTAEDGTQSEATVNVKIFQKLMFKNAPTPQEFKEGED
+s25             --------------------------------------------------
+s26             --------------------------------------------------
+s27             --------------------------------------------------
+s28             --------------------------------------------------
+s29             --------------------------------------------------
+s30             --------------------------------------------------
+s31             --------------------------------------------------
+s32             --------------------------------------------------
+s33             --------------------------------------------------
+                                                                  
+
+s22             --------------------------------------------------
+s23             --------------------------------------------------
+s24             AVIVCDVVSSLPPTIIWKHKGRDVILKKDVRFIVLSNNYLQIRGIKKTDE
+s25             --------------------------------------------------
+s26             --------------------------------------------------
+s27             --------------------------------------------------
+s28             --------------------------------------------------
+s29             --------------------------------------------------
+s30             --------------------------------------------------
+s31             --------------------------------------------------
+s32             --------------------------------------------------
+s33             --------------------------------------------------
+                                                                  
+
+s22             ------------------------
+s23             ------------------------
+s24             GTYRCEGRILARGEINFKDIQVIV
+s25             ------------------------
+s26             ------------------------
+s27             ------------------------
+s28             ------------------------
+s29             ------------------------
+s30             ------------------------
+s31             ------------------------
+s32             ------------------------
+s33             ------------------------
+                                        
+
+
+
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>test.aln.html</name>
+<content><html>
+<style>
+SPAN { font-family: courier new, courier-new, courier, monospace; font-weight: bold; font-size: 11pt;}
+SPAN { line-height:100%}
+SPAN {	white-space: pre}
+SPAN.value0 {background: #9B92FF}
+SPAN.value1 {background: #B4FFB4}
+SPAN.value2 {background: #BEFFBE}
+SPAN.value3 {background: #C8FFC8}
+SPAN.value4 {background: #FFFFB7}
+SPAN.value5 {background: #FFFFAD}
+SPAN.value6 {background: #FFFFAD}
+SPAN.value7 {background: #FFE6E6}
+SPAN.value8 {background: #FFDCDC}
+SPAN.value9 {background: #FFC8C8}
+SPAN.valuedefault {}
+SPAN.valuegap {}
+SPAN.valueink {background: 000000}
+</style><body><span class=valuedefault>T-COFFEE,&nbsp;Version_13.39.0.d675aed&nbsp;(Version_13.39.0.d675aed)</span><br><span class=valuedefault>Cedric&nbsp;Notredame&nbsp;</span><br><span class=valuedefault>CPU&nbsp;TIME:0&nbsp;sec.</span><br><span class=valuedefault>SCORE=97</span><br><span class=valuedefault>*</span><br><span class=valuedefault>&nbsp;</span><span class=value0>B</span><span class=value1>A</span><span class=value2>D</span><span class=value3>&nbsp;</span><span class=value4>A</span><span class=value5>V</span><span class=value6>G</span><span class=value7>&nbsp;</span><span class=value8>G</span><span class=value9>OOD</span><br><span class=valuedefault>*</span><br><span class=value9>s22&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;100</span><br><span class=value9>s23&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;98</span><br><span class=value9>s24&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;98</span><br><span class=value9>s25&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;98</span><br><span class=value9>s26&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;97</span><br><span class=value9>s27&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;97</span><br><span class=value9>s28&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;96</span><br><span class=value9>s29&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;98</span><br><span class=value9>s30&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;97</span><br><span class=value9>s31&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;97</span><br><span class=value9>s32&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;97</span><br><span class=value9>s33&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;97</span><br><span class=value9>con&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;&nbsp;9</span><br><br><span class=valuedefault>s22&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s23&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s24&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s25&nbsp;&nbsp;&nbsp;</span><span class=value9>LPVDKYPVLKDQPAEVLFREN</span><span class=valuegap>---</span><span class=value9>NPTVLECIIEGNDQGVKYSWK</span><br><span class=valuedefault>s26&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value9>R</span><span class=value8>SYGPV</span><span class=value9>FEEQPAHTLFPEGSAEEKVTLTCRA</span><span class=valuegap>-</span><span class=value9>RANPPATYRWK</span><br><span class=valuedefault>s27&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s28&nbsp;&nbsp;&nbsp;</span><span class=value9>MTTQAPTFTQPLQSVVVLEGSTATFEAHISGFPVPEVSWFRDGQV</span><br><span class=valuedefault>s29&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s30&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value6>M</span><span class=valuegap>------------------------------------------</span><br><span class=valuedefault>s31&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s32&nbsp;&nbsp;&nbsp;</span><span class=value9>WNI</span><span class=valuegap>------------------------------------------</span><br><span class=valuedefault>s33&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><br><span class=valuedefault>con&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;</span><span class=value7>&nbsp;</span><span class=value8>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>s22&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s23&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s24&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s25&nbsp;&nbsp;&nbsp;</span><span class=value9>KDGKSYNWQ</span><span class=valuegap>-</span><span class=value9>EHNAALRKDEGSLVFLRPQ</span><span class=valuegap>-</span><span class=value9>ASDEGHYQCFAETPA</span><br><span class=valuedefault>s26&nbsp;&nbsp;&nbsp;</span><span class=value9>MNGTELKMGPDSRYRLV</span><span class=valuegap>--</span><span class=value9>AGDLVISNPVKAKDAGSYQCVATNAR</span><br><span class=valuedefault>s27&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s28&nbsp;&nbsp;&nbsp;</span><span class=value9>ISTSTLPGVQISFSDGR</span><span class=valuegap>----------------------------</span><br><span class=valuedefault>s29&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s30&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s31&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s32&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s33&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><br><span class=valuedefault>con&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>s22&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s23&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s24&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s25&nbsp;&nbsp;&nbsp;</span><span class=value9>GVASSRVISFRKTYLIASPAKTH</span><span class=valuegap>-</span><span class=value9>EKTPIEGRPFQLDCVLPNAYP</span><br><span class=valuedefault>s26&nbsp;&nbsp;&nbsp;</span><span class=value9>GTVVSREASLRFGFLQEFSAEERDPVKITEGWGVMFTCSPPPHYP</span><br><span class=valuedefault>s27&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s28&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s29&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s30&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s31&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s32&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s33&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><br><span class=valuedefault>con&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>s22&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s23&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s24&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s25&nbsp;&nbsp;&nbsp;</span><span class=value9>KPLITWKK</span><span class=valuegap>---</span><span class=value9>RLSGADPNADVTDFDRRITAG</span><span class=valuegap>-</span><span class=value9>PDGNLYFTIVTK</span><br><span class=valuedefault>s26&nbsp;&nbsp;&nbsp;</span><span class=value9>ALSYRWLLNEFPN</span><span class=valuegap>--------</span><span class=value9>FIPADGRRFVSQTTGNLYIAKTEA</span><br><span class=valuedefault>s27&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s28&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s29&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s30&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s31&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s32&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s33&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><br><span class=valuedefault>con&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>s22&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------------------------------------------</span><span class=value9>ARV</span><br><span class=valuedefault>s23&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-----------------------------------------</span><span class=value9>GDQV</span><br><span class=valuedefault>s24&nbsp;&nbsp;&nbsp;</span><span class=valuegap>----------------------------------------</span><span class=value9>RVLQV</span><br><span class=valuedefault>s25&nbsp;&nbsp;&nbsp;</span><span class=value9>EDVSDIYKYVCTAKNAAVDEEVVLVEYEIKGVTKDNSGYKGEPVP</span><br><span class=valuedefault>s26&nbsp;&nbsp;&nbsp;</span><span class=value9>SDLGN</span><span class=valuegap>--</span><span class=value9>YSCFATSHIDFITKSVFSKFSQLSLAAED</span><span class=valuegap>-</span><span class=value9>ARQYAPSI</span><br><span class=valuedefault>s27&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value9>ISGMSGRKASGSSPTSPINANKVENEDAFLEEVAEEKPHVKPYF</span><br><span class=valuedefault>s28&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value9>AKLTIPAVTKANSGRYSLKATNGSGQATSTAELLVKAETAPPNF</span><br><span class=valuedefault>s29&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-------------------------------</span><span class=value9>GSSGSSGTDVSSWI</span><br><span class=valuedefault>s30&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-----------------------------------</span><span class=value9>HHHHHHSSRI</span><br><span class=valuedefault>s31&nbsp;&nbsp;&nbsp;</span><span class=valuegap>----------------------------------------</span><span class=value9>LKPKI</span><br><span class=valuedefault>s32&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-----------------------------------</span><span class=value8>HGKES</span><span class=value9>CDVQL</span><br><span class=valuedefault>s33&nbsp;&nbsp;&nbsp;</span><span class=valuegap>----------------------------------</span><span class=value9>MNSNNKRAPYW</span><br><br><span class=valuedefault>con&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>s22&nbsp;&nbsp;&nbsp;</span><span class=value9>DQT</span><span class=valuegap>----</span><span class=value9>PRSVTKETG</span><span class=valuegap>-</span><span class=value9>ESLTINCVLRDASY</span><span class=valuegap>-</span><span class=value9>ALGSTCWYRKKSG</span><br><span class=valuedefault>s23&nbsp;&nbsp;&nbsp;</span><span class=value9>EQS</span><span class=valuegap>----</span><span class=value9>PSALSLHEG</span><span class=valuegap>-</span><span class=value9>TDSALRCNFT</span><span class=valuegap>---</span><span class=value5>T</span><span class=valuegap>-</span><span class=value9>TMRSVQWFRQN</span><span class=valuegap>-</span><span class=value9>S</span><br><span class=valuedefault>s24&nbsp;&nbsp;&nbsp;</span><span class=value9>DIV</span><span class=valuegap>----</span><span class=value9>PSQGEISVG</span><span class=valuegap>-</span><span class=value9>ESKFFLCQVA</span><span class=valuegap>--</span><span class=value7>G</span><span class=value9>DAKDKDISWFSPN</span><span class=valuegap>--</span><br><span class=valuedefault>s25&nbsp;&nbsp;&nbsp;</span><span class=value9>QYV</span><span class=valuegap>----</span><span class=value9>SKDMMAKAG</span><span class=valuegap>-</span><span class=value9>DVTMIYCMYG</span><span class=valuegap>--</span><span class=value7>S</span><span class=valuegap>-</span><span class=value9>NPMGYPNYFKNG</span><span class=valuegap>--</span><br><span class=valuedefault>s26&nbsp;&nbsp;&nbsp;</span><span class=value9>KAK</span><span class=valuegap>----</span><span class=value9>FPADTYALTGQMVTLECFAF</span><span class=valuegap>---</span><span class=value6>G</span><span class=value9>NPVPQIKWRKLD</span><span class=valuegap>--</span><br><span class=valuedefault>s27&nbsp;&nbsp;&nbsp;</span><span class=value9>TKT</span><span class=valuegap>----</span><span class=value9>ILDMEVVEG</span><span class=valuegap>-</span><span class=value9>SAARFDCKVE</span><span class=valuegap>--</span><span class=value7>G</span><span class=value5>Y</span><span class=valuegap>-</span><span class=value9>PDPEVMWFKDD</span><span class=valuegap>--</span><br><span class=valuedefault>s28&nbsp;&nbsp;&nbsp;</span><span class=value9>VQR</span><span class=valuegap>----</span><span class=value9>LQSMTVRQG</span><span class=valuegap>-</span><span class=value9>SQVRLQVRVT</span><span class=valuegap>---</span><span class=value5>G</span><span class=value9>IPTPVVKFYRDG</span><span class=valuegap>--</span><br><span class=valuedefault>s29&nbsp;&nbsp;&nbsp;</span><span class=value9>VYPSG</span><span class=valuegap>--</span><span class=value9>KVYVAAVRL</span><span class=valuegap>-</span><span class=value9>ERVVLTCELC</span><span class=valuegap>--</span><span class=value7>R</span><span class=valuegap>--</span><span class=value9>PWAEVRWTKDG</span><span class=valuegap>--</span><br><span class=valuedefault>s30&nbsp;&nbsp;&nbsp;</span><span class=value9>LTK</span><span class=valuegap>----</span><span class=value9>PRSMTVYEG</span><span class=valuegap>-</span><span class=value9>ESARFSCDTD</span><span class=valuegap>--</span><span class=value7>G</span><span class=valuegap>-</span><span class=value9>EPVPTVTWLRKG</span><span class=valuegap>--</span><br><span class=valuedefault>s31&nbsp;&nbsp;&nbsp;</span><span class=value9>LTA</span><span class=valuegap>----</span><span class=value9>SRKIKIKAG</span><span class=valuegap>-</span><span class=value9>FTHNLEVDFI</span><span class=valuegap>---</span><span class=value6>G</span><span class=value9>APDPTATWTVGDSG</span><br><span class=valuedefault>s32&nbsp;&nbsp;&nbsp;</span><span class=value9>YIKR</span><span class=valuegap>---</span><span class=value9>QSEHSILAG</span><span class=valuegap>-</span><span class=value9>DPFELECPVK</span><span class=valuegap>--</span><span class=value7>Y</span><span class=value9>CANRPHVTWCKLNGT</span><br><span class=valuedefault>s33&nbsp;&nbsp;&nbsp;</span><span class=value9>TNTEKMEKRLHAVPAA</span><span class=valuegap>-</span><span class=value9>NTVKFRCPAG</span><span class=valuegap>--</span><span class=value8>G</span><span class=valuegap>-</span><span class=value9>NPMPTMRWLKNG</span><span class=valuegap>--</span><br><br><span class=valuedefault>con&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value6>&nbsp;</span><span class=value4>&nbsp;</span><span class=value8>&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>s22&nbsp;&nbsp;&nbsp;</span><span class=value9>EGNEESIS</span><span class=valuegap>-------</span><span class=value9>KGGRYVET</span><span class=valuegap>---</span><span class=value9>VNSG</span><span class=valuegap>-</span><span class=value9>SKSFSLRINDLTVE</span><br><span class=valuedefault>s23&nbsp;&nbsp;&nbsp;</span><span class=value9>RGS</span><span class=value8>L</span><span class=value9>ISLFYLASGTKENGRLKSA</span><span class=valuegap>--</span><span class=value9>FDS</span><span class=value8>E</span><span class=value9>R</span><span class=valuegap>-</span><span class=value9>ARYSTLHIRDAQLE</span><br><span class=valuedefault>s24&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---</span><span class=value8>G</span><span class=value9>EKLS</span><span class=valuegap>------</span><span class=value7>P</span><span class=value9>NQQRISVV</span><span class=valuegap>--</span><span class=value9>WND</span><span class=valuegap>---</span><span class=value9>DDSSTLTIYNANID</span><br><span class=valuedefault>s25&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---</span><span class=value8>K</span><span class=value9>DVN</span><span class=valuegap>------</span><span class=value4>G</span><span class=value7>N</span><span class=value9>PEDRITRHNRTS</span><span class=valuegap>------</span><span class=value9>GKRLLFKTTLPE</span><br><span class=valuedefault>s26&nbsp;&nbsp;&nbsp;</span><span class=value5>G</span><span class=value9>SQTSKWL</span><span class=valuegap>-----------------------</span><span class=value5>S</span><span class=value4>S</span><span class=value9>EPLLHIQNVDFE</span><br><span class=valuedefault>s27&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---</span><span class=value8>N</span><span class=value9>PVK</span><span class=value8>E</span><span class=valuegap>--------</span><span class=value6>S</span><span class=value9>RHFQID</span><span class=valuegap>--</span><span class=value9>YDEEG</span><span class=valuegap>---</span><span class=value9>NCSLTISEVCGD</span><br><span class=valuedefault>s28&nbsp;&nbsp;&nbsp;</span><span class=value5>A</span><span class=valuegap>---</span><span class=value9>EIQS</span><span class=valuegap>--------</span><span class=value6>S</span><span class=value9>LDFQIS</span><span class=valuegap>--</span><span class=value9>QE</span><span class=value7>G</span><span class=valuegap>-</span><span class=value9>D</span><span class=valuegap>---</span><span class=value9>LYSLLIAEAYPE</span><br><span class=valuedefault>s29&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---</span><span class=value8>E</span><span class=value9>EVVE</span><span class=valuegap>--------</span><span class=value6>S</span><span class=value9>PALLLQKEDT</span><span class=valuegap>------</span><span class=value9>VRRLVLPAVQLE</span><br><span class=valuedefault>s30&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---</span><span class=value8>Q</span><span class=value9>VLST</span><span class=valuegap>------</span><span class=value7>S</span><span class=valuegap>--</span><span class=value9>ARHQVT</span><span class=valuegap>--</span><span class=value9>TTK</span><span class=valuegap>----</span><span class=value5>Y</span><span class=value9>KSTFEISSVQAS</span><br><span class=valuedefault>s31&nbsp;&nbsp;&nbsp;</span><span class=value5>A</span><span class=valuegap>---</span><span class=value9>ALAP</span><span class=valuegap>----------</span><span class=value9>ELLVD</span><span class=valuegap>--</span><span class=value9>AKS</span><span class=valuegap>-</span><span class=value9>S</span><span class=valuegap>---</span><span class=value9>TTSIFFPSAKRA</span><br><span class=valuedefault>s32&nbsp;&nbsp;&nbsp;</span><span class=value9>T</span><span class=valuegap>--</span><span class=value8>C</span><span class=value9>VKL</span><span class=value8>E</span><span class=valuegap>----------</span><span class=value9>DRQTS</span><span class=valuegap>--</span><span class=value9>WKEEKNISFFILHFEPVLPN</span><br><span class=valuedefault>s33&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---</span><span class=value8>K</span><span class=value9>EFK</span><span class=valuegap>----</span><span class=value9>QE</span><span class=value5>H</span><span class=value7>R</span><span class=valuegap>--</span><span class=value9>IGGYKV</span><span class=valuegap>--</span><span class=value9>RNQ</span><span class=valuegap>-</span><span class=value9>H</span><span class=valuegap>---</span><span class=value9>WSLIMESV</span><span class=valuegap>-</span><span class=value9>VPS</span><br><br><span class=valuedefault>con&nbsp;&nbsp;&nbsp;</span><span class=value4>&nbsp;</span><span class=value9>&nbsp;&nbsp;</span><span class=value7>&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;</span><span class=value8>&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value1>&nbsp;</span><span class=value6>&nbsp;</span><span class=value9>&nbsp;</span><span class=value6>&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>&nbsp;&nbsp;</span><span class=value9>&nbsp;</span><span class=value6>&nbsp;</span><span class=value5>&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>s22&nbsp;&nbsp;&nbsp;</span><span class=value9>DGGTYRCGLGVAGGYCDYALCSS</span><span class=valuegap>---</span><span class=value9>RYAECGDGTAVTVN</span><span class=valuegap>-----</span><br><span class=valuedefault>s23&nbsp;&nbsp;&nbsp;</span><span class=value9>DSGTYFCAAE</span><span class=valuegap>-----------</span><span class=value9>ASSGSWQLIFGSGTQLTVMPVT</span><span class=valuegap>--</span><br><span class=valuedefault>s24&nbsp;&nbsp;&nbsp;</span><span class=value9>DAGIYKCVVT</span><span class=valuegap>-----------</span><span class=value9>AED</span><span class=value7>G</span><span class=valuegap>--</span><span class=value9>TQSEA</span><span class=valuegap>-</span><span class=value9>TVNVKIFQKLMF</span><br><span class=valuedefault>s25&nbsp;&nbsp;&nbsp;</span><span class=value9>DEGVYTCEVD</span><span class=valuegap>-----------</span><span class=value9>NGV</span><span class=value8>G</span><span class=valuegap>--</span><span class=value9>KPQKH</span><span class=valuegap>-</span><span class=value9>SLKLTVVSAPKY</span><br><span class=valuedefault>s26&nbsp;&nbsp;&nbsp;</span><span class=value9>DEGTYECEAE</span><span class=valuegap>-----------</span><span class=value9>NIK</span><span class=valuegap>---</span><span class=value9>GRDTY</span><span class=valuegap>-</span><span class=value9>QGRIIIHAQPDW</span><br><span class=valuedefault>s27&nbsp;&nbsp;&nbsp;</span><span class=value9>DDAKYTCKAV</span><span class=valuegap>-----------</span><span class=value9>NS</span><span class=valuegap>---</span><span class=value6>L</span><span class=value9>GEATC</span><span class=valuegap>-</span><span class=value9>TAELLVETMGKE</span><br><span class=valuedefault>s28&nbsp;&nbsp;&nbsp;</span><span class=value9>DSGTYSVNAT</span><span class=valuegap>-----------</span><span class=value9>NS</span><span class=valuegap>---</span><span class=value6>V</span><span class=value9>GRATS</span><span class=valuegap>-</span><span class=value9>TAELLVQGETRE</span><br><span class=valuedefault>s29&nbsp;&nbsp;&nbsp;</span><span class=value9>DSGEYLCEID</span><span class=valuegap>------------------</span><span class=value9>DESA</span><span class=valuegap>-</span><span class=value9>SFTVTVTEPPVR</span><br><span class=valuedefault>s30&nbsp;&nbsp;&nbsp;</span><span class=value9>DEGNYSVVVE</span><span class=valuegap>-----------</span><span class=value9>NS</span><span class=valuegap>-</span><span class=value7>E</span><span class=valuegap>--</span><span class=value9>GKQEA</span><span class=valuegap>-</span><span class=value9>EFTLTIQK</span><span class=valuegap>----</span><br><span class=valuedefault>s31&nbsp;&nbsp;&nbsp;</span><span class=value9>DSGNYKLKVK</span><span class=valuegap>-----------</span><span class=value9>NE</span><span class=valuegap>---</span><span class=value6>L</span><span class=value9>GEDEA</span><span class=valuegap>-</span><span class=value9>IFEVIVQ</span><span class=valuegap>-----</span><br><span class=valuedefault>s32&nbsp;&nbsp;&nbsp;</span><span class=value9>DNGSYRCSAN</span><span class=valuegap>-----------</span><span class=value9>FQS</span><span class=value7>N</span><span class=valuegap>--</span><span class=value9>LIESH</span><span class=valuegap>-</span><span class=value9>STTLYVTDVKHH</span><br><span class=valuedefault>s33&nbsp;&nbsp;&nbsp;</span><span class=value9>DKGNYTCVVE</span><span class=valuegap>-----------</span><span class=value9>NE</span><span class=valuegap>-</span><span class=value8>Y</span><span class=valuegap>--</span><span class=value9>GSINH</span><span class=valuegap>-</span><span class=value9>TYHLDVV</span><span class=valuegap>-----</span><br><br><span class=valuedefault>con&nbsp;&nbsp;&nbsp;</span><span class=value9>*&nbsp;.&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value7>&nbsp;</span><span class=value9>&nbsp;</span><span class=value4>&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>s22&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s23&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s24&nbsp;&nbsp;&nbsp;</span><span class=value9>K</span><span class=valuegap>-</span><span class=value9>NAPTPQEFKEG</span><span class=valuegap>--</span><span class=value9>EDAVIVCDVVSSLPPTIIWKHKGRDVILKK</span><br><span class=valuedefault>s25&nbsp;&nbsp;&nbsp;</span><span class=value9>EQKPEKVIVVKQG</span><span class=valuegap>--</span><span class=value9>QDVTIPCKVTGLPAPNVVWSHNAKPL</span><span class=valuegap>---</span><span class=value9>S</span><br><span class=valuedefault>s26&nbsp;&nbsp;&nbsp;</span><span class=value9>LDVI</span><span class=valuegap>---</span><span class=value9>TDTEADIGSDLRWSCVASGKPRPAVRWLRDGQPL</span><span class=valuegap>--</span><span class=value9>AS</span><br><span class=valuedefault>s27&nbsp;&nbsp;&nbsp;</span><span class=value9>GEGEGEGEEDEEEEEE</span><span class=valuegap>-----------------------------</span><br><span class=valuedefault>s28&nbsp;&nbsp;&nbsp;</span><span class=value9>EF</span><span class=valuegap>-------------------------------------------</span><br><span class=valuedefault>s29&nbsp;&nbsp;&nbsp;</span><span class=value9>I</span><span class=valuegap>-</span><span class=value9>IYSGPSSG</span><span class=valuegap>-----------------------------------</span><br><span class=valuedefault>s30&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s31&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s32&nbsp;&nbsp;&nbsp;</span><span class=value9>HHHHHH</span><span class=valuegap>---------------------------------------</span><br><span class=valuedefault>s33&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><br><span class=valuedefault>con&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>s22&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s23&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s24&nbsp;&nbsp;&nbsp;</span><span class=value9>DVRFIVLSNNYLQIRGIKKTDEGTYRCEGRILARGEINFKDIQVI</span><br><span class=valuedefault>s25&nbsp;&nbsp;&nbsp;</span><span class=value9>GGRATVT</span><span class=valuegap>-</span><span class=value9>DSGLVIKGVKNGDKGYYGCRATN</span><span class=valuegap>--</span><span class=value9>EHGDKYFETLVQ</span><br><span class=valuedefault>s26&nbsp;&nbsp;&nbsp;</span><span class=value9>QNRIEVS</span><span class=valuegap>-</span><span class=value9>GGELRFSKLVLEDSGMYQCVAEN</span><span class=valuegap>--</span><span class=value9>KHG</span><span class=valuegap>-</span><span class=value9>TVYASAEL</span><br><span class=valuedefault>s27&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s28&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s29&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s30&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s31&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s32&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s33&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><br><span class=valuedefault>con&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>s22&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s23&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s24&nbsp;&nbsp;&nbsp;</span><span class=value9>VRVLQVDIVPSQGEISVGESKFFLCQVAGDAKDKDISWFSPNGEK</span><br><span class=valuedefault>s25&nbsp;&nbsp;&nbsp;</span><span class=value9>VN</span><span class=valuegap>-------------------------------------------</span><br><span class=valuedefault>s26&nbsp;&nbsp;&nbsp;</span><span class=value9>TVQA</span><span class=valuegap>-----------------------------------------</span><br><span class=valuedefault>s27&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s28&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s29&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s30&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s31&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s32&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s33&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><br><span class=valuedefault>con&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>s22&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s23&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s24&nbsp;&nbsp;&nbsp;</span><span class=value9>LSPNQQRISVVWNDDDSSTLTIYNANIDDAGIYKCVVTAEDGTQS</span><br><span class=valuedefault>s25&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s26&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s27&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s28&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s29&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s30&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s31&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s32&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s33&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><br><span class=valuedefault>con&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>s22&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s23&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s24&nbsp;&nbsp;&nbsp;</span><span class=value9>EATVNVKIFQKLMFKNAPTPQEFKEGEDAVIVCDVVSSLPPTIIW</span><br><span class=valuedefault>s25&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s26&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s27&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s28&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s29&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s30&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s31&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s32&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s33&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><br><span class=valuedefault>con&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>s22&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s23&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s24&nbsp;&nbsp;&nbsp;</span><span class=value9>KHKGRDVILKKDVRFIVLSNNYLQIRGIKKTDEGTYRCEGRILAR</span><br><span class=valuedefault>s25&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s26&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s27&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s28&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s29&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s30&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s31&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s32&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s33&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><br><span class=valuedefault>con&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>s22&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s23&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s24&nbsp;&nbsp;&nbsp;</span><span class=value9>GEINFKDIQVIVRVLQVDIVPSQGEISVGESKFFLCQVAGDAKDK</span><br><span class=valuedefault>s25&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s26&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s27&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s28&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s29&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s30&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s31&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s32&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s33&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><br><span class=valuedefault>con&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>s22&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s23&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s24&nbsp;&nbsp;&nbsp;</span><span class=value9>DISWFSPNGEKLSPNQQRISVVWNDDDSSTLTIYNANIDDAGIYK</span><br><span class=valuedefault>s25&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s26&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s27&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s28&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s29&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s30&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s31&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s32&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s33&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><br><span class=valuedefault>con&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>s22&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s23&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s24&nbsp;&nbsp;&nbsp;</span><span class=value9>CVVTAEDGTQSEATVNVKIFQKLMFKNAPTPQEFKEGEDAVIVCD</span><br><span class=valuedefault>s25&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s26&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s27&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s28&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s29&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s30&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s31&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s32&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s33&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><br><span class=valuedefault>con&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>s22&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s23&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s24&nbsp;&nbsp;&nbsp;</span><span class=value9>VVSSLPPTIIWKHKGRDVILKKDVRFIVLSNNYLQIRGIKKTDEG</span><br><span class=valuedefault>s25&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s26&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s27&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s28&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s29&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s30&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s31&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s32&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s33&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><br><span class=valuedefault>con&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>s22&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s23&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s24&nbsp;&nbsp;&nbsp;</span><span class=value9>TYRCEGRILARGEINFKDIQVIVRVLQVDIVPSQGEISVGESKFF</span><br><span class=valuedefault>s25&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s26&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s27&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s28&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s29&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s30&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s31&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s32&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s33&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><br><span class=valuedefault>con&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>s22&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s23&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s24&nbsp;&nbsp;&nbsp;</span><span class=value9>LCQVAGDAKDKDISWFSPNGEKLSPNQQRISVVWNDDDSSTLTIY</span><br><span class=valuedefault>s25&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s26&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s27&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s28&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s29&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s30&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s31&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s32&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s33&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><br><span class=valuedefault>con&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>s22&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s23&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s24&nbsp;&nbsp;&nbsp;</span><span class=value9>NANIDDAGIYKCVVTAEDGTQSEATVNVKIFQKLMFKNAPTPQEF</span><br><span class=valuedefault>s25&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s26&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s27&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s28&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s29&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s30&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s31&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s32&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s33&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><br><span class=valuedefault>con&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>s22&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s23&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s24&nbsp;&nbsp;&nbsp;</span><span class=value9>KEGEDAVIVCDVVSSLPPTIIWKHKGRDVILKKDVRFIVLSNNYL</span><br><span class=valuedefault>s25&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s26&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s27&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s28&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s29&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s30&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s31&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s32&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><span class=valuedefault>s33&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------------------</span><br><br><span class=valuedefault>con&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>s22&nbsp;&nbsp;&nbsp;</span><span class=valuegap>----------------------------------</span><br><span class=valuedefault>s23&nbsp;&nbsp;&nbsp;</span><span class=valuegap>----------------------------------</span><br><span class=valuedefault>s24&nbsp;&nbsp;&nbsp;</span><span class=value9>QIRGIKKTDEGTYRCEGRILARGEINFKDIQVIV</span><br><span class=valuedefault>s25&nbsp;&nbsp;&nbsp;</span><span class=valuegap>----------------------------------</span><br><span class=valuedefault>s26&nbsp;&nbsp;&nbsp;</span><span class=valuegap>----------------------------------</span><br><span class=valuedefault>s27&nbsp;&nbsp;&nbsp;</span><span class=valuegap>----------------------------------</span><br><span class=valuedefault>s28&nbsp;&nbsp;&nbsp;</span><span class=valuegap>----------------------------------</span><br><span class=valuedefault>s29&nbsp;&nbsp;&nbsp;</span><span class=valuegap>----------------------------------</span><br><span class=valuedefault>s30&nbsp;&nbsp;&nbsp;</span><span class=valuegap>----------------------------------</span><br><span class=valuedefault>s31&nbsp;&nbsp;&nbsp;</span><span class=valuegap>----------------------------------</span><br><span class=valuedefault>s32&nbsp;&nbsp;&nbsp;</span><span class=valuegap>----------------------------------</span><br><span class=valuedefault>s33&nbsp;&nbsp;&nbsp;</span><span class=valuegap>----------------------------------</span><br><br><span class=valuedefault>con&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><br><br><br></body></html>
+</content>
+</file>
+<environement>
+HOME_4_TCOFFEE=/Users/cnotredame/
+MANPATH=/sw/share/man:/usr/share/man:/usr/local/share/man:/opt/X11/share/man:/Library/TeX/texbin/man:/Applications/Xcode.app/Contents/Developer/usr/share/man:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/share/man:/sw/lib/perl5/5.18.2/man
+TERM_PROGRAM=Apple_Terminal
+MCOFFEE_4_TCOFFEE=/Users/cnotredame//.t_coffee//mcoffee/
+ROOT_TMP_4_TCOFFEE=/var/tmp/
+SHELL=/bin/bash
+TERM=xterm-256color
+TMPDIR=/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/
+CONDA_SHLVL=1
+PERL5LIB=/sw/lib/perl5:/sw/lib/perl5/darwin
+Apple_PubSub_Socket_Render=/private/tmp/com.apple.launchd.6JzhyrtuKp/Render
+CONDA_PROMPT_MODIFIER=(base) 
+TERM_PROGRAM_VERSION=388.1.3
+OSNAME=macosx
+PERL_BIN=/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms::/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices
+TERM_SESSION_ID=9785BD0D-F6F1-4B59-B0BA-9937FD12A1E7
+METHODS_4_TCOFFEE=/Users/cnotredame//.t_coffee//methods/
+VERSIONER_PERL_VERSION=5.18
+XAPPLRESDIR=/sw/etc/app-defaults/
+http_proxy=
+HTTP_proxy=
+USER=cnotredame
+CONDA_EXE=/Users/cnotredame/anaconda3/bin/conda
+SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.U5mTe2o7m7/Listeners
+__CF_USER_TEXT_ENCODING=0x1F6:0x0:0x0
+ENV_4_TCOFFEE=/Users/cnotredame//.t_coffee//.t_coffee_env
+_CE_CONDA=
+all_proxy=
+ALL_PROXY=
+HTTP_proxy_4_TCOFFEE=
+PATH=/Users/cnotredame//.t_coffee//plugins/macosx/:/Users/cnotredame/anaconda3/bin:/Users/cnotredame/anaconda3/condabin:/opt/local/bin:/opt/local/sbin:/opt/local/bin:/opt/local/sbin:/Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/packages/x3dna-v2.1/bin:/Users/cnotredame/bin/macosx://Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms:.:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices:/Users/cnotredame/bin/Scripts:/Users/cnotredame/Library/Haskell/ghc-7.4.2/lib/epub-tools-2.0.0/bin:/sw/bin:/sw/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/Library/TeX/texbin
+_=/usr/bin/printenv
+CONDA_PREFIX=/Users/cnotredame/anaconda3
+COLOR_4_TCOFFEE=new
+DIR_4_TCOFFEE=/Users/cnotredame//.t_coffee/
+PWD=/private/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/RANDOMSTRINGX1EXNjAcVXRfOYiE9JRw/data
+CACHE_4_TCOFFEE=/Users/cnotredame//.t_coffee//cache/
+X3DNA=/Users/cnotredame/Dropbox/packages/x3dna-v2.1
+DBUS_LAUNCHD_SESSION_BUS_SOCKET=/private/tmp/com.apple.launchd.DfqaaC2z17/unix_domain_listener
+XPC_FLAGS=0x0
+VERSIONER_PERL_PREFER_32_BIT=no
+_CE_M=
+XPC_SERVICE_NAME=0
+ERRORFILE_4_TCOFFEE=NO
+PLUGINS_4_TCOFFEE=/Users/cnotredame//.t_coffee//plugins/macosx/
+SHLVL=3
+HOME=/Users/cnotredame
+DUMP_4_TCOFFEE=/private/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/RANDOMSTRINGX1EXNjAcVXRfOYiE9JRw/core.tests.179.dump
+HTTP_PROXY=
+MAFFT_BINARIES=
+CONDA_PYTHON_EXE=/Users/cnotredame/anaconda3/bin/python
+BIN=/Users/cnotredame/bin/macosx
+LOGNAME=cnotredame
+EMAIL_4_TCOFFEE=cedric.notredame@gmail.com
+LC_CTYPE=UTF-8
+CONDA_DEFAULT_ENV=base
+EMAIL=cedric.notredame@gmail.com
+UPDATED_ENV_4_TCOFFEE=1
+INFOPATH=/sw/share/info:/sw/info:/usr/share/info
+DISPLAY=/private/tmp/com.apple.launchd.vef8UzGxBY/org.macosforge.xquartz:0
+TC_MASTER_NODE=1
+NUMBER_OF_PROCESSORS=8
+ALL_proxy=
+LOCKDIR_4_TCOFFEE=/var/tmp/tco/tco683k8gh775231//lck/j2kpvt9swv/
+TMP_4_TCOFFEE=/var/tmp/tco/tco683k8gh775231/
+USER_BIN=/Users/cnotredame/bin/macosx
+SCRIPT_BIN=/Users/cnotredame/bin/Scripts/
+</environement>
+<DumpStatus>OK</DumpStatus>
+<DumpFile>/private/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/RANDOMSTRINGX1EXNjAcVXRfOYiE9JRw/core.tests.179.dump</DumpFile>
+<SourceFile>core.tests</SourceFile>
+<SourceLine>184</SourceLine>
+</DumpIO>

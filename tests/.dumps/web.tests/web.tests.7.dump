@@ -1,0 +1,849 @@
+<DumpIO>
+<nature>standard dump</nature>
+<program>T-COFFEE</program>
+<version>Version_13.39.0.d675aed</version>
+<build>Version_13.39.0.d675aed</build>
+<cl>t_coffee -in input-clustal.txt -in input-clustal.txt -output score_html clustalw_aln fasta_aln phylip -evaluate_mode t_coffee_slow -maxnseq 80 -maxlen 2500 -run_name result </cl>
+<stack>
+</stack>
+<warning>
+</warning>
+<file>
+<stream>output</stream>
+<name>stdout</name>
+<content>#Single Thread
+#Single Thread
+#Single Thread
+#Single Thread
+#Single Thread
+CLUSTAL FORMAT for T-COFFEE Version_13.39.0.d675aed [http://www.tcoffee.org] [MODE:  ], CPU=0.00 sec, SCORE=69, Nseq=5, Len=81 
+
+1aboA           -NLFV-ALYDFVASGDNTLSITKGEKLRV-------LGYNHNG-------
+1ycsB           KGVIY-ALWDYEPQNDDELPMKEGDCMTI-------IHREDEDEI-----
+1pht            -GYQYRALYDYKKEREEDIDLHLGDILTVNKGSLVALGFSDGQEARPEEI
+1vie            ---------DRVRKKSG--AAWQGQIVGW---------YCTNLTP----E
+1ihvA           ------NFRVYYRDSRD--PVWKGPAKLL---------WKGEG-------
+                             .         *                          
+
+1aboA           EWCEA--QTKNGQGWVPSNYITPVN------
+1ycsB           EWWWA--RLNDKEGYVPRNLLGLYP------
+1pht            GWLNGYNETTGERGDFPGTYVEYIGRKKISP
+1vie            GYAVESEAHPGSVQIYPVAALERIN------
+1ihvA           AVVIQ---DNSDIKVVPRRKAKIIRD-----
+                          .     *              
+
+
+
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>stderr</name>
+<content>
+PROGRAM: T-COFFEE Version_13.39.0.d675aed (Version_13.39.0.d675aed)
+-full_log      	S	[0] 
+-genepred_score	S	[0] 	nsd
+-run_name      	S	[1] 	result
+-mem_mode      	S	[0] 	mem
+-extend        	D	[1] 	1 
+-extend_mode   	S	[0] 	very_fast_triplet
+-max_n_pair    	D	[0] 	10 
+-seq_name_for_quadruplet	S	[0] 	all
+-compact       	S	[0] 	default
+-clean         	S	[0] 	no
+-do_self       	FL	[0] 	0
+-do_normalise  	D	[0] 	1000 
+-template_file 	S	[0] 
+-setenv        	S	[0] 	0
+-export        	S	[0] 	0
+-template_mode 	S	[0] 
+-flip          	D	[0] 	0 
+-remove_template_file	D	[0] 	0 
+-profile_template_file	S	[0] 
+-in            	S	[1] 	input-clustal.txt	input-clustal.txt
+-seq           	S	[0] 
+-aln           	S	[0] 
+-method_limits 	S	[0] 
+-method        	S	[0] 
+-lib           	S	[0] 
+-profile       	S	[0] 
+-profile1      	S	[0] 
+-profile2      	S	[0] 
+-pdb           	S	[0] 
+-relax_lib     	D	[0] 	1 
+-filter_lib    	D	[0] 	0 
+-shrink_lib    	D	[0] 	0 
+-out_lib       	W_F	[0] 	no
+-out_lib_mode  	S	[0] 	primary
+-lib_only      	D	[0] 	0 
+-outseqweight  	W_F	[0] 	no
+-seq_source    	S	[0] 	ANY
+-cosmetic_penalty	D	[0] 	0 
+-gapopen       	D	[0] 	0 
+-gapext        	D	[0] 	0 
+-fgapopen      	D	[0] 	0 
+-fgapext       	D	[0] 	0 
+-nomatch       	D	[0] 	0 
+-newtree       	W_F	[0] 	default
+-tree          	W_F	[0] 	NO
+-usetree       	R_F	[0] 
+-tree_mode     	S	[0] 	nj
+-distance_matrix_mode	S	[0] 	ktup
+-distance_matrix_sim_mode	S	[0] 	idmat_sim1
+-quicktree     	FL	[0] 	0
+-outfile       	W_F	[0] 	default
+-maximise      	FL	[1] 	1
+-output        	S	[1] 	score_html	clustalw_aln	fasta_aln	phylip
+-len           	D	[0] 	0 
+-infile        	R_F	[0] 
+-matrix        	S	[0] 	default
+-tg_mode       	D	[0] 	1 
+-profile_mode  	S	[0] 	cw_profile_profile
+-profile_comparison	S	[0] 	profile
+-dp_mode       	S	[0] 	linked_pair_wise
+-ktuple        	D	[0] 	1 
+-ndiag         	D	[0] 	0 
+-diag_threshold	D	[0] 	0 
+-diag_mode     	D	[0] 	0 
+-sim_matrix    	S	[0] 	vasiliky
+-transform     	S	[0] 
+-extend_seq    	FL	[0] 	0
+-outorder      	S	[0] 	input
+-inorder       	S	[0] 	aligned
+-seqnos        	S	[0] 	off
+-case          	S	[0] 	keep
+-cpu           	D	[0] 	0 
+-ulimit        	D	[0] 	-1 
+-maxnseq       	D	[1] 	80 
+-maxlen        	D	[1] 	2500 
+-sample_dp     	D	[0] 	0 
+-weight        	S	[0] 	default
+-seq_weight    	S	[0] 	no
+-align         	FL	[1] 	1
+-mocca         	FL	[0] 	0
+-domain        	FL	[0] 	0
+-start         	D	[0] 	0 
+-len           	D	[0] 	0 
+-scale         	D	[0] 	0 
+-mocca_interactive	FL	[0] 	0
+-method_evaluate_mode	S	[0] 	default
+-color_mode    	S	[0] 	new
+-aln_line_length	D	[0] 	0 
+-evaluate_mode 	S	[1] 	t_coffee_slow
+-get_type      	FL	[0] 	0
+-clean_aln     	D	[0] 	0 
+-clean_threshold	D	[1] 	1 
+-clean_iteration	D	[1] 	1 
+-clean_evaluate_mode	S	[0] 	t_coffee_fast
+-extend_matrix 	FL	[0] 	0
+-prot_min_sim  	D	[40] 	40 
+-prot_max_sim  	D	[90] 	90 
+-prot_trim     	D	[20] 	20 
+-prot_min_cov  	D	[40] 	40 
+-pdb_type      	S	[0] 	d
+-pdb_min_sim   	D	[35] 	35 
+-pdb_max_sim   	D	[100] 	100 
+-pdb_min_cov   	D	[50] 	50 
+-pdb_blast_server	W_F	[0] 	EBI
+-blast         	W_F	[0] 
+-blast_server  	W_F	[0] 	EBI
+-pdb_db        	W_F	[0] 	pdb
+-protein_db    	W_F	[0] 	uniref50
+-method_log    	W_F	[0] 	no
+-struc_to_use  	S	[0] 
+-cache         	W_F	[0] 	use
+-print_cache   	FL	[0] 	0
+-align_pdb_param_file	W_F	[0] 	no
+-align_pdb_hasch_mode	W_F	[0] 	hasch_ca_trace_bubble
+-external_aligner	S	[0] 	NO
+-msa_mode      	S	[0] 	tree
+-et_mode       	S	[0] 	et
+-master        	S	[0] 	no
+-blast_nseq    	D	[0] 	0 
+-lalign_n_top  	D	[0] 	10 
+-iterate       	D	[0] 	0 
+-trim          	D	[0] 	0 
+-split         	D	[0] 	0 
+-trimfile      	S	[0] 	default
+-split         	D	[0] 	0 
+-split_nseq_thres	D	[0] 	0 
+-split_score_thres	D	[0] 	0 
+-check_pdb_status	D	[0] 	0 
+-clean_seq_name	D	[0] 	0 
+-seq_to_keep   	S	[0] 
+-dpa_master_aln	S	[0] 
+-dpa_maxnseq   	D	[0] 	0 
+-dpa_min_score1	D	[0] 
+-dpa_min_score2	D	[0] 
+-dpa_keep_tmpfile	FL	[0] 	0
+-dpa_debug     	D	[0] 	0 
+-multi_core    	S	[0] 	templates_jobs_relax_msa_evaluate
+-n_core        	D	[0] 	1 
+-thread        	D	[0] 	1 
+-max_n_proc    	D	[0] 	0 
+-lib_list      	S	[0] 
+-prune_lib_mode	S	[0] 	5
+-tip           	S	[0] 	none
+-rna_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (A) input-clustal.txt  Format clustal_aln
+	Input File (A) input-clustal.txt  Format clustal_aln
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 5 SEQUENCES  [PROTEIN]
+  Input File input-clustal.txt Seq 1aboA Length   57 type PROTEIN Struct Unchecked
+  Input File input-clustal.txt Seq 1ihvA Length   49 type PROTEIN Struct Unchecked
+  Input File input-clustal.txt Seq 1pht  Length   80 type PROTEIN Struct Unchecked
+  Input File input-clustal.txt Seq 1vie  Length   51 type PROTEIN Struct Unchecked
+  Input File input-clustal.txt Seq 1ycsB Length   60 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 1 processors:
+ib_mode	S	[0] 	5
+-tip           	S	[0] 	none
+-rna_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (A) input-clustal.txt  Format clustal_aln
+	Input File (A) input-clustal.txt  Format clustal_aln
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 5 SEQUENCES  [PROTEIN]
+  Input File input-clustal.txt Seq 1aboA Length   57 type PROTEIN Struct Unchecked
+  Input File input-clustal.txt Seq 1ihvA Length   49 type PROTEIN Struct Unchecked
+  Input File input-clustal.txt Seq 1pht  Length   80 type PROTEIN Struct Unchecked
+  Input File input-clustal.txt Seq 1vie  Length   51 type PROTEIN Struct Unchecked
+  Input File input-clustal.txt Seq 1ycsB Length   60 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 1 processors:
+
+	--- Process Method/Library/Aln Ainput-clustal.txt
+	xxx Retrieved Ainput-clustal.txtib_mode	S	[0] 	5
+-tip           	S	[0] 	none
+-rna_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (A) input-clustal.txt  Format clustal_aln
+	Input File (A) input-clustal.txt  Format clustal_aln
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 5 SEQUENCES  [PROTEIN]
+  Input File input-clustal.txt Seq 1aboA Length   57 type PROTEIN Struct Unchecked
+  Input File input-clustal.txt Seq 1ihvA Length   49 type PROTEIN Struct Unchecked
+  Input File input-clustal.txt Seq 1pht  Length   80 type PROTEIN Struct Unchecked
+  Input File input-clustal.txt Seq 1vie  Length   51 type PROTEIN Struct Unchecked
+  Input File input-clustal.txt Seq 1ycsB Length   60 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 1 processors:
+
+	--- Process Method/Library/Aln Ainput-clustal.txt
+	xxx Retrieved Ainput-clustal.txt
+	--- Process Method/Library/Aln Ainput-clustal.txt
+	xxx Retrieved Ainput-clustal.txt
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [432]
+
+Library Relaxation: Multi_proc [1]
+ 
+!		[Relax Library][TOT=    5][  0 %]!		[Relax Library][TOT=    5][ 40 %]!		[Relax Library][TOT=    5][ 60 %]!		[Relax Library][TOT=    5][ 80 %]!		[Relax Library][TOT=    5][100 %]
+ib_mode	S	[0] 	5
+-tip           	S	[0] 	none
+-rna_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (A) input-clustal.txt  Format clustal_aln
+	Input File (A) input-clustal.txt  Format clustal_aln
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 5 SEQUENCES  [PROTEIN]
+  Input File input-clustal.txt Seq 1aboA Length   57 type PROTEIN Struct Unchecked
+  Input File input-clustal.txt Seq 1ihvA Length   49 type PROTEIN Struct Unchecked
+  Input File input-clustal.txt Seq 1pht  Length   80 type PROTEIN Struct Unchecked
+  Input File input-clustal.txt Seq 1vie  Length   51 type PROTEIN Struct Unchecked
+  Input File input-clustal.txt Seq 1ycsB Length   60 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 1 processors:
+
+	--- Process Method/Library/Aln Ainput-clustal.txt
+	xxx Retrieved Ainput-clustal.txt
+	--- Process Method/Library/Aln Ainput-clustal.txt
+	xxx Retrieved Ainput-clustal.txt
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [432]
+
+Library Relaxation: Multi_proc [1]
+ 
+Relaxation Summary: [432]--->[432]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: 1aboA
+Group    2: 1ihvA
+Group    3: 1pht
+Group    4: 1vie
+Group    5: 1ycsB
+
+ib_mode	S	[0] 	5
+-tip           	S	[0] 	none
+-rna_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (A) input-clustal.txt  Format clustal_aln
+	Input File (A) input-clustal.txt  Format clustal_aln
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 5 SEQUENCES  [PROTEIN]
+  Input File input-clustal.txt Seq 1aboA Length   57 type PROTEIN Struct Unchecked
+  Input File input-clustal.txt Seq 1ihvA Length   49 type PROTEIN Struct Unchecked
+  Input File input-clustal.txt Seq 1pht  Length   80 type PROTEIN Struct Unchecked
+  Input File input-clustal.txt Seq 1vie  Length   51 type PROTEIN Struct Unchecked
+  Input File input-clustal.txt Seq 1ycsB Length   60 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 1 processors:
+
+	--- Process Method/Library/Aln Ainput-clustal.txt
+	xxx Retrieved Ainput-clustal.txt
+	--- Process Method/Library/Aln Ainput-clustal.txt
+	xxx Retrieved Ainput-clustal.txt
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [432]
+
+Library Relaxation: Multi_proc [1]
+ 
+Relaxation Summary: [432]--->[432]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: 1aboA
+Group    2: 1ihvA
+Group    3: 1pht
+Group    4: 1vie
+Group    5: 1ycsB
+
+
+	Group    6: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=   58][PID:65078]ib_mode	S	[0] 	5
+-tip           	S	[0] 	none
+-rna_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (A) input-clustal.txt  Format clustal_aln
+	Input File (A) input-clustal.txt  Format clustal_aln
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 5 SEQUENCES  [PROTEIN]
+  Input File input-clustal.txt Seq 1aboA Length   57 type PROTEIN Struct Unchecked
+  Input File input-clustal.txt Seq 1ihvA Length   49 type PROTEIN Struct Unchecked
+  Input File input-clustal.txt Seq 1pht  Length   80 type PROTEIN Struct Unchecked
+  Input File input-clustal.txt Seq 1vie  Length   51 type PROTEIN Struct Unchecked
+  Input File input-clustal.txt Seq 1ycsB Length   60 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 1 processors:
+
+	--- Process Method/Library/Aln Ainput-clustal.txt
+	xxx Retrieved Ainput-clustal.txt
+	--- Process Method/Library/Aln Ainput-clustal.txt
+	xxx Retrieved Ainput-clustal.txt
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [432]
+
+Library Relaxation: Multi_proc [1]
+ 
+Relaxation Summary: [432]--->[432]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: 1aboA
+Group    2: 1ihvA
+Group    3: 1pht
+Group    4: 1vie
+Group    5: 1ycsB
+
+
+	Group    6: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=   58][PID:65078]
+	Group    7: [Group    3 (   1 seq)] with [Group    6 (   2 seq)]-->[Len=   80][PID:65078]ib_mode	S	[0] 	5
+-tip           	S	[0] 	none
+-rna_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (A) input-clustal.txt  Format clustal_aln
+	Input File (A) input-clustal.txt  Format clustal_aln
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 5 SEQUENCES  [PROTEIN]
+  Input File input-clustal.txt Seq 1aboA Length   57 type PROTEIN Struct Unchecked
+  Input File input-clustal.txt Seq 1ihvA Length   49 type PROTEIN Struct Unchecked
+  Input File input-clustal.txt Seq 1pht  Length   80 type PROTEIN Struct Unchecked
+  Input File input-clustal.txt Seq 1vie  Length   51 type PROTEIN Struct Unchecked
+  Input File input-clustal.txt Seq 1ycsB Length   60 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 1 processors:
+
+	--- Process Method/Library/Aln Ainput-clustal.txt
+	xxx Retrieved Ainput-clustal.txt
+	--- Process Method/Library/Aln Ainput-clustal.txt
+	xxx Retrieved Ainput-clustal.txt
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [432]
+
+Library Relaxation: Multi_proc [1]
+ 
+Relaxation Summary: [432]--->[432]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: 1aboA
+Group    2: 1ihvA
+Group    3: 1pht
+Group    4: 1vie
+Group    5: 1ycsB
+
+
+	Group    6: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=   58][PID:65078]
+	Group    7: [Group    3 (   1 seq)] with [Group    6 (   2 seq)]-->[Len=   80][PID:65078]
+	Group    8: [Group    5 (   1 seq)] with [Group    7 (   3 seq)]-->[Len=   81][PID:65078]ib_mode	S	[0] 	5
+-tip           	S	[0] 	none
+-rna_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (A) input-clustal.txt  Format clustal_aln
+	Input File (A) input-clustal.txt  Format clustal_aln
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 5 SEQUENCES  [PROTEIN]
+  Input File input-clustal.txt Seq 1aboA Length   57 type PROTEIN Struct Unchecked
+  Input File input-clustal.txt Seq 1ihvA Length   49 type PROTEIN Struct Unchecked
+  Input File input-clustal.txt Seq 1pht  Length   80 type PROTEIN Struct Unchecked
+  Input File input-clustal.txt Seq 1vie  Length   51 type PROTEIN Struct Unchecked
+  Input File input-clustal.txt Seq 1ycsB Length   60 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 1 processors:
+
+	--- Process Method/Library/Aln Ainput-clustal.txt
+	xxx Retrieved Ainput-clustal.txt
+	--- Process Method/Library/Aln Ainput-clustal.txt
+	xxx Retrieved Ainput-clustal.txt
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [432]
+
+Library Relaxation: Multi_proc [1]
+ 
+Relaxation Summary: [432]--->[432]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: 1aboA
+Group    2: 1ihvA
+Group    3: 1pht
+Group    4: 1vie
+Group    5: 1ycsB
+
+
+	Group    6: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=   58][PID:65078]
+	Group    7: [Group    3 (   1 seq)] with [Group    6 (   2 seq)]-->[Len=   80][PID:65078]
+	Group    8: [Group    5 (   1 seq)] with [Group    7 (   3 seq)]-->[Len=   81][PID:65078]
+	Group    9: [Group    4 (   1 seq)] with [Group    8 (   4 seq)]-->[Len=   81][PID:65078]
+
+
+
+OUTPUT RESULTS
+	#### File Type= GUIDE_TREE      Format= newick          Name= result.dnd
+	#### File Type= MSA             Format= score_html      Name= result.score_html
+	#### File Type= MSA             Format= clustalw_aln    Name= result.clustalw_aln
+	#### File Type= MSA             Format= fasta_aln       Name= result.fasta_aln
+	#### File Type= MSA             Format= phylip          Name= result.phylip
+
+# Command Line: t_coffee -in input-clustal.txt -in input-clustal.txt -output score_html clustalw_aln fasta_aln phylip -evaluate_mode t_coffee_slow -maxnseq 80 -maxlen 2500 -run_name result  [PROGRAM:T-COFFEE]
+# T-COFFEE Memory Usage: Current= 28.817 Mb, Max= 29.878 Mb
+# Results Produced with T-COFFEE Version_13.39.0.d675aed (Version_13.39.0.d675aed)
+# T-COFFEE is available from http://www.tcoffee.org
+# Register on: https://groups.google.com/group/tcoffee/
+</content>
+</file>
+<file>
+<stream>input</stream>
+<name>input-clustal.txt</name>
+<content>CLUSTAL W (1.82) multiple sequence alignment
+
+1aboA   -NLFV-ALYDFVASGDNTLSITKGEKLRV-------LGYNHNG-------EWCEA--QTK
+1ycsB   KGVIY-ALWDYEPQNDDELPMKEGDCMTI-------IHREDEDEI-----EWWWA--RLN
+1pht    -GYQYRALYDYKKEREEDIDLHLGDILTVNKGSLVALGFSDGQEARPEEIGWLNGYNETT
+1vie    ---------DRVRKKSG--AAWQGQIVGW---------YCTNLTP----EGYAVESEAHP
+1ihvA   ------NFRVYYRDSRD--PVWKGPAKLL---------WKGEG-------AVVIQ---DN
+
+1aboA  NGQGWVPSNYITPVN------
+1ycsB  DKEGYVPRNLLGLYP------
+1pht   GERGDFPGTYVEYIGRKKISP
+1vie   GSVQIYPVAALERIN------
+1ihvA  SDIKVVPRRKAKIIRD-----
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>result.dnd</name>
+<content>(((1aboA:0.15000,1ihvA:0.15000):0.00000,1pht:0.15000):0.00000,1vie:0.15000,1ycsB:0.15000);</content>
+</file>
+<file>
+<stream>input</stream>
+<name>result.dnd</name>
+<content>(((1aboA:0.15000,1ihvA:0.15000):0.00000,1pht:0.15000):0.00000,1vie:0.15000,1ycsB:0.15000);</content>
+</file>
+<file>
+<stream>output</stream>
+<name>result.score_html</name>
+<content><html>
+<style>
+SPAN { font-family: courier new, courier-new, courier, monospace; font-weight: bold; font-size: 11pt;}
+SPAN { line-height:100%}
+SPAN {	white-space: pre}
+SPAN.value0 {background: #9B92FF}
+SPAN.value1 {background: #B4FFB4}
+SPAN.value2 {background: #BEFFBE}
+SPAN.value3 {background: #C8FFC8}
+SPAN.value4 {background: #FFFFB7}
+SPAN.value5 {background: #FFFFAD}
+SPAN.value6 {background: #FFFFAD}
+SPAN.value7 {background: #FFE6E6}
+SPAN.value8 {background: #FFDCDC}
+SPAN.value9 {background: #FFC8C8}
+SPAN.valuedefault {}
+SPAN.valuegap {}
+SPAN.valueink {background: 000000}
+</style><body><span class=valuedefault>T-COFFEE,&nbsp;Version_13.39.0.d675aed&nbsp;(Version_13.39.0.d675aed)</span><br><span class=valuedefault>Cedric&nbsp;Notredame&nbsp;</span><br><span class=valuedefault>CPU&nbsp;TIME:0&nbsp;sec.</span><br><span class=valuedefault>SCORE=69</span><br><span class=valuedefault>*</span><br><span class=valuedefault>&nbsp;</span><span class=value0>B</span><span class=value1>A</span><span class=value2>D</span><span class=value3>&nbsp;</span><span class=value4>A</span><span class=value5>V</span><span class=value6>G</span><span class=value7>&nbsp;</span><span class=value8>G</span><span class=value9>OOD</span><br><span class=valuedefault>*</span><br><span class=value2>1aboA&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;27</span><br><span class=value8>1ycsB&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;81</span><br><span class=value8>1pht&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;83</span><br><span class=value8>1vie&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;80</span><br><span class=value7>1ihvA&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;78</span><br><span class=value6>cons&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;&nbsp;6</span><br><br><span class=valuedefault>1aboA&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value4>NLFV</span><span class=valuegap>-</span><span class=value3>ALY</span><span class=value2>DFVASGDN</span><span class=value4>TL</span><span class=value2>SITKGEKLRV</span><span class=valuegap>-------</span><span class=value4>LG</span><span class=value2>YNHNG</span><span class=valuegap>--</span><br><span class=valuedefault>1ycsB&nbsp;&nbsp;&nbsp;</span><span class=valuegap>K</span><span class=value7>GVIY</span><span class=valuegap>-</span><span class=value7>ALW</span><span class=value8>DYEPQNDD</span><span class=value7>EL</span><span class=value8>PMKEGDCMTI</span><span class=valuegap>-------</span><span class=value7>IH</span><span class=value8>REDED</span><span class=value4>EI</span><br><span class=valuedefault>1pht&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value7>GYQY</span><span class=valuegap>R</span><span class=value8>ALYDYKKEREE</span><span class=value7>DI</span><span class=value8>DLHLGDILTV</span><span class=valuegap>NKGSLVA</span><span class=value7>LG</span><span class=value8>FSDGQEA</span><br><span class=valuedefault>1vie&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------</span><span class=value8>DRVRKKSG</span><span class=valuegap>--</span><span class=value8>AAWQGQIVGW</span><span class=valuegap>---------</span><span class=value8>YCTNL</span><span class=value6>TP</span><br><span class=valuedefault>1ihvA&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------</span><span class=value7>NFRVYYRDSRD</span><span class=valuegap>--</span><span class=value7>PVWKGPAKLL</span><span class=valuegap>---------</span><span class=value7>WKGEG</span><span class=valuegap>--</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>&nbsp;</span><span class=value6>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>&nbsp;</span><span class=value6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>1aboA&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-----</span><span class=value2>EWCEA</span><span class=valuegap>--</span><span class=value3>Q</span><span class=value2>TKNGQGWVPSNYITPVN</span><span class=valuegap>------</span><br><span class=valuedefault>1ycsB&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-----</span><span class=value8>EWWWA</span><span class=valuegap>--</span><span class=value7>R</span><span class=value8>LNDKEGYVPRNLLGLYP</span><span class=valuegap>------</span><br><span class=valuedefault>1pht&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuegap>RPEE</span><span class=value9>I</span><span class=value8>GWLNG</span><span class=value9>YN</span><span class=value7>E</span><span class=value8>TTGERGDFPGTYVEYIG</span><span class=value9>R</span><span class=valuegap>KKISP</span><br><span class=valuedefault>1vie&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuegap>----</span><span class=value9>E</span><span class=value8>GYAVE</span><span class=value9>SE</span><span class=value7>A</span><span class=value8>HPGSVQIYPVAALERIN</span><span class=valuegap>------</span><br><span class=valuedefault>1ihvA&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-----</span><span class=value7>AVVIQ</span><span class=valuegap>---</span><span class=value7>DNSDIKVVPRRKAKIIR</span><span class=value9>D</span><span class=valuegap>-----</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;</span><span class=value6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;</span><span class=value6>&nbsp;&nbsp;&nbsp;.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;</span><span class=valuedefault>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><br><br><br></body></html>
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>result.clustalw_aln</name>
+<content>CLUSTAL W (1.83) multiple sequence alignment
+
+1aboA           -NLFV-ALYDFVASGDNTLSITKGEKLRV-------LGYNHNG-------
+1ycsB           KGVIY-ALWDYEPQNDDELPMKEGDCMTI-------IHREDEDEI-----
+1pht            -GYQYRALYDYKKEREEDIDLHLGDILTVNKGSLVALGFSDGQEARPEEI
+1vie            ---------DRVRKKSG--AAWQGQIVGW---------YCTNLTP----E
+1ihvA           ------NFRVYYRDSRD--PVWKGPAKLL---------WKGEG-------
+                             .         *                          
+
+1aboA           EWCEA--QTKNGQGWVPSNYITPVN------
+1ycsB           EWWWA--RLNDKEGYVPRNLLGLYP------
+1pht            GWLNGYNETTGERGDFPGTYVEYIGRKKISP
+1vie            GYAVESEAHPGSVQIYPVAALERIN------
+1ihvA           AVVIQ---DNSDIKVVPRRKAKIIRD-----
+                          .     *              
+
+
+
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>result.fasta_aln</name>
+<content>>1aboA
+-NLFV-ALYDFVASGDNTLSITKGEKLRV-------LGYNHNG-------
+EWCEA--QTKNGQGWVPSNYITPVN------
+>1ycsB
+KGVIY-ALWDYEPQNDDELPMKEGDCMTI-------IHREDEDEI-----
+EWWWA--RLNDKEGYVPRNLLGLYP------
+>1pht
+-GYQYRALYDYKKEREEDIDLHLGDILTVNKGSLVALGFSDGQEARPEEI
+GWLNGYNETTGERGDFPGTYVEYIGRKKISP
+>1vie
+---------DRVRKKSG--AAWQGQIVGW---------YCTNLTP----E
+GYAVESEAHPGSVQIYPVAALERIN------
+>1ihvA
+------NFRVYYRDSRD--PVWKGPAKLL---------WKGEG-------
+AVVIQ---DNSDIKVVPRRKAKIIRD-----
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>result.phylip</name>
+<content>    5  81
+1aboA      -NLFV-ALYD FVASGDNTLS ITKGEKLRV- ------LGYN HNG------- EWCEA--QTK
+1ycsB      KGVIY-ALWD YEPQNDDELP MKEGDCMTI- ------IHRE DEDEI----- EWWWA--RLN
+1pht       -GYQYRALYD YKKEREEDID LHLGDILTVN KGSLVALGFS DGQEARPEEI GWLNGYNETT
+1vie       ---------D RVRKKSG--A AWQGQIVGW- --------YC TNLTP----E GYAVESEAHP
+1ihvA      ------NFRV YYRDSRD--P VWKGPAKLL- --------WK GEG------- AVVIQ---DN
+
+           NGQGWVPSNY ITPVN----- -
+           DKEGYVPRNL LGLYP----- -
+           GERGDFPGTY VEYIGRKKIS P
+           GSVQIYPVAA LERIN----- -
+           SDIKVVPRRK AKIIRD---- -
+
+
+
+</content>
+</file>
+<environement>
+HOME_4_TCOFFEE=/Users/cnotredame/
+MANPATH=/sw/share/man:/usr/share/man:/usr/local/share/man:/opt/X11/share/man:/Library/TeX/texbin/man:/Applications/Xcode.app/Contents/Developer/usr/share/man:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/share/man:/sw/lib/perl5/5.18.2/man
+TERM_PROGRAM=Apple_Terminal
+MCOFFEE_4_TCOFFEE=/Users/cnotredame//.t_coffee//mcoffee/
+ROOT_TMP_4_TCOFFEE=/var/tmp/
+SHELL=/bin/bash
+TERM=xterm-256color
+TMPDIR=/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/
+CONDA_SHLVL=1
+PERL5LIB=/sw/lib/perl5:/sw/lib/perl5/darwin
+Apple_PubSub_Socket_Render=/private/tmp/com.apple.launchd.6JzhyrtuKp/Render
+CONDA_PROMPT_MODIFIER=(base) 
+TERM_PROGRAM_VERSION=388.1.3
+OSNAME=macosx
+PERL_BIN=/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms::/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices
+TERM_SESSION_ID=9785BD0D-F6F1-4B59-B0BA-9937FD12A1E7
+METHODS_4_TCOFFEE=/Users/cnotredame//.t_coffee//methods/
+VERSIONER_PERL_VERSION=5.18
+XAPPLRESDIR=/sw/etc/app-defaults/
+http_proxy=
+HTTP_proxy=
+USER=cnotredame
+CONDA_EXE=/Users/cnotredame/anaconda3/bin/conda
+SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.U5mTe2o7m7/Listeners
+__CF_USER_TEXT_ENCODING=0x1F6:0x0:0x0
+ENV_4_TCOFFEE=/Users/cnotredame//.t_coffee//.t_coffee_env
+_CE_CONDA=
+all_proxy=
+ALL_PROXY=
+HTTP_proxy_4_TCOFFEE=
+PATH=/Users/cnotredame//.t_coffee//plugins/macosx/:/Users/cnotredame/anaconda3/bin:/Users/cnotredame/anaconda3/condabin:/opt/local/bin:/opt/local/sbin:/opt/local/bin:/opt/local/sbin:/Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/packages/x3dna-v2.1/bin:/Users/cnotredame/bin/macosx://Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms:.:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices:/Users/cnotredame/bin/Scripts:/Users/cnotredame/Library/Haskell/ghc-7.4.2/lib/epub-tools-2.0.0/bin:/sw/bin:/sw/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/Library/TeX/texbin
+ALN_LINE_LENGTH=60
+_=/usr/bin/printenv
+CONDA_PREFIX=/Users/cnotredame/anaconda3
+COLOR_4_TCOFFEE=new
+DIR_4_TCOFFEE=/Users/cnotredame//.t_coffee/
+PWD=/private/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/RANDOMSTRINGx795cPKSoDTPP4JFkaig/data
+CACHE_4_TCOFFEE=/Users/cnotredame//.t_coffee//cache/
+X3DNA=/Users/cnotredame/Dropbox/packages/x3dna-v2.1
+DBUS_LAUNCHD_SESSION_BUS_SOCKET=/private/tmp/com.apple.launchd.DfqaaC2z17/unix_domain_listener
+XPC_FLAGS=0x0
+VERSIONER_PERL_PREFER_32_BIT=no
+_CE_M=
+XPC_SERVICE_NAME=0
+ERRORFILE_4_TCOFFEE=NO
+PLUGINS_4_TCOFFEE=/Users/cnotredame//.t_coffee//plugins/macosx/
+SHLVL=3
+HOME=/Users/cnotredame
+DUMP_4_TCOFFEE=/private/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/RANDOMSTRINGx795cPKSoDTPP4JFkaig/web.tests.7.dump
+HTTP_PROXY=
+MAFFT_BINARIES=
+CONDA_PYTHON_EXE=/Users/cnotredame/anaconda3/bin/python
+BIN=/Users/cnotredame/bin/macosx
+LOGNAME=cnotredame
+EMAIL_4_TCOFFEE=cedric.notredame@gmail.com
+LC_CTYPE=UTF-8
+CONDA_DEFAULT_ENV=base
+EMAIL=cedric.notredame@gmail.com
+UPDATED_ENV_4_TCOFFEE=1
+INFOPATH=/sw/share/info:/sw/info:/usr/share/info
+DISPLAY=/private/tmp/com.apple.launchd.vef8UzGxBY/org.macosforge.xquartz:0
+TC_MASTER_NODE=1
+NUMBER_OF_PROCESSORS=8
+ALL_proxy=
+LOCKDIR_4_TCOFFEE=/var/tmp/tco/tcohzy57rse65078//lck/6ak18augxl/
+TMP_4_TCOFFEE=/var/tmp/tco/tcohzy57rse65078/
+USER_BIN=/Users/cnotredame/bin/macosx
+SCRIPT_BIN=/Users/cnotredame/bin/Scripts/
+</environement>
+<DumpStatus>OK</DumpStatus>
+<DumpFile>/private/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/RANDOMSTRINGx795cPKSoDTPP4JFkaig/web.tests.7.dump</DumpFile>
+<SourceFile>web.tests</SourceFile>
+<SourceLine>8</SourceLine>
+</DumpIO>

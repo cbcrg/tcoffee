@@ -1,0 +1,8 @@
+#
+# all definitions 
+# Files in: ../../t_coffee/doc_test
+# Test Results in: http://www.tcoffee.org/Packages/tests/
+# The test can be monitored on: https://circleci.com/gh/cbcrg/tcoffee/
+t_coffee -reg -seq proteases_large.fasta -reg_nseq 100 -reg_tree mbed -dpa_method mafftginsi_msa -outfile proteases_large.aln -outtree proteases_large.mbed
+t_coffee -reg -seq proteases_large.fasta -reg_nseq 100 -reg_tree parttree -reg_method mafftfftnsi_msa -outfile proteases_large.aln -outtree large.parttree
+t_coffee sample_seq1.fasta    

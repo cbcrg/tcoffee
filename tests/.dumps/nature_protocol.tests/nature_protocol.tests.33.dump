@@ -1,0 +1,191 @@
+<DumpIO>
+<nature>standard dump</nature>
+<program>T-COFFEE</program>
+<version>Version_13.39.0.d675aed</version>
+<build>Version_13.39.0.d675aed</build>
+<cl>t_coffee -other_pg seq_reformat -in sh3.fasta -output sim_idscore </cl>
+<stack>
+</stack>
+<warning>
+</warning>
+<file>
+<stream>output</stream>
+<name>stdout</name>
+<content># TC_SIMILARITY_MATRIX_FORMAT_01
+# SEQ_INDEX 1PHT 0
+# SEQ_INDEX 1BB9 1
+# SEQ_INDEX 1UHC 2
+# SEQ_INDEX 1YCS 3
+# SEQ_INDEX 1OOT 4
+# SEQ_INDEX 1ABO 5
+# SEQ_INDEX 1FYN 6
+# SEQ_INDEX 1QCF 7
+# PW_SEQ_DISTANCES 
+BOT	    0    1	 30.00 1PHT	 1BB9	 30.00
+TOP	    1    0	 30.00 1BB9	 1PHT	 30.00
+BOT	    0    2	 25.00 1PHT	 1UHC	 25.00
+TOP	    2    0	 25.00 1UHC	 1PHT	 25.00
+BOT	    0    3	 24.00 1PHT	 1YCS	 24.00
+TOP	    3    0	 24.00 1YCS	 1PHT	 24.00
+BOT	    0    4	 37.00 1PHT	 1OOT	 37.00
+TOP	    4    0	 37.00 1OOT	 1PHT	 37.00
+BOT	    0    5	 26.00 1PHT	 1ABO	 26.00
+TOP	    5    0	 26.00 1ABO	 1PHT	 26.00
+BOT	    0    6	 36.00 1PHT	 1FYN	 36.00
+TOP	    6    0	 36.00 1FYN	 1PHT	 36.00
+BOT	    0    7	 33.00 1PHT	 1QCF	 33.00
+TOP	    7    0	 33.00 1QCF	 1PHT	 33.00
+BOT	    1    2	 22.00 1BB9	 1UHC	 22.00
+TOP	    2    1	 22.00 1UHC	 1BB9	 22.00
+BOT	    1    3	 27.00 1BB9	 1YCS	 27.00
+TOP	    3    1	 27.00 1YCS	 1BB9	 27.00
+BOT	    1    4	 26.00 1BB9	 1OOT	 26.00
+TOP	    4    1	 26.00 1OOT	 1BB9	 26.00
+BOT	    1    5	 19.00 1BB9	 1ABO	 19.00
+TOP	    5    1	 19.00 1ABO	 1BB9	 19.00
+BOT	    1    6	 29.00 1BB9	 1FYN	 29.00
+TOP	    6    1	 29.00 1FYN	 1BB9	 29.00
+BOT	    1    7	 36.00 1BB9	 1QCF	 36.00
+TOP	    7    1	 36.00 1QCF	 1BB9	 36.00
+BOT	    2    3	 30.00 1UHC	 1YCS	 30.00
+TOP	    3    2	 30.00 1YCS	 1UHC	 30.00
+BOT	    2    4	 28.00 1UHC	 1OOT	 28.00
+TOP	    4    2	 28.00 1OOT	 1UHC	 28.00
+BOT	    2    5	 36.00 1UHC	 1ABO	 36.00
+TOP	    5    2	 36.00 1ABO	 1UHC	 36.00
+BOT	    2    6	 33.00 1UHC	 1FYN	 33.00
+TOP	    6    2	 33.00 1FYN	 1UHC	 33.00
+BOT	    2    7	 33.00 1UHC	 1QCF	 33.00
+TOP	    7    2	 33.00 1QCF	 1UHC	 33.00
+BOT	    3    4	 31.00 1YCS	 1OOT	 31.00
+TOP	    4    3	 31.00 1OOT	 1YCS	 31.00
+BOT	    3    5	 22.00 1YCS	 1ABO	 22.00
+TOP	    5    3	 22.00 1ABO	 1YCS	 22.00
+BOT	    3    6	 32.00 1YCS	 1FYN	 32.00
+TOP	    6    3	 32.00 1FYN	 1YCS	 32.00
+BOT	    3    7	 38.00 1YCS	 1QCF	 38.00
+TOP	    7    3	 38.00 1QCF	 1YCS	 38.00
+BOT	    4    5	 26.00 1OOT	 1ABO	 26.00
+TOP	    5    4	 26.00 1ABO	 1OOT	 26.00
+BOT	    4    6	 41.00 1OOT	 1FYN	 41.00
+TOP	    6    4	 41.00 1FYN	 1OOT	 41.00
+BOT	    4    7	 42.00 1OOT	 1QCF	 42.00
+TOP	    7    4	 42.00 1QCF	 1OOT	 42.00
+BOT	    5    6	 48.00 1ABO	 1FYN	 48.00
+TOP	    6    5	 48.00 1FYN	 1ABO	 48.00
+BOT	    5    7	 40.00 1ABO	 1QCF	 40.00
+TOP	    7    5	 40.00 1QCF	 1ABO	 40.00
+BOT	    6    7	 61.00 1FYN	 1QCF	 61.00
+TOP	    7    6	 61.00 1QCF	 1FYN	 61.00
+AVG	 0	 1PHT	    *	 30.14
+AVG	 1	 1BB9	    *	 27.00
+AVG	 2	 1UHC	    *	 29.57
+AVG	 3	 1YCS	    *	 29.14
+AVG	 4	 1OOT	    *	 33.00
+AVG	 5	 1ABO	    *	 31.00
+AVG	 6	 1FYN	    *	 40.00
+AVG	 7	 1QCF	    *	 40.43
+TOT	  TOT	    *	 32.54
+AVG	  AVG	    *	 32.54
+VAR	  VAR	    *	 77.59
+STD	  STD	    *	  8.81
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>stderr</name>
+<content></content>
+</file>
+<file>
+<stream>input</stream>
+<name>sh3.fasta</name>
+<content>>1PHT
+YQYRALYDYKKEREEDIDLHLGDILTVNKGSLVALGFSDGQEARPEEIGWLNGYNETTGERGDFPGTYVEYIG
+>1BB9
+FKVQAQHDYTATDTDELQLKAGDVVLVIPFQNPEEQDEGWLMGVKESDWNQHKELEKCRGVFPENFTERVQ
+>1UHC
+QVYFAVYTFKARNPNELSVSANQKLKILEFKDVTGNTEWWLAEVNGKKGYVPSNYIRKTE
+>1YCS
+GVIYALWDYEPQNDDELPMKEGDCMTIIHREDEDEIEWWWARLNDKEGYVPRNLLGLYP
+>1OOT
+PKAVALYSFAGEESGDLPFRKGDVITILKKSDSQNDWWTGRVNGREGIFPANYVELV
+>1ABO
+NLFVALYDFVASGDNTLSITKGEKLRVLGYNHNGEWCEAQTKNGQGWVPSNYITPVN
+>1FYN
+TLFVALYDYEARTEDDLSFHKGEKFQILNSSEGDWWEARSLTTGETGYIPSNYVAPVD
+>1QCF
+IIVVALYDYEAIHHEDLSFQKGDQMVVLEESGEWWKARSLATRKEGYIPSNYVARVD
+</content>
+</file>
+<environement>
+HOME_4_TCOFFEE=/Users/cnotredame/
+MANPATH=/sw/share/man:/usr/share/man:/usr/local/share/man:/opt/X11/share/man:/Library/TeX/texbin/man:/Applications/Xcode.app/Contents/Developer/usr/share/man:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/share/man:/sw/lib/perl5/5.18.2/man
+TERM_PROGRAM=Apple_Terminal
+MCOFFEE_4_TCOFFEE=/Users/cnotredame//.t_coffee//mcoffee/
+ROOT_TMP_4_TCOFFEE=/var/tmp/
+SHELL=/bin/bash
+TERM=xterm-256color
+TMPDIR=/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/
+CONDA_SHLVL=1
+PERL5LIB=/sw/lib/perl5:/sw/lib/perl5/darwin
+Apple_PubSub_Socket_Render=/private/tmp/com.apple.launchd.6JzhyrtuKp/Render
+CONDA_PROMPT_MODIFIER=(base) 
+TERM_PROGRAM_VERSION=388.1.3
+OSNAME=macosx
+PERL_BIN=/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms::/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices
+TERM_SESSION_ID=9785BD0D-F6F1-4B59-B0BA-9937FD12A1E7
+METHODS_4_TCOFFEE=/Users/cnotredame//.t_coffee//methods/
+VERSIONER_PERL_VERSION=5.18
+XAPPLRESDIR=/sw/etc/app-defaults/
+http_proxy=
+HTTP_proxy=
+USER=cnotredame
+CONDA_EXE=/Users/cnotredame/anaconda3/bin/conda
+SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.U5mTe2o7m7/Listeners
+__CF_USER_TEXT_ENCODING=0x1F6:0x0:0x0
+ENV_4_TCOFFEE=/Users/cnotredame//.t_coffee//.t_coffee_env
+_CE_CONDA=
+all_proxy=
+ALL_PROXY=
+HTTP_proxy_4_TCOFFEE=
+PATH=/Users/cnotredame/anaconda3/bin:/Users/cnotredame/anaconda3/condabin:/opt/local/bin:/opt/local/sbin:/opt/local/bin:/opt/local/sbin:/Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/packages/x3dna-v2.1/bin:/Users/cnotredame/bin/macosx://Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms:.:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices:/Users/cnotredame/bin/Scripts:/Users/cnotredame/Library/Haskell/ghc-7.4.2/lib/epub-tools-2.0.0/bin:/sw/bin:/sw/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/Library/TeX/texbin
+_=/usr/bin/printenv
+CONDA_PREFIX=/Users/cnotredame/anaconda3
+DIR_4_TCOFFEE=/Users/cnotredame//.t_coffee/
+PWD=/private/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/RANDOMSTRINGZx8UOllZkd04XzE3lS08/data
+CACHE_4_TCOFFEE=/Users/cnotredame//.t_coffee//cache/
+X3DNA=/Users/cnotredame/Dropbox/packages/x3dna-v2.1
+DBUS_LAUNCHD_SESSION_BUS_SOCKET=/private/tmp/com.apple.launchd.DfqaaC2z17/unix_domain_listener
+XPC_FLAGS=0x0
+VERSIONER_PERL_PREFER_32_BIT=no
+_CE_M=
+XPC_SERVICE_NAME=0
+ERRORFILE_4_TCOFFEE=t_coffee.ErrorReport
+PLUGINS_4_TCOFFEE=/Users/cnotredame//.t_coffee//plugins/macosx/
+SHLVL=3
+HOME=/Users/cnotredame
+DUMP_4_TCOFFEE=/private/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/RANDOMSTRINGZx8UOllZkd04XzE3lS08/nature_protocol.tests.33.dump
+HTTP_PROXY=
+CONDA_PYTHON_EXE=/Users/cnotredame/anaconda3/bin/python
+BIN=/Users/cnotredame/bin/macosx
+LOGNAME=cnotredame
+EMAIL_4_TCOFFEE=cedric.notredame@gmail.com
+LC_CTYPE=UTF-8
+CONDA_DEFAULT_ENV=base
+EMAIL=cedric.notredame@gmail.com
+UPDATED_ENV_4_TCOFFEE=1
+INFOPATH=/sw/share/info:/sw/info:/usr/share/info
+DISPLAY=/private/tmp/com.apple.launchd.vef8UzGxBY/org.macosforge.xquartz:0
+TC_MASTER_NODE=1
+NUMBER_OF_PROCESSORS=8
+ALL_proxy=
+LOCKDIR_4_TCOFFEE=/var/tmp/tco/tcof34lm50881816//lck/xxqwsc0l76/
+TMP_4_TCOFFEE=/var/tmp/tco/tcof34lm50881816/
+USER_BIN=/Users/cnotredame/bin/macosx
+SCRIPT_BIN=/Users/cnotredame/bin/Scripts/
+</environement>
+<DumpStatus>OK</DumpStatus>
+<DumpFile>/private/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/RANDOMSTRINGZx8UOllZkd04XzE3lS08/nature_protocol.tests.33.dump</DumpFile>
+<SourceFile>nature_protocol.tests</SourceFile>
+<SourceLine>34</SourceLine>
+</DumpIO>

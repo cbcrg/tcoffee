@@ -1,0 +1,191 @@
+#
+# all definitions 
+# Files in: ../../t_coffee/doc_test
+# Test Results in: http://www.tcoffee.org/Packages/tests/
+# The test can be monitored on: https://circleci.com/gh/cbcrg/tcoffee/
+##TIMEOUT 500
+
+t_coffee -reg -seq proteases_large.fasta -reg_nseq 100 -reg_tree mbed -dpa_method mafftginsi_msa -outfile proteases_large.aln -outtree proteases_large.mbed
+t_coffee -reg -seq proteases_large.fasta -reg_nseq 100 -reg_tree mbed -dpa_method mafftginsi_msa -outfile proteases_large.aln -outtree proteases_large.mbed
+t_coffee -reg -seq proteases_large.fasta -reg_nseq 100 -reg_tree parttree -reg_method mafftfftnsi_msa -outfile proteases_large.aln -outtree proteases_large.parttree
+t_coffee sample_seq1.fasta    
+t_coffee sample_seq1.fasta -mode quickaln    
+t_coffee sample_seq1.fasta -mode quickaln -ndiag=10    
+t_coffee -infile=sproteases_small.aln -special_mode=evaluate    
+t_coffee 3d.fasta -special_mode=3dcoffee    
+t_coffee -other_pg seq_reformat -in sproteases_small.aln -output fasta_aln > sproteases_small.fasta_aln   
+t_coffee -other_pg seq_reformat -in sproteases_small.aln -output msf > sproteases_small.msf   
+t_coffee -other_pg seq_reformat -in sproteases_small.aln -output fasta_seq > sproteases_small.fasta   
+t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +lower -output clustalw    
+t_coffee -other_pg seq_reformat -in sample_aln1.aln -action +upper +edit_residue hmgb_chite 10 lower    
+t_coffee -other_pg seq_reformat -in sample_aln1.aln -in3 sample_aln1.aln -action +upper +3evaluate idmat +lower ''    
+t_coffee -other_pg seq_reformat -in sproteases_large.fasta -output code_name > sproteases_large.code_name   
+t_coffee -other_pg seq_reformat -code sproteases_large.code_name -in sproteases_large.fasta >sproteases_large.coded.fasta   
+t_coffee -other_pg seq_reformat -decode sproteases_large.code_name -in sproteases_large.coded.fasta    
+t_coffee -other_pg seq_reformat -in sample_aln1.aln -in3 sample_aln1.aln -action  +3convert a0 -output color_html > colored.html   
+t_coffee -other_pg seq_reformat -in sample_aln1.aln -action +color_residue hmgb_chite 10 1 -output color_html > color.html   
+t_coffee -other_pg seq_reformat -in sample_aln1.aln -in3 sample_aln1.aln -action +3evaluate pam250mt -output color_html > color.html   
+t_coffee -other_pg seq_reformat -in sample_aln1.aln -in3 sample_aln1.aln -action +3evaluate boxshade -output color_html > color.html   
+t_coffee -other_pg seq_reformat -in=sample_aln6.aln -output=clustalw_aln -out=cache.aln -action +convert 'Aa1' '.--' +convert '#0'    
+t_coffee -other_pg seq_reformat -in=sample_aln6.aln -output=fasta_seq -out=cache.seq -action +convert 'Aa1' '.--' +convert '#0'    
+t_coffee -other_pg seq_reformat -in=sample_aln6.aln -output=fasta_seq -out=cache -action +convert 'Aa1' '.--'    
+t_coffee -other_pg seq_reformat -in=sample_aln6.aln -struc_in=sample_aln6.cache -struc_in_f number_fasta -output=color_html -out=x.html    
+t_coffee -other_pg seq_reformat -in=sample_aln6.aln -struc_in=sample_lib5.tc_lib -output=color_html -out=x.html    
+t_coffee -infile sample_aln1.aln -mode evaluate    
+t_coffee -infile sample_aln1.aln -out_lib sample_aln1.tc_lib -lib_only    
+t_coffee -infile sample_aln1.aln -mode evaluate -lib sample_aln1.tc_lib    
+t_coffee -other_pg seq_reformat -in sample_aln1.aln -action +evaluate idmat -output score_ascii    
+t_coffee -other_pg seq_reformat -in sample_aln1.aln -action +evaluate blosum62mt -output score_ascii    
+t_coffee -other_pg seq_reformat -in sample_aln1.aln -action +evaluate blosum62mt -output score_html > x.html   
+t_coffee -other_pg seq_reformat -in sample_aln7.aln -action +rm_gap 50    
+t_coffee -other_pg seq_reformat -in sample_aln7.aln -struc_in sample_aln7.cache_aln -struc_in_f number_aln -action +lower ''    
+t_coffee -other_pg seq_reformat -in sample_aln7.aln -struc_in sample_aln7.cache_aln -struc_in_f number_aln -action +convert '' CX    
+t_coffee sample_seq1.fasta -output score_ascii, aln    
+t_coffee -other_pg seq_reformat -in sample_seq1.aln -action +evaluate blosum62mt -output score_ascii    
+t_coffee -other_pg seq_reformat -in sample_seq1.aln -struc_in sample_seq1.score_ascii -struc_in_f number_aln  -action +keep ''    
+t_coffee -other_pg seq_reformat -in sample_seq1.aln -struc_in sample_seq1.score_ascii -struc_in_f number_aln  -action +use_cons +keep ''    
+t_coffee -other_pg seq_reformat -in sample_aln1.aln -action +evaluate blosum62mt +use_cons +keep ''    
+t_coffee -other_pg seq_reformat -in sample_aln1.aln -struc_in sample1.score_ascii -struc_in_f number_aln -action +use_cons +keep ''    
+t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +grep NAME KEEP HUMAN -output clustalw    
+t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +grep NAME REMOVE HUMAN -output clustalw    
+t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +grep COMMENT KEEP sapiens -output clustalw    
+t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +grep NAME REMOVE 'K' -output clustalw    
+t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +extract_seq_list 'sp|P29786|TRY3_AEDAE' 'sp|P35037|TRY3_ANOGA'    
+t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +extract_seq_list 'sp|P29786|TRY3_AEDAE' 'sp|P35037|TRY3_ANOGA' +rm_gap    
+t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +extract_seq 'sp|P29786|TRY3_AEDAE' 20 200 'sp|P35037|TRY3_ANOGA' 10 150 +rm_gap    
+t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +keep_name +extract_seq 'sp|P29786|TRY3_AEDAE' 20 200 'sp|P35037|TRY3_ANOGA' 10 150 +rm_gap    
+t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +remove_seq 'sp|P29786|TRY3_AEDAE' 'sp|P35037|TRY3_ANOGA'    
+t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +extract_block cons 150 200    
+t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +extract_block 'sp|Q03238|GRAM_RAT' 10 200    
+t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +extract_block cons 100 120 > block1.aln   
+t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +extract_block cons 150 200 > block2.aln   
+t_coffee -other_pg seq_reformat -in block1.aln -in2 block2.aln -action +cat_aln    
+t_coffee -other_pg seq_reformat -in sample_aln1.aln -output sim    
+t_coffee -other_pg seq_reformat -in sproteases_large.fasta -action +trim _seq_n10  -output fasta_seq    
+t_coffee -other_pg seq_reformat -in sproteases_large.fasta -action +trim _seq_N20  -output fasta_seq    
+t_coffee -other_pg seq_reformat -in sproteases_large.fasta -action +trim _seq_%%50_    
+t_coffee -other_pg seq_reformat -in kinases.aln -action +trim _aln_%%50_    
+t_coffee -other_pg seq_reformat -in sproteases_large.fasta -action +trim _seq_%%50 HUMAN    
+t_coffee -other_pg seq_reformat -in sproteases_large.fasta -action +trim _seq_%%50_fCOMMENT '.apiens'    
+t_coffee -other_pg seq_reformat -in sproteases_large.fasta -action +trim _seq_%%50_fSEQ ''    
+t_coffee -other_pg seq_reformat -in sproteases_large.fasta -in2 sproteases_small.fasta -action +trim _seq_%%40    
+t_coffee -other_pg seq_reformat -in sproteases_large.fasta  -action +trim _seq_%%50_O40    
+t_coffee -other_pg seq_reformat -in sproteases_large.fasta -in2 sproteases_pair.fasta -action +chain > sproteases_chain.fasta   
+t_coffee -other_pg seq_reformat -in sproteases_small_dna.fasta -action +translate -output fasta_seq    
+t_coffee -other_pg seq_reformat -in sproteases_small_dna.fasta -in2 sproteases_small.aln -action +thread_dna_on_prot_aln -output clustalw    
+t_coffee -other_pg seq_reformat -in sproteases_small_dna.fasta -in2 sproteases_small.aln -action +thread_dna_on_prot_aln  -output clustalw    
+t_coffee -other_pg extract_from_pdb -infile 1PPGE    
+t_coffee -other_pg extract_from_pdb -infile 1PPGE -fasta    
+t_coffee -other_pg seq_reformat -in sample_rnaseq2.aln -action +aln2alifold -output stockholm_aln    
+t_coffee -other_pg seq_reformat -in sample_rnaseq2.aln -action +add_alifold -output stockholm_aln    
+t_coffee -other_pg seq_reformat -in sample_rnaseq2.aln -in2 sample_rnaseq2.alifold -input2 alifold -action +add_alifold -output stockholm_aln    
+t_coffee -other_pg seq_reformat -in sample_rnaseq2.aln -in2 sample_rnaseq2.cons.stk -action +add_alifold -output stockholm_aln    
+t_coffee -other_pg seq_reformat -in sample_rnaseq2.stk -action +alifold2analyze stat    
+t_coffee -other_pg seq_reformat -in sample_rnaseq2.stk -action +alifold2analyze list    
+t_coffee -other_pg seq_reformat -in sample_rnaseq2.aln -action +alifold2analyze aln    
+t_coffee -other_pg seq_reformat -in sample_rnaseq2.aln -action +alifold2analyze color_htm    
+t_coffee -other_pg seq_reformat sproteases_small.fasta -output sim_idscore    
+t_coffee -infile sproteases_small.aln -lib  charge_relay_lib.tc_lib  -score -output html    
+t_coffee -seq sample_seq1.fasta -method fast_pair,lalign_id_pair    
+t_coffee sample_seq1.fasta -method slow_pair@EP@MATRIX@pam250mt@GOP@-10@GEP@-1    
+t_coffee sample_seq1.fasta -method clustalw_msa@EP@PARAM2@-GAPOPEN%e100%s-GAPEXT%e10    
+t_coffee sample_seq1.fasta -method=em@clustalw@pairwise    
+t_coffee sample_seq1.fasta -method clustalw_method.tc_method
+t_coffee sample_seq1.fasta -method generic_method.tc_method    
+t_coffee -other_pg=unpack_tc_generic_method.pl    
+t_coffee sample_seq1.fasta -method slow_pair@WEIGHT@OW2    
+t_coffee sample_seq1.fasta -method slow_pair@WEIGHT@250    
+t_coffee -aln=sample_aln1_1.aln,sample_aln1_2.aln -outfile=combined_aln.aln    
+t_coffee -aln sample_aln1.aln -out_lib=test_lib.tc_lib -lib_only -weight=sim_pam250mt    
+t_coffee -aln sample_aln1.aln -lib test_lib.tc_lib -outfile=outaln    
+t_coffee -aln=sample_aln1_1.aln,sample_aln1_2.aln -method= fast_pair,lalign_id_pair -outfile=out_aln    
+t_coffee sample_seq1.fasta -method slow_pair -out_lib slow_pair_seq1.tc_lib -lib_only    
+t_coffee sample_seq1.fasta -method lalign_id_pair -out_lib lalign_id_pair_seq1.tc_lib -lib_only    
+t_coffee sample_seq1.fasta -type=PROTEIN    
+t_coffee -pdb=struc1.pdb,struc2.pdb,struc3.pdb -method sap_pair -cache=no
+t_coffee -pdb=struc1.pdb,struc2.pdb,struc3.pdb -method sap_pair -cache=update    
+t_coffee sample_seq1.fasta -special_mode low_memory    
+t_coffee  sample_seq1.fasta -method=slow_pair,lalign_id_pair -distance_matrix_mode=idscore -dp_mode=myers_miller_pair_wise    
+t_coffee sample_seq1.fasta -output=msf,fasta_aln    
+t_coffee sample_seq1.fasta -outfile=stdout -out_lib=stdout    
+t_coffee sample_seq1.fasta    
+t_coffee sample_seq1.fasta -run_name=guacamole    
+t_coffee Ssample_aln1.aln    
+t_coffee -infile=Ssample_aln1.aln    
+t_coffee -seq=sample_aln1.aln -method=slow_pair,lalign_id_pair -outfile=outaln    
+t_coffee sample_seq1.fasta -out_lib=sample_lib1.tc_lib -lib_only    
+t_coffee -in=Asample_aln1.aln -out_lib=sample_lib1.tc_lib -lib_only    
+t_coffee -aln=sample_aln1.aln -out_lib=sample_lib1.tc_lib -lib_only -weight=1000    
+t_coffee -lib=sample_lib1.tc_lib,sample_lib2.tc_lib -lib_only -out_lib=sample_lib3.tc_lib    
+t_coffee Ssample_aln1.aln -outfile=outaln    
+t_coffee sample_seq1.fasta -output=score_ps 
+t_coffee sample_seq1.fasta -output=clustalw,html,score_ps,msf    
+t_coffee sample_seq1.fasta -method muscle_msa,probcons_msa, mafft_msa, lalign_id_pair,slow_pair    
+t_coffee sample_dnaseq1.fasta -type dna    
+t_coffee sample_aln1.aln -convert -output=gcg    
+t_coffee -other_pg seq_reformat -in sample_aln4.aln -action +force_aln seq1 10 seq2 15    
+t_coffee -other_pg seq_reformat -in sample_aln4.aln -action +force_aln sample_lib4.tc_lib02
+t_coffee -aln=sample_seq1.aln -weight=1000 -out_lib=sample_seq1.tc_lib -lib_only    
+t_coffee -seq=sample_seq1.fasta -lib=sample_seq1.tc_lib -outfile sample_seq1.aln    
+t_coffee sample_seq1.fasta -usetree=sample_tree.dnd    
+t_coffee three_cdna.fasta -method=cdna_fast_pair    
+t_coffee three_cdna.fasta    
+t_coffee sample_seq1.fasta -method=clustalw_pair,clustalw_msa -lib_list=sample_list1.lib_list -outfile=test    
+t_coffee sample_seq1.fasta -profile=sample_aln2.aln -outfile tacos    
+t_coffee -profile=sample_aln1.fasta,sample_aln2.aln -outfile tacos    
+t_coffee -profile=sample_profile1.aln,sample_profile2.aln -special_mode=3dcoffee -outfile=aligne_prf.aln   
+t_coffee sample_seq1.fasta -output=html    
+t_coffee -infile=sample_aln1.aln -lib=sample_aln1.tc_lib -special_mode=evaluate    
+t_coffee -infile=sample_aln1.aln -special_mode evaluate    
+t_coffee -infile=sample_aln1_1.aln -aln=sample_aln1_2.aln -special_mode=evaluate    
+t_coffee -infile=sample_aln1.aln -special_mode evaluate    
+t_coffee sample_seq1.fasta -ktuple=3    
+t_coffee sample_seq1.fasta    
+t_coffee sample_dnaseq1.fasta -type=dna    
+t_coffee sample_seq1.fasta -mode mcoffee    
+t_coffee sample_rnaseq1.fasta -mode mrcoffee    
+t_coffee sample_rnaseq1.fasta -mode rcoffee -method lalign_id_pair slow_pair    
+t_coffee -other_pg irmsd -aln 3d_sample4.aln    
+t_coffee -other_pg trmsd -aln 3d_sample5.aln -template_file 3d_sample5.template_list    
+t_coffee sample_seq1.fasta    
+t_coffee Ssample_seq1.fasta    
+t_coffee -parameters=sample_param_file.param
+t_coffee -infile=sample_aln1.aln -mode=evaluate    
+t_coffee -infile=sample_seq1.aln -in  Lsample_lib1.tc_lib -mode=evaluate    
+t_coffee -other_pg=seq_reformat    
+t_coffee -other_pg=unpack_all    
+t_coffee -other_pg=unpack_extract_from_pdb    
+t_coffee -infile=sample_seq1.fasta    
+t_coffee -in=Ssample_seq1.fasta,Asample_aln1.aln,Asample_aln2.msf,Mlalign_id_pair,Lsample_lib1.tc_lib -outfile=outaln    
+t_coffee sample_seq1.fasta -in=Xpam250mt  -gapopen=-10  -gapext=-1    
+t_coffee -profile sample_aln1.aln,sample_aln2.aln -outfile=profile_aln    
+t_coffee -in Rsample_aln1.aln,Rsample_aln2.aln,Mslow_pair,Mlalign_id_pair -outfile=profile_aln    
+t_coffee sample_seq1.fasta -weight=winsim10 -out_lib=test.tc_lib    
+t_coffee sample_seq1.fasta -weight=winsim10 -out_lib=test.tc_lib    
+t_coffee sample_seq1.fasta -weight=1000 -out_lib=test.tc_lib    
+t_coffee sample_seq1.fasta -distance_matrix_mode=very_fast    
+t_coffee sample_seq1.fasta -quicktree    
+t_coffee sample_seq1.fasta -dp_mode myers_miller_pair_wise    
+t_coffee sample_seq2.fasta -multi_core jobs    
+t_coffee sample_seq2.fasta -multi_core no    
+t_coffee sample_seq2.fasta -multi_core jobs    
+t_coffee -pdb=struc1.pdb,struc2.pdb,struc3.pdb -method sap_pair 
+t_coffee -mode 3dcoffee -seq 3d_sample3.fasta -template_file template_file.template    
+t_coffee 3d_sample2.fasta -template_file SELF_P_    
+t_coffee sample_seq1.fasta -output=clustalw,gcg, score_html    
+t_coffee -other_pg seq_reformat -in sample_aln1.aln -action +lower -output clustalw    
+t_coffee sample_seq1.fasta -evaluate_mode t_coffee_slow -output score_ascii, score_html    
+t_coffee sample_seq1.fasta -evaluate_mode t_coffee_fast -output score_ascii, score_html    
+t_coffee sample_seq1.fasta -evaluate_mode t_coffee_non_extended -output score_ascii, score_html    
+t_coffee -other_pg seq_reformat -in 3d_sample4.aln -action +upper -output clustalw > 3d_sample4.cw_aln   
+t_coffee -other_pg apdb -aln 3d_sample4.aln    
+t_coffee -in Rsample_profile1.aln,Rsample_profile2.aln -mode=3dcoffee -outfile=aligned_prf.aln  
+t_coffee sample_seq1.fasta -in=Mclustalw_pair,Mclustalw_msa,Mslow_pair -outfile=clustal_text  
+t_coffee -mode 3dcoffee -in Sseq.fas P2PTC    
+t_coffee -mode 3dcoffee -in S2seqs.fas -template_file SELF_P_   
+t_coffee -in Msap_pair Ssample_seq7.fasta -template_file template_file7.template -weight 1001 -out_lib test_lib7.tc_lib -lib_only    
+t_coffee -in Asample_aln5.aln -outfile test.aln    
+cat sample_param_file.param  | t_coffee -parameters=stdin    
+cat sample_seq1.fasta | t_coffee -infile=stdin    
+echo -seq=sample_seq1.fasta -method=clustalw_pair | t_coffee -parameters=stdin    
+

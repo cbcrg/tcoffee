@@ -1,0 +1,417 @@
+<DumpIO>
+<nature>standard dump</nature>
+<program>T-COFFEE</program>
+<version>Version_13.39.0.d675aed</version>
+<build>Version_13.39.0.d675aed</build>
+<cl>t_coffee -other_pg trmsd -aln crd.aln -template_file crd.template_file </cl>
+<stack>
+</stack>
+<warning>
+
+
+*************************************************************************************************
+*                        MESSAGES RECAPITULATION                                    
+80899 -- WARNING: _P_ Template |  _P_ 2UWI3.pdb | Could Not Be Found
+
+80899 -- WARNING: _P_ Template |  _P_ 2UWI2.pdb | Could Not Be Found
+
+80899 -- WARNING: _P_ Template |  _P_ 2UWI1.pdb | Could Not Be Found
+
+80899 -- WARNING: _P_ Template |  _P_ 2HEY4.pdb | Could Not Be Found
+
+80899 -- WARNING: _P_ Template |  _P_ 2HEY2.pdb | Could Not Be Found
+
+80899 -- WARNING: _P_ Template |  _P_ 2HEY1.pdb | Could Not Be Found
+
+80899 -- WARNING: _P_ Template |  _P_ 2RPJ1.pdb | Could Not Be Found
+
+80899 -- WARNING: _P_ Template |  _P_ 1XU21.pdb | Could Not Be Found
+
+80899 -- WARNING: _P_ Template |  _P_ 1XU12.pdb | Could Not Be Found
+
+80899 -- WARNING: _P_ Template |  _P_ 1OQE1.pdb | Could Not Be Found
+
+80899 -- WARNING: _P_ Template |  _P_ 1EXT4.pdb | Could Not Be Found
+
+80899 -- WARNING: _P_ Template |  _P_ 1EXT3.pdb | Could Not Be Found
+
+80899 -- WARNING: _P_ Template |  _P_ 1EXT2.pdb | Could Not Be Found
+
+80899 -- WARNING: _P_ Template |  _P_ 1EXT1.pdb | Could Not Be Found
+
+80899 -- WARNING: _P_ Template |  _P_ 3BUKD.pdb | Could Not Be Found
+
+80899 -- WARNING: _P_ Template |  _P_ 3BUKD.pdb | Could Not Be Found
+
+80899 -- WARNING: _P_ Template |  _P_ 3BUKD.pdb | Could Not Be Found
+
+80899 -- WARNING: _P_ Template |  _P_ 3BUKD.pdb | Could Not Be Found
+
+80899 -- WARNING: _P_ Template |  _P_ 1JMA1.pdb | Could Not Be Found
+
+80899 -- WARNING: _P_ Template |  _P_ 1JMA2.pdb | Could Not Be Found
+
+80899 -- WARNING: _P_ Template |  _P_ 1D4V2.pdb | Could Not Be Found
+
+80899 -- WARNING: _P_ Template |  _P_ 1D4V3.pdb | Could Not Be Found
+
+*************************************************************************************************
+</warning>
+<file>
+<stream>output</stream>
+<name>stdout</name>
+<content>
+Your Alignment Does Not Contain Enough Sequences With a known Structure
+To Use APDB, your alignment must include at least TWO sequences with a known structure.
+These sequences must be named according to their PDB identifier, followed by the chain index (if any) ex: 1fnkA
+[FATAL:T-COFFEE]
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>stderr</name>
+<content>
+PROGRAM: trmsd
+-in            	S	[0] 
+-struc_to_use  	S	[0] 
+-io_format     	S	[0] 	hsgd0123456
+-aln           	S	[1] 	crd.aln
+-repeat_seq    	S	[0] 
+-repeat_pdb    	S	[0] 
+-n_excluded_nb 	D	[0] 	-1 
+-similarity_threshold	F	[0] 	70.000000 
+-filter        	F	[0] 	1.000000 
+-filter_aln    	D	[0] 	0 
+-irmsd_graph   	D	[0] 	0 
+-nirmsd_graph  	D	[0] 	0 
+-md_threshold  	F	[0] 	1.000000 
+-maximum_distance	F	[0] 	10.000000 
+-maximum_ratio 	F	[0] 	0.100000 
+-print_rapdb   	D	[0] 	0 
+-run_name      	W_F	[0] 	default
+-outfile       	W_F	[0] 	no
+-apdb_outfile  	W_F	[0] 	stdout
+-output        	S	[0] 	score_html
+-color_mode    	S	[0] 	apdb
+-seqnos        	S	[0] 	off
+-cache         	W_F	[0] 	use
+-local_mode    	W_F	[0] 	sphere
+-template_file 	S	[1] 	crd.template_file
+-mode          	S	[0] 	irmsd
+-prot_min_sim  	D	[0] 	0 
+-prot_max_sim  	D	[90] 	90 
+-prot_min_cov  	D	[0] 	0 
+-pdb_min_sim   	D	[35] 	35 
+-pdb_max_sim   	D	[100] 	100 
+-pdb_min_cov   	D	[50] 	50 
+-pdb_blast_server	W_F	[0] 	EBI
+-blast         	W_F	[0] 
+-blast_server  	W_F	[0] 	EBI
+-dm            	W_F	[0] 	no
+-pdb_db        	W_F	[0] 	pdb
+-protein_db    	W_F	[0] 	uniprot
+-gapped        	D	[0] 	0 
+-min_ncol      	D	[0] 	4 
+
+INPUT SEQUENCES: 22 SEQUENCES  [PROTEIN]
+  Input File crd.aln     Seq CRME-3      Length   42 type PROTEIN Struct Unchecked
+  Input File crd.aln     Seq CRME-2      Length   41 type PROTEIN Struct Unchecked
+  Input File crd.aln     Seq CRME-1      Length   37 type PROTEIN Struct Unchecked
+  Input File crd.aln     Seq TNFRSF4-4   Length   39 type PROTEIN Struct Unchecked
+  Input File crd.aln     Seq TNFRSF4-2   Length   41 type PROTEIN Struct Unchecked
+  Input File crd.aln     Seq TNFRSF4-1   Length   34 type PROTEIN Struct Unchecked
+  Input File crd.aln     Seq TNFRSF12A-1 Length   32 type PROTEIN Struct Unchecked
+  Input File crd.aln     Seq TNFRSF17-1  Length   34 type PROTEIN Struct Unchecked
+  Input File crd.aln     Seq TNFRSF13B-2 Length   34 type PROTEIN Struct Unchecked
+  Input File crd.aln     Seq TNFRSF1A-4  Length   28 type PROTEIN Struct Unchecked
+  Input File crd.aln     Seq TNFRSF13C-1 Length   28 type PROTEIN Struct Unchecked
+  Input File crd.aln     Seq TNFRSF1A-3  Length   40 type PROTEIN Struct Unchecked
+  Input File crd.aln     Seq TNFRSF1A-2  Length   42 type PROTEIN Struct Unchecked
+  Input File crd.aln     Seq TNFRSF1A-1  Length   38 type PROTEIN Struct Unchecked
+  Input File crd.aln     Seq TNFRSF16-4  Length   40 type PROTEIN Struct Unchecked
+  Input File crd.aln     Seq TNFRSF16-3  Length   38 type PROTEIN Struct Unchecked
+  Input File crd.aln     Seq TNFRSF16-2  Length   41 type PROTEIN Struct Unchecked
+  Input File crd.aln     Seq TNFRSF16-1  Length   33 type PROTEIN Struct Unchecked
+  Input File crd.aln     Seq TNFRSF14-2  Length   42 type PROTEIN Struct Unchecked
+  Input File crd.aln     Seq TNFRSF14-1  Length   34 type PROTEIN Struct Unchecked
+  Input File crd.aln     Seq TNFRSF10B-3 Length   40 type PROTEIN Struct Unchecked
+  Input File crd.aln     Seq TNFRSF10B-2 Length   41 type PROTEIN Struct Unchecked
+
+Looking For Sequence Templates:
+
+	Template Type: [crd.template_file] Mode Or File: [crd.template_file] [Start
+pid 80899 -- _P_ Template |  _P_ 2UWI3.pdb | Could Not Be Found
+
+
+pid 80899 -- _P_ Template |  _P_ 2UWI2.pdb | Could Not Be Found
+
+
+pid 80899 -- _P_ Template |  _P_ 2UWI1.pdb | Could Not Be Found
+
+
+pid 80899 -- _P_ Template |  _P_ 2HEY4.pdb | Could Not Be Found
+
+
+pid 80899 -- _P_ Template |  _P_ 2HEY2.pdb | Could Not Be Found
+
+
+pid 80899 -- _P_ Template |  _P_ 2HEY1.pdb | Could Not Be Found
+
+
+pid 80899 -- _P_ Template |  _P_ 2RPJ1.pdb | Could Not Be Found
+
+
+pid 80899 -- _P_ Template |  _P_ 1XU21.pdb | Could Not Be Found
+
+
+pid 80899 -- _P_ Template |  _P_ 1XU12.pdb | Could Not Be Found
+
+
+pid 80899 -- _P_ Template |  _P_ 1OQE1.pdb | Could Not Be Found
+
+
+pid 80899 -- _P_ Template |  _P_ 1EXT4.pdb | Could Not Be Found
+
+
+pid 80899 -- _P_ Template |  _P_ 1EXT3.pdb | Could Not Be Found
+
+
+pid 80899 -- _P_ Template |  _P_ 1EXT2.pdb | Could Not Be Found
+
+
+pid 80899 -- _P_ Template |  _P_ 1EXT1.pdb | Could Not Be Found
+
+
+pid 80899 -- _P_ Template |  _P_ 3BUKD.pdb | Could Not Be Found
+
+
+pid 80899 -- _P_ Template |  _P_ 3BUKD.pdb | Could Not Be Found
+
+
+pid 80899 -- _P_ Template |  _P_ 3BUKD.pdb | Could Not Be Found
+
+
+pid 80899 -- _P_ Template |  _P_ 3BUKD.pdb | Could Not Be Found
+
+
+pid 80899 -- _P_ Template |  _P_ 1JMA1.pdb | Could Not Be Found
+
+
+pid 80899 -- _P_ Template |  _P_ 1JMA2.pdb | Could Not Be Found
+
+
+pid 80899 -- _P_ Template |  _P_ 1D4V2.pdb | Could Not Be Found
+
+
+pid 80899 -- _P_ Template |  _P_ 1D4V3.pdb | Could Not Be Found
+
+]
+
+*************************************************************************************************
+*                        MESSAGES RECAPITULATION                                    
+80899 -- WARNING: _P_ Template |  _P_ 2UWI3.pdb | Could Not Be Found
+
+80899 -- WARNING: _P_ Template |  _P_ 2UWI2.pdb | Could Not Be Found
+
+80899 -- WARNING: _P_ Template |  _P_ 2UWI1.pdb | Could Not Be Found
+
+80899 -- WARNING: _P_ Template |  _P_ 2HEY4.pdb | Could Not Be Found
+
+80899 -- WARNING: _P_ Template |  _P_ 2HEY2.pdb | Could Not Be Found
+
+80899 -- WARNING: _P_ Template |  _P_ 2HEY1.pdb | Could Not Be Found
+
+80899 -- WARNING: _P_ Template |  _P_ 2RPJ1.pdb | Could Not Be Found
+
+80899 -- WARNING: _P_ Template |  _P_ 1XU21.pdb | Could Not Be Found
+
+80899 -- WARNING: _P_ Template |  _P_ 1XU12.pdb | Could Not Be Found
+
+80899 -- WARNING: _P_ Template |  _P_ 1OQE1.pdb | Could Not Be Found
+
+80899 -- WARNING: _P_ Template |  _P_ 1EXT4.pdb | Could Not Be Found
+
+80899 -- WARNING: _P_ Template |  _P_ 1EXT3.pdb | Could Not Be Found
+
+80899 -- WARNING: _P_ Template |  _P_ 1EXT2.pdb | Could Not Be Found
+
+80899 -- WARNING: _P_ Template |  _P_ 1EXT1.pdb | Could Not Be Found
+
+80899 -- WARNING: _P_ Template |  _P_ 3BUKD.pdb | Could Not Be Found
+
+80899 -- WARNING: _P_ Template |  _P_ 3BUKD.pdb | Could Not Be Found
+
+80899 -- WARNING: _P_ Template |  _P_ 3BUKD.pdb | Could Not Be Found
+
+80899 -- WARNING: _P_ Template |  _P_ 3BUKD.pdb | Could Not Be Found
+
+80899 -- WARNING: _P_ Template |  _P_ 1JMA1.pdb | Could Not Be Found
+
+80899 -- WARNING: _P_ Template |  _P_ 1JMA2.pdb | Could Not Be Found
+
+80899 -- WARNING: _P_ Template |  _P_ 1D4V2.pdb | Could Not Be Found
+
+80899 -- WARNING: _P_ Template |  _P_ 1D4V3.pdb | Could Not Be Found
+
+*************************************************************************************************
+</content>
+</file>
+<file>
+<stream>input</stream>
+<name>crd.aln</name>
+<content>CLUSTAL FORMAT for T-COFFEE Version_9.01 [http://www.tcoffee.org] [MODE:  ], CPU=1.00 sec, SCORE=51, Nseq=22, Len=48 
+
+CRME-3          CDSNS-YCLL-KASDGNCVTCAPKTKCGR--GYGKK-GED-EMGNTIC
+CRME-2          CPSDT-FTSI-YNRSPWCHSCRG--PCGT--NRVEVTPCT-PTTNRIC
+CRME-1          CEQGV-SYYN---S-QELKCCK---LCKP--GTYSDHRCD-KYSDTIC
+TNFRSF4-4       CPPGH-FSPG-D--NQACKPWT---NCTL-AGKHTLQPAS-NSSDAIC
+TNFRSF4-2       CGPGF-YNDV-V-SSKPCKPCT---WCNLRSGSERKQLCT-ATQDTVC
+TNFRSF4-1       CVGDT-YPSN----DRC---CH---ECRPGN--GMVSRCS-RSQNTVC
+TNFRSF12A-1     CSRGS-SWSA---DLDKCMDCA---SCRA--RPH-------SDFCLGC
+TNFRSF17-1      CSQNE-YFDS---LLHACIPCQL--RCSS--NT-P----P-LTCQRYC
+TNFRSF13B-2     CRKEQ-GKFY-DHLLRDCISCAS--ICGQ--H-------P-KQCAYFC
+TNFRSF1A-4      CHAGF-FLR---E--NECVSCS---NCKK--S---------LECTKLC
+TNFRSF13C-1     CVPAE-CFDL---LVRHCVACG---LLR-------------TPRPKPA
+TNFRSF1A-3      CRKNQ-YRHYWSENLFQCFNCS---LCLN--GTV-HLSCQ-EKQNTVC
+TNFRSF1A-2      CESGS-FTAS-ENHLRHCLSCS---KCRKEMGQVEISSCT-VDRDTVC
+TNFRSF1A-1      CPQGK-YIHP-QNNS---ICCT---KCHK--GTYLYNDCPGPGQDTDC
+TNFRSF16-4      CPEGT-YSDE-ANHVDPCLPCT---VCED--TERQLRECT-PWADAEC
+TNFRSF16-3      CAYGY-YQDE---ETGHCEACS---VCEV--GSGLVFSCQ-DKQNTVC
+TNFRSF16-2      CLDNVTFSDV-VSATEPCKPCT---ECLG--LQSMSAPCV-EADDAVC
+TNFRSF16-1      CSTGL-YTHS----GECC---K---ACNL--GEGVAQPCG-A-NQTVC
+TNFRSF14-2      CPPGT-YIAH-LNGLSKCLQCQ---MCDPAMGLRASRNCS-RTENAVC
+TNFRSF14-1      CKEDE-YPV----GSEC---CP---KCSP--GYRVKEACG-ELTGTVC
+TNFRSF10B-3     CEEGT-FREE-D-SPEMCRKCRT--GCPR--GMVKVGDCT-PWSDIEC
+TNFRSF10B-2     CKYGQDYSTH-WNDLLFCLRCT---RCDS--GEVELSPCT-TTRNTVC
+                *                                              .
+
+
+
+</content>
+</file>
+<file>
+<stream>input</stream>
+<name>crd.template_file</name>
+<content>>CRME-3 _P_ 2UWI3.pdb
+>CRME-2 _P_ 2UWI2.pdb
+>CRME-1 _P_ 2UWI1.pdb
+>TNFRSF4-4 _P_ 2HEY4.pdb
+>TNFRSF4-2 _P_ 2HEY2.pdb
+>TNFRSF4-1 _P_ 2HEY1.pdb
+>TNFRSF12A-1 _P_ 2RPJ1.pdb
+>TNFRSF17-1 _P_ 1XU21.pdb
+>TNFRSF13B-2 _P_ 1XU12.pdb
+>TNFRSF13C-1 _P_ 1OQE1.pdb
+>TNFRSF1A-4 _P_ 1EXT4.pdb
+>TNFRSF1A-3 _P_ 1EXT3.pdb
+>TNFRSF1A-2 _P_ 1EXT2.pdb
+>TNFRSF1A-1 _P_ 1EXT1.pdb
+>TNFRSF16-4 _P_ 3BUKD.pdb
+>TNFRSF16-3 _P_ 3BUKD.pdb
+>TNFRSF16-2 _P_ 3BUKD.pdb
+>TNFRSF16-1 _P_ 3BUKD.pdb
+>TNFRSF14-1 _P_ 1JMA1.pdb
+>TNFRSF14-2 _P_ 1JMA2.pdb
+>TNFRSF10B-2 _P_ 1D4V2.pdb
+>TNFRSF10B-3 _P_ 1D4V3.pdb
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>crd.template_file</name>
+<content>>CRME-3 _P_ 2UWI3.pdb
+>CRME-2 _P_ 2UWI2.pdb
+>CRME-1 _P_ 2UWI1.pdb
+>TNFRSF4-4 _P_ 2HEY4.pdb
+>TNFRSF4-2 _P_ 2HEY2.pdb
+>TNFRSF4-1 _P_ 2HEY1.pdb
+>TNFRSF12A-1 _P_ 2RPJ1.pdb
+>TNFRSF17-1 _P_ 1XU21.pdb
+>TNFRSF13B-2 _P_ 1XU12.pdb
+>TNFRSF13C-1 _P_ 1OQE1.pdb
+>TNFRSF1A-4 _P_ 1EXT4.pdb
+>TNFRSF1A-3 _P_ 1EXT3.pdb
+>TNFRSF1A-2 _P_ 1EXT2.pdb
+>TNFRSF1A-1 _P_ 1EXT1.pdb
+>TNFRSF16-4 _P_ 3BUKD.pdb
+>TNFRSF16-3 _P_ 3BUKD.pdb
+>TNFRSF16-2 _P_ 3BUKD.pdb
+>TNFRSF16-1 _P_ 3BUKD.pdb
+>TNFRSF14-1 _P_ 1JMA1.pdb
+>TNFRSF14-2 _P_ 1JMA2.pdb
+>TNFRSF10B-2 _P_ 1D4V2.pdb
+>TNFRSF10B-3 _P_ 1D4V3.pdb
+</content>
+</file>
+<environement>
+HOME_4_TCOFFEE=/Users/cnotredame/
+MANPATH=/sw/share/man:/usr/share/man:/usr/local/share/man:/opt/X11/share/man:/Library/TeX/texbin/man:/Applications/Xcode.app/Contents/Developer/usr/share/man:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/share/man:/sw/lib/perl5/5.18.2/man
+TERM_PROGRAM=Apple_Terminal
+MCOFFEE_4_TCOFFEE=/Users/cnotredame//.t_coffee//mcoffee/
+ROOT_TMP_4_TCOFFEE=/var/tmp/
+SHELL=/bin/bash
+TERM=xterm-256color
+TMPDIR=/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/
+CONDA_SHLVL=1
+PERL5LIB=/sw/lib/perl5:/sw/lib/perl5/darwin
+Apple_PubSub_Socket_Render=/private/tmp/com.apple.launchd.6JzhyrtuKp/Render
+CONDA_PROMPT_MODIFIER=(base) 
+TERM_PROGRAM_VERSION=388.1.3
+OSNAME=macosx
+PERL_BIN=/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms::/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices
+TERM_SESSION_ID=9785BD0D-F6F1-4B59-B0BA-9937FD12A1E7
+METHODS_4_TCOFFEE=/Users/cnotredame//.t_coffee//methods/
+VERSIONER_PERL_VERSION=5.18
+XAPPLRESDIR=/sw/etc/app-defaults/
+http_proxy=
+HTTP_proxy=
+USER=cnotredame
+CONDA_EXE=/Users/cnotredame/anaconda3/bin/conda
+SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.U5mTe2o7m7/Listeners
+__CF_USER_TEXT_ENCODING=0x1F6:0x0:0x0
+ENV_4_TCOFFEE=/Users/cnotredame//.t_coffee//.t_coffee_env
+_CE_CONDA=
+all_proxy=
+ALL_PROXY=
+HTTP_proxy_4_TCOFFEE=
+PATH=/Users/cnotredame/anaconda3/bin:/Users/cnotredame/anaconda3/condabin:/opt/local/bin:/opt/local/sbin:/opt/local/bin:/opt/local/sbin:/Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/packages/x3dna-v2.1/bin:/Users/cnotredame/bin/macosx://Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms:.:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices:/Users/cnotredame/bin/Scripts:/Users/cnotredame/Library/Haskell/ghc-7.4.2/lib/epub-tools-2.0.0/bin:/sw/bin:/sw/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/Library/TeX/texbin
+_=/usr/bin/printenv
+CONDA_PREFIX=/Users/cnotredame/anaconda3
+DIR_4_TCOFFEE=/Users/cnotredame//.t_coffee/
+PWD=/private/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/RANDOMSTRINGZx8UOllZkd04XzE3lS08/data
+CACHE_4_TCOFFEE=/Users/cnotredame//.t_coffee//cache/
+X3DNA=/Users/cnotredame/Dropbox/packages/x3dna-v2.1
+DBUS_LAUNCHD_SESSION_BUS_SOCKET=/private/tmp/com.apple.launchd.DfqaaC2z17/unix_domain_listener
+XPC_FLAGS=0x0
+VERSIONER_PERL_PREFER_32_BIT=no
+_CE_M=
+XPC_SERVICE_NAME=0
+ERRORFILE_4_TCOFFEE=t_coffee.ErrorReport
+PLUGINS_4_TCOFFEE=/Users/cnotredame//.t_coffee//plugins/macosx/
+SHLVL=3
+HOME=/Users/cnotredame
+DUMP_4_TCOFFEE=/private/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/RANDOMSTRINGZx8UOllZkd04XzE3lS08/nature_protocol.tests.10.dump
+HTTP_PROXY=
+CONDA_PYTHON_EXE=/Users/cnotredame/anaconda3/bin/python
+BIN=/Users/cnotredame/bin/macosx
+LOGNAME=cnotredame
+EMAIL_4_TCOFFEE=cedric.notredame@gmail.com
+LC_CTYPE=UTF-8
+CONDA_DEFAULT_ENV=base
+EMAIL=cedric.notredame@gmail.com
+UPDATED_ENV_4_TCOFFEE=1
+INFOPATH=/sw/share/info:/sw/info:/usr/share/info
+DISPLAY=/private/tmp/com.apple.launchd.vef8UzGxBY/org.macosforge.xquartz:0
+TC_MASTER_NODE=1
+NUMBER_OF_PROCESSORS=8
+ALL_proxy=
+LOCKDIR_4_TCOFFEE=/var/tmp/tco/tco7wna5d0x80899//lck/12yshzityu/
+TMP_4_TCOFFEE=/var/tmp/tco/tco7wna5d0x80899/
+USER_BIN=/Users/cnotredame/bin/macosx
+SCRIPT_BIN=/Users/cnotredame/bin/Scripts/
+</environement>
+<DumpStatus>OK</DumpStatus>
+<DumpFile>/private/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/RANDOMSTRINGZx8UOllZkd04XzE3lS08/nature_protocol.tests.10.dump</DumpFile>
+<SourceFile>nature_protocol.tests</SourceFile>
+<SourceLine>11</SourceLine>
+</DumpIO>
