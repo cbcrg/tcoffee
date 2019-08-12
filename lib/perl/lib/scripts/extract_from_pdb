@@ -253,7 +253,9 @@ foreach ($np=0; $np<=$n_para; $np++)
       } 
     elsif ($value eq "-is_released_pdb_name")
       {
-	$pdb_file= $ARGV[++$np];	
+	$pdb_file= $ARGV[++$np];
+	
+	if (!$pdb_file){print "0";exit (EXIT_SUCCESS);}
 	$is_released_pdb_name=1;
       }
     elsif ($value eq "-model_type")
