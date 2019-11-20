@@ -1,0 +1,8 @@
+#
+# all definitions 
+# Files in: ../../t_coffee/doc_test
+# Test Results in: http://www.tcoffee.org/Packages/tests/
+# The test can be monitored on: https://circleci.com/gh/cbcrg/tcoffee/
+t_coffee sample_seq1.fasta    
+
+

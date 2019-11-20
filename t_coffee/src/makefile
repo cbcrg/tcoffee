@@ -375,6 +375,8 @@ test-none:
 	$(PERL4MAKEFILE_LIB)/edit_version.pl -in $(DOCKER_DIR)/run-tests.sh -tag "replay" -string "#notest replay"
 test-core:
 	$(PERL4MAKEFILE_LIB)/edit_version.pl -in $(DOCKER_DIR)/run-tests.sh -tag "replay" -string "/root/tcoffee/lib/perl/lib/perl4makefile/doc2test.pl -replay ./tests/.dumps/core.tests/"
+test-mini:
+	$(PERL4MAKEFILE_LIB)/edit_version.pl -in $(DOCKER_DIR)/run-tests.sh -tag "replay" -string "/root/tcoffee/lib/perl/lib/perl4makefile/doc2test.pl -replay ./tests/.dumps/mini.tests/"
 test-all:
 	$(PERL4MAKEFILE_LIB)/edit_version.pl -in $(DOCKER_DIR)/run-tests.sh -tag "replay" -string "/root/tcoffee/lib/perl/lib/perl4makefile/doc2test.pl -replay ./tests/.dumps/"
 test-remote:

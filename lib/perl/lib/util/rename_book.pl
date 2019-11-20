@@ -7,9 +7,12 @@ use File::Basename;
 use utf8;
 use Encode;
 use DirHandle;
+use File::stat;
+Test::Simple;
+my $MASTER=1;
+my $FLAG="/Users/cnotredame/.rename_book.flag";
 my $dir;
 my $target_dir;
-
 
 
 for ($a=0; $a<@ARGV; $a++)
@@ -47,6 +50,10 @@ for ($a=0; $a<@ARGV; $a++)
       {
 	$action="-$ARGV[++$a]";
       }
+    elsif ( $v eq "-force")
+      {
+	flag2unset();
+      }
     elsif ($v eq "-daemonsync")
       {
 	my $duration=500;
@@ -79,6 +86,11 @@ for ($a=0; $a<@ARGV; $a++)
 	$action=$v;
 	$from_dir=$ARGV[++$a];
 	$to_dir=$ARGV[++$a];
+      }
+    elsif ($v eq "-bond")
+      {
+	$action=$v;
+	$string_in=$ARGV[++$a];
       }
     elsif ($v eq "-year")
       {
@@ -563,11 +575,13 @@ elsif       ($action eq "-dirsync")
   }
 elsif       ($action eq "-dirsync.torre")
   {
-    dirsync("torre")
+    dirsync("torre");
+    die;
   }
 elsif       ($action eq "-dirsync.badal")
   {
-    dirsync("badal")
+    dirsync("badal");
+    die;
   }
 
 
@@ -917,13 +931,47 @@ elsif    ($action eq "-hitchcock")
 	  }
       }
   }
+elsif    ($action eq "-bond")
+  {
+    print "\n";
+    foreach my $f (@file1)
+      {
+	my $l=$f;
+	$l=replace ($l, " - 1080p X264 Ac3 mHDgz", "");
+	$l=replace ($l, "James Bond 007 - ", "");
+	if (($l=~/(\d\d\d\d) - (.*)\.([^.]*)/))
+	  {
+	    my $movie_name=$2;
+	    my $year=$1;
+	    my $stuff=$3;
+	    my $movie_ext=$3;
+	    my $to;
+	    my $from;
+	    
+	    $movie_name=~s/\./ /g;
+	    
+	    $to="$movie_name ($year) - James Bond.$movie_ext";
+	    $to=~s/  / /g;
+	    $from=$f;
+	    
+	    if ($from ne $to && $from ne "." && $from ne "..")
+	      {
+		print "-year--- mv $from --> $to\n";
+		&my_rename ($from,$to);
+	      }
+	  }
+      }
+  }
 elsif    ($action eq "-year")
   {
     print "\n";
     foreach my $f (@file1)
       {
 	my $l=$f;
-	if (($l=~/(.*)(\d\d\d\d)(.*)\.([^.]*)/))
+	$l=replace ($l, "1080", "");
+	$l=replace ($l, '\[yggtorrent.com\]', "");
+	
+	if (($l=~/(.*)\((\d\d\d\d)\)(.*)\.([^.]*)/))
 	  {
 	    my $movie_name=$1;
 	    my $year=$2;
@@ -940,7 +988,28 @@ elsif    ($action eq "-year")
 	    
 	    if ($from ne $to && $from ne "." && $from ne "..")
 	      {
-		print "---- mv $from --> $to\n";
+		print "-year--- mv $from --> $to\n";
+		&my_rename ($from,$to);
+	      }
+	  }
+	elsif (($l=~/(.*)(\d\d\d\d)(.*)\.([^.]*)/))
+	  {
+	    my $movie_name=$1;
+	    my $year=$2;
+	    my $stuff=$3;
+	    my $movie_ext=$4;
+	    my $to;
+	    my $from;
+	    
+	    $movie_name=~s/\./ /g;
+	    
+	    $to="$movie_name ($year).$movie_ext";
+	    $to=~s/  / /g;
+	    $from=$f;
+	    
+	    if ($from ne $to && $from ne "." && $from ne "..")
+	      {
+		print "-year--- mv $from --> $to\n";
 		&my_rename ($from,$to);
 	      }
 	  }
@@ -1987,24 +2056,33 @@ sub ipadsync
   }
 sub dirsync
   {
-    my ($from_dir, $to_dir)=@_;
+    my (@in)=@_;
+    my ($from_dir, $to_dir)=@in;
     my ($press_dir, $ignore);
+    my $disc="Movies4"; # used to be Movies3
+    my $synced=0;
+    
+    if ($from_dir eq "reset"){return flag2unset();}
+    if (flag2status()&& $MASTER==1){return 0;}
+    
+    flag2set();
+    $MASTER=0;
     
     if ($from_dir eq "torre")
       {
 	
 	$press_dir="/Users/cnotredame/Dropbox/presse";
 	$from_dir="/Volumes/Torrent/Download/download.raw/";
-	$to_dir  ="/Volumes/Movies3/Download/download.ready/";
-	$ignore="/Volumes/Movies3/Download/.sync.ignore.txt";
+	$to_dir  ="/Volumes/$disc/Download/download.ready/";
+	$ignore="/Volumes/$disc/Download/.sync.ignore.txt";
       }
     else
       {
 	
 	$press_dir="/Users/cnotredame/Dropbox/presse";
 	if (!$from_dir){$from_dir="/Volumes/backup/download/";}
-	if (!$to_dir)   {$to_dir  ="/Volumes/Movies3/Download/download.raw/";}
-	$ignore="/Volumes/Movies3/Download/.sync.ignore.txt";
+	if (!$to_dir)   {$to_dir  ="/Volumes/$disc/Download/download.raw/";}
+	$ignore="/Volumes/$disc/Download/.sync.ignore.txt";
       }
     
     opendir (DIR, "$from_dir");
@@ -2017,7 +2095,22 @@ sub dirsync
 	  {
 	    my $l=$_;
 	    chomp ($l);
-	    $hd2{$l}=1;
+	    my $s1=0;
+	    my $s2=0;
+	    
+	    if (-e ("$from_dir/$l")){$s1=stat("$from_dir/$l")->size;}
+	    if (-e ("$to_dir/$l")){$s2=stat("$to_dir/$l")->size;}
+	    
+	    
+	    if ($s2>0 && $s1!=$s2)
+	      {
+		print "incomplete copy for [$l]-- redo\n";
+	      }
+	    else
+	      {
+		print "skip [$l]\n";
+		$hd2{$l}=1;
+	      }
 	  }
 	close F;
       }
@@ -2047,11 +2140,17 @@ sub dirsync
 	    close (F);
 	    if (!process_press($from_dir,$press_dir, $f))
 	      {
+		
 		print "rcopy (\"$from_dir/$f\", \"$to_dir\")\n";
 		rcopy ("$from_dir/$f", "$to_dir/$f");
+		$synced++;
 	      }
 	  }
       }
+    if ($synced){return dirsync(@in);}
+    
+    flag2unset();
+    return 0;
   }
 sub process_press
     {
@@ -2301,3 +2400,30 @@ sub cvs2h
 	   return %h;
 
 	 }
+
+sub replace 
+	   {
+	     my ($from, $string_in,$string_out)=@_;
+	     my $to=$from;
+	     $to=~s/$string_in/$string_out/;
+	     if ($from ne $to && $from ne "." && $from ne "..")
+	       {
+		 print "-rep--- mv $from --> $to\n";
+		 &my_rename ($from,$to);
+	       }
+	     return $to;
+	   }
+	     
+sub flag2set
+	     {
+	       system ("echo 1 > $FLAG");
+	     }
+sub flag2unset
+	     {
+	       if (flag2status()){unlink ($FLAG);}
+	     }
+sub flag2status
+	       {
+		 if (-e $FLAG){return 1;}
+		 return 0;
+	       }
