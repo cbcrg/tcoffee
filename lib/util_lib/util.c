@@ -9990,6 +9990,7 @@ char ** standard_initialisation  (char **in_argv, int *in_argc)
     {
       if (getenv ("DEBUG_MAFFT")){add_warning(stderr ,"\nMAFFT: NATIVE\n");}
       cputenv4pathFirst ("/usr/local/bin/");
+     
     }
   else if ( getenv ("MAFFT_PATH"))
     {

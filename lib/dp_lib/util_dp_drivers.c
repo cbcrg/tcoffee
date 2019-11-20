@@ -972,7 +972,6 @@ char *seq_file2msa_file (char *file, char *seq, char *aln)
       
       method=method_file2TC_method(m);
       command=make_aln_command (method,"seq", "aln");
-      
     }
   else
     {

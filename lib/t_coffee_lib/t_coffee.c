@@ -751,7 +751,7 @@ int batch_main ( int argc, char **argv)
 		   cputenv ("LOCAL_PLUGINS_4_TCOFFEE=%s", plugins);// single use environement variable
 		   get_plugins_4_tcoffee();
 		 }
-	       
+	      
 	       declare_name (plugins_order);
 	       get_cl_param(					\
 			    /*argc*/      argc           ,	\
@@ -764,7 +764,7 @@ int batch_main ( int argc, char **argv)
 			    /*MAX Nval*/  1              ,		\
 			    /*DOC*/       "first or last. Set the order of the plugins for T-Coffee. First means the plugins are used first. Last means that local installations are used first and the plugins only used if the local installation cannot", \
 			    /*Parameter*/ &plugins_order   ,		\
-			    /*Def 1*/    "first"       ,		\
+			    /*Def 1*/    "last"       ,		\
 			    /*Def 2*/    ""              ,		\
 			    /*Min_value*/ "any"          ,		\
 			    /*Max Value*/ "any"				\

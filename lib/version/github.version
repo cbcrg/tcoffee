@@ -1,1 +1,1 @@
-* master 0da07f0 fixed a bug causing extract_from_pdb -is_released_pdb_name to hang when no name is provided
+* master a019d22 fixed issue of conflict between local and non local mafft versions
