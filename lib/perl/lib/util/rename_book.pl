@@ -1970,7 +1970,7 @@ sub ipadsync
     my ($root)=@_;
     my %h;
     my %clean;
-    
+    #my $test=1;
     my $from="/ExportTools/";
     my $to="/outdir";
     my $delete="/outdir.delete";
@@ -2002,6 +2002,12 @@ sub ipadsync
 	      %h=cvs2h($file,%h);
 	      move ($file, "$file\.processed");
 	    }
+	elsif (!($file=~/processed/) && $file=~/\.m3u8/)
+	    {
+	      $processed_file=1;
+	      %h=m3u82h($file,%h);
+	      move ($file, "$file\.processed");
+	    }
       }
     if (!$processed_file)
       {
@@ -2019,7 +2025,12 @@ sub ipadsync
 	my ($name,$dir,$ext) = fileparse($file, qr/\.[^.]*/);
 	
 	my $dest="$to/$name\.PLEXID_$id$ext";
-	if (!-e $dest && !$processed{$id})
+	
+	if ($test)
+	  {
+	    print "$dest\n";
+	  }
+	elsif (!-e $dest && !$processed{$id})
 	  {
 	    print "COPY $file --> $dest\n";
 	    copy ($file, $dest);
@@ -2400,7 +2411,41 @@ sub cvs2h
 	   return %h;
 
 	 }
-
+sub m3u82h
+	 {
+	   my ($f,%h)=@_;
+	   my @header;
+	   my $n=0;
+	   if ( !-e $f || !($f=~/.*\.m3u8/)){return %h;}
+	   
+	   print "----Process $f\n";
+	   
+	   open (F, "$f");
+	   while (<F>)
+	     {
+	       my $l=$_;
+	       if ($l=~/ListId/)
+		 {
+		   $n++;
+		 }
+	       
+	       if ( $n)
+		 {
+		   if ($l=~/^(\/.*)/)
+		     {
+		       $h{$n}{"File Name"}=$1;
+		      
+		     }
+		   elsif ($l=~/\"Id\"\:(\d+)\, \"ListId\"/)
+		     {
+		       $h{$n}{"Media ID"}=$1;
+		      
+		     }
+		 }
+	     }
+	   close (F);
+	   return %h;
+	 }
 sub replace 
 	   {
 	     my ($from, $string_in,$string_out)=@_;

@@ -7375,6 +7375,21 @@ char ***file2list ( char *name, char *sep)
   free_arrayN((void**)lines, 2);
   return list;
 }
+int    file2nlines(char *name)
+{
+  FILE *fp;
+  char c;
+  int n=0;
+  fp=vfopen (name, "r");
+  if (!fp) return 0;
+  
+  while ((c=fgetc (fp)!=EOF))
+    {
+      if (c=='\n')n++;
+    }
+  vfclose (fp);
+  return n;
+}
 char **file2lines (char *name)
 {
   /*lines[0]->nlines;

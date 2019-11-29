@@ -1739,6 +1739,11 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
   long tot_inf=0;
   int use_columns=0;
   int NseqWithC=0;
+
+  int **InColPair=NULL;
+  int **  ColPair=NULL;
+  int n_col_pair;
+
   //receives an alignment and a constraint list file in which contacts are declared
   //can produce scores, trees and score caches to colr MSAs
 
@@ -1941,10 +1946,39 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
     }
   ntrees=nd*(replicates+1);
   if (!A->Tree)T=A->Tree=declare_aln2(ntrees,0);
-  T->RepColList=declare_int  (ntrees, ((use_columns)?1:nlen_aln)+1);
+  T->RepColList=declare_int  (ntrees, ((use_columns)?2:nlen_aln)+1);
   
-
-  
+  InColPair=NULL;
+  if (get_string_variable ("columns4treeF"))
+    {
+      int i;
+      char ***l=file2list (get_string_variable ("columns4treeF"), " ");
+      i=0;
+      while (l[i++]);
+      InColPair=declare_int (i+1, 3);
+      
+      i=n_col_pair=0;
+      while (l[i])
+	{
+	 
+	  int n=atoi(l[i][0]);
+	  
+	  if (n==3 && l[i][1][0]!='#')
+	    {
+	      InColPair[n_col_pair][0]=atoi (l[i][1]);
+	      InColPair[n_col_pair][1]=atoi (l[i][2]);
+	      n_col_pair++;
+	    }
+	  i++;
+	}
+      ColPair=declare_int (n_col_pair*2+1, 2);
+      free_arrayN((void**)l, 2);
+    }
+  else
+    {
+      ColPair=declare_int ((nlen_aln*nlen_aln)+1, 2);
+    }
+    
   
   for (maxD=lowD; maxD<=highD;maxD+=100) 
     {
@@ -1961,8 +1995,22 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
 	      T->RepColList[rep][0]=used_col[rep];
 	      T->RepColList[rep][1]=-1;
 	    }
+	  else if (InColPair)
+	    {
+	      for (c1=0; c1<n_col_pair; c1++)
+		{
+		  if (rep>0)c=(int)rand()%n_col_pair;
+		  else c=c1;
+		  ColPair[c1][0]=InColPair[c][0];
+		  ColPair[c1][1]=InColPair[c][1];
+		}
+	      ColPair[c1][0]=ColPair[c1][1]=-1;
+	      
+	    }
 	  else
 	    {
+	      int ncp=0;
+	      int ic1=0;
 	      //rep 0 is the target tree
 	      nlen_aln1=nlen_aln;
 	      for (c1=0; c1<nlen_aln; c1++)
@@ -1972,8 +2020,26 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
 		}
 	      T->RepColList[rep][c1]=-1;
 	      if (getenv("BS_SQRLEN") && rep>1)T->RepColList[rep][(int)sqrt((double)nlen_aln)]=-1;
-	  
+	      
+	      ic1=0;
+	      while (T->RepColList[rep][ic1]!=-1)
+		{
+		  int ic2=0;
+		  
+		  while (T->RepColList[rep][ic2]!=-1)
+		    {
+		      ColPair[ncp][0]=T->RepColList[rep][ic1];
+		      ColPair[ncp][1]=T->RepColList[rep][ic2];
+		      ncp++;
+		      ic2++;
+		    }
+		  ic1++;
+		}
+	      ColPair[ncp][0]=ColPair[ncp][1]=-1;
 	    }
+	  
+	  
+	  
 	  for (s1=0; s1<A->nseq; s1++)
 	    {
 	    int ls1=rseq[s1];
@@ -2035,257 +2101,254 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
 
 		//Now do the all against all
 		
+
 		ic1=0;
-		while (T->RepColList[rep][ic1]!=-1)//go through all the positions selected 
+		
+		while (ColPair[ic1][0]!=-1)
 		  {
-		    int ic2=0;
-		    c1=T->RepColList[rep][ic1++];
-		    
-		    if (A->seq_al[s1][c1]=='-')continue;
-		    
-		    while (T->RepColList[rep][ic2]!=-1)//Go through All the positions selected
-		      {
-			double rsc=0;//raw score for strike
-			double brsc=0;//background raw score for strike
-			double randsc=0; //score for randomization;
-			
-			double sc=0;
-			double in=0;
-			double bin=0; //background in => non contact evaluation for strike;
-			
-			double w1; 
-		
-			c2=T->RepColList[rep][ic2++];
-			w1=(double)dm1[c1][c2];
-			
-			if (A->seq_al[s1][c2]=='-')continue;
-			else if (!col_lu[c2])continue; 
-			else if (FABS((pos[s1][c1]-pos[s1][c2]))<enb)continue;
-			else if (!strikeM && !dm1[c1][c2])continue;
-			else if (modeM==distancesM && w1>maxD)continue;
-			
-			if (modeM==strikeM)
-			  {
-			    rsc=randsc=sc=brsc=in=bin=0;
-			    if (A->seq_al[s2][c1]=='-' || A->seq_al[s2][c2]=='-');
-			    else 
-			      {
-				if (dm1[c1][c2])
-				  {
-				    in=1;
-				    rsc=matrix[tolower(A->seq_al[s2][c1])][tolower(A->seq_al [s2][c2])];
-				    sc=matrix[tolower(A->seq_al[s2][c1])][tolower(A->seq_al [s2][c2])]*2;
-				    sc/=max[tolower(A->seq_al[s2][c1])]+max[tolower(A->seq_al[s2][c2])];
-				    if (randstrike)
-				      {
-					char rr='-';
-					
-					while (rr=='-' || rr=='x' || rr=='X')
-					  {
-					    rr=A->seq_al[rand()%A->nseq][rand()%A->len_aln];
-					    //rr=A->seq_al[rand()%A->nseq][c2])=='-';
-					  }
-					randsc=matrix[tolower(A->seq_al[s2][c1])][tolower(rr)];
-				      }
-				  }
-				else
-				  {
-				    bin=1;
-				    brsc=matrix[tolower(A->seq_al[s2][c1])][tolower(A->seq_al [s2][c2])];
-				    
-				  }
+		   double rsc=0;//raw score for strike
+		   double brsc=0;//background raw score for strike
+		   double randsc=0; //score for randomization;
+		   
+		   double sc=0;
+		   double in=0;
+		   double bin=0; //background in => non contact evaluation for strike;
+		   double w1; 
+		   
+		   c1=ColPair[ic1][0];
+		   c2=ColPair[ic1][1];
 
-			      }
-			  }
-			else
-			  {
-			    if (A->seq_al[s2][c1]=='-' || A->seq_al[s2][c2]=='-'){sc=0;in=1;}
-			    else
-			      {
-				double w2=(double)dm2[c1][c2];
-				if (modeM==distancesM && dm2[c1][c2])
-				  {
-				    static int   distance_mode=atoigetenv ("THREED_TREE_MODE");
-				    static double distance_modeE=atofgetenv ("THREED_TREE_MODE_EXP");
-				    static int no_weights=atoigetenv ("THREED_TREE_NO_WEIGHTS");
-				    
-				    
-				    static int print;
-				    double we;
-				    
-				    if ( !print)
-				      {
-					HERE ("THREED_TREE_MODE=%d THREED_TREE_MODE_EXP=%.1f THREED_TREE_NO_WEIGHTS=%d", distance_mode,distance_modeE,no_weights);
-					print=1;
-				      }
 
-				    if ( distance_modeE<0.0001)distance_modeE=3;
+		   ic1++;
+
+		   if (A->seq_al[s1][c1]=='-')continue;
+		   
+		   w1=(double)dm1[c1][c2];
+		   
+		   if (A->seq_al[s1][c2]=='-')continue;
+		   else if (!col_lu[c2])continue; 
+		   else if (FABS((pos[s1][c1]-pos[s1][c2]))<enb)continue;
+		   else if (!strikeM && !dm1[c1][c2])continue;
+		   else if (modeM==distancesM && w1>maxD)continue;
+		   
+		   if (modeM==strikeM)
+		     {
+		       rsc=randsc=sc=brsc=in=bin=0;
+		       if (A->seq_al[s2][c1]=='-' || A->seq_al[s2][c2]=='-');
+		       else 
+			 {
+			   if (dm1[c1][c2])
+			     {
+			       in=1;
+			       rsc=matrix[tolower(A->seq_al[s2][c1])][tolower(A->seq_al [s2][c2])];
+			       sc=matrix[tolower(A->seq_al[s2][c1])][tolower(A->seq_al [s2][c2])]*2;
+			       sc/=max[tolower(A->seq_al[s2][c1])]+max[tolower(A->seq_al[s2][c2])];
+			       if (randstrike)
+				 {
+				   char rr='-';
 				   
-
-				    //first attempt-- Major issue because non symetrical and therefore not a distance
-				    if (!distance_mode)
-				      {
-					static int warn;
-					we=w1;
-					sc=((MIN((w1/w2),(w2/w1))));
-					if (warn==0)
-					  {
-					    add_warning ( stderr, "\nWARNING: distance_mode==0 should not be used");
-					    warn=1;
-					  }
-					
-				      }
-				    //same as before but symetrical: the distance ratio weighted by the average distance
-				    else if (distance_mode==1)
-				      {
-					we=(w1+w2)/2;
-					sc=((MIN((w1/w2),(w2/w1))));
-				      }
-				    //the absolute difference of distance normalized by the average distance
-				    else if (distance_mode==2)
-				      {
-					
-					we=(w1+w2)/2;
-					sc=(double) 1-(FABS((w1-w2))/we);
-					
-				      }
-				    //the absolute difference of distance normalized by the average distance and weighted by the average distance
-				    else if (distance_mode==3)
-				      {
-					we=(w1+w2)/2;
-					sc=(double)1-(FABS((w1-w2))/we);
-				      }
-				    else if (distance_mode ==4)
-				      {
-					we=((w1>w2)?w1:w2);
-					sc=(double) 1-(FABS((w1-w2))/we);
-					
-				      }
-				    else if (distance_mode ==5)
-				      {
-					we=(w1+w2);
-					sc=(double)1-(FABS((w1-w2))/we);
-					
-				      }
-				    else if (distance_mode ==6)
-				      {
-					we=1;
-					sc=(double)(FABS((w1-w2)));
-					
-				      }
+				   while (rr=='-' || rr=='x' || rr=='X')
+				     {
+				       rr=A->seq_al[rand()%A->nseq][rand()%A->len_aln];
+				       //rr=A->seq_al[rand()%A->nseq][c2])=='-';
+				     }
+				   randsc=matrix[tolower(A->seq_al[s2][c1])][tolower(rr)];
+				 }
+			     }
+			   else
+			     {
+			       bin=1;
+			       brsc=matrix[tolower(A->seq_al[s2][c1])][tolower(A->seq_al [s2][c2])];
+			       
+			     }
+			   
+			 }
+		     }
+		   else
+		     {
+		       if (A->seq_al[s2][c1]=='-' || A->seq_al[s2][c2]=='-'){sc=0;in=1;}
+		       else
+			 {
+			   double w2=(double)dm2[c1][c2];
+			   if (modeM==distancesM && dm2[c1][c2])
+			     {
+			       static int   distance_mode=atoigetenv ("THREED_TREE_MODE");
+			       static double distance_modeE=atofgetenv ("THREED_TREE_MODE_EXP");
+			       static int no_weights=atoigetenv ("THREED_TREE_NO_WEIGHTS");
+			       
+			       
+			       static int print;
+			       double we;
+			       
+			       if ( !print)
+				 {
+				   HERE ("THREED_TREE_MODE=%d THREED_TREE_MODE_EXP=%.1f THREED_TREE_NO_WEIGHTS=%d", distance_mode,distance_modeE,no_weights);
+				   print=1;
+				 }
+			       
+			       if ( distance_modeE<0.0001)distance_modeE=3;
+			       
+			       
+			       //first attempt-- Major issue because non symetrical and therefore not a distance
+			       if (!distance_mode)
+				 {
+				   static int warn;
+				   we=w1;
+				   sc=((MIN((w1/w2),(w2/w1))));
+				   if (warn==0)
+				     {
+				       add_warning ( stderr, "\nWARNING: distance_mode==0 should not be used");
+				       warn=1;
+				     }
 				   
-				    if (no_weights)
-				      we=1;
-				    
-				    //Compute the score and its normalization
-				    //If 
-				    in=we;
-				    sc=pow(sc,distance_modeE)*we;
-				    
-				    
-				  }
-				else if (modeM==contactsM && w2>0)
-				  {sc=1;in=1;}
-				else {sc=1;in=1;}
-			      }
-			  }
-			
-			if (tree)
-			  {
-			    tot_pw_sc[s1][s2]+=sc;
-			    max_pw_sc[s1][s2]+=in;
+				 }
+			       //same as before but symetrical: the distance ratio weighted by the average distance
+			       else if (distance_mode==1)
+				 {
+				   we=(w1+w2)/2;
+				   sc=((MIN((w1/w2),(w2/w1))));
+				 }
+			       //the absolute difference of distance normalized by the average distance
+			       else if (distance_mode==2)
+				 {
+				   
+				   we=(w1+w2)/2;
+				   sc=(double) 1-(FABS((w1-w2))/we);
+				   
+				 }
+			       //the absolute difference of distance normalized by the average distance and weighted by the average distance
+			       else if (distance_mode==3)
+				 {
+				   we=(w1+w2)/2;
+				   sc=(double)1-(FABS((w1-w2))/we);
+				 }
+			       else if (distance_mode ==4)
+				 {
+				   we=((w1>w2)?w1:w2);
+				   sc=(double) 1-(FABS((w1-w2))/we);
+				   
+				 }
+			       else if (distance_mode ==5)
+				 {
+				   we=(w1+w2);
+				   sc=(double)1-(FABS((w1-w2))/we);
+				   
+				 }
+			       else if (distance_mode ==6)
+				 {
+				   we=1;
+				   sc=(double)(FABS((w1-w2)));
+				 }
+			       
+			       if (no_weights)
+				 we=1;
+			       
+			       //Compute the score and its normalization
+			       //If 
+			       in=we;
+			       sc=pow(sc,distance_modeE)*we;
+			       
+			       
+			     }
+			   else if (modeM==contactsM && w2>0)
+			     {sc=1;in=1;}
+			   else {sc=1;in=1;}
+			 }
+		     }
+		   
+		   if (tree)
+		     {
+		       tot_pw_sc[s1][s2]+=sc;
+		       max_pw_sc[s1][s2]+=in;
+		       
+		       tot_pw_sc[s2][s1]+=sc;
+		       max_pw_sc[s2][s1]+=in;
+		       //if ( s1==s2)
+		       //  {
+		       //	HERE ("[%f %f] - %f %f",(float)sc, (float)in,(float) tot_pw_sc[s2][s1], (float)max_pw_sc[s2][s1]);
+		       //  }
+		       
+		     }
+		   
+		   
+		   //residues
+		   if (!strikeM)
+		     {
+		       max_res_sc[s1][c1]+=in;
+		       tot_res_sc[s1][c1]+=sc;
+		     }
+		   
+		   max_res_sc[s2][c1]+=in;
+		   tot_res_sc[s2][c1]+=sc;
+		   
+		   
+		   
+		   //seq
+		   if (!strikeM)
+		     {
+		       tot_seq_sc[s1]+=sc;
+		       max_seq_sc[s1]+=in;
+		     }
+		   
+		   tot_seq_sc[s2]+=sc;
+		   max_seq_sc[s2]+=in;
+		   
+		   //StrikeM Raw Score
+		   //Score of each sequence given each structure
+		   tot_seq_rsc[s1][s2]+=rsc;
+		   max_seq_rsc[s1][s2]+=in;
+		   
+		   tot_seq_randsc[s1][s2]+=randsc;
+		   max_seq_randsc[s1][s2]+=in;
+		   
+		   
+		   tot_seq_brsc[s1][s2]+=brsc;
+		   max_seq_brsc[s1][s2]+=bin;
+		   
+		   
+		   //Global score of each sequence given all the structures
+		   tot_seq_rsc[A->nseq][s2]+=rsc;
+		   max_seq_rsc[A->nseq][s2]+=in;
+		   
+		   tot_seq_randsc[A->nseq][s2]+=randsc;
+		   max_seq_randsc[A->nseq][s2]+=in;
+		   
+		   
+		   tot_seq_brsc[A->nseq][s2]+=brsc;
+		   max_seq_brsc[A->nseq][s2]+=bin;
+		   
+		   //column
+		   max_col_sc[c1]+=in;;
+		   tot_col_sc[c1]+=sc;
+		   
+		   //aln
+		   max_sc+=in;
+		   tot_sc+=sc;
+		   
+		   //aln: strike M Raw Score
+		   max_rsc[s1]+=in;
+		   tot_rsc[s1]+=rsc;
 
-			    tot_pw_sc[s2][s1]+=sc;
-			    max_pw_sc[s2][s1]+=in;
-			    //if ( s1==s2)
-			    //  {
-			    //	HERE ("[%f %f] - %f %f",(float)sc, (float)in,(float) tot_pw_sc[s2][s1], (float)max_pw_sc[s2][s1]);
-			    //  }
-			    
-			  }
-			
-			
-			//residues
-			if (!strikeM)
-			  {
-			    max_res_sc[s1][c1]+=in;
-			    tot_res_sc[s1][c1]+=sc;
-			  }
-			
-			max_res_sc[s2][c1]+=in;
-			tot_res_sc[s2][c1]+=sc;
-			
-		
-			
-			//seq
-			if (!strikeM)
-			  {
-			    tot_seq_sc[s1]+=sc;
-			    max_seq_sc[s1]+=in;
-			  }
-			
-			tot_seq_sc[s2]+=sc;
-			max_seq_sc[s2]+=in;
-			
-			//StrikeM Raw Score
-			//Score of each sequence given each structure
-			tot_seq_rsc[s1][s2]+=rsc;
-			max_seq_rsc[s1][s2]+=in;
-			
-			tot_seq_randsc[s1][s2]+=randsc;
-			max_seq_randsc[s1][s2]+=in;
-			
-
-			tot_seq_brsc[s1][s2]+=brsc;
-			max_seq_brsc[s1][s2]+=bin;
-			
-			
-			//Global score of each sequence given all the structures
-			tot_seq_rsc[A->nseq][s2]+=rsc;
-			max_seq_rsc[A->nseq][s2]+=in;
-			
-			tot_seq_randsc[A->nseq][s2]+=randsc;
-			max_seq_randsc[A->nseq][s2]+=in;
-			
-
-			tot_seq_brsc[A->nseq][s2]+=brsc;
-			max_seq_brsc[A->nseq][s2]+=bin;
-			
-			//column
-			max_col_sc[c1]+=in;;
-			tot_col_sc[c1]+=sc;
-			
-			//aln
-			max_sc+=in;
-			tot_sc+=sc;
-			
-			//aln: strike M Raw Score
-			max_rsc[s1]+=in;
-			tot_rsc[s1]+=rsc;
-
-			max_brsc[s1]+=bin;
-			tot_brsc[s1]+=brsc;
-			
-			max_randsc[s1]+=in;
-			tot_randsc[s1]+=randsc;
-			
-			max_rsc[A->nseq]+=in;
-			tot_rsc[A->nseq]+=rsc;
-
-			max_brsc[A->nseq]+=bin;
-			tot_brsc[A->nseq]+=brsc;
-			
-			max_randsc[A->nseq]+=in;
-			tot_randsc[A->nseq]+=randsc;
-
-		      }
+		   max_brsc[s1]+=bin;
+		   tot_brsc[s1]+=brsc;
+		   
+		   max_randsc[s1]+=in;
+		   tot_randsc[s1]+=randsc;
+		   
+		   max_rsc[A->nseq]+=in;
+		   tot_rsc[A->nseq]+=rsc;
+		   
+		   max_brsc[A->nseq]+=bin;
+		   tot_brsc[A->nseq]+=brsc;
+		   
+		   max_randsc[A->nseq]+=in;
+		   tot_randsc[A->nseq]+=randsc;
 		  }
 		for (c1=0; c1<A->len_aln; c1++)for (c2=0; c2<A->len_aln; c2++)dm2[c1][c2]=0;
 	      }
 	    for (c1=0; c1<A->len_aln; c1++)for (c2=0; c2<A->len_aln; c2++)dm1[c1][c2]=0;
 	    }
-	  
-	 
+	  	 
 	  //Estimate Phylogenetic Tree Replicates
 	  if (tree)
 	    {
@@ -2352,8 +2415,7 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
 	    
 	    vfclose (fp);
 	    T->nseq++;
-	    
-	    
+	    	    
 	    
 	    if (T->nseq<ntrees)
 	      {
@@ -2374,6 +2436,8 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
 	      }
 	    }
 	}
+      free_arrayN ((void **) ColPair, 2);
+      free_arrayN ((void **) InColPair, 2);
     }
   
   if (modeM==strikeM)

@@ -396,6 +396,7 @@ int seq_reformat ( int argc, char **in_argv)
 		fprintf ( stdout, "\n     .....replicates <N>..+evaluate makes N replicates");
 		fprintf ( stdout, "\n     .....mode <nj|upgma>.+evaluate makes N replicates");
 		fprintf ( stdout, "\n     .....gap <N float>...+evaluate ignores colum with N float gap");
+		fprintf ( stdout, "\n     +column4tree <file>  Provoide a file where each line is a pair of columns [c1 c2]. The list can be bootstrapped\n");         
 		fprintf ( stdout, "\n     +tree2bs.............Add BS support to the original tree drawn from replicates");
 		fprintf ( stdout, "\n     +tree2bs.............The replicates must be provided via -in, one newick tree/line");
 		fprintf ( stdout, "\n     +print_replicates....Print Replicate trees AFTER the main tree");
@@ -12009,6 +12010,12 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 		   else printf_exit ( EXIT_FAILURE,stderr, "\nERROR: %s is not a known +tree parameter (replicates <int>|mode <string>|gap <float>|goup <seqfile>)[FATAL]",action_list[j]);
 		 }
 	     }
+	 }
+       else if (strm(action, "columns4tree"))
+	 {
+	   char *f=ACTION(1);
+	   set_string_variable ("columns4treeF",f);
+	   
 	 }
        
        else if ( strm(action, "evaluateGroup"))

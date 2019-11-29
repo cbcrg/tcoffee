@@ -396,7 +396,7 @@ release2:
 	sphinx-build -b singlehtml $(RST_DOC) $(HTML_DOC)
 	make distribution VERSION=$(VERSION)
 	make web
-	git commit -a -m '$(m)'	
+	git commit -a -m $(m)	
 	git push
 
 web:

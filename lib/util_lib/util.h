@@ -596,6 +596,7 @@ char **expand_flist (char *file, char **list,int i,int *n, char *tag);
 
 char ***file2list   (char *name, char *sep);
 char ** file2lines  (char *name);
+int     file2nlines (char *name);
 char *  file2string (char *name);
 int     file2size   (char *name);
 float **file2float_mat (char * name, char *sep);
