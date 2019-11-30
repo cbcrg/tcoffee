@@ -361,11 +361,11 @@ version:
 
 
 beta:
-	make release -release_type=beta 
+	make release type=beta 
 stable:
-	make release  -release_type=stable
+	make release  type=stable
 major:
-	make release  -release_type=major
+	make release  type=major
 
 release:
 	make version release_type=$(type)

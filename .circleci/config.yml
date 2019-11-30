@@ -7,7 +7,7 @@ jobs:
       # **do not edit: start
       # Variable programmatically edited by /lib/perl/scripts/read_program_version.pl when changing release number
       # /lib/perl/scripts/read_program_version.pl gets invoked by make beta|stable|major
-      - run: echo 'export RELEASE="0"' >> $BASH_ENV #UPDATE_RELEASE_STATUS
+      - run: echo 'export RELEASE="1"' >> $BASH_ENV #UPDATE_RELEASE_STATUS
       # **do not edit: end
       - run: mv ~/project ~/tcoffee
       - run: mkdir -p ~/repo 
