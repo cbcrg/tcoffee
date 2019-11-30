@@ -2001,8 +2001,8 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
 		{
 		  if (rep>0)c=(int)rand()%n_col_pair;
 		  else c=c1;
-		  ColPair[c1][0]=InColPair[c][0];
-		  ColPair[c1][1]=InColPair[c][1];
+		  ColPair[c1][0]=InColPair[c][0]-1;
+		  ColPair[c1][1]=InColPair[c][1]-1;
 		}
 	      ColPair[c1][0]=ColPair[c1][1]=-1;
 	      
