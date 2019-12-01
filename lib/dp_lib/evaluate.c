@@ -642,9 +642,10 @@ Alignment * nfork_triplet_coffee_evaluate_output ( Alignment *IN,Constraint_list
 Alignment * triplet_coffee_evaluate_output ( Alignment *IN,Constraint_list *CL)  
 {
   
+
   if (!IN || !CL || !CL->residue_index) return IN;
   
-  if (get_nproc()==1)return  nfork_triplet_coffee_evaluate_output (IN,CL);
+  if (get_nproc()==1)return  fork_triplet_coffee_evaluate_output (IN,CL,2);
   else if (strstr ( CL->multi_thread, "evaluate"))return  fork_triplet_coffee_evaluate_output (IN,CL,get_nproc());
   else return fork_triplet_coffee_evaluate_output (IN,CL,1);
 }

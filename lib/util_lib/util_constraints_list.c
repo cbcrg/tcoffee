@@ -62,7 +62,6 @@ Constraint_list *produce_list   ( Constraint_list *CL, Sequence *S, char * metho
 
 	nproc=get_nproc();
 
-
 	if (strstr ( CL->multi_thread, "jobcells"))return fork_cell_produce_list (CL, S, method, weight, mem_mode,job,nproc,local_stderr);
 	else if (strstr ( CL->multi_thread, "joblines"))return fork_line_produce_list (CL, S, method, weight, mem_mode,job, nproc,local_stderr);
 	else if (strstr ( CL->multi_thread, "jobs"))return fork_subset_produce_list (CL, S, method, weight, mem_mode,job, nproc,local_stderr); //Recommended default
@@ -125,47 +124,47 @@ Constraint_list *fork_subset_produce_list   ( Constraint_list *CL, Sequence *S, 
 	while (jl[a])
 	{
 	  start=job=jl[a][0];
-		end=jl[a][1];
-		pid_tmpfile[a]=vtmpnam(NULL);
-		pid=vvfork(NULL);
-
-		if (pid==0)//child process
+	  end=jl[a][1];
+	  pid_tmpfile[a]=vtmpnam(NULL);
+	  pid=vvfork(NULL);
+	  
+	  if (pid==0)//child process
+	    {
+	      int done, todo;
+	      
+	      freeze_constraint_list (CL);//record the current state, so as not to dump everything
+	      initiate_vtmpnam(NULL);
+	      vfclose(vfopen (pid_tmpfile[a],"w"));
+	      
+	      todo=0;
+	      while (job!=end){todo++;job=job->c;}
+	      job=start;
+	      
+	      done=0;
+	      while (job!=end)
 		{
-			int done, todo;
-
-			freeze_constraint_list (CL);//record the current state, so as not to dump everything
-			initiate_vtmpnam(NULL);
-			vfclose(vfopen (pid_tmpfile[a],"w"));
-
-			todo=0;
-			while (job!=end){todo++;job=job->c;}
-			job=start;
-
-			done=0;
-			while (job!=end)
-			{
-				if (a==0)output_completion ( local_stderr,done,todo,1, "Submit   Job");
-				job=print_lib_job (job, "io->CL=%p control->submitF=%p control->retrieveF=%p control->mode=%s",CL,submit_lib_job, retrieve_lib_job, CL->multi_thread );
-
-				job=submit_job (job);
-				retrieve_job (job);
-
-				job=job->c;
-				done++;
-			}
-			dump_constraint_list (CL, pid_tmpfile[a], "a");
-			freeze_constraint_list (CL);
+		  if (a==0)output_completion ( local_stderr,done,todo,1, "Submit   Job");
+		  job=print_lib_job (job, "io->CL=%p control->submitF=%p control->retrieveF=%p control->mode=%s",CL,submit_lib_job, retrieve_lib_job, CL->multi_thread );
+		  
+		  job=submit_job (job);
+		  retrieve_job (job);
+		  
+		  job=job->c;
+		  done++;
+		}
+	      dump_constraint_list (CL, pid_tmpfile[a], "a");
+	      freeze_constraint_list (CL);
 			myexit (EXIT_SUCCESS);
-		}
-		else
-		{
-			pid_list[pid]=npid;
-			//set_pid(pid);
-			npid++;
-			a++;
-		}
+	    }
+	  else
+	    {
+	      pid_list[pid]=npid;
+	      //set_pid(pid);
+	      npid++;
+	      a++;
+	    }
 	}
-
+	
 	//wait for all processes to finish
 	for (a=0; a<npid; a++)
 	{
