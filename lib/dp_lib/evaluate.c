@@ -1953,18 +1953,16 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
   if (get_string_variable ("columns4treeF"))
     {
       int i;
-      char ***l=file2list (get_string_variable ("columns4treeF"), " ");
+      char ***l=file2list (get_string_variable ("columns4treeF"), " \t");
       i=0;
       while (l[i++]);
       InColPair=declare_int (i+1, 3);
-      
       i=n_col_pair=0;
       while (l[i])
 	{
 	 
 	  int n=atoi(l[i][0]);
-	  
-	  if (n==3 && l[i][1][0]!='#')
+	  if (n>=3 && l[i][1][0]!='#')
 	    {
 	      InColPair[n_col_pair][0]=atoi (l[i][1]);
 	      InColPair[n_col_pair][1]=atoi (l[i][2]);
@@ -1974,6 +1972,7 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
 	}
       ColPair=declare_int (n_col_pair*2+1, 2);
       free_arrayN((void**)l, 2);
+      
     }
   else
     {

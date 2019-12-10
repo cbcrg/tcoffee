@@ -65,7 +65,7 @@ Constraint_list *produce_list   ( Constraint_list *CL, Sequence *S, char * metho
 	if (strstr ( CL->multi_thread, "jobcells"))return fork_cell_produce_list (CL, S, method, weight, mem_mode,job,nproc,local_stderr);
 	else if (strstr ( CL->multi_thread, "joblines"))return fork_line_produce_list (CL, S, method, weight, mem_mode,job, nproc,local_stderr);
 	else if (strstr ( CL->multi_thread, "jobs"))return fork_subset_produce_list (CL, S, method, weight, mem_mode,job, nproc,local_stderr); //Recommended default
-	else return fork_subset_produce_list (CL, S, method, weight, mem_mode,job,1,local_stderr); //Recommended default
+	else return fork_subset_produce_list (CL, S, method, weight, mem_mode,job,2,local_stderr); //Recommended default
 }
 int job2first_seq(Job_TC *job)
 {
