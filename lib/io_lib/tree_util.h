@@ -4,6 +4,9 @@
 typedef struct ALNcol
 {
   int aa;
+  long index;
+  int homoplasy;
+  int whomoplasy;
   //int id //put this back when debugging pointers
 struct ALNcol *next;
 };

@@ -8247,18 +8247,12 @@ char* tree2msa4dpa (NT_node T, Sequence *S, int N, char *method)
     ktree2aln_bucketsF(K, "alndump.");
   
   if (getenv ("OLD_DPA"))
-	   outname=kmsa2msa_old  (S,K,n,&cn);
+    outname=kmsa2msa_old  (S,K,n,&cn);
   else if ( getenv("NOREC_DPA"))
     outname=kmsa2msa_norec  (S,KL,n);
   else
     outname=kmsa2msa (K,S,NULL,NULL); 
-  //
-  
-  
-  //do it on disc
-  //no memory footprint but very very slow
-  //outname=kmsa2msa_d  (S,K,n,&cn); 
-  
+    
   declare_aln_node (-1);//Free all the nodes declared
   
   return outname;
@@ -8401,13 +8395,14 @@ char *kmsa2msa (KT_node K,Sequence *S, ALNcol***S2,ALNcol*start)
   char *out=NULL;
   FILE *fp;
   ALNcol *end;
+  char *output;
   
   if (!start)
     {
       S2=(ALNcol***)vcalloc (S->nseq, sizeof (ALNcol**));
       for (s=0; s<S->nseq; s++)S2[s]=(ALNcol**)vcalloc (S->len[s], sizeof (ALNcol*));
+      //A=quick_read_aln (K->msaF); -- For some reason the efficient i/o function does not work
       
-      //A=quick_read_aln (K->msaF);
       A=main_read_aln (K->msaF,NULL);
       start=msa2graph(A,S, S2,start, -1);
       free_aln (A);
@@ -8420,7 +8415,7 @@ char *kmsa2msa (KT_node K,Sequence *S, ALNcol***S2,ALNcol*start)
     {
       int i =name_is_in_hlist2((K->child[a])->name,S->name, S->nseq);
       
-      //A=quick_read_aln ((K->child[a])->msaF);
+      //A=quick_read_aln ((K->child[a])->msaF); -- For some reason the efficient i/o function does not work
       A=main_read_aln    ((K->child[a])->msaF,NULL);
       start=msa2graph (A,S, S2,start,i);
       free_aln (A);
@@ -8430,37 +8425,96 @@ char *kmsa2msa (KT_node K,Sequence *S, ALNcol***S2,ALNcol*start)
   
   
   if (!out) return out;
+  output=get_string_variable ("output");
   
-  
-  fp=vfopen (out, "w");
-  for (s=0; s<S->nseq; s++)
+  if (!output || strm (output, "fasta_aln"))
     {
-      int r=0;
-      ALNcol*msa=start;
-      
-      output_completion (stderr,s,S->nseq, 100, "Final MSA");
-      for (c=0; c<S->len[s]; c++)
+     
+      fp=vfopen (out, "w");
+      for (s=0; s<S->nseq; s++)
 	{
-	  S2[s][c]->aa=S->seq[s][c];
-	}
-      fprintf (fp, ">%s\n", S->name[s]);
-      
-      while (msa->next)
-	{
-	  if (msa->aa==0){fprintf (fp, "-");}
-	  else if (msa->aa>0) 
+	  int r=0;
+	  ALNcol*msa=start;
+	  
+	  output_completion (stderr,s,S->nseq, 100, "Final MSA");
+	  for (c=0; c<S->len[s]; c++)
 	    {
-	      fprintf (fp, "%c",msa->aa);
-	      msa->aa=0;
+	      S2[s][c]->aa=S->seq[s][c];
 	    }
-      	  msa=msa->next;
+	  fprintf (fp, ">%s\n", S->name[s]);
+	  
+	  while (msa->next)
+	    {
+	      if (msa->aa==0){fprintf (fp, "-");}
+	      else if (msa->aa>0) 
+		{
+		  fprintf (fp, "%c",msa->aa);
+		  msa->aa=0;
+		}
+	      msa=msa->next;
+	    }
+	  
+	  fprintf (fp, "\n");
 	}
-      
-      fprintf (fp, "\n");
+      vfclose (fp);
     }
-  vfclose (fp);
+  else if (strm (output, "fastaz_aln"))
+    {
+      fp=vfopen (out, "w");
+      for (s=0; s<S->nseq; s++)
+	{
+	  int r=0;
+	  ALNcol*msa=start;
+	  int cg=0;
+	  
+	  output_completion (stderr,s,S->nseq, 100, "Final MSA");
+	  for (c=0; c<S->len[s]; c++)
+	    {
+	      S2[s][c]->aa=S->seq[s][c];
+	    }
+	  fprintf (fp, ">%s\n", S->name[s]);
+	  
+	  while (msa->next)
+	    {
+	      if (msa->aa==0){cg++;}
+	      else if (msa->aa>0) 
+		{
+		  if (cg){fprintf (fp, "%d",cg);cg=0;}
+		  fprintf (fp, "%c",msa->aa);
+		  msa->aa=0;
+		}
+	      msa=msa->next;
+	    }
+	  if (cg){fprintf (fp, "%d",cg);cg=0;}
+	  fprintf (fp, "\n");
+	}
+      vfclose (fp);
+    }
+  else
+    {
+       myexit (fprintf_error (stderr, "-output=%s is not supported when using -reg [FATAL:%s]", output,PROGRAM));
+    }
+ 
+  if (get_string_variable ("homoplasy"))
+    {
+       ALNcol*msa=start;
+       int homoplasy=0;
+       int whomoplasy=0;
+       FILE *fp2;
+       
+       while (msa->next)
+	 {
+	   homoplasy+=msa->homoplasy;
+	   whomoplasy+=msa->whomoplasy;	   
+	   msa=msa->next;
+	 }
+       
+       fp2=vfopen (get_string_variable ("homoplasy"), "w");
+       fprintf ( fp2, "HOMOPLASY: %d\n", homoplasy);
+       fprintf ( fp2, "WEIGHTED_HOMOPLASY: %d\n", whomoplasy);
+       vfclose (fp2);
+    }
 
-  
   vfree (start);
   for (s=0; s<S->nseq; s++)vfree (S2[s]);
   vfree (S2);
@@ -8470,13 +8524,14 @@ char *kmsa2msa (KT_node K,Sequence *S, ALNcol***S2,ALNcol*start)
 ALNcol * msa2graph (Alignment *A, Sequence *S, ALNcol***S2,ALNcol*msa,int seq)
 {
   //Thread msa in the child section
-  int s, c,ir;
+  int s, c,ir, subseq;
   int * lu =(int*) vcalloc (A->nseq, sizeof (int));
   int **pos=(int**)declare_int (A->nseq, A->len_aln);
   ALNcol**graph=(ALNcol**)vcalloc ( A->len_aln, sizeof (ALNcol*));
   ALNcol *lp, *p, *test;
   ALNcol *start, *end, *parent, *child, *lchild, *lparent;
   int compact=-1;
+  int check_homoplasy=1;
   
   if (A->len_aln==0)return msa;
   
@@ -8490,8 +8545,42 @@ ALNcol * msa2graph (Alignment *A, Sequence *S, ALNcol***S2,ALNcol*msa,int seq)
 	  if (A->seq_al[s][c]!='-')pos[s][c]=r++;
 	  else pos[s][c]=-1;
 	}
+      //This matches the index of seq in S - the complkete sequence dataset and in A, the subMSA
+      if (lu[s]==seq)subseq=s;
     }
   
+  //The MSA is a linked list of ALNcol having the length of the full MSA
+  //S2 is a list of residues with each residue pointing to a position on MSA
+  //This way, MSA is only ONE string of Length MSA as opposed to N Strings of length MSA
+  //When A is integrated within MSA, for each column, we look for an S2 residue pointing to an ALNcol in msa. 
+  //If there is none, then this is an unmatched column and a column of gpas must be inserted in the rest of the sequences
+  
+
+  if (msa && check_homoplasy)
+    {
+      int len, r;
+      int *rpos=(int*)vcalloc (A->len_aln, sizeof (int));
+      for (len=0,c=0; c<A->len_aln; c++)
+	{
+	  if (A->seq_al[subseq][c]!='-')rpos[len++]=c;
+	}
+      
+      for (r=0; r<len-1; r++)
+	{
+	  int d1=rpos[r+1]-rpos[r];
+	  int d2=(S2[seq][r+1])->index-(S2[seq][r])->index;
+	  if (d1>1 && d2>1)
+	    {
+	      (S2[seq][r])->homoplasy++;
+	      (S2[seq][r])->whomoplasy+=MIN(d1,d2);
+	    }
+	}
+      vfree (rpos);
+    }
+
+	    
+	
+
   for (c=0; c<A->len_aln; c++)
     {
       p=NULL;
@@ -8513,10 +8602,11 @@ ALNcol * msa2graph (Alignment *A, Sequence *S, ALNcol***S2,ALNcol*msa,int seq)
 	  
 	  ir=pos[s][c];
 	  if (ir!=-1 && !S2[lu[s]][ir])S2[lu[s]][ir]=p;
+	  //p is an empty column it will trigger a insertion in msa in the next step.
 	}
     }
-  
-  if (!msa)
+ 
+  if (!msa)//graph gets turned into msa
     {
       msa=start=declare_alncol();
       end=declare_alncol();
@@ -8528,7 +8618,7 @@ ALNcol * msa2graph (Alignment *A, Sequence *S, ALNcol***S2,ALNcol*msa,int seq)
 
      
     }
-  else 
+  else //Insert graph into msa by expanding seq
     {
       ALNcol*last=msa;
       int len=0;
@@ -8539,6 +8629,7 @@ ALNcol * msa2graph (Alignment *A, Sequence *S, ALNcol***S2,ALNcol*msa,int seq)
 	  if (graph[c]->aa)last=graph[c];
 	  else 
 	    {
+	      //This is where new columns of gaps are inserted in the MSA
 	      graph[c]->next=last->next;
 	      last->next=graph[c];
 	      last=last->next;
@@ -8546,6 +8637,19 @@ ALNcol * msa2graph (Alignment *A, Sequence *S, ALNcol***S2,ALNcol*msa,int seq)
 	}
       for (c=0; c<S->len[seq]; c++)(S2[seq][c])->aa=0;
     }
+  
+  //This assigns an index to every column in the linked list MSA
+  if (check_homoplasy)
+    {
+      int i=0;
+      ALNcol*st=msa;
+      while (st)
+	{
+	  st->index=i++;
+	  st=st->next;
+	}
+    }
+  
   
   vfree (graph);
   vfree (lu);

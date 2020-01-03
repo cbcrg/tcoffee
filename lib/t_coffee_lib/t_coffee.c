@@ -7010,7 +7010,8 @@ Alignment * t_coffee_dpa (int argc, char **argv)
   int seqflag=0;
   FILE *le;
   char *se_name;
-  
+  char *homoplasy=NULL;
+
   /* This is used for the dump function see -dump option*/
   declare_name (se_name);
   sprintf (se_name, "stderr");
@@ -7023,7 +7024,7 @@ Alignment * t_coffee_dpa (int argc, char **argv)
   //default values
   set_int_variable ("swlN",50);
   set_nproc(1);
-  
+  set_string_variable ("output", "fasta_aln");
   for (a=0; a<argc; a++)
     {
       if      (strm (argv[a], "-seq" ))
@@ -7032,7 +7033,16 @@ Alignment * t_coffee_dpa (int argc, char **argv)
 	  S=quick_read_seq (seqfile);
 	  seqflag=1;
 	}
-      
+      else if (strm ( argv[a], "-output"))
+	{
+	  char *dpa_output=argv[++a];
+	  if (strm (dpa_output, "fastaz_aln"))set_string_variable ("output", "fastaz_aln");
+	  else if (strm (dpa_output, "fasta_aln"))set_string_variable ("output", "fasta_aln");
+	  else
+	    {
+	       myexit (fprintf_error (stderr, "regressive mode only supports fasta_aln and fastaz_aln with the -output flag [FATAL:%s]", argv[a],PROGRAM));
+	    }
+	}
       else if (strm (argv[a],"-dpa_tree") ||strm (argv[a],"-reg_tree") )
 	{
 	  dpa_tree=argv[++a];
@@ -7075,7 +7085,7 @@ Alignment * t_coffee_dpa (int argc, char **argv)
 	{
 	  dpa_aligner=argv[++a];
 	}
-      else if (strm (argv[a],"-output") || strm (argv[a],"-in") || strm (argv[a],"-infile"))
+      else if (strm (argv[a],"-in") || strm (argv[a],"-infile"))
 	{
 	  myexit (fprintf_error (stderr, "%s is not supported when using -dpa [FATAL:%s]", argv[a],PROGRAM));
 	}
@@ -7083,7 +7093,13 @@ Alignment * t_coffee_dpa (int argc, char **argv)
 	{
 	   myexit (fprintf_error (stderr, "%s is an unknown dpa flag [FATAL:%s]", argv[a],PROGRAM));
 	}
+      else if ( strstr (argv[a], "reg_homoplasy"))
+	{
+	  homoplasy=(char*)vcalloc ( 1000, sizeof (char));
+	 
+	}
       else
+	
 	command=strcatf (command,"%s ", argv[a]);
     }
   
@@ -7100,6 +7116,25 @@ Alignment * t_coffee_dpa (int argc, char **argv)
       command=(char*)vcalloc (10000, sizeof (char));
       sprintf (command, "clustalo_msa");
     }
+  
+
+  //prepare output names
+  //output the MSA
+  F=parse_fname(seqfile);
+  if (run_name){vfree(F->name); F->name=run_name;F->path[0]='\0';}
+  
+  if (!outfile)
+    {
+      outfile=(char*)vcalloc ( 1000, sizeof (char));
+      sprintf (outfile, "%s.%s", F->name, get_string_variable("output"));
+    }
+  //output the MSA
+  if (homoplasy)
+    {
+      sprintf (homoplasy, "%s.homoplasy", F->name);
+      set_string_variable("homoplasy", homoplasy);
+    }
+  
   
   //check Sequences are here
   
@@ -7146,6 +7181,10 @@ Alignment * t_coffee_dpa (int argc, char **argv)
   else { w=seq2dpa_weight (S, "longuest");fprintf ( le, "default longuest\n", dpa_weight);}
   fprintf ( le, "!Compute Weights --- done\n");
   
+  
+  
+
+
   //run the alignment
   fprintf (le, "!Compute MSA --- reg_method %s -- reg_nseq %d -- start\n", command, dpa_nseq);
   T=node2master (T, S, w);
@@ -7153,19 +7192,9 @@ Alignment * t_coffee_dpa (int argc, char **argv)
   alnfile=tree2msa4dpa(T, S, dpa_nseq, command);
   fprintf ( le, "!Compute MSA --- done\n");
   
-  //figure out the name
-  F=parse_fname(seqfile);
-  if (run_name){vfree(F->name); F->name=run_name;F->path[0]='\0';}
-  
-  //output the MSA
-  if (!outfile)
-    {
-      outfile=(char*)vcalloc ( 1000, sizeof (char));
-      sprintf (outfile, "%s.aln", F->name);
-    }
   printf_system ("mv %s %s", alnfile, outfile);
-  display_output_filename (le, "MSA","fasta",outfile, CHECK);
-  
+  display_output_filename (le, "MSA",get_string_variable ("output"),outfile, CHECK);
+  if (homoplasy)display_output_filename (le, "HOMOPLASY","homoplasy",homoplasy, CHECK);
   
   //output The tree
   if (output_dpa_tree)
