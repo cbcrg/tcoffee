@@ -1790,6 +1790,10 @@ NT_node seq2dnd (Sequence *S, char *dpa_tree)
       free_int (s, -1);
       T=main_read_tree (tfile);
     }
+  else if strm (dpa_tree, "regdnd")
+    {
+      T=seq2reg_tree(S);
+    }
   else if ( dpa_tree[0]=='#')
     {
       char *seqf=vtmpnam (NULL);
@@ -2097,7 +2101,189 @@ NT_node seq2cw_tree ( Sequence *S)
   vfree (cdir);
   return T;
 }
+NT_node seq2reg_tree (Sequence *S)
+{
+  char *seq=vtmpnam  (NULL);
+  FILE *fp;
+  char *tree=vtmpnam (NULL);
+  NT_node T;
+  
+  //parameters to be read
+  char *mode="codnd";
+  int nseq=get_int_variable ("reg_dnd_nseq");
+  int depth=get_int_variable("reg_dnd_depth");
+  
+  int **list;
+  int a, i;
+  Sequence *S2;
+  float *w;
 
+  
+  if (!tree)tree=vtmpnam (NULL);
+  if (!seq)seq=vtmpnam (NULL);
+
+  if (nseq>S->nseq)return seq2dnd(S,mode);
+  
+  list=declare_int (S->nseq, 2);
+  for (a=0; a<S->nseq; a++)
+    {
+      list[a][0]=a;
+      list[a][1]=vsrand(10*S->nseq);
+    }
+  sort_int (list, 2, 1,0,S->nseq-1);
+  fp=vfopen (seq, "w");
+  fprintf ( stderr, "!Estimate Regressive Tree CoreMethod: %s CoreNseq: %d Depth: %d\n",mode, nseq, depth); 
+  for (a=0; a<nseq; a++)
+    {
+      fprintf ( fp, ">%s\n%s\n", S->name[list[a][0]], S->seq[list[a][0]]);
+    }
+  vfclose (fp);
+  S2=get_fasta_sequence(seq, NULL);
+  T=seq2dnd(S2,mode);
+  w=seq2dpa_weight (S, "longuest");
+  T=node2master    (T,S, w);
+  
+  for (i=0,a=nseq; a<S->nseq; a++,i++)
+    {
+      output_completion (stderr,i,(S->nseq-nseq), 100, "Incorporate Sequences");
+      //fprintf (stderr, "add %s : ", S->name[list[a][0]]);
+      addseq2reg_tree(T,S,list[a][0], depth);
+      //fprintf ( stderr, "\n");
+    }
+  free_sequence (S2, S2->nseq);
+  free_int (list, -1);
+  vfree (w);
+
+  return T;
+}
+NT_node addseq2reg_tree (NT_node T, Sequence *S, int seq, int depth)
+{
+  if (!T)return NULL;
+  int a;
+  if (T->left && T->right)
+    {
+      NT_node R;
+      int seqL, seqR;
+      int score=strlen (S->seq[seq]);
+      float *scoreR=(float*)vcalloc ( 3, sizeof(float));
+      float *scoreL=(float*)vcalloc ( 3, sizeof(float));
+      
+      if (score>T->score)
+	{
+	  T->score=score;
+	  sprintf (T->name, "%s", S->name[seq]);
+	  T->seq=seq;
+	}
+      seqL=(T->left)->seq;
+      seqR=(T->right)->seq;
+      
+      node2reg_score(T->right,S,S->seq[seq], scoreR, depth);
+      node2reg_score(T->left,S,S->seq[seq], scoreL, depth);
+     
+      
+      if      (scoreR[0]>scoreL[0])R=T->right;
+      else if (scoreR[0]<scoreL[0])R=T->left;
+      else if (scoreR[1]>scoreL[1])R=T->right;
+      else if (scoreR[1]<scoreL[1])R=T->left;
+      else if (scoreR[2]>scoreL[2])R=T->right;
+      else if (scoreR[2]<scoreL[2])R=T->left;
+      else R=T->left; 
+      vfree (scoreL); vfree(scoreR);
+      //fprintf ( stderr, "%c", (R==T->right)?'R':'L');
+      return addseq2reg_tree (R,S, seq, depth);
+    }
+  else
+    {
+      NT_node L=new_declare_tree_node();
+      NT_node R=new_declare_tree_node();
+      
+      T->leaf=0;
+      T->isseq=0;
+      
+      T->left=L;
+      sprintf (L->name, "%s", T->name);
+      L->seq=T->seq;
+      L->leaf=1;
+      L->isseq=1;
+      L->parent=T;
+      
+      T->right=R;
+      sprintf (R->name, "%s", S->name[seq]);
+      R->seq=seq;
+      R->leaf=1;
+      R->isseq=1;
+      R->parent=T;
+      
+      int score=strlen (S->seq[seq]);
+      if (score>T->score)
+	{
+	  T->score=score;
+	  sprintf (T->name, "%s", S->name[seq]);
+	  T->seq=seq;
+	}
+      return R;
+    } 
+}
+
+float* node2reg_score(NT_node T, Sequence *S,char *s1, float *v, int depth)
+{
+  static int pdepth;
+  static int **matrix=read_matrice ("blosum62mt");
+  static NT_node *NNL;
+  static NT_node *CNL;
+  int cnn=0;
+  int a,d, i, j;
+  int nn=(int)pow((double)2,(double)depth);
+  
+  static float*cv=(float*)vcalloc (3, sizeof (float));
+  for (a=0; a<3; a++) cv[a]=0;
+  
+  if (pdepth && pdepth!=depth)
+    {
+      pdepth=depth;
+      vfree (NNL); NNL=NULL;
+      vfree (CNL); CNL=NULL;
+    }
+  
+  if (!NNL)NNL=(NT_node*)vcalloc (nn,sizeof (NT_node));
+  if (!CNL)CNL=(NT_node*)vcalloc (nn,sizeof (NT_node));
+
+
+  CNL[cnn++]=T;
+  for ( d=0; d< depth; d++)
+    {
+      for (i=0, j=0; i<cnn; i++)
+	{
+	  if ((CNL[i])->right)
+	    {
+	      NNL[j++]=(CNL[i])->right;
+	      NNL[j++]=(CNL[i])->left;
+	    }
+	  else
+	    {
+	      NNL[j++]=CNL[i];
+	    }
+	}
+      cnn=j;
+      for (i=0; i<cnn; i++)CNL[i]=NNL[i];
+    }
+  
+  for (i=0; i<cnn; i++)
+    {
+      seq2sw_vector(s1, S->seq[(CNL[i])->seq], -4, -1, matrix, cv);
+      if (cv[0]>v[0])
+	for (a=0; a<3;a++)v[a]=cv[a];
+    }
+  return v;
+}
+    
+float* node2reg_score_old(char *s1, char *s2,float *v)
+{
+  static int **matrix=read_matrice ("blosum62mt");
+  return seq2sw_vector(s1,s2, -4, -1, matrix,v);
+}
+    
+ 
 NT_node seq2co_dnd (Sequence *S)
 {
   char *seq=vtmpnam  (NULL);

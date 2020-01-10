@@ -5300,7 +5300,8 @@ NT_node node2master(NT_node T, Sequence *S, float *w)
 	}
       T->score=R->score;
       T->seq=R->seq;
-      T->name=R->name;
+      
+      sprintf (T->name,"%s",R->name);
     }
   
   return T;
@@ -6051,29 +6052,30 @@ NT_node new_insert_node (NT_node T)
 
 NT_node new_declare_tree_node ()
 {
-	NT_node p=NULL;
-	static int node_index;
+  //does not declare seqlist --> important when making very large trees
+  NT_node p=NULL;
+  static int node_index;
 	
-	p= (NT_node)vcalloc (1, sizeof ( Treenode));
-	if (!p)HERE ("Could Not Allocate Node");
-	
-	
-	p->left = NULL;
-   	p->right = NULL;
-   	p->parent = NULL;
-   	p->dist = 0.0;
-   	p->leaf = 0;
-   	p->order = 0;
-	p->index=++node_index;
-	p->maxnseq=1000;
-   	p->name=(char*)vcalloc (MAXNAMES+1,sizeof (char));
-	
-   	p->name[0]='\0';
+  p= (NT_node)vcalloc (1, sizeof ( Treenode));
+  if (!p)HERE ("Could Not Allocate Node");
 	
 	
-   	return p;
+  p->left = NULL;
+  p->right = NULL;
+  p->parent = NULL;
+  p->dist = 0.0;
+  p->leaf = 0;
+  p->order = 0;
+  p->index=++node_index;
+  p->maxnseq=1000;
+  p->name=(char*)vcalloc (MAXNAMES+1,sizeof (char));
+  
+  p->name[0]='\0';
+  
+  
+  return p;
 
-	}
+}
 void display_tree_lseq2 (NT_node T, int n)
 {
   if (!T) return;

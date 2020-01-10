@@ -1,7 +1,9 @@
 #ifndef __UTIL_DP_GOTOH_NW_H
 #define __UTIL_DP_GOTOH_NW_H 
 /*pair wise aln implementations*/
+float* seq2sw_vector (char *s1, char *s2, int gop, int gep, int **m, float *v);
 int seq2swl (char *s1, char *s2, int gop, int gep, int **m);
+
 int idscore_pairseq (char *s1, char *s2, int gop, int gep, int **m, char *mode);
 int idscore_pair_wise (Alignment *A,int*ns, int **l_s,Constraint_list *CL);
 int gotoh_pair_wise         (Alignment *A,int*ns, int **l_s,Constraint_list *CL);

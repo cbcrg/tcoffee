@@ -9029,7 +9029,7 @@ FILE * output_completion ( FILE *fp,int n, int tot, int n_reports, char *string)
 
 	      elapsed=((float)100-(float)ref_val)*((float)elapsed/(float)ref_val);
 	      if (elapsed)
-		fprintf (fp, "\r!\t\t[%s][TOT=%5d][%3d %%][REMAINING TIME: %4d sec.]", (string)?string:"",tot,ref_val, elapsed);
+		fprintf (fp, "\r!\t\t[%s][TOT=%5d][%3d %%][EST. REMAINING TIME: %4d sec.]", (string)?string:"",tot,ref_val, elapsed);
 	      else
 		fprintf (fp, "\r!\t\t[%s][TOT=%5d][%3d %%]", (string)?string:"",tot,ref_val);
 	      flag=0;

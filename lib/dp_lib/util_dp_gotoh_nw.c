@@ -50,6 +50,106 @@ void debug_list (char *tag, int n, int **list, int ex)
 /*                                                                             */
 /*	for MODE, see the function  get_dp_cost                                */
 /*******************************************************************************/
+
+float* seq2sw_vector (char *s1, char *s2, int gop, int gep, int **m, float *v)
+//return the length, the score and the average id of the best scoring local alignment
+{
+  static int **I;
+  static int **D;
+  static int **M;
+  static int maxlen;
+  int best_score=0; 
+  int best_len=0;
+  int best_id=0;
+
+  int score;
+  int *P;
+  int i, j,l1, l2, l, id, igop,match;
+    
+  if (!s1)
+    {
+      if (!maxlen)return 0;
+      free_int (I, -1);
+      free_int (D, -1);
+      free_int (M, -1);
+      maxlen=0;
+      return 0;
+    }
+
+  l1=strlen (s1); l2=strlen (s2);
+  lower_string (s1); lower_string (s2);
+
+  if (l2>maxlen)
+    {
+      seq2swl (NULL,NULL,0,0,NULL);
+      I=declare_int (6,l2+1);D=declare_int (6,l2+1);M=declare_int (6,l2+1);
+      maxlen=l2;
+    }
+  for (j=0; j<=l2; j++)
+    {
+      D[0][j]=gep*j;M[0][j]=2*gep*j;D[4][j]=0;
+    }
+  
+  for (i=1; i<=l1; i++)
+    {
+      
+      I[1][0]=i*gep;
+      M[1][0]=2*i*gep;
+      
+      for (j=1; j<=l2; j++)
+	{
+	  score=m[s1[i-1]-'a'][s2[j-1]-'a'];
+	  id=(s1[i-1]==s2[j-1])?1:0;
+	  
+	  igop=(i==l1 || j==l2)?0:gop;
+	  
+	  if   ((D[0][j]+gep)>(M[0][j]+igop+gep))   {D[1][j]=D[0][j]+gep;      D[3][j]=D[2][j];        D[5][j]=D[4][j];}
+	  else                                      {D[1][j]=M[0][j]+igop+gep; D[3][j]=M[2][j];        D[5][j]=M[4][j];}
+	  
+	  if ( (I[1][j-1]+gep)>(M[1][j-1]+igop+gep)){I[1][j]=I[1][j-1]+gep;      I[3][j]=I[3][j-1];    I[5][j]=I[5][j-1];}
+	  else                                      {I[1][j]=M[1][j-1]+igop+gep; I[3][j]=M[3][j-1];    I[5][j]=M[5][j-1];}
+	  
+	  match=M[0][j-1]+score;
+	  if (I[1][j]>match && I[1][j]>D[1][j] && I[1][j]>0)     {M[1][j]=I[1][j]           ; M[3][j]=I[3][j];      M[5][j]=I[5][j];}
+	  else if (D[1][j]>match && D[1][j]>0)                   {M[1][j]=D[1][j]           ; M[3][j]=D[3][j];      M[5][j]=D[5][j];}
+	  else if (match>0)                                    {M[1][j]=match             ; M[3][j]=M[2][j-1]+id; M[5][j]=M[4][j-1]+1;}
+	  else
+	    {
+	      M[1][j]=M[3][j]=M[5][j]=0;
+	    }
+	  //HERE ("%d %d --%d %d (%d %d)", score, M[1][j], best_score, best_len, l1, l2);
+	  if (M[1][j]>best_score)
+	    {
+	      best_score=M[1][j];
+	      best_id=M[3][j];
+	      best_len=M[5][j];
+	     
+	    }
+	}
+      
+      P=I[0]; I[0]=I[1]; I[1]=P;
+      P=I[2]; I[2]=I[3]; I[3]=P;
+      P=I[4]; I[4]=I[5]; I[5]=P;
+
+      P=D[0]; D[0]=D[1]; D[1]=P;
+      P=D[2]; D[2]=D[3]; D[3]=P;
+      P=D[4]; D[4]=D[5]; D[5]=P;
+
+      P=M[0]; M[0]=M[1]; M[1]=P;
+      P=M[2]; M[2]=M[3]; M[3]=P;
+      P=M[4]; M[4]=M[5]; M[5]=P;
+    }
+
+  if (!v)v=(float*)vcalloc (3, sizeof (float));
+  v[0]=best_len;
+  v[1]=best_score;
+  v[2]=(best_len<0.0000001)?0:((float)best_id/(float)best_len);
+  
+  return v;  
+}
+
+
+
 int seq2swl (char *s1, char *s2, int gop, int gep, int **m)
 //return the length of the best scoring local alignment
 {
@@ -132,8 +232,7 @@ int seq2swl (char *s1, char *s2, int gop, int gep, int **m)
       P=M[4]; M[4]=M[5]; M[5]=P;
     }
   
-  return best_len;
-  
+  return best_len;  
 }
 int idscore_pairseq (char *s1, char *s2, int gop, int gep, int **m, char *comp_mode)
 {

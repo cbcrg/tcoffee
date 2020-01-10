@@ -7025,6 +7025,10 @@ Alignment * t_coffee_dpa (int argc, char **argv)
   set_int_variable ("swlN",50);
   set_nproc(1);
   set_string_variable ("output", "fasta_aln");
+  set_int_variable    ("reg_dnd_nseq",100);
+  set_int_variable    ("reg_dnd_depth",3);
+  set_string_variable ("reg_dnd_mode", "codnd");
+
   for (a=0; a<argc; a++)
     {
       if      (strm (argv[a], "-seq" ))
@@ -7047,6 +7051,19 @@ Alignment * t_coffee_dpa (int argc, char **argv)
 	{
 	  dpa_tree=argv[++a];
 	}
+      else if ( strm(argv[a], "-reg_dnd_nseq"))
+	{
+	  set_int_variable ("reg_dnd_nseq",atoi(argv[++a]));
+	}
+      else if ( strm (argv[a],"-reg_dnd_depth"))
+	{
+	  set_int_variable ("reg_dnd_depth",atoi(argv[++a]));
+	}
+      else if ( strm (argv[a],"-reg_dnd_mode"))
+	{
+	  set_string_variable ("reg_dnd_mode",argv[++a]);
+	}
+	
       else if (strm (argv[a],"-dpa_swlN")|| strm (argv[a],"-reg_swlN") )
 	{
 	  set_int_variable ("swlN",atoi (argv[++a]));
@@ -7165,7 +7182,9 @@ Alignment * t_coffee_dpa (int argc, char **argv)
       
     }
   else
-    T=seq2dnd (S, dpa_tree);fprintf ( le, " reg_tree %s\n", dpa_tree);
+    T=seq2dnd (S, dpa_tree);
+
+  fprintf ( le, " reg_tree %s\n", dpa_tree);
   
   if (dpa_tree && check_file_exists (dpa_tree))output_dpa_tree=0;
   else output_dpa_tree=1;
@@ -7181,14 +7200,9 @@ Alignment * t_coffee_dpa (int argc, char **argv)
   else { w=seq2dpa_weight (S, "longuest");fprintf ( le, "default longuest\n", dpa_weight);}
   fprintf ( le, "!Compute Weights --- done\n");
   
-  
-  
-
-
   //run the alignment
   fprintf (le, "!Compute MSA --- reg_method %s -- reg_nseq %d -- start\n", command, dpa_nseq);
   T=node2master (T, S, w);
-  //alnfile=tree2bucket (T,S,dpa_nseq,command);
   alnfile=tree2msa4dpa(T, S, dpa_nseq, command);
   fprintf ( le, "!Compute MSA --- done\n");
   

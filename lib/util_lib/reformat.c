@@ -1871,7 +1871,7 @@ char*  is_pdb_struc ( char *name)
      static char **buf_names;
      static char **buf_result;
      static int   nbuf, s;
-
+     static int max_nbuf;
 
      char *r=NULL;
      char command[1000];
@@ -1888,7 +1888,23 @@ char*  is_pdb_struc ( char *name)
 	  buf_result=(char**)vcalloc ( 1000, sizeof (char*));
 	  file_name1=(char*)vcalloc ( 1000, sizeof (char));
 	  file_name2=(char*)vcalloc ( 1000, sizeof (char));
+	  max_nbuf=1000;
 	}
+
+     if (nbuf>=max_nbuf)
+       {
+	 int i;
+	 buf_names= (char**)vrealloc ( buf_names, (max_nbuf+1000)*sizeof (char*));
+	 buf_result=(char**)vrealloc ( buf_result,(max_nbuf+1000)*sizeof (char*));
+	 
+	 for (i=max_nbuf;i<max_nbuf+1000; i++)
+	   {
+	     buf_names[i]=NULL;
+	     buf_result[i]=NULL;
+	   }
+	 max_nbuf+=1000;
+       }
+     
      if ( (s=name_is_in_list ( name, buf_names,nbuf,-1))!=-1)return buf_result[s];
 
 

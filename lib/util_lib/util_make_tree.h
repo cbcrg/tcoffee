@@ -41,6 +41,11 @@ NT_node   seq2dpparttree_dnd ( Sequence *S);
 NT_node   seq2fastparttree_dnd ( Sequence *S);
 NT_node   seq2cw_tree ( Sequence *S);
 
+//functions for the estimation of a reg_tree
+NT_node   seq2reg_tree( Sequence *S);
+NT_node   addseq2reg_tree (NT_node T, Sequence *S, int seq, int depth);
+float* node2reg_score(NT_node T, Sequence *S, char *s1, float *v, int depth);
+
 NT_node compute_cw_tree (Alignment *A);
 NT_node aln2cw_tree     (Alignment *A);
 NT_node aln2km_tree (Alignment *A, char *mode, int nboot);
