@@ -156,7 +156,9 @@ for ($a=0; $a<@ARGV; $a++)
       }
     else
       {
-	print "[$v] is an unknown argument"; die;
+	print "[$v] is an unknown argument"; 
+
+	die;
       }
   }
 
@@ -1339,6 +1341,10 @@ elsif ($action eq "-dup1")
 else
   {
     print "\nUnknown Action\n";
+    print "FLAG is in : $FLAG\n";
+    print "-dirsync.torre to copy files from torrent disk\n";
+    print "-year to clean freshly downloaded files\n";
+    
   }
 
 sub my_rename

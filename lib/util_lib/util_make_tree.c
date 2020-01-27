@@ -1794,6 +1794,10 @@ NT_node seq2dnd (Sequence *S, char *dpa_tree)
     {
       T=seq2reg_tree(S);
     }
+  else if strm (dpa_tree, "chaindnd")
+    {
+       T=seq2chain_tree(S);
+    }
   else if ( dpa_tree[0]=='#')
     {
       char *seqf=vtmpnam (NULL);
@@ -2101,6 +2105,60 @@ NT_node seq2cw_tree ( Sequence *S)
   vfree (cdir);
   return T;
 }
+
+NT_node seq2chain_tree (Sequence *S)
+{
+  int a, mode;
+  int **list;
+  NT_node Root, T, R, L;
+  char *modeS=get_string_variable ("reg_chaindnd_mode");
+  
+  if (!modeS)mode=0;
+  else if ( strm (modeS, "longest"))mode=1;
+  else if ( strm (modeS, "shortest"))mode=2;
+  else if ( strm (modeS, "random"))mode=3;
+  
+  
+  list=declare_int (S->nseq, 2);
+  for (a=0; a<S->nseq; a++)
+    {
+      list[a][0]=a;
+      if      ( mode==0)list[a][1]=a;
+      else if ( mode==1)list[a][1]=strlen (S->seq[a]);
+      else if ( mode==2)list[a][1]=strlen (S->seq[a])*-1;
+      else if ( mode==3)list[a][1]=rand()%S->nseq;
+    }
+  sort_int (list, 2, 1, 0, S->nseq-1);
+  
+  
+  T=Root=new_declare_tree_node();
+  for (a=0; a<S->nseq-1;a++)
+    {
+      R=new_declare_tree_node();
+      L=new_declare_tree_node();
+      
+      R->leaf=1;
+      R->isseq=1;
+      R->parent=T;
+      sprintf (R->name, "%s", S->name[list[a][0]]);
+
+      L->leaf=0;
+      L->isseq=0;
+      L->parent=T;
+            
+      T->right=R;
+      T->left=L;
+      T=L;
+    }
+  T->leaf=1;
+  T->isseq=1;
+  sprintf (T->name, "%s", S->name[list[a][0]]);
+  free_int (list, -1);
+  return Root;
+  }
+
+
+
 NT_node seq2reg_tree (Sequence *S)
 {
   char *seq=vtmpnam  (NULL);

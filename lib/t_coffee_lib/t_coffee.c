@@ -7051,6 +7051,10 @@ Alignment * t_coffee_dpa (int argc, char **argv)
 	{
 	  dpa_tree=argv[++a];
 	}
+      else if ( strm(argv[a], "-reg_chaindnd_mode"))
+	{
+	  set_string_variable ("reg_chaindnd_mode",argv[++a]);
+	}
       else if ( strm(argv[a], "-reg_dnd_nseq"))
 	{
 	  set_int_variable ("reg_dnd_nseq",atoi(argv[++a]));

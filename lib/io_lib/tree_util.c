@@ -8398,6 +8398,9 @@ char *kmsa2msa (KT_node K,Sequence *S, ALNcol***S2,ALNcol*start)
   FILE *fp;
   ALNcol *end;
   char *output;
+  ALNcol *msa;
+  unsigned long *gapcount,ngap, ngap2, len;
+  
   
   if (!start)
     {
@@ -8428,6 +8431,19 @@ char *kmsa2msa (KT_node K,Sequence *S, ALNcol***S2,ALNcol*start)
   
   if (!out) return out;
   output=get_string_variable ("output");
+
+  //compute length
+  msa=start;
+  len=0;
+  while (msa)
+    {
+      len++;
+      msa=msa->next;
+    }
+  msa=start;
+  gapcount=(unsigned long*)vcalloc (len, sizeof (unsigned long));
+  //
+
   
   if (!output || strm (output, "fasta_aln"))
     {
@@ -8436,7 +8452,7 @@ char *kmsa2msa (KT_node K,Sequence *S, ALNcol***S2,ALNcol*start)
       for (s=0; s<S->nseq; s++)
 	{
 	  int r=0;
-	  ALNcol*msa=start;
+	  msa=start;
 	  
 	  output_completion (stderr,s,S->nseq, 100, "Final MSA");
 	  for (c=0; c<S->len[s]; c++)
@@ -8445,14 +8461,20 @@ char *kmsa2msa (KT_node K,Sequence *S, ALNcol***S2,ALNcol*start)
 	    }
 	  fprintf (fp, ">%s\n", S->name[s]);
 	  
+	  r=0;
 	  while (msa->next)
 	    {
-	      if (msa->aa==0){fprintf (fp, "-");}
+	      if (msa->aa==0)
+		{
+		  fprintf (fp, "-");
+		  gapcount[r]++;
+		}
 	      else if (msa->aa>0) 
 		{
 		  fprintf (fp, "%c",msa->aa);
 		  msa->aa=0;
 		}
+	      r++;
 	      msa=msa->next;
 	    }
 	  
@@ -8502,21 +8524,34 @@ char *kmsa2msa (KT_node K,Sequence *S, ALNcol***S2,ALNcol*start)
        ALNcol*msa=start;
        int homoplasy=0;
        int whomoplasy=0;
+       int whomoplasy2=0;
        FILE *fp2;
        
        while (msa->next)
 	 {
 	   homoplasy+=msa->homoplasy;
 	   whomoplasy+=msa->whomoplasy;	   
+	   whomoplasy2+=msa->whomoplasy2;
 	   msa=msa->next;
 	 }
-       
+       ngap=ngap2=0;
+       for (a=0; a<len; a++)
+	 {
+	   ngap +=gapcount[a];
+	   ngap2+=gapcount[a]*gapcount[a];
+	 }
+
        fp2=vfopen (get_string_variable ("homoplasy"), "w");
        fprintf ( fp2, "HOMOPLASY: %d\n", homoplasy);
        fprintf ( fp2, "WEIGHTED_HOMOPLASY: %d\n", whomoplasy);
+       fprintf ( fp2, "WEIGHTED_HOMOPLASY2: %d\n", whomoplasy2);
+       
+       fprintf ( fp2, "LEN: %d\n", len);
+       fprintf ( fp2, "NGAP: %ul\n", ngap);
+       fprintf ( fp2, "NGAP2: %ul\n",ngap2);
        vfclose (fp2);
     }
-
+  vfree (gapcount);
   vfree (start);
   for (s=0; s<S->nseq; s++)vfree (S2[s]);
   vfree (S2);
@@ -8534,6 +8569,8 @@ ALNcol * msa2graph (Alignment *A, Sequence *S, ALNcol***S2,ALNcol*msa,int seq)
   ALNcol *start, *end, *parent, *child, *lchild, *lparent;
   int compact=-1;
   int check_homoplasy=1;
+  int *gapcount;
+  int *rescount;
   
   if (A->len_aln==0)return msa;
   
@@ -8557,11 +8594,21 @@ ALNcol * msa2graph (Alignment *A, Sequence *S, ALNcol***S2,ALNcol*msa,int seq)
   //When A is integrated within MSA, for each column, we look for an S2 residue pointing to an ALNcol in msa. 
   //If there is none, then this is an unmatched column and a column of gpas must be inserted in the rest of the sequences
   
-
+  gapcount=(int*)vcalloc ( A->len_aln, sizeof (int));
+  rescount=(int*)vcalloc ( A->len_aln, sizeof (int));
+  for ( s=0; s<A->nseq; s++)
+    for (c=0; c<A->len_aln; c++)
+      {
+	if (A->seq_al[s][c]=='-')gapcount[c]++;
+	else rescount[c]++;
+      }
+  
   if (msa && check_homoplasy)
     {
       int len, r;
       int *rpos=(int*)vcalloc (A->len_aln, sizeof (int));
+      
+      //Homoplasy 1
       for (len=0,c=0; c<A->len_aln; c++)
 	{
 	  if (A->seq_al[subseq][c]!='-')rpos[len++]=c;
@@ -8577,31 +8624,68 @@ ALNcol * msa2graph (Alignment *A, Sequence *S, ALNcol***S2,ALNcol*msa,int seq)
 	      (S2[seq][r])->whomoplasy+=MIN(d1,d2);
 	    }
 	}
+
+      //whomoplasy2
+      //Counts the minimum number of indels on each side (parent and subMSA), keep the lowest value
+      for (r=0; r<len-1; r++)
+	{
+	  int c, g,re;
+	  int sub, main;
+	  //Count gaps and res in child, keep the lowest count -> parsimony
+	  g=re=0;
+	  for (c=rpos[r]+1;c<rpos[r+1]; c++)
+	    {
+	      g+=gapcount[c];
+	      re+=rescount[c];
+	    }
+	  sub=MIN(g,re);
+	  
+	  //Count gaps and res in main, keep lowest count
+	  start=(S2[seq][r])->next;
+	  end  =(S2[seq][r+1]);
+	  g=re=0;
+	  while (start!=end)
+	    {
+	      g+=start->ngap;
+	      re+=start->nres;
+	      start=start->next;
+	    }
+	  main=MIN(g,re);
+	  (S2[seq][r])->whomoplasy2+=MIN(main,sub);
+	}
       vfree (rpos);
     }
 
-	    
+  
+  
 	
 
   for (c=0; c<A->len_aln; c++)
     {
       p=NULL;
+      //scan A->nseq to check if one of the residue is already mapped onto MSA
+      //If such a residue is mapped then the whole column is mapped
       for (s=0; s<A->nseq; s++)
 	{
 	  ir=pos[s][c];
 	  if (ir!=-1 && S2[lu[s]][ir] )
 	    {
 	      p=S2[lu[s]][ir];graph[c]=p;
+	      p->ngap+=gapcount[c];
+	      p->nres+=rescount[c];
 	      break;
 	    }
 	}
+      //If no residue was found to be mapped for msa
+      //all residues of this column will then be mapped onto this MSA position
       if (!p)
 	{
 	  p=graph[c]=(ALNcol*)declare_alncol();
+	  p->ngap=gapcount[c];
+	  p->nres=rescount[c];
 	}
       for (s=0; s<A->nseq; s++)
-	{
-	  
+	{	  
 	  ir=pos[s][c];
 	  if (ir!=-1 && !S2[lu[s]][ir])S2[lu[s]][ir]=p;
 	  //p is an empty column it will trigger a insertion in msa in the next step.
@@ -8616,11 +8700,18 @@ ALNcol * msa2graph (Alignment *A, Sequence *S, ALNcol***S2,ALNcol*msa,int seq)
       end->aa=-1;
       start->next=graph[0];
 
-      for (c=0; c<A->len_aln; c++)graph[c]->next=(c<A->len_aln-1)?graph[c+1]:end;
-
+      for (c=0; c<A->len_aln; c++)
+	{
+	  graph[c]->next=(c<A->len_aln-1)?graph[c+1]:end;
+	}
      
     }
-  else //Insert graph into msa by expanding seq
+  //Insert graph into msa by expanding seq
+  //Trick: graph[A->len_aln] contains all the nodes
+  //the ones from seq are already in. They can be recognised with aa==1
+  //the new ones are the gaps and they need to be connected to the aa==1
+  
+  else 
     {
       ALNcol*last=msa;
       int len=0;
@@ -8656,7 +8747,7 @@ ALNcol * msa2graph (Alignment *A, Sequence *S, ALNcol***S2,ALNcol*msa,int seq)
   vfree (graph);
   vfree (lu);
   free_int (pos,-1);
-  
+  vfree (gapcount); vfree(rescount);
   return msa;
 }  
 
