@@ -10,6 +10,7 @@ typedef struct ALNcol
   int whomoplasy2;
   int ngap;
   int nres;
+  int nseq;
   //int id //put this back when debugging pointers
 struct ALNcol *next;
 };

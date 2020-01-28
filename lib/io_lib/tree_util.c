@@ -8399,9 +8399,7 @@ char *kmsa2msa (KT_node K,Sequence *S, ALNcol***S2,ALNcol*start)
   ALNcol *end;
   char *output;
   ALNcol *msa;
-  unsigned long *gapcount,ngap, ngap2, len;
-  
-  
+    
   if (!start)
     {
       S2=(ALNcol***)vcalloc (S->nseq, sizeof (ALNcol**));
@@ -8432,22 +8430,10 @@ char *kmsa2msa (KT_node K,Sequence *S, ALNcol***S2,ALNcol*start)
   if (!out) return out;
   output=get_string_variable ("output");
 
-  //compute length
   msa=start;
-  len=0;
-  while (msa)
-    {
-      len++;
-      msa=msa->next;
-    }
-  msa=start;
-  gapcount=(unsigned long*)vcalloc (len, sizeof (unsigned long));
-  //
-
-  
   if (!output || strm (output, "fasta_aln"))
     {
-     
+      
       fp=vfopen (out, "w");
       for (s=0; s<S->nseq; s++)
 	{
@@ -8467,7 +8453,6 @@ char *kmsa2msa (KT_node K,Sequence *S, ALNcol***S2,ALNcol*start)
 	      if (msa->aa==0)
 		{
 		  fprintf (fp, "-");
-		  gapcount[r]++;
 		}
 	      else if (msa->aa>0) 
 		{
@@ -8518,7 +8503,7 @@ char *kmsa2msa (KT_node K,Sequence *S, ALNcol***S2,ALNcol*start)
     {
        myexit (fprintf_error (stderr, "-output=%s is not supported when using -reg [FATAL:%s]", output,PROGRAM));
     }
- 
+
   if (get_string_variable ("homoplasy"))
     {
        ALNcol*msa=start;
@@ -8526,32 +8511,33 @@ char *kmsa2msa (KT_node K,Sequence *S, ALNcol***S2,ALNcol*start)
        int whomoplasy=0;
        int whomoplasy2=0;
        FILE *fp2;
+       unsigned long ngap=0;
+       unsigned long ngap2=0;
+       int len=0;
        
        while (msa->next)
 	 {
 	   homoplasy+=msa->homoplasy;
 	   whomoplasy+=msa->whomoplasy;	   
 	   whomoplasy2+=msa->whomoplasy2;
+	   
+	   ngap+=msa->ngap;
+	   ngap2+=msa->ngap*msa->ngap;
 	   msa=msa->next;
+	   if (msa->aa>=0)len++;
 	 }
-       ngap=ngap2=0;
-       for (a=0; a<len; a++)
-	 {
-	   ngap +=gapcount[a];
-	   ngap2+=gapcount[a]*gapcount[a];
-	 }
-
+       
        fp2=vfopen (get_string_variable ("homoplasy"), "w");
        fprintf ( fp2, "HOMOPLASY: %d\n", homoplasy);
        fprintf ( fp2, "WEIGHTED_HOMOPLASY: %d\n", whomoplasy);
        fprintf ( fp2, "WEIGHTED_HOMOPLASY2: %d\n", whomoplasy2);
        
-       fprintf ( fp2, "LEN: %d\n", len);
-       fprintf ( fp2, "NGAP: %ul\n", ngap);
+       fprintf ( fp2, "LEN: %d\n", len-2);//substract start and end of msa data structure
+       fprintf ( fp2, "NGAP: %lu\n", ngap);
        fprintf ( fp2, "NGAP2: %ul\n",ngap2);
        vfclose (fp2);
     }
-  vfree (gapcount);
+
   vfree (start);
   for (s=0; s<S->nseq; s++)vfree (S2[s]);
   vfree (S2);
@@ -8561,7 +8547,7 @@ char *kmsa2msa (KT_node K,Sequence *S, ALNcol***S2,ALNcol*start)
 ALNcol * msa2graph (Alignment *A, Sequence *S, ALNcol***S2,ALNcol*msa,int seq)
 {
   //Thread msa in the child section
-  int s, c,ir, subseq;
+  int s, c,ir, subseq, a;
   int * lu =(int*) vcalloc (A->nseq, sizeof (int));
   int **pos=(int**)declare_int (A->nseq, A->len_aln);
   ALNcol**graph=(ALNcol**)vcalloc ( A->len_aln, sizeof (ALNcol*));
@@ -8569,12 +8555,17 @@ ALNcol * msa2graph (Alignment *A, Sequence *S, ALNcol***S2,ALNcol*msa,int seq)
   ALNcol *start, *end, *parent, *child, *lchild, *lparent;
   int compact=-1;
   int check_homoplasy=1;
-  int *gapcount;
   int *rescount;
+  int *gapcount;
+  int  nnseq;
+  static int tt;
+  static int tt2;
   
   if (A->len_aln==0)return msa;
-  
+  nnseq=(msa)?(A->nseq+(msa->next)->nseq-1):A->nseq;
+
   //1-fill up the look up section: pos
+  subseq=-1;
   for (s=0; s<A->nseq; s++)
     {
       int r;
@@ -8584,7 +8575,7 @@ ALNcol * msa2graph (Alignment *A, Sequence *S, ALNcol***S2,ALNcol*msa,int seq)
 	  if (A->seq_al[s][c]!='-')pos[s][c]=r++;
 	  else pos[s][c]=-1;
 	}
-      //This matches the index of seq in S - the complkete sequence dataset and in A, the subMSA
+      //This matches the index of seq in S - the complete sequence dataset and in A, the subMSA
       if (lu[s]==seq)subseq=s;
     }
   
@@ -8597,12 +8588,13 @@ ALNcol * msa2graph (Alignment *A, Sequence *S, ALNcol***S2,ALNcol*msa,int seq)
   gapcount=(int*)vcalloc ( A->len_aln, sizeof (int));
   rescount=(int*)vcalloc ( A->len_aln, sizeof (int));
   for ( s=0; s<A->nseq; s++)
-    for (c=0; c<A->len_aln; c++)
-      {
-	if (A->seq_al[s][c]=='-')gapcount[c]++;
-	else rescount[c]++;
-      }
-  
+    if (s!=subseq)
+      for (c=0; c<A->len_aln; c++)
+	{
+	  if (A->seq_al[s][c]=='-')gapcount[c]++;
+	  else rescount[c]++;
+	}
+     
   if (msa && check_homoplasy)
     {
       int len, r;
@@ -8671,17 +8663,17 @@ ALNcol * msa2graph (Alignment *A, Sequence *S, ALNcol***S2,ALNcol*msa,int seq)
 	  if (ir!=-1 && S2[lu[s]][ir] )
 	    {
 	      p=S2[lu[s]][ir];graph[c]=p;
-	      p->ngap+=gapcount[c];
 	      p->nres+=rescount[c];
+	      
 	      break;
 	    }
 	}
+      
       //If no residue was found to be mapped for msa
       //all residues of this column will then be mapped onto this MSA position
       if (!p)
 	{
 	  p=graph[c]=(ALNcol*)declare_alncol();
-	  p->ngap=gapcount[c];
 	  p->nres=rescount[c];
 	}
       for (s=0; s<A->nseq; s++)
@@ -8732,13 +8724,19 @@ ALNcol * msa2graph (Alignment *A, Sequence *S, ALNcol***S2,ALNcol*msa,int seq)
     }
   
   //This assigns an index to every column in the linked list MSA
+  
   if (check_homoplasy)
     {
       int i=0;
       ALNcol*st=msa;
       while (st)
 	{
-	  st->index=i++;
+	  if (st->aa>=0)
+	    {
+	      st->nseq=nnseq;
+	      st->index=i++;
+	      st->ngap=st->nseq - st->nres;
+	    }
 	  st=st->next;
 	}
     }
