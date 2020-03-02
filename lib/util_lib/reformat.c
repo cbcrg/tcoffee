@@ -396,7 +396,7 @@ int seq_reformat ( int argc, char **in_argv)
 		fprintf ( stdout, "\n     .....replicates <N>..+evaluate makes N replicates");
 		fprintf ( stdout, "\n     .....mode <nj|upgma>.+evaluate makes N replicates");
 		fprintf ( stdout, "\n     .....gap <N float>...+evaluate ignores colum with N float gap");
-		fprintf ( stdout, "\n     +column4tree <file>  Provoide a file where each line is a pair of columns [c1 c2]. The list can be bootstrapped\n");         
+		fprintf ( stdout, "\n     +columns4tree <file>  Provoide a file where each line is a pair of columns [c1 c2]. The list can be bootstrapped\n");         
 		fprintf ( stdout, "\n     +tree2bs.............Add BS support to the original tree drawn from replicates");
 		fprintf ( stdout, "\n     +tree2bs.............The replicates must be provided via -in, one newick tree/line");
 		fprintf ( stdout, "\n     +print_replicates....Print Replicate trees AFTER the main tree");
@@ -12201,10 +12201,11 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	     {
 	       ev3d="distances";
 	       enb=3;
-	       max=15;//Angstrom
+	       max=150000;//Angstrom
 	       
 	       if (ACTION(na+1)&& !strm (ACTION(na+1), "def"))max=atof(ACTION(na+1));
 	       if (ACTION(na+2)&& !strm (ACTION(na+2), "def"))enb=atoi(ACTION(na+2));
+	       
 	     }
 	   else if (strm (ACTION(na), "contacts"))
 	     {

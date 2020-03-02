@@ -2085,23 +2085,11 @@ sub dirsync
     flag2set();
     $MASTER=0;
     
-    if ($from_dir eq "torre")
-      {
-	
-	$press_dir="/Users/cnotredame/Dropbox/presse";
-	$from_dir="/Volumes/Torrent/Download/download.raw/";
-	$to_dir  ="/Volumes/$disc/Download/download.ready/";
-	$ignore="/Volumes/$disc/Download/.sync.ignore.txt";
-      }
-    else
-      {
-	
-	$press_dir="/Users/cnotredame/Dropbox/presse";
-	if (!$from_dir){$from_dir="/Volumes/backup/download/";}
-	if (!$to_dir)   {$to_dir  ="/Volumes/$disc/Download/download.raw/";}
-	$ignore="/Volumes/$disc/Download/.sync.ignore.txt";
-      }
-    
+    $press_dir="/Users/cnotredame/Dropbox/presse";
+    $from_dir="/Volumes/Torrent/Download/download.raw/";
+    $to_dir  ="/Volumes/$disc/Download/download.ready/";
+    $ignore="/Volumes/$disc/Download/.sync.ignore.txt";
+        
     opendir (DIR, "$from_dir");
     my @l1=readdir(DIR);
     closedir (DIR);

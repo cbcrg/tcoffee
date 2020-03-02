@@ -1752,7 +1752,10 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
   if (!A) return A;
   
   //Get arguments passed via environement
-  if (getenv ("TREE_GAP_4_TCOFFEE")) max_gap  =atofgetenv("TREE_GAP_4_TCOFFEE");
+  if (getenv ("TREE_GAP_4_TCOFFEE"))
+    {
+      max_gap  =atofgetenv("TREE_GAP_4_TCOFFEE");
+    }
   else max_gap=0.5;
   
   if (getenv ("TREE_MODE_4_TCOFFEE"))tree_mode=getenv("TREE_MODE_4_TCOFFEE");
@@ -1920,6 +1923,7 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
   used_col=(int*)vcalloc (A->len_aln, sizeof (int));
   col_lu=(int*)vcalloc (A->len_aln, sizeof (int));
   
+
   for (c1=0; c1<A->len_aln; c1++)
     {
       for (gap=0,r1=0; r1<A->nseq; r1++)
@@ -1979,7 +1983,7 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
       ColPair=declare_int ((nlen_aln*nlen_aln)+1, 2);
     }
     
-  
+ 
   for (maxD=lowD; maxD<=highD;maxD+=100) 
     {
 
@@ -2061,8 +2065,10 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
 		    p1=lu[s1][r1-1];
 		    p2=lu[s1][r2-1];
 		    dm1[p1][p2]=dm1[p2][p1]=we;
+		    //HERE ("%s [%d %d] [%d %d] %d", S->name[ls1],p1, p2,r1, r2,we );
 		  }
 	      }
+	    //exit (0);
 	    //Scan target Sequences
 	    for (s2=0; s2<A->nseq; s2++)
 	      {
@@ -2117,19 +2123,19 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
 		   
 		   c1=ColPair[ic1][0];
 		   c2=ColPair[ic1][1];
-
-
+		   
 		   ic1++;
 
 		   if (A->seq_al[s1][c1]=='-')continue;
 		   
 		   w1=(double)dm1[c1][c2];
 		   
-		   if (A->seq_al[s1][c2]=='-')continue;
-		   else if (!col_lu[c2])continue; 
-		   else if (FABS((pos[s1][c1]-pos[s1][c2]))<enb)continue;
+		   
+		   if (A->seq_al[s1][c2]=='-'){continue;}
+		   else if (!col_lu[c2]){continue;}
+		   else if (FABS((pos[s1][c1]-pos[s1][c2]))<enb){continue;}
 		   else if (!strikeM && !dm1[c1][c2])continue;
-		   else if (modeM==distancesM && w1>maxD)continue;
+		   else if (modeM==distancesM && w1>maxD){continue;}
 		   
 		   if (modeM==strikeM)
 		     {
@@ -2170,6 +2176,7 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
 		       else
 			 {
 			   double w2=(double)dm2[c1][c2];
+			   HERE ("%d %d", w1, w2);
 			   if (modeM==distancesM && dm2[c1][c2])
 			     {
 			       static int   distance_mode=atoigetenv ("THREED_TREE_MODE");

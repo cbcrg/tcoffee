@@ -8946,7 +8946,8 @@ int kseq2kmsa_thread   (KT_node *K, int n, char *method);
 int kseq2kmsa   (KT_node *K, int n, char *method)
 {
   int nproc=get_nproc();
-
+  
+    
   if ( strstr (method, "NF_"))
     return kseq2kmsa_nextflow(K, n, method);
   else if (nproc==-1) return  kseq2kmsa_serial (K, n, method);
@@ -8973,27 +8974,29 @@ int kseq2kmsa_serial   (KT_node *K, int n, char *method)
 int kseq2kmsa_nextflow   (KT_node *K, int n, char *met)
 {
   int a;
-  static char *list=vtmpnam (NULL);
-  TC_method *method=method_file2TC_method(method_name2method_file(met));
-  char *command=NULL;
-  FILE *fp=vfopen (list, "w");
+  static char *in=vtmpnam (NULL);
+  static char *out=vtmpnam (NULL);
+  TC_method *method=method_file2TC_method(method_name2method_file(met+3));
+  char *command=make_aln_command (method,"inputile", "outputfile");
+ 
+ 
+  FILE *fp1=vfopen (in, "w");
+  FILE *fp2=vfopen (out, "w");
+  HERE ("%s", command);
   
   for (a=0; a<n; a++)
     {
-      if (K[a]->nseq==1)
-	{
-	  printf_system ("cp %s %s", K[a]->seqF, K[a]->msaF);
-	}
-      else
-	{
-	  fprintf (fp, "%s %s\n", K[a]->seqF, K[a]->msaF);
-	}
+      fprintf (fp1, "%s %s\n", K[a]->seqF);
+      fprintf (fp2, "%s %s\n", K[a]->msaF);
     }
-  vfclose (fp);
+  vfclose (fp1);
+  vfclose (fp2);
   
-  command=make_aln_command (method,list, list);
-  printf_system ("%s", command);
+  //Generate a NF pipleline that runs command on each seqF file so as to generate an msaF
+  //Deploy the Nextflow command
   vfree (command);
+  
+  printf_exit (EXIT_FAILURE, stderr,"NF_<method> is currently NOT supported\n");
   return 1;
 }
 
