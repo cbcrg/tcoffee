@@ -8977,7 +8977,7 @@ int kseq2kmsa_nextflow   (KT_node *K, int n, char *met)
   static char *in=vtmpnam (NULL);
   static char *out=vtmpnam (NULL);
   TC_method *method=method_file2TC_method(method_name2method_file(met+3));
-  char *command=make_aln_command (method,"inputile", "outputfile");
+  char *command=make_aln_command (method,"inputfile", "outputfile");
  
  
   FILE *fp1=vfopen (in, "w");
