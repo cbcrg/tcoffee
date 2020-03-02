@@ -2120,7 +2120,7 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
 		   double in=0;
 		   double bin=0; //background in => non contact evaluation for strike;
 		   double w1; 
-		   
+		   //HERE ("* %s %s", A->name[s1], A->name[s2]);
 		   c1=ColPair[ic1][0];
 		   c2=ColPair[ic1][1];
 		   
@@ -2176,7 +2176,7 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
 		       else
 			 {
 			   double w2=(double)dm2[c1][c2];
-			   HERE ("%d %d", w1, w2);
+			   //HERE ("---- [%s %s] %d %d", A->name[s1], A->name[s2],(int)w1, (int)w2);
 			   if (modeM==distancesM && dm2[c1][c2])
 			     {
 			       static int   distance_mode=atoigetenv ("THREED_TREE_MODE");
@@ -2262,7 +2262,8 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
 			   else {sc=1;in=1;}
 			 }
 		     }
-		   
+		   if (1==2 &&( A->seq_al[s1][c1]=='-' || A->seq_al[s1][c2]=='-' || A->seq_al[s2][c1]=='-' || A->seq_al[s2][c2]=='-'))
+		     HERE ("   [%s %s][%d %d][%c %c][%c %c] SC=%.3f IN=%d",A->name[s1], A->name[s2],dm1[c1][c2],dm2[c1][c2],A->seq_al[s1][c1], A->seq_al[s1][c2], A->seq_al[s2][c1],A->seq_al[s2][c2], sc, in); 
 		   if (tree)
 		     {
 		       tot_pw_sc[s1][s2]+=sc;
@@ -2374,11 +2375,17 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
 	    for (s1=0; s1<A->nseq; s1++)
 	      {
 		for (s2=0; s2<A->nseq; s2++)
-		  if (max_pw_sc[s1][s2]>0.000000001)
-		    {
-		      tot_pw_sc[s1][s2]/=max_pw_sc[s1][s2];
-		      tot_pw_sc[s1][s2]=(double)100*((double)1-tot_pw_sc[s1][s2]);
-		    }
+		  {
+		    if (max_pw_sc[s1][s2]>0.000000001)
+		      {
+			tot_pw_sc[s1][s2]/=max_pw_sc[s1][s2];
+			tot_pw_sc[s1][s2]=(double)100*((double)1-tot_pw_sc[s1][s2]);
+		      }
+		    else
+		      {
+			tot_pw_sc[s1][s2]=100;
+		      }
+		  }
 	      }
 	    
 	    if (strm (tree_mode, "nj"))
