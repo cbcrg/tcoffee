@@ -426,7 +426,7 @@ void slow_nj_tree(char **tree_description)
 		      /* commented out to have consistent results with CYGWIN: if(total < tmin)"*/
 		      if(total < tmin) 
 			{
-			  if ( tmin-total>MY_EPS)
+			  if ( tmin-total>MY_EPSILON)
 			  tmin = total;
 			  mini = ii;
 			  minj = jj;
