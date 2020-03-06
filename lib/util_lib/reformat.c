@@ -12226,7 +12226,7 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	       	       
 	       ungap_seq(D1->S);
 	       if (strm (ev3d, "distances"))
-		 D1->CL=pdb2contacts (D1->S, D2?(D2->S):NULL,D1->CL, "intra","distances",2*max);
+		 D1->CL=pdb2contacts (D1->S, D2?(D2->S):NULL,D1->CL, "intra","distances",max);
 	       else if (strm (ev3d, "contacts"))
 		 D1->CL=pdb2contacts (D1->S, D2?(D2->S):NULL,D1->CL, "intra","contacts",0);
 	       else

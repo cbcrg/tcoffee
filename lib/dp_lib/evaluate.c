@@ -2049,9 +2049,9 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
 	    int ls1=rseq[s1];
 	    int s2_has_contacts=0;
 	    
-	    if (ls1==-1)continue;
+	    if (ls1==-1)continue;//Means the sequence has no contac; OK with Strike
 	    
-	    //Get contacts from template sequence
+	    
 	    for (r1=1;r1<=S->len[ls1]; r1++)
 	      {
 		for (b=1; b<CL->residue_index[ls1][r1][0]; b+=ICHUNK)
@@ -2065,14 +2065,13 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
 		    p1=lu[s1][r1-1];
 		    p2=lu[s1][r2-1];
 		    dm1[p1][p2]=dm1[p2][p1]=we;
-		    //HERE ("%s [%d %d] [%d %d] %d", S->name[ls1],p1, p2,r1, r2,we );
 		  }
 	      }
-	    //exit (0);
 	    //Scan target Sequences
 	    for (s2=0; s2<A->nseq; s2++)
 	      {
 		int ls2=rseq[s2];
+
 		if (s1==s2 && !strikeM) continue;//A sequence can be estimated against itself with strike
 		else if (ls2!=-1)
 		  {
@@ -2119,25 +2118,34 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
 		   double sc=0;
 		   double in=0;
 		   double bin=0; //background in => non contact evaluation for strike;
-		   double w1; 
+		   double w1, w2; 
 		   //HERE ("* %s %s", A->name[s1], A->name[s2]);
 		   c1=ColPair[ic1][0];
 		   c2=ColPair[ic1][1];
 		   
 		   ic1++;
 
-		   if (A->seq_al[s1][c1]=='-')continue;
+		   
 		   
 		   w1=(double)dm1[c1][c2];
+		   w2=(double)dm2[c1][c2];
 		   
+		   //Modified: make sure that s1 vs s2 == s2 vs s1
+		   sc=0; in=0; //These will be the  
+		   if     (A->seq_al[s1][c1]=='-'){continue;}
+		   else if(A->seq_al[s1][c2]=='-'){continue;}
+		   else if(A->seq_al[s2][c1]=='-'){continue;}
+		   else if(A->seq_al[s2][c2]=='-'){continue;}
 		   
-		   if (A->seq_al[s1][c2]=='-'){continue;}
 		   else if (!col_lu[c2]){continue;}
 		   else if (FABS((pos[s1][c1]-pos[s1][c2]))<enb){continue;}
-		   else if (!strikeM && !dm1[c1][c2])continue;
-		   else if (modeM==distancesM && w1>maxD){continue;}
+		   else if (FABS((pos[s2][c1]-pos[s2][c2]))<enb){continue;}
 		   
-		   if (modeM==strikeM)
+		   else if (modeM==distancesM && w1>maxD){continue;}
+		   else if (modeM==distancesM && w1<MY_EPSILON){continue;}
+		   else if (modeM==distancesM && w2>maxD){continue;}
+		   else if (modeM==distancesM && w2<MY_EPSILON){continue;}
+		   else if (modeM==strikeM)
 		     {
 		       rsc=randsc=sc=brsc=in=bin=0;
 		       if (A->seq_al[s2][c1]=='-' || A->seq_al[s2][c2]=='-');
@@ -2170,100 +2178,84 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
 			   
 			 }
 		     }
-		   else
-		     {
-		       if (A->seq_al[s2][c1]=='-' || A->seq_al[s2][c2]=='-'){sc=0;in=1;}
-		       else
+		   else if (modeM==distancesM)
 			 {
-			   double w2=(double)dm2[c1][c2];
-			   //HERE ("---- [%s %s] %d %d", A->name[s1], A->name[s2],(int)w1, (int)w2);
-			   if (modeM==distancesM && dm2[c1][c2])
+			   static int   distance_mode=atoigetenv ("THREED_TREE_MODE");
+			   static double distance_modeE=atofgetenv ("THREED_TREE_MODE_EXP");
+			   static int no_weights=atoigetenv ("THREED_TREE_NO_WEIGHTS");
+			   double we;
+			   
+			   if ( distance_modeE<MY_EPSILON)distance_modeE=3;
+			   
+			   
+			   //first attempt-- Major issue because non symetrical and therefore not a distance
+			   if (!distance_mode)
 			     {
-			       static int   distance_mode=atoigetenv ("THREED_TREE_MODE");
-			       static double distance_modeE=atofgetenv ("THREED_TREE_MODE_EXP");
-			       static int no_weights=atoigetenv ("THREED_TREE_NO_WEIGHTS");
-			       
-			       
-			       static int print;
-			       double we;
-			       
-			       if ( !print)
+			       static int warn;
+			       we=w1;
+			       sc=((MIN((w1/w2),(w2/w1))));
+			       if (warn==0)
 				 {
-				   HERE ("THREED_TREE_MODE=%d THREED_TREE_MODE_EXP=%.1f THREED_TREE_NO_WEIGHTS=%d", distance_mode,distance_modeE,no_weights);
-				   print=1;
+				   add_warning ( stderr, "\nWARNING: distance_mode==0 should not be used");
+				   warn=1;
 				 }
-			       
-			       if ( distance_modeE<0.0001)distance_modeE=3;
-			       
-			       
-			       //first attempt-- Major issue because non symetrical and therefore not a distance
-			       if (!distance_mode)
-				 {
-				   static int warn;
-				   we=w1;
-				   sc=((MIN((w1/w2),(w2/w1))));
-				   if (warn==0)
-				     {
-				       add_warning ( stderr, "\nWARNING: distance_mode==0 should not be used");
-				       warn=1;
-				     }
-				   
-				 }
-			       //same as before but symetrical: the distance ratio weighted by the average distance
-			       else if (distance_mode==1)
-				 {
-				   we=(w1+w2)/2;
-				   sc=((MIN((w1/w2),(w2/w1))));
-				 }
-			       //the absolute difference of distance normalized by the average distance
-			       else if (distance_mode==2)
-				 {
-				   
-				   we=(w1+w2)/2;
-				   sc=(double) 1-(FABS((w1-w2))/we);
-				   
-				 }
-			       //the absolute difference of distance normalized by the average distance and weighted by the average distance
-			       else if (distance_mode==3)
-				 {
-				   we=(w1+w2)/2;
-				   sc=(double)1-(FABS((w1-w2))/we);
-				 }
-			       else if (distance_mode ==4)
-				 {
-				   we=((w1>w2)?w1:w2);
-				   sc=(double) 1-(FABS((w1-w2))/we);
-				   
-				 }
-			       else if (distance_mode ==5)
-				 {
-				   we=(w1+w2);
-				   sc=(double)1-(FABS((w1-w2))/we);
-				   
-				 }
-			       else if (distance_mode ==6)
-				 {
-				   we=1;
-				   sc=(double)(FABS((w1-w2)));
-				 }
-			       
-			       if (no_weights)
-				 we=1;
-			       
-			       //Compute the score and its normalization
-			       //If 
-			       in=we;
-			       sc=pow(sc,distance_modeE)*we;
-			       
 			       
 			     }
-			   else if (modeM==contactsM && w2>0)
-			     {sc=1;in=1;}
-			   else {sc=1;in=1;}
+			   //same as before but symetrical: the distance ratio weighted by the average distance
+			   else if (distance_mode==1)
+			     {
+			       we=(w1+w2)/2;
+			       sc=((MIN((w1/w2),(w2/w1))));
+			     }
+			   //the absolute difference of distance normalized by the average distance
+			   else if (distance_mode==2)
+			     {
+			       
+			       we=(w1+w2)/2;
+			       sc=(double) 1-(FABS((w1-w2))/we);
+			       
+			     }
+			   //the absolute difference of distance normalized by the average distance and weighted by the average distance
+			   else if (distance_mode==3)
+			     {
+			       we=(w1+w2)/2;
+			       sc=(double)1-(FABS((w1-w2))/we);
+			     }
+			   else if (distance_mode ==4)
+			     {
+			       we=((w1>w2)?w1:w2);
+			       sc=(double) 1-(FABS((w1-w2))/we);
+			       
+			     }
+			   else if (distance_mode ==5)
+			     {
+			       we=(w1+w2);
+			       sc=(double)1-(FABS((w1-w2))/we);
+			       
+			     }
+			   else if (distance_mode ==6)
+			     {
+			       we=1;
+			       sc=(double)(FABS((w1-w2)));
+			     }
+			   
+			   if (no_weights)
+			     we=1;
+			   
+			   //Compute the score and its normalization
+			   //If 
+			   in=we;
+			   sc=pow(sc,distance_modeE)*we;
+			   
+			   
 			 }
+		   else if (modeM==contactsM)
+		     {
+		       if (w2>MY_EPSILON)
+			 {sc=1;in=1;}
 		     }
-		   if (1==2 &&( A->seq_al[s1][c1]=='-' || A->seq_al[s1][c2]=='-' || A->seq_al[s2][c1]=='-' || A->seq_al[s2][c2]=='-'))
-		     HERE ("   [%s %s][%d %d][%c %c][%c %c] SC=%.3f IN=%d",A->name[s1], A->name[s2],dm1[c1][c2],dm2[c1][c2],A->seq_al[s1][c1], A->seq_al[s1][c2], A->seq_al[s2][c1],A->seq_al[s2][c2], sc, in); 
+		   
+		  
 		   if (tree)
 		     {
 		       tot_pw_sc[s1][s2]+=sc;
@@ -2363,7 +2355,7 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
 	    static char *treeF=vtmpnam (NULL);
 	    static int ml;
 
-	    //Get length of lobguest name;
+	    //Get length of longuest name;
 	    if (!ml)
 	      {
 		for (s1=0; s1<A->nseq; s1++)ml=MAX((strlen (A->name[s1])),ml);
@@ -2371,19 +2363,20 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
 	    
 	    output_completion (stderr,T->nseq,ntrees,1, "Distance Tree Replicates");
 	    
-	    //This is where the distance between two sequences gets turned into a % between 0 and a 100
+	    //This is where the distance between two sequences gets turned into a % between 0 and a 100. 0: very similar, 100 maximal relative distance
 	    for (s1=0; s1<A->nseq; s1++)
 	      {
 		for (s2=0; s2<A->nseq; s2++)
 		  {
-		    if (max_pw_sc[s1][s2]>0.000000001)
+		    if (s1==s2)tot_pw_sc[s1][s2]=0;
+		    else if (max_pw_sc[s1][s2]>0.000000001)
 		      {
 			tot_pw_sc[s1][s2]/=max_pw_sc[s1][s2];
 			tot_pw_sc[s1][s2]=(double)100*((double)1-tot_pw_sc[s1][s2]);
 		      }
 		    else
 		      {
-			tot_pw_sc[s1][s2]=100;
+			tot_pw_sc[s1][s2]=-100;
 		      }
 		  }
 	      }
@@ -2404,7 +2397,7 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
 	      {
 		fprintf (fp, "%-*.*s ", ml,ml,A->name[s1]);
 		for (s2=0; s2<A->nseq; s2++)
-		  fprintf (fp, "%5.3f ", (float)((double)tot_pw_sc[s1][s2])/(float)100);
+		  fprintf (fp, "%6.3f ", (float)((double)tot_pw_sc[s1][s2])/(float)100);
 		fprintf (fp, "\n");
 	      }
 	    fprintf ( fp, "\n");

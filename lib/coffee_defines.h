@@ -5,7 +5,7 @@
 /*#include "mshell.h"*/
 /*MEMORY MANAGEMENT*/
 #include <float.h>
-#define MY_EPS 1000*DBL_EPSILON
+#define MY_EPSILON 1000*DBL_EPSILON
 //Maximum number of tries for interactibve things
 #define MAX_N_TRIES 3
 #define MAX_NSEQ_4_DISPLAY 50
