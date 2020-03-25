@@ -13215,12 +13215,29 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	   free_sequence (D1->S,(D1->S)->nseq);
 	   D1->S=aln2seq (D1->A);
 	 }
+       
+       else if ( strm (action, "regtrim"))
+	 {
+	   int ns, p;
+	   if (strstr (action_list[1], "%"))
+	     {
+	       sscanf (action_list[1], "%d%%", &p);
+	       ns=(D1->A)->nseq*((float)p/(float)100);
+	     }
+	   else
+	     {
+	       ns=atoi (action_list[1]);
+	     }
+	   D1->S=regtrim (D1->S, D2->T,ns);
+	   D1->A=seq2aln(D1->S, NULL, 0);
+	 }
        else if ( strm (action, "trim"))
 	 {
 	   D1->A=simple_trimseq (D1->A,(D2)?D2->A:NULL, action_list[1], ACTION (2), NULL);
-
+	   
 	   free_sequence (D1->S,(D1->S)->nseq);
 	   D1->S=aln2seq (D1->A);
+	   
 	 }
 
        else if (strm ( action, "trimTC"))

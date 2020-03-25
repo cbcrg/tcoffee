@@ -8820,6 +8820,95 @@ int ktree2klist (KT_node K, KT_node *KL, int *n)
     }
   return n[0];
 }
+
+
+Sequence * regtrim (Sequence *S, NT_node T, int N)
+{
+  NT_node *CL, *NL;
+  int left, right, nc,nn, a,terminal;
+  FILE *fp;
+  int **ordered;
+  char *tmp=vtmpnam(NULL);
+  float *w;
+
+  if (!T)return NULL;
+  w=seq2dpa_weight (S, "longuest");
+  T=node2master (T, S, w);
+
+  
+  T->leaf=0;
+    
+  CL=(NT_node*)vcalloc (1, sizeof (NT_node));
+  nc=0;CL[nc++]=T;
+  
+  terminal=0;
+  while (nc<N && !terminal)
+    {
+      
+      nn=0;
+      terminal=1;
+      NL=(NT_node*)vcalloc (nc*2, sizeof (NT_node));
+      CL=sort_nodelist4dpa (CL, nc);
+
+      for (left=0; left<nc && (nn+(nc-left))<N; left++)
+	{
+	  
+	  NT_node N=CL[left];
+	  if (N->isseq){NL[nn++]=N; T->leaf++;}
+	  else
+	    {
+	      NL[nn++]=N->right;
+	      NL[nn++]=N->left;
+	      terminal=0;
+	      T->leaf+=2;
+	    }
+	}
+      for (a=left; a<nc; a++)
+	{
+	  NL[nn++]=CL[a];
+	  if (!CL[a]->isseq)terminal=0;
+	  T->leaf++;
+	}
+      
+      vfree (CL);
+      CL=NL;
+      nc=nn;
+    }
+    
+  fp=vfopen (tmp, "w");
+  if (S->nseq>N)
+    {
+      ordered=declare_int (nc, 1);
+      for (a=0; a<nc; a++)ordered[a][0]=CL[a]->seq;
+      sort_int (ordered,1,0, 0, nc-1);
+      for (a=0; a<nc; a++)
+	{
+	  int s=ordered[a][0];
+	  fprintf (fp, ">%s\n%s\n", S->name[s],S->seq[s]);
+
+	  
+	}
+      vfclose (fp);
+      free_int (ordered, -1);
+    }
+  else
+    {
+      for (a=0; a<nc; a++)
+	{
+	  
+	  int s=CL[a]->seq;
+	  
+	  fprintf (fp, ">%s\n%s\n", S->name[s],S->seq[s]);
+	}
+      vfclose (fp);
+    }
+  
+  vfree (w);
+  vfree(CL);
+  return get_fasta_sequence (tmp,NULL);
+  
+}
+
   
 KT_node tree2ktree (NT_node T,Sequence *S, int N)
 {
@@ -8828,9 +8917,11 @@ KT_node tree2ktree (NT_node T,Sequence *S, int N)
   int left, right, nc,nn, a,terminal;
   FILE *fp;
   int **ordered;
+  float *w;
   
   
   if (!T)return NULL;
+  
   T->leaf=0;
   //Make sure the node content is declared
   K=(KT_node)vcalloc (1, sizeof (KTreenode));
