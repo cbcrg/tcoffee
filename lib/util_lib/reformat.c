@@ -12290,6 +12290,72 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	       fprintf ( stdout, "ID2: %d\n", aln2sim2(D1->A));
 	       exit (EXIT_SUCCESS);
 	     }
+	   else if (strm (action_list[1], "res2del") || strm (action_list[1], "del2ins"))
+	     {
+	       int s, c;
+	       float threshold=0;
+	       double*nr=(double*)vcalloc ((D1->A)->len_aln, sizeof (double));
+	       double*ri=(double*)vcalloc ((D1->A)->nseq, sizeof (double));
+	       double*gi=(double*)vcalloc ((D1->A)->nseq, sizeof (double));
+	       Alignment *A=D1->A;
+	       if (action_list[2])threshold=atof (action_list[2]);
+	       double sum_gi, sum_gi2, avg_gi, sd_gi;
+	       double sum_ri,sum_ri2, avg_ri, sd_ri;
+
+	       sum_gi=sum_gi2=avg_gi=sd_gi=0;
+	       sum_ri=sum_ri2=avg_ri=sd_ri=0;
+	       
+	       
+	       for ( c=0; c< A->len_aln; c++)
+		 {
+		   for (s=0; s<A->nseq;s++)
+		     {
+		       if (A->seq_al[s][c]!='-')nr[c]++;
+		     }
+		 }
+	       for ( c=0; c<A->len_aln; c++)
+		 {
+		   double r,g;
+		   r=g=0;
+		   if (nr[a]>0.1)    r=(A->nseq-nr[c])/nr[c];
+		   if (nr[a]<A->nseq)g=(nr[c])/(A->nseq-nr[c]);
+		   for (s=0; s<A->nseq; s++)
+		     {
+		       if (A->seq_al[s][c]!='-')ri[s]+=r;
+		       else gi[s]+=g;
+		     }
+		 }
+	       for (s=0; s<A->nseq; s++)
+		 {
+		   sum_gi +=gi[s];
+		   sum_gi2+=gi[s]*gi[s];
+
+		   sum_ri +=ri[s];
+		   sum_ri2+=ri[s]*ri[s];
+		 }
+	       avg_gi=sum_gi/(double)A->nseq;
+	       sd_gi=sqrt((sum_gi2-((sum_gi*sum_gi)/(double)A->nseq))/(double)A->nseq);
+
+	       avg_ri=sum_ri/(double)A->nseq;
+	       sd_ri=sqrt((sum_ri2-((sum_ri*sum_ri)/(double)A->nseq))/(double)A->nseq);
+	       
+	       
+	      		   
+	       for (s=0; s<A->nseq; s++)
+		 {
+		   double z;
+		   if (strm (action_list[1], "res2del"))z=FABS((avg_ri-ri[s]))/sd_ri;
+		   else z=FABS((avg_gi-gi[s]))/sd_gi;
+
+		   if (threshold <0.00001 || z<(double)threshold)
+		     {
+		       fprintf ( stdout, ">%s ins: %.2f res2del: %.2f Z%s %.2f\n",A->name[s],gi[s],ri[s], action_list[1], (float)z);
+		       fprintf ( stdout, "%s\n", A->seq_al[s]);
+		     }
+		 }
+	       exit (EXIT_SUCCESS);
+	     }
+			   
 	   else if    (strm (action_list[1], "id") || is_matrix(ACTION(1)))
 	     {
 	       Constraint_list *CL;
