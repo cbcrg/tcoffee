@@ -12349,7 +12349,7 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 
 		   if (threshold <0.00001 || z<(double)threshold)
 		     {
-		       fprintf ( stdout, ">%s ins: %.2f res2del: %.2f Z%s %.2f\n",A->name[s],gi[s],ri[s], action_list[1], (float)z);
+		       fprintf ( stdout, ">%s del2ins: %.2f res2del: %.2f Z%s %.2f\n",A->name[s],gi[s],ri[s], action_list[1], (float)z);
 		       fprintf ( stdout, "%s\n", A->seq_al[s]);
 		     }
 		 }
