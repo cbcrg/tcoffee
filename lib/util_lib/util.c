@@ -7271,7 +7271,6 @@ char **list2expanded_flist (char **list, int *n, char *tag)
   while (list[a]!=NULL)
     {
       char *f=NULL;
-
       if (strstr (list[a], tag)){f=list[a]+strlen (tag);}
       else if ( token_is_in_file_n (list[a],tag,1))f=list[a];
       else f=NULL;
@@ -7285,7 +7284,7 @@ char **list2expanded_flist (char **list, int *n, char *tag)
 	  a++;
 	}
     }
-
+  
   return list;
 }
 

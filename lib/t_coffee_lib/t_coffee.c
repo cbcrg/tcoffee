@@ -1626,8 +1626,8 @@ if ( !do_evaluate)
 				/*Min_value*/ "any"         ,		\
 				/*Max Value*/ "any"			\
 					      );
-	profile_list=declare_char ( 2000, STRING);
-	n_profile_list=get_cl_param(					\
+	profile_list=declare_char ( 2001, STRING);
+	n_profile_list=get_cl_param(				\
 			    /*argc*/      argc             ,\
 			    /*argv*/      argv             ,\
 			    /*output*/    &le              ,\
@@ -1645,6 +1645,7 @@ if ( !do_evaluate)
 			    );
 	if (n_profile_list)
 	  {
+	    profile_list[n_profile_list]=NULL;
 	    profile_list=list2expanded_flist(profile_list,&n_profile_list, "FILE::");
 	  }
 	declare_name (profile1);
