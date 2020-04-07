@@ -15,7 +15,7 @@ SHELL := /bin/bash
 # 
 
 type=beta
-test=core
+test=mini
 m='undocumented beta release tested with $(type) tests'
 
 
