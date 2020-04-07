@@ -233,7 +233,7 @@ for (my $a=0; $a<=$#ARGV; $a++)
 
 if ( !-w $TMPDIR)
   {
-    myprintf ("Default tmpdir [$TMPDIR] cannot be accessed. Will crate and use .tmp instead [$WARN]\n");
+    myprintf ("Default tmpdir [$TMPDIR] cannot be accessed. Will create and use .tmp instead [$WARN]\n");
     my $cwd=cwd;
     $TMPDIR=$cwd."/.tmp";
     system ("mkdir -p $TMPDIR");
