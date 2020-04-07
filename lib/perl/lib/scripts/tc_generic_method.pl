@@ -98,6 +98,7 @@ if (!$EMAIL)
   }
 
 ($maxid,$minid,$mincov,$trim)=(&my_get_opt ( $cl, "-maxid=",0,0, "-minid=",0,0,"-mincov=",0,0, "-trim=",0,0));
+
 if (!$cl=~/\-maxid\=/){$maxid=95;}
 if (!$cl=~/\-minid\=/){$minid=35;}
 if (!$cl=~/\-mincov\=/){$mincov=80;}
@@ -2307,15 +2308,29 @@ sub output_profile
 
     if ( $trim)
       {
-	
-	if ($trim>0)
+	if ($ENV{PSITRIM} eq "oldtrim")
 	  {
-	    &safe_system ("t_coffee -other_pg seq_reformat -in $tmp -action +trim _aln_n$trim\_K1 -output fasta_aln -out $outfile");
+	    if ($trim>0)
+	      {
+		&safe_system ("t_coffee -other_pg seq_reformat -in $tmp -action +trim _aln_n$trim\_K1 -output fasta_aln -out $outfile");
+	      }
+	    else
+	      {
+		&safe_system ("t_coffee -other_pg seq_reformat -in $tmp -action +trim _aln_%%$trim\_K1 -output fasta_aln -out $outfile");
+	      }
 	  }
 	else
 	  {
-	    &safe_system ("t_coffee -other_pg seq_reformat -in $tmp -action +trim _aln_%%$trim\_K1 -output fasta_aln -out $outfile");
+	    if ($trim>0)
+	      {
+		&safe_system ("t_coffee -other_pg seq_reformat -in $tmp -treemode codnd -keep 1 -action +regtrim $trim -output fasta_aln -out $outfile");
+	      }
+	    else
+	      {
+		&safe_system ("t_coffee -other_pg seq_reformat -in $tmp -treemode codnd -keep 1 -action +regtrim $trim\% -output fasta_aln -out $outfile");
+	      }
 	  }
+	
       }
     else
       {
@@ -2637,25 +2652,28 @@ sub run_blast
 	  }
 	elsif ( $SERVER eq "LOCAL")
 	  {
-	    if ($ENV{"BLAST_DB_DIR"}) {
+	    if ($ENV{"BLAST_DB_DIR"}) 
+	      {
 	    	$x=$ENV{"BLAST_DB_DIR"};
-			$cl_db="$x/$db";
-	    }
-	    else{
-			$cl_db=$db;
-	    }
-
-        ##
-		## BLAST+ provide different binaries names and CLI options
-		## Use the 'legacy_blast.pl' to keep compatibility with old blast commands
-		##
-		$path=`which legacy_blast.pl 2>/dev/null`;  
-		$path=`dirname $path`; 
-		chomp($path);
-	    if ($method eq "blastp"){
-			&check_configuration("legacy_blast.pl");
-			$command="legacy_blast.pl blastpgp --path $path -d $cl_db -i $infile -o $outfile -m7 -j1";
-	    }
+		$cl_db="$x/$db";
+	      }
+	    else
+	      {
+		$cl_db=$db;
+	      }
+	    
+	    ##
+	    ## BLAST+ provide different binaries names and CLI options
+	    ## Use the 'legacy_blast.pl' to keep compatibility with old blast commands
+	    ##
+	    $path=`which legacy_blast.pl 2>/dev/null`;  
+	    $path=`dirname $path`; 
+	    chomp($path);
+	    if ($method eq "blastp")
+	      {
+		&check_configuration("legacy_blast.pl");
+		$command="legacy_blast.pl blastpgp --path $path -d $cl_db -i $infile -o $outfile -m7 -j1";		
+	      }
 	    elsif ($method eq "psiblast")
 	      {
 		&check_configuration("legacy_blast.pl");
@@ -3476,17 +3494,17 @@ END
 sub blast_com2new_blast_com
     {
       my $com=shift;
-	  if ($com=~/formatdb/)
-	    {
-	      $com=~s/formatdb/makeblastdb/;
-	      $com=~s/\-i/\-in/;
-	      if ($com =~/pF/){$com=~s/\-pF/\-dbtype nucl/;}
-	      if ($com =~/p F/){$com=~s/\-p F/\-dbtype nucl/;}
-	      $com="$com -logfile /dev/null";
-	      return $com;
-	    }
-	  else {return $com;}
-
+      if ($com=~/formatdb/)
+	{
+	  $com=~s/formatdb/makeblastdb/;
+	  $com=~s/\-i/\-in/;
+	  if ($com =~/pF/){$com=~s/\-pF/\-dbtype nucl/;}
+	  if ($com =~/p F/){$com=~s/\-p F/\-dbtype nucl/;}
+	  $com="$com -logfile /dev/null";
+	  return $com;
+	}
+      else {return $com;}
+      
     }
 sub safe_system
 {
@@ -3497,9 +3515,9 @@ sub safe_system
   my $status;
   my $ppid=getppid();
   if ($com eq ""){return 1;}
-
+ 
   if ( ($com=~/^blast/) ||($com=~/^formatdb/)){$com=&blast_com2new_blast_com($com);}
-
+ 
   if (($pid = fork ()) < 0){return (-1);}
   if ($pid == 0)
     {

@@ -5848,7 +5848,7 @@ Sequence * seq2template_seq ( Sequence *S, char *template_list, Fname *F)
   BmI=get_int_variable ("prot_min_sim");
   BMI=get_int_variable ("prot_max_sim");
   BmC=get_int_variable ("prot_min_cov");
-  Trim=get_int_variable("prot_trim");
+  Trim=get_int_variable("psitrim");
   
   if (strm (prot_db, "dataset") || strm (prot_db, "self"))
     {

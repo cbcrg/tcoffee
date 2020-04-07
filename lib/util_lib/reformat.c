@@ -147,6 +147,9 @@ int seq_reformat ( int argc, char **in_argv)
 		fprintf ( stdout, "\n-decode <file>     Rename file <name2> to <name1>");
 		fprintf ( stdout, "\n-no_warning........Suppresses all warnings");
 		fprintf ( stdout, "\n-cache.............use,ignore,update,local, DirectoryName");
+		fprintf ( stdout, "\n-treemode..........mode used to generate any required tree");
+		fprintf ( stdout, "\n-keep..............Number of top entries to be kept when trimming");
+		
 
 
 		fprintf ( stdout, "\n");
@@ -344,7 +347,7 @@ int seq_reformat ( int argc, char **in_argv)
 		fprintf ( stdout, "\n     +RNAfold_cmp.........compares the sec struc of in1 and in2 (computes them with alifold if missing)");
 
 		fprintf ( stdout, "\nMSA Post Processing___________________________________________________");
-			fprintf ( stdout, "\n     +force_aln filename|seq1 res1 seq2 res2");
+		fprintf ( stdout, "\n     +force_aln filename|seq1 res1 seq2 res2");
 		fprintf ( stdout, "\n     .....................Forces residue 1 of seq1 to be aligned with res2 of seq 2");
 		fprintf ( stdout, "\n     .....................In a file, there must be one pair of interaction/line");
 		fprintf ( stdout, "\n     +sim_filter[_aln_Ix_iy_Cz_cw <seq>");
@@ -353,8 +356,11 @@ int seq_reformat ( int argc, char **in_argv)
 		fprintf ( stdout, "\n     ....................._i min identity to seq");
 		fprintf ( stdout, "\n     ....................._C max cov on seq");
 		fprintf ( stdout, "\n     ....................._c min cov on seq");
-		fprintf ( stdout, "\n     +hpylotrim [N|N%%|split] [nj|phyml|trmsd] [trmsd template file]");
-		fprintf ( stdout, "\n     +trim[_aln_%%%%50_n111_N50_T_Fn_fS_pS_max_sim_P0_K0] [string2]");
+		fprintf ( stdout, "\n     +phylotrim [N|N%%|split] [nj|phyml|trmsd] [trmsd template file]");
+		fprintf ( stdout, "\n     +regtrim N[%]........Keep N (or N%) sequences from <-in1> seq using <-in2> tree.");
+		fprintf ( stdout, "\n     .....................The first -keep sequences are kept\n");
+		fprintf ( stdout, "\n     .....................if no <-in2> tree is provided <-treemode> is used to generate it (def=codnd)");
+		
 		fprintf ( stdout, "\n     ....................._<seq or aln>, aln is assumed");
 		fprintf ( stdout, "\n     ....................._%%%%<max/min_percent_similarity>");
 		fprintf ( stdout, "\n     ....................._max Or _min <keep sequences for which sim is the max or the min [Def: _max>");
@@ -650,22 +656,29 @@ int seq_reformat ( int argc, char **in_argv)
  			{
  			sprintf (action_list[n_actions++], "seqnos");
  			}
-
+		else if ( strcmp( argv[a], "-treemode")==0)
+		  {
+		    set_string_variable ("treemode", argv[++a]);
+		  }
+		else if ( strcmp( argv[a], "-keep")==0)
+		  {
+		    set_int_variable ("keep", atoi(argv[++a]));
+		  } 
 		else if ( strcmp( argv[a], "-action")==0)
-		        {
-			while ((a+1)<argc && argv[a+1][0]!='-')
-			  {
-			    sprintf (action_list[n_actions++], "%s", argv[a+1]);
-			    a++;
-			  }
-			}
+		  {
+		    while ((a+1)<argc && argv[a+1][0]!='-')
+		      {
+			sprintf (action_list[n_actions++], "%s", argv[a+1]);
+			a++;
+		      }
+		  }
 		else if ( strcmp ( argv[a], "-keep_case")==0)
-		        {
-			  if(!NEXT_ARG_IS_FLAG)RAD->keep_case=1;
-			  else RAD->keep_case=(strm3(argv[a], "on","ON","On"))?1:0;
-
-			}
-
+		  {
+		    if(!NEXT_ARG_IS_FLAG)RAD->keep_case=1;
+		    else RAD->keep_case=(strm3(argv[a], "on","ON","On"))?1:0;
+		    
+		  }
+		  
 		else if ( strcmp ( argv[a], "-conv")==0)
 	                {
 			if ( strncmp ( argv[a+1],"set",3)==0)RAD->symbol_list=make_symbols (argv[++a],&(RAD->n_symbol));
@@ -13285,6 +13298,7 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
        else if ( strm (action, "regtrim"))
 	 {
 	   int ns, p;
+	  
 	   if (strstr (action_list[1], "%"))
 	     {
 	       sscanf (action_list[1], "%d%%", &p);
@@ -13294,7 +13308,7 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	     {
 	       ns=atoi (action_list[1]);
 	     }
-	   D1->S=regtrim (D1->S, D2->T,ns);
+	   D1->S=regtrim (D1->S, (D2)?D2->T:NULL,ns);
 	   D1->A=seq2aln(D1->S, NULL, 0);
 	 }
        else if ( strm (action, "trim"))

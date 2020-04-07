@@ -92,9 +92,11 @@ The following procedure shows howto install T-Coffee from the pre-packages sourc
 
 
 
-******************
-BLAST and T-Coffee
-******************
+************************************************
+Template based modes: PSI/TM-Coffee and Expresso
+************************************************
+The template modes are special modes of T-Coffee in whichj the tempates are associated with templates. The templates are easier to align the the sequences, thus resulting in more accurate alignments. The templates can be provided manually, or they can be fectched using BLAST. In order to do so, T-offee must be able to use BLAST. It can do so using a remote server like the EBI, or using your local installation. 
+
 BLAST is a program that searches databases for homologues of a query sequence. It works for protein and nucleic acid sequences alike. In theory BLAST is just a package like any but in practice things are a bit more complex. To run correctly, BLAST requires up-to-date databases (that can be fairly large, like nr or UniProt) and a powerful computer. Fortunately, an increasing number of institutes or companies are now providing BLAST clients that run over the net. It means that all you need is a small program that send your query to the big server and gets the results back. This prevents you from the hassle of installing and maintaining BLAST, but of course it is less private and you rely on the network and the current load of these busy servers.
 
 **Thanks to its interaction with BLAST, T-Coffee can gather more information and deliver alignments significantly more accurate than the default T-Coffee or any similar method. Let us go through the various modes available for T-Coffee...**
@@ -119,21 +121,36 @@ These templates are automatically built by T-Coffee when using one of the follow
    
    To fetch everything possible and get the best templates, structure or profile:
    ##: t_coffee <your seq> -mode accurate
+
+.. tip:: BLAST based computation is a bit time intensive and results are cached to save time on re-computation (~/.t_coffee/cache/). These files are never erased so remember to empty the cache from time to time otherwise it's just getting bigger and bigger or use the option **-cache=no**
    
    
+Using a BLAST local version on Unix
+===================================
+This is the most accurate way of using BLAST as it provides you with version control on both the program and the database. The downisde is that it requires installing BLAST and associated databases. If you simply want to make a quick try, you can use the remote cliant (see next section)
+If you have BLAST+ <https://blast.ncbi.nlm.nih.gov/Blast.cgi?PAGE_TYPE=BlastDocs&DOC_TYPE=Download> installed, you can run it using the following command line:
+
+::
+    ##: t_coffee <yourseq> -mode <expresso|piscoffee|tmcoffee> -blast_server=LOCAL -protein_db=<location of NR50 for psi/tm-coffee > -pdb_db=<location of PDB fasta database for expresso>  
+
+The default installation should be compliant with your system. At the time this section is being written (03/2020) Uniprot50 features about 36 million sequences and it takes about 3 minutes/sequences to build a profile on a mid-range workstation. 
+
 Using the EBI BLAST client
 ==========================
 This is by far the easiest way and conveniently the default mode of T-Coffee. The PERL clients are already incorporated in T-Coffee and all you need are the proper PERL libraries. In principle, T-Coffee should have already installed these libraries during the standard installation, yet, this requires having root access. It really is worth the effort since the EBI is providing one of the best webservice available around and most notably, the only public PSI-BLAST via a webservice. Note that because PSI-BLAST is time consuming, T-Coffee stores the runs in its cache (**./tcoffee/cache**) so that it does not need to be rerun. It means that if you realign your sequences (or add a few extra sequences), things will be considerably faster.
 
-.. danger:: Whenever you use a T-Coffee mode requiring BLAST access, it will ask you for an authentification e-mail. Be extra careful!!! If you provide a fake e-mail, the EBI may suspend the service for all machines associated with your IP address (that could mean your entire lab, entire institute, even the entire country or, but I doubt it, the whole universe). 
+.. tip:: The clients require the Perl module XML::Simple to be installed 
+   
+.. warning:: Whenever you use a T-Coffee mode requiring BLAST access, it will ask you for an authentification e-mail. Do not provide fake e-mail, the EBI may suspend the service for all machines associated with your IP address (that could mean your entire lab, entire institute, even the entire country or, but I doubt it, the whole universe). 
 
-.. tip:: Files in the cache are never erased so remember to empty the cache from time to time otherwise it's just getting bigger and bigger...
+
 
 
 Using the NCBI BLAST client
 ===========================
 The NCBI is the next best alternative however in my hands it was always a bit slower and, most of all, it does not incorporate PSI-BLAST as a webservice. A big miss! The NCBI web BLAST client is a small executable that you should install on your system. To do so, you just have to follow the instructions given on this `link <ftp://ftp.ncbi.nih.gov/blast/executables/LATEST>`_. Simply go for netbl, download the executable that corresponds to your architecture (Cygwin users should go for the win executable). Despite all the files that come along the executable blastcl3 is a stand alone executable that you can safely move to your $BIN. All you then need to do is to make sure that T-Coffee uses the right client; when you run T-Coffee, specify the client in the command line with the flag **-blast_server=NCBI**.
 
+.. tip:: The clients require the Perl module XML::Simple to be installed 
 .. Attention:: No need for any e-mail here, but you don't get PSI-BLAST. Whenever T-Coffee will need to use it, BLASTP will be used instead.
 
 
@@ -154,29 +171,7 @@ You may have your own client (lucky you). If that is so, all you need is to make
 .. tip:: If foo.pl behaves differently, the easiest way will probably be to write a wrapper around it so that wrapped_foo.pl behaves like BLASTPGP.
 
 
-Using a BLAST local version on Unix
-===================================
-If you have BLASTPGP installed, you can run it instead of the remote clients by using in your command line the flag **-blast_server=LOCAL**. The documentation for BLASTPGP can be found `here <http://www.ncbi.nlm.nih.gov/staff/tao/URLAPI/blastpgp.html>`_ and the package is part of the standard BLAST `distribution <ftp://ftp.ncbi.nih.gov/blast/executables/LATEST>`_. Depending on your system, your own skills, your requirements and on more parameters than I have fingers to count, installing a BLAST server suited for your needs can range from a 10 minutes job to an achievement spread over several generations. So at this point, you should roam the NCBI website for suitable information. If you want to have your own BLAST server to run your own databases, you should know that it is possible to control both the database and the program used by BLAST using T-Coffee flags  **-protein_db** (will specify the database used by all the PSI-BLAST modes) and **-pdb_db** (will specify the database used by the structural modes)
 
-.. tip:: T-Coffee is compliant with BLAST+, the latest NCBI BLAST.
-
-
-Using a BLAST local version on Windows/Cygwin
-=============================================
-BLAST+ is the latest NCBI BLAST. It is easier to install and a default installation should be compliant with a default T-Coffee installation. For those of you using Cygwin, be careful!! While Cygwin behaves like a Unix system, the BLAST executable required for Cygwin (win32) is expecting Windows paths and not Unix paths. This has three important consequences:
-
-::
-
-  1. The NCBI file declaring the sata directory must be:
-     C:WINDOWS//ncbi.init [at the root of your WINDOWS]
-
-  2. The address mentioned with this file must be WINDOWS formated, for example:
-     Data=C:\cygwin\home\notredame\blast\data
-
-  3. The database addresses to BLAST must be in Windows format:
-     ##: t_coffee ... -protein_db='c:/somewhere/somewhere else/database'
-
-.. attention:: Using the slash (/) or the antislash (\\) does not matter on new systems but I would recommend against incorporating white spaces.
 
 
 ***************

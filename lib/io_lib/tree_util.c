@@ -8825,17 +8825,29 @@ int ktree2klist (KT_node K, KT_node *KL, int *n)
 Sequence * regtrim (Sequence *S, NT_node T, int N)
 {
   NT_node *CL, *NL;
-  int left, right, nc,nn, a,terminal;
+  int left, right, nc,nn, a,s,terminal;
   FILE *fp;
   int **ordered;
   char *tmp=vtmpnam(NULL);
   float *w;
-
+  int *used;
+  
+  //This defines the numbr of sequences that will be kept
+  //This is typically set to 1 to keep the first sequence
+  
+  int keep=get_int_variable ("keep");
+  
+  if (!T)
+    {
+      char *tmode=get_string_variable ("treemode");
+      if (tmode)T=seq2dnd(S,tmode);
+      else T=seq2dnd(S,"codnd");
+    }
+  
   if (!T)return NULL;
+  
   w=seq2dpa_weight (S, "longuest");
   T=node2master (T, S, w);
-
-  
   T->leaf=0;
     
   CL=(NT_node*)vcalloc (1, sizeof (NT_node));
@@ -8874,8 +8886,18 @@ Sequence * regtrim (Sequence *S, NT_node T, int N)
       CL=NL;
       nc=nn;
     }
-    
+  
   fp=vfopen (tmp, "w");
+  //used makes sure the keep first sequences are not duplicated
+  used=(int*)vcalloc (S->nseq, sizeof (int));
+  if (keep)
+    {
+      for (s=0; s<keep;s++)
+	{
+	  fprintf (fp, ">%s\n%s\n", S->name[s],S->seq[s]);
+	  used[s]=1;
+	}
+    }
   if (S->nseq>N)
     {
       ordered=declare_int (nc, 1);
@@ -8884,12 +8906,12 @@ Sequence * regtrim (Sequence *S, NT_node T, int N)
       for (a=0; a<nc; a++)
 	{
 	  int s=ordered[a][0];
-	  fprintf (fp, ">%s\n%s\n", S->name[s],S->seq[s]);
-
 	  
+	  if (!used[s])fprintf (fp, ">%s\n%s\n", S->name[s],S->seq[s]);
 	}
       vfclose (fp);
       free_int (ordered, -1);
+      
     }
   else
     {
@@ -8898,11 +8920,11 @@ Sequence * regtrim (Sequence *S, NT_node T, int N)
 	  
 	  int s=CL[a]->seq;
 	  
-	  fprintf (fp, ">%s\n%s\n", S->name[s],S->seq[s]);
+	  if (!used[s])fprintf (fp, ">%s\n%s\n", S->name[s],S->seq[s]);
 	}
       vfclose (fp);
     }
-  
+  vfree (used);
   vfree (w);
   vfree(CL);
   return get_fasta_sequence (tmp,NULL);
@@ -8919,7 +8941,10 @@ KT_node tree2ktree (NT_node T,Sequence *S, int N)
   int **ordered;
   float *w;
   
+  //Dynamic is the variable that will be used to increase the bucket size from root to leaf
+  int dynamic=get_int_variable ("reg_dynamic");
   
+  if (N==0)printf_exit ( EXIT_FAILURE,stderr, "\nERROR: Bucket size set to 0 (N=%d Dynamic=%d) [FATAL:tree2ktree]", N, dynamic);
   if (!T)return NULL;
   
   T->leaf=0;
@@ -9000,7 +9025,8 @@ KT_node tree2ktree (NT_node T,Sequence *S, int N)
     {
       if (!CL[a]->isseq)
 	{
-	  K->child[K->nc]=tree2ktree (CL[a],S, N);
+	  //The Children will be at max, dynamic times larger than their parent 
+	  K->child[K->nc]=tree2ktree (CL[a],S, N*dynamic);
 	  (K->child[K->nc])->name=(CL[a])->name;
 	  K->tot+=(K->child[K->nc])->tot;
 	  K->nc++;

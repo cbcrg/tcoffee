@@ -374,7 +374,8 @@ int batch_main ( int argc, char **argv)
 	int maxlen;
 	int ulimit;
 	/*Thread parameters*/
-	int prot_trim;
+	int psitrim;
+	char *psitrim_mode;
 	int prot_min_sim;
 	int prot_max_sim;
 	int prot_min_cov;
@@ -2923,23 +2924,41 @@ get_cl_param(\
 		   );
 set_int_variable ("prot_max_sim", prot_max_sim);
 
+declare_name (psitrim_mode);
+get_cl_param(							\
+			    /*argc*/      argc          ,\
+			    /*argv*/      argv          ,\
+			    /*output*/    &le           ,\
+			    /*Name*/      "-psitrim_mode"    ,\
+			    /*Flag*/      &garbage      ,\
+			    /*TYPE*/      "S"         ,\
+			    /*OPTIONAL?*/ OPTIONAL      ,\
+			    /*MAX Nval*/  1             ,\
+			    /*DOC*/       "Mode used to trim profiles, regtrim or trim (def)",\
+			    /*Parameter*/&psitrim_mode       ,\
+			    /*Def 1*/    "trim"      ,\
+			    /*Def 2*/    "trim",\
+			    /*Min_value*/ "any"         ,\
+			    /*Max Value*/ "any"          \
+		   );
+cputenv ("PSITRIM=%s", psitrim_mode);
 get_cl_param(\
 			    /*argc*/      argc             ,\
 			    /*argv*/      argv             ,\
 			    /*output*/    &le              ,\
-			    /*Name*/      "-prot_trim"        ,\
-			    /*Flag*/      &prot_trim        ,\
+			    /*Name*/      "-psitrim"        ,\
+			    /*Flag*/      &psitrim        ,\
 			    /*TYPE*/      "D"              ,\
 			    /*OPTIONAL?*/ OPTIONAL         ,\
 			    /*MAX Nval*/  1                ,\
 			    /*DOC*/       "Maximum number of sequences to keep when building a profile [0 to keep everything, negative value to keep X%%, positive value to keep X Sequences]" ,\
-			    /*Parameter*/ &prot_trim          ,\
-			    /*Def 1*/     "20"             ,\
-			    /*Def 2*/     "20"             ,\
+			    /*Parameter*/ &psitrim          ,\
+			    /*Def 1*/     "40"             ,\
+			    /*Def 2*/     "40"             ,\
 			    /*Min_value*/ "any"            ,\
 			    /*Max Value*/ "any"             \
 		   );
-set_int_variable ("prot_trim", prot_trim);
+set_int_variable ("psitrim", psitrim);
 
 get_cl_param(\
 			    /*argc*/      argc             ,\
@@ -3088,7 +3107,7 @@ declare_name (prot_blast_server);
  // HERE ("%s", blast_server);
  if ( strm (prot_blast_server, "env"))prot_blast_server=get_env_variable ("blast_server_4_TCOFFEE",IS_FATAL);
  set_string_variable ("blast_server", prot_blast_server);
-
+ cputenv ("blast_server_4_TCOFFEE=%s",prot_blast_server);
 
 
  declare_name (pdb_db);
@@ -3110,6 +3129,7 @@ declare_name (prot_blast_server);
 		   );
  if ( strm (pdb_db, "env"))pdb_db=get_env_variable ("pdb_db_4_TCOFFEE", IS_FATAL);
  set_string_variable ("pdb_db", pdb_db);
+ cputenv ("pdb_db_4_TCOFFEE=%s",pdb_db);
 
 
 declare_name (prot_db);
@@ -3131,6 +3151,7 @@ declare_name (prot_db);
 		   );
  if ( strm (prot_db, "env"))prot_db=get_env_variable ("protein_db_4_TCOFFEE", IS_FATAL);
  set_string_variable ("prot_db", prot_db);
+ cputenv ("protein_db_4_TCOFFEE=%s",pdb_db);
 
  declare_name (method_log);
  get_cl_param(							\
@@ -7011,7 +7032,9 @@ Alignment * t_coffee_dpa (int argc, char **argv)
   FILE *le;
   char *se_name;
   char *homoplasy=NULL;
-
+  int reg_dynamic=1;
+  
+  
   /* This is used for the dump function see -dump option*/
   declare_name (se_name);
   sprintf (se_name, "stderr");
@@ -7082,6 +7105,10 @@ Alignment * t_coffee_dpa (int argc, char **argv)
 	  set_nproc (atoi (argv[++a]));
 	}
       else if (strm (argv[a],"-dpa")|| strm (argv[a],"-reg"));
+      else if (strm (argv[a],"-child_tree"))
+	{
+	  cputenv ("child_tree_4_TCOFFEE=%s", argv[++a]);
+	}
       else if (strm (argv[a],"-usetree"))
 	{
 	  usetree=argv[++a];
@@ -7102,6 +7129,10 @@ Alignment * t_coffee_dpa (int argc, char **argv)
 	{
 	  dpa_nseq=atoi(argv[++a]);
 	}
+      else if (strm (argv[a],"-dynamic"))
+	{
+	  reg_dynamic=atoi(argv[++a]);
+	}
       else if ( strm (argv[a], "-dpa_method") || strm (argv[a], "-reg_method")  )
 	{
 	  dpa_aligner=argv[++a];
@@ -7119,11 +7150,32 @@ Alignment * t_coffee_dpa (int argc, char **argv)
 	  homoplasy=(char*)vcalloc ( 1000, sizeof (char));
 	 
 	}
+      else if (strm (argv[a],"-blast_server"))
+	{
+	  cputenv ("blast_server_4_TCOFFEE=%s", argv[++a]);
+	}
+      else if (strm (argv[a],"-protein_db"))
+	{
+	  cputenv ("protein_db_4_TCOFFEE=%s", argv[++a]);
+	}
+      else if (strm (argv[a],"-pdb_db"))
+	{
+	  cputenv ("pdb_db_4_TCOFFEE=%s", argv[++a]);
+	}
+      else if (strm (argv[a],"-cache"))
+	{
+	  cputenv ("cache_4_TCOFFEE=%s", argv[++a]);
+	}
+      else if (strm (argv[a],"-dynamic_config"))
+	{
+	  cputenv ("dynamic_config_4_TCOFFEE=%s", argv[++a]);
+	}
+
       else
 	
 	command=strcatf (command,"%s ", argv[a]);
     }
-  
+  set_int_variable ("reg_dynamic",reg_dynamic);
   
   //prepare the aligner CL
   if (dpa_aligner)

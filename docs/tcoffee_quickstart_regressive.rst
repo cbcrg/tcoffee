@@ -90,6 +90,7 @@ This flag defines which method will be used to estimate the tree. The following 
   - fftns2dnd   : Tree produced after the second iteration MAFFT fftns mode
   - upgma       : upgma tree - warning cubic time computation
   - nj          : Neighbour Joinning tree
+  - famsadnd    : FAMSA single 
   - #<command>  : Runs comamnd <seq> > <tree>. 
   - filename    : Any file in newick format. The seq file and the tree file must match
 
@@ -108,6 +109,12 @@ Sets the maximum number of threads to be used by one instance. Note that if you 
 
 - **-reg_method**(usage:**-reg_tree=<method or configuration file>** , default: clustalo_msa)
 This flag defines which method will be used to estimate the tree. In order to know which methods are available, type he following command line:
+
+- **-dynamic**(usage:**-dynamic=<Integer>** , default: 1)
+This flag defines the factor by which every Child reg_n is increased while going from root to leaf
+
+- **-dynamic_config**(usage:**-dynamic_config=<file>** , default: none)
+This flag provides a file specifying which method will be used depending on Nseq in slaves when using dynamic_msa
 
 ::
 

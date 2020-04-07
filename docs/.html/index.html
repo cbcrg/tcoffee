@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>T-Coffee Version_13.41.15.6eaf8df documentation</title>
+  <title>T-Coffee Version_13.41.16.8874b4a documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                Version_13.41.15.6eaf8df
+                Version_13.41.16.8874b4a
               </div>
             
           
@@ -82,13 +82,12 @@
 <li class="toctree-l3"><a class="reference internal" href="index.html#installation-from-source-binaries-downloader-mac-osx-linux">Installation From Source/Binaries downloader (Mac OSX/Linux)</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="index.html#blast-and-t-coffee">BLAST and T-Coffee</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="index.html#template-based-modes-psi-tm-coffee-and-expresso">Template based modes: PSI/TM-Coffee and Expresso</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="index.html#why-do-i-need-blast-with-t-coffee">Why do I need BLAST with T-Coffee?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#using-a-blast-local-version-on-unix">Using a BLAST local version on Unix</a></li>
 <li class="toctree-l3"><a class="reference internal" href="index.html#using-the-ebi-blast-client">Using the EBI BLAST client</a></li>
 <li class="toctree-l3"><a class="reference internal" href="index.html#using-the-ncbi-blast-client">Using the NCBI BLAST client</a></li>
 <li class="toctree-l3"><a class="reference internal" href="index.html#using-another-client">Using another client</a></li>
-<li class="toctree-l3"><a class="reference internal" href="index.html#using-a-blast-local-version-on-unix">Using a BLAST local version on Unix</a></li>
-<li class="toctree-l3"><a class="reference internal" href="index.html#using-a-blast-local-version-on-windows-cygwin">Using a BLAST local version on Windows/Cygwin</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#troubleshooting">Troubleshooting</a><ul>
@@ -707,7 +706,7 @@
     
       <li><a href="index.html#document-index">Docs</a> &raquo;</li>
         
-      <li>T-Coffee Version_13.41.15.6eaf8df documentation</li>
+      <li>T-Coffee Version_13.41.16.8874b4a documentation</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -815,8 +814,9 @@
 </div>
 </div>
 </div>
-<div class="section" id="blast-and-t-coffee">
-<h3>BLAST and T-Coffee<a class="headerlink" href="#blast-and-t-coffee" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="template-based-modes-psi-tm-coffee-and-expresso">
+<h3>Template based modes: PSI/TM-Coffee and Expresso<a class="headerlink" href="#template-based-modes-psi-tm-coffee-and-expresso" title="Permalink to this headline">¶</a></h3>
+<p>The template modes are special modes of T-Coffee in whichj the tempates are associated with templates. The templates are easier to align the the sequences, thus resulting in more accurate alignments. The templates can be provided manually, or they can be fectched using BLAST. In order to do so, T-offee must be able to use BLAST. It can do so using a remote server like the EBI, or using your local installation.</p>
 <p>BLAST is a program that searches databases for homologues of a query sequence. It works for protein and nucleic acid sequences alike. In theory BLAST is just a package like any but in practice things are a bit more complex. To run correctly, BLAST requires up-to-date databases (that can be fairly large, like nr or UniProt) and a powerful computer. Fortunately, an increasing number of institutes or companies are now providing BLAST clients that run over the net. It means that all you need is a small program that send your query to the big server and gets the results back. This prevents you from the hassle of installing and maintaining BLAST, but of course it is less private and you rely on the network and the current load of these busy servers.</p>
 <p><strong>Thanks to its interaction with BLAST, T-Coffee can gather more information and deliver alignments significantly more accurate than the default T-Coffee or any similar method. Let us go through the various modes available for T-Coffee…</strong></p>
 <div class="section" id="why-do-i-need-blast-with-t-coffee">
@@ -839,22 +839,40 @@
 <span class="c1">##: t_coffee &lt;your seq&gt; -mode accurate</span>
 </pre></div>
 </div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>BLAST based computation is a bit time intensive and results are cached to save time on re-computation (~/.t_coffee/cache/). These files are never erased so remember to empty the cache from time to time otherwise it’s just getting bigger and bigger or use the option <strong>-cache=no</strong></p>
+</div>
+</div>
+<div class="section" id="using-a-blast-local-version-on-unix">
+<h4>Using a BLAST local version on Unix<a class="headerlink" href="#using-a-blast-local-version-on-unix" title="Permalink to this headline">¶</a></h4>
+<p>This is the most accurate way of using BLAST as it provides you with version control on both the program and the database. The downisde is that it requires installing BLAST and associated databases. If you simply want to make a quick try, you can use the remote cliant (see next section)
+If you have BLAST+ &lt;<a class="reference external" href="https://blast.ncbi.nlm.nih.gov/Blast.cgi?PAGE_TYPE=BlastDocs&amp;DOC_TYPE=Download">https://blast.ncbi.nlm.nih.gov/Blast.cgi?PAGE_TYPE=BlastDocs&amp;DOC_TYPE=Download</a>&gt; installed, you can run it using the following command line:</p>
+<dl class="simple">
+<dt>::</dt><dd><p>##: t_coffee &lt;yourseq&gt; -mode &lt;expresso|piscoffee|tmcoffee&gt; -blast_server=LOCAL -protein_db=&lt;location of NR50 for psi/tm-coffee &gt; -pdb_db=&lt;location of PDB fasta database for expresso&gt;</p>
+</dd>
+</dl>
+<p>The default installation should be compliant with your system. At the time this section is being written (03/2020) Uniprot50 features about 36 million sequences and it takes about 3 minutes/sequences to build a profile on a mid-range workstation.</p>
 </div>
 <div class="section" id="using-the-ebi-blast-client">
 <h4>Using the EBI BLAST client<a class="headerlink" href="#using-the-ebi-blast-client" title="Permalink to this headline">¶</a></h4>
 <p>This is by far the easiest way and conveniently the default mode of T-Coffee. The PERL clients are already incorporated in T-Coffee and all you need are the proper PERL libraries. In principle, T-Coffee should have already installed these libraries during the standard installation, yet, this requires having root access. It really is worth the effort since the EBI is providing one of the best webservice available around and most notably, the only public PSI-BLAST via a webservice. Note that because PSI-BLAST is time consuming, T-Coffee stores the runs in its cache (<strong>./tcoffee/cache</strong>) so that it does not need to be rerun. It means that if you realign your sequences (or add a few extra sequences), things will be considerably faster.</p>
-<div class="admonition danger">
-<p class="admonition-title">Danger</p>
-<p>Whenever you use a T-Coffee mode requiring BLAST access, it will ask you for an authentification e-mail. Be extra careful!!! If you provide a fake e-mail, the EBI may suspend the service for all machines associated with your IP address (that could mean your entire lab, entire institute, even the entire country or, but I doubt it, the whole universe).</p>
-</div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>Files in the cache are never erased so remember to empty the cache from time to time otherwise it’s just getting bigger and bigger…</p>
+<p>The clients require the Perl module XML::Simple to be installed</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Whenever you use a T-Coffee mode requiring BLAST access, it will ask you for an authentification e-mail. Do not provide fake e-mail, the EBI may suspend the service for all machines associated with your IP address (that could mean your entire lab, entire institute, even the entire country or, but I doubt it, the whole universe).</p>
 </div>
 </div>
 <div class="section" id="using-the-ncbi-blast-client">
 <h4>Using the NCBI BLAST client<a class="headerlink" href="#using-the-ncbi-blast-client" title="Permalink to this headline">¶</a></h4>
 <p>The NCBI is the next best alternative however in my hands it was always a bit slower and, most of all, it does not incorporate PSI-BLAST as a webservice. A big miss! The NCBI web BLAST client is a small executable that you should install on your system. To do so, you just have to follow the instructions given on this <a class="reference external" href="ftp://ftp.ncbi.nih.gov/blast/executables/LATEST">link</a>. Simply go for netbl, download the executable that corresponds to your architecture (Cygwin users should go for the win executable). Despite all the files that come along the executable blastcl3 is a stand alone executable that you can safely move to your $BIN. All you then need to do is to make sure that T-Coffee uses the right client; when you run T-Coffee, specify the client in the command line with the flag <strong>-blast_server=NCBI</strong>.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>The clients require the Perl module XML::Simple to be installed</p>
+</div>
 <div class="admonition attention">
 <p class="admonition-title">Attention</p>
 <p>No need for any e-mail here, but you don’t get PSI-BLAST. Whenever T-Coffee will need to use it, BLASTP will be used instead.</p>
@@ -875,32 +893,6 @@
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>If foo.pl behaves differently, the easiest way will probably be to write a wrapper around it so that wrapped_foo.pl behaves like BLASTPGP.</p>
-</div>
-</div>
-<div class="section" id="using-a-blast-local-version-on-unix">
-<h4>Using a BLAST local version on Unix<a class="headerlink" href="#using-a-blast-local-version-on-unix" title="Permalink to this headline">¶</a></h4>
-<p>If you have BLASTPGP installed, you can run it instead of the remote clients by using in your command line the flag <strong>-blast_server=LOCAL</strong>. The documentation for BLASTPGP can be found <a class="reference external" href="http://www.ncbi.nlm.nih.gov/staff/tao/URLAPI/blastpgp.html">here</a> and the package is part of the standard BLAST <a class="reference external" href="ftp://ftp.ncbi.nih.gov/blast/executables/LATEST">distribution</a>. Depending on your system, your own skills, your requirements and on more parameters than I have fingers to count, installing a BLAST server suited for your needs can range from a 10 minutes job to an achievement spread over several generations. So at this point, you should roam the NCBI website for suitable information. If you want to have your own BLAST server to run your own databases, you should know that it is possible to control both the database and the program used by BLAST using T-Coffee flags  <strong>-protein_db</strong> (will specify the database used by all the PSI-BLAST modes) and <strong>-pdb_db</strong> (will specify the database used by the structural modes)</p>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>T-Coffee is compliant with BLAST+, the latest NCBI BLAST.</p>
-</div>
-</div>
-<div class="section" id="using-a-blast-local-version-on-windows-cygwin">
-<h4>Using a BLAST local version on Windows/Cygwin<a class="headerlink" href="#using-a-blast-local-version-on-windows-cygwin" title="Permalink to this headline">¶</a></h4>
-<p>BLAST+ is the latest NCBI BLAST. It is easier to install and a default installation should be compliant with a default T-Coffee installation. For those of you using Cygwin, be careful!! While Cygwin behaves like a Unix system, the BLAST executable required for Cygwin (win32) is expecting Windows paths and not Unix paths. This has three important consequences:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">1.</span> <span class="n">The</span> <span class="n">NCBI</span> <span class="n">file</span> <span class="n">declaring</span> <span class="n">the</span> <span class="n">sata</span> <span class="n">directory</span> <span class="n">must</span> <span class="n">be</span><span class="p">:</span>
-   <span class="n">C</span><span class="p">:</span><span class="n">WINDOWS</span><span class="o">//</span><span class="n">ncbi</span><span class="o">.</span><span class="n">init</span> <span class="p">[</span><span class="n">at</span> <span class="n">the</span> <span class="n">root</span> <span class="n">of</span> <span class="n">your</span> <span class="n">WINDOWS</span><span class="p">]</span>
-
-<span class="mf">2.</span> <span class="n">The</span> <span class="n">address</span> <span class="n">mentioned</span> <span class="k">with</span> <span class="n">this</span> <span class="n">file</span> <span class="n">must</span> <span class="n">be</span> <span class="n">WINDOWS</span> <span class="n">formated</span><span class="p">,</span> <span class="k">for</span> <span class="n">example</span><span class="p">:</span>
-   <span class="n">Data</span><span class="o">=</span><span class="n">C</span><span class="p">:</span>\<span class="n">cygwin</span>\<span class="n">home</span>\<span class="n">notredame</span>\<span class="n">blast</span>\<span class="n">data</span>
-
-<span class="mf">3.</span> <span class="n">The</span> <span class="n">database</span> <span class="n">addresses</span> <span class="n">to</span> <span class="n">BLAST</span> <span class="n">must</span> <span class="n">be</span> <span class="ow">in</span> <span class="n">Windows</span> <span class="nb">format</span><span class="p">:</span>
-   <span class="c1">##: t_coffee ... -protein_db=&#39;c:/somewhere/somewhere else/database&#39;</span>
-</pre></div>
-</div>
-<div class="admonition attention">
-<p class="admonition-title">Attention</p>
-<p>Using the slash (/) or the antislash (\) does not matter on new systems but I would recommend against incorporating white spaces.</p>
 </div>
 </div>
 </div>
@@ -1122,6 +1114,7 @@ blastpgp_client http://www.ebi.ac.uk/Tools/webservices/services/blastpgp
 <span class="o">-</span> <span class="n">fftns2dnd</span>   <span class="p">:</span> <span class="n">Tree</span> <span class="n">produced</span> <span class="n">after</span> <span class="n">the</span> <span class="n">second</span> <span class="n">iteration</span> <span class="n">MAFFT</span> <span class="n">fftns</span> <span class="n">mode</span>
 <span class="o">-</span> <span class="n">upgma</span>       <span class="p">:</span> <span class="n">upgma</span> <span class="n">tree</span> <span class="o">-</span> <span class="n">warning</span> <span class="n">cubic</span> <span class="n">time</span> <span class="n">computation</span>
 <span class="o">-</span> <span class="n">nj</span>          <span class="p">:</span> <span class="n">Neighbour</span> <span class="n">Joinning</span> <span class="n">tree</span>
+<span class="o">-</span> <span class="n">famsadnd</span>    <span class="p">:</span> <span class="n">FAMSA</span> <span class="n">single</span>
 <span class="o">-</span> <span class="c1">#&lt;command&gt;  : Runs comamnd &lt;seq&gt; &gt; &lt;tree&gt;.</span>
 <span class="o">-</span> <span class="n">filename</span>    <span class="p">:</span> <span class="n">Any</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">newick</span> <span class="nb">format</span><span class="o">.</span> <span class="n">The</span> <span class="n">seq</span> <span class="n">file</span> <span class="ow">and</span> <span class="n">the</span> <span class="n">tree</span> <span class="n">file</span> <span class="n">must</span> <span class="n">match</span>
 </pre></div>
@@ -1146,6 +1139,14 @@ blastpgp_client http://www.ebi.ac.uk/Tools/webservices/services/blastpgp
 <li><p><strong>-reg_method**(usage:</strong>-reg_tree=&lt;method or configuration file&gt;** , default: clustalo_msa)</p></li>
 </ul>
 <p>This flag defines which method will be used to estimate the tree. In order to know which methods are available, type he following command line:</p>
+<ul class="simple">
+<li><p><strong>-dynamic**(usage:</strong>-dynamic=&lt;Integer&gt;** , default: 1)</p></li>
+</ul>
+<p>This flag defines the factor by which every Child reg_n is increased while going from root to leaf</p>
+<ul class="simple">
+<li><p><strong>-dynamic_config**(usage:</strong>-dynamic_config=&lt;file&gt;** , default: none)</p></li>
+</ul>
+<p>This flag provides a file specifying which method will be used depending on Nseq in slaves when using dynamic_msa</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$$: t_coffee
 </pre></div>
 </div>

@@ -1308,9 +1308,9 @@ Assuming you have multiple alignment(s) (sproteases_small.aln) or profile(s) her
 
 .. warning:: You can also use all the methods you want but be aware when using external methods that profiles are nto always supported. When it is not, it is replaced with its consensus sequence which will not be quite as accurate. Methods supporting full profile information are: lalign_id_pair, slow_pair, proba_pair, clustalw_pair and clustalw_msa. All the other methods (internal or external) treat the profile as a consensus (less accurate).
 
-Computing very accurate (but slow) alignments with PSI/TM-Coffee
+Computing very accurate alignments with PSI/TM-Coffee
 -----------------------------------------------------------------
-PSI-Coffee is currently the most accurate mode of T-Coffee but also the slowest. Its principle is rather simple: it associates every sequence with a profile of homologous sequences gathered using BLAST on a sequence database (nr by default). PSI-Coffee then uses the profiles instead of the initial sequences to makes a multiple profile alignment (command 1). In a last step, your profiles are replaced by their initial query sequence from your initial dataset and returns a MSA of your sequences. PSI-Coffee can also use reduced database instead of nr (installed locally) in order to speed-up the process. A special mode, TM-Coffee, exists using PSI-Coffee but specialized to align transmembrane proteins using a reduced database of TM proteins and also including a prediction of transmembrane domains with the flag **-template_file PSITM** (command 2). It is much faster as the search database is limited to known transmembrane protein, however, it applies in only specific cases unlike PSI-Coffee which is a general method. You can find more information about TM-Coffee `here <http://tcoffee.crg.cat/apps/tcoffee/tutorial_tmcoffee.html>`_. If you want to specify a local BLAST version and a local database of your choice, just add to your command line the flags **-blast_server** and **-protein_db** and the corresponding paths.
+PSI-Coffee is currently the most accurate mode of T-Coffee but also the slowest. Its principle is rather simple: it associates every sequence with a profile of homologous sequences gathered using BLAST on a sequence database (nr50 by default). PSI-Coffee then uses the profiles instead of the initial sequences to makes a multiple profile alignment (command 1). In a last step, your profiles are replaced by their initial query sequence from your initial dataset and returns a MSA of your sequences. PSI-Coffee can also use reduced database instead of nr (installed locally) in order to speed-up the process. A special mode, TM-Coffee, exists using PSI-Coffee but specialized to align transmembrane proteins using a reduced database of TM proteins and also including a prediction of transmembrane domains with the flag **-template_file PSITM** (command 2). It is much faster as the search database is limited to known transmembrane protein, however, it applies in only specific cases unlike PSI-Coffee which is a general method. You can find more information about TM-Coffee `here <http://tcoffee.crg.cat/apps/tcoffee/tutorial_tmcoffee.html>`_. If you want to specify a local BLAST version and a local database of your choice, just add to your command line the flags **-blast_server** and **-protein_db** and the corresponding paths.
 
 ::
 
@@ -1412,10 +1412,10 @@ To make a secondary structure prediction T-Coffee used the GOR software. In the 
 ::
 
   Command 1: 
-  $$: t_coffee sample_seq1.fasta -template_file SSP
+  $#: t_coffee sample_seq1.fasta -template_file SSP
   
   Command 2: 
-  $$: t_coffee sample_seq1.fasta -template_file PSISSP
+  $#: t_coffee sample_seq1.fasta -template_file PSISSP
 
   Command 3:
   $$: t_coffee sample_seq1.fasta -template_file TM
@@ -1505,7 +1505,7 @@ There are two modes we proposed to improve R-Coffee alignments: 1) using the bes
 
 ::
 
-  Using Consan (best but requires consan to be locally installed):
+  Using Consan (best):
   $#: t_coffee sample_rnaseq1.fasta -mode rcoffee_consan
 
  

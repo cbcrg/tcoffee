@@ -27,6 +27,7 @@ NT_node   seq2cat_dnd (Sequence *S, char *mode);
 NT_node   seq2swl_dnd (Sequence *S);
 NT_node   seq2km_dnd (Sequence *S);
 NT_node   seq2co_dnd (Sequence *S);
+NT_node   seq2famsa_dnd (Sequence *S);
 NT_node   list2balanced_dnd (char **name, int n);
 NT_node   seq2cw_dnd ( Sequence *S);
 NT_node   seq2cwquick_dnd ( Sequence *S);

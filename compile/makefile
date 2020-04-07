@@ -179,6 +179,7 @@ quote="'"'"
 SCRIPT_LIB_OBJECTS=\
 	msa2bootstrap.pl\
 	tc_generic_method.pl\
+	dynamic.pl\
 	rnapdb2protpdb.pl\
 	generic_method.tc_method\
 	clustalw_method.tc_method\
@@ -214,14 +215,18 @@ generic_method.tc_method:\
 tc_generic_method.pl:\
 	$(SCRIPT_LIB)/tc_generic_method.pl
 	cp $(SCRIPT_LIB)/tc_generic_method.pl .
-	echo "$(dollar)program=$(quote)$(PROGRAM) ($(VERSION))$(quote);\n">> tc_generic_method.pl
+	echo "my $(dollar)program=$(quote)$(PROGRAM) ($(VERSION))$(quote);">> tc_generic_method.pl
+dynamic.pl:\
+	$(SCRIPT_LIB)/dynamic.pl
+	cp $(SCRIPT_LIB)/dynamic.pl .
+	echo "my $(dollar)program=$(quote)$(PROGRAM) ($(VERSION))$(quote);">> dynamic.pl
 rnapdb2protpdb.pl:\
 	$(SCRIPT_LIB)/rnapdb2protpdb.pl
 	cp $(SCRIPT_LIB)/rnapdb2protpdb.pl .
 t_coffee_dpa:\
 	$(SCRIPT_LIB)/t_coffee_dpa
 	cp $(SCRIPT_LIB)/t_coffee_dpa .
-	echo "$(dollar)program=$(quote)$(PROGRAM) ($(VERSION))$(quote);\n">> t_coffee_dpa
+	echo "my $(dollar)program=$(quote)$(PROGRAM) ($(VERSION))$(quote);">> t_coffee_dpa
 t_coffee_dpa2:\
 	$(SCRIPT_LIB)/t_coffee_dpa2
 	cp $(SCRIPT_LIB)/t_coffee_dpa2 .

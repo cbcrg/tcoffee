@@ -6094,6 +6094,20 @@ char *** produce_method_file ( char *method)
     fprintf ( fp, "PROGRAM    %s\n", CLUSTALO_4_TCOFFEE);
     vfclose (fp);}
 
+    sprintf (list[n][0], "dynamic_msa");
+    sprintf (list[n][1], "%s", vtmpnam(NULL));
+    n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
+    fprintf ( fp, "DOC: dynamic [%s]\n", "Will use a method depending on the provides number of sequences");
+    fprintf ( fp, "EXECUTABLE dynamic.pl\n");
+    fprintf ( fp, "ALN_MODE   multiple\n");
+    fprintf ( fp, "OUT_MODE   aln\n");
+    fprintf ( fp, "IN_FLAG    &bnsp\n");
+    fprintf ( fp, "OUT_FLAG   &bnsp\n");
+    fprintf ( fp, "SEQ_TYPE   S\n");
+    fprintf ( fp, "ADDRESS    %s\n", ADDRESS_BUILT_IN);
+    fprintf ( fp, "PROGRAM    %s\n", PROGRAM_BUILT_IN);
+    vfclose (fp);}
+    
 
     sprintf (list[n][0], "clustaloNF_pair");
     sprintf (list[n][1], "%s", vtmpnam(NULL));
@@ -7462,7 +7476,7 @@ char *** produce_method_file ( char *method)
 		fprintf ( fp, "OUT_MODE aln\n"); 
 		fprintf ( fp, "IN_FLAG &bnsp\n"); 
 		fprintf ( fp, "OUT_FLAG &bnsp\n"); 
-		fprintf ( fp, "PARAM &bnsp2>/dev/null\n"); 
+		fprintf ( fp, "PARAM -t 1 &bnsp2>/dev/null\n"); 
 		fprintf ( fp, "SEQ_TYPE S\n"); 
 
 		fprintf ( fp, "ADDRESS %s\n", "famsa"); 

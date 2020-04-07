@@ -1742,6 +1742,10 @@ NT_node seq2dnd (Sequence *S, char *dpa_tree)
     {
       T=seq2co_dnd (S);
     }
+  else if (strm (dpa_tree, "famsadnd"))
+    {
+      T=seq2famsa_dnd (S);
+    }
   else if (strm (dpa_tree, "cwdnd")|| strm (dpa_tree, "clustalwdnd") )
     {
       T=seq2cw_dnd (S);
@@ -2341,7 +2345,18 @@ float* node2reg_score_old(char *s1, char *s2,float *v)
   return seq2sw_vector(s1,s2, -4, -1, matrix,v);
 }
     
- 
+NT_node seq2famsa_dnd (Sequence *S)
+{
+  char *seq=vtmpnam  (NULL);
+  char *tree=vtmpnam (NULL);
+  
+  if (!tree)tree=vtmpnam (NULL);
+  if (!seq)seq=vtmpnam (NULL);
+  output_fasta_simple (seq, S);
+  
+  printf_system ("famsa -t1 -gt_export %s %s --force>/dev/null 2>/dev/null", seq,tree);
+  return main_read_tree(tree);
+} 
 NT_node seq2co_dnd (Sequence *S)
 {
   char *seq=vtmpnam  (NULL);
