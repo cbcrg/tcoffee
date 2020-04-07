@@ -219,8 +219,7 @@ tc_generic_method.pl:\
 dynamic.pl:\
 	$(SCRIPT_LIB)/dynamic.pl
 	cp $(SCRIPT_LIB)/dynamic.pl .
-#	echo "my $(dollar)program=$(quote)$(PROGRAM) ($(VERSION))$(quote);\n">> dynamic.pl
-#This version tag does not seem to be compatible with strict
+	echo "my $(dollar)program=$(quote)$(PROGRAM) ($(VERSION))$(quote);\n">> dynamic.pl
 rnapdb2protpdb.pl:\
 	$(SCRIPT_LIB)/rnapdb2protpdb.pl
 	cp $(SCRIPT_LIB)/rnapdb2protpdb.pl .
