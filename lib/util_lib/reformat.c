@@ -511,6 +511,8 @@ int seq_reformat ( int argc, char **in_argv)
 		fprintf ( stdout, "\n     dialign_aln    matrix        conc_aln");
 		fprintf ( stdout, "\n     NON AUTOMATIC RECOGNITION (use the -input file to specify the format");
 		fprintf ( stdout, "\n     number_aln     newick        mafftnewick");
+		
+		
 		fprintf ( stdout, "\n");
 		fprintf ( stdout, "\n***********  INPUT FORMATS: Sequences *****************");
  		fprintf ( stdout, "\n     fasta_seq      dali_seq       pir_seq");
@@ -545,7 +547,7 @@ int seq_reformat ( int argc, char **in_argv)
  		fprintf ( stdout, "\n");
 		fprintf ( stdout, "\n*********** OUTPUT FORMATS: trees   ******************");
 		fprintf ( stdout, "\n     newick          dm             newick_dm");
-		fprintf ( stdout, "\n     mafftnewick");
+		fprintf ( stdout, "\n     mafftnewick     mafftdndmat");
 		
 		fprintf ( stdout, "\n     use +print_replicates flag to print the replicates (first line = original)");
 		fprintf ( stdout, "\n     with newick_dm, grep \";\" to collect the trees");
@@ -3771,8 +3773,36 @@ int main_output  (Sequence_data_struc *D1, Sequence_data_struc *D2, Sequence_dat
 	  }
 	else if ( strm  (out_format, "mafftnewick"))
 	  {
-	    if (!D2->S)printf_exit (EXIT_FAILURE,stderr,"ERROR -output=mafftnewick requires -in2=<seqfile> [FATAL]");
-	    vfclose (tree2file (D1->T, D2->S, "mafftnewick", vfopen (out_file, "w")));
+	    if (D2 && D2->S)
+	      vfclose (tree2file (D1->T, D2->S, "mafftnewick", vfopen (out_file, "w")));
+	    else if (D1 && D1->S)
+	      vfclose (tree2file (D1->T, D1->S, "mafftnewick", vfopen (out_file, "w")));
+	    else
+	      printf_exit (EXIT_FAILURE,stderr,"ERROR -output=mafftnewick requires -in2=<seqfile> [FATAL]");
+	  }
+	else if ( strm  (out_format, "mafftdndmatrix"))
+	  {
+	    FILE *lfp1;
+	    FILE *lfp2;
+	    char *mafftdnd=vtmpnam (NULL);
+	    char *mafftmatrix=vtmpnam (NULL);
+	    
+	    int cc;
+
+	    if (D2 && D2->S)
+	      vfclose (tree2file (D1->T, D2->S, "mafftnewick", vfopen (mafftdnd, "w")));
+	    else if ( D1 && D1->S)
+	      vfclose (tree2file (D1->T, D1->S, "mafftnewick", vfopen (mafftdnd, "w")));
+	    else
+	      printf_exit (EXIT_FAILURE,stderr,"ERROR -output=mafftdndmat requires -in2=<seqfile> [FATAL]");
+	    
+	    
+	    printf_system ("newick2mafft.rb %s > %s 2>/dev/null", mafftdnd,mafftmatrix);
+	    
+	    lfp1=vfopen (mafftmatrix, "r");
+	    lfp2=vfopen (out_file, "w");
+	    while ((cc=fgetc (lfp1))!=EOF)fprintf (lfp2, "%c", cc);
+	    vfclose (lfp1);vfclose (lfp2);
 	  }
 	else if ( strm4 (out_format, "newick_tree","newick","binary","nh") || strm (out_format, "quick_newick"))
 	        {

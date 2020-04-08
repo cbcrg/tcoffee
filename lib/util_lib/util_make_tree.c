@@ -2354,7 +2354,7 @@ NT_node seq2famsa_dnd (Sequence *S)
   if (!seq)seq=vtmpnam (NULL);
   output_fasta_simple (seq, S);
   
-  printf_system ("famsa -t1 -gt_export %s %s --force>/dev/null 2>/dev/null", seq,tree);
+  printf_system ("famsa -t 1 -gt_export %s %s>/dev/null 2>/dev/null", seq,tree);
   return main_read_tree(tree);
 } 
 NT_node seq2co_dnd (Sequence *S)

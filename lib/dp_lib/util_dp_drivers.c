@@ -4383,7 +4383,7 @@ NT_node* local_tree_aln ( NT_node l, NT_node r, Alignment*A,int nseq, Constraint
     }
   else
     {
-      printf ("#Single Thread\n");
+      fprintf (CL->local_stderr,"#Single Thread\n");
       
     }
 

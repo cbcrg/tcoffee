@@ -6101,8 +6101,8 @@ char *** produce_method_file ( char *method)
     fprintf ( fp, "EXECUTABLE dynamic.pl\n");
     fprintf ( fp, "ALN_MODE   multiple\n");
     fprintf ( fp, "OUT_MODE   aln\n");
-    fprintf ( fp, "IN_FLAG    &bnsp\n");
-    fprintf ( fp, "OUT_FLAG   &bnsp\n");
+    fprintf ( fp, "IN_FLAG    -seq&bnsp\n");
+    fprintf ( fp, "OUT_FLAG   -outfile&bnsp\n");
     fprintf ( fp, "SEQ_TYPE   S\n");
     fprintf ( fp, "ADDRESS    %s\n", ADDRESS_BUILT_IN);
     fprintf ( fp, "PROGRAM    %s\n", PROGRAM_BUILT_IN);
