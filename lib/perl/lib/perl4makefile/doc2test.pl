@@ -727,8 +727,15 @@ sub replay_dump_file
     
     if    ($STRICT && ($error || $missing)){$shell=1;}
     elsif ($VERY_STRICT && ($error || $missing || $warning || $different)){$shell=1;}
-    
-    
+
+#This Will Print the Faided Dump    
+    if ($shell)
+      {
+	open (F, "$replayed");
+	while (<F>){print "$_";}
+	close(F);
+      }
+
     if ($KEEPREPLAYED)
       {
 	if (-e $replayed)
@@ -752,6 +759,8 @@ sub replay_dump_file
       {
 	unlink ($replayed);
       }
+
+   
     return ($shell);
   }
   
