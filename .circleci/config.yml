@@ -39,8 +39,8 @@ jobs:
       # publish artifacts 
       - run: |
           #
-          # This section will publish onto the websites the various elemets produced by make distribution
-          # Note that since the distribution is usualy trigerred by the push in make release, the basic elements (doc, source and binary of the machine in which make release was launched) should already be published
+          # This section will publish onto the websites the various elements produced by "make distribution"
+          # Note that since the distribution is usualy triggered by the "git push" in "make release", the basic elements (doc, source and binary of the machine in which make release was launched) should already be published
           #
           if [[ $RELEASE == 1 ]]; then MODE=Stable; else MODE=Beta; fi;
           version=$(cat ~/publish/sandbox/.version);
