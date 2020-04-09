@@ -547,7 +547,8 @@ char *check_hlist_for_dup (char **name, int n)
   char index[100];
   int a;
   char *dup=NULL;
-  
+ 
+  if (! name || n==0)return NULL;
   ht=ht_create (n);
   
   for (a=0;a<n; a++)

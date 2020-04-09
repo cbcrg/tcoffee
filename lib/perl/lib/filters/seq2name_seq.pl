@@ -8,6 +8,7 @@ use Env qw(HOME);
 use Env qw(USER);
 
 my $format=file2format ($ARGV[0]);
+
 if    ($format eq "clustalw"){clustalw2name_seq($ARGV[0]);}
 elsif ($format eq "fasta")   {fasta2name_seq($ARGV[0]);}
 elsif ($format eq "msf")   {msf2name_seq($ARGV[0]);}
@@ -176,7 +177,9 @@ sub fasta2name_seq
       open ($F, $file);
       while (<$F>)
 	{
-	  if ( /^>(\S+)(.*)\n/)
+	  my $l=$_;
+	  $l=~s/\r[\n]*/\n/gm;
+	  if ( ($l=~/^>(\S+)(.*)\n/))
 	    {
 	      my $name=$1;
 	      my $comment=$2;

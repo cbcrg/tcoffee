@@ -1309,7 +1309,7 @@ Sequence  * quick_read_seq ( char *file)
 	  if (S->min_len==-1 || S->min_len <S->len[a])S->min_len=S->len[a];
 	  if (S->max_len==-1 || S->min_len >S->len[a])S->max_len=S->len[a];
 	}
-      
+     
       if ( (dup=check_hlist_for_dup( S->name, S->nseq)))
 	{
 	  fprintf ( stderr, "ERROR -- Duplicated Sequences %s", dup);

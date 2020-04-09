@@ -1396,7 +1396,7 @@ if ( !do_evaluate)
 			    /*Min_value*/ "any"         ,\
 			    /*Max Value*/ "any"          \
 					  );
-
+	       if (n_template_file)cputenv ("template_file_4_TCOFFEE=%s",template_file_list[0]);
 
 /*PARAMETER PROTOTYPE:    VERSION      */
 	       setenv_list=declare_char (100, STRING);
@@ -3105,7 +3105,6 @@ declare_name (prot_blast_server);
 			    /*Max Value*/ "any"          \
 		   );
    }
- // HERE ("%s", blast_server);
  if ( strm (prot_blast_server, "env"))prot_blast_server=get_env_variable ("blast_server_4_TCOFFEE",IS_FATAL);
  set_string_variable ("blast_server", prot_blast_server);
  cputenv ("blast_server_4_TCOFFEE=%s",prot_blast_server);
@@ -7057,6 +7056,7 @@ Alignment * t_coffee_dpa (int argc, char **argv)
     {
       if      (strm (argv[a], "-seq" ))
 	{
+	  
 	  seqfile=argv[++a];
 	  S=quick_read_seq (seqfile);
 	  seqflag=1;
@@ -7171,7 +7171,10 @@ Alignment * t_coffee_dpa (int argc, char **argv)
 	{
 	  cputenv ("dynamic_config_4_TCOFFEE=%s", argv[++a]);
 	}
-
+      else if (strm (argv[a],"-template_file"))
+	{
+	  cputenv ("template_file_4_TCOFFEE=%s", argv[++a]);
+	}
       else
 	
 	command=strcatf (command,"%s ", argv[a]);

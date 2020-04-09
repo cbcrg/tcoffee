@@ -116,6 +116,15 @@ PG upp binary			upp
 PG upp version			1
 PG upp update_action		never
 
+PG famsa 4_TCOFFEE		FAMSA
+PG famsa type			sequence_multiple_aligner		
+PG famsa ADDRESS		https://github.com/refresh-bio/FAMSA
+PG famsa language		C++
+PG famsa language		C++				
+PG famsa source			https://github.com/refresh-bio/FAMSA.git
+PG famsa mode			mcoffee,rcoffee	
+PG famsa binary			famsa
+PG famsa version		1.1
 
 
 

@@ -20,6 +20,7 @@ my $blast=$ENV{blast_server_4_TCOFFEE};
 my $protein_db=$ENV{protein_db_4_TCOFFEE};
 my $pdb_db=$ENV{pdb_db_4_TCOFFEE};
 my $cache=$ENV{cache_4_TCOFFEE};
+my $template_file=$ENV{template_file_4_TCOFFEE};
 my $clean;
 my $treeFlag;
 my $blastFlag;
@@ -30,6 +31,10 @@ my ($h1, $h2);
 my @tmpL;
 my $tmpdir = File::Temp->newdir();
 my $cdir=getcwd();
+
+
+
+
 for ($a=0; $a<=$#ARGV; $a++)
   {
     if    ($ARGV[$a] eq "-seq"){$infile=$ARGV[++$a];}
@@ -43,6 +48,17 @@ for ($a=0; $a<=$#ARGV; $a++)
     elsif ($ARGV[$a] eq "-method") {$method2use=$ARGV[++$a];}
     elsif ($ARGV[$a] eq "-verbose"){$VERBOSE=1; $QUIET="";} 
     elsif ($ARGV[$a] eq "-clean"){$clean=1;}
+    elsif ($ARGV[$a] eq "-template_file"){$template_file=$ARGV[++$a]}
+    
+  }
+if ($ENV{dynamic_4_TCOFFEE})
+  {
+    print "ERROR - $method2use resulst in infinite recursion [FATAL:dynamic.pl]\n";
+    exit ($EXIT_FAILURE);
+  }
+else
+  {
+    $ENV{dynamic_4_TCOFFEE}=1;
   }
 
 my $n=file2nseq($infile);
@@ -139,6 +155,15 @@ elsif  ($method2use eq "accurate_msa")
     if ($blast eq "LOCAL"){$blastFlag="-blast_server=LOCAL -protein_db=$protein_db -pdb_db=$pdb_db";}
     my_system ("t_coffee -mode accurate -in $infile -outfile $outfile -output fasta_aln  $cacheFlag $blastFlag>/dev/null  $QUIET");
   }
+elsif  ($method2use eq "3dcoffee_msa")
+  {
+    my $cacheFlag;
+    if ($cache){$cacheFlag="-cache=$cache";}
+    if ($treeF){$treeFlag="-usetree $treeF "}
+    if ($blast eq "LOCAL"){$blastFlag="-blast_server=LOCAL  -pdb_db=$pdb_db";}
+    my_system ("t_coffee -method sap_pair TMalign_pair -template_file $template_file  -in $infile -outfile $outfile -output fasta_aln  $cacheFlag $blastFlag>/dev/null $QUIET");
+  }
+
 elsif  ($method2use eq "expresso_msa")
   {
     my $cacheFlag;
@@ -151,7 +176,7 @@ elsif  ($method2use eq "expresso_msa")
 elsif ($method2use eq "clustalo_msa")
   {
     if ($treeF){$treeFlag="--guidetree-in=$treeF "}
-    my_system ("clustalo -i $infile $treeFlag > $outfile $QUIET");
+    my_system ("clustalo -i $infile $treeFlag -o $outfile  --force --threads=1 $QUIET");
     }
 elsif ($method2use eq "mafft_msa")
   {

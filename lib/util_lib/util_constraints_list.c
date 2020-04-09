@@ -6063,8 +6063,8 @@ char *** produce_method_file ( char *method)
 	fprintf ( fp, "PROGRAM    %s\n", NCBIBLAST_4_TCOFFEE);
 	vfclose (fp);}
 
-
-    sprintf (list[n][0], "clustalo_pair");
+	/*deprecated: Should now run clustalo via dynamic.pl	*/
+    sprintf (list[n][0], "old_clustalo_pair");
     sprintf (list[n][1], "%s", vtmpnam(NULL));
     n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
     fprintf ( fp, "DOC: clustalo [%s]\n", CLUSTALO_ADDRESS);
@@ -6079,7 +6079,8 @@ char *** produce_method_file ( char *method)
     fprintf ( fp, "PROGRAM    %s\n", CLUSTALO_4_TCOFFEE);
     vfclose (fp);}
 
-    sprintf (list[n][0], "clustalo_msa");
+    /*deprecated: Should now run clustalo via dynamic.pl	*/
+    sprintf (list[n][0], "old_clustalo_msa");
     sprintf (list[n][1], "%s", vtmpnam(NULL));
     n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
     fprintf ( fp, "DOC: clustalo [%s]\n", CLUSTALO_ADDRESS);
@@ -6094,6 +6095,10 @@ char *** produce_method_file ( char *method)
     fprintf ( fp, "PROGRAM    %s\n", CLUSTALO_4_TCOFFEE);
     vfclose (fp);}
 
+    // The following methods are T-Coffee modes made available via thscript dynamic.pl
+    // This script can select a method based on the number of sequences -dynamic_config
+    // It is also the easiest way to use a T-Coffee mode as child aligner when running the regressive algo
+    // The script also supports all the standard T-Coffee modes
     sprintf (list[n][0], "dynamic_msa");
     sprintf (list[n][1], "%s", vtmpnam(NULL));
     n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
@@ -6108,6 +6113,314 @@ char *** produce_method_file ( char *method)
     fprintf ( fp, "PROGRAM    %s\n", PROGRAM_BUILT_IN);
     vfclose (fp);}
     
+    sprintf (list[n][0], "3dcoffee_msa");
+    sprintf (list[n][1], "%s", vtmpnam(NULL));
+    n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
+    fprintf ( fp, "DOC: dynamic [%s]\n", "runs 3d coffee from dynamic.pl");
+    fprintf ( fp, "EXECUTABLE dynamic.pl\n");
+    fprintf ( fp, "ALN_MODE   multiple\n");
+    fprintf ( fp, "OUT_MODE   aln\n");
+    fprintf ( fp, "IN_FLAG    -seq&bnsp\n");
+    fprintf ( fp, "OUT_FLAG   -outfile&bnsp\n");
+    fprintf ( fp, "PARAM      -method 3dcoffee_msa\n");
+    fprintf ( fp, "SEQ_TYPE   S\n");
+    fprintf ( fp, "ADDRESS    %s\n", ADDRESS_BUILT_IN);
+    fprintf ( fp, "PROGRAM    %s\n", PROGRAM_BUILT_IN);
+    vfclose (fp);}
+    
+    sprintf (list[n][0], "expresso_msa");
+    sprintf (list[n][1], "%s", vtmpnam(NULL));
+    n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
+    fprintf ( fp, "DOC: dynamic [%s]\n", "runs expresso from dynamic.pl");
+    fprintf ( fp, "EXECUTABLE dynamic.pl\n");
+    fprintf ( fp, "ALN_MODE   multiple\n");
+    fprintf ( fp, "OUT_MODE   aln\n");
+    fprintf ( fp, "IN_FLAG    -seq&bnsp\n");
+    fprintf ( fp, "OUT_FLAG   -outfile&bnsp\n");
+    fprintf ( fp, "PARAM      -method expresso_msa\n");
+    fprintf ( fp, "SEQ_TYPE   S\n");
+    fprintf ( fp, "ADDRESS    %s\n", ADDRESS_BUILT_IN);
+    fprintf ( fp, "PROGRAM    %s\n", PROGRAM_BUILT_IN);
+    vfclose (fp);}
+
+    sprintf (list[n][0], "accurate_msa");
+    sprintf (list[n][1], "%s", vtmpnam(NULL));
+    n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
+    fprintf ( fp, "DOC: dynamic [%s]\n", "Runs t_coffee -mode accurate from dynamic.pl");
+    fprintf ( fp, "EXECUTABLE dynamic.pl\n");
+    fprintf ( fp, "ALN_MODE   multiple\n");
+    fprintf ( fp, "OUT_MODE   aln\n");
+    fprintf ( fp, "IN_FLAG    -seq&bnsp\n");
+    fprintf ( fp, "OUT_FLAG   -outfile&bnsp\n");
+    fprintf ( fp, "PARAM      -method accurate_msa\n");
+    fprintf ( fp, "SEQ_TYPE   S\n");
+    fprintf ( fp, "ADDRESS    %s\n", ADDRESS_BUILT_IN);
+    fprintf ( fp, "PROGRAM    %s\n", PROGRAM_BUILT_IN);
+    vfclose (fp);}
+    
+    sprintf (list[n][0], "psicoffee_msa");
+    sprintf (list[n][1], "%s", vtmpnam(NULL));
+    n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
+    fprintf ( fp, "DOC: dynamic [%s]\n", "runs psicoffee from dynamic.pl");
+    fprintf ( fp, "EXECUTABLE dynamic.pl\n");
+    fprintf ( fp, "ALN_MODE   multiple\n");
+    fprintf ( fp, "OUT_MODE   aln\n");
+    fprintf ( fp, "IN_FLAG    -seq&bnsp\n");
+    fprintf ( fp, "OUT_FLAG   -outfile&bnsp\n");
+    fprintf ( fp, "PARAM      -method psicoffee_msa\n");
+    fprintf ( fp, "SEQ_TYPE   S\n");
+    fprintf ( fp, "ADDRESS    %s\n", ADDRESS_BUILT_IN);
+    fprintf ( fp, "PROGRAM    %s\n", PROGRAM_BUILT_IN);
+    vfclose (fp);}
+
+
+    //FAMSA runs through dynamic.pl
+    //Guide Tree mode can be selected
+    sprintf (list[n][0], "famsa_msa");
+    sprintf (list[n][1], "%s", vtmpnam(NULL));
+    n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
+    fprintf ( fp, "DOC: dynamic [%s]\n", "runs famsa from dynamic.pl");
+    fprintf ( fp, "EXECUTABLE dynamic.pl\n");
+    fprintf ( fp, "ALN_MODE   multiple\n");
+    fprintf ( fp, "OUT_MODE   aln\n");
+    fprintf ( fp, "IN_FLAG    -seq&bnsp\n");
+    fprintf ( fp, "OUT_FLAG   -outfile&bnsp\n");
+    fprintf ( fp, "PARAM      -method famsa_msa\n");
+    fprintf ( fp, "SEQ_TYPE   S\n");
+    fprintf ( fp, "ADDRESS    %s\n", FAMSA_ADDRESS);
+    fprintf ( fp, "PROGRAM    %s\n", FAMSA_4_TCOFFEE);
+    vfclose (fp);}
+   
+    sprintf (list[n][0], "famsa_pair");
+    sprintf (list[n][1], "%s", vtmpnam(NULL));
+    n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
+    fprintf ( fp, "DOC: dynamic [%s]\n", "runs fmasa from dynamic.pl");
+    fprintf ( fp, "EXECUTABLE dynamic.pl\n");
+    fprintf ( fp, "ALN_MODE   pair\n");
+    fprintf ( fp, "OUT_MODE   aln\n");
+    fprintf ( fp, "IN_FLAG    -seq&bnsp\n");
+    fprintf ( fp, "OUT_FLAG   -outfile&bnsp\n");
+    fprintf ( fp, "PARAM      -method famsa_msa\n");
+    fprintf ( fp, "SEQ_TYPE   S\n");
+    fprintf ( fp, "ADDRESS    %s\n", FAMSA_ADDRESS);
+    fprintf ( fp, "PROGRAM    %s\n", FAMSA_4_TCOFFEE);
+    vfclose (fp);}
+    
+    
+    
+    //CLUSTALO runs through dynamic.pl
+    //Guide Tree mode can be selected
+    sprintf (list[n][0], "clustalo_msa");
+    sprintf (list[n][1], "%s", vtmpnam(NULL));
+    n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
+    fprintf ( fp, "DOC: dynamic [%s]\n", "runs clustalo from dynamic.pl");
+    fprintf ( fp, "EXECUTABLE dynamic.pl\n");
+    fprintf ( fp, "ALN_MODE   multiple\n");
+    fprintf ( fp, "OUT_MODE   aln\n");
+    fprintf ( fp, "IN_FLAG    -seq&bnsp\n");
+    fprintf ( fp, "OUT_FLAG   -outfile&bnsp\n");
+    fprintf ( fp, "PARAM      -method clustalo_msa\n");
+    fprintf ( fp, "SEQ_TYPE   S\n");
+    fprintf ( fp, "ADDRESS    %s\n", CLUSTALO_ADDRESS);
+    fprintf ( fp, "PROGRAM    %s\n", CLUSTALO_4_TCOFFEE);
+    vfclose (fp);}
+   
+    sprintf (list[n][0], "clustalo_pair");
+    sprintf (list[n][1], "%s", vtmpnam(NULL));
+    n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
+    fprintf ( fp, "DOC: dynamic [%s]\n", "runs clustalo from dynamic.pl");
+    fprintf ( fp, "EXECUTABLE dynamic.pl\n");
+    fprintf ( fp, "ALN_MODE   pair\n");
+    fprintf ( fp, "OUT_MODE   aln\n");
+    fprintf ( fp, "IN_FLAG    -seq&bnsp\n");
+    fprintf ( fp, "OUT_FLAG   -outfile&bnsp\n");
+    fprintf ( fp, "PARAM      -method clustalo_msa\n");
+    fprintf ( fp, "SEQ_TYPE   S\n");
+    fprintf ( fp, "ADDRESS    %s\n", CLUSTALO_ADDRESS);
+    fprintf ( fp, "PROGRAM    %s\n", CLUSTALO_4_TCOFFEE);
+    vfclose (fp);}
+
+    
+
+    
+    //MAFFT runs through dynamic.pl
+    //Guide Tree mode can be selected
+    sprintf (list[n][0], "mafft_msa");
+    sprintf (list[n][1], "%s", vtmpnam(NULL));
+    n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
+    fprintf ( fp, "DOC: dynamic [%s]\n", "runs mafft from dynamic.pl");
+    fprintf ( fp, "EXECUTABLE dynamic.pl\n");
+    fprintf ( fp, "ALN_MODE   multiple\n");
+    fprintf ( fp, "OUT_MODE   aln\n");
+    fprintf ( fp, "IN_FLAG    -seq&bnsp\n");
+    fprintf ( fp, "OUT_FLAG   -outfile&bnsp\n");
+    fprintf ( fp, "PARAM      -method mafft_msa\n");
+    fprintf ( fp, "SEQ_TYPE   S\n");
+    fprintf ( fp, "ADDRESS    %s\n", MAFFT_ADDRESS);
+    fprintf ( fp, "PROGRAM    %s\n", MAFFT_4_TCOFFEE);
+    vfclose (fp);}
+   
+    sprintf (list[n][0], "mafft_pair");
+    sprintf (list[n][1], "%s", vtmpnam(NULL));
+    n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
+    fprintf ( fp, "DOC: dynamic [%s]\n", "runs mafft from dynamic.pl");
+    fprintf ( fp, "EXECUTABLE dynamic.pl\n");
+    fprintf ( fp, "ALN_MODE   pair\n");
+    fprintf ( fp, "OUT_MODE   aln\n");
+    fprintf ( fp, "IN_FLAG    -seq&bnsp\n");
+    fprintf ( fp, "OUT_FLAG   -outfile&bnsp\n");
+    fprintf ( fp, "PARAM      -method mafft_msa\n");
+    fprintf ( fp, "SEQ_TYPE   S\n");
+    fprintf ( fp, "ADDRESS    %s\n", MAFFT_ADDRESS);
+    fprintf ( fp, "PROGRAM    %s\n", MAFFT_4_TCOFFEE);
+    vfclose (fp);}
+
+    
+    //MAFFT runs through dynamic.pl
+    //Guide Tree mode can be selected
+    sprintf (list[n][0], "mafftginsi_msa");
+    sprintf (list[n][1], "%s", vtmpnam(NULL));
+    n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
+    fprintf ( fp, "DOC: dynamic [%s]\n", "runs mafft from dynamic.pl");
+    fprintf ( fp, "EXECUTABLE dynamic.pl\n");
+    fprintf ( fp, "ALN_MODE   multiple\n");
+    fprintf ( fp, "OUT_MODE   aln\n");
+    fprintf ( fp, "IN_FLAG    -seq&bnsp\n");
+    fprintf ( fp, "OUT_FLAG   -outfile&bnsp\n");
+    fprintf ( fp, "PARAM      -method mafftginsi_msa\n");
+    fprintf ( fp, "SEQ_TYPE   S\n");
+    fprintf ( fp, "ADDRESS    %s\n", MAFFT_ADDRESS);
+    fprintf ( fp, "PROGRAM    %s\n", MAFFT_4_TCOFFEE);
+    vfclose (fp);}
+   
+    sprintf (list[n][0], "mafftginsi_pair");
+    sprintf (list[n][1], "%s", vtmpnam(NULL));
+    n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
+    fprintf ( fp, "DOC: dynamic [%s]\n", "runs mafft from dynamic.pl");
+    fprintf ( fp, "EXECUTABLE dynamic.pl\n");
+    fprintf ( fp, "ALN_MODE   pair\n");
+    fprintf ( fp, "OUT_MODE   aln\n");
+    fprintf ( fp, "IN_FLAG    -seq&bnsp\n");
+    fprintf ( fp, "OUT_FLAG   -outfile&bnsp\n");
+    fprintf ( fp, "PARAM      -method mafftginsi_msa\n");
+    fprintf ( fp, "SEQ_TYPE   S\n");
+    fprintf ( fp, "ADDRESS    %s\n", MAFFT_ADDRESS);
+    fprintf ( fp, "PROGRAM    %s\n", MAFFT_4_TCOFFEE);
+    vfclose (fp);}
+
+
+    //MAFFT runs through dynamic.pl
+    //Guide Tree mode can be selected
+    sprintf (list[n][0], "mafftfftn1_msa");
+    sprintf (list[n][1], "%s", vtmpnam(NULL));
+    n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
+    fprintf ( fp, "DOC: dynamic [%s]\n", "runs mafft from dynamic.pl");
+    fprintf ( fp, "EXECUTABLE dynamic.pl\n");
+    fprintf ( fp, "ALN_MODE   multiple\n");
+    fprintf ( fp, "OUT_MODE   aln\n");
+    fprintf ( fp, "IN_FLAG    -seq&bnsp\n");
+    fprintf ( fp, "OUT_FLAG   -outfile&bnsp\n");
+    fprintf ( fp, "PARAM      -method mafftfftns1_msa\n");
+    fprintf ( fp, "SEQ_TYPE   S\n");
+    fprintf ( fp, "ADDRESS    %s\n", MAFFT_ADDRESS);
+    fprintf ( fp, "PROGRAM    %s\n", MAFFT_4_TCOFFEE);
+    vfclose (fp);}
+   
+    sprintf (list[n][0], "mafftfftns1_pair");
+    sprintf (list[n][1], "%s", vtmpnam(NULL));
+    n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
+    fprintf ( fp, "DOC: dynamic [%s]\n", "runs mafft from dynamic.pl");
+    fprintf ( fp, "EXECUTABLE dynamic.pl\n");
+    fprintf ( fp, "ALN_MODE   pair\n");
+    fprintf ( fp, "OUT_MODE   aln\n");
+    fprintf ( fp, "IN_FLAG    -seq&bnsp\n");
+    fprintf ( fp, "OUT_FLAG   -outfile&bnsp\n");
+    fprintf ( fp, "PARAM      -method mafftfftns1_msa\n");
+    fprintf ( fp, "SEQ_TYPE   S\n");
+    fprintf ( fp, "ADDRESS    %s\n", MAFFT_ADDRESS);
+    fprintf ( fp, "PROGRAM    %s\n", MAFFT_4_TCOFFEE);
+    vfclose (fp);}
+
+
+
+    sprintf (list[n][0], "dynamic_pair");
+    sprintf (list[n][1], "%s", vtmpnam(NULL));
+    n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
+    fprintf ( fp, "DOC: dynamic [%s]\n", "Will use a method depending on the provides number of sequences");
+    fprintf ( fp, "EXECUTABLE dynamic.pl\n");
+    fprintf ( fp, "ALN_MODE   pairwise\n");
+    fprintf ( fp, "OUT_MODE   aln\n");
+    fprintf ( fp, "IN_FLAG    -seq&bnsp\n");
+    fprintf ( fp, "OUT_FLAG   -outfile&bnsp\n");
+    fprintf ( fp, "SEQ_TYPE   S\n");
+    fprintf ( fp, "ADDRESS    %s\n", ADDRESS_BUILT_IN);
+    fprintf ( fp, "PROGRAM    %s\n", PROGRAM_BUILT_IN);
+    vfclose (fp);}
+    
+    sprintf (list[n][0], "3dcoffee_pair");
+    sprintf (list[n][1], "%s", vtmpnam(NULL));
+    n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
+    fprintf ( fp, "DOC: dynamic [%s]\n", "Will use a method depending on the provides number of sequences");
+    fprintf ( fp, "EXECUTABLE dynamic.pl\n");
+    fprintf ( fp, "ALN_MODE   pairwise\n");
+    fprintf ( fp, "OUT_MODE   aln\n");
+    fprintf ( fp, "IN_FLAG    -seq&bnsp\n");
+    fprintf ( fp, "OUT_FLAG   -outfile&bnsp\n");
+    fprintf ( fp, "PARAM      -method 3dcoffee_msa\n");
+    fprintf ( fp, "SEQ_TYPE   S\n");
+    fprintf ( fp, "ADDRESS    %s\n", ADDRESS_BUILT_IN);
+    fprintf ( fp, "PROGRAM    %s\n", PROGRAM_BUILT_IN);
+    vfclose (fp);}
+    
+    sprintf (list[n][0], "expresso_pair");
+    sprintf (list[n][1], "%s", vtmpnam(NULL));
+    n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
+    fprintf ( fp, "DOC: dynamic [%s]\n", "Will use a method depending on the provides number of sequences");
+    fprintf ( fp, "EXECUTABLE dynamic.pl\n");
+    fprintf ( fp, "ALN_MODE   pairwise\n");
+    fprintf ( fp, "OUT_MODE   aln\n");
+    fprintf ( fp, "IN_FLAG    -seq&bnsp\n");
+    fprintf ( fp, "OUT_FLAG   -outfile&bnsp\n");
+    fprintf ( fp, "PARAM      -method expresso_msa\n");
+    fprintf ( fp, "SEQ_TYPE   S\n");
+    fprintf ( fp, "ADDRESS    %s\n", ADDRESS_BUILT_IN);
+    fprintf ( fp, "PROGRAM    %s\n", PROGRAM_BUILT_IN);
+    vfclose (fp);}
+
+    sprintf (list[n][0], "accurate_pair");
+    sprintf (list[n][1], "%s", vtmpnam(NULL));
+    n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
+    fprintf ( fp, "DOC: dynamic [%s]\n", "Will use a method depending on the provides number of sequences");
+    fprintf ( fp, "EXECUTABLE dynamic.pl\n");
+    fprintf ( fp, "ALN_MODE   pairwise\n");
+    fprintf ( fp, "OUT_MODE   aln\n");
+    fprintf ( fp, "IN_FLAG    -seq&bnsp\n");
+    fprintf ( fp, "OUT_FLAG   -outfile&bnsp\n");
+    fprintf ( fp, "PARAM      -method accurate_msa\n");
+    fprintf ( fp, "SEQ_TYPE   S\n");
+    fprintf ( fp, "ADDRESS    %s\n", ADDRESS_BUILT_IN);
+    fprintf ( fp, "PROGRAM    %s\n", PROGRAM_BUILT_IN);
+    vfclose (fp);}
+    
+    sprintf (list[n][0], "psicoffee_pair");
+    sprintf (list[n][1], "%s", vtmpnam(NULL));
+    n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
+    fprintf ( fp, "DOC: dynamic [%s]\n", "Will use a method depending on the provides number of sequences");
+    fprintf ( fp, "EXECUTABLE dynamic.pl\n");
+    fprintf ( fp, "ALN_MODE   pairwise\n");
+    fprintf ( fp, "OUT_MODE   aln\n");
+    fprintf ( fp, "IN_FLAG    -seq&bnsp\n");
+    fprintf ( fp, "OUT_FLAG   -outfile&bnsp\n");
+    fprintf ( fp, "PARAM      -method psicoffee_msa\n");
+    fprintf ( fp, "SEQ_TYPE   S\n");
+    fprintf ( fp, "ADDRESS    %s\n", ADDRESS_BUILT_IN);
+    fprintf ( fp, "PROGRAM    %s\n", PROGRAM_BUILT_IN);
+    vfclose (fp);}
+
+
+
+
+
 
     sprintf (list[n][0], "clustaloNF_pair");
     sprintf (list[n][1], "%s", vtmpnam(NULL));
@@ -6400,7 +6713,7 @@ char *** produce_method_file ( char *method)
 	fprintf ( fp, "PROGRAM    %s\n", MAFFT_4_TCOFFEE);
 	vfclose (fp);}
 	
-	sprintf (list[n][0], "mafft_pair");
+	sprintf (list[n][0], "old_mafft_pair");
 	sprintf (list[n][1], "%s", vtmpnam(NULL));
 	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
 	fprintf ( fp, "EXECUTABLE mafft\n");
@@ -6416,7 +6729,7 @@ char *** produce_method_file ( char *method)
 	fprintf ( fp, "PROGRAM    %s\n", MAFFT_4_TCOFFEE);
 	vfclose (fp);}
 
-	sprintf (list[n][0], "mafft_msa");
+	sprintf (list[n][0], "old_mafft_msa");
 	sprintf (list[n][1], "%s", vtmpnam(NULL));
 	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
 	fprintf ( fp, "EXECUTABLE mafft\n");
@@ -6536,7 +6849,7 @@ char *** produce_method_file ( char *method)
 
 	//ginsi
 	
-	sprintf (list[n][0], "mafftginsi_pair");
+	sprintf (list[n][0], "old_mafftginsi_pair");
 	sprintf (list[n][1], "%s", vtmpnam(NULL));
 	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
 	fprintf ( fp, "EXECUTABLE mafft-ginsi\n");
@@ -6553,7 +6866,7 @@ char *** produce_method_file ( char *method)
 	vfclose (fp);}
 	
 
-	sprintf (list[n][0], "mafftginsi_msa");
+	sprintf (list[n][0], "old_mafftginsi_msa");
 	sprintf (list[n][1], "%s", vtmpnam(NULL));
 
 	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
@@ -6607,6 +6920,7 @@ char *** produce_method_file ( char *method)
 	vfclose (fp);}
 
 	//fftnsi
+	/*deprecated: Should now run maffttftns1 via dynamic.pl	*/
 	sprintf (list[n][0], "mafftfftnsi_pair");
 	sprintf (list[n][1], "%s", vtmpnam(NULL));
 	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
@@ -6623,7 +6937,8 @@ char *** produce_method_file ( char *method)
 	fprintf ( fp, "ADDRESS    %s\n", MAFFT_ADDRESS);
 	fprintf ( fp, "PROGRAM    %s\n", MAFFT_4_TCOFFEE);
 	vfclose (fp);}
-
+	
+	/*deprecated: Should now run clustalo via dynamic.pl	*/
 	sprintf (list[n][0], "mafftfftnsi_msa");
 	sprintf (list[n][1], "%s", vtmpnam(NULL));
 	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
@@ -6634,8 +6949,7 @@ char *** produce_method_file ( char *method)
 	fprintf ( fp, "IN_FLAG    &bnsp\n");
 	fprintf ( fp, "OUT_FLAG   >\n");
 	fprintf ( fp, "PARAM1 --anysymbol \n");
-	fprintf ( fp, "PARAM      &bnsp2>/dev/null\n");
-	
+	fprintf ( fp, "PARAM      &bnsp2>/dev/null\n");	
 	fprintf ( fp, "SEQ_TYPE   S\n");
 	fprintf ( fp, "ADDRESS    %s\n", MAFFT_ADDRESS);
 	fprintf ( fp, "PROGRAM    %s\n", MAFFT_4_TCOFFEE);
@@ -6643,7 +6957,7 @@ char *** produce_method_file ( char *method)
 
 	
 	//fftns1
-	sprintf (list[n][0], "mafftfftns1_pair");
+	sprintf (list[n][0], "old_mafftfftns1_pair");
 	sprintf (list[n][1], "%s", vtmpnam(NULL));
 	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
 	fprintf ( fp, "EXECUTABLE mafft-fftns\n");
@@ -6659,7 +6973,7 @@ char *** produce_method_file ( char *method)
 	fprintf ( fp, "PROGRAM    %s\n", MAFFT_4_TCOFFEE);
 	vfclose (fp);}
 
-	sprintf (list[n][0], "mafftfftns1_msa");
+	sprintf (list[n][0], "old_mafftfftns1_msa");
 	sprintf (list[n][1], "%s", vtmpnam(NULL));
 	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
 	fprintf ( fp, "EXECUTABLE mafft-fftns\n");
