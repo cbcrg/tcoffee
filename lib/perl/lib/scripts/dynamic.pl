@@ -30,6 +30,8 @@ my $flush;
 my ($h1, $h2);
 my @tmpL;
 my $tmpdir = File::Temp->newdir();
+my $stderrF="$tmpdir/stderr";
+$QUIET="2>$stderrF";
 my $cdir=getcwd();
 
 
@@ -226,6 +228,20 @@ elsif ( $flush)
  }
 #Clean empty files
 foreach my $f (@tmpL){unlink($f);}
+
+
+if ($VERBOSE!=-1)
+  {
+    open (F, "$stderrF");
+    while (<F>)
+      {
+	my $l=$_;
+	if ( $VERBOSE || $l=~/WARNING/ || $l=~/ERROR/ || $l=~/INFORNATION/){print stderr "$l";}
+      }
+    close (F);
+  }
+
+
 
 exit ($EXIT_SUCCESS);
 

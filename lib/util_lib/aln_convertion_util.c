@@ -5640,6 +5640,46 @@ Sequence * swap_header ( Sequence *S, Sequence *H)
   return S;
 }
 
+char *template_file2abs_template_file(char *name)
+{
+  FILE *out;
+  FILE *in;
+  char *outF;
+  int  a;
+  char ***l;
+  
+
+  
+  
+  if (!name) return NULL;
+  if (!file_exists (NULL, name)) return name;
+ 
+  
+  l=file2list(name, " ");
+  a=0;
+  out=vfopen (outF=vtmpnam (NULL), "w");
+  while (l[a])
+    {
+      char *pdb1=l[a][3];
+      char *pdb2=(char *)vcalloc ( strlen (pdb1)+10, sizeof (char));
+      char *abs1, *abs2;
+      sprintf ( pdb2, "%s.pdb",pdb1);
+      
+      abs1=fname2abs(pdb1);
+      abs2=fname2abs(pdb2);
+      
+      if      (abs1)fprintf (out,"%s %s %s\n", l[a][1], l[a][2],abs1);
+      else if (abs2)fprintf (out,"%s %s %s\n", l[a][1], l[a][2],abs2);
+      else          fprintf (out,"%s %s %s\n", l[a][1], l[a][2],l[a][3]);
+      a++;
+    }
+
+  vfclose (out);
+  free_arrayN ((void ***)l, 3);
+  return outF;
+}
+	
+	       
 
 Sequence * profile_seq2template_seq ( Sequence *S, char *template_file, Fname *F)
 {

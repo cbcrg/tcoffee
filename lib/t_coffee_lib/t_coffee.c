@@ -7157,11 +7157,11 @@ Alignment * t_coffee_dpa (int argc, char **argv)
 	}
       else if (strm (argv[a],"-protein_db"))
 	{
-	  cputenv ("protein_db_4_TCOFFEE=%s", argv[++a]);
+	  cputenv ("protein_db_4_TCOFFEE=%s", fname2abs(argv[++a]));
 	}
       else if (strm (argv[a],"-pdb_db"))
 	{
-	  cputenv ("pdb_db_4_TCOFFEE=%s", argv[++a]);
+	  cputenv ("pdb_db_4_TCOFFEE=%s", fname2abs(argv[++a]));
 	}
       else if (strm (argv[a],"-cache"))
 	{
@@ -7169,11 +7169,12 @@ Alignment * t_coffee_dpa (int argc, char **argv)
 	}
       else if (strm (argv[a],"-dynamic_config"))
 	{
-	  cputenv ("dynamic_config_4_TCOFFEE=%s", argv[++a]);
+	  cputenv ("dynamic_config_4_TCOFFEE=%s", fname2abs(argv[++a]));
 	}
       else if (strm (argv[a],"-template_file"))
 	{
-	  cputenv ("template_file_4_TCOFFEE=%s", argv[++a]);
+	  
+	  cputenv ("template_file_4_TCOFFEE=%s", template_file2abs_template_file(argv[++a]));
 	}
       else
 	
@@ -7181,6 +7182,8 @@ Alignment * t_coffee_dpa (int argc, char **argv)
     }
   set_int_variable ("reg_dynamic",reg_dynamic);
   
+  
+
   //prepare the aligner CL
   if (dpa_aligner)
     {

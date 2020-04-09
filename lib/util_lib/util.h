@@ -390,7 +390,7 @@ void string_array_convert ( char **array, int n_strings, int ns, char **sl);
 void string_convert( char *string, int ns, char **sl);
 int convert ( char c, int ns, char **sl);
 int convert2 ( char c, char *list);
-
+char *fname2abs(char*name);
 void string_array_upper ( char **string, int n);
 void string_array_lower ( char **string, int n);
 char *upper_string ( char *string);

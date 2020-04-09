@@ -229,7 +229,7 @@ Sequence  * reorder_seq_2  ( Sequence   *A, int **name,int field, int nseq);
 
 char * concatenate_seq ( Sequence *S, char *conc, int *order);
 Sequence * swap_header ( Sequence *S, Sequence *H);
-
+char *template_file2abs_template_file(char *name);
 Alignment *aln2jacknife (Alignment *A, int nseq, int len);
 char ** name2random_subset (char **in_name, int n_in, int n_out);
 Alignment * aln2random_order   ( Alignment  *A);

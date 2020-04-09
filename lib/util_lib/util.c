@@ -2356,10 +2356,15 @@ char* get_env_variable ( const char *var, int mode)
 	       }
 	    else return getenv (var);
 	}
+#ifndef PATH_MAX
+#define PATH_MAX 4000
+#endif
+  
 char *get_pwd ( char *name)
 {
-  char cwd[1024];
-  if (!name)name=(char*)vcalloc (1025, sizeof (int));
+  char cwd[PATH_MAX];
+  
+  if (!name)name=(char*)vcalloc (PATH_MAX+1, sizeof (int));
   if (getcwd(cwd, sizeof(cwd)) != NULL)
     sprintf(name, "%s", cwd);
   else
@@ -2556,10 +2561,11 @@ char* csprintf (char *string1,char *string2, ...)
   cvsprintf (buf, string2);
   va_end (ap);
   
-  l1=read_array_size_new (string1);
+ 
+  l1=(string1)?read_array_size_new (string1):0;
   l2=read_array_size_new (buf);
-  
-  if (l1<l2)string1=(char*)vrealloc (string1,sizeof(char)*l2);
+  if      (!l1  )string1=(char*)vcalloc (l2, sizeof (char*));
+  else if (l1<l2)string1=(char*)vrealloc (string1,sizeof(char)*l2);
   sprintf (string1, "%s", buf);
   
   vfree (buf);
@@ -2859,6 +2865,22 @@ char * path2filename ( char *array)
   else sprintf (name, "%s", F->name);
   free_fname (F);
   return name;
+}
+
+char * fname2abs(char*name)
+{
+  static char *name2;
+  
+  //if (!name2)name2=(char*)vcalloc (10, sizeof (char));
+  if ( !name)return NULL;
+  else if (!file_exists (NULL, name))return NULL;
+  else if ( name[0]=='/')name2=csprintf (name2, "%s", name);
+  else
+    {
+      
+      name2=csprintf (name2, "%s/%s",get_pwd(NULL), name); 
+    }
+  return name2;
 }
 
 Fname* parse_fname ( char *array)
