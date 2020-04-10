@@ -469,7 +469,8 @@ int batch_main ( int argc, char **argv)
 	char *multi_core;
 	int   n_core;
 	int max_n_proc; //legacy for Nature protocol
-
+	int n_thread;
+	
 	char *lib_list;
 	char *prune_lib_mode;
 
@@ -3673,10 +3674,10 @@ get_cl_param(\
 			    /*TYPE*/      "D"          ,\
 			    /*OPTIONAL?*/ OPTIONAL       ,\
 			    /*MAX Nval*/  1              ,\
-			    /*DOC*/       "Number of cores to be used by machine [default=1 => use one core only.Use 0 for all cores]",\
+			    /*DOC*/       "Number of cores to be used by machine [default=1, 0=> all those defined in the environement]",\
 			    /*Parameter*/ &n_core   ,\
 			    /*Def 1*/    "1"       ,\
-			    /*Def 2*/    "0"              ,\
+			    /*Def 2*/    "1"              ,\
 			    /*Min_value*/ "0"          ,\
 			    /*Max Value*/ "10000"           \
 		   );
@@ -3689,10 +3690,10 @@ get_cl_param(\
 			    /*TYPE*/      "D"          ,\
 			    /*OPTIONAL?*/ OPTIONAL       ,\
 			    /*MAX Nval*/  1              ,\
-			    /*DOC*/       "Number of cores to be used by machine [default=1 => use one core only.Use 0 for all cores]",\
-			    /*Parameter*/ &n_core   ,\
+			    /*DOC*/       "Number of cores to be used by machine [default=1, 0=> all those defined in the environement]",\
+			    /*Parameter*/ &n_thread   ,\
 			    /*Def 1*/    "1"       ,\
-			    /*Def 2*/    "0"              ,\
+			    /*Def 2*/    "1"              ,\
 			    /*Min_value*/ "0"          ,\
 			    /*Max Value*/ "10000"           \
 		   );
@@ -3710,15 +3711,24 @@ get_cl_param(\
 			    /*TYPE*/      "D"          ,\
 			    /*OPTIONAL?*/ OPTIONAL       ,\
 			    /*MAX Nval*/  1              ,\
-			    /*DOC*/       "Number of cores to be used by machine [default=0 => all those defined in the environement]",\
+			    /*DOC*/       "Number of cores to be used by machine [default=1, 0=> all those defined in the environement]",\
 			    /*Parameter*/ &max_n_proc   ,\
-			    /*Def 1*/    "0"       ,\
-			    /*Def 2*/    "0"              ,\
+			    /*Def 1*/    "1"       ,\
+			    /*Def 2*/    "1"              ,\
 			    /*Min_value*/ "0"          ,\
-			    /*Max Value*/ "100"           \
+			    /*Max Value*/ "10000"           \
 		   );
-	       if (max_n_proc)n_core=max_n_proc;
-	       if (n_core)set_int_variable ("n_core",n_core);
+
+	       //-n_core and -max_n_core are deprecated. everything should arrive via -thread
+	       //if any of the three is set 0, ALL cores are used
+	       //if any of the three are set top >1 , the highest value is used
+	       
+	       if (!n_core || !max_n_proc || !n_thread){n_core=get_nproc();}
+	       else n_core=MAX3(n_core, max_n_proc,n_thread);
+	       set_int_variable ("n_core",n_core);
+	       set_nproc (n_core);
+	       
+	      
 
 /*PARAMETER PROTOTYPE:    lib_list    */
 	       declare_name (lib_list);
@@ -7033,7 +7043,7 @@ Alignment * t_coffee_dpa (int argc, char **argv)
   char *se_name;
   char *homoplasy=NULL;
   int reg_dynamic=1;
-  
+  int n_core=1;
   
   /* This is used for the dump function see -dump option*/
   declare_name (se_name);
@@ -7103,7 +7113,7 @@ Alignment * t_coffee_dpa (int argc, char **argv)
 
       else if (strm (argv[a],"-dpa_thread") || strm (argv[a],"-dpa_n_core") || strm (argv[a],"-reg_thread") || strm (argv[a],"-reg_n_core"))
 	{
-	  set_nproc (atoi (argv[++a]));
+	  n_core=atoi(argv[++a]);
 	}
       else if (strm (argv[a],"-dpa")|| strm (argv[a],"-reg"));
       else if (strm (argv[a],"-child_tree"))
@@ -7180,9 +7190,18 @@ Alignment * t_coffee_dpa (int argc, char **argv)
 	
 	command=strcatf (command,"%s ", argv[a]);
     }
+
+
+
+  //Core management
+  if (n_core==0)n_core=get_nproc();
+  set_nproc (n_core);
+  set_int_variable ("n_core",n_core);
+
+
+  //Dynamic regression
   set_int_variable ("reg_dynamic",reg_dynamic);
-  
-  
+    
 
   //prepare the aligner CL
   if (dpa_aligner)
