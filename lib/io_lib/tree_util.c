@@ -8940,7 +8940,7 @@ KT_node tree2ktree (NT_node T,Sequence *S, int N)
   FILE *fp;
   int **ordered;
   float *w;
-  
+  if (N<2)N=2;
   //Dynamic is the variable that will be used to increase the bucket size from root to leaf
   int dynamic=get_int_variable ("reg_dynamic");
   
@@ -9026,7 +9026,7 @@ KT_node tree2ktree (NT_node T,Sequence *S, int N)
       if (!CL[a]->isseq)
 	{
 	  //The Children will be at max, dynamic times larger than their parent 
-	  K->child[K->nc]=tree2ktree (CL[a],S, N*dynamic);
+	  K->child[K->nc]=tree2ktree (CL[a],S, (dynamic>0)?N*dynamic:(-1*N/dynamic));
 	  (K->child[K->nc])->name=(CL[a])->name;
 	  K->tot+=(K->child[K->nc])->tot;
 	  K->nc++;

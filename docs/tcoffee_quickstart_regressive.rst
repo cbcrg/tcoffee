@@ -36,6 +36,17 @@ In order to use T-Coffee you must also have the following pacaked installed
   ## Mafft:	 	https://mafft.cbrc.jp/alignment/software/
   ## ClustalOmega:      http://www.clustal.org/omega/#Download
 
+More sophisticated modes of the regressive algorithm that use either profile extension (psicoffee) or structural templates (3dcoffee or Expresso)require a local installation of Blast+ and associated databases
+
+::
+  
+  ## Blast+:	 	https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/	
+  ## Uniprot50:		https://www.uniprot.org/downloads
+  ## PDB Fasta:		ftp://ftp.wwpdb.org/pub/pdb/derived_data/pdb_seqres.txt.gz
+
+Whenever structural modes are used, T-Coffee is able to download directly the PDBs from rscb. It is therefore not needed to install PDB locally, but the program can also use a local version of PDB. T-Coffee is, however, able to use a local version installed in a standard way (cf the RSCB website: https://www.rcsb.org/)
+
+
 ********
 Exemples
 ********
@@ -97,6 +108,10 @@ This flag defines which method will be used to estimate the tree. The following 
 - **-newtree** (usage:**-newtree=<filename>** , default: <infile>.<reg_tree>)
 This flag defines the name of the newly computed ouput tree. Deafult will be filename.reg_tree
 
+- **-child_tree**(usage:**-chile_tree=<tree_method>** , default:None)
+This flag defines which method will be used to estimate the tree. Note that by default, each ref_method will juse its own default tree mode. 
+
+
 - **-outfile**(usage:**-outfile=<filename>** , default: <infile>.aln)
 This flag defines the name of the output file containing the multiple sequence alignment
 
@@ -104,23 +119,40 @@ This flag defines the name of the output file containing the multiple sequence a
 - **-reg_nseq** (usage:**-reg_nseq=N** , default: 1000 for datasets larger than 10,000 and Nseq/10 for smaller datasets )
 Sets the maximum size of the subsequence alignments. The recommanded value is 1000. With slow/accurate aligners that do not scale in a linear way, this parameter can have an importnat impact on CPU requirement with small values resulting in faster computation.
 
-- **-reg_thread** (usage:**-reg_nseq=N** , default: 0 to use all available threads)
-Sets the maximum number of threads to be used by one instance. Note that if you have scrited your own aligner using a configuration file, you should make sure it does not run in a multi-threaded version as well. 
+- **-dynamic**(usage:**-dynamic=<Integer>** , default: 1)
+This flag defines the factor by which every Child reg_n is increased while going from root to leaf. By default all children contain the same maximum number of sequences, if dynamic>1, this number is set to reg_nseq*(dynamic^NGeneration from root). If dynamic <1, this number is set to: reg_nseq/(-dynamic^NGeneration from root). *Note that this mode has not bee validated*
 
 - **-reg_method**(usage:**-reg_tree=<method or configuration file>** , default: clustalo_msa)
-This flag defines which method will be used to estimate the tree. In order to know which methods are available, type he following command line:
+This flag defines which method will be used to estimate the child MSA. In order to know which methods are available.
 
-- **-dynamic**(usage:**-dynamic=<Integer>** , default: 1)
-This flag defines the factor by which every Child reg_n is increased while going from root to leaf
-
-- **-dynamic_config**(usage:**-dynamic_config=<file>** , default: none)
-This flag provides a file specifying which method will be used depending on Nseq in slaves when using dynamic_msa
 
 ::
 
   $$: t_coffee
 
 All methods the multiple sequence alignment methods xxx_msa are supported.
+
+- **-dynamic_config**(usage:**-dynamic_config=<file>** , default: none)
+This flag provides a file specifying which method will be used depending on Nseq in slaves when using dynamic_msa. The format is 
+::
+
+  <method>	<maxnseq>
+
+The default is
+
+::
+  psicoffee_msa	20
+  famsa_msa     100000000
+
+
+All methods (*_msa) available in t_coffee are supported.
+
+- **-reg_thread** (usage:**-reg_nseq=N** , default: 0 to use all available threads)
+Sets the maximum number of threads to be used by one instance. Note that if you have scrited your own aligner using a configuration file, you should make sure it does not run in a multi-threaded version as well. 
+
+
+
+
 
 If you want to use an non-supported method, follow these `guidelines <https://tcoffee.readthedocs.io/en/latest/tcoffee_main_documentation.html#advanced-method-integration>`_. 
 

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>T-Coffee Version_13.41.36.c5bd1e6 documentation</title>
+  <title>T-Coffee Version_13.41.37.c818c43 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                Version_13.41.36.c5bd1e6
+                Version_13.41.37.c818c43
               </div>
             
           
@@ -706,7 +706,7 @@
     
       <li><a href="index.html#document-index">Docs</a> &raquo;</li>
         
-      <li>T-Coffee Version_13.41.36.c5bd1e6 documentation</li>
+      <li>T-Coffee Version_13.41.37.c818c43 documentation</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -1067,6 +1067,13 @@ blastpgp_client http://www.ebi.ac.uk/Tools/webservices/services/blastpgp
 <span class="c1">## ClustalOmega:      http://www.clustal.org/omega/#Download</span>
 </pre></div>
 </div>
+<p>More sophisticated modes of the regressive algorithm that use either profile extension (psicoffee) or structural templates (3dcoffee or Expresso)require a local installation of Blast+ and associated databases</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">## Blast+:            https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/</span>
+<span class="c1">## Uniprot50:         https://www.uniprot.org/downloads</span>
+<span class="c1">## PDB Fasta:         ftp://ftp.wwpdb.org/pub/pdb/derived_data/pdb_seqres.txt.gz</span>
+</pre></div>
+</div>
+<p>Whenever structural modes are used, T-Coffee is able to download directly the PDBs from rscb. It is therefore not needed to install PDB locally, but the program can also use a local version of PDB. T-Coffee is, however, able to use a local version installed in a standard way (cf the RSCB website: <a class="reference external" href="https://www.rcsb.org/">https://www.rcsb.org/</a>)</p>
 </div>
 <div class="section" id="exemples">
 <h3>Exemples<a class="headerlink" href="#exemples" title="Permalink to this headline">¶</a></h3>
@@ -1124,6 +1131,10 @@ blastpgp_client http://www.ebi.ac.uk/Tools/webservices/services/blastpgp
 </ul>
 <p>This flag defines the name of the newly computed ouput tree. Deafult will be filename.reg_tree</p>
 <ul class="simple">
+<li><p><strong>-child_tree**(usage:</strong>-chile_tree=&lt;tree_method&gt;** , default:None)</p></li>
+</ul>
+<p>This flag defines which method will be used to estimate the tree. Note that by default, each ref_method will juse its own default tree mode.</p>
+<ul class="simple">
 <li><p><strong>-outfile**(usage:</strong>-outfile=&lt;filename&gt;** , default: &lt;infile&gt;.aln)</p></li>
 </ul>
 <p>This flag defines the name of the output file containing the multiple sequence alignment</p>
@@ -1132,25 +1143,35 @@ blastpgp_client http://www.ebi.ac.uk/Tools/webservices/services/blastpgp
 </ul>
 <p>Sets the maximum size of the subsequence alignments. The recommanded value is 1000. With slow/accurate aligners that do not scale in a linear way, this parameter can have an importnat impact on CPU requirement with small values resulting in faster computation.</p>
 <ul class="simple">
-<li><p><strong>-reg_thread</strong> (usage:<strong>-reg_nseq=N</strong> , default: 0 to use all available threads)</p></li>
+<li><p><strong>-dynamic**(usage:</strong>-dynamic=&lt;Integer&gt;** , default: 1)</p></li>
 </ul>
-<p>Sets the maximum number of threads to be used by one instance. Note that if you have scrited your own aligner using a configuration file, you should make sure it does not run in a multi-threaded version as well.</p>
+<p>This flag defines the factor by which every Child reg_n is increased while going from root to leaf. By default all children contain the same maximum number of sequences, if dynamic&gt;1, this number is set to reg_nseq*(dynamic^NGeneration from root). If dynamic &lt;1, this number is set to: reg_nseq/(-dynamic^NGeneration from root). <em>Note that this mode has not bee validated</em></p>
 <ul class="simple">
 <li><p><strong>-reg_method**(usage:</strong>-reg_tree=&lt;method or configuration file&gt;** , default: clustalo_msa)</p></li>
 </ul>
-<p>This flag defines which method will be used to estimate the tree. In order to know which methods are available, type he following command line:</p>
-<ul class="simple">
-<li><p><strong>-dynamic**(usage:</strong>-dynamic=&lt;Integer&gt;** , default: 1)</p></li>
-</ul>
-<p>This flag defines the factor by which every Child reg_n is increased while going from root to leaf</p>
-<ul class="simple">
-<li><p><strong>-dynamic_config**(usage:</strong>-dynamic_config=&lt;file&gt;** , default: none)</p></li>
-</ul>
-<p>This flag provides a file specifying which method will be used depending on Nseq in slaves when using dynamic_msa</p>
+<p>This flag defines which method will be used to estimate the child MSA. In order to know which methods are available.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$$: t_coffee
 </pre></div>
 </div>
 <p>All methods the multiple sequence alignment methods xxx_msa are supported.</p>
+<ul class="simple">
+<li><p><strong>-dynamic_config**(usage:</strong>-dynamic_config=&lt;file&gt;** , default: none)</p></li>
+</ul>
+<p>This flag provides a file specifying which method will be used depending on Nseq in slaves when using dynamic_msa. The format is</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">method</span><span class="o">&gt;</span>      <span class="o">&lt;</span><span class="n">maxnseq</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>The default is</p>
+<dl class="simple">
+<dt>::</dt><dd><p>psicoffee_msa 20
+famsa_msa     100000000</p>
+</dd>
+</dl>
+<p>All methods (<a href="#id1"><span class="problematic" id="id2">*</span></a>_msa) available in t_coffee are supported.</p>
+<ul class="simple">
+<li><p><strong>-reg_thread</strong> (usage:<strong>-reg_nseq=N</strong> , default: 0 to use all available threads)</p></li>
+</ul>
+<p>Sets the maximum number of threads to be used by one instance. Note that if you have scrited your own aligner using a configuration file, you should make sure it does not run in a multi-threaded version as well.</p>
 <p>If you want to use an non-supported method, follow these <a class="reference external" href="https://tcoffee.readthedocs.io/en/latest/tcoffee_main_documentation.html#advanced-method-integration">guidelines</a>.</p>
 </div>
 </div>
