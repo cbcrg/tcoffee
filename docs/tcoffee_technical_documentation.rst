@@ -83,8 +83,13 @@ Specifies that T-Coffee should be multithreaded or not; by default all relevant 
   - msa: compute the msa in a parallel way
   - no: not parallelized
 
-- **-n_core** (usage:**-n_core= [number of cores+]**/default:none)
-Default indicates that all cores will be used as indicated by the environment.
+- **-n_core** (usage:**-n_core= [number of cores+]**/default:1, deprecated: use -thread instead)
+Use 0 to use all the cores
+- **-max_n_core** (usage:**-max_n_core= [number of cores+]**/default:1, deprecated: use -thread instead)
+Use 0 to use all the cores
+- **-thread** (usage:**-thread= [number of cores+]**/default:1)
+Use 0 to use all the cores
+
 
 Limits
 ^^^^^^

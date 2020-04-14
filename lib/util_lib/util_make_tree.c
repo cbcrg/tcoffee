@@ -20,6 +20,225 @@ static double 	*left_branch, *right_branch;
 static int 	*tkill;
 
 
+int unistrap ( int argc, char **in_argv)
+ 	{
+	  Sequence_data_struc *D1=NULL;
+	  Action_data_struc  *RAD;
+	  
+	  Sequence *S;
+	  Alignment *A, *B;
+	  
+	  int a,c,s,n;
+	  char *in_file, *method, *in_format, *tree_mode;
+	  char *tree, *outfile, *seq, *aln,*aln2, *cache;
+	
+	  int shuffle_tree=0;
+	  int shuffle_seq=0;
+	  
+	  int shuffle=10;
+	  int bootstrap=10;
+
+	  NT_node T=NULL;
+	  FILE*fp;
+	  
+	  int  maxlen=0;
+	  char **argv;
+	  char **action_list;
+	  int def=1;
+	  int **order;
+	  char *mode=(char*)vcalloc ( 10, sizeof (char));
+	  
+	  for (a=0; a<argc; a++)
+	    if (strlen (in_argv[a])>maxlen)maxlen=strlen (in_argv[a]);
+	  argv=break_list ( in_argv, &argc, "=;, \n");
+	  
+	  action_list=declare_char (argc+1,maxlen+1);
+	  declare_name (in_format);declare_name(method);declare_name(in_file); declare_name(cache);declare_name(outfile);
+	  declare_name (tree_mode);
+	  sprintf ( outfile, "unistrap.phylip");
+	  sprintf ( tree_mode,"%s", "mbed");
+	  sprintf ( method,"%s", "clustalo");
+	  shuffle=10;
+	  bootstrap=10;
+	  
+	  /*END INITIALIZATION*/
+	  
+	  RAD=(Action_data_struc*) vcalloc ( 1, sizeof ( Action_data_struc));
+	  RAD->keep_case=1;
+	  addrandinit ( (unsigned long) 500);
+	  
+	  if ( argc==1 || strm6 ( argv[1], "h", "-h", "help", "-help", "-man", "?"))
+	    {
+	      
+		fprintf ( stdout, "\n%s (%s,%s,%s [%s])\n",PROGRAM, VERSION,AUTHOR, DATE, URL);
+		fprintf ( stdout, "\n***********     MINIMUM SYNTAX        *****************");
+		fprintf ( stdout, "\nunistrap -in <in_file> -outfile <outfile>");
+		fprintf ( stdout, "\nSome File formats are automatically recognised");
+		fprintf ( stdout, "\nSee Format section");
+		fprintf ( stdout, "\n");
+		fprintf ( stdout, "\n***********        MAIN FLAGS              ******************");
+		fprintf ( stdout, "\n-in     name........Name of the file read");
+		fprintf ( stdout, "\n-input  format......Name of the format read, see Input Format Section");
+		
+ 		fprintf ( stdout, "\n");
+
+
+		fprintf ( stdout, "\n");
+ 	        return EXIT_SUCCESS;
+ 		}
+
+	argv=standard_initialisation (argv, &argc);
+
+
+	for ( a=1; a< argc; a++)
+ 		{
+		  if (a==1 && argv[1][0]!='-')
+		    {
+		      sprintf( in_file, "%s", argv[a]);
+		    }
+		  else if ( strcmp ( argv[a], "-in_f")==0 ||strm(argv[a],"-input") )
+ 			{
+			if ( strcmp ( argv[a], "-in_f")==0) fprintf ( stdout,"\nWARNING: %s deprecated, use -input instead", argv[a]);
+
+ 			sprintf ( in_format, "%s", argv[a+1]);
+			a++;
+ 			}
+
+		
+ 		else if ( strcmp (argv[a],"-in")==0)
+ 			{
+ 			sprintf( in_file, "%s", argv[a+1]);
+ 			a++;
+ 			}
+		else if ( strcmp (argv[a],"-shuffle_tree")==0){shuffle_tree=1;def=0;}
+		else if ( strcmp (argv[a],"-shuffle_seq")==0){shuffle_seq=1;def=0;}
+		else if ( strcmp (argv[a],"-tree")==0){sprintf(tree_mode, "%s", argv[++a]);}
+		else if ( strcmp (argv[a],"-method")==0){sprintf(method, "%s", argv[++a]);}
+		else if ( strcmp (argv[a],"-msa")==0){shuffle=atoi (argv[++a]);}
+		else if ( strcmp (argv[a],"-bootstrap")==0){bootstrap=atoi (argv[++a]);}
+		else if ( strcmp (argv[a],"-outfile")==0){sprintf (outfile,"%s",argv[++a]);}
+		else if ( strcmp (argv[a],"-setenv")==0)
+		  {
+		    while ((a+2)<argc && argv[a+1][0]!='-' && argv[a+2][0]!='-')
+		      {
+			cputenv ("%s=%s", argv[a+1], argv[a+2]);
+			a+=2;
+		      }
+		  }
+ 		else
+		  {
+		    fprintf ( stdout, "\nUNKNOWN OPTION: %s", argv[a]);
+		    myexit(EXIT_FAILURE);
+		  }
+ 		}
+	if (def)
+	  {
+	    shuffle_tree=1;
+	    shuffle_seq=0;
+	  }
+	
+	if ( strm (tree_mode, "list") || strm (method, "list"))
+	  {
+	    if ( strm (tree_mode, "list"))printf_system ("dynamic.pl -tree list");
+	    if ( strm (method, "list"))printf_system ("dynamic.pl -method list");
+	    return EXIT_SUCCESS;
+	  }
+
+
+	prepare_cache (cache);
+	if ((D1=read_data_structure (in_format, in_file,RAD))!=NULL)
+	  {
+	    in_format=(in_format && in_format[0])?in_format:identify_seq_format(in_file);
+	  }
+	else if ( in_file[0])
+	  {
+	    fprintf ( stdout, "\nFORMAT of file %s Not Supported[FATAL:%s]\n", in_file, PROGRAM);
+	    myexit(EXIT_FAILURE);
+	  }
+	S=D1->S;
+	
+	tree=vtmpnam (NULL);
+	seq=vtmpnam  (NULL);
+	aln=vtmpnam (NULL);
+	aln2=vtmpnam (NULL);
+
+	//T=seq2dnd(S,tree_mode);
+	
+
+	order=declare_int (S->nseq, 2);
+
+
+	fprintf (stderr, "! UNISTRAP\n");
+	fprintf (stderr, "! %d Shuffled MSAs followed each by %d bootstrap Replicates = %d Replicates\n", shuffle, bootstrap, shuffle*bootstrap);
+	
+	if (shuffle_seq )fprintf ( stderr, "#Shuffle: sequence order\n");
+	if (shuffle_tree)fprintf ( stderr, "#Shuffle: guide tree sister nodes order\n");
+	fprintf ( stderr, "! Tree: %s\n",tree_mode);
+	fprintf ( stderr, "! MSA : %s\n",method);
+	
+	
+	for ( a=0; a< shuffle; a++)
+	  {
+
+	    output_completion (stderr,a,shuffle, 1, "MSA Replicates");
+	    for (s=0; s<S->nseq; s++){order[s][0]=s;order[s][1]=rand()%(S->nseq*10);}
+	    if ( shuffle_seq)sort_int (order, 2, 1, 0,S->nseq-1);
+	    fp=vfopen (seq, "w");
+	    
+	    for (s=0; s<S->nseq; s++)
+	      {
+		int rs=order[s][0];
+		fprintf ( fp, ">%s\n%s\n", S->name[rs], S->seq[rs]);
+	      }
+	    vfclose (fp);
+	    
+	    fp=vfopen (tree, "w");
+	    
+	    if (shuffle_seq || T==NULL)	
+	      {
+		Sequence *S2=get_fasta_sequence (seq, NULL);
+		free_tree(T);
+		T=seq2dnd(S2,tree_mode);
+		free_sequence (S2, S2->nseq);
+	      }
+
+	    if (shuffle_tree)T=tree2shuffle (T);
+	    fp=no_rec_print_tree (T, fp);
+	    fprintf (fp, ";\n");
+	    vfclose (fp);
+	    
+
+	    printf_system ("dynamic.pl -seq %s -tree %s -outfile %s -method %s", seq, tree,aln, method);  
+
+	    A=quick_read_aln (aln);
+	    if (bootstrap==0)
+	      {
+		output_phylip_aln (outfile,A, "w");
+	      }
+	    else
+	      {
+	
+		B=quick_read_aln(aln);
+		for ( n=0; n<bootstrap; n++)
+		  {
+		    for (c=0; c<A->len_aln; c++)
+		      {
+			int x=rand()%A->len_aln;
+			
+			for ( s=0; s<A->nseq; s++)B->seq_al[s][c]=A->seq_al[s][x];
+		      }
+		    sprintf ( mode,"%s",(n==0)?"w":"a");
+		    output_phylip_aln (outfile,B, mode);
+		  }
+		free_aln (B);
+	      }
+	    free_aln (A);
+	  }
+	fprintf ( stderr, "! Unistrap output: %s\n", outfile);
+	return EXIT_SUCCESS;
+	}
+
+
 /*!
  *	\file util_make_tree.c
  *	\brief Source code tree algorithms
@@ -1684,8 +1903,12 @@ NT_node seq2dnd (Sequence *S, char *dpa_tree)
   NT_node T=NULL;
   static char *tmptree=vtmpnam (NULL);
   if (!dpa_tree) return T;
- 
-  if (strm (dpa_tree, "kmdnd"))
+  else if ( strm (dpa_tree, "list"))
+    {
+      fprintf ( stdout, "kmdnd\nswlcatdnd\niswlcatdnd\nlongcatdnd\nshortcatdnd\nswldnd\ncodnd Or mbed\ncwdnd Or clustalwnd\ncwqdnd\nparttree\ndpparttree\nmafftdnd\nfftns1dnd\nfftns2dnd\nupgma\nnj\nregdnd\nchaindnd\nfamsadnd\n");
+      exit (EXIT_SUCCESS);
+    }
+  else if (strm (dpa_tree, "kmdnd"))
     {
       T=seq2km_dnd (S);
     }

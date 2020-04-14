@@ -1,3 +1,4 @@
+int unistrap ( int argc, char **in_argv);
 char* seq2aln_file (char *pg,char *in, char *out);
 char* seq2cw_aln_file (char *in, char *out);
 char* seq2co_aln_file (char *in, char *out);

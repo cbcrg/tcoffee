@@ -422,15 +422,15 @@ print "-------       $PLUGINS_DIR:\n";
 print "------- Your t_coffee exccutable is in\n";
 print "-------       $INSTALL_DIR:\n";
 print "------- In order to make your installation permanent add these two lines\n";
-print "-------       export PATH=$INSTALL_DIR:\$PATH\n";
-print "-------       export PLUGINS_4_TCOFFEE=$PLUGINS_DIR:\n";
+print "export PATH=$INSTALL_DIR:\$PATH\n";
+print "export PLUGINS_4_TCOFFEE=$PLUGINS_DIR:\n";
 if ($OS eq "linux")
   {
     print "-------       to the file: $HOME/.bashrc\n";
   }
 else 
   {
-    print "-------       to the file: $HOME/.profile\n";
+    print "-------       to the file: $HOME/.profile\ OR $HOME/.basrc";
   }
 exit ($EXIT_SUCCESS);  
   

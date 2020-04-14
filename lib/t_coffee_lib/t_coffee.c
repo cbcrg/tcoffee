@@ -80,7 +80,7 @@ static char *get_rmcoffee_defaults_old(char *buf, char *type);//Original R-Coffe
 static char *get_rcoffee_defaults_old(char *buf, char *type);//Original R-Coffee Paper
 static char *get_best4RNA_defaults(char *buf, char *type);
 static char *get_saracoffee_defaults(char *buf, char *type);
-static char *get_sracoffee_defaults(char *buf, char *type);
+static char *get_rsapcoffee_defaults(char *buf, char *type);
 
 static char *get_very_fast_defaults(char *buf, char *type);
 static char *get_precomputed_defaults(char *buf, char *type);
@@ -916,7 +916,7 @@ if (t_coffee_defaults_flag)
 	 else if ( strm (special_mode, "rcoffee_fast_approximate"))new_arg=get_rmcoffee_defaults(NULL,lseq_type);
 	 else if ( strm (special_mode, "t_coffee"))new_arg=get_t_coffee_defaults(NULL,lseq_type);
 	 else if ( strm (special_mode, "saracoffee"))new_arg=get_saracoffee_defaults(NULL,lseq_type);
-	 else if ( strm (special_mode, "sracoffee"))new_arg=get_sracoffee_defaults(NULL,lseq_type);
+	 else if ( strm (special_mode, "rsapcoffee"))new_arg=get_rsapcoffee_defaults(NULL,lseq_type);
 	 
 
 	 else if ( strm (special_mode, "unspecified"));
@@ -6017,13 +6017,13 @@ char *get_rcoffee_defaults(char *buf, char *type)
 
      return buf;
    }
-char *get_sracoffee_defaults(char *buf, char *type)
+char *get_rsapcoffee_defaults(char *buf, char *type)
 { 
   if (buf==NULL)buf=(char*)vcalloc (1000, sizeof (char));
   check_program_is_installed (SAP_4_TCOFFEE,NULL, NULL,SAP_ADDRESS, INSTALL_OR_DIE);
   check_program_is_installed (MUSTANG_4_TCOFFEE,NULL, NULL,MUSTANG_ADDRESS, INSTALL_OR_DIE);
   
-  buf=strcat (buf,"-method sap_pair mustang_pair -template_file=RNA -extend_mode rna2 -output clustalw,html -transform dna2rna");
+  buf=strcat (buf,"-method sap_pair -template_file=RNA -extend_mode rna2 -output clustalw,html -transform dna2rna");
   
   return buf;
    }
@@ -6125,6 +6125,10 @@ int run_other_pg ( int argc, char *argv[])
   if ( strm (argv[0], "seq_reformat") || strm (argv[0], "saltt"))
     {
       return seq_reformat (argc, argv);
+    }
+  else if ( strm (argv[0], "unistrap"))
+    {
+      return unistrap (argc, argv);
     }
   else if ( strm (argv[0], "aln_compare"))
     {

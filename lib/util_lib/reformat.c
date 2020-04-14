@@ -3216,7 +3216,7 @@ int main_output  (Sequence_data_struc *D1, Sequence_data_struc *D2, Sequence_dat
 		if (action==2)
 		  if (strstr (out_format, "fasta"))output_mfasta_aln ( out_file,B);
 		  else if (strstr (out_format, "rphylip"))output_rphylip_aln ( out_file, B);
-		  else output_phylip_aln ( out_file,B);
+		  else output_phylip_aln ( out_file,B,"w");
 		else if (action==3)
 		  {
 		    Alignment *C;
@@ -3236,7 +3236,7 @@ int main_output  (Sequence_data_struc *D1, Sequence_data_struc *D2, Sequence_dat
 			
 			if (strstr (out_format, "fasta"))output_mfasta_aln ( out_file,C);
 			else if (strstr (out_format, "rphylip"))output_rphylip_aln ( out_file, C);
-			else output_phylip_aln ( out_file,C);
+			else output_phylip_aln ( out_file,C, "w");
 		      }
 		    free_aln(C);
 		  }
@@ -3274,7 +3274,7 @@ int main_output  (Sequence_data_struc *D1, Sequence_data_struc *D2, Sequence_dat
 		    }
 		if (strstr (out_format, "fasta"))output_mfasta_aln ( out_file,D1->A);
 		else if (strstr (out_format, "rphylip"))output_rphylip_aln ( out_file, D1->A);
-		else output_phylip_aln ( out_file, D1->A);
+		else output_phylip_aln ( out_file, D1->A, "w");
 	      }
 	    
 	  }
@@ -3302,7 +3302,7 @@ int main_output  (Sequence_data_struc *D1, Sequence_data_struc *D2, Sequence_dat
 	  {
 	    if (!D1)return 1;
 	    if ( check_file_exists (out_file))remove (out_file);
-	    output_phylip_aln ( out_file, D1->A);
+	    output_phylip_aln ( out_file, D1->A, "w");
 	  }
 	else if ( strm ( out_format, "mocca_aln"))
 	  {
@@ -3717,12 +3717,12 @@ int main_output  (Sequence_data_struc *D1, Sequence_data_struc *D2, Sequence_dat
 		}
 
 	
-	else if ( strm  (out_format, "newick_randomize"))
+	else if ( strm  (out_format, "newick_shuffle"))
 	  {
 	    no_rec_print_tree_shuffle (D1->T, stdout);
 	    fprintf (stdout, ";\n");
 	  }
-	else if ( strm  (out_format, "newick_shuffle"))
+	else if ( strm  (out_format, "newick_randomize"))
 	  {
 	    no_rec_print_tree_randomize (D1->T, stdout);
 	    fprintf (stdout, ";\n");
@@ -8144,11 +8144,11 @@ static int mnl;
 void output_rphylip_aln ( char *name, Alignment *B)
 {
   mnl=-1;
-  output_phylip_aln (name, B);
+  output_phylip_aln (name, B, "w");
   
 }
 
-void output_phylip_aln ( char *name, Alignment *B)
+void output_phylip_aln ( char *name, Alignment *B, char *mode)
     {
       int a, b, c, d;
       FILE *fp;
@@ -8176,7 +8176,7 @@ void output_phylip_aln ( char *name, Alignment *B)
 
       print_name=(int*)vcalloc ( B->nseq, sizeof (int));
       if (check_file_exists(name)) fp= vfopen ( name, "a");//make it possible to output replicates
-      else fp= vfopen ( name, "w");
+      else fp= vfopen ( name, mode);
       
       fprintf (fp, "%5d  %d\n", B->nseq, B->len_aln);
       for (a=0; a<B->len_aln; a+=line)

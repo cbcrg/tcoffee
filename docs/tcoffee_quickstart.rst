@@ -1,6 +1,6 @@
-###########
-Quick Start
-###########
+####################
+Quick Start T-Coffee
+####################
 .. warning:: This chapter has been extensively updated in 11/2016. All T-Coffee modes/tools/commands should be valid for version 9.03 and above, but it is not guaranteed for lower versions of T-Coffee.
 
 ******************************

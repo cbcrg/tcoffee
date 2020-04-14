@@ -1869,7 +1869,7 @@ NT_node aln2phyml_tree (Alignment *A)
 
   A=get_aln_type (A);
   type=(A->S)->type;
-  output_phylip_aln (tmpaln, A);
+  output_phylip_aln (tmpaln, A, "w");
   
   /*
   if ( strstr (type, "DNA") || strstr (type, "RNA"))
@@ -2204,6 +2204,7 @@ NT_node no_rec_free_tree ( NT_node root);
 NT_node rec_free_tree ( NT_node root);
 NT_node free_tree ( NT_node R)
 {
+  if (!R) return R;
   if (use_recursion ())return rec_free_tree(R);
   else return no_rec_free_tree (R);
 }

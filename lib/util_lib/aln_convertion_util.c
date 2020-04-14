@@ -7097,6 +7097,7 @@ Alignment * aln2scramble_seq (Alignment *A)
   return aln2random_order (A);
 }
 
+
 Alignment * shuffle_aln ( Alignment *A,int N, char *name_i, char *mode)
 {
   int **index;

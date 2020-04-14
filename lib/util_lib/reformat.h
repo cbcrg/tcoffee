@@ -248,7 +248,7 @@ void output_strict_clustal_aln( char *name, Alignment*B);
 void output_generic_clustal_aln( char *name, Alignment*B, char *format);
 void output_saga_aln   ( char *name, Alignment*B);
 void output_rphylip_aln ( char *name, Alignment*B);
-void output_phylip_aln ( char *name, Alignment*B);
+void output_phylip_aln ( char *name, Alignment*B, char *mode);
 void output_mocca_aln  ( char *name, Alignment*B,Alignment*S);
 void output_rnalign    (char *out_file, Alignment*A,Sequence *STRUC);
 void output_pw_lib_saga_aln (char *lib_name, Alignment *A );

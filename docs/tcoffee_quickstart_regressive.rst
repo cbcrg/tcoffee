@@ -6,7 +6,7 @@ Quick Start Regressive Algorithm
 Introduction
 ************
 
-This document introduces the regressive mode of T-Coffee. It is meant to align very large datasets with a high accuracy. In order to ise it, you need a complete installation of T-Coffee with all supported third-party packages. These come by default in the installation package but you will have to install them manualy if you compile T-Coffee from its source code. See the `installation section <https://tcoffee.readthedocs.io/en/latest/tcoffee_installation.html#installation>`_ for more details.
+This document introduces the regressive mode of T-Coffee (please cite the `Nature Biotech original publication <https://www.nature.com/articles/s41587-019-0333-6>`_). It is meant to align very large datasets with a high accuracy. In order to ise it, you need a complete installation of T-Coffee with all supported third-party packages. These come by default in the installation package but you will have to install them manualy if you compile T-Coffee from its source code. See the `installation section <https://tcoffee.readthedocs.io/en/latest/tcoffee_installation.html#installation>`_ for more details.
 
 Multiple sequence alignments (MSA) are usualy estimated by progressively aligning all the sequences, starting with the most similar. The regressive alignment is a new procedure that proceeds the other way around and starts by aligning the most distantly related sequences first. Like its progressive sibblin, the regressive algorithm starts with a guide tree. It uses this guide tree to extract the N most diverse sequences. In this first intermediate MSA, each sequence is either a leaf or the representative of a subtree. The algorithm is re-aplied recursively onto every representative sequence until all sequences have been incorporated in an internediate MSA of max size N. The final MSA is then obtained by merging all the intermediate MSAs into the final MSA. The merging is very efficient and does not require further alignment because the intermediate MSAs contain common sequences. 
 
@@ -17,10 +17,24 @@ When deployed serialy, the regressive algorithm scales linearly with the number 
 In the following document, we list its main options and how these can be deployed from the T-Coffee algorithm. 
 
 .. note:: REG does not support ALL the T-Coffee options. It is especially limited with respect to input and output and will only allow FASTA.
+***************************
+Installation from binaries
+**************************
 
-************
-Installation
-************
+::
+
+  ##: Get the latest stable version from http://www.tcoffee.org/Packages/Stable/Latest/
+  ##: Or  the latest Beta   Version from http://www.tcoffee.org/Packages/Beta/Latest/	
+  ##: downlad the *.tar.gz file
+  ##: tar -xvf T-COFFEE_distribution_Version_XXXXX.tar.gz
+  ##: cd T-COFFFEE_distribution_Version_XXXXX
+  ##: ./install all
+  ##: add the instructions given at the bottom of the install output to your .profile or your .bashrc 
+
+
+************************
+Installation from source
+************************
 
 ::
 
@@ -101,28 +115,28 @@ This flag defines which method will be used to estimate the tree. The following 
   - fftns2dnd   : Tree produced after the second iteration MAFFT fftns mode
   - upgma       : upgma tree - warning cubic time computation
   - nj          : Neighbour Joinning tree
-  - famsadnd    : FAMSA single 
+  - famsadnd    : FAMSA single linkage tree
   - #<command>  : Runs comamnd <seq> > <tree>. 
   - filename    : Any file in newick format. The seq file and the tree file must match
 
 - **-newtree** (usage:**-newtree=<filename>** , default: <infile>.<reg_tree>)
 This flag defines the name of the newly computed ouput tree. Deafult will be filename.reg_tree
 
-- **-child_tree**(usage:**-chile_tree=<tree_method>** , default:None)
+- **-child_tree** (usage:**-chile_tree=<tree_method>** , default:None)
 This flag defines which method will be used to estimate the tree. Note that by default, each ref_method will juse its own default tree mode. 
 
 
-- **-outfile**(usage:**-outfile=<filename>** , default: <infile>.aln)
+- **-outfile** (usage:**-outfile=<filename>** , default: <infile>.aln)
 This flag defines the name of the output file containing the multiple sequence alignment
 
 
 - **-reg_nseq** (usage:**-reg_nseq=N** , default: 1000 for datasets larger than 10,000 and Nseq/10 for smaller datasets )
 Sets the maximum size of the subsequence alignments. The recommanded value is 1000. With slow/accurate aligners that do not scale in a linear way, this parameter can have an importnat impact on CPU requirement with small values resulting in faster computation.
 
-- **-dynamic**(usage:**-dynamic=<Integer>** , default: 1)
+- **-dynamic** (usage:**-dynamic=<Integer>** , default: 1)
 This flag defines the factor by which every Child reg_n is increased while going from root to leaf. By default all children contain the same maximum number of sequences, if dynamic>1, this number is set to reg_nseq*(dynamic^NGeneration from root). If dynamic <1, this number is set to: reg_nseq/(-dynamic^NGeneration from root). *Note that this mode has not bee validated*
 
-- **-reg_method**(usage:**-reg_tree=<method or configuration file>** , default: clustalo_msa)
+- **-reg_method** (usage:**-reg_tree=<method or configuration file>** , default: clustalo_msa)
 This flag defines which method will be used to estimate the child MSA. In order to know which methods are available.
 
 
@@ -132,7 +146,7 @@ This flag defines which method will be used to estimate the child MSA. In order 
 
 All methods the multiple sequence alignment methods xxx_msa are supported.
 
-- **-dynamic_config**(usage:**-dynamic_config=<file>** , default: none)
+- **-dynamic_config** (usage:**-dynamic_config=<file>** , default: none)
 This flag provides a file specifying which method will be used depending on Nseq in slaves when using dynamic_msa. The format is 
 ::
 
@@ -140,7 +154,9 @@ This flag provides a file specifying which method will be used depending on Nseq
 
 The default is
 
+
 ::
+
   psicoffee_msa	20
   famsa_msa     100000000
 

@@ -37,10 +37,19 @@ Unix/Linux Binaries
      $$: t_coffee -version
 
 
-MacOS Binaries - Deprecated
-===========================
+MacOS Binaries - Updated
+========================
 
-These binaries are not any more supported as such. However, the source installer - see below - will automatically retrive pre-compiled MacOS binaries if compilation fails on your system. 
+::
+
+  ##: Get the latest stable version from http://www.tcoffee.org/Packages/Stable/Latest/
+  ##: Or  the latest Beta   Version from http://www.tcoffee.org/Packages/Beta/Latest/	
+  ##: downlad the *.tar.gz file
+  ##: tar -xvf T-COFFEE_distribution_Version_XXXXX.tar.gz
+  ##: cd T-COFFFEE_distribution_Version_XXXXX
+  ##: ./install all
+  ##: add the instructions given at the bottom of the install output to your .profile or your .bashrc 
+
 
 
 Installation From Source/Binaries downloader (Mac OSX/Linux)

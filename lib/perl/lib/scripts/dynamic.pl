@@ -27,6 +27,7 @@ my $blastFlag;
 my $infile;
 my $outfile;
 my $flush;
+my $do_exit=0;
 my ($h1, $h2);
 my @tmpL;
 my $tmpdir = File::Temp->newdir();
@@ -51,17 +52,62 @@ for ($a=0; $a<=$#ARGV; $a++)
     elsif ($ARGV[$a] eq "-verbose"){$VERBOSE=1; $QUIET="";} 
     elsif ($ARGV[$a] eq "-clean"){$clean=1;}
     elsif ($ARGV[$a] eq "-template_file"){$template_file=$ARGV[++$a]}
+ 
     
   }
-if ($ENV{dynamic_4_TCOFFEE})
+
+if ($tree eq "list")
   {
-    print "ERROR - $method2use resulst in infinite recursion [FATAL:dynamic.pl]\n";
-    exit ($EXIT_FAILURE);
+    my $f="$tmpdir/f";
+    open (F, ">$f");
+    print F ">a\nxxx\n>b\nyyyyy\n";
+    close (F);
+    print STDOUT ("**** Supported Guide tree modes:\n");
+    system ("t_coffee -other_pg seq_reformat -in $f -action +seq2dnd list ");
+    $do_exit=1;
   }
-else
+if ($method2use eq "list")
   {
-    $ENV{dynamic_4_TCOFFEE}=1;
+    my %ml;
+    my $listfile="$tmpdir/list";
+    
+    $ml{tcoffee}=1;
+    $ml{psicoffee}=1;
+    $ml{accurate}=1;
+    $ml{'3dcoffee'}=1;
+    $ml{expresso}=1;
+    $ml{clustalo}=1;
+    $ml{mafft}=1;
+    $ml{famsa}=1;
+      print STDOUT ("**** Supported MSA mode:\n");
+    system ("t_coffee 2>/dev/null | grep _msa > $listfile");
+    open (F, $listfile);
+    while (<F>)
+      {
+	my $l=$_;
+	$l=~/(.*_msa)\s+(.*)/;
+	my $m=$1;
+	my $i="$2\n";
+	if ($m=~/mafftsparsescore/)
+	  {
+	   printf STDOUT "%-20s DOES NOT Support [-tree] -- $i", $m;
+	  }
+	elsif ($m=~/mafft/)
+	  {
+	   printf STDOUT "%-20s DOES     Support [-tree] -- $i", $m;
+	  }
+	elsif (!$ml{$m})
+	  {
+	   printf STDOUT "%-20s DOES NOT Support [-tree] -- $i", $m;
+	  }
+	else 
+	  {
+	   printf STDOUT "%-20s DOES     Support [-tree] -- $i", $m;
+	  }
+      }
+    $do_exit=1;
   }
+if ($do_exit){exit ($EXIT_SUCCESS);}
 
 my $n=file2nseq($infile);
 if ($n==0)
@@ -135,13 +181,13 @@ if ($clean)
     chdir ($tmpdir);
   }
 	
-
-if ($method2use eq "tcoffee_msa")
+if ($method2use eq "tcoffee_msa" || $method2use eq "tcoffee"|| $method2use eq "t_coffee" )
   {
+    
     if ($treeF){$treeFlag="-usetree $treeF "}
     my_system ("t_coffee -seq $infile -outfile $outfile -output fasta_aln $treeFlag >/dev/null  $QUIET");    
   }
-elsif ($method2use eq "psicoffee_msa")
+elsif ($method2use eq "psicoffee_msa" || $method2use eq "psicoffee")
   {
     my $cacheFlag;
     if ($cache){$cacheFlag="-cache=$cache";}
@@ -149,7 +195,7 @@ elsif ($method2use eq "psicoffee_msa")
     if ($blast eq "LOCAL"){$blastFlag="-blast_server=LOCAL -protein_db=$protein_db";}
     my_system ("t_coffee -mode psicoffee -in $infile -outfile $outfile -output fasta_aln  $cacheFlag $blastFlag>/dev/null $QUIET");
   }
-elsif  ($method2use eq "accurate_msa")
+elsif  ($method2use eq "accurate_msa" || $method2use eq "accurate")
   {
     my $cacheFlag;
     if ($cache){$cacheFlag="-cache=$cache";}
@@ -157,7 +203,7 @@ elsif  ($method2use eq "accurate_msa")
     if ($blast eq "LOCAL"){$blastFlag="-blast_server=LOCAL -protein_db=$protein_db -pdb_db=$pdb_db";}
     my_system ("t_coffee -mode accurate -in $infile -outfile $outfile -output fasta_aln  $cacheFlag $blastFlag>/dev/null  $QUIET");
   }
-elsif  ($method2use eq "3dcoffee_msa")
+elsif  ($method2use eq "3dcoffee_msa"|| $method2use eq "3dcoffee")
   {
     my $cacheFlag;
     if ($cache){$cacheFlag="-cache=$cache";}
@@ -166,7 +212,7 @@ elsif  ($method2use eq "3dcoffee_msa")
     my_system ("t_coffee -method sap_pair TMalign_pair -template_file $template_file  -in $infile -outfile $outfile -output fasta_aln  $cacheFlag $blastFlag>/dev/null $QUIET");
   }
 
-elsif  ($method2use eq "expresso_msa")
+elsif  ($method2use eq "expresso_msa" || $method2use eq "expresso")
   {
     my $cacheFlag;
     if ($cache){$cacheFlag="-cache=$cache";}
@@ -175,26 +221,31 @@ elsif  ($method2use eq "expresso_msa")
     my_system ("t_coffee -mode expresso -in $infile -outfile $outfile -output fasta_aln  $cacheFlag $blastFlag>/dev/null $QUIET");
   }
 
-elsif ($method2use eq "clustalo_msa")
+elsif ($method2use eq "clustalo_msa" || $method2use eq "clustalo")
   {
     if ($treeF){$treeFlag="--guidetree-in=$treeF "}
     my_system ("clustalo -i $infile $treeFlag -o $outfile  --force --threads=1 $QUIET");
     }
-elsif ($method2use eq "mafft_msa")
+elsif ($method2use eq "mafft_msa" || $method2use eq "mafft")
   {
     if ($treeF){$treeFlag="--treein $treeF ";}
     my_system ("mafft --anysymbol $treeFlag $infile > $outfile $QUIET");
   }
-elsif ($method2use eq "mafftginsi_msa")
+elsif ($method2use eq "mafftginsi_msa" || $method2use eq "mafft-ginsi")
   {
     if ($treeF){$treeFlag="--treein $treeF ";}
     my_system ("mafft-ginsi --anysymbol $treeFlag $infile > $outfile $QUIET");
   }
-elsif ($method2use eq "mafftfftns1_msa")
+elsif ($method2use eq "mafftfftns1_msa" || $method2use eq "mafft-fftnsi")
   {
     if ($treeF){$treeFlag="--treein $treeF ";}
     my_system ("mafft-fftns1 --anysymbol --retree1 $treeFlag $infile > $outfile $QUIET");
   }
+elsif ($method2use =~/mafft/)
+   {
+     if ($treeF){$treeFlag="--treein $treeF ";}
+     my_system ("$method2use --anysymbol $treeFlag $infile > $outfile $QUIET");
+    }
 elsif ($method2use eq "famsa_msa")
   {
     if ($treeF){$treeFlag="-gt import $treeF "}
