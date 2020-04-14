@@ -1,12 +1,12 @@
-################################
-Quick Start Regressive Algorithm
-################################
+####################
+Quick Start Unistrap
+####################
 
 ************
 Introduction
 ************
 
-This document introduces the unsitsrap strategy that incorpates MSA instability intonthe estimation of the Felsentein Bootstrap replicates (please cite the `Systematic Biology original publication <https://academic.oup.com/sysbio/article/67/6/997/4948750>`_). 
+This document introduces the unsitsrap strategy that incorpates MSA instability into the estimation of the Felsentein Bootstrap replicates (please cite the `Systematic Biology original publication <https://academic.oup.com/sysbio/article/67/6/997/4948750>`_). 
 
 The principke is very straightorward. It involves shuffling the input order of the sequences so as to generate MSA shuffle replicates, from which columns are then drawn with replacement so as to generate the Bootsrap replicates. As established in the paper, it is also possible to shuffle left and right chidren in the guide tree of any progressive methods. This procedure recapitulates two third of the instability measured when shuffling sequences. Whenever using a progressive algorithm, the tree shuffling procedure should be applied in order to by-pass any arbitrary stabilisation procedures (internal sorting for instance).
 
@@ -71,13 +71,7 @@ The following command will list all the guide tree methods and multiple aligners
 
   $$: t_coffee -other_pg unistrap  -tree list -method list 
 
-Very Fast
-=========
-This mode is expected to be the fastest currently available. Its accuracy is comparable to that of MAFFT-fftnsi running on its own 
 
-::
-
-  $$: t_coffee -reg -seq proteases_large.fasta -reg_nseq 100 -reg_tree parttree -reg_method mafftfftnsi_msa -outfile proteases_large.aln -outtree proteases_large.parttree
 
 ****************
 unistrap flags
@@ -102,7 +96,7 @@ This flag defines the method used to estimate the MSA.
 This flag defines the number of MSA replicates
 
 - **-bootstrap** (usage:**-bootstrap=<integer>** , default: 10)
-This flag defines the number of Bootsrap replicates. Note that the final number of replicates will be msa*bootstrap
+This flag defines the number of Bootsrap replicates. Note that the final number of replicates will be msa* x bootstrap
 	
 - **-outfile** (usage:**-outfile=<tree_method>** , default:stdout)
 This flag defines the outfile name

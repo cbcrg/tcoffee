@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>T-Coffee Version_13.41.39.631ca86 documentation</title>
+  <title>T-Coffee Version_13.41.40.50b4c71 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                Version_13.41.39.631ca86
+                Version_13.41.40.50b4c71
               </div>
             
           
@@ -111,13 +111,12 @@
 <li class="toctree-l2"><a class="reference internal" href="index.html#regressive-flags">Regressive flags</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="index.html#document-tcoffee_quickstart_unistrap">Quick Start Regressive Algorithm</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html#document-tcoffee_quickstart_unistrap">Quick Start Unistrap</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="index.html#introduction">Introduction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#exemples">Exemples</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="index.html#produce-bootsrap-replicates-by-shuffling-sequences-and-guide-tree-sister-nodes">Produce bootsrap replicates by shuffling sequences and guide tree sister nodes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="index.html#produce-bootsrap-replicates-by-shuffling-the-guide-tree-sister-nodes">Produce bootsrap replicates by shuffling the guide tree sister nodes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="index.html#get-list-of-supported-methods">Get list of supported methods</a></li>
-<li class="toctree-l3"><a class="reference internal" href="index.html#very-fast">Very Fast</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#unistrap-flags">unistrap flags</a></li>
@@ -718,7 +717,7 @@
     
       <li><a href="index.html#document-index">Docs</a> &raquo;</li>
         
-      <li>T-Coffee Version_13.41.39.631ca86 documentation</li>
+      <li>T-Coffee Version_13.41.40.50b4c71 documentation</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -1203,11 +1202,11 @@ blastpgp_client http://www.ebi.ac.uk/Tools/webservices/services/blastpgp
 <p>If you want to use an non-supported method, follow these <a class="reference external" href="https://tcoffee.readthedocs.io/en/latest/tcoffee_main_documentation.html#advanced-method-integration">guidelines</a>.</p>
 </div>
 </div>
-<span id="document-tcoffee_quickstart_unistrap"></span><div class="section" id="quick-start-regressive-algorithm">
-<h2>Quick Start Regressive Algorithm<a class="headerlink" href="#quick-start-regressive-algorithm" title="Permalink to this headline">¶</a></h2>
+<span id="document-tcoffee_quickstart_unistrap"></span><div class="section" id="quick-start-unistrap">
+<h2>Quick Start Unistrap<a class="headerlink" href="#quick-start-unistrap" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="introduction">
 <h3>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h3>
-<p>This document introduces the unsitsrap strategy that incorpates MSA instability intonthe estimation of the Felsentein Bootstrap replicates (please cite the <a class="reference external" href="https://academic.oup.com/sysbio/article/67/6/997/4948750">Systematic Biology original publication</a>).</p>
+<p>This document introduces the unsitsrap strategy that incorpates MSA instability into the estimation of the Felsentein Bootstrap replicates (please cite the <a class="reference external" href="https://academic.oup.com/sysbio/article/67/6/997/4948750">Systematic Biology original publication</a>).</p>
 <p>The principke is very straightorward. It involves shuffling the input order of the sequences so as to generate MSA shuffle replicates, from which columns are then drawn with replacement so as to generate the Bootsrap replicates. As established in the paper, it is also possible to shuffle left and right chidren in the guide tree of any progressive methods. This procedure recapitulates two third of the instability measured when shuffling sequences. Whenever using a progressive algorithm, the tree shuffling procedure should be applied in order to by-pass any arbitrary stabilisation procedures (internal sorting for instance).</p>
 <p>The procedure used for the original validation is available on <a class="reference external" href="https://github.com/cbcrg/unistrap">Github</a>). The content of this repository is not especially user friendly and its sole purpose is to allow reproducing the analysis provided in the original paper. For practical usage, we recommand using the re-implementation provided below that can be accessed using the T-Coffee package. This re-implementation supports all the T-Coffee supported aligners when shuffling input sequences (<a href="#id1"><span class="problematic" id="id2">**</span></a>t_coffee ** to get a list) and a subset of progressive aligners when using the tree shuffle strategy.</p>
 <p>Aside from its improved accuracy, the main benefit of this protocol is to allow any third party multiple sequence aligner to be applied on the sub-groups (ClustalO, MAfft, etc) and any third party guide-tree protocol. The default T-Coffee supports a large number of <a class="reference external" href="https://tcoffee.readthedocs.io/en/latest/tcoffee_main_documentation.html#internal-external-methods">internal and external package</a> but if the one you need is not supported, note that it is relatively simple to create a configuration file allowing T-Coffee to interact with the package you need as docimented <a class="reference external" href="https://tcoffee.readthedocs.io/en/latest/tcoffee_main_documentation.html#advanced-method-integration">here</a>.</p>
@@ -1254,13 +1253,6 @@ blastpgp_client http://www.ebi.ac.uk/Tools/webservices/services/blastpgp
 </pre></div>
 </div>
 </div>
-<div class="section" id="very-fast">
-<h4>Very Fast<a class="headerlink" href="#very-fast" title="Permalink to this headline">¶</a></h4>
-<p>This mode is expected to be the fastest currently available. Its accuracy is comparable to that of MAFFT-fftnsi running on its own</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$$: t_coffee -reg -seq proteases_large.fasta -reg_nseq 100 -reg_tree parttree -reg_method mafftfftnsi_msa -outfile proteases_large.aln -outtree proteases_large.parttree
-</pre></div>
-</div>
-</div>
 </div>
 <div class="section" id="unistrap-flags">
 <h3>unistrap flags<a class="headerlink" href="#unistrap-flags" title="Permalink to this headline">¶</a></h3>
@@ -1291,7 +1283,7 @@ blastpgp_client http://www.ebi.ac.uk/Tools/webservices/services/blastpgp
 <ul class="simple">
 <li><p><strong>-bootstrap</strong> (usage:<strong>-bootstrap=&lt;integer&gt;</strong> , default: 10)</p></li>
 </ul>
-<p>This flag defines the number of Bootsrap replicates. Note that the final number of replicates will be msa*bootstrap</p>
+<p>This flag defines the number of Bootsrap replicates. Note that the final number of replicates will be msa* x bootstrap</p>
 <ul class="simple">
 <li><p><strong>-outfile</strong> (usage:<strong>-outfile=&lt;tree_method&gt;</strong> , default:stdout)</p></li>
 </ul>
