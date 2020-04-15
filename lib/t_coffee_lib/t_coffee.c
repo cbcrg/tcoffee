@@ -7060,7 +7060,7 @@ Alignment * t_coffee_dpa (int argc, char **argv)
   
   //default values
   set_int_variable ("swlN",50);
-  set_nproc(1);
+
   set_string_variable ("output", "fasta_aln");
   set_int_variable    ("reg_dnd_nseq",100);
   set_int_variable    ("reg_dnd_depth",3);
@@ -7198,10 +7198,11 @@ Alignment * t_coffee_dpa (int argc, char **argv)
 
 
   //Core management
+ 
   if (n_core==0)n_core=get_nproc();
   set_nproc (n_core);
   set_int_variable ("n_core",n_core);
-
+  
 
   //Dynamic regression
   set_int_variable ("reg_dynamic",reg_dynamic);

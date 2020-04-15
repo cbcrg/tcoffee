@@ -5479,6 +5479,7 @@ static int nproc;
 
 int set_nproc(int np)
 {
+
   //set to 0 if to be reset by environement
   nproc=np;
 }
@@ -5488,9 +5489,10 @@ int get_nproc ()
   
 
   if (nproc>0) { return nproc; }
-
+ 
   if ( get_int_variable ("n_core"))
     {
+      
       nproc=get_int_variable ("n_core");
     }
   else if ( getenv ("NUMBER_OF_PROCESSORS_4_TCOFFEE"))
@@ -5499,11 +5501,12 @@ int get_nproc ()
     }
   else if ( getenv ("NUMBER_OF_PROCESSORS"))
     {
+      
       nproc=atoi(getenv ("NUMBER_OF_PROCESSORS"));
     }
   else
     nproc=getNumCores();
-
+  
   return nproc;
 }
 
