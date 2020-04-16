@@ -5584,6 +5584,23 @@ int fcputenv   (char *file, char *mode,char * string, ...)
   va_end (ap);
   return 1;
 }
+int iswdir     (char *p)
+{
+  FILE*fp;
+  char *f=NULL;
+  
+  if ( !isdir(p))return 0;
+  
+  f=csprintf (f,"%s/test%d",p, rand()%100000); 
+  
+  if ( !(fp=fopen (f, "w"))){vfree(f); return 0;}
+  if ( !fprintf ( fp, "test")){fclose(fp);vfree(f);return 0;}
+  
+  fclose(fp);
+  vfree(f);
+  return 1;
+}
+  
 int isdir4path (char *p)
 {
    if ( !p) return 0;
@@ -10139,6 +10156,158 @@ void clean_exit ()
   char *tmp;
   
   Tmpname *start;
+  int debug=0;
+  static char *trash=NULL;
+
+  clean_exit_started=1;//prevent new locks
+  start=tmpname;
+  static int set_trash;
+  
+  if (!set_trash)
+    {
+      if (getenv ("TRASH_4_TCOFFEE"))trash=getenv ("TRASH_4_TCOFFEE");
+      else trash=csprintf (trash, "%s/.Trash", getenv("HOME"));
+
+      if ( strm (trash, "NO") || strm (trash, "no"))trash=NULL;
+      else if (!iswdir(trash))
+	{
+	  add_warning (stderr, "Cannot use Trash path: %s -- set the path using TRASH_4_TCOFFEE=[valid/path] -- will clean tmp files", trash);
+	  trash=NULL;
+	}
+      
+      set_trash=1;
+    }
+  
+  
+
+  //update error lock if needed
+  if (has_error_lock())//Update error lock
+    {
+      lock (getpid(), LERROR, LSET, "%d -- STACK: %d -> %d -- %s %s (%s)\n", getpid(), getppid(), getpid(), PROGRAM, VERSION, BUILD_INFO);
+      lock (getpid(), LERROR, LSET, "%d -- COM: %s\n",getpid(),in_cl );
+
+      //
+    }
+
+  
+  if (is_rootpid())
+    {
+      if (trash)
+	{
+	  fprintf (get_stdout1(NULL), "!Your tmp files have been moved into [%s] --- Use a cron job to delete them\n", trash);
+	}
+      
+      kill_child_pid(getpid());
+      if (has_error_lock())
+	{
+	  char *e=NULL;
+	  stack_msg (stderr);
+	  warning_msg (stderr);
+	  e=lock (getpid(), LERROR, LREAD, NULL);
+
+
+
+	  //explicit the most common error messages
+	  if ( strstr (e, "EMAIL"))email_msg (stderr);
+	  if ( strstr (e, "INTERNET"))proxy_msg (stderr);
+	  if ( strstr (e, "PG"))   install_msg(stderr);
+	  if ( strstr (e, "COREDUMP"))
+	    {
+	      error_msg (stderr);
+	      dump_error_file();
+	    }
+	  print_exit_failure_message ();
+	  vfree (e);
+	}
+      else if ( has_warning_lock())
+	{
+	  warning_msg (stderr);
+	}
+      else
+	print_exit_success_message();
+      
+      //Dump the io if requested
+      dump_io (get_string_variable ("dump"), "standard dump");
+      
+      lock (getpid(), LLOCK, LRELEASE, "");
+      lock (getpid(), LWARNING, LRELEASE, "");
+      lock (getpid(), LERROR, LRELEASE, "");
+      add_method_output2method_log (NULL, NULL, NULL, NULL, decode_name (NULL, CODELIST));
+    }
+
+
+
+  
+
+  //Remove all temporary files
+    
+  if      (istmp(get_tmp_4_tcoffee()))
+    {
+      return;
+    }
+  else if (trash && !is_rootpid());
+  else if (trash && is_rootpid())
+    {
+      printf_system_direct ("mv %s %s", get_tmp_4_tcoffee(), trash);
+      return;
+    }
+  
+  
+  while ( start && start->name)
+    {
+      if (trash)
+	{
+	  struct stat s;
+	  if (stat(start->name,& s)!=-1)
+	    printf_system_direct ("mv %s %s", start->name, trash);
+	}
+      else 
+	{
+	  if ( start && start->name)
+	    {
+	      if (isdir(start->name))
+		{
+		  rrmdir (start->name);
+		}
+	      else
+		{
+		  char test[10000];
+		  vremove (start->name);
+		  if (start->name)sprintf (test, "%s.dnd", start->name);vremove (test);
+		  if (start->name)sprintf (test, "%s.html",start->name);vremove (test);
+		  
+		}
+	    }
+	      
+	}
+      
+      b=start;
+      start=start->next;
+    }
+  if (!is_rootpid());
+  else if (trash)
+    {
+      printf_system_direct ("mv %s %s", get_tmp_4_tcoffee(),trash);
+    }
+  else
+    {
+      my_rmdir (get_tmp_4_tcoffee());
+    }
+  
+  
+  //Remove the lock
+  //lock (getpid(), LLOCK, LRELEASE,NULL); Now keep the lock unless it is a parent process
+
+  //UNIQUE TERMINATION FOR EVERYBODY!!!!!!
+  
+  return;
+}
+void clean_exit_new_doesNotWork ()
+{
+  Tmpname *b;
+  char *tmp;
+  
+  Tmpname *start;
   int debug=atoigetenv ("DEBUG_TMP_FILE");;
   static char *trash=NULL;
   static int set_trash;
@@ -10157,7 +10326,7 @@ void clean_exit ()
       
       set_trash=1;
     }
-  return;
+ 
   clean_exit_started=1;//prevent new locks
   start=tmpname;
  

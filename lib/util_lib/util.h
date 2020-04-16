@@ -749,6 +749,8 @@ int file_exists (char *path,char *fname);
 int isexec (char *fname);
 int istmp  (char *name);
 int isdir  (char *fname);
+int iswdir  (char *fname);
+
 int isdir4path (char *fname);
 int rrmdir (char *fname);
 char * ls_l(char *path,char *fname);
