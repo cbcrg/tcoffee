@@ -10247,59 +10247,31 @@ void clean_exit ()
     }
   
       
-      /*
-  if      (istmp(get_tmp_4_tcoffee()))
-    {
-      return;
-    }
-  else if (trash && !is_rootpid());
-  else if (trash && is_rootpid())
-    {
-      printf_system_direct ("mv %s %s", get_tmp_4_tcoffee(), trash);
-      return;
-    }
-      */
+ 
   
   while ( start && start->name)
     {
-      if (trash)
+      
+      if ( start && start->name)
 	{
-	  struct stat s;
-	  if (stat(start->name,& s)!=-1)
-	    printf_system_direct ("mv %s %s", start->name, trash);
-	}
-      else 
-	{
-	  if ( start && start->name)
+	  if (isdir(start->name))
 	    {
-	      if (isdir(start->name))
-		{
-		  rrmdir (start->name);
-		}
-	      else
-		{
-		  char test[10000];
-		  vremove (start->name);
-		  if (start->name)sprintf (test, "%s.dnd", start->name);vremove (test);
-		  if (start->name)sprintf (test, "%s.html",start->name);vremove (test);
-		  
-		}
+	      rrmdir (start->name);
 	    }
+	  else
+	    {
+	      char test[10000];
+	      vremove (start->name);
+	      if (start->name)sprintf (test, "%s.dnd", start->name);vremove (test);
+	      if (start->name)sprintf (test, "%s.html",start->name);vremove (test);
 	      
+	    }
 	}
       
       b=start;
       start=start->next;
     }
-  if (!is_rootpid());
-  else if (trash)
-    {
-      printf_system_direct ("mv %s %s", get_tmp_4_tcoffee(),trash);
-    }
-  else
-    {
-      my_rmdir (get_tmp_4_tcoffee());
-    }
+  if (is_rootpid()){my_rmdir (get_tmp_4_tcoffee());}
   
   
   //Remove the lock
