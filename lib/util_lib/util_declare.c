@@ -1352,9 +1352,15 @@ double max_mem;
 double tot_mem;
 Memcontrol *memlast;
 
+
+void mem_profile (char *msg)
+{
+ 
+  if (getenv ("PROFILE_MEM_4_TCOFFEE"))print_mem_usage(stdout,msg);
+}
 FILE* print_mem_usage (FILE *fp, char *comment)
 {
-  fprintf ( fp, "# %s Memory Usage: Current= %.3f Mb, Max= %.3f Mb\n", comment,(float)((float)alloc_mem/(1024*1024)),(float)((float)tot_mem/(1024*1024)) );
+  fprintf ( fp, "# %s Memory Usage: Current= %.3f Mb, Max= %.3f Mb\n", (comment)?comment:"",(float)((float)alloc_mem/(1024*1024)),(float)((float)tot_mem/(1024*1024)) );
   return fp;
 }
 void set_max_mem (int m)

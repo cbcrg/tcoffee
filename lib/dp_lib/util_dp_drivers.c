@@ -971,6 +971,7 @@ char *seq_file2msa_file (char *file, char *seq, char *aln)
       if (!m)printf_exit ( EXIT_FAILURE,stderr, "\nERROR: %s is an unknown method [FATAL]", file);
       
       method=method_file2TC_method(m);
+      
       command=make_aln_command (method,"seq", "aln");
     }
   else
@@ -986,7 +987,7 @@ char *seq_file2msa_file (char *file, char *seq, char *aln)
     }
   
   chdir (dir);
-  printf_system ("cp %s seq", seq);
+  printf_system ("mv %s seq", seq);
   
   if ( duplicated==1)printf_system ("cp seq aln");
   else if (lcom)
@@ -998,15 +999,15 @@ char *seq_file2msa_file (char *file, char *seq, char *aln)
   
   if (check_file_exists ("aln"))
     {
-      printf_system ("cp aln %s",aln);
+      printf_system ("mv aln %s",aln);
+      printf_system ("mv seq %s",seq);
       chdir    (cdir);
-      printf_system_direct ("rm %s/*", dir);
+      //printf_system_direct ("rm %s/*", dir);
     }
   else
     {
       printf_exit (EXIT_FAILURE, stderr, "ERROR: Impossible to run %s [FATAL:%s]\n",file, PROGRAM);
     }
-  
   return aln;
 }
 

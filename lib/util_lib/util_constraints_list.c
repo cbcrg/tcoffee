@@ -7817,10 +7817,15 @@ char *** produce_method_file ( char *method)
 		vfclose (fp);
 	}
 	
-	for (a=0; a<n; a++)printf_file (list[a][1], "a", "METHOD %s\n", list[a][0]), 
-	  
+	//programatically add something to the configuraion file
+	//Used to cause the creation fo a large number of temp files
 	
-
+	for (a=0; a<n; a++)
+	  {
+	    if (strm (method, list[a][0]))
+	      printf_file (list[a][1], "a", "METHOD %s \n", list[a][0]); 
+	  }
+	
 	list[n]=NULL;
 	return list;
 }

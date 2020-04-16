@@ -7290,9 +7290,10 @@ Alignment * t_coffee_dpa (int argc, char **argv)
   //run the alignment
   fprintf (le, "!Compute MSA --- reg_method %s -- reg_nseq %d -- start\n", command, dpa_nseq);
   T=node2master (T, S, w);
+  
   alnfile=tree2msa4dpa(T, S, dpa_nseq, command);
   fprintf ( le, "!Compute MSA --- done\n");
-  
+ 
   printf_system ("mv %s %s", alnfile, outfile);
   display_output_filename (le, "MSA",get_string_variable ("output"),outfile, CHECK);
   if (homoplasy)display_output_filename (le, "HOMOPLASY","homoplasy",homoplasy, CHECK);
@@ -7312,7 +7313,7 @@ Alignment * t_coffee_dpa (int argc, char **argv)
   //terminate
   fprintf (le,"\n\n");
   print_command_line (le);
-  print_mem_usage (stdout, "REG memory Usage");
+  print_mem_usage (le, "REG memory Usage");
   print_program_information (le, NULL);
   fprintf ( le, "\n");
   myexit (EXIT_SUCCESS);

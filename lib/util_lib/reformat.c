@@ -1358,6 +1358,78 @@ Alignment * quick_read_aln_static ( char *file)
       return A;
     }
 }
+Alignment * quick_read_fasta_aln (Alignment *A, char *file)
+{
+  //Reads a canonical FASTA aln file- no checks
+  //Recycles Memory
+  
+  int l, a;
+  char c;
+  static char *buf;
+  static int maxbuf=100000;
+  int maxnseq=0;
+  FILE *fp;
+  int cs;
+  
+  int chunck=10000;
+
+  if ( !A)A=declare_aln2(1,1);
+  A->nseq=0;
+  if(!buf)buf=(char*)vcalloc (maxbuf+1, sizeof (char));
+ 
+  maxnseq=read_array_size_new(A->name);
+  
+  fp=vfopen(file, "r");
+  c=fgetc (fp);
+  
+  if ( c!='>'){vfclose(fp); return NULL;}
+  
+  ungetc (c, fp);
+  
+  while (fgets (buf,maxbuf,fp))
+    {
+      if (buf[0]=='>')
+	{
+	  
+	  A->nseq++;
+	  cs=A->nseq-1;
+	  if ( A->nseq>maxnseq)
+	    {
+	      maxnseq+=chunck;
+	      A->name=(char**)vrealloc (A->name, maxnseq*sizeof (char*));
+	      A->seq_al =(char**)vrealloc (A->seq_al, maxnseq*sizeof (char*));
+	    }
+	  if (A->seq_al[cs])A->seq_al[cs][0]=A->name[cs][0]='\0';
+	  
+	  a=0;
+	  while(buf[a]!='\n' && buf[a]!='\t' && buf[a]!=' ')a++;
+	  buf[a]='\0';
+	  A->name[cs]=vcat(A->name[cs],buf+1);
+	}
+      else
+	{
+	  int l=strlen (buf);
+	  if (buf[l-1]=='\n')buf[l-1]='\0';
+	  A->seq_al[cs]=vcat (A->seq_al[cs],buf);
+	}
+      buf[0]='\0';
+    }	
+  vfclose (fp);
+  if ( buf[0])
+    {
+      l=strlen (buf);
+      if (buf[l-1]=='\n')buf[l-1]='\0';
+      A->seq_al[cs]=vcat (A->seq_al[cs], buf);
+    }
+  
+  free_char (A->aln_comment, -1);
+  A->aln_comment=declare_char (A->nseq,1);
+  A->declared_len=A->len_aln=strlen (A->seq_al[0]);
+  A->max_n_seq=A->nseq;
+    
+  return A;
+} 
+
 Alignment * quick_read_aln ( char *file)
 {
   //only reads FASTA, Clustal, MSF, and Phylips

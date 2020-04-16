@@ -8679,6 +8679,9 @@ int file_is_empty (char *fname)
   if (s.st_size)return 0;
   else return 1;
   }
+
+
+
 int file_exists (char *path, char *fname)
 {
   struct stat s;
@@ -10136,37 +10139,38 @@ void clean_exit ()
   char *tmp;
   
   Tmpname *start;
-  int debug=0;
-  static char *scratch=NULL;
-  
-  if (!scratch && getenv ("TMP2SCRATCH"))scratch=getenv ("TMP2SCRATCH");
+  int debug=atoigetenv ("DEBUG_TMP_FILE");;
+  static char *trash=NULL;
+  static int set_trash;
+ 
+  if (!set_trash)
+    {
+      if (getenv ("TRASH_4_TCOFFEE"))trash=getenv ("TRASH_4_TCOFFEE");
+      else trash=csprintf (trash, "%s/.Trash", getenv("HOME"));
+
+      if ( strm (trash, "NO") || strm (trash, "no"))trash=NULL;
+      else if (!isdir(trash))
+	{
+	  add_warning (stderr, "Cannot use Trash path: %s -- set the path using TRASH_4_TCOFFEE=[valid/path] -- will clean tmp files", trash);
+	  trash=NULL;
+	}
+      
+      set_trash=1;
+    }
+ 
   clean_exit_started=1;//prevent new locks
   start=tmpname;
-  //1-start killing all the children
-  
-
-  //3-update error lock if needed
+ 
+  //update error lock if needed
   if (has_error_lock())//Update error lock
     {
       lock (getpid(), LERROR, LSET, "%d -- STACK: %d -> %d -- %s %s (%s)\n", getpid(), getppid(), getpid(), PROGRAM, VERSION, BUILD_INFO);
       lock (getpid(), LERROR, LSET, "%d -- COM: %s\n",getpid(),in_cl );
-
-      //
     }
-
   
+  //Make a dump if needed
   if (is_rootpid())
-    {
-      if (scratch)
-	{
-	  fprintf (get_stdout1(NULL), "Your tmp files have been moved into [%s] --- Use a cron job to delete them\n", scratch);
-	}
-      else 
-	{
-	  //fprintf (get_stdout1(NULL), "Deleting tmp files --- Set TMP2SCRATCH to move them to SCRATCH instead\n");
-	  ;
-	}
-      
+    {      
       kill_child_pid(getpid());
       if (has_error_lock())
 	{
@@ -10208,78 +10212,51 @@ void clean_exit ()
 
 
   
-
-  //Remove all temporary files
-  debug=(atoigetenv ("DEBUG_TMP_FILE"));
-  scratch=getenv ("TMP2SCRATCH");
-  
-  if      (istmp(get_tmp_4_tcoffee()))
+  //Remove all temporary files: one by one (slow) OR mv to .Trash (fast)
+  if (trash)
     {
-      return;
-    }
-  else if (scratch && !is_rootpid());
-  else if (scratch && is_rootpid())
-    {
-      printf_system_direct ("mv %s %s", get_tmp_4_tcoffee(), scratch);
-      return;
-    }
-  
-  
-  while ( start && start->name)
-    {
-      if (scratch)
+      if (is_rootpid())
 	{
-	  struct stat s;
-	  if (stat(start->name,& s)!=-1)
-	    printf_system_direct ("mv %s %s", start->name,  scratch);
+	  fprintf (get_stdout1(NULL), "!Your tmp files have been moved into [%s] --- Use a cron job to delete them or setenv TRASH_4_TCOFFEE=NO\n",trash);
+	  printf_system_direct ("mv %s %s", get_tmp_4_tcoffee(),trash);
 	}
-      else if (debug)
-	{
-	   /*
-	  if (isdir(start->name))
-	    {fprintf ( stderr, "DEBUG_TMP_FILE SET : Dir  %s not removed (%d)\n", start->name, getpid());}
-	  else
-	    {fprintf ( stderr, "DEBUG_TMP_FILE SET : File %s not removed (%d)\n", start->name, getpid());}
-	   */
-	}
-      else 
-	{
-	  if ( start && start->name)
-	    {
-	      if (isdir(start->name))
-		{
-		  rrmdir (start->name);
-		}
-	      else
-		{
-		  char test[10000];
-		  vremove (start->name);
-		  if (start->name)sprintf (test, "%s.dnd", start->name);vremove (test);
-		  if (start->name)sprintf (test, "%s.html",start->name);vremove (test);
-		  
-		}
-	    }
-	      
-	}
-      
-      b=start;
-      start=start->next;
-    }
-  if (debug);
-  else if (!is_rootpid());
-  else if (scratch)
-    {
-      printf_system_direct ("mv %s %s", get_tmp_4_tcoffee(), scratch);
     }
   else
     {
+      
+      while ( start && start->name)
+	{
+	  if (debug)
+	    {
+	      if (isdir(start->name))
+		{fprintf ( stderr, "DEBUG_TMP_FILE SET : Dir  %s not removed (%d)\n", start->name, getpid());}
+	      else
+		{fprintf ( stderr, "DEBUG_TMP_FILE SET : File %s not removed (%d)\n", start->name, getpid());}
+	    }
+	  else 
+	    {
+	      if ( start && start->name)
+		{
+		  if (isdir(start->name))
+		    {
+		      rrmdir (start->name);
+		    }
+		  else
+		    {
+		      char test[10000];
+		      vremove (start->name);
+		      if (start->name)sprintf (test, "%s.dnd", start->name);vremove (test);
+		      if (start->name)sprintf (test, "%s.html",start->name);vremove (test);
+		    }
+		}
+	      
+	    }
+	  
+	  b=start;
+	  start=start->next;
+	}
       my_rmdir (get_tmp_4_tcoffee());
     }
-  
-  
-  //Remove the lock
-  //lock (getpid(), LLOCK, LRELEASE,NULL); Now keep the lock unless it is a parent process
-
   //UNIQUE TERMINATION FOR EVERYBODY!!!!!!
   
   return;

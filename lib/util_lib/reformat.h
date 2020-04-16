@@ -37,8 +37,10 @@ Sequence_data_struc *read_data_structure ( char *in_format, char *in_file,Action
 Alignment * read_fasta_aln_noceck ( char *name, Alignment *A);
 
 Alignment * main_read_aln ( char *name, Alignment *A);
+
 Sequence  * quick_read_seq ( char *file);
 Alignment * quick_read_aln( char *name);//reads onléy fasta and clustalw
+Alignment * quick_read_fasta_aln( Alignment *A,char *name);//reads onléy fasta and clustalw
 Alignment * quick_read_aln_static( char *name);//reads onléy fasta and clustalw
 int read_nameseq (char *file,char ***nam, char ***seq, char ***com);
 

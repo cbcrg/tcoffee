@@ -8238,12 +8238,18 @@ char* tree2msa4dpa (NT_node T, Sequence *S, int N, char *method)
   KT_node K =tree2ktree  (T, S, N);
   KT_node*KL=(KT_node*)vcalloc (K->tot, sizeof (KT_node));
   n=ktree2klist(K,KL,&n);
+  
+  
 
+ 
   if (getenv ("DUMP_SEQ_BUCKETS") ||getenv ("DUMP_SEQ_BUCKETS_ONLY"))
     {
       ktree2seq_bucketsF(K, "seqdump.");
       if (getenv ("DUMP_SEQ_BUCKETS_ONLY"))exit (0);
     }
+
+  //This is where the slave MSAs are computed, all at once.
+ 
   kseq2kmsa(KL,n, method);
   
   if (getenv ("DUMP_ALN_BUCKETS") ||getenv ("DUMP_ALN_BUCKETS_ONLY"))
@@ -8254,8 +8260,9 @@ char* tree2msa4dpa (NT_node T, Sequence *S, int N, char *method)
   else if ( getenv("NOREC_DPA"))
     outname=kmsa2msa_norec  (S,KL,n);
   else
-    outname=kmsa2msa (K,S,NULL,NULL); 
-    
+    {
+      outname=kmsa2msa (K,S,NULL,NULL); 
+    }
   declare_aln_node (-1);//Free all the nodes declared
   
   return outname;
@@ -8405,12 +8412,8 @@ char *kmsa2msa (KT_node K,Sequence *S, ALNcol***S2,ALNcol*start)
     {
       S2=(ALNcol***)vcalloc (S->nseq, sizeof (ALNcol**));
       for (s=0; s<S->nseq; s++)S2[s]=(ALNcol**)vcalloc (S->len[s], sizeof (ALNcol*));
-      //A=quick_read_aln (K->msaF); -- For some reason the efficient i/o function does not work
-      
-      A=main_read_aln (K->msaF,NULL);
+      A=quick_read_fasta_aln (A,K->msaF);
       start=msa2graph(A,S, S2,start, -1);
-      free_aln (A);
-      
       out=vtmpnam (NULL);
     }
   
@@ -8418,15 +8421,11 @@ char *kmsa2msa (KT_node K,Sequence *S, ALNcol***S2,ALNcol*start)
   for (a=0; a<K->nc; a++)
     {
       int i =name_is_in_hlist2((K->child[a])->name,S->name, S->nseq);
-      
-      //A=quick_read_aln ((K->child[a])->msaF); -- For some reason the efficient i/o function does not work
-      A=main_read_aln    ((K->child[a])->msaF,NULL);
+      A=quick_read_fasta_aln (A,K->child[a]->msaF);
       start=msa2graph (A,S, S2,start,i);
-      free_aln (A);
-      
       kmsa2msa (K->child[a], S, S2,start);
     }
-  
+  free_aln (A);
   
   if (!out) return out;
   output=get_string_variable ("output");
@@ -8749,13 +8748,6 @@ ALNcol * msa2graph (Alignment *A, Sequence *S, ALNcol***S2,ALNcol*msa,int seq)
   vfree (gapcount); vfree(rescount);
   return msa;
 }  
-
-
-
-      
-      
-
-
 
 int ktree2aln_bucketsF(KT_node K,char *fname)
 {
@@ -9147,7 +9139,7 @@ int kseq2kmsa_thread   (KT_node *K, int n, char *method)
     }
   //deploy the jobs
   a=0;
-
+  
   while (KL[a]) 
     {
       nt++;

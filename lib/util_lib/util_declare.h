@@ -75,7 +75,7 @@ Structure       * extend_structure ( Structure *S);
 Weights* declare_weights ( int nseq);
 Weights* duplicate_weights (Weights *W);
 Weights* free_weights ( Weights* W);
-
+void mem_profile (char *msg);
 FILE* print_mem_usage (FILE *fp, char *comment);
 void set_max_mem (int m);
 int verify_memory (int s);
