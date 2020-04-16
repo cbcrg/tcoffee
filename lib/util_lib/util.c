@@ -10157,7 +10157,7 @@ void clean_exit ()
       
       set_trash=1;
     }
-  trash=NULL;
+  return;
   clean_exit_started=1;//prevent new locks
   start=tmpname;
  
