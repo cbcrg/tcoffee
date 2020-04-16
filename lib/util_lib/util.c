@@ -10240,7 +10240,14 @@ void clean_exit ()
   
 
   //Remove all temporary files
-    
+  if (trash)
+    {
+      if (is_rootpid()) printf_system_direct ("mv %s %s", get_tmp_4_tcoffee(), trash);
+      return;
+    }
+  
+      
+      /*
   if      (istmp(get_tmp_4_tcoffee()))
     {
       return;
@@ -10251,7 +10258,7 @@ void clean_exit ()
       printf_system_direct ("mv %s %s", get_tmp_4_tcoffee(), trash);
       return;
     }
-  
+      */
   
   while ( start && start->name)
     {
