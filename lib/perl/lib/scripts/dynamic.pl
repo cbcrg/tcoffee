@@ -15,11 +15,13 @@ my %method;
 my $method2use;
 my $treeF;
 my $tree=$ENV{"child_tree_4_TCOFFEE"};
+my $thread=$ENV{"child_thread_4_TCOFFEE"};
 my $dynamic=$ENV{dynamic_config_4_TCOFFEE};
 my $blast=$ENV{blast_server_4_TCOFFEE};
 my $protein_db=$ENV{protein_db_4_TCOFFEE};
 my $pdb_db=$ENV{pdb_db_4_TCOFFEE};
 my $cache=$ENV{cache_4_TCOFFEE};
+my $tcarg=$ENV{tcarg_4_TCOFFEE};
 my $template_file=$ENV{template_file_4_TCOFFEE};
 my $clean;
 my $treeFlag;
@@ -34,7 +36,9 @@ my $tmpdir = File::Temp->newdir();
 my $stderrF="$tmpdir/stderr";
 $QUIET="2>$stderrF";
 my $cdir=getcwd();
-
+my $threadFlag4tc;
+my $threadFlag4famsa;
+my $threadFlag;
 
 
 
@@ -52,9 +56,13 @@ for ($a=0; $a<=$#ARGV; $a++)
     elsif ($ARGV[$a] eq "-verbose"){$VERBOSE=1; $QUIET="";} 
     elsif ($ARGV[$a] eq "-clean"){$clean=1;}
     elsif ($ARGV[$a] eq "-template_file"){$template_file=$ARGV[++$a]}
- 
-    
+    elsif ($ARGV[$a] eq "-thread"){$thread=$ARGV[++$a]}
+    elsif ($ARGV[$a] eq "-tcarg") {$tcarg=file2string($ARGV[++$a]);}
   }
+
+$threadFlag=($thread)?"--thread $thread ":"--thread 1 ";
+$threadFlag4tc=($thread)?"-thread $thread ":"-thread 1 ";
+$threadFlag4famsa=($thread)?"-t $thread ":"-t 1 ";
 
 if ($tree eq "list")
   {
@@ -180,12 +188,12 @@ if ($clean)
     $pdb_db=file2abs($pdb_db);
     chdir ($tmpdir);
   }
-	
+
 if ($method2use eq "tcoffee_msa" || $method2use eq "tcoffee"|| $method2use eq "t_coffee" )
   {
     
     if ($treeF){$treeFlag="-usetree $treeF "}
-    my_system ("t_coffee -seq $infile -outfile $outfile -output fasta_aln $treeFlag >/dev/null  $QUIET");    
+    my_system ("t_coffee -seq $infile -outfile $outfile -output fasta_aln $treeFlag $threadFlag4tc $tcarg>/dev/null  $QUIET");    
   }
 elsif ($method2use eq "psicoffee_msa" || $method2use eq "psicoffee")
   {
@@ -193,7 +201,7 @@ elsif ($method2use eq "psicoffee_msa" || $method2use eq "psicoffee")
     if ($cache){$cacheFlag="-cache=$cache";}
     if ($treeF){$treeFlag="-usetree $treeF "}
     if ($blast eq "LOCAL"){$blastFlag="-blast_server=LOCAL -protein_db=$protein_db";}
-    my_system ("t_coffee -mode psicoffee -in $infile -outfile $outfile -output fasta_aln  $cacheFlag $blastFlag>/dev/null $QUIET");
+    my_system ("t_coffee -mode psicoffee -in $infile -outfile $outfile -output fasta_aln  $cacheFlag $blastFlag $threadFlag4tc>/dev/null $QUIET");
   }
 elsif  ($method2use eq "accurate_msa" || $method2use eq "accurate")
   {
@@ -201,7 +209,7 @@ elsif  ($method2use eq "accurate_msa" || $method2use eq "accurate")
     if ($cache){$cacheFlag="-cache=$cache";}
     if ($treeF){$treeFlag="-usetree $treeF "}
     if ($blast eq "LOCAL"){$blastFlag="-blast_server=LOCAL -protein_db=$protein_db -pdb_db=$pdb_db";}
-    my_system ("t_coffee -mode accurate -in $infile -outfile $outfile -output fasta_aln  $cacheFlag $blastFlag>/dev/null  $QUIET");
+    my_system ("t_coffee -mode accurate -in $infile -outfile $outfile -output fasta_aln  $cacheFlag $blastFlag $threadFlag4tc>/dev/null  $QUIET");
   }
 elsif  ($method2use eq "3dcoffee_msa"|| $method2use eq "3dcoffee")
   {
@@ -209,7 +217,15 @@ elsif  ($method2use eq "3dcoffee_msa"|| $method2use eq "3dcoffee")
     if ($cache){$cacheFlag="-cache=$cache";}
     if ($treeF){$treeFlag="-usetree $treeF "}
     if ($blast eq "LOCAL"){$blastFlag="-blast_server=LOCAL  -pdb_db=$pdb_db";}
-    my_system ("t_coffee -method sap_pair TMalign_pair -template_file $template_file  -in $infile -outfile $outfile -output fasta_aln  $cacheFlag $blastFlag>/dev/null $QUIET");
+    my_system ("t_coffee -method sap_pair TMalign_pair -template_file $template_file  -in $infile -outfile $outfile -output fasta_aln  $cacheFlag $blastFlag $threadFlag4tc>/dev/null $QUIET");
+  }
+elsif  ($method2use eq "3dmcoffee_msa"|| $method2use eq "3dmcoffee")
+  {
+    my $cacheFlag;
+    if ($cache){$cacheFlag="-cache=$cache";}
+    if ($treeF){$treeFlag="-usetree $treeF "}
+    if ($blast eq "LOCAL"){$blastFlag="-blast_server=LOCAL  -pdb_db=$pdb_db";}
+    my_system ("t_coffee -method mustang_pair sap_pair TMalign_pair -template_file $template_file  -in $infile -outfile $outfile -output fasta_aln  $cacheFlag $blastFlag $threadFlag4tc>/dev/null $QUIET");
   }
 
 elsif  ($method2use eq "expresso_msa" || $method2use eq "expresso")
@@ -218,38 +234,39 @@ elsif  ($method2use eq "expresso_msa" || $method2use eq "expresso")
     if ($cache){$cacheFlag="-cache=$cache";}
     if ($treeF){$treeFlag="-usetree $treeF "}
     if ($blast eq "LOCAL"){$blastFlag="-blast_server=LOCAL  -pdb_db=$pdb_db";}
-    my_system ("t_coffee -mode expresso -in $infile -outfile $outfile -output fasta_aln  $cacheFlag $blastFlag>/dev/null $QUIET");
+    my_system ("t_coffee -mode expresso -in $infile -outfile $outfile -output fasta_aln  $cacheFlag $blastFlag $threadFlag4tc>/dev/null $QUIET");
   }
 
 elsif ($method2use eq "clustalo_msa" || $method2use eq "clustalo")
   {
-    if ($treeF){$treeFlag="--guidetree-in=$treeF "}
-    my_system ("clustalo -i $infile $treeFlag -o $outfile  --force --threads=1 $QUIET");
+    if ($treeF) {$treeFlag="--guidetree-in=$treeF "}
+    
+    my_system ("clustalo -i $infile $treeFlag -o $outfile  --force $threadFlag $QUIET");
     }
 elsif ($method2use eq "mafft_msa" || $method2use eq "mafft")
   {
     if ($treeF){$treeFlag="--treein $treeF ";}
-    my_system ("mafft --anysymbol $treeFlag $infile > $outfile $QUIET");
+    my_system ("mafft --anysymbol $threadFlag $treeFlag $infile > $outfile $QUIET");
   }
 elsif ($method2use eq "mafftginsi_msa" || $method2use eq "mafft-ginsi")
   {
     if ($treeF){$treeFlag="--treein $treeF ";}
-    my_system ("mafft-ginsi --anysymbol $treeFlag $infile > $outfile $QUIET");
+    my_system ("mafft-ginsi $threadFlag --anysymbol $treeFlag $infile > $outfile $QUIET");
   }
 elsif ($method2use eq "mafftfftns1_msa" || $method2use eq "mafft-fftnsi")
   {
     if ($treeF){$treeFlag="--treein $treeF ";}
-    my_system ("mafft-fftns1 --anysymbol --retree1 $treeFlag $infile > $outfile $QUIET");
+    my_system ("mafft-fftns1 $threadFlag --anysymbol --retree1 $treeFlag $infile > $outfile $QUIET");
   }
 elsif ($method2use =~/mafft/)
    {
      if ($treeF){$treeFlag="--treein $treeF ";}
-     my_system ("$method2use --anysymbol $treeFlag $infile > $outfile $QUIET");
+     my_system ("$method2use $threadFlag --anysymbol $treeFlag $infile > $outfile $QUIET");
     }
 elsif ($method2use eq "famsa_msa")
   {
     if ($treeF){$treeFlag="-gt import $treeF "}
-    my_system ("famsa -t 1 $infile $outfile >/dev/null $QUIET");
+    my_system ("famsa $threadFlag4famsa $infile $outfile >/dev/null $QUIET");
   }
 
 else
@@ -258,7 +275,7 @@ else
       {
 	printf (STDERR "WARNING: Method $method2use CANNOT use pre-sepecified guide tree [dynamic.pl]\n");
       }
-    my_system ("t_coffee -in $infile -method $method2use -outfile $outfile -output fasta_aln -quiet $QUIET");
+    my_system ("t_coffee -in $infile -method $method2use -outfile $outfile -output fasta_aln $tcarg -quiet $QUIET");
   }
 if ($clean)
   {
@@ -327,3 +344,17 @@ sub file2abs
       if (!$f || $f=~/^\//){return $f;}
       return "$cdir/$f";
     }
+sub file2string 
+    {
+      my ($f)=@_;
+      my $s;
+
+      open (F, $f) || return 0;
+      while (<F>)
+	{
+	  $s.=$_;
+	}
+      close (F);
+      chomp($s);
+      return $s;
+    }   

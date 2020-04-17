@@ -6312,7 +6312,7 @@ char *** produce_method_file ( char *method)
 
     //MAFFT runs through dynamic.pl
     //Guide Tree mode can be selected
-    sprintf (list[n][0], "mafftfftn1_msa");
+    sprintf (list[n][0], "mafftfftns1_msa");
     sprintf (list[n][1], "%s", vtmpnam(NULL));
     n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
     fprintf ( fp, "DOC: dynamic [%s]\n", "runs mafft from dynamic.pl");

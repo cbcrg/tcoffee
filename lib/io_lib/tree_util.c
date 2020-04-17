@@ -9060,27 +9060,11 @@ int kseq2kmsa   (KT_node *K, int n, char *method)
     
   if ( strstr (method, "NF_"))
     return kseq2kmsa_nextflow(K, n, method);
-  else if (nproc==-1) return  kseq2kmsa_serial (K, n, method);
-  else return kseq2kmsa_thread (K, n, method);
+  
+  return kseq2kmsa_thread (K, n, method);
 }
   
-int kseq2kmsa_serial   (KT_node *K, int n, char *method)
-{
-  int a;
 
-  for (a=0; a<n; a++)
-    {
-      if (K[a]->nseq==1)
-	{
-	  printf_system ("cp %s %s", K[a]->seqF, K[a]->msaF);
-	}
-      else
-	{
-	  seq_file2msa_file (method,K[a]->seqF, K[a]->msaF);
-	}
-    }
-  return 1;
-}
 int kseq2kmsa_nextflow   (KT_node *K, int n, char *met)
 {
   int a;

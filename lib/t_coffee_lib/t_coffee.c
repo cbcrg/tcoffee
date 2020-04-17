@@ -7085,9 +7085,13 @@ Alignment * t_coffee_dpa (int argc, char **argv)
 	       myexit (fprintf_error (stderr, "regressive mode only supports fasta_aln and fastaz_aln with the -output flag [FATAL:%s]", argv[a],PROGRAM));
 	    }
 	}
-      else if (strm (argv[a],"-dpa_tree") ||strm (argv[a],"-reg_tree") )
+      else if (strm (argv[a],"-tree") || strm (argv[a],"-dpa_tree") ||strm (argv[a],"-reg_tree") )
 	{
 	  dpa_tree=argv[++a];
+	}
+      else if (strm (argv[a],"-child_tree"))
+	{
+	  cputenv ("child_tree_4_TCOFFEE=%s", argv[++a]);
 	}
       else if ( strm(argv[a], "-reg_chaindnd_mode"))
 	{
@@ -7115,15 +7119,16 @@ Alignment * t_coffee_dpa (int argc, char **argv)
 	  dpa_weight=argv[++a];
 	}
 
-      else if (strm (argv[a],"-dpa_thread") || strm (argv[a],"-dpa_n_core") || strm (argv[a],"-reg_thread") || strm (argv[a],"-reg_n_core"))
+      else if (strm (argv[a],"-thread") || strm (argv[a],"-dpa_thread") || strm (argv[a],"-dpa_n_core") || strm (argv[a],"-reg_thread") || strm (argv[a],"-reg_n_core"))
 	{
 	  n_core=atoi(argv[++a]);
 	}
-      else if (strm (argv[a],"-dpa")|| strm (argv[a],"-reg"));
-      else if (strm (argv[a],"-child_tree"))
+       else if (strm (argv[a],"-child_thread"))
 	{
-	  cputenv ("child_tree_4_TCOFFEE=%s", argv[++a]);
+	  cputenv ("child_thread_4_TCOFFEE=%d", atoi(argv[++a]));
 	}
+      else if (strm (argv[a],"-dpa")|| strm (argv[a],"-reg"));
+      
       else if (strm (argv[a],"-usetree"))
 	{
 	  usetree=argv[++a];
@@ -7140,7 +7145,7 @@ Alignment * t_coffee_dpa (int argc, char **argv)
 	{
 	  outfile=argv[++a];
 	}
-      else if (strm (argv[a],"-dpa_nseq") || strm (argv[a], "-reg_nseq"))
+      else if (strm (argv[a], "-nseq") || strm (argv[a],"-dpa_nseq") || strm (argv[a], "-reg_nseq") )
 	{
 	  dpa_nseq=atoi(argv[++a]);
 	}
@@ -7148,7 +7153,7 @@ Alignment * t_coffee_dpa (int argc, char **argv)
 	{
 	  reg_dynamic=atoi(argv[++a]);
 	}
-      else if ( strm (argv[a], "-dpa_method") || strm (argv[a], "-reg_method")  )
+      else if (strm (argv[a], "-method") || strm (argv[a], "-dpa_method") || strm (argv[a], "-reg_method"))
 	{
 	  dpa_aligner=argv[++a];
 	}
@@ -7156,10 +7161,7 @@ Alignment * t_coffee_dpa (int argc, char **argv)
 	{
 	  myexit (fprintf_error (stderr, "%s is not supported when using -dpa [FATAL:%s]", argv[a],PROGRAM));
 	}
-      else if (strstr (argv[a], "dpa"))
-	{
-	   myexit (fprintf_error (stderr, "%s is an unknown dpa flag [FATAL:%s]", argv[a],PROGRAM));
-	}
+     
       else if ( strstr (argv[a], "reg_homoplasy"))
 	{
 	  homoplasy=(char*)vcalloc ( 1000, sizeof (char));
@@ -7185,14 +7187,28 @@ Alignment * t_coffee_dpa (int argc, char **argv)
 	{
 	  cputenv ("dynamic_config_4_TCOFFEE=%s", fname2abs(argv[++a]));
 	}
+      else if ( strm (argv[a], "-tcarg"))
+	{
+	  char *tcarg=NULL;
+	  a++;
+	  while (!strm (argv[a], "-tcarg_end") && a<argc)
+	    {
+	      tcarg=vcat(tcarg,argv[a]);
+	      tcarg=vcat(tcarg, " ");
+	      a++;
+	    }
+	  cputenv ("argc_4_TCOFFEE=%s", tcarg);
+	}
+      
       else if (strm (argv[a],"-template_file"))
 	{
 	  
 	  cputenv ("template_file_4_TCOFFEE=%s", template_file2abs_template_file(argv[++a]));
 	}
-      else
-	
-	command=strcatf (command,"%s ", argv[a]);
+      else if (strstr (argv[a], "dpa"))
+	{
+	   myexit (fprintf_error (stderr, "%s is an unknown dpa flag [FATAL:%s]", argv[a],PROGRAM));
+	}
     }
 
 
