@@ -7060,7 +7060,6 @@ Alignment * t_coffee_dpa (int argc, char **argv)
   
   //default values
   set_int_variable ("swlN",50);
-
   set_string_variable ("output", "fasta_aln");
   set_int_variable    ("reg_dnd_nseq",100);
   set_int_variable    ("reg_dnd_depth",3);
@@ -7205,7 +7204,7 @@ Alignment * t_coffee_dpa (int argc, char **argv)
 	  
 	  cputenv ("template_file_4_TCOFFEE=%s", template_file2abs_template_file(argv[++a]));
 	}
-      else if (strstr (argv[a], "dpa"))
+      else 
 	{
 	   myexit (fprintf_error (stderr, "%s is an unknown dpa flag [FATAL:%s]", argv[a],PROGRAM));
 	}

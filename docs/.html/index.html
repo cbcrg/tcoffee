@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>T-Coffee Version_13.41.49.74a4d8f documentation</title>
+  <title>T-Coffee Version_13.41.50.f9cefc8 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                Version_13.41.49.74a4d8f
+                Version_13.41.50.f9cefc8
               </div>
             
           
@@ -717,7 +717,7 @@
     
       <li><a href="index.html#document-index">Docs</a> &raquo;</li>
         
-      <li>T-Coffee Version_13.41.49.74a4d8f documentation</li>
+      <li>T-Coffee Version_13.41.50.f9cefc8 documentation</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -1108,7 +1108,7 @@ blastpgp_client http://www.ebi.ac.uk/Tools/webservices/services/blastpgp
 <div class="section" id="fast-and-accurate">
 <h4>Fast and accurate<a class="headerlink" href="#fast-and-accurate" title="Permalink to this headline">¶</a></h4>
 <p>In the following exemple, the regressive alignment is used to align the sequences in FASTA format. The tree is estimated using the mbed method of Clustal Omega (-reg_tree=mbed), the size of the groups is 100 (-reg_nseq=100) and the method used to align the groups is Clustal Omega:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$$: t_coffee -reg -seq proteases_large.fasta -reg_nseq 100 -reg_tree mbed -reg_method clustalo_msa -outfile proteases_large.aln -outtree proteases_large.mbed
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$$: t_coffee -reg -seq proteases_large.fasta -nseq 100 -tree mbed -method clustalo_msa -outfile proteases_large.aln -outtree proteases_large.mbed
 </pre></div>
 </div>
 <p>This mode is the default mode and is expected to deliver fast and reasonnably accurate alignments</p>
@@ -1116,14 +1116,14 @@ blastpgp_client http://www.ebi.ac.uk/Tools/webservices/services/blastpgp
 <div class="section" id="slower-and-more-accurate">
 <h4>Slower and more accurate<a class="headerlink" href="#slower-and-more-accurate" title="Permalink to this headline">¶</a></h4>
 <p>This mode is expected to be the most accurate and combines the ginsi mode of MAFFT which is very accurate with the mbed trees of Clustal Omega. Note that it is the regressive deployment that allows ginsi to be used on datasets of unlimited size.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$$: t_coffee -reg -seq proteases_large.fasta -reg_nseq 100 -reg_tree mbed -reg_method mafftginsi_msa -outfile proteases_large.aln -outtree proteases_large.mbed
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$$: t_coffee -reg -seq proteases_large.fasta -nseq 100 -tree mbed -method mafftginsi_msa -outfile proteases_large.aln -outtree proteases_large.mbed
 </pre></div>
 </div>
 </div>
 <div class="section" id="very-fast">
 <h4>Very Fast<a class="headerlink" href="#very-fast" title="Permalink to this headline">¶</a></h4>
 <p>This mode is expected to be the fastest currently available. Its accuracy is comparable to that of MAFFT-fftnsi running on its own</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$$: t_coffee -reg -seq proteases_large.fasta -reg_nseq 100 -reg_tree parttree -reg_method mafftfftnsi_msa -outfile proteases_large.aln -outtree proteases_large.parttree
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$$: t_coffee -reg -seq proteases_large.fasta -nseq 100 -tree parttree -reg_method mafftfftnsi_msa -outfile proteases_large.aln -outtree proteases_large.parttree
 </pre></div>
 </div>
 </div>
@@ -1135,7 +1135,7 @@ blastpgp_client http://www.ebi.ac.uk/Tools/webservices/services/blastpgp
 </ul>
 <p>This flag is mandatory to provide the sequences. The sequences must be in FASTA and must not contain any sequences. Because these sequences are meant to be aligned with third party aligners that may not support the IUPAC extended alphabet, it is advisable to avoid non standard amino-acids symbols. It is also not advisable to provide gapped sequences.</p>
 <ul class="simple">
-<li><p><strong>-reg_tree</strong> (usage:<strong>-reg_tree=&lt;method or Newick File&gt;</strong>, default: <strong>mbed</strong> )</p></li>
+<li><p><strong>-tree</strong> (usage:<strong>-tree=&lt;method or Newick File&gt;</strong>, default: <strong>mbed</strong> )</p></li>
 </ul>
 <p>This flag defines which method will be used to estimate the tree. The following methods are available</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Tree</span> <span class="n">Computation</span> <span class="n">Method</span><span class="p">:</span>
@@ -1161,27 +1161,31 @@ blastpgp_client http://www.ebi.ac.uk/Tools/webservices/services/blastpgp
 <ul class="simple">
 <li><p><strong>-child_tree</strong> (usage:<strong>-chile_tree=&lt;tree_method&gt;</strong> , default:None)</p></li>
 </ul>
-<p>This flag defines which method will be used to estimate the tree. Note that by default, each ref_method will juse its own default tree mode.</p>
+<p>This flag defines which method will be used to estimate the tree. Note that by default, each &lt;method&gt; will use its own default tree mode.</p>
 <ul class="simple">
 <li><p><strong>-outfile</strong> (usage:<strong>-outfile=&lt;filename&gt;</strong> , default: &lt;infile&gt;.aln)</p></li>
 </ul>
 <p>This flag defines the name of the output file containing the multiple sequence alignment</p>
 <ul class="simple">
-<li><p><strong>-reg_nseq</strong> (usage:<strong>-reg_nseq=N</strong> , default: 1000 for datasets larger than 10,000 and Nseq/10 for smaller datasets )</p></li>
+<li><p><strong>-nseq</strong> (usage:<strong>-nseq=N</strong> , default: 1000 for datasets larger than 10,000 and Nseq/10 for smaller datasets )</p></li>
 </ul>
 <p>Sets the maximum size of the subsequence alignments. The recommanded value is 1000. With slow/accurate aligners that do not scale in a linear way, this parameter can have an importnat impact on CPU requirement with small values resulting in faster computation.</p>
 <ul class="simple">
-<li><p><strong>-dynamic</strong> (usage:<strong>-dynamic=&lt;Integer&gt;</strong> , default: 1)</p></li>
-</ul>
-<p>This flag defines the factor by which every Child reg_n is increased while going from root to leaf. By default all children contain the same maximum number of sequences, if dynamic&gt;1, this number is set to reg_nseq*(dynamic^NGeneration from root). If dynamic &lt;1, this number is set to: reg_nseq/(-dynamic^NGeneration from root). <em>Note that this mode has not bee validated</em></p>
-<ul class="simple">
-<li><p><strong>-reg_method</strong> (usage:<strong>-reg_tree=&lt;method or configuration file&gt;</strong> , default: clustalo_msa)</p></li>
+<li><p><strong>-method</strong> (usage:<strong>-method=&lt;method or configuration file&gt;</strong> , default: clustalo_msa)</p></li>
 </ul>
 <p>This flag defines which method will be used to estimate the child MSA. In order to know which methods are available.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$$: t_coffee
 </pre></div>
 </div>
 <p>All methods the multiple sequence alignment methods xxx_msa are supported.</p>
+<ul class="simple">
+<li><p><strong>-thread</strong> (usage:<a href="#id1"><span class="problematic" id="id2">**</span></a>-thread=&lt;N&gt; , default: 1, 0 causes all available procs to be used)</p></li>
+</ul>
+<p>This flag defines how many procs will be used. Children MSAs are computed in parrallel</p>
+<ul class="simple">
+<li><p><strong>-dynamic</strong> (usage:<strong>-dynamic=&lt;Integer&gt;</strong> , default: 1)</p></li>
+</ul>
+<p>This flag defines the factor by which every Child reg_n is increased while going from root to leaf. By default all children contain the same maximum number of sequences, if dynamic&gt;1, this number is set to reg_nseq*(dynamic^NGeneration from root). If dynamic &lt;1, this number is set to: reg_nseq/(-dynamic^NGeneration from root). <em>Note that this mode has not bee validated</em></p>
 <ul class="simple">
 <li><p><strong>-dynamic_config</strong> (usage:<strong>-dynamic_config=&lt;file&gt;</strong> , default: none)</p></li>
 </ul>
@@ -1194,11 +1198,15 @@ blastpgp_client http://www.ebi.ac.uk/Tools/webservices/services/blastpgp
 <span class="n">famsa_msa</span>     <span class="mi">100000000</span>
 </pre></div>
 </div>
-<p>All methods (<a href="#id1"><span class="problematic" id="id2">*</span></a>_msa) available in t_coffee are supported.</p>
+<p>All methods (<a href="#id3"><span class="problematic" id="id4">*</span></a>_msa) available in t_coffee are supported.</p>
 <ul class="simple">
-<li><p><strong>-reg_thread</strong> (usage:<strong>-reg_nseq=N</strong> , default: 0 to use all available threads)</p></li>
+<li><p><strong>-thread</strong> (usage:<strong>-nseq=N</strong> , default: 1, 0 to use all available threads)</p></li>
 </ul>
 <p>Sets the maximum number of threads to be used by one instance. Note that if you have scrited your own aligner using a configuration file, you should make sure it does not run in a multi-threaded version as well.</p>
+<ul class="simple">
+<li><p><strong>-child_thread</strong> (usage:<a href="#id5"><span class="problematic" id="id6">**</span></a>-child_thread=&lt;N&gt; , default: 1, 0 causes all available procs to be used)</p></li>
+</ul>
+<p>This flag defines how many procs will be allocated to the computation of <em>each</em> child MSA. This makes sense when the children MSAs are very large</p>
 <p>If you want to use an non-supported method, follow these <a class="reference external" href="https://tcoffee.readthedocs.io/en/latest/tcoffee_main_documentation.html#advanced-method-integration">guidelines</a>.</p>
 </div>
 </div>

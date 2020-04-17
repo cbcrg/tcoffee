@@ -72,7 +72,7 @@ In the following exemple, the regressive alignment is used to align the sequence
 
 ::
 
-  $$: t_coffee -reg -seq proteases_large.fasta -reg_nseq 100 -reg_tree mbed -reg_method clustalo_msa -outfile proteases_large.aln -outtree proteases_large.mbed
+  $$: t_coffee -reg -seq proteases_large.fasta -nseq 100 -tree mbed -method clustalo_msa -outfile proteases_large.aln -outtree proteases_large.mbed
 
 This mode is the default mode and is expected to deliver fast and reasonnably accurate alignments 
 
@@ -82,7 +82,7 @@ This mode is expected to be the most accurate and combines the ginsi mode of MAF
 
 ::
 
-  $$: t_coffee -reg -seq proteases_large.fasta -reg_nseq 100 -reg_tree mbed -reg_method mafftginsi_msa -outfile proteases_large.aln -outtree proteases_large.mbed
+  $$: t_coffee -reg -seq proteases_large.fasta -nseq 100 -tree mbed -method mafftginsi_msa -outfile proteases_large.aln -outtree proteases_large.mbed
 
 Very Fast
 =========
@@ -90,7 +90,7 @@ This mode is expected to be the fastest currently available. Its accuracy is com
 
 ::
 
-  $$: t_coffee -reg -seq proteases_large.fasta -reg_nseq 100 -reg_tree parttree -reg_method mafftfftnsi_msa -outfile proteases_large.aln -outtree proteases_large.parttree
+  $$: t_coffee -reg -seq proteases_large.fasta -nseq 100 -tree parttree -reg_method mafftfftnsi_msa -outfile proteases_large.aln -outtree proteases_large.parttree
 
 ****************
 Regressive flags
@@ -99,7 +99,7 @@ Regressive flags
 - **-seq** (usage:**-seq=<FASTA sequence file>**)
 This flag is mandatory to provide the sequences. The sequences must be in FASTA and must not contain any sequences. Because these sequences are meant to be aligned with third party aligners that may not support the IUPAC extended alphabet, it is advisable to avoid non standard amino-acids symbols. It is also not advisable to provide gapped sequences. 
 
-- **-reg_tree** (usage:**-reg_tree=<method or Newick File>**, default: **mbed** )
+- **-tree** (usage:**-tree=<method or Newick File>**, default: **mbed** )
 This flag defines which method will be used to estimate the tree. The following methods are available
 
 ::
@@ -123,28 +123,31 @@ This flag defines which method will be used to estimate the tree. The following 
 This flag defines the name of the newly computed ouput tree. Deafult will be filename.reg_tree
 
 - **-child_tree** (usage:**-chile_tree=<tree_method>** , default:None)
-This flag defines which method will be used to estimate the tree. Note that by default, each ref_method will juse its own default tree mode. 
+This flag defines which method will be used to estimate the tree. Note that by default, each <method> will use its own default tree mode. 
 
 
 - **-outfile** (usage:**-outfile=<filename>** , default: <infile>.aln)
 This flag defines the name of the output file containing the multiple sequence alignment
 
 
-- **-reg_nseq** (usage:**-reg_nseq=N** , default: 1000 for datasets larger than 10,000 and Nseq/10 for smaller datasets )
+- **-nseq** (usage:**-nseq=N** , default: 1000 for datasets larger than 10,000 and Nseq/10 for smaller datasets )
 Sets the maximum size of the subsequence alignments. The recommanded value is 1000. With slow/accurate aligners that do not scale in a linear way, this parameter can have an importnat impact on CPU requirement with small values resulting in faster computation.
 
-- **-dynamic** (usage:**-dynamic=<Integer>** , default: 1)
-This flag defines the factor by which every Child reg_n is increased while going from root to leaf. By default all children contain the same maximum number of sequences, if dynamic>1, this number is set to reg_nseq*(dynamic^NGeneration from root). If dynamic <1, this number is set to: reg_nseq/(-dynamic^NGeneration from root). *Note that this mode has not bee validated*
 
-- **-reg_method** (usage:**-reg_tree=<method or configuration file>** , default: clustalo_msa)
+- **-method** (usage:**-method=<method or configuration file>** , default: clustalo_msa)
 This flag defines which method will be used to estimate the child MSA. In order to know which methods are available.
-
-
 ::
 
   $$: t_coffee
 
 All methods the multiple sequence alignment methods xxx_msa are supported.
+
+
+- **-thread** (usage:**-thread=<N> , default: 1, 0 causes all available procs to be used)
+This flag defines how many procs will be used. Children MSAs are computed in parrallel
+
+- **-dynamic** (usage:**-dynamic=<Integer>** , default: 1)
+This flag defines the factor by which every Child reg_n is increased while going from root to leaf. By default all children contain the same maximum number of sequences, if dynamic>1, this number is set to reg_nseq*(dynamic^NGeneration from root). If dynamic <1, this number is set to: reg_nseq/(-dynamic^NGeneration from root). *Note that this mode has not bee validated*
 
 - **-dynamic_config** (usage:**-dynamic_config=<file>** , default: none)
 This flag provides a file specifying which method will be used depending on Nseq in slaves when using dynamic_msa. The format is 
@@ -163,12 +166,11 @@ The default is
 
 All methods (*_msa) available in t_coffee are supported.
 
-- **-reg_thread** (usage:**-reg_nseq=N** , default: 0 to use all available threads)
+- **-thread** (usage:**-nseq=N** , default: 1, 0 to use all available threads)
 Sets the maximum number of threads to be used by one instance. Note that if you have scrited your own aligner using a configuration file, you should make sure it does not run in a multi-threaded version as well. 
 
-
-
-
+- **-child_thread** (usage:**-child_thread=<N> , default: 1, 0 causes all available procs to be used)
+This flag defines how many procs will be allocated to the computation of *each* child MSA. This makes sense when the children MSAs are very large
 
 If you want to use an non-supported method, follow these `guidelines <https://tcoffee.readthedocs.io/en/latest/tcoffee_main_documentation.html#advanced-method-integration>`_. 
 
