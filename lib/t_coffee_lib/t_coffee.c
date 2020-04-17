@@ -7067,7 +7067,8 @@ Alignment * t_coffee_dpa (int argc, char **argv)
 
   for (a=0; a<argc; a++)
     {
-      if      (strm (argv[a], "-seq" ))
+      if ( strm (argv[a], "t_coffee"));
+      else if      (strm (argv[a], "-seq" ))
 	{
 	  
 	  seqfile=argv[++a];
