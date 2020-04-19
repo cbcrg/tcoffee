@@ -7133,7 +7133,7 @@ Alignment * t_coffee_dpa (int argc, char **argv)
 	{
 	  usetree=argv[++a];
 	}
-      else if (strm (argv[a],"-newtree"))
+      else if (strm (argv[a],"-newtree") ||strm (argv[a],"-outtree") )
 	{
 	  newtree=argv[++a];
 	}

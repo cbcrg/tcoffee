@@ -170,7 +170,7 @@ if ($tree)
       }
     elsif ($method2use=~/mafft/)
       {
-	system ("t_coffee -other_pg seq_reformat -in $infile -action +seq2dnd $tree -output mafttdndmatrix> $treeF");
+	system ("t_coffee -other_pg seq_reformat -in $infile -action +seq2dnd $tree -output mafftdndmatrix> $treeF");
       }
     else
       {
@@ -194,6 +194,37 @@ if ($method2use eq "tcoffee_msa" || $method2use eq "tcoffee"|| $method2use eq "t
     
     if ($treeF){$treeFlag="-usetree $treeF "}
     my_system ("t_coffee -seq $infile -outfile $outfile -output fasta_aln $treeFlag $threadFlag4tc $tcarg>/dev/null  $QUIET");    
+  }
+
+elsif ($method2use eq "mcoffee_msa" || $method2use eq "mcoffee")
+  {
+    
+    if ($treeF){$treeFlag="-usetree $treeF "}
+    my_system ("t_coffee  -mode fcoffee -seq $infile -outfile $outfile -output fasta_aln $treeFlag $threadFlag4tc $tcarg>/dev/null  $QUIET");    
+  }
+elsif ($method2use eq "fmcoffee_msa" || $method2use eq "fmcoffee")
+  {
+    
+    if ($treeF){$treeFlag="-usetree $treeF "}
+    my_system ("t_coffee  -mode fmcoffee -seq $infile -outfile $outfile -output fasta_aln $treeFlag $threadFlag4tc $tcarg>/dev/null  $QUIET");    
+  }
+elsif ($method2use eq "rcoffee_msa" || $method2use eq "rcoffee")
+  {
+    
+    if ($treeF){$treeFlag="-usetree $treeF "}
+    my_system ("t_coffee  -mode rcoffee -seq $infile -outfile $outfile -output fasta_aln $treeFlag $threadFlag4tc $tcarg>/dev/null  $QUIET");    
+  }
+elsif ($method2use eq "rmcoffee_msa" || $method2use eq "rmcoffee")
+  {
+    
+    if ($treeF){$treeFlag="-usetree $treeF "}
+    my_system ("t_coffee  -mode rmcoffee -seq $infile -outfile $outfile -output fasta_aln $treeFlag $threadFlag4tc $tcarg>/dev/null  $QUIET");    
+  }
+elsif ($method2use eq "rsapcoffee_msa" || $method2use eq "rsapcoffee")
+  {
+    
+    if ($treeF){$treeFlag="-usetree $treeF "}
+    my_system ("t_coffee  -mode rsapcoffee -seq $infile -outfile $outfile -output fasta_aln $treeFlag $threadFlag4tc $tcarg>/dev/null  $QUIET");    
   }
 elsif ($method2use eq "psicoffee_msa" || $method2use eq "psicoffee")
   {
