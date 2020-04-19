@@ -297,7 +297,7 @@ elsif ($method2use =~/mafft/)
 elsif ($method2use eq "famsa_msa")
   {
     if ($treeF){$treeFlag="-gt import $treeF "}
-    my_system ("famsa $threadFlag4famsa $infile $outfile >/dev/null $QUIET");
+    my_system ("famsa $treeFlag $threadFlag4famsa $infile $outfile >/dev/null $QUIET");
   }
 
 else
