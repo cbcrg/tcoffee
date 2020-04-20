@@ -178,7 +178,7 @@ if ($tree)
       }
   }
 my $psiCL=get_psicl();
-print "$psiCL\n";die;
+
 
 if ($clean)
   {
