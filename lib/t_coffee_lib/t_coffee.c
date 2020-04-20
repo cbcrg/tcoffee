@@ -374,7 +374,8 @@ int batch_main ( int argc, char **argv)
 	int maxlen;
 	int ulimit;
 	/*Thread parameters*/
-	int psitrim;
+	int psiN=0;
+	int psitrim=0;
 	char *psitrim_mode;
 	int prot_min_sim;
 	int prot_max_sim;
@@ -2926,6 +2927,23 @@ get_cl_param(\
 		   );
 set_int_variable ("prot_max_sim", prot_max_sim);
 
+get_cl_param(							\
+			    /*argc*/      argc          ,\
+			    /*argv*/      argv          ,\
+			    /*output*/    &le           ,\
+			    /*Name*/      "-psiN"    ,\
+			    /*Flag*/      &garbage      ,\
+			    /*TYPE*/      "D"         ,\
+			    /*OPTIONAL?*/ OPTIONAL      ,\
+			    /*MAX Nval*/  1             ,\
+			    /*DOC*/       "Defines the number of iteration of psiblast (-j)",\
+			    /*Parameter*/&psiN       ,\
+			    /*Def 1*/    "1"      ,\
+			    /*Def 2*/    "1",\
+			    /*Min_value*/ "any"         ,\
+			    /*Max Value*/ "any"          \
+		   );
+cputenv ("psiN_4_TCOFFEE=%d", psiN);
 declare_name (psitrim_mode);
 get_cl_param(							\
 			    /*argc*/      argc          ,\
@@ -2938,12 +2956,12 @@ get_cl_param(							\
 			    /*MAX Nval*/  1             ,\
 			    /*DOC*/       "Mode used to trim profiles, regtrim or trim (def)",\
 			    /*Parameter*/&psitrim_mode       ,\
-			    /*Def 1*/    "trim"      ,\
-			    /*Def 2*/    "trim",\
+			    /*Def 1*/    "regtrim"      ,\
+			    /*Def 2*/    "regtrim",\
 			    /*Min_value*/ "any"         ,\
 			    /*Max Value*/ "any"          \
 		   );
-cputenv ("PSITRIM=%s", psitrim_mode);
+cputenv ("psitrim_mode_4_TCOFEE=%s", psitrim_mode);
 get_cl_param(\
 			    /*argc*/      argc             ,\
 			    /*argv*/      argv             ,\
@@ -2961,6 +2979,7 @@ get_cl_param(\
 			    /*Max Value*/ "any"             \
 		   );
 set_int_variable ("psitrim", psitrim);
+cputenv ("psitrim_4_TCOFFEE=%d",psitrim);
 
 get_cl_param(\
 			    /*argc*/      argc             ,\
@@ -7065,10 +7084,11 @@ Alignment * t_coffee_dpa (int argc, char **argv)
   set_int_variable    ("reg_dnd_depth",3);
   set_string_variable ("reg_dnd_mode", "codnd");
 
-  for (a=0; a<argc; a++)
+  for (a=1; a<argc; a++)
     {
-      if ( strm (argv[a], "t_coffee"));
-      else if      (strm (argv[a], "-seq" ))
+      
+
+      if      (strm (argv[a], "-seq" ))
 	{
 	  
 	  seqfile=argv[++a];
@@ -7182,6 +7202,18 @@ Alignment * t_coffee_dpa (int argc, char **argv)
       else if (strm (argv[a],"-cache"))
 	{
 	  cputenv ("cache_4_TCOFFEE=%s", argv[++a]);
+	}
+      else if (strm (argv[a], "-psiN"))
+	{
+	  cputenv ("psiN_4_TCOFFEE=%d", atoi(argv[++a]));
+	}
+      else if (strm (argv[a], "-psitrim"))
+	{
+	  cputenv ("psitrim_4_TCOFFEE=%d", atoi(argv[++a]));
+	}
+      else if (strm (argv[a], "-psitrim_mode"))
+	{
+	  cputenv ("psitrim_mode_4_TCOFFEE=%s", argv[++a]);
 	}
       else if (strm (argv[a],"-dynamic_config"))
 	{

@@ -177,6 +177,8 @@ if ($tree)
 	system ("t_coffee -other_pg seq_reformat -in $infile -action +seq2dnd $tree -output newick> $treeF");
       }
   }
+my $psiCL=get_psicl();
+
 
 if ($clean)
   {
@@ -231,15 +233,16 @@ elsif ($method2use eq "psicoffee_msa" || $method2use eq "psicoffee")
     my $cacheFlag;
     if ($cache){$cacheFlag="-cache=$cache";}
     if ($treeF){$treeFlag="-usetree $treeF "}
+    
     if ($blast eq "LOCAL"){$blastFlag="-blast_server=LOCAL -protein_db=$protein_db";}
-    my_system ("t_coffee -mode psicoffee -in $infile -outfile $outfile -output fasta_aln  $cacheFlag $blastFlag $threadFlag4tc>/dev/null $QUIET");
+    my_system ("t_coffee -mode psicoffee -in $infile -outfile $outfile -output fasta_aln  $cacheFlag $blastFlag $threadFlag4tc $psiCL>/dev/null $QUIET");
   }
 elsif  ($method2use eq "accurate_msa" || $method2use eq "accurate")
   {
     my $cacheFlag;
     if ($cache){$cacheFlag="-cache=$cache";}
     if ($treeF){$treeFlag="-usetree $treeF "}
-    if ($blast eq "LOCAL"){$blastFlag="-blast_server=LOCAL -protein_db=$protein_db -pdb_db=$pdb_db";}
+    if ($blast eq "LOCAL"){$blastFlag="-blast_server=LOCAL -protein_db=$protein_db -pdb_db=$pdb_db $psiCL";}
     my_system ("t_coffee -mode accurate -in $infile -outfile $outfile -output fasta_aln  $cacheFlag $blastFlag $threadFlag4tc>/dev/null  $QUIET");
   }
 elsif  ($method2use eq "3dcoffee_msa"|| $method2use eq "3dcoffee")
@@ -389,3 +392,15 @@ sub file2string
       chomp($s);
       return $s;
     }   
+
+sub get_psicl
+      {
+	my ($psitrim, $psitrim_mode, $pisN);
+	my $cl;
+	
+	if ($ENV{psitrim_mode_4_TCOFFEE}){$cl.=" -psitrim_mode=".$ENV{psitrim_mode_4_TCOFFEE}." ";}
+	if ($ENV{psitrim_4_TCOFFEE}){$cl.=" -psitrim=".$ENV{psitrim_4_TCOFFEE}." ";}
+	if ($ENV{psiN_4_TCOFFEE}){$cl.=" -psiN=".$ENV{psiN_4_TCOFFEE}." ";}
+	
+
+	return $cl;

@@ -2308,7 +2308,7 @@ sub output_profile
 
     if ( $trim)
       {
-	if ($ENV{PSITRIM} eq "oldtrim")
+	if ($ENV{psitrim_mode_4_TCOFFEE} eq "trim")# old trimming
 	  {
 	    if ($trim>0)
 	      {
@@ -2319,7 +2319,7 @@ sub output_profile
 		&safe_system ("t_coffee -other_pg seq_reformat -in $tmp -action +trim _aln_%%$trim\_K1 -output fasta_aln -out $outfile");
 	      }
 	  }
-	else
+	else # newtrimming
 	  {
 	    if ($trim>0)
 	      {
@@ -2670,10 +2670,20 @@ sub run_blast
 	    $path=`dirname $path`; 
 	    chomp($path);
 	    if ($method eq "blastp")
-	      {
-		&check_configuration("legacy_blast.pl");
-		$command="legacy_blast.pl blastpgp --path $path -d $cl_db -i $infile -o $outfile -m7 -j1";		
-	      }
+	     {
+	       my $nit;
+	       if ($ENV{psimode_4_TCOFFEE})
+		   {
+		     $nit=$ENV{psimode_4_TCOFFEE};
+		   }
+	       else 
+		 {
+		   $nit="-j1";
+		 }
+	       
+	       &check_configuration("legacy_blast.pl");
+	       $command="legacy_blast.pl blastpgp --path $path -d $cl_db -i $infile -o $outfile -m7 $nit";		
+	     }
 	    elsif ($method eq "psiblast")
 	      {
 		&check_configuration("legacy_blast.pl");
