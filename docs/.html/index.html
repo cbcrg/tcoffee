@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>T-Coffee Version_13.41.56.e3b52ce documentation</title>
+  <title>T-Coffee Version_13.41.57.1d4f622 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                Version_13.41.56.e3b52ce
+                Version_13.41.57.1d4f622
               </div>
             
           
@@ -488,6 +488,7 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="index.html#template-based-modes">Template based modes</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="index.html#database-searches-parameters">Database searches parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="index.html#psi-coffee-and-tm-coffee-parameters">PSI-Coffee and TM-Coffee parameters</a></li>
 <li class="toctree-l4"><a class="reference internal" href="index.html#using-structures">Using structures</a></li>
 <li class="toctree-l4"><a class="reference internal" href="index.html#using-finding-pdb-templates-for-the-sequences">Using/finding PDB templates for the sequences</a></li>
 <li class="toctree-l4"><a class="reference internal" href="index.html#using-structure-for-msa-evaluation">Using structure for MSA evaluation</a></li>
@@ -717,7 +718,7 @@
     
       <li><a href="index.html#document-index">Docs</a> &raquo;</li>
         
-      <li>T-Coffee Version_13.41.56.e3b52ce documentation</li>
+      <li>T-Coffee Version_13.41.57.1d4f622 documentation</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -5042,6 +5043,10 @@ Increase the scale Increase sensitivity  More alignments( i.e. -50).</p>
 </ul>
 <p>Defines which way BLAST will be used, either through web services or locally. To have more information about BLAST, refer to the <strong>T-Coffee Installation</strong> chapter.</p>
 <ul class="simple">
+<li><p><strong>-psiJ</strong> (usage:<strong>-psiJ= &lt;D&gt;</strong>/default:1)</p></li>
+</ul>
+<p>Defines the number of psi-BLAST iterations</p>
+<ul class="simple">
 <li><p><strong>-protein_db</strong> (usage:<strong>-protein_db=&lt;database&gt;</strong>/default:nr database)</p></li>
 </ul>
 <p>Database used for the construction of a PSI-BLAST profile.</p>
@@ -5076,7 +5081,12 @@ Increase the scale Increase sensitivity  More alignments( i.e. -50).</p>
 <ul class="simple">
 <li><p><strong>-pdb_min_cov</strong> (usage:<strong>-pdb_min_cov= &lt;0-100t&gt;</strong>/default:50)</p></li>
 </ul>
-<p>Minimum coverage for a PDB template to be selected by Expresso.</p>
+<p>Minimum coverage for a PDB template to be selected by Expresso.
+PSI-Coffee and TM-Coffee Parameters</p>
+</div>
+<div class="section" id="psi-coffee-and-tm-coffee-parameters">
+<h5>PSI-Coffee and TM-Coffee parameters<a class="headerlink" href="#psi-coffee-and-tm-coffee-parameters" title="Permalink to this headline">¶</a></h5>
+<p>Profiles returned by Blast and PSI-Blast are usualy too large and very redundant. They are trimmed to the &lt;-psitrim=40&gt; most informative sequences, as determined by applying the regressive algorithm onto the returned sequences using &lt;psitrim_tree=codnd&gt;</p>
 </div>
 <div class="section" id="using-structures">
 <h5>Using structures<a class="headerlink" href="#using-structures" title="Permalink to this headline">¶</a></h5>

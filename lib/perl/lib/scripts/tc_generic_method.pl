@@ -2321,14 +2321,18 @@ sub output_profile
 	  }
 	else # newtrimming
 	  {
+	    my $tm;
+	    if ($ENV{psitrim_tree_4_TCOFFEE}){$tm="-treemode=".$ENV{psitrim_tree_4_TCOFFEE};}
+	    else {$tm="-treemode=codnd";}
 	    if ($trim>0)
 	      {
-		&safe_system ("t_coffee -other_pg seq_reformat -in $tmp -treemode codnd -keep 1 -action +regtrim $trim -output fasta_aln -out $outfile");
+		&safe_system ("t_coffee -other_pg seq_reformat -in $tmp $tm -keep 1 -action +regtrim $trim -output fasta_aln -out $outfile");
 	      }
 	    else
 	      {
-		&safe_system ("t_coffee -other_pg seq_reformat -in $tmp -treemode codnd -keep 1 -action +regtrim $trim\% -output fasta_aln -out $outfile");
+		&safe_system ("t_coffee -other_pg seq_reformat -in $tmp $tm -keep 1 -action +regtrim $trim\% -output fasta_aln -out $outfile");
 	      }
+	   
 	  }
 	
       }
@@ -2487,7 +2491,7 @@ sub seq2msa_gor_prediction
 
     $blast_output=&run_blast ($name,"blastp", "uniprot", $infile, "outfile");
 
-    if (&cache_file("GET",$infile,$name,$method,$db,$outfile,$SERVER))
+    if (&cache_file("GET",$infile,$name,$method,$db,$outfile,$SERVER, $psiJ))
       {
 	print "\tPSIGOR: USE Cache\n";
 	return $outfile;
@@ -2525,8 +2529,11 @@ sub run_blast
     if (!$run){$run=1;}
     my $error_log=vtmpnam();
     my $cl_db;
+    my $psiJ=($ENV{psiJ_4_TCOFFEE})?$ENV{psiJ_4_TCOFFEE}:1;
     
-    if (&cache_file("GET",$infile,$name,$method,$db,$outfile,$SERVER) && is_valid_blast_xml ($outfile))
+    my $psiJFlag="-j$psiJ";
+   
+    if (&cache_file("GET",$infile,$name,$method,$db,$outfile,$SERVER, $psiJ) && is_valid_blast_xml ($outfile))
       {return $outfile;}
     else
       {
@@ -2538,8 +2545,9 @@ sub run_blast
 	    $cl_method=$method;
 	    if ($cl_method =~/wu/)
 	      {
+		if ( $method eq "psiblast" || $psiJ>1){myexit(add_error (EXIT_FAILURE,$$,$$,getppid(), "BLAST_FAILURE::$SERVER does not Support psiblast mode ($psiJFlag)",$CL));}
 		$cl_method=~s/wu//;
-		if ( $cl_method eq "psiblast")
+		if ( $cl_method eq "psiblast" || $psiJ>1)
 		  {
 		    add_warning($$,$$,"PSI BLAST cannot be used with the wuBLAST Client. Use server=EBI Or server=LOCAL. blastp will be used instead");
 		    $cl_method="blastp";
@@ -2551,7 +2559,7 @@ sub run_blast
 	      }
 	    else
 	      {
-		if ($cl_method eq "psiblast"){$cl_method ="blastp -j5";}
+		if ($cl_method eq "psiblast"){$cl_method ="blastp $psiJFlag";}
 
 		$command="t_coffee -other_pg blastpgp.pl --email $EMAIL $infile -d $db --outfile $outfile -p $cl_method --mode PSI-Blast>/dev/null 2>$error_log";
 		&safe_system ( $command);
@@ -2570,13 +2578,15 @@ sub run_blast
 	    if ($cl_method =~/wu/)
 	      {
 		$cl_method=~s/wu//;
+
+		
 		if ( $cl_method eq "psiblast"){$cl_method="blastp";}
 
 		$command="t_coffee -other_pg wublast_lwp.pl --email $EMAIL -D $db1 -p $cl_method --outfile $outfile --align 5 --stype protein $infile>/dev/null 2>error_log";
 	      }
 	    else
 	      {
-		if ( $cl_method =~/psiblast/){$cl_method ="blastp -j5";}
+		if ( $cl_method =~/psiblast/){$cl_method ="blastp $psiJFlag";}
 		$command="t_coffee -other_pg ncbiblast_lwp.pl --email $EMAIL -D $db1 -p $cl_method --outfile $outfile --align 5 --stype protein $infile>/dev/null 2>$error_log";
 		#DEBUG
 		#$command="t_coffee -other_pg ncbiblast_lwp.pl --email $EMAIL -D $db1 -p $cl_method --outfile $outfile --align 5 --stype protein $infile";
@@ -2621,16 +2631,9 @@ sub run_blast
 	    if ($db eq "uniprot"){$cl_db="swissprot";}
 	    else {$cl_db=$db;}
 
-	    if ( $method eq "psiblast")
-	      {
-		add_warning($$,$$,"PSI BLAST cannot be used with the NCBI BLAST Client. Use server=EBI Or server=LOCAL. blastp will be used instead");
-		$cl_method="blastp";
-	      }
-	    else
-	      {
-		$cl_method=$method;
-	      }
-	      
+	    if ( $method eq "psiblast" || $psiJ>1){myexit(add_error (EXIT_FAILURE,$$,$$,getppid(), "BLAST_FAILURE::$SERVER does not Support psiblast mode ($psiJFlag)",$CL));}
+	    my $cl_method=$method;
+	    
 	    &check_configuration ($cl_method);  
 	    $command="$cl_method -db $cl_db -query $infile -out $outfile -outfmt 5 -remote";
 	    &safe_system ($command);
@@ -2638,20 +2641,20 @@ sub run_blast
 	elsif ($SERVER =~/CLIENT_(.*)/)
 	  {
 	    my $client=$1;
+	    if ( $method eq "psiblast" || $psiJ>1){myexit(add_error (EXIT_FAILURE,$$,$$,getppid(), "BLAST_FAILURE::$SERVER does not Support psiblast mode ($psiJFlag)",$CL));}
 	    $command="$client -p $method -d $db -i $infile -o $outfile -m 7";
 	    &safe_system ($command);
 	  }
 	elsif ( $SERVER eq "LOCAL_blastall")
 	  {
 	    &check_configuration ("blastall");
-	    if ($method eq "blastp")
-	      {
-		$command="blastall -d $db -i $infile -o $outfile -m7 -p blastp";
-	      }
+	    if ( $method eq "psiblast" || $psiJ>1){myexit(add_error (EXIT_FAILURE,$$,$$,getppid(), "BLAST_FAILURE::$SERVER does not Support psiblast mode ($psiJFlag)",$CL));}
+	    $command="blastall -d $db -i $infile -o $outfile -m7 -p blastp";
 	    &safe_system ($command);
 	  }
 	elsif ( $SERVER eq "LOCAL")
 	  {
+	    my $legacy=0;
 	    if ($ENV{"BLAST_DB_DIR"}) 
 	      {
 	    	$x=$ENV{"BLAST_DB_DIR"};
@@ -2669,25 +2672,22 @@ sub run_blast
 	    $path=`which legacy_blast.pl 2>/dev/null`;  
 	    $path=`dirname $path`; 
 	    chomp($path);
-	    if ($method eq "blastp")
+	    
+	    if    (!$legacy && ($method eq "blastp" || $method eq "psiblast"))
+	      {
+		
+		&check_configuration("psiblast");
+		$command="psiblast -db $cl_db -query $infile -num_iterations $psiJ -out $outfile -outfmt 5";
+	      }
+	    elsif ($legacy && $method eq "blastp")
 	     {
-	       my $nit;
-	       if ($ENV{psimode_4_TCOFFEE})
-		   {
-		     $nit=$ENV{psimode_4_TCOFFEE};
-		   }
-	       else 
-		 {
-		   $nit="-j1";
-		 }
-	       
 	       &check_configuration("legacy_blast.pl");
-	       $command="legacy_blast.pl blastpgp --path $path -d $cl_db -i $infile -o $outfile -m7 $nit";		
+	       $command="legacy_blast.pl blastpgp --path $path -d $cl_db -i $infile -o $outfile -m7 $psiJFlag";		
 	     }
-	    elsif ($method eq "psiblast")
+	    elsif ($legacy && $method eq "psiblast")
 	      {
 		&check_configuration("legacy_blast.pl");
-		$command="legacy_blast.pl blastpgp --path $path -d $cl_db -i $infile -o $outfile -m7 -j5";
+		$command="legacy_blast.pl blastpgp --path $path -d $cl_db -i $infile -o $outfile -m7 $psiJFlag";
 	      }
 	    elsif ($method eq "blastn")
 	      {
@@ -2741,32 +2741,30 @@ sub run_blast
 	      }
 	  }
 
-	&cache_file("SET",$infile,$name,$method,$db,$outfile,$SERVER);
-	#system ("cp $outfile ~/Dropbox/tmp/cedric.out");
-	#die;
+	&cache_file("SET",$infile,$name,$method,$db,$outfile,$SERVER, $psiJ);
 	return $outfile;
       }
   }
 
 sub cache_file
   {
-    my ($cache_mode,$infile,$name,$method,$db, $outfile,$server)=(@_);
+    my ($cache_mode,$infile,$name,$method,$db, $outfile,$server,$it)=(@_);
     my $cache_file;
     #Protect names so that they can be turned into legal filenames
     $name=&clean_file_name ($name);
-
+    if (!$it){$it=1;}
     if ($db=~/\//)
       {
 	$db=~/([^\/]+)$/;
 	$db=$1;
       }
-    $cache_file_sh="$name.$method.$db.$server.tmp";
-    $cache_file="$CACHE/$name.$method.$db.$server.tmp";
+    $cache_file_sh="$name.$method.$db.$server.$it.tmp";
+    $cache_file="$CACHE/$name.$method.$db.$server.$it.tmp";
 
     if ($infile ne "")
       {
-	$cache_file_infile_sh="$name.$method.$db.$server.infile.tmp";
-	$cache_file_infile="$CACHE/$name.$method.$db.$server.infile.tmp";
+	$cache_file_infile_sh="$name.$method.$db.$server.$it.infile.tmp";
+	$cache_file_infile="$CACHE/$name.$method.$db.$server.$it.infile.tmp";
       }
 
     if ($cache_mode eq "GET")

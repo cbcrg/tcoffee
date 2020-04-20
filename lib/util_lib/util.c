@@ -10138,8 +10138,6 @@ void error_exit_sigill (int x){error_exit(SIGILL);}
 void error_exit_sigfpe (int x){error_exit(SIGFPE);}
 void error_exit_sigabrt(int x){error_exit(SIGABRT);}
 
-
-
 void error_exit (int exit_code)
  {
    
@@ -10194,7 +10192,8 @@ void clean_exit ()
     {
       if (trash)
 	{
-	  fprintf (get_stdout1(NULL), "!Your tmp files have been moved into [%s] --- Use a cron job to delete them\n", trash);
+	  //fprintf (get_stdout1(NULL), "!Your tmp files have been moved into [%s] --- Use a cron job to delete them\n", trash);
+	  ;
 	}
       
       kill_child_pid(getpid());

@@ -439,7 +439,7 @@ int seq_reformat ( int argc, char **in_argv)
 
 		fprintf ( stdout, "\n     +tree_compute n s....Computes a tree using the MSA provided with -in");
 		fprintf ( stdout, "\n     ....................n:0-9, controls the way the MSA is filtered");
-		fprintf ( stdout, "\n     ....................s:pam250mt|blosum62mt|categories|enthropy");
+		fprintf ( stdout, "\n     ....................s:pam250mt|blosum62mt|categories|entropy");
 		fprintf ( stdout, "\n     ....................s:controls the column evaluation in MSA");
 		fprintf ( stdout, "\n     +change_distances.f.f:float, sets all the distances to f in the tree");
 		fprintf ( stdout, "\n     +change_bootstrap n..:n=0 removes all the bootstrap values");
@@ -13400,6 +13400,8 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
        else if ( strm (action, "regtrim"))
 	 {
 	   int ns, p;
+	   char *tt=get_string_variable ("treemode");
+
 	  
 	   if (strstr (action_list[1], "%"))
 	     {
@@ -13410,6 +13412,11 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	     {
 	       ns=atoi (action_list[1]);
 	     }
+	   if (!D2 && strstr(tt, "msa"))
+	     {
+	       (D1->S)->seq=(D1->A)->seq_al;
+	     }
+	   
 	   D1->S=regtrim (D1->S, (D2)?D2->T:NULL,ns);
 	   D1->A=seq2aln(D1->S, NULL, 0);
 	 }

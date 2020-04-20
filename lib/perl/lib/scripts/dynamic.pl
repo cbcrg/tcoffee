@@ -178,7 +178,7 @@ if ($tree)
       }
   }
 my $psiCL=get_psicl();
-
+print "$psiCL\n";die;
 
 if ($clean)
   {
@@ -235,6 +235,9 @@ elsif ($method2use eq "psicoffee_msa" || $method2use eq "psicoffee")
     if ($treeF){$treeFlag="-usetree $treeF "}
     
     if ($blast eq "LOCAL"){$blastFlag="-blast_server=LOCAL -protein_db=$protein_db";}
+    print ("t_coffee -mode psicoffee -in $infile -outfile $outfile -output fasta_aln  $cacheFlag $blastFlag $threadFlag4tc $psiCL>/dev/null $QUIET");
+    die;
+    
     my_system ("t_coffee -mode psicoffee -in $infile -outfile $outfile -output fasta_aln  $cacheFlag $blastFlag $threadFlag4tc $psiCL>/dev/null $QUIET");
   }
 elsif  ($method2use eq "accurate_msa" || $method2use eq "accurate")
@@ -398,9 +401,10 @@ sub get_psicl
 	my ($psitrim, $psitrim_mode, $pisN);
 	my $cl;
 	
+	if ($ENV{psitrim_tree_4_TCOFFEE}){$cl.=" -psitrim_tree=".$ENV{psitrim_tree_4_TCOFFEE}." ";}
 	if ($ENV{psitrim_mode_4_TCOFFEE}){$cl.=" -psitrim_mode=".$ENV{psitrim_mode_4_TCOFFEE}." ";}
 	if ($ENV{psitrim_4_TCOFFEE}){$cl.=" -psitrim=".$ENV{psitrim_4_TCOFFEE}." ";}
-	if ($ENV{psiN_4_TCOFFEE}){$cl.=" -psiN=".$ENV{psiN_4_TCOFFEE}." ";}
+	if ($ENV{psiJ_4_TCOFFEE}){$cl.=" -psiJ=".$ENV{psiJ_4_TCOFFEE}." ";}
 	
 
 	return $cl;

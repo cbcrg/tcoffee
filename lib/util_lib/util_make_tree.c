@@ -1902,10 +1902,22 @@ NT_node seq2dnd (Sequence *S, char *dpa_tree)
 {
   NT_node T=NULL;
   static char *tmptree=vtmpnam (NULL);
-  if (!dpa_tree) return T;
+
+ 
+  if (!S || S->nseq==0)return NULL;
+  else if (S->nseq<=2)
+    {
+      char *t=vtmpnam(NULL);
+      FILE*fp=vfopen (t, "w");
+      if (S->nseq==1)fprintf (fp, "(%s:1.000)", S->name[0]);
+      else if ( S->nseq==2)fprintf (fp, "(%s,%s:1.000):1.000;", S->name[0], S->name[1]);
+      vfclose (fp);
+      T=main_read_tree (t);
+    }
+  else if (!dpa_tree) return T;
   else if ( strm (dpa_tree, "list"))
     {
-      fprintf ( stdout, "kmdnd\nswlcatdnd\niswlcatdnd\nlongcatdnd\nshortcatdnd\nswldnd\ncodnd Or mbed\ncwdnd Or clustalwnd\ncwqdnd\nparttree\ndpparttree\nmafftdnd\nfftns1dnd\nfftns2dnd\nupgma\nnj\nregdnd\nchaindnd\nfamsadnd\n");
+      fprintf ( stdout, "kmdnd\nswlcatdnd\niswlcatdnd\nlongcatdnd\nshortcatdnd\nswldnd\ncodnd Or mbed\ncwdnd Or clustalwnd\ncwqdnd\nparttree\ndpparttree\nmafftdnd\nfftns1dnd\nfftns2dnd\nupgma\nupgma_msa\nnj\nnj_msa\nregdnd\nchaindnd\nfamsadnd\n");
       exit (EXIT_SUCCESS);
     }
   else if (strm (dpa_tree, "kmdnd"))
@@ -2001,7 +2013,13 @@ NT_node seq2dnd (Sequence *S, char *dpa_tree)
     {
       T=seq2fftns1_dnd (S);
     }
-  
+  else if ( strm (dpa_tree, "upgma_msa"))
+    {
+      
+      int **s=array2sim(S->seq, S->nseq, "sim1");//sequences are expected to be aligned
+      T=int_dist2upgma_tree_new(s, S->name,S->nseq);
+      free_int (s, -1);
+    }
   else if ( strm (dpa_tree, "upgma"))
     {
       
@@ -2013,6 +2031,14 @@ NT_node seq2dnd (Sequence *S, char *dpa_tree)
     {
       char *tfile=vtmpnam (NULL);
       int **s=array2sim(S->seq, S->nseq, "ktup3");
+      int_dist2nj_tree (s, S->name, S->nseq, tfile);
+      free_int (s, -1);
+      T=main_read_tree (tfile);
+    }
+  else if ( strm (dpa_tree, "nj_msa"))
+    {
+      char *tfile=vtmpnam (NULL);
+      int **s=array2sim(S->seq, S->nseq, "sim1");//sequences are expected to be aligned
       int_dist2nj_tree (s, S->name, S->nseq, tfile);
       free_int (s, -1);
       T=main_read_tree (tfile);

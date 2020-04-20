@@ -3287,8 +3287,9 @@ char * tree2string (NT_node T)
 
 FILE * tree2file ( NT_node T, Sequence *S,char *format,FILE *fp)
 {
-  int ns=tree2nleaf(T);
   
+
+
   /*
     if (!S)
     {
@@ -3505,6 +3506,16 @@ FILE * no_rec_print_tree_shuffle ( NT_node p, FILE *fp)
 
 FILE * no_rec_print_tree ( NT_node p, FILE *fp)
 {
+  int ns=tree2nleaf(p);
+  if ( ns==1)
+    {
+      
+      if (p->name)fprintf (fp, "(%s:1.000)", p->name);
+      else if ( p->right)fprintf (fp, "(%s:1.000)", (p->right)->name);
+      else if ( p->left)fprintf (fp, "(%s:1.000)", (p->left)->name);
+      return fp;
+    }
+
   reset_node_count (p);
   
   while (p)
@@ -8824,10 +8835,18 @@ Sequence * regtrim (Sequence *S, NT_node T, int N)
   char *tmp=vtmpnam(NULL);
   float *w;
   int *used;
+
+  //This defines the number of sequences that will be kept
   
-  //This defines the numbr of sequences that will be kept
+  
+  if (S->nseq==1)
+    {
+      fp=vfopen (tmp, "w");
+      fprintf ( fp, ">%s\n%s\n", S->name[0], S->seq[0]);
+      vfclose (fp);
+      return get_fasta_sequence (tmp,NULL);
+    }
   //This is typically set to 1 to keep the first sequence
-  
   int keep=get_int_variable ("keep");
   
   if (!T)

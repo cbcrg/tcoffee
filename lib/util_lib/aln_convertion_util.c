@@ -5953,7 +5953,7 @@ Sequence * seq2template_seq ( Sequence *S, char *template_list, Fname *F)
     }
   else if ( strm ( template_list, "PSITM"))
     {
-
+      cputenv ("psiJ_4_TCOFFEE=5");
       /*predict transmembrane structure*/
       check_program_is_installed (HMMTOP_4_TCOFFEE,NULL, NULL,HMMTOP_ADDRESS, INSTALL_OR_DIE);
       check_blast_is_installed(server);

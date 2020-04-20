@@ -374,9 +374,10 @@ int batch_main ( int argc, char **argv)
 	int maxlen;
 	int ulimit;
 	/*Thread parameters*/
-	int psiN=0;
+	int psiJ=0;
 	int psitrim=0;
 	char *psitrim_mode;
+	char *psitrim_tree;
 	int prot_min_sim;
 	int prot_max_sim;
 	int prot_min_cov;
@@ -2931,19 +2932,20 @@ get_cl_param(							\
 			    /*argc*/      argc          ,\
 			    /*argv*/      argv          ,\
 			    /*output*/    &le           ,\
-			    /*Name*/      "-psiN"    ,\
+			    /*Name*/      "-psiJ"    ,\
 			    /*Flag*/      &garbage      ,\
 			    /*TYPE*/      "D"         ,\
 			    /*OPTIONAL?*/ OPTIONAL      ,\
 			    /*MAX Nval*/  1             ,\
 			    /*DOC*/       "Defines the number of iteration of psiblast (-j)",\
-			    /*Parameter*/&psiN       ,\
+			    /*Parameter*/&psiJ       ,\
 			    /*Def 1*/    "1"      ,\
 			    /*Def 2*/    "1",\
 			    /*Min_value*/ "any"         ,\
 			    /*Max Value*/ "any"          \
 		   );
-cputenv ("psiN_4_TCOFFEE=%d", psiN);
+ 
+cputenv ("psiJ_4_TCOFFEE=%d", psiJ);
 declare_name (psitrim_mode);
 get_cl_param(							\
 			    /*argc*/      argc          ,\
@@ -2961,7 +2963,28 @@ get_cl_param(							\
 			    /*Min_value*/ "any"         ,\
 			    /*Max Value*/ "any"          \
 		   );
-cputenv ("psitrim_mode_4_TCOFEE=%s", psitrim_mode);
+cputenv ("psitrim_mode_4_TCOFFEE=%s", psitrim_mode);
+
+declare_name (psitrim_tree);
+get_cl_param(							\
+			    /*argc*/      argc          ,\
+			    /*argv*/      argv          ,\
+			    /*output*/    &le           ,\
+			    /*Name*/      "-psitrim_tree"    ,\
+			    /*Flag*/      &garbage      ,\
+			    /*TYPE*/      "S"         ,\
+			    /*OPTIONAL?*/ OPTIONAL      ,\
+			    /*MAX Nval*/  1             ,\
+			    /*DOC*/       "Mode used to compute the tree when using regtree to trim profiles (codnd def)",\
+			    /*Parameter*/&psitrim_tree       ,\
+			    /*Def 1*/    "codnd"      ,\
+			    /*Def 2*/    "codnd",\
+			    /*Min_value*/ "any"         ,\
+			    /*Max Value*/ "any"          \
+		   );
+cputenv ("psitrim_tree_4_TCOFFEE=%s", psitrim_tree);
+
+
 get_cl_param(\
 			    /*argc*/      argc             ,\
 			    /*argv*/      argv             ,\
@@ -5904,7 +5927,7 @@ char *get_psicoffee_defaults(char *buf, char *type)
 
      if (buf==NULL)buf=(char*)vcalloc (1000, sizeof (char));
 
-     buf=strcat (buf,"-in Mproba_pair -template_file BLAST   ");
+     buf=strcat (buf,"-in Mproba_pair -template_file BLAST  ");
      /*buf=strcat (buf,"-in ");*/
 
      return buf;
@@ -7169,7 +7192,7 @@ Alignment * t_coffee_dpa (int argc, char **argv)
 	{
 	  dpa_nseq=atoi(argv[++a]);
 	}
-      else if (strm (argv[a],"-dynamic"))
+      else if (strm (argv[a],"-dynamic") || strm (argv[a],"-reg_dynamic") )
 	{
 	  reg_dynamic=atoi(argv[++a]);
 	}
@@ -7203,9 +7226,9 @@ Alignment * t_coffee_dpa (int argc, char **argv)
 	{
 	  cputenv ("cache_4_TCOFFEE=%s", argv[++a]);
 	}
-      else if (strm (argv[a], "-psiN"))
+      else if (strm (argv[a], "-psiJ"))
 	{
-	  cputenv ("psiN_4_TCOFFEE=%d", atoi(argv[++a]));
+	  cputenv ("psiJ_4_TCOFFEE=%d", atoi(argv[++a]));
 	}
       else if (strm (argv[a], "-psitrim"))
 	{
@@ -7214,6 +7237,10 @@ Alignment * t_coffee_dpa (int argc, char **argv)
       else if (strm (argv[a], "-psitrim_mode"))
 	{
 	  cputenv ("psitrim_mode_4_TCOFFEE=%s", argv[++a]);
+	}
+      else if (strm (argv[a], "-psitrim_tree"))
+	{
+	  cputenv ("psitrim_tree_4_TCOFFEE=%s", argv[++a]);
 	}
       else if (strm (argv[a],"-dynamic_config"))
 	{
@@ -7239,7 +7266,7 @@ Alignment * t_coffee_dpa (int argc, char **argv)
 	}
       else 
 	{
-	   myexit (fprintf_error (stderr, "%s is an unknown dpa flag [FATAL:%s]", argv[a],PROGRAM));
+	   myexit (fprintf_error (stderr, "%s is an unknown flag of the -reg mode [FATAL:%s]", argv[a],PROGRAM));
 	}
     }
 

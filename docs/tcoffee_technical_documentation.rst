@@ -702,6 +702,9 @@ These parameters are used when running template based modes of T-Coffee such as 
 - **-blast_server** (sage:**-blast_server=[EBI,NCBI,LOCAL]**/default:**-blast_server=EBI**)
 Defines which way BLAST will be used, either through web services or locally. To have more information about BLAST, refer to the **T-Coffee Installation** chapter.
 
+- **-psiJ** (usage:**-psiJ= <D>**/default:1)
+Defines the number of psi-BLAST iterations
+
 - **-protein_db** (usage:**-protein_db=<database>**/default:nr database)
 Database used for the construction of a PSI-BLAST profile.
 
@@ -728,6 +731,13 @@ Maximum % identity for a PDB template to be selected by Expresso.
 
 - **-pdb_min_cov** (usage:**-pdb_min_cov= <0-100t>**/default:50)
 Minimum coverage for a PDB template to be selected by Expresso.
+PSI-Coffee and TM-Coffee Parameters
+
+
+PSI-Coffee and TM-Coffee parameters
+-----------------------------------
+
+Profiles returned by Blast and PSI-Blast are usualy too large and very redundant. They are trimmed to the <-psitrim=40> most informative sequences, as determined by applying the regressive algorithm onto the returned sequences using <psitrim_tree=codnd> 
 
 
 Using structures
