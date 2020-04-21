@@ -290,11 +290,14 @@ elsif ($method2use eq "mafftginsi_msa" || $method2use eq "mafft-ginsi")
     if ($treeF){$treeFlag="--treein $treeF ";}
     my_system ("mafft-ginsi $threadFlag --anysymbol $treeFlag $infile > $outfile $QUIET");
   }
-elsif ($method2use eq "mafftfftns1_msa" || $method2use eq "mafft-fftnsi")
+elsif ($method2use eq "mafftfftns1_msa" || $method2use eq "mafft-fftns1")
   {
+   
     if ($treeF){$treeFlag="--treein $treeF ";}
-    my_system ("mafft-fftns1 $threadFlag --anysymbol --retree1 $treeFlag $infile > $outfile $QUIET");
+   
+    my_system ("mafft-fftnsi $threadFlag --retree 1 --anysymbol $treeFlag $infile > $outfile $QUIET");
   }
+
 elsif ($method2use =~/mafft/)
    {
      if ($treeF){$treeFlag="--treein $treeF ";}
