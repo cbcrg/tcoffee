@@ -9124,7 +9124,7 @@ int kseq2kmsa_thread   (KT_node *K, int n, char *method)
   int a, b;
   int nt=0;
   //split the jobs
- 
+  
  
   KL=(KT_node**)vcalloc(nproc+1, sizeof (KT_node*));
   for (b=0; b<nproc; b++)

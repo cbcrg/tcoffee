@@ -5973,6 +5973,7 @@ Pwfunc get_pair_wise_function (Pwfunc pw,char *dp_mode, int *glocal)
 	     {
 	       pw=pwl[a];
 	       if (dp_mode)sprintf (dp_mode,"%s", dpl[a]);
+	       
 	       glocal[0]=dps[a];
 	       return pw;
 	     }

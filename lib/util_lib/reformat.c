@@ -1499,7 +1499,8 @@ int read_nameseq (char *file,char ***nam, char ***seq, char ***com)
 	      fscanf (fp, "%d %d ", &l1, &l2);
 	      nam[0][nseq]=(char*)vreallocg(nam [0][nseq],(l1+1)* sizeof (char), NOMEMSET, NORESIZE);
 	      seq[0][nseq]=(char*)vreallocg(seq [0][nseq],(l2+1)* sizeof (char), NOMEMSET, NORESIZE);
-	      fscanf (fp, "%s %s\n", nam[0][nseq], seq[0][nseq]);
+	      fscanf (fp, "%s %s", nam[0][nseq], seq[0][nseq]);
+	      
 	      nseq++;
 	    }
 	  else if (c=='#')
@@ -1509,7 +1510,8 @@ int read_nameseq (char *file,char ***nam, char ***seq, char ***com)
 	       fgets (com[0][nseq],l1, fp);
 	       c=fgetc(fp);
 	    }
-	}
+	    }
+      
       vfclose (fp);
       return nseq;
     }

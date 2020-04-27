@@ -166,6 +166,7 @@ sub fasta2name_seq
 	    {
 	      $l=$_;
 	      chomp ($l);
+	      
 	      $seq.=$l;
 	      $len{$name}=length($seq);
 	    }
@@ -197,6 +198,7 @@ sub fasta2name_seq
 	    {
 	      $l=$_;
 	      chomp ($l);
+	      $l=~s/\W//g;
 	      print "$l";
 	    }
 	}

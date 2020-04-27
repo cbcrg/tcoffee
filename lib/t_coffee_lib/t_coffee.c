@@ -2963,6 +2963,7 @@ get_cl_param(							\
 			    /*Min_value*/ "any"         ,\
 			    /*Max Value*/ "any"          \
 		   );
+
 cputenv ("psitrim_mode_4_TCOFFEE=%s", psitrim_mode);
 
 declare_name (psitrim_tree);
@@ -2996,8 +2997,8 @@ get_cl_param(\
 			    /*MAX Nval*/  1                ,\
 			    /*DOC*/       "Maximum number of sequences to keep when building a profile [0 to keep everything, negative value to keep X%%, positive value to keep X Sequences]" ,\
 			    /*Parameter*/ &psitrim          ,\
-			    /*Def 1*/     "40"             ,\
-			    /*Def 2*/     "40"             ,\
+			    /*Def 1*/     "100"             ,\
+			    /*Def 2*/     "100"             ,\
 			    /*Min_value*/ "any"            ,\
 			    /*Max Value*/ "any"             \
 		   );
@@ -7068,6 +7069,7 @@ Alignment * km_coffee_align3 (Sequence *S, char *km_tree, int k, char *out_f, in
 Alignment * t_coffee_dpa (int argc, char **argv)
 {
   NT_node T;
+  FILE *fp;
   Sequence *S=NULL;
   char *seqfile=NULL;
   char *dpa_tree=NULL;
@@ -7328,7 +7330,6 @@ Alignment * t_coffee_dpa (int argc, char **argv)
       else dpa_nseq=MAX((S->nseq/10),2);
     }
   
-  //
   fprintf ( le, "!Maximum N Threads --- %d\n",get_nproc());
   //prepare the guide tree
   fprintf ( le, "!Compute Guide Tree --- ");
