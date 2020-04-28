@@ -182,41 +182,55 @@ $threadFlag4famsa=($thread)?"-t $thread ":"-t 1 ";
 $CL4tc.=" $threadFlag4tc ";
 
 
-if ($method2use eq "tcoffee_msa" || $method2use eq "tcoffee"|| $method2use eq "t_coffee" )
+my $cmethod=$method2use;
+$cmethod=~s/_pair/_msa/;
+$cmethod=~s/_msa//;
+
+if ($cmethod eq "tcoffee"|| $cmethod eq "t_coffee" )
   {
     my_system ("t_coffee -seq $infile -outfile $outfile -output fasta_aln $CL4tc>/dev/null  $QUIET");    
   }
-elsif ($method2use=~/(.*coffee)/ || $method2use=~/(accurate)/ || $method2use=~/(expresso)/)
+elsif ($cmethod=~/(.*coffee)/ || $cmethod=~/(accurate)/ || $cmethod=~/(expresso)/)
   {
     my $mode=$1;
     my_system ("t_coffee  -mode $mode -seq $infile -outfile $outfile -output fasta_aln $CL4tc >/dev/null  $QUIET");    
   }
-elsif ($method2use eq "clustalo_msa" || $method2use eq "clustalo")
+elsif ($cmethod eq "clustalo")
   {
     my_system ("clustalo -i $infile $treeFlag -o $outfile  --force $threadFlag $QUIET");
     }
-elsif ($method2use eq "mafft_msa" || $method2use eq "mafft")
+elsif ($cmethod =~/sparsecore/)
   {
-    my_system ("mafft --anysymbol $threadFlag $treeFlag $infile > $outfile $QUIET");
+    my_system ("mafft-sparsecore.rb -i $infile > $outfile $QUIET");
   }
-elsif ($method2use eq "mafftginsi_msa" || $method2use eq "mafft-ginsi")
+elsif (($cmethod =~/mafft/))
   {
-    my_system ("mafft-ginsi $threadFlag --anysymbol $treeFlag $infile > $outfile $QUIET");
+    my $mm;
+    my $retree;
+    
+    if ( $cmethod eq "mafft" || $cmethod=~/\-/ )
+      {
+	$mm=$cmethod;
+      }
+    elsif (($cmethod=~/mafft(.*)/))
+      {
+	$mm="mafft-".$1;
+      }
+
+    if ($mm =~/1/)
+      {
+	$mm=~s/1/i/;
+	$retree="--retree 1 "
+      };
+    
+    my_system ("$mm --anysymbol $threadFlag $treeFlag $retree $infile > $outfile $QUIET");
   }
-elsif ($method2use eq "mafftfftns1_msa" || $method2use eq "mafft-fftns1")
-  {
-    my_system ("mafft-fftnsi $threadFlag --retree 1 --anysymbol $treeFlag $infile > $outfile $QUIET");
-  }
-elsif ($method2use =~/mafft/)
-   {
-     my_system ("$method2use $threadFlag --anysymbol $treeFlag $infile > $outfile $QUIET");
-   }
-elsif ($method2use eq "famsa_msa")
+
+elsif ($method2use eq "famsa")
   {
     
     my_system ("famsa $treeFlag $threadFlag4famsa $infile $outfile >/dev/null $QUIET");
   }
-
 else
   {
     if ($treeF)

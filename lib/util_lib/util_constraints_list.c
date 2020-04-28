@@ -6342,6 +6342,204 @@ char *** produce_method_file ( char *method)
     fprintf ( fp, "PROGRAM    %s\n", MAFFT_4_TCOFFEE);
     vfclose (fp);}
 
+    //MAFFT runs through dynamic.pl
+    //Guide Tree mode can be selected
+    sprintf (list[n][0], "mafftfftnsi_msa");
+    sprintf (list[n][1], "%s", vtmpnam(NULL));
+    n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
+    fprintf ( fp, "DOC: dynamic [%s]\n", "runs mafft from dynamic.pl");
+    fprintf ( fp, "EXECUTABLE dynamic.pl\n");
+    fprintf ( fp, "ALN_MODE   multiple\n");
+    fprintf ( fp, "OUT_MODE   aln\n");
+    fprintf ( fp, "IN_FLAG    -seq&bnsp\n");
+    fprintf ( fp, "OUT_FLAG   -outfile&bnsp\n");
+    fprintf ( fp, "PARAM      -method mafftfftnsi_msa\n");
+    fprintf ( fp, "SEQ_TYPE   S\n");
+    fprintf ( fp, "ADDRESS    %s\n", MAFFT_ADDRESS);
+    fprintf ( fp, "PROGRAM    %s\n", MAFFT_4_TCOFFEE);
+    vfclose (fp);}
+   
+    sprintf (list[n][0], "mafftfftnsi_pair");
+    sprintf (list[n][1], "%s", vtmpnam(NULL));
+    n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
+    fprintf ( fp, "DOC: dynamic [%s]\n", "runs mafft from dynamic.pl");
+    fprintf ( fp, "EXECUTABLE dynamic.pl\n");
+    fprintf ( fp, "ALN_MODE   pair\n");
+    fprintf ( fp, "OUT_MODE   aln\n");
+    fprintf ( fp, "IN_FLAG    -seq&bnsp\n");
+    fprintf ( fp, "OUT_FLAG   -outfile&bnsp\n");
+    fprintf ( fp, "PARAM      -method mafftfftnsi_msa\n");
+    fprintf ( fp, "SEQ_TYPE   S\n");
+    fprintf ( fp, "ADDRESS    %s\n", MAFFT_ADDRESS);
+    fprintf ( fp, "PROGRAM    %s\n", MAFFT_4_TCOFFEE);
+    vfclose (fp);}
+
+     //MAFFT runs through dynamic.pl
+    //Guide Tree mode can be selected
+    sprintf (list[n][0], "mafftnwnsi_msa");
+    sprintf (list[n][1], "%s", vtmpnam(NULL));
+    n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
+    fprintf ( fp, "DOC: dynamic [%s]\n", "runs mafft from dynamic.pl");
+    fprintf ( fp, "EXECUTABLE dynamic.pl\n");
+    fprintf ( fp, "ALN_MODE   multiple\n");
+    fprintf ( fp, "OUT_MODE   aln\n");
+    fprintf ( fp, "IN_FLAG    -seq&bnsp\n");
+    fprintf ( fp, "OUT_FLAG   -outfile&bnsp\n");
+    fprintf ( fp, "PARAM      -method mafftnwnsi_msa\n");
+    fprintf ( fp, "SEQ_TYPE   S\n");
+    fprintf ( fp, "ADDRESS    %s\n", MAFFT_ADDRESS);
+    fprintf ( fp, "PROGRAM    %s\n", MAFFT_4_TCOFFEE);
+    vfclose (fp);}
+   
+    sprintf (list[n][0], "mafftnwnsi_pair");
+    sprintf (list[n][1], "%s", vtmpnam(NULL));
+    n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
+    fprintf ( fp, "DOC: dynamic [%s]\n", "runs mafft from dynamic.pl");
+    fprintf ( fp, "EXECUTABLE dynamic.pl\n");
+    fprintf ( fp, "ALN_MODE   pair\n");
+    fprintf ( fp, "OUT_MODE   aln\n");
+    fprintf ( fp, "IN_FLAG    -seq&bnsp\n");
+    fprintf ( fp, "OUT_FLAG   -outfile&bnsp\n");
+    fprintf ( fp, "PARAM      -method mafftfftnwnsi_msa\n");
+    fprintf ( fp, "SEQ_TYPE   S\n");
+    fprintf ( fp, "ADDRESS    %s\n", MAFFT_ADDRESS);
+    fprintf ( fp, "PROGRAM    %s\n", MAFFT_4_TCOFFEE);
+    vfclose (fp);}
+
+
+     //MAFFT runs through dynamic.pl
+    //Guide Tree mode can be selected
+    sprintf (list[n][0], "mafftsparsecore_msa");
+    sprintf (list[n][1], "%s", vtmpnam(NULL));
+    n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
+    fprintf ( fp, "DOC: dynamic [%s]\n", "runs mafft from dynamic.pl");
+    fprintf ( fp, "EXECUTABLE dynamic.pl\n");
+    fprintf ( fp, "ALN_MODE   multiple\n");
+    fprintf ( fp, "OUT_MODE   aln\n");
+    fprintf ( fp, "IN_FLAG    -seq&bnsp\n");
+    fprintf ( fp, "OUT_FLAG   -outfile&bnsp\n");
+    fprintf ( fp, "PARAM      -method mafftsparsecore_msa\n");
+    fprintf ( fp, "SEQ_TYPE   S\n");
+    fprintf ( fp, "ADDRESS    %s\n", MAFFT_ADDRESS);
+    fprintf ( fp, "PROGRAM    %s\n", MAFFT_4_TCOFFEE);
+    vfclose (fp);}
+   
+    sprintf (list[n][0], "mafftnwnsi_pair");
+    sprintf (list[n][1], "%s", vtmpnam(NULL));
+    n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
+    fprintf ( fp, "DOC: dynamic [%s]\n", "runs mafft from dynamic.pl");
+    fprintf ( fp, "EXECUTABLE dynamic.pl\n");
+    fprintf ( fp, "ALN_MODE   pair\n");
+    fprintf ( fp, "OUT_MODE   aln\n");
+    fprintf ( fp, "IN_FLAG    -seq&bnsp\n");
+    fprintf ( fp, "OUT_FLAG   -outfile&bnsp\n");
+    fprintf ( fp, "PARAM      -method mafftffsparsecore_pair\n");
+    fprintf ( fp, "SEQ_TYPE   S\n");
+    fprintf ( fp, "ADDRESS    %s\n", MAFFT_ADDRESS);
+    fprintf ( fp, "PROGRAM    %s\n", MAFFT_4_TCOFFEE);
+    vfclose (fp);}
+
+
+
+    sprintf (list[n][0], "mafftsparsecore_pair");
+	sprintf (list[n][1], "%s", vtmpnam(NULL));
+	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
+	fprintf ( fp, "EXECUTABLE mafft-sparsecore.rb\n");
+	fprintf ( fp, "DOC Mafft [%s]\n", MAFFT_ADDRESS);
+	fprintf ( fp, "ALN_MODE   pairwise\n");
+	fprintf ( fp, "OUT_MODE   aln\n");
+	fprintf ( fp, "IN_FLAG    -i\n");
+	fprintf ( fp, "OUT_FLAG   >\n");
+	fprintf ( fp, "PARAM1 -C \"--globalpair --maxiterate 100 --anysymbol\" \n");
+	fprintf ( fp, "SEQ_TYPE   S\n");
+	fprintf ( fp, "ADDRESS    %s\n", MAFFT_ADDRESS);
+	fprintf ( fp, "PROGRAM    %s\n", MAFFT_4_TCOFFEE);
+	vfclose (fp);}
+
+	sprintf (list[n][0], "mafftsparsecore_msa");
+	sprintf (list[n][1], "%s", vtmpnam(NULL));
+	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
+	fprintf ( fp, "EXECUTABLE mafft-sparsecore.rb\n");
+	fprintf ( fp, "DOC Mafft [%s]\n", MAFFT_ADDRESS);
+	fprintf ( fp, "ALN_MODE   multiple\n");
+	fprintf ( fp, "OUT_MODE   aln\n");
+	fprintf ( fp, "IN_FLAG    -i\n");
+	fprintf ( fp, "OUT_FLAG   >\n");
+	fprintf ( fp, "PARAM1 -C \"--globalpair --maxiterate 100 --anysymbol\" \n");
+	fprintf ( fp, "SEQ_TYPE   S\n");
+	fprintf ( fp, "ADDRESS    %s\n", MAFFT_ADDRESS);
+	fprintf ( fp, "PROGRAM    %s\n", MAFFT_4_TCOFFEE);
+	vfclose (fp);}
+
+	 //MAFFT runs through dynamic.pl
+	//Guide Tree mode can be selected
+	sprintf (list[n][0], "mafftlinsi_msa");
+	sprintf (list[n][1], "%s", vtmpnam(NULL));
+	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
+	  fprintf ( fp, "DOC: dynamic [%s]\n", "runs mafft from dynamic.pl");
+	  fprintf ( fp, "EXECUTABLE dynamic.pl\n");
+	  fprintf ( fp, "ALN_MODE   multiple\n");
+	  fprintf ( fp, "OUT_MODE   aln\n");
+	  fprintf ( fp, "IN_FLAG    -seq&bnsp\n");
+	  fprintf ( fp, "OUT_FLAG   -outfile&bnsp\n");
+	  fprintf ( fp, "PARAM      -method mafftlinsi_msa\n");
+	  fprintf ( fp, "SEQ_TYPE   S\n");
+	  fprintf ( fp, "ADDRESS    %s\n", MAFFT_ADDRESS);
+	  fprintf ( fp, "PROGRAM    %s\n", MAFFT_4_TCOFFEE);
+	  vfclose (fp);}
+	
+	sprintf (list[n][0], "mafftlinsi_pair");
+	sprintf (list[n][1], "%s", vtmpnam(NULL));
+	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
+	  fprintf ( fp, "DOC: dynamic [%s]\n", "runs mafft from dynamic.pl");
+	  fprintf ( fp, "EXECUTABLE dynamic.pl\n");
+	  fprintf ( fp, "ALN_MODE   pair\n");
+	  fprintf ( fp, "OUT_MODE   aln\n");
+	  fprintf ( fp, "IN_FLAG    -seq&bnsp\n");
+	  fprintf ( fp, "OUT_FLAG   -outfile&bnsp\n");
+	  fprintf ( fp, "PARAM      -method mafftlinsi_pair\n");
+	  fprintf ( fp, "SEQ_TYPE   S\n");
+	  fprintf ( fp, "ADDRESS    %s\n", MAFFT_ADDRESS);
+	  fprintf ( fp, "PROGRAM    %s\n", MAFFT_4_TCOFFEE);
+	  vfclose (fp);}
+
+	//MAFFT runs through dynamic.pl
+	//Guide Tree mode can be selected
+	sprintf (list[n][0], "maffteinsi_msa");
+	sprintf (list[n][1], "%s", vtmpnam(NULL));
+	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
+	  fprintf ( fp, "DOC: dynamic [%s]\n", "runs mafft from dynamic.pl");
+	  fprintf ( fp, "EXECUTABLE dynamic.pl\n");
+	  fprintf ( fp, "ALN_MODE   multiple\n");
+	  fprintf ( fp, "OUT_MODE   aln\n");
+	  fprintf ( fp, "IN_FLAG    -seq&bnsp\n");
+	  fprintf ( fp, "OUT_FLAG   -outfile&bnsp\n");
+	  fprintf ( fp, "PARAM      -method maffteinsi_msa\n");
+	  fprintf ( fp, "SEQ_TYPE   S\n");
+	  fprintf ( fp, "ADDRESS    %s\n", MAFFT_ADDRESS);
+	  fprintf ( fp, "PROGRAM    %s\n", MAFFT_4_TCOFFEE);
+	  vfclose (fp);}
+
+	
+	//MAFFT runs through dynamic.pl
+	//Guide Tree mode can be selected
+	sprintf (list[n][0], "maffteinsi_pair");
+	sprintf (list[n][1], "%s", vtmpnam(NULL));
+	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
+	  fprintf ( fp, "DOC: dynamic [%s]\n", "runs mafft from dynamic.pl");
+	  fprintf ( fp, "EXECUTABLE dynamic.pl\n");
+	  fprintf ( fp, "ALN_MODE   multiple\n");
+	  fprintf ( fp, "OUT_MODE   pair\n");
+	  fprintf ( fp, "IN_FLAG    -seq&bnsp\n");
+	  fprintf ( fp, "OUT_FLAG   -outfile&bnsp\n");
+	  fprintf ( fp, "PARAM      -method maffteinsi_pair\n");
+	  fprintf ( fp, "SEQ_TYPE   S\n");
+	  fprintf ( fp, "ADDRESS    %s\n", MAFFT_ADDRESS);
+	  fprintf ( fp, "PROGRAM    %s\n", MAFFT_4_TCOFFEE);
+	  vfclose (fp);}
+	
+   
+
 
 
     sprintf (list[n][0], "dynamic_pair");
@@ -6650,523 +6848,6 @@ char *** produce_method_file ( char *method)
 	fprintf ( fp, "ADDRESS    %s\n", DCA_ADDRESS);
 	fprintf ( fp, "PROGRAM    %s\n", DCA_4_TCOFFEE);
 	vfclose (fp);}
-
-	sprintf (list[n][0], "mafftsparsecore_pair");
-	sprintf (list[n][1], "%s", vtmpnam(NULL));
-	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
-	fprintf ( fp, "EXECUTABLE mafft-sparsecore.rb\n");
-	fprintf ( fp, "DOC Mafft [%s]\n", MAFFT_ADDRESS);
-	fprintf ( fp, "ALN_MODE   pairwise\n");
-	fprintf ( fp, "OUT_MODE   aln\n");
-	fprintf ( fp, "IN_FLAG    -i\n");
-	fprintf ( fp, "OUT_FLAG   >\n");
-	fprintf ( fp, "PARAM1 -C \"--globalpair --maxiterate 100 --anysymbol\" \n");
-	fprintf ( fp, "SEQ_TYPE   S\n");
-	fprintf ( fp, "ADDRESS    %s\n", MAFFT_ADDRESS);
-	fprintf ( fp, "PROGRAM    %s\n", MAFFT_4_TCOFFEE);
-	vfclose (fp);}
-
-	sprintf (list[n][0], "mafftsparsecore_msa");
-	sprintf (list[n][1], "%s", vtmpnam(NULL));
-	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
-	fprintf ( fp, "EXECUTABLE mafft-sparsecore.rb\n");
-	fprintf ( fp, "DOC Mafft [%s]\n", MAFFT_ADDRESS);
-	fprintf ( fp, "ALN_MODE   multiple\n");
-	fprintf ( fp, "OUT_MODE   aln\n");
-	fprintf ( fp, "IN_FLAG    -i\n");
-	fprintf ( fp, "OUT_FLAG   >\n");
-	fprintf ( fp, "PARAM1 -C \"--globalpair --maxiterate 100 --anysymbol\" \n");
-	fprintf ( fp, "SEQ_TYPE   S\n");
-	fprintf ( fp, "ADDRESS    %s\n", MAFFT_ADDRESS);
-	fprintf ( fp, "PROGRAM    %s\n", MAFFT_4_TCOFFEE);
-	vfclose (fp);}
-
-	sprintf (list[n][0], "maffttest_pair");
-	sprintf (list[n][1], "%s", vtmpnam(NULL));
-	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
-	fprintf ( fp, "EXECUTABLE mafft\n");
-	fprintf ( fp, "DOC Mafft [%s]\n", MAFFT_ADDRESS);
-	fprintf ( fp, "ALN_MODE   pairwise\n");
-	fprintf ( fp, "OUT_MODE   aln\n");
-	fprintf ( fp, "IN_FLAG    &bnsp\n");
-	fprintf ( fp, "OUT_FLAG   >\n");
-	fprintf ( fp, "PARAM1 --anysymbol \n");
-
-	fprintf ( fp, "SEQ_TYPE   S\n");
-	fprintf ( fp, "ADDRESS    %s\n", MAFFT_ADDRESS);
-	fprintf ( fp, "PROGRAM    %s\n", MAFFT_4_TCOFFEE);
-	vfclose (fp);}
-
-	sprintf (list[n][0], "maffttest_msa");
-	sprintf (list[n][1], "%s", vtmpnam(NULL));
-	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
-	fprintf ( fp, "EXECUTABLE mafft\n");
-	fprintf ( fp, "DOC Mafft [%s]\n", MAFFT_ADDRESS);
-	fprintf ( fp, "ALN_MODE   multiple\n");
-	fprintf ( fp, "OUT_MODE   aln\n");
-	fprintf ( fp, "IN_FLAG    &bnsp\n");
-	fprintf ( fp, "OUT_FLAG   >\n");
-
-	fprintf ( fp, "PARAM1 --anysymbol \n");
-	fprintf ( fp, "PARAM      \n");
-	fprintf ( fp, "SEQ_TYPE   S\n");
-	fprintf ( fp, "ADDRESS    %s\n", MAFFT_ADDRESS);
-	fprintf ( fp, "PROGRAM    %s\n", MAFFT_4_TCOFFEE);
-	vfclose (fp);}
-	
-	sprintf (list[n][0], "old_mafft_pair");
-	sprintf (list[n][1], "%s", vtmpnam(NULL));
-	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
-	fprintf ( fp, "EXECUTABLE mafft\n");
-	fprintf ( fp, "DOC Mafft [%s]\n", MAFFT_ADDRESS);
-	fprintf ( fp, "ALN_MODE   pairwise\n");
-	fprintf ( fp, "OUT_MODE   aln\n");
-	fprintf ( fp, "IN_FLAG    &bnsp\n");
-	fprintf ( fp, "OUT_FLAG   >\n");
-	fprintf ( fp, "PARAM1 --anysymbol \n");
-	fprintf ( fp, "PARAM      &bnsp2>/dev/null\n");
-	fprintf ( fp, "SEQ_TYPE   S\n");
-	fprintf ( fp, "ADDRESS    %s\n", MAFFT_ADDRESS);
-	fprintf ( fp, "PROGRAM    %s\n", MAFFT_4_TCOFFEE);
-	vfclose (fp);}
-
-	sprintf (list[n][0], "old_mafft_msa");
-	sprintf (list[n][1], "%s", vtmpnam(NULL));
-	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
-	fprintf ( fp, "EXECUTABLE mafft\n");
-	fprintf ( fp, "DOC Mafft [%s]\n", MAFFT_ADDRESS);
-	fprintf ( fp, "ALN_MODE   multiple\n");
-	fprintf ( fp, "OUT_MODE   aln\n");
-	fprintf ( fp, "IN_FLAG    &bnsp\n");
-	fprintf ( fp, "OUT_FLAG   >\n");
-	fprintf ( fp, "PARAM      &bnsp2>/dev/null\n");
-	fprintf ( fp, "PARAM1 --anysymbol \n");
-	fprintf ( fp, "PARAM      \n");
-	fprintf ( fp, "SEQ_TYPE   S\n");
-	fprintf ( fp, "ADDRESS    %s\n", MAFFT_ADDRESS);
-	fprintf ( fp, "PROGRAM    %s\n", MAFFT_4_TCOFFEE);
-	vfclose (fp);}
-
-	sprintf (list[n][0], "mafftparttree1_pair");
-	sprintf (list[n][1], "%s", vtmpnam(NULL));
-	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
-	fprintf ( fp, "EXECUTABLE mafft\n");
-	fprintf ( fp, "DOC Mafft [%s]\n", MAFFT_ADDRESS);
-	fprintf ( fp, "ALN_MODE   pairwise\n");
-	fprintf ( fp, "OUT_MODE   aln\n");
-	fprintf ( fp, "PARAM1 --retree 1 --parttree \n");
-	fprintf ( fp, "IN_FLAG    &bnsp\n");
-	fprintf ( fp, "OUT_FLAG   >\n");
-	fprintf ( fp, "PARAM1 --anysymbol \n");
-	fprintf ( fp, "PARAM      &bnsp2>/dev/null\n");
-	fprintf ( fp, "SEQ_TYPE   S\n");
-	fprintf ( fp, "ADDRESS    %s\n", MAFFT_ADDRESS);
-	fprintf ( fp, "PROGRAM    %s\n", MAFFT_4_TCOFFEE);
-	vfclose (fp);}
-
-	sprintf (list[n][0], "mafftparttree1_msa");
-	sprintf (list[n][1], "%s", vtmpnam(NULL));
-	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
-	fprintf ( fp, "EXECUTABLE mafft\n");
-	fprintf ( fp, "DOC Mafft [%s]\n", MAFFT_ADDRESS);
-	fprintf ( fp, "ALN_MODE   multiple\n");
-	fprintf ( fp, "OUT_MODE   aln\n");
-	fprintf ( fp, "PARAM1 --rretree 1 --parttree  --anysymbol \n");
-	fprintf ( fp, "IN_FLAG    &bnsp\n");
-	fprintf ( fp, "OUT_FLAG   >\n");
-	fprintf ( fp, "PARAM      &bnsp2>/dev/null\n");
-	fprintf ( fp, "SEQ_TYPE   S\n");
-	fprintf ( fp, "ADDRESS    %s\n", MAFFT_ADDRESS);
-	fprintf ( fp, "PROGRAM    %s\n", MAFFT_4_TCOFFEE);
-	vfclose (fp);}
-
-	sprintf (list[n][0], "mafftparttree_pair");
-	sprintf (list[n][1], "%s", vtmpnam(NULL));
-	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
-	fprintf ( fp, "EXECUTABLE mafft\n");
-	fprintf ( fp, "DOC Mafft [%s]\n", MAFFT_ADDRESS);
-	fprintf ( fp, "ALN_MODE   pairwise\n");
-	fprintf ( fp, "OUT_MODE   aln\n");
-	
-	fprintf ( fp, "PARAM1 --parttree \n");
-	fprintf ( fp, "IN_FLAG    &bnsp\n");
-	fprintf ( fp, "OUT_FLAG   >\n");
-	fprintf ( fp, "PARAM1 --anysymbol \n");
-	fprintf ( fp, "PARAM      &bnsp2>/dev/null\n");
-	fprintf ( fp, "SEQ_TYPE   S\n");
-	fprintf ( fp, "ADDRESS    %s\n", MAFFT_ADDRESS);
-	fprintf ( fp, "PROGRAM    %s\n", MAFFT_4_TCOFFEE);
-	vfclose (fp);}
-
-	sprintf (list[n][0], "mafftparttree_msa");
-	sprintf (list[n][1], "%s", vtmpnam(NULL));
-	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
-	fprintf ( fp, "EXECUTABLE mafft\n");
-	fprintf ( fp, "DOC Mafft [%s]\n", MAFFT_ADDRESS);
-	fprintf ( fp, "ALN_MODE   multiple\n");
-	fprintf ( fp, "OUT_MODE   aln\n");
-	fprintf ( fp, "PARAM1 --parttree  --anysymbol \n");
-	fprintf ( fp, "IN_FLAG    &bnsp\n");
-	fprintf ( fp, "OUT_FLAG   >\n");
-	fprintf ( fp, "PARAM      &bnsp2>/dev/null\n");
-	fprintf ( fp, "SEQ_TYPE   S\n");
-	fprintf ( fp, "ADDRESS    %s\n", MAFFT_ADDRESS);
-	fprintf ( fp, "PROGRAM    %s\n", MAFFT_4_TCOFFEE);
-	vfclose (fp);}
-	
-	
-	sprintf (list[n][0], "mafftlinsi_pair");
-	sprintf (list[n][1], "%s", vtmpnam(NULL));
-	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
-	fprintf ( fp, "EXECUTABLE mafft-linsi\n");
-	fprintf ( fp, "DOC Mafft [%s]\n", MAFFT_ADDRESS);
-	fprintf ( fp, "ALN_MODE   pairwise\n");
-	fprintf ( fp, "OUT_MODE   aln\n");
-	fprintf ( fp, "IN_FLAG    &bnsp\n");
-	fprintf ( fp, "OUT_FLAG   >\n");
-	fprintf ( fp, "PARAM1 --anysymbol \n");
-	fprintf ( fp, "PARAM      &bnsp2>/dev/null\n");
-	fprintf ( fp, "SEQ_TYPE   S\n");
-	fprintf ( fp, "ADDRESS    %s\n", MAFFT_ADDRESS);
-	fprintf ( fp, "PROGRAM    %s\n", MAFFT_4_TCOFFEE);
-	vfclose (fp);}
-
-	sprintf (list[n][0], "mafftlinsi_msa");
-	sprintf (list[n][1], "%s", vtmpnam(NULL));
-	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
-	fprintf ( fp, "EXECUTABLE mafft-linsi\n");
-	fprintf ( fp, "DOC Mafft [%s]\n", MAFFT_ADDRESS);
-	fprintf ( fp, "ALN_MODE   multiple\n");
-	fprintf ( fp, "OUT_MODE   aln\n");
-	fprintf ( fp, "IN_FLAG    &bnsp\n");
-	fprintf ( fp, "OUT_FLAG   >\n");
-	fprintf ( fp, "PARAM1 --anysymbol \n");
-	fprintf ( fp, "PARAM      &bnsp2>/dev/null\n");
-	
-	fprintf ( fp, "SEQ_TYPE   S\n");
-	fprintf ( fp, "ADDRESS    %s\n", MAFFT_ADDRESS);
-	fprintf ( fp, "PROGRAM    %s\n", MAFFT_4_TCOFFEE);
-	vfclose (fp);}
-
-	//ginsi
-	
-	sprintf (list[n][0], "old_mafftginsi_pair");
-	sprintf (list[n][1], "%s", vtmpnam(NULL));
-	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
-	fprintf ( fp, "EXECUTABLE mafft-ginsi\n");
-	fprintf ( fp, "DOC Mafft [%s]\n", MAFFT_ADDRESS);
-	fprintf ( fp, "ALN_MODE   pairwise\n");
-	fprintf ( fp, "OUT_MODE   aln\n");
-	fprintf ( fp, "IN_FLAG    &bnsp\n");
-	fprintf ( fp, "OUT_FLAG   >\n");
-	fprintf ( fp, "PARAM1 --anysymbol \n");
-	fprintf ( fp, "PARAM      &bnsp2>/dev/null\n");
-	fprintf ( fp, "SEQ_TYPE   S\n");
-	fprintf ( fp, "ADDRESS    %s\n", MAFFT_ADDRESS);
-	fprintf ( fp, "PROGRAM    %s\n", MAFFT_4_TCOFFEE);
-	vfclose (fp);}
-	
-
-	sprintf (list[n][0], "old_mafftginsi_msa");
-	sprintf (list[n][1], "%s", vtmpnam(NULL));
-
-	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
-	fprintf ( fp, "EXECUTABLE mafft-ginsi\n");
-	fprintf ( fp, "DOC Mafft [%s]\n", MAFFT_ADDRESS);
-	fprintf ( fp, "ALN_MODE   multiple\n");
-	fprintf ( fp, "OUT_MODE   aln\n");
-	fprintf ( fp, "IN_FLAG    &bnsp\n");
-	fprintf ( fp, "OUT_FLAG   >\n");
-	fprintf ( fp, "PARAM1 --anysymbol \n");
-	fprintf ( fp, "PARAM      &bnsp2>/dev/null\n");
-	
-	fprintf ( fp, "SEQ_TYPE   S\n");
-	fprintf ( fp, "ADDRESS    %s\n", MAFFT_ADDRESS);
-	fprintf ( fp, "PROGRAM    %s\n", MAFFT_4_TCOFFEE);
-	vfclose (fp);}
-	
-	//einsi
-	sprintf (list[n][0], "maffteinsi_pair");
-	sprintf (list[n][1], "%s", vtmpnam(NULL));
-	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
-	fprintf ( fp, "EXECUTABLE mafft-einsi\n");
-	fprintf ( fp, "DOC Mafft [%s]\n", MAFFT_ADDRESS);
-	fprintf ( fp, "ALN_MODE   pairwise\n");
-	fprintf ( fp, "OUT_MODE   aln\n");
-	fprintf ( fp, "IN_FLAG    &bnsp\n");
-	fprintf ( fp, "OUT_FLAG   >\n");
-	fprintf ( fp, "PARAM1 --anysymbol \n");
-	fprintf ( fp, "PARAM      &bnsp2>/dev/null\n");
-	
-	fprintf ( fp, "SEQ_TYPE   S\n");
-	fprintf ( fp, "ADDRESS    %s\n", MAFFT_ADDRESS);
-	fprintf ( fp, "PROGRAM    %s\n", MAFFT_4_TCOFFEE);
-	vfclose (fp);}
-
-	sprintf (list[n][0], "maffteinsi_msa");
-	sprintf (list[n][1], "%s", vtmpnam(NULL));
-	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
-	fprintf ( fp, "EXECUTABLE mafft-einsi\n");
-	fprintf ( fp, "DOC Mafft [%s]\n", MAFFT_ADDRESS);
-	fprintf ( fp, "ALN_MODE   multiple\n");
-	fprintf ( fp, "OUT_MODE   aln\n");
-	fprintf ( fp, "IN_FLAG    &bnsp\n");
-	fprintf ( fp, "OUT_FLAG   >\n");
-	fprintf ( fp, "PARAM1 --anysymbol \n");
-	fprintf ( fp, "PARAM      &bnsp2>/dev/null\n");
-	
-	fprintf ( fp, "SEQ_TYPE   S\n");
-	fprintf ( fp, "ADDRESS    %s\n", MAFFT_ADDRESS);
-	fprintf ( fp, "PROGRAM    %s\n", MAFFT_4_TCOFFEE);
-	vfclose (fp);}
-
-	//fftnsi
-	/*deprecated: Should now run maffttftns1 via dynamic.pl	*/
-	sprintf (list[n][0], "mafftfftnsi_pair");
-	sprintf (list[n][1], "%s", vtmpnam(NULL));
-	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
-	fprintf ( fp, "EXECUTABLE mafft-fftnsi\n");
-	fprintf ( fp, "DOC Mafft [%s]\n", MAFFT_ADDRESS);
-	fprintf ( fp, "ALN_MODE   pairwise\n");
-	fprintf ( fp, "OUT_MODE   aln\n");
-	fprintf ( fp, "IN_FLAG    &bnsp\n");
-	fprintf ( fp, "OUT_FLAG   >\n");
-	fprintf ( fp, "PARAM1 --anysymbol \n");
-	fprintf ( fp, "PARAM      &bnsp2>/dev/null\n");
-	
-	fprintf ( fp, "SEQ_TYPE   S\n");
-	fprintf ( fp, "ADDRESS    %s\n", MAFFT_ADDRESS);
-	fprintf ( fp, "PROGRAM    %s\n", MAFFT_4_TCOFFEE);
-	vfclose (fp);}
-	
-	/*deprecated: Should now run clustalo via dynamic.pl	*/
-	sprintf (list[n][0], "mafftfftnsi_msa");
-	sprintf (list[n][1], "%s", vtmpnam(NULL));
-	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
-	fprintf ( fp, "EXECUTABLE mafft-fftnsi\n");
-	fprintf ( fp, "DOC Mafft [%s]\n", MAFFT_ADDRESS);
-	fprintf ( fp, "ALN_MODE   multiple\n");
-	fprintf ( fp, "OUT_MODE   aln\n");
-	fprintf ( fp, "IN_FLAG    &bnsp\n");
-	fprintf ( fp, "OUT_FLAG   >\n");
-	fprintf ( fp, "PARAM1 --anysymbol \n");
-	fprintf ( fp, "PARAM      &bnsp2>/dev/null\n");	
-	fprintf ( fp, "SEQ_TYPE   S\n");
-	fprintf ( fp, "ADDRESS    %s\n", MAFFT_ADDRESS);
-	fprintf ( fp, "PROGRAM    %s\n", MAFFT_4_TCOFFEE);
-	vfclose (fp);}
-
-	
-	//fftns1
-	sprintf (list[n][0], "old_mafftfftns1_pair");
-	sprintf (list[n][1], "%s", vtmpnam(NULL));
-	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
-	fprintf ( fp, "EXECUTABLE mafft-fftns\n");
-	fprintf ( fp, "DOC Mafft [%s]\n", MAFFT_ADDRESS);
-	fprintf ( fp, "ALN_MODE   pairwise\n");
-	fprintf ( fp, "OUT_MODE   aln\n");
-	fprintf ( fp, "IN_FLAG    &bnsp\n");
-	fprintf ( fp, "OUT_FLAG   >\n");
-	fprintf ( fp, "PARAM1 --retree 1 --anysymbol \n");
-	fprintf ( fp, "PARAM      &bnsp2>/dev/null\n");
-	fprintf ( fp, "SEQ_TYPE   S\n");
-	fprintf ( fp, "ADDRESS    %s\n", MAFFT_ADDRESS);
-	fprintf ( fp, "PROGRAM    %s\n", MAFFT_4_TCOFFEE);
-	vfclose (fp);}
-
-	sprintf (list[n][0], "old_mafftfftns1_msa");
-	sprintf (list[n][1], "%s", vtmpnam(NULL));
-	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
-	fprintf ( fp, "EXECUTABLE mafft-fftns\n");
-	fprintf ( fp, "DOC Mafft [%s]\n", MAFFT_ADDRESS);
-	fprintf ( fp, "ALN_MODE   multiple\n");
-	fprintf ( fp, "OUT_MODE   aln\n");
-	fprintf ( fp, "IN_FLAG    &bnsp\n");
-	fprintf ( fp, "OUT_FLAG   >\n");
-	fprintf ( fp, "PARAM1 --retree 1 --anysymbol \n");
-	fprintf ( fp, "PARAM      &bnsp2>/dev/null\n");
-	
-	fprintf ( fp, "SEQ_TYPE   S\n");
-	fprintf ( fp, "ADDRESS    %s\n", MAFFT_ADDRESS);
-	fprintf ( fp, "PROGRAM    %s\n", MAFFT_4_TCOFFEE);
-	vfclose (fp);}
-
-	//fftns2
-	sprintf (list[n][0], "mafftfftns_pair");
-	sprintf (list[n][1], "%s", vtmpnam(NULL));
-	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
-	fprintf ( fp, "EXECUTABLE mafft-fftns\n");
-	fprintf ( fp, "DOC Mafft [%s]\n", MAFFT_ADDRESS);
-	fprintf ( fp, "ALN_MODE   pairwise\n");
-	fprintf ( fp, "OUT_MODE   aln\n");
-	fprintf ( fp, "IN_FLAG    &bnsp\n");
-	fprintf ( fp, "OUT_FLAG   >\n");
-	fprintf ( fp, "PARAM1 --anysymbol \n");
-	fprintf ( fp, "PARAM      &bnsp2>/dev/null\n");
-	fprintf ( fp, "SEQ_TYPE   S\n");
-	fprintf ( fp, "ADDRESS    %s\n", MAFFT_ADDRESS);
-	fprintf ( fp, "PROGRAM    %s\n", MAFFT_4_TCOFFEE);
-	vfclose (fp);}
-
-	sprintf (list[n][0], "mafftfftns_msa");
-	sprintf (list[n][1], "%s", vtmpnam(NULL));
-	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
-	fprintf ( fp, "EXECUTABLE mafft-fftns\n");
-	fprintf ( fp, "DOC Mafft [%s]\n", MAFFT_ADDRESS);
-	fprintf ( fp, "ALN_MODE   multiple\n");
-	fprintf ( fp, "OUT_MODE   aln\n");
-	fprintf ( fp, "IN_FLAG    &bnsp\n");
-	fprintf ( fp, "OUT_FLAG   >\n");
-	fprintf ( fp, "PARAM1 --anysymbol \n");
-	fprintf ( fp, "PARAM      &bnsp2>/dev/null\n");
-	
-	fprintf ( fp, "SEQ_TYPE   S\n");
-	fprintf ( fp, "ADDRESS    %s\n", MAFFT_ADDRESS);
-	fprintf ( fp, "PROGRAM    %s\n", MAFFT_4_TCOFFEE);
-	vfclose (fp);}
-
-	//nwns
-	sprintf (list[n][0], "mafftnwns_pair");
-	sprintf (list[n][1], "%s", vtmpnam(NULL));
-	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
-	fprintf ( fp, "EXECUTABLE mafft-nwns\n");
-	fprintf ( fp, "DOC Mafft [%s]\n", MAFFT_ADDRESS);
-	fprintf ( fp, "ALN_MODE   pairwise\n");
-	fprintf ( fp, "OUT_MODE   aln\n");
-	fprintf ( fp, "IN_FLAG    &bnsp\n");
-	fprintf ( fp, "OUT_FLAG   >\n");
-	fprintf ( fp, "PARAM1 --anysymbol \n");
-	fprintf ( fp, "PARAM      &bnsp2>/dev/null\n");
-	fprintf ( fp, "SEQ_TYPE   S\n");
-	fprintf ( fp, "ADDRESS    %s\n", MAFFT_ADDRESS);
-	fprintf ( fp, "PROGRAM    %s\n", MAFFT_4_TCOFFEE);
-	vfclose (fp);}
-
-	sprintf (list[n][0], "mafftnwns_msa");
-	sprintf (list[n][1], "%s", vtmpnam(NULL));
-	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
-	fprintf ( fp, "EXECUTABLE mafft-nwns\n");
-	fprintf ( fp, "DOC Mafft [%s]\n", MAFFT_ADDRESS);
-	fprintf ( fp, "ALN_MODE   multiple\n");
-	fprintf ( fp, "OUT_MODE   aln\n");
-	fprintf ( fp, "IN_FLAG    &bnsp\n");
-	fprintf ( fp, "OUT_FLAG   >\n");
-	fprintf ( fp, "PARAM1 --anysymbol \n");
-	fprintf ( fp, "PARAM      &bnsp2>/dev/null\n");
-	
-	fprintf ( fp, "SEQ_TYPE   S\n");
-	fprintf ( fp, "ADDRESS    %s\n", MAFFT_ADDRESS);
-	fprintf ( fp, "PROGRAM    %s\n", MAFFT_4_TCOFFEE);
-	vfclose (fp);}
-
-	//nwns
-	sprintf (list[n][0], "mafftnwnsi_pair");
-	sprintf (list[n][1], "%s", vtmpnam(NULL));
-	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
-	fprintf ( fp, "EXECUTABLE mafft-nwnsi\n");
-	fprintf ( fp, "DOC Mafft [%s]\n", MAFFT_ADDRESS);
-	fprintf ( fp, "ALN_MODE   pairwise\n");
-	fprintf ( fp, "OUT_MODE   aln\n");
-	fprintf ( fp, "IN_FLAG    &bnsp\n");
-	fprintf ( fp, "OUT_FLAG   >\n");
-	fprintf ( fp, "PARAM1 --anysymbol \n");
-	fprintf ( fp, "PARAM      &bnsp2>/dev/null\n");
-	fprintf ( fp, "SEQ_TYPE   S\n");
-	fprintf ( fp, "ADDRESS    %s\n", MAFFT_ADDRESS);
-	fprintf ( fp, "PROGRAM    %s\n", MAFFT_4_TCOFFEE);
-	vfclose (fp);}
-
-	sprintf (list[n][0], "mafftnwnsi_msa");
-	sprintf (list[n][1], "%s", vtmpnam(NULL));
-	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
-	fprintf ( fp, "EXECUTABLE mafft-nwnsi\n");
-	fprintf ( fp, "DOC Mafft [%s]\n", MAFFT_ADDRESS);
-	fprintf ( fp, "ALN_MODE   multiple\n");
-	fprintf ( fp, "OUT_MODE   aln\n");
-	fprintf ( fp, "IN_FLAG    &bnsp\n");
-	fprintf ( fp, "OUT_FLAG   >\n");
-	fprintf ( fp, "PARAM1 --anysymbol \n");
-	fprintf ( fp, "PARAM      &bnsp2>/dev/null\n");
-	fprintf ( fp, "PARAM      \n");
-	fprintf ( fp, "SEQ_TYPE   S\n");
-	fprintf ( fp, "ADDRESS    %s\n", MAFFT_ADDRESS);
-	fprintf ( fp, "PROGRAM    %s\n", MAFFT_4_TCOFFEE);
-	vfclose (fp);}
-	
-	
-
-
-	
-
-	
-
-
-	sprintf (list[n][0], "mafftjtt_pair");
-	sprintf (list[n][1], "%s", vtmpnam(NULL));
-	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
-	fprintf ( fp, "DOC Mafft [%s]\n", MAFFT_ADDRESS);
-	fprintf ( fp, "EXECUTABLE mafft \n");
-	fprintf ( fp, "ALN_MODE   pairwise\n");
-	fprintf ( fp, "OUT_MODE   aln\n");
-	fprintf ( fp, "IN_FLAG    &bnsp\n");
-	fprintf ( fp, "OUT_FLAG   >\n");
-	fprintf ( fp, "PARAM1 --anysymbol --jtt 250 --localpair --maxiterate 1000 \n");
-	fprintf ( fp, "PARAM      &bnsp2>/dev/null\n");
-	fprintf ( fp, "SEQ_TYPE   S\n");
-	fprintf ( fp, "ADDRESS    %s\n", MAFFT_ADDRESS);
-	fprintf ( fp, "PROGRAM    %s\n", MAFFT_4_TCOFFEE);
-	vfclose (fp);}
-
-	sprintf (list[n][0], "mafftjtt_msa");
-	sprintf (list[n][1], "%s", vtmpnam(NULL));
-	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
-	fprintf ( fp, "DOC Mafft [%s]\n", MAFFT_ADDRESS);
-	fprintf ( fp, "EXECUTABLE mafft \n");
-
-	fprintf ( fp, "ALN_MODE   multiple\n");
-	fprintf ( fp, "OUT_MODE   aln\n");
-	fprintf ( fp, "IN_FLAG    &bnsp\n");
-	fprintf ( fp, "OUT_FLAG   >\n");
-	fprintf ( fp, "PARAM1 --anysymbol --jtt 250 --localpair --maxiterate 1000 \n");
-	fprintf ( fp, "PARAM      &bnsp2>/dev/null\n");
-	fprintf ( fp, "SEQ_TYPE   S\n");
-	fprintf ( fp, "ADDRESS    %s\n", MAFFT_ADDRESS);
-	fprintf ( fp, "PROGRAM    %s\n", MAFFT_4_TCOFFEE);
-	vfclose (fp);}
-	
-
-	sprintf (list[n][0], "mafftgins_pair");
-	sprintf (list[n][1], "%s", vtmpnam(NULL));
-	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
-	fprintf ( fp, "EXECUTABLE mafft\n");
-	fprintf ( fp, "DOC Mafft [%s]\n", MAFFT_ADDRESS);
-	fprintf ( fp, "ALN_MODE   pairwise\n");
-	fprintf ( fp, "OUT_MODE   aln\n");
-	fprintf ( fp, "PARAM1 --anysymbol --globalpair --maxiterate 1000 \n");
-	fprintf ( fp, "IN_FLAG    &bnsp\n");
-	fprintf ( fp, "OUT_FLAG   >\n");
-	fprintf ( fp, "PARAM      &bnsp2>/dev/null\n");
-	fprintf ( fp, "SEQ_TYPE   S\n");
-	fprintf ( fp, "ADDRESS    %s\n", MAFFT_ADDRESS);
-	fprintf ( fp, "PROGRAM    %s\n", MAFFT_4_TCOFFEE);
-	vfclose (fp);}
-
-	sprintf (list[n][0], "mafftgins_msa");
-	sprintf (list[n][1], "%s", vtmpnam(NULL));
-	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
-	fprintf ( fp, "EXECUTABLE mafft\n");
-	fprintf ( fp, "DOC Mafft [%s]\n", MAFFT_ADDRESS);
-	fprintf ( fp, "ALN_MODE   multiple\n");
-	fprintf ( fp, "OUT_MODE   aln\n");
-	fprintf ( fp, "PARAM1 --anysymbol --globalpair --maxiterate 1000 \n");
-	fprintf ( fp, "IN_FLAG    &bnsp\n");
-	fprintf ( fp, "OUT_FLAG   >\n");
-	fprintf ( fp, "PARAM      &bnsp2>/dev/null\n");
-	fprintf ( fp, "SEQ_TYPE   S\n");
-	fprintf ( fp, "ADDRESS    %s\n", MAFFT_ADDRESS);
-	fprintf ( fp, "PROGRAM    %s\n", MAFFT_4_TCOFFEE);
-	vfclose (fp);}
-
 
 	sprintf (list[n][0], "dialigntx_pair");
 	sprintf (list[n][1], "%s", vtmpnam(NULL));
