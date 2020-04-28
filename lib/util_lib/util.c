@@ -2873,7 +2873,7 @@ char * fname2abs(char*name)
   
   //if (!name2)name2=(char*)vcalloc (10, sizeof (char));
   if ( !name)return NULL;
-  else if (!file_exists (NULL, name))return NULL;
+  else if (!file_exists (NULL, name))return name;
   else if ( name[0]=='/')name2=csprintf (name2, "%s", name);
   else
     {

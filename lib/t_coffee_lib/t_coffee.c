@@ -7108,7 +7108,9 @@ Alignment * t_coffee_dpa (int argc, char **argv)
   set_int_variable    ("reg_dnd_nseq",100);
   set_int_variable    ("reg_dnd_depth",3);
   set_string_variable ("reg_dnd_mode", "codnd");
-
+  //*_4_CLTCOFFEE gets added to the T-Coffee command line of any slave
+  //*_4_TCOFFEE   
+      
   for (a=1; a<argc; a++)
     {
       
@@ -7136,8 +7138,17 @@ Alignment * t_coffee_dpa (int argc, char **argv)
 	}
       else if (strm (argv[a],"-child_tree"))
 	{
-	  cputenv ("child_tree_4_TCOFFEE=%s", argv[++a]);
+	  cputenv ("child_tree_4_TCOFFEE=%s", argv[a]);	  
 	}
+      else if (strm (argv[a],"-child_thread"))
+	{
+	  cputenv ("thread_4_TCOFFEE=%d", atoi(argv[++a]));
+	}
+      else if (strm (argv[a],"-dynamic_config"))
+	{
+	  cputenv ("dynamic_config_4_TCOFFEE=%s", fname2abs(argv[++a]));
+	}
+      
       else if ( strm(argv[a], "-reg_chaindnd_mode"))
 	{
 	  set_string_variable ("reg_chaindnd_mode",argv[++a]);
@@ -7168,10 +7179,7 @@ Alignment * t_coffee_dpa (int argc, char **argv)
 	{
 	  n_core=atoi(argv[++a]);
 	}
-       else if (strm (argv[a],"-child_thread"))
-	{
-	  cputenv ("child_thread_4_TCOFFEE=%d", atoi(argv[++a]));
-	}
+       
       else if (strm (argv[a],"-dpa")|| strm (argv[a],"-reg"));
       
       else if (strm (argv[a],"-usetree"))
@@ -7190,7 +7198,7 @@ Alignment * t_coffee_dpa (int argc, char **argv)
 	{
 	  outfile=argv[++a];
 	}
-      else if (strm (argv[a], "-nseq") || strm (argv[a],"-dpa_nseq") || strm (argv[a], "-reg_nseq") )
+      else if (strm (argv[a], "-nseq") || strm (argv[a],"-dpa_nseq") || strm (argv[a], "-reg_nseq")|| strm (argv[a], "-N") )
 	{
 	  dpa_nseq=atoi(argv[++a]);
 	}
@@ -7212,59 +7220,14 @@ Alignment * t_coffee_dpa (int argc, char **argv)
 	  homoplasy=(char*)vcalloc ( 1000, sizeof (char));
 	 
 	}
-      else if (strm (argv[a],"-blast_server"))
+      else if (argv[a][0]=='-' &&(a==argc-1 || argv[a+1][0]=='-'))
 	{
-	  cputenv ("blast_server_4_TCOFFEE=%s", argv[++a]);
+	  cputenv ("%s_4_CLTCOFFEE=FLAGSET", argv[a]+1);
 	}
-      else if (strm (argv[a],"-protein_db"))
+      else if (argv[a][0]=='-')
 	{
-	  cputenv ("protein_db_4_TCOFFEE=%s", fname2abs(argv[++a]));
-	}
-      else if (strm (argv[a],"-pdb_db"))
-	{
-	  cputenv ("pdb_db_4_TCOFFEE=%s", fname2abs(argv[++a]));
-	}
-      else if (strm (argv[a],"-cache"))
-	{
-	  cputenv ("cache_4_TCOFFEE=%s", argv[++a]);
-	}
-      else if (strm (argv[a], "-psiJ"))
-	{
-	  cputenv ("psiJ_4_TCOFFEE=%d", atoi(argv[++a]));
-	}
-      else if (strm (argv[a], "-psitrim"))
-	{
-	  cputenv ("psitrim_4_TCOFFEE=%d", atoi(argv[++a]));
-	}
-      else if (strm (argv[a], "-psitrim_mode"))
-	{
-	  cputenv ("psitrim_mode_4_TCOFFEE=%s", argv[++a]);
-	}
-      else if (strm (argv[a], "-psitrim_tree"))
-	{
-	  cputenv ("psitrim_tree_4_TCOFFEE=%s", argv[++a]);
-	}
-      else if (strm (argv[a],"-dynamic_config"))
-	{
-	  cputenv ("dynamic_config_4_TCOFFEE=%s", fname2abs(argv[++a]));
-	}
-      else if ( strm (argv[a], "-tcarg"))
-	{
-	  char *tcarg=NULL;
-	  a++;
-	  while (!strm (argv[a], "-tcarg_end") && a<argc)
-	    {
-	      tcarg=vcat(tcarg,argv[a]);
-	      tcarg=vcat(tcarg, " ");
-	      a++;
-	    }
-	  cputenv ("argc_4_TCOFFEE=%s", tcarg);
-	}
-      
-      else if (strm (argv[a],"-template_file"))
-	{
+	  cputenv ("%s_4_CLTCOFFEE=%s", argv[a]+1, fname2abs(argv[++a]));
 	  
-	  cputenv ("template_file_4_TCOFFEE=%s", template_file2abs_template_file(argv[++a]));
 	}
       else 
 	{

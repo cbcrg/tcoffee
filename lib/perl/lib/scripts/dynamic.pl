@@ -7,7 +7,7 @@ use File::Path;
 use Sys::Hostname;
 use File::Temp qw/ tempfile tempdir /;
 my $QUIET="2>/dev/null";
-my $VERBOSE=0;
+my $VERBOSE=$ENV{VERBOSE_4_DYNAMIC};
 our $EXIT_FAILURE=1;
 our $EXIT_SUCCESS=0;
 
@@ -17,12 +17,6 @@ my $treeF;
 my $tree=$ENV{"child_tree_4_TCOFFEE"};
 my $thread=$ENV{"child_thread_4_TCOFFEE"};
 my $dynamic=$ENV{dynamic_config_4_TCOFFEE};
-my $blast=$ENV{blast_server_4_TCOFFEE};
-my $protein_db=$ENV{protein_db_4_TCOFFEE};
-my $pdb_db=$ENV{pdb_db_4_TCOFFEE};
-my $cache=$ENV{cache_4_TCOFFEE};
-my $tcarg=$ENV{tcarg_4_TCOFFEE};
-my $template_file=$ENV{template_file_4_TCOFFEE};
 my $clean;
 my $treeFlag;
 my $blastFlag;
@@ -39,30 +33,29 @@ my $cdir=getcwd();
 my $threadFlag4tc;
 my $threadFlag4famsa;
 my $threadFlag;
-
+my $tcarg;
 
 
 for ($a=0; $a<=$#ARGV; $a++)
   {
-    if    ($ARGV[$a] eq "-seq"){$infile=$ARGV[++$a];}
-    elsif ($ARGV[$a] eq "-outfile"){$outfile=$ARGV[++$a];}
-    elsif ($ARGV[$a] eq "-dynamic_config"){$dynamic=$ARGV[++$a];}
-    elsif ($ARGV[$a] eq "-blast_server"){$blast=$ARGV[++$a];}
+    if    ($ARGV[$a] eq "-seq"){$infile=file2abs($ARGV[++$a]);}
+    elsif ($ARGV[$a] eq "-outfile"){$outfile=file2abs($ARGV[++$a], "new");}
+    elsif ($ARGV[$a] eq "-dynamic_config"){$dynamic=file2abs($ARGV[++$a]);}
+    
     elsif ($ARGV[$a] eq "-tree") {$tree=$ARGV[++$a];}
-    elsif ($ARGV[$a] eq "-protein_db") {$protein_db=$ARGV[++$a];}
-    elsif ($ARGV[$a] eq "-pdb_db") {$pdb_db=$ARGV[++$a];}
-    elsif ($ARGV[$a] eq "-cache") {$cache=$ARGV[++$a];}
     elsif ($ARGV[$a] eq "-method") {$method2use=$ARGV[++$a];}
-    elsif ($ARGV[$a] eq "-verbose"){$VERBOSE=1; $QUIET="";} 
+    elsif ($ARGV[$a] eq "-verbose"){$VERBOSE=1; $QUIET="";}
     elsif ($ARGV[$a] eq "-clean"){$clean=1;}
-    elsif ($ARGV[$a] eq "-template_file"){$template_file=$ARGV[++$a]}
+  
     elsif ($ARGV[$a] eq "-thread"){$thread=$ARGV[++$a]}
     elsif ($ARGV[$a] eq "-tcarg") {$tcarg=file2string($ARGV[++$a]);}
+    else 
+      {
+	add2tcenv($a++,@ARGV);
+      }
   }
 
-$threadFlag=($thread)?"--thread $thread ":"--thread 1 ";
-$threadFlag4tc=($thread)?"-thread $thread ":"-thread 1 ";
-$threadFlag4famsa=($thread)?"-t $thread ":"-t 1 ";
+
 
 if ($tree eq "list")
   {
@@ -100,17 +93,11 @@ if ($method2use eq "list")
 	  {
 	   printf STDOUT "%-20s DOES NOT Support [-tree] -- $i", $m;
 	  }
-	elsif ($m=~/mafft/)
-	  {
-	   printf STDOUT "%-20s DOES     Support [-tree] -- $i", $m;
-	  }
+	elsif ($m=~/tcoffee/){;}
+	elsif ($m=~/mafft/){;}
 	elsif (!$ml{$m})
 	  {
-	   printf STDOUT "%-20s DOES NOT Support [-tree] -- $i", $m;
-	  }
-	else 
-	  {
-	   printf STDOUT "%-20s DOES     Support [-tree] -- $i", $m;
+	    printf STDOUT "%-20s DOES     Support [-tree] -- $i", $m;
 	  }
       }
     $do_exit=1;
@@ -159,7 +146,6 @@ else
 	  }
       }
   }
-if ($VERBOSE){print "\n! METHOD: NSEQ: $NSEQ $method2use $blast $protein_db\n";}
 if ($tree)
   {
     ($h2,$treeF)=tempfile();
@@ -177,19 +163,10 @@ if ($tree)
 	system ("t_coffee -other_pg seq_reformat -in $infile -action +seq2dnd $tree -output newick> $treeF");
       }
   }
-my $psiCL=get_psicl();
+chdir ($tmpdir);
 
-
-if ($clean)
-  {
-    
-    $infile=file2abs($infile);
-    $outfile=file2abs($outfile);
-    $treeF=file2abs($treeF);
-    $protein_db=file2abs($protein_db);
-    $pdb_db=file2abs($pdb_db);
-    chdir ($tmpdir);
-  }
+#Collect T-Coffee Command Line
+my $CL4tc=get_cl4tc();#will collect from env every CLTCOFEE env variable
 
 if (!$treeF || $NSEQ<=2){$treeFlag="";}
 elsif ( $method2use=~/coffee/ || $method2use=~/accurate/){$treeFlag="-usetree $treeF ";}
@@ -197,71 +174,23 @@ elsif ( $method2use=~/clustalo/){$treeFlag="--guidetree-in=$treeF ";}
 elsif ( $method2use=~/mafftsparsecore/){;}
 elsif ( $method2use=~/mafft/){$treeFlag="--treein $treeF ";}
 elsif ( $method2use=~/famsa/){$treeFlag="-gt import $treeF ";}
+$CL4tc.=" $treeFlag ";
+
+$threadFlag=($thread)?"--thread $thread ":"--thread 1 ";
+$threadFlag4tc=($thread)?"-thread $thread ":"-thread 1 ";
+$threadFlag4famsa=($thread)?"-t $thread ":"-t 1 ";
+$CL4tc.=" $threadFlag4tc ";
 
 
 if ($method2use eq "tcoffee_msa" || $method2use eq "tcoffee"|| $method2use eq "t_coffee" )
   {
-    my_system ("t_coffee -seq $infile -outfile $outfile -output fasta_aln $treeFlag $threadFlag4tc $tcarg>/dev/null  $QUIET");    
+    my_system ("t_coffee -seq $infile -outfile $outfile -output fasta_aln $CL4tc>/dev/null  $QUIET");    
   }
-
-elsif ($method2use eq "mcoffee_msa" || $method2use eq "mcoffee")
+elsif ($method2use=~/(.*coffee)/ || $method2use=~/(accurate)/ || $method2use=~/(expresso)/)
   {
-    my_system ("t_coffee  -mode fcoffee -seq $infile -outfile $outfile -output fasta_aln $treeFlag $threadFlag4tc $tcarg>/dev/null  $QUIET");    
+    my $mode=$1;
+    my_system ("t_coffee  -mode $mode -seq $infile -outfile $outfile -output fasta_aln $CL4tc >/dev/null  $QUIET");    
   }
-elsif ($method2use eq "fmcoffee_msa" || $method2use eq "fmcoffee")
-  {
-    my_system ("t_coffee  -mode fmcoffee -seq $infile -outfile $outfile -output fasta_aln $treeFlag $threadFlag4tc $tcarg>/dev/null  $QUIET");    
-  }
-elsif ($method2use eq "rcoffee_msa" || $method2use eq "rcoffee")
-  {
-    my_system ("t_coffee  -mode rcoffee -seq $infile -outfile $outfile -output fasta_aln $treeFlag $threadFlag4tc $tcarg>/dev/null  $QUIET");    
-  }
-elsif ($method2use eq "rmcoffee_msa" || $method2use eq "rmcoffee")
-  {
-    my_system ("t_coffee  -mode rmcoffee -seq $infile -outfile $outfile -output fasta_aln $treeFlag $threadFlag4tc $tcarg>/dev/null  $QUIET");    
-  }
-elsif ($method2use eq "rsapcoffee_msa" || $method2use eq "rsapcoffee")
-  {
-    my_system ("t_coffee  -mode rsapcoffee -seq $infile -outfile $outfile -output fasta_aln $treeFlag $threadFlag4tc $tcarg>/dev/null  $QUIET");    
-  }
-elsif ($method2use eq "psicoffee_msa" || $method2use eq "psicoffee")
-  {
-    my $cacheFlag;
-    if ($cache){$cacheFlag="-cache=$cache";}
-    if ($blast eq "LOCAL"){$blastFlag="-blast_server=LOCAL -protein_db=$protein_db";}
-    my_system ("t_coffee -mode psicoffee -in $infile -outfile $outfile -output fasta_aln  $cacheFlag $blastFlag $threadFlag4tc $psiCL>/dev/null $QUIET");
-  }
-elsif  ($method2use eq "accurate_msa" || $method2use eq "accurate")
-  {
-    my $cacheFlag;
-    if ($cache){$cacheFlag="-cache=$cache";}
-    if ($treeF){$treeFlag="-usetree $treeF "}
-    if ($blast eq "LOCAL"){$blastFlag="-blast_server=LOCAL -protein_db=$protein_db -pdb_db=$pdb_db $psiCL";}
-    my_system ("t_coffee -mode accurate -in $infile -outfile $outfile -output fasta_aln  $cacheFlag $blastFlag $threadFlag4tc>/dev/null  $QUIET");
-  }
-elsif  ($method2use eq "3dcoffee_msa"|| $method2use eq "3dcoffee")
-  {
-    my $cacheFlag;
-    if ($cache){$cacheFlag="-cache=$cache";}
-    if ($blast eq "LOCAL"){$blastFlag="-blast_server=LOCAL  -pdb_db=$pdb_db";}
-    my_system ("t_coffee -method sap_pair TMalign_pair -template_file $template_file  -in $infile -outfile $outfile -output fasta_aln  $cacheFlag $blastFlag $threadFlag4tc>/dev/null $QUIET");
-  }
-elsif  ($method2use eq "3dmcoffee_msa"|| $method2use eq "3dmcoffee")
-  {
-    my $cacheFlag;
-    if ($cache){$cacheFlag="-cache=$cache";}
-    if ($blast eq "LOCAL"){$blastFlag="-blast_server=LOCAL  -pdb_db=$pdb_db";}
-    my_system ("t_coffee -method mustang_pair sap_pair TMalign_pair -template_file $template_file  -in $infile -outfile $outfile -output fasta_aln  $cacheFlag $blastFlag $threadFlag4tc>/dev/null $QUIET");
-  }
-
-elsif  ($method2use eq "expresso_msa" || $method2use eq "expresso")
-  {
-    my $cacheFlag;
-    if ($cache){$cacheFlag="-cache=$cache";}
-    if ($blast eq "LOCAL"){$blastFlag="-blast_server=LOCAL  -pdb_db=$pdb_db";}
-    my_system ("t_coffee -mode expresso -in $infile -outfile $outfile -output fasta_aln  $cacheFlag $blastFlag $threadFlag4tc>/dev/null $QUIET");
-  }
-
 elsif ($method2use eq "clustalo_msa" || $method2use eq "clustalo")
   {
     my_system ("clustalo -i $infile $treeFlag -o $outfile  --force $threadFlag $QUIET");
@@ -296,10 +225,9 @@ else
       }
     my_system ("t_coffee -in $infile -method $method2use -outfile $outfile -output fasta_aln $tcarg -quiet $QUIET");
   }
-if ($clean)
-  {
-    chdir ($cdir);
-  }
+
+
+
 
 #Flush output if none provided
 if ( ! -e $outfile)
@@ -328,16 +256,16 @@ if ($VERBOSE!=-1)
     close (F);
   }
 
+chdir ($cdir);
 exit ($EXIT_SUCCESS);
 
 
 sub my_system 
   {
     my ($com)=@_;
-    if ($VERBOSE)
-      {
-	print "$com\n";
-      }
+    
+    if ($VERBOSE){print "![dynamic.pl] NSEQ: $NSEQ --- $com\n";}
+    
     system ($com);
   }
 
@@ -356,10 +284,12 @@ sub file2nseq
   }
 sub file2abs
     {
-      my $f=shift @_;
-      
+      my ($f, $mode)=@_;
       
       if (!$f || $f=~/^\//){return $f;}
+      elsif (!-e $f && $mode eq "new"){return "$cdir/$f";}
+      elsif (!-e $f){return $f;}
+    
       return "$cdir/$f";
     }
 sub file2string 
@@ -391,3 +321,34 @@ sub get_psicl
 	return $cl;
       }
       
+sub get_cl4tc
+	{
+	  my $cl;
+	  
+	  foreach my $arg (keys(%ENV))
+	    {
+	      if ($arg=~/(.*)_4_CLTCOFFEE/)
+		{
+		  my $name=$1;
+		  my $val=$ENV{$arg};
+		  if (-e $val){$val=file2abs($val);}
+		  
+
+		  if ($val eq "FLAGSET"){$val="";}
+		  $cl.="-$name $val ";
+		}
+	    }
+	  return $cl;
+	}
+
+sub add2tcenv
+	    {
+	      my ($p, @argv)=@_;
+
+	      my $flag=$argv[$p];
+	      $flag =~s/^-//;
+	      my $val =file2abs($argv[$p+1]);
+	      my $envv="$flag\_4_CLTCOFFEE";
+	      $ENV{$envv}=$val;
+	    }
+	      
