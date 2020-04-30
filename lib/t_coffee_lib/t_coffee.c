@@ -7121,7 +7121,7 @@ Alignment * t_coffee_dpa (int argc, char **argv)
 	  myexit (fprintf_error (stderr, "%s is an unknown flag of the -reg mode [FATAL:%s]", argv[a],PROGRAM));
 	}
       
-      if      (strm (argv[a], "-seq" ))
+      if (strm (argv[a], "-seq" ))
 	{
 	  
 	  seqfile=argv[++a];
@@ -7230,9 +7230,14 @@ Alignment * t_coffee_dpa (int argc, char **argv)
 	{
 	  cputenv ("%s_4_CLTCOFFEE=FLAGSET", argv[a]+1);
 	}
-      else if (argv[a][0]=='-')
+      else if (argv[a][0]=='-')       
 	{
-	  cputenv ("%s_4_CLTCOFFEE=%s", argv[a]+1, fname2abs(argv[++a]));
+	  if (getenv("DEBUG_4_TCOFFEE"))
+	    {
+	      HERE ("Parse Arg: %s -> %s -> %s", argv[a], argv[a]+1,fname2abs(argv[a+1]));
+	    }
+	  cputenv ("%s_4_CLTCOFFEE=%s", argv[a]+1, fname2abs(argv[a+1]));
+	  a++;
 	  
 	}
       else 
@@ -7324,11 +7329,18 @@ Alignment * t_coffee_dpa (int argc, char **argv)
     }
   else
     T=seq2dnd (S, dpa_tree);
-
   fprintf ( le, " reg_tree %s\n", dpa_tree);
   
   if (dpa_tree && check_file_exists (dpa_tree))output_dpa_tree=0;
   else output_dpa_tree=1;
+  
+  //Save Guide Tree for Children Aligners
+  if (1==1)
+    {
+      char *child_tree_file=vtmpnam (NULL);
+      print_newick_tree(T,child_tree_file);
+      cputenv ("CHILD_TREE_FILE_4_TCOFFEE=%s",child_tree_file);
+    }
   
   fprintf ( le, "!Compute Guide Tree ---  done\n");
   

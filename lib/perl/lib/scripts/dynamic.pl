@@ -149,18 +149,29 @@ else
 if ($tree)
   {
     ($h2,$treeF)=tempfile();
+    ($h2,$tmptree)=tempfile();
     push (@tmpL,$treeF);
     if ( -e $tree)
       {
-	system ("cp $tree $treeF");
+	system ("cp $tree $tmptree");
       }
-    elsif ($method2use=~/mafft/)
+    else if ($tree eq "master")
       {
-	system ("t_coffee -other_pg seq_reformat -in $infile -action +seq2dnd $tree -output mafftdndmatrix> $treeF");
+	my $master_tree=$ENV{CHILD_TREE_FILE_4_TCOFFEE};
+	system ("t_coffee -in $master_tree -in2 $infile -action +prune_tree -output newick > $tmptree");
+      }
+    else 
+      {
+	system ("t_coffee -other_pg seq_reformat -in $infile -action +seq2dnd $tree -output newick> $tmptree");
+      }
+    
+    if ($method2use=~/mafft/)
+      {
+	system ("t_coffee -other_pg seq_reformat -in $tmptree -output mafftdndmatrix> $treeF");
       }
     else
       {
-	system ("t_coffee -other_pg seq_reformat -in $infile -action +seq2dnd $tree -output newick> $treeF");
+	system ("mv $tmptree $treeF");
       }
   }
 chdir ($tmpdir);
