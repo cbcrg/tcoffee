@@ -29,7 +29,7 @@ my @tmpL;
 my $tmpdir = File::Temp->newdir();
 my $stderrF="$tmpdir/stderr";
 $QUIET="2>$stderrF";
-my $cdir=getcwd();
+my $CDIR=getcwd();
 my $threadFlag4tc;
 my $threadFlag4famsa;
 my $threadFlag;
@@ -102,7 +102,7 @@ if ($method2use eq "list")
       }
     $do_exit=1;
   }
-if ($do_exit){exit ($EXIT_SUCCESS);}
+if ($do_exit){my_exit ($CDIR,$EXIT_SUCCESS);}
 
 my $NSEQ=file2nseq($infile);
 if ($NSEQ==0)
@@ -226,7 +226,7 @@ elsif (($cmethod =~/mafft/))
     my_system ("$mm --anysymbol $threadFlag $treeFlag $retree $infile > $outfile $QUIET");
   }
 
-elsif ($method2use eq "famsa")
+elsif ($method2use=~/famsa/)
   {
     
     my_system ("famsa $treeFlag $threadFlag4famsa $infile $outfile >/dev/null $QUIET");
@@ -247,7 +247,7 @@ else
 if ( ! -e $outfile)
   {
     print "ERROR - No MSA computed [FATAL:dynamic.pl]\n";
-    exit ($EXIT_FAILURE);
+    my_exit ($CDIR,$EXIT_FAILURE);
   }
 elsif ( $flush)
  {
@@ -270,8 +270,7 @@ if ($VERBOSE!=-1)
     close (F);
   }
 
-chdir ($cdir);
-exit ($EXIT_SUCCESS);
+my_exit ($CDIR,$EXIT_SUCCESS);
 
 
 sub my_system 
@@ -301,10 +300,10 @@ sub file2abs
       my ($f, $mode)=@_;
       
       if (!$f || $f=~/^\//){return $f;}
-      elsif (!-e $f && $mode eq "new"){return "$cdir/$f";}
+      elsif (!-e $f && $mode eq "new"){return "$CDIR/$f";}
       elsif (!-e $f){return $f;}
     
-      return "$cdir/$f";
+      return "$CDIR/$f";
     }
 sub file2string 
     {
@@ -365,4 +364,12 @@ sub add2tcenv
 	      my $envv="$flag\_4_CLTCOFFEE";
 	      $ENV{$envv}=$val;
 	    }
+	      
+sub my_exit
+    {
+      my ($dir,$ec)=@_;
+      if ($VERBOSE){print "\nEXIT: $ec ($EXIT_SUCCESS:success, $EXIT_FAILURE:failure)-- Verbose mode -- unset VERBOSE_4_DYNAMIC to turn verbose mode off\n";}
+      chdir ($dir);
+      exit ($ec);
+    }
 	      

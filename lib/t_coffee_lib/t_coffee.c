@@ -7116,7 +7116,11 @@ Alignment * t_coffee_dpa (int argc, char **argv)
   for (a=1; a<argc; a++)
     {
       
-
+      if ( argv[a][0]!='-')
+	{
+	  myexit (fprintf_error (stderr, "%s is an unknown flag of the -reg mode [FATAL:%s]", argv[a],PROGRAM));
+	}
+      
       if      (strm (argv[a], "-seq" ))
 	{
 	  
@@ -7237,7 +7241,16 @@ Alignment * t_coffee_dpa (int argc, char **argv)
 	}
     }
 
-
+  if (getenv("DEBUG_4_TCOFFEE"))
+    {
+      HERE ("******* ARGUMENTS*****: start");
+      for (a=1; a<argc; a++)fprintf ( stderr, "%s\n", argv[a]);
+      HERE ("******* ARGUMENTS*****: end");
+      HERE ("******* Environement: start*****");
+      system ("printenv");
+      HERE ("******* Environement: end*****");
+    }
+      
 
   //Core management
  
