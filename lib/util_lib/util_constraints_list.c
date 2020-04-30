@@ -65,7 +65,7 @@ Constraint_list *produce_list   ( Constraint_list *CL, Sequence *S, char * metho
 	if (strstr ( CL->multi_thread, "jobcells"))return fork_cell_produce_list (CL, S, method, weight, mem_mode,job,nproc,local_stderr);
 	else if (strstr ( CL->multi_thread, "joblines"))return fork_line_produce_list (CL, S, method, weight, mem_mode,job, nproc,local_stderr);
 	else if (strstr ( CL->multi_thread, "jobs"))return fork_subset_produce_list (CL, S, method, weight, mem_mode,job, nproc,local_stderr); //Recommended default
-	else return fork_subset_produce_list (CL, S, method, weight, mem_mode,job,2,local_stderr); //Recommended default
+	else return fork_subset_produce_list (CL, S, method, weight, mem_mode,job,nproc,local_stderr); //Recommended default
 }
 int job2first_seq(Job_TC *job)
 {
@@ -117,7 +117,7 @@ Constraint_list *fork_subset_produce_list   ( Constraint_list *CL, Sequence *S, 
 	pid_tmpfile=(char**)vcalloc (MAX(njob,nproc)+1, sizeof (char*));
 	pid_list   =(int *)vcalloc (MAX_N_PID, sizeof (int *));
 
-	fprintf ( local_stderr, "\n\tMulti Core Mode: %d processor(s) [subset]\n", nproc);
+	fprintf ( local_stderr, "\n\tMulti Core Mode (Compute): %d processor(s) [subset]\n", nproc);
 
 	jl=split_job_list(job,nproc);
 	a=npid=0;
@@ -231,7 +231,7 @@ Constraint_list *fork_line_produce_list   ( Constraint_list *CL, Sequence *S, ch
 	pid_tmpfile=(char**)vcalloc (njob, sizeof (char*));
 
 	pid_list   =(int *)vcalloc (MAX_N_PID, sizeof (int *));
-	fprintf ( local_stderr, "\n\tMulti Core Mode: %d processor(s) [jobline]\n", nproc);
+	fprintf ( local_stderr, "\n\tMulti Core Mode (Compute): %d processor(s) [jobline]\n", nproc);
 
 
 	//count the number of lines
@@ -368,7 +368,7 @@ Constraint_list *fork_cell_produce_list   ( Constraint_list *CL, Sequence *S, ch
 	pid_tmpfile=(char**)vcalloc (njob, sizeof (char*));
 	pid_list   =(int *)vcalloc (MAX_N_PID, sizeof (int *));
 
-	fprintf ( local_stderr, "\n\tMulti Core Mode: %d processor(s):\n", nproc);
+	fprintf ( local_stderr, "\n\tMulti Core Mode (compute): %d processor(s):\n", nproc);
 	npid=0;
 	submited=0;
 	while (job)
@@ -2109,8 +2109,8 @@ Constraint_list*  fork_read_n_constraint_list(char **fname,int n_list, char *in_
 Constraint_list* read_n_constraint_list(char **fname,int n_list, char *in_mode,char *mem_mode,char *weight_mode, char *type,FILE *local_stderr, Constraint_list *CL, char *seq_source)
 {
 
- 
-  if ( !strstr (CL->multi_thread, "methods"))
+  
+  if (1==1 && !strstr (CL->multi_thread, "methods"))//deprecated
     return fork_read_n_constraint_list(fname,n_list, in_mode,mem_mode,weight_mode,type,local_stderr, CL, seq_source, 1);
   else
     return fork_read_n_constraint_list(fname,n_list, in_mode,mem_mode,weight_mode,type,local_stderr, CL, seq_source, get_nproc());
@@ -2176,7 +2176,7 @@ Constraint_list* fork_read_n_constraint_list(char **fname,int n_list, char *in_m
 	}
 
 	CL->local_stderr=local_stderr;
-	fprintf ( local_stderr, "\n\tMulti Core Mode: %d processor(s):\n", nproc);
+	fprintf ( local_stderr, "\n\tMulti Core Mode (read): %d processor(s):\n", nproc);
 	for (ns=0,a=0; a< n_list; a++)
 	{
 		int pid;
