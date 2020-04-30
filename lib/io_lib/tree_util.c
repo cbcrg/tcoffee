@@ -335,8 +335,72 @@ NT_node main_prune_tree ( NT_node T, Sequence *S)
   T=prune_tree ( T, S);
   return T;
 }
+NT_node no_rec_prune_tree(NT_node T, Sequence *S);
+NT_node    rec_prune_tree(NT_node T, Sequence *S);
+NT_node prune_tree (NT_node T, Sequence *S)
+{
+  int rec=0;
+  if (!T || !S)return T;
+  if (rec)return rec_prune_tree(T,S);
+  else return no_rec_prune_tree(T,S);
+}
+NT_node no_rec_prune_tree(NT_node T, Sequence *S)
+{
+ NT_node *L;
+ 
+ int a,n;
+ 
+ L=tree2seqnode_list (T,NULL);
+ a=0;
+ while (L[a])
+   {
+     NT_node C=L[a];
+     NT_node P=C->parent;
+     NT_node GP=(P)?P->parent:NULL;
+     NT_node B;
+     
+     if (P->right==C)B=P->left;
+     else B=P->right;
+     
+     if (name_is_in_hlist2 (C->name,S->name, S->nseq)==-1)
+       {
+	 if (!GP && B->leaf)
+	   {
+	     B->parent=NULL;
+	     free_tree_node(P); free_tree_node (C);
+	     vfree(L);return B;
+	   }
+	 else if (!GP)
+	   {
+	     P->right=B->right;
+	     P->left =B->left;
+	     (B->right)->parent=P;
+	     (B->left )->parent=P;
+	      P->dist=0;
+	     free_tree_node (B);free_tree_node (C);
+	    
+	   }
+	 else
+	   {
+	     if (GP->left==P)GP->left=B;
+	     else GP->right=B;
+	     B->parent=GP;
+	     B->dist+=P->dist;
+	     free_tree_node (P); free_tree_node (C);
+	   }
+       }
+     a++;
+   }
+ 
+ vfree (L);
+ 
 
-NT_node prune_tree ( NT_node T, Sequence *S)
+ 
+ //exit (0);
+ return T;
+}
+
+NT_node rec_prune_tree ( NT_node T, Sequence *S)
 {
 
   if (!T ) return T;
@@ -351,7 +415,7 @@ NT_node prune_tree ( NT_node T, Sequence *S)
 	  int a;
 	  for (a=0; a< S->nseq; a++)
 	    {
-	      HERE ("prune pb ---%s", S->name[a]);
+ 	      HERE ("prune pb ---%s", S->name[a]);
 	    }
 	  myexit (EXIT_FAILURE);
 	}
@@ -2287,7 +2351,7 @@ NT_node no_rec_free_tree ( NT_node root)
       NT_node tofree=stack;
       stack->visited++;
       stack=stack->bot;
-      
+      free_tree_node (tofree);
     }
 }
   

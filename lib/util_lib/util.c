@@ -8107,6 +8107,7 @@ int token_is_in_file_n ( char *fname, char *token, int nlines)
 	  else if ( begining==0 && p){vfclose (fp); return 1;}
 	  line_number++;
 	}
+      if (b){buf=b;}
       vfclose (fp);
       return 0;
     }
@@ -8118,13 +8119,8 @@ char *vfgets ( char *buf, FILE *fp)
   int c;
   int buf_len, l;
   char *bufin;
-  static int debug;
-
-
-  if ( !debug)
-    debug=(getenv ("DEBUG_TCOFFEE"))?1:-1;
-
-
+  int debug=0;
+  
   bufin=buf;
 
   if (!buf)
