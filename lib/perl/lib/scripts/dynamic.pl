@@ -64,7 +64,7 @@ if ($tree eq "list")
     print F ">a\nxxx\n>b\nyyyyy\n";
     close (F);
     print STDOUT ("**** Supported Guide tree modes:\n");
-    system ("t_coffee -other_pg seq_reformat -in $f -action +seq2dnd list ");
+    my_system ("t_coffee -other_pg seq_reformat -in $f -action +seq2dnd list ");
     $do_exit=1;
   }
 if ($method2use eq "list")
@@ -81,7 +81,7 @@ if ($method2use eq "list")
     $ml{mafft}=1;
     $ml{famsa}=1;
       print STDOUT ("**** Supported MSA mode:\n");
-    system ("t_coffee 2>/dev/null | grep _msa > $listfile");
+    my_system ("t_coffee 2>/dev/null | grep _msa > $listfile");
     open (F, $listfile);
     while (<F>)
       {
@@ -151,27 +151,29 @@ if ($tree)
     ($h2,$treeF)=tempfile();
     my ($h2,$tmptree)=tempfile();
     push (@tmpL,$treeF);
-    if ( -e $tree)
+    if ( $tree eq "default"){;}
+    elsif ( -e $tree)
       {
-	system ("cp $tree $tmptree");
+	my_system ("cp $tree $tmptree");
       }
-    elsif ($tree eq "master")
+    elsif ($tree eq "master" || $tree eq "main" || $tree eq "parent")
       {
 	my $master_tree=$ENV{CHILD_TREE_FILE_4_TCOFFEE};
-	system ("t_coffee -in $master_tree -in2 $infile -action +prune_tree -output newick > $tmptree");
+	my_system ("t_coffee -other_pg seq_reformat -in $master_tree -in2 $infile -action +prune_tree -output newick > $tmptree");
+	
       }
     else 
       {
-	system ("t_coffee -other_pg seq_reformat -in $infile -action +seq2dnd $tree -output newick> $tmptree");
+	my_system ("t_coffee -other_pg seq_reformat -in $infile -action +seq2dnd $tree -output newick> $tmptree");
       }
     
     if ($method2use=~/mafft/)
       {
-	system ("t_coffee -other_pg seq_reformat -in $tmptree -output mafftdndmatrix> $treeF");
+	my_system ("t_coffee -other_pg seq_reformat -in $tmptree -output mafftdndmatrix> $treeF");
       }
     else
       {
-	system ("mv $tmptree $treeF");
+	my_system ("mv $tmptree $treeF");
       }
   }
 chdir ($tmpdir);
@@ -284,14 +286,6 @@ if ($VERBOSE!=-1)
 my_exit ($CDIR,$EXIT_SUCCESS);
 
 
-sub my_system 
-  {
-    my ($com)=@_;
-    
-    if ($VERBOSE){print "![dynamic.pl] NSEQ: $NSEQ --- $com\n";}
-    
-    system ($com);
-  }
 
 sub file2nseq
   {
@@ -379,8 +373,28 @@ sub add2tcenv
 sub my_exit
     {
       my ($dir,$ec)=@_;
-      if ($VERBOSE){print "\nEXIT: $ec ($EXIT_SUCCESS:success, $EXIT_FAILURE:failure)-- Verbose mode -- unset VERBOSE_4_DYNAMIC to turn verbose mode off\n";}
+      my $a;
+      if ($VERBOSE)
+	{
+	  print "![dynamic.pl] --- CDIR: $CDIR\n";
+	  print "![dynamic.pl] --- Processed $NSEQ\n";
+	  print "![dynamic.pl] --- ";
+	  foreach my $arg (@ARGV)
+	    {
+	      print "$arg ";
+	    }
+	  print ("\n");
+	  print "![dynamic.pl] --- EXIT: $ec ($EXIT_SUCCESS:success, $EXIT_FAILURE:failure)-- Verbose mode -- unset VERBOSE_4_DYNAMIC to turn verbose mode off\n";
+	}
       chdir ($dir);
       exit ($ec);
     }
 	      
+sub my_system 
+  {
+    my ($com)=@_;
+    
+    if ($VERBOSE){print "![dynamic.pl] --- SysCall --- $com\n";}
+    
+    system ($com);
+  }

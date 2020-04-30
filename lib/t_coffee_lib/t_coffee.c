@@ -7144,7 +7144,7 @@ Alignment * t_coffee_dpa (int argc, char **argv)
 	}
       else if (strm (argv[a],"-child_tree"))
 	{
-	  cputenv ("child_tree_4_TCOFFEE=%s", argv[a]);	  
+	  cputenv ("child_tree_4_TCOFFEE=%s", argv[++a]);	  
 	}
       else if (strm (argv[a],"-child_thread"))
 	{
@@ -7316,6 +7316,7 @@ Alignment * t_coffee_dpa (int argc, char **argv)
   fprintf ( le, "!Maximum N Threads --- %d\n",get_nproc());
   //prepare the guide tree
   fprintf ( le, "!Compute Guide Tree --- ");
+  
   if (usetree){dpa_tree=usetree;}
   if (!dpa_tree)dpa_tree="codnd";
   if (strm (dpa_tree, "dpa"))
