@@ -149,7 +149,7 @@ else
 if ($tree)
   {
     ($h2,$treeF)=tempfile();
-    ($h2,$tmptree)=tempfile();
+    my ($h2,$tmptree)=tempfile();
     push (@tmpL,$treeF);
     if ( -e $tree)
       {
