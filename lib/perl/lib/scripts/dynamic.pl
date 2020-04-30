@@ -155,7 +155,7 @@ if ($tree)
       {
 	system ("cp $tree $tmptree");
       }
-    else if ($tree eq "master")
+    elsif ($tree eq "master")
       {
 	my $master_tree=$ENV{CHILD_TREE_FILE_4_TCOFFEE};
 	system ("t_coffee -in $master_tree -in2 $infile -action +prune_tree -output newick > $tmptree");
