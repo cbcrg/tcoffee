@@ -5544,30 +5544,24 @@ char * get_os()
 }
 
 
-
 int cputenv (char *string, ...)
 {
-
-
-
-
-
+  //
+  //If done through a pointer, any change to the pointer will change the value
+  //the string containing the assignment MUST NOT be changed or freed
+  //Note s is leacked each time cputenv is called
   char *s;
-  char *s2;
-  int r;
-
-
+  
   if (!string)return 0;
-
   cvsprintf (s, string);
+  if (getenv ("DEBUG_4_TCOFFEE"))HERE ("CPUTENV::%s", s);
+  if (putenv (s))
+    myexit(fprintf_error ( stderr, "\nCould not set the environement [%s] [FATAL]\n",s));
 
-  s2=(char*)vcalloc (strlen (s)+1, sizeof (char));
-  sprintf ( s2, "%s", s);
-
-  r=putenv (s2);
-  //vfree (s); //Potential leak
-  return r;
+  return 1;
+  
 }
+
 
 
 int fcputenv   (char *file, char *mode,char * string, ...)
