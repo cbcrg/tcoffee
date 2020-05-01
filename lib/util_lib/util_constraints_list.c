@@ -91,7 +91,8 @@ Constraint_list *fork_subset_produce_list   ( Constraint_list *CL, Sequence *S, 
 	char **pid_tmpfile;
 	int   *pid_list;
 	int pid, npid, njob, max_nproc;
-
+	int max=max_n_pid();
+	
 	max_nproc=nproc;
 	max_nproc*=2;
 	/*OUT_MODE:
@@ -115,7 +116,7 @@ Constraint_list *fork_subset_produce_list   ( Constraint_list *CL, Sequence *S, 
 	M=(job->param)->TCM;
 	if (M)M->PW_CL=method2pw_cl ( M, CL);
 	pid_tmpfile=(char**)vcalloc (MAX(njob,nproc)+1, sizeof (char*));
-	pid_list   =(int *)vcalloc (MAX_N_PID, sizeof (int *));
+	pid_list   =(int *)vcalloc (max, sizeof (int *));
 
 	fprintf ( local_stderr, "\n\tMulti Core Mode (Compute): %d processor(s) [subset]\n", nproc);
 
@@ -197,7 +198,7 @@ Constraint_list *fork_line_produce_list   ( Constraint_list *CL, Sequence *S, ch
 	int pid,npid, njob;
 	int max_nproc, submited;
 	int cseq, seq, nlines;
-
+	int max=max_n_pid();
 	max_nproc=nproc;
 	max_nproc*=2;
 	/*OUT_MODE:
@@ -230,7 +231,7 @@ Constraint_list *fork_line_produce_list   ( Constraint_list *CL, Sequence *S, ch
 	njob=queue2n(job)+1;
 	pid_tmpfile=(char**)vcalloc (njob, sizeof (char*));
 
-	pid_list   =(int *)vcalloc (MAX_N_PID, sizeof (int *));
+	pid_list   =(int *)vcalloc (max, sizeof (int *));
 	fprintf ( local_stderr, "\n\tMulti Core Mode (Compute): %d processor(s) [jobline]\n", nproc);
 
 
@@ -336,7 +337,7 @@ Constraint_list *fork_cell_produce_list   ( Constraint_list *CL, Sequence *S, ch
 	int pid,npid, njob;
 	int max_nproc;
 	int submited;
-
+	int max=max_n_pid();
 	max_nproc=nproc;
 
 	/*OUT_MODE:
@@ -366,7 +367,7 @@ Constraint_list *fork_cell_produce_list   ( Constraint_list *CL, Sequence *S, ch
 
 	njob=queue2n(job)+1;
 	pid_tmpfile=(char**)vcalloc (njob, sizeof (char*));
-	pid_list   =(int *)vcalloc (MAX_N_PID, sizeof (int *));
+	pid_list   =(int *)vcalloc  (max, sizeof (int *));
 
 	fprintf ( local_stderr, "\n\tMulti Core Mode (compute): %d processor(s):\n", nproc);
 	npid=0;
@@ -2138,9 +2139,9 @@ Constraint_list* fork_read_n_constraint_list(char **fname,int n_list, char *in_m
 	char **tmp_list;
 	int*proclist;
 	int  ns;
+	int max=max_n_pid();
 
-
-	proclist=(int*)vcalloc (MAX_N_PID, sizeof (int));
+	proclist=(int*)vcalloc (max, sizeof (int));
 	tmp_list=(char**)vcalloc (n_list+1, sizeof (char*));
 	for (a=0; a<n_list; a++)tmp_list[a]=vtmpnam(NULL);
 
@@ -3893,93 +3894,6 @@ Constraint_list * relax_constraint_list_4gp (Constraint_list *CL)
 Constraint_list * fork_relax_constraint_list_4gp (Constraint_list *CL)
 {
 	return nfork_relax_constraint_list_4gp(CL);
-
-	#ifdef ladygaga
-
-	in=CL->ne;
-	if (!CL || !CL->L)return CL;
-
-
-
-	if ((chunk=CL->ne/get_nproc())==0)chunk=get_nproc();
-
-
-	pid_tmpfile=vcalloc ((CL->ne/chunk)+1, sizeof (char*));
-	pid_list   =vcalloc (MAX_N_PID, sizeof (int *));
-
-	for (npid=0,job=0; job<CL->ne; job+=chunk)
-	{
-		pid_tmpfile[npid]=vtmpnam(NULL);
-		pid=vvfork (NULL);
-		if (pid==0)
-		{
-			int s,e;
-
-			initiate_vtmpnam (NULL);
-			s=job;
-			e=MIN((s+chunk),CL->ne);
-			fp=vfopen (pid_tmpfile[npid], "w");
-			for (a=s; a<e; a++)
-			{
-
-				s1=CL->L[a*CL->entry_len+SEQ1];
-				s2=CL->L[a*CL->entry_len+SEQ2];
-
-				r1=CL->L[a*CL->entry_len+R1];
-				r2=CL->L[a*CL->entry_len+R2];
-				score=residue_pair_extended_list_4gp (CL,s1, r1,s2, r2);
-				CL->L[a*CL->entry_len+WE]=score;
-				fprintf (fp, "%d %d ", a, score);
-			}
-			vfclose (fp);
-			myexit (EXIT_SUCCESS);
-		}
-		else
-		{
-			pid_list[pid]=npid;
-			//set_pid (pid);
-			npid++;
-		}
-	}
-
-	for (a=0; a<npid; a++)
-	{
-		int i;
-		int j=0;
-
-		pid=vwait (NULL);
-		fp=vfopen (pid_tmpfile[pid_list[pid]], "r");
-		while (fscanf (fp, "%d %d ",&i, &score)==2){CL->L[i*CL->entry_len+WE]=score;j++;}
-		vfclose (fp);
-		remove(pid_tmpfile[pid_list[pid]]);
-	}
-
-	vfree (pid_list);
-	vfree (pid_tmpfile);
-
-	thr=0;
-
-	for (n=0,a=0; a< CL->ne; a++)
-	{
-		score=CL->L[a*CL->entry_len+WE];
-
-		if (score<=thr);
-		else
-		{
-			CL->L[n*CL->entry_len+SEQ1]=CL->L[a*CL->entry_len+SEQ1];
-			CL->L[n*CL->entry_len+SEQ2]=CL->L[a*CL->entry_len+SEQ2];
-			CL->L[n*CL->entry_len+R1]=CL->L[a*CL->entry_len+R1];
-			CL->L[n*CL->entry_len+R2]=CL->L[a*CL->entry_len+R2];
-			CL->L[n*CL->entry_len+WE]=score;
-			n++;
-		}
-
-	}
-
-	CL->L=vrealloc (CL->L, n*CL->entry_len*sizeof (int));
-	CL->ne=n;
-	s  return CL;
-	#endif
 }
 Constraint_list * nfork_relax_constraint_list_4gp (Constraint_list *CL)
 {

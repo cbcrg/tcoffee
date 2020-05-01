@@ -4871,24 +4871,34 @@ int safe_system (const char * com_in)
 }
 
 
-
+int max_n_pid()
+{
+  static int max;
+  
+  if (!max)
+    {
+      if (getenv ("MAX_N_PID_4_TCOFFEE"))max=atoigetenv ("MAX_N_PID_4_TCOFFEE");
+      else max=MAX_N_PID;
+    }
+  return max;
+}
 
 
 static int **pidtable;
 int assert_pid (pid_t p)
 {
-  if ( p>= MAX_N_PID || p<0)
+  if ( p>= max_n_pid() || p<0)
     {
-      printf_exit (EXIT_FAILURE, stderr, "MAX_N_PID exceded -- Recompile changing the value of MAX_N_PID (current: %d Requested: %d)", MAX_N_PID, p);
+      printf_exit (EXIT_FAILURE, stderr, "MAX_N_PID exceded -- Recompile changing the value of MAX_N_PID (current: %d Requested: %d) OR setenv MAX_N_PID_4_TCOFFEE=%d", MAX_N_PID, p,p);
     }
   return 1;
 }
 pid_t **declare_pidtable ()
 {
   int a;
-
-  pidtable=(int**)vcalloc (MAX_N_PID, sizeof (pid_t*));
-  for (a=0; a<MAX_N_PID; a++)
+  int max=max_n_pid();
+  pidtable=(int**)vcalloc (max, sizeof (pid_t*));
+  for (a=0; a<max; a++)
     {
       pidtable[a]=(int*)vcalloc (2, sizeof (pid_t));
     }
@@ -5004,16 +5014,17 @@ int kill_child_pid(int pid)
 {
   int *list;
   int n,a, cpid;
-
+  int max=max_n_pid();
+  
   cpid=getpid();
-  list=(int*)vcalloc (MAX_N_PID, sizeof (int));
+  list=(int*)vcalloc (max, sizeof (int));
 
   while ((n=get_child_list (pid,list)))
     {
       kill_child_list (list);
     }
 
-  for (a=0; a<MAX_N_PID; a++)
+  for (a=0; a<max; a++)
     {
       if ( list [a] && a!=cpid)
 	{
@@ -5030,8 +5041,10 @@ int kill_child_pid(int pid)
 void kill_child_list (int *list)
 {
   int a;
+  int max=max_n_pid();
+  
   int cpid=getpid();
-  for (a=0; a<MAX_N_PID; a++)
+  for (a=0; a<max; a++)
     {
       if (list[a]==1 && a!=cpid)
 	{
@@ -5045,42 +5058,42 @@ void kill_child_list (int *list)
 static int done =0;
 int get_child_list (int pid,int *clist)
 {
+  int max=max_n_pid();
+  if (done)
+    return 0;
+  char ***list;
+  char *lockf;
+  int a;
+  int n=0;
 
-	if (done)
-		return 0;
-	char ***list;
-	char *lockf;
-	int a;
-	int n=0;
-
-	assert_pid (pid);
-	clist[pid]++;
-	if (clist[pid]>1)
+  assert_pid (pid);
+  clist[pid]++;
+  if (clist[pid]>1)
+    {
+      add_information ( stderr, "WARNING Lock System not solved correctly." );
+      for (a=0; a<max; a++)
+	release_all_locks (a);
+      done=1;
+      return 0;
+    }
+  
+  lockf=lock2name (pid, LLOCK);
+  if ( lockf && file_exists (NULL,lockf))
+    {
+      list=file2list (lockf, "\n");
+      
+      a=1;
+      while (list && list[a])
 	{
-		add_information ( stderr, "WARNING Lock System not solved correctly." );
-		for (a=0; a<MAX_N_PID; a++)
-			release_all_locks (a);
-		done=1;
-		return 0;
+	  n+=get_child_list (atoi(list[a++][1]), clist);
 	}
-
-	lockf=lock2name (pid, LLOCK);
-	if ( lockf && file_exists (NULL,lockf))
-	{
-		list=file2list (lockf, "\n");
-
-		a=1;
-		while (list && list[a])
-		{
-			n+=get_child_list (atoi(list[a++][1]), clist);
-		}
-		free_arrayN ((void **)list, 3);
-	}
-	vfree (lockf);
-
-	if (!clist[pid]){clist[pid]=1; n++;}
-	return n;
-	return 0;
+      free_arrayN ((void **)list, 3);
+    }
+  vfree (lockf);
+  
+  if (!clist[pid]){clist[pid]=1; n++;}
+  return n;
+  return 0;
 }
 
 
@@ -5096,9 +5109,10 @@ int kill_child_pid_pld()
   else
     {
       int a;
+      int max=max_n_pid();
       pid_t cpid;
       cpid=getpid();
-      for (a=0; a<MAX_N_PID; a++)
+      for (a=0; a<max; a++)
 	{
 	  if (pidtable[a][1] && pidtable[a][0]==cpid )
 	    {
