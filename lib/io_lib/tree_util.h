@@ -365,6 +365,8 @@ NT_node nni (NT_node S, int n);
 int has_nni (NT_node N);
 NT_node tree2nni (NT_node T, NT_node S);
 
+KT_node* pool (KT_node *K1,int n1,int *n2, int N);
+
 char* tree2msa4dpa (NT_node T, Sequence *S, int N, char *method);
 NT_node tree2dnd4dpa (NT_node T, Sequence *S, int N, char *method);
 int ktree2parent_seq_bucketsF(KT_node K,char *fname);

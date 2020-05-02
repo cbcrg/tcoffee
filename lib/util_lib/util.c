@@ -7261,7 +7261,8 @@ FILE * vfclose ( FILE *fp)
        if ( fp==stdin) return stdin;
        if ( fp==NULL)return NULL;
        else
-	 if (fclose (fp)!=0)HERE ("***** ERROR****");
+	 if (fclose (fp)!=0)
+	   HERE ("***** ERROR::Could not close file properly****");
 
        return NULL;
        }

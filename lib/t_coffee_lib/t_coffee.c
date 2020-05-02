@@ -7093,6 +7093,7 @@ Alignment * t_coffee_dpa (int argc, char **argv)
   char *se_name;
   char *homoplasy=NULL;
   int reg_dynamic=1;
+  int reg_pool=0;
   int n_core=1;
   
   /* This is used for the dump function see -dump option*/
@@ -7211,6 +7212,12 @@ Alignment * t_coffee_dpa (int argc, char **argv)
       else if (strm (argv[a],"-dynamic") || strm (argv[a],"-reg_dynamic") )
 	{
 	  reg_dynamic=atoi(argv[++a]);
+	  
+	}
+      else if (strm (argv[a],"-pool")  )
+	{
+	  reg_pool=1;
+	  
 	}
       else if (strm (argv[a], "-method") || strm (argv[a], "-dpa_method") || strm (argv[a], "-reg_method"))
 	{
@@ -7266,7 +7273,8 @@ Alignment * t_coffee_dpa (int argc, char **argv)
 
   //Dynamic regression
   set_int_variable ("reg_dynamic",reg_dynamic);
-    
+  set_int_variable ("reg_pool",reg_pool);
+  
 
   //prepare the aligner CL
   if (dpa_aligner)

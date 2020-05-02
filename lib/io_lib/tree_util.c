@@ -8305,28 +8305,99 @@ NT_node tree2dnd4dpa (NT_node T, Sequence *S, int N, char *method)
   
   return kmsa2dnd  (S,KL,n);
 }
+
+//This function pools into a single file all the children sequences until they contain a maximum of N*2-1 sequences
+KT_node*pool (KT_node *K1,int n1,int *n2in, int N)
+{
+  int a,b, cn;
+  int pool=0;
+  KT_node*K2;
+  int n2;
+  int **nseq;
+  
+  for ( a=0; a<n1; a++){if (K1[a]->nseq<N)pool=1;}
+  if (!pool)return NULL;
+  
+
+  nseq=declare_int(n1, 2);
+  for ( a=0; a<n1; a++)
+    {
+      nseq[a][0]=a;
+      nseq[a][1]=K1[a]->nseq;
+    }
+  sort_int (nseq, 2, 1, 0,n1-1);
+  
+
+  K2=(KT_node*)vcalloc (n1, sizeof (KT_node));
+  for (a=0; a<n1; a++)K2[a]=(KT_node)vcalloc (1, sizeof (KTreenode));
+  
+  for (cn=0,n2=0, b=0; b< n1; b++)
+    {
+      if ( cn==0)
+	{
+	  K2[n2]->seqF=vtmpnam (NULL);
+	  K2[n2]->msaF=vtmpnam (NULL);
+	  n2++;
+	}
+      a=nseq[b][0];
+      cn+=K1[a]->nseq;
+      
+      printf_system ("cat %s >> %s", K1[a]->seqF, K2[n2-1]->seqF);
+      K2[n2-1]->nseq=cn;
+      
+      K1[a]->msaF=K2[n2-1]->msaF;
+      if (cn>=N)cn=0;
+    }
+  
+  //Debug test
+  //for ( b=0; b<n1; b++)
+  //{
+  //a=nseq[b][0];
+  //HERE ("IN: %d: %d ->%d", a,K1[a]->nseq, K2[a]->nseq);
+  //}
+  
+  free_int (nseq, -1);
+  n2in[0]=n2;
+  return K2;
+}
+
+
 char* tree2msa4dpa (NT_node T, Sequence *S, int N, char *method)
 {
   int n=0;
   char *outname;
   int cn=0;
+  int dopool=get_int_variable ("reg_pool");
+  
   KT_node K =tree2ktree  (T, S, N);
   KT_node*KL=(KT_node*)vcalloc (K->tot, sizeof (KT_node));
+  KT_node*KL2;
+  int n2=0;
+  
   n=ktree2klist(K,KL,&n);
   
-  
-
- 
   if (getenv ("DUMP_SEQ_BUCKETS") ||getenv ("DUMP_SEQ_BUCKETS_ONLY"))
     {
       ktree2seq_bucketsF(K, "seqdump.");
       if (getenv ("DUMP_SEQ_BUCKETS_ONLY"))exit (0);
     }
-
   //This is where the slave MSAs are computed, all at once.
- 
-  kseq2kmsa(KL,n, method);
-  
+  if ( dopool && (KL2=pool(KL, n, &n2,N))!=NULL)
+    {
+      int a;
+      kseq2kmsa(KL2,n2, method);
+      for (a=0; a<n; a++)
+	{
+	  char *tmp=vtmpnam(NULL);
+	  printf_system ("t_coffee -other_pg seq_reformat -in %s -action +keep_name +extract_seq %s -output fasta_aln > %s", KL[a]->msaF, KL[a]->seqF, tmp);
+	  KL[a]->msaF=tmp;
+	  vfree(KL2[a]);
+	}
+      vfree (KL2);
+    }
+  else
+    kseq2kmsa(KL,n, method);
+       
   if (getenv ("DUMP_ALN_BUCKETS") ||getenv ("DUMP_ALN_BUCKETS_ONLY"))
     ktree2aln_bucketsF(K, "alndump.");
   
@@ -8339,7 +8410,7 @@ char* tree2msa4dpa (NT_node T, Sequence *S, int N, char *method)
       outname=kmsa2msa (K,S,NULL,NULL); 
     }
   declare_aln_node (-1);//Free all the nodes declared
-  
+  vfree (KL);
   return outname;
 }
 
