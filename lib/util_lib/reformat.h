@@ -38,6 +38,12 @@ Alignment * read_fasta_aln_noceck ( char *name, Alignment *A);
 
 Alignment * main_read_aln ( char *name, Alignment *A);
 
+int *list2sample(int nseq, int sample);
+char*FastaRecord2name(char*rec);
+char *file2record (char *file, int i, long *map);
+long *fasta2map(char *file);
+int fasta2nseq (char *file);
+
 Sequence  * quick_read_seq ( char *file);
 Alignment * quick_read_aln( char *name);//reads onléy fasta and clustalw
 Alignment * quick_read_fasta_aln( Alignment *A,char *name);//reads onléy fasta and clustalw

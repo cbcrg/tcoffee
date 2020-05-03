@@ -112,8 +112,121 @@ FILE * compare_al_to_lib ( Constraint_list *CL, int start, char *fname, Sequence
 }
 //-----------END OF CHANGES------------//
  
+int sample_aln_compare ( int argc, char *argv[]);
+int sample_aln_compare ( int argc, char *argv[])
+{
+  int n=0;
+  int a;
+  int nseq1, nseq2;
+  long *map1, *map2;
+  int *sampled;
+  int sample=300;
+  int nseq=0;
+  char **nargv=(char**)vcalloc(argc+30, sizeof (char*));
+  char *al1, *al2, *sal1, *sal2, *ial1,*ial2, *s;
+  FILE *fp1, *fp2;
+  char *r=vtmpnam (NULL);
+  float avg=0, sum=0, sum2=0, sd=0, v=0;
+  char *mode=NULL;
+
+  mode=csprintf(mode, "sp"); 
+  
+  nargv[n]=csprintf (nargv[n],"aln_compare");n++;
+  nargv[n]=csprintf (nargv[n],"-io_format");n++;
+  nargv[n]=csprintf (nargv[n],"t");n++;
+  nargv[n]=csprintf (nargv[n],"-sep");n++;
+  nargv[n]=csprintf (nargv[n]," ");n++;
+  nargv[n]=csprintf (nargv[n],"-f");n++;
+  nargv[n]=csprintf (nargv[n],"%s",r);n++;
+  
+  for (a=0; a<argc; a++)
+    {
+      
+      if ( strm (argv[a], "-al1") || strm (argv[a], "-al2")) 
+	{
+	  char *tmp=vtmpnam (NULL);
+	  nargv[n]=csprintf (nargv[n],"%s", argv[a]);n++;
+	  nargv[n]=csprintf (nargv[n],"%s", tmp    );n++;
+	  if (strm (argv[a], "-al1"))sal1=tmp;
+	  else sal2=tmp;
+	  
+	  if (strm (argv[a], "-al1"))ial1=argv[a+1];
+	  else ial2=argv[a+1];
+	  a++;
+	}
+      else if (strm (argv[a], "-sample"))
+	{
+	  if (a<argc-1 && argv[a+1][0]!='-'){sample=atoi(argv[++a]);}
+	  else sample=100;
+	}
+      else if (strm (argv[a], "-compare_mode"))
+	{
+	  mode=csprintf (mode, "%s", argv[a+1]);
+	  nargv[n]=csprintf (nargv[n],"%s", argv[a]);n++;
+	  nargv[n]=csprintf (nargv[n],"%s", argv[++a]);n++;
+	}
+      else if (strm (argv[a], "-nseq"))
+	{
+	  nseq=atoi (argv[++a]);
+	}
+      else if (strm (argv[a], "aln_compare"));
+      
+      else 
+	{
+	 nargv[n]=csprintf (nargv[n],"%s", argv[a]);n++;
+	 if (a<argc-1 && argv[a+1][0]!='-')	 
+	   nargv[n]=csprintf (nargv[n],"%s", argv[++a]);n++;
+	}
+    }
  
+
+  if (!trim_aln_big_file (ial1, ial2, al1=vtmpnam (NULL), al2=vtmpnam (NULL), &map1, &map2))
+    {
+      myexit (fprintf_error ( stderr, "\nCannot compare %s and %s  [FATAL:%s]", ial1, ial2, PROGRAM));
+    }
  
+  nseq1=read_array_size_new(map1)-1;
+  nseq2=read_array_size_new(map2)-1;
+  
+  if (!nseq) nseq=(int)log(nseq1)+1;
+ 
+  
+  for ( a=0; a<sample; a++)
+    {
+      int b;
+      char ***l;
+      sampled=list2sample(nseq1,nseq);
+      output_completion (stderr,a,sample,100, "Sampling");
+      fp1=vfopen (sal1, "w");
+      fp2=vfopen (sal2, "w");
+      
+      for (b=0; b<nseq; b++)
+	{
+	  
+	  fprintf ( fp1, "%s",file2record(al1,sampled[b], map1));
+	  fprintf ( fp2, "%s",file2record(al2,sampled[b], map2));
+	}
+      
+           
+      
+      vfclose (fp1);vfclose (fp2);
+      aln_compare (n, nargv);
+      
+      l=file2list (r, " ");
+      v=atof (l[0][4]);
+      
+      sum+=v;
+      sum2+=v*v;
+      free_arrayN((void ***)l,3);
+    }
+  avg=sum/(float)sample;
+  sd =(sum2-(sum*sum)/(float)sample)/(float)sample;
+
+  fprintf ( stdout, "Mode: %s: %.2f %% (sd: %.2f) - %d Sampling iterations on %d sequences drawn from %d common sequences\n", mode, avg, sd, sample, nseq, nseq1); 
+    
+  return EXIT_SUCCESS;
+}
+	  
 int aln_compare ( int argc, char *argv[])
     {
     int a, b, c, f;
@@ -216,7 +329,13 @@ int aln_compare ( int argc, char *argv[])
 	output_informations();
       }
     
+
+    
+    
     argv=standard_initialisation (argv, &argc);
+    for ( a=0; a< argc; a++)if (strm (argv[a], "-sample"))return sample_aln_compare (argc, argv);
+
+
     /*Declarations and Initializations*/
     alignment1_file=(char*)vcalloc ( LONG_STRING, sizeof (char));
     alignment2_file=(char*)vcalloc ( LONG_STRING, sizeof (char));
@@ -802,13 +921,13 @@ if ( aln_compare==1)pep_compare=0;
     
        tot_count=declare_int (n_categories+1, A->nseq+1);
        pos_count=declare_int (n_categories+1, A->nseq+1);
+       
+       
        pw_tot_count=(int***)vcalloc ( A->nseq, sizeof (int**));
-       for ( a=0; a< A->nseq; a++)pw_tot_count[a]=declare_int ( A->nseq, n_categories);
-
-    
+       for ( a=0; a< A->nseq; a++)pw_tot_count[a]=declare_int ( A->nseq, n_categories);    
        pw_pos_count=(int***)vcalloc ( A->nseq, sizeof (int**));
        for ( a=0; a< A->nseq; a++)pw_pos_count[a]=declare_int ( A->nseq, n_categories);
- 
+       
      /*COMPARISON MODULE*/
        if (strm( compare_mode, "tc") )
 	 {

@@ -3037,7 +3037,89 @@ char **padd_string ( char **string, int n,char pad)
   return string;
 }
 
+int trim_aln_big_file(char *in1, char*in2, char *out1, char *out2, long **nmap1, long **nmap2)
+{
+  //Same as trim_aln_file, but works on big files: no need to read the entire msa
+  //returns a file map
+  long *map1, *map2, *tmap, *tnmap;
+  
+  int nseq1, nseq2, tnseq;
+  char *tin, *tout;
+  int invert=0;
+  int tot=0, pos1, pos2;
+  FILE *fp1, *fp2;
+  char **name;
+  int i1, i2, a, l;
+  char *s;
+  
+  map1=fasta2map(in1);
+  nseq1=read_array_size_new(map1)-1;
+    
+  map2=fasta2map(in2);
+  nseq2=read_array_size_new(map2)-1;
 
+ 
+
+  //1 gets processed twice
+  //make sure 1 is the smallest
+  if ( 1==2 && nseq2<nseq1)
+    {
+      invert=1;
+      tnseq=nseq1;nseq1=nseq2;nseq2=tnseq;
+      tmap=map1;map1=map2; map2=tmap;
+      tin=in1;in1=in2; in2=tin;
+      tout=out1;out1=out2;out2=tout;
+    }
+  
+  nmap1[0]=(long*)vcalloc (nseq1+1, sizeof (long));
+  nmap2[0]=(long*)vcalloc (nseq2+1, sizeof (long));
+    
+
+  name=(char **)vcalloc (nseq1, sizeof (char*));
+  for (a=0; a<nseq1; a++)
+    {
+      name[a]=csprintf(name[a],"%s",FastaRecord2name(file2record(in1,a,map1))); 
+    }
+
+  
+
+
+	
+  fp1=vfopen (out1, "w");
+  fp2=vfopen (out2, "w");
+  pos1=pos2=0;
+  for ( i2=0; i2<nseq2; i2++)
+    {
+      s=file2record(in2,i2, map2);
+      if ((i1=name_is_in_hlist (FastaRecord2name(s), name, nseq1))!=-1)
+	{
+	  fprintf ( fp2, "%s",s);
+	  nmap2[0][tot]=pos2; pos2+=strlen (s);
+	  
+	  s=file2record(in1,i1, map1);
+	  fprintf ( fp1, "%s",s);
+	  nmap1[0][tot]=pos1;pos1+=strlen (s);
+	  tot++;
+	}
+    }
+  nmap1[0][tot]=pos1;
+  nmap2[0][tot]=pos2;
+  
+  vfclose (fp1); vfclose (fp2);
+  if (invert)
+    {
+      invert=1;
+      tnseq=nseq1;nseq1=nseq2;nseq2=tnseq;
+      tmap=map1;map1=map2; map2=tmap;
+      tin=in1;in1=in2; in2=tin;
+      tout=out1;out1=out2;out2=tout;
+      tnmap=nmap1[0];nmap1[0]=nmap2[0];nmap2[0]=tnmap;
+    }
+  free_char (name, -1);
+  vfree (map1);
+  vfree (map2);
+  return tot;
+}
 int trim_aln_file (char *in_aln1, char*in_aln2, char *out_aln1, char *out_aln2)
 {
   FILE *fp1, *fp2, *fp;
@@ -3048,6 +3130,7 @@ int trim_aln_file (char *in_aln1, char*in_aln2, char *out_aln1, char *out_aln2)
   char *comment=NULL;
   int fs1, fs2;
   int n=0;
+  int tot=0;
   
   //fs1=file2size (in_aln1);
   //fs2=file2size (in_aln2);
@@ -3083,7 +3166,7 @@ int trim_aln_file (char *in_aln1, char*in_aln2, char *out_aln1, char *out_aln2)
 
       if ((i=name_is_in_hlist (name, A->name, A->nseq))!=-1)
 	{
-	  
+	  tot++;
 	  fprintf ((invert)?fp2:fp1, ">%s\n%s\n",name, A->seq_al[i]);
 	  fprintf ((invert)?fp1:fp2, ">%s\n%s\n",name, seq);
 	}
@@ -3092,7 +3175,7 @@ int trim_aln_file (char *in_aln1, char*in_aln2, char *out_aln1, char *out_aln2)
   vfclose (fp1);
   vfclose (fp2);
   vfclose (fp);
-  return 1;
+  return tot;
 }
 	      
 	 

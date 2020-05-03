@@ -1358,6 +1358,158 @@ Alignment * quick_read_aln_static ( char *file)
       return A;
     }
 }
+int *list2sample(int nseq, int sample)
+{
+  static int *random;
+  static int *sampled;
+  int a, tot, tried;
+  
+  if (nseq==0 || sample==0){vfree(random); random=NULL; return random;}
+  
+  
+  if (!random)random=(int*)vcalloc (nseq, sizeof (int));
+  else if (read_array_size_new(random)<nseq)random=(int*)vrealloc (random,sizeof (int)*nseq);
+
+  if (!sampled)sampled=(int*)vcalloc (sample, sizeof (int));
+  else if (read_array_size_new(sampled)<sample)sampled=(int*)vrealloc (sampled,sizeof (int)*nseq);
+  
+  
+  if (sample>=nseq)
+    {
+      for (a=0; a<nseq; a++) sampled[a]=1;
+      return sampled;
+    }
+  
+  //try first with random sampling
+  tot=0;
+  tried=0;
+  while (tot<sample && tried <100*sample)
+    {
+      int i=rand()%nseq;
+      tried++;
+      if (random[i]==0)
+	{
+	  sampled[tot]=i;
+	  random[i]=1;
+	  tot++;
+	}
+    }
+  for ( a=0; a<nseq; a++)random[a]=0;
+  
+  //If failed, random sort and select
+  if (tot<sample)
+    {
+      int **random2=declare_int (nseq, 2);
+      for ( a=0; a<nseq; a++)
+	{
+	  random2[a][0]=a;
+	  random2[a][1]=rand()%nseq;
+	}
+      sort_int (random2, 2, 1, 0, nseq-1);
+      for (a=0; a<sample; a++)
+	sampled[a]=random2[a][0];
+      free_int (random2, -1);
+    }
+  return sampled;
+}
+char *FastaRecord2name (char *record)
+{
+  static char *name;
+  char *p;
+  if (!record) return NULL;
+  p=name=csprintf(name, "%s", record);
+  
+  while (!isspace(p[0]))p++;
+  p[0]='\0';
+  
+   
+  return name;
+}
+					       
+    
+char *file2record (char *file, int i, long *map)
+{
+  FILE *fp;
+  static char *seq;
+  long start, end;
+  int len;
+  
+
+  if (i<0) return NULL;
+
+  start=map[i];
+  end=map[i+1];
+
+ 
+  len=(int)(end-start);
+  if (len<=0) return NULL;
+  
+  if (!seq)seq=(char*)vcalloc (len+1, sizeof (char));
+  else if  (read_array_size_new(seq)<=(len+1))seq=(char*)vrealloc (seq,(len+1)*sizeof(char));
+  seq[0]='\0';
+  fp=vfopen (file, "r");
+  fseek (fp, start, SEEK_SET);
+  fread (seq,sizeof (char), len, fp);
+  vfclose (fp);
+  seq[len]='\0';
+  return seq;
+}
+
+    
+    
+    
+
+long *fasta2map(char *file)
+{
+  FILE *fp;
+  int i=0;
+  long pos=0;
+  char c,lc;
+  long *map;
+  int nseq;
+  int a;
+  if ( !file || !check_file_exists (file) || !(fp=vfopen(file, "r"))) return NULL;
+  
+  nseq=fasta2nseq(file);//causes the file to be read twice
+
+   if ( nseq==-1)
+    myexit (fprintf_error ( stderr, "\nFile %s must be in FASTA format [FATAL:%s]",file, PROGRAM));
+  
+  map=(long*)vcalloc (nseq+1, sizeof (long));
+  fp=vfopen (file, "r");
+  pos=0;
+  while ((c=fgetc(fp))!=EOF)
+    {
+      if (c=='>')
+	{
+	  map[i++]=pos;
+	}
+      pos++;
+      lc=c;
+      
+    }
+  if (!isspace(lc))pos++;
+  map[i++]=pos;
+  vfclose (fp);
+  
+  return map;
+}
+    
+int fasta2nseq (char *file)
+{
+  FILE *fp;
+  char c;
+  int n=0;
+  if (!(fp=vfopen (file, "r")))return -1;
+  
+  c=fgetc(fp);
+  if ( c!='>')return -1;
+  ungetc (c, fp);
+  while ( (c=fgetc (fp))!=EOF)if ( c=='>')n++;
+  vfclose (fp);
+  return n;
+}
+  
 Alignment * quick_read_fasta_aln (Alignment *A, char *file)
 {
   //Reads a canonical FASTA aln file- no checks

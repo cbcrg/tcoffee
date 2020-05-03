@@ -7262,8 +7262,17 @@ FILE * vfclose ( FILE *fp)
        if ( fp==NULL)return NULL;
        else
 	 if (fclose (fp)!=0)
-	   HERE ("***** ERROR::Could not close file properly****");
-
+	   {
+	     int a=0;
+	     
+	     while (a<10)
+	       {
+		 sleep (2);
+		 if (fclose (fp)==0)return NULL;
+		 a++;
+	       }
+	     myexit (fprintf_error ( stderr, "\nCould not close file properly [FATAL:%s]", PROGRAM));
+	   }
        return NULL;
        }
 
@@ -9965,7 +9974,7 @@ char ** standard_initialisation  (char **in_argv, int *in_argc)
 {
 
   char *s;
-  static int done=0;
+  static int done;
   char buf[1000];
   char **out_argv;
   int a, stdi,c;
@@ -9974,12 +9983,16 @@ char ** standard_initialisation  (char **in_argv, int *in_argc)
   //Debug things
   debug_lock=atoigetenv("DEBUG_LOCK");
 
-  if (!in_argv){done=0;return NULL;}
+  if (!in_argv)
+    {
+      done=0;
+      return NULL;
+    }
   else if ( done){return in_argv;}
   else done=1;
 
   get_time();
-
+  
 /*Standard exit*/
   global_exit_signal=EXIT_SUCCESS;
   atexit (clean_exit);
@@ -10162,6 +10175,8 @@ void clean_exit ()
   int debug=0;
   static char *trash=NULL;
 
+  
+
   clean_exit_started=1;//prevent new locks
   start=tmpname;
   static int set_trash;
@@ -10174,7 +10189,7 @@ void clean_exit ()
       if ( strm (trash, "NO") || strm (trash, "no"))trash=NULL;
       else if (!iswdir(trash))
 	{
-	  add_warning (stderr, "Cannot use Trash path: %s -- set the path using TRASH_4_TCOFFEE=[valid/path] -- will clean tmp files", trash);
+	  if (getenv("DEBUG_4_TCOFFEE"))add_warning (stderr, "Cannot use Trash path: %s -- set the path using TRASH_4_TCOFFEE=[valid/path] -- will clean tmp files", trash);
 	  trash=NULL;
 	}
       
@@ -10209,19 +10224,21 @@ void clean_exit ()
 	  warning_msg (stderr);
 	  e=lock (getpid(), LERROR, LREAD, NULL);
 
-
-
-	  //explicit the most common error messages
-	  if ( strstr (e, "EMAIL"))email_msg (stderr);
-	  if ( strstr (e, "INTERNET"))proxy_msg (stderr);
-	  if ( strstr (e, "PG"))   install_msg(stderr);
-	  if ( strstr (e, "COREDUMP"))
+	  
+	  if ( e)
 	    {
-	      error_msg (stderr);
-	      dump_error_file();
+	      //explicit the most common error messages
+	      if ( strstr (e, "EMAIL"))email_msg (stderr);
+	      if ( strstr (e, "INTERNET"))proxy_msg (stderr);
+	      if ( strstr (e, "PG"))   install_msg(stderr);
+	      if ( strstr (e, "COREDUMP"))
+		{
+		  error_msg (stderr);
+		  dump_error_file();
+		}
+	      print_exit_failure_message ();
+	      vfree (e);
 	    }
-	  print_exit_failure_message ();
-	  vfree (e);
 	}
       else if ( has_warning_lock())
 	{
@@ -10246,7 +10263,7 @@ void clean_exit ()
   //Remove all temporary files
   if (trash)
     {
-      if (is_rootpid()) printf_system_direct ("mv %s %s", get_tmp_4_tcoffee(), trash);
+      if (is_rootpid() && isdir(get_tmp_4_tcoffee()) && iswdir(trash) ) printf_system_direct ("mv %s %s", get_tmp_4_tcoffee(), trash);
       return;
     }
   

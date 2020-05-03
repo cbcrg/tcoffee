@@ -1643,7 +1643,7 @@ int read_array_size (void *array, size_t size)
     if ( p[0].size_element ==0 && size==0)
       {
 	int *x;
-	fprintf ( stderr, "\nERROR in read_array_size: trying to read the size of a malloced block [FATAL]");
+	fprintf ( stderr, "\nERROR in read_array_size: trying to read the size of a malloc-ed block [FATAL]");
 	x[1000]=1;
 	exit (0);
       }
