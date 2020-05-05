@@ -2756,6 +2756,79 @@ Alignment *RmLowerInAln(Alignment *A, char *gap)
   return A;
 }
 
+char *ungap_fastaF_big (char *in, char *out, int p)
+{
+  FILE *fp;
+  static char *tmp=vtmpnam (NULL);
+  int *cache=NULL;
+  long *map;
+  int l, ml=0;
+  int a,b,nseq;
+  char *rec, *name, *header, *seq;
+  if (!out) out=vtmpnam(NULL);
+
+  
+  map=fasta2map(in);
+  nseq=read_array_size_new (map)-1;
+
+  if (p==-1)
+    {
+       fp=vfopen (tmp, "w");  
+       for (a=0; a<nseq; a++)
+	 {
+	   rec=file2record_it (in,a,map);
+	   seq=seq2clean(FastaRecord2seq(rec));
+	   header=FastaRecord2header(rec);
+	   fprintf (fp, "%s\n",header);
+	   l=strlen (seq);
+	   for (b=0; b<l; b++)
+	     {
+	       if (seq[b]!='-')fprintf ( fp, "%c", seq[b]);
+	     }
+	 }
+      fprintf ( fp, "\n");
+      vfclose (fp);
+    }
+  else
+    {
+      for (a=0; a<nseq; a++)
+	{
+	  rec=file2record_it (in,a, map);
+	  seq=seq2clean(FastaRecord2seq(rec));
+	  l=strlen (seq);
+	  if (!cache){cache=(int*)vcalloc (l, sizeof (int));ml=l;}
+	  else if (ml<l){cache=(int*)vrealloc (cache, ml*sizeof (int));ml=l;}
+	  
+	  for ( b=0; b<l; b++)if(seq[b]=='-')cache[b]++;
+	}
+      for ( a=0; a<ml; a++)cache[a]=(cache[a]*100)/nseq;
+      
+      
+      fp=vfopen (tmp, "w");  
+      for (a=0; a<nseq; a++)
+	{
+	  rec=file2record_it (in,a, map);
+	  seq=seq2clean(FastaRecord2seq(rec));
+	  header=FastaRecord2header(rec);
+	  fprintf (fp, "%s\n",header);
+	  l=strlen (seq);
+	  for (b=0; b<l; b++)
+	    {
+	      if (cache[b]<p)fprintf ( fp, "%c", seq[b]);
+	    }
+	  fprintf ( fp, "\n");
+	}
+      vfclose (fp);
+      vfree (cache);
+    }
+  
+  printf_system ("mv %s %s", tmp, out);
+  vfree (map);
+  return out;
+}
+
+
+
 Alignment *ungap_aln_n ( Alignment *A, int p)
 	{
 /*remove all the columns of gap-only within an alignment*/
@@ -3037,150 +3110,96 @@ char **padd_string ( char **string, int n,char pad)
   return string;
 }
 
-int trim_aln_big_file(char *in1, char*in2, char *out1, char *out2, long **nmap1, long **nmap2)
+
+char *msaF2fastaF(char *file)
+{
+  Alignment *A;
+  Sequence *S;
+  char *tmp=vtmpnam(NULL);
+  int a;
+  FILE *fp;
+  
+  A=main_read_aln (file, NULL);
+  fp=vfopen (tmp, "w");
+  for (a=0; a<A->nseq; a++)
+    {
+      fprintf ( fp, ">%s %s\n%s\n", A->name [a], A->aln_comment[a], A->seq_al[a]);
+    }
+  vfclose (fp);
+  S=free_aln (A);
+  if (S)free_sequence (S,S->nseq);  
+  return tmp;
+}
+  
+int trim_fastaF_big(char *in1, char*in2, char *out1, char *out2, long **nmap1, long **nmap2)
 {
   //Same as trim_aln_file, but works on big files: no need to read the entire msa
   //returns a file map
-  long *map1, *map2, *tmap, *tnmap;
-  
-  int nseq1, nseq2, tnseq;
-  char *tin, *tout;
-  int invert=0;
-  int tot=0, pos1, pos2;
-  FILE *fp1, *fp2;
+  long *map1, *map2;
+  int nseq1, nseq2;
+  int tot=0, pos=0;
+  FILE *fp;
   char **name;
   int i1, i2, a, l;
   char *s;
+  int *order;
   
+  if (!format_is_fasta(in1))in1=msaF2fastaF(in1);
+  if (!format_is_fasta(in2))in2=msaF2fastaF(in2);
+  
+
   map1=fasta2map(in1);
   nseq1=read_array_size_new(map1)-1;
     
   map2=fasta2map(in2);
   nseq2=read_array_size_new(map2)-1;
-
- 
-
-  //1 gets processed twice
-  //make sure 1 is the smallest
-  if ( 1==2 && nseq2<nseq1)
-    {
-      invert=1;
-      tnseq=nseq1;nseq1=nseq2;nseq2=tnseq;
-      tmap=map1;map1=map2; map2=tmap;
-      tin=in1;in1=in2; in2=tin;
-      tout=out1;out1=out2;out2=tout;
-    }
   
-  nmap1[0]=(long*)vcalloc (nseq1+1, sizeof (long));
-  nmap2[0]=(long*)vcalloc (nseq2+1, sizeof (long));
-    
-
+  if (nmap1)nmap1[0]=(long*)vcalloc (nseq1+1, sizeof (long));
+  if (nmap2)nmap2[0]=(long*)vcalloc (nseq2+1, sizeof (long));
+  order=(int*)vcalloc ( nseq1, sizeof (int));  
   name=(char **)vcalloc (nseq1, sizeof (char*));
+  
   for (a=0; a<nseq1; a++)
     {
-      name[a]=csprintf(name[a],"%s",FastaRecord2name(file2record(in1,a,map1))); 
+      name[a]=csprintf(name[a],"%s",FastaRecord2name(file2record_it(in1,a,map1))); 
     }
-
-  
-
-
-	
-  fp1=vfopen (out1, "w");
-  fp2=vfopen (out2, "w");
-  pos1=pos2=0;
-  for ( i2=0; i2<nseq2; i2++)
+ 
+  fp=(out2)?vfopen (out2, "w"):NULL;
+  for (tot=0,pos=0, i2=0; i2<nseq2; i2++)
     {
-      s=file2record(in2,i2, map2);
+      s=file2record_it(in2,i2, map2);
       if ((i1=name_is_in_hlist (FastaRecord2name(s), name, nseq1))!=-1)
 	{
-	  fprintf ( fp2, "%s",s);
-	  nmap2[0][tot]=pos2; pos2+=strlen (s);
-	  
-	  s=file2record(in1,i1, map1);
-	  fprintf ( fp1, "%s",s);
-	  nmap1[0][tot]=pos1;pos1+=strlen (s);
+	  if (fp)fprintf ( fp, "%s",s);
+	  if (nmap2)nmap2[0][tot]=pos; 
+	  pos+=strlen (s);
+	  order[tot]=i1;
 	  tot++;
 	}
     }
-  nmap1[0][tot]=pos1;
-  nmap2[0][tot]=pos2;
+  if (nmap2)nmap2[0][tot]=pos;
+  if (fp)vfclose (fp);
   
-  vfclose (fp1); vfclose (fp2);
-  if (invert)
+  fp=(out1)?vfopen (out1, "w"):NULL;
+  for (pos=0,i1=0; i1<tot; i1++)
     {
-      invert=1;
-      tnseq=nseq1;nseq1=nseq2;nseq2=tnseq;
-      tmap=map1;map1=map2; map2=tmap;
-      tin=in1;in1=in2; in2=tin;
-      tout=out1;out1=out2;out2=tout;
-      tnmap=nmap1[0];nmap1[0]=nmap2[0];nmap2[0]=tnmap;
+      s=file2record_it(in1,order[i1], map1);
+      if (fp)fprintf (fp, "%s", s);
+      if (nmap1)nmap1[0][i1]=pos; pos+=strlen (s);
     }
+  if (nmap1)nmap1[0][tot]=pos;
+  if (fp)vfclose (fp);
+
+  //must be set right because it is used to determine nseq
+  if (nmap1)nmap1[0]=(long*)vrealloc (nmap1[0],(tot+1)*sizeof (long));
+  if (nmap2)nmap2[0]=(long*)vrealloc  (nmap2[0],(tot+1)*sizeof (long));
+  
   free_char (name, -1);
+  vfree (order);
   vfree (map1);
   vfree (map2);
   return tot;
 }
-int trim_aln_file (char *in_aln1, char*in_aln2, char *out_aln1, char *out_aln2)
-{
-  FILE *fp1, *fp2, *fp;
-  Alignment *A;
-  int invert=0;
-  char *seq=NULL;
-  char *name=NULL;
-  char *comment=NULL;
-  int fs1, fs2;
-  int n=0;
-  int tot=0;
-  
-  //fs1=file2size (in_aln1);
-  //fs2=file2size (in_aln2);
-  
-  fs1=1;
-  fs2=2;
-  if (fs1>fs2 && format_is_not_fasta (in_aln1))return 0;
-  else if ( format_is_not_fasta (in_aln2))return 0;
-  
-  
-  
-  if (fs1>fs2)
-    {
-      A=main_read_aln (in_aln2,NULL); 
-      fp=vfopen (in_aln1, "r");
-      invert=1;
-    }
-  else
-    {
-      A=main_read_aln (in_aln1,NULL);
-      fp=vfopen (in_aln2, "r");
-      invert=0;
-    }
-  
-  fp1=vfopen (out_aln1, "w");
-  fp2=vfopen (out_aln2, "w");
-
-  
-  while ((get_next_fasta_sequence(fp, &name, &comment,&seq)!=NULL))
-    {
-      int i;
-      
-
-      if ((i=name_is_in_hlist (name, A->name, A->nseq))!=-1)
-	{
-	  tot++;
-	  fprintf ((invert)?fp2:fp1, ">%s\n%s\n",name, A->seq_al[i]);
-	  fprintf ((invert)?fp1:fp2, ">%s\n%s\n",name, seq);
-	}
-    }
-  
-  vfclose (fp1);
-  vfclose (fp2);
-  vfclose (fp);
-  return tot;
-}
-	      
-	 
-	 
-  
   
 Alignment * trim_aln_with_seq ( Alignment *S, Alignment *P)
 {
@@ -14141,18 +14160,10 @@ int thread_msa2msa(char *small, char *big, char *seq)
     
 
   printf_system ( "seq2name_seq.pl %s > %s",small, smallT);
-  S->nseq=read_nameseq(smallT, &name0, &seq0, &com0);
-  S->name=name0;
-  S->seq_al=seq0;
-  S->len_aln=strlen (S->seq_al[0]);
-  
-  printf_system ( "seq2name_seq.pl %s > %s",big, bigT);
-  B->nseq=read_nameseq(bigT, &name1, &seq1, &com1);
-  B->name=name1;
-  B->seq_al=seq1;
-  B->len_aln=strlen (B->seq_al[0]);
+  S=quick_read_fasta_aln(NULL,smallT);
     
-
+  printf_system ( "seq2name_seq.pl %s > %s",big, bigT);
+  B=quick_read_fasta_aln(NULL,bigT);
 
   if ((Si=name_is_in_list (seq, S->name, S->nseq, MAXNAMES+1))==-1)
     {

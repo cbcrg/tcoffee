@@ -170,7 +170,8 @@ int aln2ngap (Alignment *A);
 int  * count_in_aln ( Alignment *A, Alignment *ST, int value, int n_symbol,char **symbol_list, int *table);
 void count_misc (Alignment*A, Alignment *B);
 
-int         trim_aln_big_file (char *in_aln1, char*in_aln2, char *out_aln1, char *out_aln2, long **map1, long **map2);
+char *msaF2fastaF(char *file);
+int         trim_fastaF_big (char *in_aln1, char*in_aln2, char *out_aln1, char *out_aln2, long **map1, long **map2);
 int         trim_aln_file (char *in_aln1, char*in_aln2, char *out_aln1, char *out_aln2);
 Alignment * trim_aln_with_seq ( Alignment *S, Alignment *P);
 Alignment * add_align_seq2aln ( Alignment *A, char *seq, char *seq_name);
@@ -193,7 +194,8 @@ Alignment * unalign_aln_pos (Alignment *A, int s, int p, int l);
 Alignment *degap_aln (Alignment *A);
 
 Alignment * RmLowerInAln (Alignment *A, char *gap);
-Alignment * ungap_aln_n        ( Alignment *A, int n);
+char * ungap_fastaF_big        (char *in, char*out, int n);
+Alignment* ungap_aln_n        ( Alignment *A, int n);
 Alignment * ungap_aln        ( Alignment *A);
 void compress_aln     ( Alignment *A);
 Alignment* condense_aln (Alignment *A);

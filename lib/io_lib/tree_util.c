@@ -8388,9 +8388,9 @@ char* tree2msa4dpa (NT_node T, Sequence *S, int N, char *method)
       kseq2kmsa(KL2,n2, method);
       for (a=0; a<n; a++)
 	{
-	  char *tmp=vtmpnam(NULL);
-	  printf_system ("t_coffee -other_pg seq_reformat -in %s -action +keep_name +extract_seq %s -output fasta_aln > %s", KL[a]->msaF, KL[a]->seqF, tmp);
-	  KL[a]->msaF=tmp;
+
+	  trim_fastaF_big  ( KL[a]->msaF, KL[a]->seqF,  KL[a]->msaF, NULL, NULL, NULL);
+	  ungap_fastaF_big ( KL[a]->msaF, KL[a]->msaF, 100);
 	  vfree(KL2[a]);
 	}
       vfree (KL2);
@@ -8712,6 +8712,7 @@ ALNcol * msa2graph (Alignment *A, Sequence *S, ALNcol***S2,ALNcol*msa,int seq)
 
   //1-fill up the look up section: pos
   subseq=-1;
+
   for (s=0; s<A->nseq; s++)
     {
       int r;
@@ -8806,6 +8807,7 @@ ALNcol * msa2graph (Alignment *A, Sequence *S, ALNcol***S2,ALNcol*msa,int seq)
       for (s=0; s<A->nseq; s++)
 	{
 	  ir=pos[s][c];
+
 	  if (ir!=-1 && S2[lu[s]][ir] )
 	    {
 	      p=S2[lu[s]][ir];graph[c]=p;

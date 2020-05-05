@@ -124,7 +124,7 @@ int sample_aln_compare ( int argc, char *argv[])
   int nseq=0;
   char **nargv=(char**)vcalloc(argc+30, sizeof (char*));
   char *al1, *al2, *sal1, *sal2, *ial1,*ial2, *s;
-  FILE *fp1, *fp2;
+  FILE *fp;
   char *r=vtmpnam (NULL);
   float avg=0, sum=0, sum2=0, sd=0, v=0;
   char *mode=NULL;
@@ -180,7 +180,7 @@ int sample_aln_compare ( int argc, char *argv[])
     }
  
 
-  if (!trim_aln_big_file (ial1, ial2, al1=vtmpnam (NULL), al2=vtmpnam (NULL), &map1, &map2))
+  if (!trim_fastaF_big (ial1, ial2, al1=vtmpnam (NULL), al2=vtmpnam (NULL), &map1, &map2))
     {
       myexit (fprintf_error ( stderr, "\nCannot compare %s and %s  [FATAL:%s]", ial1, ial2, PROGRAM));
     }
@@ -197,19 +197,18 @@ int sample_aln_compare ( int argc, char *argv[])
       char ***l;
       sampled=list2sample(nseq1,nseq);
       output_completion (stderr,a,sample,100, "Sampling");
-      fp1=vfopen (sal1, "w");
-      fp2=vfopen (sal2, "w");
+
+
+
       
-      for (b=0; b<nseq; b++)
-	{
-	  
-	  fprintf ( fp1, "%s",file2record(al1,sampled[b], map1));
-	  fprintf ( fp2, "%s",file2record(al2,sampled[b], map2));
-	}
+      fp=vfopen (sal1, "w");
+      for (b=0; b<nseq; b++)fprintf ( fp, "%s",file2record(al1,sampled[b], map1));
+      vfclose (fp);
       
-           
+      fp=vfopen (sal2, "w");
+      for (b=0; b<nseq; b++)fprintf ( fp, "%s",file2record(al2,sampled[b], map2));
+      vfclose (fp);
       
-      vfclose (fp1);vfclose (fp2);
       aln_compare (n, nargv);
       
       l=file2list (r, " ");
@@ -582,54 +581,24 @@ int aln_compare ( int argc, char *argv[])
 		myexit (EXIT_FAILURE);
 		}
 	}
-    
+   
     if (alignment1_file[0] && check_file_exists ( alignment1_file) && alignment2_file[0] && check_file_exists ( alignment2_file))
       {
 	char *tmp1=vtmpnam (NULL);
 	char *tmp2=vtmpnam (NULL);
 	char *aln1=vtmpnam (NULL);
 	char *aln2=vtmpnam (NULL);
-	int quick_trim=1; // this option was added to trim the MSA in C
-	
-
-	if (quick_trim && trim_aln_file ( alignment1_file, alignment2_file,aln1, aln2))
-	  {
-	    alignment1_file=aln1;
-	    alignment2_file=aln2;
-	  }
-	    
-	else
-	  {
-	    printf_system ("seq2name_seq.pl %s > %s", alignment1_file, tmp1);
-	    printf_system ("seq2name_seq.pl %s > %s", alignment2_file, tmp2);
-	    printf_system ("seq2intersection.pl %s %s -fasta> %s", tmp1, tmp2, aln1);
-	    printf_system ("seq2intersection.pl %s %s -fasta> %s", tmp2, tmp1, aln2);
-	    alignment1_file=aln1;
-	    alignment2_file=aln2;
-	  }
+	trim_fastaF_big ( alignment1_file, alignment2_file,aln1, aln2, NULL, NULL);
+	alignment1_file=aln1;
+	alignment2_file=aln2;
       }
-    if (pep1_file[0] && check_file_exists ( pep1_file) && pep2_file[0] && check_file_exists ( pep2_file))
-      {
-	char *ptmp1=vtmpnam (NULL);
-	char *ptmp2=vtmpnam (NULL);
-	char *pep1=vtmpnam (NULL);
-	char *pep2=vtmpnam (NULL);
-	
-	printf_system ("seq2name_seq.pl %s > %s", pep1_file, ptmp1);
-	printf_system ("seq2name_seq.pl %s > %s", pep2_file, ptmp2);
-	printf_system ("seq2intersection.pl %s %s -fasta > %s", ptmp1, ptmp2, pep1);
-	printf_system ("seq2intersection.pl %s %s -fasta > %s", ptmp2, ptmp1, pep2);
-	pep1_file=pep1;
-	pep1_file=pep2;
-      }
+    
     
 
 /*PARAMETER PROCESSING*/
  //---Maria added this---//
        CL=NULL;
 
-if ( pep_compare==1 || count==1)aln_compare=0;
-if ( aln_compare==1)pep_compare=0; 
 
 /*READ THE TOTAL SEQUENCES*/
        seq_list=declare_char ( 100,STRING);
@@ -716,89 +685,9 @@ if ( aln_compare==1)pep_compare=0;
        
        TOT_SEQ=read_seq_in_n_list ( seq_list, n_seq_file, NULL, NULL);
              
-       
-/*1 COMPARISON OF THE SEQUENCES*/
-       
-       /*New Input*/
-
-    if ( pep_compare==1 || count==1)
-       {
-       f=0; 
-
-       if ( pep1_file[0]!='\0')SA=quick_read_seq (pep1_file);
-       else if (alignment1_file[0]!='\0')  
-           {	       
-	     A=main_read_aln (alignment1_file, NULL);
-	     SA=aln2seq ( A);
-	   }
-       
-       if ( pep2_file[0]!='\0')SB=quick_read_seq (pep2_file);
-       else if (alignment2_file[0]!='\0') 
-	 {
-	   B=main_read_aln ( alignment2_file, NULL);
-	   SB=aln2seq (B);
-	   }
-       else 
-           {
-	   SB=SA;
-	   sprintf ( alignment2_file, "%s", alignment1_file );
-	   }
-       buf1=(pep1_file[0]!='\0')?pep1_file: alignment1_file;
-       buf2=(pep2_file[0]!='\0')?pep2_file: alignment2_file;
-       /*Output of the Results*/    
-
-       fp=vfopen ( io_file, "w");      
-       
-
-       if ( count==1)
-          {
-	  fprintf (fp, "Number of seq: %d %d\n", SA->nseq,SA->nseq);
-	  for ( a=0; a< SA->nseq; a++) fprintf (fp, "%-15s %d %d\n", SA->name[a], (int)strlen (SA->seq[a]), (int)strlen (SA->seq[a]));
-	  }
-	      
-       if (SA->nseq!=SB->nseq)
-	   {
-	   
-	   fprintf ( fp, "DIFFERENCE TYPE 1: Different number of sequences %3d/%3d",SA->nseq,SB->nseq);
-	   f=1;
-	   }
-
-       trim_seq ( SA, SB);
-       for ( a=0; a< SA->nseq; a++)
-           {
-	   lower_string (SA->seq[a]);
-	   lower_string (SB->seq[a]);
-	   ungap ( SA->seq[a]);
-	   ungap ( SB->seq[a]);
-
-	   if ( strcmp ( SA->seq[a], SB->seq[a])!=0) 
-	       {
-	       fprintf ( fp, "DIFFERENCE TYPE 2: %s is different in the 2 files\n", SA->name[a]);
-	       f=1;
-	       }
-	   }
-       for ( a=0; a< SA->nseq; a++)
-           {
-	   lower_string (SA->seq[a]);
-	   lower_string (SB->seq[a]);
-	   ungap ( SA->seq[a]);
-	   ungap ( SB->seq[a]);
-
-	   if ( strlen ( SA->seq[a])!= strlen (SB->seq[a]))
-	       {
-		 fprintf ( fp, "DIFFERENCE TYPE 3: %s has != length in the 2 files (%d-%d)\n", SA->name[a],(int)strlen ( SA->seq[a]), (int)strlen (SB->seq[a]));
-	       f=1;
-	       }
-	   }
-       if ( f==1)
-           {
-	   fprintf ( fp, "\nDIFFERENCES found between:\n\t%s\n\t%s\n**********\n\n",buf1, buf2);
-	   }
-       fclose (fp);
-       }
-
+       aln_compare=1;
 /*2 COMPARISON OF THE ALIGNMENTS*/			 
-    else if ( aln_compare==1)
+    if ( aln_compare==1)
        {
 
        n_categories=parse_category_list ( category_list, category, n_sub_categories);

@@ -32,6 +32,7 @@ sub file2format
     else 
       {
 	print STDERR "ERROR: $f FILE is NOT a supported format [ERROR]\n";
+	system ("cp $f /Users/cnotredame/cedric1.txt");
 	exit (1);
       }
   }
@@ -213,6 +214,7 @@ sub clustalw2name_seq
     my (@name, @seq);
     my $F= new FileHandle;
     my $stockholm;
+   
     
     open ($F, $fname);
     
@@ -296,15 +298,13 @@ sub clustalw2name_seq
 	print STDERR "ERROR: $fname is NOT an MSA in Clustalw format: make sure there is no blank line within a block [ERROR]\n";
 	exit (1);
       }
-    print "#NAMESEQ_01\n";
-    print "# $nseq\n";
+    
+    
     for (my $a=0; $a< $nseq; $a++)
       {
 	$name[$a]=cleanstring ($name[$a]);
 	$seq[$a]=cleanstring ($seq[$a]);
-	my $ln=length ($name[$a]);
-	my $ls=length ($seq[$a]);
-	print ">$ln $ls $name[$a] $seq[$a]\n";
+	print ">$name[$a]\n$seq[$a]\n";
       }
   }
 sub cleanstring

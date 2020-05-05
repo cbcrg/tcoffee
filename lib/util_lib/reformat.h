@@ -37,10 +37,14 @@ Sequence_data_struc *read_data_structure ( char *in_format, char *in_file,Action
 Alignment * read_fasta_aln_noceck ( char *name, Alignment *A);
 
 Alignment * main_read_aln ( char *name, Alignment *A);
-
+int big();
 int *list2sample(int nseq, int sample);
 char*FastaRecord2name(char*rec);
+char*FastaRecord2seq(char*rec);
+char *FastaRecord2header (char *record);
+char *seq2clean  (char*seq);
 char *file2record (char *file, int i, long *map);
+char *file2record_it (char *file, int i, long *map);
 long *fasta2map(char *file);
 int fasta2nseq (char *file);
 

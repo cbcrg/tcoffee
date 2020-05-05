@@ -7071,7 +7071,12 @@ void ignore_cache()
   return;
 
 }
-
+static int NopenF;
+int count_openF()
+{
+  return NopenF;
+}
+ 
 FILE * fopenN   ( char *fname, char *mode, int max_n_tries, int delay);
 FILE * myfopen (char *name, char *mode);
 FILE * vfopen  ( char *name_in, char *mode)
@@ -7222,7 +7227,7 @@ int register_file4dump (char *file, char *mode)
 FILE *myfopen (char *name, char *mode)
 {
   char *dump_output_file_list=dump_io_start(NULL);
-
+  FILE *fp;
 
   if (dump_output_file_list)
     {
@@ -7236,7 +7241,9 @@ FILE *myfopen (char *name, char *mode)
     }
   
 
-  return fopen (name, mode);
+  fp=fopen (name, mode);
+  if (fp)NopenF++;
+  return fp;
 }
       
 FILE *fopenN  ( char *fname, char *mode, int max_n_tries, int delay)
@@ -7273,6 +7280,7 @@ FILE * vfclose ( FILE *fp)
 	       }
 	     myexit (fprintf_error ( stderr, "\nCould not close file properly [FATAL:%s]", PROGRAM));
 	   }
+       NopenF--;
        return NULL;
        }
 
