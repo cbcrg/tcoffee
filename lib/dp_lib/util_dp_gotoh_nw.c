@@ -851,7 +851,7 @@ int gotoh_pair_wise_lgp ( Alignment *A, int *ns, int **l_s, Constraint_list *CL)
 		char_buf[b]='-';
 	    }
 	  char_buf[b]='\0';
-	  sprintf (aln[l_s[c][a]],"%s", char_buf);
+	  aln[l_s[c][a]]=csprintf (aln[l_s[c][a]],"%s", char_buf);
 	}
     }
 

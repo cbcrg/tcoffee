@@ -368,6 +368,7 @@ Alignment * matrix_evaluate_output ( Alignment *IN,Constraint_list *CL)
 	  }
       }
     sprintf (OUT->name[OUT->nseq], "cons");
+    (OUT)->seq_al[IN->nseq]=csprintf((OUT)->seq_al[IN->nseq],"%s",(OUT)->seq_al[IN->nseq-1]);
     for ( a=0; a< IN->len_aln; a++)
       {
 	
@@ -669,6 +670,7 @@ Alignment * fork_triplet_coffee_evaluate_output ( Alignment *IN,Constraint_list 
       int **sl;
       int j;
       
+      
       OUT=copy_aln (IN, OUT);
       pos=aln2pos_simple(IN, IN->nseq);
       sprintf ( OUT->name[IN->nseq], "cons");
@@ -681,7 +683,7 @@ Alignment * fork_triplet_coffee_evaluate_output ( Alignment *IN,Constraint_list 
       njobs=nproc;
       sl=n2splits (njobs,IN->len_aln);
       pid_tmpfile=(char**)vcalloc (njobs, sizeof (char*));
-      
+      	
       for (sjobs=0,j=0; sjobs<njobs; j++)
 	{
 	  pid_tmpfile[j]=vtmpnam(NULL);
@@ -714,6 +716,7 @@ Alignment * fork_triplet_coffee_evaluate_output ( Alignment *IN,Constraint_list 
 		      
 		      for (x=1;x<CL->residue_index[s1][r1][0];x+=ICHUNK)
 			{
+			  
 			  s2=CL->residue_index[s1][r1][x+SEQ2];
 			  r2=CL->residue_index[s1][r1][x+R2];
 			  w2=CL->residue_index[s1][r1][x+WE];

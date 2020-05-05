@@ -1754,6 +1754,7 @@ Constraint_list *add_entry2list( CLIST_TYPE *entry, Constraint_list *CL)
   entry[SEQ2]=s1;
   entry[R1]=r2;
   entry[R2]=r1;
+  
   add_entry2list2 (entry, CL);
 
   entry[SEQ1]=s1;
@@ -1778,7 +1779,7 @@ Constraint_list *add_entry2list2 (CLIST_TYPE *entry, Constraint_list *CL)
   int s1=entry[SEQ1];
   int r1=entry[R1];
   int i;
-
+  
   if (r1>(CL->S)->len[s1])
     {
       myexit (fprintf_error ( stderr, "Library out of bounds: %s::%d [%d]* vs %s::%d", (CL->S)->name[s1], r1,(CL->S)->len[s1], (CL->S)->name[s2], r2));
@@ -2154,6 +2155,8 @@ Constraint_list* fork_read_n_constraint_list(char **fname,int n_list, char *in_m
 		CL->S=S;
 	}
 
+
+
 	/*CHECK IF THERE IS A MATRIX AND GET RID OF OTHER METHODS*/
 	for (b=0, a=0; a< n_list; a++)if (is_matrix(fname[a]) ||is_matrix(fname[a]+1) )b=a+1;
 
@@ -2410,155 +2413,158 @@ Sequence * read_seq_in_n_list(char **fname, int n, char *type, char *SeqMode)
 	*/
 
 	if ( n==0)
-	{
-		myexit (fprintf_error ( stderr, "NO in FILE"));
-	}
+	  {
+	    myexit (fprintf_error ( stderr, "NO in FILE"));
+	  }
 	else
-	{
-		for ( a=0; a< n ; a++)
-		{
-			static char *buf;
-			char *lname;
-			if (buf)vfree (buf);
-			
-			//prevent silly bug when the file Sname also exists...		    
-			if (fname[a][0]=='S' && file_exists(NULL, fname[a]+1))
-			  {
-			    buf=(char*)vcalloc (strlen (fname[a])+1, sizeof(char));
-			    sprintf (buf, "%s", fname[a]);
-			  }
-			else
-			  buf=name2type_name(fname[a]);
-			
-			mode=buf[0];lname=buf+1;
-			
-			if (is_seq_source ('A', mode, SeqMode))
-			  {
-
-
-				A=main_read_aln (lname,NULL);
-			
-				S1=aln2seq(A);
-				
-				S1=seq2unique_name_seq (S1);
-				if ((S=merge_seq ( S1, S))==NULL){fprintf ( stderr, "\nERROR: Sequence Error in %s [FATAL:%s]\n",lname, PROGRAM); myexit(EXIT_FAILURE);}
-				free_aln (A);
-				free_sequence (S1, S1->nseq);
-			  }
-			else if ( is_seq_source ('R', mode, SeqMode))
-			  {
-
-				S=add_prf2seq (lname, S);
-
-			  }
-			else if (is_seq_source ('P', mode, SeqMode))
-			  {
-			    int i;
-
-			    S1=get_pdb_sequence (lname);
-			    if (S1==NULL)
-			      {
-				add_warning ( stderr, "\nWarning: Could not use PDB: %s", lname);
-			      }
-			    else
-			      {
-				if ((S=merge_seq ( S1, S))==NULL){fprintf ( stderr, "\nERROR: Sequence Error in %s [FATAL:%s]\n",lname, PROGRAM); myexit(EXIT_FAILURE);}
-				i=name_is_in_list (S1->name[0], S->name, S->nseq, 100);
-				(S->T[i])->P=fill_P_template (S->name[i], lname, S);
-			      }
-			    free_sequence (S1, S1->nseq);
-			  }
-			else if ( mode=='M');
-			else if ( mode=='X');
-			else if ( mode=='W');
-
-			else if (is_seq_source ('S', mode, SeqMode))
-			  {
-				/*1 Try with my routines (read t_coffee and MSF)*/
-			    
-			    if ( (A=main_read_aln ( lname, NULL))!=NULL)
-				{
-				  
-
-					S1=aln2seq(A);
-					free_aln(A);
-				}
-				else
-				{
-					S1=main_read_seq (lname);
-				}
-
-				for ( b=0; b< S1->nseq; b++)ungap(S1->seq[b]);
-				S1=seq2unique_name_seq (S1);
-
-
-				if ((S=merge_seq ( S1, S))==NULL){fprintf ( stderr, "\nSequence Error in %s [FATAL:%s]\n",lname,PROGRAM); myexit(EXIT_FAILURE);}
-
-				free_sequence (S1,S1->nseq);
-				
-
-			  }
-			else if (is_seq_source ('L', mode, SeqMode))
-			  {
-			    
-			    read_seq_in_list (lname,&nseq,&sequences,&seq_name, &genome_co);
-			    S1=fill_sequence_struc ( nseq, sequences, seq_name, genome_co);
-			    
-			    if (genome_co != NULL)
-			      {
-				for ( b=0; b< S1->nseq; b++)
-				  vfree(genome_co[b].seg_name);
-			      }
-			    nseq=0;
-			    
-			    vfree(genome_co);
-			    free_char (sequences, -1);
-			    free_char ( seq_name, -1);
-			    sequences=NULL;
-			    seq_name=NULL;
-			    S1=seq2unique_name_seq (S1);
-			    
-			    if ((S=merge_seq( S1, S))==NULL)
-			      {
-				fprintf ( stderr, "\nSequence Error in %s [FATAL:%s]\n",lname,PROGRAM);
-				myexit(EXIT_FAILURE);
-			      }
-			    free_sequence(S1, S1->nseq);
-			  }
-			
-			else if ( !strchr ( "ALSMXPRWG", mode))
-			  {
-			    myexit (fprintf_error ( stderr, "%s is neither a file nor a method [FATAL:%s]\n", lname));
-			  }
-		}
+	  {
+	    for ( a=0; a< n ; a++)
+	      {
+		static char *buf;
+		char *lname;
+		if (buf)vfree (buf);
 		
-		S=remove_empty_sequence (S);
-		
-		
-		if ( type && type[0] )sprintf ( S->type, "%s", type);
-		else S=get_sequence_type (S);
-
-		if ( strm (S->type, "PROTEIN_DNA"))
+		//prevent silly bug when the file Sname also exists...		    
+		if (fname[a][0]=='S' && file_exists(NULL, fname[a]+1))
 		  {
-		    for ( a=0; a< S->nseq; a++)
+		    buf=(char*)vcalloc (strlen (fname[a])+1, sizeof(char));
+		    sprintf (buf, "%s", fname[a]);
+		  }
+		else
+		  buf=name2type_name(fname[a]);
+		
+		mode=buf[0];lname=buf+1;
+		
+		if (is_seq_source ('A', mode, SeqMode))
+		  {
+		    
+		    
+		    A=main_read_aln (lname,NULL);
+		    
+		    S1=aln2seq(A);
+		    
+		    S1=seq2unique_name_seq (S1);
+		    
+		    if ((S=merge_seq ( S1, S))==NULL){fprintf ( stderr, "\nERROR: Sequence Error in %s [FATAL:%s]\n",lname, PROGRAM); myexit(EXIT_FAILURE);}
+		    free_aln (A);
+		    free_sequence (S1, S1->nseq);
+		    
+		  }
+		else if ( is_seq_source ('R', mode, SeqMode))
+		  {
+		    
+		    S=add_prf2seq (lname, S);
+		    
+		  }
+		else if (is_seq_source ('P', mode, SeqMode))
+		  {
+		    int i;
+		    
+		    S1=get_pdb_sequence (lname);
+		    if (S1==NULL)
 		      {
-			if (strm ( get_string_type ( S->seq[a]), "DNA") ||strm ( get_string_type ( S->seq[a]), "RNA")  );
-			else if ( strm ( get_string_type ( S->seq[a]), "PROTEIN"))
-			  {
-			    S->seq[a]=thread_aa_seq_on_dna_seq (S->seq[a]);
-			    S->len[a]=strlen (S->seq[a]);
-			    S->max_len=MAX(S->max_len, S->len[a]);
-			  }
+			add_warning ( stderr, "\nWarning: Could not use PDB: %s", lname);
 		      }
+		    else
+		      {
+			if ((S=merge_seq ( S1, S))==NULL){fprintf ( stderr, "\nERROR: Sequence Error in %s [FATAL:%s]\n",lname, PROGRAM); myexit(EXIT_FAILURE);}
+			i=name_is_in_list (S1->name[0], S->name, S->nseq, 100);
+			(S->T[i])->P=fill_P_template (S->name[i], lname, S);
+		      }
+		    free_sequence (S1, S1->nseq);
+		  }
+		else if ( mode=='M');
+		else if ( mode=='X');
+		else if ( mode=='W');
+		
+		else if (is_seq_source ('S', mode, SeqMode))
+		  {
+		    /*1 Try with my routines (read t_coffee and MSF)*/
+		    
+		    if ( (A=main_read_aln ( lname, NULL))!=NULL)
+		      {
+			
+			
+			S1=aln2seq(A);
+			free_aln(A);
+		      }
+		    else
+		      {
+			S1=main_read_seq (lname);
+		      }
+		    
+		    for ( b=0; b< S1->nseq; b++)ungap(S1->seq[b]);
+		    S1=seq2unique_name_seq (S1);
+		    
+		    
+		    if ((S=merge_seq ( S1, S))==NULL){fprintf ( stderr, "\nSequence Error in %s [FATAL:%s]\n",lname,PROGRAM); myexit(EXIT_FAILURE);}
+		    
+		    free_sequence (S1,S1->nseq);
+		  }
+		else if (is_seq_source ('L', mode, SeqMode))
+		  {
+		    
+		    read_seq_in_list (lname,&nseq,&sequences,&seq_name, &genome_co);
+		    S1=fill_sequence_struc ( nseq, sequences, seq_name, genome_co);
+		    
+		    if (genome_co != NULL)
+		      {
+			for ( b=0; b< S1->nseq; b++)
+			  vfree(genome_co[b].seg_name);
+		      }
+		    nseq=0;
+		    
+		    vfree(genome_co);
+		    free_char (sequences, -1);
+		    free_char ( seq_name, -1);
+		    sequences=NULL;
+		    seq_name=NULL;
+		    S1=seq2unique_name_seq (S1);
+		    
+		    if ((S=merge_seq( S1, S))==NULL)
+		      {
+			fprintf ( stderr, "\nSequence Error in %s [FATAL:%s]\n",lname,PROGRAM);
+			myexit(EXIT_FAILURE);
+		      }
+		    free_sequence(S1, S1->nseq);
 		  }
 		
-		
-		
-		return S;
-	}
+		else if ( !strchr ( "ALSMXPRWG", mode))
+		  {
+		    myexit (fprintf_error ( stderr, "%s is neither a file nor a method [FATAL:%s]\n", lname));
+		  }
+	      }
+	    
+	    S=remove_empty_sequence (S);
+	    
+	    
+	    if ( type && type[0] )sprintf ( S->type, "%s", type);
+	    else S=get_sequence_type (S);
+	    
+	    if ( strm (S->type, "PROTEIN_DNA"))
+	      {
+		for ( a=0; a< S->nseq; a++)
+		  {
+		    if (strm ( get_string_type ( S->seq[a]), "DNA") ||strm ( get_string_type ( S->seq[a]), "RNA")  );
+		    else if ( strm ( get_string_type ( S->seq[a]), "PROTEIN"))
+		      {
+			S->seq[a]=thread_aa_seq_on_dna_seq (S->seq[a]);
+			S->len[a]=strlen (S->seq[a]);
+			S->max_len=MAX(S->max_len, S->len[a]);
+		      }
+		  }
+	      }
+	    
+	    for (a=0; a<S->nseq; a++)
+	      {
+		int l=S->len[a]=strlen (S->seq[a]);
+		S->max_len=(S->max_len>l)?S->max_len:l;
+	      }
+	    return S;
+	  }
 	
 	
-
+	
 	return NULL;
 }
 
@@ -3608,6 +3614,8 @@ Constraint_list * fork_relax_constraint_list (Constraint_list *CL, int njobs,int
   if (!CL || !CL->residue_index)return CL;
   fprintf ( CL->local_stderr, "\nLibrary Relaxation: Multi_proc [%d]\n ", nproc);
 
+  
+  
   if ( !hasch || max_len!=(CL->S)->max_len)
     {
       max_len=(CL->S)->max_len;

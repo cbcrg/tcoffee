@@ -48,7 +48,9 @@ char *file2record_it (char *file, int i, long *map);
 long *fasta2map(char *file);
 int fasta2nseq (char *file);
 
+
 Sequence  * quick_read_seq ( char *file);
+Alignment *reload_aln (Alignment*A);
 Alignment * quick_read_aln( char *name);//reads onléy fasta and clustalw
 Alignment * quick_read_fasta_aln( Alignment *A,char *name);//reads onléy fasta and clustalw
 Alignment * quick_read_aln_static( char *name);//reads onléy fasta and clustalw
@@ -60,7 +62,7 @@ Alignment *alifold2aln     ( char *name);
 Sequence  * main_read_seq ( char *mname);
 int output_format_aln ( char *format, Alignment *A, Alignment *EA,char *name);
 int main_output   ( Sequence_data_struc *D1, Sequence_data_struc *D2, Sequence_data_struc *DST, char *out_format, char *out_file);
-
+int is_aligned (int n,char **al);
 char * identify_seq_format ( char *file);
 char * name2type_name ( char *name);
 char identify_format (char **fname);
@@ -158,6 +160,7 @@ Sequence* get_pir_sequence           ( char *fname, char *comment_name);
 Sequence* perl_reformat2fasta        ( char *perl_script, char *file);
 
 int get_next_fasta_sequence          (FILE*fp, char **name, char **comment, char **seq);
+Sequence *reload_seq(Sequence *A);
 Sequence* get_fasta_sequence         ( char *fname, char *comment_name);
 Sequence* get_fasta_sequence_num     ( char *fname, char *comment_name);
 Sequence* get_fasta_sequence_raw     ( char *fname, char *comment_name);

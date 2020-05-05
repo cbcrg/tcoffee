@@ -9,10 +9,10 @@ use Env qw(USER);
 
 my $format=file2format ($ARGV[0]);
 
-if    ($format eq "clustalw"){clustalw2name_seq($ARGV[0]);}
-elsif ($format eq "fasta")   {fasta2name_seq($ARGV[0]);}
-elsif ($format eq "msf")   {msf2name_seq($ARGV[0]);}
-elsif ($format eq "phylip")   {phylip2name_seq($ARGV[0]);}
+if    ($format eq "clustalw"){clustalw2fasta($ARGV[0]);}
+elsif ($format eq "fasta")   {fasta2fasta($ARGV[0]);}
+elsif ($format eq "msf")   {msf2fasta($ARGV[0]);}
+elsif ($format eq "phylip")   {phylip2fasta($ARGV[0]);}
 elsif ($format eq "nameseq") {display_file ($ARGV[0]);}
  
 exit (0);
@@ -44,7 +44,7 @@ sub display_file
        while (<$F>){print "$_";}
        close ($F);
      }
-sub phylip2name_seq
+sub phylip2fasta
     {
       my $file=shift;
       my $F= new FileHandle;
@@ -91,17 +91,13 @@ sub phylip2name_seq
 	}
       close ($F);
       
-      print "#NAMESEQ_01\n";
-      print "# $nseq\n";
       for (my $a=0; $a<$nseq; $a++)
 	{
-	  my $nl=length ($list{$a}{'name'});
-	  my $sl=length ($list{$a}{'seq'});
-	  print ">$nl $sl $list{$a}{'name'} $list{$a}{'seq'}\n";
+	  print ">$list{$a}{'name'}\n$list{$a}{'seq'}\n";
 	}
     }
       
-sub msf2name_seq
+sub msf2fasta
     {
       my $file=shift;
       my $F= new FileHandle;
@@ -143,22 +139,21 @@ sub msf2name_seq
 	    {$n=0;}
 	}
       close ($F);
-      print "#NAMESEQ_01\n";
-      print "# $nseq\n";
+      
       for (my $a=0; $a<$nseq; $a++)
 	{
 	  my $nl=length ($list{$a}{'name'});
 	  my $sl=length ($list{$a}{'seq'});
-	  print ">$nl $sl $list{$a}{'name'} $list{$a}{'seq'}\n";
+	  print ">$list{$a}{'name'}\n$list{$a}{'seq'}\n";
 	}
     }
     
-sub fasta2name_seq
+sub fasta2fasta
     {
       my $file=shift;
       my $F= new FileHandle;
       my ($seq, $name,$n,$l,%len);
-      
+      my $started=0;
       open ($F, $file);
       while (<$F>)
 	{
@@ -173,8 +168,6 @@ sub fasta2name_seq
 	    }
 	}
       close ($F);
-      print "#NAMESEQ_01\n";
-      print "# $n";
       
       open ($F, $file);
       while (<$F>)
@@ -191,9 +184,9 @@ sub fasta2name_seq
 		{
 		  $comment=~s/^\s+//g;
 		  my $cl=length ($comment);
-		  print "\n#$cl $comment\n";
 		}
-	      print "\n>$nl $sl $name ";
+	      if (!$started){$started=1;print ">$name\n";}
+	      else {print "\n>$name\n"}
 	    }
 	  else
 	    {
@@ -206,7 +199,7 @@ sub fasta2name_seq
       print "\n";
       close ($F);
     }
-sub clustalw2name_seq
+sub clustalw2fasta
   {
     my $fname=shift;
     my ($file1, $file);

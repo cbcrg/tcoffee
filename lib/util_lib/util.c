@@ -1356,6 +1356,22 @@ int quantile_rank (int **list,int field, int n, float p)
 /*                                                                   */
 /*                                                                   */
 /*********************************************************************/
+
+
+void *  cmemcpy(void*out, void*in,size_t size )
+{
+  int l;
+  if (!in){free(out);return NULL;}
+  
+  l=read_array_size_new (in);
+  if (!l){vfree (out); return NULL;}
+  
+  if (!out)out=(void*)vcalloc (l, size);
+  else out=(void*)vrealloc (out, l*size);
+  return memcpy (out, in, l*size);
+}
+    
+
 short* ga_memcpy_short ( short *array1, short *array2, int n)
 	{
 	int a;
@@ -1461,15 +1477,15 @@ READ_ARRAY_SIZE(double,read_size_double)
 
 short ** duplicate_short ( short **array , int len, int field)
     {
-    return copy_short (array ,declare_short ( len, field),  len, field);
+      return copy_short (array ,declare_short ( len, field));
     }
 int ** duplicate_int ( int **array , int len, int field)
     {
-    return copy_int (array ,declare_int ( len, field),  len, field);
+      return copy_int (array ,declare_int ( len, field));
     }
 char ** duplicate_char ( char **array , int len, int field)
     {
-    return copy_char (array ,declare_char ( len, field),  len, field);
+    return copy_char (array ,declare_char ( len, field));
     }
 char * duplicate_string ( char *string)
     {
@@ -1488,11 +1504,11 @@ char * duplicate_string ( char *string)
     }
 float ** duplicate_float ( float **array , int len, int field)
     {
-    return copy_float (array ,declare_float ( len, field),  len, field);
+      return copy_float (array ,declare_float ( len, field));
     }
 double ** duplicate_double ( double **array , int len, int field)
     {
-    return copy_double (array ,declare_double ( len, field),  len, field);
+      return copy_double (array ,declare_double ( len, field));
     }
 
 
@@ -1631,89 +1647,103 @@ double ** copy_double_new (double **array1)
   return array2;
 }
 
-short ** copy_short( short **array1, short  **array2, int len, int number_field)
+
+char ** copy_char ( char **array1, char **array2)
     {
     int a;
+    int l1, l2; 
 
-    if ( len==-1)len=read_array_size (array1,sizeof (short*));
-    if ( number_field==-1)number_field=read_array_size (array1[0],sizeof (short));
-    if ( array2)free_short ( array2, -1);
-    array2=declare_short ( len, number_field);
+    
+    if ( !array1)return NULL;
+    else l1=read_array_size_new(array1);
 
-    for ( a=0; a< len; a++)
-	ga_memcpy_short( array1[a],array2[a],number_field);
-
-    return array2;
-    }
-char ** copy_char ( char **array1, char **array2, int len, int number_field)
-    {
-    int a;
-
-    if ( array1==NULL)return NULL;
-    if ( len==-1)len=read_size_char (array1,sizeof (char*));
-    if ( number_field==-1)
-	{
-	number_field=read_size_char (array1[0],sizeof(char));
-	for ( a=0; a< len; a++)
-	    number_field=MAX(number_field, strlen ( array1[a]))+1;
-	}
-
-    if ( array2)free_char (array2, -1);
-    array2=declare_char(len, number_field);
-
-    for ( a=0; a< len; a++)
-      sprintf ( array2[a], "%s", array1[a]);
-
-    return array2;
-    }
-int ** copy_int ( int **array1, int **array2, int len, int number_field)
-    {
-    int a;
-
-    if ( array1==NULL) return NULL;
-    if ( len==-1)len=read_size_int (array1, sizeof (int*));
-    if ( number_field==-1)number_field=read_size_int (array1[0],sizeof (int));
-
-
-
-    if (array2)free_int (array2, -1);
-    array2=declare_int ( len, number_field);
-
-    for ( a=0; a< len; a++)
-	ga_memcpy_int( array1[a],array2[a],number_field);
-
+    if (!array2)array2=(char**)vcalloc (l1, sizeof (char*));
+    l2=read_array_size_new(array2);
+      
+    if (l1!=l2)array2=(char**)vrealloc(array2, sizeof (char*)*l1);
+    
+    for (a=0; a<l1; a++)
+      array2[a]=(array1[a])?csprintf (array2[a], "%s", array1[a]):NULL;
+		    
     return array2;
     }
 
-float ** copy_float ( float **array1, float **array2, int len, int number_field)
+short ** copy_short (short **array1,short **array2)
     {
     int a;
+    int l1, l2; 
 
-    if ( array1==NULL) return NULL;
-    if ( len==-1)len=read_size_float (array1,sizeof (float*));
-    if ( number_field==-1)number_field=read_size_float (array1[0],sizeof (float));
+    
+    if ( !array1)return NULL;
+    else l1=read_array_size_new(array1);
 
-    if ( array2)free_float (array2, -1);
-    array2=declare_float ( len, number_field);
-
-    for ( a=0; a< len; a++)
-	ga_memcpy_float( array1[a],array2[a],number_field);
+    if (!array2)array2=(short**)vcalloc (l1, sizeof (short*));
+    l2=read_array_size_new(array2);
+      
+    if (l1!=l2)array2=(short**)vrealloc(array2, sizeof (short*)*l1);
+    
+    for (a=0; a<l1; a++)array2[a]=(short*)cmemcpy(array2[a], array1[a],sizeof (short));
     return array2;
     }
-double ** copy_double (double **array1, double **array2, int len, int number_field)
+
+int ** copy_int (int **array1,int **array2)
     {
     int a;
+    int l1, l2; 
 
-    if ( array1==NULL) return NULL;
-    if ( len==-1)len=read_size_double (array1,sizeof (double*));
-    if ( number_field==-1)number_field=read_size_double (array1[0], sizeof (double));
-    if ( array2)free_double (array2, -1);
-    array2=declare_double ( len, number_field);
+    
+    if ( !array1)return NULL;
+    else l1=read_array_size_new(array1);
 
-    for ( a=0; a< len; a++)
-	ga_memcpy_double( array1[a],array2[a],number_field);
+    if (!array2)array2=(int**)vcalloc (l1, sizeof (int*));
+    l2=read_array_size_new(array2);
+      
+    if (l1!=l2)array2=(int**)vrealloc(array2, sizeof (int*)*l1);
+    
+    for (a=0; a<l1; a++)array2[a]=(int*)cmemcpy(array2[a], array1[a],sizeof (int));
+   
     return array2;
     }
+float ** copy_float (float **array1,float **array2)
+    {
+    int a;
+    int l1, l2; 
+
+    
+    if ( !array1)return NULL;
+    else l1=read_array_size_new(array1);
+
+    if (!array2)array2=(float**)vcalloc (l1, sizeof (float*));
+    l2=read_array_size_new(array2);
+      
+    if (l1!=l2)array2=(float**)vrealloc(array2, sizeof (float*)*l1);
+    
+    for (a=0; a<l1; a++)array2[a]=(float*)cmemcpy(array2[a], array1[a],sizeof (float));
+
+    return array2;
+    }
+double ** copy_double (double **array1,double**array2)
+    {
+    int a;
+    int l1, l2; 
+
+    
+    if ( !array1)return NULL;
+    else l1=read_array_size_new(array1);
+
+    if (!array2)array2=(double**)vcalloc (l1, sizeof (double*));
+    l2=read_array_size_new(array2);
+      
+    if (l1!=l2)array2=(double**)vrealloc(array2, sizeof (double*)*l1);
+    
+    for (a=0; a<l1; a++)array2[a]=(double*)cmemcpy(array2[a], array1[a],sizeof (double));
+
+    return array2;
+    }
+
+
+
+
 /*********************************************************************/
 /*                                                                   */
 /*                        CONCATENATION                              */
@@ -2552,6 +2582,7 @@ char * update_string (char string1[], char string2[])
     }
   return string1;
 }
+
 char* csprintf (char *string1,char *string2, ...)
 {
   va_list ap;

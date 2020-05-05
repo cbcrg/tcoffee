@@ -166,7 +166,7 @@ Constraint_list *seq2list     ( Job_TC *job)
 
       seqlist=string2num_list (seq)+1;
 
-
+     
 
 /*Proteins*/
 
@@ -2487,6 +2487,8 @@ Alignment * fast_pair      (Job_TC *job)
 	    seq_in=(job->param)->seq_c;
 
 
+	   
+
 	    sprintf (seq, "%s", seq_in);
 	    seqlist=string2num_list (seq);
 	    n=seqlist[1];
@@ -2513,9 +2515,11 @@ Alignment * fast_pair      (Job_TC *job)
 		else
 		  buf[s]=S->seq[s];
 
-
-		  sprintf ( A->seq_al[a], "%s",S->seq[s]);
-		  sprintf ( A->name[a], "%s", (CL->S)->name[s]);
+		  A->seq_al[a]=csprintf (A->seq_al[a], "%s", S->seq[s]);
+		  A->name[a]=csprintf (A->name[a], "%s", (CL->S)->name[s]);
+		  
+		  //sprintf ( A->seq_al[a], "%s",S->seq[s]);
+		  //sprintf ( A->name[a], "%s", (CL->S)->name[s]);
 		  A->order[a][0]=s;
 		}
 
@@ -2542,7 +2546,9 @@ Alignment * fast_pair      (Job_TC *job)
 		extend_seqaln (NULL,A);
 	      }
 	    
+	    
 	    score=pair_wise ( A, ns, l_s, PW_CL);
+	    
 	    //PostProcessing of the sequences
 	    if (PW_CL->reverse_seq || flipped==1)
 	      {
@@ -5694,7 +5700,7 @@ int pair_wise   (Alignment *A, int*ns, int **l_s,Constraint_list *CL )
 	 CL->TG_MODE;
 	*/
 	int score;
-
+	int a;
 	int glocal;
 	Pwfunc function;
 
@@ -5714,6 +5720,9 @@ int pair_wise   (Alignment *A, int*ns, int **l_s,Constraint_list *CL )
 
 	function=get_pair_wise_function(CL->pair_wise,  CL->dp_mode,&glocal);
 	if ( CL->get_dp_cost==NULL)CL->get_dp_cost=get_dp_cost;
+
+
+	
 
 	if (strlen ( A->seq_al[l_s[0][0]])==0 || strlen ( A->seq_al[l_s[1][0]])==0)
 	  score=empty_pair_wise ( A, ns, l_s, CL, glocal);

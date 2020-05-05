@@ -217,7 +217,7 @@ Constraint_list *copy_constraint_list (Constraint_list *CL, int mode)
 
      if ( mode==HARD_COPY)
        {
-	 NCL->M=copy_int ( CL->M,NCL->M,-1, -1);
+	 NCL->M=copy_int ( CL->M,NCL->M);
        }
      else
        NCL->M=CL->M;
@@ -495,7 +495,7 @@ Moca * duplicate_moca ( Moca *m)
 	nm->evaluate_domain=m->evaluate_domain;
 	nm->moca_threshold=m->moca_threshold;
 	nm->cache_cl_with_domain=m->cache_cl_with_domain;
-	if ( m->forbiden_residues)nm->forbiden_residues=copy_int  (m->forbiden_residues,nm->forbiden_residues,    -1, -1);
+	if ( m->forbiden_residues)nm->forbiden_residues=copy_int  (m->forbiden_residues,nm->forbiden_residues);
 	nm->make_nol_aln=m->make_nol_aln;
 
 
@@ -660,8 +660,45 @@ Sequence * realloc_sequence   (Sequence *OUT, int new_nseq, int max_len)
 	OUT->max_nseq=new_nseq;
 	return OUT;
 }
-
 Sequence * duplicate_sequence (Sequence *S )
+{
+	Sequence *LS;
+	int a, b;
+	static char*tmp=vtmpnam(NULL);
+	FILE *fp;
+	
+	fp=vfopen (tmp, "w");
+	for (a=0; a<S->nseq; a++)
+	  fprintf (fp, ">%s %s\n%s\n", S->name[a],S->seq_comment[a], S->seq[a]);
+	vfclose (fp);
+	
+	LS=get_fasta_sequence(tmp, NULL);
+
+	for (a=0; a<S->nseq; a++)
+	  {
+	    LS->file[a]=csprintf (LS->file[a],"%s", S->file[a]);
+	    LS->aln_comment[a]=csprintf (LS->aln_comment[a],"%s", S->aln_comment[a]);
+	    LS->seq_comment[a]=csprintf (LS->seq_comment[a],"%s", S->seq_comment[a]);
+	    LS->dc[a][0]=S->dc[a][0];
+	    LS->dc[a][1]=S->dc[a][1];
+	    LS->len[a]=S->len[a];
+	    LS->T[a][0]=S->T[a][0];
+	  }
+	sprintf (LS->type,"%s", S->type);
+	sprintf (LS->template_file,"%s", S->template_file);
+	if (S->W)LS->W=duplicate_weights (S->W);
+	
+	LS->max_len=S->max_len;
+	LS->min_len=S->min_len;
+
+	LS->blastdb=S->blastdb;
+	LS->max_nseq=S->nseq;
+	LS->blastdbS=S->blastdbS;
+	LS->MasterS=S->MasterS;
+
+	return LS;
+}
+Sequence * duplicate_sequence_old (Sequence *S )
 {
 	Sequence *LS;
 	int a, b;
@@ -834,6 +871,7 @@ Alignment* copy_aln ( Alignment *A, Alignment *B)
 	  if ( A==NULL){free_aln(B); return NULL;}
 
 	  nnseq=MAX(A->nseq, A->max_n_seq);
+	  nnseq=A->nseq;
 	  nlen=A->len_aln;
 	  for (a=0; a<A->nseq; a++)
 	    {
@@ -869,54 +907,35 @@ Alignment* copy_aln ( Alignment *A, Alignment *B)
 	    if ( (A->S)==NULL){vfree (B->len); B->len=(int*)vcalloc ( A->max_n_seq, sizeof (int));}
 	    ga_memcpy_int ( A->len, B->len, B->nseq);
 
-	    B->seq_comment=copy_char ( A->seq_comment,  B->seq_comment,  -1,-1);
-	    B->aln_comment=copy_char ( A->aln_comment,  B->aln_comment,  -1,-1);
+	    
+	    B->seq_comment=copy_char ( A->seq_comment,  B->seq_comment);
+	    B->aln_comment=copy_char ( A->aln_comment,  B->aln_comment);
 
-	    B->name=copy_char ( A->name,     B->name,     -1,-1);
+	    B->name=copy_char ( A->name,     B->name);
 
-	    B->file=copy_char ( A->file,     B->file,     -1,-1);
-	    B->tree_order=copy_char ( A->tree_order,     B->tree_order,     -1,-1);
+	    B->file=copy_char ( A->file,     B->file);
+	    B->tree_order=copy_char ( A->tree_order,     B->tree_order);
 	    B->expanded_order=A->expanded_order;
 	    
 	    //Copy seq_al
-	    free_char ( B->seq_al, -1);
-	    B->seq_al=(char**)vcalloc (B->max_n_seq, sizeof (char*));
 	    for (a=0; a<nnseq; a++)
 	      {
-		if (A->seq_al[a])
-		  {
-		    int l=read_array_size_new (A->seq_al[a]);
-		    int l2=MAX(l, B->declared_len);//in case the out MSA must be longuer than the in...
-		    B->seq_al[a]=(char*)vcalloc (l2, sizeof (char));
-		    memcpy(B->seq_al[a], A->seq_al[a], sizeof (char)*l);
-		  }
+		if (A->seq_al[a])B->seq_al[a]=csprintf (B->seq_al[a], "%s", A->seq_al[a]);
 	      }
-	    
-
-	    
-	    // B->seq_al=declare_char(B->max_n_seq, B->declared_len);
-	    // HERE ("A: MAX_NSEQ=%d %d %d %d",B->nseq, B->max_n_seq, B->declared_len, B->len_aln);
-	    // HERE ("B: MAX_NSEQ=%d %d %d %d",A->nseq, A->max_n_seq, A->declared_len, A->len_aln);
-	    //
-	    //
-	    //for ( a=0; a< nnseq; a++)
-	    //{
-	    //for (b=0; b<B->declared_len; b++)
-	    //  B->seq_al[a][b]=A->seq_al[a][b];
-	    //}
+	    //This is meant to take care of the consensus
+	    B->seq_al[A->nseq]=csprintf (B->seq_al[A->nseq], "%s", A->seq_al[A->nseq-1]);
 	    
 	    
-
-	    B->order=copy_int  ( A->order,    B->order,    -1, -1);
+	    B->order=copy_int  ( A->order,    B->order);
 	    B->S=A->S;
 	    if (A->seq_cache)
 	        {
-		B->seq_cache=copy_int  ( A->seq_cache,    B->seq_cache,-1,-1);
+		  B->seq_cache=copy_int  ( A->seq_cache,    B->seq_cache);
 		}
 
 	    if (A->cdna_cache)
 	        {
-		B->cdna_cache=copy_int  ( A->cdna_cache,    B->cdna_cache,-1,-1);
+		  B->cdna_cache=copy_int  ( A->cdna_cache,    B->cdna_cache);
 		}
 
 	    B->P=copy_profile (A->P);
@@ -1089,15 +1108,16 @@ Alignment *declare_Alignment ( Sequence *S)
 	LA->file=declare_char (LA->max_n_seq, STRING);
 	LA->tree_order=declare_char (LA->max_n_seq, STRING);
 	LA->order= declare_int (LA->max_n_seq , 5);
+	
 	//order[a][0]: sequence index in S
 	//order[a][1]: offset of the sequence
 	//order[a][2]: used by sw_gotoh_pair_wise
 	//order[a][3]: used by sw_gotoh_pair_wise
 	//order[a][4]: weight, -1
+	
 	LA->score_seq= (int*)vcalloc (LA->max_n_seq, sizeof (int));
 
 	for ( a=0; a< LA->max_n_seq; a++)LA->order[a][0]=a;
-
 	LA->len_aln=0;
 	LA->score_aln=0;
 	LA->len=(int*)vcalloc (LA->max_n_seq, sizeof (int));
@@ -1111,6 +1131,39 @@ Alignment *declare_Alignment ( Sequence *S)
 	return LA;
 
 	}
+
+Alignment *Realloc_Alignment4nseq ( Alignment *A, int nseq)
+{
+  int a;
+  nseq++;
+  A->seq_comment=(char **)vrealloc(A->seq_comment, nseq*sizeof (char*)); 
+  A->aln_comment=(char **)vrealloc(A->aln_comment, nseq*sizeof (char*)); 
+ 
+  A->seq_al=(char **)vrealloc(A->seq_al, nseq*sizeof (char*)); 
+  A->name=(char **)vrealloc(A->name, nseq*sizeof (char*)); 
+
+  A->file=(char **)vrealloc(A->file, nseq*sizeof (char*)); 
+  A->tree_order=(char **)vrealloc(A->tree_order, nseq*sizeof (char*)); 
+  
+  
+  A->score_seq= (int*)vrealloc (A->score_seq,sizeof (int)*nseq);
+  A->len= (int*)vrealloc (A->len,sizeof (int)*nseq);
+  A->order=(int **)vrealloc(A->order, nseq*sizeof (int*)); 
+  
+  for (a=0; a<nseq; a++)
+    {
+      if (!A->aln_comment[a])A->aln_comment[a] =(char*)vcalloc (COMMENT_SIZE,sizeof (char));
+      if (!A->seq_comment[a])A->seq_comment[a] =(char*)vcalloc (COMMENT_SIZE,sizeof (char));
+      if (!A->file[a])       A->file[a]        =(char*)vcalloc (STRING,      sizeof (char));
+      if (!A->tree_order[a]) A->tree_order[a]  =(char*)vcalloc (STRING,      sizeof (char));
+      if (!A->order[a])      A->order[a]       =(int* )vcalloc (5,           sizeof (int));
+      if (!A->name[a])       A->name[a]        =(char*)vcalloc (MAXNAMES+1,  sizeof (char));
+    
+    }
+
+  A->max_n_seq=nseq;
+  return A;
+}
 Alignment * realloc_aln ( Alignment *A, int new_len){return realloc_alignment(A, new_len);}
 Alignment * realloc_alignment ( Alignment *A, int new_len)
 	{
@@ -1119,7 +1172,13 @@ Alignment * realloc_alignment ( Alignment *A, int new_len)
 	return realloc_alignment2( A, A->max_n_seq,new_len);
 	}
 
-Alignment * realloc_aln2 ( Alignment *A, int n_nseq, int n_len){return realloc_alignment2(A, n_nseq, n_len);}
+Alignment * realloc_aln2 ( Alignment *A, int n_nseq, int n_len)
+{
+  if (n_len==0 && n_nseq==0)return A;
+  else if (n_nseq && !n_len)return Realloc_Alignment4nseq(A,n_nseq);
+  else   return realloc_alignment2(A, n_nseq, n_len);
+}
+
 
 
 
@@ -1301,9 +1360,9 @@ Profile   *copy_profile   (Profile *P1)
 
   if ( !P1) return NULL;
   P=declare_profile ( P1->alphabet, P1->max_len);
-  P->count=copy_int (P1->count, P->count, -1, -1);
-  P->count2=copy_int (P1->count2, P->count2, -1, -1);
-  P->count3=copy_int (P1->count3, P->count3, -1, -1);
+  P->count=copy_int (P1->count, P->count);
+  P->count2=copy_int (P1->count2, P->count2);
+  P->count3=copy_int (P1->count3, P->count3);
 
   return P;
 

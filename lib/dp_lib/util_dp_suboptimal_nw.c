@@ -1424,9 +1424,10 @@ Constraint_list *ProbaMatrix2CL (Alignment *A, int *ns, int **ls, int NumMatrixT
   int list_n;
   int old_n=0;
   double v;
+  int a;
   static float F=4; //potential number of full suboptimal alignmnents incorporated in the library
   static int tot_old, tot_new;
-
+  
   if (!A)
     {
       free_int (list, -1);list=NULL;
@@ -1435,12 +1436,15 @@ Constraint_list *ProbaMatrix2CL (Alignment *A, int *ns, int **ls, int NumMatrixT
       vfree(entry); entry=NULL;
       return NULL;
     }
-
+  
   I=strlen (A->seq_al[ls[0][0]]);
   J=strlen (A->seq_al[ls[1][0]]);
+
+  
+
   s1=name_is_in_list (A->name[ls[0][0]], (CL->S)->name, (CL->S)->nseq, 100);
   s2=name_is_in_list (A->name[ls[1][0]], (CL->S)->name, (CL->S)->nseq, 100);
-
+  
   list_size=I*J;
 
   if ( list_max<list_size)

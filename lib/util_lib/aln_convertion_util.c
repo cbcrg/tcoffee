@@ -2148,11 +2148,11 @@ Sequence  *  fill_sequence_struc ( int nseq, char **sequences, char **seq_name, 
 	S->nseq=nseq;
 
 	if (sequences)
-		S->seq=copy_char ( sequences, S->seq, nseq, -1);
+		S->seq=copy_char ( sequences, S->seq);
 	else
 		S->seq=declare_char (S->nseq, 1);
 
-	S->name=copy_char ( seq_name, S->name,nseq, -1);
+	S->name=copy_char ( seq_name, S->name);
 
 	ungap_array (S->seq,nseq);
 	for ( a=0; a< S->nseq; a++)
@@ -3131,7 +3131,7 @@ char *msaF2fastaF(char *file)
   return tmp;
 }
   
-int trim_fastaF_big(char *in1, char*in2, char *out1, char *out2, long **nmap1, long **nmap2)
+int trim_fastaF_big(char *in1, char*in2, char *nout1, char *nout2, long **nmap1, long **nmap2)
 {
   //Same as trim_aln_file, but works on big files: no need to read the entire msa
   //returns a file map
@@ -3143,6 +3143,8 @@ int trim_fastaF_big(char *in1, char*in2, char *out1, char *out2, long **nmap1, l
   int i1, i2, a, l;
   char *s;
   int *order;
+  static char *out1=vtmpnam (NULL);
+  static char *out2=vtmpnam (NULL);
   
   if (!format_is_fasta(in1))in1=msaF2fastaF(in1);
   if (!format_is_fasta(in2))in2=msaF2fastaF(in2);
@@ -3198,6 +3200,10 @@ int trim_fastaF_big(char *in1, char*in2, char *out1, char *out2, long **nmap1, l
   vfree (order);
   vfree (map1);
   vfree (map2);
+  
+  if (nout1)printf_system ("mv %s %s", out1, nout1);
+  if (nout2)printf_system ("mv %s %s", out2, nout2);
+
   return tot;
 }
   
@@ -3304,32 +3310,25 @@ Sequence * aln2seq (Alignment *A)
 }
 Sequence * aln2seq_main (Alignment *A, int mode)
 	{
-	Sequence *LS;
+	Sequence *S;
 	int a;
-	int maxlen;
+	
 	
 	if ( !A) return NULL;
-	
-	for (maxlen=0,a=0; a<A->nseq; a++)maxlen=MAX(maxlen, strlen (A->seq_al[a]));
-	
-	LS=declare_sequence ( maxlen+1, maxlen+1, A->nseq);
-	LS->nseq=A->nseq;
-	for ( a=0; a< LS->nseq; a++)
+	S=declare_sequence(0, 0, A->nseq);
+	for (a=0; a<A->nseq; a++)
 	  {
-	    sprintf (LS->file[a],"%s", A->file[a]);
+	    S->seq[a]=csprintf (S->seq[a], "%s", A->seq_al[a]);
+	    S->name[a]=csprintf (S->name[a], "%s", A->name[a]);
+	    S->seq_comment[a]=csprintf (S->seq_comment[a], "%s", A->aln_comment[a]);
+	    S->aln_comment[a]=csprintf (S->aln_comment[a], "%s", A->aln_comment[a]);
 	    
-	    sprintf ( LS->seq[a], "%s", A->seq_al[a]);
-	    
-	    if (mode==RM_GAP)ungap ( LS->seq[a]);
-	    
-	    LS->len[a]=strlen ( LS->seq[a]);
-	    
-	    sprintf ( LS->seq_comment[a], "%s",A->seq_comment[a]);
-	    sprintf ( LS->aln_comment[a], "%s",A->aln_comment[a]);
-	    sprintf ( LS->name[a], "%s", A->name[a]);
-	    
+	    if (mode==RM_GAP)ungap(S->seq[a]);
+	    S->len[a]=strlen (S->seq[a]);	    
+	    S->file[a]=csprintf(S->file[a],"%s", A->file[a]);
 	  }
-	return LS;
+	S->nseq=A->nseq;
+	return S;
 	}
 
 Sequence  *keep_residues_in_seq ( Sequence *S, char *list, char replacement)
@@ -5072,6 +5071,7 @@ Sequence * merge_seq( Sequence *IN, Sequence *OUT)
 
 	if ( OUT==NULL)
 	  {
+	    
 	    return duplicate_sequence (IN);
 	  }
 	else
@@ -5328,7 +5328,7 @@ Alignment * fix_aln_seq  ( Alignment *A, Sequence *S)
 
 
 	if ( S==NULL)return A;
-	reorder_aln (A, S->name,S->nseq);
+	A=reorder_aln (A, S->name,S->nseq);
 	if (A->seq_cache)free_int (A->seq_cache, -1);
 	A->seq_cache=declare_int ( S->nseq, MAX((A->len_aln+1), S->max_len+1));
 
@@ -5342,14 +5342,16 @@ Alignment * fix_aln_seq  ( Alignment *A, Sequence *S)
 	        {
 		if (strm ( S->name[a], A->name[b]))
 		   {
+		    
 		   A->order[b][0]=a;
 
 		   vfree (buf1);
+		   
 		   buf1=(char*)vcalloc ( A->len_aln+1, sizeof (char));
 		   sprintf (buf1, "%s", A->seq_al[b]);
 		   ungap (buf1);
 		   upper_string (buf1);
-
+		   
 		   vfree(buf2);
 		   buf2=(char*)vcalloc (strlen(S->seq[a])+1, sizeof (char));
 		   sprintf (buf2, "%s",S->seq[a]);
@@ -7258,45 +7260,42 @@ Alignment * shuffle_aln ( Alignment *A,int N, char *name_i, char *mode)
   return A;
 }
 	  
-Alignment * reorder_aln ( Alignment *A, char **name, int nseq)
+Alignment * reorder_aln ( Alignment *A, char **iname, int nseq)
 {
-	int a,sn;
-	Alignment *BUF;
-	int  n=0;
-	int *tpp_int;
-
-	if ( name==NULL)return aln2random_order(A);
-	
-	
-	BUF=copy_aln ( A,NULL);
-	for ( a=0; a<nseq; a++)
-	  {
-	    sn =name_is_in_list ( name[a],BUF->name, A->nseq,STRING);
-	    if ( sn==-1)
-	      {
-		;
-	      }
-	    else
-	      {
-		SWAPP(A->order[n], BUF->order[sn], tpp_int);
-		sprintf ( A->name[n], "%s", BUF->name[sn]);
-		sprintf ( A->seq_al[n], "%s",BUF->seq_al[sn]);
-		sprintf ( A->seq_comment[n], "%s",  BUF->seq_comment[sn]);
-		n++;
-		}
-	  }
-	
-	for ( a=n; a< A->nseq; a++)
-	  A->name[a][0]=A->seq_al[a][0]='\0';
-	A->nseq=n;
-	
-	if ( A->A)A->A=reorder_aln(A->A, name, nseq);
-	
-	free_aln (BUF);
-	return A;
- }
-
-
+ 
+  FILE*fp;
+  int a, i, n;
+  char **seq_al=(char**)vcalloc (nseq, sizeof (char*));
+  char **name=(char**)vcalloc (nseq, sizeof (char*));
+  char **aln_comment=(char**)vcalloc(nseq, sizeof (char*));
+  int  **order=(int**)vcalloc(nseq, sizeof (int*));
+  
+  
+  for ( n=0,a=0; a<nseq; a++)
+    {
+      if ((i =name_is_in_hlist ( iname[a],A->name, A->nseq))!=-1)
+	{
+	  seq_al[n]=A->seq_al[i];
+	  name[n]=A->name[i];
+	  aln_comment[n]=A->aln_comment[i];
+	  order[n]=A->order[i];
+	  n++;
+	}
+    }
+  A->nseq=n;
+  for (a=0; a<A->nseq; a++)
+    {
+      A->seq_al[a]=seq_al[a];
+      A->name[a]=name[a];
+      aln_comment[a]=A->aln_comment[a];
+      A->order[a]=order[a];
+    }
+  vfree (seq_al);vfree(name); vfree(aln_comment); vfree(order);
+  
+  if ( A->A)A->A=reorder_aln(A->A, name, nseq);
+  
+  return A;
+}
 
 Sequence * reorder_seq_2 ( Sequence *A, int **order,int field, int nseq)
 	{
@@ -7327,11 +7326,18 @@ Sequence * reorder_seq ( Sequence *A, char **name, int nseq)
 
 	    if ( nA->file)       sprintf ( A->file[a], "%s", nA->file[sn]);
 
-	    if ( nA->seq_comment)sprintf ( A->seq_comment[a], "%s", nA->seq_comment[sn]);
-	    if ( nA->aln_comment)sprintf ( A->aln_comment[a], "%s", nA->aln_comment[sn]);
-	    sprintf ( A->seq[a], "%s", nA->seq[sn]);
+	    //if ( nA->seq_comment)sprintf ( A->seq_comment[a], "%s", nA->seq_comment[sn]);
+	    //if ( nA->aln_comment)sprintf ( A->aln_comment[a], "%s", nA->aln_comment[sn]);
+	    //sprintf ( A->seq[a], "%s", nA->seq[sn]);
+	    //sprintf ( A->name[a], "%s", nA->name[sn]);
+	    A->seq[a]=csprintf (A->seq[a], "%s", nA->seq[sn]);
+	    A->name[a]=csprintf (A->name[a], "%s", nA->name[sn]);
+	    if ( nA->seq_comment)A->seq_comment[a]=csprintf (A->seq_comment[a], "%s", nA->seq_comment[sn]);
+	    if ( nA->aln_comment)A->aln_comment[a]=csprintf (A->aln_comment[a], "%s", nA->aln_comment[sn]);
+	    
+	    
 	    A->len[a]=nA->len[sn];
-	    sprintf ( A->name[a], "%s", nA->name[sn]);
+	    
 	    A->T[a][0]=nA->T[sn][0];
 	  }
 	A->nseq=nseq;
@@ -7613,133 +7619,58 @@ Alignment * extract_aln2 ( Alignment *A, int in_start, int in_end, char *seq)
        return extract_aln3 (A,tmp);
      }
 Alignment * extract_aln3 ( Alignment *B, char *file)
-     {
-     int a, b, c;
-     int start, end;
-     int n, i, s, nline=0;
-     FILE *fp;
-     Alignment *A=NULL;
-     int *col;
-     char name[MAXNAMES];
-     char line[VERY_LONG_STRING];
-     int *offset;
+{
+  static char *tmp=vtmpnam(NULL);
+  char ***list=file2list(file, " ");
+  FILE*fp;
+  int start, end, i, n, c;
+  
+  if (!B || !file ||!(list=file2list (file, " ")))return B;
+  fp=vfopen ( tmp, "w");
+  n=0;    
+  while (list[n])
+    {
+      if ( list[n][1][0]=='#'){;}
+      else
+	{
+	  int start=atoi (list[n][2])-1;
+	  if (atoi(list[n][0])==4)end=atoi (list[n][3]);
+	  else end=B->len_aln;
+	  
+	  if ( end>B->len_aln)
+	    add_warning ( stderr, "Illegal coordinates [%s offset: %d] (line %d) ** Line ignored",list[n][1],start, n+1);
+	  else if ( strm (list[n][1], "cons"))
+	    {
+	      for ( i=0; i<B->nseq; i++)
+		{
+		  c=B->seq_al[i][end];
+		  B->seq_al[i][end]='\0';
+		  
+		  fprintf ( fp, ">%s\n%s\n", B->name[i], B->seq_al[i]+start);
+		  B->seq_al[i][end]=c;
+		}
+	    }
+	  else if ((i=name_is_in_hlist (list[n][1],B->name, B->nseq))!=-1)
+	    {
+	      c=B->seq_al[i][end];
+	      fprintf ( fp, ">%s\n%s\n", B->name[i], B->seq_al[i]+start);
+	      B->seq_al[i][end]=c;
+	    }
+	  else 
+	    {
+	      add_warning ( stderr, "Seq %s does not belong to the alignment (line %d) ** Line ignored",list[n][1],n+1);
+	    }
+	  n++;
+	}
+    }
+  vfclose (fp);
+  free_arrayN(list, 3);
+  
+  
+  return quick_read_fasta_aln (B,tmp);
+}
+	      
 
-     /*Reads in a file
-       #comment
-       ! seq_name offset
-       seqname pos
-       OR
-       seqname start end[
-       modifies the incoming alignment
-     */
-
-     offset=(int*)vcalloc ( B->nseq+1, sizeof (int));
-     fp=vfopen (file,"r");
-     while ( (c=fgetc(fp))!=EOF)
-       {
-	 s=-1;
-	 fgets ( line, VERY_LONG_STRING,fp);
-	 if ( c=='!')
-	   {
-	     sscanf (line, "%s %d", name, &start);
-	     s=name_is_in_list (name,B->name,B->nseq,MAXNAMES);
-	   }
-	 if (s!=-1)
-	   offset[s]=start;
-       }
-
-     vfclose (fp);
-
-     A=copy_aln (B, A);
-     col=(int*)vcalloc ( A->len_aln, sizeof (int));
-
-     fp=vfopen ( file, "r");
-     while ( (c=fgetc(fp))!=EOF)
-       {
-	 nline++;
-	 if ( c=='#' || c=='!')fgets ( line, VERY_LONG_STRING,fp);
-	 else
-	   {
-	     ungetc(c, fp);
-	     fgets ( line, VERY_LONG_STRING,fp);
-
-	     if (sscanf (line, "%s %d %d", name, &start, &end)==3);
-	     else if (sscanf (line, "%s %d", name, &start)==2)
-	       {
-		 end=start+1;
-	       }
-	     else
-	       {
-		 add_warning ( stderr, "Wrong format in coordinate file (line=%d) ** Line Ignored", nline);
-		 continue;
-	       }
-	     if ( end==0)end=A->len_aln+1;
-
-	     s=name_is_in_list (name,A->name,A->nseq,MAXNAMES);
-
-
-	     if ( s==-1 && !strm (name, "cons"))
-	       {
-		 add_warning ( stderr, "Seq %s does not belong to the alignment (line %d) ** Line ignored", name,nline);
-		 continue;
-	       }
-	     else if ( start>end)
-	       {
-		 add_warning ( stderr, "Illegal coordinates [%s %d %d] (line %d) ** Line ignored", name,start, end,nline);
-		 continue;
-	       }
-	     else
-	       {
-		 int done=0;
-		 if ( s!=-1)
-		   {
-		     start-=offset[s]-1;
-		     end-=offset[s]-1;
-		   }
-		 for (n=0, a=0; done!=1 && a< A->len_aln; a++)
-		   {
-		     i=(strm (name, "cons"))?1:!is_gap(A->seq_al[s][a]);
-
-		     n+=i;
-		     if (n>=start && n<end)
-		       {
-			 col[a]=1;
-		       }
-		     if (n>=end)done=1;
-		     //if (n>=start && n<end && !(i==0 && n==end-1))
-		     //{
-		     // col[a]=1;
-		     //}
-		     //else if ( n>=end)a=A->len_aln;
-		   }
-		 if ( done==0)
-		   {
-		     HERE ("Warning Missing positions in File %s",file );
-		   }
-	       }
-	   }
-       }
-     vfclose ( fp);
-
-
-
-     /*Extract [start-end[*/
-     for ( b=0,a=0; a< A->len_aln; a++)
-       {
-	 if ( col[a])
-	   {
-	     for (c=0; c< A->nseq; c++)A->seq_al[c][b]=A->seq_al[c][a];
-	     b++;
-	   }
-       }
-     A->len_aln=b;
-
-     for (c=0; c< A->nseq; c++)A->seq_al[c][A->len_aln]='\0';
-     vfree (col);
-
-     return A;
-
-     }
 Alignment * trunkate_local_aln ( Alignment *A)
      {
      int a, b;
@@ -9720,25 +9651,24 @@ Alignment* aln2sub_aln_file (Alignment *A, int n, char **string)
 Sequence *remove_empty_sequence (Sequence *S)
 {
   int a, b;
-  char *c;
+  static char *c;
   Sequence *NS;
+  if (!S) return S;
 
-  c=(char*)vcalloc ( S->max_len+1, sizeof (char));
-
+  
   for (a=0, b=0; a< S->nseq; a++)
     {
-      sprintf ( c, "%s",S->seq[a]);
+      c=csprintf (c, "%s", S->seq[a]);
       ungap (c);
       if ( strlen (c)==0)
 	{
-	  //vfree (S->seq[a]);
 	  S->seq[a]=NULL;
 	  add_warning ( stderr, "WARNING: Sequence %s does not contain any residue: automatically removed from the set [WARNING:%s]",S->name[a], PROGRAM);
 	}
     }
   NS=duplicate_sequence (S);
   free_sequence (S, S->nseq);
-  vfree (c);
+  
   return NS;
 }
 Alignment* aln2sub_seq (Alignment *A, int n, char **string)

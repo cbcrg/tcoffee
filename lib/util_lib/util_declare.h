@@ -184,6 +184,7 @@ long aln_stack (Alignment *A, int mode);
 Sequence  *free_Alignment     ( Alignment *A);
 Sequence  *free_aln     ( Alignment *A);
 Alignment *declare_Alignment  ( Sequence  *S);
+Alignment *realloc_Alignment4nseq  ( Alignment *A, int nseq);
 Alignment *realloc_alignment  ( Alignment *A, int new_len);
 Alignment *realloc_alignment2 ( Alignment *A, int new_nseq, int new_len);
 

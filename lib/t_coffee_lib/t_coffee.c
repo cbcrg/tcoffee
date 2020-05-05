@@ -4718,6 +4718,7 @@ get_cl_param(\
 	        * if wanted (::transform_sequence).
 	        *
 	        */
+	       
 	       if ( transform && transform[0])
 		 {
 		   S=transform_sequence (S, transform);
@@ -4766,6 +4767,7 @@ get_cl_param(\
 	        * This function allocates memory for a Constraint_list and sets the Constraint_list::residue_index
 	        * to default values.
 	        */
+	      
 	       CL=declare_constraint_list ( S,NULL, NULL, 0,(strm(mem_mode, "disk"))?tmpfile():NULL, NULL);
 
 	       sprintf ( CL->method_evaluate_mode, "%s", method_evaluate_mode);
@@ -5020,6 +5022,7 @@ get_cl_param(\
 	       if ((CL->S)->nseq>1 && !do_convert)
 		 {
 		   CL=read_n_constraint_list (list_file,n_list,NULL, mem_mode,weight,type, le, CL, seq_source);
+		   
 		   //CL=post_process_constraint_list (CL); //needed when constraints are added, for instance the RNA modes
 		 }
 	       else if ( do_convert && out_lib[0])
@@ -5043,8 +5046,8 @@ get_cl_param(\
 	        */
 	       free_pair_wise ();
 
-
-
+	       
+	
 	       /**
 	        * If the Constraint_list should, for some reason, be empty afterwards, report an Error.
 	        */
@@ -5187,6 +5190,7 @@ get_cl_param(\
 	       *
 	       * We recommend reading the documentation of each of these functions to get to grips with the extension.
 	       */
+
 	      if (!processed_lib)
 			  {
 			  if ( filter_lib) CL=filter_constraint_list (CL,CL->weight_field, filter_lib);
@@ -5517,17 +5521,7 @@ get_cl_param(\
 
 	      if (A)
 	          {
-		    /*
-		    for ( a=0; a< A->nseq; a++)
-		      {
-			   for ( b=0; b< A->len_aln ; b++)
-			     if ( A->seq_al[a][b]=='O' || A->seq_al[a][b]=='o')A->seq_al[a][b]='-';
-			 }
-		    */
-
-
-
-
+		    int ii;
 		    if ( check_file_exists(outorder))
 			{
 			  Sequence *OS;
@@ -5583,7 +5577,7 @@ get_cl_param(\
 			  output_format_aln ("overaln", A, NULL, over_aln_tmp);
 			  A=main_read_aln (over_aln_tmp,A);
 			}
-		      
+
 		      EA=main_coffee_evaluate_output(A, CL, evaluate_mode);
 		      
 

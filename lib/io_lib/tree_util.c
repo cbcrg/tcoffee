@@ -8388,9 +8388,12 @@ char* tree2msa4dpa (NT_node T, Sequence *S, int N, char *method)
       kseq2kmsa(KL2,n2, method);
       for (a=0; a<n; a++)
 	{
-
-	  trim_fastaF_big  ( KL[a]->msaF, KL[a]->seqF,  KL[a]->msaF, NULL, NULL, NULL);
+	  //Be carefull not to overwrite msaF: it is common to all the pooled buckets
+	  char *tmp=vtmpnam (NULL);
+	  trim_fastaF_big  ( KL[a]->msaF, KL[a]->seqF,tmp, NULL, NULL, NULL);
+	  KL[a]->msaF=tmp;
 	  ungap_fastaF_big ( KL[a]->msaF, KL[a]->msaF, 100);
+	 
 	  vfree(KL2[a]);
 	}
       vfree (KL2);

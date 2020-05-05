@@ -145,6 +145,7 @@ int quantile_rank (int **list,int field, int n, float p);
 /*                                                                   */
 /*                                                                   */
 /*********************************************************************/
+void *  cmemcpy(void*in, void*out,size_t size );
 short  *  set_short ( short *, int n,...);
 char   *  set_char  ( char  *, int n,...);
 int    *  set_int   ( int   *, int n,...);
@@ -163,11 +164,11 @@ char    * duplicate_string ( char *string);
 float  ** duplicate_float ( float  **array , int len, int field);
 double ** duplicate_double( double **array , int len, int field);
 
-short  ** copy_short ( short  **array1, short  **array2, int len, int number_field);
-char   ** copy_char  ( char   **array1, char   **array2, int len, int number_field);
-int    ** copy_int   ( int    **array1, int    **array2, int len, int number_field);
-float  ** copy_float ( float  **array1, float  **array2, int len, int number_field);
-double ** copy_double( double **array1, double **array2, int len, int number_field);
+short  ** copy_short ( short  **array1, short  **array2);
+char   ** copy_char  ( char   **array1, char   **array2);
+int    ** copy_int   ( int    **array1, int    **array2);
+float  ** copy_float ( float  **array1, float  **array2);
+double ** copy_double( double **array1, double **array2);
 
 
 short  ** copy_short_new ( short  **array1);

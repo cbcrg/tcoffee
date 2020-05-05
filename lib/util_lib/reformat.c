@@ -1257,7 +1257,6 @@ Sequence  * main_read_seq ( char *name)
 	 {
 	   A=main_read_aln ( name, NULL);
 	   S=aln2seq(A);
-	   ungap_seq(S);
 	   free_aln(A);
 	 }
        else if ( format && strstr (format, "tc_lib"))
@@ -1592,6 +1591,18 @@ int fasta2nseq (char *file)
   vfclose (fp);
   return n;
 }
+Alignment *reload_aln(Alignment *A)
+{
+  int a;
+  FILE *fp;
+  static char *tmp=vtmpnam (NULL);
+  fp=vfopen (tmp, "w");
+  for (a=0; a<A->nseq; a++)
+    fprintf (fp, ">%s %s\n%s\n", A->name, A->aln_comment, A->seq_al);
+  vfclose(fp);
+  free_aln (A);
+  return quick_read_fasta_aln(NULL,tmp);
+}
 Alignment * quick_read_fasta_aln (Alignment *A, char *file)
 {
   long *map;
@@ -1602,13 +1613,8 @@ Alignment * quick_read_fasta_aln (Alignment *A, char *file)
   nseq=read_array_size_new (map)-1;
 
   if (!A)A=declare_aln2(nseq,1);
-  else if (A->max_n_seq<nseq)
-    {
-      A->max_n_seq=A->nseq=nseq;
-      A->seq_al=(char**)vrealloc (A->seq_al,sizeof(char*)*A->nseq);
-      A->name=(char**)vrealloc (A->name,sizeof(char*)*A->nseq);
-      A->aln_comment=(char**)vrealloc (A->aln_comment,sizeof(char*)*A->nseq);
-    }
+  else if (A->max_n_seq<nseq)A=realloc_aln2(A,nseq,0);
+  
   A->nseq=nseq;
   for(i=0;i<nseq; i++)
     {
@@ -1616,6 +1622,7 @@ Alignment * quick_read_fasta_aln (Alignment *A, char *file)
       A->seq_al[i]=csprintf (A->seq_al[i], "%s", seq2clean(FastaRecord2seq(s)));
       A->name[i]=csprintf (A->name[i], "%s", FastaRecord2name(s));
       A->aln_comment[i]=csprintf (A->aln_comment[i], "%s", FastaRecord2comment(s));
+      A->file[i]=csprintf (A->file[i], "%s", file);
     }
   file2record_it(NULL,0, NULL);
   vfree (map);
@@ -1671,13 +1678,19 @@ Alignment * main_read_aln ( char *name, Alignment *A)
 	   else
 	     myexit(fprintf_error (stderr,"ERROR - (main_read_aln): unknown format for %s ",name));
 	 }
+       if (!is_aligned (A->nseq,A->seq_al))
+	 {
+	   free_aln (A);
+	   return NULL;
+	 }
        
        if ( (dup=check_hlist_for_dup( A->name, A->nseq)))
           {
 	    fprintf ( stderr, "ERROR -- Duplicated Sequences %s", dup);
 	    myexit(fprintf_error (stderr,"ERROR - (main_read_aln): duplicated sequence in File %s ", A->file[0]));
 	  }
-       
+
+      
        A->S=ungap_seq(aln2seq(A));
        A=fix_aln_seq(A, A->S);
        compress_aln (A);
@@ -1685,11 +1698,20 @@ Alignment * main_read_aln ( char *name, Alignment *A)
        A=clean_aln (A);
        return A;
        }
-char * identify_aln_format ( char *file)
-       {
-	/*This function identify known sequence and alignmnent formats*/
-	 return identify_seq_format (file);
-       }
+int is_aligned (int nseq, char **seq)
+{
+  int a,l;
+  
+  if (!seq|| !nseq)return 0;
+  l=strlen (seq[0]);
+  
+  for (a=1; a<nseq; a++)
+    {
+      if (l!=strlen (seq[a]))return 0;
+    }
+  return 1;
+}
+
 char * identify_seq_format ( char *file)
        {
        char *format=NULL;
@@ -4999,17 +5021,29 @@ Sequence *get_fasta_sequence_raw (char *file, char *comment_out)
 {
   return get_fasta_sequence(file, comment_out);
 }
-
+Sequence *reload_seq(Sequence *A)
+{
+  int a;
+  FILE *fp;
+  static char *tmp=vtmpnam (NULL);
+  
+  fp=vfopen (tmp, "w");
+  for (a=0; a<A->nseq; a++)
+    fprintf (fp, ">%s %s\n%s\n", A->name, A->seq_comment, A->seq);
+  vfclose(fp);
+  free_sequence (A,-1);
+  return get_fasta_sequence(tmp, NULL);
+}
 Sequence *get_fasta_sequence (char *file, char *comment_out)
 {
   long *map;
   char *s;
   int i, nseq,a;
   Sequence *A;
-  
+  int maxlen=0;
   map=fasta2map(file);
   nseq=read_array_size_new (map)-1;
-
+  
   A=declare_sequence(0,0,nseq);
   A->nseq=nseq;
   
@@ -5021,10 +5055,11 @@ Sequence *get_fasta_sequence (char *file, char *comment_out)
       A->name[i]=csprintf (A->name[i], "%s", FastaRecord2name(s));
       A->seq_comment[i]=csprintf (A->seq_comment[i], "%s", FastaRecord2comment(s));
       A->len[i]=strlen (A->seq[i]);
+      A->max_len=( A->max_len>A->len[i])?A->len[i]:A->max_len;
     }
   file2record_it(NULL,0, NULL);
   vfree (map);
-   
+  
   return A;
 }
 
@@ -6832,7 +6867,7 @@ FILE * output_Alignment_with_res_number ( Alignment *B, FILE *fp)
 	max_len+=4;
 	line=60;
 	}
-   order=copy_int ( B->order,declare_int ( B->nseq, 2), B->nseq, 2);
+    order=copy_int ( B->order,declare_int ( B->nseq, 2));
 
    fprintf ( fp, "T_COFFEE ALIGNMENT\nCPU TIME:%d sec.\n", (B->cpu+get_time())/1000);
    fprintf ( fp, "\n");
@@ -9719,7 +9754,7 @@ char *testdna2gene (char *dna)
 {
   int *w,a,l;
   l=strlen (dna);
-  HERE ("%s", dna);
+
   w=(int*)vcalloc(l+1, sizeof (int));
   for (a=0; a<l; a++)
     {
@@ -12286,10 +12321,14 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	 {
 
 	   BUF=copy_aln (D1->A, NULL);
+	   
 	   if ( check_file_exists(action_list[1]))
 	     BUF=extract_aln3(BUF,action_list[1]);
 	   else
+	     {
+	       
 	     BUF=extract_aln2(BUF,atoi(action_list[2]),atoi(action_list[3]),action_list[1]);
+	     }
 	   D1->A=copy_aln (BUF,D1->A);
 
 	 }
@@ -14392,34 +14431,3 @@ Sequence *add_file2file_list (char *name, Sequence *S)
 
 
 
-#ifdef DO_PHECOMP
-int parse_phecomp_data (char *in, char *out)
-{
-  static char *buffer;
-  in=quick_find_token_in_file (in, "[EXPERIMENT HEADER]");
-  while (fgets (buffer,MAX_LINE_LENGTH, fp));
-}
-FILE * quick_find_token_in_file  (FILE *fp, char *token)
-{
-  //returns fp pointing to the begining of the line FOLLOWING the line containing token
-  static char *buffer;
-  if (!line) line=(char*)vcalloc (MAX_LINE_LENGTH+1, sizeof (char));
-  while (fgets (buffer,MAX_LINE_LENGTH, fp)!=NULL)
-    if (strstr (buffer,token))return fp;
-  vfclose (fp);
-  return NULL;
-}
-
-int * file2cage (char *file, int cage)
-{
-
-
-
-
-
-
-
-
-
-
-#endif
