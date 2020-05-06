@@ -670,6 +670,7 @@ Alignment * fork_triplet_coffee_evaluate_output ( Alignment *IN,Constraint_list 
       int **sl;
       int j;
       
+      //for (a=0; a<(CL->S)->nseq; a++)(CL->S)->len[a]=strlen ((CL->S)->seq[a]);
       
       OUT=copy_aln (IN, OUT);
       pos=aln2pos_simple(IN, IN->nseq);
@@ -713,7 +714,6 @@ Alignment * fork_triplet_coffee_evaluate_output ( Alignment *IN,Constraint_list 
 			  fprintf (fp, "%d ", res);
 			  continue;
 			}
-		      
 		      for (x=1;x<CL->residue_index[s1][r1][0];x+=ICHUNK)
 			{
 			  

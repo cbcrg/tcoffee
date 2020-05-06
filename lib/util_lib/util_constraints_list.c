@@ -2402,7 +2402,7 @@ Sequence * read_seq_in_n_list(char **fname, int n, char *type, char *SeqMode)
 	Sequence *S1;
 	char mode;
 
-
+	
 
 	/*THE TYPE OF EACH FILE MUST BE INDICATED*/
 	/*SeqMode indicates the type of file that can be used as sequence sources*/
@@ -2534,7 +2534,7 @@ Sequence * read_seq_in_n_list(char **fname, int n, char *type, char *SeqMode)
 		    myexit (fprintf_error ( stderr, "%s is neither a file nor a method [FATAL:%s]\n", lname));
 		  }
 	      }
-	    
+	   
 	    S=remove_empty_sequence (S);
 	    
 	    
@@ -2562,9 +2562,7 @@ Sequence * read_seq_in_n_list(char **fname, int n, char *type, char *SeqMode)
 	      }
 	    return S;
 	  }
-	
-	
-	
+		
 	return NULL;
 }
 

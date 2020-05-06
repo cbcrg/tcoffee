@@ -5019,6 +5019,7 @@ get_cl_param(\
 	        * \sa Constraint_list::residue_index to understand how \b CL stores edges/constraints.
 	        *
 	        */
+	       
 	       if ((CL->S)->nseq>1 && !do_convert)
 		 {
 		   CL=read_n_constraint_list (list_file,n_list,NULL, mem_mode,weight,type, le, CL, seq_source);
@@ -5436,11 +5437,12 @@ get_cl_param(\
 
 
 		   A=(infile[0])?main_read_aln ( infile, declare_aln(CL->S)):NULL;
-
+		   
 		   if (!A)A=seq2aln((CL->S), NULL,0);
 
 
 		   A->S=CL->S;
+		   		   
 		   A->nseq=(CL->S)->nseq;
 
 

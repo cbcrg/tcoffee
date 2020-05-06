@@ -1240,7 +1240,7 @@ Sequence  * main_read_seq ( char *name)
        Alignment *A=NULL;
        int a;
        register_file4dump (name, "r");/*make sure file is included in dump*/
-       
+      
 
        format=identify_seq_format (name);
        
@@ -1647,7 +1647,7 @@ Alignment * main_read_aln ( char *name, Alignment *A)
        
        register_file4dump (name, "r");/*make sure file is in dump*/
        
-
+       
        
 
        if ( !name)return NULL;
@@ -1691,7 +1691,7 @@ Alignment * main_read_aln ( char *name, Alignment *A)
 	  }
 
       
-       A->S=ungap_seq(aln2seq(A));
+       if (!A->S)A->S=ungap_seq(aln2seq(A));
        A=fix_aln_seq(A, A->S);
        compress_aln (A);
        for ( a=0; a< A->nseq; a++) sprintf ( A->file[a], "%s", name);
