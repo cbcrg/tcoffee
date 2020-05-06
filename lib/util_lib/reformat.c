@@ -3924,9 +3924,8 @@ int main_output  (Sequence_data_struc *D1, Sequence_data_struc *D2, Sequence_dat
 	    FILE *lfp2;
 	    char *mafftdnd=vtmpnam (NULL);
 	    char *mafftmatrix=vtmpnam (NULL);
-	    
-	    int cc;
-
+	    char cc;
+	    reset_tree_distances (D1->T, 1);
 	    if (D2 && D2->S)
 	      vfclose (tree2file (D1->T, D2->S, "mafftnewick", vfopen (mafftdnd, "w")));
 	    else if ( D1 && D1->S)
@@ -3934,8 +3933,10 @@ int main_output  (Sequence_data_struc *D1, Sequence_data_struc *D2, Sequence_dat
 	    else
 	      printf_exit (EXIT_FAILURE,stderr,"ERROR -output=mafftdndmat requires -in2=<seqfile> [FATAL]");
 	    
-	    
+	   
 	    printf_system ("newick2mafft.rb %s > %s 2>/dev/null", mafftdnd,mafftmatrix);
+	    
+
 	    
 	    lfp1=vfopen (mafftmatrix, "r");
 	    lfp2=vfopen (out_file, "w");

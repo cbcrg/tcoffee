@@ -2481,111 +2481,7 @@ Sequence * tree2seq (NT_node p, Sequence *S)
   return S;
 }
 
-#ifdef OLD_STUFF
-Sequence * no_rec_tree2seq    (NT_node R, Sequence *S);
-Sequence * rec_tree2seq    (NT_node R, Sequence *S);
 
-Sequence * tree2seq (NT_node R, Sequence *S)
-{
-  if ( use_recursion())return rec_tree2seq (R, S);
-  return no_rec_tree2seq (R, S);
-}
-
-Sequence * no_rec_tree2seq    (NT_node root, Sequence *S)
-{
-   NT_node current,pre;
-  if ( !root)return S;
-  if ( !S)
-    {
-      int n=tree2nseq (root);
-      S=declare_sequence (10, 10, tree2nseq (root));
-      S->nseq=0;
-    }
-  
-  reset_node_count (root);
-  current = root;
-  root->visited=1;
-  
-  while(current != NULL)
-    {                 
-      if(!current->left)
-	{
-	  if (current && current->isseq && !current->visited)
-	    {
-	      sprintf ( S->name[S->nseq++], current->name);
-	   } 
-	  current->visited=1;
-	  current = current->right;  
-	  
-	}    
-      else
-	{
-	  pre = current->left;
-	  
-	  if (!pre->visited)
-	    {
-	      if (pre && !pre->visited && pre->isseq)
-		{
-		  sprintf ( S->name[S->nseq++], pre->name);
-		}
-	      pre->visited=1;
-	    }
-	  while(pre->right && pre->right != current)
-	    {
-	      pre = pre->right;
-	      if (pre)
-		{
-		  if (pre && !pre->visited && pre->isseq)
-		    {
-		      sprintf ( S->name[S->nseq++], pre->name);
-		    }
-		  pre->visited=1;
-		}
-	    }
-	  
-	  
-	  if(!pre->right )
-	    {
-	      pre->right = current;
-	      current = current->left;
-	    }
-	  
-	  else 
-	    {
-	      pre->right = NULL;
-	      current = current->right;      
-	    } 
-	} 
-    } 
-  return S;
-}
-
-
-
-
-
-Sequence * rec_tree2seq    (NT_node R, Sequence *S)
-{
-
-  if ( !R)return S;
-  if ( !S)
-    {
-      S=declare_sequence (10, 10, tree2nseq (R));
-      S->nseq=0;
-    }
-
-  if (R->leaf==1)
-    {
-      sprintf ( S->name[S->nseq++], "%s", R->name);
-    }
-  else
-    {
-      S=tree2seq (R->left, S);
-      S=tree2seq (R->right, S);
-    }
-  return S;
-}
-#endif
 
 int seqindex2seqname4tree (NT_node root, Sequence *S)
 {
@@ -3626,7 +3522,54 @@ FILE * no_rec_print_tree ( NT_node p, FILE *fp)
     }
   return fp;
 }
+void reset_tree_distances( NT_node p, float d)
+{
+  int ns=tree2nleaf(p);
+  if ( ns==1)
+    {
+      p->dist=d;
+      return;
+    }
 
+  reset_node_count (p);
+  
+  while (p)
+    {
+      int x=++(p->visited);
+      
+      if (!p->isseq)
+	{
+	  p->dist=1;
+	  if (x==1)
+	    {
+	      p=p->right;
+	      if (p)p->dist=d;
+	    }
+	  else if (x==2)
+	    {
+	      p=p->left;
+	      if (p)p->dist=d;
+	    }
+	  else if (x==3 && !p->parent)
+	    {
+	      p=p->parent;
+	      if (p)p->dist=d;
+	    }
+	  else if (x>=3){;}
+	}
+      if (x>=3 || p->isseq)
+	{
+	  if (p)p->dist=d;
+	  if (x>3)p=NULL;
+	  else if (p) 
+	    {
+	      p=p->parent;
+	      p->dist=1;
+	    }
+	}
+    }
+  reset_node_count (p);
+}
 
 
 

@@ -105,6 +105,8 @@ if ($method2use eq "list")
 if ($do_exit){my_exit ($CDIR,$EXIT_SUCCESS);}
 
 my $NSEQ=file2nseq($infile);
+
+
 if ($NSEQ==0)
   {
     print "ERROR - No sequences provided [FATAL:dynamic.pl]\n";
@@ -169,6 +171,9 @@ if ($tree)
     
     if ($method2use=~/mafft/)
       {
+	#print "cp $tmptree /Users/cnotredame/.Trash/$$.tmptree\n";
+	#system ("cp $tmptree /Users/cnotredame/.Trash/$$.tmptree");
+	
 	my_system ("t_coffee -other_pg seq_reformat -in $tmptree -output mafftdndmatrix> $treeF");
       }
     else

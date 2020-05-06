@@ -248,6 +248,9 @@ FILE * no_rec_print_tree ( NT_node T, FILE *fp);
 FILE*  no_rec_print_tree_shuffle ( NT_node T, FILE *fp);
 FILE*  no_rec_print_tree_randomize ( NT_node T, FILE *fp);
 
+void reset_tree_distances( NT_node p, float d);
+
+
 int newick2random4dpa (Sequence *S, NT_node p, int N, int ntrees);
 
 NT_node tree2shuffle (NT_node p);
