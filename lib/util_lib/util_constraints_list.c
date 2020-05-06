@@ -1323,18 +1323,20 @@ Constraint_list *  empty_constraint_list (Constraint_list *CL)
 
 Constraint_list *  undump_constraint_list (Constraint_list *CL, char *file)
 {
+
 	int *entry, b, c, e, tot;
 	FILE *fp;
-
+	
 	if (!CL || !CL->residue_index)return CL;
 	entry=(int*)vcalloc ( CL->entry_len+1, sizeof (int));
-	fp=vfopen (file, "rb");
-	b=0;c=0;tot=0;
 	
-	while (fread (entry, sizeof(int), CL->entry_len, fp))
+	
+	fp=vfopen (file, "rb");
+	while ((b=fread (entry, sizeof(int), CL->entry_len, fp))==CL->entry_len)
 	  {
 	    CL=add_entry2list2 (entry, CL);
 	  }
+
 	vfree(entry);
 	vfclose (fp);
 	remove(file);
@@ -1400,6 +1402,93 @@ int safe_dump_constraint_list (Constraint_list *CL,char *file, char *mode, Seque
 	return d;
 }
 
+#ifdef BABBABABA
+
+
+Constraint_list *  undump_constraint_list (Constraint_list *CL, char *file)
+{
+	int *entry, b, c, e, tot;
+	FILE *fp;
+
+	if (!CL || !CL->residue_index)return CL;
+	entry=(int*)vcalloc ( CL->entry_len+1, sizeof (int));
+	fp=vfopen (file, "r");
+	b=0;c=0;tot=0;
+	while ((fscanf (fp, "%d ", &e))!=EOF)
+	{
+		entry [b++]=e;
+		if (b==CL->entry_len)
+		{
+			b=0;
+			CL=add_entry2list2 (entry, CL);
+			//dump does not make the entries symetrical
+			//It reads in EXACTLY what was dumped
+		}
+	}
+
+	vfclose (fp);
+	remove(file);
+	return CL;
+}
+
+int safe_dump_constraint_list (Constraint_list *CL,char *file, char *mode, Sequence *RS)
+{
+	Sequence *S;
+	int **cache=NULL;
+	FILE *fp;
+// 	static int *entry;
+	int *entry =(int*)vcalloc (CL->entry_len+1, sizeof (int));
+	int b,c,s1, r1, s2, r2;
+	int d=0;
+	if (!CL || !CL->S || !CL->residue_index || CL->ne==0) return 0;
+	S=CL->S;
+	if (RS)cache=fix_seq_seq (S, RS);
+// 	if (!entry)
+// 	{
+// 		entry=vcalloc (CL->entry_len+1, sizeof (int));
+// 	}
+
+	fp=vfopen (file, mode);
+	for (s1=0; s1<S->nseq; s1++)
+	{
+		if (cache && cache[s1][0]==-1)continue;
+		for (r1=1; r1<=S->len[s1]; r1++)
+		{
+			entry[SEQ1]=(cache)?cache[s1][0]:s1;
+			entry[R1]=(cache)?cache[s1][r1]:r1;
+			if (entry[R1]<=0)continue;
+
+			b=(CL->freeze)?CL->freeze[s1][r1]:1;
+			for (;b<CL->residue_index[s1][r1][0]; b+=ICHUNK)
+			{
+				s2=CL->residue_index[s1][r1][b+SEQ2];
+				r2=CL->residue_index[s1][r1][b+R2];
+
+				entry[SEQ2]=(cache)?cache[s2][0]:s2;
+				if ( entry[SEQ2]==-1)continue;
+				else
+				{
+					entry[R2]=(cache)?cache[s2][r2]:r2;
+					if (entry[R2]<=0)continue;
+					else
+					{
+						d++;
+						entry[WE]=CL->residue_index[s1][r1][b+WE];
+						entry[CONS]=CL->residue_index[s1][r1][b+CONS];
+						entry[MISC]=CL->residue_index[s1][r1][b+MISC];
+						for (c=0; c<CL->entry_len; c++)fprintf ( fp, "%d ", entry[c]);
+					}
+				}
+			}
+		}
+	}
+	vfclose (fp);
+
+	free_int (cache, -1);
+	vfree (entry);
+	return d;
+}
+#endif
 int dump_constraint_list (Constraint_list *CL, char *file, char *mode)
 {
 	return safe_dump_constraint_list (CL, file, mode, NULL);
@@ -5182,7 +5271,7 @@ Constraint_list * rna_lib_extension ( Constraint_list *CL, Constraint_list *R)
 	list2=(int*)vcalloc ( 100, sizeof (int));
 
 	if (!tmp) tmp=vtmpnam (NULL);
-	fp=vfopen (tmp, "w");
+	fp=vfopen (tmp, "wb");
 	entry=(int*)vcalloc ( 100, sizeof (int));
 	for (s1=0; s1<S->nseq; s1++)
 	{
@@ -5215,7 +5304,8 @@ Constraint_list * rna_lib_extension ( Constraint_list *CL, Constraint_list *R)
 					{
 						entry[R1]=list1[b];
 						entry[R2]=list2[d];
-						for (e=0; e<CL->entry_len; e++) fprintf (fp, "%d ", entry[e]);
+						fwrite(entry, sizeof (int),CL->entry_len,fp);
+						//for (e=0; e<CL->entry_len; e++) fprintf (fp, "%d ", entry[e]);
 					}
 			}
 		}

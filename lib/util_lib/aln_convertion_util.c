@@ -5416,15 +5416,18 @@ Alignment * fix_aln_seq  ( Alignment *A, Sequence *S)
 Sequence * add_prf2seq  ( char *file, Sequence *S)
     {
       static int n;
-      static char* prf_name;
+      static char** prf_name;
       char **new_seq;
       Sequence *NS;
 
-      if (!prf_name){prf_name=(char*)vcalloc ( 100, sizeof (char));}
+      if (!prf_name)
+	{
+	  prf_name=declare_char (1,100);
+	}
       if (file && !atoigetenv("KM_COFFEE_PRF"))
-	sprintf (prf_name, "%s", file);
+	sprintf (prf_name[0], "%s", file);
       else
-	sprintf (prf_name, "prf_%d", ++n);
+	sprintf (prf_name[0], "prf_%d", ++n);
       
       if ( !is_aln (file)&& !is_seq (file))return S;
       else
@@ -5448,7 +5451,7 @@ Sequence * add_prf2seq  ( char *file, Sequence *S)
 	    sprintf ( new_seq[0], "%s",aln2cons_seq_mat(A, "blosum62mt"));
 	  
 	  
-	  NS=fill_sequence_struc(1, new_seq,&prf_name, NULL);
+	  NS=fill_sequence_struc(1, new_seq,prf_name, NULL);
 
 	  S=add_sequence (NS, S, 0);
 	  (S->T[S->nseq-1])->R=R;
