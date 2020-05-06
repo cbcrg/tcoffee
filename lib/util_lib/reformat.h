@@ -181,8 +181,11 @@ void read_amps_aln ( char *in_file, Alignment *A);
 int get_amps_seq_name ( char **name, char* fname);
 Alignment *read_gotoh_aln ( char *fname, Alignment *A);
 
-void undump_msa ( Alignment *A, char *tmp);
-void dump_msa ( char *file,Alignment *A, int nseq, int *lseq);
+Alignment* undump_msa ( Alignment *A, char *tmp);
+Sequence * undump_seq ( Sequence  *A, char *tmp);
+char* dump_msa   ( Alignment *A, char *tmp);
+char* dump_seq   ( Sequence  *A, char *tmp);
+
 /*******************************************************************************************/
 /*                                                                                         */
 /*                                                                                         */

@@ -1545,21 +1545,23 @@ long *fasta2map(char *file)
   long *map;
   int ml=1000;
   int a;
-  char buf[1000];
+  char buf[VERY_LONG_STRING];
+  
+
   
   if ( !file || !check_file_exists (file) || !(fp=vfopen(file, "r"))) return NULL;
   
   map=(long*)vcalloc (ml, sizeof (long));
   
   pos=0;
-  while (fgets(buf,100000,fp))
+  while (fgets(buf,VERY_LONG_STRING,fp))
     {
       int d=0;
       while ((c=buf[d++])!=0)
 	{
 	  if (c=='>')
 	    {
-	      if (i<=ml){ml+=10000; map=(long*)vrealloc (map, ml*sizeof (long));}
+	      if (i<=ml){ml+=VERY_LONG_STRING; map=(long*)vrealloc (map, ml*sizeof (long));}
 	      map[i++]=pos;
 	    }
 	  pos++;
@@ -1596,12 +1598,8 @@ Alignment *reload_aln(Alignment *A)
   int a;
   FILE *fp;
   static char *tmp=vtmpnam (NULL);
-  fp=vfopen (tmp, "w");
-  for (a=0; a<A->nseq; a++)
-    fprintf (fp, ">%s %s\n%s\n", A->name, A->aln_comment, A->seq_al);
-  vfclose(fp);
-  free_aln (A);
-  return quick_read_fasta_aln(NULL,tmp);
+  dump_msa (A,tmp);
+  return quick_read_fasta_aln(A,tmp);
 }
 Alignment * quick_read_fasta_aln (Alignment *A, char *file)
 {
@@ -1690,7 +1688,7 @@ Alignment * main_read_aln ( char *name, Alignment *A)
 	    myexit(fprintf_error (stderr,"ERROR - (main_read_aln): duplicated sequence in File %s ", A->file[0]));
 	  }
 
-      
+       //Very important---> make sure A stays in sync when A->S provided
        if (!A->S)A->S=ungap_seq(aln2seq(A));
        A=fix_aln_seq(A, A->S);
        compress_aln (A);
@@ -5026,11 +5024,7 @@ Sequence *reload_seq(Sequence *A)
   int a;
   FILE *fp;
   static char *tmp=vtmpnam (NULL);
-  
-  fp=vfopen (tmp, "w");
-  for (a=0; a<A->nseq; a++)
-    fprintf (fp, ">%s %s\n%s\n", A->name, A->seq_comment, A->seq);
-  vfclose(fp);
+  dump_seq(A, tmp);
   free_sequence (A,-1);
   return get_fasta_sequence(tmp, NULL);
 }
@@ -5254,7 +5248,40 @@ int fscanf_seq_name ( FILE *fp, char *sname)
 /*                               INPUT ALN                                                 */
 /*                                                                                         */
 /***************************************************************************************** */
-void undump_msa ( Alignment *A, char *tmp)
+Alignment* undump_msa ( Alignment *A, char *tmp)
+{
+  return quick_read_fasta_aln (A, tmp);
+}
+char* dump_msa (Alignment *A, char *tmp)
+{
+  FILE*fp;
+  int a;
+
+  if (!A)return NULL;
+  if (!tmp)tmp=vtmpnam(NULL);
+  if (!(fp=vfopen (tmp, "w")))return NULL;
+  
+  for (a=0; a<A->nseq; a++)
+    fprintf ( fp, ">%s %s\n%s\n", A->name[a], A->aln_comment[a], A->seq_al[a]);
+  vfclose (fp);
+  return tmp;
+}
+char* dump_seq (Sequence *A, char *tmp)
+{
+  FILE*fp;
+  int a;
+
+  if (!A)return NULL;
+  if (!tmp)tmp=vtmpnam(NULL);
+  if (!(fp=vfopen (tmp, "w")))return NULL;
+  
+  for (a=0; a<A->nseq; a++)
+    fprintf ( fp, ">%s %s\n%s\n", A->name[a], A->seq_comment[a], A->seq[a]);
+  vfclose (fp);
+  return tmp;
+}    
+
+void undump_msa_old ( Alignment *A, char *tmp)
 {
   FILE *fp;
   int m;

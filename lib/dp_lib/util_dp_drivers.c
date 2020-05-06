@@ -4431,7 +4431,7 @@ NT_node rec_local_tree_aln ( NT_node P, Alignment*A, Constraint_list *CL,int pri
 
 	  initiate_vtmpnam (NULL);
 	  rec_local_tree_aln (L, A, CL, print);
-	  dump_msa (tmp1,A, L->nseq, L->lseq);
+	  dump_msa (A,tmp1);
 	  myexit (EXIT_SUCCESS);
 	}
       else
@@ -4445,7 +4445,7 @@ NT_node rec_local_tree_aln ( NT_node P, Alignment*A, Constraint_list *CL,int pri
 
 	      initiate_vtmpnam (NULL);
 	      rec_local_tree_aln (R, A, CL, print);
-	      dump_msa (tmp2, A, R->nseq, R->lseq);
+	      dump_msa (A,tmp2);
 	      myexit (EXIT_SUCCESS);
 	    }
 	}
