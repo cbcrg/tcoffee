@@ -2064,10 +2064,8 @@ Constraint_list * sap_pair   (char *seq_in, char *weight, Constraint_list *CL)
 
 
 	    
-	    tmp_name1=(char*)vcalloc (100, sizeof (char));
-	    sprintf ( tmp_name1, "%s_%s.sap_results",template1,template2);
-	    tmp_name2=(char*)vcalloc (100, sizeof (char));
-	    sprintf ( tmp_name2, "%s_%s.sap_results",template2,template1);
+	    tmp_name1=csprintf (NULL, "%s_%s.sap_results",template1,template2);
+	    tmp_name2=csprintf (NULL, "%s_%s.sap_results",template2,template1);
 
 	    if (is_sap_file (tmp_name1))
 	      {
@@ -2087,14 +2085,18 @@ Constraint_list * sap_pair   (char *seq_in, char *weight, Constraint_list *CL)
 		tmp_name=tmp_name1;
 
 		tmp_pdb1=normalize_pdb_file(seq2P_template_file(CL->S,s1),(CL->S)->seq[s1], vtmpnam (NULL));
+		
+
+
+
 		tmp_pdb2=normalize_pdb_file(seq2P_template_file(CL->S,s2),(CL->S)->seq[s2], vtmpnam (NULL));
 		sprintf ( full_name, "%s%s", get_cache_dir (), tmp_name);
-
+		
 		//pb: sap crashes when file names are too long
 		//solution: create shorter names and chdir
 
 		getcwd (cdir, sizeof(char)*1000);
-		chdir (get_cache_dir());
+		//chdir (get_cache_dir());
 
 		sprintf (local1, "%d_1.%d.sap_tmp", getpid(), rand()%10000);
 		sprintf (local2, "%d_2.%d.sap_tmp", getpid(), rand()%10000);
@@ -2110,11 +2112,13 @@ Constraint_list * sap_pair   (char *seq_in, char *weight, Constraint_list *CL)
 		    printf_system ("cp %s %s", tmp_pdb1, local1);
 		    printf_system ("cp %s %s", tmp_pdb2, local2);
 		  }
+	
+		HERE ("%s %s %s >%s 2>/dev/null::IGNORE_FAILURE::",program,local1,local2, full_name);
 		
 		printf_system ("%s %s %s >%s 2>/dev/null::IGNORE_FAILURE::",program,local1,local2, full_name);
-		printf_system ("rm %s", local1);
-		printf_system ("rm %s", local2);
-		chdir (cdir);
+		//printf_system ("rm %s", local1);
+		//printf_system ("rm %s", local2);
+		//chdir (cdir);
 
 		if ( !check_file_exists (full_name) || !is_sap_file(full_name))
 		  {

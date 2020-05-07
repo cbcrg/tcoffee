@@ -5772,7 +5772,8 @@ char *template_file2abs_template_file(char *name)
       if (check_file_exists(l[a][3]))pdb=csprintf (pdb, "%s", l[a][3]);
       else pdb=csprintf (pdb, "%s.pdb", l[a][3]);
       
-      if (check_file_exists (pdb))pdb=csprintf (pdb, "%s",fname2abs(pdb));
+      //if (check_file_exists (pdb))pdb=csprintf (pdb, "%s",fname2abs(pdb));
+      if (check_file_exists (pdb)){;}
       else pdb=csprintf (pdb, "%s", l[a][3]);
       
       fprintf (out,"%s %s %s\n", l[a][1], l[a][2],pdb);
@@ -6657,7 +6658,7 @@ struct X_template *fill_P_template ( char *name,char *p, Sequence *S)
     }
   else
     {
-      char *tn=fname2abs(template_name);
+      char *tn=template_name;
       char *tf=fix_pdb_file (tn);
       if (!tf)
 	{
