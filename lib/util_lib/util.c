@@ -2911,6 +2911,7 @@ char * fname2abs(char*name)
       
       name2=csprintf (name2, "%s/%s",get_pwd(NULL), name); 
     }
+  
   return name2;
 }
 
@@ -5739,10 +5740,13 @@ FILE *add_warning (FILE *fp, char *string, ...)
   char *buf;
 
   if ( warning_mode==NO || getenv("NO_WARNING_4_TCOFFEE"))return fp;
+  else if ( !string)return fp;
   else
     {
 
       cvsprintf (buf, string);
+      buf=substitute (buf,"\n", " ");
+            
       if (fp)fprintf (fp, "\npid %d -- %s\n",getpid(), buf);
       if ( clean_exit_started)return fp;
 
@@ -8540,7 +8544,7 @@ int check_environement_variable_is_set ( char *variable, char *description, int 
 
 	}
       else
-	add_warning ( stderr, "\n[%s:WARNING]\n", PROGRAM);
+	add_warning ( stderr, "[%s:WARNING]\n", PROGRAM);
     }
   return 1;
 }
@@ -8719,7 +8723,7 @@ FILE * display_output_filename ( FILE *io, char *type, char *format, char *name,
       if (check_file_exists(name)==NULL)
 	{
 	  if ( !strm (name, "no") && !strm (name, "NO") && !strm (name, "STDOUT") && !strm(name, "stdout"))
-	       add_warning( io, "\n\t#### File Type= %-15s Format= %-15s Name= %s | NOT PRODUCED [WARNING:%s:%s]\n",type, format, name, PROGRAM, VERSION );
+	       add_warning( io, "\t#### File Type= %-15s Format= %-15s Name= %s | NOT PRODUCED [WARNING:%s:%s]\n",type, format, name, PROGRAM, VERSION );
 	  return io;
 	}
       fprintf ( io, "\n\t#### File Type= %-15s Format= %-15s Name= %s",type, format, name );
@@ -8872,7 +8876,7 @@ int my_rmdir ( char *dir_in)
  else
    {
      if ( strstr (dir, "tco"))printf_system_direct ( "rm -rf %s", dir);
-     else add_warning(stderr,"directory %s could not be removed - it does not contain the string 'tco'", dir);		}
+     else add_warning(stderr,"Directory %s could not be removed - it does not contain the string 'tco'", dir);		}
  vfree (dir);
  return 1;
 }
@@ -10104,40 +10108,40 @@ char ** standard_initialisation  (char **in_argv, int *in_argc)
   //set special Variables
   if (!getenv ("USE_MAFFT_FROM_PLUGINS") && check_file_exists ("/usr/local/bin/mafft"))
     {
-      if (getenv ("DEBUG_MAFFT")){add_warning(stderr ,"\nMAFFT: NATIVE\n");}
+      if (getenv ("DEBUG_MAFFT")){add_warning(stderr ,"MAFFT: NATIVE\n");}
       cputenv4pathFirst ("/usr/local/bin/");
      
     }
   else if ( getenv ("MAFFT_PATH"))
     {
-      if (getenv ("DEBUG_MAFFT")){add_warning (stderr, "\nMAFFT: use special path provided via [MAFFT_PATH]: %s \n",getenv ("MAFFT_PATH"));}
+      if (getenv ("DEBUG_MAFFT")){add_warning (stderr, "MAFFT: use special path provided via [MAFFT_PATH]: %s \n",getenv ("MAFFT_PATH"));}
       cputenv4pathFirst (getenv ("MAFFT_PATH"));
     }
   else if (!getenv ("USE_MAFFT_BINARIES") && getenv ("MAFFT_BINARIES"))
     {
-      if (getenv ("DEBUG_MAFFT")){add_warning (stderr, "\nMAFFT: MAFFT_BINARIES was set to [%s] ---> UNSET\n",getenv ("MAFFT_BINARIES"));}
+      if (getenv ("DEBUG_MAFFT")){add_warning (stderr, "MAFFT: MAFFT_BINARIES was set to [%s] ---> UNSET\n",getenv ("MAFFT_BINARIES"));}
       unsetenv("MAFFT_BINARIES");
     }
  
   else if (getenv ("NO_MAFFT_BINARIES"))
     {   
-      if (getenv ("DEBUG_MAFFT")){add_warning (stderr ,"\nMAFFT: NO_MAFFT_BINARIES: MAFFT_BINARIES=""\n");}
+      if (getenv ("DEBUG_MAFFT")){add_warning (stderr ,"MAFFT: NO_MAFFT_BINARIES: MAFFT_BINARIES=""\n");}
       add_warning (stderr,"NO_MAFFT_BINARIES is set");
      cputenv ( "MAFFT_BINARIES=%s",""); 
     }
   else if (getenv ("MAFFT_BINARIES"))
     {
-      if (getenv ("DEBUG_MAFFT")){add_warning (stderr, "\nMAFFT: MAFFT_BINARIES=%s\n", getenv ("MAFFT_BINARIES"));}
+      if (getenv ("DEBUG_MAFFT")){add_warning (stderr, "MAFFT: MAFFT_BINARIES=%s\n", getenv ("MAFFT_BINARIES"));}
       add_warning (stderr,"MAFFT_BINARIES value preset to: %s", getenv ("MAFFT_BINARIES"));
     }
   else if ( strstr (get_os(), "macosx"))  
     {
-      if (getenv ("DEBUG_MAFFT")){add_warning (stderr, "\nMAFFT: maosx set, set MAFFT_BINARIES=""\n");}
+      if (getenv ("DEBUG_MAFFT")){add_warning (stderr, "MAFFT: maosx set, set MAFFT_BINARIES=""\n");}
       cputenv ( "MAFFT_BINARIES=%s","");  //
     }
   else
     {
-      if (getenv ("DEBUG_MAFFT")){add_warning (stderr, "\nMAFFT: default, use plugins, set MAFFT_BINARIES=%s\n", get_plugins_4_tcoffee());}
+      if (getenv ("DEBUG_MAFFT")){add_warning (stderr, "MAFFT: default, use plugins, set MAFFT_BINARIES=%s\n", get_plugins_4_tcoffee());}
       cputenv ( "MAFFT_BINARIES=%s",get_plugins_4_tcoffee());
     }
   

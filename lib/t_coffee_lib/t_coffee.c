@@ -4410,7 +4410,7 @@ get_cl_param(\
 			   else if ( is_method (list_file[a]))nn['M']++;
 			   else
 			     {
-			       add_warning (stderr, "\nWARNING: File %s was not properly tagged. Potential ambiguity\n",list_file[a]);
+			       add_warning (stderr, "File %s was not properly tagged. Potential ambiguity\n",list_file[a]);
 			     }
 			 }
 		     }
@@ -4841,7 +4841,7 @@ get_cl_param(\
 		       
 		       if (S==NULL)
 			 {
-			   add_warning (stderr, "\nImpossible to find %s Templates\nCheck that your blast server is properly installed [See documentation][FATAL:%s]\n", template_file_list[a],PROGRAM);
+			   add_warning (stderr, "Impossible to find %s Templates\nCheck that your blast server is properly installed [See documentation][FATAL:%s]\n", template_file_list[a],PROGRAM);
 			   myexit (EXIT_FAILURE);
 			 }
 		     }
@@ -5246,7 +5246,7 @@ get_cl_param(\
 				{
 				  printf ( "\nquad: %s", seq_name_for_quadruplet[a]);
 				  if ( (b=name_is_in_list (seq_name_for_quadruplet[a],(CL->S)->name,(CL->S)->nseq, 100))!=-1)CL->seq_for_quadruplet[b]=1;
-				  else add_warning ( stderr, "\nWARNING: Sequence %s is not in the set and cannot be used for quadruplet extension\n",seq_name_for_quadruplet[a]);
+				  else add_warning ( stderr, "Sequence %s is not in the set and cannot be used for quadruplet extension\n",seq_name_for_quadruplet[a]);
 				}
 			}
 	      else if ( nseq_for_quadruplet && strm(seq_name_for_quadruplet[0], "all"))
@@ -7149,7 +7149,8 @@ Alignment * t_coffee_dpa (int argc, char **argv)
 	}
       else if (strm (argv[a],"-dynamic_config"))
 	{
-	  cputenv ("dynamic_config_4_TCOFFEE=%s", fname2abs(argv[++a]));
+	  cputenv ("dynamic_config_4_TCOFFEE=%s", (fname2abs(argv[a+1])));
+	  a++;
 	}
       
       else if ( strm(argv[a], "-reg_chaindnd_mode"))
@@ -7239,7 +7240,7 @@ Alignment * t_coffee_dpa (int argc, char **argv)
 	    {
 	      HERE ("Parse Arg: %s -> %s -> %s", argv[a], argv[a]+1,fname2abs(argv[a+1]));
 	    }
-	  cputenv ("%s_4_CLTCOFFEE=%s", argv[a]+1, fname2abs(argv[a+1]));
+	  cputenv ("%s_4_CLTCOFFEE=%s", argv[a]+1,fname2abs(argv[a+1]));
 	  a++;
 	  
 	}
@@ -7275,7 +7276,7 @@ Alignment * t_coffee_dpa (int argc, char **argv)
   //prepare the aligner CL
   if (dpa_aligner)
     {
-      //add_warning (stderr, "-dpa_method flag used -- [%s] Will be used instead of [%s]",dpa_aligner, command+1);
+      
       command=(char*)vcalloc (10000, sizeof (char));
       sprintf ( command, "%s", dpa_aligner);
     }

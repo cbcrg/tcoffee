@@ -2017,6 +2017,8 @@ char*  is_pdb_struc ( char *name)
      char command[1000];
 
 
+     
+
      if ( !name || name[0]=='\0')return NULL;
 
 
@@ -2053,17 +2055,17 @@ char*  is_pdb_struc ( char *name)
      sprintf ( file_name2, "%s.pdb", name);
 
 
+
      if (is_pdb_file(file_name1)){r=file_name1;}
      else if (is_pdb_file(file_name2)){r=file_name2;}
      else if (is_pdb_name (name))
        {
-	 //printf_system ("extract_from_pdb -netfile \'%s\' > %s/%s",name, get_cache_dir(), file_name2);
 	 printf_system ("extract_from_pdb -netfile \'%s\' > %s/%s 2>/dev/null",name, get_cache_dir(), file_name2);
 	 if ( is_pdb_file(file_name2))r=file_name2;
 	 else r=NULL;
 
        }
-
+    
 
       /*Fill the buffer*/
      buf_names[nbuf]=(char*)vcalloc ( strlen (name)+1, sizeof (char));
@@ -2079,28 +2081,39 @@ char*  is_pdb_struc ( char *name)
      return r;
    }
 
+char *atom2pdbF (char*in)
+{
+  static char *tmp;
+  tmp=csprintf (NULL, "%s", vtmpnam(NULL));
+  printf_system ("extract_from_pdb %s > %s", in,tmp);
+  return tmp;
+}
 char *fix_pdb_file ( char *in)
 {
-  char *empty;
-
-  empty=(char*)vcalloc(1, sizeof(char));
-
-  if ( !in || !check_file_exists (in))return empty;
-  else if ( is_pdb_file(in))return in;
+  char *b;
+  static char*tmp;
+  
+  if ( !in || !check_file_exists (in))return NULL;
+  else if (!is_pdb_file(in))
+    {
+      if (!pdb_has_atom(in))b=NULL;
+      else if (is_pdb_file (b=atom2pdbF(in)))
+	add_warning ( stderr, "File %s is a partial PDB File - regenerated from ATOM with extract_from_pdb [%s:WARNING]\n",in, PROGRAM);
+    }
+  else if ( !seqres_equal_atom(in))
+    {
+      b=atom2pdbF(in);
+      if (!is_pdb_file (b))return NULL;
+      else
+	  add_warning ( stderr, "Could not use SEQRES field in %s -- used ATOM instead [%s:WARNING]\n",in, PROGRAM);
+    }
   else
     {
-      char command[10000];
-      char *tmp;
-      char *tmp2;
-      tmp=vtmpnam (NULL);
-      tmp2=(char*)vcalloc (strlen (tmp)+1, sizeof (char));
-      sprintf (tmp2, "%s", tmp);
-      sprintf ( command, "extract_from_pdb %s > %s", check_file_exists(in), tmp2);
-      my_system (command);
-      if ( is_pdb_file (tmp))return tmp2;
-      else return empty;
-
+      b=in;
     }
+  if (!b) return NULL;
+  else return tmp=csprintf (tmp, "%s", b);
+  
 }
 
 int is_sap_file ( char *name)
@@ -2160,7 +2173,7 @@ int is_simple_pdb_file ( char *name)
  * \param fname The filename
  * \return 1 if the file exists and the keywords "HEADER", "SEQRES" and "ATOM" appear (in this order) at the beginning of a line. 0 otherwise
  */
-int is_pdb_file ( char *name)
+int pdb_has_atom ( char *name)
        {
 	 FILE *fp;
 	 int ispdb=0;
@@ -2168,12 +2181,38 @@ int is_pdb_file ( char *name)
 	 if ( name==NULL) return 0;
 	 if (!check_file_exists (name))return 0;
 
-	 if ((fp=find_token_in_file (name, NULL, "\nHEADER"))!=NULL)
-           {vfclose (fp);
+	
+
+	 if ((fp=find_token_in_file (name, NULL, "\nATOM"))!=NULL)
+	   {
+	     vfclose (fp);
 	     ispdb++;
 	   }
+	 else
+	   {
+	     ispdb=0;
+	   }
+	 return ispdb;
+       }
+int is_pdb_file ( char *name)
+       {
+	 FILE *fp;
+	 int ispdb=0;
+	 int *a;
+	 if ( name==NULL) return 0;
+	 if (!check_file_exists (name))return 0;
+
+	 if ((fp=find_token_in_file (name, NULL, "\nHEADER"))!=NULL)
+           {
+
+	     vfclose (fp);
+	     ispdb++;
+	   }
+
+	 
 	 if ((fp=find_token_in_file (name, NULL, "\nSEQRES"))!=NULL)
            {
+
 	     vfclose (fp);
 	     ispdb++;
 	   }
@@ -4561,7 +4600,21 @@ int *pdb2atom_pos_list(char *pdb)
   return pos;
 }  
 
-
+int seqres_equal_atom (char*fname)
+{
+  Sequence *S1=get_pdb_sequence_from_field(fname, "SEQRES");
+  Sequence *S2=get_pdb_sequence_from_field(fname, "ATOM");
+  int value;
+  
+  if (!S1||!S2)value=0;
+  else if (!strm(S1->seq[0], S2->seq[0]))value=0;
+  else value=1;
+  
+  free_sequence (S1, NULL);
+  free_sequence (S2, NULL);
+  return value;
+}
+  
 
 Sequence* get_pdb_sequence   (char *fname)
 {
@@ -4570,11 +4623,11 @@ Sequence* get_pdb_sequence   (char *fname)
   if ( (S=get_pdb_sequence_from_field(fname, "SEQRES"))!=NULL);
   else if ( (S=get_pdb_sequence_from_field(fname, "ATOM"))!=NULL)
     {
-      add_warning (stderr,"Warning: Read Sequence from ATOM field in %s [%s:WARNING]", fname, PROGRAM);
+      add_warning (stderr,"Read Sequence from ATOM field in %s [%s:WARNING]", fname, PROGRAM);
     }
   else
     {
-      add_warning ( stderr, "\nWARNING: failed to extract sequence from %s [%s:WARNING]\n", fname, PROGRAM);
+      add_warning ( stderr, "failed to extract sequence from %s [%s:WARNING]\n", fname, PROGRAM);
       S=NULL;
     }
   return S;
@@ -4966,7 +5019,7 @@ Sequence* perl_reformat2fasta (char *perl_command, char *fname)
 // 	fscanf (fp, "%s", name);
 // 	r=strlen (name);
 // 	if ( r>MAXNAMES)
-// 		add_warning (stderr, "\nWARNING: Seq Name Too long: [%s]. Truncated to %d", name, MAXNAMES);
+// 		add_warning (stderr, "Seq Name Too long: [%s]. Truncated to %d", name, MAXNAMES);
 // 	name[MAXNAMES]='\0';
 // 	sprintf ( sname, "%s", name);
 // 	return r;
@@ -4981,7 +5034,7 @@ void check_seq_name (char *sname)
 		*tmp='\0';
 	int x = strlen (sname);
 	if ( x>MAXNAMES)
-		add_warning (stderr, "\nWARNING: Seq Name Too long: [%s]. Truncated to %d", sname, MAXNAMES);
+		add_warning (stderr, "Seq Name Too long: [%s]. Truncated to %d", sname, MAXNAMES);
 // 	if (sname[x-1] == '\n')
 // 		sname[MAXNAMES]='\0';
 }
@@ -5236,7 +5289,7 @@ int fscanf_seq_name ( FILE *fp, char *sname)
 	fscanf (fp, "%s", name);
 	r=strlen (name);
 	if ( r>MAXNAMES)
-		add_warning (stderr, "\nWARNING: Seq Name Too long: [%s]. Truncated to %d", name, MAXNAMES);
+		add_warning (stderr, "Seq Name Too long: [%s]. Truncated to %d", name, MAXNAMES);
 	name[MAXNAMES]='\0';
 	sprintf ( sname, "%s", name);
 	return r;
@@ -5463,7 +5516,7 @@ void read_number_aln ( char *file_name, Alignment *A)
 
 	if ( name_is_in_list (A->name[A->nseq], A->name, A->nseq, 100)!=-1)
 	  {
-	    fprintf ( stderr, "\nWARNING (read_number_aln): Sequence %s Duplicated in File %s ", A->name[A->nseq], A->file[A->nseq]);
+	    fprintf ( stderr, "(read_number_aln): Sequence %s Duplicated in File %s ", A->name[A->nseq], A->file[A->nseq]);
 	    if (!getenv("ALLOW_DUPLICATE"))
 	      {
 		fprintf ( stderr, " [FATAL:%s]\n", PROGRAM);

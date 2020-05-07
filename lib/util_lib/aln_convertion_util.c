@@ -1748,7 +1748,7 @@ Sequence * seq2unique_name_seq ( Sequence *S)
  
   if ((a=name_list2unique_name_list (S->nseq, S->name)))
     {
-      add_warning ( stderr, "\nWarning: Sequence %s is duplicated in file %s. The sequence will be renamed", S->name[a-1], S->file[a-1]);
+      add_warning ( stderr, "Sequence %s is duplicated in file %s. The sequence will be renamed", S->name[a-1], S->file[a-1]);
     }
   return S;
 }
@@ -1757,7 +1757,7 @@ Alignment * aln2unique_name_aln ( Alignment *S)
   int a;
   if ((a=name_list2unique_name_list (S->nseq, S->name)))
     {
-      add_warning ( stderr, "\nWarning: Sequence %s is duplicated in file %s. The sequence will be renamed", S->name[a-1], S->file[a-1]);
+      add_warning ( stderr, "Sequence %s is duplicated in file %s. The sequence will be renamed", S->name[a-1], S->file[a-1]);
     }
   return S;
 }
@@ -2398,7 +2398,7 @@ Alignment * probabilistic_rm_aa ( Alignment *A, int pos, int len)
 	  else right=len;
 	  if ( (pos-right)<0 || (pos+left)>A->len_aln)
 	    {
-	      add_warning ( stderr, "\nWarning: probabilistic_rm_aa, pos out of range [%s]\n", PROGRAM);
+	      add_warning ( stderr, "probabilistic_rm_aa, pos out of range [%s]\n", PROGRAM);
 	    }
 	  else
 	    for ( b=pos-right; b<pos+left; b++)A->seq_al[a][b]=(b==pos)?'~':'*';
@@ -3479,8 +3479,7 @@ Alignment * merge_annotation   ( Alignment *A, Alignment *ST, char *seq)
 
   if (s==-1)
     {
-      add_warning ( stderr, "\nERROR: %s is not in your MSA [FATAL: %s]", PROGRAM);
-      myexit (EXIT_FAILURE);
+      printf_exit(EXIT_FAILURE,stderr,"%s is not in your MSA [FATAL: %s]", PROGRAM);
     }
 
   for (a=0; a<A->len_aln; a++)
@@ -4741,7 +4740,7 @@ int  seq_list2in_file ( TC_method *M, Sequence *S, char *list, char *file)
 
 	  if (strlen (M->seq_type) >1)
 	    {
-	      add_warning( stderr, "\nERROR: Mixed seq_type not supported for external methods\n[FATAL:%s]", PROGRAM);
+	      printf_exit( EXIT_FAILURE,stderr, "\Mixed seq_type not supported for external methods\n[FATAL:%s]", PROGRAM);
 	    }
 
 	  for ( a=2; a<n; a++)
@@ -5754,7 +5753,7 @@ char *template_file2abs_template_file(char *name)
   char *outF;
   int  a;
   char ***l;
-  
+  char *pdb=NULL;
 
   
   
@@ -5767,22 +5766,22 @@ char *template_file2abs_template_file(char *name)
   out=vfopen (outF=vtmpnam (NULL), "w");
   while (l[a])
     {
-      char *pdb1=l[a][3];
-      char *pdb2=(char *)vcalloc ( strlen (pdb1)+10, sizeof (char));
-      char *abs1, *abs2;
-      sprintf ( pdb2, "%s.pdb",pdb1);
+      //if pdb does not exist, check if its *.pdb version exists and seek the abs path
+      //if no file to be found, assume it is an identifier and leave it untouched
       
-      abs1=fname2abs(pdb1);
-      abs2=fname2abs(pdb2);
+      if (check_file_exists(l[a][3]))pdb=csprintf (pdb, "%s", l[a][3]);
+      else pdb=csprintf (pdb, "%s.pdb", l[a][3]);
       
-      if      (abs1)fprintf (out,"%s %s %s\n", l[a][1], l[a][2],abs1);
-      else if (abs2)fprintf (out,"%s %s %s\n", l[a][1], l[a][2],abs2);
-      else          fprintf (out,"%s %s %s\n", l[a][1], l[a][2],l[a][3]);
+      if (check_file_exists (pdb))pdb=csprintf (pdb, "%s",fname2abs(pdb));
+      else pdb=csprintf (pdb, "%s", l[a][3]);
+      
+      fprintf (out,"%s %s %s\n", l[a][1], l[a][2],pdb);
       a++;
     }
 
   vfclose (out);
   free_arrayN ((void ***)l, 3);
+  vfree(pdb);
   return outF;
 }
 	
@@ -6009,7 +6008,7 @@ Sequence * seq2template_seq ( Sequence *S, char *template_list, Fname *F)
       strcpy(server,"LOCAL");
     }
 
-
+  
   //Set the type of the PDB structure
   if ((p=get_string_variable ("pdb_type")))
     {
@@ -6112,6 +6111,7 @@ Sequence * seq2template_seq ( Sequence *S, char *template_list, Fname *F)
 	}
       else
 	{
+
 	  sprintf ( buf, "SCRIPT_tc_generic_method.pl@mode#pdb_template@database#%s@method#blastp@cache#%s@minid#%d@maxid#%d@mincov#%d@server#%s@type#_P_@pdb_type#%s",pdb_db, get_cache_dir(),PmI,PMI,PmC, server,pdb_type);
 	}
       
@@ -6178,7 +6178,7 @@ Sequence * seq2template_seq ( Sequence *S, char *template_list, Fname *F)
       Sequence *T;
       int a, i;
       int ntemp=0;
-
+      
       T=(template_list!=NULL)?get_fasta_sequence (template_list, NULL):S;
       for (a=0; a< T->nseq; a++)
 	{
@@ -6622,8 +6622,6 @@ struct X_template *fill_F_template ( char *name,char *p, Sequence *S)
   return F;
 
 }
-
-
 struct X_template *fill_P_template ( char *name,char *p, Sequence *S)
 {
   struct X_template *P;
@@ -6631,22 +6629,130 @@ struct X_template *fill_P_template ( char *name,char *p, Sequence *S)
   Alignment *A;
   int sim, cov, i;
   char *buf;
+  static char *template_name;
+  static char *template_file;
+  char *k;
   
+  if (!name || !S) return NULL;
+  else if (!p)
+    {
+      add_warning(stderr, "_P_ Template | %s | Could Not Be Found",name);
+      return NULL;
+    }
+  
+  if ( (k=strstr (p, "_P_")))template_name=csprintf (template_name, "%s",k+4);
+  else template_name=csprintf (template_name, "%s", p); 
+
+  if (!check_file_exists (template_name))
+    {
+      static char *bb1;
+      static char *bb2;
+      
+      bb1=is_pdb_struc(template_name);
+      bb2=csprintf (bb2, "%s.pdb", template_name);
+
+      if (bb1)return fill_P_template (name,bb1, S);
+      else if (check_file_exists (bb2))return fill_P_template (name,bb2, S);
+      else return NULL;
+    }
+  else
+    {
+      char *tn=fname2abs(template_name);
+      char *tf=fix_pdb_file (tn);
+      if (!tf)
+	{
+	  if (p)add_warning(stderr, "_P_ Template | %s | Could Not Be Used\n",p);
+	  else if (name)add_warning(stderr, "_P_ Template | %s | Could Not Be Found\n",name);
+	  return NULL;
+	}
+      template_file=csprintf (template_file, "%s", tf);
+      template_name=csprintf (template_name, "%s", tn);
+      
+    }
+  
+  //We now have a valid PDB file 
+  P=fill_X_template (name,p, "_P_");
+  sprintf (P->template_format , "pdb");
+  sprintf (P->template_file, "%s",template_file);
+  sprintf (P->template_name, "%s",template_name);
+  
+  
+  
+
+ 
+
+  /*Check the target sequence is similar enough*/
+
+  PS=get_pdb_sequence (P->template_file);
+
+
+
+  if ( PS==NULL)
+    {
+      add_warning( stderr, "_P_  Template |%s| Could Not be Used for Sequence |%s|: Structure Not Found", P->template_name, name);
+      free_X_template (P);P=NULL;
+    }
+  else
+    {
+      int minsim=get_int_variable ("pdb_min_sim");
+      int mincov=get_int_variable ("pdb_min_cov");
+
+
+      i=name_is_in_list (name, S->name, S->nseq, 100);
+
+      A=align_two_sequences (S->seq[i], PS->seq[0],"idmat",-3,0, "fasta_pair_wise");
+
+      sprintf ( A->name[0], "seq");
+      sprintf ( A->name[1], "pdb");
+      cov=aln2coverage (A, 0);
+      sim=aln2sim (A, "idmat");
+
+      if (sim<=minsim)
+	{
+	  add_information( stderr, "_P_  Template %s Could Not be Used for Sequence %s: Similarity too low [%d, Min=%d]",P->template_name,name,sim,minsim);
+	  add_information( stderr, "If you want to include %s in anycase,add -pdb_min_sim=%d to the command line",name,sim);
+	  print_aln (A);
+	  free_X_template (P);
+	  P=NULL;
+	}
+      else if ( cov<=mincov)
+	{
+	  add_information(stderr, "_P_  Template |%s| Could Not be Used for Sequence |%s|: Coverage too low [%d, Min=%d]",P->template_name,name, cov, mincov);
+	  add_information( stderr, "If you want to include this sequence in anycase add -pdb_min_cov=%d to the command line", cov);
+	  print_aln (A);
+	  free_X_template (P);P=NULL;
+	}
+      free_aln(A);
+      free_sequence (PS, -1);
+    }
+
+  return P;
+}
+
+struct X_template *fill_P_template_new ( char *name,char *p, Sequence *S)
+{
+  struct X_template *P;
+  Sequence *PS;
+  Alignment *A;
+  int sim, cov, i;
+  char *buf;
+  
+  HERE ("***** %s", p);
  
   P=fill_X_template ( name, p, "_P_");
-  
+ 
   sprintf (P->template_format , "pdb");
 
   if (!P ||(check_file_exists (P->template_name) && !is_pdb_file (P->template_name) ))
     {
-
+      
       fprintf ( stderr, "Could Not Fill _P_ template for sequence |%s|", name);
       free_X_template (P);
       return NULL;
     }
   else if ( check_file_exists (P->template_name))
     {
-
+      
       sprintf ( P->template_file, "%s", P->template_name);
       buf=path2filename (P->template_name);
       if (P->template_name!=buf)
@@ -6658,7 +6764,7 @@ struct X_template *fill_P_template ( char *name,char *p, Sequence *S)
    else
      {
        char *st;
-
+      
        st=is_pdb_struc (P->template_name);
 
        if (st)
@@ -6666,7 +6772,7 @@ struct X_template *fill_P_template ( char *name,char *p, Sequence *S)
 	   if (st!=P->template_file)sprintf ( P->template_file, "%s", st);
 	 }
      }
-
+  
   /*Make a first run to fix relaxed PDB files*/
   buf=fix_pdb_file (P->template_file);
   
@@ -6674,7 +6780,7 @@ struct X_template *fill_P_template ( char *name,char *p, Sequence *S)
   {
 
     sprintf ( P->template_file, "%s",buf);
-    vfree (buf);
+
   }
 
   /*Check the PDB FILE EXISTS*/
@@ -8584,7 +8690,7 @@ int* get_cdna_seq_winsim ( int *cache, char *string1, char *string2, char *ignor
 	for ( a=0; a< len1; a++)
 	  w[a]=x;
 
-	add_warning (stderr, "\nWARNING: winsim not implemented for cDNA");
+	add_warning (stderr, "winsim not implemented for cDNA");
 	return w;
 	}
 
@@ -9055,13 +9161,11 @@ Alignment * grep_seq (Alignment *S,char *field, char *mode, char *string)
 
   if ( !strm(mode, "KEEP") && ! strm (mode, "REMOVE"))
     {
-      add_warning ( stderr, "\nERROR: +grep <field> <KEEP|REMOVE> <string> [FATAL: %s]", PROGRAM);
-      myexit (EXIT_FAILURE);
+      printf_exit(EXIT_FAILURE,stderr, "+grep <field> <KEEP|REMOVE> <string> [FATAL: %s]", PROGRAM);
     }
   else if ( !strm(field, "SEQ") && ! strm (field, "COMMENT") && ! strm(field, "NAME"))
     {
-      add_warning ( stderr, "\nERROR: +grep <NAME|COMMENT|SEQ> <mode> <string> [FATAL: %s]", PROGRAM);
-      myexit (EXIT_FAILURE);
+      printf_exit(EXIT_FAILURE,stderr,"ERROR: +grep <NAME|COMMENT|SEQ> <mode> <string> [FATAL: %s]", PROGRAM);
     }
 
 
@@ -9666,7 +9770,7 @@ Sequence *remove_empty_sequence (Sequence *S)
       if ( strlen (c)==0)
 	{
 	  S->seq[a]=NULL;
-	  add_warning ( stderr, "WARNING: Sequence %s does not contain any residue: automatically removed from the set [WARNING:%s]",S->name[a], PROGRAM);
+	  add_warning ( stderr, "Sequence %s does not contain any residue: automatically removed from the set [WARNING:%s]",S->name[a], PROGRAM);
 	}
     }
   NS=duplicate_sequence (S);
@@ -10452,7 +10556,7 @@ Alignment * master_trimseq( Alignment *A, Sequence *S,char *mode)
        {
 	 if ( min_nseq<-100)
 	   {
-	     add_warning ( stderr, "\nWARNING: trimseq: Nseq(N)  max_val=100%% [Automatic reset]\n");
+	     add_warning ( stderr, "trimseq: Nseq(N)  max_val=100%% [Automatic reset]\n");
 	     min_nseq=-100;
 	   }
 
@@ -11510,7 +11614,7 @@ Alignment * trimseq( Alignment *A, Sequence *S,char *mode)
        {
 	 if ( min_nseq<-100)
 	   {
-	     add_warning ( stderr, "\nWARNING: trimseq: Nseq(N)  max_val=100%% [Automatic reset]\n");
+	     add_warning ( stderr, "trimseq: Nseq(N)  max_val=100%% [Automatic reset]\n");
 	     min_nseq=-100;
 	   }
 

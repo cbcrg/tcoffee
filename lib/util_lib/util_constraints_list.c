@@ -573,7 +573,7 @@ Job_TC *submit_lib_job ( Job_TC *job)
 	    io->CL= seq2list(job);
 	    if (!io->CL)
 	      {
-		add_warning (stderr, "\nFAILED TO EXECUTE:%s [SERIOUS:%s]", p->aln_c, PROGRAM);
+		add_warning (stderr, "FAILED TO EXECUTE:%s [SERIOUS:%s]", p->aln_c, PROGRAM);
 		job->status=EXIT_FAILURE;
 	      }
 	  }
@@ -705,7 +705,7 @@ Job_TC* method2job_list ( char *method_name,Sequence *S, char *weight, char *lib
 	      else if ((x=name_is_in_list (list[i], S->name, S->nseq, 100))!=-1)sprintf(list[i], "%d", x);
 	      else
 		{
-		  add_warning ( stderr, "\nWARNING: %s is not part of the sequence dataset \n", list[i]);
+		  add_warning ( stderr, "%s is not part of the sequence dataset", list[i]);
 		  continue;
 		}
 	    }
@@ -2546,7 +2546,7 @@ Sequence * read_seq_in_n_list(char **fname, int n, char *type, char *SeqMode)
 		    S1=get_pdb_sequence (lname);
 		    if (S1==NULL)
 		      {
-			add_warning ( stderr, "\nWarning: Could not use PDB: %s", lname);
+			add_warning ( stderr, "ould not use PDB: %s", lname);
 		      }
 		    else
 		      {
@@ -5884,7 +5884,7 @@ char *** produce_method_file ( char *method)
 		static int issued;
 		if (!issued)
 		{
-			add_warning (stderr, "\n******************** WARNING: ****************************************\nSAP is not installed\nTMalign will be used instead\ntmalign is FASTER than SAP and *almost* as accurate\n**********************************************************************\n");
+		  add_warning (stderr, "SAP is not installed: TMalign will be used instead");
 			issued=1;
 		}
 

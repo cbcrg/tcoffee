@@ -95,7 +95,10 @@ int is_sap_file (char *name);
 int is_pdb_file ( char *name);
 int is_simple_pdb_file ( char *name);
 char *fix_pdb_file (char *name);
+char *atom2pdbF(char*file);
+int pdb_has_atom ( char *name);
 
+int seqres_equal_atom (char*fname);
 int is_pdb_name ( char *name);
 char* get_pdb_id(char *name);
 char* get_pdb_struc(char *name, int start, int end);
