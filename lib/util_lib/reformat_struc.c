@@ -133,13 +133,12 @@ char *     normalize_pdb_file  (char *name_in, char *seq, char *out_file)
   int start, end, npdb, r1, r2;
   char name[100];
 
+  if ( !name_in) return NULL;
+  else
+    {
+      sprintf ( name, "%s", name_in);
+    }
   
- if ( !name_in) return NULL;
- else
-   {
-     sprintf ( name, "%s", name_in);
-   }
- 
  if ( !is_pdb_file(name))
     {
       fprintf(stdout, "\nERROR[normalize_pdb_file]: %s is not a pdb file[FATAL:%s]\n", name, PROGRAM);
@@ -149,9 +148,7 @@ char *     normalize_pdb_file  (char *name_in, char *seq, char *out_file)
   S=get_pdb_sequence (name);
   A=align_two_sequences (S->seq[0],seq,"idmat",-3,0, "fasta_pair_wise");
  
-  
-
-  for (start=-1, end=-1,npdb=0,a=0; a< A->len_aln; a++)
+ for (start=-1, end=-1,npdb=0,a=0; a< A->len_aln; a++)
     {
       r1=1-is_gap(A->seq_al[0][a]);
       r2=1-is_gap(A->seq_al[1][a]);

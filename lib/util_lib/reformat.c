@@ -14474,7 +14474,8 @@ FILE * display_sequences_names (Sequence *S, FILE *fp, int check_pdb_status, int
 			else fprintf (fp, " Struct No");
 		      }
 		    else fprintf (fp, " Struct Unchecked");
-		    if ( print_templates)fp=display_sequence_templates (S, a, fp);
+		    if ( print_templates)
+		      fp=display_sequence_templates (S, a, fp);
 		  }
 		fprintf ( fp, "\n");
 	      }

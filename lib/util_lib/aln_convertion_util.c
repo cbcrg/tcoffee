@@ -5790,21 +5790,18 @@ char *template_file2abs_template_file(char *name)
 Sequence * profile_seq2template_seq ( Sequence *S, char *template_file, Fname *F)
 {
   /*This function fetches potential templates associated with sequences within a profile*/
-  int i;
+  int i,b;
   Alignment *A;
-
+  
+  
   for ( i=0; i< S->nseq; i++)
     {
-
       if ( (A=seq2R_template_profile (S, i)))
 	{
-
 	  A->S=aln2seq (A);
 	  A->S=seq2template_seq (A->S, template_file, F);
-	  if (!A->S)return NULL;
 	}
     }
-
   return S;
 }
 
@@ -6570,7 +6567,8 @@ FILE * display_X_template (struct X_template *X, FILE *io)
 {
 
   if ( !X) return io;
-  if ( !strm (X->template_type, "_S_"))fprintf (io, "\n\t%s: Template=%s, File=%s",template_type2type_name (X->template_type), X->template_name,X->template_file);
+  if ( !strm (X->template_type, "_S_"))
+    fprintf (io, "\n\t%s: Template=%s, File=%s",template_type2type_name (X->template_type), X->template_name,X->template_file);
   return io;
 }
 char *template_type2short_type_name (char *type)

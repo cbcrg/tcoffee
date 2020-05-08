@@ -250,6 +250,7 @@ Sequence * seq2template_type(Sequence *Seq);
 
 Sequence * vremove_seq_template_files (Sequence *S);
 Sequence * display_seq_template_files (Sequence *S);
+
 Sequence * handle_seq_template_file (Sequence *S, char *mode);
 int handle_X_template_files ( X_template *T, char *mode);
 
@@ -263,11 +264,13 @@ int seq2n_X_template ( Sequence *S, char *type);
 
 struct X_template *fill_X_template (char *name, char *p, char *type);
 FILE * display_seq_template (Sequence *S, FILE *io);
+
 char *template_type2type_name (char *type);
 char *template_type2short_type_name (char *type);
 
 
 FILE * display_sequence_templates ( Sequence *S, int i, FILE *io);
+FILE * display_profile_templates (Sequence *S,int i, FILE *io);
 FILE * display_X_template (struct X_template *X, FILE *io);
 
 struct X_template* free_X_template ( struct X_template *X);

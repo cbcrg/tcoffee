@@ -84,6 +84,7 @@ Constraint_list *profile2list     (Job_TC *job, int nprf)
 	 job=print_lib_job (job, "param->seq_c=%s", buf);
 	 CL=seq2list (job);
        }
+   
    //restaure CL;
    CL->S=RS;
    NRI=CL->residue_index;
@@ -1895,17 +1896,16 @@ Constraint_list * sap_pair   (char *seq_in, char *weight, Constraint_list *CL)
    char *cdir=NULL;
    char *seq=NULL;
    char *wdir   =vtmpnam(NULL);
-      
+   int *v;   
    seq=csprintf (seq, "%s", seq_in);
-	    	    
+  
    atoi(strtok (seq,SEPARATORS));
    s1=atoi(strtok (NULL,SEPARATORS));
    s2=atoi(strtok (NULL,SEPARATORS));
-   template1=seq2T_value(CL->S,s1, "template_name", "_P_");
-   template2=seq2T_value(CL->S,s2, "template_name", "_P_");
-   if (!template1 || !template2)return CL;
-   
-   
+   if (!(template1=seq2T_value(CL->S,s1, "template_name", "_P_")))return CL;
+   if (!(template2=seq2T_value(CL->S,s2, "template_name", "_P_")))return CL;
+   if (!(tmp_pdb1=normalize_pdb_file(seq2P_template_file(CL->S,s1),(CL->S)->seq[s1], vtmpnam (NULL))))return NULL;
+   if (!(tmp_pdb2=normalize_pdb_file(seq2P_template_file(CL->S,s2),(CL->S)->seq[s2], vtmpnam (NULL))))return NULL;
    
    
    //Start working in special dir
@@ -1913,15 +1913,11 @@ Constraint_list * sap_pair   (char *seq_in, char *weight, Constraint_list *CL)
    printf_system    ("mkdir -p %s",wdir);
    chdir (wdir);
    
-   tmp_pdb1=normalize_pdb_file(fname2abs(seq2P_template_file(CL->S,s1)),(CL->S)->seq[s1], vtmpnam (NULL));
-   tmp_pdb2=normalize_pdb_file(fname2abs(seq2P_template_file(CL->S,s2)),(CL->S)->seq[s2], vtmpnam (NULL));
-   
-   
    if (strm ((CL->S)->type, "RNA"))
      {
        printf_system ("rnapdb2protpdb.pl C3PRIME %s > in1",tmp_pdb1);
        printf_system ("rnapdb2protpdb.pl C3PRIME %s > in2",tmp_pdb2);
-	 }
+     }
    else
      {
        printf_system ("mv %s in1", tmp_pdb1);
@@ -1962,11 +1958,8 @@ Constraint_list * sap_pair   (char *seq_in, char *weight, Constraint_list *CL)
 	   tot++;
 	 }
      }
-   
    vfclose (fp);
-   
-   
-   
+      
    if (tot>0)
      {
        sim=(sim*100)/tot;
@@ -2010,6 +2003,8 @@ Constraint_list * sap_pair   (char *seq_in, char *weight, Constraint_list *CL)
    vfree (buf);
    vremove("in1");vremove ("in2");vremove("sapout"); vremove("saplib");
    chdir (cdir);
+
+   
    return CL;
  }
 
