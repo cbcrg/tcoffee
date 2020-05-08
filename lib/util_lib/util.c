@@ -8131,7 +8131,6 @@ int token_is_in_file_n ( char *fname, char *token, int nlines)
   return 0;
 }
 
-
 char *vfgets ( char *buf, FILE *fp)
 {
   int c;

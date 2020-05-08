@@ -12600,18 +12600,16 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	 }
        else if ( strm (action, "remove_seq") || strm (action, "rm_seq"))
 	 {
-	   char *buf;
+	   char *buf=NULL;
 	   char **list;
 	   int n;
 	   int l;
 
 	   list=declare_char ((D1->S)->nseq, 200);
-
-	   buf=(char*)vcalloc ((D1->S)->max_len+1, sizeof (char));
 	   for ( n=0,a=0; a< (D1->A)->nseq; a++)
 	     {
 
-	       sprintf (buf, "%s", (D1->S)->seq[a]);
+	       buf=csprintf(buf, "%s",(D1->S)->seq[a]);
 	       ungap (buf);
 	       l=strlen(buf);
 
