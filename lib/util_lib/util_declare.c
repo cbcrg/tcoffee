@@ -868,9 +868,10 @@ Alignment* copy_aln ( Alignment *A, Alignment *B)
 
 
 	  if ( A==NULL){free_aln(B); return NULL;}
-
-	  nnseq=MAX(A->nseq, A->max_n_seq);
 	  
+	  
+	  nnseq=MAX(A->nseq, A->max_n_seq);
+	  nnseq=A->nseq;
 	  nlen=A->len_aln;
 	  for (a=0; a<A->nseq; a++)
 	    {
