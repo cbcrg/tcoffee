@@ -1163,8 +1163,7 @@ Sequence_data_struc *read_data_structure ( char *in_format, char *in_file,	Actio
 	else if ( strm( in_format, "tc_lib") ||  strm( in_format, "mocca_lib") ||  strm( in_format, "lib"))
 	        {
 		 
-		  read_seq_in_list (in_file,&nseq,&sequences,&seq_name, &genome_co);
-		  D->S=fill_sequence_struc ( nseq, sequences, seq_name, genome_co);
+		  D->S=read_seq_in_list (in_file);
 		  D->CL=declare_constraint_list ( D->S,NULL, NULL, 0,NULL, NULL);
 		  D->CL=read_constraint_list_file(D->CL,in_file);
 		  seq2aln (D->S, D->A, RAD->rm_gap);
@@ -1261,13 +1260,7 @@ Sequence  * main_read_seq ( char *name)
 	 }
        else if ( format && strstr (format, "tc_lib"))
 	 {
-	   int nseq,b;
-	   char **sequences=NULL, **seq_name=NULL;
-		Genomic_info *genome_co =NULL;
-	   read_seq_in_list (name,&nseq,&sequences,&seq_name, &genome_co);
-	   S=fill_sequence_struc ( nseq, sequences, seq_name, genome_co);
-	   for ( b=0; b< S->nseq; b++)sprintf ( S->file[b], "%s",name);
-	   free_char (seq_name, -1);free_char (sequences, -1);
+	   S=read_seq_in_list (name);
 	 }
        else
 	  {
@@ -1288,13 +1281,14 @@ Sequence  * quick_read_seq ( char *file)
   register_file4dump (file, "r");
   Sequence *S=NULL;
   char *dup;
-  static char *tmp_file=vtmpnam (NULL);
+  char *tmp_file;
   
   if (!file || !check_file_exists (file))return NULL;
   else if (format_is_fasta (file))
     S=get_fasta_sequence (file, NULL);
-  else if (printf_system ( "seq2name_seq.pl %s > %s",file, tmp_file)==EXIT_SUCCESS)
+  else if (printf_system ( "seq2name_seq.pl %s > %s",file, tmp_file=vtmpnam(NULL))==EXIT_SUCCESS)
     {
+      
       S=get_fasta_sequence (tmp_file, NULL);
     }
   ungap_seq(S);
@@ -1597,7 +1591,7 @@ Alignment *reload_aln(Alignment *A)
 {
   int a;
   FILE *fp;
-  static char *tmp=vtmpnam (NULL);
+  char *tmp=vtmpnam (NULL);
   dump_msa (A,tmp);
   return quick_read_fasta_aln(A,tmp);
 }
@@ -1641,7 +1635,7 @@ Alignment * main_read_aln ( char *name, Alignment *A)
        char *dup;
        static char *format;
        Sequence *S=NULL;
-       static char*tmp_name=vtmpnam(NULL);
+       char*tmp_name;
        
        register_file4dump (name, "r");/*make sure file is in dump*/
        
@@ -1662,7 +1656,7 @@ Alignment * main_read_aln ( char *name, Alignment *A)
 	   A=quick_read_fasta_aln (A, name);
 	   
 	 }
-       else if   ( printf_system ( "seq2name_seq.pl %s > %s",name, tmp_name)==EXIT_SUCCESS)//takes care of common formats
+       else if   ( printf_system ( "seq2name_seq.pl %s > %s",name, tmp_name=vtmpnam(NULL))==EXIT_SUCCESS)//takes care of common formats
 	 {
 	   A=quick_read_fasta_aln (A, tmp_name);
 	 }
@@ -2083,45 +2077,42 @@ char*  is_pdb_struc ( char *name)
 
 char *atom2pdbF (char*in)
 {
-  static char *tmp;
-  tmp=csprintf (NULL, "%s", vtmpnam(NULL));
+  char *tmp=vtmpnam(NULL);
   printf_system ("extract_from_pdb %s > %s", in,tmp);
   return tmp;
 }
 char *fix_pdb_file ( char *in)
 {
-  char *b;
-  static char*tmp;
+  
+  char*tmp=NULL;
   
   if ( !in || !check_file_exists (in))return NULL;
   else if (!is_pdb_file(in))
     {
-      if (!pdb_has_atom(in))b=NULL;
-      else if (is_pdb_file (b=atom2pdbF(in)))
+      if (!pdb_has_atom(in))tmp=NULL;
+      else if (is_pdb_file (tmp=atom2pdbF(in)))
 	add_warning ( stderr, "File %s is a partial PDB File - regenerated from ATOM with extract_from_pdb [%s:WARNING]\n",in, PROGRAM);
     }
   else if ( !seqres_equal_atom(in))
     {
-      b=atom2pdbF(in);
-      if (!is_pdb_file (b))return NULL;
+      tmp=atom2pdbF(in);
+      if (!is_pdb_file (tmp))return NULL;
       else
 	  add_warning ( stderr, "Could not use SEQRES field in %s -- used ATOM instead [%s:WARNING]\n",in, PROGRAM);
     }
   else
     {
-      b=in;
+      tmp=csprintf (tmp, "%s", in);
     }
-  if (!b) return NULL;
-  else return tmp=csprintf (tmp, "%s", b);
-  
+  return tmp;
 }
 
 int is_sap_file ( char *name)
 	{
 	FILE *fp;
-	if (!name);
+	if (!name)return 0;
 	if (!check_file_exists(name))return 0;
-
+	
 	if ((fp=find_token_in_file (name, NULL, "Percent"))!=NULL)
 	  {
 	    if ((fp=find_token_in_file (name,fp, "Percent"))!=NULL)
@@ -5077,7 +5068,7 @@ Sequence *reload_seq(Sequence *A)
 {
   int a;
   FILE *fp;
-  static char *tmp=vtmpnam (NULL);
+  char *tmp=vtmpnam (NULL);
   dump_seq(A, tmp);
   free_sequence (A,-1);
   return get_fasta_sequence(tmp, NULL);
@@ -11410,14 +11401,7 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	   D1->S=tree2seq(D1->T, NULL);
 	   D1->A=seq2aln (D1->S, NULL, RM_GAP);
 	 }
-       else if ( strm(action, "tree2bucket") )
-	 {
-	   float *weight=seq2dpa_weight (D1->S, NULL);
-	   node2master (D2->T, D1->S, weight);
-	   
-	   tree2bucket (D2->T, D1->S,ATOI_ACTION(1), ACTION(2));
-	   myexit (EXIT_SUCCESS);
-	 }
+      
        else if ( strm(action, "tree2node") )
 	 {
 	   print_node_list ( D1->T,(DST)?DST->S:NULL);

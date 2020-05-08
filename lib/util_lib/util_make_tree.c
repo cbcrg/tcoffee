@@ -1901,7 +1901,7 @@ double **aln2km_vector (Alignment *A, char *mode, int *dim)
 NT_node seq2dnd (Sequence *S, char *dpa_tree)
 {
   NT_node T=NULL;
-  static char *tmptree=vtmpnam (NULL);
+  char *tmptree=vtmpnam (NULL);
 
  
   if (!S || S->nseq==0)return NULL;

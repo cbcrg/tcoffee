@@ -664,7 +664,7 @@ Sequence * duplicate_sequence (Sequence *S )
 {
 	Sequence *LS;
 	int a, b;
-	static char*tmp=vtmpnam(NULL);
+	char*tmp=vtmpnam(NULL);
 	FILE *fp;
 	
 	fp=vfopen (tmp, "w");
@@ -849,7 +849,6 @@ Weights* free_weights ( Weights* W)
 
 
 	vfree(W->mode);
-
 	free_char(W->seq_name, -1);
 	free_float(W->PW_SD,-1);
 	free_float(W->PW_ID, -1);
@@ -871,7 +870,7 @@ Alignment* copy_aln ( Alignment *A, Alignment *B)
 	  if ( A==NULL){free_aln(B); return NULL;}
 
 	  nnseq=MAX(A->nseq, A->max_n_seq);
-	  nnseq=A->nseq;
+	  
 	  nlen=A->len_aln;
 	  for (a=0; a<A->nseq; a++)
 	    {

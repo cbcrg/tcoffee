@@ -2759,7 +2759,7 @@ Alignment *RmLowerInAln(Alignment *A, char *gap)
 char *ungap_fastaF_big (char *in, char *out, int p)
 {
   FILE *fp;
-  static char *tmp=vtmpnam (NULL);
+  char *tmp=vtmpnam (NULL);
   int *cache=NULL;
   long *map;
   int l, ml=0;
@@ -3143,8 +3143,8 @@ int trim_fastaF_big(char *in1, char*in2, char *nout1, char *nout2, long **nmap1,
   int i1, i2, a, l;
   char *s;
   int *order;
-  static char *out1=vtmpnam (NULL);
-  static char *out2=vtmpnam (NULL);
+  char *out1=vtmpnam (NULL);
+  char *out2=vtmpnam (NULL);
   
   if (!format_is_fasta(in1))in1=msaF2fastaF(in1);
   if (!format_is_fasta(in2))in2=msaF2fastaF(in2);
@@ -5070,7 +5070,6 @@ Sequence * merge_seq( Sequence *IN, Sequence *OUT)
 
 	if ( OUT==NULL)
 	  {
-	    
 	    return duplicate_sequence (IN);
 	  }
 	else
@@ -5280,9 +5279,9 @@ int **fix_seq_seq (Sequence *S0, Sequence *Sx)
 	  int c;
 	  int nr0=0;
 	  int nr1=0;
-
-	  Alignment *B=align_two_sequences (S0->seq[s0], Sx->seq[i], const_cast<char*>( (strm(S0->type, "PROTEIN"))?"blosum62mt":"idmat"), -4,-1, "myers_miller_pair_wise");
-								    //Maria added this to cast a const char* to char*
+	  Alignment *B;
+	  
+	  B=align_two_sequences (S0->seq[s0], Sx->seq[i], const_cast<char*>( (strm(S0->type, "PROTEIN"))?"blosum62mt":"idmat"), -4,-1, "myers_miller_pair_wise");
 	  for (c=0; c<B->len_aln; c++)
 	    {
 
@@ -5293,7 +5292,7 @@ int **fix_seq_seq (Sequence *S0, Sequence *Sx)
 	      if (!g0 && !g1)index[s0][nr0]=nr1;
 	    }
 	  if (aln2sim(B, "idmat")<20) add_warning (stderr,"Unreliable reconciliation for sequence %s. If it is a PDB, check source file", S0->name[s0]);
-	  free_aln (B);B=NULL;
+	  
 	}
     }
   return index;
@@ -7730,7 +7729,7 @@ Alignment * extract_aln2 ( Alignment *A, int in_start, int in_end, char *seq)
      }
 Alignment * extract_aln3 ( Alignment *B, char *file)
 {
-  static char *tmp=vtmpnam(NULL);
+  char *tmp=vtmpnam(NULL);
   char ***list=file2list(file, " ");
   FILE*fp;
   int start, end, i, n, c;
@@ -14175,53 +14174,4 @@ void add_msa (Alignment *A,int seq, char *lu, char *file, char *mode)
   return;
 }
 
-int thread_msa2msa(char *small, char *big, char *seq)
-{
-  //incorporate small into Big
-  static Alignment *M;
-  static char *sseq;
-  static char *bseq;
-  int Si, Bi;
-  static char **name0=NULL;
-  static char **seq0=NULL;
-  static char **com0=NULL;
 
-  static char **name1=NULL;
-  static char **seq1=NULL;
-  static char **com1=NULL;
-  
-  static char *smallT=vtmpnam (NULL);
-  static char *bigT=vtmpnam (NULL);
-  
-  static Alignment *S=declare_aln2 (1,1);
-  static Alignment *B=declare_aln2 (1,1);
-    
-
-  printf_system ( "seq2name_seq.pl %s > %s",small, smallT);
-  S=quick_read_fasta_aln(NULL,smallT);
-    
-  printf_system ( "seq2name_seq.pl %s > %s",big, bigT);
-  B=quick_read_fasta_aln(NULL,bigT);
-
-  if ((Si=name_is_in_list (seq, S->name, S->nseq, MAXNAMES+1))==-1)
-    {
-      printf_exit ( EXIT_FAILURE,stderr, "\nERROR: %s is NOT in %s [FATAL]",seq, small );
-    }
-  if ((Bi=name_is_in_list (seq, B->name, B->nseq, MAXNAMES+1))==-1)
-    {
-      printf_exit ( EXIT_FAILURE,stderr, "\nERROR: %s is NOT in %s [FATAL]",seq, big );
-    }
-  
-  sseq=msa2master_seq (S, Si, sseq);
-  bseq=msa2master_seq (B, Bi, bseq);
-  
-  
-  M=align_two_sequences4dpa (sseq,S->seq_al[Si],bseq,B->seq_al[Bi],"blosum62mt",-4,-1, "myers_miller_pair_wise", M);
-  
-
-  
-  add_msa (S,-1,M->seq_al[0],big, "w");
-  add_msa (B,Bi,M->seq_al[1],big, "a");
-  
-  return 1;
-}

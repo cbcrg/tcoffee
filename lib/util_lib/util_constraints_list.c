@@ -154,8 +154,8 @@ Constraint_list *fork_subset_produce_list   ( Constraint_list *CL, Sequence *S, 
 		  done++;
 		}
 	      dump_constraint_list (CL, pid_tmpfile[a], "a");
-	      freeze_constraint_list (CL);
-			myexit (EXIT_SUCCESS);
+	      unfreeze_constraint_list (CL);
+	      myexit (EXIT_SUCCESS);
 	    }
 	  else
 	    {
@@ -2338,11 +2338,11 @@ Constraint_list* read_constraint_list(Constraint_list *CL,char *in_fname,char *i
 	Sequence *SL=NULL, *TS=NULL;
 	int a;
 	Constraint_list *SUBCL=NULL;
-	static char *read_mode;
+	char *read_mode;
 	char *fname;
 
 	fname=in_fname;
-	if ( !read_mode)read_mode=(char*)vcalloc ( STRING, sizeof (char));
+	read_mode=(char*)vcalloc ( STRING, sizeof (char));
 
 	if ( is_lib_list (in_fname))sprintf ( read_mode, "lib_list");
 	else if ( in_mode)sprintf (read_mode, "%s", in_mode);
@@ -2546,7 +2546,7 @@ Sequence * read_seq_in_n_list(char **fname, int n, char *type, char *SeqMode)
 		    S1=get_pdb_sequence (lname);
 		    if (S1==NULL)
 		      {
-			add_warning ( stderr, "ould not use PDB: %s", lname);
+			add_warning ( stderr, "Could not use PDB: %s", lname);
 		      }
 		    else
 		      {
@@ -2586,23 +2586,7 @@ Sequence * read_seq_in_n_list(char **fname, int n, char *type, char *SeqMode)
 		  }
 		else if (is_seq_source ('L', mode, SeqMode))
 		  {
-		    
-		    read_seq_in_list (lname,&nseq,&sequences,&seq_name, &genome_co);
-		    S1=fill_sequence_struc ( nseq, sequences, seq_name, genome_co);
-		    
-		    if (genome_co != NULL)
-		      {
-			for ( b=0; b< S1->nseq; b++)
-			  vfree(genome_co[b].seg_name);
-		      }
-		    nseq=0;
-		    
-		    vfree(genome_co);
-		    free_char (sequences, -1);
-		    free_char ( seq_name, -1);
-		    sequences=NULL;
-		    seq_name=NULL;
-		    S1=seq2unique_name_seq (S1);
+		    S1=read_seq_in_list(lname);
 		    
 		    if ((S=merge_seq( S1, S))==NULL)
 		      {
@@ -2839,271 +2823,152 @@ Constraint_list * old_read_constraint_list_file(Constraint_list *CL, char *fname
 
 Constraint_list *read_constraint_list_file(Constraint_list *CL, char *fname)
 {
-	static int ov = -1;
-	if (ov == -1)
-	  {
-	    if (!getenv ("DEBUG_READ_LIB"))
-	      ov = 0;
-	    else
-	      ov = 1;
-	  }
-	
-	
-	if (ov)
-	  return old_read_constraint_list_file(CL, fname);
-
-	Sequence *NS;
-	int **index, *entry;
-	int c,line=0,s1, s2, r1, r2, misc, cons,x,we;
-	FILE *fp;
-	char *buf=NULL;
-	int error=0;
-	int keepNS=0;
-	unsigned int i;
-	char arg[10];
-	unsigned int length;
-	int start=0;
-	
-	NS=read_seq_in_n_list (&fname, 1,NULL, NULL);
-
-	if (!CL)
-	  {
-	    CL=declare_constraint_list_simple(NS);
-	    keepNS=1;
-	  }
-	
-	index=fix_seq_seq (NS, CL->S);
-	entry=(int*)vcalloc ( CL->entry_len+1, sizeof (int));
-
-
-	fp=vfopen(fname,"r");
-	//while ((c=fgetc(fp))!='#' && c!=EOF){line+=(c=='\n')?1:0;}
-	//ungetc (c, fp);
-
-	while ((buf=vfgets ( buf, fp))!=NULL)
+  Sequence *NS;
+  int **index, *entry;
+  int c,line=0,s1, s2, r1, r2, misc, cons,x,we;
+  FILE *fp;
+  char *buf=NULL;
+  int error=0;
+  int keepNS=0;
+  unsigned int i;
+  char arg[10];
+  unsigned int length;
+  int start=0;
+  int a;
+  
+  NS=read_seq_in_n_list (&fname, 1,NULL, NULL);
+  
+  if (!CL)
+    {
+      CL=declare_constraint_list_simple(NS);
+      keepNS=1;
+    }
+  
+  index=fix_seq_seq (NS, CL->S);
+  
+  
+  
+  entry=(int*)vcalloc ( CL->entry_len+1, sizeof (int));
+  
+  
+  fp=vfopen(fname,"r");
+  //while ((c=fgetc(fp))!='#' && c!=EOF){line+=(c=='\n')?1:0;}
+  //ungetc (c, fp);
+  
+  while ((buf=vfgets ( buf, fp))!=NULL)
+    {
+      line++;
+      if (buf[0]=='!')
 	{
-		line++;
-		if (buf[0]=='!')
-		  {
-		    if (strstr (buf, "!CMT:"))
-		      {
-			if ((CL->comment && ! strstr (CL->comment, buf))|| !CL->comment)
-			  CL->comment=vcat(CL->comment, buf);
-		      }
-		    else continue;
-		  }	
-		else if (buf[0]!='#' && !start)continue;
-		else if (buf[0]=='#')
-		  {
-		    start=1;
-		    sscanf ( buf, "#%d %d", &s1, &s2);
-		    s1--; s2--;
-		    if (s1>NS->nseq || s2>NS->nseq)error=1;
-		  }
-		else
-		  {
-		    cons=misc=r1=r2=we=0;
-		    if (buf[0] != '+')
-		      {
-			x=sscanf (buf, "%d %d %d %d %d",&r1,&r2,&we,&cons,&misc);
-			length = 1;
-		      }
-		    else
-		      {
-			x=sscanf (buf, "%s %d %d %d %d %d",arg, &length, &r1,&r2,&we,&cons,&misc);
-		      }
-		    
-		    for (i = 0; i < length; ++i)
-		      {
-			if (r1>NS->len[s1] || r2>NS->len[s2] || x<3)error=1;
-			else
-			  {
-			    int is1, is2, ir1, ir2;
-			    
-			    is1=entry[SEQ1]=index[s1][0];//0-N-1
-			    is2=entry[SEQ2]=index[s2][0];//0-N-1
-			    ir1=entry[R1]=index[s1][r1];//1-N
-			    ir2=entry[R2]=index[s2][r2];//1-N
-			    entry[WE]=we;//0-1000
-			    entry[CONS]=cons;
-			    entry[MISC]=misc;
-			    if (ir1>(CL->S)->len[is1] || ir2>(CL->S)->len[is2])
-			      {
-				
-				myexit(fprintf_error (stderr, "%s::%d -- %s::%d ---- %s::%d %s::%d", NS->name[s1],r1, NS->name[s2],r2, (CL->S)->name[is1],ir1, (CL->S)->name[is2],ir2));
-			      }
-			    if (entry[SEQ1]>-1 && entry[SEQ2]>-1 && entry[R1]>0 && entry[R2]>0 && entry[WE]>0)
-			      add_entry2list (entry, CL);
-			  }
-			++r1;
-			++r2;
-		      }
-		    
-		  }
-		if (error)
-		  printf_exit (EXIT_FAILURE,stderr,"Parsing Error [L:%d F:%s S:%s]",line,fname,buf);
+	  if (strstr (buf, "!CMT:"))
+	    {
+	      if ((CL->comment && ! strstr (CL->comment, buf))|| !CL->comment)
+		CL->comment=vcat(CL->comment, buf);
+	    }
+	  else continue;
+	}	
+      else if (buf[0]!='#' && !start)continue;
+      else if (buf[0]=='#')
+	{
+	  start=1;
+	  sscanf ( buf, "#%d %d", &s1, &s2);
+	  s1--; s2--;
+	  if (s1>NS->nseq || s2>NS->nseq)error=1;
 	}
-	
-	vfclose (fp);
-	
-	if (!keepNS)free_sequence (NS,-1);
-	vfree (entry);
-	vfree (buf);
-	free_int (index, -1);
-	return CL;
+      else
+	{
+	  cons=misc=r1=r2=we=0;
+	  if (buf[0] != '+')
+	    {
+	      x=sscanf (buf, "%d %d %d %d %d",&r1,&r2,&we,&cons,&misc);
+	      length = 1;
+	    }
+	  else
+	    {
+	      x=sscanf (buf, "%s %d %d %d %d %d",arg, &length, &r1,&r2,&we,&cons,&misc);
+	    }
+	  
+	  for (i = 0; i < length; ++i)
+	    {
+	      if (r1>NS->len[s1] || r2>NS->len[s2] || x<3)error=1;
+	      else
+		{
+		  int is1, is2, ir1, ir2;
+		  int ax, bx, cx, dx, ex, fx;
+		  
+		  is1=entry[SEQ1]=index[s1][0];//0-N-1
+		  is2=entry[SEQ2]=index[s2][0];//0-N-1
+		  ir1=entry[R1]=index[s1][r1];//1-N
+		  ir2=entry[R2]=index[s2][r2];//1-N
+		  entry[WE]=we;//0-1000
+		  entry[CONS]=cons;
+		  entry[MISC]=misc;
+		  if(ir1>0){;}
+		  if (ir2>0){;}
+		  if (is1>0){;}
+		  if (is2>0){;}
+		  if((CL->S)->len[is1]){;}
+		  if((CL->S)->len[is2]){;}
+		  
+		  if (ir1>(CL->S)->len[is1] || ir2>(CL->S)->len[is2])
+		    {
+		      
+		      myexit(fprintf_error (stderr, "%s::%d -- %s::%d ---- %s::%d %s::%d", NS->name[s1],r1, NS->name[s2],r2, (CL->S)->name[is1],ir1, (CL->S)->name[is2],ir2));
+		    }
+		  if (entry[SEQ1]>-1 && entry[SEQ2]>-1 && entry[R1]>0 && entry[R2]>0 && entry[WE]>0)
+		    add_entry2list (entry, CL);
+		}
+	      ++r1;
+	      ++r2;
+	    }
+	  
+	}
+      if (error)
+	{
+	  printf_exit (EXIT_FAILURE,stderr,"Parsing Error [Line:%d F:%s S:%s][r1=%d r2=%d L1=%d L2=%d NP:%d]\[%s]\n[%s]",line,fname,buf, r1, r2,NS->len[s1],r2>NS->len[s2], x, NS->seq[s1], NS->seq[s2] );
+	}
+    }
+  
+  vfclose (fp);
+  
+  if (!keepNS)free_sequence (NS,-1);
+  vfree (entry);
+  vfree (buf);
+  free_int (index, -1);
+  return CL;
 }
 Sequence *constraint_list2seq (char *lname)
 {
-  int nseq=0;
-  char **sequences=NULL;
-  char **seq_name=NULL;
-  Genomic_info *genome_co = NULL;
-  read_seq_in_list (lname,&nseq,&sequences,&seq_name, &genome_co);
-  return fill_sequence_struc ( nseq, sequences, seq_name, genome_co);
+  return read_seq_in_list(lname);
 }
-int read_seq_in_list ( char *fname,  int *nseq, char ***sequences, char ***seq_name, Genomic_info **genome_co)
+
+Sequence * read_seq_in_list (char *fname)
 {
-	int a;
-	int seq_len, sn;
+  char *name=NULL;
+  char *seq=NULL;
+  char *buf=NULL;
+  FILE *fp1,*fp2;
+  char *tmp=vtmpnam(NULL);
+  int a,l;
+  int nseq;
 
-	FILE *fp;
-	char name[1000];
-	char *sequence;
-	static int max_nseq;
-	static int *sn_list;
-	int list_nseq;
-	int lline;
-
-	fp=vfopen (fname, "r");
-	fp=skip_commentary_line_in_file ('!', fp);
-	fscanf (fp, "%d\n", &max_nseq);
-	for ( lline=0,a=0; a<max_nseq; a++)
-	{
-		int l=0;
-		fp=skip_commentary_line_in_file ('!', fp);
-		fscanf (fp, "%*s %d %*s\n", &l);
-		lline=MAX(lline, l);
-	}
-	vfclose (fp);
-	sequence=(char*)vcalloc (lline+1, sizeof (char));
-
-	Genomic_info *gn_co;
-	if ( seq_name[0]==NULL)
-	{
-		seq_name[0]= declare_char (max_nseq,0);
-		sequences[0]=declare_char (max_nseq,0);
-		gn_co=(Genomic_info*)vcalloc(max_nseq, sizeof(Genomic_info));
-	}
-
-	if ( sn_list==NULL)
-		sn_list=(int*)vcalloc ( max_nseq, sizeof (int));
-	else
-		sn_list=(int*)vrealloc (sn_list, max_nseq*sizeof (int));
-
-	fp=vfopen (fname,"r");
-	fp=skip_commentary_line_in_file ('!', fp);
-	if (fscanf ( fp, "%d\n", &list_nseq)!=1)
-		return 0;
-	char c;
-	char line[200];
-	char *tag;
-	int genomic_info_found = 0;
-	fp=skip_commentary_line_in_file ('!', fp);
-
-
-	for ( a=0; a<max_nseq; a++)
-	{
-		fscanf ( fp, "%s %d %s\n", name, &seq_len, sequence);
-		lower_string (sequence);
-		if ((sn=name_is_in_list (name, seq_name[0], nseq[0], 100))==-1)
-		{
-			seq_name[0][nseq[0]]=(char*)vcalloc (strlen (name)+1, sizeof (char));
-			sprintf (seq_name[0][nseq[0]], "%s", name);
-			sequences[0][nseq[0]]=(char*)vcalloc (strlen (sequence)+1, sizeof (char));
-			sprintf (sequences[0][nseq[0]], "%s", sequence);
-			sn_list[a]=nseq[0];
-			nseq[0]++;
-		}
-		else
-		{
-			sn_list[a]=sn;
-		}
-  		gn_co[a].seg_name = NULL;
-
-		gn_co[a].strand='|';
-		gn_co[a].start=1;
-		gn_co[a].end =2;
-		gn_co[a].seg_len=0;
-		char *tmp;
-		while ((c = fgetc(fp)) == '!')
-		{
-
-			fgets (line , 200 , fp);
-
-			tag = strtok(line, " ");
-			if (strcmp(tag, "SG") == 0)
-			{
-			  genomic_info_found = 1;
-			  tmp = strtok(NULL, " \n");
-			  gn_co[a].seg_name =(char*) vcalloc(strlen(tmp)+1, sizeof(char));
-			  strcpy(gn_co[a].seg_name, tmp);
-
-
-			}
-			else
-			  {
-			  if (strcmp(tag, "SD") == 0)
-			    {
-			      genomic_info_found = 1;
-			      gn_co[a].strand = strtok(NULL, " ")[0];
-			    }
-			  else
-			    {
-			      if (strcmp(tag, "ST") == 0)
-				{
-				  genomic_info_found = 1;
-				  gn_co[a].start = atoi(strtok(NULL, " "))-1;
-				}
-			      else
-				{
-				if (strcmp(tag, "EN") == 0)
-				  {
-				    genomic_info_found = 1;
-				    gn_co[a].end = atoi(strtok(NULL, " "))-1;
-				  }
-				else
-				  {
-				    if (strcmp(tag, "SL") == 0)
-				      {
-					genomic_info_found = 1;
-					gn_co[a].seg_len = atoi(strtok(NULL, " "));
-				      }
-				  }
-				}
-			    }
-			}
-		}
- 		ungetc(c, fp);
-	}
-
-
-	if (genomic_info_found)
-	  {
-	    *genome_co = gn_co;
-
-	  }
-
-	else
-	{
-		vfree(gn_co);
-		*genome_co = NULL;
-	}
-
-	vfclose (fp);
-	vfree (sequence);
-	return 1;
+  fp1=vfopen (fname, "r");
+  fp2=vfopen (tmp, "w");
+  
+  fp1=skip_commentary_line_in_file ('!', fp1);
+  fscanf (fp1, "%d\n", &nseq);
+  for (a=0; a<nseq; a++)
+    {
+      buf=vfgets(buf, fp1);
+      name=csprintf (name, "%s", buf);
+      seq =csprintf (seq , "%s", buf);
+      sscanf (buf, "%s %d %s\n", name, &l,seq);
+      fprintf ( fp2, ">%s\n%s\n",name, seq);
+    }
+  vfclose (fp1); vfclose (fp2);
+  vfree (name); vfree(seq); vfree(buf);
+  return get_fasta_sequence (tmp, NULL);
 }
-
 
 /*********************************************************************/
 /*                                                                   */

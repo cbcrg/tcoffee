@@ -1325,7 +1325,7 @@ Constraint_list * profile_pair (TC_method *M , char *in_seq, Constraint_list *CL
 	else 
 	  {
 	    int c;
-	    static char *result2=vtmpnam (NULL);
+	    char *result2=vtmpnam (NULL);
 	    char bufname [10000];
 	    FILE *fp =vfopen (result,  "r");
 	    FILE *fp2=vfopen (result2, "w");
@@ -1527,146 +1527,6 @@ Constraint_list * profile_pair_decomposed (TC_method *M , char *in_seq, Constrai
 
   return CL;
 }
-Constraint_list * profile_subset_pair_old (TC_method *M , char *in_seq, Constraint_list *CL)
-{
-  int a,b,c,d, we;
-  int *entry, *s, **sub, *ns, ***lu;
-  char *seq, ***prf, *result, *param;
-  Alignment **A, *F;
-  
-  if ( M->executable2[0]=='\0')
-    fprintf ( stderr, "\nERROR: profile_pair requires a method: thread_pair@EP@executable2@<method> [FATAL:%s]\n", PROGRAM);
-  
-  //declare Start
-  seq=(char*)vcalloc (strlen(in_seq)+1, sizeof(char));
-  entry=(int*)vcalloc (CL->entry_len+1, sizeof (int));
-  s=(int*)vcalloc (2, sizeof (int));
-  A=(Alignment**)vcalloc (2, sizeof (Alignment*));
-  lu=(int***)vcalloc (2, sizeof (int**));
-  sub=(int**)vcalloc (2, sizeof (int*));
-  ns=(int*)vcalloc (2, sizeof (int));
-  result=vtmpnam(NULL);
-  prf=(char***)vcalloc (2, sizeof (char**));
-  result=vtmpnam (NULL);
-  //declare End
-  
- 
-  
-  sprintf ( seq, "%s", in_seq);
-  atoi(strtok (seq,SEPARATORS));
-  
-  s[0]=atoi(strtok (NULL,SEPARATORS));
-  s[1]=atoi(strtok (NULL,SEPARATORS));
-  
-  param=NULL;
-  if ( M->param)
-    {
-      param=(char*)vcalloc(strlen (M->param)+1, sizeof (char));
-      sprintf ( param, "%s", M->param);
-      param=substitute ( param, " ", "");
-      param=substitute ( param, "\n", "");
-    }
-  
-  for (a=0; a<2; a++)
-    {
-      A[a]=seq2R_template_profile(CL->S,s[a]);
-      
-      sub[a]=aln2subset (A[a],"cov",&ns[a]);
-      lu[a]=declare_int (ns[a],A[a]->len_aln+1); 
-      for (b=0; b<ns[a]; b++)
-	  {
-	    for (d=0,c=0; c<A[a]->len_aln; c++)
-	      {
-		if (!is_gap(A[a]->seq_al[sub[a][b]][c]))lu[a][b][++d]=c+1;
-	      }
-	  }
-    }
-  
-  for (a=0; a<2; a++)
-    {
-
-      prf[a]=(char**)vcalloc (ns[a], sizeof (char*));
-      for (b=0; b<ns[a]; b++)
-	{
-	  FILE *fp;
-	  char *seq=(char*)vcalloc (strlen (A[a]->seq_al[sub[a][b]])+1, sizeof (char));
-	  sprintf (seq, "%s", A[a]->seq_al[sub[a][b]]);
-	  ungap(seq);
-	  
-	  prf[a][b]=vtmpnam(NULL);
-	  fp=vfopen (prf[a][b], "w");
-	  fprintf (fp, ">Seq_%d\n%s\n", a+1, seq);
-	  vfclose (fp);
-	  vfree (seq);
-	}
-    }
-
-
-  entry[SEQ1]=s[0];
-  entry[SEQ2]=s[1];
-  for (a=0; a<ns[0]; a++)
-    for (b=0; b<ns[1]; b++)
-      {
-	int p1=0, p2=0;
-	int we;
-	
-	printf_system ("tc_generic_method.pl -mode=profile_pair -method=%s %s%s %s%s %s%s -param=%s -tmpdir=%s", M->executable2,M->in_flag,prf[0][a], M->in_flag2,prf[1][b],M->out_flag, result, param, get_tmp_4_tcoffee());
-	
-	fprintf (stderr, "tc_generic_method.pl -mode=profile_pair -method=%s %s%s %s%s %s%s -param=%s -tmpdir=%s", M->executable2,M->in_flag,prf[0][a], M->in_flag2,prf[1][b],M->out_flag, result, param, get_tmp_4_tcoffee());
-	
-	F=main_read_aln (result, NULL);
-
-	HERE ("%s %s", F->name[0], F->seq_al[0]);
-	
-	we=aln2sim (F, "idmat");
-	for (c=0; c<F->len_aln; c++)
-	  {
-	    char c1, c2;
-	    int r1, r2;
-
-
-	    c1=F->seq_al[0][c];
-	    c2=F->seq_al[1][c];
-	    
-	    r1=!is_gap(c1);
-	    r2=!is_gap(c2);
-	    
-	    p1+=r1;
-	    p2+=r2;
-	    
-	    if (r1 && r2)
-	      {
-		entry[R1]=lu[0][a][p1];
-		entry[R2]=lu[1][b][p2];
-		entry[WE]=(int)(we*1000);
-		entry[CONS]=1;
-		add_entry2list (entry,CL);
-	      }
-	  }
-	free_aln(F);
-      }	
-
-//free
-  vfree (seq);
-  vfree (entry);
-  vfree (s);
-  vfree (A);
-  free_int (sub, -1);
-  
-  for (a=0; a<2; a++)
-    {
-      free_int (lu[a], -1);
-      free_char (prf[a], -1);
-    }
-  vfree (prf);
-  vfree (lu);
-  vfree (result);
-  vfree (param);
-  //free End
-
-  return CL;
-}
-
 
 
 
@@ -2021,14 +1881,147 @@ Constraint_list * srap_pair   (char *seq, char *weight, Constraint_list *CL)
   vfree (atom); atom=NULL;
   return CL;
 }
+
 Constraint_list * sap_pair   (char *seq_in, char *weight, Constraint_list *CL)
+ {
+   int a, c,s1, s2,tot,sim,score,max;
+   FILE *fp;
+   char *template1, *template2;
+   char *tmp_pdb1, *tmp_pdb2;
+   char *sap_seq1, *sap_seq2;
+   char *buf=NULL;
+   
+   
+   char *cdir=NULL;
+   char *seq=NULL;
+   char *wdir   =vtmpnam(NULL);
+      
+   seq=csprintf (seq, "%s", seq_in);
+	    	    
+   atoi(strtok (seq,SEPARATORS));
+   s1=atoi(strtok (NULL,SEPARATORS));
+   s2=atoi(strtok (NULL,SEPARATORS));
+   template1=seq2T_value(CL->S,s1, "template_name", "_P_");
+   template2=seq2T_value(CL->S,s2, "template_name", "_P_");
+   if (!template1 || !template2)return CL;
+   
+   
+   
+   
+   //Start working in special dir
+   cdir=get_pwd(cdir);
+   printf_system    ("mkdir -p %s",wdir);
+   chdir (wdir);
+   
+   tmp_pdb1=normalize_pdb_file(fname2abs(seq2P_template_file(CL->S,s1)),(CL->S)->seq[s1], vtmpnam (NULL));
+   tmp_pdb2=normalize_pdb_file(fname2abs(seq2P_template_file(CL->S,s2)),(CL->S)->seq[s2], vtmpnam (NULL));
+   
+   
+   if (strm ((CL->S)->type, "RNA"))
+     {
+       printf_system ("rnapdb2protpdb.pl C3PRIME %s > in1",tmp_pdb1);
+       printf_system ("rnapdb2protpdb.pl C3PRIME %s > in2",tmp_pdb2);
+	 }
+   else
+     {
+       printf_system ("mv %s in1", tmp_pdb1);
+       printf_system ("mv %s in2", tmp_pdb2);
+     }
+   
+   printf_system ("%s in1 in2 >sapout 2>/dev/null::IGNORE_FAILURE::",SAP_4_TCOFFEE);
+   
+   if (!is_sap_file("sapout"))
+     {
+       add_warning ( stderr, "SAP failed to align: %s against %s [%s:WARNING]\n", seq2P_template_file(CL->S,s1),seq2P_template_file(CL->S,s2), PROGRAM);
+       return CL;
+     }
+   
+   //Sap is finished, Now go back to cdir and turn it into a lib
+   
+   max=file2nlines("sapout")+1;
+   sap_seq1=(char*)vcalloc (max, sizeof (char));
+   sap_seq2=(char*)vcalloc (max, sizeof (char));
+   
+   fp=find_token_in_file ("sapout", NULL, "Percent");
+   fp=find_token_in_file ("sapout", fp  , "Percent");
+   while ( (c=fgetc (fp))!='\n' && c!=EOF);
+   tot=sim=0;
+   while ((buf=vfgets (buf, fp)))
+     {
+       char r1, r2;
+       remove_charset (buf, "*");
+       if ( strstr (buf, "eighted"));
+       else if (strstr (buf, "RMSd"));
+       else if (sscanf (buf, " %c %*d %*f %*d %c", &r2,&r1)==2)
+	 {
+	   if (!isalpha(r1) || !isalpha(r2))continue;
+	   sim+=(r1==r2)?1:0;
+	   sap_seq1[tot]=r1;
+	   sap_seq2[tot]=r2;
+	   
+	   tot++;
+	 }
+     }
+   
+   vfclose (fp);
+   
+   
+   
+   if (tot>0)
+     {
+       sim=(sim*100)/tot;
+       if ( is_number (weight))score=atoi(weight);
+       else if ( strstr ( weight, "OW"))
+	 {
+	   int ow;
+	   sscanf ( weight, "OW%d", &ow);
+	   score=sim*ow;
+	 }
+       else
+	 {
+	   score=sim;
+	 }
+       
+       sap_seq1[tot]=sap_seq2[tot]='\0';
+       
+       
+       fp=vfopen ( "saplib", "w");
+       fprintf (fp, "! TC_LIB_FORMAT_01\n");
+       fprintf (fp, "2\n");
+       fprintf (fp, "%s %d %s\n", (CL->S)->name[s1],(int)strlen (sap_seq1), sap_seq1);
+       fprintf (fp, "%s %d %s\n", (CL->S)->name[s2],(int)strlen (sap_seq2), sap_seq2);
+       fprintf (fp, "#1 2\n");
+       
+       
+       for ( a=0; a< tot; a++)
+	 {
+	   fprintf (fp, "%d %d %d 1 0\n", a+1, a+1, score);
+	 }
+       
+       fprintf (fp, "! CPU 0\n");
+       fprintf (fp, "! SEQ_1_TO_N\n");
+       vfclose (fp);
+       
+              
+       CL=read_constraint_list_file(CL,"saplib");
+     }
+   
+   vfree (sap_seq1); vfree(sap_seq2);
+   vfree (buf);
+   vremove("in1");vremove ("in2");vremove("sapout"); vremove("saplib");
+   chdir (cdir);
+   return CL;
+ }
+
+
+Constraint_list * sap_pair_old2   (char *seq_in, char *weight, Constraint_list *CL)
  {
             register int a;
 	    FILE *fp;
-	    char full_name[FILENAMELEN];
+	   
 	    char *tmp_pdb1, *tmp_pdb2;
 	    char *sap_seq1, *sap_seq2;
-	    char *sap_lib,  *tmp_name, *tmp_name1, *tmp_name2;
+
 	    char *buf=NULL;
 	    int s1, s2;
 	    int sim=0, tot=0, score=0;
@@ -2039,7 +2032,13 @@ Constraint_list * sap_pair   (char *seq_in, char *weight, Constraint_list *CL)
 	    char *template1, *template2;
 	    int c;
 	    char *seq=NULL;
-
+	    char *local1=vtmpnam(NULL);
+	    char *local2=vtmpnam(NULL);
+	    char *newdir=vtmpnam(NULL);
+	    char *tmp_name=vtmpnam(NULL);
+	    char *sap_lib=vtmpnam(NULL);
+	    char cdir[1001];
+	   
 
 	    
 	    seq=(char*)vcalloc (strlen (seq_in)+1, sizeof(char));
@@ -2061,77 +2060,44 @@ Constraint_list * sap_pair   (char *seq_in, char *weight, Constraint_list *CL)
 	    if ( getenv ( "SAP_4_TCOFFEE")==NULL)sprintf (program, "%s", SAP_4_TCOFFEE);
 	    else sprintf ( program, "%s", (getenv ( "SAP_4_TCOFFEE")));
 #endif
-
-
 	    
-	    tmp_name1=csprintf (NULL, "%s_%s.sap_results",template1,template2);
-	    tmp_name2=csprintf (NULL, "%s_%s.sap_results",template2,template1);
+	    tmp_name=vtmpnam (NULL);
+	    HERE ("\nDo THE COMPUTATIOON: NO CACHE");
+	    
+	    getcwd (cdir, sizeof(char)*1000);
+	    printf_system    ("mkdir -p %s", newdir);
+	    
 
-	    if (is_sap_file (tmp_name1))
+	    ////////
+	    chdir (newdir);
+	    tmp_pdb1=normalize_pdb_file(fname2abs(seq2P_template_file(CL->S,s1)),(CL->S)->seq[s1], vtmpnam (NULL));
+	    tmp_pdb2=normalize_pdb_file(fname2abs(seq2P_template_file(CL->S,s2)),(CL->S)->seq[s2], vtmpnam (NULL));
+	    
+	    sprintf (local1, "%d_1.%d.sap_tmp", getpid(), rand()%10000);
+	    sprintf (local2, "%d_2.%d.sap_tmp", getpid(), rand()%10000);
+
+		
+	    if (strm ((CL->S)->type, "RNA"))
 	      {
-		tmp_name=tmp_name1;
-	      }
-	    else if ( is_sap_file (tmp_name2))
-	      {
-		tmp_name=tmp_name2;
-		SWAP (s1, s2);
+		printf_system ("rnapdb2protpdb.pl C3PRIME %s > %s",tmp_pdb1, local1);
+		printf_system ("rnapdb2protpdb.pl C3PRIME %s > %s",tmp_pdb2, local2);
 	      }
 	    else
 	      {
-		char local1[100];
-		char local2[100];
-		char cdir[1001];
-		
-		tmp_name=tmp_name1;
-
-		tmp_pdb1=normalize_pdb_file(seq2P_template_file(CL->S,s1),(CL->S)->seq[s1], vtmpnam (NULL));
-		
-
-
-
-		tmp_pdb2=normalize_pdb_file(seq2P_template_file(CL->S,s2),(CL->S)->seq[s2], vtmpnam (NULL));
-		sprintf ( full_name, "%s%s", get_cache_dir (), tmp_name);
-		
-		//pb: sap crashes when file names are too long
-		//solution: create shorter names and chdir
-
-		getcwd (cdir, sizeof(char)*1000);
-		//chdir (get_cache_dir());
-
-		sprintf (local1, "%d_1.%d.sap_tmp", getpid(), rand()%10000);
-		sprintf (local2, "%d_2.%d.sap_tmp", getpid(), rand()%10000);
-
-		
-		if (strm ((CL->S)->type, "RNA"))
-		  {
-		    printf_system ("rnapdb2protpdb.pl C3PRIME %s > %s",tmp_pdb1, local1);
-		    printf_system ("rnapdb2protpdb.pl C3PRIME %s > %s",tmp_pdb2, local2);
-		  }
-		else
-		  {
-		    printf_system ("cp %s %s", tmp_pdb1, local1);
-		    printf_system ("cp %s %s", tmp_pdb2, local2);
-		  }
-	
-		HERE ("%s %s %s >%s 2>/dev/null::IGNORE_FAILURE::",program,local1,local2, full_name);
-		
-		printf_system ("%s %s %s >%s 2>/dev/null::IGNORE_FAILURE::",program,local1,local2, full_name);
-		//printf_system ("rm %s", local1);
-		//printf_system ("rm %s", local2);
-		//chdir (cdir);
-
-		if ( !check_file_exists (full_name) || !is_sap_file(full_name))
-		  {
-		    add_warning ( stderr, "SAP failed to align: %s against %s [%s:WARNING]\n", seq2P_template_file(CL->S,s1),seq2P_template_file(CL->S,s2), PROGRAM);
-		    if ( check_file_exists (full_name))add2file2remove_list (full_name);
-		    vfree (seq);
-		    return CL;
-		  }
-		
-		if ( flag_file2remove_is_on())add2file2remove_list (full_name);
-		remove ("super.pdb");
+		printf_system ("cp %s %s", tmp_pdb1, local1);
+		printf_system ("cp %s %s", tmp_pdb2, local2);
 	      }
-
+	    
+	    printf_system ("%s %s %s >%s 2>/dev/null::IGNORE_FAILURE::",program,local1,local2,tmp_name);
+	    
+	    if ( !check_file_exists (tmp_name) || !is_sap_file(tmp_name))
+	      {
+		add_warning ( stderr, "SAP failed to align: %s against %s [%s:WARNING]\n", seq2P_template_file(CL->S,s1),seq2P_template_file(CL->S,s2), PROGRAM);
+		vfree (seq);
+		return CL;
+	      }
+	    chdir (cdir);
+	    
 	    sap_seq1=(char*)vcalloc (max_struc_len, sizeof (char));
 	    sap_seq2=(char*)vcalloc (max_struc_len, sizeof (char));
 
@@ -2144,7 +2110,7 @@ Constraint_list * sap_pair   (char *seq_in, char *weight, Constraint_list *CL)
 		remove_charset (buf, "*");
 		if ( strstr (buf, "eighted"));
 		else if (strstr (buf, "RMSd"));
-		else if (sscanf (buf, " %c %*d %*f %*d %c", &r1,&r2)==2)
+		else if (sscanf (buf, " %c %*d %*f %*d %c", &r2,&r1)==2)
 		  {
 		    if (!isalpha(r1) || !isalpha(r2))continue;
 		    sim+=(r1==r2)?1:0;
@@ -2162,7 +2128,7 @@ Constraint_list * sap_pair   (char *seq_in, char *weight, Constraint_list *CL)
 
 	    vfclose (fp);
 
-
+	    
 
 	    if (tot>0)
 	      {
@@ -2182,14 +2148,14 @@ Constraint_list * sap_pair   (char *seq_in, char *weight, Constraint_list *CL)
 		sap_seq1[tot]=sap_seq2[tot]='\0';
 
 
-		fp=vfopen ( sap_lib=vtmpnam(NULL), "w");
+		fp=vfopen ( sap_lib, "w");
 		fprintf (fp, "! TC_LIB_FORMAT_01\n");
 		fprintf (fp, "2\n");
-		fprintf (fp, "%s %d %s\n", (CL->S)->name[s2],(int)strlen (sap_seq1), sap_seq1);
-		fprintf (fp, "%s %d %s\n", (CL->S)->name[s1],(int)strlen (sap_seq2), sap_seq2);
+		fprintf (fp, "%s %d %s\n", (CL->S)->name[s1],(int)strlen (sap_seq1), sap_seq1);
+		fprintf (fp, "%s %d %s\n", (CL->S)->name[s2],(int)strlen (sap_seq2), sap_seq2);
 		fprintf (fp, "#1 2\n");
 
-
+		
 		for ( a=0; a< tot; a++)
 		  {
 		    fprintf (fp, "%d %d %d 1 0\n", a+1, a+1, score);
@@ -2199,13 +2165,15 @@ Constraint_list * sap_pair   (char *seq_in, char *weight, Constraint_list *CL)
 		fprintf (fp, "! SEQ_1_TO_N\n");
 		vfclose (fp);
 
+		HERE ("SAP LIB-1\n%s %s\n%s %s\n", (CL->S)->name[s1], (CL->S)->seq[s1], (CL->S)->name[s1], sap_seq1);
+		HERE ("SAP LIB-2\n%s %s\n%s %s\n", (CL->S)->name[s2], (CL->S)->seq[s2], (CL->S)->name[s2], sap_seq2);
+
+		
+
 		CL=read_constraint_list_file(CL,sap_lib);
-		vremove (sap_lib);
 	      }
 
-	    if (strm ((CL->S)->type, "RNA")){vremove (tmp_name);vremove (full_name);}
-
-	    vfree (sap_seq1); vfree(sap_seq2);vfree (tmp_name1); vfree(tmp_name2);
+	    vfree (sap_seq1); vfree(sap_seq2);
 	    vfree (buf);vfree (seq);
 	    return CL;
 	}
@@ -2813,7 +2781,7 @@ Alignment *align_two_streches4dpa ( char *s0, char *s1, char *in_matrix, int gop
 
 Alignment * align_two_sequences ( char *seq1, char *seq2, char *in_matrix, int gop, int gep, char *in_align_mode)
 {
-	static Alignment *A;
+	Alignment *A;
 	Constraint_list *CL;
 	Sequence *S;
 
@@ -2831,12 +2799,8 @@ Alignment * align_two_sequences ( char *seq1, char *seq2, char *in_matrix, int g
 	if (!align_mode)align_mode=(char*)vcalloc ( 100, sizeof (char));
 	sprintf ( align_mode, "%s", in_align_mode);
 
-	//HERE ("## %s ##\## %s ##\n\n");
-
 	CL=(Constraint_list*)vcalloc ( 1, sizeof (Constraint_list));
-
 	CL->pw_parameters_set=1;
-
 	CL->matrices_list=declare_char (10, 10);
 
 
@@ -2897,7 +2861,6 @@ Alignment * align_two_sequences ( char *seq1, char *seq2, char *in_matrix, int g
 	ungap (A->seq_al[1]);
 
 
-
 	A->score_aln=pair_wise (A, ns, l_s,CL);
 
 	vfree (ns);
@@ -2908,6 +2871,8 @@ Alignment * align_two_sequences ( char *seq1, char *seq2, char *in_matrix, int g
         S=free_constraint_list (CL);
 	free_sequence (S,-1);
 	A->S=NULL;
+	
+
 	return A;
 }
 

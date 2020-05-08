@@ -1293,7 +1293,7 @@ Alignment * phylotrim (Alignment *A, NT_node RT, char *Ns,  char *treemode, char
       int ns=0;
       int **sl;
       FILE *fp;
-      static char * alnF=vtmpnam (NULL);
+      char * alnF=vtmpnam (NULL);
       
       S=tree2seq(RT, NULL);
       
@@ -1346,7 +1346,7 @@ Alignment * phylotrim2 (Alignment *A, char *reftree,int *l, int ph, int narg, ch
   int a, b, n, rf;
   FILE *fp;
   
-  static char *tmpaln=vtmpnam (NULL);
+  char *tmpaln=vtmpnam (NULL);
   
   
   for (n=0,a=0; a< A->nseq; a++)
@@ -1394,7 +1394,7 @@ Alignment * phylotrim1 (Alignment *A, char *reftree, int narg, char **argl, char
   int a, b, n;
   FILE *fp;
   int seq, brf;
-  static char *alnF=vtmpnam (NULL);
+  char *alnF=vtmpnam (NULL);
 
   seq=brf=-1;
   
@@ -1714,7 +1714,7 @@ NT_node main_aln2tree (Alignment *A, int n, char **arglist, char *name)
     }
   else
     {
-      static char *tmpA=vtmpnam(NULL);
+      char *tmpA=vtmpnam(NULL);
       long int HV;
       
       output_fasta_aln (tmpA,A);
@@ -1906,8 +1906,8 @@ NT_node similarities_file2tree (char *mat)
 
 NT_node aln2trmsd_tree (Alignment *A, char *temp)
 {
-  static char *fname=vtmpnam (NULL);
-  static char *tree=vtmpnam (NULL);
+  char *fname=vtmpnam (NULL);
+  char *tree=vtmpnam (NULL);
   NT_node T=NULL;
 
 
@@ -5326,31 +5326,6 @@ NT_node node2master(NT_node T, Sequence *S, float *w)
   return T;
 }
 
-
-
-char* tree2bucketR (NT_node T, Sequence *S, int N, char *method, char *name, char *name2);
-static int *lu4t2b;
-static int lun4t2b;
-char* tree2bucket (NT_node T, Sequence *S, int N, char *method)
-{
-  char *name;
-  if (!method || strm (method, "seq"))
-    {
-      name=(char*)vcalloc (100, sizeof (char));
-      sprintf ( name, "1");
-    }
-  else
-    {
-      name=vtmpnam (NULL);
-    }
-  lu4t2b=(int*)vcalloc (S->nseq, sizeof (int));
-  lun4t2b=0;
-  
-  tree2bucketR(T, S, N, method, name, "1");
-  if (method && !strm (method, "seq"))display_file_content (stdout, name);
-  vfree (lu4t2b);
-  return name;
-}      
 NT_node * sort_nodelist4dpa (NT_node *L, int n);
 NT_node * sort_nodelist4dpa (NT_node *L, int n)
 {
@@ -5374,221 +5349,8 @@ NT_node * sort_nodelist4dpa (NT_node *L, int n)
 }
 
 
-char* tree2bucketR (NT_node T, Sequence *S, int N, char *method, char *name, char *name2)
-{
-  int terminal=0;
-  NT_node *CL, *NL;
-  int left, right, cn,nn, a;
-  FILE *fp;
-  char *seq;
-  int do_aln;
-  int debug=0;
-  
-  if (getenv ("DEBUG_DPA"))debug=1;
-  if (!method || strm (method, "seq"))do_aln=0;
-  else do_aln=1;
-  
-  T->leaf=0;
-  if (!T || T->isseq)return NULL;
-  
-  CL=(NT_node*)vcalloc (1, sizeof (NT_node));
-  cn=0;CL[cn++]=T;
-  while (cn<N && !terminal)
-    {
-      
-      nn=0;
-      terminal=1;
-      NL=(NT_node*)vcalloc (cn*2, sizeof (NT_node));
-      CL=sort_nodelist4dpa (CL, cn);
 
-      for (left=0; left<cn && (nn+(cn-left))<N; left++)
-	{
-	  
-	  NT_node N=CL[left];
-	  if (N->isseq){NL[nn++]=N; T->leaf++;}
-	  else
-	    {
-	      NL[nn++]=N->right;
-	      NL[nn++]=N->left;
-	      terminal=0;
-	      T->leaf+=2;
-	    }
-	}
-      for (a=left; a<cn; a++)
-	{
-	  NL[nn++]=CL[a];
-	  if (!CL[a]->isseq)terminal=0;
-	  T->leaf++;
-	}
-      
-      vfree (CL);
-      CL=NL;
-      cn=nn;
-    }
-  
-  seq=vtmpnam(NULL);
-  fp=vfopen (seq, "w");
-  for (a=0; a<cn; a++)
-    {
-      int s=CL[a]->seq;
-      if (!lu4t2b[s])
-	{
-	  lu4t2b[s]=1;
-	  lun4t2b++;
-	}
-      if ( debug==0)fprintf (fp, ">%s\n%s\n", S->name[s],S->seq[s]);
-      else fprintf (fp, ">%s Leaf %d\n%s\n", S->name[s],a+1,S->seq[s]);
-    }
-  vfclose (fp);
-  if (!do_aln)
-    {
-      fprintf ( stderr, "Output File %20s containing %5d Sequences -- FASTA\n", name,nn);
-      printf_system_direct ("mv %s %s", seq, name);
-    }
-  else
-    {
-      seq_file2msa_file (method,seq, name);
-      
-      if (debug)
-	{
-	  HERE ("\n------> %s\n", name2);
-	  printf_system ("cp %s %s", name, name2);
-	}
-    }
-    
-  
-  if (!terminal)
-    {
-      char *nname;
-      char *nname2=(char*)vcalloc (strlen (name) +1000, sizeof (char));
-      if (!do_aln)
-	nname=(char*)vcalloc (strlen (name) +1000, sizeof (char));
-      else
-	nname=vtmpnam (NULL);
-      
-      for (a=0; a< cn; a++)
-	{
-	  if (!do_aln)sprintf (nname, "%s.%d",name, a+1);
-	  sprintf (nname2, "%s.%d",name2, a+1);
-	  if (tree2bucketR (CL[a],S,N,method, nname, nname2) && !strm (method, "seq"))
-	    {
-	      T->leaf+=(CL[a])->leaf-1;
-	      
-	      fprintf ( stderr, "\n## T-Coffee dpa -- %5.2f %% Complete -- MERGE %30s using %s",(float)((float)lun4t2b*(float)100)/(float)S->nseq, (CL[a])->name, method);
-	      thread_msa2msa (nname,name,(CL[a])->name);
-	    }
-	  
-	}
-      vfree (nname2);
-      if (!do_aln)vfree (nname);
-    }
-  vfree (CL);
-  return name;
-}
 
-char* tree2bucketR_unfixed (NT_node T, Sequence *S, int N, char *method, char *name, char *name2)
-{
-  int terminal=0;
-  NT_node *CL, *NL;
-  int left, right, cn,nn, a;
-  FILE *fp;
-  char *seq;
-  int do_aln;
-  int debug=0;
-  
-  if (getenv ("DEBUG_DPA"))debug=1;
-  if (!method || strm (method, "seq"))do_aln=0;
-  else do_aln=1;
-  
-  T->leaf=0;
-  if (!T || T->isseq)return NULL;
-  
-  CL=(NT_node*)vcalloc (1, sizeof (NT_node));
-  cn=0;CL[cn++]=T;
-  while (cn<N && !terminal)
-    {
-      
-      nn=0;
-      terminal=1;
-      NL=(NT_node*)vcalloc (cn*2, sizeof (NT_node));
-      
-      for (left=0; left<cn; left++)
-	{
-	  
-	  NT_node N=CL[left];
-	  if (N->isseq){NL[nn++]=N;}
-	  else
-	    {
-	      NL[nn++]=N->right;
-	      NL[nn++]=N->left;
-	      terminal=0;
-	    }
-	  T->leaf++;
-	}
-      vfree (CL);
-      CL=NL;
-      cn=nn;
-    }
-  
-  seq=vtmpnam(NULL);
-  fp=vfopen (seq, "w");
-  for (a=0; a<cn; a++)
-    {
-      int s=CL[a]->seq;
-      if (!lu4t2b[s])
-	{
-	  lu4t2b[s]=1;
-	  lun4t2b++;
-	}
-      if ( debug==0)fprintf (fp, ">%s\n%s\n", S->name[s],S->seq[s]);
-      else fprintf (fp, ">%s Leaf %d\n%s\n", S->name[s],a+1,S->seq[s]);
-    }
-  vfclose (fp);
-  if (!do_aln)
-    {
-      fprintf ( stderr, "Output File %20s containing %5d Sequences -- FASTA\n", name,nn);
-      printf_system_direct ("mv %s %s", seq, name);
-    }
-  else
-    {
-      seq_file2msa_file (method,seq, name);
-      if (debug)
-	{
-	  HERE ("\n------> %s\n", name2);
-	  printf_system ("cp %s %s", name, name2);
-	}
-    }
-    
-  
-  if (!terminal)
-    {
-      char *nname;
-      char *nname2=(char*)vcalloc (strlen (name) +1000, sizeof (char));
-      if (!do_aln)
-	nname=(char*)vcalloc (strlen (name) +1000, sizeof (char));
-      else
-	nname=vtmpnam (NULL);
-      
-      for (a=0; a< cn; a++)
-	{
-	  if (!do_aln)sprintf (nname, "%s.%d",name, a+1);
-	  sprintf (nname2, "%s.%d",name2, a+1);
-	  if (tree2bucketR (CL[a],S,N,method, nname, nname2) && !strm (method, "seq"))
-	    {
-	      T->leaf+=(CL[a])->leaf-1;
-	      
-	      fprintf ( stderr, "\n## T-Coffee dpa -- %4d %% Complete -- MERGE %30s using %s",(lun4t2b*100)/S->nseq, (CL[a])->name, method);
-	      thread_msa2msa (nname,name,(CL[a])->name);
-	    }
-	  
-	}
-      vfree (nname2);
-      if (!do_aln)vfree (nname);
-    }
-  vfree (CL);
-  return name;
-}
-  
   
 int tree2clusters   (NT_node T, int *nc,int **cl, double **dist, double Thr, int min)
 {
@@ -6406,7 +6168,7 @@ int cmp_tree_array ( const void *p, const void *q)
 
 NT_node newick_string2tree (char *string)
 {
-  static char *tmp=vtmpnam (NULL);
+  char *tmp=vtmpnam (NULL);
   
   if (!string) return NULL;
   printf_file (tmp,"w", "%s", string);
@@ -8224,16 +7986,11 @@ int ktree2aln_bucketsF(KT_node K,char *fname);
 
 
 char   *kmsa2msa (KT_node K,Sequence *S, ALNcol***S2,ALNcol*PG);
-char   *kmsa2msa_norec (Sequence *S,KT_node *KL, int n);
-
 ALNcol * msa2graph (Alignment *A, Sequence *S, ALNcol***S2, ALNcol*msa,int seq);
 
 
 
 NT_node kmsa2dnd(Sequence *S,KT_node *KL, int n);
-char * kmsa2msa_old    (Sequence *S,KT_node K, int max, int *cn);
-char * kmsa2msa_file   (Sequence *S,KT_node K, int max, int *cn);
-char * kmsa2msa_serial   (Sequence *S,KT_node K, int max, int *cn);
 
 NT_node tree2dnd4dpa (NT_node T, Sequence *S, int N, char *method)
 {
@@ -8347,14 +8104,8 @@ char* tree2msa4dpa (NT_node T, Sequence *S, int N, char *method)
   if (getenv ("DUMP_ALN_BUCKETS") ||getenv ("DUMP_ALN_BUCKETS_ONLY"))
     ktree2aln_bucketsF(K, "alndump.");
   
-  if (getenv ("OLD_DPA"))
-    outname=kmsa2msa_old  (S,K,n,&cn);
-  else if ( getenv("NOREC_DPA"))
-    outname=kmsa2msa_norec  (S,KL,n);
-  else
-    {
-      outname=kmsa2msa (K,S,NULL,NULL); 
-    }
+  outname=kmsa2msa (K,S,NULL,NULL); 
+
   declare_aln_node (-1);//Free all the nodes declared
   vfree (KL);
   return outname;
@@ -8370,126 +8121,7 @@ ALNcol* declare_alncol ()
   //p->id=++n; //put this back when debugging pointers
   return p;
 }
-char *kmsa2msa_norec (Sequence *S,KT_node *KL, int n)
-{
-  char *out=vtmpnam (NULL);
-  ALNcol ***S2;
-  ALNcol *start, *end;
-  int a, s, c;
-  FILE*fp=vfopen (out,"w");
 
-  HERE ("USE NOREC DPA");
-  S2=(ALNcol***)vcalloc (S->nseq, sizeof (ALNcol**));
-  for (s=0; s<S->nseq; s++)S2[s]=(ALNcol**)vcalloc (S->len[s], sizeof (ALNcol*));
-  
-    
-  for (a=0; a<n; a++)
-    {
-      
-      Alignment *A=quick_read_aln (KL[a]->msaF);
-      int * lu =(int*) vcalloc (A->nseq, sizeof (int));
-      int **pos=(int**)declare_int (A->nseq, A->len_aln);
-      output_completion (stderr,a,n, 100, "Incorporating Children");
-      for (s=0; s<A->nseq; s++)
-	{
-	  int r;
-	  lu[s]=name_is_in_hlist2 (A->name[s],S->name, S->nseq);
-	  for (r=0,c=0; c<A->len_aln; c++)
-	    {
-	      if (A->seq_al[s][c]!='-')pos[s][c]=r++;
-	      else pos[s][c]=-1;
-	    }
-	}
-      
-      for (c=0; c<A->len_aln; c++)
-	{
-	  ALNcol *p=NULL;
-	  for (s=0; s<A->nseq; s++)
-	    {
-	      int ir=pos[s][c];
-	      
-	      if (ir!=-1)
-		{
-		  if (S2[lu[s]][ir])
-		    {
-		      p=S2[lu[s]][ir];
-		      break;
-		    }
-		}
-	    }
-	  if (!p)p=(ALNcol*)vcalloc (1, sizeof (ALNcol));
-	  for (s=0; s<A->nseq; s++)
-	    {
-	      int ir=pos[s][c];
-	      if (ir!=-1)
-		{
-		  S2[lu[s]][ir]=p;
-		  
-		}
-	    }
-	}
-      free_aln (A);
-      free_int (pos, -1);
-      vfree(lu);
-    }
-  
- 
-  start=(ALNcol*)vcalloc (1, sizeof (ALNcol));
-  end  =(ALNcol*)vcalloc (1, sizeof (ALNcol));
-  start->aa=end->aa=-1;
-  start->next=end;
-  
-  for (s=0; s<S->nseq; s++)
-    {
-      ALNcol *cpos=start;
-      output_completion (stderr,s,S->nseq, 100, "Threading Sequences");
-      for (c=0; c<S->len[s]; c++)
-	{
-	  
-	  ALNcol *p=S2[s][c];
-	  if (!p->next)
-	    {
-	      p->next=cpos->next;
-	      cpos->next=p;
-	    }
-	  cpos=p;
-	}
-    }
-  
-  for (s=0; s<S->nseq; s++)
-    {
-      ALNcol *msa=start;
-      int r=0;
-      output_completion (stderr,s,S->nseq, 100, "Final MSA");
-      for (c=0; c<S->len[s]; c++)
-	{
-	  S2[s][c]->aa=S->seq[s][c];
-	}
-      fprintf (fp, ">%s\n", S->name[s]);
-      
-      while (msa->next)
-	{
-	  
-	  if (msa->aa==0){fprintf (fp, "-");}
-	  else if (msa->aa>0)fprintf (fp, "%c",msa->aa);
-	  msa=msa->next;
-	}
-      fprintf (fp, "\n");
-    }
-  vfclose (fp);
-
-  while (start->next)
-    {
-      ALNcol *k=start;
-      start=start->next;
-      vfree (k);
-    }
-  vfree (start);
-  for (s=0; s<S->nseq; s++)vfree (S2[s]);
-  vfree (S2);
-  
-  return out;
-}
 char *kmsa2msa (KT_node K,Sequence *S, ALNcol***S2,ALNcol*start)
 {
   int a, s, c;
@@ -9170,8 +8802,8 @@ int kseq2kmsa   (KT_node *K, int n, char *method)
 int kseq2kmsa_nextflow   (KT_node *K, int n, char *met)
 {
   int a;
-  static char *in=vtmpnam (NULL);
-  static char *out=vtmpnam (NULL);
+  char *in=vtmpnam (NULL);
+  char *out=vtmpnam (NULL);
   TC_method *method=method_file2TC_method(method_name2method_file(met+3));
   char *command=make_aln_command (method,"inputfile", "outputfile");
  
@@ -9278,65 +8910,6 @@ int kseq2kmsa_thread   (KT_node *K, int n, char *method)
   
   return n;
 }
-
-
-    
-	
-char* kmsa2msa_serial (KT_node K, int max, int *cn)
-{
-  int a;
-  if (!K) return NULL;
-  
-  for (a=0; a<K->nc; a++)
-    {
-      
-      kmsa2msa_serial (K->child[a], max, cn);
-      cn[0]++;
-      thread_msa2msa ((K->child[a])->msaF, K->msaF, (K->child[a])->name);
-    }
-return K->msaF;
-}
-char * kmsa2msa_file   (Sequence *S,KT_node K, int max, int *cn)
-{
-  int nproc=get_nproc();
-  int a, b, c;
-  reset_output_completion ();
-  for (a=0; a<K->nc;)
-    {
-      for (b=0; b<nproc && a<K->nc;)
-	{
-	  output_completion (stderr,a,K->nc, 100, "thread the MSAs");
-	  if (vvfork(NULL)==0)//child process
-	    {
-	      initiate_vtmpnam(NULL);
-	      kmsa2msa_serial (K->child[a], max, cn);
-	      myexit (EXIT_SUCCESS);
-	    }
-	  else
-	    {
-	      a++;
-	      b++;
-	    }
-	  
-	}
-      for (c=0; c<b; c++)vwait(NULL);
-    }
-  reset_output_completion ();
-  for (a=0; a<K->nc;a++)
-    {
-      output_completion (stderr,a,K->nc, 100, "thread the final MSA");
-      thread_msa2msa ((K->child[a])->msaF, K->msaF, (K->child[a])->name);
-    }
-  //HERE ("K->nc: %d %d %d", check_file_exists (K->seqF), check_file_exists (K->msaF));
-   
-  return K->msaF;
-}
-
-//
-//
-//
-//
-//
 
 ALN_node* kmsa2graph2 (Sequence *S,KT_node K,Alignment *A0, ALN_node **lu0, ALN_node *list, int *ns, int *done, int max);
 int node2gap_len2 (ALN_node n);
@@ -9597,50 +9170,6 @@ char *getseq4kmsa2dnd (char *seq, char *alseq, ALNcol *start, ALNcol **S2)
       msa=msa->next;
     }
   return alseq;
-}
-
-
-
-char * kmsa2msa_old (Sequence *S,KT_node K, int max, int *cn)
-{
-  char *out=vtmpnam (NULL);
-  int  a;
-  int nseq=0;
-  FILE*fp;
-  ALN_node *aln;
-  short *lu;
-  int done=1;
-  aln=(ALN_node*)vcalloc ((2*S->nseq)+1, sizeof (ALN_node));
-  lu=(short*)vcalloc (S->nseq, sizeof (short));
-  
-  aln=kmsa2graph_multi (S,K, NULL, NULL,aln,&nseq,&done,max);
-  
-  
-  fp=vfopen (out, "w");
-  for (a=0; a<nseq; a++)
-    {
-      ALN_node seq=aln[a];
-      
-      if (lu[seq->seqN]);
-      else
-	{
-	  lu[seq->seqN]=1;
-	  fprintf (fp, ">%s\n", S->name[seq->seqN]);
-	  while (seq->aa!=')')
-	    {
-	      ALN_node pseq=seq;
-	      
-	      if (seq->aa!='(')fprintf (fp, "%c", seq->aa);
-	      seq=seq->r;
-	    }
-	  fprintf (fp, "\n");
-	}
-    }
-  
-  vfclose (fp);
-  vfree (aln);
-  vfree (lu);
-  return out;
 }
 
 ALN_node ** msa2graph (Sequence *S, Alignment *A, ALN_node**lu)

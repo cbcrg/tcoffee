@@ -1097,7 +1097,7 @@ Alignment *msa_list2struc_evaluate4tcoffee (Sequence *SP,Sequence *AF, Sequence 
 {
   Alignment       **AL;
   Constraint_list **CLL;
-  static char *tmp=vtmpnam (NULL);
+  char *tmp=vtmpnam (NULL);
   
   Alignment *NA;
   Sequence  *NS;
@@ -2199,7 +2199,7 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
 			       sc=((MIN((w1/w2),(w2/w1))));
 			       if (warn==0)
 				 {
-				   add_warning ( stderr, "\nWARNING: distance_mode==0 should not be used");
+				   add_warning ( stderr, "distance_mode==0 should not be used");
 				   warn=1;
 				 }
 			       

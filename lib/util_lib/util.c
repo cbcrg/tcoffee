@@ -2392,33 +2392,16 @@ char* get_env_variable ( const char *var, int mode)
   
 char *get_pwd ( char *name)
 {
-  char cwd[PATH_MAX];
+  char cwd[PATH_MAX*2];
   
-  if (!name)name=(char*)vcalloc (PATH_MAX+1, sizeof (int));
   if (getcwd(cwd, sizeof(cwd)) != NULL)
-    sprintf(name, "%s", cwd);
+    return csprintf (name, "%s", cwd);
   else
     perror("getcwd() error");
-  return name;
 }
 
 
-int pg_is_installed ( char *pg)
-        {
-	static char *fname=vtmpnam(NULL);
-	FILE *fp;
-	int r=0;
 
-	return 1;
-
-	printf_system_direct("which %s > %s", pg, fname);
-
-	if ((fp=find_token_in_file ( fname, NULL, "Command"))){r=1;vfclose(fp);}
-
-
-	return r;
-
-	}
 
 
 /*********************************************************************/
@@ -2452,7 +2435,7 @@ char *num2plot (int value, int max, int line_len)
 
 int   perl_strstr ( char *string, char *pattern)
 {
-  static char *tmp=vtmpnam (NULL);
+  char *tmp=vtmpnam (NULL);
   FILE *fp;
   int r;
 
@@ -2900,11 +2883,11 @@ char * path2filename ( char *array)
 
 char * fname2abs(char*name)
 {
-  static char *name2;
+  char *name2=NULL;
   
   //if (!name2)name2=(char*)vcalloc (10, sizeof (char));
   if ( !name)return NULL;
-  else if (!file_exists (NULL, name))return name;
+  else if (!file_exists (NULL, name))return NULL;
   else if ( name[0]=='/')name2=csprintf (name2, "%s", name);
   else
     {
@@ -5208,7 +5191,7 @@ int unpack_perl_script (char *name, char ***unpacked, int n)
       a++;
     }
 
-  if ( strm(PerlScriptName[a], "EndList")|| (check_file_exists (name) && isexec(name) && satoi(getenv("RUN_LOCAL_SCRIPT"))) || (pg_is_installed (name) &&(satoi(getenv("RUN_LOCAL_SCRIPT"))) ))
+  if ( strm(PerlScriptName[a], "EndList")|| (check_file_exists (name) && isexec(name) && satoi(getenv("RUN_LOCAL_SCRIPT"))) || satoi(getenv("RUN_LOCAL_SCRIPT")))
        {
 	 if ( check_file_exists (name) && ! strstr (name, "/") && isexec(name) && satoi(getenv ("RUN_LOCAL_SCRIPT")))
 	   {
@@ -5217,7 +5200,7 @@ int unpack_perl_script (char *name, char ***unpacked, int n)
 	     sprintf ( unpacked[1][n], "./%s", name);
 	     sprintf ( unpacked[2][n], "shell");
 	   }
-	 else if ( pg_is_installed (name) &&satoi(getenv("RUN_LOCAL_SCRIPT")) )
+	 else if (satoi(getenv("RUN_LOCAL_SCRIPT")) )
 	   {
 	     add_warning ( stderr, "Running external copy of %s [Debug mode].", name);
 	     sprintf ( unpacked[0][n], "%s", name);
@@ -7232,7 +7215,7 @@ int register_file4dump (char *file, char *mode)
     {
       if (exists)
 	{
-	  static char *tmp=vtmpnam (NULL);
+	  char *tmp=vtmpnam (NULL);
 	  if (check_file_exists (file))
 	    {
 	      printf_system ("mv %s %s", file, tmp);
@@ -7477,18 +7460,20 @@ char ***file2list ( char *name, char *sep)
   free_arrayN((void**)lines, 2);
   return list;
 }
-int    file2nlines(char *name)
+int    file2nlines(char *file)
 {
   FILE *fp;
   char c;
   int n=0;
-  fp=vfopen (name, "r");
-  if (!fp) return 0;
+  char buf [1000];
   
-  while ((c=fgetc (fp)!=EOF))
+  if (!(fp=vfopen (file, "r")))return -1;
+  
+  while (fgets(buf, 1000, fp))
     {
-      if (c=='\n')n++;
-    }
+      int d=0;
+      while ((c=buf[d++])!='\0')if ( c=='\n')n++;
+    }	
   vfclose (fp);
   return n;
 }
@@ -8100,35 +8085,6 @@ int token_is_in_n_lines ( char *fname, char *token, int n_line)
   return 0;
 }
     
-FILE * find_token_in_file_nlines_old ( char *fname, FILE * fp, char *token, int n_line)
-
-        {
-	  /*This function finds the string TOKEN (as a single word) in the n_line first lines of fname.
-	    It returns NULL if not found or the position of the fp
-	  */
-
-	  static char *tmp_name=vtmpnam (NULL);
-	  FILE *fp1;
-	  FILE *fp2;
-	  char buffer[10001];
-	  int a;
-	  if ( !fp && !file_exists(NULL,fname))return NULL;
-	  if ( fp==NULL)
-	    {
-	      
-	      fp1=vfopen (fname, "r");
-	      fp2=vfopen (tmp_name, "w");
-
-	      for ( a=0; a< n_line && fgets(buffer, 10000, fp1)!=NULL; a++)
-		{
-		  fprintf ( fp2, "%s", buffer);
-		}
-	      vfclose (fp1);
-	      vfclose (fp2);
-	    }
-	  return find_token_in_file ( tmp_name,fp,token);
-	}
-
 int token_is_in_file ( char *fname, char *token)
 {
   return token_is_in_file_n (fname, token, 0);
@@ -8174,6 +8130,7 @@ int token_is_in_file_n ( char *fname, char *token, int nlines)
     }
   return 0;
 }
+
 
 char *vfgets ( char *buf, FILE *fp)
 {
