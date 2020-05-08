@@ -51,9 +51,9 @@ int fasta2nseq (char *file);
 
 Sequence  * quick_read_seq ( char *file);
 Alignment *reload_aln (Alignment*A);
-Alignment * quick_read_aln( char *name);//reads onléy fasta and clustalw
-Alignment * quick_read_fasta_aln( Alignment *A,char *name);//reads onléy fasta and clustalw
-Alignment * quick_read_aln_static( char *name);//reads onléy fasta and clustalw
+Alignment * quick_read_aln( char *name);//reads onlï¿½y fasta and clustalw
+Alignment * quick_read_fasta_aln( Alignment *A,char *name);//reads onlï¿½y fasta and clustalw
+Alignment * quick_read_aln_static( char *name);//reads onlï¿½y fasta and clustalw
 int read_nameseq (char *file,char ***nam, char ***seq, char ***com);
 
 Sequence  * read_sequences ( char *name);

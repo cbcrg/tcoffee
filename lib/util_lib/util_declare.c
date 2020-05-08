@@ -889,7 +889,7 @@ Alignment* copy_aln ( Alignment *A, Alignment *B)
 	  B->max_len=A->max_len;
 	  B->min_len=A->min_len;
 	  B->declared_len=nlen;
-	  B->max_n_seq=nnseq;
+	  B->max_n_seq=nnseq+1;
 
 	  B->nseq=A->nseq;
 	  B->len_aln=A->len_aln;
@@ -916,12 +916,16 @@ Alignment* copy_aln ( Alignment *A, Alignment *B)
 	    B->expanded_order=A->expanded_order;
 	    
 	    //Copy seq_al
-	    for (a=0; a<nnseq; a++)
+	    
+	    for (a=0; a<A->nseq; a++)
 	      {
 		if (A->seq_al[a])B->seq_al[a]=csprintf (B->seq_al[a], "%s", A->seq_al[a]);
 	      }
+	    
+	    //B->seq_al[A->nseq]=csprintf (B->seq_al[A->nseq], "%s", A->seq_al[A->nseq-1]);
+	   
 	    //This is meant to take care of the consensus
-	    B->seq_al[A->nseq]=csprintf (B->seq_al[A->nseq], "%s", A->seq_al[A->nseq-1]);
+	    //
 	    
 	    
 	    B->order=copy_int  ( A->order,    B->order);
@@ -1548,7 +1552,7 @@ void *sub_vcalloc ( size_t nobj, size_t size, int MODE)
 	}
 void *vreallocg ( void *p, size_t size, int set, int resize)
 	{
-	  //makes it possiblée to realloc w/o reintilaizing and w/o freeing left over: MEMSET or NOMEMSET and RESIZE or NORESIZE
+	  //makes it possiblï¿½e to realloc w/o reintilaizing and w/o freeing left over: MEMSET or NOMEMSET and RESIZE or NORESIZE
 	void *x;
 	Memcontrol *M;
 	size_t i_size;
