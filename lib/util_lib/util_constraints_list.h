@@ -495,6 +495,7 @@ int *extract_entry (Constraint_list *CL);
 /*                                                                   */
 /*                                                                   */
 /*********************************************************************/
+Constraint_list*CL2simCL (Constraint_list *CL);
 Constraint_list *extend_list_pair (Constraint_list *CLin,char *store_mode, int s1, int s2);
 Constraint_list *extend_list (Constraint_list *CLin, char *store_mode,char *clean_mode, char *compact_mode,int do_self, Sequence *SUBSET);
 void get_bounds (Constraint_list *CL, int s1, int s2, int *start, int *end);
@@ -521,6 +522,7 @@ Constraint_list * sort_constraint_list_on_n_fields (Constraint_list *CL, int sta
 /*                                                                   */
 /*                                                                   */
 /*********************************************************************/
+Constraint_list*reload_constraint_list (Constraint_list *CL);
 Constraint_list* read_n_constraint_list(char **fname,int n_list, char *in_mode,char *mem_mode,char *weight_mode,char *type, FILE *local_stderr, Constraint_list *CL, char *seq_source); /**< See util_constraints_list.c::read_n_constraint_list */
 Constraint_list* read_constraint_list(Constraint_list *CL,char *fname,char *in_mode,char *mem_mode,char *weight_mode);
 Constraint_list * read_constraint_list_raw_file(Constraint_list *CL, char *fname);

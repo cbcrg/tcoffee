@@ -5037,6 +5037,13 @@ get_cl_param(\
 		     CL=read_n_constraint_list (list_file,n_list,NULL, mem_mode,weight,type, le, CL, seq_source);
 		     }
 		 }
+	       //This very importnat step insures the CL is symetrical
+	       //This is essential for the remaioning computation
+	       //It should not be done before because some methods may not be symetrical for specific reasons
+	       //And the CL may be used in different contexts
+	       CL=CL2simCL (CL);
+
+	       
 	       if ( CL->M)clean_aln=0;
 
 	       if ( is_number (weight))set_weight4constraint_list (CL, atoi(weight));
@@ -5046,7 +5053,8 @@ get_cl_param(\
 	        * That's why ::free_pair_wise is called here.
 	        */
 	       free_pair_wise ();
-
+	       
+	       
 	       
 	
 	       /**
@@ -5152,12 +5160,13 @@ get_cl_param(\
 			* If this was all you wanted to do (\c lib_only), exit the program afterwards.
 			*
 			*/
-	      if (CL->ne>0 && out_lib[0]!='\0' && !strm (out_lib, "no"))
+	       
+	       if (CL->ne>0 && out_lib[0]!='\0' && !strm (out_lib, "no"))
 	         {
+		   
 		   if (strstr (out_lib_mode, "extended"))
 		     {
 		       char emode[1000];
-
 		       //Do the processing before saving the extended lib*/
 		       processed_lib=1;
 		       if ( filter_lib) CL=filter_constraint_list (CL,CL->weight_field, filter_lib);
