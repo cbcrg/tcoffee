@@ -1514,9 +1514,18 @@ There are two modes we proposed to improve R-Coffee alignments: 1) using the bes
 
 .. tip:: In order to know if a RNA alignment is better than another one, the best is to visualize the compensatory mutations of the secondary structure: look at the subsection **Manipulating RNA Sequences**.
 
+Using rsap-Coffee
+-----------------
+RSAP-Coffee is a an experemental mode of T-Coffee using protein structral aligners. It processes RNA PDB files so that the C3' Carbons are treated as C-alpha in a protein chain. This procedure is suitable for any protein structural aligner that only considers alpha carbons in the main chain. By default, sracoffee uses  the sap_aligner that ships with T-Coffee default distribution.
+
+
+
 Using SARA-Coffee
 -----------------
 SARA-Coffee is a structure based multiple RNA aligner. This is a new algorithm that joins the pairwise RNA structure alignments performed by SARA with the multiple sequence T-Coffee framework. Since setting up the SARA-Coffee dependencies (T-Coffee, `SARA <http://structure.biofold.org/sara/>`_, `X3DNA <http://x3dna.org/>`_, `Numpy <http://www.numpy.org/>`_, `Biopython <http://biopython.org/>`_, Perl, Python 2.7) can be tricky we provide a self-contained Vagrant VM, which downloads and configures all the required pieces of software for you. 
+
+As an alternative to the complex installation described above, we also provide the rsap-Coffee RNA structural aligner that uses proteins structral aligners to align RNA 3D structures (cf section above). This mode has not been extensivly tested. It is expected to have a comparable albeith slighly lower accuracy than sara-coffee.
+
 
 Installing SARA-Coffee VM
 ^^^^^^^^^^^^^^^^^^^^^^^^^

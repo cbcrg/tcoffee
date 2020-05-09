@@ -1477,18 +1477,18 @@ You can output a color coded version of your alignment using the secondary predi
 
 
 
-Aligning RNA sequences 
-======================
+Aligning RNA sequences, 2D and 3D Structure
+===========================================
 RNA sequences are very important and almost every-where these days. The main property of RNA sequences is to have a secondary structure that can be used to guide the alignment. While the default T-Coffee has no special RNA alignment method incorporated in, we have developped specific modes and tools for RNA alignment and analysis (see subsection **Manipulating RNA Sequences** for more details).
 
-R-Coffee, many possibilities
-----------------------------
+R-Coffee for 2D structure
+-------------------------
 Introduction
 ^^^^^^^^^^^^
 R-Coffee is the special mode of T-Coffee developped to handle specifically RNA sequences. It has been proven far more accurate than T-Coffee default because of its specific design. It can be run as a standalone aligner (using secondary structure prediction) or using third party software.
 
-R-Coffee: aligning RNA sequences
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+R-Coffee: aligning RNA sequences using secondary structures
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 R-Coffee uses predicted secondary structures via the software RNApfold, in order to improve RNA alignments. Running R-Coffee by default is rather simple (command 1) but as for T-Coffee, you can also specify the methods you prefer (command 2):
 
 ::
@@ -1514,14 +1514,35 @@ There are two modes we proposed to improve R-Coffee alignments: 1) using the bes
 
 .. tip:: In order to know if a RNA alignment is better than another one, the best is to visualize the compensatory mutations of the secondary structure: look at the subsection **Manipulating RNA Sequences**.
 
-Using rsap-Coffee
------------------
+RSAP-Coffee for RNA 3D Structures
+---------------------------------
 RSAP-Coffee is a an experemental mode of T-Coffee using protein structral aligners. It processes RNA PDB files so that the C3' Carbons are treated as C-alpha in a protein chain. This procedure is suitable for any protein structural aligner that only considers alpha carbons in the main chain. By default, sracoffee uses  the sap_aligner that ships with T-Coffee default distribution.
 
+Running rsap-Coffee
+^^^^^^^^^^^^^^^^^^^
+RSAP-Coffee works ina  way similar to Expresso/3Dcoffee. It requires providing a template file in which you matchyour PDB files with the corresponding sequences
+
+::
+
+  ><RNA Seq Identifier>  _P_ <PDB identifier - one chain only per PDB>
+  ><RNA Seq Identifier>  _P_ <PDB identifier - one chain only per PDB>
+  ...
+
+You then need to run 
+
+::
+
+   $$: t_coffee <yourseq.fasta> -mode rsapcoffee -template_file <template file>
+
+By Default, SRAP-Coffee only runs sap, but you can also run other structural methods supported by T-Cofee. like Mustang or TM-Align
+
+::
+
+   $$: t_coffee <yourseq.fasta> -mode rsapcoffee -method sap_pair, mustang_pair, TMalign_pair -template_file <template file>
 
 
-Using SARA-Coffee
------------------
+SARA-Coffee for RNA 3D Structures
+---------------------------------
 SARA-Coffee is a structure based multiple RNA aligner. This is a new algorithm that joins the pairwise RNA structure alignments performed by SARA with the multiple sequence T-Coffee framework. Since setting up the SARA-Coffee dependencies (T-Coffee, `SARA <http://structure.biofold.org/sara/>`_, `X3DNA <http://x3dna.org/>`_, `Numpy <http://www.numpy.org/>`_, `Biopython <http://biopython.org/>`_, Perl, Python 2.7) can be tricky we provide a self-contained Vagrant VM, which downloads and configures all the required pieces of software for you. 
 
 As an alternative to the complex installation described above, we also provide the rsap-Coffee RNA structural aligner that uses proteins structral aligners to align RNA 3D structures (cf section above). This mode has not been extensivly tested. It is expected to have a comparable albeith slighly lower accuracy than sara-coffee.
@@ -1573,6 +1594,23 @@ SARA-Coffee is also distributed as a Docker container. This will allow you to ru
 
 
 .. Note:: this command assumes your input file is located in the working directory. If this is not the case, you will need to mount the input file path accordingly. 
+
+Running Sara-Coffee
+^^^^^^^^^^^^^^^^^^^
+Sara-Coffee works ina  way similar to Expresso/3Dcoffee. It requires providing a template file in which you matchyour PDB files with the corresponding sequences
+
+::
+
+  ><RNA Seq Identifier>  _P_ <PDB identifier - one chain only per PDB>
+  ><RNA Seq Identifier>  _P_ <PDB identifier - one chain only per PDB>
+  ...
+
+You then need to run 
+
+::
+
+   $$: t_coffee <yourseq.fasta> -mode saracoffee -template_file <template file>
+
 
 
 Aligning DNA sequences

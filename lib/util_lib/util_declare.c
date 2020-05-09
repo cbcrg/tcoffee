@@ -1692,7 +1692,7 @@ READ_ARRAY_SIZE(double,read_size_double)
 
 int read_array_size_new (void *array)
 {
- 
+  if (!array)return 0;
   return read_array_size ( array, 0);
 }
 int read_array_size (void *array, size_t size)
