@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>T-Coffee Version_13.41.92.f469187 documentation</title>
+  <title>T-Coffee Version_13.41.93.15fbe9f documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                Version_13.41.92.f469187
+                Version_13.41.93.15fbe9f
               </div>
             
           
@@ -714,7 +714,7 @@
     
       <li><a href="index.html#document-index">Docs</a> &raquo;</li>
         
-      <li>T-Coffee Version_13.41.92.f469187 documentation</li>
+      <li>T-Coffee Version_13.41.93.15fbe9f documentation</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -6153,14 +6153,13 @@ $#: doc2test.pl -play tests/all2test.rst -data tests/.data/ -dump tests/.dumps/ 
 </pre></div>
 </div>
 <p>If they do, you should the run the following</p>
-<dl class="simple">
-<dt>::</dt><dd><p>$#: make release type=beta test=full</p>
-</dd>
-</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$#: make release type=beta test=full
+</pre></div>
+</div>
 <p>If this beta is succesful, then you can pack the major</p>
-<blockquote>
-<div><p>$#: make release type=major teste=none</p>
-</div></blockquote>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$#: make release type=major teste=none
+</pre></div>
+</div>
 </div>
 </div>
 <div class="section" id="release-building-procedure">
@@ -6173,9 +6172,9 @@ $#: doc2test.pl -play tests/all2test.rst -data tests/.data/ -dump tests/.dumps/ 
 <li><p>type make release=beta|stable|major m=’commit comments’ – including [ci skip] if needed</p></li>
 </ul>
 <p>This will trigger
-* An  update of the version number in lib/version/version_number.version: Version_&lt;major&gt;.&lt;stable&gt;.&lt;build&gt;.&lt;github Branch Number&gt;
-* The file .circleci/config.yml will be programmatically edidted by read_program_version.pl to state the kind of release to be done by CircleCI
-* The command ‘make distribution’ will run. Among othe things it will</p>
+- An  update of the version number in lib/version/version_number.version: Version_&lt;major&gt;.&lt;stable&gt;.&lt;build&gt;.&lt;github Branch Number&gt;
+- The file .circleci/config.yml will be programmatically edidted by read_program_version.pl to state the kind of release to be done by CircleCI
+- The command ‘make distribution’ will run. Among othe things it will</p>
 <blockquote>
 <div><ul class="simple">
 <li><p>Check that the distribution procedure is functional - it is a similar procedure that will be used by CircleCI</p></li>
@@ -6192,41 +6191,18 @@ $#: doc2test.pl -play tests/all2test.rst -data tests/.data/ -dump tests/.dumps/ 
 <p>The Circle build is controlled by the [.circleci/circle.yml](circle.yml) file and processes as follows:</p>
 <ol class="arabic simple">
 <li><p>The T-Coffee [build/build.sh](build/build.sh) script is executed in the [cbcrg/tcoffee-build-box:1.2](docker/Dockerfile.buildbox) container</p></li>
-<li><p>The T-Coffee binaries produced by the build process are created in the folder</p></li>
-</ol>
-<blockquote>
-<div><p><cite>~/publish/sandbox/build</cite>. This folder is moved under path <cite>build/tcoffee</cite></p>
-</div></blockquote>
-<ol class="arabic simple">
-<li><p>A new Docker image named <cite>xcoffee</cite> is created copying the content of the folder <cite>build/tcoffee</cite>.</p></li>
-</ol>
-<blockquote>
-<div><p>The image is built by using this [docker/Dockerfile](docker/Dockerfile).</p>
-</div></blockquote>
-<ol class="arabic simple">
-<li><p>The new <cite>xcoffee</cite> build is tested by running the [docker/run-tests.sh](docker/run-tests.sh)</p></li>
-</ol>
-<blockquote>
-<div><p>tests suite.</p>
-</div></blockquote>
-<ol class="arabic simple">
+<li><p>The T-Coffee binaries produced by the build process are created in the folder <cite>~/publish/sandbox/build</cite>. This folder is moved under path <cite>build/tcoffee</cite></p></li>
+<li><p>A new Docker image named <cite>xcoffee</cite> is created copying the content of the folder <cite>build/tcoffee</cite>.The image is built by using this [docker/Dockerfile](docker/Dockerfile).</p></li>
+<li><p>The new <cite>xcoffee</cite> build is tested by running the [docker/run-tests.sh](docker/run-tests.sh)tests suite.</p></li>
 <li><p>The summary of the tests is available on <a class="reference external" href="https://circleci.com/gh/cbcrg/tcoffee/tree/master">https://circleci.com/gh/cbcrg/tcoffee/tree/master</a></p></li>
-<li><p>If all tests are passed the <cite>xcoffee</cite> image is pushed to the [Docker Hub](<a class="reference external" href="https://hub.docker.com/r/cbcrg/tcoffee/tags/">https://hub.docker.com/r/cbcrg/tcoffee/tags/</a>)</p></li>
+<li><p>If all tests are passed the <cite>xcoffee</cite> image is pushed to the [Docker Hub](<a class="reference external" href="https://hub.docker.com/r/cbcrg/tcoffee/tags/">https://hub.docker.com/r/cbcrg/tcoffee/tags/</a>) with the names <cite>cbcrg/tcoffee:latest</cite> and <cite>cbcrg/tcoffee:&lt;version.commit-id&gt;</cite></p></li>
+<li><p>The environment variable <cite>RELEASE=0|1</cite> is used to mark the build as beta or stable (use the [build/make_release.sh] to trigger a new release build).</p></li>
 </ol>
-<blockquote>
-<div><p>with the names <cite>cbcrg/tcoffee:latest</cite> and <cite>cbcrg/tcoffee:&lt;version.commit-id&gt;</cite></p>
-</div></blockquote>
-<ol class="arabic simple">
-<li><p>The environment variable <cite>RELEASE=0|1</cite> is used to mark the build as beta or stable</p></li>
-</ol>
-<blockquote>
-<div><p>(use the [build/make_release.sh] to trigger a new release build).</p>
-</div></blockquote>
 </div>
 <div class="section" id="publication">
 <h4>Publication<a class="headerlink" href="#publication" title="Permalink to this headline">¶</a></h4>
 <p>Once the build is complete and all tests are passed the distribution is pushed onto the web along with the associated documentation.</p>
-<p>The ititility doc2test.pl makes it possible to run a command line on data located in a folder and to produce a dump file that will then be a stand alone tests, that can be transfered and replayed. The dump file is a container in which the input, the stdoin, stdout, environement and output of the run are recorded.</p>
+<p>The utility doc2test.pl makes it possible to run a command line on data located in a folder and to produce a dump file that will then be a stand alone tests, that can be transfered and replayed. The dump file is a container in which the input, the stdoin, stdout, environement and output of the run are recorded.</p>
 <p>Tests are systematically carried out on all the command lines that start with the symbol $$. For instance, the following CL will has been tested.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$#: t_coffee
 </pre></div>
@@ -6255,39 +6231,36 @@ $#: doc2test.pl -play tests/all2test.rst -data tests/.data/ -dump tests/.dumps/ 
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#$: ./lib/perl/lib/perl4makefile/doc2test.pl -check &lt;dump directory - recursive&gt;</span>
 </pre></div>
 </div>
-<p>Note that while compiling cls, you can use check to clean your directory</p>
+<p>Note that while compiling Command Lines, you can use check to clean your directory and remove any failed dump.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#$: ./lib/perl/lib/perl4makefile/doc2test.pl -check &lt;dump directory - recursive&gt; -clean FAILED or -clean2 &lt;string in dump to be deleted&gt;</span>
 </pre></div>
 </div>
 <p>You should also use check to make a fresh build and remove all previous dumps:</p>
-<dl class="simple">
-<dt>::</dt><dd><p>#$: ./lib/perl/lib/perl4makefile/doc2test.pl -check &lt;dump directory - recursive&gt; -clean ALL</p>
-</dd>
-</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#$: ./lib/perl/lib/perl4makefile/doc2test.pl -check &lt;dump directory - recursive&gt; -clean ALL</span>
+</pre></div>
+</div>
 <p>And you can the re-run the play that will only regenerate missing dumps:</p>
-<p>::
-#$: ./lib/perl/lib/perl4makefile/doc2test.pl -play &lt;<a href="#id1"><span class="problematic" id="id2">*</span></a>.rst file or <a href="#id3"><span class="problematic" id="id4">*</span></a>.tests file or list of cmd in txt&gt; -data &lt;folder containing the data&gt; -dumps &lt;target directory for dumps&gt;</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#$: ./lib/perl/lib/perl4makefile/doc2test.pl -play &lt;*.rst file or *.tests file or list of cmd in txt&gt; -data &lt;folder containing the data&gt; -dumps &lt;target directory for dumps&gt;</span>
+</pre></div>
+</div>
 <p>The replay action will re-run each dump and report the status. It will report new warnings.</p>
-<dl class="simple">
-<dt>::</dt><dd><p>#$: ./lib/perl/lib/perl4makefile/doc2test.pl -replay &lt;dump directory - recursive&gt;</p>
-</dd>
-</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#$: ./lib/perl/lib/perl4makefile/doc2test.pl -replay &lt;dump directory - recursive&gt;</span>
+</pre></div>
+</div>
 <p>The unplay option maked it possible to output the inoput files of every dump</p>
-<dl class="simple">
-<dt>::</dt><dd><p>#$: ./lib/perl/lib/perl4makefile/doc2test.pl -replay &lt;dump directory - recursive&gt; -outdir &lt;file in which data should be dumped&gt;</p>
-</dd>
-</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#$: ./lib/perl/lib/perl4makefile/doc2test.pl -replay &lt;dump directory - recursive&gt; -outdir &lt;file in which data should be dumped&gt;</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="compiling-tests-from-the-rst-documentation">
 <h4>Compiling tests from the rst documentation<a class="headerlink" href="#compiling-tests-from-the-rst-documentation" title="Permalink to this headline">¶</a></h4>
 <p>The rst documentation contain lines tagged with two $$ signs. These lines will be selected for validation and used to build dump files. In order to run a fresh collection of dumps for the full documentation, run the foillowing commands:</p>
 <p>The simplest way to compile all possible tests from the the documentation is to run the following command from the top of the git repo.</p>
 <blockquote>
-<div><dl class="simple">
-<dt>::</dt><dd><p>#$: ./lib/perl/lib/perl4makefile/doc2test.pl -check docs/.dumps -clean ALL
-#$: ./lib/perl/lib/perl4makefile/doc2test.pl -play docs/doc2test.rst -data docs/.data -dump docs/.dumps</p>
-</dd>
-</dl>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#$: ./lib/perl/lib/perl4makefile/doc2test.pl -check docs/.dumps -clean ALL</span>
+<span class="c1">#$: ./lib/perl/lib/perl4makefile/doc2test.pl -play docs/doc2test.rst -data docs/.data -dump docs/.dumps</span>
+</pre></div>
+</div>
 </div></blockquote>
 <p>The output can then be checked</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#$: ./lib/perl/lib/perl4makefile/doc2test.pl -check docs/.dumps</span>
@@ -6298,14 +6271,13 @@ $#: doc2test.pl -play tests/all2test.rst -data tests/.data/ -dump tests/.dumps/ 
 </pre></div>
 </div>
 <p>Note that in order to figure out an issue you can use the replay debug option</p>
-<blockquote>
-<div><p>#$: ./lib/perl/lib/perl4makefile/doc2test.pl -replay &lt;dump file&gt; -debug</p>
-</div></blockquote>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#$: ./lib/perl/lib/perl4makefile/doc2test.pl -replay &lt;dump file&gt; -debug</span>
+</pre></div>
+</div>
 <p>You can the re-run all the dumps. This is how the tests will be carried out by CircleCI</p>
-<dl class="simple">
-<dt>::</dt><dd><p>#$: ./lib/perl/lib/perl4makefile/doc2test.pl -replay docs/.dumps</p>
-</dd>
-</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#$: ./lib/perl/lib/perl4makefile/doc2test.pl -replay docs/.dumps</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="compiling-tests-commands">
 <h4>Compiling tests commands<a class="headerlink" href="#compiling-tests-commands" title="Permalink to this headline">¶</a></h4>

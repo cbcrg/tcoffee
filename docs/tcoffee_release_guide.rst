@@ -71,10 +71,13 @@ Make sure ALL the tests pass well on your local machine before running them on C
 If they do, you should the run the following
 
 ::
+
   $#: make release type=beta test=full
 
 
 If this beta is succesful, then you can pack the major
+
+::
 
   $#: make release type=major teste=none
  	
@@ -95,9 +98,9 @@ Triggering a release
 - type make release=beta|stable|major m='commit comments' -- including [ci skip] if needed
 
 This will trigger 
-* An  update of the version number in lib/version/version_number.version: Version_<major>.<stable>.<build>.<github Branch Number>
-* The file .circleci/config.yml will be programmatically edidted by read_program_version.pl to state the kind of release to be done by CircleCI
-* The command 'make distribution' will run. Among othe things it will
+- An  update of the version number in lib/version/version_number.version: Version_<major>.<stable>.<build>.<github Branch Number>
+- The file .circleci/config.yml will be programmatically edidted by read_program_version.pl to state the kind of release to be done by CircleCI
+- The command 'make distribution' will run. Among othe things it will
    * Check that the distribution procedure is functional - it is a similar procedure that will be used by CircleCI
    * Compile the documentation with sphinx and update docs/.html -- this requires sphinx to be installed on the local machine
 
@@ -111,23 +114,12 @@ The tcoffee git repository is registered to CircleCI via the following hook:
 The Circle build is controlled by the [.circleci/circle.yml](circle.yml) file and processes as follows:
 
 #. The T-Coffee [build/build.sh](build/build.sh) script is executed in the [cbcrg/tcoffee-build-box:1.2](docker/Dockerfile.buildbox) container
-
-#. The T-Coffee binaries produced by the build process are created in the folder 
-  `~/publish/sandbox/build`. This folder is moved under path `build/tcoffee`
-  
-#. A new Docker image named `xcoffee` is created copying the content of the folder `build/tcoffee`. 
-  The image is built by using this [docker/Dockerfile](docker/Dockerfile). 
-  
-#. The new `xcoffee` build is tested by running the [docker/run-tests.sh](docker/run-tests.sh) 
-  tests suite. 
-
+#. The T-Coffee binaries produced by the build process are created in the folder `~/publish/sandbox/build`. This folder is moved under path `build/tcoffee`
+#. A new Docker image named `xcoffee` is created copying the content of the folder `build/tcoffee`.The image is built by using this [docker/Dockerfile](docker/Dockerfile). 
+#. The new `xcoffee` build is tested by running the [docker/run-tests.sh](docker/run-tests.sh)tests suite. 
 #. The summary of the tests is available on https://circleci.com/gh/cbcrg/tcoffee/tree/master
-  
-#. If all tests are passed the `xcoffee` image is pushed to the [Docker Hub](https://hub.docker.com/r/cbcrg/tcoffee/tags/) 
-  with the names `cbcrg/tcoffee:latest` and `cbcrg/tcoffee:<version.commit-id>`
-
-#. The environment variable `RELEASE=0|1` is used to mark the build as beta or stable 
-  (use the [build/make_release.sh] to trigger a new release build).
+#. If all tests are passed the `xcoffee` image is pushed to the [Docker Hub](https://hub.docker.com/r/cbcrg/tcoffee/tags/) with the names `cbcrg/tcoffee:latest` and `cbcrg/tcoffee:<version.commit-id>`
+#. The environment variable `RELEASE=0|1` is used to mark the build as beta or stable (use the [build/make_release.sh] to trigger a new release build).
 
 Publication
 ===========
@@ -139,7 +131,7 @@ Once the build is complete and all tests are passed the distribution is pushed o
 Compiling and running tests
 ***************************
 
-The ititility doc2test.pl makes it possible to run a command line on data located in a folder and to produce a dump file that will then be a stand alone tests, that can be transfered and replayed. The dump file is a container in which the input, the stdoin, stdout, environement and output of the run are recorded. 
+The utility doc2test.pl makes it possible to run a command line on data located in a folder and to produce a dump file that will then be a stand alone tests, that can be transfered and replayed. The dump file is a container in which the input, the stdoin, stdout, environement and output of the run are recorded. 
 
 
 Tests are systematically carried out on all the command lines that start with the symbol $$. For instance, the following CL will has been tested.
@@ -183,7 +175,7 @@ The Check action will recursively go through any directory and report the exit s
 
   #$: ./lib/perl/lib/perl4makefile/doc2test.pl -check <dump directory - recursive>
 
-Note that while compiling cls, you can use check to clean your directory
+Note that while compiling Command Lines, you can use check to clean your directory and remove any failed dump.
  
 ::
 
@@ -192,24 +184,28 @@ Note that while compiling cls, you can use check to clean your directory
 You should also use check to make a fresh build and remove all previous dumps:
  
 ::
+
   #$: ./lib/perl/lib/perl4makefile/doc2test.pl -check <dump directory - recursive> -clean ALL
 
 And you can the re-run the play that will only regenerate missing dumps:
  
 
 ::
+
 #$: ./lib/perl/lib/perl4makefile/doc2test.pl -play <*.rst file or *.tests file or list of cmd in txt> -data <folder containing the data> -dumps <target directory for dumps>
 
 The replay action will re-run each dump and report the status. It will report new warnings.
 
 
 ::
+
   #$: ./lib/perl/lib/perl4makefile/doc2test.pl -replay <dump directory - recursive>
 
 
 The unplay option maked it possible to output the inoput files of every dump
 
 ::
+
   #$: ./lib/perl/lib/perl4makefile/doc2test.pl -replay <dump directory - recursive> -outdir <file in which data should be dumped>
 
 
@@ -224,6 +220,7 @@ The rst documentation contain lines tagged with two $$ signs. These lines will b
 The simplest way to compile all possible tests from the the documentation is to run the following command from the top of the git repo.
 
  ::
+
   #$: ./lib/perl/lib/perl4makefile/doc2test.pl -check docs/.dumps -clean ALL
   #$: ./lib/perl/lib/perl4makefile/doc2test.pl -play docs/doc2test.rst -data docs/.data -dump docs/.dumps
 
@@ -241,12 +238,15 @@ The failing jobs can be removed and re-run once the issue has been identified (u
 
 Note that in order to figure out an issue you can use the replay debug option
 
+::
+
   #$: ./lib/perl/lib/perl4makefile/doc2test.pl -replay <dump file> -debug
 
 
 You can the re-run all the dumps. This is how the tests will be carried out by CircleCI
 
 ::
+
   #$: ./lib/perl/lib/perl4makefile/doc2test.pl -replay docs/.dumps
 
 Compiling tests commands
