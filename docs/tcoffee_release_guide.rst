@@ -12,7 +12,7 @@ Before the realease of a new T-Coffee version, many command lines in the documen
 Making a new release
 ********************
 
-T-Coffee is automatically build by using the [Circle CI](https://circleci.com/gh/cbcrg/tcoffee) service. The procedure starts with an update of the version number followed by a git push that triggers the validation of the new release on circleCI and a posting via an amzon instance hosting the T-Coffee web site. All these operations are detailed below. Depending on the release type the correspinding counter will be incremented by 1 <nmajor>.<stable>.<beta>
+T-Coffee is automatically build by using the [Circle CI](https://circleci.com/gh/cbcrg/tcoffee) service. The procedure starts with an update of the version number followed by a git push that triggers the validation of the new release on circleCI and a posting via an Amazon instance hosting the T-Coffee web site. All these operations are detailed below. Depending on the release type the correspinding counter will be incremented by 1 <nmajor>.<stable>.<beta>
 	
 	
 ::
@@ -32,6 +32,7 @@ Beta Release
 For a beta, the following needs to go through:
 
 ::
+
   $#: make release type=beta test=core|none
 
 Stable Release
@@ -40,6 +41,7 @@ Stable Release
 For a Stable, the following needs to go through:
 
 ::
+
   $#: make release type=beta test=core
   $#: make release type=stable teste=none
 
@@ -50,13 +52,20 @@ For a Major, the following needs to go through. Note that a major implies some i
 
 
 ::
+
   $#: doc2test.pl -play docs/doc2test.rst -data docs/.data/ -dump docs/.dumps/ -update
-  $#: doc2test.pl -play tests/doc2test.rst -data tests/.data/ -dump tests/.dumps/ -update
+  $#: doc2test.pl -play tests/all2test.rst -data tests/.data/ -dump tests/.dumps/ -update
 
 
-Then you should make sure ALL the tests pass well on your local machine. This is a rsather lengthy procedure that you want to bulletpruf localy before running it on CircleCI
+.. tip:: doc2test contains the list of ALL the rst files to be tested. Note that in an RST files, the only files CL that get tested are the ones starting wit **$$**
+
+.. tip:: The files required tu run the command lines are available in docs/.data and test/.data
+ 
+
+Make sure ALL the tests pass well on your local machine before running them on CircleCI
 
 ::
+
   $#: doc2test.pl -replay  . 
 
 If they do, you should the run the following
@@ -83,41 +92,41 @@ Triggering a release
 ====================
 
 - go into t_coffee/src
-- type make release=beta|stable|major m='commit comments -- including [ci skip] if needed
+- type make release=beta|stable|major m='commit comments' -- including [ci skip] if needed
 
 This will trigger 
-	-an  update of the version number in lib/version/version_number.version: Version_<major>.<stable>.<build>.<github Branch Number>
-	-the file .circleci/config.yml will be programmatically edidted by read_program_version.pl to state the kind of release to be done by CircleCI
- 	-make distribution will run. Among othe things it will
-		-check that the distribution procedure is functional - it is a similar procedure that will be used by CircleCI
-		-compile the documentation with sphinx and update docs/.html -- this requires sphinx to be installed on the local machine
+* An  update of the version number in lib/version/version_number.version: Version_<major>.<stable>.<build>.<github Branch Number>
+* The file .circleci/config.yml will be programmatically edidted by read_program_version.pl to state the kind of release to be done by CircleCI
+* The command 'make distribution' will run. Among othe things it will
+   * Check that the distribution procedure is functional - it is a similar procedure that will be used by CircleCI
+   * Compile the documentation with sphinx and update docs/.html -- this requires sphinx to be installed on the local machine
 
 
 CircleCI building
 =================
 
-The tcoffee git repoitory is registered to CircleCI via the following hook:
+The tcoffee git repository is registered to CircleCI via the following hook:
 	https://github.com/cbcrg/tcoffee/settings/hooks		
 
 The Circle build is controlled by the [.circleci/circle.yml](circle.yml) file and processes as follows:
 
-1. The T-Coffee [build/build.sh](build/build.sh) script is executed in the [cbcrg/tcoffee-build-box:1.2](docker/Dockerfile.buildbox) container
+#. The T-Coffee [build/build.sh](build/build.sh) script is executed in the [cbcrg/tcoffee-build-box:1.2](docker/Dockerfile.buildbox) container
 
-2. The T-Coffee binaries produced by the build process are created in the folder 
+#. The T-Coffee binaries produced by the build process are created in the folder 
   `~/publish/sandbox/build`. This folder is moved under path `build/tcoffee`
   
-3. A new Docker image named `xcoffee` is created copying the content of the folder `build/tcoffee`. 
+#. A new Docker image named `xcoffee` is created copying the content of the folder `build/tcoffee`. 
   The image is built by using this [docker/Dockerfile](docker/Dockerfile). 
   
-4. The new `xcoffee` build is tested by running the [docker/run-tests.sh](docker/run-tests.sh) 
+#. The new `xcoffee` build is tested by running the [docker/run-tests.sh](docker/run-tests.sh) 
   tests suite. 
 
-5. The summary of the tests is available on https://circleci.com/gh/cbcrg/tcoffee/tree/master
+#. The summary of the tests is available on https://circleci.com/gh/cbcrg/tcoffee/tree/master
   
-5. If all tests are passed the `xcoffee` image is pushed to the [Docker Hub](https://hub.docker.com/r/cbcrg/tcoffee/tags/) 
+#. If all tests are passed the `xcoffee` image is pushed to the [Docker Hub](https://hub.docker.com/r/cbcrg/tcoffee/tags/) 
   with the names `cbcrg/tcoffee:latest` and `cbcrg/tcoffee:<version.commit-id>`
 
-7. The environment variable `RELEASE=0|1` is used to mark the build as beta or stable 
+#. The environment variable `RELEASE=0|1` is used to mark the build as beta or stable 
   (use the [build/make_release.sh] to trigger a new release build).
 
 Publication
@@ -137,7 +146,7 @@ Tests are systematically carried out on all the command lines that start with th
 
 ::
 
-  $$: t_coffee
+  $#: t_coffee
 
  
 Other command lines starting with different symbols are not checked. Two types of command lines identifiers are used:
@@ -150,7 +159,7 @@ For a command that could be tested but will not be, either for the sake of time 
 
 ::
 
-  ##: t_coffee
+  $#: t_coffee
 
 These commands are never tested, either because they contain system dependant information or non programmatic information.
 

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>T-Coffee Version_13.41.91.55def16 documentation</title>
+  <title>T-Coffee Version_13.41.92.f469187 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                Version_13.41.91.55def16
+                Version_13.41.92.f469187
               </div>
             
           
@@ -277,7 +277,7 @@
 <li class="toctree-l4"><a class="reference internal" href="index.html#choosing-the-right-package-without-flipping-a-coin">Choosing the right package (without flipping a coin !)</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="index.html#computing-simple-msa-with-t-coffee">Computing simple MSA with T-Coffee</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="index.html#protein-sequences">Protein Sequences</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="index.html#general-considerations">General considerations</a></li>
 <li class="toctree-l4"><a class="reference internal" href="index.html#computing-a-simple-msa-default-t-coffee">Computing a simple MSA (default T-Coffee)</a></li>
 <li class="toctree-l4"><a class="reference internal" href="index.html#aligning-multiple-datasets-combining-multiple-msas">Aligning multiple datasets/Combining multiple MSAs</a></li>
@@ -288,28 +288,12 @@
 <li class="toctree-l5"><a class="reference internal" href="index.html#can-you-guess-the-optimal-parameters">Can you guess the optimal parameters?</a></li>
 <li class="toctree-l5"><a class="reference internal" href="index.html#changing-the-substitution-matrix">Changing the substitution matrix</a></li>
 <li class="toctree-l5"><a class="reference internal" href="index.html#changing-gap-penalties">Changing gap penalties</a></li>
+<li class="toctree-l5"><a class="reference internal" href="index.html#aligning-very-large-datasets">Aligning (very) large datasets</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="index.html#aligning-very-large-datasets">Aligning (very) large datasets</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="index.html#aligning-very-large-datasets-with-muscle">Aligning (very) large datasets with MUSCLE</a></li>
-<li class="toctree-l4"><a class="reference internal" href="index.html#aligning-very-large-datasets-with-mafft">Aligning (very) large datasets with MAFFT</a></li>
-<li class="toctree-l4"><a class="reference internal" href="index.html#aligning-very-large-alignments-with-t-coffee">Aligning (very) large alignments with T-Coffee</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="index.html#using-many-methods-at-once">Using many methods at once</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="index.html#using-third-party-aligner-via-t-coffee">Using third party aligner via T-Coffee</a></li>
-<li class="toctree-l4"><a class="reference internal" href="index.html#using-all-the-methods-at-the-same-time-m-coffee">Using all the methods at the same time: M-Coffee</a></li>
-<li class="toctree-l4"><a class="reference internal" href="index.html#using-selected-methods-to-compute-your-msa">Using selected methods to compute your MSA</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="index.html#aligning-profiles">Aligning profiles</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="index.html#aligning-sequence-s-to-profile-s">Aligning sequence(s) to profile(s)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="index.html#computing-very-accurate-but-slow-alignments-with-psi-tm-coffee">Computing very accurate (but slow) alignments with PSI/TM-Coffee</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="index.html#using-protein-2d-3d-structural-information">Using protein 2D/3D structural information</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="index.html#protein-sequences-using-2d-and-or-3d-information">Protein sequences using 2D and/or 3D information</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="index.html#using-3d-structures-expresso-3d-coffee">Using 3D structures: Expresso/3D-Coffee</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="index.html#requirements-to-run-expresso-3d-coffee">Requirements to run Expresso/3D-Coffee</a></li>
 <li class="toctree-l5"><a class="reference internal" href="index.html#how-does-expresso-3d-coffee-work">How does Expresso/3D-Coffee work?</a></li>
@@ -331,30 +315,38 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="index.html#aligning-rna-sequences-2d-and-3d-structure">Aligning RNA sequences, 2D and 3D Structure</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="index.html#r-coffee-for-2d-structure">R-Coffee for 2D structure</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="index.html#rna-sequences-using-2d-and-3d-structure">RNA sequences using 2D and 3D Structure</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="index.html#rna-sequences-using-2d-structure-r-coffee">RNA sequences using 2D structure (R-Coffee)</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="index.html#introduction">Introduction</a></li>
 <li class="toctree-l5"><a class="reference internal" href="index.html#r-coffee-aligning-rna-sequences-using-secondary-structures">R-Coffee: aligning RNA sequences using secondary structures</a></li>
 <li class="toctree-l5"><a class="reference internal" href="index.html#improving-r-coffee">Improving R-Coffee</a></li>
 </ul>
 </li>
-<li class="toctree-l4"><a class="reference internal" href="index.html#rsap-coffee-for-rna-3d-structures">RSAP-Coffee for RNA 3D Structures</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="index.html#running-rsap-coffee">Running rsap-Coffee</a></li>
-</ul>
-</li>
-<li class="toctree-l4"><a class="reference internal" href="index.html#sara-coffee-for-rna-3d-structures">SARA-Coffee for RNA 3D Structures</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="index.html#rna-sequences-using-2d-and-3d-structures-sara-coffee-and-rsap-coffee">RNA Sequences using 2D and 3D structures (SARA-Coffee and RSAP-Coffee)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="index.html#running-sara-rsap-coffee">Running SARA/RSAP-Coffee</a></li>
+<li class="toctree-l5"><a class="reference internal" href="index.html#estimating-the-accuracy-of-an-rna-structure-based-alignment">Estimating the accuracy of an RNA structure based alignment</a></li>
 <li class="toctree-l5"><a class="reference internal" href="index.html#installing-sara-coffee-vm">Installing SARA-Coffee VM</a></li>
 <li class="toctree-l5"><a class="reference internal" href="index.html#docker-image-for-sara-coffee">Docker image for SARA-Coffee</a></li>
-<li class="toctree-l5"><a class="reference internal" href="index.html#running-sara-coffee">Running Sara-Coffee</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="index.html#aligning-dna-sequences">Aligning DNA sequences</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="index.html#id5">Aligning DNA sequences</a></li>
+<li class="toctree-l4"><a class="reference internal" href="index.html#id4">Aligning DNA sequences</a></li>
 <li class="toctree-l4"><a class="reference internal" href="index.html#pro-coffee-aligning-functional-dna-regions">Pro-Coffee: Aligning functional DNA regions</a></li>
 <li class="toctree-l4"><a class="reference internal" href="index.html#splice-variants">Splice variants</a></li>
 <li class="toctree-l4"><a class="reference internal" href="index.html#noisy-coding-dna-sequences">Noisy coding DNA sequences…</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#using-many-msa-methods-at-once">Using many MSA methods at once</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="index.html#using-third-party-aligner-via-t-coffee">Using third party aligner via T-Coffee</a></li>
+<li class="toctree-l4"><a class="reference internal" href="index.html#using-all-the-methods-at-the-same-time-m-coffee">Using all the methods at the same time: M-Coffee</a></li>
+<li class="toctree-l4"><a class="reference internal" href="index.html#using-selected-methods-to-compute-your-msa">Using selected methods to compute your MSA</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#aligning-profiles">Aligning profiles</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="index.html#aligning-sequence-s-to-profile-s">Aligning sequence(s) to profile(s)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="index.html#computing-very-accurate-but-slow-alignments-with-psi-tm-coffee">Computing very accurate (but slow) alignments with PSI/TM-Coffee</a></li>
 </ul>
 </li>
 </ul>
@@ -722,7 +714,7 @@
     
       <li><a href="index.html#document-index">Docs</a> &raquo;</li>
         
-      <li>T-Coffee Version_13.41.91.55def16 documentation</li>
+      <li>T-Coffee Version_13.41.92.f469187 documentation</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -2745,8 +2737,8 @@ $$: t_coffee -other_pg extract_from_pdb -infile 1PPGE -fasta -no_remote_pdb_file
 <p>Table 2. Most Suitable Appplications of each package. In any of the situations corresponding to each table line, (+++) indicates that the method is the best suited, (++) indicates that the method is not optimal but behaves reasonably well, (+) indicates that it is possible but not recommended (-) indicates that the option is not available.</p>
 </div>
 </div>
-<div class="section" id="computing-simple-msa-with-t-coffee">
-<h4>Computing simple MSA with T-Coffee<a class="headerlink" href="#computing-simple-msa-with-t-coffee" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="protein-sequences">
+<h4>Protein Sequences<a class="headerlink" href="#protein-sequences" title="Permalink to this headline">¶</a></h4>
 <div class="section" id="general-considerations">
 <h5>General considerations<a class="headerlink" href="#general-considerations" title="Permalink to this headline">¶</a></h5>
 <p>T-Coffee aligner is by default parallelized, meaning that it can use multiple cores when running on a cluster or a computer. By default, T-Coffee will use all available processors to run, but you can parallelize the differents steps and allocate the number of cores you want with the flag <strong>-multi_core</strong> or <strong>n_core</strong>. For more details, refer to the chapter <strong>T-Coffee Technical Documentation</strong>, subsection <strong>CPU control</strong>.</p>
@@ -2942,121 +2934,14 @@ $$: t_coffee proteases_small.fasta -method lalign_id_pair@EP@MATRIX@blosum62mt, 
 <p>It only makes sense to compare the consistency score of alternative alignments when these alignments have been computed using the same methods (lalign_id_pair and slow_pair for instance).</p>
 </div>
 </div>
-</div>
-</div>
 <div class="section" id="aligning-very-large-datasets">
-<h4>Aligning (very) large datasets<a class="headerlink" href="#aligning-very-large-datasets" title="Permalink to this headline">¶</a></h4>
-<div class="section" id="aligning-very-large-datasets-with-muscle">
-<h5>Aligning (very) large datasets with MUSCLE<a class="headerlink" href="#aligning-very-large-datasets-with-muscle" title="Permalink to this headline">¶</a></h5>
-<p>To run MUSCLE you can try one of the following command; don’t hesitate to MUSCLE tutorial or help to get more information.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Default</span> <span class="n">mode</span><span class="p">:</span>
-<span class="c1">##: muscle -in proteases_large.fasta &gt; proteases_large.muscle</span>
-
-<span class="n">Fast</span> <span class="n">mode</span> <span class="p">(</span><span class="n">less</span> <span class="n">accurate</span><span class="p">):</span>
-<span class="c1">##: muscle -in proteases_large.fasta -maxiters 1 -diags -sv -distance1 kbit20_3 \</span>
-<span class="o">&gt;</span> <span class="n">proteases_large</span><span class="o">.</span><span class="n">muscle</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="aligning-very-large-datasets-with-mafft">
-<h5>Aligning (very) large datasets with MAFFT<a class="headerlink" href="#aligning-very-large-datasets-with-mafft" title="Permalink to this headline">¶</a></h5>
-<p>MAFFT is can align large datasets by default however it is better to use the fastest mode with MAFFT using the <strong>retree</strong> parameter; don’t hesitate to MAFFT tutorial or help to get more information.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Default</span> <span class="n">mode</span><span class="p">:</span>
-<span class="c1">##: mafft input &gt; output</span>
-<span class="n">Fast</span> <span class="n">mode</span><span class="p">:</span>
-<span class="c1">##: mafft --retree 2 input &gt; output</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="aligning-very-large-alignments-with-t-coffee">
-<h5>Aligning (very) large alignments with T-Coffee<a class="headerlink" href="#aligning-very-large-alignments-with-t-coffee" title="Permalink to this headline">¶</a></h5>
-<p>T-Coffee is not very well gifted for aligning large datasets (for now), but you can give it a try using a special option that generates approximate fast alignments (command 1). These MSAs should roughly have the same accuracy as ClustalW, and are quite acceptable for sequences more than 40% identical. This mode works by only considering the best diagonals between two sequences, and by default all the diagonals with substitution score &gt;0 are considered. You can lower this value with the flag <strong>-ndiag</strong> to reduce the running time (command 2). This will be very useful if you have long and very similar sequences to align (DNA for instance).</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Command 1:
-$$: t_coffee proteases_large.fasta -mode quickaln
-
-Command 2:
- $$: t_coffee proteases_large.fasta -mode quickaln -ndiag=10
-</pre></div>
-</div>
-<p>Another alternative to align large datasets is a special mode of T-Coffee, fm-Coffee (command 3), derived from M-Coffee (see next section) and designed to be fast and able to handle large datasets (it is used for example in Ensembl). To do so, T-Coffee used three different fast aligners: MAFFT, MUSCLE and Kalign.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Command 3:
-$$: t_coffee proteases_large.fasta -mode fmcoffee
-</pre></div>
-</div>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>Once you have your large MSA, you can always shrink/trim it using reformatting options (see previous section) for instance by extracting the most informative sequences or by defining a % identity cut-off.</p>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>In the last 10 years, a special effort have been made to improve large scale alignment leading to the development of few new methods among which Clustal Omega, PASTA, UPP and we hope soon a MEGA-Coffee aligner. These methods are not incorporated in T-Coffee so if your datasets are really large (&gt;5000 sequences) don’t hesitate to use these methods instead.</p>
+<h6>Aligning (very) large datasets<a class="headerlink" href="#aligning-very-large-datasets" title="Permalink to this headline">¶</a></h6>
+<p>The consistency based default method is not really suited for more that 200 sequences. Above this number, it is recommanded to use the <a class="reference external" href="http://www.tcoffee.org/Projects/tcoffee/documentation/index.html#document-tcoffee_quickstart_regressive">regressive agorithm implemented in T-Coffee</a>.</p>
 </div>
 </div>
 </div>
-<div class="section" id="using-many-methods-at-once">
-<h4>Using many methods at once<a class="headerlink" href="#using-many-methods-at-once" title="Permalink to this headline">¶</a></h4>
-<p>One of the most common situation when building MSAs is to have several alignments produced by different alternative methods, and not knowing which one to choose. In this section, we show you how to use M-Coffee to combine many alignments into one single alignment, or how you can specify only the methods you want. M-Coffee is not always the best method, but extensive benchmarks on BAliBASE, PREFAB and HOMSTRAD have shown that it delivers the best alignment 2 times out of 3. If you do not want to use the methods provided by M-Coffee, you can also combine precomputed alignments.</p>
-<div class="section" id="using-third-party-aligner-via-t-coffee">
-<h5>Using third party aligner via T-Coffee<a class="headerlink" href="#using-third-party-aligner-via-t-coffee" title="Permalink to this headline">¶</a></h5>
-<p>T-Coffee is installed along with many aligners necessary to run M-Coffee for instance, and many more. If you type <strong>t_coffee</strong>, it will display on the screen the different t_coffee options and all the methods included. If you look carefully, you will see that most of the methods exist under two denominations: 1) <strong>&lt;method&gt;_msa</strong> or 2) <strong>&lt;method&gt;_pair</strong>. In the first case, it means that T-Coffee will use the specified method to run your MSA, so you can easily have a ClustalW or a MAFFT alignment using T-Coffee. In the second case, you ask T-Coffee to align every pair of sequence with the specified methods, the final MSA will be computed using the T-Coffee consistency between all the pairs. Go to the <strong>Integrating External Methods in T-Coffee</strong> if you want more information.</p>
-</div>
-<div class="section" id="using-all-the-methods-at-the-same-time-m-coffee">
-<h5>Using all the methods at the same time: M-Coffee<a class="headerlink" href="#using-all-the-methods-at-the-same-time-m-coffee" title="Permalink to this headline">¶</a></h5>
-<p>To use M-Coffee (M stands for Meta aligner), you will need several packages to be installed (see <strong>T-Coffee Installation</strong> and section <strong>Integrating External Methods in T-Coffee</strong>). If you did a default installation, all the software you need should be there. M-Coffee is a special mode of T-Coffee that you can call using the flag <strong>-mode mcoffee</strong>. It will align your sequence using 8 different aligners: ClustalW, POA, MUSCLE, ProbCons, MAFFT, Dialing-T, PCMA and T-Coffee:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$$: t_coffee proteases_small.fasta -mode mcoffee -output clustalw, html
-</pre></div>
-</div>
-<p>The final MSA is a combination of all methods. The alignment is colored with the T-Coffee consistency color scheme, but in this case the colors will reflect the consistency between methods: 1) regions in red have a high consistency, so all the methods agree and you can expect them to be fairly accurate, 2) regions in green/blue have the lowest consistency, meaning that all the methods deliver different alignment in these regions and you should not trust them. Overall this alignment has a score of 951 (1000 being the max), which means that it is roughly 95% consistent with the entire collection; this is a fairly high index meaning that you can trust your alignment.</p>
-</div>
-<div class="section" id="using-selected-methods-to-compute-your-msa">
-<h5>Using selected methods to compute your MSA<a class="headerlink" href="#using-selected-methods-to-compute-your-msa" title="Permalink to this headline">¶</a></h5>
-<p>Using the 8 methods predefined in M-Coffee can sometimes be a bit heavy, if you only want to use a subset of your favorite methods, you should know that each of these methods is available via the <strong>-method</strong> flag. You can make all the combination you want !!! For instance, to combine MAFFT, MUSCLE, T-Coffee and ProbCons, you can use:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$$: t_coffee proteases_small.fasta -method=t_coffee_msa,mafft_msa,probcons_msa, \
-    muscle_msa -output=html
-</pre></div>
-</div>
-</div>
-</div>
-<div class="section" id="aligning-profiles">
-<h4>Aligning profiles<a class="headerlink" href="#aligning-profiles" title="Permalink to this headline">¶</a></h4>
-<p>Sometimes, it is better to prealign a subset of your sequences, and then to use this small alignment as a master for adding sequences (sequence to profile alignment) or even to align several profiles together if your protein family contains distantly related groups. T-Coffee contains most of the facilities available in ClustalW to deal with profiles, and the strategy we outline here can be used to deal with large datasets.</p>
-<div class="section" id="aligning-sequence-s-to-profile-s">
-<h5>Aligning sequence(s) to profile(s)<a class="headerlink" href="#aligning-sequence-s-to-profile-s" title="Permalink to this headline">¶</a></h5>
-<p>Assuming you have multiple alignment(s) (sproteases_small.aln) or profile(s) here is a simple strategy to align sequence(s) to your profile(s). It can align a variable number of sequences from 1 to N, with a variable number of profiles from 1 ot N: you can mix sequences and profiles in any proportion you like.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Adding one sequence to your MSA:
-$$: t_coffee proteases_oneseq.fasta -profile proteases_small.aln
-
-Adding many sequences to many profiles:
-$$: t_coffee -profile=prf1.aln,prf2.aln,prf3.aln -outfile=combined_profiles.aln
-</pre></div>
-</div>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>You can also use all the methods you want but be aware when using external methods that profiles are nto always supported. When it is not, it is replaced with its consensus sequence which will not be quite as accurate. Methods supporting full profile information are: lalign_id_pair, slow_pair, proba_pair, clustalw_pair and clustalw_msa. All the other methods (internal or external) treat the profile as a consensus (less accurate).</p>
-</div>
-</div>
-<div class="section" id="computing-very-accurate-but-slow-alignments-with-psi-tm-coffee">
-<h5>Computing very accurate (but slow) alignments with PSI/TM-Coffee<a class="headerlink" href="#computing-very-accurate-but-slow-alignments-with-psi-tm-coffee" title="Permalink to this headline">¶</a></h5>
-<p>PSI-Coffee is currently the most accurate mode of T-Coffee but also the slowest. Its principle is rather simple: it associates every sequence with a profile of homologous sequences gathered using BLAST on a sequence database (nr by default). PSI-Coffee then uses the profiles instead of the initial sequences to makes a multiple profile alignment (command 1). In a last step, your profiles are replaced by their initial query sequence from your initial dataset and returns a MSA of your sequences. PSI-Coffee can also use reduced database instead of nr (installed locally) in order to speed-up the process. A special mode, TM-Coffee, exists using PSI-Coffee but specialized to align transmembrane proteins using a reduced database of TM proteins and also including a prediction of transmembrane domains with the flag <strong>-template_file PSITM</strong> (command 2). It is much faster as the search database is limited to known transmembrane protein, however, it applies in only specific cases unlike PSI-Coffee which is a general method. You can find more information about TM-Coffee <a class="reference external" href="http://tcoffee.crg.cat/apps/tcoffee/tutorial_tmcoffee.html">here</a>. If you want to specify a local BLAST version and a local database of your choice, just add to your command line the flags <strong>-blast_server</strong> and <strong>-protein_db</strong> and the corresponding paths.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Command 1: PSI-Coffee
-$$: t_coffee sample_seq1.fasta -mode psicoffee
-
-Command 2: TM-Coffee
-##: t_coffee proteases_small.fasta -mode psicoffee -template_file PSITM -protein_db &lt;database&gt;
-</pre></div>
-</div>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>PSI/TM-Coffee requires BLAST and a database to search; if you don’t have BLAST installed locally, it will use the BLAST default of T-Coffee. More importantly, if you don’t specify a reduced database for TM-Coffee, it will run on nr and be equal to PSI-Coffee.</p>
-</div>
-<div class="admonition hint">
-<p class="admonition-title">Hint</p>
-<p>When running PSI/TM-Coffee, T-Coffee will use the BLAST EBI by default; it can happen that the web service is unavailable from time to time, T-Coffee will return a warning asking you to use NCBI BLAST instead. You can either do that or wait and rerun your job later on.</p>
-</div>
-</div>
-</div>
-<div class="section" id="using-protein-2d-3d-structural-information">
-<h4>Using protein 2D/3D structural information<a class="headerlink" href="#using-protein-2d-3d-structural-information" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="protein-sequences-using-2d-and-or-3d-information">
+<h4>Protein sequences using 2D and/or 3D information<a class="headerlink" href="#protein-sequences-using-2d-and-or-3d-information" title="Permalink to this headline">¶</a></h4>
 <p>Using structural information when aligning sequences is very useful. The reason is that structures diverge slower than sequences. As a consequence, one may still find a discernable homology between two sequences that have been diverging for a long time beyond recognition using their corresponding structure. Yet, when assembling a structure based MSA, you will realize that these sequences contain key conserved residues that a simple alignment procedure was unable to reveal. We show you in this section how to make the best of T-Coffee tools to incorporate structural information in your alignment.</p>
 <div class="section" id="using-3d-structures-expresso-3d-coffee">
 <h5>Using 3D structures: Expresso/3D-Coffee<a class="headerlink" href="#using-3d-structures-expresso-3d-coffee" title="Permalink to this headline">¶</a></h5>
@@ -3202,11 +3087,11 @@ $$: t_coffee sample_seq1.fasta -template_file PSITM -output tm_html
 </div>
 </div>
 </div>
-<div class="section" id="aligning-rna-sequences-2d-and-3d-structure">
-<h4>Aligning RNA sequences, 2D and 3D Structure<a class="headerlink" href="#aligning-rna-sequences-2d-and-3d-structure" title="Permalink to this headline">¶</a></h4>
-<p>RNA sequences are very important and almost every-where these days. The main property of RNA sequences is to have a secondary structure that can be used to guide the alignment. While the default T-Coffee has no special RNA alignment method incorporated in, we have developped specific modes and tools for RNA alignment and analysis (see subsection <strong>Manipulating RNA Sequences</strong> for more details).</p>
-<div class="section" id="r-coffee-for-2d-structure">
-<h5>R-Coffee for 2D structure<a class="headerlink" href="#r-coffee-for-2d-structure" title="Permalink to this headline">¶</a></h5>
+<div class="section" id="rna-sequences-using-2d-and-3d-structure">
+<h4>RNA sequences using 2D and 3D Structure<a class="headerlink" href="#rna-sequences-using-2d-and-3d-structure" title="Permalink to this headline">¶</a></h4>
+<p>The main property of RNA sequences is to have a secondary structure that can be used to guide the alignment. While the default T-Coffee has no special RNA alignment method incorporated in, we have developped specific modes and tools for RNA alignment and analysis (see subsection <strong>Manipulating RNA Sequences</strong> for more details).</p>
+<div class="section" id="rna-sequences-using-2d-structure-r-coffee">
+<h5>RNA sequences using 2D structure (R-Coffee)<a class="headerlink" href="#rna-sequences-using-2d-structure-r-coffee" title="Permalink to this headline">¶</a></h5>
 <div class="section" id="introduction">
 <h6>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h6>
 <p>R-Coffee is the special mode of T-Coffee developped to handle specifically RNA sequences. It has been proven far more accurate than T-Coffee default because of its specific design. It can be run as a standalone aligner (using secondary structure prediction) or using third party software.</p>
@@ -3239,31 +3124,55 @@ $$: t_coffee sample_rnaseq1.fasta -mode rmcoffee
 </div>
 </div>
 </div>
-<div class="section" id="rsap-coffee-for-rna-3d-structures">
-<h5>RSAP-Coffee for RNA 3D Structures<a class="headerlink" href="#rsap-coffee-for-rna-3d-structures" title="Permalink to this headline">¶</a></h5>
-<p>RSAP-Coffee is a an experemental mode of T-Coffee using protein structral aligners. It processes RNA PDB files so that the C3’ Carbons are treated as C-alpha in a protein chain. This procedure is suitable for any protein structural aligner that only considers alpha carbons in the main chain. By default, sracoffee uses  the sap_aligner that ships with T-Coffee default distribution.</p>
-<div class="section" id="running-rsap-coffee">
-<h6>Running rsap-Coffee<a class="headerlink" href="#running-rsap-coffee" title="Permalink to this headline">¶</a></h6>
-<p>RSAP-Coffee works ina  way similar to Expresso/3Dcoffee. It requires providing a template file in which you matchyour PDB files with the corresponding sequences</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&lt;</span><span class="n">RNA</span> <span class="n">Seq</span> <span class="n">Identifier</span><span class="o">&gt;</span>  <span class="n">_P_</span> <span class="o">&lt;</span><span class="n">PDB</span> <span class="n">identifier</span> <span class="o">-</span> <span class="n">one</span> <span class="n">chain</span> <span class="n">only</span> <span class="n">per</span> <span class="n">PDB</span><span class="o">&gt;</span>
-<span class="o">&gt;&lt;</span><span class="n">RNA</span> <span class="n">Seq</span> <span class="n">Identifier</span><span class="o">&gt;</span>  <span class="n">_P_</span> <span class="o">&lt;</span><span class="n">PDB</span> <span class="n">identifier</span> <span class="o">-</span> <span class="n">one</span> <span class="n">chain</span> <span class="n">only</span> <span class="n">per</span> <span class="n">PDB</span><span class="o">&gt;</span>
+<div class="section" id="rna-sequences-using-2d-and-3d-structures-sara-coffee-and-rsap-coffee">
+<h5>RNA Sequences using 2D and 3D structures (SARA-Coffee and RSAP-Coffee)<a class="headerlink" href="#rna-sequences-using-2d-and-3d-structures-sara-coffee-and-rsap-coffee" title="Permalink to this headline">¶</a></h5>
+<p>SARA-Coffee is a structure based multiple RNA aligner. This is a new algorithm that joins the pairwise RNA structure alignments performed by SARA with the multiple sequence T-Coffee framework. Since setting up the SARA-Coffee dependencies (T-Coffee, <a class="reference external" href="http://structure.biofold.org/sara/">SARA</a>, <a class="reference external" href="http://x3dna.org/">X3DNA</a>, <a class="reference external" href="http://www.numpy.org/">Numpy</a>, <a class="reference external" href="http://biopython.org/">Biopython</a>, Perl, Python 2.7) can be tricky we provide a self-contained Vagrant VM, which downloads and configures all the required pieces of software for you. This procedure can be complex, and if you cannot install SARA, we recommand using RSAP-Coffee instead (cf next paragraph).</p>
+<p>RSAP-Coffee is a an an alternative experimental mode of SARA-Coffee using protein structral aligners. It processes RNA PDB files so that the C3’ Carbons are treated as C-alpha in a protein chain. This procedure is suitable for any protein structural aligner that only considers alpha carbons in the main chain. By default, rsapcoffee uses  the sap_aligner that ships with T-Coffee default distribution.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>SARA-Coffee and RSAP-Coffee use very similar command line. In practice, the only difference is the use of the method sa_pair instead of the sara_pair methiod when buolding the T-Coffee library.</p>
+</div>
+<div class="section" id="running-sara-rsap-coffee">
+<h6>Running SARA/RSAP-Coffee<a class="headerlink" href="#running-sara-rsap-coffee" title="Permalink to this headline">¶</a></h6>
+<p>The procedure is similar to Expresso/3Dcoffee and requires providing a template file in the PDB files are matched with the corresponding sequences</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&lt;</span><span class="n">RNA</span> <span class="n">Seq</span> <span class="n">Identifier</span><span class="o">&gt;</span>  <span class="n">_P_</span> <span class="o">&lt;</span><span class="n">PDB</span><span class="o">&gt;</span>
+<span class="o">&gt;&lt;</span><span class="n">RNA</span> <span class="n">Seq</span> <span class="n">Identifier</span><span class="o">&gt;</span>  <span class="n">_P_</span> <span class="o">&lt;</span><span class="n">PDB</span><span class="o">&gt;</span>
 <span class="o">...</span>
 </pre></div>
 </div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>PBD can be either a file PDB identifier or a PDB file. The file can be either in your homew dir or on a location specified by the environement variable <strong>PBD_DIR</strong>. If you use an identifier T-Coffee will be able to download the file from RCSB.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If in your PDB the SEQRES and the ATOM yield a different sequence, T-Coffee will use a sequence estimated from ATOM. If tghis sequence does not match your FASTA, they will be reconciliated using an alignment procedure to establish residues equivalencies.</p>
+</div>
 <p>You then need to run</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$$: t_coffee &lt;yourseq.fasta&gt; -mode rsapcoffee -template_file &lt;template file&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$$: t_coffee t_coffee -seq rna3D.fa -mode rsapcoffee -template_file rna3D.template
 </pre></div>
 </div>
-<p>By Default, SRAP-Coffee only runs sap, but you can also run other structural methods supported by T-Cofee. like Mustang or TM-Align</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$$: t_coffee &lt;yourseq.fasta&gt; -mode rsapcoffee -method sap_pair, mustang_pair, TMalign_pair -template_file &lt;template file&gt;
+<dl class="simple">
+<dt>Or</dt><dd><p>$$: t_coffee t_coffee -seq rna3D.fa -mode saracoffee -template_file rna3D.template</p>
+</dd>
+</dl>
+<p>By Default, RSAP-Coffee only runs sap, but you can also run other structural methods supported by T-Cofee. like Mustang or TM-Align</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$#: t_coffee &lt;yourseq.fasta&gt; -mode rsapcoffee -method sap_pair, mustang_pair, TMalign_pair -template_file &lt;template file&gt;
+</pre></div>
+</div>
+<p>The default procedure is meant to handle a muxture of PDB files and sequences. All possble PDB sequences pairs are aligned using strucure based methods (structural library) and all possibl?e sequence pairs (including PDB sequences) sequences are then aligned using the R-Coffee mode (secondary library). In the secondary library, the PDB sequences are aligned using their experimentallyerived secondary structures, as estimated by X3DNA. Note that id you aonly have structures, you may use the folloing command lines to carry out a strict structure based sequence alignment:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$$: t_coffee -seq rna3D.fa -method sap_pair -template_file rna3D.template
+</pre></div>
+</div>
+<p>In that case the PDB Sequences are aligned using the experimental</p>
+</div>
+<div class="section" id="estimating-the-accuracy-of-an-rna-structure-based-alignment">
+<h6>Estimating the accuracy of an RNA structure based alignment<a class="headerlink" href="#estimating-the-accuracy-of-an-rna-structure-based-alignment" title="Permalink to this headline">¶</a></h6>
+<p>It is possible to use the irmsd procedure to estimate d-RMSD of your sutcure based sequence alignmnent</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$$: t_coffee -other_pg irmsd -aln rna3D_msa2.aln -template_file rna3D.template
 </pre></div>
 </div>
 </div>
-</div>
-<div class="section" id="sara-coffee-for-rna-3d-structures">
-<h5>SARA-Coffee for RNA 3D Structures<a class="headerlink" href="#sara-coffee-for-rna-3d-structures" title="Permalink to this headline">¶</a></h5>
-<p>SARA-Coffee is a structure based multiple RNA aligner. This is a new algorithm that joins the pairwise RNA structure alignments performed by SARA with the multiple sequence T-Coffee framework. Since setting up the SARA-Coffee dependencies (T-Coffee, <a class="reference external" href="http://structure.biofold.org/sara/">SARA</a>, <a class="reference external" href="http://x3dna.org/">X3DNA</a>, <a class="reference external" href="http://www.numpy.org/">Numpy</a>, <a class="reference external" href="http://biopython.org/">Biopython</a>, Perl, Python 2.7) can be tricky we provide a self-contained Vagrant VM, which downloads and configures all the required pieces of software for you.</p>
-<p>As an alternative to the complex installation described above, we also provide the rsap-Coffee RNA structural aligner that uses proteins structral aligners to align RNA 3D structures (cf section above). This mode has not been extensivly tested. It is expected to have a comparable albeith slighly lower accuracy than sara-coffee.</p>
 <div class="section" id="installing-sara-coffee-vm">
 <h6>Installing SARA-Coffee VM<a class="headerlink" href="#installing-sara-coffee-vm" title="Permalink to this headline">¶</a></h6>
 <p>Follow the procedure:</p>
@@ -3307,25 +3216,12 @@ $$: t_coffee sample_rnaseq1.fasta -mode rmcoffee
 <p>this command assumes your input file is located in the working directory. If this is not the case, you will need to mount the input file path accordingly.</p>
 </div>
 </div>
-<div class="section" id="running-sara-coffee">
-<h6>Running Sara-Coffee<a class="headerlink" href="#running-sara-coffee" title="Permalink to this headline">¶</a></h6>
-<p>Sara-Coffee works ina  way similar to Expresso/3Dcoffee. It requires providing a template file in which you matchyour PDB files with the corresponding sequences</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&lt;</span><span class="n">RNA</span> <span class="n">Seq</span> <span class="n">Identifier</span><span class="o">&gt;</span>  <span class="n">_P_</span> <span class="o">&lt;</span><span class="n">PDB</span> <span class="n">identifier</span> <span class="o">-</span> <span class="n">one</span> <span class="n">chain</span> <span class="n">only</span> <span class="n">per</span> <span class="n">PDB</span><span class="o">&gt;</span>
-<span class="o">&gt;&lt;</span><span class="n">RNA</span> <span class="n">Seq</span> <span class="n">Identifier</span><span class="o">&gt;</span>  <span class="n">_P_</span> <span class="o">&lt;</span><span class="n">PDB</span> <span class="n">identifier</span> <span class="o">-</span> <span class="n">one</span> <span class="n">chain</span> <span class="n">only</span> <span class="n">per</span> <span class="n">PDB</span><span class="o">&gt;</span>
-<span class="o">...</span>
-</pre></div>
-</div>
-<p>You then need to run</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$$: t_coffee &lt;yourseq.fasta&gt; -mode saracoffee -template_file &lt;template file&gt;
-</pre></div>
-</div>
-</div>
 </div>
 </div>
 <div class="section" id="aligning-dna-sequences">
 <h4>Aligning DNA sequences<a class="headerlink" href="#aligning-dna-sequences" title="Permalink to this headline">¶</a></h4>
-<div class="section" id="id5">
-<h5>Aligning DNA sequences<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h5>
+<div class="section" id="id4">
+<h5>Aligning DNA sequences<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h5>
 <p>MSA methods are not at their best when aligning DNA sequences. Whenever you can, try using a local MSA package like the Gibbs sampler; yet if you believe your DNA sequence are homologous over their entire length, you can use T-Coffee. In theory, the program automatically recognizes DNA sequences and uses appropriate methods, yet adding the <strong>-type=dna flag</strong> cannot do any harm…</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$$: t_coffee sample_dnaseq1.fasta -type=dna
 </pre></div>
@@ -3380,6 +3276,68 @@ $$: t_coffee three_cdna.fasta -method cdna_fast_pair
 Command 3: Recovering your protein sequences
 $$: t_coffee -other_pg seq_reformat -in three_cdna.aln -action +clean_cdna +translate
 </pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="using-many-msa-methods-at-once">
+<h4>Using many MSA methods at once<a class="headerlink" href="#using-many-msa-methods-at-once" title="Permalink to this headline">¶</a></h4>
+<p>One of the most common situation when building MSAs is to have several alignments produced by different alternative methods, and not knowing which one to choose. In this section, we show you how to use M-Coffee to combine many alignments into one single alignment, or how you can specify only the methods you want. M-Coffee is not always the best method, but extensive benchmarks on BAliBASE, PREFAB and HOMSTRAD have shown that it delivers the best alignment 2 times out of 3. If you do not want to use the methods provided by M-Coffee, you can also combine precomputed alignments.</p>
+<div class="section" id="using-third-party-aligner-via-t-coffee">
+<h5>Using third party aligner via T-Coffee<a class="headerlink" href="#using-third-party-aligner-via-t-coffee" title="Permalink to this headline">¶</a></h5>
+<p>T-Coffee is installed along with many aligners necessary to run M-Coffee for instance, and many more. If you type <strong>t_coffee</strong>, it will display on the screen the different t_coffee options and all the methods included. If you look carefully, you will see that most of the methods exist under two denominations: 1) <strong>&lt;method&gt;_msa</strong> or 2) <strong>&lt;method&gt;_pair</strong>. In the first case, it means that T-Coffee will use the specified method to run your MSA, so you can easily have a ClustalW or a MAFFT alignment using T-Coffee. In the second case, you ask T-Coffee to align every pair of sequence with the specified methods, the final MSA will be computed using the T-Coffee consistency between all the pairs. Go to the <strong>Integrating External Methods in T-Coffee</strong> if you want more information.</p>
+</div>
+<div class="section" id="using-all-the-methods-at-the-same-time-m-coffee">
+<h5>Using all the methods at the same time: M-Coffee<a class="headerlink" href="#using-all-the-methods-at-the-same-time-m-coffee" title="Permalink to this headline">¶</a></h5>
+<p>To use M-Coffee (M stands for Meta aligner), you will need several packages to be installed (see <strong>T-Coffee Installation</strong> and section <strong>Integrating External Methods in T-Coffee</strong>). If you did a default installation, all the software you need should be there. M-Coffee is a special mode of T-Coffee that you can call using the flag <strong>-mode mcoffee</strong>. It will align your sequence using 8 different aligners: ClustalW, POA, MUSCLE, ProbCons, MAFFT, Dialing-T, PCMA and T-Coffee:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$$: t_coffee proteases_small.fasta -mode mcoffee -output clustalw, html
+</pre></div>
+</div>
+<p>The final MSA is a combination of all methods. The alignment is colored with the T-Coffee consistency color scheme, but in this case the colors will reflect the consistency between methods: 1) regions in red have a high consistency, so all the methods agree and you can expect them to be fairly accurate, 2) regions in green/blue have the lowest consistency, meaning that all the methods deliver different alignment in these regions and you should not trust them. Overall this alignment has a score of 951 (1000 being the max), which means that it is roughly 95% consistent with the entire collection; this is a fairly high index meaning that you can trust your alignment.</p>
+</div>
+<div class="section" id="using-selected-methods-to-compute-your-msa">
+<h5>Using selected methods to compute your MSA<a class="headerlink" href="#using-selected-methods-to-compute-your-msa" title="Permalink to this headline">¶</a></h5>
+<p>Using the 8 methods predefined in M-Coffee can sometimes be a bit heavy, if you only want to use a subset of your favorite methods, you should know that each of these methods is available via the <strong>-method</strong> flag. You can make all the combination you want !!! For instance, to combine MAFFT, MUSCLE, T-Coffee and ProbCons, you can use:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$$: t_coffee proteases_small.fasta -method=t_coffee_msa,mafft_msa,probcons_msa, \
+    muscle_msa -output=html
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="aligning-profiles">
+<h4>Aligning profiles<a class="headerlink" href="#aligning-profiles" title="Permalink to this headline">¶</a></h4>
+<p>Sometimes, it is better to prealign a subset of your sequences, and then to use this small alignment as a master for adding sequences (sequence to profile alignment) or even to align several profiles together if your protein family contains distantly related groups. T-Coffee contains most of the facilities available in ClustalW to deal with profiles, and the strategy we outline here can be used to deal with large datasets.</p>
+<div class="section" id="aligning-sequence-s-to-profile-s">
+<h5>Aligning sequence(s) to profile(s)<a class="headerlink" href="#aligning-sequence-s-to-profile-s" title="Permalink to this headline">¶</a></h5>
+<p>Assuming you have multiple alignment(s) (sproteases_small.aln) or profile(s) here is a simple strategy to align sequence(s) to your profile(s). It can align a variable number of sequences from 1 to N, with a variable number of profiles from 1 ot N: you can mix sequences and profiles in any proportion you like.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Adding one sequence to your MSA:
+$$: t_coffee proteases_oneseq.fasta -profile proteases_small.aln
+
+Adding many sequences to many profiles:
+$$: t_coffee -profile=prf1.aln,prf2.aln,prf3.aln -outfile=combined_profiles.aln
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>You can also use all the methods you want but be aware when using external methods that profiles are nto always supported. When it is not, it is replaced with its consensus sequence which will not be quite as accurate. Methods supporting full profile information are: lalign_id_pair, slow_pair, proba_pair, clustalw_pair and clustalw_msa. All the other methods (internal or external) treat the profile as a consensus (less accurate).</p>
+</div>
+</div>
+<div class="section" id="computing-very-accurate-but-slow-alignments-with-psi-tm-coffee">
+<h5>Computing very accurate (but slow) alignments with PSI/TM-Coffee<a class="headerlink" href="#computing-very-accurate-but-slow-alignments-with-psi-tm-coffee" title="Permalink to this headline">¶</a></h5>
+<p>PSI-Coffee is currently the most accurate mode of T-Coffee but also the slowest. Its principle is rather simple: it associates every sequence with a profile of homologous sequences gathered using BLAST on a sequence database (nr by default). PSI-Coffee then uses the profiles instead of the initial sequences to makes a multiple profile alignment (command 1). In a last step, your profiles are replaced by their initial query sequence from your initial dataset and returns a MSA of your sequences. PSI-Coffee can also use reduced database instead of nr (installed locally) in order to speed-up the process. A special mode, TM-Coffee, exists using PSI-Coffee but specialized to align transmembrane proteins using a reduced database of TM proteins and also including a prediction of transmembrane domains with the flag <strong>-template_file PSITM</strong> (command 2). It is much faster as the search database is limited to known transmembrane protein, however, it applies in only specific cases unlike PSI-Coffee which is a general method. You can find more information about TM-Coffee <a class="reference external" href="http://tcoffee.crg.cat/apps/tcoffee/tutorial_tmcoffee.html">here</a>. If you want to specify a local BLAST version and a local database of your choice, just add to your command line the flags <strong>-blast_server</strong> and <strong>-protein_db</strong> and the corresponding paths.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Command 1: PSI-Coffee
+$$: t_coffee sample_seq1.fasta -mode psicoffee
+
+Command 2: TM-Coffee
+##: t_coffee proteases_small.fasta -mode psicoffee -template_file PSITM -protein_db &lt;database&gt;
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>PSI/TM-Coffee requires BLAST and a database to search; if you don’t have BLAST installed locally, it will use the BLAST default of T-Coffee. More importantly, if you don’t specify a reduced database for TM-Coffee, it will run on nr and be equal to PSI-Coffee.</p>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>When running PSI/TM-Coffee, T-Coffee will use the BLAST EBI by default; it can happen that the web service is unavailable from time to time, T-Coffee will return a warning asking you to use NCBI BLAST instead. You can either do that or wait and rerun your job later on.</p>
 </div>
 </div>
 </div>
@@ -6150,7 +6108,7 @@ $$: t_coffee -infile=sample_aln1.aln -evaluate -method proba_pair
 </div>
 <div class="section" id="making-a-new-release">
 <h3>Making a new release<a class="headerlink" href="#making-a-new-release" title="Permalink to this headline">¶</a></h3>
-<p>T-Coffee is automatically build by using the [Circle CI](<a class="reference external" href="https://circleci.com/gh/cbcrg/tcoffee">https://circleci.com/gh/cbcrg/tcoffee</a>) service. The procedure starts with an update of the version number followed by a git push that triggers the validation of the new release on circleCI and a posting via an amzon instance hosting the T-Coffee web site. All these operations are detailed below. Depending on the release type the correspinding counter will be incremented by 1 &lt;nmajor&gt;.&lt;stable&gt;.&lt;beta&gt;</p>
+<p>T-Coffee is automatically build by using the [Circle CI](<a class="reference external" href="https://circleci.com/gh/cbcrg/tcoffee">https://circleci.com/gh/cbcrg/tcoffee</a>) service. The procedure starts with an update of the version number followed by a git push that triggers the validation of the new release on circleCI and a posting via an Amazon instance hosting the T-Coffee web site. All these operations are detailed below. Depending on the release type the correspinding counter will be incremented by 1 &lt;nmajor&gt;.&lt;stable&gt;.&lt;beta&gt;</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$#: cd t_coffee/src
 $#: make release type=beta(default)|stable|major m=&#39;short description of the main feature&#39; test=core(default)|all|full|remote|docs|web|none
 </pre></div>
@@ -6163,33 +6121,37 @@ docs  : will run all the dumps compiled from the rst files</p>
 <div class="section" id="beta-release">
 <h4>Beta Release<a class="headerlink" href="#beta-release" title="Permalink to this headline">¶</a></h4>
 <p>For a beta, the following needs to go through:</p>
-<dl class="simple">
-<dt>::</dt><dd><p>$#: make release type=beta test=core|none</p>
-</dd>
-</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$#: make release type=beta test=core|none
+</pre></div>
+</div>
 </div>
 <div class="section" id="stable-release">
 <h4>Stable Release<a class="headerlink" href="#stable-release" title="Permalink to this headline">¶</a></h4>
 <p>For a Stable, the following needs to go through:</p>
-<dl class="simple">
-<dt>::</dt><dd><p>$#: make release type=beta test=core
-$#: make release type=stable teste=none</p>
-</dd>
-</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$#: make release type=beta test=core
+$#: make release type=stable teste=none
+</pre></div>
+</div>
 </div>
 <div class="section" id="major-release">
 <h4>Major Release<a class="headerlink" href="#major-release" title="Permalink to this headline">¶</a></h4>
 <p>For a Major, the following needs to go through. Note that a major implies some important milestone such as a publication. For a start, you should make sure the documentation compiles well. If needed you should recompile all the available tests</p>
-<dl class="simple">
-<dt>::</dt><dd><p>$#: doc2test.pl -play docs/doc2test.rst -data docs/.data/ -dump docs/.dumps/ -update
-$#: doc2test.pl -play tests/doc2test.rst -data tests/.data/ -dump tests/.dumps/ -update</p>
-</dd>
-</dl>
-<p>Then you should make sure ALL the tests pass well on your local machine. This is a rsather lengthy procedure that you want to bulletpruf localy before running it on CircleCI</p>
-<dl class="simple">
-<dt>::</dt><dd><p>$#: doc2test.pl -replay  .</p>
-</dd>
-</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$#: doc2test.pl -play docs/doc2test.rst -data docs/.data/ -dump docs/.dumps/ -update
+$#: doc2test.pl -play tests/all2test.rst -data tests/.data/ -dump tests/.dumps/ -update
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>doc2test contains the list of ALL the rst files to be tested. Note that in an RST files, the only files CL that get tested are the ones starting wit <strong>$$</strong></p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>The files required tu run the command lines are available in docs/.data and test/.data</p>
+</div>
+<p>Make sure ALL the tests pass well on your local machine before running them on CircleCI</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$#: doc2test.pl -replay  .
+</pre></div>
+</div>
 <p>If they do, you should the run the following</p>
 <dl class="simple">
 <dt>::</dt><dd><p>$#: make release type=beta test=full</p>
@@ -6208,27 +6170,23 @@ $#: doc2test.pl -play tests/doc2test.rst -data tests/.data/ -dump tests/.dumps/ 
 <h4>Triggering a release<a class="headerlink" href="#triggering-a-release" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
 <li><p>go into t_coffee/src</p></li>
-<li><p>type make release=beta|stable|major m=’commit comments – including [ci skip] if needed</p></li>
+<li><p>type make release=beta|stable|major m=’commit comments’ – including [ci skip] if needed</p></li>
 </ul>
-<dl>
-<dt>This will trigger</dt><dd><dl class="option-list">
-<dt><kbd><span class="option">-a<var>n</var></span></kbd></dt>
-<dd><p>update of the version number in lib/version/version_number.version: Version_&lt;major&gt;.&lt;stable&gt;.&lt;build&gt;.&lt;github Branch Number&gt;</p>
-</dd>
-</dl>
-<p>-the file .circleci/config.yml will be programmatically edidted by read_program_version.pl to state the kind of release to be done by CircleCI
--make distribution will run. Among othe things it will</p>
+<p>This will trigger
+* An  update of the version number in lib/version/version_number.version: Version_&lt;major&gt;.&lt;stable&gt;.&lt;build&gt;.&lt;github Branch Number&gt;
+* The file .circleci/config.yml will be programmatically edidted by read_program_version.pl to state the kind of release to be done by CircleCI
+* The command ‘make distribution’ will run. Among othe things it will</p>
 <blockquote>
-<div><p>-check that the distribution procedure is functional - it is a similar procedure that will be used by CircleCI
--compile the documentation with sphinx and update docs/.html – this requires sphinx to be installed on the local machine</p>
+<div><ul class="simple">
+<li><p>Check that the distribution procedure is functional - it is a similar procedure that will be used by CircleCI</p></li>
+<li><p>Compile the documentation with sphinx and update docs/.html – this requires sphinx to be installed on the local machine</p></li>
+</ul>
 </div></blockquote>
-</dd>
-</dl>
 </div>
 <div class="section" id="circleci-building">
 <h4>CircleCI building<a class="headerlink" href="#circleci-building" title="Permalink to this headline">¶</a></h4>
 <dl class="simple">
-<dt>The tcoffee git repoitory is registered to CircleCI via the following hook:</dt><dd><p><a class="reference external" href="https://github.com/cbcrg/tcoffee/settings/hooks">https://github.com/cbcrg/tcoffee/settings/hooks</a></p>
+<dt>The tcoffee git repository is registered to CircleCI via the following hook:</dt><dd><p><a class="reference external" href="https://github.com/cbcrg/tcoffee/settings/hooks">https://github.com/cbcrg/tcoffee/settings/hooks</a></p>
 </dd>
 </dl>
 <p>The Circle build is controlled by the [.circleci/circle.yml](circle.yml) file and processes as follows:</p>
@@ -6239,28 +6197,26 @@ $#: doc2test.pl -play tests/doc2test.rst -data tests/.data/ -dump tests/.dumps/ 
 <blockquote>
 <div><p><cite>~/publish/sandbox/build</cite>. This folder is moved under path <cite>build/tcoffee</cite></p>
 </div></blockquote>
-<ol class="arabic simple" start="3">
+<ol class="arabic simple">
 <li><p>A new Docker image named <cite>xcoffee</cite> is created copying the content of the folder <cite>build/tcoffee</cite>.</p></li>
 </ol>
 <blockquote>
 <div><p>The image is built by using this [docker/Dockerfile](docker/Dockerfile).</p>
 </div></blockquote>
-<ol class="arabic simple" start="4">
+<ol class="arabic simple">
 <li><p>The new <cite>xcoffee</cite> build is tested by running the [docker/run-tests.sh](docker/run-tests.sh)</p></li>
 </ol>
 <blockquote>
 <div><p>tests suite.</p>
 </div></blockquote>
-<ol class="arabic simple" start="5">
+<ol class="arabic simple">
 <li><p>The summary of the tests is available on <a class="reference external" href="https://circleci.com/gh/cbcrg/tcoffee/tree/master">https://circleci.com/gh/cbcrg/tcoffee/tree/master</a></p></li>
-</ol>
-<ol class="arabic simple" start="5">
 <li><p>If all tests are passed the <cite>xcoffee</cite> image is pushed to the [Docker Hub](<a class="reference external" href="https://hub.docker.com/r/cbcrg/tcoffee/tags/">https://hub.docker.com/r/cbcrg/tcoffee/tags/</a>)</p></li>
 </ol>
 <blockquote>
 <div><p>with the names <cite>cbcrg/tcoffee:latest</cite> and <cite>cbcrg/tcoffee:&lt;version.commit-id&gt;</cite></p>
 </div></blockquote>
-<ol class="arabic simple" start="7">
+<ol class="arabic simple">
 <li><p>The environment variable <cite>RELEASE=0|1</cite> is used to mark the build as beta or stable</p></li>
 </ol>
 <blockquote>
@@ -6272,7 +6228,7 @@ $#: doc2test.pl -play tests/doc2test.rst -data tests/.data/ -dump tests/.dumps/ 
 <p>Once the build is complete and all tests are passed the distribution is pushed onto the web along with the associated documentation.</p>
 <p>The ititility doc2test.pl makes it possible to run a command line on data located in a folder and to produce a dump file that will then be a stand alone tests, that can be transfered and replayed. The dump file is a container in which the input, the stdoin, stdout, environement and output of the run are recorded.</p>
 <p>Tests are systematically carried out on all the command lines that start with the symbol $$. For instance, the following CL will has been tested.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$$: t_coffee
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$#: t_coffee
 </pre></div>
 </div>
 <p>Other command lines starting with different symbols are not checked. Two types of command lines identifiers are used:</p>
@@ -6280,7 +6236,7 @@ $#: doc2test.pl -play tests/doc2test.rst -data tests/.data/ -dump tests/.dumps/ 
 </pre></div>
 </div>
 <p>For a command that could be tested but will not be, either for the sake of time or because it is currently unstable. When a new release needs to be urgently made available because of a critical fix, it is advisable to comment out this way non critical command lines failing the test.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">##: t_coffee</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$#: t_coffee
 </pre></div>
 </div>
 <p>These commands are never tested, either because they contain system dependant information or non programmatic information.</p>

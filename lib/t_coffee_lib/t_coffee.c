@@ -865,7 +865,9 @@ if (t_coffee_defaults_flag)
      
      for ( a=0; a< n_special_mode; a++)
        {
-	 char *new_arg=NULL;
+	 char *new_arg=NULL;//to be pushed after t_coffee
+	 char *new_arg2=NULL;//to be pushed last
+	 
 	 
 	 special_mode=special_mode_list[a];
 
@@ -917,8 +919,8 @@ if (t_coffee_defaults_flag)
 	 else if ( strm (special_mode, "rcoffee_slow_accurate"))new_arg=get_rcoffee_consan_defaults(NULL,lseq_type);
 	 else if ( strm (special_mode, "rcoffee_fast_approximate"))new_arg=get_rmcoffee_defaults(NULL,lseq_type);
 	 else if ( strm (special_mode, "t_coffee"))new_arg=get_t_coffee_defaults(NULL,lseq_type);
-	 else if ( strm (special_mode, "saracoffee"))new_arg=get_saracoffee_defaults(NULL,lseq_type);
-	 else if ( strm (special_mode, "rsapcoffee"))new_arg=get_rsapcoffee_defaults(NULL,lseq_type);
+	 else if ( strm (special_mode, "saracoffee"))new_arg2=get_saracoffee_defaults(NULL,lseq_type);
+	 else if ( strm (special_mode, "rsapcoffee"))new_arg2=get_rsapcoffee_defaults(NULL,lseq_type);
 	 
 
 	 else if ( strm (special_mode, "unspecified"));
@@ -927,7 +929,9 @@ if (t_coffee_defaults_flag)
 	     fprintf ( stderr, "\nERROR: special_mode %s is unknown [FATAL:%s]\n",special_mode, PROGRAM);
 	     myexit (EXIT_FAILURE);
 	   }
+	 
 	 if (new_arg)argv=push_string (new_arg, argv, &argc, 1);
+	 else if (new_arg2)argv=push_string (new_arg2, argv, &argc,argc);
        }
    }
 
@@ -1559,7 +1563,7 @@ if ( !do_evaluate)
 				/*Min_value*/ "any"         ,		\
 				/*Max Value*/ "any"			\
 					      );
-
+	
 
 	aln_file_list=declare_char (1000, STRING);
 	n_aln_file_list=get_cl_param(				\
@@ -4153,14 +4157,15 @@ get_cl_param(\
 			    /*Max Value*/ "any"           \
 			   );
 	       if (display)set_int_variable ("display",display);
+	       
 /*******************************************************************************************************/
 /*                                                                                                     */
 /*                           TCoffee_dpa Parameter:END                                                 */
 /*                                                                                                     */
 /*******************************************************************************************************/
+	      
 
-
-
+	       
 	       if (argc==1 )
 		 {
 		   display_method_names ("display", stdout);
@@ -4320,13 +4325,13 @@ get_cl_param(\
 		       sprintf ( list_file[n_list++], "R%s",profile_list[a]);
 		     }
 		 }
-	       
+	      
 	       
 	       /*Introduce the sequences from the -seq flag*/
 	       for (a=0; a<n_seq_list; a++)
 		 {
 		   //
-
+		   
 		   if (check_file_exists(seq_list[a]))
 		     sprintf (list_file[n_list++], "S%s",seq_list[a]);
 		   else if ( check_file_exists (seq_list[a]+1) && seq_list[a][0]=='S')
@@ -4334,7 +4339,7 @@ get_cl_param(\
 		   else printf_exit ( EXIT_FAILURE,stderr, "\nERROR: %s does not exist [FATAL]",seq_list[a]);
 
 		 }
-	       
+	      
 	       /*introduce the alignments from the -aln flag*/
 	       //Important: Must be introduced AFTER the profiles
 	       for (a=0; a<n_aln_file_list; a++)
@@ -4430,7 +4435,7 @@ get_cl_param(\
 		 }
 	      
 /*FILL THE F STRUCTURE (Contains Information for Output names For the defaults)*/
-	      
+	     
 	       	       
 	       if (n_list==0 || argc<=1)
 		 {
@@ -4542,6 +4547,7 @@ get_cl_param(\
 			*         Input File (M) proba_pair
 	        * \endcode
 	        */
+	       
 	       fprintf (le, "\nINPUT FILES\n");
 	       for ( a=0; a< n_list; a++)
 		   {
@@ -4829,6 +4835,8 @@ get_cl_param(\
 		   fprintf ( le, "\nLooking For Sequence Templates:\n");
 		   for ( a=0; a< n_template_file; a++)
 		     {
+
+		       
 		       //correct for missing extension modes
 		       if (strm (template_file_list[a],"RNA") && !strstr (extend_mode, "rna"))sprintf ( extend_mode, "rna2");
 

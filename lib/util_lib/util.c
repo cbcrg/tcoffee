@@ -866,7 +866,7 @@ int cherry (int argc, char *argv[])
       myexit (EXIT_FAILURE);
     }
   
-  if (strm (argv[1], "stdin"))
+  if (strm (argv[1], "stdin") || strm (argv[1], "/dev/stdin"))
     {
       name=capture_stdin();
     }
@@ -2746,6 +2746,28 @@ char *vstrstr ( char *in, char *token)
   else return strstr (in, token);
 }
 char ** push_string (char *val, char **stack, int *nval, int position)
+{
+  //adds val on position
+  int l, a,b;
+  char **news;
+  
+  if (!val || !stack || position>nval[0])return stack;
+  
+  if (read_array_size_new (stack)<=nval[0])stack=(char**)vrealloc (stack,(nval[0]+1)*sizeof (char*));
+  news=(char**)vcalloc (nval[0]+1, sizeof (char*));
+
+  for (b=0,a=0; a<nval[0]; a++, b++)
+    {
+      if (a==position)b++;
+      news[b]=stack[a];
+    }
+  news[position]=csprintf (news[position], "%s", val);
+  nval[0]++;
+  for (a=0; a<nval[0]; a++)stack[a]=news[a];
+  vfree (news);
+  return stack;
+}    
+char ** push_string_old (char *val, char **stack, int *nval, int position)
 {
   char **new_stack;
   int a;
@@ -8714,8 +8736,8 @@ int file_is_empty (char *fname)
 
 int file_exists (char *path, char *fname)
 {
-  struct stat s;
-  char file[1000];
+  
+  static char *file;
 
   if (!fname)return 0;
   else if (path && strm (path, "CACHE"))
@@ -8723,9 +8745,15 @@ int file_exists (char *path, char *fname)
       if (file_exists (NULL, fname))return 1;
       else return file_exists (get_cache_dir(), fname);
     }
-  else if (path) sprintf ( file, "%s/%s", path, fname);
-  else if (!path)sprintf (file, "%s", fname);
+  else if (path)file=csprintf (file, "%s/%s", path,fname);
+  else file=csprintf (file, "%s",fname);
+  return isfile(fname);
+}
 
+int isfile (char *file)
+{
+  struct stat s;
+  if (!file) return 0;
   if (stat(file,& s)!=-1)
     return S_ISREG(s.st_mode);
   else return 0;

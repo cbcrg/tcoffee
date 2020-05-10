@@ -18,8 +18,14 @@ T-Coffee is automatically build by using the [Circle CI](https://circleci.com/gh
 ::
 
   $#: cd t_coffee/src
-  $#: make release type=beta(default)|stable|major m='short description of the main feature' test=core(default)|all|remote|none
+  $#: make release type=beta(default)|stable|major m='short description of the main feature' test=core(default)|all|full|remote|docs|web|none
   
+core  : will test a throrough set of commands
+all   : will run all the test commands packaged as dumps in tests
+full  : will test all the commands packaged as dumps in the git repo - they are normally in docs and tests
+remote: will run all tze tests command dealing with remote access (BLAST and PDB)
+docs  : will run all the dumps compiled from the rst files 
+
 Beta Release
 ============
 
@@ -40,12 +46,29 @@ For a Stable, the following needs to go through:
 Major Release
 ==============
 
-For a Major, the following needs to go through. Note that a major implies some important milestone such as a publication
+For a Major, the following needs to go through. Note that a major implies some important milestone such as a publication. For a start, you should make sure the documentation compiles well. If needed you should recompile all the available tests
+
 
 ::
-  $#: make release type=beta test=all
+  $#: doc2test.pl -play docs/doc2test.rst -data docs/.data/ -dump docs/.dumps/ -update
+  $#: doc2test.pl -play tests/doc2test.rst -data tests/.data/ -dump tests/.dumps/ -update
+
+
+Then you should make sure ALL the tests pass well on your local machine. This is a rsather lengthy procedure that you want to bulletpruf localy before running it on CircleCI
+
+::
+  $#: doc2test.pl -replay  . 
+
+If they do, you should the run the following
+
+::
+  $#: make release type=beta test=full
+
+
+If this beta is succesful, then you can pack the major
+
   $#: make release type=major teste=none
- 
+ 	
 
 **************************
 Release Building Procedure
@@ -103,6 +126,11 @@ Once the build is complete and all tests are passed the distribution is pushed o
 
 
 
+****************************
+Compiling and running tests
+***************************
+
+The ititility doc2test.pl makes it possible to run a command line on data located in a folder and to produce a dump file that will then be a stand alone tests, that can be transfered and replayed. The dump file is a container in which the input, the stdoin, stdout, environement and output of the run are recorded. 
 
 
 Tests are systematically carried out on all the command lines that start with the symbol $$. For instance, the following CL will has been tested.
@@ -129,67 +157,98 @@ These commands are never tested, either because they contain system dependant in
 Whenvever adding a new command, input files must be added to the repository directory ./examples/. New commands can be also be built using the existing files, or they can depend on files newly added to the repository.
 
 
-Checking the documentation command lines
-========================================
+Using doc2test.pl
+=================
 
-The simplest way to check the documentation is to run the following command from the repository root (other locations are possible, but -ref, -docs must be modified accordingly). Note that the .tests and .rst files can link to other files. 
+The utility doc2test is meant to do the following actions:
+
+The play action will compile dump files. 
 
  ::
 
-  #$: ./lib/perl/lib/perl4makefile/doc2test.pl -play <*.rst file or *.tests file or list of cmd> -data <file containing the data> -dumps <target file for dumps>
+  #$: ./lib/perl/lib/perl4makefile/doc2test.pl -play <*.rst file or *.tests file or list of cmd in txt> -data <folder containing the data> -dumps <target directory for dumps>
 
-You can the check the contents
 
+The Check action will recursively go through any directory and report the exit status of each dump
 ::
 
   #$: ./lib/perl/lib/perl4makefile/doc2test.pl -check <dump directory - recursive>
 
-You can the re-run a list of dumps. This is how each distribution gest tested against tests/core.tests with data .in tests/.data and the dumps in tests/.dumps
-
-::
-  #$: ./lib/perl/lib/perl4makefile/doc2test.pl -replay <dump directory, or single dump file>
-
-This mode will only run the command lines that have previously failed, as indicated by the presence of an output in the failed directory. Note that you can selectively delete some dumps 
-
+Note that while compiling cls, you can use check to clean your directory
+ 
 ::
 
   #$: ./lib/perl/lib/perl4makefile/doc2test.pl -check <dump directory - recursive> -clean FAILED or -clean2 <string in dump to be deleted>
 
-By default existing dumps will only be recomputed if the command line or the input data has changed. YOu can trigger recomputation:
+You should also use check to make a fresh build and remove all previous dumps:
+ 
+::
+  #$: ./lib/perl/lib/perl4makefile/doc2test.pl -check <dump directory - recursive> -clean ALL
+
+And you can the re-run the play that will only regenerate missing dumps:
+ 
+
+::
+#$: ./lib/perl/lib/perl4makefile/doc2test.pl -play <*.rst file or *.tests file or list of cmd in txt> -data <folder containing the data> -dumps <target directory for dumps>
+
+The replay action will re-run each dump and report the status. It will report new warnings.
+
+
+::
+  #$: ./lib/perl/lib/perl4makefile/doc2test.pl -replay <dump directory - recursive>
+
+
+The unplay option maked it possible to output the inoput files of every dump
+
+::
+  #$: ./lib/perl/lib/perl4makefile/doc2test.pl -replay <dump directory - recursive> -outdir <file in which data should be dumped>
+
+
+
+Compiling tests from the rst documentation
+==========================================
+
+The rst documentation contain lines tagged with two $$ signs. These lines will be selected for validation and used to build dump files. In order to run a fresh collection of dumps for the full documentation, run the foillowing commands:
+
+::
+
+The simplest way to compile all possible tests from the the documentation is to run the following command from the top of the git repo.
+
  ::
+  #$: ./lib/perl/lib/perl4makefile/doc2test.pl -check docs/.dumps -clean ALL
+  #$: ./lib/perl/lib/perl4makefile/doc2test.pl -play docs/doc2test.rst -data docs/.data -dump docs/.dumps
 
-  #$: ./lib/perl/lib/perl4makefile/doc2test.pl -play <*.rst file or *.tests file or list of cmd> -data <file containing the data> -dumps <target file for dumps> -update
-
-Finalyit is possible to dump the data containned in a dump:
-::
-
-  #$: ./lib/perl/lib/perl4makefile/doc2test.pl -unplay <dump file or dump dir> -outdir <dir where data is to be dummped>
-
-
-
-Local Validation of a distribution
-==================================
-
-Dump files are safe contained. It is possible to check T-Coffee capacity to reproduce a collection of reference dump files.
+The output can then be checked
 
 ::
 
-  ##: ./lib/perl/lib/perl4makefile/doc2test.pl -mode check -ref <dir containing dump files>
+  #$: ./lib/perl/lib/perl4makefile/doc2test.pl -check docs/.dumps
 
-It will cause the test to stop whenever a failed is encountered
+The failing jobs can be removed and re-run once the issue has been identified (usualy a missing file):
 
 ::
 
-  ##: ./lib/perl/lib/perl4makefile/doc2test.pl -mode reset
+  #$: ./lib/perl/lib/perl4makefile/doc2test.pl -check docs/.dumps -clean FAILED
 
-Will cause all the reference files to be erased.
+Note that in order to figure out an issue you can use the replay debug option
+
+  #$: ./lib/perl/lib/perl4makefile/doc2test.pl -replay <dump file> -debug
+
+
+You can the re-run all the dumps. This is how the tests will be carried out by CircleCI
+
+::
+  #$: ./lib/perl/lib/perl4makefile/doc2test.pl -replay docs/.dumps
+
+Compiling tests commands
+========================
+tests are special types of pre-compiled commands used to validate specific components of T-Coffee. You can compile and use thsis test in the same way as rst files. 
 
 
 Creating a new command to be tested  
 ===================================
 
-In order to generate a new test command, all you need to do is to run your command while setting an environement variable. This will generate a dump file that can be used to rerun the same call:
-Dump files are very easy to produce yout simply need to run
+In order to generate a new test command, all you need to do is to run your command while setting an environement variable. This will generate a dump file that can be used torerun the same call. Dump files are very easy to produce yout simply need to run
 
 ::
 
