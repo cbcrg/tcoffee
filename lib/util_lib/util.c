@@ -2909,8 +2909,7 @@ char * fname2abs(char*name)
   
   //if (!name2)name2=(char*)vcalloc (10, sizeof (char));
   if ( !name)return NULL;
-  else if (!file_exists (NULL, name))return NULL;
-  else if ( name[0]=='/')name2=csprintf (name2, "%s", name);
+  else if ( !isfile(name) || name[0]=='/')name2=csprintf (name2, "%s", name);
   else
     {
       
@@ -8152,6 +8151,8 @@ int token_is_in_file_n ( char *fname, char *token, int nlines)
     }
   return 0;
 }
+
+  
 
 char *vfgets ( char *buf, FILE *fp)
 {

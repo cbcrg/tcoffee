@@ -2146,7 +2146,7 @@ Sequence  *  fill_sequence_struc ( int nseq, char **sequences, char **seq_name, 
 
 	S=declare_sequence (shortest, longuest,nseq);
 	S->nseq=nseq;
-
+	
 	if (sequences)
 		S->seq=copy_char ( sequences, S->seq);
 	else
@@ -6915,11 +6915,17 @@ struct X_template *fill_R_template ( char *name,char *p, Sequence *S)
 	  s=name_is_in_list(name, S->name, S->nseq, 100);
 	  if ( s!=-1)
 	    {
-	      S1=fill_sequence_struc (1, &S->seq[s], &S->name[s], NULL);
+	      char **lseq =(char**)vcalloc (1, sizeof (char*));
+	      char **lname=(char**)vcalloc (1, sizeof (char*));
+	      lseq [0]=S->seq [s];
+	      lname[0]=S->name[s];
+	      
+	      S1=fill_sequence_struc (1,lseq,lname, NULL);
+	      vfree (lseq); vfree(lname);
 	      A1=seq2aln (S1,NULL, RM_GAP);
-
+	      
 	      (R->VR)->A=trim_aln_with_seq (A1, (R->VR)->A);
-
+	      
 	      sprintf ( R->template_file, "%s", vtmpnam (NULL));
 	      output_clustal_aln (R->template_file, (R->VR)->A);
 	    }

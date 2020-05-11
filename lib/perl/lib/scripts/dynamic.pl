@@ -295,7 +295,7 @@ my_exit ($CDIR,$EXIT_SUCCESS);
 sub file2nseq
   {
     my ($f)=@_;
-    my $n=`grep '>' $f | wc -l`; 
+    my $n=`grep -c '>' $f`; 
     
     return $n;
   }
