@@ -295,14 +295,8 @@ my_exit ($CDIR,$EXIT_SUCCESS);
 sub file2nseq
   {
     my ($f)=@_;
-    my $n;
+    my $n=`grep '>' $f | wc -l`; 
     
-    open (F, $f) || return 0;
-    while (<F>)
-      {
-	if ($_=~/^\>/){$n++;}
-      }
-    close (F);
     return $n;
   }
 sub file2abs
