@@ -8152,7 +8152,50 @@ int token_is_in_file_n ( char *fname, char *token, int nlines)
   return 0;
 }
 
+#ifdef AFAFAFAFAF
+//new vfgets under DEV
+char *vfgets ( char *bufin, FILE *fp)
+{
+  int i=0;
+  long pos=0;
+  char c,lc;
+  long *map;
+  int ml=1000;
+  int a;
+  char buf[VERY_LONG_STRING];
   
+  shitt_in=shift_out=tell(fp);
+  shift=0;
+  while (fgets(buf,VERY_LONG_STRING,fp))
+    {
+      shift_out+=strlen (buf);
+      while (buf[l]!='\n' && buf[l]!='\0')l++; 
+      if ( buf[l]=='\n')
+	{
+	  fseek (fp,shift_in, SEEK_SET);
+	  l=d;
+	  
+
+	  if ( l<arrlen (bufin))bufin=(char*)vrealloc (bufin,l*sizeof (char));
+	  fread(bufin, sizeof (char), len,fp);
+	  
+	  if (c=='>')
+	    {
+	      if (i<=ml){ml+=VERY_LONG_STRING; map=(long*)vrealloc (map, ml*sizeof (long));}
+	      map[i++]=pos;
+	    }
+	  pos++;
+	}
+    }
+  map=(long*)vrealloc (map, (i+1)*sizeof (long));//map will be used to estimate nseq
+  
+  map[i]=pos;
+  
+  vfclose (fp);
+  
+  return map;
+}
+#endif  
 
 char *vfgets ( char *buf, FILE *fp)
 {

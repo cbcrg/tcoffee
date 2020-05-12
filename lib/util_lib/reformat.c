@@ -1282,10 +1282,13 @@ Sequence  * quick_read_seq ( char *file)
   Sequence *S=NULL;
   char *dup;
   char *tmp_file;
-  
+
   if (!file || !check_file_exists (file))return NULL;
   else if (format_is_fasta (file))
-    S=get_fasta_sequence (file, NULL);
+    {
+      S=get_fasta_sequence (file, NULL);
+    }
+  
   else if (printf_system ( "seq2name_seq.pl %s > %s",file, tmp_file=vtmpnam(NULL))==EXIT_SUCCESS)
     {
       
@@ -1547,15 +1550,26 @@ long *fasta2map(char *file)
   
   map=(long*)vcalloc (ml, sizeof (long));
   
+  
+  while ((c=fgetc(fp))!=EOF){;}
+  vfclose(fp);
+  
+  fp=vfopen(file, "r");
+  while (fgets(buf,VERY_LONG_STRING,fp));
+  
+  vfclose(fp);  
+  
+
+  fp=vfopen(file, "r");
   pos=0;
   while (fgets(buf,VERY_LONG_STRING,fp))
     {
       int d=0;
-      while ((c=buf[d++])!=0)
+      while ((c=buf[d++])!='\0')
 	{
 	  if (c=='>')
 	    {
-	      if (i<=ml){ml+=VERY_LONG_STRING; map=(long*)vrealloc (map, ml*sizeof (long));}
+	      if (i>=ml){ml+=VERY_LONG_STRING; map=(long*)vrealloc (map, ml*sizeof (long));}
 	      map[i++]=pos;
 	    }
 	  pos++;
@@ -2769,15 +2783,9 @@ int format_is_fasta_seq  ( char *file)
 
 int format_is_fasta ( char *file)
     {
-      Sequence *S;
-
-      if ( !check_file_exists(file))return 0;
-
-      if ( get_first_non_white_char (file)!='>')return 0;
-      if ( !(S=get_fasta_sequence (file, NULL)))return 0;
-      free_sequence (S, -1);
-      if ( format_is_pir(file)) return 0;
-      return 1;
+      if ( !isfile(file))return 0;
+      if ( get_first_non_white_char (file)=='>')return 1;
+      return 0;
     }
 
 int format_is_pir_aln ( char *file)
@@ -5148,7 +5156,10 @@ Sequence *get_fasta_sequence (char *file, char *comment_out)
   int i, nseq,a;
   Sequence *A;
   int maxlen=0;
+
+  
   map=fasta2map(file);
+  
   nseq=read_array_size_new (map)-1;
   
   A=declare_sequence(0,0,nseq);
