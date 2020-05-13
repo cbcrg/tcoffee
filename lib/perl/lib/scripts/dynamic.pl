@@ -246,8 +246,14 @@ elsif (($cmethod =~/mafft/))
 
 elsif ($method2use=~/famsa/)
   {
-    
+    print "![dynamic.pl] --- FAMSA DEFAULT";    
     my_system ("famsa $treeFlag $threadFlag4famsa $infile $outfile >/dev/null $QUIET");
+  }
+elsif ($method2use=~/famsaUpgma/)
+  {
+    print "![dynamic.pl] --- FAMSA Upgma";
+    print "![dynamic.pl] --- Command: famsa -gt upgma $treeFlag $threadFlag4famsa $infile $outfile >/dev/null $QUIET";
+    my_system ("famsa -gt upgma $treeFlag $threadFlag4famsa $infile $outfile >/dev/null $QUIET");
   }
 else
   {
