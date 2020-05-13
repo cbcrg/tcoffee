@@ -5444,7 +5444,7 @@ char *** produce_method_file ( char *method)
 	fprintf ( fp, "ADDRESS    %s\n", ADDRESS_BUILT_IN);
 	fprintf ( fp, "PROGRAM    %s\n", PROGRAM_BUILT_IN);
 	vfclose (fp);}
-
+	
 
 	sprintf (list[n][0], "best_pair4prot");
 	sprintf (list[n][1], "%s", vtmpnam(NULL));

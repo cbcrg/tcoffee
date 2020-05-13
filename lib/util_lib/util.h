@@ -707,6 +707,7 @@ void ignore_cache();
 int  register_file4dump (char *name, char *mode);
 char *capture_stdin ();
 int count_openF();
+void valgrind_test();
 FILE * vfopen ( char *name, char *mode);
 FILE * vfclose (FILE *fp);
 int echo ( char *string, char *fname);

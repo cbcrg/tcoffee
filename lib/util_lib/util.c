@@ -7115,7 +7115,15 @@ int count_openF()
 {
   return NopenF;
 }
- 
+void valgrind_test()
+{
+  int a;
+  int *b;
+  HERE ("Do a VAlgrind Test");
+  for (a=0; a<10000; a++)b[a]=100;
+} 
+  
+
 FILE * fopenN   ( char *fname, char *mode, int max_n_tries, int delay);
 FILE * myfopen (char *name, char *mode);
 FILE * vfopen  ( char *name_in, char *mode)
@@ -7183,10 +7191,11 @@ FILE * vfopen  ( char *name_in, char *mode)
 		  }
     		else if ( strcmp (mode, "r")==0 && cache_used==1)
     			{
-    			fprintf (stderr, "\n--COULD NOT READ %s\n", name);
-    			if ( get_new_name){fprintf ( stderr, "\nNew name: ");return vfopen (input_name(), mode-1);}
-    			else if ( tolerate_mistake)return NULL;
-			else
+			  fprintf (stderr, "\n--COULD NOT READ %s\n", name);
+			  // valgrind_test();
+			  if ( get_new_name){fprintf ( stderr, "\nNew name: ");return vfopen (input_name(), mode-1);}
+			  else if ( tolerate_mistake)return NULL;
+			  else
 			    {
 			      myexit(fprintf_error (stderr, "\nFORCED EXIT (NON INTERACTIVE MODE pid %d)\n", getpid()));
 			    }
@@ -8191,8 +8200,8 @@ char *vfgets ( char *buf, FILE *fp)
 
 
 
-
-#ifdef THIS_WOULD_USE_THE_NEW_TOKEN_SEARCH
+#ifdef STRING
+//#ifdef THIS_WOULD_USE_THE_NEW_TOKEN_SEARCH
 int token_is_in_file ( char *fname, char *token)
 {
   return token_is_in_file_n (fname, token, 0);
@@ -8205,12 +8214,11 @@ int token_is_in_file_n ( char *fname, char *token, int max)
   int n=0;
   int bl, tl;
   
-  HERE ("1");
-  
-  if (!token || !fname)return NULL;
+
+  if (!token || !fname || !file_exists(NULL,fname))return NULL;
   tl=strlen (token);
   if (!buf)buf=(char*)vcalloc ((strlen (token)+VERY_LONG_STRING),sizeof (char));
-  buf=(char*)vrealloc (buf, (strlen (token)+VERY_LONG_STRING)*sizeof (char));
+  
   bl=read_array_size_new(buf);
   
   

@@ -1855,7 +1855,7 @@ char identify_format (char **fname)
        {
 	   char mode='?';
 	   mode=fname[0][0];
-
+	   
 	   if ((is_in_set (mode, "ALMSPR") && check_file_exists(fname[0]+1)) ||(mode=='X' && is_matrix ( fname[0]+1)) ||(mode=='M' && is_method(fname[0]+1)) )
 	     {
 
