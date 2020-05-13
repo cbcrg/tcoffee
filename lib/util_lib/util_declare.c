@@ -1602,10 +1602,7 @@ void *vrealloc ( void *p, size_t size)
 
 	if ( p==NULL)
 	  {
-	    x=vmalloc (size);
-	    memset (x, 0, size);
-
-	    return x;
+	    return vcalloc (size/sizeof(char), sizeof (char));
 	  }
 	else
 	  {
@@ -1689,6 +1686,22 @@ READ_ARRAY_SIZE(int,read_size_int)
 READ_ARRAY_SIZE(float,read_size_float)
 READ_ARRAY_SIZE(double,read_size_double)
 
+
+int arrlen (void *array)
+    {
+    Memcontrol *p;
+    if (array==NULL)return 0;
+    p=(Memcontrol *)array;
+    p-=2;
+    if ( p[0].size_element ==0)
+      {
+	int *x;
+	fprintf ( stderr, "\nERROR in read_array_size: trying to read the size of a malloc-ed block [FATAL]");
+	x[1000]=1;//THis helps triggering a trace in Valgring
+	exit (0);
+      }
+    else return (int)p[0].size/p[0].size_element;
+    }
 
 int read_array_size_new (void *array)
 {

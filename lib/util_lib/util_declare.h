@@ -115,6 +115,7 @@ int read_size_char  ( void  *array, size_t size );
 int read_size_int   ( void  *array, size_t size );
 int read_size_float ( void  *array, size_t size );
 int read_size_double( void  *array, size_t size );
+int arrlen ( void  *array);
 int read_array_size_new ( void  *array);
 int read_array_size ( void  *array, size_t size );
 int read_array_new ( void  *array);

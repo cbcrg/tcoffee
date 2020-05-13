@@ -8106,96 +8106,40 @@ int token_is_in_n_lines ( char *fname, char *token, int n_line)
   return 0;
 }
     
-int token_is_in_file ( char *fname, char *token)
-{
-  return token_is_in_file_n (fname, token, 0);
-}
-int token_is_in_file_n ( char *fname, char *token, int nlines)
-{
-  /*TH:an argument against torture: innocents get tortured longer, likewise for token testing*/
-  FILE *fp;
-  static char *buf;
-  char *b, *p;
-  int begining;
-  int line_number=0;
 
 
-  if (token[0]=='\n')
-    {
-
-      begining=1;
-      token++;
-    }
-  else
-    {
-      begining=0;
-    }
-
-  if ( !fname || !file_exists(NULL,fname))return 0;
-  else
-    {
-      fp=vfopen (fname, "r");
-      while ((b=vfgets (buf,fp))!=NULL && (line_number<nlines || nlines==0))
-	{
-	  buf=b;
-
-	  p=strstr (buf, token);
-	  if (!p);
-	  else if ( begining==1 && p==buf){vfclose (fp); return 1;}
-	  else if ( begining==0 && p){vfclose (fp); return 1;}
-	  line_number++;
-	}
-      if (b){buf=b;}
-      vfclose (fp);
-      return 0;
-    }
-  return 0;
-}
-
-#ifdef AFAFAFAFAF
+#ifdef STRING
 //new vfgets under DEV
+
+
+
+
 char *vfgets ( char *bufin, FILE *fp)
 {
-  int i=0;
-  long pos=0;
-  char c,lc;
-  long *map;
-  int ml=1000;
-  int a;
   char buf[VERY_LONG_STRING];
+  int in=0;
+  int len=0;
   
-  shitt_in=shift_out=tell(fp);
-  shift=0;
+  in=ftell(fp);
   while (fgets(buf,VERY_LONG_STRING,fp))
     {
-      shift_out+=strlen (buf);
-      while (buf[l]!='\n' && buf[l]!='\0')l++; 
-      if ( buf[l]=='\n')
-	{
-	  fseek (fp,shift_in, SEEK_SET);
-	  l=d;
-	  
-
-	  if ( l<arrlen (bufin))bufin=(char*)vrealloc (bufin,l*sizeof (char));
-	  fread(bufin, sizeof (char), len,fp);
-	  
-	  if (c=='>')
-	    {
-	      if (i<=ml){ml+=VERY_LONG_STRING; map=(long*)vrealloc (map, ml*sizeof (long));}
-	      map[i++]=pos;
-	    }
-	  pos++;
-	}
+      char *x=strstr(buf, "\n");
+      if (x){len+=(x-buf)+1;break;}
+      else len+=strlen (buf);
     }
-  map=(long*)vrealloc (map, (i+1)*sizeof (long));//map will be used to estimate nseq
-  
-  map[i]=pos;
-  
-  vfclose (fp);
-  
-  return map;
+  if (len)
+    {
+      fseek(fp,in,SEEK_SET);
+      if (len>arrlen (bufin))bufin=(char*)vrealloc (bufin,(len+1)*sizeof (char));
+      fread(bufin, sizeof (char),len,fp);
+      bufin[len]='\0';
+      fseek(fp,in+len,SEEK_SET);
+      return bufin;
+    }
+  else return NULL;
 }
-#endif  
+
+#else 
 
 char *vfgets ( char *buf, FILE *fp)
 {
@@ -8243,6 +8187,98 @@ char *vfgets ( char *buf, FILE *fp)
 
   return buf;
 }
+#endif
+
+
+
+
+#ifdef THIS_WOULD_USE_THE_NEW_TOKEN_SEARCH
+int token_is_in_file ( char *fname, char *token)
+{
+  return token_is_in_file_n (fname, token, 0);
+}
+int token_is_in_file_n ( char *fname, char *token, int max)
+{
+  FILE *fp;
+  static char *buf;
+  int ret=0;
+  int n=0;
+  int bl, tl;
+  
+  HERE ("1");
+  
+  if (!token || !fname)return NULL;
+  tl=strlen (token);
+  if (!buf)buf=(char*)vcalloc ((strlen (token)+VERY_LONG_STRING),sizeof (char));
+  buf=(char*)vrealloc (buf, (strlen (token)+VERY_LONG_STRING)*sizeof (char));
+  bl=read_array_size_new(buf);
+  
+  
+  fp=vfopen (fname, "r");
+  while (fgets(buf,bl,fp))
+    {
+      char *x;
+      if (token[0]=='\n' && n==0)x=strstr(buf, token+1);
+      else x=strstr(buf, token+1);
+      
+      if (x){ret=1;break;}
+      else if (strlen (buf)<bl)break;
+      if (max!=0 && max==n)break;
+      
+      fseek(fp,ftell(fp)-strlen(token),SEEK_SET);
+      n++;
+    }
+  vfclose (fp);
+  return ret;
+}
+#else
+ 
+int token_is_in_file ( char *fname, char *token)
+{
+  return token_is_in_file_n (fname, token, 0);
+}
+int token_is_in_file_n ( char *fname, char *token, int nlines)
+{
+  /*TH:an argument against torture: innocents get tortured longer, likewise for token testing*/
+  FILE *fp;
+  static char *buf;
+  char *b, *p;
+  int begining;
+  int line_number=0;
+
+
+  if (token[0]=='\n')
+    {
+
+      begining=1;
+      token++;
+    }
+  else
+    {
+      begining=0;
+    }
+
+  if ( !fname || !file_exists(NULL,fname))return 0;
+  else
+    {
+      fp=vfopen (fname, "r");
+      while ((b=vfgets (buf,fp))!=NULL && (line_number<nlines || nlines==0))
+	{
+	  buf=b;
+
+	  p=strstr (buf, token);
+	  if (!p);
+	  else if ( begining==1 && p==buf){vfclose (fp); return 1;}
+	  else if ( begining==0 && p){vfclose (fp); return 1;}
+	  line_number++;
+	}
+      if (b){buf=b;}
+      vfclose (fp);
+      return 0;
+    }
+  return 0;
+}
+#endif
 
 
 FILE * find_token_in_file ( char *fname, FILE * fp, char *token)
