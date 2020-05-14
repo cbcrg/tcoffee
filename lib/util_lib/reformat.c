@@ -2631,6 +2631,8 @@ int format_is_oligo(char *file)
     }
 int format_is_msf ( char *file)
     {
+      
+      
       if (!token_is_in_n_lines (file,"MSF:",5)) return 0;
       else if (!token_is_in_n_lines (file,"Type:",5))return 0;
       else return 1;
