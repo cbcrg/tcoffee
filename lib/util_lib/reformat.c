@@ -837,8 +837,13 @@ int seq_reformat ( int argc, char **in_argv)
 		  myexit(EXIT_FAILURE);
 		}
 	
-	if ((D2=read_data_structure (in2_format, in2_file,RAD))!=NULL){if (print_format)fprintf ( stderr, "\nFILE:%s FORMAT:%s\n", in2_file, (in2_format&&in2_format[0])?in2_format:identify_seq_format(in2_file));}
 
+	if ((D2=read_data_structure (in2_format, in2_file,RAD))!=NULL)
+	  {
+	    if (print_format)
+	      fprintf ( stderr, "\nFILE:%s FORMAT:%s\n", in2_file, (in2_format&&in2_format[0])?in2_format:identify_seq_format(in2_file));
+	  }
+	
 	else if (!D2 && in2_file[0])
 	        {
 		  fprintf ( stderr, "\nFORMAT of file %s Not Supported (2)[FATAL:%s]\n", in2_file, PROGRAM);
@@ -847,7 +852,7 @@ int seq_reformat ( int argc, char **in_argv)
 
 /*STRUCTURE INPUT*/
 
-	
+
 	if ((D_ST=read_data_structure (struc_in_format, struc_in_file,RAD)))
 	    {
 	     
@@ -949,7 +954,7 @@ Sequence_data_struc *read_data_structure ( char *in_format, char *in_file,	Actio
 	    in_format=identify_seq_format(in_file);
 	  }
 	if (!in_format[0])return NULL;
-
+	
 
 	D->A=declare_Alignment(NULL);
 	if ( RAD->keep_case)(D->A)->residue_case=KEEP_CASE;
@@ -1283,6 +1288,7 @@ Sequence  * quick_read_seq ( char *file)
   char *dup;
   char *tmp_file;
 
+  
   if (!file || !check_file_exists (file))return NULL;
   else if (format_is_fasta (file))
     {
@@ -1653,8 +1659,7 @@ Alignment * main_read_aln ( char *name, Alignment *A)
        
        register_file4dump (name, "r");/*make sure file is in dump*/
        
-       
-       
+
 
        if ( !name)return NULL;
        else if (!check_file_exists(name))
@@ -1740,7 +1745,6 @@ char * identify_seq_format ( char *file)
        if ( format==NULL)format=(char*)vcalloc ( 100, sizeof (char));
        else format[0]='\0';
        
-      
        
        int format_val  = 0;
        if ( !check_file_exists(file))
@@ -2872,50 +2876,16 @@ int format_is_conc_aln (char *file)
 }
 int format_is_saga ( char *file)
     {
-    FILE *fp;
-    int **list;
-    int n_blocks;
-    int n_seq;
-    int a, b;
-
-
-    if ( (fp=find_token_in_file (file, NULL, "SAGA"))){vfclose (fp); return 1;}
-    else if  ((fp=find_token_in_file (file, NULL, "CLUSTAL"))){vfclose (fp); return 1;}
-    else if  ((fp=find_token_in_file (file, NULL, "ClustalW"))){vfclose (fp); return 1;}
-    else if  ((fp=find_token_in_file (file, NULL, "clustalw"))){vfclose (fp); return 1;}
-    else if  ((fp=find_token_in_file (file, NULL, "clustal"))){vfclose (fp); return 1;}
-    else if  ((fp=find_token_in_file (file, NULL, "T-COFFEE_MSA"))){vfclose (fp); return 1;}
-    else if  ((fp=find_token_in_file (file, NULL, "INTERLEAVED_MSA"))){vfclose (fp); return 1;}
-
+    
+    if (token_is_in_file_n(file, "SAGA", 2))return 1;
+    else if (token_is_in_file_n(file, "CLUSTAL", 2))return 1;
+    else if (token_is_in_file_n(file, "CLUSTALW", 2))return 1;
+    else if (token_is_in_file_n(file, "ClustalW", 2))return 1;
+    else if (token_is_in_file_n(file, "clustalw", 2))return 1;
+    else if (token_is_in_file_n(file, "T-COFFEE_MSA", 2))return 1;
+    else if (token_is_in_file_n(file, "INTERLEAVED_MSA", 2))return 1;
     else return 0;
-
-    if (1==1);
-    else if  ((fp=find_token_in_file (file, NULL, "T-COFFEE"))){vfclose (fp); return 1;}
-    else if  ((fp=find_token_in_file (file, NULL, "SAGA_FORMAT"))){vfclose (fp); return 1;}
-    else if  ((fp=find_token_in_file (file, NULL, "GARP"))){vfclose (fp); return 1;}
-    else if  ((fp=find_token_in_file (file, NULL, "INTERLEAVED"))){vfclose (fp); return 1;}
-
-    else
-       {
-	   list=get_file_block_pattern (file,&n_blocks,100);
-	   if (n_blocks<=2){free_int (list, -1);return 0;}
-	   else
-	       {
-	       n_seq=list[1][0];
-	       for ( a=1; a< n_blocks-1; a++)
-	           {
-		       if ( list[a][0]!=n_seq){free_int (list, -1);return 0;}
-		       else
-		       {
-			   for ( b=1; b<=list[a][0]; b++)
-			       if ( list[a][b]!=2){free_int (list, -1);return 0;}
-		       }
-		   }
-	       }
-	   return 1;
-       }
-
-    return 0;
+    
     }
 
 
