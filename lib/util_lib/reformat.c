@@ -833,15 +833,15 @@ int seq_reformat ( int argc, char **in_argv)
 	  }
 	else if ( in_file[0])
 	        {
-		  fprintf ( stdout, "\nFORMAT of file %s Not Supported[FATAL:%s]\n", in_file, PROGRAM);
-		myexit(EXIT_FAILURE);
+		  fprintf ( stdout, "\nFORMAT of file %s Not Supported (1)[FATAL:%s]\n", in_file, PROGRAM);
+		  myexit(EXIT_FAILURE);
 		}
-
+	
 	if ((D2=read_data_structure (in2_format, in2_file,RAD))!=NULL){if (print_format)fprintf ( stderr, "\nFILE:%s FORMAT:%s\n", in2_file, (in2_format&&in2_format[0])?in2_format:identify_seq_format(in2_file));}
 
 	else if (!D2 && in2_file[0])
 	        {
-		  fprintf ( stderr, "\nFORMAT of file %s Not Supported [FATAL:%s]\n", in2_file, PROGRAM);
+		  fprintf ( stderr, "\nFORMAT of file %s Not Supported (2)[FATAL:%s]\n", in2_file, PROGRAM);
 		  myexit(EXIT_FAILURE);
 		}
 
@@ -2875,6 +2875,7 @@ int format_is_saga ( char *file)
     int n_blocks;
     int n_seq;
     int a, b;
+
 
     if ( (fp=find_token_in_file (file, NULL, "SAGA"))){vfclose (fp); return 1;}
     else if  ((fp=find_token_in_file (file, NULL, "CLUSTAL"))){vfclose (fp); return 1;}
