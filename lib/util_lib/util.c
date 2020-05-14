@@ -8117,11 +8117,6 @@ int token_is_in_n_lines ( char *fname, char *token, int n_line)
     
 
 
-#ifdef STRING
-//new vfgets under DEV
-
-
-
 
 char *vfgets ( char *bufin, FILE *fp)
 {
@@ -8148,60 +8143,10 @@ char *vfgets ( char *bufin, FILE *fp)
   else return NULL;
 }
 
-#else 
-
-char *vfgets ( char *buf, FILE *fp)
-{
-  int c;
-  int buf_len, l;
-  char *bufin;
-  int debug=0;
-  
-  bufin=buf;
-
-  if (!buf)
-    {
-      buf=(char*)vcalloc ( 1000, sizeof (char));
-      buf_len=1000;
-    }
-  else
-    {
-      buf_len=read_array_size_new (buf);
-    }
-
-  l=0;
-  c=fgetc (fp);
-  
-  if (c==EOF){return NULL;}
-  ungetc (c, fp);
-    
-  while ( (c=fgetc (fp))!='\n' && c!=EOF)
-    {
-      if (l>=buf_len)
-	{buf_len+=100;buf=(char*)vrealloc (buf, buf_len*sizeof (char));}
-      buf[l++]=c;
-    }
-  /*Add the cariage return*/
-  if ( c=='\n')
-    {
-      if (l>=buf_len){buf_len+=100,buf=(char*)vrealloc (buf, buf_len*sizeof (char));}
-      buf[l++]='\n';
-    }
-  /*add the terminator*/
-  if (l>=buf_len){buf_len+=100,buf=(char*)vrealloc (buf, buf_len*sizeof (char));}
-  buf[l]='\0';
-
-  if ( bufin!=buf && bufin!=NULL && debug==1)
-    fprintf ( stderr, "\nPointer change in vfgets...");
-
-  return buf;
-}
-#endif
 
 
 
-#ifdef STRING
-//#ifdef THIS_WOULD_USE_THE_NEW_TOKEN_SEARCH
+
 int token_is_in_file ( char *fname, char *token)
 {
   return token_is_in_file_n (fname, token, 0);
@@ -8216,11 +8161,12 @@ int token_is_in_file_n ( char *fname, char *token, int max)
   
 
   if (!token || !fname || !file_exists(NULL,fname))return NULL;
-  tl=strlen (token);
-  if (!buf)buf=(char*)vcalloc ((strlen (token)+VERY_LONG_STRING),sizeof (char));
-  
-  bl=read_array_size_new(buf);
-  
+      
+  bl=arrlen(buf);
+  tl=arrlen(token);
+  if (bl<(VERY_LONG_STRING+tl))
+    buf=(char*)vrealloc (buf, (tl+VERY_LONG_STRING)*sizeof (char));
+  bl=arrlen(buf);
   
   fp=vfopen (fname, "r");
   while (fgets(buf,bl,fp))
@@ -8233,62 +8179,53 @@ int token_is_in_file_n ( char *fname, char *token, int max)
       else if (strlen (buf)<bl)break;
       if (max!=0 && max==n)break;
       
-      fseek(fp,ftell(fp)-strlen(token),SEEK_SET);
+      fseek(fp,ftell(fp)-arrlen(token),SEEK_SET);
       n++;
     }
   vfclose (fp);
   return ret;
 }
-#else
- 
-int token_is_in_file ( char *fname, char *token)
+
+
+#ifdef STRING
+
+FILE * find_token_in_file ( char *fname, FILE * fp, char *token)
 {
-  return token_is_in_file_n (fname, token, 0);
-}
-int token_is_in_file_n ( char *fname, char *token, int nlines)
-{
-  /*TH:an argument against torture: innocents get tortured longer, likewise for token testing*/
-  FILE *fp;
   static char *buf;
-  char *b, *p;
-  int begining;
-  int line_number=0;
+  int ret=0;
+  int bl, tl;
+  int n=0;
 
-
-  if (token[0]=='\n')
+  if (!fp || !token || !fname || !file_exists(NULL,fname))return NULL;
+      
+  bl=arrlen(buf);
+  tl=arrlen(token);
+  if (bl<(VERY_LONG_STRING+tl))
+    buf=(char*)vrealloc (buf, (tl+VERY_LONG_STRING+1)*sizeof (char));
+  bl=arrlen(buf);
+  
+  while (fgets(buf,bl,fp))
     {
-
-      begining=1;
-      token++;
-    }
-  else
-    {
-      begining=0;
-    }
-
-  if ( !fname || !file_exists(NULL,fname))return 0;
-  else
-    {
-      fp=vfopen (fname, "r");
-      while ((b=vfgets (buf,fp))!=NULL && (line_number<nlines || nlines==0))
+      char *x;
+      if (token[0]=='\n' && n==0)x=strstr(buf, token+1);
+      else x=strstr(buf, token+1);
+      
+      if (x)
 	{
-	  buf=b;
-
-	  p=strstr (buf, token);
-	  if (!p);
-	  else if ( begining==1 && p==buf){vfclose (fp); return 1;}
-	  else if ( begining==0 && p){vfclose (fp); return 1;}
-	  line_number++;
+	  ret=1;
+	  fseek (fp, (ftell(fp)-strlen(buf))+(x-buf)+strlen(token), SEEK_SET);
+	  break;
 	}
-      if (b){buf=b;}
-      vfclose (fp);
-      return 0;
+      else if (strlen (buf)<bl)break;
+            
+      fseek(fp,ftell(fp)-strlen(token),SEEK_SET);
+      n++;
     }
-  return 0;
+  
+  return (ret==0)?NULL:fp;
 }
-#endif
 
-
+#else
 FILE * find_token_in_file ( char *fname, FILE * fp, char *token)
 	{
 	int c;
@@ -8328,7 +8265,7 @@ FILE * find_token_in_file ( char *fname, FILE * fp, char *token)
 	vfclose ( fp);
 	return NULL;
 	}
-
+#endif
 
 
 // FILE * find_token_at_line_start ( char *fname, FILE * fp, char *token)
