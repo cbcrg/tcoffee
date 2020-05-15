@@ -7359,7 +7359,6 @@ char *** produce_method_file ( char *method)
 		fprintf ( fp, "OUT_MODE aln\n"); 
 		fprintf ( fp, "IN_FLAG &bnsp\n"); 
 		fprintf ( fp, "OUT_FLAG &bnsp\n"); 
-		fprintf ( fp, "PARAM -t 1 &bnsp2>/dev/null\n"); 
 		fprintf ( fp, "SEQ_TYPE S\n"); 
 
 		fprintf ( fp, "ADDRESS %s\n", "famsa"); 
