@@ -947,7 +947,6 @@ Sequence_data_struc *read_data_structure ( char *in_format, char *in_file,	Actio
 
 	D=(Sequence_data_struc*)vcalloc ( 1, sizeof (Sequence_data_struc));
 
-
 	if (!in_file[0])return NULL;
 	if (!in_format[0])
 	  {
@@ -955,7 +954,6 @@ Sequence_data_struc *read_data_structure ( char *in_format, char *in_file,	Actio
 	  }
 	if (!in_format[0])return NULL;
 	
-
 	D->A=declare_Alignment(NULL);
 	if ( RAD->keep_case)(D->A)->residue_case=KEEP_CASE;
 
@@ -1745,7 +1743,28 @@ char * identify_seq_format ( char *file)
        if ( format==NULL)format=(char*)vcalloc ( 100, sizeof (char));
        else format[0]='\0';
        
-       
+       if (1==2)
+	 {
+	   HERE ("TEST The various formats");
+	   
+	   HERE ("test 1: %d", is_nameseq (file));;
+	   HERE ("test 2: %d", is_stockholm_aln(file));
+	   HERE ("test 3: %d", format_is_msf (file));
+	   HERE ("test 4: %d", is_blast_file (file));
+	   HERE ("test 5: %d", fast_format_determination(file));
+	   HERE ("test 6: %d", format_is_oligo    (file));
+	   HERE ("test 7: %d", format_is_saga    (file));
+	   HERE ("test 8: %d", format_is_conc_aln    (file));
+	   HERE ("test 9: %d", is_lib (file));
+	   HERE ("test 10: %d", is_lib_02 (file));
+	   HERE ("test 11: %d", is_treelist (file));
+	   HERE ("test 12: %d", is_newick(file));
+	   HERE ("test 13: %d",  is_mafft_newick(file));
+	   HERE ("test 14: %d", is_nexus (file));
+	   exit (0);
+	 }
+
+
        int format_val  = 0;
        if ( !check_file_exists(file))
 	 {
@@ -1758,13 +1777,15 @@ char * identify_seq_format ( char *file)
 	 // 	if ( format_is_fasta_seq(file))sprintf ( format, "fasta_seq");
 	 // 	else if ( format_is_fasta_aln(file,1))
 	 // 	sprintf ( format, "fasta_aln");
-	 if (is_nameseq (file)){sprintf (format, "nameseq");}
+	 if ( is_newick(file))sprintf ( format, "newick_tree");
+	 else if ( is_mafft_newick(file))sprintf ( format, "mafft_newick_tree");
 	 else if ( is_stockholm_aln (file))sprintf (format, "stockholm_aln");
          else if (format_is_msf (file))sprintf (format, "msf_aln");
 	 else if ( is_blast_file (file))sprintf ( format, "blast_aln");
 	 else if ( is_pdb_file(file))sprintf ( format, "pdb_struc");
 	 else if (format_val = fast_format_determination(file))
 	   {
+	     
 	     switch( format_val )
 	       {
 	       case 1 : sprintf ( format, "fasta_seq");
@@ -1777,16 +1798,14 @@ char * identify_seq_format ( char *file)
 		 break;
 	       }
 	   }
-	 else if ( format_is_msf      (file))sprintf ( format, "msf_aln");
-       	 else if ( format_is_oligo    (file))sprintf ( format, "oligo_aln");
+	 else if ( format_is_oligo    (file))sprintf ( format, "oligo_aln");
 	
 	 else if ( format_is_saga     (file))sprintf ( format, "clustal_aln");
 	 else if ( format_is_conc_aln (file))sprintf ( format, "conc_aln");
 	 else if ( is_lib (file))sprintf ( format, "tc_lib");
 	 else if ( is_lib_02 (file))sprintf ( format, "tc_lib_02");
 	 else if ( is_treelist (file))sprintf ( format, "treelist");
-	 else if ( is_newick(file))sprintf ( format, "newick_tree");
-	 else if ( is_mafft_newick(file))sprintf ( format, "mafft_newick_tree");
+	 
          else if ( is_nexus (file))sprintf ( format, "nexus");
        
        
@@ -1796,7 +1815,7 @@ char * identify_seq_format ( char *file)
 	     ;
 	   }
        // 	 printf("DETERMINED FORMAT: %s\n", format);
-       
+      
        return format;
        }
 char **identify_list_format ( char **list, int n)
@@ -2434,56 +2453,16 @@ int is_treelist (char *name)
   if (n>1) return 1;
   return 0;
 }
- int is_mafft_newick (char *name)
+int is_mafft_newick (char *name)
    {
-     int c, pc;
-     FILE *fp;
-
-     
-     fp=vfopen (name, "r");
-     c=fgetc(fp);
-     if (c!='('){vfclose (fp); return 0;}
-     while ((c=fgetc(fp))!=EOF)
-       {
-	 
-	 pc=(c=='\n' || c==' ' || c== '\t')?pc:c;
-       }
-     vfclose (fp);
-     
-     if (pc==';')return 0;
-     else return 1;
+     if (file2firstchar (name)=='(' && file2lastchar (name)!=';')return 1;
+     return 0;
    }
 int is_newick (char *name)
    {
-     int c, pc;
-     FILE *fp;
-
-     
-     fp=vfopen (name, "r");
-     c=fgetc(fp);
-     if (c!='('){vfclose (fp); return 0;}
-     while ((c=fgetc(fp))!=EOF)
-       {
-	 pc=(c=='\n' || c==' ' || c== '\t')?pc:c;
-       }
-     vfclose (fp);
-     if (pc==';')return 1;
-     else return 0;
-   }
-
-int is_newick_old (char *name)
-   {
-     int c;
-     FILE *fp;
-
-     
-     fp=vfopen (name, "r");
-     c=fgetc(fp);
-     vfclose (fp);
-     if (c=='(')return 1;
+     if (file2firstchar (name)=='(' && file2lastchar (name)==';')return 1;
      return 0;
    }
-
 int is_clustalw_matrix ( char *name)
 {
 
@@ -11305,7 +11284,7 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	 }
        else if ( strm(action, "tree_prune") || strm(action, "prune_tree"))
 	 {
-	   D1->T=main_prune_tree ( D1->T, D2->S);
+	   D1->T=prune_tree ( D1->T, D2->S);
 	 }
        else if ( strm ( action, "tree2seq"))
 	 {

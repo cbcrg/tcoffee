@@ -7358,12 +7358,6 @@ Alignment * t_coffee_dpa (int argc, char **argv)
   else output_dpa_tree=1;
   
   //Save Guide Tree for Children Aligners
-  if (1==1)
-    {
-      char *child_tree_file=vtmpnam (NULL);
-      print_newick_tree(T,child_tree_file);
-      cputenv ("CHILD_TREE_FILE_4_TCOFFEE=%s",child_tree_file);
-    }
   
   fprintf ( le, "!Compute Guide Tree ---  done\n");
   

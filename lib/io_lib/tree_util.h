@@ -39,6 +39,8 @@ typedef struct ktnode
   char *name;//master sequence
   char *seqF;//sequence File
   char *msaF;//msa File
+  char *treeF;//msa File
+  
   
   KT_node parent;
 }KTreenode;
@@ -118,8 +120,10 @@ typedef struct split_struc{
   NT_node *L;
 }Split_struc;
 
-NT_node main_prune_tree ( NT_node T, Sequence *S);
+int check_tree_seq(NT_node T, Sequence *S);
+int check_treeF_seqF( char*seq,char*tree);
 NT_node prune_tree ( NT_node T, Sequence *S);
+char* prune_treeF ( NT_node T, Sequence *S, char *file);
 /*********************************************************************/
 /*                                                                   */
 /*                                   dpa_tree_manipulation           */
@@ -243,8 +247,8 @@ FILE* tree2file ( NT_node T,Sequence *S,char *format, FILE *fp);
 char *tree2string (NT_node T);
 
 
-int print_newick_tree ( NT_node T, char *name);
-FILE * no_rec_print_tree ( NT_node T, FILE *fp);
+char* print_newick_tree ( NT_node T, char *name);
+FILE* no_rec_print_tree ( NT_node T, FILE *fp);
 FILE*  no_rec_print_tree_shuffle ( NT_node T, FILE *fp);
 FILE*  no_rec_print_tree_randomize ( NT_node T, FILE *fp);
 
@@ -307,8 +311,9 @@ int **display_tree_from_node (NT_node T, int up, int down, int **array);
 NT_node tree2node ( char *name, NT_node T);
 
 NT_node * tree2seqnode_list (NT_node T, NT_node *L);
+NT_node   duplicate_tree (NT_node T);
 NT_node * tree2node_list (NT_node T, NT_node *L);
-NT_node * no_rec_tree2node_list (NT_node T, NT_node *L);
+
 NT_node tree2root ( NT_node T);
 int new_tree_sort ( char *name, NT_node T);
 
@@ -374,11 +379,13 @@ char* tree2msa4dpa (NT_node T, Sequence *S, int N, char *method);
 NT_node tree2dnd4dpa (NT_node T, Sequence *S, int N, char *method);
 int ktree2parent_seq_bucketsF(KT_node K,char *fname);
 int ktree2seq_bucketsF(KT_node K,char *fname);
-int kseq2kmsa   (KT_node *K, int n, char *method);
-char* kmsa2msa_old  (Sequence *S,KT_node K, int n, int *cn);
+int kseq2kmsa   (NT_node T,KT_node *K, int n, char *method);
+
+char *tree2child_tree(NT_node T,char *seqF,char *treeF);
+char *reg_seq_file2msa_file (char *method,int nseq, char* seqF, char* msaF, char *treeF);
 char *kmsa2msa (Sequence *S,KT_node *KL, int n);
 int ktree2klist (KT_node K, KT_node *KL, int *n);
-KT_node tree2ktree (NT_node T,Sequence *S, int N);
+KT_node tree2ktree (NT_node ROOT,NT_node T,Sequence *S, int N);
 Sequence* regtrim( Sequence *S,NT_node T,int N);
 
 KT_node *free_ktree (KT_node k);

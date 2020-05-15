@@ -10,6 +10,7 @@ my $QUIET="2>/dev/null";
 my $VERBOSE=$ENV{VERBOSE_4_DYNAMIC};
 our $EXIT_FAILURE=1;
 our $EXIT_SUCCESS=0;
+our $LAST_COM="";
 
 my %method;
 my $method2use;
@@ -153,16 +154,23 @@ if ($tree)
     ($h2,$treeF)=tempfile();
     my ($h2,$tmptree)=tempfile();
     push (@tmpL,$treeF);
-    if ( $tree eq "default"){;}
+    if ( $tree eq "default"){$treeF=0;}
     elsif ( -e $tree)
       {
 	my_system ("cp $tree $tmptree");
       }
     elsif ($tree eq "master" || $tree eq "main" || $tree eq "parent")
       {
-	my $master_tree=$ENV{CHILD_TREE_FILE_4_TCOFFEE};
-	my_system ("t_coffee -other_pg seq_reformat -in $master_tree -in2 $infile -action +prune_tree -output newick > $tmptree");
-	
+	if ($ENV{CHILD_TREEF_4_TCOFFEE} && -e $ENV{CHILD_TREEF_4_TCOFFEE})
+	  {
+	    my $ctree=$ENV{CHILD_TREEF_4_TCOFFEE};
+	    my_system ("mv $ctree $tmptree");
+	  }
+	else
+	  {
+	    my $master_tree=$ENV{CHILD_TREE_4_TCOFFEE};
+	    my_system ("t_coffee -other_pg seq_reformat -in $master_tree -in2 $infile -action +prune_tree -output newick > $tmptree");
+	  }
       }
     else 
       {
@@ -264,7 +272,11 @@ else
 #Flush output if none provided
 if ( ! -e $outfile)
   {
-    print "ERROR - No MSA computed [FATAL:dynamic.pl]\n";
+    system (" cp $treeF /Users/cnotredame/tmp/big/failed.$$.01.dnd");
+    system (" cp $infile /Users/cnotredame/tmp/big/failed.$$.01.fa");
+    
+    
+    print "ERROR - No MSA computed - $LAST_COM -- [FATAL:dynamic.pl]\n";
     my_exit ($CDIR,$EXIT_FAILURE);
   }
 elsif ( $flush)
@@ -392,6 +404,7 @@ sub my_exit
 sub my_system 
   {
     my ($com)=@_;
+    $LAST_COM=$com;
     
     if ($VERBOSE){print "![dynamic.pl] --- SysCall --- $com\n";}
     

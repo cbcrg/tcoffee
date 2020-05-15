@@ -600,6 +600,9 @@ char ***file2list   (char *name, char *sep);
 char ** file2lines  (char *name);
 int     file2nlines (char *name);
 char *  file2string (char *name);
+char    file2lastchar (char *name);
+char    file2firstchar (char *name);
+
 int     file2size   (char *name);
 float **file2float_mat (char * name, char *sep);
 int string2file_direct (char *file, char *mode, char *string,...);
