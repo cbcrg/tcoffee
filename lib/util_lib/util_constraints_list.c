@@ -2026,6 +2026,7 @@ CLIST_TYPE *main_search_in_list_constraint ( int *key,int *p,int k_len,Constrain
 	s2=key[SEQ2];
 	r2=key[R2];
 	ni=CL->residue_index[s1][r1][0];
+	
 	for (a=1; a<ni; a+=ICHUNK)
 	{
 		if (CL->residue_index[s1][r1][a+SEQ2]==s2 && CL->residue_index[s1][r1][a+R2]==r2)

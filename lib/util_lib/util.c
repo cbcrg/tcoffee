@@ -764,8 +764,12 @@ int cmp_list_int (const int**a, const int**b)
 	return 0;
 	}
 
-
 int name_is_in_list ( const char name_in[], char **name_list, int n_name, int len)
+{
+  char *name=(char*)name_in;
+  return name_is_in_hlist (name, name_list, n_name);
+}
+int name_is_in_list_old ( const char name_in[], char **name_list, int n_name, int len)
 {
 	int a;
 	int pos=-1;
@@ -4596,7 +4600,7 @@ int my_system ( char *command0)
 		  unpack_all_perl_script (list[a]+strlen ("unpack_"));
 		  myexit (EXIT_SUCCESS);
 		}
-	      else if ((c=name_is_in_list (list[a], unpacked_list[0], n_unpacked, 100))!=-1);
+	      else if ((c=name_is_in_list_old (list[a], unpacked_list[0], n_unpacked, 100))!=-1);
 	      else
 		{
 
@@ -5274,7 +5278,7 @@ int unpack_perl_script (char *name, char ***unpacked, int n)
       printf_system_direct ("chmod u+x %s", unpacked[1][n]);
 
     }
-
+  hupdate (unpacked[0]);
   set_file2remove_extension(".pl", UNSET);
   return ++n;
 }
