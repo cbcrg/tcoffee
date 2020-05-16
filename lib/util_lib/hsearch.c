@@ -452,7 +452,7 @@ hashtable_t * array2hashN (char **list, int nn)
       
       for (a=0; a<nn; a++)
 	{
-	  if (list[a])
+	  if (list[a] && list[a][0])
 	    {
 	      sprintf (index, "%d", a);
 	      ht_set (ht,list[a], index);

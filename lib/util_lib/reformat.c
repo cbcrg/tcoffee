@@ -1915,7 +1915,7 @@ int is_pdb_name ( char *name)
 	  buf_names=declare_char (1000, 100);
 	  buf_result=(int*)vcalloc (1000, sizeof (int));
 	}
-      if ( (result=name_is_in_list ( name, buf_names,nbuf,100))!=-1)return buf_result[result];
+      if ((result=name_is_in_list ( name, buf_names,nbuf,100))!=-1)return buf_result[result];
 
 
 
@@ -1932,7 +1932,7 @@ int is_pdb_name ( char *name)
 
       sprintf ( buf_names[nbuf], "%s", name);
       result=buf_result[nbuf++]=(result==1)?1:0;
-
+      hupdate(buf_names);
       return result;
 
     }

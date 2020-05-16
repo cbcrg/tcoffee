@@ -767,6 +767,7 @@ int cmp_list_int (const int**a, const int**b)
 int name_is_in_list ( const char name_in[], char **name_list, int n_name, int len)
 {
   char *name=(char*)name_in;
+  if (n_name==0) return -1;
   return name_is_in_hlist (name, name_list, n_name);
 }
 int name_is_in_list_old ( const char name_in[], char **name_list, int n_name, int len)
