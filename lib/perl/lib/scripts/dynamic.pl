@@ -120,7 +120,7 @@ if (!$outfile)
     $flush=1;
   }
 
-if ($method2use){;}
+if (!($method2use=~/dynamic/)){;}
 else 
   {
     if (-e $dynamic)
@@ -149,6 +149,8 @@ else
 	  }
       }
   }
+
+
 if ($tree)
   {
     ($h2,$treeF)=tempfile();

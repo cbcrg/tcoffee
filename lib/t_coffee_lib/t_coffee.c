@@ -7124,9 +7124,12 @@ Alignment * t_coffee_dpa (int argc, char **argv)
   set_int_variable    ("reg_dnd_nseq",100);
   set_int_variable    ("reg_dnd_depth",3);
   set_string_variable ("reg_dnd_mode", "codnd");
-  //*_4_CLTCOFFEE gets added to the T-Coffee command line of any slave
-  //*_4_TCOFFEE   
-      
+  //*_4_CLTCOFFEE gets added to the T-Coffee command line of any slave;
+
+  //Set Some Defaults that can be over-written by the CL parsing below
+  //Note that by default ALL flag get added to the env variable <name>_4_CLTCOFFEE. These variables are then used to construct the slave CL in dynamic.pl
+  cputenv ("blast_server_4_CLTCOFFEE=LOCAL");
+ 
   for (a=1; a<argc; a++)
     {
       
@@ -7250,6 +7253,18 @@ Alignment * t_coffee_dpa (int argc, char **argv)
       else if (argv[a][0]=='-' &&(a==argc-1 || argv[a+1][0]=='-'))
 	{
 	  cputenv ("%s_4_CLTCOFFEE=FLAGSET", argv[a]+1);
+	}
+      else if (strm (argv[a], "-child_method"))
+	{
+	  char *ml=NULL;
+	  a++;
+	  while (a<argc && argv[a][0]!='-')
+	    {
+	      ml=vcat(ml," ");
+	      ml=vcat(ml, argv[a]);
+	      a++;
+	    }
+	  if (ml)cputenv ("method_4_CLTCOFFEE=%s", ml);
 	}
       else if (argv[a][0]=='-')       
 	{

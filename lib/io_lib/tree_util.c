@@ -8496,6 +8496,9 @@ KT_node tree2ktree (NT_node ROOT,NT_node T,Sequence *S, int N)
   
   K->seqF=vtmpnam(NULL);
   fp=vfopen (K->seqF, "w");
+
+  
+
   if (S->nseq>N)
     {
       ordered=declare_int (nc, 1);
