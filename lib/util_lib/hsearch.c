@@ -414,76 +414,7 @@ char *ht_get( hashtable_t *hashtable, char *key ) {
 	}
 	
 }
-//makes it possible to maintain an alternative hash
-int name_is_in_hlist3 (char *name, char **list, int n)
-{
 
-  return name_is_in_hlist (name,list, n);
-  static hashtable_t *ht;
-  static char **rlist;
-  char *r;
-  
-  if (list !=rlist || list==NULL)
-    {
-      rlist=list;
-      if (ht)ht=ht_destroy(ht);
-    }
-  if (list==NULL)return -1;
-  
-  if (!ht)
-    {
-      int a;
-      char index[100];
-      
-      ht=ht_create (n*10);
-      for (a=0;a<n; a++)
-	{
-	  sprintf (index, "%d", a);
-	  ht_set (ht,list[a], index);
-	  //HERE ("SET %s %s", list[a], index);
-	}
-    }
-  if ((r=ht_get(ht, name))!=NULL)
-    {
-      return atoi (r);
-    }
-  else
-    return -1;
-}
-int name_is_in_hlist2 (char *name, char **list, int n)
-{
-  return name_is_in_hlist (name,list, n);
-  static hashtable_t *ht;
-  static char **rlist;
-  char *r;
-  
-  if (list !=rlist || list==NULL)
-    {
-      rlist=list;
-      if (ht)ht=ht_destroy(ht);
-    }
-  if (list==NULL)return -1;
-  
-  if (!ht)
-    {
-      int a;
-      char index[100];
-      
-      ht=ht_create (n*10);
-      for (a=0;a<n; a++)
-	{
-	  sprintf (index, "%d", a);
-	  ht_set (ht,list[a], index);
-	  //HERE ("SET %s %s", list[a], index);
-	}
-    }
-  if ((r=ht_get(ht, name))!=NULL)
-    {
-      return atoi (r);
-    }
-  else
-    return -1;
-}
 hashtable_t * array2hash (char **list)
 {
   if (!list)return NULL;

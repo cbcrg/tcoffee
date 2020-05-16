@@ -1011,10 +1011,6 @@ Sequence_data_struc *read_data_structure ( char *in_format, char *in_file,	Actio
 	  {
 	    D->M=read_matrice (in_file);
 	  }
-	else if (strm (in_format, "quick_newick"))
-	  {
-	    D->T=quick_read_tree (in_file);
-	  }
 	else if (strm (in_format, "mafft_newick_tree"))
 	  {
 	   
@@ -4001,7 +3997,7 @@ int main_output  (Sequence_data_struc *D1, Sequence_data_struc *D2, Sequence_dat
 	    while ((cc=fgetc (lfp1))!=EOF)fprintf (lfp2, "%c", cc);
 	    vfclose (lfp1);vfclose (lfp2);
 	  }
-	else if ( strm4 (out_format, "newick_tree","newick","binary","nh") || strm (out_format, "quick_newick"))
+	else if ( strm4 (out_format, "newick_tree","newick","binary","nh"))
 	        {
 		  if (!D1)return 1;
 		  if (!D1->T && (D1->A))
