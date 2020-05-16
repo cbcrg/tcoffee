@@ -1499,6 +1499,8 @@ void * vmalloc ( size_t size)
 		M=(Memcontrol*)x;
 		M[0].size=size;
 		M[0].size_element=0;
+		M[0].ht=NULL;
+		M[0].hn=0;
 		sprintf ( M[0].check, "dy");
 		M+=2;
 		x=M;
@@ -1528,7 +1530,10 @@ void *sub_vcalloc ( size_t nobj, size_t size, int MODE)
 
 
 	M=(Memcontrol*)x;
-	M-=2;M[0].size_element=size;
+	M-=2;
+	M[0].size_element=size;
+	M[0].ht=NULL;
+	M[0].hn=0;
 	M+=2;
 	x=M;
 
@@ -1606,9 +1611,12 @@ void *vrealloc ( void *p, size_t size)
 	  }
 	else
 	  {
+	    
 	    M=(Memcontrol*)p;
 	    M-=2;
+	    if (M[0].ht)hfree(p);
 	    i_size=M[0].size;
+	    
 	    p=M;
 
 
@@ -1638,10 +1646,11 @@ void vfree ( void *p)
        if ( !p)return;
        else
 	 {
+
 	   M=(Memcontrol*)p;
 	   M-=2;
 	   size=M[0].size;
-
+	   if (M[0].ht)hfree(p);
 	   p=M;
 	   free(p);
 

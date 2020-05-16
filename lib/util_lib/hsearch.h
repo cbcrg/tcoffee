@@ -55,7 +55,42 @@ Hasch_entry * allocate_hasch_entry (Hasch_entry *e, int action,struct Hasch_data
 int string2key (char *s, Char_node *n);
 Char_node * declare_char_node (int action);
 
+int name2index (char *name, char **list);
 int name_is_in_hlist (char *name, char **list, int n);
 int name_is_in_hlist2 (char *name, char **list, int n);
 int name_is_in_hlist3 (char *name, char **list, int n);
 char *check_hlist_for_dup(char **name, int n);
+
+
+/*********************************************************************/
+/*                                                                   */
+/*                         string hasch
+/*                                                                   */
+/*                                                                   */
+/*********************************************************************/
+struct entry_s {
+	char *key;
+	char *value;
+	struct entry_s *next;
+};
+
+typedef struct entry_s entry_t;
+
+struct hashtable_s {
+	int size;
+	struct entry_s **table;	
+};
+
+typedef struct hashtable_s hashtable_t;
+
+hashtable_t *ht_create( int size );
+hashtable_t * ht_destroy( hashtable_t *ht);
+
+int ht_hash( hashtable_t *hashtable, char *key );
+entry_t *ht_newpair( char *key, char *value );
+char *ht_get( hashtable_t *hashtable, char *key );
+
+hashtable_t * array2hashN (char **list, int nn);
+hashtable_t * array2hash (char **list, int nn);
+hashtable_t * hfree (void *list);
+hashtable_t * hupdate (char **list);

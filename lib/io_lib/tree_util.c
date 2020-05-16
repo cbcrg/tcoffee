@@ -330,7 +330,7 @@ NT_node collapse_tree (NT_node T, Sequence *S, char *string)
 /*********************************************************************/
 NT_node remove_leaf ( NT_node T);
 NT_node prune_root (NT_node T);
-NT_node prune_tree_old(NT_node T, Sequence *S);
+
 
 NT_node prune_tree(NT_node T, Sequence *S)
 {
@@ -356,7 +356,7 @@ int check_tree_seq(NT_node T, Sequence *S)
   char **tname=(char**)vcalloc (arrlen(L), sizeof (char*));
   while (L[ntseq])
     {
-      if (name_is_in_hlist2 (L[ntseq]->name,S->name, S->nseq)==-1)
+      if (name_is_in_hlist (L[ntseq]->name,S->name, S->nseq)==-1)
 	{
 	  HERE ("%s is not in seq", L[ntseq]->name);
 	  return 0;
@@ -369,7 +369,7 @@ int check_tree_seq(NT_node T, Sequence *S)
   
 
   for (a=0; a<S->nseq; a++)
-    if (name_is_in_hlist2 (S->name[a], tname,ntseq)==-1)
+    if (name_is_in_hlist (S->name[a], tname,ntseq)==-1)
 	{
 	  HERE ("%s is not in seq", S->name[a]);
 	  return 0;
@@ -389,7 +389,7 @@ char* prune_treeF (NT_node T, Sequence *S, char *tmp)
   int special=0;
   NT_node B,C,P,GP;
   if (!tmp)tmp=vtmpnam (NULL);
-  name_is_in_hlist2(NULL, NULL, 0);
+  //name_is_in_hlist2(NULL, NULL, 0);
   R=tree2node_list(T,NULL);
   a=0;
   while (R[a])
@@ -433,7 +433,7 @@ char* prune_treeF (NT_node T, Sequence *S, char *tmp)
       if (P->right==C)B=P->left;
       else B=P->right;
       
-      if (name_is_in_hlist2 (C->name,S->name, S->nseq)==-1)
+      if (name_is_in_hlist (C->name,S->name, S->nseq)==-1)
 	{
 	  C->index=0;
 	  if (!GP && B->isseq)
@@ -481,57 +481,6 @@ char* prune_treeF (NT_node T, Sequence *S, char *tmp)
 }
 
   
-NT_node prune_tree_old(NT_node T, Sequence *S)
-{
- NT_node *L;
- 
- int a,n;
- 
- L=tree2seqnode_list (T,NULL);
- a=0;
- while (L[a])
-   {
-     NT_node C=L[a];
-     NT_node P=C->parent;
-     NT_node GP=(P)?P->parent:NULL;
-     NT_node B;
-     
-     if (P->right==C)B=P->left;
-     else B=P->right;
-     
-     if (name_is_in_hlist2 (C->name,S->name, S->nseq)==-1)
-       {
-	 if (!GP && B->leaf)
-	   {
-	     B->parent=NULL;
-	     free_tree_node(P); free_tree_node (C);
-	     vfree(L);return B;
-	   }
-	 else if (!GP)
-	   {
-	     P->right=B->right;
-	     P->left =B->left;
-	     (B->right)->parent=P;
-	     (B->left )->parent=P;
-	      P->dist=0;
-	     free_tree_node (B);free_tree_node (C);
-	    
-	   }
-	 else
-	   {
-	     if (GP->left==P)GP->left=B;
-	     else GP->right=B;
-	     B->parent=GP;
-	     B->dist+=P->dist;
-	     free_tree_node (P); free_tree_node (C);
-	   }
-       }
-     a++;
-   }
- 
- vfree (L);
- return T;
-}
 
 
 

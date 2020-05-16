@@ -2,12 +2,16 @@
 #define __UTIL_DECLARE_H
 
 
+
+typedef struct hashtable_s hashtable_t;
 typedef struct Tmpname Tmpname;
 struct Memcontrol
     {
       size_t size;
       size_t size_element;
       char check[3];
+      int hn;
+      hashtable_t *ht;
       struct Memcontrol *p;
       struct Memcontrol *n;
     };
