@@ -274,10 +274,6 @@ else
 #Flush output if none provided
 if ( ! -e $outfile)
   {
-    system (" cp $treeF /Users/cnotredame/tmp/big/failed.$$.01.dnd");
-    system (" cp $infile /Users/cnotredame/tmp/big/failed.$$.01.fa");
-    
-    
     print "ERROR - No MSA computed - $LAST_COM -- [FATAL:dynamic.pl]\n";
     my_exit ($CDIR,$EXIT_FAILURE);
   }

@@ -702,7 +702,7 @@ Job_TC* method2job_list ( char *method_name,Sequence *S, char *weight, char *lib
 	  for (i=2; i<n+2; i++)
 	    {
 	      if ( is_number (list[i]));
-	      else if ((x=name_is_in_list (list[i], S->name, S->nseq, 100))!=-1)sprintf(list[i], "%d", x);
+	      else if ((x=name_is_in_hlist (list[i], S->name, S->nseq))!=-1)sprintf(list[i], "%d", x);
 	      else
 		{
 		  add_warning ( stderr, "%s is not part of the sequence dataset", list[i]);
@@ -2527,7 +2527,7 @@ Sequence * read_seq_in_n_list(char **fname, int n, char *type, char *SeqMode)
 		    else
 		      {
 			if ((S=merge_seq ( S1, S))==NULL){fprintf ( stderr, "\nERROR: Sequence Error in %s [FATAL:%s]\n",lname, PROGRAM); myexit(EXIT_FAILURE);}
-			i=name_is_in_list (S1->name[0], S->name, S->nseq, 100);
+			i=name_is_in_hlist (S1->name[0], S->name, S->nseq);
 			(S->T[i])->P=fill_P_template (S->name[i], lname, S);
 		      }
 		    free_sequence (S1, S1->nseq);
@@ -2991,8 +2991,8 @@ FILE * save_extended_constraint_list_pair (  Constraint_list *CL, char *mode, ch
 	if ((p=strstr (mode, "THR"))!=NULL)t=atoi(p+3);
 	else t=0;
 
-	s1=name_is_in_list (seq1,(CL->S)->name, (CL->S)->nseq, 100);
-	s2=name_is_in_list (seq2,(CL->S)->name, (CL->S)->nseq, 100);
+	s1=name_is_in_hlist (seq1,(CL->S)->name, (CL->S)->nseq);
+	s2=name_is_in_hlist (seq2,(CL->S)->name, (CL->S)->nseq);
 
 	if ( s1==-1)
 	{
@@ -3034,63 +3034,7 @@ FILE * save_extended_constraint_list_pair (  Constraint_list *CL, char *mode, ch
 /*                                                                   */
 /*                                                                   */
 /*********************************************************************/
-#ifdef MMMMMMMM
-FILE *save_extended_constraint_list ( Constraint_list *CL,Sequence *S, char *fname)
-{
-	int a, b, c, d;
-	int *tr, *ns;
-	int **pos0, **l_s;
-	int epsilon=0;
-	Alignment *A;
-	FILE *fp;
 
-	fp=vfopen (fname, "w");
-	fp=save_sub_list_header(fp, S->nseq, S->name, CL);
-
-	tr=vcalloc (S->nseq+1, sizeof (int));
-	for ( b=0,a=0; a< S->nseq; a++)
-	{
-		int i;
-		if ( (i=name_is_in_list(S->name[a],(CL->S)->name,(CL->S)->nseq, 100))==-1)
-		{
-			printf_exit (EXIT_FAILURE, stderr, "\nERROR: Sequence %s is not part of the sequence dataset [FATAL:%s]", S->name[a], PROGRAM);
-
-		}
-		else
-		{
-			tr[a]=i;
-		}
-	}
-
-	A=declare_aln (S);
-	pos0=vcalloc ( S->nseq, sizeof (int*));
-	for (a=0; a<S->nseq; a++)
-	{
-		int l;
-		l=strlen (S->seq[a]);
-		A->seq_al[a]=S->seq[a];
-		pos0[a]=vcalloc (l+1, sizeof (int));
-		for (b=0; b<l; b++)pos[a][b]=b+1;
-	}
-	l_s=declare_int (2,2);
-	ns=vcalloc ( 2, sizeof (int));
-
-
-	for ( a=0; a< S->nseq-1; a++)
-		for ( b=a+1; b<S->nseq; b++)
-		{
-			int pos_i, pos_j, s;
-			l_s[0]=tr[a];l_s[1]=tr[b];
-			for ( pos_i=0; pos_i< S->len[a]; pos_i++)
-				for (pos_j=0; pos_j<S->len[b]; pos_j++)
-				{
-					s=(CL->get_dp_cost) ( A, pos0, ns[0], l_s[0], i-1, pos0, ns[1], l_s[1],pos_j-1, CL);
-					if (s>epsilon)fprintf (fp, "%d %d %d", i, j, s);
-				}
-		}
-		return fp;
-}
-#endif
 int save_contact_constraint_list (Constraint_list *CL, char *name)
 {
   FILE *fp;
@@ -3206,7 +3150,7 @@ FILE * save_constraint_list ( Constraint_list *CL,int start, int len, char *fnam
 		translation=(int*)vcalloc ( (CL->S)->nseq+1, sizeof (int));
 		for ( b=0,a=0; a< (CL->S)->nseq; a++)
 		{
-			if ( name_is_in_list((CL->S)->name[a],S->name,S->nseq, 100)==-1)
+			if ( name_is_in_hlist((CL->S)->name[a],S->name,S->nseq)==-1)
 			{
 				(CL->S)->len[a]=-1;
 				translation [a]=-1;
@@ -4000,7 +3944,7 @@ Constraint_list * constraint_list2sub_constraint_list (Constraint_list *CL, Sequ
   
   for (ns=0,a=0; a<SMALL->nseq; a++)
     {
-      if ((i=name_is_in_list (SMALL->name[a], S->name, S->nseq,100))!=-1)lu[i]=++ns;
+      if ((i=name_is_in_hlist (SMALL->name[a], S->name, S->nseq))!=-1)lu[i]=++ns;
     }
   
  
@@ -4485,7 +4429,7 @@ int ** aln2defined_residues ( Alignment *A, Constraint_list *CL)
 	aln_count=declare_int (A->nseq, A->len_aln);
 	for (a=0; a< A->nseq; a++)
 	{
-		ra=name_is_in_list(A->name[a], (CL->S)->name, (CL->S)->nseq, 100);
+		ra=name_is_in_hlist(A->name[a], (CL->S)->name, (CL->S)->nseq);
 		if ( ra==-1) continue;
 		for ( b=0; b<A->len_aln; b++)
 			if (pos[a][b]>0 && seq_count[ra][pos[a][b]]>0)aln_count[a][b]=1;
