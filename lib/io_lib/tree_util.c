@@ -7790,16 +7790,18 @@ KT_node*pool (KT_node *K1,int n1,int *n2in, int N)
   KT_node*K2;
   int n2;
   int **nseq;
-  
+
   for ( a=0; a<n1; a++){if (K1[a]->nseq<N)pool=1;}
   if (!pool)return NULL;
   
+ 
 
   nseq=declare_int(n1, 2);
   for ( a=0; a<n1; a++)
     {
       nseq[a][0]=a;
       nseq[a][1]=K1[a]->nseq;
+      
     }
   sort_int (nseq, 2, 1, 0,n1-1);
   
@@ -7824,7 +7826,9 @@ KT_node*pool (KT_node *K1,int n1,int *n2in, int N)
       K2[n2-1]->nseq=cn;
       
       K1[a]->msaF=K2[n2-1]->msaF;
+     
       if (cn>=N)cn=0;
+      
     }
   
   //Debug test
@@ -7863,15 +7867,17 @@ char* tree2msa4dpa (NT_node T, Sequence *S, int N, char *method)
   if ( dopool && (KL2=pool(KL, n, &n2,N))!=NULL)
     {
       int a;
+      
       kseq2kmsa(T,KL2,n2, method);
+            
       for (a=0; a<n; a++)
 	{
+
 	  //Be carefull not to overwrite msaF: it is common to all the pooled buckets
 	  char *tmp=vtmpnam (NULL);
 	  trim_fastaF_big  ( KL[a]->msaF, KL[a]->seqF,tmp, NULL, NULL, NULL);
 	  KL[a]->msaF=tmp;
 	  ungap_fastaF_big ( KL[a]->msaF, KL[a]->msaF, 100);
-	 
 	  vfree(KL2[a]);
 	}
       vfree (KL2);
@@ -7915,6 +7921,7 @@ char *kmsa2msa (KT_node K,Sequence *S, ALNcol***S2,ALNcol*start)
       S2=(ALNcol***)vcalloc (S->nseq, sizeof (ALNcol**));
       for (s=0; s<S->nseq; s++)S2[s]=(ALNcol**)vcalloc (S->len[s], sizeof (ALNcol*));
       A=quick_read_fasta_aln (A,K->msaF);
+      
       start=msa2graph(A,S, S2,start, -1);
       out=vtmpnam (NULL);
     }

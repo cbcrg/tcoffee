@@ -1614,7 +1614,7 @@ Alignment * quick_read_fasta_aln (Alignment *A, char *file)
   long *map;
   char *s;
   int i, nseq,a;
-  
+  file2record_it(NULL,0, NULL);
   map=fasta2map(file);
   nseq=read_array_size_new (map)-1;
 
@@ -1630,6 +1630,7 @@ Alignment * quick_read_fasta_aln (Alignment *A, char *file)
       A->aln_comment[i]=csprintf (A->aln_comment[i], "%s", FastaRecord2comment(s));
       A->file[i]=csprintf (A->file[i], "%s", file);
     }
+
   file2record_it(NULL,0, NULL);
   vfree (map);
   A->declared_len=A->len_aln=strlen (A->seq_al[0]);
