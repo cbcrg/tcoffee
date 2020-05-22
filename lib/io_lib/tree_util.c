@@ -7857,19 +7857,20 @@ char* tree2msa4dpa (NT_node T, Sequence *S, int N, char *method)
   int n2=0;
  
   n=ktree2klist(K,KL,&n);
-  
+  ktree2display (K, "1");
   if (getenv ("DUMP_SEQ_BUCKETS") ||getenv ("DUMP_SEQ_BUCKETS_ONLY"))
     {
-      ktree2seq_bucketsF(K, "seqdump.");
+      ktree2seq_bucketsF(K, "seqdump.1");
       if (getenv ("DUMP_SEQ_BUCKETS_ONLY"))exit (0);
-    }
+    }  
+ 
   //This is where the slave MSAs are computed, all at once.
   if ( dopool && (KL2=pool(KL, n, &n2,N))!=NULL)
     {
       int a;
-      
+         
       kseq2kmsa(T,KL2,n2, method);
-            
+      
       for (a=0; a<n; a++)
 	{
 
@@ -7883,8 +7884,10 @@ char* tree2msa4dpa (NT_node T, Sequence *S, int N, char *method)
       vfree (KL2);
     }
   else
-    kseq2kmsa(T,KL,n, method);
+    {
        
+      kseq2kmsa(T,KL,n, method);
+    }
   if (getenv ("DUMP_ALN_BUCKETS") ||getenv ("DUMP_ALN_BUCKETS_ONLY"))
     ktree2aln_bucketsF(K, "alndump.");
   
@@ -8292,23 +8295,40 @@ int ktree2parent_seq_bucketsF(KT_node K,char *fname)
     }
   return 1;
 }
+int ktree2display(KT_node K,char *fname)
+{
+
+  if (!K)return 0;
+  else
+    {
+      int a;
+      fprintf (stderr, "!\t%-10s -- %10d Seq\n", fname, K->nseq);
+
+      for (a=0; a<K->nc; a++)
+	{
+	  char *nfname=csprintf(NULL, "%s.%d", fname, a+1);
+	  ktree2display(K->child[a],nfname); 
+	  vfree (nfname);
+	}
+    }
+  return 1;
+}
 int ktree2seq_bucketsF(KT_node K,char *fname)
 {
 
   if (!K)return 0;
   else
     {
-      char *nfname=(char*)vcalloc (1000, sizeof (char));
       int a;
-      
+      fprintf (stderr, "!DUMP: \t%-10s -- %10d Seq\n", fname, K->nseq);
+      printf_system ("cp %s %s", K->seqF, fname);
       for (a=0; a<K->nc; a++)
 	{
-	  sprintf (nfname, "%s.%d.seq_bucket", fname,a+1);
-	  printf_system ("cp %s %s", K->seqF, nfname);
-	  sprintf (nfname, "%s.%d", fname,a+1);
+	  char *nfname=csprintf(NULL, "%s.%d", fname, a+1);
 	  ktree2seq_bucketsF (K->child[a],nfname); 
+	  vfree (nfname);
 	}
-      vfree (nfname);
+
     }
   return 1;
 }

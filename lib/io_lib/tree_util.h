@@ -379,6 +379,7 @@ char* tree2msa4dpa (NT_node T, Sequence *S, int N, char *method);
 NT_node tree2dnd4dpa (NT_node T, Sequence *S, int N, char *method);
 int ktree2parent_seq_bucketsF(KT_node K,char *fname);
 int ktree2seq_bucketsF(KT_node K,char *fname);
+int ktree2display(KT_node K,char *fname);
 int kseq2kmsa   (NT_node T,KT_node *K, int n, char *method);
 
 char *tree2child_tree(NT_node T,char *seqF,char *treeF);
