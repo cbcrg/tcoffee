@@ -132,7 +132,7 @@ char *     normalize_pdb_file  (char *name_in, char *seq, char *out_file)
   int a;
   int start, end, npdb, r1, r2;
   char name[100];
-
+ 
   if ( !name_in) return NULL;
   else
     {
@@ -147,7 +147,7 @@ char *     normalize_pdb_file  (char *name_in, char *seq, char *out_file)
 
   S=get_pdb_sequence (name);
   A=align_two_sequences (S->seq[0],seq,"idmat",-3,0, "fasta_pair_wise");
- 
+  
  for (start=-1, end=-1,npdb=0,a=0; a< A->len_aln; a++)
     {
       r1=1-is_gap(A->seq_al[0][a]);
@@ -158,12 +158,15 @@ char *     normalize_pdb_file  (char *name_in, char *seq, char *out_file)
       if (r1 && r2 && start==-1)start=npdb;
       if (r1 && r2)end=npdb;
     }
-
+ 
   free_aln(A);  
+  
   free_sequence (S, -1);
   
   sprintf ( command, "extract_from_pdb -infile %s -atom ALL -chain FIRST -coor %d %d -nodiagnostic > %s", check_file_exists(name), start, end, out_file);
+  
   my_system ( command);
+  
   return out_file;
   }
 

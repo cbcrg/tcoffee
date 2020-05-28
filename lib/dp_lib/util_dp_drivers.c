@@ -1882,8 +1882,81 @@ Constraint_list * srap_pair   (char *seq, char *weight, Constraint_list *CL)
   vfree (atom); atom=NULL;
   return CL;
 }
+Constraint_list * sap_pair_test  (char *seq_in, char *weight, Constraint_list *CL)
+ {
+   int a, c,s1, s2,tot,sim,score,max;
+   FILE *fp;
+   char *template1, *template2;
+   char *tmp_pdb1, *tmp_pdb2;
+   char *sap_seq1, *sap_seq2;
+   char *buf=NULL;
+   
+   
+   char *cdir=NULL;
+   char *seq=NULL;
+   char *wdir   =vtmpnam(NULL);
+   int *v;   
+   seq=csprintf (seq, "%s", seq_in);
+  
+   atoi(strtok (seq,SEPARATORS));
+   s1=atoi(strtok (NULL,SEPARATORS));
+   s2=atoi(strtok (NULL,SEPARATORS));
+   if (!(template1=seq2T_value(CL->S,s1, "template_name", "_P_")))return CL;
+   if (!(template2=seq2T_value(CL->S,s2, "template_name", "_P_")))return CL;
 
-Constraint_list * sap_pair   (char *seq_in, char *weight, Constraint_list *CL)
+   cputenv ( "SKIP=1");
+   normalize_pdb_file(seq2P_template_file(CL->S,s1),(CL->S)->seq[s1], vtmpnam (NULL));
+   normalize_pdb_file(seq2P_template_file(CL->S,s2),(CL->S)->seq[s2], vtmpnam (NULL));
+   
+   
+   //Start working in special dir
+   cdir=get_pwd(cdir);
+   printf_system    ("mkdir -p %s",wdir);
+   chdir (wdir);
+   
+   
+   
+  
+  
+  
+   //Sap is finished, Now go back to cdir and turn it into a lib
+   
+   
+   tot=10;
+   if (tot>0)
+     {
+       
+       
+       
+       fp=vfopen ( "saplib", "w");
+       fprintf (fp, "! TC_LIB_FORMAT_01\n");
+       fprintf (fp, "2\n");
+       fprintf (fp, "%s %d %s\n", (CL->S)->name[s1],(int)strlen ((CL->S)->seq[s1]), (CL->S)->seq[s1]);
+       fprintf (fp, "%s %d %s\n", (CL->S)->name[s2],(int)strlen ((CL->S)->seq[s2]), (CL->S)->seq[s2]);
+       fprintf (fp, "#1 2\n");
+       
+       
+       for ( a=0; a<tot; a++)
+	 {
+	   fprintf (fp, "%d %d 100 1 0\n", a+1, a+1);
+	 }
+       
+       fprintf (fp, "! CPU 0\n");
+       fprintf (fp, "! SEQ_1_TO_N\n");
+       vfclose (fp);
+       
+              
+       CL=read_constraint_list_file(CL,"saplib");
+     }
+   
+   
+   vfree (buf);
+   vremove("in1");vremove ("in2");vremove("sapout"); vremove("saplib");
+   chdir (cdir);
+  
+   return CL;
+ }
+Constraint_list * sap_pair  (char *seq_in, char *weight, Constraint_list *CL)
  {
    int a, c,s1, s2,tot,sim,score,max;
    FILE *fp;
@@ -1924,14 +1997,14 @@ Constraint_list * sap_pair   (char *seq_in, char *weight, Constraint_list *CL)
        printf_system ("mv %s in2", tmp_pdb2);
      }
    
-   printf_system ("%s in1 in2 >sapout 2>/dev/null::IGNORE_FAILURE::",SAP_4_TCOFFEE);
-   
+   printf_system ("%s in1 in2 >sapout 2>/dev/null",SAP_4_TCOFFEE);
+  
    if (!is_sap_file("sapout"))
      {
        add_warning ( stderr, "SAP failed to align: %s against %s [%s:WARNING]\n", seq2P_template_file(CL->S,s1),seq2P_template_file(CL->S,s2), PROGRAM);
        return CL;
      }
-   
+  
    //Sap is finished, Now go back to cdir and turn it into a lib
    
    max=file2nlines("sapout")+1;
@@ -2003,8 +2076,7 @@ Constraint_list * sap_pair   (char *seq_in, char *weight, Constraint_list *CL)
    vfree (buf);
    vremove("in1");vremove ("in2");vremove("sapout"); vremove("saplib");
    chdir (cdir);
-
-   
+  
    return CL;
  }
 

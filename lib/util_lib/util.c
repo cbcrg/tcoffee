@@ -4520,8 +4520,8 @@ int printf_system  (char *string, ...)
   int r;
   char static *tmpdir;
   char static *cdir;
-
   cvsprintf (buf, string);
+    
   r=my_system (buf);
   vfree(buf);
   return r;
@@ -4550,7 +4550,7 @@ int my_system ( char *command0)
   static int n_unpacked;
   char *dump=NULL;
 
-  /* Chile process must not be granted access to the dump file*/
+  /* Child process must not be granted access to the dump file*/
   if (dump=getenv("DUMP_4_TCOFFEE"))unsetenv ("DUMP_4_TCOFFEE");
   
   if (!unpacked_list)
@@ -4631,6 +4631,7 @@ int my_system ( char *command0)
       vfree ( command1);
       command2=substitute ( command2, "//", "/");
       command2=substitute ( command2, ":/", "://");
+     
       return_val=safe_system (command2);
       if (dump)cputenv ("DUMP_4_TCOFFEE=%s", dump);
       
@@ -4768,6 +4769,7 @@ char* lock(int pid,int type, int action,char *string, ...)
 			value=(char*)vcalloc (2, sizeof(char));
 			sprintf (value, " ");
 		}
+		//HERE ("FILE: %s VALUE=[%s]", fname,value);
 		string2file_direct (fname, const_cast<char*>( (action==LSET)?"a":"w"), value);
 		vfree (value);
 		r= " ";
@@ -4825,37 +4827,25 @@ int safe_system (const char * com_in)
 {
     pid_t pid;
     int   status;
-
     int failure_handling;
     char *p;
     char command[1000];
-    static char *com;
-
+    char *com=NULL;
+    int ret;
+    
     if (getenv4debug ("DEBUG_SYSTEM")){fprintf ( stderr, "DEBUG_SYSTEM::safe_system::%s\n",com_in);}
     
     
     if ( clean_exit_started) return system (com_in);
-    if ( com)vfree (com);
-    if ( strstr ( com_in, "SCRATCH_FILE"))
+    com=csprintf (NULL, "%s", com_in);
+    while (strstr ( com, "SCRATCH_FILE"))
       {
-	com=(char*)vcalloc ( strlen ( com_in)+1, sizeof (char));
-	sprintf ( com, "%s", com_in);
-	while (strstr ( com, "SCRATCH_FILE"))
-	  {
-	    char *t;
-	    t=vtmpnam(NULL);
-	    com=(char*)vrealloc (com, (strlen (com)+strlen (t)+1)*sizeof (char));
-	    com=substitute (com,"SCRATCH_FILE", t);
-	  }
+	char *t;
+	t=vtmpnam(NULL);
+	com=(char*)vrealloc (com, (strlen (com)+strlen (t)+1)*sizeof (char));
+	com=substitute (com,"SCRATCH_FILE", t);
       }
-    else
-      {
-	com=(char*)vcalloc (strlen (com_in)+1, sizeof (char));
-	sprintf ( com, "%s", com_in);
-      }
-
-
-
+    
     if (com == NULL)
         return (1);
     else if ( (p=strstr (com, "::IGNORE_FAILURE::")))
@@ -4880,8 +4870,8 @@ int safe_system (const char * com_in)
       {
 	failure_handling=EXIT_ON_FAILURE;
       }
-
-
+    //ret=system (com);vfree(com);return ret;
+    
     sprintf ( command, " -SHELL- %s (tc)", com_in);
 
     if ((pid = vvfork (command)) < 0)
@@ -4896,14 +4886,14 @@ int safe_system (const char * com_in)
         argv [3] = 0;
 	if ( debug_lock)fprintf (stderr,"\n--- safe_system (util.h): %s (%d)\n", com, getpid());
 	execvp ("/bin/sh", argv);
-
+	
       }
     else
       {
 	set_pid(pid);
+	
       }
-
-
+  
     while (1)
       {
 	int r;
@@ -4915,6 +4905,7 @@ int safe_system (const char * com_in)
 	else r=EXIT_SUCCESS;
 	if ( debug_lock)
 	  fprintf ( stderr, "\n--- safe system return (util.c): p:%d c:%d r:%d (wait for %d", getppid(), getpid(), r, pid);
+	
 	return check_process (com_in,pid,r, failure_handling);
       }
 }
@@ -5067,13 +5058,14 @@ int kill_child_pid(int pid)
   
   cpid=getpid();
   list=(int*)vcalloc (max, sizeof (int));
-  
+ 
   while ((n=get_child_list (pid,list)))
     {
       
       kill_child_list (list);
+      
     }
-
+ 
   for (a=0; a<max; a++)
     {
       if ( list [a] && a!=cpid)
@@ -5083,9 +5075,10 @@ int kill_child_pid(int pid)
 	  lock  (a, LLOCK, LRELEASE, " ");
 	  lock  (a, LERROR,LRELEASE, " ");
 	  lock  (a, LWARNING,LRELEASE, " ");
+	  ;
 	}
     }
-
+  
   return 1;
 }
 
@@ -5130,7 +5123,7 @@ int get_child_list (int pid,int *clist)
     }
 
   lockf=lock2name (pid, LLOCK);
-
+  
   if ( lockf && file_exists (NULL,lockf))
     {
      
@@ -5148,7 +5141,7 @@ int get_child_list (int pid,int *clist)
   
   if (!clist[pid]){clist[pid]=1; n++;}
   return n;
-  return 0;
+  
 }
 
 
@@ -7576,6 +7569,7 @@ int string2file_direct (char *file, char *mode, char *string,...)
   va_end (ap);
   return 1;
 }
+
 int string2file (char *file, char *mode, char *string,...)
 {
   FILE *fp;
@@ -7651,7 +7645,7 @@ char *file2string (char *name)
       string=vcat(string, buf);
     }
   vfree(buf);
-  
+  vfclose (fp);
   return string;
 }
 
@@ -8210,7 +8204,7 @@ FILE * find_token_in_file ( char *fname, FILE * fp, char *token)
 	}
       n++;
     }
-  if (ret==0)vfclose (fp);
+  if (ret==0 && fp)vfclose (fp);
   return (ret==0)?NULL:fp;
 }
 
@@ -10079,7 +10073,6 @@ void clean_exit ()
   static char *trash=NULL;
 
   
-
   clean_exit_started=1;//prevent new locks
   start=tmpname;
   static int set_trash;

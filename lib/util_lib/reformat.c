@@ -1937,8 +1937,34 @@ int is_pdb_name ( char *name)
       return result;
 
     }
-
 char*  get_pdb_id ( char *file)
+{
+  /*receives the name of a pdb file*/
+  /*reads the structure id in the header*/
+  /*returns the pdb_id*/
+  char *tmp_name=vtmpnam(NULL);
+  char cached [1000];
+  char fname[1000];
+  FILE *fp;
+  char buf[1000];
+
+  sprintf ( cached, "%s/%s", get_cache_dir(),file);
+  if ( check_file_exists(cached))sprintf ( fname, "%s", cached);
+  else sprintf ( fname, "%s", file);
+
+  printf_system ("extract_from_pdb -get_pdb_id %s > %s",fname, tmp_name);
+  
+  buf[0]='\0';
+  if ((fp=vfopen (tmp_name, "r")))
+    {
+      fscanf ( fp, "\n%s\n", buf);
+      vfclose (fp);
+    }
+      
+  return csprintf (NULL, "%s", buf);
+  
+}
+char*  get_pdb_id_old ( char *file)
 {
   /*receives the name of a pdb file*/
   /*reads the structure id in the header*/
@@ -4635,7 +4661,7 @@ int seqres_equal_atom (char*fname)
 Sequence* get_pdb_sequence   (char *fname)
 {
   Sequence *S;
-
+  
   if ( (S=get_pdb_sequence_from_field(fname, "SEQRES"))!=NULL);
   else if ( (S=get_pdb_sequence_from_field(fname, "ATOM"))!=NULL)
     {
@@ -4649,8 +4675,32 @@ Sequence* get_pdb_sequence   (char *fname)
   return S;
 }
 
-
 Sequence* get_pdb_sequence_from_field   (char *fname, char *field)
+{
+  char *tp_name=vtmpnam(NULL);
+  char *pdbid;
+  Sequence *S=NULL;
+  char *c;
+
+  printf_system_direct ("extract_from_pdb -seq_field %s -chain FIRST -infile \'%s\' -mode fasta > %s", field, check_file_exists(fname), tp_name);
+  S=get_fasta_sequence ( tp_name, NULL);
+  
+  if (S==NULL)return NULL;
+  
+  if ( (pdbid=get_pdb_id (fname))){sprintf ( S->name[0], "%s",pdbid);vfree (pdbid);}
+  S->nseq=1;
+  
+  sprintf ( S->file[0], "%s", fname);
+  S->max_len=S->min_len=S->len[0];
+  if ( S->len[0]==0)
+    {
+      free_sequence (S, -1);
+      S=NULL;
+    }
+  
+  return S;
+}
+Sequence* get_pdb_sequence_from_field_old   (char *fname, char *field)
 {
 	char *tp_name;
 	char *command;
@@ -4661,10 +4711,6 @@ Sequence* get_pdb_sequence_from_field   (char *fname, char *field)
 	command=(char*)vcalloc ( LONG_STRING, sizeof (char));
 	tp_name=vtmpnam (NULL);
 	sprintf ( command, "extract_from_pdb -seq_field %s -chain FIRST -infile \'%s\' -mode fasta > %s", field, check_file_exists(fname), tp_name);
-// 	printf("CO: %s\n", command);
-// 	char *x = vcalloc ( LONG_STRING, sizeof (char));
-// 	sprintf(x, "cp %s ~/Desktop/erg.txt", tp_name);
-// 	my_system(x);
 	if ( getenv4debug ("DEBUG_EXTRACT_FROM_PDB"))fprintf ( stderr, "\n[DEBUG_EXTRACT_FROM_PDB:get_pdb_seq] %s\n", command);
 	my_system ( command);
 
