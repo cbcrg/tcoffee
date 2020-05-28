@@ -153,7 +153,6 @@ Constraint_list *fork_subset_produce_list   ( Constraint_list *CL, Sequence *S, 
 		  job=job->c;
 		  done++;
 		}
-	      
 	      dump_constraint_list (CL, pid_tmpfile[a], "a");
 	      unfreeze_constraint_list (CL);
 	      myexit (EXIT_SUCCESS);
