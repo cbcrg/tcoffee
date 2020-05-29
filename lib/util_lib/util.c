@@ -5647,22 +5647,7 @@ int fcputenv   (char *file, char *mode,char * string, ...)
   va_end (ap);
   return 1;
 }
-int iswdir     (char *p)
-{
-  FILE*fp;
-  char *f=NULL;
-  
-  if ( !isdir(p))return 0;
-  
-  f=csprintf (f,"%s/test%d",p, rand()%100000); 
-  
-  if ( !(fp=fopen (f, "w"))){vfree(f); return 0;}
-  if ( !fprintf ( fp, "test")){fclose(fp);vfree(f);return 0;}
-  
-  fclose(fp);
-  vfree(f);
-  return 1;
-}
+
   
 int isdir4path (char *p)
 {
@@ -8665,6 +8650,23 @@ int istmp  (char *file)
   
   return 0;
 }
+int iswdir     (char *p)
+{
+  FILE*fp;
+  char *f=NULL;
+  if ( !p) return 0;
+  if ( !isdir(p))return 0;
+  
+  f=csprintf (f,"%s/test%d",p, rand()%100000); 
+  
+  if ( !(fp=fopen (f, "w"))){vfree(f); return 0;}
+  if ( !fprintf ( fp, "test")){fclose(fp);vfree(f);return 0;}
+  
+  fclose(fp);
+  vfree(f);
+  return 1;
+}
+
 int isdir  (char *file)
 {
   struct stat s;

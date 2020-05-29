@@ -1895,7 +1895,7 @@ Constraint_list * sap_pair   (char *seq_in, char *weight, Constraint_list *CL)
    
    char *cdir=NULL;
    char *seq=NULL;
-   char *wdir   =vtmpnam(NULL);
+   char *wdir;  
    int *v;   
    seq=csprintf (seq, "%s", seq_in);
   
@@ -1909,8 +1909,15 @@ Constraint_list * sap_pair   (char *seq_in, char *weight, Constraint_list *CL)
    
    
    //Start working in special dir
+   
    cdir=get_pwd(cdir);
-   printf_system    ("mkdir -p %s",wdir);
+   printf_system    ("mkdir -p %s",wdir=vtmpnam(NULL));
+   if (!iswdir(wdir)){my_mkdir (wdir);}
+   if (!iswdir(wdir))
+     {
+       myexit(fprintf_error ( stderr, "\nERROR: Could Not Create Directory %s required by sap_pair [FATAL:%s]", wdir, PROGRAM));	
+     }
+   
    chdir (wdir);
    
    if (strm ((CL->S)->type, "RNA"))
