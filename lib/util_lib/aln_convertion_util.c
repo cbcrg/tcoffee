@@ -2146,7 +2146,7 @@ Sequence  *  fill_sequence_struc ( int nseq, char **sequences, char **seq_name, 
 
 	S=declare_sequence (shortest, longuest,nseq);
 	S->nseq=nseq;
-
+	
 	if (sequences)
 		S->seq=copy_char ( sequences, S->seq);
 	else
@@ -3520,7 +3520,7 @@ Alignment * filter_aln_convert ( Alignment *A, Alignment *ST,int use_cons, int v
 	      if ( cons==-1)
 		{
 		  use_cons=0;
-		  fprintf (stderr, "WARNING: Could Not Use the Consensus Sequence [WARNING:%s]\n", PROGRAM);
+		  fprintf (stderr, "WARNING: Could not Use the Consensus Sequence [WARNING:%s]\n", PROGRAM);
 		}
 	    }
 
@@ -6122,6 +6122,7 @@ Sequence * seq2template_seq ( Sequence *S, char *template_list, Fname *F)
       char *file_struc_calc = vtmpnam (NULL);
       FILE* struc_calc_f =vfopen(file_struc_calc,"w");
       int i;
+      
       for (i = 0; i< S->nseq; ++i)
 	{
 	  if (S->T[i]->P)
@@ -6129,7 +6130,9 @@ Sequence * seq2template_seq ( Sequence *S, char *template_list, Fname *F)
 	      fprintf(struc_calc_f,"%s %s\n",S->name[i],S->T[i]->P->template_file);
 	    }
 	  else
-	    fprintf(struc_calc_f,"%s\n",S->name[i]);
+	    {
+	      fprintf(struc_calc_f,"%s\n",S->name[i]);
+	    }
 	}
       vfclose(struc_calc_f);
       sprintf ( buf, "SCRIPT_tc_generic_method.pl@mode#RNA_template@pdbfile#%s@cache#%s@type#_F_", file_struc_calc,get_cache_dir());
@@ -6608,7 +6611,7 @@ struct X_template *fill_F_template ( char *name,char *p, Sequence *S)
   sprintf (F->template_format , "TCOFFEE_LIBRARY");
   if (!F || !check_file_exists (F->template_name))
     {
-      fprintf ( stderr, "Could Not Fill _F_ (Fold) template for sequence |%s|", name);
+      fprintf ( stderr, "Could not fill _F_ (Fold) template for sequence |%s|", name);
       free_X_template (F);
       return NULL;
     }
@@ -6627,58 +6630,39 @@ struct X_template *fill_P_template ( char *name,char *p, Sequence *S)
   Alignment *A;
   int sim, cov, i;
   char *buf;
-  static char *template_name;
-  static char *template_file;
+  char *template_name=NULL;
+  char *template_file=NULL;
   char *k;
   
   if (!name || !S) return NULL;
   else if (!p)
     {
-      add_warning(stderr, "_P_ Template | %s | Could Not Be Found",name);
+      add_warning(stderr, "_P_ Template | %s | Could not be found",name);
       return NULL;
     }
-  
+ 
   if ( (k=strstr (p, "_P_")))template_name=csprintf (template_name, "%s",k+4);
   else template_name=csprintf (template_name, "%s", p); 
-
-  if (!check_file_exists (template_name))
-    {
-      static char *bb1;
-      static char *bb2;
-      
-      bb1=is_pdb_struc(template_name);
-      bb2=csprintf (bb2, "%s.pdb", template_name);
-
-      if (bb1)return fill_P_template (name,bb1, S);
-      else if (check_file_exists (bb2))return fill_P_template (name,bb2, S);
-      else return NULL;
-    }
-  else
-    {
-      char *tn=template_name;
-      char *tf=fix_pdb_file (tn);
-      if (!tf)
-	{
-	  if (p)add_warning(stderr, "_P_ Template | %s | Could Not Be Used\n",p);
-	  else if (name)add_warning(stderr, "_P_ Template | %s | Could Not Be Found\n",name);
-	  return NULL;
-	}
-      template_file=csprintf (template_file, "%s", tf);
-      template_name=csprintf (template_name, "%s", tn);
-      
-    }
   
+  if (!(template_name=is_pdb_struc(template_name)))//make sure a valid PDB exists
+    {
+      add_warning(stderr, "_P_ Template | %s | Could not be found",name);
+      return NULL;
+    }
+  if (!(template_file=fix_pdb_file(template_name)))//make sure the PDB can be used
+    {
+      add_warning(stderr, "_P_ Template | %s | Could not be used",name);
+      vfree(template_name);
+      return NULL;
+    }
+ 
   //We now have a valid PDB file 
   P=fill_X_template (name,p, "_P_");
   sprintf (P->template_format , "pdb");
   sprintf (P->template_file, "%s",template_file);
-  sprintf (P->template_name, "%s",template_name);
+  sprintf (P->template_name, "%s",name);
+  vfree(template_file); vfree(template_name);
   
-  
-  
-
- 
-
   /*Check the target sequence is similar enough*/
 
   PS=get_pdb_sequence (P->template_file);
@@ -6687,7 +6671,7 @@ struct X_template *fill_P_template ( char *name,char *p, Sequence *S)
 
   if ( PS==NULL)
     {
-      add_warning( stderr, "_P_  Template |%s| Could Not be Used for Sequence |%s|: Structure Not Found", P->template_name, name);
+      add_warning( stderr, "_P_  Template |%s| Could not be used for Sequence |%s|: Structure Not Found", P->template_name, name);
       free_X_template (P);P=NULL;
     }
   else
@@ -6707,7 +6691,7 @@ struct X_template *fill_P_template ( char *name,char *p, Sequence *S)
 
       if (sim<=minsim)
 	{
-	  add_information( stderr, "_P_  Template %s Could Not be Used for Sequence %s: Similarity too low [%d, Min=%d]",P->template_name,name,sim,minsim);
+	  add_information( stderr, "_P_  Template %s Could not be used for Sequence %s: Similarity too low [%d, Min=%d]",P->template_name,name,sim,minsim);
 	  add_information( stderr, "If you want to include %s in anycase,add -pdb_min_sim=%d to the command line",name,sim);
 	  print_aln (A);
 	  free_X_template (P);
@@ -6715,7 +6699,7 @@ struct X_template *fill_P_template ( char *name,char *p, Sequence *S)
 	}
       else if ( cov<=mincov)
 	{
-	  add_information(stderr, "_P_  Template |%s| Could Not be Used for Sequence |%s|: Coverage too low [%d, Min=%d]",P->template_name,name, cov, mincov);
+	  add_information(stderr, "_P_  Template |%s| Could not be used for Sequence |%s|: Coverage too low [%d, Min=%d]",P->template_name,name, cov, mincov);
 	  add_information( stderr, "If you want to include this sequence in anycase add -pdb_min_cov=%d to the command line", cov);
 	  print_aln (A);
 	  free_X_template (P);P=NULL;
@@ -6735,7 +6719,6 @@ struct X_template *fill_P_template_new ( char *name,char *p, Sequence *S)
   int sim, cov, i;
   char *buf;
   
-  HERE ("***** %s", p);
  
   P=fill_X_template ( name, p, "_P_");
  
@@ -6744,7 +6727,7 @@ struct X_template *fill_P_template_new ( char *name,char *p, Sequence *S)
   if (!P ||(check_file_exists (P->template_name) && !is_pdb_file (P->template_name) ))
     {
       
-      fprintf ( stderr, "Could Not Fill _P_ template for sequence |%s|", name);
+      fprintf ( stderr, "Could not fill _P_ template for sequence |%s|", name);
       free_X_template (P);
       return NULL;
     }
@@ -6786,8 +6769,8 @@ struct X_template *fill_P_template_new ( char *name,char *p, Sequence *S)
   if (!is_pdb_file (P->template_file))
     {
 
-      if (p)add_warning(stderr, "_P_ Template | %s | Could Not Be Found\n",p);
-      else if (name)add_warning(stderr, "_P_ Template | %s | Could Not Be Found\n",name);
+      if (p)add_warning(stderr, "_P_ Template | %s | Could not be found\n",p);
+      else if (name)add_warning(stderr, "_P_ Template | %s | Could not be found\n",name);
       free_X_template (P);
       return NULL;
     }
@@ -6809,7 +6792,7 @@ struct X_template *fill_P_template_new ( char *name,char *p, Sequence *S)
 
   if ( PS==NULL)
     {
-      add_warning( stderr, "_P_  Template |%s| Could Not be Used for Sequence |%s|: Structure Not Found", P->template_name, name);
+      add_warning( stderr, "_P_  Template |%s| Could not be used for Sequence |%s|: Structure Not Found", P->template_name, name);
       free_X_template (P);P=NULL;
     }
   else
@@ -6829,7 +6812,7 @@ struct X_template *fill_P_template_new ( char *name,char *p, Sequence *S)
 
       if (sim<=minsim)
 	{
-	  add_information( stderr, "_P_  Template %s Could Not be Used for Sequence %s: Similarity too low [%d, Min=%d]",P->template_name,name,sim,minsim);
+	  add_information( stderr, "_P_  Template %s Could not be used for Sequence %s: Similarity too low [%d, Min=%d]",P->template_name,name,sim,minsim);
 	  add_information( stderr, "If you want to include %s in anycase,add -pdb_min_sim=%d to the command line",name,sim);
 	  print_aln (A);
 	  free_X_template (P);
@@ -6837,7 +6820,7 @@ struct X_template *fill_P_template_new ( char *name,char *p, Sequence *S)
 	}
       else if ( cov<=mincov)
 	{
-	  add_information(stderr, "_P_  Template |%s| Could Not be Used for Sequence |%s|: Coverage too low [%d, Min=%d]",P->template_name,name, cov, mincov);
+	  add_information(stderr, "_P_  Template |%s| Could not be used for Sequence |%s|: Coverage too low [%d, Min=%d]",P->template_name,name, cov, mincov);
 	  add_information( stderr, "If you want to include this sequence in anycase add -pdb_min_cov=%d to the command line", cov);
 	  print_aln (A);
 	  free_X_template (P);P=NULL;
@@ -6913,7 +6896,7 @@ struct X_template *fill_R_template ( char *name,char *p, Sequence *S)
   if (!is_aln(R->template_name) && !is_seq (R->template_name))
     {
 
-      add_information ( stderr, "_R_ Template %s Could Not Be Found\n",R->template_name);
+      add_information ( stderr, "_R_ Template %s Could not be found\n",R->template_name);
       free_X_template (R);
       return NULL;
     }
@@ -6932,11 +6915,17 @@ struct X_template *fill_R_template ( char *name,char *p, Sequence *S)
 	  s=name_is_in_list(name, S->name, S->nseq, 100);
 	  if ( s!=-1)
 	    {
-	      S1=fill_sequence_struc (1, &S->seq[s], &S->name[s], NULL);
+	      char **lseq =(char**)vcalloc (1, sizeof (char*));
+	      char **lname=(char**)vcalloc (1, sizeof (char*));
+	      lseq [0]=S->seq [s];
+	      lname[0]=S->name[s];
+	      
+	      S1=fill_sequence_struc (1,lseq,lname, NULL);
+	      vfree (lseq); vfree(lname);
 	      A1=seq2aln (S1,NULL, RM_GAP);
-
+	      
 	      (R->VR)->A=trim_aln_with_seq (A1, (R->VR)->A);
-
+	      
 	      sprintf ( R->template_file, "%s", vtmpnam (NULL));
 	      output_clustal_aln (R->template_file, (R->VR)->A);
 	    }
@@ -6962,7 +6951,7 @@ struct X_template *fill_T_template ( char *name,char *p, Sequence *S)
   if (!is_aln(T->template_name) && !is_seq (T->template_name))
     {
 
-      add_information ( stderr, "_T_ Template %s Could Not Be Found\n",T->template_name);
+      add_information ( stderr, "_T_ Template %s Could not be found\n",T->template_name);
       free_X_template (T);
       return NULL;
     }
@@ -6985,7 +6974,7 @@ struct X_template *fill_U_template ( char *name,char *p, Sequence *S)
 
   if (!check_file_exists(U->template_name))
     {
-      add_information ( stderr, "_U_ Template %s Could Not Be Found\n",U->template_name);
+      add_information ( stderr, "_U_ Template %s Could not be found\n",U->template_name);
       free_X_template (U);
       return NULL;
     }
@@ -7008,7 +6997,7 @@ struct X_template *fill_E_template ( char *name,char *p, Sequence *S)
   if (!is_aln(E->template_name) && !is_seq (E->template_name))
     {
 
-      add_information ( stderr, "_E_ Template %s Could Not Be Found\n",E->template_name);
+      add_information ( stderr, "_E_ Template %s Could not be found\n",E->template_name);
       free_X_template (E);
       return NULL;
     }
@@ -7049,7 +7038,7 @@ struct X_template *fill_G_template ( char *name,char *p, Sequence *S)
   /*2: Put the template in VG->S*/
   if (!is_seq (G->template_file))
     {
-      add_information ( stderr, "_G_ Template %s Could Not Be Found \n",p);
+      add_information ( stderr, "_G_ Template %s Could not be found \n",p);
 
       free_X_template (G);
       return NULL;

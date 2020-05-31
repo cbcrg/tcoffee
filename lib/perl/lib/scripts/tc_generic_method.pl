@@ -334,9 +334,14 @@ sub seq2RNA_template
 	elsif ($pdb_template_h{$seq} ne "")
 	  {
 	    my $pdbf;
-	    if (-e "$cwd/$pdb_chain"){$pdbf="$cwd/$pdb_chain";}
-	    else {$pdbf="$CACHE$pdb_chain";}
-	    
+	    if    ( -e "$cwd/$pdb_chain"   ){$pdbf="$cwd/$pdb_chain"; }
+	    elsif ( -e  $pdb_chain         ){$pdbf="$pdb_chain";      }
+	    elsif ( -e  "$CACHE$pdb_chain" ){$pdbf="$CACHE$pdb_chain";}
+	    elsif ( -e  "$CACHE/$pdb_chain"){$pdbf="$CACHE/$pdb_chain";}
+	    else
+	      {
+		myexit(flush_error("Could not read $pdb_chain "));
+	      }
 
 	    if($pdb_mode eq "x3dna-ssr")
 	      {
@@ -1184,10 +1189,12 @@ sub pg_is_installed
       }
     else
       {
-	$r=`which $p 2>/dev/null`;
-	if ($r eq ""){$r=0;}
-	else {$r=1;}
-
+	my $cwhich=vtmpnam();
+	$r=`which $p >$cwhich 2>/dev/null`;
+	$r=file2string ($cwhich);
+	if ($r=~/^\//){$r=1;}
+	else {$r=0;}
+	
 	if ($r==0 && is_blast_package ($p)){return pg_is_installed ("legacy_blast.pl");}
 	else {return $r;}
       }
@@ -2965,17 +2972,19 @@ sub x3dna_find_pair2lib
       my $command;
       my %s_pdb;
       my %s_seq;
+      my $pdbseq=vtmpnam(NULL);
       
       #$pg: "find_pair" OR "find_pair -p"
       
       if (!pg_is_installed ("find_pair"))
 	{
-	  add_warning ($$,$$, "x3dna/find_pairs could not be used to extract RNA secondary structures. Secondary structures will be extracted by x3dna-ssr instead");
+	  add_warning ($$,$$, "x3dna/find_pair could not be used to extract RNA secondary structures. Secondary structures will be extracted by x3dna-ssr instead -- Install the find-pair module of x3dna  [http://x3dna.org/]");
 	  return x3dnassr2lib ($seq, $pdb, $lib);
 	}
       
+
       #get PDB sequence
-      safe_system ("t_coffee -other_pg extract_from_pdb $pdb -seq >$outfile1");
+      safe_system ("t_coffee -other_pg extract_from_pdb $pdb -seq >$pdbseq");
       
       #get find_pair contacts
       $command="$pg $pdb simple.output > /dev/null 2>/dev/null";
@@ -2993,11 +3002,10 @@ sub x3dna_find_pair2lib
 
       #Handle situations when the pdb sequence differs from the RNA sequence
       #my @out=file2array($outfile1);
-      %s_pdb=read_fasta_seq_index ($outfile1);
+      %s_pdb=read_fasta_seq_index ($pdbseq);
       %s_seq=read_fasta_seq_index ($seq);
       my $rnaS=uc($s_seq{0}{seq});
       my $pdbS=uc($s_pdb{0}{seq});
-      
       my $vienna;
       my @lu;
     
@@ -3055,7 +3063,7 @@ sub x3dna_find_pair2lib
 	  
 	  if (!$f1 || !$s1)
 	    {
-	      print "\n---- $rnaSS\n---- $pdbSS\n$line\n[$l[0] --- $l[1]]<---->[$f1 --- $s1]\n";
+	      print "\n1---- $rnaSS\n2---- $pdbSS\n$line\n[$l[0] --- $l[1]]<---->[$f1 --- $s1]\n";
 	      myexit(flush_error("Error while parsing s3dna::find_pair output"));
 	    }
 	  elsif ($f1==-1 || $s1==-1){;}
@@ -3092,7 +3100,7 @@ sub x3dnassr2lib
 
       if (!pg_is_installed ("x3dna-ssr"))
 	{
-	  add_warning ($$,$$, "x3dna-ssr could not be used to extract RNA secondary structures. Secondary structures will be predicted ab-initio instead with RNAPlfold");
+	  add_warning ($$,$$, "x3dna-ssr could not be used to extract RNA secondary structures. Secondary structures will be predicted ab-initio instead with RNAPlfold -- Install s3dna [http://x3dna.org/] ");
 	  return RNAplfold2lib ($seq,$lib);
 	}
       
@@ -3401,6 +3409,7 @@ BEGIN
 sub flush_error
   {
     my $msg=shift;
+    $msg.=" [tc_generic_method.pl/FATAL]";
     return add_error ($EXIT_FAILURE,$$, $$,getppid(), $msg, $CL);
   }
 sub add_error

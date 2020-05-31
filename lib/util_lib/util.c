@@ -764,8 +764,13 @@ int cmp_list_int (const int**a, const int**b)
 	return 0;
 	}
 
-
 int name_is_in_list ( const char name_in[], char **name_list, int n_name, int len)
+{
+  char *name=(char*)name_in;
+  if (n_name==0) return -1;
+  return name_is_in_hlist (name, name_list, n_name);
+}
+int name_is_in_list_old ( const char name_in[], char **name_list, int n_name, int len)
 {
 	int a;
 	int pos=-1;
@@ -866,7 +871,7 @@ int cherry (int argc, char *argv[])
       myexit (EXIT_FAILURE);
     }
   
-  if (strm (argv[1], "stdin"))
+  if (strm (argv[1], "stdin") || strm (argv[1], "/dev/stdin"))
     {
       name=capture_stdin();
     }
@@ -2600,8 +2605,14 @@ char* strcatf  (char *string1,char *string2, ...)
   return string1;
 }
 
-
 char *vcat ( char *st1, char *st2)
+{
+  static char *b;
+  
+  b=csprintf (b, "%s%s", (st1)?st1:"", (st2)?st2:"");
+  return csprintf (st1, "%s", b);
+}
+char *vcatOld ( char *st1, char *st2)
 {
   int l=0;
   char *ns;
@@ -2747,6 +2758,28 @@ char *vstrstr ( char *in, char *token)
 }
 char ** push_string (char *val, char **stack, int *nval, int position)
 {
+  //adds val on position
+  int l, a,b;
+  char **news;
+  
+  if (!val || !stack || position>nval[0])return stack;
+  
+  if (read_array_size_new (stack)<=nval[0])stack=(char**)vrealloc (stack,(nval[0]+1)*sizeof (char*));
+  news=(char**)vcalloc (nval[0]+1, sizeof (char*));
+
+  for (b=0,a=0; a<nval[0]; a++, b++)
+    {
+      if (a==position)b++;
+      news[b]=stack[a];
+    }
+  news[position]=csprintf (news[position], "%s", val);
+  nval[0]++;
+  for (a=0; a<nval[0]; a++)stack[a]=news[a];
+  vfree (news);
+  return stack;
+}    
+char ** push_string_old (char *val, char **stack, int *nval, int position)
+{
   char **new_stack;
   int a;
 
@@ -2887,8 +2920,7 @@ char * fname2abs(char*name)
   
   //if (!name2)name2=(char*)vcalloc (10, sizeof (char));
   if ( !name)return NULL;
-  else if (!file_exists (NULL, name))return NULL;
-  else if ( name[0]=='/')name2=csprintf (name2, "%s", name);
+  else if ( !isfile(name) || name[0]=='/')name2=csprintf (name2, "%s", name);
   else
     {
       
@@ -4569,7 +4601,7 @@ int my_system ( char *command0)
 		  unpack_all_perl_script (list[a]+strlen ("unpack_"));
 		  myexit (EXIT_SUCCESS);
 		}
-	      else if ((c=name_is_in_list (list[a], unpacked_list[0], n_unpacked, 100))!=-1);
+	      else if ((c=name_is_in_list_old (list[a], unpacked_list[0], n_unpacked, 100))!=-1);
 	      else
 		{
 
@@ -4701,7 +4733,9 @@ char* lock(int pid,int type, int action,char *string, ...)
 
 	if (action == LREAD)
 	{
-		r=file2string (fname);
+	  
+	  r=file2string (fname);
+	  
 	}
 	else if ( action == LCHECK)
 	{
@@ -5033,9 +5067,10 @@ int kill_child_pid(int pid)
   
   cpid=getpid();
   list=(int*)vcalloc (max, sizeof (int));
-
+  
   while ((n=get_child_list (pid,list)))
     {
+      
       kill_child_list (list);
     }
 
@@ -5050,6 +5085,7 @@ int kill_child_pid(int pid)
 	  lock  (a, LWARNING,LRELEASE, " ");
 	}
     }
+
   return 1;
 }
 
@@ -5068,6 +5104,7 @@ void kill_child_list (int *list)
 	}
       else if (a==cpid)list[a]=0;
     }
+
 }
 
 static int done =0;
@@ -5091,18 +5128,21 @@ int get_child_list (int pid,int *clist)
       done=1;
       return 0;
     }
-  
+
   lockf=lock2name (pid, LLOCK);
+
   if ( lockf && file_exists (NULL,lockf))
     {
+     
       list=file2list (lockf, "\n");
-      
+
       a=1;
       while (list && list[a])
 	{
 	  n+=get_child_list (atoi(list[a++][1]), clist);
 	}
       free_arrayN ((void **)list, 3);
+      
     }
   vfree (lockf);
   
@@ -5239,7 +5279,7 @@ int unpack_perl_script (char *name, char ***unpacked, int n)
       printf_system_direct ("chmod u+x %s", unpacked[1][n]);
 
     }
-
+  hupdate (unpacked[0]);
   set_file2remove_extension(".pl", UNSET);
   return ++n;
 }
@@ -5607,22 +5647,7 @@ int fcputenv   (char *file, char *mode,char * string, ...)
   va_end (ap);
   return 1;
 }
-int iswdir     (char *p)
-{
-  FILE*fp;
-  char *f=NULL;
-  
-  if ( !isdir(p))return 0;
-  
-  f=csprintf (f,"%s/test%d",p, rand()%100000); 
-  
-  if ( !(fp=fopen (f, "w"))){vfree(f); return 0;}
-  if ( !fprintf ( fp, "test")){fclose(fp);vfree(f);return 0;}
-  
-  fclose(fp);
-  vfree(f);
-  return 1;
-}
+
   
 int isdir4path (char *p)
 {
@@ -6790,9 +6815,25 @@ char *vtmpnam ( char *s1)
   
   if (s1)
     {
-      sprintf (s1, "%s",s2);return s1;
+      sprintf (s1, "%s",s2);
+      if ( isfile(s1))
+	{
+	  HERE ("Duplicated tmp file : %s", s1);
+	  exit (0);
+	}
+     
+      return s1;
     }
-  else return s2;
+  else
+    {
+      if ( isfile(s1))
+	{
+	  HERE ("Duplicated tmp file : %s", s1);
+	  exit (0);
+	}
+      
+      return s2;
+    }
 }
 
 
@@ -6833,6 +6874,7 @@ char *tmpnam_2 (char *s)
       else if (atoigetenv ("SHORT_TMPNAME")==2)shortn=2;
       else shortn=-1;
     }
+ 
   if (shortn==1) return short_tmpnam_2(s);
   else if ( shortn==2)  return ultrashort_tmpnam_2(s);
   else  return long_tmpnam_2(s);
@@ -6867,6 +6909,7 @@ char *long_tmpnam_2 (char *s)
 	sprintf (buf, "%s/%s%d%s",tmpdir,root2, file++,set_file2remove_extension (NULL, GET));
 	if ( strlen(buf)>=name_size)s=(char*)vrealloc (s,(strlen(buf)+1)*sizeof (char));
 	sprintf (s, "%s", buf);
+	
 	return s;
 }
 char *ultrashort_tmpnam_2 (char *s)
@@ -6884,7 +6927,7 @@ char *ultrashort_tmpnam_2 (char *s)
 	    
 	    name_size=MAX( 2*L_tmpnam, MAXNAMES*2)+1;
 	    root=get_vtmpnam2_root();
-	    sprintf ( root2, "%d%d", root, (int)getpid());
+	    sprintf ( root2, "%d%d%s", root, (int)getpid(),generate_unique_string(5));
 	    
 	    vtmpnam_prefixe=(char*)vcalloc (strlen (root2)+strlen (get_tmp_4_tcoffee())+2, sizeof (char));
 	    sprintf (vtmpnam_prefixe, "%s/%s", get_tmp_4_tcoffee(), root2);
@@ -7094,7 +7137,15 @@ int count_openF()
 {
   return NopenF;
 }
- 
+void valgrind_test()
+{
+  int a;
+  int *b;
+  HERE ("Do a VAlgrind Test");
+  for (a=0; a<10000; a++)b[a]=100;
+} 
+  
+
 FILE * fopenN   ( char *fname, char *mode, int max_n_tries, int delay);
 FILE * myfopen (char *name, char *mode);
 FILE * vfopen  ( char *name_in, char *mode)
@@ -7160,16 +7211,17 @@ FILE * vfopen  ( char *name_in, char *mode)
 		    sprintf ( name2, "%s%s",get_cache_dir(), name);
 		    return vfopen ( name2, "cr");
 		  }
-    		else if ( strcmp (mode, "r")==0 && cache_used==1)
-    			{
-    			fprintf (stderr, "\n--COULD NOT READ %s\n", name);
-    			if ( get_new_name){fprintf ( stderr, "\nNew name: ");return vfopen (input_name(), mode-1);}
-    			else if ( tolerate_mistake)return NULL;
-			else
-			    {
-			      myexit(fprintf_error (stderr, "\nFORCED EXIT (NON INTERACTIVE MODE pid %d)\n", getpid()));
-			    }
-			}
+    		else if ( strcmp (mode, "r")==0 && cache_used==1)return NULL;
+		else if ( 2==3)
+		  {
+		    if ( get_new_name){fprintf ( stderr, "\nNew name: ");return vfopen (input_name(), mode-1);}
+		    else if ( tolerate_mistake)return NULL;
+		    else
+		      { 
+			fprintf (stderr, "\n--COULD NOT READ %s\n", name);
+			myexit(fprintf_error (stderr, "\nFORCED EXIT (NON INTERACTIVE MODE pid %d)\n", getpid()));
+		      }
+		  }
     		else if ( strcmp (mode, "a")==0 && cache_used==0)
 		  {
 		    sprintf ( name2, "%s%s",get_cache_dir(), name);
@@ -7485,7 +7537,7 @@ char **file2lines (char *name)
   char **lines;
   char *string;
 
-
+  
   string=file2string (name);
   if ( !string) return NULL;
   else
@@ -7524,35 +7576,68 @@ int string2file (char *file, char *mode, char *string,...)
   return 1;
 }
 
+char  file2lastchar (char *name)
+{
+  FILE*fp;
+  char buf[2];
+  int l;
+  if (!name || !file_exists (NULL,name))return NULL;
+  
+  fp=vfopen (name, "r");
+  fseek(fp, 0, SEEK_END);
+  l=ftell(fp)-1;
+  
+  while (l)
+    {
+      fseek(fp,l, SEEK_SET);
+      fread(buf, sizeof(char),1, fp);
+      if (buf[0]&& !isspace(buf[0]))
+	{
+	  vfclose (fp);
+	  return buf[0];
+	}
+      l--;
+    }
+  vfclose (fp);
+  return 0;
+}
+
+char  file2firstchar (char *name)
+{
+  FILE*fp;
+  char c;
+  
+  if (!name || !file_exists (NULL,name))return NULL;
+  
+  fp=vfopen (name, "r");
+  while ((c=fgetc(fp))!=EOF)
+    {
+      if (!isspace(c))
+	{
+	  vfclose (fp);
+	  return c;
+	}
+    }
+  vfclose (fp);
+  return 0;
+}
 char *file2string (char *name)
 {
   FILE*fp;
-  char *string;
-  int a, c;
-  
+  char *string=NULL;
+  char *buf=NULL;
+  char *b;
   if (!name || !file_exists (NULL,name))return NULL;
-  else
+  
+  if (!(fp=vfopen (name, "tr")))return NULL;
+  while ((b=vfgets(buf,fp)))
     {
-      a=0;
-      if ((fp=fopen (name, "r")))
-	{
-	  while ( (c=fgetc(fp))!=EOF)a++;
-	  fclose (fp);
-	}
-      else return NULL;
-
-      string=(char*)vcalloc (a+1, sizeof (char));
-      a=0;
-      if ((fp=fopen (name, "r")))
-	{
-	  while ( (c=fgetc(fp))!=EOF)string[a++]=c;
-	  fclose (fp);
-	}
-      else return NULL;
-      string[a]='\0';
-      
-      return string;
+      buf=b;
+      string=vcat(string, buf);
     }
+  vfree(buf);
+  vfclose (fp);
+  return string;
 }
 
 int file2size(char *name)
@@ -7573,16 +7658,6 @@ int file2size(char *name)
   return (int) file_size;
 }
 
-int file2size_old(char *name)
-{
-  FILE *fp;
-  char c;
-  int n=0;
-  fp=vfopen (name, "r");
-  while ((c=fgetc (fp)!=EOF))n++;
-  vfclose (fp);
-  return n;
-}
 
 /**
  * Read command line parameters.
@@ -8031,291 +8106,99 @@ FILE * set_fp_after_char ( FILE *fp, char x)
 	return fp;
 	}
 
-int    check_file_for_token      ( char *file , char *token)
+
+    
+
+
+
+char *vfgets ( char *bufin, FILE *fp)
 {
-  FILE *fp;
-  char *buf=NULL;
-  if (!file)return 0;
-  if (!token) return 0;
-  if (!(fp=vfopen (file, "r")))return 0;
-  while ((buf=vfgets(buf, fp)))
+  char buf[VERY_LONG_STRING];
+  int in=0;
+  int len=0;
+  static char *tb;
+  
+  in=ftell(fp);
+  if (bufin)bufin[0]='\0';
+  while (fgets(buf,VERY_LONG_STRING,fp))
     {
-      if ( strstr (buf, token))
-	{
-	  vfree (buf);
-	  vfclose (fp);
-	  return 1;
-	}
-    }
-  vfree (buf);
-  vfclose (fp);
-  return 0;
+      int l=strlen (buf);
+      len+=l;
+      if (buf[l-1]=='\n'){bufin=csprintf ( bufin, "%s", buf);break;}
+      tb=csprintf (tb, "%s%s", bufin,buf);
+      bufin=csprintf (bufin, "%s", tb); 
+      }
+  return (len)?bufin:NULL;
 }
 
-int token_is_in_n_lines ( char *fname, char *token, int n_line)
+
+int    check_file_for_token      ( char *file , char *token)
 {
-  FILE *fp;
-  char *buf;
-  int c;
-  int l, nl;
-  if (!fname || !token)return 0;
-  
-  
-  l=nl=0;
-  fp=vfopen (fname, "r");
-  while ((c=fgetc(fp))!=EOF && nl<n_line)
-    {
-      l++;
-      if (c=='\n')nl++;
-    }
-  vfclose (fp);
-  fp=vfopen (fname, "r");
-  buf=(char *)vcalloc (l+1, sizeof (char));
-  nl=l=0;
-  while ((c=fgetc(fp))!=EOF && nl<n_line)
-    {
-      buf[l++]=c;
-      if (c=='\n')nl++;
-    }
-  vfclose (fp);
-  
-  if (strstr (buf, token)){vfree (buf); return 1;}
-  vfree(buf);
-  
-  return 0;
+  return token_is_in_file_n (file, token,0);
 }
-    
+
+int token_is_in_n_lines ( char *file, char *token, int n)
+{
+  return token_is_in_file_n (file, token,n);
+}
+
 int token_is_in_file ( char *fname, char *token)
 {
   return token_is_in_file_n (fname, token, 0);
 }
-int token_is_in_file_n ( char *fname, char *token, int nlines)
+int token_is_in_file_n ( char *fname, char *token, int max)
 {
-  /*TH:an argument against torture: innocents get tortured longer, likewise for token testing*/
-  FILE *fp;
   static char *buf;
-  char *b, *p;
-  int begining;
-  int line_number=0;
-
-
-  if (token[0]=='\n')
-    {
-
-      begining=1;
-      token++;
-    }
-  else
-    {
-      begining=0;
-    }
-
-  if ( !fname || !file_exists(NULL,fname))return 0;
-  else
-    {
-      fp=vfopen (fname, "r");
-      while ((b=vfgets (buf,fp))!=NULL && (line_number<nlines || nlines==0))
-	{
-	  buf=b;
-
-	  p=strstr (buf, token);
-	  if (!p);
-	  else if ( begining==1 && p==buf){vfclose (fp); return 1;}
-	  else if ( begining==0 && p){vfclose (fp); return 1;}
-	  line_number++;
-	}
-      if (b){buf=b;}
-      vfclose (fp);
-      return 0;
-    }
-  return 0;
-}
-
-char *vfgets ( char *buf, FILE *fp)
-{
-  int c;
-  int buf_len, l;
-  char *bufin;
-  int debug=0;
+  char *x,*b;
+  FILE *fp;
+  int n=0, ret=0;
+  if (!token || !fname || !file_exists(NULL,fname) || !(fp=vfopen (fname, "r")))return NULL;
   
-  bufin=buf;
-
-  if (!buf)
+  while ((b=vfgets(buf,fp)))
     {
-      buf=(char*)vcalloc ( 1000, sizeof (char));
-      buf_len=1000;
+      buf=b;
+      
+      if (token[0]=='\n' && n==0)x=strstr(buf, token+1);
+      else x=strstr(buf, token+1);
+      
+      if (x){ret=1;break;}
+      if (max!=0 && max==n)break;
+      n++;
     }
-  else
-    {
-      buf_len=read_array_size_new (buf);
-    }
-
-  l=0;
-  c=fgetc (fp);
-  
-  if (c==EOF){return NULL;}
-  ungetc (c, fp);
-    
-  while ( (c=fgetc (fp))!='\n' && c!=EOF)
-    {
-      if (l>=buf_len)
-	{buf_len+=100;buf=(char*)vrealloc (buf, buf_len*sizeof (char));}
-      buf[l++]=c;
-    }
-  /*Add the cariage return*/
-  if ( c=='\n')
-    {
-      if (l>=buf_len){buf_len+=100,buf=(char*)vrealloc (buf, buf_len*sizeof (char));}
-      buf[l++]='\n';
-    }
-  /*add the terminator*/
-  if (l>=buf_len){buf_len+=100,buf=(char*)vrealloc (buf, buf_len*sizeof (char));}
-  buf[l]='\0';
-
-  if ( bufin!=buf && bufin!=NULL && debug==1)
-    fprintf ( stderr, "\nPointer change in vfgets...");
-
-  return buf;
+  vfclose (fp);
+  return ret;
 }
-
 
 FILE * find_token_in_file ( char *fname, FILE * fp, char *token)
+{
+  static char *buf;
+  int ret=0, n=0;
+  char *b, *x;
+  
+  if (!token)return NULL;
+  else if (fp);
+  else if (!fname || !file_exists(NULL,fname))return NULL;
+  else if (!(fp=vfopen (fname, "r")))return NULL;
+  
+  while ((b=vfgets(buf,fp)))
+    {
+      char *x;
+      buf=b;
+      if (token[0]=='\n' && n==0)x=strstr(buf, token+1);
+      else x=strstr(buf, token+1);
+      
+      if (x)
 	{
-	int c;
-	static char *name;
-	int token_len;
-
-	int only_start;
-
-	/*Note: Token: any string
-	        If Token[0]=='\n' Then Token only from the beginning of the line
-	*/
-
-	if (!fp && !file_exists("CACHE",fname))return NULL;
-
-	if ( token[0]=='\n'){token++;only_start=1;}
-	else only_start=0;
-
-	token_len=strlen (token);
-
-
-
-	if (!fp)
-	  {
-	    if (name)vfree (name);
-	    name = (char*)vcalloc (((fname)?measure_longest_line_in_file (fname):10000)+1, sizeof (char));
-	    fp=vfopen ( fname, "r");
-	  }
-
-	while ( (fscanf ( fp, "%s", name))!=EOF)
-		{
-
-		if ( name[0]=='*')while ( ((c=fgetc (fp))!='\n')&& (c!=EOF));
-		else if (strncmp ( name, token,token_len)==0){return fp;}
-		else if (only_start) while ( ((c=fgetc (fp))!='\n')&& (c!=EOF));
-		}
-
-	vfclose ( fp);
-	return NULL;
+	  ret=1;
+	  fseek (fp, (ftell(fp)-strlen(buf))+(x-buf)+strlen(token), SEEK_SET);
+	  break;
 	}
+      n++;
+    }
+  if (ret==0)vfclose (fp);
+  return (ret==0)?NULL:fp;
+}
 
-
-
-// FILE * find_token_at_line_start ( char *fname, FILE * fp, char *token)
-// {
-// 	static char *name;
-// 	int token_len;
-//
-// 	int only_start;
-// 	const int LINE_LENGTH=1000;
-// 	char line[LINE_LENGTH];
-//
-//
-// 	/*Note: Token: any string
-// 	If Token[0]=='\n' Then Token only from the beginning of the line
-// 	*/
-//
-// 	if (!fp && !file_exists("CACHE",fname))return NULL;
-//
-// 	if ( token[0]=='\n')
-// 	{
-// 		++token;
-// 		only_start=1;
-// 	}
-// 	else
-// 		only_start=0;
-//
-// 	token_len=strlen (token);
-// 	if (!fp)
-// 	{
-// 		if (name)vfree (name);
-// 		name = vcalloc (((fname)?measure_longest_line_in_file (fname):10000)+1, sizeof (char));
-// 		fp=vfopen ( fname, "r");
-// 	}
-//
-// 	line[LINE_LENGTH-2]='\0';
-// 	while (fgets(line, LINE_LENGTH, fp)!=NULL)
-// 	{
-// 		if ((line[LINE_LENGTH-2]!='\0') && (line[LINE_LENGTH-2]!='\n'))
-// 			line[LINE_LENGTH-2]='\0';
-// 		else
-// 		{
-// 			if (!strncmp(line,token,token_len))
-// 				return fp;
-// 		}
-// 	}
-//
-//
-// 	vfclose ( fp);
-// 	return NULL;
-// }
-
-
-
-// FILE * find_token_in_file ( char *fname, FILE * fp, char *token)
-// {
-// 	int c;
-// 	static char *name;
-// 	int token_len;
-//
-// 	int only_start;
-//
-// 	/*Note: Token: any string
-// 	If Token[0]=='\n' Then Token only from the beginning of the line
-// 	*/
-//
-// 	if (!fp && !file_exists("CACHE",fname))
-// 		return NULL;
-//
-//
-// 	if ( token[0]=='\n')
-// 		return find_token_at_line_start (fname, fp, ++token);
-// 	else
-// 		only_start=0;
-//
-// 	token_len=strlen (token);
-//
-//
-//
-// 	if (!fp)
-// 	{
-// 		if (name)vfree (name);
-// 		name = vcalloc (((fname)?measure_longest_line_in_file (fname):10000)+1, sizeof (char));
-// 		fp=vfopen ( fname, "r");
-// 	}
-//
-// 	while ( (fscanf ( fp, "%s", name))!=EOF)
-// 	{
-//
-// 		if ( name[0]=='*')
-// 			while ( ((c=fgetc (fp))!='\n')&& (c!=EOF));
-// 		else if (strncmp ( name, token,token_len)==0)
-// 			{return fp;}
-// 	}
-//
-// 	vfclose ( fp);
-// 	return NULL;
-// }
 
 
 int **get_file_block_pattern (char *fname, int *n_blocks, int max_n_line)
@@ -8714,8 +8597,8 @@ int file_is_empty (char *fname)
 
 int file_exists (char *path, char *fname)
 {
-  struct stat s;
-  char file[1000];
+  
+  static char *file;
 
   if (!fname)return 0;
   else if (path && strm (path, "CACHE"))
@@ -8723,9 +8606,15 @@ int file_exists (char *path, char *fname)
       if (file_exists (NULL, fname))return 1;
       else return file_exists (get_cache_dir(), fname);
     }
-  else if (path) sprintf ( file, "%s/%s", path, fname);
-  else if (!path)sprintf (file, "%s", fname);
+  else if (path)file=csprintf (file, "%s/%s", path,fname);
+  else file=csprintf (file, "%s",fname);
+  return isfile(fname);
+}
 
+int isfile (char *file)
+{
+  struct stat s;
+  if (!file) return 0;
   if (stat(file,& s)!=-1)
     return S_ISREG(s.st_mode);
   else return 0;
@@ -8761,6 +8650,23 @@ int istmp  (char *file)
   
   return 0;
 }
+int iswdir     (char *p)
+{
+  FILE*fp;
+  char *f=NULL;
+  if ( !p) return 0;
+  if ( !isdir(p))return 0;
+  
+  f=csprintf (f,"%s/test%d",p, rand()%100000); 
+  
+  if ( !(fp=fopen (f, "w"))){vfree(f); return 0;}
+  if ( !fprintf ( fp, "test")){fclose(fp);vfree(f);return 0;}
+  
+  fclose(fp);
+  vfree(f);
+  return 1;
+}
+
 int isdir  (char *file)
 {
   struct stat s;
@@ -10214,7 +10120,6 @@ void clean_exit ()
 	  //fprintf (get_stdout1(NULL), "!Your tmp files have been moved into [%s] --- Use a cron job to delete them\n", trash);
 	  ;
 	}
-      
       kill_child_pid(getpid());
       if (has_error_lock())
 	{
@@ -10252,6 +10157,7 @@ void clean_exit ()
       lock (getpid(), LLOCK, LRELEASE, "");
       lock (getpid(), LWARNING, LRELEASE, "");
       lock (getpid(), LERROR, LRELEASE, "");
+      
       add_method_output2method_log (NULL, NULL, NULL, NULL, decode_name (NULL, CODELIST));
     }
 

@@ -989,8 +989,8 @@ Profile Construction  ++     +++   +++      +++      ++
 Table 2. Most Suitable Appplications of each package. In any of the situations corresponding to each table line, (+++) indicates that the method is the best suited, (++) indicates that the method is not optimal but behaves reasonably well, (+) indicates that it is possible but not recommended (-) indicates that the option is not available.
 
 
-Computing simple MSA with T-Coffee 
-==================================
+Protein Sequences
+=================
 General considerations
 ----------------------
 T-Coffee aligner is by default parallelized, meaning that it can use multiple cores when running on a cluster or a computer. By default, T-Coffee will use all available processors to run, but you can parallelize the differents steps and allocate the number of cores you want with the flag **-multi_core** or **n_core**. For more details, refer to the chapter **T-Coffee Technical Documentation**, subsection **CPU control**. 
@@ -1213,121 +1213,15 @@ This gap penalty is only applied at the alignment level (i.e. after the library 
 
 
 Aligning (very) large datasets
-==============================
-Aligning (very) large datasets with MUSCLE
-------------------------------------------
-To run MUSCLE you can try one of the following command; don't hesitate to MUSCLE tutorial or help to get more information.
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-::
-
-  Default mode:
-  ##: muscle -in proteases_large.fasta > proteases_large.muscle
-  
-  Fast mode (less accurate):
-  ##: muscle -in proteases_large.fasta -maxiters 1 -diags -sv -distance1 kbit20_3 \
-  > proteases_large.muscle
-
-Aligning (very) large datasets with MAFFT
------------------------------------------
-MAFFT is can align large datasets by default however it is better to use the fastest mode with MAFFT using the **retree** parameter; don't hesitate to MAFFT tutorial or help to get more information.
-
-::
-  
-  Default mode:
-  ##: mafft input > output
-  Fast mode:
-  ##: mafft --retree 2 input > output
-
-Aligning (very) large alignments with T-Coffee
-----------------------------------------------
-T-Coffee is not very well gifted for aligning large datasets (for now), but you can give it a try using a special option that generates approximate fast alignments (command 1). These MSAs should roughly have the same accuracy as ClustalW, and are quite acceptable for sequences more than 40% identical. This mode works by only considering the best diagonals between two sequences, and by default all the diagonals with substitution score >0 are considered. You can lower this value with the flag **-ndiag** to reduce the running time (command 2). This will be very useful if you have long and very similar sequences to align (DNA for instance).
-
-::
-
-  Command 1:
-  $$: t_coffee proteases_large.fasta -mode quickaln
-
-  Command 2:
-   $$: t_coffee proteases_large.fasta -mode quickaln -ndiag=10
-
-Another alternative to align large datasets is a special mode of T-Coffee, fm-Coffee (command 3), derived from M-Coffee (see next section) and designed to be fast and able to handle large datasets (it is used for example in Ensembl). To do so, T-Coffee used three different fast aligners: MAFFT, MUSCLE and Kalign. 
-
-::
-
-  Command 3:
-  $$: t_coffee proteases_large.fasta -mode fmcoffee
-
-.. tip:: Once you have your large MSA, you can always shrink/trim it using reformatting options (see previous section) for instance by extracting the most informative sequences or by defining a % identity cut-off.
-
-.. note:: In the last 10 years, a special effort have been made to improve large scale alignment leading to the development of few new methods among which Clustal Omega, PASTA, UPP and we hope soon a MEGA-Coffee aligner. These methods are not incorporated in T-Coffee so if your datasets are really large (>5000 sequences) don't hesitate to use these methods instead.
+The consistency based default method is not really suited for more that 200 sequences. Above this number, it is recommanded to use the `regressive agorithm implemented in T-Coffee <http://www.tcoffee.org/Projects/tcoffee/documentation/index.html#document-tcoffee_quickstart_regressive>`_.
 
 
-Using many methods at once
-==========================
-One of the most common situation when building MSAs is to have several alignments produced by different alternative methods, and not knowing which one to choose. In this section, we show you how to use M-Coffee to combine many alignments into one single alignment, or how you can specify only the methods you want. M-Coffee is not always the best method, but extensive benchmarks on BAliBASE, PREFAB and HOMSTRAD have shown that it delivers the best alignment 2 times out of 3. If you do not want to use the methods provided by M-Coffee, you can also combine precomputed alignments. 
-
-Using third party aligner via T-Coffee
---------------------------------------
-T-Coffee is installed along with many aligners necessary to run M-Coffee for instance, and many more. If you type **t_coffee**, it will display on the screen the different t_coffee options and all the methods included. If you look carefully, you will see that most of the methods exist under two denominations: 1) **<method>_msa** or 2) **<method>_pair**. In the first case, it means that T-Coffee will use the specified method to run your MSA, so you can easily have a ClustalW or a MAFFT alignment using T-Coffee. In the second case, you ask T-Coffee to align every pair of sequence with the specified methods, the final MSA will be computed using the T-Coffee consistency between all the pairs. Go to the **Integrating External Methods in T-Coffee** if you want more information.
-
-Using all the methods at the same time: M-Coffee
-------------------------------------------------
-To use M-Coffee (M stands for Meta aligner), you will need several packages to be installed (see **T-Coffee Installation** and section **Integrating External Methods in T-Coffee**). If you did a default installation, all the software you need should be there. M-Coffee is a special mode of T-Coffee that you can call using the flag **-mode mcoffee**. It will align your sequence using 8 different aligners: ClustalW, POA, MUSCLE, ProbCons, MAFFT, Dialing-T, PCMA and T-Coffee:
-
-::
-
-  $$: t_coffee proteases_small.fasta -mode mcoffee -output clustalw, html
-
-The final MSA is a combination of all methods. The alignment is colored with the T-Coffee consistency color scheme, but in this case the colors will reflect the consistency between methods: 1) regions in red have a high consistency, so all the methods agree and you can expect them to be fairly accurate, 2) regions in green/blue have the lowest consistency, meaning that all the methods deliver different alignment in these regions and you should not trust them. Overall this alignment has a score of 951 (1000 being the max), which means that it is roughly 95% consistent with the entire collection; this is a fairly high index meaning that you can trust your alignment. 
-
-Using selected methods to compute your MSA
--------------------------------------------
-Using the 8 methods predefined in M-Coffee can sometimes be a bit heavy, if you only want to use a subset of your favorite methods, you should know that each of these methods is available via the **-method** flag. You can make all the combination you want !!! For instance, to combine MAFFT, MUSCLE, T-Coffee and ProbCons, you can use:
-
-::
-
-  $$: t_coffee proteases_small.fasta -method=t_coffee_msa,mafft_msa,probcons_msa, \
-      muscle_msa -output=html
 
 
-Aligning profiles 
-=================
-Sometimes, it is better to prealign a subset of your sequences, and then to use this small alignment as a master for adding sequences (sequence to profile alignment) or even to align several profiles together if your protein family contains distantly related groups. T-Coffee contains most of the facilities available in ClustalW to deal with profiles, and the strategy we outline here can be used to deal with large datasets.
-
-Aligning sequence(s) to profile(s)
-----------------------------------
-Assuming you have multiple alignment(s) (sproteases_small.aln) or profile(s) here is a simple strategy to align sequence(s) to your profile(s). It can align a variable number of sequences from 1 to N, with a variable number of profiles from 1 ot N: you can mix sequences and profiles in any proportion you like. 
-
-::
-
-  Adding one sequence to your MSA:
-  $$: t_coffee proteases_oneseq.fasta -profile proteases_small.aln
-
-  Adding many sequences to many profiles:
-  $$: t_coffee -profile=prf1.aln,prf2.aln,prf3.aln -outfile=combined_profiles.aln
-
-.. warning:: You can also use all the methods you want but be aware when using external methods that profiles are nto always supported. When it is not, it is replaced with its consensus sequence which will not be quite as accurate. Methods supporting full profile information are: lalign_id_pair, slow_pair, proba_pair, clustalw_pair and clustalw_msa. All the other methods (internal or external) treat the profile as a consensus (less accurate).
-
-Computing very accurate (but slow) alignments with PSI/TM-Coffee
------------------------------------------------------------------
-PSI-Coffee is currently the most accurate mode of T-Coffee but also the slowest. Its principle is rather simple: it associates every sequence with a profile of homologous sequences gathered using BLAST on a sequence database (nr by default). PSI-Coffee then uses the profiles instead of the initial sequences to makes a multiple profile alignment (command 1). In a last step, your profiles are replaced by their initial query sequence from your initial dataset and returns a MSA of your sequences. PSI-Coffee can also use reduced database instead of nr (installed locally) in order to speed-up the process. A special mode, TM-Coffee, exists using PSI-Coffee but specialized to align transmembrane proteins using a reduced database of TM proteins and also including a prediction of transmembrane domains with the flag **-template_file PSITM** (command 2). It is much faster as the search database is limited to known transmembrane protein, however, it applies in only specific cases unlike PSI-Coffee which is a general method. You can find more information about TM-Coffee `here <http://tcoffee.crg.cat/apps/tcoffee/tutorial_tmcoffee.html>`_. If you want to specify a local BLAST version and a local database of your choice, just add to your command line the flags **-blast_server** and **-protein_db** and the corresponding paths.
-
-::
-
-  Command 1: PSI-Coffee
-  $$: t_coffee sample_seq1.fasta -mode psicoffee
-  
-  Command 2: TM-Coffee
-  ##: t_coffee proteases_small.fasta -mode psicoffee -template_file PSITM -protein_db <database>
-  
-
-.. warning:: PSI/TM-Coffee requires BLAST and a database to search; if you don't have BLAST installed locally, it will use the BLAST default of T-Coffee. More importantly, if you don't specify a reduced database for TM-Coffee, it will run on nr and be equal to PSI-Coffee.
-
-.. hint:: When running PSI/TM-Coffee, T-Coffee will use the BLAST EBI by default; it can happen that the web service is unavailable from time to time, T-Coffee will return a warning asking you to use NCBI BLAST instead. You can either do that or wait and rerun your job later on.
-
-
-Using protein 2D/3D structural information 
-==========================================
+Protein sequences using 2D and/or 3D information
+================================================
 Using structural information when aligning sequences is very useful. The reason is that structures diverge slower than sequences. As a consequence, one may still find a discernable homology between two sequences that have been diverging for a long time beyond recognition using their corresponding structure. Yet, when assembling a structure based MSA, you will realize that these sequences contain key conserved residues that a simple alignment procedure was unable to reveal. We show you in this section how to make the best of T-Coffee tools to incorporate structural information in your alignment.
 
 Using 3D structures: Expresso/3D-Coffee
@@ -1477,12 +1371,12 @@ You can output a color coded version of your alignment using the secondary predi
 
 
 
-Aligning RNA sequences, 2D and 3D Structure
-===========================================
-RNA sequences are very important and almost every-where these days. The main property of RNA sequences is to have a secondary structure that can be used to guide the alignment. While the default T-Coffee has no special RNA alignment method incorporated in, we have developped specific modes and tools for RNA alignment and analysis (see subsection **Manipulating RNA Sequences** for more details).
+RNA sequences using 2D and 3D Structure
+=======================================
+The main property of RNA sequences is to have a secondary structure that can be used to guide the alignment. While the default T-Coffee has no special RNA alignment method incorporated in, we have developped specific modes and tools for RNA alignment and analysis (see subsection **Manipulating RNA Sequences** for more details).
 
-R-Coffee for 2D structure
--------------------------
+RNA sequences using 2D structure (R-Coffee)
+-------------------------------------------
 Introduction
 ^^^^^^^^^^^^
 R-Coffee is the special mode of T-Coffee developped to handle specifically RNA sequences. It has been proven far more accurate than T-Coffee default because of its specific design. It can be run as a standalone aligner (using secondary structure prediction) or using third party software.
@@ -1514,38 +1408,58 @@ There are two modes we proposed to improve R-Coffee alignments: 1) using the bes
 
 .. tip:: In order to know if a RNA alignment is better than another one, the best is to visualize the compensatory mutations of the secondary structure: look at the subsection **Manipulating RNA Sequences**.
 
-RSAP-Coffee for RNA 3D Structures
----------------------------------
-RSAP-Coffee is a an experemental mode of T-Coffee using protein structral aligners. It processes RNA PDB files so that the C3' Carbons are treated as C-alpha in a protein chain. This procedure is suitable for any protein structural aligner that only considers alpha carbons in the main chain. By default, sracoffee uses  the sap_aligner that ships with T-Coffee default distribution.
+RNA Sequences using 2D and 3D structures (SARA-Coffee and RSAP-Coffee)
+----------------------------------------------------------------------
+SARA-Coffee is a structure based multiple RNA aligner. This is a new algorithm that joins the pairwise RNA structure alignments performed by SARA with the multiple sequence T-Coffee framework. Since setting up the SARA-Coffee dependencies (T-Coffee, `SARA <http://structure.biofold.org/sara/>`_, `X3DNA <http://x3dna.org/>`_, `Numpy <http://www.numpy.org/>`_, `Biopython <http://biopython.org/>`_, Perl, Python 2.7) can be tricky we provide a self-contained Vagrant VM, which downloads and configures all the required pieces of software for you. This procedure can be complex, and if you cannot install SARA, we recommand using RSAP-Coffee instead (cf next paragraph).
 
-Running rsap-Coffee
-^^^^^^^^^^^^^^^^^^^
-RSAP-Coffee works ina  way similar to Expresso/3Dcoffee. It requires providing a template file in which you matchyour PDB files with the corresponding sequences
+RSAP-Coffee is a an an alternative experimental mode of SARA-Coffee using protein structral aligners. It processes RNA PDB files so that the C3' Carbons are treated as C-alpha in a protein chain. This procedure is suitable for any protein structural aligner that only considers alpha carbons in the main chain. By default, rsapcoffee uses  the sap_aligner that ships with T-Coffee default distribution.
+
+.. note:: SARA-Coffee and RSAP-Coffee use very similar command line. In practice, the only difference is the use of the method sa_pair instead of the sara_pair methiod when buolding the T-Coffee library.
+
+Running SARA/RSAP-Coffee
+^^^^^^^^^^^^^^^^^^^^^^^^
+The procedure is similar to Expresso/3Dcoffee and requires providing a template file in the PDB files are matched with the corresponding sequences
 
 ::
 
-  ><RNA Seq Identifier>  _P_ <PDB identifier - one chain only per PDB>
-  ><RNA Seq Identifier>  _P_ <PDB identifier - one chain only per PDB>
+  ><RNA Seq Identifier>  _P_ <PDB>
+  ><RNA Seq Identifier>  _P_ <PDB>
   ...
+.. note:: PBD can be either a file PDB identifier or a PDB file. The file can be either in your homew dir or on a location specified by the environement variable **PBD_DIR**. If you use an identifier T-Coffee will be able to download the file from RCSB.
+
+.. note:: If in your PDB the SEQRES and the ATOM yield a different sequence, T-Coffee will use a sequence estimated from ATOM. If tghis sequence does not match your FASTA, they will be reconciliated using an alignment procedure to establish residues equivalencies. 
 
 You then need to run 
 
 ::
 
-   $$: t_coffee <yourseq.fasta> -mode rsapcoffee -template_file <template file>
+   $$: t_coffee t_coffee -seq rna3D.fa -mode rsapcoffee -template_file rna3D.template
+Or
+   $$: t_coffee t_coffee -seq rna3D.fa -mode saracoffee -template_file rna3D.template
 
-By Default, SRAP-Coffee only runs sap, but you can also run other structural methods supported by T-Cofee. like Mustang or TM-Align
+
+By Default, RSAP-Coffee only runs sap, but you can also run other structural methods supported by T-Cofee. like Mustang or TM-Align
 
 ::
 
-   $$: t_coffee <yourseq.fasta> -mode rsapcoffee -method sap_pair, mustang_pair, TMalign_pair -template_file <template file>
+   $#: t_coffee <yourseq.fasta> -mode rsapcoffee -method sap_pair, mustang_pair, TMalign_pair -template_file <template file>
+
+The default procedure is meant to handle a muxture of PDB files and sequences. All possble PDB sequences pairs are aligned using strucure based methods (structural library) and all possiblée sequence pairs (including PDB sequences) sequences are then aligned using the R-Coffee mode (secondary library). In the secondary library, the PDB sequences are aligned using their experimentallyerived secondary structures, as estimated by X3DNA. Note that id you aonly have structures, you may use the folloing command lines to carry out a strict structure based sequence alignment:
+
+::
+
+   $$: t_coffee -seq rna3D.fa -method sap_pair -template_file rna3D.template 
+	
+In that case the PDB Sequences are aligned using the experimental 
 
 
-SARA-Coffee for RNA 3D Structures
----------------------------------
-SARA-Coffee is a structure based multiple RNA aligner. This is a new algorithm that joins the pairwise RNA structure alignments performed by SARA with the multiple sequence T-Coffee framework. Since setting up the SARA-Coffee dependencies (T-Coffee, `SARA <http://structure.biofold.org/sara/>`_, `X3DNA <http://x3dna.org/>`_, `Numpy <http://www.numpy.org/>`_, `Biopython <http://biopython.org/>`_, Perl, Python 2.7) can be tricky we provide a self-contained Vagrant VM, which downloads and configures all the required pieces of software for you. 
+Estimating the accuracy of an RNA structure based alignment
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+It is possible to use the irmsd procedure to estimate d-RMSD of your sutcure based sequence alignmnent
 
-As an alternative to the complex installation described above, we also provide the rsap-Coffee RNA structural aligner that uses proteins structral aligners to align RNA 3D structures (cf section above). This mode has not been extensivly tested. It is expected to have a comparable albeith slighly lower accuracy than sara-coffee.
+::
+
+   $$: t_coffee -other_pg irmsd -aln rna3D_msa2.aln -template_file rna3D.template 
 
 
 Installing SARA-Coffee VM
@@ -1594,22 +1508,6 @@ SARA-Coffee is also distributed as a Docker container. This will allow you to ru
 
 
 .. Note:: this command assumes your input file is located in the working directory. If this is not the case, you will need to mount the input file path accordingly. 
-
-Running Sara-Coffee
-^^^^^^^^^^^^^^^^^^^
-Sara-Coffee works ina  way similar to Expresso/3Dcoffee. It requires providing a template file in which you matchyour PDB files with the corresponding sequences
-
-::
-
-  ><RNA Seq Identifier>  _P_ <PDB identifier - one chain only per PDB>
-  ><RNA Seq Identifier>  _P_ <PDB identifier - one chain only per PDB>
-  ...
-
-You then need to run 
-
-::
-
-   $$: t_coffee <yourseq.fasta> -mode saracoffee -template_file <template file>
 
 
 
@@ -1679,6 +1577,69 @@ When dealing with coding DNA, the right thing to do is to translate your DNA seq
   Command 3: Recovering your protein sequences
   $$: t_coffee -other_pg seq_reformat -in three_cdna.aln -action +clean_cdna +translate
 
+
+Using many MSA methods at once
+==============================
+One of the most common situation when building MSAs is to have several alignments produced by different alternative methods, and not knowing which one to choose. In this section, we show you how to use M-Coffee to combine many alignments into one single alignment, or how you can specify only the methods you want. M-Coffee is not always the best method, but extensive benchmarks on BAliBASE, PREFAB and HOMSTRAD have shown that it delivers the best alignment 2 times out of 3. If you do not want to use the methods provided by M-Coffee, you can also combine precomputed alignments. 
+
+Using third party aligner via T-Coffee
+--------------------------------------
+T-Coffee is installed along with many aligners necessary to run M-Coffee for instance, and many more. If you type **t_coffee**, it will display on the screen the different t_coffee options and all the methods included. If you look carefully, you will see that most of the methods exist under two denominations: 1) **<method>_msa** or 2) **<method>_pair**. In the first case, it means that T-Coffee will use the specified method to run your MSA, so you can easily have a ClustalW or a MAFFT alignment using T-Coffee. In the second case, you ask T-Coffee to align every pair of sequence with the specified methods, the final MSA will be computed using the T-Coffee consistency between all the pairs. Go to the **Integrating External Methods in T-Coffee** if you want more information.
+
+Using all the methods at the same time: M-Coffee
+------------------------------------------------
+To use M-Coffee (M stands for Meta aligner), you will need several packages to be installed (see **T-Coffee Installation** and section **Integrating External Methods in T-Coffee**). If you did a default installation, all the software you need should be there. M-Coffee is a special mode of T-Coffee that you can call using the flag **-mode mcoffee**. It will align your sequence using 8 different aligners: ClustalW, POA, MUSCLE, ProbCons, MAFFT, Dialing-T, PCMA and T-Coffee:
+
+::
+
+  $$: t_coffee proteases_small.fasta -mode mcoffee -output clustalw, html
+
+The final MSA is a combination of all methods. The alignment is colored with the T-Coffee consistency color scheme, but in this case the colors will reflect the consistency between methods: 1) regions in red have a high consistency, so all the methods agree and you can expect them to be fairly accurate, 2) regions in green/blue have the lowest consistency, meaning that all the methods deliver different alignment in these regions and you should not trust them. Overall this alignment has a score of 951 (1000 being the max), which means that it is roughly 95% consistent with the entire collection; this is a fairly high index meaning that you can trust your alignment. 
+
+Using selected methods to compute your MSA
+-------------------------------------------
+Using the 8 methods predefined in M-Coffee can sometimes be a bit heavy, if you only want to use a subset of your favorite methods, you should know that each of these methods is available via the **-method** flag. You can make all the combination you want !!! For instance, to combine MAFFT, MUSCLE, T-Coffee and ProbCons, you can use:
+
+::
+
+  $$: t_coffee proteases_small.fasta -method=t_coffee_msa,mafft_msa,probcons_msa, \
+      muscle_msa -output=html
+
+
+Aligning profiles 
+=================
+Sometimes, it is better to prealign a subset of your sequences, and then to use this small alignment as a master for adding sequences (sequence to profile alignment) or even to align several profiles together if your protein family contains distantly related groups. T-Coffee contains most of the facilities available in ClustalW to deal with profiles, and the strategy we outline here can be used to deal with large datasets.
+
+Aligning sequence(s) to profile(s)
+----------------------------------
+Assuming you have multiple alignment(s) (sproteases_small.aln) or profile(s) here is a simple strategy to align sequence(s) to your profile(s). It can align a variable number of sequences from 1 to N, with a variable number of profiles from 1 ot N: you can mix sequences and profiles in any proportion you like. 
+
+::
+
+  Adding one sequence to your MSA:
+  $$: t_coffee proteases_oneseq.fasta -profile proteases_small.aln
+
+  Adding many sequences to many profiles:
+  $$: t_coffee -profile=prf1.aln,prf2.aln,prf3.aln -outfile=combined_profiles.aln
+
+.. warning:: You can also use all the methods you want but be aware when using external methods that profiles are nto always supported. When it is not, it is replaced with its consensus sequence which will not be quite as accurate. Methods supporting full profile information are: lalign_id_pair, slow_pair, proba_pair, clustalw_pair and clustalw_msa. All the other methods (internal or external) treat the profile as a consensus (less accurate).
+
+Computing very accurate (but slow) alignments with PSI/TM-Coffee
+-----------------------------------------------------------------
+PSI-Coffee is currently the most accurate mode of T-Coffee but also the slowest. Its principle is rather simple: it associates every sequence with a profile of homologous sequences gathered using BLAST on a sequence database (nr by default). PSI-Coffee then uses the profiles instead of the initial sequences to makes a multiple profile alignment (command 1). In a last step, your profiles are replaced by their initial query sequence from your initial dataset and returns a MSA of your sequences. PSI-Coffee can also use reduced database instead of nr (installed locally) in order to speed-up the process. A special mode, TM-Coffee, exists using PSI-Coffee but specialized to align transmembrane proteins using a reduced database of TM proteins and also including a prediction of transmembrane domains with the flag **-template_file PSITM** (command 2). It is much faster as the search database is limited to known transmembrane protein, however, it applies in only specific cases unlike PSI-Coffee which is a general method. You can find more information about TM-Coffee `here <http://tcoffee.crg.cat/apps/tcoffee/tutorial_tmcoffee.html>`_. If you want to specify a local BLAST version and a local database of your choice, just add to your command line the flags **-blast_server** and **-protein_db** and the corresponding paths.
+
+::
+
+  Command 1: PSI-Coffee
+  $$: t_coffee sample_seq1.fasta -mode psicoffee
+  
+  Command 2: TM-Coffee
+  ##: t_coffee proteases_small.fasta -mode psicoffee -template_file PSITM -protein_db <database>
+  
+
+.. warning:: PSI/TM-Coffee requires BLAST and a database to search; if you don't have BLAST installed locally, it will use the BLAST default of T-Coffee. More importantly, if you don't specify a reduced database for TM-Coffee, it will run on nr and be equal to PSI-Coffee.
+
+.. hint:: When running PSI/TM-Coffee, T-Coffee will use the BLAST EBI by default; it can happen that the web service is unavailable from time to time, T-Coffee will return a warning asking you to use NCBI BLAST instead. You can either do that or wait and rerun your job later on.
 
 
 *************************

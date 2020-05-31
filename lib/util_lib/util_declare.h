@@ -2,12 +2,16 @@
 #define __UTIL_DECLARE_H
 
 
+
+typedef struct hashtable_s hashtable_t;
 typedef struct Tmpname Tmpname;
 struct Memcontrol
     {
       size_t size;
       size_t size_element;
       char check[3];
+      int hn;
+      hashtable_t *ht;
       struct Memcontrol *p;
       struct Memcontrol *n;
     };
@@ -115,6 +119,7 @@ int read_size_char  ( void  *array, size_t size );
 int read_size_int   ( void  *array, size_t size );
 int read_size_float ( void  *array, size_t size );
 int read_size_double( void  *array, size_t size );
+int arrlen ( void  *array);
 int read_array_size_new ( void  *array);
 int read_array_size ( void  *array, size_t size );
 int read_array_new ( void  *array);

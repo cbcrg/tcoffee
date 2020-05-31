@@ -244,32 +244,7 @@ static int key;
   return NULL;
 }
   
-/*********************************************************************/
-/*                                                                   */
-/*                         string hasch
-/*                                                                   */
-/*                                                                   */
-/*********************************************************************/
-struct entry_s {
-	char *key;
-	char *value;
-	struct entry_s *next;
-};
 
-typedef struct entry_s entry_t;
-
-struct hashtable_s {
-	int size;
-	struct entry_s **table;	
-};
-
-typedef struct hashtable_s hashtable_t;
-hashtable_t *ht_create( int size );
-hashtable_t * ht_destroy( hashtable_t *ht);
-
-int ht_hash( hashtable_t *hashtable, char *key );
-entry_t *ht_newpair( char *key, char *value );
-char *ht_get( hashtable_t *hashtable, char *key );
 
 
 /* Create a new hashtable. */
@@ -439,75 +414,111 @@ char *ht_get( hashtable_t *hashtable, char *key ) {
 	}
 	
 }
-//makes it possible to maintain an alternative hash
-int name_is_in_hlist3 (char *name, char **list, int n)
-{
-  static hashtable_t *ht;
-  static char **rlist;
-  char *r;
-  
-  if (list !=rlist || list==NULL)
-    {
-      rlist=list;
-      if (ht)ht=ht_destroy(ht);
-    }
-  if (list==NULL)return -1;
-  
-  if (!ht)
-    {
-      int a;
-      char index[100];
-      
-      ht=ht_create (n*10);
-      for (a=0;a<n; a++)
-	{
-	  sprintf (index, "%d", a);
-	  ht_set (ht,list[a], index);
-	  //HERE ("SET %s %s", list[a], index);
-	}
-    }
-  if ((r=ht_get(ht, name))!=NULL)
-    {
-      return atoi (r);
-    }
-  else
-    return -1;
-}
-int name_is_in_hlist2 (char *name, char **list, int n)
-{
-  static hashtable_t *ht;
-  static char **rlist;
-  char *r;
-  
-  if (list !=rlist || list==NULL)
-    {
-      rlist=list;
-      if (ht)ht=ht_destroy(ht);
-    }
-  if (list==NULL)return -1;
-  
-  if (!ht)
-    {
-      int a;
-      char index[100];
-      
-      ht=ht_create (n*10);
-      for (a=0;a<n; a++)
-	{
-	  sprintf (index, "%d", a);
-	  ht_set (ht,list[a], index);
-	  //HERE ("SET %s %s", list[a], index);
-	}
-    }
-  if ((r=ht_get(ht, name))!=NULL)
-    {
-      return atoi (r);
-    }
-  else
-    return -1;
-}
 
+hashtable_t * array2hash (char **list)
+{
+  if (!list)return NULL;
+  else return array2hashN(list,-1);
+}
+hashtable_t * array2hashN (char **list, int nn)
+{
+  int hn;
+  hashtable_t *ht;
+  Memcontrol*M;
+  
+  
+  if (!list)return NULL;
+  if (nn==-1)nn=arrlen(list);
+  
+  M=(Memcontrol*)list;
+  M-=2;
+  hn=M[0].hn;
+  ht=M[0].ht;
+  
+  
+
+  if (nn!=hn && ht)
+    {
+      ht_destroy(ht);
+      ht=NULL;
+    }
+  
+  
+  if (!ht)
+    {
+      int a;
+      char index[100];
+      ht=ht_create(nn*10);
+      
+      for (a=0; a<nn; a++)
+	{
+	  if (list[a] && list[a][0])
+	    {
+	      sprintf (index, "%d", a);
+	      ht_set (ht,list[a], index);
+	    }
+	}
+      M[0].hn=nn;
+      M[0].ht=ht;
+    }
+  
+  return ht;
+}
+hashtable_t *hupdate (char **list)
+{
+  int hn;
+  hashtable_t *ht;
+  Memcontrol*M;
+  int nn;
+  
+  if (!list)return NULL;
+  nn=arrlen(list);
+  
+  M=(Memcontrol*)list;
+  M-=2;
+  hn=M[0].hn;
+  ht=M[0].ht;
+  
+  if (ht)hfree(list);
+  return array2hash(list);
+}
+hashtable_t * hfree (void *list)
+{
+  Memcontrol*M;
+
+  if (!list) return NULL;
+  M=(Memcontrol*)list;
+  M-=2;
+  
+  if (M[0].ht)
+    {
+      ht_destroy(M[0].ht);
+      M[0].ht=NULL;
+    }
+  return NULL;
+}
+int name2hindex (char *name, char **list)
+{
+  return name_is_in_hlist(name, list,-1);
+}
 int name_is_in_hlist (char *name, char **list, int n)
+{
+  hashtable_t *ht;
+  char *r;
+  
+
+  if (!name){hfree(list);return -1;}
+  if (!list)return -1;
+  ht=array2hashN(list,n);
+  
+  if ((r=ht_get(ht, name))!=NULL)
+    {
+      return atoi (r);
+    }
+  else
+    return -1;
+}
+int name_is_in_hlist_old (char *name, char **list, int n)
 {
   static hashtable_t *ht;
   static char **rlist;
@@ -547,8 +558,10 @@ char *check_hlist_for_dup (char **name, int n)
   char index[100];
   int a;
   char *dup=NULL;
- 
-  if (! name || n==0)return NULL;
+  Memcontrol*M;
+  
+  if (! name)return NULL;
+  if (n<=0)n=arrlen (name);
   ht=ht_create (n);
   
   for (a=0;a<n; a++)
@@ -564,7 +577,12 @@ char *check_hlist_for_dup (char **name, int n)
 	  ht_set (ht,name[a], index);
 	}
     }
-  ht_destroy(ht);
+  
+  M=(Memcontrol*)name;
+  M-=2;
+  if (M[0].ht)hfree(name);
+  M[0].ht=ht;
+  
   return dup;
 }
   

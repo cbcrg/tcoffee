@@ -841,7 +841,7 @@ int print_seq_pos ( int pos, Alignment *A, char *seq)
 {
   int a, b, s;
 
-  s=name_is_in_list (seq, A->name, A->nseq, MAXNAMES);
+  s=name_is_in_hlist (seq, A->name, A->nseq);
   fprintf ( stdout, "S=%d", s);
 
   for (b=0,a=0; a<pos; a++)
@@ -879,7 +879,7 @@ int process_cache ( Alignment *A,Alignment *S, int  ***Cache, char *mode)
     }
 
   C=Cache[0];
-  ab1=name_is_in_list ("ABL1", A->name, A->nseq,100);
+  ab1=name_is_in_hlist ("ABL1", A->name, A->nseq);
   ab1_pos=(int*)vcalloc (A->len_aln+1, sizeof (int));
 
   for ( b=0,a=0; a< A->len_aln; a++)
@@ -958,7 +958,7 @@ float** cache2pred1 (Alignment*A,int **cache, int *ns, int **ls, Alignment *S, c
   strget_param ( mode, "_WEIGHT_", "0", "%d", &weight_mode);
 
   R=declare_float (2, 2);
-  ci=name_is_in_list ( compound, S->name, S->nseq, -1);
+  ci=name_is_in_hlist ( compound, S->name, S->nseq);
 
 
 
@@ -1032,7 +1032,7 @@ float** cache2pred2 (Alignment*A,int **cache, int *ns, int **ls, Alignment *S, c
 
 
   R=declare_float (2, 2);
-  ci=name_is_in_list ( compound, S->name, S->nseq, -1);
+  ci=name_is_in_hlist ( compound, S->name,S->nseq);
 
   for (s1=0; s1<ns[1]; s1++)
     {
@@ -1110,7 +1110,7 @@ float** cache2pred3 (Alignment*A,int **cache, int *ns, int **ls, Alignment *S, c
 
 
   R=declare_float (2, 2);
-  ci=name_is_in_list ( compound, S->name, S->nseq, -1);
+  ci=name_is_in_hlist ( compound, S->name, S->nseq);
   list=declare_int ( ns[1],3);
 
   for (s1=0; s1<ns[1]; s1++)
@@ -1226,7 +1226,7 @@ float** cache2pred4 (Alignment*A,int **cache, int *ns, int **ls, Alignment *S, c
 
 
 
-  ci=name_is_in_list ( compound, S->name, S->nseq, -1);
+  ci=name_is_in_hlist ( compound, S->name, S->nseq);
   list=declare_int ( ns[1],2);
 
   for (s1=0; s1<ns[1]; s1++)
@@ -1297,7 +1297,7 @@ float** cache2pred5 (Alignment*A,int **cache, int *ns, int **ls, Alignment *S, c
 
 
 
-  ci=name_is_in_list ( compound, S->name, S->nseq, -1);
+  ci=name_is_in_hlist ( compound, S->name, S->nseq);
   list=declare_int ( ns[1],2);
 
   for (s1=0; s1<ns[1]; s1++)
@@ -1357,7 +1357,7 @@ float** jacknife5 (Alignment*A,int **cacheIN, int *ns, int **ls, Alignment *S, c
   int **list;
   int **cache;
 
-  ci=name_is_in_list ( compound, S->name, S->nseq, -1);
+  ci=name_is_in_hlist ( compound, S->name, S->nseq);
   list=declare_int (A->nseq,2);
   R=declare_float (2, 2);
 
@@ -1451,7 +1451,7 @@ float** jacknife6 (Alignment*A,int **cache, int *ns, int **ls, Alignment *S, cha
   int delta, best_delta;
   int **list;
 
-  ci=name_is_in_list ( compound, S->name, S->nseq, -1);
+  ci=name_is_in_hlist ( compound, S->name, S->nseq);
   list=declare_int (A->len_aln,2);
   R=declare_float (2, 2);
 
@@ -1562,7 +1562,7 @@ float** cache2pred_new (Alignment*A,int **cache, int *ns, int **ls, Alignment *S
   int delta, best_delta;
   int **list;
 
-  ci=name_is_in_list ( compound, S->name, S->nseq, -1);
+  ci=name_is_in_hlist ( compound, S->name, S->nseq);
   list=declare_int ( ns[1],2);
   R=declare_float (2, 2);
 
@@ -1636,7 +1636,7 @@ float** cache2pred_forbiden_res (Alignment*A,int **cache, int *ns, int **ls, Ali
 
   mat=read_matrice ( "blosum62mt");
 
-  ci=name_is_in_list ( compound, S->name, S->nseq, -1);
+  ci=name_is_in_hlist ( compound, S->name, S->nseq);
   list=declare_int ( ns[1],2);
   R=declare_float (2, 2);
 
@@ -1829,7 +1829,7 @@ int **sar2cache_proba_old ( Alignment *A, int *ns,int **ls, Alignment *S, char *
   float zscore;
 
   RES=nfield++;COL_INDEX=nfield++;N1msa=nfield++;N1sar=nfield++;N=nfield++;N11=nfield++;N10=nfield++;N01=nfield++;N00=nfield++;SCORE=nfield++;
-  ci=name_is_in_list ( compound, S->name, S->nseq, -1);
+  ci=name_is_in_hlist ( compound, S->name, S->nseq);
   cache=declare_int (A->nseq, A->len_aln);
 
   strget_param ( mode, "_FILTER1_", "0"   , "%f", &T1);
@@ -2058,7 +2058,7 @@ int **sar2cache_count1 ( Alignment *A, int *ns,int **ls, Alignment *S, char *com
   cache=declare_int ( 27, A->len_aln);
   analyze=declare_int (27, 2);
 
-  ci=name_is_in_list ( compound, S->name, S->nseq, -1);
+  ci=name_is_in_hlist ( compound, S->name, S->nseq);
 
   for ( col=0; col< A->len_aln; col++)
     {
@@ -2132,7 +2132,7 @@ int **sar2cache_count2 ( Alignment *A, int *ns,int **ls, Alignment *S, char *com
 
   analyze=declare_int (27, 2);
 
-  ci=name_is_in_list ( compound, S->name, S->nseq, -1);
+  ci=name_is_in_hlist ( compound, S->name, S->nseq);
   for ( col=0; col< A->len_aln; col++)
     {
       int n1, n0;
@@ -2222,7 +2222,7 @@ int **sar2cache_count3 ( Alignment *A, int *ns,int **ls, Alignment *S, char *com
   cache=declare_int ( 27, A->len_aln);
   analyze=declare_int (27, 2);
 
-  ci=name_is_in_list ( compound, S->name, S->nseq, -1);
+  ci=name_is_in_hlist ( compound, S->name, S->nseq);
 
   for ( col=0; col< A->len_aln; col++)
     {
@@ -2331,7 +2331,7 @@ int **sar2cache_proba_new ( Alignment *A, int *ns,int **ls, Alignment *S, char *
   float zscore;
 
   RES=nfield++;COL_INDEX=nfield++;N1msa=nfield++;N1sar=nfield++;N=nfield++;N11=nfield++;N10=nfield++;N01=nfield++;N00=nfield++;SCORE=nfield++;
-  ci=name_is_in_list ( compound, S->name, S->nseq, -1);
+  ci=name_is_in_hlist ( compound, S->name, S->nseq);
   cache=declare_int (27, A->len_aln);
 
   strget_param ( mode, "_SWTHR_", "30", "%d", &sw_thr);
@@ -2468,7 +2468,7 @@ int **sar2cache_adriana ( Alignment *A, int *ns,int **ls, Alignment *S, char *co
 
 
   int **cache;
-  ci=name_is_in_list ( compound, S->name, S->nseq, -1);
+  ci=name_is_in_hlist ( compound, S->name, S->nseq);
   cache=declare_int (A->nseq, A->len_aln);
 
 
@@ -2528,7 +2528,7 @@ int **sar2cache_proba2 ( Alignment *A, int *ns,int **ls, Alignment *S, char *com
 
   int **cache;
   cache=declare_int ( A->nseq, A->len_aln);
-  ci=name_is_in_list ( compound, S->name, S->nseq, -1);
+  ci=name_is_in_hlist ( compound, S->name, S->nseq);
 
   strget_param ( mode, "_FILTER1_", "0"   , "%f", &T1);
   strget_param ( mode, "_FILTER2_", "1000000", "%f", &T2);
@@ -2725,7 +2725,7 @@ int sarset2subsarset ( Alignment *A, Alignment *S, Alignment **subA, Alignment *
   list=(int*)vcalloc ( SUB->nseq, sizeof (int));
   for (nl=0,a=0; a<SUB->nseq; a++)
     {
-      b=name_is_in_list(SUB->name[a], A->name, A->nseq, 100);
+      b=name_is_in_hlist(SUB->name[a], A->name, A->nseq);
       if ( b!=-1)list[nl++]=b;
     }
 
@@ -3876,7 +3876,7 @@ Alignment *display_sar ( Alignment *A, Alignment *SAR, char *compound)
   int a,c;
   char name[100];
 
-  c=name_is_in_list ( compound, SAR->name, SAR->nseq, 100);
+  c=name_is_in_hlist ( compound, SAR->name, SAR->nseq);
   if ( c==-1)return A;
 
   for ( a=0; a< A->nseq; a++)
@@ -3899,7 +3899,7 @@ Alignment *aln2weighted_sar_score ( Alignment *A,Alignment *SAR, char *weight_fi
 
   if ( SAR)
     {
-      c=name_is_in_list (compound, SAR->name, SAR->nseq, 100);
+      c=name_is_in_hlist (compound, SAR->name, SAR->nseq);
     }
 
   list=file2list (weight_file, " ");
@@ -4100,7 +4100,7 @@ Alignment * sar2simpred2 (Alignment *A, Alignment *SAR, char *seqlist, char *pos
 	  nrs++;
 	}
     }
-  else if ((a=name_is_in_list ( seqlist, A->name, A->nseq, 100))!=-1)
+  else if ((a=name_is_in_hlist ( seqlist, A->name, A->nseq))!=-1)
     {
       rlist[nrs]=a;
       tlist[rlist[nrs]]=1;
@@ -4112,13 +4112,13 @@ Alignment * sar2simpred2 (Alignment *A, Alignment *SAR, char *seqlist, char *pos
       R=main_read_aln (seqlist, NULL);
       for (a=0; a<R->nseq; a++)
 	{
-	  rlist[a]=name_is_in_list( R->name[a], A->name, A->nseq, 100);
+	  rlist[a]=name_is_in_hlist( R->name[a], A->name, A->nseq);
 	  tlist[rlist[a]]=1;
 	}
       free_aln (R);
     }
 
-  c=name_is_in_list ( compound, SAR->name, SAR->nseq, 100);
+  c=name_is_in_hlist ( compound, SAR->name, SAR->nseq);
 
   sim_ref=aln2sim_mat (A, "idmat");
   if (strm (posfile, "all"))
@@ -4822,9 +4822,9 @@ float or_loo_evaluate2 ( Alignment *A, Alignment *S, char *mode, int *pos, int p
 	  sar=S->seq_al[s][c];
 	  positive[s]=negative[s]=NULL;
 
-	  if ( name_is_in_list (words[s], positive, A->nseq, nl+1)!=-1)
+	  if ( name_is_in_hlist (words[s], positive, A->nseq)!=-1)
 	    pos=1;
-	  if ( name_is_in_list (words[s], negative, A->nseq, nl+1)!=-1)
+	  if ( name_is_in_hlist (words[s], negative, A->nseq)!=-1)
 	    neg=1;
 
 	  if (pos & !neg) pred=1;
@@ -5400,7 +5400,7 @@ Alignment *get_prediction_target (Alignment *A, Alignment *S, char *param)
   name=declare_char (A->nseq, 100);
   for (n=0,a=0; a< A->nseq; a++)
     {
-      if ( name_is_in_list (A->name[a], S->name, S->nseq, 100)==-1)
+      if ( name_is_in_hlist (A->name[a], S->name, S->nseq)==-1)
 	{
 	  sprintf (name[n++], "%s", A->name[a]);
 	}
@@ -5417,7 +5417,7 @@ Alignment *set_sar (Alignment *A, Alignment *S, char *param)
   name=declare_char (A->nseq, 100);
   for (n=0,a=0; a< A->nseq; a++)
     {
-      if ( name_is_in_list (A->name[a], S->name, S->nseq, 100)!=-1)
+      if ( name_is_in_hlist (A->name[a], S->name, S->nseq)!=-1)
 	{
 	  sprintf (name[n++], "%s", A->name[a]);
 	}
@@ -5455,7 +5455,7 @@ ORP* new_evaluate_prediction  (ORP *PR, char *mode, int print)
   for (a=0; a<P->nseq; a++)
     {
       tp=tn=fp=fn=0;
-      if ((i=name_is_in_list (P->name[a], R->name, R->nseq, 100))!=-1)
+      if ((i=name_is_in_hlist (P->name[a], R->name, R->nseq))!=-1)
 	{
 
 	  for (b=0;b<P->len_aln; b++)
@@ -5489,7 +5489,7 @@ ORP* new_evaluate_prediction  (ORP *PR, char *mode, int print)
       tp=tn=fp=fn=0;
       for (a=0; a<P->nseq;a++)
 	{
-	  if ((i=name_is_in_list (P->name[a], R->name, R->nseq, 100))!=-1)
+	  if ((i=name_is_in_hlist (P->name[a], R->name, R->nseq))!=-1)
 	    {
 	      r=R->seq_al[i][b];
 	      p=P->seq_al[a][b];
@@ -5548,7 +5548,7 @@ float  evaluate_prediction  (Alignment *R, Alignment *P, char *mode, int print)
   for (a=0; a<P->nseq; a++)
     {
       tp=tn=fp=fn=0;
-      if ((i=name_is_in_list (P->name[a], R->name, R->nseq, 100))!=-1)
+      if ((i=name_is_in_hlist (P->name[a], R->name, R->nseq))!=-1)
 	{
 
 	  for (b=0;b<P->len_aln; b++)
@@ -5589,7 +5589,7 @@ float  evaluate_prediction  (Alignment *R, Alignment *P, char *mode, int print)
       tp=tn=fp=fn=0;
       for (a=0; a<P->nseq;a++)
 	{
-	  if ((i=name_is_in_list (P->name[a], R->name, R->nseq, 100))!=-1)
+	  if ((i=name_is_in_hlist (P->name[a], R->name, R->nseq))!=-1)
 	    {
 	      r=R->seq_al[i][b];
 	      p=P->seq_al[a][b];
@@ -5700,7 +5700,7 @@ int *   file2pos_list (Alignment *A, char *posfile)
 	    p=atoi(file[n][3])-1;
 	  else
 	    {
-	      i=name_is_in_list ( file[n][2], A->name, A->nseq, MAXNAMES+1);
+	      i=name_is_in_hlist ( file[n][2], A->name, A->nseq);
 	      if (i!=-1)
 		p=index[i][atoi(file[n][3])]-1;
 	      else p=-1;

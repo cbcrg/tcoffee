@@ -1499,6 +1499,8 @@ void * vmalloc ( size_t size)
 		M=(Memcontrol*)x;
 		M[0].size=size;
 		M[0].size_element=0;
+		M[0].ht=NULL;
+		M[0].hn=0;
 		sprintf ( M[0].check, "dy");
 		M+=2;
 		x=M;
@@ -1528,7 +1530,10 @@ void *sub_vcalloc ( size_t nobj, size_t size, int MODE)
 
 
 	M=(Memcontrol*)x;
-	M-=2;M[0].size_element=size;
+	M-=2;
+	M[0].size_element=size;
+	M[0].ht=NULL;
+	M[0].hn=0;
 	M+=2;
 	x=M;
 
@@ -1602,16 +1607,16 @@ void *vrealloc ( void *p, size_t size)
 
 	if ( p==NULL)
 	  {
-	    x=vmalloc (size);
-	    memset (x, 0, size);
-
-	    return x;
+	    return vcalloc (size/sizeof(char), sizeof (char));
 	  }
 	else
 	  {
+	    
 	    M=(Memcontrol*)p;
 	    M-=2;
+	    if (M[0].ht)hfree(p);
 	    i_size=M[0].size;
+	    
 	    p=M;
 
 
@@ -1641,10 +1646,11 @@ void vfree ( void *p)
        if ( !p)return;
        else
 	 {
+
 	   M=(Memcontrol*)p;
 	   M-=2;
 	   size=M[0].size;
-
+	   if (M[0].ht)hfree(p);
 	   p=M;
 	   free(p);
 
@@ -1689,6 +1695,22 @@ READ_ARRAY_SIZE(int,read_size_int)
 READ_ARRAY_SIZE(float,read_size_float)
 READ_ARRAY_SIZE(double,read_size_double)
 
+
+int arrlen (void *array)
+    {
+    Memcontrol *p;
+    if (array==NULL)return 0;
+    p=(Memcontrol *)array;
+    p-=2;
+    if ( p[0].size_element ==0)
+      {
+	int *x;
+	fprintf ( stderr, "\nERROR in read_array_size: trying to read the size of a malloc-ed block [FATAL]");
+	x[1000]=1;//THis helps triggering a trace in Valgring
+	exit (0);
+      }
+    else return (int)p[0].size/p[0].size_element;
+    }
 
 int read_array_size_new (void *array)
 {
