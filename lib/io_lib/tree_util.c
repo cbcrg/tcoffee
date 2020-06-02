@@ -5478,8 +5478,8 @@ NT_node file2tree (char *fname)
 	{
 	  N=new_declare_tree_node ();
 	  N->parent=T;
-	  if      (!T->right)T->right=N;
-	  else if (!T->left)T->left=N;
+	  if      (T && !T->right)T->right=N;
+	  else if (T && !T->left)T->left=N;
 	  else 
 	    {
 	      N->right=T->right; (T->right)->parent=N;
@@ -7353,6 +7353,8 @@ Alignment *tree2node_support (char *newick_tree, Alignment *T)
 {
   char *p;
   float s=0;
+  
+
   p=tree2node_support_simple(newick_tree, T, &s);
   
   T->seq_al[0]=(char*)vrealloc (T->seq_al[0],(strlen (p)+1)*sizeof (char));
