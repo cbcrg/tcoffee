@@ -1885,6 +1885,11 @@ Constraint_list * srap_pair   (char *seq, char *weight, Constraint_list *CL)
 
 Constraint_list * sap_pair   (char *seq_in, char *weight, Constraint_list *CL)
  {
+   int ntry=0;
+   int max_ntry=3;
+   int issap=0;
+   //Number of times sap will try to align pdb1 with pdb2. Sap is non deterministic and may crash depending on the seed it usues
+   //THis number should do fine for up to 1,000 structures
    int a, c,s1, s2,tot,sim,score,max;
    FILE *fp;
    char *template1, *template2;
@@ -1931,12 +1936,24 @@ Constraint_list * sap_pair   (char *seq_in, char *weight, Constraint_list *CL)
        printf_system ("mv %s in2", tmp_pdb2);
      }
    
+
+
+   //Run a max of max_ntry before exiting
    printf_system ("%s in1 in2 >sapout 2>/dev/null::IGNORE_FAILURE::",SAP_4_TCOFFEE);
+   issap=is_sap_file("sapout");
+   ntry++;
    
-   if (!is_sap_file("sapout"))
+   while (ntry<max_ntry && !issap) 
      {
-       add_warning ( stderr, "SAP failed to align: %s against %s [%s:WARNING]\n", seq2P_template_file(CL->S,s1),seq2P_template_file(CL->S,s2), PROGRAM);
-       return CL;
+       add_warning ( stderr, "SAP failed to align: %s against %s [%s %s]- attempt %d [WARNING:%s]\n", seq2P_template_file(CL->S,s1),seq2P_template_file(CL->S,s2), template1, template2,ntry,PROGRAM);
+       
+       printf_system ("%s in1 in2 >sapout 2>/dev/null::IGNORE_FAILURE::",SAP_4_TCOFFEE);
+       issap=is_sap_file("sapout");
+       ntry++;
+     }
+   if (!issap)
+     {
+       myexit(fprintf_error ( stderr, "SAP failed to align: %s against %s [%s %s]- attempt %d [FATAL:%s]\n", seq2P_template_file(CL->S,s1),seq2P_template_file(CL->S,s2), template1, template2,ntry,PROGRAM));
      }
    
    //Sap is finished, Now go back to cdir and turn it into a lib

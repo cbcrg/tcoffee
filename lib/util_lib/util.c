@@ -8771,13 +8771,14 @@ int my_mkdir ( char *dir_in)
 
 	  if (access(dir, F_OK)==-1)
 	    {
-		  mode_t oldmask = umask(0);
+	      mode_t oldmask = umask(0);
 	      mkdir (dir, S_IRWXU | S_IRWXG | S_IRWXO);
 	      umask(oldmask);
 
 	      if ( access (dir, F_OK)==-1)
 		{
-		  myexit(fprintf_error ( stderr, "\nERROR: Could Not Create Directory %s [FATAL:%s]", dir, PROGRAM));	}
+		  myexit(fprintf_error ( stderr, "Could not access created dir %s [FATAL:%s]", dir,PROGRAM)); 
+		}
 	    }
 	  dir[a+1]=buf;
 	}
