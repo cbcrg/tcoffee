@@ -129,15 +129,16 @@ else
     if (-e $dynamic)
       {
        if ($VERBOSE){print "![dynamic.pl] --- -dynamic_config FILE: \n";}
+        my @dynamicFile;
 	open (F, $dynamic);
 	while (<F>)
 	  {
 	    my $f=$_;
 	    if ($VERBOSE){print "![dynamic.pl] --- FILE content: $f\n";}
 	    ## $f=~/(\W)+ (\d)+/;
-	    char *ptr = strtok($f," ");		# split line by space
-	    if ($VERBOSE){print "![dynamic.pl] --- -dynamic_config --- $ptr[1] :: $ptr[2]\n";}
-	    $method{$ptr[1]}=$ptr[2];
+	    @dynamicFile = split ' ', $f;
+	    if ($VERBOSE){print "![dynamic.pl] --- -dynamic_config --- $dynamicFile[0] :: $dynamicFile[1]\n";}
+	    $method{$dynamicFile[0]} = $dynamicFile[1];
 	  }
 	close(F);
       }
