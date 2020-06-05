@@ -134,9 +134,10 @@ else
 	  {
 	    my $f=$_;
 	    if ($VERBOSE){print "![dynamic.pl] --- FILE content: $f\n";}
-	    $f=~/(\W)+ (\d)+/;
-	    if ($VERBOSE){print "![dynamic.pl] --- -dynamic_config --- $1 :: $2\n";}
-	    $method{$1}=$2;
+	    ## $f=~/(\W)+ (\d)+/;
+	    char *ptr = strtok($f," ");		# split line by space
+	    if ($VERBOSE){print "![dynamic.pl] --- -dynamic_config --- $ptr[1] :: $ptr[2]\n";}
+	    $method{$ptr[1]}=$ptr[2];
 	  }
 	close(F);
       }
