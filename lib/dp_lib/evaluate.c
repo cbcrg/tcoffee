@@ -2383,15 +2383,16 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
 		      }
 		  }
 	      }
-	    
+
 	    if (strm (tree_mode, "nj"))
 	      dist2nj_tree (tot_pw_sc, A->name, A->nseq, treeF);
 	    else if ( strm (tree_mode, "upgma"))
 	      dist2upgma_tree (tot_pw_sc, A->name, A->nseq, treeF);
 	    else
 	      printf_exit ( EXIT_FAILURE,stderr, "\nERROR: %s is not a known tree_mode[FATAL]",tree_mode);
-	    
+	   
 	    T->seq_al[T->nseq]=file2string(treeF);
+	    	    
 	    sprintf (T->name[T->nseq], "%d",T->nseq); 
 	    
 	    fp=vfopen (T->dmF_list[T->nseq]=vtmpnam (NULL), "w");

@@ -4732,50 +4732,47 @@ char* lock(int pid,int type, int action,char *string, ...)
 	}
 
 	if (action == LREAD)
-	{
-	  
-	  r=file2string (fname);
-	  
-	}
+	  {
+	    r=file2string (fname);
+	  }
 	else if ( action == LCHECK)
-	{
-		r=const_cast<char*>( (file_exists (NULL,fname))?"x":NULL );
-	}
+	  {
+	    r=const_cast<char*>( (file_exists (NULL,fname))?"x":NULL );
+	  }
 	else if (action== LRELEASE)
-	{
-		if (debug_lock)
-	{
+	  {
+	    if (debug_lock)
+	      {
 		printf_system_direct ("mv %s %s.released", fname, fname);
-	}
-		else if (file_exists (NULL, fname))
-	{
+	      }
+	    else if (file_exists (NULL, fname))
+	      {
 		vremove (fname);
-	//safe_remove (fname);return NULL;
-	}
-		r=" ";
-	}
+		//safe_remove (fname);return NULL;
+	      }
+	    r=" ";
+	  }
 	else if ( clean_exit_started)
-		return NULL; //NO MORE LOCK SETTING during EXIT Phase
+	  return NULL; //NO MORE LOCK SETTING during EXIT Phase
 	else if (action== LSET || action == LRESET)
-	{
-		char *value;
-		if (string)
-		{
-			cvsprintf (value,string);
-		}
-		else
-		{
-			value=(char*)vcalloc (2, sizeof(char));
-			sprintf (value, " ");
-		}
-		string2file_direct (fname, const_cast<char*>( (action==LSET)?"a":"w"), value);
-		vfree (value);
-		r= " ";
-	}
+	  {
+	    char *value;
+	    if (string)
+	      {
+		cvsprintf (value,string);
+	      }
+	    else
+	      {
+		value=(char*)vcalloc (2, sizeof(char));
+		sprintf (value, " ");
+	      }
+	    string2file_direct (fname, const_cast<char*>( (action==LSET)?"a":"w"), value);
+	    vfree (value);
+	    r= " ";
+	  }
 	else myexit(fprintf_error ( stderr, "ERROR: Unknown action for LOCK"));
 	vfree (fname);
 	return r;
-
 }
 
 
@@ -7143,6 +7140,7 @@ void valgrind_test()
   int *b;
   HERE ("Do a VAlgrind Test");
   for (a=0; a<10000; a++)b[a]=100;
+  exit (0);
 } 
   
 
@@ -7621,6 +7619,9 @@ char  file2firstchar (char *name)
   vfclose (fp);
   return 0;
 }
+
+
+
 char *file2string (char *name)
 {
   FILE*fp;
@@ -7655,6 +7656,8 @@ int file2size(char *name)
   if ((fstat(fd, &st) != 0) || (!S_ISREG(st.st_mode))) {return -1;}
   if (fseeko(fp, 0 , SEEK_END) != 0) {return -1;}
   file_size = ftello(fp);
+  
+  fclose (fp);
   return (int) file_size;
 }
 
@@ -8119,13 +8122,14 @@ char *vfgets ( char *bufin, FILE *fp)
   static char *tb;
   
   in=ftell(fp);
+  
   if (bufin)bufin[0]='\0';
   while (fgets(buf,VERY_LONG_STRING,fp))
     {
       int l=strlen (buf);
       len+=l;
       if (buf[l-1]=='\n'){bufin=csprintf ( bufin, "%s", buf);break;}
-      tb=csprintf (tb, "%s%s", bufin,buf);
+      tb=csprintf (tb, "%s%s", (bufin)?bufin:"",buf);
       bufin=csprintf (bufin, "%s", tb); 
       }
   return (len)?bufin:NULL;
@@ -8771,13 +8775,14 @@ int my_mkdir ( char *dir_in)
 
 	  if (access(dir, F_OK)==-1)
 	    {
-		  mode_t oldmask = umask(0);
+	      mode_t oldmask = umask(0);
 	      mkdir (dir, S_IRWXU | S_IRWXG | S_IRWXO);
 	      umask(oldmask);
 
 	      if ( access (dir, F_OK)==-1)
 		{
-		  myexit(fprintf_error ( stderr, "\nERROR: Could Not Create Directory %s [FATAL:%s]", dir, PROGRAM));	}
+		  myexit(fprintf_error ( stderr, "Could not access created dir %s [FATAL:%s]", dir,PROGRAM)); 
+		}
 	    }
 	  dir[a+1]=buf;
 	}

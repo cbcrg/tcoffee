@@ -2038,7 +2038,11 @@ char*  is_pdb_struc ( char *iname)
   if (get_cache_dir())name[a]=csprintf ( name[a], "%s/%s", get_cache_dir(),iname);a++;
   if (get_cache_dir())name[a]=csprintf ( name[a], "%s/%s.pdb", get_cache_dir(),iname);a++;
   
-  for (i=0; i<a;i++)if ((r=is_pdb_struc_strict (name[i]))!=NULL)return r;
+  for (i=0; i<a;i++)
+    {
+      name[i]=substitute(name[i], " ", "");
+      if ((r=is_pdb_struc_strict (name[i]))!=NULL)return r;
+    }
   add_warning(stderr, "%s Could not be used to find a PDB template",iname);
   return r;
 }
@@ -11623,12 +11627,12 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 		   else printf_exit ( EXIT_FAILURE,stderr, "\nERROR: %s is not a known +tree parameter (replicates <int>|mode <string>|gap <float>|goup <seqfile>)[FATAL]",action_list[j]);
 		 }
 	     }
+	   
 	 }
        else if (strm(action, "columns4tree"))
 	 {
 	   char *f=ACTION(1);
 	   set_string_variable ("columns4treeF",f);
-	   
 	 }
        
        else if ( strm(action, "evaluateGroup"))
@@ -11834,7 +11838,7 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 		 }
 	       CL=D1->CL;
 	     }
-	   
+	  
 	   DST->A=struc_evaluate4tcoffee (D1->A,CL,ev3d,max,enb, strikem);
 	 }
        else if ( strm(action, "hot"))
