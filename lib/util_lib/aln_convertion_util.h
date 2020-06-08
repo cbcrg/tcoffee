@@ -94,7 +94,11 @@ char * seq2tmstruc ( char *seq);
 
 void set_blast_default_values();
 char      *  seq2pdb   ( Sequence *S);
-Alignment *  seq2blast ( Sequence *S);
+Alignment *  seq2prf ( Sequence *S);
+char* clean_sname(char sname);
+Sequence *  seq2blast ( Sequence *S);
+Sequence *  seq2blast_thread ( Sequence *S);
+
 
 Sequence * seq2unique_name_seq ( Sequence *S);
 Alignment * aln2unique_name_aln ( Alignment *S);

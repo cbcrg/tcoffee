@@ -1708,7 +1708,188 @@ char * seq2pdb   (Sequence *S)
   return seq2P_pdb_id(S,0);
 }
 
-Alignment * seq2blast ( Sequence *S)
+char* clean_sname     ( char *in)
+{
+  int l=0;
+  while (in && in[l])
+    {
+      char c=in[l];
+      if (!(isalnum(c) || c=='.' || c=='_'))in[l]='_';
+      l++;
+    } 
+  return in;
+}
+Sequence * seq2blast ( Sequence *S)
+{
+  int thread=0;
+  int   *pid_list;
+  char **pid_tmpfile;
+  int pid, npid, njob, max_nproc,a;
+  int max=max_n_pid();
+  int nseq, nnseq;
+  
+  max_nproc=max*2;
+  if (getenv("thread_4_BLAST"))thread=atoi(getenv("thread_4_BLAST"));
+  else thread=1;
+  
+  nnseq=S->nseq/thread;
+  pid_tmpfile=(char**)vcalloc (max_nproc+1, sizeof (char*));
+  pid_list   =(int *)vcalloc (max_nproc, sizeof (int *));
+  
+  npid=0;
+  nseq=0;
+  while (nseq<S->nseq)
+    {
+      
+      char *tmp=vtmpnam (NULL);
+      FILE *fp=vfopen  (tmp, "w");
+      for (a=0; a<nnseq && nseq<S->nseq; a++, nseq++)
+	{
+	  fprintf ( fp, ">%s\n%s\n", S->name[nseq], S->seq[nseq]);
+	}
+      vfclose (fp);
+      pid=vvfork(NULL);
+      if ( pid==0)
+	{
+	  initiate_vtmpnam(NULL);
+	  vfclose(vfopen (pid_tmpfile[a],"w"));
+	  seq2blast_thread(get_fasta_sequence (tmp, NULL));
+	  myexit (EXIT_SUCCESS);
+	}
+      else
+	{
+	  pid_list[pid]=npid;
+	  
+	  npid++;
+	}
+    }
+  for (a=0; a<npid; a++)
+    {
+      pid=vwait(NULL);
+      vremove(pid_tmpfile[pid_list[pid]]);
+    }
+  
+  vfree (pid_list);
+  free_char (pid_tmpfile, -1);
+  return S;
+}
+  
+Sequence * seq2blast_thread ( Sequence *S)
+{
+  char *db=NULL;
+  char *dbn=NULL;
+  int num_iterations=1;
+  int outfmt=5;
+  char *FullBlastF=vtmpnam (NULL);
+  char *FullSeqF=vtmpnam (NULL);
+  char *sname=NULL;
+  char *outdir=NULL;
+  char *buf=NULL;
+  FILE *fp;
+  FILE *out;
+  char *header=NULL;
+  char *lheader=NULL;
+  char *ilen=NULL;
+  char *olen=NULL;
+  char *in=NULL;
+  char *inz=NULL;
+  int  *dolist;
+  char *footer=NULL;
+  int a;
+  int compress=0;
+  
+  free_char (S->file, -1);
+  S->file=(char**)vcalloc (S->nseq, sizeof (char*));
+
+  free_char (S->blastfile, -1);
+  S->blastfile=(char**)vcalloc (S->nseq, sizeof (char*));
+  
+  if (getenv("db_4_BLAST"))db=csprintf (db, "%s", getenv("db_4_BLAST"));
+  if (!getenv("db_4_BLAST"))myexit(fprintf_error (stderr,"Database has not been set for Blast"));
+  if (!isfile(db))myexit(fprintf_error (stderr,"Database %s not available",db));
+  dbn=path2filename(db);
+  
+  if (getenv("num_iterations_4_BLAST"))num_iterations=atoi(getenv("num_iterations_4_BLAST"));
+  if (getenv("outfmt_4_BLAST"))outfmt=atoi(getenv("outfmt_4_BLAST"));
+  if (getenv("outdir_4_BLAST"))outdir=csprintf (outdir, "%s", getenv("outdir_4_BLAST"));
+  if (getenv("compress_4_BLAST"))compress=1;
+  if (outdir)
+    {
+      if (!isdir(outdir))my_mkdir(outdir);
+    }
+  else 
+    outdir=csprintf (outdir, "./");
+  
+  dolist=(int*)vcalloc ( S->nseq, sizeof (int));
+  for ( a=0; a<S->nseq; a++)
+    {
+      sname=clean_sname(csprintf (sname, "%s", S->name[a]));
+      in=csprintf (in,"%s/%s.blastp.%s.LOCAL.%d.tmp", outdir,sname,dbn,num_iterations);
+      inz=csprintf (inz, "%s.gz", in);
+      if ( isfile (in) || isfile (inz))dolist[a]=0;
+      else dolist[a]=1;
+    }
+  
+  fp=vfopen ( FullSeqF, "w");
+  for ( a=0; a<S->nseq; a++)
+    {
+      if (dolist[a])fprintf ( fp, ">%s\n%s\n", S->name[a], S->seq[a]);
+    }
+  vfclose (fp);
+  
+  printf_system ("psiblast -db %s -query %s -num_iterations %d -out %s -outfmt %d", db, FullSeqF, num_iterations, FullBlastF, outfmt);
+  printf_system ( "cp %s FullB.txt", FullBlastF);
+  fp=vfopen (FullBlastF, "r");
+  while ((buf=vfgets (buf, fp))!=NULL && !strstr (buf, "<BlastOutput_iterations>"))
+    header=vcat (header, buf);
+  footer=csprintf (NULL, "</BlastOutput_iterations>\n</BlastOutput>\n");
+  
+
+  for ( a=0; a<S->nseq; a++)
+    {
+      if (!dolist[a])
+	{
+	  HERE ("...Skip %s", S->name[a]);
+	  continue;
+	}
+      lheader=csprintf (lheader, "%s", header);
+      if (a>0)
+	{
+	  lheader=substitute(lheader, S->name[0], S->name[a]);
+	  ilen=csprintf (ilen,"<BlastOutput_query-len>%d</BlastOutput_query-len>", strlen (S->seq[0]));
+	  olen=csprintf (olen,"<BlastOutput_query-len>%d</BlastOutput_query-len>", strlen (S->seq[a]));
+	}
+      sname=clean_sname(csprintf (sname, "%s", S->name[a]));
+      S->file[a]=csprintf (S->file[a],"%s/%s.blastp.%s.LOCAL.%d.infile.tmp", outdir,sname,dbn,num_iterations);
+      S->blastfile[a]=csprintf (S->blastfile[a],"%s/%s.blastp.%s.LOCAL.%d.tmp", outdir,sname,dbn,num_iterations);
+      
+      
+      string2file(S->file[a],"w", ">A\n%s\n", S->seq[a]);//Note: name is removed
+      out=vfopen (S->blastfile[a], "w");
+      fprintf ( out, "%s", lheader);
+      while ((buf=vfgets (buf, fp))!=NULL && !strstr (buf, "</Iteration>"))
+	{
+	  fprintf (out, "%s", buf);
+	}
+      fprintf (out, "%s", buf);
+      fprintf ( out,"%s", footer);
+      vfclose (out);
+      if ( compress)
+	{
+	  ;
+	  printf_system_direct ("gzip %s", (S->file[a]));
+	  printf_system_direct ("gzip %s", (S->blastfile[a]));
+	}
+    }
+  vfclose (fp);
+  vfree (db);vfree(dbn);vfree(sname);vfree(outdir);
+  vfree(buf); 
+  vfree(header);vfree(lheader); vfree(ilen);vfree (olen);vfree(in); vfree(inz);
+  vfree(dolist );vfree(footer );
+    
+  return S;
+}
+Alignment * seq2prf ( Sequence *S)
 {
   Alignment *A;
   set_blast_default_values();

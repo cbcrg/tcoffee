@@ -1404,7 +1404,7 @@ if ( !do_evaluate)
 			    /*Max Value*/ "any"          \
 					  );
 	       if (n_template_file)cputenv ("template_file_4_TCOFFEE=%s",template_file_list[0]);
-
+	       
 /*PARAMETER PROTOTYPE:    VERSION      */
 	       setenv_list=declare_char (100, STRING);
 	       n_setenv=get_cl_param(\
@@ -4830,6 +4830,19 @@ get_cl_param(\
 	        *
 	        * \sa ::Template for more information on how templates are stored within T-Coffee.
 	        */
+
+	       if (name_is_in_list("BLAST",template_file_list, n_template_file,-1)!=-1  && strstr ("LOCAL", prot_blast_server))
+		 {
+		   cputenv ("db_4_BLAST=%s", prot_db);
+		   cputenv ("num_iterations_4_BLAST=%d", psiJ);
+		   cputenv ("outdir_4_BLAST=%d", get_cache_dir());
+		   cputenv ("thread_4_BLAST=%d",get_nproc());
+		   
+		   fprintf ( le, "\nPrecompute the Blasts -- Use Cache if available\n");
+		   seq2blast (S);
+		 }
+		     
+		     
 	       if ( n_template_file)
 		 {
 		   fprintf ( le, "\nLooking For Sequence Templates:\n");

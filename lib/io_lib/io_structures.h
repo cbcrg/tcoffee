@@ -50,28 +50,30 @@ Genomic_info;
  */
 struct Sequence
 {
-	  char **file;          	/**< \c file[\c nseq ][\c filenamelength ] Name of the file where each sequence is taken from */
-      char **seq_comment;   	/**< \c seq_comment[\c nseq ][\c LONG_STRING ] comment read in the fasta file */
-      char **aln_comment;  		/*id*/
-      char **seq;          		/**< \c seq[\c nseq ][\c len ] Actual sequences */
-      int *len;            		/**< \c len[\c nseq ] length of each sequence */
-      int max_len;         		/**< Lenght of the longest sequence */
-      int min_len;         		/**< Length of the shortest sequence */
-      int nseq;            		/**< Number of sequences */
-      int max_nseq;        		/*Maximum number of sequences in the datastruct*/
-      char **name;         		/**< \c name[\c nseq ][\c MAXNAMELEN ] Names of the sequences */
-      int **dc;         		/*coordinates on the disk. Coordinates set if seq[i]==NULL*/
-
-      struct Constraint_list *CL; /**< Points to the ::Constraint_list */
-      int contains_gap;   		/**< Set to 1 if gaps should be kept */
-      char *type;         		/**< PROTEIN, DNA, RNA */
-      Weights *W;         		/**< Associated ::Weight object */
-      char template_file[FILENAMELEN+1];
-      struct Template **T;		/**< \c T[\c nseq ] Pointer to ::Template for each sequence */
-      char *blastdb;
-      struct Sequence *blastdbS;
-      struct Sequence *MasterS;
-	  Genomic_info *genome_co; //safes genome_coordinates
+  char **file;          	/**< \c file[\c nseq ][\c filenamelength ] Name of the file where each sequence is taken from */
+  char **blastfile;          	/**Contains the name of the blastfiles*/
+  
+  char **seq_comment;   	/**< \c seq_comment[\c nseq ][\c LONG_STRING ] comment read in the fasta file */
+  char **aln_comment;  		/*id*/
+  char **seq;          		/**< \c seq[\c nseq ][\c len ] Actual sequences */
+  int *len;            		/**< \c len[\c nseq ] length of each sequence */
+  int max_len;         		/**< Lenght of the longest sequence */
+  int min_len;         		/**< Length of the shortest sequence */
+  int nseq;            		/**< Number of sequences */
+  int max_nseq;        		/*Maximum number of sequences in the datastruct*/
+  char **name;         		/**< \c name[\c nseq ][\c MAXNAMELEN ] Names of the sequences */
+  int **dc;         		/*coordinates on the disk. Coordinates set if seq[i]==NULL*/
+  
+  struct Constraint_list *CL; /**< Points to the ::Constraint_list */
+  int contains_gap;   		/**< Set to 1 if gaps should be kept */
+  char *type;         		/**< PROTEIN, DNA, RNA */
+  Weights *W;         		/**< Associated ::Weight object */
+  char template_file[FILENAMELEN+1];
+  struct Template **T;		/**< \c T[\c nseq ] Pointer to ::Template for each sequence */
+  char *blastdb;
+  struct Sequence *blastdbS;
+  struct Sequence *MasterS;
+  Genomic_info *genome_co; //safes genome_coordinates
 
 
 };

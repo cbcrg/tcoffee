@@ -2765,14 +2765,10 @@ sub cache_file
 	$db=~/([^\/]+)$/;
 	$db=$1;
       }
-    $cache_file_sh="$name.$method.$db.$server.$it.tmp";
-    $cache_file="$CACHE/$name.$method.$db.$server.$it.tmp";
 
-    if ($infile ne "")
-      {
-	$cache_file_infile_sh="$name.$method.$db.$server.$it.infile.tmp";
-	$cache_file_infile="$CACHE/$name.$method.$db.$server.$it.infile.tmp";
-      }
+    $cache_file="$CACHE/$name.$method.$db.$server.$it.tmp";
+    #print "Look for $cache_file [$cache_mode][$CACHE] \n";
+    if ($infile ne ""){$cache_file_infile="$CACHE/$name.$method.$db.$server.$it.infile.tmp";}
 
     if ($cache_mode eq "GET")
       {
@@ -2784,10 +2780,16 @@ sub cache_file
 	  }
 	else
 	  {
+	    my ($z1,$z1m)=uncompress($cache_file_infile);
+	    my ($z2,$z2m)=uncompress($cache_file);
+	    
 	    if ( -e $cache_file && &fasta_file1_eq_fasta_file2($infile,$cache_file_infile)==1)
 	      {
 		`cp $cache_file $outfile`;
 		$CACHE_STATUS="READ CACHE";
+		compress($z1,$z1m);
+		compress($z2,$z2m);
+		
 		return 1;
 	      }
 	  }
@@ -2804,10 +2806,6 @@ sub cache_file
 	  {
 	    `cp $outfile $cache_file`;
 	    if ($cache_file_infile ne ""){ `cp $infile $cache_file_infile`;}
-
-	    #functions for updating the cache
-	    #`t_coffee -other_pg clean_cache.pl -file $cache_file_sh -dir $CACHE`;
-	    #`t_coffee -other_pg clean_cache.pl -file $cache_file_infile_sh -dir $CACHE`;
 	    return 1;
 	  }
       }
@@ -2862,13 +2860,17 @@ sub fasta_file1_eq_fasta_file2
 
     foreach $n (keys(%s1))
       {
-	if ($s1{$n}{seq} ne $s2{$n}{seq}){return 0;}
+	my $ss1=lc($s1{$n}{seq});
+	my $ss2=lc($s2{$n}{seq});
+	if ($ss1 ne $ss2){return 0;}
       }
-
     foreach $n (keys(%s2))
       {
-	if ($s1{$n}{seq} ne $s2{$n}{seq}){return 0;}
+	my $ss1=lc($s1{$n}{seq});
+	my $ss2=lc($s2{$n}{seq});
+	if ($ss1 ne $ss2){return 0;}
       }
+    
     return 1;
   }
 
@@ -3716,3 +3718,30 @@ sub fasta2nseq
 	  return $nseq;
 	}
 	
+sub compress
+	  {
+	    my ($f, $mode)=@_;
+	    if    ($mode eq "gz"){system ("gzip $f");}
+	    elsif ($mode eq "zip" ){system ("zip $f");}
+	    return;
+	  }
+sub uncompress 
+	  {
+	    my $f=@_[0];
+	    if ( -e $f) {return "";}
+
+	    my $gz=$f.".gz";
+	    if ( -e $gz)
+	      {
+		system ("gunzip $gz");
+		return ($f, "gz");
+	      }
+	    my $gz=$f.".zip";
+	    
+	    if ( -e $gz)
+	      {
+		system ("unzip $gz");
+		return ($f, "zip");
+	      }
+	    return "";
+	  }

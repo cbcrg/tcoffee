@@ -12866,9 +12866,41 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	   free_sequence (D1->S,(D1->S)->nseq);
 	   D1->S=aln2seq (D1->A);
 	 }
+       else if ( strm (action, "protein_db")||  strm (action, "db"))
+	 {
+	   cputenv ("db_4_BLAST=%s", action_list[1]);
+	 }
+       else if ( strm (action, "compress"))
+	 {
+	   cputenv ("compress_4_BLAST=1");
+	 }
+       else if ( strm (action, "thread"))
+	 {
+	   int nproc=(atoi(action_list[1]));
+	   if (!nproc)nproc=get_nproc();
+	   cputenv ("thread_4_BLAST=%d", nproc);
+	 }
+       else if ( strm (action, "psiJ") || strm (action, "num_irtrations"))
+	 {
+	   cputenv ("num_iterations_4_BLAST=%s", action_list[1]);
+	 }
+       
+       else if ( strm (action, "outfmt"))
+	 {
+	   cputenv ("outfmt_4_BLAST=%s", action_list[1]);
+	 }
+       else if ( strm (action, "outdir"))
+	 {
+	   cputenv ("outdir_4_BLAST=%s", action_list[1]);
+	 }
        else if ( strm (action, "seq2blast"))
 	 {
-	   D1->A=seq2blast (D1->S);
+	   if (!getenv("thread_4_BLAST"))cputenv ("thread_4_BLAST=1");
+	   seq2blast (D1->S);
+	 }
+       else if ( strm (action, "seq2prf"))
+	 {
+	   D1->A=seq2prf (D1->S);
 	   free_sequence (D1->S,(D1->S)->nseq);
 	   D1->S=aln2seq (D1->A);
 	 }
