@@ -111,6 +111,11 @@ if ($mode eq "seq_msa")
   {
     &seq2msa($mode,&my_get_opt ( $cl, "-infile=",1,1, "-method=",1,2, "-param=",0,0,"-outfile=",1,0, "-database=",0,0));
   }
+elsif ($mode eq "blast2prf")
+  {
+
+    blast2prf (&my_get_opt ( $cl, "-infile=",0,0,"-seqfile=",0,0,"-outfile=",0,0));
+  }
 elsif ( $mode eq "tblastx_msa")
   {
     &seq2tblastx_lib ($mode,&my_get_opt ( $cl, "-infile=",1,1, "-outfile=",1,0));
@@ -1841,6 +1846,17 @@ sub file2blast_flavor
 	elsif (&file_contains ($file,"NCBI_BlastOutput",100)){return "NCBI";}
 	else {return "UNKNOWN";}
       }
+sub blast2prf
+	{
+	  my ($blastF, $seqF,$outfile)=@_;
+	  my (%s, %profile);
+	  my ($result,$psiblast_output,$profile_name,@profiles);
+	  %s=read_fasta_seq_index ($seqF);
+	  my ($z1,$z1m)=uncompress($blastF);
+	  %profile=blast_xml2profile($s{0}{name}, $s{0}{seq},$maxid, $minid,$mincov,$blastF);
+	  output_profile ($outfile, \%profile, $trim);
+	  compress($z1,$z1m);
+	}
 sub blast_xml2profile
   {
     my ($name,$seq,$maxid, $minid, $mincov, $file)=(@_);
@@ -1849,7 +1865,10 @@ sub blast_xml2profile
 
 
     if ($BLAST_TYPE eq "EBI" || &file_contains ($file,"EBIApplicationResult",100)){%p=ebi_blast_xml2profile(@_);}
-    elsif ($BLAST_TYPE eq "NCBI" || &file_contains ($file,"NCBI_BlastOutput",100)){%p=ncbi_blast_xml2profile(@_);}
+    elsif ($BLAST_TYPE eq "NCBI" || &file_contains ($file,"NCBI_BlastOutput",100))
+      {
+	%p=ncbi_blast_xml2profile(@_);
+      }
     else
       {
 	myexit(add_error ( $$,$$,getppid(), "BLAST_FAILURE::unkown XML",$CL));
@@ -2067,14 +2086,14 @@ sub ncbi_blast_xml2profile
 
     $seq=~s/[^a-zA-Z]//g;
     $L=length ($seq);
-
+    
     #This is causing the NCBI parser to fail when Iteration_query-def is missing
     #%query=&xml2tag_list ($string, "Iteration_query-def");
     #$name=$query{0}{body};
 
     %hit=&xml2tag_list ($string, "Hit");
 
-
+    
     for ($nhits=0,$a=0; $a<$hit{n}; $a++)
       {
 	my ($ldb,$id, $identity, $expectation, $start, $end, $coverage, $r);
@@ -2119,8 +2138,10 @@ sub ncbi_blast_xml2profile
 		$Hend=$HEND{$e}{body};
 
 		$coverage=($L)?(($end-$start)*100)/$L:0;
-
-		if ($identity>$maxid || $identity<$minid || $coverage<$mincov){next;}
+		if ($identity>$maxid || $identity<$minid || $coverage<$mincov)
+		  {
+		    next;
+		  }
 		@lr1=(split (//,$qs));
 		@lr2=(split (//,$ms));
 		$l=$#lr1+1;

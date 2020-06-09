@@ -7096,6 +7096,7 @@ char * prepare_cache ( const char *mode)
       sprintf ( cache, "%s/",mode);
       my_mkdir ( cache);
     }
+  cputenv ("cache_4_TCOFFEE=%s", cache);
   return cache;
 
 }

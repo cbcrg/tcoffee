@@ -3200,8 +3200,10 @@ declare_name (prot_db);
 		   );
  if ( strm (prot_db, "env"))prot_db=get_env_variable ("protein_db_4_TCOFFEE", IS_FATAL);
  set_string_variable ("prot_db", prot_db);
- cputenv ("protein_db_4_TCOFFEE=%s",pdb_db);
-
+ cputenv ("protein_db_4_TCOFFEE=%s",prot_db);
+ 
+ 
+ 
  declare_name (method_log);
  get_cl_param(							\
 			    /*argc*/      argc          ,\
@@ -7111,6 +7113,7 @@ Alignment * t_coffee_dpa (int argc, char **argv)
   char *command;
   char *run_name=NULL;
   Fname *F=NULL;
+  char *cache=NULL;
   float *w;
   int a;
   int output_dpa_tree=1;
@@ -7253,6 +7256,10 @@ Alignment * t_coffee_dpa (int argc, char **argv)
 	{
 	  dpa_aligner=argv[++a];
 	}
+      else if (strm (argv[a], "-cache"))
+	{
+	  cache=argv[++a];
+	}
       else if (strm (argv[a],"-in") || strm (argv[a],"-infile"))
 	{
 	  myexit (fprintf_error (stderr, "%s is not supported when using -dpa [FATAL:%s]", argv[a],PROGRAM));
@@ -7317,7 +7324,12 @@ Alignment * t_coffee_dpa (int argc, char **argv)
   set_int_variable ("reg_dynamic",reg_dynamic);
   set_int_variable ("reg_pool",reg_pool);
   
-
+  //Set the cache
+  if (!cache)cache=csprintf (NULL,"use");
+  prepare_cache (cache);
+  cputenv ("cache_4_TCOFFEE=%s", get_cache_4_tcoffee());
+  cputenv ("cache_4_CLTCOFFEE=%s", get_cache_4_tcoffee());
+  
   //prepare the aligner CL
   if (dpa_aligner)
     {

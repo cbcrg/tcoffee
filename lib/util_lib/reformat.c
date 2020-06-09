@@ -241,7 +241,56 @@ int seq_reformat ( int argc, char **in_argv)
 		fprintf ( stdout, "\n     .....................where id>=min and id<=max\n");
 		fprintf ( stdout, "\n     .....................min and max can be omitted (min=0, max=100)\n");
 
-		fprintf ( stdout, "\n     +seq2blast <matrix>..gather all possible homologues from NR (EBI BLAST)");
+		fprintf ( stdout, "\n     +seq2blast...........gather all possible homologues from +db using blastp\n");
+		fprintf ( stdout, "\n     .....................with +num_iterations using +thread\n");
+		fprintf ( stdout, "\n     .....................the output are put in +outdir and can be +compressed with gzip\n");
+		fprintf ( stdout, "\n     .....................+outdir can be used as a cache by psicoffee\n");
+		fprintf ( stdout, "\n     .....................The folowing flgas must be set BEFORE +seq2blast\n");
+		fprintf ( stdout, "\n     .....................BLAST output already in +outdir will NOT be recomputed\n");
+		
+		
+		fprintf ( stdout, "\n     +thread..<int>.......Number of procs used (0 for all, Default=1)\n");       
+		fprintf ( stdout, "\n     +db......</path/db>..Database used by Blast. Compulsory\n");
+		fprintf ( stdout, "\n     +num_iterations.<int>Number of Psi-Blast iteations (Def=1)\n");
+		fprintf ( stdout, "\n     +outfmt..<int>.......BLAST output format\n");
+		fprintf ( stdout, "\n     +outdir..<path>......BLAST output dir (one per seq, Def=./\n");
+		fprintf ( stdout, "\n     +compress............gzip output\n");
+		
+		fprintf ( stdout, "\n     +seq2prf.............runs seq2blast and extracts profiles into +outdir/<seqname>.prf\n"); 
+		fprintf ( stdout, "\n     .....................each profileis a BLAST stack on the query where columns gapped in query are removed\n");
+		fprintf ( stdout, "\n     .....................the blast seq kepped are thopse with >+prot_min_cov (40), <+prot_max_sim (50) and >+prot_min_sim(100)\n");
+		fprintf ( stdout, "\n     .....................The remaining sequences are trimmed to the +trimseq (100) representatives using +trimseq_mode (regtrim)\n");
+		fprintf ( stdout, "\n     .....................while using a tree as defined in regtrim_tree(codnd)\n");
+		fprintf ( stdout, "\n     +prot_min_cov.<int>..minimum coverage on query for BLAST hit to be kept Def: 40%\n");
+		fprintf ( stdout, "\n     +prot_min_sim.<int>..minimum sim with query for BLAST hit to be kept Def: 50%\n");
+		fprintf ( stdout, "\n     +prot_max_sim.<int>..max sim with query for BLAST hit to be kept Def: 90%\n");
+		fprintf ( stdout, "\n     +psitrim.<int>.......max number of hits in final psicoffee profile Def: 100\n");
+		fprintf ( stdout, "\n     +psitrim_tree.<treemode|tree>..tree used to psitrim Def: codnd\n");
+		fprintf ( stdout, "\n     +psitrim_mode.<treemode|tree>..mode used to psitrim Def: regtrim\n");
+		
+		
+		
+		
+ 
+		
+		
+		
+		fprintf ( stdout, "\n     .....................with +num_iterations using +thread\n");
+		fprintf ( stdout, "\n     .....................the output are put in +outdir and can be +compressed with gzip\n");
+		fprintf ( stdout, "\n     .....................+outdir can be used as a cache by psicoffee\n");
+		fprintf ( stdout, "\n     .....................The folowing flgas must be set BEFORE +eq2blast\n");
+		
+		fprintf ( stdout, "\n     +thread..<int>.......Number of procs used (0 for all, Default=1)\n");       
+		fprintf ( stdout, "\n     +db......</path/db>..Database used by Blast. Compulsory\n");
+		fprintf ( stdout, "\n     +num_iterations.<int>Number of Psi-Blast iteations (Def=1)\n");
+		fprintf ( stdout, "\n     +outfmt..<int>.......BLAST output format\n");
+		fprintf ( stdout, "\n     +outdir..<path>......BLAST output dir (one per seq, Def=./\n");
+		fprintf ( stdout, "\n     +compress............gzip output\n");
+		
+		
+		
+		
+		
 		fprintf ( stdout, "\n     +seq2msa <matrix>....makes a standard progressive alignment using matrix");
 		fprintf ( stdout, "\n     +realign_block <c1> <c2> <pg>");
 		fprintf ( stdout, "\n     .....................Realign column c1 to c2 (non inc.) with pg)");
@@ -1399,6 +1448,8 @@ char *FastaRecord2comment (char *record)
   if (p[0]=='\n')value[0]='\0';
   else 
     {
+      p++;
+      value=p;
       while (p[0]!='\n')p++;
       p[0]='\0';
     }
@@ -3638,7 +3689,7 @@ int main_output  (Sequence_data_struc *D1, Sequence_data_struc *D2, Sequence_dat
 	  }
 	else if ( strm ( out_format, "fasta_seq") ||strm ( out_format, "list")||strm ( out_format, "file_list"))
 	  {
-
+	    
 		if (!D1)return 1;
 		output_fasta_seq (out_file,D1->A);
 	  }
@@ -12868,41 +12919,85 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	 }
        else if ( strm (action, "protein_db")||  strm (action, "db"))
 	 {
-	   cputenv ("db_4_BLAST=%s", action_list[1]);
+	   cputenv ("protein_db_4_TCOFFEE=%s", action_list[1]);
 	 }
        else if ( strm (action, "compress"))
 	 {
-	   cputenv ("compress_4_BLAST=1");
+	   cputenv ("compress_4_TCOFFEE=1");
 	 }
        else if ( strm (action, "thread"))
 	 {
 	   int nproc=(atoi(action_list[1]));
 	   if (!nproc)nproc=get_nproc();
-	   cputenv ("thread_4_BLAST=%d", nproc);
+	   cputenv ("thread_4_TCOFFEE=%d", nproc);
 	 }
        else if ( strm (action, "psiJ") || strm (action, "num_irtrations"))
 	 {
-	   cputenv ("num_iterations_4_BLAST=%s", action_list[1]);
+	   cputenv ("num_iterations_4_TCOFFEE=%s", action_list[1]);
 	 }
        
        else if ( strm (action, "outfmt"))
 	 {
-	   cputenv ("outfmt_4_BLAST=%s", action_list[1]);
+	   cputenv ("outfmt_4_TCOFFEE=%s", action_list[1]);
 	 }
        else if ( strm (action, "outdir"))
 	 {
-	   cputenv ("outdir_4_BLAST=%s", action_list[1]);
+	   cputenv ("cache_4_TCOFFEE=%s", action_list[1]);
+	 }
+       else if ( strm (action, "cache"))
+	 {
+	   cputenv ("cache_4_TCOFFEE=%s", action_list[1]);
 	 }
        else if ( strm (action, "seq2blast"))
 	 {
-	   if (!getenv("thread_4_BLAST"))cputenv ("thread_4_BLAST=1");
-	   seq2blast (D1->S);
+	   int a;
+	   if (!getenv("thread_4_TCOFFEE"))cputenv ("thread_4_TCOFFEE=1");
+	   D1->S=seq2blast (D1->S);
+	   if (D1->A)
+	     {
+	       for ( a=0; a<(D1->S)->nseq; a++)
+		 {
+		   (D1->A)->seq_comment[a] =csprintf ((D1->A)->seq_comment[a], "%s",(D1->S)->seq_comment[a]);
+		   (D1->A)->aln_comment[a] =csprintf ((D1->A)->aln_comment[a], "%s",(D1->S)->aln_comment[a]);
+		 }
+	     }
 	 }
+       else if ( strm (action, "prot_min_cov"))
+	 {
+	   cputenv ("prot_min_cov_4_TCOFFEE=%s", action_list[1]);
+	 }
+        else if ( strm (action, "prot_min_sim"))
+	 {
+	   cputenv ("prot_min_sim_4_TCOFFEE=%s",action_list[1]);
+	 }
+	else if ( strm (action, "prot_max_sim"))
+	 {
+	   cputenv ("prot_max_sim_4_TCOFFEE=%s",action_list[1]);
+	 }
+        else if ( strm (action, "psitrim"))
+	 {
+	   cputenv ("psitrim_4_TCOFFEE=%s",action_list[1]);
+	 }
+       else if ( strm (action, "psitrim_tree"))
+	 {
+	   cputenv ("psitrim_tree_4_TCOFFEE=%s",action_list[1]);
+	 }
+       else if ( strm (action, "psitrim_mode"))
+	 {
+	   cputenv ("psitrim_mode_4_TCOFFEE=%s",action_list[1]);
+	 }
+       
        else if ( strm (action, "seq2prf"))
 	 {
-	   D1->A=seq2prf (D1->S);
-	   free_sequence (D1->S,(D1->S)->nseq);
-	   D1->S=aln2seq (D1->A);
+	   D1->S=seq2prf (D1->S);
+	   if (D1->A)
+	     {
+	       for ( a=0; a<(D1->S)->nseq; a++)
+		 {
+		   (D1->A)->seq_comment[a] =csprintf ((D1->A)->seq_comment[a], "%s",(D1->S)->seq_comment[a]);
+		   (D1->A)->aln_comment[a] =csprintf ((D1->A)->aln_comment[a], "%s",(D1->S)->aln_comment[a]);
+		 }
+	     }
 	 }
        else if ( strm (action, "kmeans"))
 	 {
