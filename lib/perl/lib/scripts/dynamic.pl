@@ -36,12 +36,18 @@ my $threadFlag4famsa;
 my $threadFlag;
 my $tcarg;
 
+my $QUIET_ENV=$ENV{QUIET_ENV};
+
+if ($QUIET_ENV==1){$QUIET="";}
 
 for ($a=0; $a<=$#ARGV; $a++)
   {
     if    ($ARGV[$a] eq "-seq"){$infile=file2abs($ARGV[++$a]);}
     elsif ($ARGV[$a] eq "-outfile"){$outfile=file2abs($ARGV[++$a], "new");}
-    elsif ($ARGV[$a] eq "-dynamic_config"){$dynamic=file2abs($ARGV[++$a]);}
+    elsif ($ARGV[$a] eq "-dynamic_config"){
+    	$dynamic=file2abs($ARGV[++$a]);
+    	if ($VERBOSE){print "![dynamic.pl] --- -dynamic_config flag if/else--- $dynamic\n";}
+	}
     
     elsif ($ARGV[$a] eq "-tree") {$tree=$ARGV[++$a];}
     elsif ($ARGV[$a] eq "-method") {$method2use=$ARGV[++$a];}
@@ -125,12 +131,17 @@ else
   {
     if (-e $dynamic)
       {
+       if ($VERBOSE){print "![dynamic.pl] --- -dynamic_config FILE: \n";}
+        my @dynamicFile;
 	open (F, $dynamic);
 	while (<F>)
 	  {
 	    my $f=$_;
-	    $f=~/(\W)+ (\d)+/;
-	    $method{$1}=$2;
+	    if ($VERBOSE){print "![dynamic.pl] --- FILE content: $f\n";}
+	    ## $f=~/(\W)+ (\d)+/;
+	    @dynamicFile = split ' ', $f;
+	    if ($VERBOSE){print "![dynamic.pl] --- -dynamic_config --- $dynamicFile[0] :: $dynamicFile[1]\n";}
+	    $method{$dynamicFile[0]} = $dynamicFile[1];
 	  }
 	close(F);
       }
@@ -209,10 +220,13 @@ $threadFlag4tc=($thread)?"-thread $thread ":"-thread 1 ";
 $threadFlag4famsa=($thread)?"-t $thread ":"-t 1 ";
 $CL4tc.=" $threadFlag4tc ";
 
+print "![dynamic.pl] --- CL4tc == $CL4tc";  
 
 my $cmethod=$method2use;
 $cmethod=~s/_pair/_msa/;
 $cmethod=~s/_msa//;
+
+print "![dynamic.pl] --- cmethod == $cmethod";  
 
 if ($cmethod eq "tcoffee"|| $cmethod eq "t_coffee" )
   {
@@ -256,8 +270,14 @@ elsif (($cmethod =~/mafft/))
 
 elsif ($method2use=~/famsa/)
   {
-    
+    print "![dynamic.pl] --- FAMSA DEFAULT";    
     my_system ("famsa $treeFlag $threadFlag4famsa $infile $outfile >/dev/null $QUIET");
+  }
+elsif ($method2use=~/famsaUpgma/)
+  {
+    print "![dynamic.pl] --- FAMSA Upgma";
+    print "![dynamic.pl] --- Command: famsa -gt upgma $treeFlag $threadFlag4famsa $infile $outfile >/dev/null $QUIET";
+    my_system ("famsa -gt upgma $treeFlag $threadFlag4famsa $infile $outfile >/dev/null $QUIET");
   }
 else
   {
@@ -267,9 +287,6 @@ else
       }
     my_system ("t_coffee -in $infile -method $method2use -outfile $outfile -output fasta_aln $tcarg -quiet $QUIET");
   }
-
-
-
 
 #Flush output if none provided
 if ( ! -e $outfile)
@@ -299,7 +316,6 @@ if ($VERBOSE!=-1)
   }
 
 my_exit ($CDIR,$EXIT_SUCCESS);
-
 
 
 sub file2nseq
@@ -365,6 +381,7 @@ sub get_cl4tc
 		  $cl.="-$name $val ";
 		}
 	    }
+	  if ($VERBOSE){print "![dynamic.pl] --- get_psicl --- $cl\n";}
 	  return $cl;
 	}
 
