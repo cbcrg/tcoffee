@@ -1732,6 +1732,15 @@ Sequence * seq2blast ( Sequence *S)
   int nseq,nseq2, nnseq;
   int i, b;
   FILE *fp;
+  char *db=NULL;
+  char *dbn=NULL;
+  char *outdir=NULL;
+  int num_iterations, outfmt;
+  int compress;
+  char *in=NULL;
+  char *inz=NULL;
+  char *sname=NULL;
+  
   if (!S->blastfile)S->blastfile=(char**)vcalloc (S->nseq, sizeof (char*));
   max_nproc=max*2;
   if (getenv("thread_4_TCOFFEE"))thread=atoi(getenv("thread_4_TCOFFEE"));
@@ -1743,6 +1752,51 @@ Sequence * seq2blast ( Sequence *S)
   blist=(char**)vcalloc (max_nproc+1, sizeof (char*));;
   npid=0;
   nseq=0;
+  
+  
+  if (getenv("protein_db_4_TCOFFEE"))db=csprintf (db, "%s", getenv("protein_db_4_TCOFFEE"));
+  if (!getenv("protein_db_4_TCOFFEE"))myexit(fprintf_error (stderr,"Database has not been set for Blast"));
+  if (!isfile(db))myexit(fprintf_error (stderr,"Database %s not available",db));
+  dbn=path2filename(db);
+  
+  if (getenv("num_iterations_4_TCOFFEE"))num_iterations=atoi(getenv("num_iterations_4_TCOFFEE"));
+  else num_iterations=1;
+  
+  if (getenv("outfmt_4_TCOFFEE"))outfmt=atoi(getenv("outfmt_4_TCOFFEE"));
+  else outfmt=5;
+  
+  if (getenv("cache_4_TCOFFEE"))
+    {
+      outdir=csprintf (outdir, "%s", getenv("cache_4_TCOFFEE"));
+      if (outdir[0]!='/')outdir=csprintf (outdir, "./%s", getenv("cache_4_TCOFFEE"));
+    }
+  else  outdir=csprintf (outdir, "./");
+  my_mkdir (outdir);
+      
+  if (getenv("compress_4_TCOFFEE"))compress=1;
+  else compress=0;
+
+  fprintf ( stderr, "\n!Run psiblast in Batch -- db: %s number_iterations: %d outdir: %s outfmt: %d compression: %s\n", db, num_iterations, outdir, outfmt, (compress)?"yes":"no"); 
+  for (b=0,a=0; a<S->nseq; a++)
+    {
+      sname=clean_sname(csprintf (sname, "%s", S->name[a]));
+      in=csprintf (in,"%s/%s.blastp.%s.LOCAL.%d.tmp", outdir,sname,dbn,num_iterations);
+      inz=csprintf (inz, "%s.gz", in);
+      
+      if ( isfile (in) || isfile (inz))
+	{
+	  fprintf ( stderr, "!\tLOOKUP BLAST %s vs %s\n", S->name[a], dbn); 
+	  b++;
+	}
+      else 
+	{
+	  fprintf ( stderr, "!\tCOMPUTE BLAST %s vs %s\n", S->name[a], dbn); 
+	}
+    }
+  
+    
+
+
   while (nseq<S->nseq)
     {
       int nseq2;
@@ -1858,24 +1912,22 @@ Sequence * seq2blast_thread (Sequence *S)
   else compress=0;
   
   dolist=(int*)vcalloc ( S->nseq, sizeof (int));
+  
   for ( b=0,a=0; a<S->nseq; a++)
     {
+      char *in;
       sname=clean_sname(csprintf (sname, "%s", S->name[a]));
       S->file[a]=csprintf (S->file[a],"%s/%s.blastp.%s.LOCAL.%d.infile.tmp", outdir,sname,dbn,num_iterations);
-      S->blastfile[a]=csprintf (S->blastfile[a],"%s/%s.blastp.%s.LOCAL.%d.tmp", outdir,sname,dbn,num_iterations);
-      
-      in=csprintf (in,"%s/%s.blastp.%s.LOCAL.%d.tmp", outdir,sname,dbn,num_iterations);
-      inz=csprintf (inz, "%s.gz", in);
+      in=S->blastfile[a]=csprintf (S->blastfile[a],"%s/%s.blastp.%s.LOCAL.%d.tmp", outdir,sname,dbn,num_iterations);
+      inz=csprintf (inz, "%s.gz",in);
 
       if ( isfile (in) || isfile (inz))
 	{
 	  dolist[a]=0;
-	  fprintf ( stderr, "! BLAST %s vs %s [USE CACHE]", S->name[a], db); 
 	}
       else 
 	{
 	  dolist[a]=1;
-	  fprintf ( stderr, "! BLAST %s vs %s [COMPUTE CACHE]", S->name[a], db); 
 	  b++;
 	}
     }
