@@ -41,7 +41,10 @@ for ($a=0; $a<=$#ARGV; $a++)
   {
     if    ($ARGV[$a] eq "-seq"){$infile=file2abs($ARGV[++$a]);}
     elsif ($ARGV[$a] eq "-outfile"){$outfile=file2abs($ARGV[++$a], "new");}
-    elsif ($ARGV[$a] eq "-dynamic_config"){$dynamic=file2abs($ARGV[++$a]);}
+    elsif ($ARGV[$a] eq "-dynamic_config"){
+    	$dynamic=file2abs($ARGV[++$a]);
+    	if ($VERBOSE){print "![dynamic.pl] --- -dynamic_config flag if/else--- $dynamic\n";}
+	}
     
     elsif ($ARGV[$a] eq "-tree") {$tree=$ARGV[++$a];}
     elsif ($ARGV[$a] eq "-method") {$method2use=$ARGV[++$a];}
@@ -125,12 +128,17 @@ else
   {
     if (-e $dynamic)
       {
+       if ($VERBOSE){print "![dynamic.pl] --- -dynamic_config FILE: \n";}
+        my @dynamicFile;
 	open (F, $dynamic);
 	while (<F>)
 	  {
 	    my $f=$_;
-	    $f=~/(\W)+ (\d)+/;
-	    $method{$1}=$2;
+	    if ($VERBOSE){print "![dynamic.pl] --- FILE content: $f\n";}
+	    ## $f=~/(\W)+ (\d)+/;
+	    @dynamicFile = split ' ', $f;
+	    if ($VERBOSE){print "![dynamic.pl] --- -dynamic_config --- $dynamicFile[0] :: $dynamicFile[1]\n";}
+	    $method{$dynamicFile[0]} = $dynamicFile[1];
 	  }
 	close(F);
       }
