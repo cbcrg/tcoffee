@@ -3180,7 +3180,6 @@ declare_name (prot_blast_server);
  set_string_variable ("pdb_db", pdb_db);
  cputenv ("pdb_db_4_TCOFFEE=%s",pdb_db);
 
-
 declare_name (prot_db);
  get_cl_param(\
 			    /*argc*/      argc          ,\

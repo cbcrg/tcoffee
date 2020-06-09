@@ -188,7 +188,8 @@ Constraint_list *fork_subset_produce_list   ( Constraint_list *CL, Sequence *S, 
     
 Constraint_list *fork_line_produce_list   ( Constraint_list *CL, Sequence *S, char * method,char *weight,char *mem_mode, Job_TC *job, int nproc,FILE *local_stderr)
 {
-	//forks lines of the matrix
+
+	//forks lines of the matrix  
 	int a;
 	Job_TC *heap;
 	TC_method *M;
@@ -7293,23 +7294,7 @@ char *** produce_method_file ( char *method)
 		fprintf ( fp, "PROGRAM %s\n", "famsa"); 
 		vfclose (fp);
 	}
-        sprintf (list[n][0], "famsaUpgma_msa"); 
-	sprintf (list[n][1], "%s", vtmpnam(NULL)); 
-	n++;
-	if (method==NULL || strm (method, list[n-1][0])){
-		fp=vfopen (list[n-1][1], "w"); 
-		fprintf ( fp, "DOC famsa [%s]\n", "FAMSA"); 
-		fprintf ( fp, "EXECUTABLE famsa\n"); 
-		fprintf ( fp, "ALN_MODE multiple\n"); 
-		fprintf ( fp, "OUT_MODE aln\n"); 
-		fprintf ( fp, "IN_FLAG &bnsp\n"); 
-		fprintf ( fp, "OUT_FLAG &bnsp\n"); 
-		fprintf ( fp, "SEQ_TYPE S\n"); 
-
-		fprintf ( fp, "ADDRESS %s\n", "famsa"); 
-		fprintf ( fp, "PROGRAM %s\n", "famsa"); 
-		vfclose (fp);
-	}
+	
 	//programatically add something to the configuraion file
 	//Used to cause the creation fo a large number of temp files
 	

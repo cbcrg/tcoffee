@@ -1841,7 +1841,7 @@ sub is_valid_blast_xml
     }
 sub file2blast_flavor
       {
-	my $file=shift;
+	my $file=shift; 
 	if (&file_contains ($file,"EBIApplicationResult",100)){return "EBI";}
 	elsif (&file_contains ($file,"NCBI_BlastOutput",100)){return "NCBI";}
 	else {return "UNKNOWN";}

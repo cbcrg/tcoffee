@@ -9,6 +9,8 @@
 #include "dp_lib_header.h"
 #include "define_header.h"
 
+
+
 /**
  * \file aln_convertion_util.c
  * Contains several auxiliary functions for alignments and templates.
@@ -1864,12 +1866,16 @@ Sequence * seq2blast_thread (Sequence *S)
       
       in=csprintf (in,"%s/%s.blastp.%s.LOCAL.%d.tmp", outdir,sname,dbn,num_iterations);
       inz=csprintf (inz, "%s.gz", in);
-      HERE ("%s", in);
-      if ( isfile (in) || isfile (inz))dolist[a]=0;
+
+      if ( isfile (in) || isfile (inz))
+	{
+	  dolist[a]=0;
+	  fprintf ( stderr, "! BLAST %s vs %s [USE CACHE]", S->name[a], db); 
+	}
       else 
 	{
-	  HERE ("do it");
 	  dolist[a]=1;
+	  fprintf ( stderr, "! BLAST %s vs %s [COMPUTE CACHE]", S->name[a], db); 
 	  b++;
 	}
     }

@@ -87,6 +87,8 @@ char *array2alphabet (char **array, int n, char *forbiden);
 
 
 
+
+
 //TM Predictions
 char* alnpos2hmmtop_pred (Alignment *A, Alignment *Pred, int pos, int mode);
 Alignment * aln2hmmtop_pred (Alignment *A);

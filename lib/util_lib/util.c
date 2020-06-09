@@ -7061,7 +7061,7 @@ FILE *NFP;/*Null file pointer: should only be open once*/
 /*                                                                   */
 /*                         CACHE_FUNCTION                            */
 /*                                                                   */
-/*                                                                   */
+/*                                                                     */
 /*********************************************************************/
 static char *cache;
 char * prepare_cache ( const char *mode)

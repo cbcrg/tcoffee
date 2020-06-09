@@ -12924,6 +12924,8 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
        else if ( strm (action, "compress"))
 	 {
 	   cputenv ("compress_4_TCOFFEE=1");
+	   
+
 	 }
        else if ( strm (action, "thread"))
 	 {
