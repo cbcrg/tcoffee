@@ -1865,10 +1865,7 @@ sub blast_xml2profile
 
 
     if ($BLAST_TYPE eq "EBI" || &file_contains ($file,"EBIApplicationResult",100)){%p=ebi_blast_xml2profile(@_);}
-    elsif ($BLAST_TYPE eq "NCBI" || &file_contains ($file,"NCBI_BlastOutput",100))
-      {
-	%p=ncbi_blast_xml2profile(@_);
-      }
+    elsif ($BLAST_TYPE eq "NCBI" || &file_contains ($file,"NCBI_BlastOutput",100)){%p=ncbi_blast_xml2profile(@_);}
     else
       {
 	myexit(add_error ( $$,$$,getppid(), "BLAST_FAILURE::unkown XML",$CL));
@@ -2082,7 +2079,6 @@ sub ncbi_blast_xml2profile
   {
     my ($name,$seq,$maxid, $minid, $mincov, $string)=(@_);
     my ($L,$l, $a,$b,$c,$d,$nhits,@identifyerL);
-
 
     $seq=~s/[^a-zA-Z]//g;
     $L=length ($seq);

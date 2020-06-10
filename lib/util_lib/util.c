@@ -7070,14 +7070,13 @@ char * prepare_cache ( const char *mode)
 
   if (strm (mode, "use"))
     {
-      sprintf (cache, "%s",get_cache_4_tcoffee());
+      cache=csprintf (cache, "%s",get_cache_4_tcoffee());
     }
 
   else if ( strm (mode, "ignore") ||  strm (mode, "no"))
     {
-
-      cache=vtmpnam(cache);
-      strcat (cache, "/");
+      
+      cache=csprintf ("%s/",vtmpnam(cache));
       printf_system_direct ("mkdir %s",cache);
 
     }
@@ -7089,16 +7088,16 @@ char * prepare_cache ( const char *mode)
     }
   else if ( strm (mode, "local"))
     {
-      cache[0]='\0';
+      cache=csprintf ( cache, "./");
     }
   else
     {
-      sprintf ( cache, "%s/",mode);
+      if (mode[0]!='/')cache=csprintf (cache, "%s/%s/",get_pwd(NULL),mode);
+      else cache=csprintf (cache, "%s/", mode);
       my_mkdir ( cache);
     }
   cputenv ("cache_4_TCOFFEE=%s", cache);
   return cache;
-
 }
 
 char * get_cache_dir()

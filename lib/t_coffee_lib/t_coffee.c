@@ -3776,7 +3776,7 @@ get_cl_param(\
 	       else n_core=MAX3(n_core, max_n_proc,n_thread);
 	       set_int_variable ("n_core",n_core);
 	       set_nproc (n_core);
-	       
+	       cputenv ("thread_4_TCOFFEE=%d", get_nproc());
 	       
 	       
 

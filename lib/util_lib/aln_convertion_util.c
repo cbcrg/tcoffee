@@ -1776,7 +1776,7 @@ Sequence * seq2blast ( Sequence *S)
   if (getenv("compress_4_TCOFFEE"))compress=1;
   else compress=0;
 
-  fprintf ( stderr, "\n!Run psiblast in Batch -- db: %s number_iterations: %d outdir: %s outfmt: %d compression: %s\n", db, num_iterations, outdir, outfmt, (compress)?"yes":"no"); 
+  fprintf ( stderr, "\n!Run blast in Batch -- db: %s number_iterations: %d outdir: %s outfmt: %d compression: %s\n", db, num_iterations, outdir, outfmt, (compress)?"yes":"no"); 
   for (b=0,a=0; a<S->nseq; a++)
     {
       sname=clean_sname(csprintf (sname, "%s", S->name[a]));
@@ -1796,7 +1796,7 @@ Sequence * seq2blast ( Sequence *S)
   
     
 
-
+  npid=0;
   while (nseq<S->nseq)
     {
       int nseq2;
@@ -1806,9 +1806,10 @@ Sequence * seq2blast ( Sequence *S)
       FILE *fp=vfopen  (tmp, "w");
       for (nseq2=0,a=0; a<nnseq && nseq<S->nseq; a++, nseq++, nseq2++)
 	{
+	  
 	  fprintf ( fp, ">%s\n%s\n", S->name[nseq], S->seq[nseq]);
 	}
-      
+     
       vfclose (fp);
       pid=vvfork(NULL);
       if ( pid==0)
@@ -1953,7 +1954,7 @@ Sequence * seq2blast_thread (Sequence *S)
   vfclose (fp);
   
   printf_system ("psiblast -db %s -query %s -num_iterations %d -out %s -outfmt %d", db, FullSeqF, num_iterations, FullBlastF, outfmt);
-  printf_system ( "cp %s FullB.txt", FullBlastF);
+  
   fp=vfopen (FullBlastF, "r");
   while ((buf=vfgets (buf, fp))!=NULL && !strstr (buf, "<BlastOutput_iterations>"))
     header=vcat (header, buf);
@@ -6390,9 +6391,10 @@ Sequence * seq2template_seq ( Sequence *S, char *template_list, Fname *F)
     }
   else if (strm ( template_list, "PSIBLAST"))
     {
+      //Note PSIBLAST ans BLAST are NOW THE SAME, but BLAST=psiblast -num_iterations 1
       check_blast_is_installed(server);
     
-      sprintf ( buf, "SCRIPT_tc_generic_method.pl@mode#psiprofile_template@database#%s@method#psiblast@cache#%s@minid#%d@maxid#%d@mincov#%d@trim#%d@server#%s@type#_R_", prot_db,get_cache_dir(),BmI,BMI,BmC,Trim,server);
+      sprintf ( buf, "SCRIPT_tc_generic_method.pl@mode#psiprofile_template@database#%s@method#blastp@cache#%s@minid#%d@maxid#%d@mincov#%d@trim#%d@server#%s@type#_R_", prot_db,get_cache_dir(),BmI,BMI,BmC,Trim,server);
       S=seq2template_seq (S,buf, F);
 
       return S;
@@ -6401,7 +6403,7 @@ Sequence * seq2template_seq ( Sequence *S, char *template_list, Fname *F)
     {
 
       check_blast_is_installed(server);
-
+      
       sprintf ( buf, "SCRIPT_tc_generic_method.pl@mode#profile_template@database#%s@method#blastp@cache#%s@minid#%d@maxid#%d@mincov#%d@trim#%d@server#%s@type#_R_", prot_db,get_cache_dir(),BmI,BMI,BmC,Trim,server);
       S=seq2template_seq (S,buf, F);
 
@@ -6503,7 +6505,13 @@ Sequence * seq2template_seq ( Sequence *S, char *template_list, Fname *F)
 	  char *p;
 	  if ((i=name_is_in_list(T->name[a], S->name, S->nseq, MAXNAMES))!=-1)
 	    {
-	      
+	      //This thing because the new parsing does not keep the space between name and comments in FASTA
+	      if (T->seq_comment[a] && T->seq_comment[a][0]=='_')
+		{
+		  char *buf=csprintf (NULL, " %s", T->seq_comment[a]);
+		  T->seq_comment[a]=csprintf ( T->seq_comment[a], "%s",buf);
+		  vfree(buf);
+		}
 	      if (       (p=strstr (T->seq_comment[a], " _P_ ")) && !(S->T[i])->P &&( (S->T[i])->P=fill_P_template (S->name[i],p,S)))ntemp++;
 	      else if (  (p=strstr (T->seq_comment[a], " _F_ ")) && !(S->T[i])->F &&( (S->T[i])->F=fill_F_template (S->name[i],p,S)))ntemp++;
 	      else if (  (p=strstr (T->seq_comment[a], " _S_ ")) && !(S->T[i])->S &&( (S->T[i])->S=fill_S_template (S->name[i],p,S)))ntemp++;
@@ -6546,7 +6554,7 @@ Sequence * seq2template_seq ( Sequence *S, char *template_list, Fname *F)
       char *p;
       int z, i;
       int freeF=0;
-
+     
       if (!script)script=(char*)vcalloc ( 1000, sizeof(char));
 
       ntemp++;
@@ -6656,7 +6664,7 @@ Sequence * seq2template_seq ( Sequence *S, char *template_list, Fname *F)
       char *p;
       int z;
       if (!script)script=(char*)vcalloc ( 1000, sizeof(char));
-
+     
       ntemp++;
 
       command=(char*)vcalloc ( 1000, sizeof (char));
@@ -6695,7 +6703,7 @@ Sequence * seq2template_seq ( Sequence *S, char *template_list, Fname *F)
       my_system ( command);
 
       free_aln (A);
-
+      
       if ( check_file_exists (outfile) && format_is_fasta(outfile))
 	{
 	  S=seq2template_seq (S, outfile, F);
