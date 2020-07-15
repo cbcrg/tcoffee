@@ -1686,6 +1686,30 @@ char *shuffle_seq_file(char *file)
   return file;
 }
 
+Alignment *struc_evaluate4tcoffee4gt (Alignment *A, Constraint_list *CL, char *mode, float imaxD, int enb,char *in_matrix_name)
+{
+  int a, b;
+  Alignment *B;
+  Sequence *S=CL->S;
+  A->dm=declare_double (A->nseq, A->nseq);
+  for ( a=0; a<A->nseq-1; a++)
+    for ( b=a+1; b<A->nseq; b++)
+      {
+	B=align_two_sequences (S->seq[a], S->seq[b], "pam250mt", -10, -2, "myers_miller_pair_wise");
+	B->name[0]=csprintf (B->name[0], "%s", S->name[a]);
+	B->name[1]=csprintf (B->name[1], "%s", S->name[b]);
+	
+	B=struc_evaluate4tcoffee (B,CL, mode,imaxD,enb,in_matrix_name);
+	A->dm[a][b]=B->dm[0][1];
+	A->dm[b][a]=B->dm[1][0];
+	
+	
+	free_aln (B);
+      }
+  return A;
+}
+    
+
 Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode, float imaxD, int enb,char *in_matrix_name)
 {
   double **max_pw_sc;
@@ -1772,7 +1796,9 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
 	  replicates=A->len_aln;
 	}
       else 
-	replicates=atoigetenv ("REPLICATES_4_TCOFFEE");
+	{
+	  replicates=atoigetenv ("REPLICATES_4_TCOFFEE");
+	}
     }
   else replicates=0;
   
@@ -1927,6 +1953,7 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
   col_lu=(int*)vcalloc (A->len_aln, sizeof (int));
   
 
+  
   for (c1=0; c1<A->len_aln; c1++)
     {
       for (gap=0,r1=0; r1<A->nseq; r1++)
@@ -1937,7 +1964,7 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
   if (nlen_aln==0)
     {printf_exit ( EXIT_FAILURE,stderr, "\nERROR: No column with less than %.2f %% gaps[FATAL]", max_gap*100);}
   
-
+  
   if (replicates>=1)
     {
       tree=1;
@@ -1952,9 +1979,15 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
       replicates=1;
       max_pw_sc=tot_pw_sc=NULL;
     }
-  ntrees=nd*(replicates+1);
+
+
+  //Importnat:: This i where replicates=1 prevents the computation of 1 replicate
+  if (replicates==1){ntrees=nd;replicates=0;}
+  else ntrees=nd*(replicates+1);
+  
   if (!A->Tree)T=A->Tree=declare_aln2(ntrees,0);
   T->RepColList=declare_int  (ntrees, ((use_columns)?2:nlen_aln)+1);
+  
   
   InColPair=NULL;
   if (get_string_variable ("columns4treeF"))
@@ -2258,7 +2291,7 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
 			 {sc=1;in=1;}
 		     }
 		   
-		  
+
 		   if (tree)
 		     {
 		       tot_pw_sc[s1][s2]+=sc;
@@ -2383,16 +2416,17 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
 		      }
 		  }
 	      }
-
-	    if (strm (tree_mode, "nj"))
-	      dist2nj_tree (tot_pw_sc, A->name, A->nseq, treeF);
-	    else if ( strm (tree_mode, "upgma"))
-	      dist2upgma_tree (tot_pw_sc, A->name, A->nseq, treeF);
-	    else
-	      printf_exit ( EXIT_FAILURE,stderr, "\nERROR: %s is not a known tree_mode[FATAL]",tree_mode);
-	   
-	    T->seq_al[T->nseq]=file2string(treeF);
-	    	    
+	    if (A->nseq>2)
+	      {
+		if (strm (tree_mode, "nj"))
+		  dist2nj_tree (tot_pw_sc, A->name, A->nseq, treeF);
+		else if ( strm (tree_mode, "upgma"))
+		  dist2upgma_tree (tot_pw_sc, A->name, A->nseq, treeF);
+		else
+		  printf_exit ( EXIT_FAILURE,stderr, "\nERROR: %s is not a known tree_mode[FATAL]",tree_mode);
+		
+		T->seq_al[T->nseq]=file2string(treeF);
+	      }
 	    sprintf (T->name[T->nseq], "%d",T->nseq); 
 	    
 	    fp=vfopen (T->dmF_list[T->nseq]=vtmpnam (NULL), "w");
@@ -2406,27 +2440,10 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
 	      }
 	    fprintf ( fp, "\n");
 	    
-	    /*
-	    if (T->nseq==0)fprintf ( fp, "#START Original Distance Matrix NSEQ %4d\n", A->nseq);
-	    else fprintf ( fp, "#START REPLICATE Distance Matrix - %4d - NSEQ %4d\n", T->nseq,A->nseq);
-	    fprintf ( fp, "#SEQS: ");
-	    for (s1=0; s1<A->nseq; s1++)fprintf ( fp, "%s,", A->name[s1]);
-	    fprintf ( fp, "\n");
-	    for (s1=0; s1<A->nseq-1; s1++)
-	      {
-		for (s2=s1+1;s2<A->nseq; s2++)
-		  {
-		    fprintf (fp, "%6.2f ", (float)tot_pw_sc[s1][s2]);
-		  }
-		fprintf (fp, "\n");
-	      }
-	    if (T->nseq==0)fprintf (fp,"#END Original Distance Matrix\n");
-	    else fprintf (fp,"#END Replicate Distance MAtrix - %4d\n", T->nseq);
-	    */
 	    
 	    vfclose (fp);
 	    T->nseq++;
-	    	    
+	    
 	    
 	    if (T->nseq<ntrees)
 	      {
@@ -2445,6 +2462,7 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
 	      {
 		OUT->dm=tot_pw_sc;
 	      }
+	    
 	    }
 	}
       free_arrayN ((void **) ColPair, 2);

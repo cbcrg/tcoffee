@@ -7793,8 +7793,8 @@ KT_node*pool (KT_node *K1,int n1,int *n2in, int N)
   int n2;
   int **nseq;
 
-  for ( a=0; a<n1; a++){if (K1[a]->nseq<N)pool=1;}
-  if (!pool)return NULL;
+  //for ( a=0; a<n1; a++){if (K1[a]->nseq<N)pool=1;}
+  //if (!pool)return NULL;
   
  
 
@@ -7833,13 +7833,6 @@ KT_node*pool (KT_node *K1,int n1,int *n2in, int N)
       
     }
   
-  //Debug test
-  //for ( b=0; b<n1; b++)
-  //{
-  //a=nseq[b][0];
-  //HERE ("IN: %d: %d ->%d", a,K1[a]->nseq, K2[a]->nseq);
-  //}
-  
   free_int (nseq, -1);
   n2in[0]=n2;
   return K2;
@@ -7857,7 +7850,9 @@ char* tree2msa4dpa (NT_node T, Sequence *S, int N, char *method)
   KT_node*KL=(KT_node*)vcalloc (K->tot, sizeof (KT_node));
   KT_node*KL2;
   int n2=0;
- 
+  int docons=0;
+  int N2;
+  
   n=ktree2klist(K,KL,&n);
   ktree2display (K, "1");
   if (getenv ("DUMP_SEQ_BUCKETS") ||getenv ("DUMP_SEQ_BUCKETS_ONLY"))
@@ -7866,6 +7861,9 @@ char* tree2msa4dpa (NT_node T, Sequence *S, int N, char *method)
       if (getenv ("DUMP_SEQ_BUCKETS_ONLY"))exit (0);
     }  
  
+  //if (docons){N2=N*10;pool=1;}
+  //else N2=N;
+  
   //This is where the slave MSAs are computed, all at once.
   if ( dopool && (KL2=pool(KL, n, &n2,N))!=NULL)
     {

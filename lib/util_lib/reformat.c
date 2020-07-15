@@ -10987,9 +10987,9 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
        //Switches
        static int evaluate2tree;
        static int clean_flag;
-       
+       static int gtree=0;
        /*Switches*/
-
+       
        action=action_list[0];
 
        if (action[0]=='2')
@@ -11661,6 +11661,11 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	 {
 	   cputenv ("TREE_MODE_4_TCOFFEE=%s",ACTION(1));
 	 }
+       else if ( strm(action, "gtree"))
+	 {
+	   gtree=1;
+	   
+	 }
        else if ( strm(action, "tree"))
 	 {
 	   if      (!ACTION(1))cputenv ("REPLICATES_4_TCOFFEE=1");
@@ -11849,6 +11854,7 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 		   else sprintf (strikem, "%s", ACTION(na+3));
 		 }
 	     }
+	   
 	   else if (strm (ACTION(na), "distances"))
 	     {
 	       ev3d="distances";
@@ -11889,7 +11895,9 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 		 }
 	       CL=D1->CL;
 	     }
-	  
+
+
+	   if (gtree)struc_evaluate4tcoffee4gt (D1->A,CL,ev3d,max,enb, strikem);
 	   DST->A=struc_evaluate4tcoffee (D1->A,CL,ev3d,max,enb, strikem);
 	 }
        else if ( strm(action, "hot"))

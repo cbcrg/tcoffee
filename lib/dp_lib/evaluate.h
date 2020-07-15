@@ -22,6 +22,7 @@ Alignment * sp3_evaluate4tcoffee (Alignment *RNA, Constraint_list *CLin);
 Alignment * distance_evaluate4tcoffee (Alignment *A, Constraint_list *CL, float max, float delta, int enb);
 Alignment * strike_evaluate4tcoffee (Alignment *A, Constraint_list *CL,char *matrix);
 Alignment * struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL,char *mode,float max, int enb,char *in_matrix_name);
+Alignment * struc_evaluate4tcoffee4gt (Alignment *A, Constraint_list *CL,char *mode,float max, int enb,char *in_matrix_name);
 Alignment * msa2distances (Alignment *A, Constraint_list *CL, float radius, float threshold, int mon);
 Alignment * msa_list2struc_evaluate4tcoffee (Sequence *Species, Sequence *MSAs, Sequence *CL,char *mode,float max, int enb,char *in_matrix_name);
 

@@ -40,7 +40,7 @@
  *	- util_constraints_list.c
  *	- aln_convertion_util.c
  *	- util.c
- *	- reformat.c
+ *	- reformatp.c
  *	- evaluate.c
  *
  *	For datastructures, these files are interesting:
@@ -2909,7 +2909,7 @@ get_cl_param(\
 			    /*MAX Nval*/  1                ,\
 			    /*DOC*/       "Minimum similarity between a sequence and its BLAST relatives" ,\
 			    /*Parameter*/ &prot_min_sim          ,\
-			    /*Def 1*/     "40"             ,\
+			    /*Def 1*/     "0"             ,\
 			    /*Def 2*/     "20"             ,\
 			    /*Min_value*/ "any"            ,\
 			    /*Max Value*/ "any"             \
@@ -2926,7 +2926,7 @@ get_cl_param(\
 			    /*MAX Nval*/  1                ,\
 			    /*DOC*/       "Maximum similarity between a sequence and its BLAST relatives" ,\
 			    /*Parameter*/ &prot_max_sim          ,\
-			    /*Def 1*/     "90"             ,\
+			    /*Def 1*/     "100"             ,\
 			    /*Def 2*/     "50"             ,\
 			    /*Min_value*/ "any"            ,\
 			    /*Max Value*/ "any"             \
@@ -2944,8 +2944,8 @@ get_cl_param(							\
 			    /*MAX Nval*/  1             ,\
 			    /*DOC*/       "Defines the number of iteration of psiblast (-j)",\
 			    /*Parameter*/&psiJ       ,\
-			    /*Def 1*/    "1"      ,\
-			    /*Def 2*/    "1",\
+			    /*Def 1*/    "3"      ,\
+			    /*Def 2*/    "3",\
 			    /*Min_value*/ "any"         ,\
 			    /*Max Value*/ "any"          \
 		   );
@@ -3021,7 +3021,7 @@ get_cl_param(\
 			    /*MAX Nval*/  1                ,\
 			    /*DOC*/       "Minimum coverage of a sequence by its BLAST relatives" ,\
 			    /*Parameter*/ &prot_min_cov          ,\
-			    /*Def 1*/     "40"             ,\
+			    /*Def 1*/     "90"             ,\
 			    /*Def 2*/     "0"             ,\
 			    /*Min_value*/ "any"            ,\
 			    /*Max Value*/ "any"             \
