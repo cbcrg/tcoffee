@@ -1691,9 +1691,12 @@ Alignment *struc_evaluate4tcoffee4gt (Alignment *A, Constraint_list *CL, char *m
   int a, b;
   Alignment *B;
   Sequence *S=CL->S;
+  int n;
+  int tot=(A->nseq*(A->nseq-1))/2;
+  
   A->dm=declare_double (A->nseq, A->nseq);
-  for ( a=0; a<A->nseq-1; a++)
-    for ( b=a+1; b<A->nseq; b++)
+  for ( n=0,a=0; a<A->nseq-1; a++)
+    for ( b=a+1; b<A->nseq; b++, n++)
       {
 	B=align_two_sequences (S->seq[a], S->seq[b], "pam250mt", -10, -2, "myers_miller_pair_wise");
 	B->name[0]=csprintf (B->name[0], "%s", S->name[a]);
@@ -1702,7 +1705,7 @@ Alignment *struc_evaluate4tcoffee4gt (Alignment *A, Constraint_list *CL, char *m
 	B=struc_evaluate4tcoffee (B,CL, mode,imaxD,enb,in_matrix_name);
 	A->dm[a][b]=B->dm[0][1];
 	A->dm[b][a]=B->dm[1][0];
-	
+	output_completion (stderr,n,tot,1, "Guide Tree Computation");
 	
 	free_aln (B);
       }
@@ -2397,7 +2400,7 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
 		for (s1=0; s1<A->nseq; s1++)ml=MAX((strlen (A->name[s1])),ml);
 	      }
 	    
-	    output_completion (stderr,T->nseq,ntrees,1, "Distance Tree Replicates");
+	    if (A->nseq>2)output_completion (stderr,T->nseq,ntrees,1, "Distance Tree Replicates");
 	    
 	    //This is where the distance between two sequences gets turned into a % between 0 and a 100. 0: very similar, 100 maximal relative distance
 	    for (s1=0; s1<A->nseq; s1++)

@@ -4468,6 +4468,7 @@ int printf_file  (char *file,char *mode, char *string,...)
   vfclose (fp);
   return 1;
   }
+
 int printf_system_direct_check  (char *string, ...)
 {
   char *buf;
@@ -4512,6 +4513,28 @@ int printf_system_direct  (char *string, ...)
   r=system (buf);
   vfree(buf);
   return r;
+}
+
+char* printf_system2string  (char *string, ...)
+{
+  char *buf;
+  char *result;
+  char *tmpF=vtmpnam(NULL);
+  
+  if (!string) return NULL;
+  
+  cvsprintf (buf, string);
+  printf_system ("%s >%s", buf,tmpF);
+  vfree (buf);
+  if (!isfile(tmpF))result=NULL;
+  else
+    {
+      
+      result=file2string(tmpF);
+      vremove (tmpF);
+    }
+  
+  return result;
 }
 
 int printf_system  (char *string, ...)
@@ -6702,6 +6725,7 @@ int set_email (char *email)
 char *chomp (char *name)
 {
   int a=0;
+  if (!name) return name;
   while ( name[a]!='\n' && name[a]!='\0')a++;
   name[a]='\0';
   return name;

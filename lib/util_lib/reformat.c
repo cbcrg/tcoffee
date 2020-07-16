@@ -1949,8 +1949,51 @@ char identify_format (char **fname)
        }
 
 
-
 int is_pdb_name ( char *name)
+    {
+      int result;
+      
+      static char **buf_names;
+      static int   *buf_result;
+      static int   nbuf;
+      static int maxnbuf;
+      
+      /*Use the look up*/
+      if (!buf_names)
+	{
+	   maxnbuf+=10;
+	   buf_names =(char**)vcalloc (maxnbuf,sizeof (char*)); 
+	   buf_result=(int*  )vcalloc (maxnbuf,sizeof (int)); 
+	}
+      else if (nbuf==maxnbuf)
+	{
+	  maxnbuf+=1000;
+	  buf_names =(char**)vrealloc (buf_names ,maxnbuf*sizeof (char*)); 
+	  buf_result=(int*  )vrealloc (buf_result,maxnbuf*sizeof (int)); 
+	}
+      if ((result=name_is_in_list ( name, buf_names,nbuf,100))!=-1)result=buf_result[result];
+      else 
+	{
+	  char *s=printf_system2string ("extract_from_pdb -is_pdb_name \'%s\'", name);
+
+	  if (!s)result=0;
+	  else
+	    {
+	      
+	      substitute (s, "\n", "");
+	      substitute (s, "\n", "");
+	     
+	      result=atoi (s);
+	      
+	      buf_names[nbuf]=csprintf ( buf_names[nbuf], "%s", name);
+	      result=buf_result[nbuf++]=(result==1)?1:0;
+	      hupdate(buf_names);
+	    }
+	}
+      return result;
+    }
+
+int is_pdb_name_old ( char *name)
     {
       char command[1000];
       int result;
