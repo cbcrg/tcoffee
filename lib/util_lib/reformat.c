@@ -1949,7 +1949,7 @@ char identify_format (char **fname)
        }
 
 
-int is_pdb_name ( char *name)
+int is_pdb_name_new ( char *name)
     {
       int result;
       
@@ -1993,7 +1993,7 @@ int is_pdb_name ( char *name)
       return result;
     }
 
-int is_pdb_name_old ( char *name)
+int is_pdb_name ( char *name)
     {
       char command[1000];
       int result;
@@ -2007,12 +2007,12 @@ int is_pdb_name_old ( char *name)
       /*Use the look up*/
       if ( !buf_names)
 	{
-	  buf_names=declare_char (1000, 100);
-	  buf_result=(int*)vcalloc (1000, sizeof (int));
+	  buf_names=declare_char (10000, 100);
+	  buf_result=(int*)vcalloc (10000, sizeof (int));
 	}
       if ((result=name_is_in_list ( name, buf_names,nbuf,100))!=-1)return buf_result[result];
 
-
+      
 
       result_file=vtmpnam (NULL);
 
