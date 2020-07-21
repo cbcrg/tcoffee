@@ -1210,6 +1210,7 @@ float atom2radius (char *t)
       lu['S'][' ']=1.808;
       lu['S']['b']=1.12;
       lu['S']['c']=1.32;
+      lu['S']['d']=1.808;
       lu['S']['e']=0.9;
       lu['S']['i']=2.2;
       lu['S']['m']=1.74;
@@ -1234,10 +1235,22 @@ float atom2radius (char *t)
       
     }
   if (!b)b=' ';
-  else if (b>='A' && b<='Z')b=' ';
+  else if (a=='C' && isupper(b))b=' ';
+  else if (a=='N' && isupper(b))b=' ';
+  else if (a=='O' && isupper(b))b=' ';
+  
+  
   else if (b>='0' && b<='9')b=' ';
+  else b=tolower (b);
 
-  if (lu[a][b]<0)printf_exit ( EXIT_FAILURE,stderr, "\nERROR: Atom [%s] is unknown[FATAL] (a=[%c] b=[%c]",t, a, b);
+
+  
+
+  if (lu[a][b]<0)
+    {
+      add_warning (stderr, "\nERROR: Atom [%s] is unknown[FATAL] (a=[%c] b=[%c]",t, a, b);
+      return 1;
+    }
   return lu[a][b];
 }
     

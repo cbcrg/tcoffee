@@ -1701,11 +1701,18 @@ Alignment *struc_evaluate4tcoffee4gt (Alignment *A, Constraint_list *CL, char *m
 	B=align_two_sequences (S->seq[a], S->seq[b], "pam250mt", -10, -2, "myers_miller_pair_wise");
 	B->name[0]=csprintf (B->name[0], "%s", S->name[a]);
 	B->name[1]=csprintf (B->name[1], "%s", S->name[b]);
-	
+	if (B->nseq<2)
+	  {
+	    HERE ("OUPS: %s %s", S->name[a],S->name[b]);
+	  }
+	else 
+	  {
+	    HERE ("%d %d", n, tot);
+	  }
 	B=struc_evaluate4tcoffee (B,CL, mode,imaxD,enb,in_matrix_name);
 	A->dm[a][b]=B->dm[0][1];
 	A->dm[b][a]=B->dm[1][0];
-	output_completion (stderr,n,tot,1, "Guide Tree Computation");
+	//output_completion (stderr,n,tot,1, "Guide Tree Computation");
 	
 	free_aln (B);
       }

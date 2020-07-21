@@ -1951,6 +1951,7 @@ char identify_format (char **fname)
 
 int is_pdb_name_new ( char *name)
     {
+      //for some reason this crashes
       int result;
       
       static char **buf_names;

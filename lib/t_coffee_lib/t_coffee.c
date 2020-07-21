@@ -2951,6 +2951,8 @@ get_cl_param(							\
 		   );
  
 cputenv ("psiJ_4_TCOFFEE=%d", psiJ);
+cputenv ("num_iterations_4_TCOFFEE=%d", psiJ);
+
 declare_name (psitrim_mode);
 get_cl_param(							\
 			    /*argc*/      argc          ,\

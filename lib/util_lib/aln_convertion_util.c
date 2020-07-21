@@ -1776,7 +1776,7 @@ Sequence * seq2blast ( Sequence *S)
   if (getenv("compress_4_TCOFFEE"))compress=1;
   else compress=0;
 
-  fprintf ( stderr, "\n!Run blast in Batch -- db: %s number_iterations: %d outdir: %s outfmt: %d compression: %s\n", db, num_iterations, outdir, outfmt, (compress)?"yes":"no"); 
+  fprintf ( stderr, "\n!Run Blast in batch -- db: %s number_iterations: %d outdir: %s outfmt: %d compression: %s\n", db, num_iterations, outdir, outfmt, (compress)?"yes":"no"); 
   for (b=0,a=0; a<S->nseq; a++)
     {
       sname=clean_sname(csprintf (sname, "%s", S->name[a]));
