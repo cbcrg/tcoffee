@@ -1161,7 +1161,7 @@ int get_tot_prob2 (Alignment *A1,Alignment *A2, int *ns, int **ls, int nstates, 
   static double **prf2;
   int i, I, j, J, k, ij,r,r1,r2; 
   int *lu;
-   
+ 
   if (mode==SEQUENCE)
     {
       int s1, s2, a;
@@ -1170,7 +1170,7 @@ int get_tot_prob2 (Alignment *A1,Alignment *A2, int *ns, int **ls, int nstates, 
       char *sst1;
       char *sst2;
 
-
+      
       nns=(int*)vcalloc ( 2, sizeof (int));
       nls=(int**)vcalloc (2, sizeof (int*));
 
@@ -1220,13 +1220,22 @@ int get_tot_prob2 (Alignment *A1,Alignment *A2, int *ns, int **ls, int nstates, 
 	      for (a=0; a<ns[1]; a++)
 		nls[1][a]=ls[1][a];
 	    }
-
+	 
 	  get_tot_prob2 (NA1, NA2, nns, nls, nstates, matchProb, insProb, TmatchProb, TinsProb, CL,PROFILE);
 	  vfree (nns); free_int (nls,-1);
 	  return 1;
 	}
     }
-  
+  else if (mode == PROFILE)
+    {
+      static int display_mode;
+      if (!display_mode)
+	{
+	  fprintf ( stderr, "\n! profile/profile alignment --- use proba_pair\n");
+	  display_mode=1;
+	}
+    }
+        
   I=strlen (A1->seq_al[ls[0][0]]);
   J=strlen (A2->seq_al[ls[1][0]]);
      

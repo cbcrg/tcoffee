@@ -5061,8 +5061,8 @@ get_cl_param(\
 		     CL=read_n_constraint_list (list_file,n_list,NULL, mem_mode,weight,type, le, CL, seq_source);
 		     }
 		 }
-	       //This very importnat step insures the CL is symetrical
-	       //This is essential for the remaioning computation
+	       //This very important step insures the CL is symetrical
+	       //This is essential for the remaining computation
 	       //It should not be done before because some methods may not be symetrical for specific reasons
 	       //And the CL may be used in different contexts
 	       CL=CL2simCL (CL);
@@ -5769,9 +5769,11 @@ get_cl_param(\
 		      }
 		}
 
+
 	      if (remove_template_file){S=vremove_seq_template_files(S);}
 	      else
 		{
+		  
 		  S=display_seq_template_files (S);
 		}
 	      
@@ -7375,7 +7377,7 @@ Alignment * t_coffee_dpa (int argc, char **argv)
       if (S->nseq>10000)dpa_nseq=1000;
       else dpa_nseq=MAX((S->nseq/10),2);
     }
-  
+  fprintf ( stdout, "PROGRAM: %s %s (%s) -- regressive mode\n",PROGRAM,VERSION,BUILD_INFO);
   fprintf ( le, "!Maximum N Threads --- %d\n",get_nproc());
   //prepare the guide tree
   fprintf ( le, "!Compute Guide Tree --- ");

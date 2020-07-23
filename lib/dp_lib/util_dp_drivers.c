@@ -53,10 +53,7 @@ Constraint_list *profile2list     (Job_TC *job, int nprf)
 
 
 
-
-
-
-  //Index
+    //Index
   seqlist=string2num_list ((job->param)->seq_c)+1;
   A1=seq2profile(CL->S, seqlist[1]);
   A2=seq2profile(CL->S, seqlist[2]);
@@ -144,13 +141,17 @@ Constraint_list *seq2list     ( Job_TC *job)
       char *weight;
       TC_method *M;
 
+    
       
       
       M=(job->param)->TCM;
       
 
       
-      if (M->prfmode && M->prfmode[0])mode=M->prfmode;
+      if (M->prfmode && M->prfmode[0])
+	{
+	  mode=M->prfmode;
+	}
       else mode=M->executable;
 
             
@@ -215,6 +216,7 @@ Constraint_list *seq2list     ( Job_TC *job)
 	}
       else if ( strm ( mode, "proba_pair") )
 	{
+	  
 	  A=fast_pair (job);
 	  RCL=A->CL;
 	}
@@ -266,6 +268,7 @@ Constraint_list *seq2list     ( Job_TC *job)
 	 }
       else if (strm (mode, "profile_pair") || strm (mode, "hh_pair"))
 	{
+	 
 	  RCL=profile_pair (M, seq, CL);
 	}
 
@@ -1117,7 +1120,9 @@ Constraint_list * hh_pair (TC_method *M , char *in_seq, Constraint_list *CL)
 	  char *buf;
 	  int narg;
 	  char buf2[10001];
-
+	  int freeal1=0;
+	  int freeal2=0;
+	  
 	  seq=(char*)vcalloc ( strlen (in_seq)+1, sizeof (char));
 	  entry=(int*)vcalloc (CL->entry_len+1, sizeof (int));
 
@@ -1125,25 +1130,23 @@ Constraint_list * hh_pair (TC_method *M , char *in_seq, Constraint_list *CL)
 	  atoi(strtok (seq,SEPARATORS));
 	  s1=atoi(strtok (NULL,SEPARATORS));
 	  s2=atoi(strtok (NULL,SEPARATORS));
+	
 
+	  //make sure that hh_pair does not crash if a sequence has no profile
 	  A1=seq2R_template_profile(CL->S,s1);
 	  A2=seq2R_template_profile(CL->S,s2);
+	  
 	  buf=(char*)vcalloc (strlen ((CL->S)->seq[s1])+strlen ((CL->S)->seq[s2])+1, sizeof (char));
-
-// 	  aln1=vtmpnam (NULL);
-// 	  prf1=vtmpnam(NULL);
-		char aln1[500], aln2[500], hhfile[500];
-		tmpnam(aln1);
-		tmpnam(aln2);
-// 		tmpnam(prf1);
-// 		tmpnam(prf2);
-		tmpnam(hhfile);
+	  char aln1[500], aln2[500], hhfile[500];
+	  tmpnam(aln1);
+	  tmpnam(aln2);
+	  tmpnam(hhfile);
 
 	  fp=vfopen (aln1, "w");
-
+	  
 	  sprintf ( buf, "%s",(CL->S)->seq[s1]);
 	  upper_string(buf);
-// 	  fprintf ( fp, ">%s\n%s\n", (CL->S)->name[s1],buf);
+
 	  if (A1)
 	    {
 	      for (a=0; a<A1->nseq; a++)
@@ -1152,18 +1155,17 @@ Constraint_list * hh_pair (TC_method *M , char *in_seq, Constraint_list *CL)
 		  fprintf ( fp, ">%s\n%s\n",A1->name[a], buf);
 		}
 	    }
-
+	  else
+	    {
+	      sprintf ( buf, "%s",(CL->S)->seq[s1]);upper_string(buf);
+	      fprintf ( fp, ">%s\n%s\n",(CL->S)->name[s1], buf);
+	    }
 	  vfclose (fp);
-// 	  printf_system ("hhmake -v 0 -i %s -o %s  -M 90  >/dev/null 2>/dev/null", aln1, prf1);
 
-
-
-// 	  aln2=vtmpnam (NULL);
-// 	  prf2=vtmpnam(NULL);
 	  fp=vfopen (aln2, "w");
 	  sprintf ( buf, "%s",(CL->S)->seq[s2]);
 	  upper_string(buf);
-// 	  fprintf ( fp, ">%s\n%s\n", (CL->S)->name[s2],buf);
+
 	  if (A2)
 	    {
 	      for (a=0; a<A2->nseq; a++)
@@ -1172,14 +1174,16 @@ Constraint_list * hh_pair (TC_method *M , char *in_seq, Constraint_list *CL)
 		  fprintf ( fp, ">%s\n%s\n",A2->name[a], buf);
 		}
 	    }
+	  else
+	    {
+	      sprintf ( buf, "%s",(CL->S)->seq[s2]);upper_string(buf);
+	      fprintf ( fp, ">%s\n%s\n",(CL->S)->name[s2], buf);
+	    }
 	  vfclose (fp);
-// 	  printf_system ("hhmake -v 0 -i %s -o %s -M 90 >/dev/null 2>/dev/null", aln2, prf2);
 
 	  //make the prf prf alignment
-// 	  hhfile=vtmpnam(NULL);
 	  printf_system ("hhalign -v 0 -i %s -t %s -atab %s -global -M 100 -cons >/dev/null 2>/dev/null", aln1, aln2, hhfile);
-
-
+	  
 	  //parse the output
 	  //PB: sometimes the probab field is missing from the hhalign output
 
@@ -1215,11 +1219,11 @@ Constraint_list * hh_pair (TC_method *M , char *in_seq, Constraint_list *CL)
 	  vfclose (fp);
 	  vfree (entry);
 	  vfree (seq);
-// 	  remove(prf1);
-// 	  remove(prf2);
+
 	  remove(aln1);
 	  remove(aln2);
 	  remove(hhfile);
+	  
 	  return CL;
 	}
 
@@ -1235,16 +1239,26 @@ Constraint_list * profile_pair (TC_method *M , char *in_seq, Constraint_list *CL
 	char command[10000];
 	char *param;
 	static char *sn1, *sn2;
+	static int display_mode;
 	
-	
-
 	if ( strm (M->executable2, "hhalign") && !getenv ("HHALIGN_4_TCOFFEE"))
-		return hh_pair (M ,in_seq, CL);
-
+	  {
+	    if (!display_mode)
+	      {
+		fprintf ( stderr, "\n! profile/profile alignment --- use hhalign as available on $PATH\n");
+		display_mode=1;
+	      }
+	    return hh_pair (M ,in_seq, CL);
+	  }
 	if ( M->executable2[0]=='\0')
 		fprintf ( stderr, "\nERROR: profile_pair requires a method: thread_pair@EP@executable2@<method> [FATAL:%s]\n", PROGRAM);
 
-
+	if (!display_mode)
+	      {
+		fprintf ( stderr, "\n! profile/profile alignment --- use %s via tc_generic_method.pl\n", M->executable2);
+		display_mode=1;
+	      }
+	
 	if (!sn1)
 	  {
 	    sn1=(char*)vcalloc (100, sizeof(char));
@@ -1256,7 +1270,7 @@ Constraint_list * profile_pair (TC_method *M , char *in_seq, Constraint_list *CL
 	atoi(strtok (seq,SEPARATORS));
 	s1=atoi(strtok (NULL,SEPARATORS));
 	s2=atoi(strtok (NULL,SEPARATORS));
-
+	
 	A1=seq2R_template_profile(CL->S,s1);
 	A2=seq2R_template_profile(CL->S,s2);
 
@@ -1431,7 +1445,7 @@ Constraint_list * profile_pair_decomposed (TC_method *M , char *in_seq, Constrai
       param=substitute ( param, " ", "");
       param=substitute ( param, "\n", "");
     }
-  
+ 
   for (a=0; a<2; a++)
     {
       int l;
@@ -2477,8 +2491,7 @@ Alignment * fast_pair      (Job_TC *job)
 	    CL=(job->io)->CL;
 	    seq_in=(job->param)->seq_c;
 
-
-	   
+	    
 
 	    sprintf (seq, "%s", seq_in);
 	    seqlist=string2num_list (seq);
@@ -5694,8 +5707,10 @@ int pair_wise   (Alignment *A, int*ns, int **l_s,Constraint_list *CL )
 
 
 
-	if (read_size_int (ns, sizeof (int))==3 && ns[2]!=-1)return pair_wise_ms(A,ns,l_s,CL);
-
+	if (read_size_int (ns, sizeof (int))==3 && ns[2]!=-1)
+	  {
+	    return pair_wise_ms(A,ns,l_s,CL);
+	  }
 
 	/*Make sure evaluation functions update their cache if needed*/
 	A=update_aln_random_tag (A);
@@ -5716,7 +5731,6 @@ int pair_wise   (Alignment *A, int*ns, int **l_s,Constraint_list *CL )
 	  score=empty_pair_wise ( A, ns, l_s, CL, glocal);
 	else
 	  score=function ( A, ns, l_s, CL);
-
 	return score;
     }
 
@@ -6315,7 +6329,7 @@ int hh_pair_wise (Alignment *A, int *ns, int **ls, Constraint_list *CL)
   char *hhfile;
   char *tmpfile;
   FILE *fp,*fp1, *fp2;
-
+  
   for (a=0; a<2; a++)
     {
       aln[a]=vtmpnam(NULL);
@@ -6338,7 +6352,7 @@ int hh_pair_wise (Alignment *A, int *ns, int **ls, Constraint_list *CL)
   hhfile=vtmpnam(NULL);
   tmpfile=vtmpnam (NULL);
 
-
+ 
   printf_system ("hhalign -v 0 -i %s -t %s -atab %s -global  >/dev/null 2>/dev/null", prf[0], prf[1], hhfile);
 
 

@@ -6241,9 +6241,13 @@ int handle_X_template_files ( X_template *T, char *mode)
       }
     else if (strm (mode, "display"))
       {
-	char buf[100];
-	sprintf ( buf, "Template %s",  template_type2type_name (T->template_type));
-	if (check_file_exists (T->template_name))display_output_filename ( stdout,buf,T->template_format,T->template_name, STORE);
+	static char *buf;
+	//do not diplay the nameof template files that are in the cache
+	if ( !strstr (T->template_name, get_cache_dir()))
+	  {
+	    buf=csprintf (buf,"Template %s",  template_type2type_name (T->template_type));
+	    if (check_file_exists (T->template_name))display_output_filename ( stdout,buf,T->template_format,T->template_name, STORE);
+	  }
       }
     else
       {
@@ -7215,7 +7219,13 @@ struct X_template *fill_R_template ( char *name,char *p, Sequence *S)
 
   R=fill_X_template ( name, p, "_R_");
   sprintf (R->template_format , "fasta_aln");
-
+  
+  if (!isfile(R->template_name))
+    {
+      static char *buf;
+      buf=csprintf (buf, "%s/%s", get_cache_dir(),R->template_name);
+      sprintf (R->template_name, "%s", buf);
+    }
 
   if (!is_aln(R->template_name) && !is_seq (R->template_name))
     {

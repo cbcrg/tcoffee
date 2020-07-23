@@ -2320,7 +2320,7 @@ Constraint_list* read_constraint_list(Constraint_list *CL,char *in_fname,char *i
 
 	fname=in_fname;
 	read_mode=(char*)vcalloc ( STRING, sizeof (char));
-
+	
 	if ( is_lib_list (in_fname))sprintf ( read_mode, "lib_list");
 	else if ( in_mode)sprintf (read_mode, "%s", in_mode);
 	else if ( fname[0]=='A'){sprintf ( read_mode, "aln");fname++;}
@@ -2338,7 +2338,7 @@ Constraint_list* read_constraint_list(Constraint_list *CL,char *in_fname,char *i
 	}
 
 	fprintf (CL->local_stderr, "\n\t%s [%s]\n", fname, read_mode);
-
+	
 
 	if ( strm (read_mode, "lib_list"))
 	{
@@ -2365,9 +2365,10 @@ Constraint_list* read_constraint_list(Constraint_list *CL,char *in_fname,char *i
 
 	}
 	else if (strm(read_mode, "method"))
-	{
-		CL=produce_list ( CL, CL->S, fname,weight_mode,mem_mode);
-	}
+	  {
+	    
+	    CL=produce_list ( CL, CL->S, fname,weight_mode,mem_mode);
+	  }
 	else if (strm(read_mode, "matrix"))
 	{
 	  CL->residue_index=NULL;
@@ -2375,47 +2376,47 @@ Constraint_list* read_constraint_list(Constraint_list *CL,char *in_fname,char *i
 	  CL->M=read_matrice ( fname);
 	}
 	else if ( strm ( read_mode, "structure"))
-	{
-		if ( CL->ne>0)
-		{
-			fprintf ( stderr, "\nERROR: Wstructure must come before Mmethod or Aaln [FATAL:%s]",PROGRAM);
-			myexit (EXIT_FAILURE);
-		}
-
-		if ( !(CL->STRUC_LIST))
-		{
-			CL->STRUC_LIST=declare_sequence (1,1,10000);
-			(CL->STRUC_LIST)->nseq=0;
-		}
-		SL=CL->STRUC_LIST;
-
-		if ( check_file_exists(fname))
-		{
-			TS=main_read_seq ( fname);
-			for (a=0; a<TS->nseq; a++)sprintf (SL->name[SL->nseq++], "%s", TS->name[a]);
-			free_sequence (TS, TS->nseq);
-		}
-		else
-		{
-			sprintf (SL->name[SL->nseq++], "%s", fname);
-		}
-	}
+	  {
+	  if ( CL->ne>0)
+		  {
+		  fprintf ( stderr, "\nERROR: Wstructure must come before Mmethod or Aaln [FATAL:%s]",PROGRAM);
+		  myexit (EXIT_FAILURE);
+		  }
+	  
+	  if ( !(CL->STRUC_LIST))
+	    {
+	      CL->STRUC_LIST=declare_sequence (1,1,10000);
+	      (CL->STRUC_LIST)->nseq=0;
+	    }
+	  SL=CL->STRUC_LIST;
+	  
+	  if ( check_file_exists(fname))
+	    {
+	      TS=main_read_seq ( fname);
+	      for (a=0; a<TS->nseq; a++)sprintf (SL->name[SL->nseq++], "%s", TS->name[a]);
+	      free_sequence (TS, TS->nseq);
+	    }
+	  else
+	    {
+	      sprintf (SL->name[SL->nseq++], "%s", fname);
+	    }
+	  }
 	else if (strm (read_mode, "aln"))
-	{
-		CL=aln_file2constraint_list ( fname,CL,weight_mode);
-	}
+	  {
+	    CL=aln_file2constraint_list ( fname,CL,weight_mode);
+	  }
 	else
-	{
-		SUBCL=read_constraint_list_file(SUBCL, fname);
-	}
-
-
+	  {
+	    SUBCL=read_constraint_list_file(SUBCL, fname);
+	  }
+	
+	
 	if (SUBCL)
-	{
-		CL=merge_constraint_list    (SUBCL, CL, "default");
-		free_constraint_list_full (SUBCL);
-	}
-
+	  {
+	    CL=merge_constraint_list    (SUBCL, CL, "default");
+	    free_constraint_list_full (SUBCL);
+	  }
+	
 	return CL;
 }
 
