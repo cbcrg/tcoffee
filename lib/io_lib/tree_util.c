@@ -7929,7 +7929,6 @@ char *kmsa2msa (KT_node K,Sequence *S, ALNcol***S2,ALNcol*start)
       out=vtmpnam (NULL);
     }
   
-  
   for (a=0; a<K->nc; a++)
     {
       int i =name_is_in_hlist((K->child[a])->name,S->name, S->nseq);
@@ -7939,7 +7938,10 @@ char *kmsa2msa (KT_node K,Sequence *S, ALNcol***S2,ALNcol*start)
     }
   free_aln (A);
   
+  //OUT ionly defined in the parent process
+  //This is how the recursion stops
   if (!out) return out;
+  
   output=get_string_variable ("output");
 
   msa=start;

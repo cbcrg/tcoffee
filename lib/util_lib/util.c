@@ -4124,7 +4124,7 @@ int get_longest_string (char **array,int n, int *len, int *index)
      {
      int a, l;
      int max_len=0, max_index=0;
-
+     if (!array) return 0;
      if ( n==0 || array==NULL )return 0;
      if ( n==-1)n=read_size_char(array,sizeof (char*));
 
@@ -4140,7 +4140,7 @@ int get_longest_string (char **array,int n, int *len, int *index)
 	 max_index=0;
 	 for ( a=1; a< n; a++)
 	     {
-	     l=strlen ( array[a]);
+	       l=(array[a])?strlen ( array[a]):0;
 	     if ( l>max_len)
 	        {
 		max_len=l;
