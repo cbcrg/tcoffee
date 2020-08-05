@@ -207,9 +207,10 @@ char * get_array_type (int n, char **seq)
   buf2=(char*)vcalloc ( 100, sizeof (char));
 		 
   
-  for ( tot=0,a=0; a<n; a++)tot+=strlen (seq[a]);
+
+  for ( tot=0,a=0; a<n; a++)tot+=(seq[a])?strlen (seq[a]):0;
   buf=(char*)vcalloc (tot+1, sizeof (char));
-  for ( a=0; a<n; a++)strcat (buf, seq[a]);
+  for ( a=0; a<n; a++)strcat (buf, (seq[a])?(seq[a]):"");
   sprintf ( buf2, "%s", get_string_type(buf));
   vfree (buf);
   return buf2;
