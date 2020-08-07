@@ -7049,7 +7049,7 @@ char *vremove3(char *s, char *ext)
 }
 char *vremove (char *s)
 {
-
+  if (s && getenv ("DEBUG_VREMOVE"))HERE ("!--- DEBUG VREMOVE::Remove %s", s);
 
   if (!s)return NULL;
   else if ( s && strstr (s, "*"))return vremove2(s);
