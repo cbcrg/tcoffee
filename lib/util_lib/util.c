@@ -7003,6 +7003,12 @@ char *vremove2 (char *s)
   char ***list;
   int a;
 
+  if (!s) return NULL;
+  else 
+    {
+      add_warning ( stderr, "cautiously refusing to remove file with wildcard: [%s] [%s:WARNING]\n", s,PROGRAM);
+      return NULL;
+    }
 
   //Remove filenames with a wildcard
 
