@@ -2,7 +2,7 @@
 
 T-Coffee is automatically build by using the [Circle CI](https://circleci.com/gh/cbcrg/tcoffee) service.
 
-The Circle build is controlled by the [.circleci/circle.yml](circle.yml) file. 
+The Circle build is controlled by the [circle.yml](.circleci/config.yml) file. 
 
 ## Build process main tasks 
 
