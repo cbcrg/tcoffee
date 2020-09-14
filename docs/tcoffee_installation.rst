@@ -44,7 +44,7 @@ MacOS Binaries - Updated
 
   ##: Get the latest stable version from http://www.tcoffee.org/Packages/Stable/Latest/
   ##: Or  the latest Beta   Version from http://www.tcoffee.org/Packages/Beta/Latest/	
-  ##: downlad the *.tar.gz file
+  ##: download the *.tar.gz file
   ##: tar -xvf T-COFFEE_distribution_Version_XXXXX.tar.gz
   ##: cd T-COFFFEE_distribution_Version_XXXXX
   ##: ./install all

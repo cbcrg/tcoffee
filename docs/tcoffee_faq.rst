@@ -53,12 +53,14 @@ A: You can use a more accurate, slower and less memory hungry dynamic programmin
 ********************
 Input/Output control
 ********************
-Q: How many sequences can T_Coffee handle? [Deprecated]
+Q: How many sequences can T_Coffee handle? 
 ------------------------------------------
-A: T-Coffee is limited to a maximum of 50 sequences. Above this number, the program automatically switches to a heuristic mode, named DPA, where DPA stands for Double Progressive Alignment. DPA is still in development and the version currently shipped with T-Coffee is only a beta version.
+A: T-Coffee is recommanded for a maximum of 200. Above this number, the regreessive flavor (**t_coffee -reg** ) should be used
+
 Q: Can I change line length in the defaut format?
 -------------------------------------------------
-A: Yes, by setting the environement variable **ALN_LINE_LENGTH=<chosen value**. 
+A: Yes, by using the flag **-aln_line_length**.
+
 Q: Can I prevent the output of all the warnings?
 -----------------------------------------------
 A: Yes, by setting **-no_warning**.

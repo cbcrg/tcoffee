@@ -29,7 +29,7 @@ Installation from binaries
 
   ##: Get the latest stable version from http://www.tcoffee.org/Packages/Stable/Latest/
   ##: Or  the latest Beta   Version from http://www.tcoffee.org/Packages/Beta/Latest/	
-  ##: downlad the *.tar.gz file
+  ##: download the *.tar.gz file
   ##: tar -xvf T-COFFEE_distribution_Version_XXXXX.tar.gz
   ##: cd T-COFFFEE_distribution_Version_XXXXX
   ##: ./install all
@@ -38,13 +38,13 @@ Installation from binaries
 
 
 ********
-Exemples
+Examples
 ********
 
 Produce bootsrap replicates by shuffling sequences and guide tree sister nodes
 ==============================================================================
 
-In the following exemple, the input order of the sequences will be shuffled 10 times so as to generate as many MSA replicates (-msa). Each time a guide tree will be generated using mbed (-tree), and the sister nodes of this tree will be randomly shuffled (i.e. left and right will be randomléy reassigned to left or right) - note that this shuffling does not change the topology. For each shuffled replicated, an MSA willl be estimated with clustalo (-method) and each MSA this produced will be used to produce 10 replicates. 
+In the following example, the input order of the sequences will be shuffled 10 times so as to generate as many MSA replicates (-msa). Each time a guide tree will be generated using mbed (-tree), and the sister nodes of this tree will be randomly shuffled (i.e. left and right will be randomléy reassigned to left or right) - note that this shuffling does not change the topology. For each shuffled replicated, an MSA willl be estimated with clustalo (-method) and each MSA this produced will be used to produce 10 replicates. 
 
 .. note:: Note: This mode will re-compute a guide tree for every sequence shuffle. The tree shuffle is not needed but it will increase the probability of each iteration delivering a different MSA. It is much more computationaly efficient to replace the sequence order shuffle with a tree shuffle thgat will generate a comparable amount of MSA diversity at a significantly lower computational cost. 
 
@@ -56,7 +56,7 @@ In the following exemple, the input order of the sequences will be shuffled 10 t
 
 Produce bootsrap replicates by shuffling the guide tree sister nodes
 ====================================================================
-In the following exemple, a guide tree will be generated once using mbed (-tree), and the sister nodes of this tree will be randomly shuffled (i.e. left and right will be randomléy reassigned to left or right) 10 times. For each shuffled replicated, an MSA willl be estimated with clustalo (-method) and each MSA this produced will be used to produce 10 replicates. 
+In the following example, a guide tree will be generated once using mbed (-tree), and the sister nodes of this tree will be randomly shuffled (i.e. left and right will be randomléy reassigned to left or right) 10 times. For each shuffled replicated, an MSA willl be estimated with clustalo (-method) and each MSA this produced will be used to produce 10 replicates. 
 
 
 ::

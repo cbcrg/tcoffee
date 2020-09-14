@@ -25,7 +25,7 @@ Installation from binaries
 
   ##: Get the latest stable version from http://www.tcoffee.org/Packages/Stable/Latest/
   ##: Or  the latest Beta   Version from http://www.tcoffee.org/Packages/Beta/Latest/	
-  ##: downlad the *.tar.gz file
+  ##: download the *.tar.gz file
   ##: tar -xvf T-COFFEE_distribution_Version_XXXXX.tar.gz
   ##: cd T-COFFFEE_distribution_Version_XXXXX
   ##: ./install all
@@ -62,13 +62,13 @@ Whenever structural modes are used, T-Coffee is able to download directly the PD
 
 
 ********
-Exemples
+Examples
 ********
 
 Fast and accurate
 =================
 
-In the following exemple, the regressive alignment is used to align the sequences in FASTA format. The tree is estimated using the mbed method of Clustal Omega (-reg_tree=mbed), the size of the groups is 100 (-reg_nseq=100) and the method used to align the groups is Clustal Omega:
+In the following example, the regressive alignment is used to align the sequences in FASTA format. The tree is estimated using the mbed method of Clustal Omega (-reg_tree=mbed), the size of the groups is 100 (-reg_nseq=100) and the method used to align the groups is Clustal Omega:
 
 ::
 
