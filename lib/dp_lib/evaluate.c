@@ -642,7 +642,8 @@ Alignment * fork_triplet_coffee_evaluate_output ( Alignment *IN,Constraint_list 
 Alignment * nfork_triplet_coffee_evaluate_output ( Alignment *IN,Constraint_list *CL);
 Alignment * triplet_coffee_evaluate_output ( Alignment *IN,Constraint_list *CL)  
 {
-  
+  //This is where score_ascii is taking place when evaluation_mode is set to triplet
+
 
   if (!IN || !CL || !CL->residue_index) return IN;
   
@@ -743,6 +744,7 @@ Alignment * fork_triplet_coffee_evaluate_output ( Alignment *IN,Constraint_list 
 			    }
 			}
 		      res=(max_res==0)?NO_COLOR_RESIDUE:((score_res*10)/max_res);
+		      
 		      //res=(res==NO_COLOR_RESIDUE)?res:(MIN(res,9));
 		      res=MIN(res,9);
 		      fprintf ( fp, "%d ", res);
@@ -830,8 +832,7 @@ Alignment * nfork_triplet_coffee_evaluate_output ( Alignment *IN,Constraint_list
       int s1,r1,s2,r2,w2,s3,r3,w3;
       int **lu;
       
-
-      
+            
       OUT=copy_aln (IN, OUT);
       pos=aln2pos_simple(IN, IN->nseq);
       sprintf ( OUT->name[IN->nseq], "cons");
@@ -889,6 +890,9 @@ Alignment * nfork_triplet_coffee_evaluate_output ( Alignment *IN,Constraint_list
 		    }
 		}
 	      res=(max_res==0)?NO_COLOR_RESIDUE:((score_res*10)/max_res);
+	     
+
+	      
 	      //res=(res==NO_COLOR_RESIDUE)?res:(MIN(res,9));
 	      res=MIN(res,9);
 	      OUT->seq_al[b][a]=res;
@@ -900,10 +904,12 @@ Alignment * nfork_triplet_coffee_evaluate_output ( Alignment *IN,Constraint_list
 	      if (r1>0)lu[s1][r1]=0;
 	    }
 	  
-	  res=(max_col==0)?NO_COLOR_RESIDUE:((score_col*10)/max_col);	
+	  res=(max_col==0)?NO_COLOR_RESIDUE:((score_col*10)/max_col);
+	  
 	  //res=(res==NO_COLOR_RESIDUE)?res:(MIN(res,9));
 	  res=MIN(res,9);
 	  OUT->seq_al[IN->nseq][a]=res;
+	  
 	}
       fprintf ( stderr, "\n");
       
@@ -3259,8 +3265,7 @@ Alignment * fast_coffee_evaluate_output ( Alignment *IN,Constraint_list *CL)
     int local_m;
     int local_nseq;
     
-
-
+  
     /*NORMALIZE: with the highest scoring pair found in the multiple alignment*/
    
     

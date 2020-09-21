@@ -2981,7 +2981,7 @@ int output_format_aln ( char *format, Alignment *inA, Alignment *inEA,char *name
 
 	A =copy_aln (inA, NULL);
 	A->CL=inA->CL;
-	EA=copy_aln (inEA,NULL);
+	EA=copy_number_aln  (inEA,NULL);
 	A =expand_aln(A);
 	EA=expand_number_aln(inA,EA);
 

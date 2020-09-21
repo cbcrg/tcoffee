@@ -857,7 +857,26 @@ Weights* free_weights ( Weights* W)
 	return NULL;
 	}
 
-
+Alignment* copy_number_aln (Alignment *A, Alignment *B)
+        {
+	  int a, b, l;
+	  if (!A) return NULL;
+	  B=copy_aln (A, B);
+	  if (!B) return NULL;
+	  l=arrlen(A->seq_al);
+	  
+	  if (l>arrlen(B->seq_al))B->seq_al=(char**)vrealloc (B->seq_al, l*sizeof (char*));
+	  for (a=0; a<l; a++)
+	    {
+	      int l1 =arrlen(A->seq_al[a]);
+	      int l2 =arrlen(B->seq_al[a]);
+	      if (l2<l1) B->seq_al[a]=(char*)vrealloc (B->seq_al[a], l1*sizeof (char));
+	      for (b=0; b<l1; b++)
+		B->seq_al[a][b]=A->seq_al[a][b];
+	    }
+	  return B;
+	}
+	  
 Alignment* copy_aln ( Alignment *A, Alignment *B)
         {
 	  int a, b;

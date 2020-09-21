@@ -5612,7 +5612,7 @@ get_cl_param(\
 			  output_format_aln ("overaln", A, NULL, over_aln_tmp);
 			  A=main_read_aln (over_aln_tmp,A);
 			}
-
+		      
 		      EA=main_coffee_evaluate_output(A, CL, evaluate_mode);
 		      
 

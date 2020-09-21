@@ -199,7 +199,8 @@ Alignment *realloc_aln  ( Alignment *A, int new_len);
 Alignment *realloc_aln2 ( Alignment *A, int new_nseq, int new_len);
 Alignment *update_aln_random_tag (Alignment *A);
 
-Alignment *copy_aln ( Alignment *A, Alignment *B);
+Alignment *copy_aln     ( Alignment *A, Alignment *B);
+Alignment *copy_number_aln ( Alignment *A, Alignment *B);
 Alignment* extract_sub_aln2 ( Alignment *A, int nseq, char **list);
 Alignment* extract_sub_aln ( Alignment *A, int nseq, int *list);
 Alignment* shrink_aln      ( Alignment *A, int nseq, int *list);
