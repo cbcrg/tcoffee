@@ -2611,7 +2611,7 @@ sub run_blast
 	    else
 	      {
 		if ( $cl_method =~/psiblast/){$cl_method ="blastp $psiJFlag";}
-		$command="t_coffee -other_pg ncbiblast_lwp.pl --email $EMAIL -D $db1 -p $cl_method --outfile $outfile --align 5 --stype protein $infile>/dev/null 2>$error_log";
+		$command="t_coffee -other_pg ncbiblast_lwp.pl --email $EMAIL --database $db1 --program $cl_method --outfile $outfile --alignments 5 --stype protein $infile>/dev/null 2>$error_log";
 		#DEBUG
 		#$command="t_coffee -other_pg ncbiblast_lwp.pl --email $EMAIL -D $db1 -p $cl_method --outfile $outfile --align 5 --stype protein $infile";
 		
