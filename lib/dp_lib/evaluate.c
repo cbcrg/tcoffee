@@ -1691,7 +1691,8 @@ char *shuffle_seq_file(char *file)
   
   return file;
 }
-
+//Does not work ye. Meant to estimate the tree from unaligned structures
+//Like a guide tree estimation but from structures
 Alignment *struc_evaluate4tcoffee4gt (Alignment *A, Constraint_list *CL, char *mode, float imaxD, int enb,char *in_matrix_name)
 {
   int a, b;
@@ -1724,7 +1725,70 @@ Alignment *struc_evaluate4tcoffee4gt (Alignment *A, Constraint_list *CL, char *m
       }
   return A;
 }
-    
+
+float tune_imaxD (Alignment *A, Constraint_list *CL, char *mode, float imaxD, int enb,char *in_matrix_name);
+float tune_imaxD (Alignment *A, Constraint_list *CL, char *mode, float scan3D_max, int enb,char *in_matrix_name)
+{
+  NT_node RT, T;
+  float rf, brf,bimaxD;
+  int a;
+  Sequence *S=aln2seq(A);
+  Alignment *B;
+  
+  
+  buffer_env ("REPLICATES_4_TCOFFEE");
+  cputenv("REPLICATES_4_TCOFFEE=1");
+
+  if (!getenv ("REFERENCE_TREE"))
+    {
+      RT= compute_cw_tree(A);
+      fprintf ( stderr, "\n!#ref_tree= [cw] -- %s;",tree2string (RT));
+    }
+  else if ( getenv ("REFERENCE_TREE") && isfile(getenv ("REFERENCE_TREE")))
+    {
+      RT=main_read_tree (getenv ("REFERENCE_TREE"));
+      fprintf ( stderr, "\n!#ref_tree=%s", getenv ("REFERENCE_TREE"));
+    }
+  else
+    {
+      RT= compute_cw_tree(A);
+      vfclose (tree2file (RT, S, "newick",vfopen(getenv ("REFERENCE_TREE"), "w")));
+      fprintf ( stderr, "\n!#ref_tree=%s [cw]", getenv ("REFERENCE_TREE"));
+    }
+	  
+  fprintf ( stderr, "\n!#scan3D_max=%.2f", scan3D_max);
+
+
+  bimaxD=0;
+  brf=0;
+  
+  for (a=5; a<scan3D_max; a++)
+    {
+      B=struc_evaluate4tcoffee(A,CL, mode, (float)a, enb, in_matrix_name);
+      B=B->A;
+      if (A->Tree && (A->Tree)->seq_al && (A->Tree)->seq_al[0])
+	{
+	  
+	  T=newick_string2tree((A->Tree)->seq_al[0]);
+	  rf=simple_tree_cmp(RT,T, S, 1);
+	  free_tree(T);
+	  fprintf ( stderr, "\n!# Threshold = %3d Angstrom ==> %6.2f %% Similiarity with ref_tree", a, rf) ;
+	  if ( rf>brf)
+	    {
+	      brf=rf;
+	      bimaxD=(float)a;
+	    }
+	  free_aln (A->Tree); A->Tree=NULL;
+	}
+    }
+  fprintf ( stderr, "\n!# Optimal Threshold: %d Angstrom  ==> %.2f %% RF similarity with ref_tree\n", (int)bimaxD, brf);
+  restore_env ("REPLICATES_4_TCOFFEE");
+  free_sequence (S,-1);
+  return bimaxD;
+}
+	
+	
+
 
 Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode, float imaxD, int enb,char *in_matrix_name)
 {
@@ -1787,12 +1851,19 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
   int **InColPair=NULL;
   int **  ColPair=NULL;
   int n_col_pair;
-
+  int scan3D_max;
+  
   //receives an alignment and a constraint list file in which contacts are declared
   //can produce scores, trees and score caches to colr MSAs
-
- 
+   
   if (!A) return A;
+  
+  if (getenv ("scan3D"))
+    {
+      scan3D_max=atoigetenv("scan3D");
+      unsetenv ("scan3D");
+      imaxD=tune_imaxD(A,CL,mode,(float)scan3D_max,enb,in_matrix_name);//Scan to maximize fit to cw 1D tree
+    }
   
   //Get arguments passed via environement
   if (getenv ("TREE_GAP_4_TCOFFEE"))
@@ -1961,7 +2032,7 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
   else lowD=highD;
   for (nd=0,maxD=lowD;maxD<=highD; maxD+=100, nd++);
   
-  
+    
 
   //Prepare the gap cache
   nlen_aln=0;
@@ -1997,7 +2068,7 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
     }
 
 
-  //Importnat:: This i where replicates=1 prevents the computation of 1 replicate
+  //Important:: This is where replicates=1 prevents the computation of 1 replicate
   if (replicates==1){ntrees=nd;replicates=0;}
   else ntrees=nd*(replicates+1);
   
@@ -2101,8 +2172,11 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
 	    int ls1=rseq[s1];
 	    int s2_has_contacts=0;
 	    
-	    if (ls1==-1)continue;//Means the sequence has no contac; OK with Strike
-	    
+	    if (ls1==-1)
+	      {
+		HERE ("NO CONTACT");
+		continue;//Means the sequence has no contac; OK with Strike
+	      }
 	    
 	    for (r1=1;r1<=S->len[ls1]; r1++)
 	      {
@@ -2413,7 +2487,7 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
 		for (s1=0; s1<A->nseq; s1++)ml=MAX((strlen (A->name[s1])),ml);
 	      }
 	    
-	    if (A->nseq>2)output_completion (stderr,T->nseq,ntrees,1, "Distance Tree Replicates");
+	    if (A->nseq>2 && ntrees>1)output_completion (stderr,T->nseq,ntrees,1, "Distance Tree Replicates");
 	    
 	    //This is where the distance between two sequences gets turned into a % between 0 and a 100. 0: very similar, 100 maximal relative distance
 	    for (s1=0; s1<A->nseq; s1++)
@@ -2442,6 +2516,8 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
 		  printf_exit ( EXIT_FAILURE,stderr, "\nERROR: %s is not a known tree_mode[FATAL]",tree_mode);
 		
 		T->seq_al[T->nseq]=file2string(treeF);
+		
+		
 	      }
 	    sprintf (T->name[T->nseq], "%d",T->nseq); 
 	    
@@ -2575,7 +2651,7 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
 
   //compute bs_score
   
-  if (tree)fprintf (stderr, "\n");
+  if (tree && ntrees>1)fprintf (stderr, "\n");
   
   
   

@@ -5632,7 +5632,30 @@ char * get_os()
   return os;
 }
 
+int buffer_env  (char *env)
+{
+  static char *buffered;
+  if (!env) return 0;
+  else if ( !getenv (env)) return 0;
+  
+  buffered=csprintf (buffered, "%s_BUFFERED",env);
+  
+  cputenv ("%s=%s",buffered,getenv (env));
+  unsetenv (env);
+  return 1;
+}
+int restore_env (char *env)
+{
+  static char *buffered;
+  if (!env) return 0;
 
+  buffered=csprintf (buffered, "%s_BUFFERED",env);
+  if (!getenv (buffered)) return 0;
+  cputenv ("%s=%s",env,getenv (buffered));
+  unsetenv (buffered);
+  return 1;
+}
+      
 int cputenv (char *string, ...)
 {
   //

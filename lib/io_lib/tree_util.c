@@ -1238,7 +1238,7 @@ Tree_sim* tree_cmp( NT_node T1, NT_node T2)
   TS1->uw=(TS1->uw+TS2->uw)*100/(TS1->max_uw+TS2->max_uw);
   TS1->w=(TS1->w+TS2->w)*100/(TS1->max_w+TS2->max_w);
   TS1->d=(TS1->d+TS2->d)*100/(TS1->max_d+TS2->max_d);
-  TS1->rf=(TS1->rf+TS2->rf)/2;
+  TS1->rf=(((TS1->rf+TS2->rf))*10)/2;
   vfree (TS2);
   return TS1;
 }
@@ -1513,7 +1513,8 @@ NT_node main_compare_trees ( NT_node T1, NT_node T2, FILE *fp)
   Tree_sim *T;
 
   T=tree_cmp (T1, T2);
-  fprintf ( fp, "\n#tree_cmp|T: %.f W: %.2f L: %.2f RF: %d N: %d S: %d", T->uw, T->w, T->d, T->rf, T->n, T->nseq);
+  fprintf ( fp, "\n#tree_cmp|T: %.2f W: %.2f L: %.2f RF: %.2f N: %d S: %d", T->uw, T->w, T->d, (float)T->rf/10, T->n, T->nseq);
+  fprintf ( fp, "\n#Distance obtained by averaging T1 vs T2 and T2 vs T1");
   fprintf ( fp, "\n#tree_cmp_def|T: ratio of identical nodes");
   fprintf ( fp, "\n#tree_cmp_def|W: ratio of identical nodes weighted with the min Nseq below node");
   fprintf ( fp, "\n#tree_cmp_def|L: average branch length similarity");

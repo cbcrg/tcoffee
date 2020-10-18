@@ -369,6 +369,8 @@ int seq_reformat ( int argc, char **in_argv)
 		fprintf ( stdout, "\n     .....................If none, uses +seq2contacts ");
 		fprintf ( stdout, "\n     .....................-output score_ascii, score, score_html,fasta_tree ");
 		fprintf ( stdout, "\n     .....................+tree [1] trigers tree computation for -output fasta_tree");
+		fprintf ( stdout, "\n     .....................+scan3D <value> ....triggers scanning of 3D threshold values that maximise RF similarity to ref_tree");
+		fprintf ( stdout, "\n     .....................+ref_tree <fname>... will either use fname or compute fname from -in <msa> using cw\n");
 		fprintf ( stdout, "\n     .....................distances..<Max|Def=15 >");
 		fprintf ( stdout, "\n     .....................contacts...<Max|Def=1.2> <nb|Def=3>");
 		fprintf ( stdout, "\n     .....................contacts|distances provided via -in2=contact_lib");
@@ -11710,6 +11712,16 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	   gtree=1;
 	   
 	 }
+       else if ( strm(action, "ref_tree"))
+	 {
+	   cputenv ("REFERENCE_TREE=%s", ACTION(1));
+	 }
+       else if ( strm (action, "scan3D"))
+	 {
+	   if (!ACTION(1))cputenv ("scan3D=100");
+	   else cputenv ("scan3D=%s",ACTION(1));
+	 }
+       
        else if ( strm(action, "tree"))
 	 {
 	   if      (!ACTION(1))cputenv ("REPLICATES_4_TCOFFEE=1");
@@ -11805,6 +11817,7 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	       if (ACTION(na+1) && !strm (ACTION(na+1), "def"))max=atof(ACTION(na+1));
 	       if (ACTION(na+2) && !strm (ACTION(na+2), "def"))enb=atoi(ACTION(na+2));
 	     }
+	  
 	   DST->A=msa_list2struc_evaluate4tcoffee (D1->S,D2->S,DST->S,ev3d,max,enb, strikem);
 	   D1->A=(DST->A)->A;
 	   (DST->A)->A=NULL;
@@ -11928,7 +11941,7 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	       	       
 	       ungap_seq(D1->S);
 	       if (strm (ev3d, "distances"))
-		 D1->CL=pdb2contacts (D1->S, D2?(D2->S):NULL,D1->CL, "intra","distances",max);
+		 D1->CL=pdb2contacts (D1->S, D2?(D2->S):NULL,D1->CL, "intra","distances",(max==0)?1000000:max);//make no limit if Max==0
 	       else if (strm (ev3d, "contacts"))
 		 D1->CL=pdb2contacts (D1->S, D2?(D2->S):NULL,D1->CL, "intra","contacts",0);
 	       else
@@ -11940,7 +11953,7 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	       CL=D1->CL;
 	     }
 
-
+	   
 	   if (gtree)struc_evaluate4tcoffee4gt (D1->A,CL,ev3d,max,enb, strikem);
 	   DST->A=struc_evaluate4tcoffee (D1->A,CL,ev3d,max,enb, strikem);
 	 }

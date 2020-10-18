@@ -644,6 +644,9 @@ int cputenv4pathFirst (char*);
 int cputenv4pathLast (char*);
 int cputenv4path (char*);
 
+int buffer_env  (char *env);
+int restore_env (char *env);
+
 int   cputenv (char*, ...);
 int   fcputenv (char *,char *, char*, ...);
 char *file_putenv (char *file);

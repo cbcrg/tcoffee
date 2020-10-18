@@ -85,6 +85,7 @@ char * pdb2contacts2lib (Sequence *S, char *mode,float max, char *name, char * i
       else max=get_default_pdb_probe();
     }
   
+  
   if (!name)name=vtmpnam (NULL);
   fp=vfopen (name, "w");
   fprintf ( fp, "! TC_LIB_FORMAT_01\n");
