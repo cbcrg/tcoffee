@@ -78,6 +78,7 @@ char * pdb2contacts2lib (Sequence *S, char *mode,float max, char *name, char * i
   else scope=all;
   
   
+
   
   if (!max)
     {

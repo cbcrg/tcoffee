@@ -1872,6 +1872,7 @@ NT_node compute_std_tree_2 (Alignment *A, int **s, char *cl)
       return compute_cw_tree (A);
     }
 
+
   //compute distance matrix if needed
   if ( !s)
     {

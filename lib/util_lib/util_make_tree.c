@@ -2648,7 +2648,7 @@ NT_node list2balanced_dnd (char **name, int n)
       i=j=0;
       for (j=i=0; i<n-1; i+=2)
 	{
-	  node=new_declare_tree_node();
+	  node=new_declare_tree_node(); 
 	  node->left=NL[i];
 	  node->right=NL[i+1];
 	  (node->right)->parent=(node->left)->parent=node;

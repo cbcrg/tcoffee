@@ -6593,7 +6593,7 @@ void dump_io(char *target, char *nature)
 	  n++;
 	}
 
-      free_arrayN ((void ***)list, 3);
+      free_arrayN ((void ***)list, 3); 
       
       fprintf (fp, "<environement>\n");
       fclose (fp);

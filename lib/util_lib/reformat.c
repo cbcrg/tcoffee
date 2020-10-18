@@ -387,6 +387,7 @@ int seq_reformat ( int argc, char **in_argv)
 		fprintf ( stdout, "\n     .....................gop and gep must be negative");
 		fprintf ( stdout, "\n     .....................use -output=color_ascii, color_html to get a color display");
 
+
 		fprintf ( stdout, "\n.....+evaluate_lat........Make a lateral evaluation with matrix");
 		fprintf ( stdout, "\n     +msa_weight proc.....Computes weights using the procedure");
 		fprintf ( stdout, "\nRNA analysis Post Processing___________________________________________________");
