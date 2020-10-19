@@ -1731,11 +1731,13 @@ float tune_imaxD (Alignment *A, Constraint_list *CL, char *mode, float scan3D_ma
 {
   NT_node RT, T;
   float rf, brf,bimaxD;
-  int a;
+  int a, b,c;
   Sequence *S=aln2seq(A);
   Alignment *B;
+  int scan3D_min=5;
   
-  
+  HERE ("BEFORE---REP=%s", getenv ("REPLICATES_4_TCOFFEE"));
+
   buffer_env ("REPLICATES_4_TCOFFEE");
   cputenv("REPLICATES_4_TCOFFEE=1");
 
@@ -1762,27 +1764,57 @@ float tune_imaxD (Alignment *A, Constraint_list *CL, char *mode, float scan3D_ma
   bimaxD=0;
   brf=0;
   
-  for (a=5; a<scan3D_max; a++)
+  for (a=scan3D_min; a<scan3D_max; a++)
     {
+      int process=1;
       B=struc_evaluate4tcoffee(A,CL, mode, (float)a, enb, in_matrix_name);
+
+      for (b=0; b<A->nseq; b++)
+	{
+	  for (c=0; c<A->nseq; c++)
+	    if (B->dm[b][c]<-99)
+	      {
+		b=A->nseq;
+		c=A->nseq;
+		process=0;
+	      }
+	}
+      
+      
       B=B->A;
       if (A->Tree && (A->Tree)->seq_al && (A->Tree)->seq_al[0])
 	{
-	  
-	  T=newick_string2tree((A->Tree)->seq_al[0]);
-	  rf=simple_tree_cmp(RT,T, S, 1);
-	  free_tree(T);
-	  fprintf ( stderr, "\n!# Threshold = %3d Angstrom ==> %6.2f %% Similiarity with ref_tree", a, rf) ;
-	  if ( rf>brf)
+	  if (process)
 	    {
-	      brf=rf;
-	      bimaxD=(float)a;
+	      T=newick_string2tree((A->Tree)->seq_al[0]);
+	      rf=simple_tree_cmp(RT,T, S, 1);
+	      free_tree(T);
+	      fprintf ( stderr, "\n!# Threshold = %3d Angstrom ==> %6.2f %% Similiarity with ref_tree", a, rf) ;
+	      if ( rf>brf)
+		{
+		  brf=rf;
+		  bimaxD=(float)a;
+		}
+	    }
+	  else
+	    {
+	      fprintf ( stderr, "\n!# Threshold = %3d Angstrom ==> Missing Values in the distance matrix", a) ;
 	    }
 	  free_aln (A->Tree); A->Tree=NULL;
-	}
+	}     
     }
-  fprintf ( stderr, "\n!# Optimal Threshold: %d Angstrom  ==> %.2f %% RF similarity with ref_tree\n", (int)bimaxD, brf);
+  if (brf>0)
+    {
+      fprintf ( stderr, "\n!# Optimal Threshold: %d Angstrom  ==> %.2f %% RF similarity with ref_tree\n", (int)bimaxD, brf);
+    }
+  else
+    {
+      bimaxD=150000;
+      fprintf ( stderr, "\n!# WARNING -- Missing Values -- Could not find any suitable threshold - Use max value %d Angstrom -use a higher value for scan3D_max ", (int)bimaxD);
+    }
   restore_env ("REPLICATES_4_TCOFFEE");
+
+  HERE ("AFTER---REP=%s", getenv ("REPLICATES_4_TCOFFEE"));
   free_sequence (S,-1);
   return bimaxD;
 }
