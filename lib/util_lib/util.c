@@ -7383,24 +7383,29 @@ FILE *fopenN  ( char *fname, char *mode, int max_n_tries, int delay)
 
 FILE * vfclose ( FILE *fp)
        {
-       if ( fp==NFP)return NULL;
-       if ( fp==stdout)return stdout;
-       if ( fp==stderr)return stderr;
-       if ( fp==stdin) return stdin;
-       if ( fp==NULL)return NULL;
-       else
-	 if (fclose (fp)!=0)
-	   {
-	     int a=0;
-	     
-	     while (a<10)
-	       {
-		 sleep (2);
-		 if (fclose (fp)==0)return NULL;
-		 a++;
-	       }
-	     myexit (fprintf_error ( stderr, "\nCould not close file properly [FATAL:%s]", PROGRAM));
-	   }
+	 int ecode;
+	 char error [10000];
+	 
+	 if ( fp==NFP)return NULL;
+	 if ( fp==stdout)return stdout;
+	 if ( fp==stderr)return stderr;
+	 if ( fp==stdin) return stdin;
+	 if ( fp==NULL)return NULL;
+	 else
+	   if ((ecode==fclose (fp))!=0) 
+	     {
+	       if    ( ecode==EAGAIN)sprintf ( error, "The O_NONBLOCK flag is set and output cannot be written immediately.");
+	       else if ( ecode==EBADF)sprintf (error,"The underlying file descriptor is not valid.");
+	       else if (ecode ==EFBIG) sprintf (error,"Writing to the output file would exceed the maximum file size or the process's file size supported by the implementation.");
+	       else if (ecode==EINTR) sprintf (error, "The fclose() function was interrupted by a signal before it had written any output.");
+	       else if (ecode==EIO) sprintf (error, "The process is in a background process group and is attempting to write to its controlling terminal, but TOSTOP (defined in the termio.h include file) is set, the process is neither ignoring nor blocking SIGTTOU signals, and the process group of the process is orphaned.");
+	       else if (ecode==ENOSPC) sprintf (error, "There is no free space left on the output device");
+	       else if (ecode==ENXIO) sprintf (error, "A request was made of a nonexistent device, or the request was outside the device.");
+	       else if (ecode==EPIPE) sprintf (error, "fclose() is trying to write to a pipe or FIFO that is not open for reading by any process. This error also generates a SIGPIPE signal");
+	       else sprintf (error, "unknown error code for fclose [%d]", ecode);
+	       
+	       myexit (fprintf_error ( stderr, "\nCould not close file properly [%s][FATAL:%s]", error,PROGRAM));
+	     }
        NopenF--;
        return NULL;
        }

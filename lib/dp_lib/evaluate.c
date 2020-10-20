@@ -1736,7 +1736,7 @@ float tune_imaxD (Alignment *A, Constraint_list *CL, char *mode, float scan3D_ma
   Alignment *B;
   int scan3D_min=5;
   
-  HERE ("BEFORE---REP=%s", getenv ("REPLICATES_4_TCOFFEE"));
+ 
 
   buffer_env ("REPLICATES_4_TCOFFEE");
   cputenv("REPLICATES_4_TCOFFEE=1");
@@ -1814,7 +1814,7 @@ float tune_imaxD (Alignment *A, Constraint_list *CL, char *mode, float scan3D_ma
     }
   restore_env ("REPLICATES_4_TCOFFEE");
 
-  HERE ("AFTER---REP=%s", getenv ("REPLICATES_4_TCOFFEE"));
+ 
   free_sequence (S,-1);
   return bimaxD;
 }

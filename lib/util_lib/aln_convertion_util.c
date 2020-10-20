@@ -59,6 +59,7 @@ Constraint_list * pdb2contacts (Sequence *S, Sequence *T,Constraint_list *CL, ch
   
   S=fast_get_sequence_type(S);
   
+
   if (contact_type)
     {
       cputenv ("SEQ2TEMPLATE4_F_=no");
