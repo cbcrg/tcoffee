@@ -7392,7 +7392,7 @@ FILE * vfclose ( FILE *fp)
 	 if ( fp==stdin) return stdin;
 	 if ( fp==NULL)return NULL;
 	 else
-	   if ((ecode==fclose (fp))!=0) 
+	   if ((ecode=fclose (fp))!=0) 
 	     {
 	       if    ( ecode==EAGAIN)sprintf ( error, "The O_NONBLOCK flag is set and output cannot be written immediately.");
 	       else if ( ecode==EBADF)sprintf (error,"The underlying file descriptor is not valid.");
