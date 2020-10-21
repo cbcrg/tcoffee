@@ -7949,13 +7949,18 @@ char *kmsa2msa (KT_node K,Sequence *S, ALNcol***S2,ALNcol*start)
   msa=start;
   if (!output || strm (output, "fasta_aln"))
     {
-      
+      int nn;
       fp=vfopen (out, "w");
-      for (s=0; s<S->nseq; s++)
+      for (nn=0,s=0; s<S->nseq; s++, nn++)
 	{
 	  int r=0;
 	  msa=start;
-	  
+	  if (nn==1000)
+	    {
+	      vfclose (fp);
+	      fp=vfopen (out, "a");
+	      nn=0;
+	    }
 	  output_completion (stderr,s,S->nseq, 100, "Final MSA");
 	  for (c=0; c<S->len[s]; c++)
 	    {
