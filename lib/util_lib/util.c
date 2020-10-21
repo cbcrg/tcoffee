@@ -7403,7 +7403,7 @@ FILE * vfclose ( FILE *fp)
 	       else if (ecode==ENXIO) sprintf (error, "A request was made of a nonexistent device, or the request was outside the device.");
 	       else if (ecode==EPIPE) sprintf (error, "fclose() is trying to write to a pipe or FIFO that is not open for reading by any process. This error also generates a SIGPIPE signal");
 	       else sprintf (error, "unknown error code for fclose [%d]", ecode);
-	       
+	       valgrind_test();
 	       myexit (fprintf_error ( stderr, "\nCould not close file properly [%s][FATAL:%s]", error,PROGRAM));
 	     }
        NopenF--;
