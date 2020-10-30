@@ -1885,6 +1885,9 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
   int **  ColPair=NULL;
   int n_col_pair;
   int scan3D_max;
+  int *used_sites;
+  int nsites=0;
+  int print_nsites=(getenv ("PRINT_NSITES")?1:0);
   
   //receives an alignment and a constraint list file in which contacts are declared
   //can produce scores, trees and score caches to colr MSAs
@@ -2010,6 +2013,7 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
 
   max_col_sc=(double*)vcalloc (A->len_aln, sizeof (double));
   tot_col_sc=(double*)vcalloc (A->len_aln, sizeof (double));
+  used_sites=(int*)vcalloc (A->len_aln, sizeof (int*));
   
   max_sc=0;
   tot_sc=0;
@@ -2406,7 +2410,8 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
 			   in=we;
 			   sc=pow(sc,distance_modeE)*we;
 			   
-			   
+			   used_sites[c1]=1;
+			   used_sites[c2]=1;
 			 }
 		   else if (modeM==contactsM)
 		     {
@@ -2503,11 +2508,19 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
 		   max_randsc[A->nseq]+=in;
 		   tot_randsc[A->nseq]+=randsc;
 		  }
+		
 		for (c1=0; c1<A->len_aln; c1++)for (c2=0; c2<A->len_aln; c2++)dm2[c1][c2]=0;
 	      }
 	    for (c1=0; c1<A->len_aln; c1++)for (c2=0; c2<A->len_aln; c2++)dm1[c1][c2]=0;
 	    }
-	  	 
+	  //Report the number of used columns
+	  
+	  for (nsites=0,c1=0; c1<A->len_aln; c1++)
+	    {
+	      nsites+=used_sites[c1];
+	      used_sites[c1]=0;
+	    }
+	  
 	  //Estimate Phylogenetic Tree Replicates
 	  if (tree)
 	    {
@@ -2555,6 +2568,7 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
 	    sprintf (T->name[T->nseq], "%d",T->nseq); 
 	    
 	    fp=vfopen (T->dmF_list[T->nseq]=vtmpnam (NULL), "w");
+	    if (print_nsites)fprintf (fp, "# NSITES: %d\n", nsites);
 	    fprintf ( fp, "%d \n", A->nseq);
 	    for ( s1=0; s1<A->nseq;s1++)
 	      {
@@ -2585,6 +2599,7 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
 	      }
 	    else 
 	      {
+		OUT->nsites=nsites;
 		OUT->dm=tot_pw_sc;
 	      }
 	    
@@ -2721,7 +2736,8 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
 
   A->score=A->score_aln=OUT->score=OUT->score_aln=(int)(max_sc==0)?0:(tot_sc*1000)/max_sc;
   
-			     
+			
+  vfree (used_sites);
   free_int (lu,  -1);
   free_int (dm1, -1);
   free_int (dm2, -1);

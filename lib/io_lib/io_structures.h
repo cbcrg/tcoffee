@@ -275,7 +275,7 @@ struct Alignment
       int  **RepColList;//last item set to -1
       char **dmF_list;
 /*Score*/
-      
+    int       nsites;  
     double ** dm;   
     int   *  score_seq;
     int   ** score_res;
