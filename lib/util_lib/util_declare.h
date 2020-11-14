@@ -81,6 +81,8 @@ Weights* duplicate_weights (Weights *W);
 Weights* free_weights ( Weights* W);
 void mem_profile (char *msg);
 FILE* print_mem_usage (FILE *fp, char *comment);
+FILE* print_mem (FILE *fp, char *comment);
+
 void set_max_mem (int m);
 int verify_memory (int s);
 int my_assert ( void *p, int index);

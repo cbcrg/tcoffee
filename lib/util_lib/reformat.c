@@ -4026,11 +4026,13 @@ int main_output  (Sequence_data_struc *D1, Sequence_data_struc *D2, Sequence_dat
 	  {
 	    int x;
 	    FILE *fpx;
+	    
 	    if (D1 && D1->A && (D1->A)->Tree && ((D1->A)->Tree)->dmF_list)
 	      {
 		Alignment *T=(D1->A)->Tree;
 		FILE *fpx=vfopen (out_file, "w");
 		display_file_content (fpx,T->dmF_list[0]);
+		
 		if (int_variable_isset ("print_replicates")) 
 		  for (x=1; x<T->nseq; x++)
 		    {
@@ -11708,11 +11710,6 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	 {
 	   cputenv ("TREE_MODE_4_TCOFFEE=%s",ACTION(1));
 	 }
-       else if ( strm(action, "gtree"))
-	 {
-	   gtree=1;
-	   
-	 }
        else if ( strm(action, "ref_tree"))
 	 {
 	   cputenv ("REFERENCE_TREE=%s", ACTION(1));
@@ -11726,8 +11723,9 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	 {
 	   cputenv ("PRINT_NSITES=1");
 	 }
-       else if ( strm(action, "tree"))
+       else if ( strm(action, "tree") || strm (action, "gtree"))
 	 {
+	   if (strm (action, "gtree"))gtree=1;
 	   if      (!ACTION(1))cputenv ("REPLICATES_4_TCOFFEE=1");
 	   else if (is_number(ACTION(1)))cputenv ("REPLICATES_4_TCOFFEE=%s",ACTION(1));
 	   else
@@ -11738,9 +11736,9 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 		   if      (strm (action_list[j], "mode")) cputenv ("TREE_MODE_4_TCOFFEE=%s",action_list[j+1]);
 		   else if (strm (action_list[j], "gap" )) cputenv ("TREE_GAP_4_TCOFFEE=%s" ,action_list[j+1]);
 		   else if (strm (action_list[j], "replicates"))cputenv ("REPLICATES_4_TCOFFEE=%s" ,action_list[j+1]);
-		   else if (strm (action_list[j], "group"))cputenv ("SGROUP_4_TCOFFEE=%s" ,action_list[j+1]);
-		   
-		   else printf_exit ( EXIT_FAILURE,stderr, "\nERROR: %s is not a known +tree parameter (replicates <int>|mode <string>|gap <float>|goup <seqfile>)[FATAL]",action_list[j]);
+		   else if (strm (action_list[j], "group"))cputenv ("SGROUP_4_TCOFFEE=%s" ,action_list[j+1]);		   
+		   else 
+		     printf_exit ( EXIT_FAILURE,stderr, "\nERROR: %s is not a known +%s parameter (replicates <int>|mode <string>|gap <float>|goup <seqfile>)[FATAL]",action,action_list[j]);
 		 }
 	     }
 	   
@@ -11958,8 +11956,10 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	     }
 
 	   
-	   if (gtree)struc_evaluate4tcoffee4gt (D1->A,CL,ev3d,max,enb, strikem);
-	   DST->A=struc_evaluate4tcoffee (D1->A,CL,ev3d,max,enb, strikem);
+	   if (gtree)
+	     DST->A=struc_evaluate4tcoffee4gt (D1->A,CL,ev3d,max,enb, strikem);
+	   else 
+	     DST->A=struc_evaluate4tcoffee (D1->A,CL,ev3d,max,enb, strikem);
 	 }
        else if ( strm(action, "hot"))
 	 {
