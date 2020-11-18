@@ -498,6 +498,7 @@ DP_LIB_OBJECTS = \
 		evaluate_for_domain.o_$(OSNAME)\
 		evaluate_dirichlet.o_$(OSNAME)\
 		evaluate.o_$(OSNAME)\
+		phylo3d.o_$(OSNAME)\
 		showpair.o_$(OSNAME)\
 		fsa_dp.o_$(OSNAME)\
 		pavie_dp.o_$(OSNAME)

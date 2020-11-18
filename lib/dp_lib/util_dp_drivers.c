@@ -1902,7 +1902,7 @@ Constraint_list * sap_pair   (char *seq_in, char *weight, Constraint_list *CL)
    int ntry=0;
    int max_ntry=3;
    int issap=0;
-   //Number of times sap will try to align pdb1 with pdb2. Sap is non deterministic and may crash depending on the seed it usues
+   //Number of times sap will try to align pdb1 with pdb2. Sap is non deterministic and may crash depending on the seed it usses
    //THis number should do fine for up to 1,000 structures
    int a, c,s1, s2,tot,sim,score,max;
    FILE *fp;
@@ -2808,8 +2808,21 @@ Alignment *align_two_streches4dpa ( char *s0, char *s1, char *in_matrix, int gop
   
 
 
-
-
+Alignment * align_two_structures ( Sequence *S, int s1, int s2, char *mode)
+{
+  static char *in=vtmpnam (NULL);
+  static char *out=vtmpnam (NULL);
+  FILE *fp;
+  
+  fp=vfopen (in, "w");
+  fprintf (fp, ">%s _P_ %s\n%s",S->name[s1],seq2T_value(S,s1, "template_name", "_P_"),S->seq[s1]);
+  fprintf (fp, ">%s _P_ %s\n%s",S->name[s2],seq2T_value(S,s2, "template_name", "_P_"),S->seq[s2]);
+  vfclose (fp);
+  printf_system ("t_coffee -in %s -method %s -outfile=%s -output fasta_aln -quiet >/dev/null 2>/dev/null",in,mode, out);
+  return quick_read_fasta_aln (NULL,out);
+}
+  
+  
 
 Alignment * align_two_sequences ( char *seq1, char *seq2, char *in_matrix, int gop, int gep, char *in_align_mode)
 {

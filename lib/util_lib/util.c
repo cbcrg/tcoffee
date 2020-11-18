@@ -4119,7 +4119,6 @@ char * translate_string (char *string, char *in, char*out)
   return string;
 }
 
-
 int get_longest_string (char **array,int n, int *len, int *index)
      {
      int a, l;

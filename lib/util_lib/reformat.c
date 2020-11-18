@@ -364,6 +364,18 @@ int seq_reformat ( int argc, char **in_argv)
 		fprintf ( stdout, "\n     +tree..gap <F|def=0.5> replicates<D|column|def=1> mode <nj|upgma|def=nj>");
 		
 		fprintf ( stdout, "\n     +remove_nuc.x........Remove Position 1, 2 or 3 of every codon");
+		fprintf ( stdout, "\n     +phylo3D.<tree|gtree>Replaces evaluate3D for the estimation of 3D trees\n");
+		fprintf ( stdout, "\n        +enb <int>...........Specifies the number of excluded nb (def=3)\n");
+		fprintf ( stdout, "\n        +replicates <int>....Specifies the number of replicates (def=0)\n");
+		fprintf ( stdout, "\n        +maxd <int>..........Specifies the distance cutoff (def=maximum distance on provided PDBs)\n");
+		fprintf ( stdout, "\n        +strict_maxsd........ALL distances within pairs of coolumns must be <=maxd to be kept\n");
+		fprintf ( stdout, "\n        +align_method.<st>...Specifies which T-Coffee method in gtree, use sa_pair for struc based aln\n");
+		fprintf ( stdout, "\n        +columns4tree.<file>.Specifies the columns to be used <c1> <c2> on each line (1-len_aln)\n");
+		fprintf ( stdout, "\n        +max_gap.<float>.....Specifies the maximum fraction of gaps for columns to be considered (<=)\n");
+		
+		
+		
+		fprintf ( stdout, "\n        +ref_tree <file>..specifies the ref tree when +maxd=scan\n");
 		fprintf ( stdout, "\n     +evaluate3D..........strike|distances|contacts");
 		fprintf ( stdout, "\n     .....................Uses the -in2 contact_lib or the +pdb2contacts +seq2contacts ");
 		fprintf ( stdout, "\n     .....................If none, uses +seq2contacts ");
@@ -4022,51 +4034,35 @@ int main_output  (Sequence_data_struc *D1, Sequence_data_struc *D2, Sequence_dat
 	    no_rec_print_tree_randomize (D1->T, stdout);
 	    fprintf (stdout, ";\n");
 	  }
-	else if ( strm  (out_format, "dm"))
+	else if ( strm  (out_format, "dm") || strm  (out_format, "dm_newick")||strm  (out_format, "newick_dm")|| strm (out_format,"newick_tree") || strm (out_format,"binary") || strm (out_format,"nh") )
 	  {
 	    int x;
 	    FILE *fpx;
+	    int ptree, pdm;
+	    if ( strstr (out_format, "dm"))pdm=1;
+	    else pdm=0;
 	    
-	    if (D1 && D1->A && (D1->A)->Tree && ((D1->A)->Tree)->dmF_list)
+	    if ( strstr (out_format, "newick"))ptree=1;
+	    else if (!strstr(out_format, "dm"))ptree=1;
+	    else ptree=0;
+	    
+
+
+	    if (!D1)return 1;
+	    else if (D1 && !D1->T && D1->A && (D1->A)->Tree)
 	      {
 		Alignment *T=(D1->A)->Tree;
 		FILE *fpx=vfopen (out_file, "w");
-		display_file_content (fpx,T->dmF_list[0]);
-		
-		if (int_variable_isset ("print_replicates")) 
-		  for (x=1; x<T->nseq; x++)
-		    {
-		      display_file_content (fpx,T->dmF_list[x]);
-		    }
+		for (x=0; x<T->nseq; x++)
+		  {
+		    if (ptree)fprintf (fpx, "%s\n", T->seq_al[x]);
+		    if (pdm && T->dmF_list )display_file_content (fpx,T->dmF_list[x]);
+		    else printf_exit ( EXIT_FAILURE, stderr, "Distance Matrix Not produced\n", PROGRAM);
+		  }
 		vfclose (fpx);
 	      }
-	    else
-	      {
-		printf_exit ( EXIT_FAILURE, stderr, "Distance Matrix Not produced\n", PROGRAM);
-	      }
-	  }
-	else if ( strm  (out_format, "newick_dm"))
-	  {
-	    int x;
-	    FILE *fpx;
-	    if (D1 && D1->A && (D1->A)->Tree && ((D1->A)->Tree)->dmF_list)
-	      {
-		Alignment *T=(D1->A)->Tree;
-		FILE *fpx=vfopen (out_file, "w");
-		fprintf (fpx, "%s\n", T->seq_al[0]);
-		display_file_content (fpx,T->dmF_list[0]);
-		if (int_variable_isset ("print_replicates")) 
-		  for (x=1; x<T->nseq; x++)
-		    {
-		      fprintf (fpx, "%s\n", T->seq_al[0]);
-		      display_file_content (fpx,T->dmF_list[x]);
-		    }
-		vfclose (fpx);
-	      }
-	    else
-	      {
-		printf_exit ( EXIT_FAILURE, stderr, "Distance Matrix Not produced\n", PROGRAM);
-	      }
+	    else if (D1->T  && ptree)print_newick_tree (D1->T, out_file);
+	    else printf_exit ( EXIT_FAILURE, stderr, "No Tree to be printed\n", PROGRAM);
 	  }
 	else if ( strm  (out_format, "mafftnewick"))
 	  {
@@ -11710,10 +11706,7 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	 {
 	   cputenv ("TREE_MODE_4_TCOFFEE=%s",ACTION(1));
 	 }
-       else if ( strm(action, "ref_tree"))
-	 {
-	   cputenv ("REFERENCE_TREE=%s", ACTION(1));
-	 }
+       
        else if ( strm (action, "scan3D"))
 	 {
 	   if (!ACTION(1))cputenv ("scan3D=100");
@@ -11723,6 +11716,39 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	 {
 	   cputenv ("PRINT_NSITES=1");
 	 }
+       else if ( strm(action, "ref_tree"))cputenv ("REFERENCE_TREE=%s", ACTION(1));
+       else if ( strm(action, "replicates"))cputenv ("REPLICATES_4_TCOFFEE=%s",ACTION(1));
+       else if ( strm(action, "enb"))cputenv ("enb_4_TCOFFEE=%s",ACTION(1));
+       else if ( strm(action, "maxd"))cputenv ("maxd_4_TCOFFEE=%s",ACTION(1));
+       else if ( strm(action, "max_maxd"))cputenv ("max_maxd_4_TCOFFEE=%s",ACTION(1));
+       else if ( strm(action, "min_maxd"))cputenv ("min_maxd_4_TCOFFEE=%s",ACTION(1));
+       else if ( strm(action, "strict_maxd"))cputenv ("strict_maxd_4_TCOFFEE=%s",ACTION(1));
+       else if ( strm(action, "align_method"))cputenv ("align_method_4_TCOFFEE=%s",ACTION(1));
+       else if ( strm(action, "gap"))cputenv ("gap_4_TCOFFEE=%s",ACTION(1));
+       
+       else if ( strm(action, "columns4tree"))
+	 {
+	   char *f=ACTION(1);//legacy
+	   set_string_variable ("columns4treeF",f);//legacy
+	   
+	   cputenv ("columns4tree_4_TCOFFEE=%s",ACTION(1));
+	 }
+       else if (strm (action, "phylo3d"))
+	 {
+	   ungap_seq(D1->S);
+	   if ( !D2 || !D2->S)
+	     printf_exit ( EXIT_FAILURE,stderr, "\nERROR: +phylo3D requires a tenmplate file via -in2");
+	   D1->CL=pdb2contacts (D1->S, D2->S,D1->CL, "intra","distances",1000000);
+	   if (n_actions>1 && strm (ACTION(1), "gtree"))
+	     {
+	       if (!D1->A)D1->A=seq2aln (D1->S,NULL, RM_GAP);
+	       D1->A=phylo3d_gt (D1->A, D1->CL);
+	     }
+	   else
+	     D1->A=phylo3d (D1->A, D1->CL);
+	 }
+       
+
        else if ( strm(action, "tree") || strm (action, "gtree"))
 	 {
 	   if (strm (action, "gtree"))gtree=1;
@@ -11743,12 +11769,6 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	     }
 	   
 	 }
-       else if (strm(action, "columns4tree"))
-	 {
-	   char *f=ACTION(1);
-	   set_string_variable ("columns4treeF",f);
-	 }
-       
        else if ( strm(action, "evaluateGroup"))
 	 {
 	   

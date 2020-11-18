@@ -1912,20 +1912,17 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
     {
       scan3D_max=atoigetenv("scan3D");
       unsetenv ("scan3D");
-      imaxD=tune_imaxD(A,CL,mode,(float)scan3D_max,enb,in_matrix_name);//Scan to maximize fit to cw 1D tree
+      imaxD=tune_imaxD(A,CL,mode,(float)scan3D_max,enb,in_matrix_name);//Scan to maximize fit to some pre-defined 3D tree
     }
   
   //Get arguments passed via environement
-  if (getenv ("TREE_GAP_4_TCOFFEE"))
-    {
-      max_gap  =atofgetenv("TREE_GAP_4_TCOFFEE");
-    }
+  if (getenv ("TREE_GAP_4_TCOFFEE")){max_gap  =atofgetenv("TREE_GAP_4_TCOFFEE");}
   else max_gap=0.5;
   
   if (getenv ("TREE_MODE_4_TCOFFEE"))tree_mode=getenv("TREE_MODE_4_TCOFFEE");
   else tree_mode="nj";
     
-
+  
   if (getenv ("REPLICATES_4_TCOFFEE"))
     {
       if ( strm (getenv ("REPLICATES_4_TCOFFEE"), "columns"))
@@ -1948,10 +1945,7 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
   if (!mode || strm (mode, "strike"))modeM=strikeM;
   else if (strm (mode, "distances"))modeM=distancesM;
   else if (strm (mode, "contacts"))modeM=contactsM;
-  else 	
-    {
-      printf_exit ( EXIT_FAILURE,stderr, "\nERROR: struc_evaluate4tcoffe::mode %s is unknown", (mode)?mode:"unset");
-    }
+  else {printf_exit ( EXIT_FAILURE,stderr, "\nERROR: struc_evaluate4tcoffe::mode %s is unknown", (mode)?mode:"unset");}
   
  
 
@@ -2041,7 +2035,7 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
   
 
 
-  //Set the right evlaution matrix for proteins or RNA
+  //Set the right evaluation matrix for proteins or RNA
   if (modeM==strikeM)
     {
       matrix_name=(char*)vcalloc ((strlen(in_matrix_name)+2), sizeof (char));
@@ -2287,8 +2281,7 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
 		//Fine if S2 has no structure for strike
 		if (modeM!=strikeM && !s2_has_contacts)continue;
 
-		//Now do the all against all
-		
+		//Now do the all against all		
 
 		ic1=0;
 		
@@ -2545,7 +2538,7 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
 
 	  
 
-	  //This is where the distance between two sequences gets turned into a % between 0 and a 100. 0: very similar, 100 maximal relative distance
+	  //This is where the distance between two sequences gets turned into a % between 0 and a 100. 0: very similar, 100 maximal relative distance, -100 missing value
 	  
 
 	  for (s1=0; s1<A->nseq; s1++)
@@ -2553,7 +2546,7 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
 		for (s2=0; s2<A->nseq; s2++)
 		  {
 		    if (s1==s2)tot_pw_sc[s1][s2]=0;
-		    else if (max_pw_sc[s1][s2]>0.000000001)
+		    else if (max_pw_sc[s1][s2]>MY_EPSILON)
 		      {
 			tot_pw_sc[s1][s2]/=max_pw_sc[s1][s2];
 			tot_pw_sc[s1][s2]=(double)100*((double)1-tot_pw_sc[s1][s2]);
@@ -2810,6 +2803,12 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
   OUT->A=A;
   return OUT;
 }   	
+
+
+
+
+
+
 
 Alignment *msa2distances (Alignment *A, Constraint_list *CL, float radius, float clus_th, int clus_min)
 {

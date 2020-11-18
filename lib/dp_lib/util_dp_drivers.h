@@ -78,6 +78,7 @@ Alignment * fast_pair      (Job_TC *job);
 Constraint_list *hash_pair (TC_method *M , char *in_seq, Constraint_list *CL);
 
 void toggle_case_in_align_two_sequences(int value);
+Alignment * align_two_structures ( Sequence *S, int s1, int s2, char *mode);
 Alignment * align_two_sequences ( char *seq1, char *seq2, char *matrix, int gop, int gep, char *align_mode);
 Alignment *align_two_streches4dpa ( char *s0, char *s1, char *in_matrix, int gop, int gep, char *in_align_mode, Alignment *A);
 Alignment * align_two_sequences4dpa ( char *padded1, char *seq1, char *padded2, char *seq2,char *matrix, int gop, int gep, char *align_mode, Alignment *R);

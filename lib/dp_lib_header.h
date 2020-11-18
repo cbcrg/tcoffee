@@ -22,6 +22,7 @@
 #include "dp_lib/evaluate_for_domain.h"
 #include "dp_lib/evaluate_dirichlet.h"
 #include "dp_lib/evaluate.h"
+#include "dp_lib/phylo3d.h"
 #include "dp_lib/showpair.h"
 #include "dp_lib/fsa_dp.h"
 #include "dp_lib/pavie_dp.h"
