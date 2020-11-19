@@ -4500,7 +4500,6 @@ int dump_nfc (char *file, char *container)
 
 
 
-
 int printf_system_direct  (char *string, ...)
 {
   char *buf=NULL;
@@ -11153,3 +11152,16 @@ double km_kmeans_bs (double **data, int n, int dim, int k,double t, double **cen
    
   exit (0);
 }
+static int verbose_mode=1;
+int set_verbose(int mode)
+{
+  //0: quiet
+  //1: verbose
+  //2: pedantic
+  verbose_mode=mode;
+}
+int verbose()
+{
+  return verbose_mode;
+}
+

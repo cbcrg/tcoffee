@@ -59,21 +59,21 @@ double scan_maxd (p3D *D)
   if (!getenv ("REFERENCE_TREE"))
     {
       RT= compute_cw_tree(D->A);
-      fprintf ( stderr, "\n!#ref_tree= [cw] -- %s",tree2string (RT));
+      if (verbose())fprintf ( stderr, "\n!#ref_tree= [cw] -- %s",tree2string (RT));
     }
   else if ( getenv ("REFERENCE_TREE") && isfile(getenv ("REFERENCE_TREE")))
     {
       RT=main_read_tree (getenv ("REFERENCE_TREE"));
-      fprintf ( stderr, "\n!#ref_tree=%s", getenv ("REFERENCE_TREE"));
+      if (verbose())fprintf ( stderr, "\n!#ref_tree=%s", getenv ("REFERENCE_TREE"));
     }
   else
     {
       RT= compute_cw_tree(D->A);
       vfclose (tree2file (RT, S, "newick",vfopen(getenv ("REFERENCE_TREE"), "w")));
-      fprintf ( stderr, "\n!# ref_tree=%s [cw]", getenv ("REFERENCE_TREE"));
+      if (verbose())fprintf ( stderr, "\n!# ref_tree=%s [cw]", getenv ("REFERENCE_TREE"));
     }
   
-  fprintf ( stderr, "\n!# scan3D_max=%d", scan3D_max);
+  if (verbose())fprintf ( stderr, "\n!# scan3D_max=%d", scan3D_max);
   
   brf=0;
   bmaxd=D->extremed;
@@ -90,9 +90,9 @@ double scan_maxd (p3D *D)
 	  dist2nj_tree (D->dm, A->name, A->nseq, treeF);
 	  T=main_read_tree(treeF);
 	  rf=simple_tree_cmp(RT,T, S, 1);
-	  fprintf ( stderr, "\n!# Threshold = %3d Angstrom ==> %6.2f %% Similiarity with ref_tree -- Nsites: %d", a, rf, D->nsites) ;
+	  if (verbose())fprintf ( stderr, "\n!# Threshold = %3d Angstrom ==> %6.2f %% Similiarity with ref_tree -- Nsites: %d", a, rf, D->nsites) ;
 	  
-	  if ( rf>brf)
+	  if ( rf>=brf)
 	    {
 	      brf=rf;
 	      bmaxd=(double)a;
@@ -100,16 +100,16 @@ double scan_maxd (p3D *D)
 	}
       else
 	{
-	  fprintf ( stderr, "\n!# Threshold = %3d Angstrom ==> Missing Values in the distance matrix", a) ;
+	  if (verbose())fprintf ( stderr, "\n!# Threshold = %3d Angstrom ==> Missing Values in the distance matrix", a) ;
 	}
     }
   if (brf>0)
     {
-      fprintf ( stderr, "\n!# Optimal Threshold: %d Angstrom  ==> %.2f %% RF similarity with ref_tree\n", (int)bmaxd, brf);
+      if (verbose())fprintf ( stderr, "\n!# Optimal Threshold: %d Angstrom  ==> %.2f %% RF similarity with ref_tree\n", (int)bmaxd, brf);
     }
   else
     {
-      fprintf ( stderr, "\n!# WARNING -- Missing Values -- Could not find any suitable threshold - Use max value %d Angstrom -use a higher value for scan3D_max ", (int)bmaxd);
+      if (verbose())fprintf ( stderr, "\n!# WARNING -- Missing Values -- Could not find any suitable threshold - Use max value %d Angstrom -use a higher value for scan3D_max ", (int)bmaxd);
     }
   free_sequence (S, -1);
   
@@ -131,8 +131,10 @@ Alignment *phylo3d_gt (Alignment *inA, Constraint_list *CL)
   //set the parameters
   
   l=2*A->len_aln;
-  D->colrep=declare_int ((l*l-l)/2+1,2);
-
+  D->colrep=declare_int ((l*l-l)/2+1,3);
+  vfree(D->used_site);D->used_site=NULL;
+  free_int(D->used_site_pair, -1);D->used_site_pair=NULL;
+  
   S=aln2seq(A);
 
   if (D->maxd<MY_EPSILON)D->maxd=D->extremed*100+1;
@@ -174,7 +176,7 @@ Alignment *phylo3d_gt (Alignment *inA, Constraint_list *CL)
 	  
 	  
 	  D->dm[s1][s2]=D->dm[s2][s1]=pair2dist(D,s1,s2);
-	  output_completion (stderr,n,tot,1, "Guide Tree Computation");
+	  if (verbose())output_completion (stderr,n,tot,1, "Guide Tree Computation");
 	  
 	  //restaure data
 	  A->seq_al[s1]=buf_s1;
@@ -198,6 +200,8 @@ int free_3dD (p3D*D)
   free_arrayN((void***)D->dm3d,3);
   free_arrayN((void**)D->dm,2);
   free_arrayN ((void**)D->col,2);
+  vfree    (D->used_site);
+  free_int(D->used_site_pair, -1);
   vfree (D);
   return 1;
 }
@@ -249,7 +253,10 @@ p3D* fill_p3D (Alignment *A, Constraint_list *CL)
   if (D->maxd>=0 && D->maxd<MY_EPSILON)D->maxd=D->extremed*100;
   
   D->dm =declare_double(A->nseq, A->nseq);
+  D->nsites=-1;
   D->used_site=(int*)vcalloc (A->len_aln, sizeof (int));
+  D->nsitepairs=-1;
+  D->used_site_pair=declare_int (A->len_aln, A->len_aln);
   
   if (A->Tree) free_aln (A->Tree); A->Tree=NULL;
   A->Tree=declare_aln2(D->replicates+1, 0);
@@ -257,6 +264,49 @@ p3D* fill_p3D (Alignment *A, Constraint_list *CL)
   for (a=0; a<=D->replicates; a++)(A->Tree)->dmF_list[a]=vtmpnam (NULL);
   (A->Tree)->nseq=0;
   return D;
+}
+
+
+p3D * makerep (p3D *D, int mode)
+{
+  if (mode==0)      D->colrep=col2rep(D->col, D->colrep, D->N);
+  else if ( mode==1)D->colrep=col2bsrep(D->col, D->colrep, D->N);
+  return D;
+}
+
+
+int **col2rep (int **colin,int **colout, int ni)
+{
+  int i;
+  if (!colout)colout=declare_int (ni+1,3);
+  for (i=0; i<ni; i++)
+    {
+      colout[i][0]=colin[i][0];
+      colout[i][1]=colin[i][1];
+    }
+  colout[i][0]=-1;
+  return colout;
+}
+int **col2bsrep (int **colin,int **colout, int ni)
+{
+  int i;
+  if (!colout)colout=declare_int (ni+1,3);
+  for (i=0; i<ni; i++)
+    {
+      int ri=rand()%ni;
+      colout[i][0]=colin[ri][0];
+      colout[i][1]=colin[ri][1];
+    }
+  colout[i][0]=-1;
+  return colout;
+}
+
+int **col2scramble_col (int **col, int ni)
+{
+  int i;
+  for (i=0; i<ni; i++)col[i][2]=rand()%(ni*2);
+  sort_int (col, 3, 2, 0, ni-1);
+  return col;
 }
 int col2n (int **col)
 {
@@ -267,28 +317,20 @@ int col2n (int **col)
   while (col[i++][0]!=-1);
   return i-1;
 }
-
-p3D * makerep (p3D *D, int mode)
-{
-  D->colrep=col2colrep(D->col, D->colrep, D->N, mode);
-  return D;
-}
-int **col2colrep (int **colin,int **colout, int ni, int mode)
+int   col2max(int **col)
 {
   int i;
-  
-  if (!colout)colout=declare_int (ni+1,2);
-  for (i=0; i<ni; i++)
+  int max=0;
+  while (col[i][0]!=-1)
     {
-      int ri=(mode)?rand ()%ni:i;
-      colout[i][0]=colin[ri][0];
-      colout[i][1]=colin[ri][1];
+      int c1=col[i][0];
+      int c2=col[i][1];
+      if ( c1>max)max=c1;
+      if ( c2>max)max=c2;
+      i++;
     }
-  colout[i][0]=-1;
-  return colout;
+  return max;
 }
-
-
 Alignment * addtree (p3D *D,Alignment *A)
 {
   static char *treeF=vtmpnam (NULL);
@@ -305,6 +347,17 @@ Alignment * addtree (p3D *D,Alignment *A)
   fp=vfopen (TREEA->dmF_list[TREEA->nseq], "w");
   
   fprintf ( fp, "%d \n", A->nseq);
+  if (getenv ("PRINT_NSITES"))
+    {
+      float p1=(float)(D->nsites*100)/(float)A->len_aln;
+      float p2=(float)(D->nsitepairs*100)/(float)(A->len_aln*A->len_aln-A->len_aln);
+     
+      
+      fprintf (fp, "!# MAXD: %.2f  Angstrom",(float)D->maxd/100);
+      if (D->nsites >-1)   fprintf (fp, "-- NSITES: %d  %.2f%%",D->nsites, p1);
+      if (D->nsitepairs>-1)fprintf (fp, "-- NSITEPAIRS: %d %.2f%%", D->nsitepairs,p2);
+      fprintf (fp, "\n");
+    }
   for ( s1=0; s1<A->nseq;s1++)
     {
       fprintf (fp, "%-*.*s ", ml,ml,A->name[s1]);
@@ -313,7 +366,7 @@ Alignment * addtree (p3D *D,Alignment *A)
       fprintf (fp, "\n");
     }
   fprintf (fp, "\n");
-  if (getenv ("PRINT_NSITES"))fprintf (fp, "!# NSITES: %d\n", D->nsites);
+  
   vfclose (fp);
   TREEA->nseq++;
   return TREEA;
@@ -420,7 +473,7 @@ int filter_columns_with_gap (int **col, Alignment *B, float max_gap)
  int** msa2column_list (Alignment *B, int **col)
 {
   int i, j, n;
-  if (!col)col=declare_int(((B->len_aln*B->len_aln)-B->len_aln)/2+1,2);
+  if (!col)col=declare_int(((B->len_aln*B->len_aln)-B->len_aln)/2+1,3);
   for (n=0,i=1; i<B->len_aln-1; i++)
     for (j=i+1; j<B->len_aln; j++, n++)
       {
@@ -522,9 +575,18 @@ int aln2dm (p3D *D, Alignment *A)
 {
   int rv=1;
   int s1, s2;
-  int c, t;
+  int c1,c2, t;
     
-  for (c=0; c<A->len_aln; c++)D->used_site[c]=0;
+  if (D->used_site)
+    {
+      for (c1=0; c1<A->len_aln; c1++)
+	{
+	  D->used_site[c1]=0;
+	  for ( c2=0; c2<A->len_aln; c2++)
+	    D->used_site_pair[c1][c2]=0;
+	}
+    }
+  
   
   for (s1=0; s1<A->nseq-1; s1++)
     for (s2=s1+1; s2<A->nseq; s2++)
@@ -532,8 +594,17 @@ int aln2dm (p3D *D, Alignment *A)
 	D->dm[s1][s2]=D->dm[s2][s1]=pair2dist (D,s1, s2);
 	if (D->dm[s1][s2]<-99)rv=0;
       }
-  for (D->nsites=0,c=0; c<A->len_aln; c++)
-    D->nsites+=D->used_site[c];
+  if ( D->used_site)
+    {
+      for (D->nsites=0,D->nsitepairs=0,c1=0; c1<A->len_aln; c1++)
+	{
+	  D->nsites+=D->used_site[c1];
+	  for (c2=0; c2<A->len_aln; c2++)
+	    {
+	      D->nsitepairs+=D->used_site_pair[c1][c2];
+	    }
+	}
+    }
   
   return rv;
 }
@@ -582,7 +653,8 @@ double pair2dist(p3D *D, int s1, int s2)
       
       score+=rscore;
       max+=rmax;
-      D->used_site[c1]=D->used_site[c2]=1;
+      if (D->used_site)D->used_site[c1]=D->used_site[c2]=1;
+      if (D->used_site_pair)D->used_site_pair[c1][c2]=D->used_site_pair[c2][c1]=1;
 
     }
   
@@ -594,13 +666,24 @@ double phylo3d2score (double w1, double w2, double *rscore, double *rmax)
 {
   double we=0;
   double sc=0;
-    
-  static int   distance_mode=atoigetenv ("THREED_TREE_MODE");
-  static double distance_modeE=atofgetenv ("THREED_TREE_MODE_EXP");
-  static int no_weights=atoigetenv ("THREED_TREE_NO_WEIGHTS");
+  static int setparam;
+  static int   distance_mode;
+  static double distance_modeE;
+  static int no_weights;
   
-  if ( distance_modeE<MY_EPSILON)distance_modeE=3;
-			   
+
+  if (!setparam)
+    {
+      setparam=1;
+      if (getenv ("THREED_TREE_MODE"))distance_mode=atoigetenv ("THREED_TREE_MODE");
+      else distance_mode=4;
+      
+      if (getenv ("THREED_TREE_MODE_EXP"))distance_modeE=atofgetenv ("THREED_TREE_MODE_EXP");
+      else distance_modeE=2;
+
+      if (getenv ("THREED_TREE_NO_WEIGHTS"))no_weights=atoigetenv ("THREED_TREE_NO_WEIGHTS");
+      else no_weights=1;
+    }
 			   
    //first attempt-- Major issue because non symetrical and therefore not a distance
    if (!distance_mode)

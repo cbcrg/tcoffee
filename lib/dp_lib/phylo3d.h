@@ -21,6 +21,8 @@ struct p3D
       int **colrep;
       int *used_site;
       int nsites;
+      int **used_site_pair;
+      int nsitepairs;
       
       
 
@@ -35,6 +37,10 @@ p3D* fill_p3D (Alignment *A, Constraint_list *CL);
 int col2n (int **col);
 p3D * makerep (p3D *D, int mode);
 int **col2colrep (int **colin,int **colout, int ni, int mode);
+
+int **col2rep   (int **colin,int **colout, int ni);
+int **col2bsrep (int **colin, int **colout, int ni);
+
 Alignment * addtree (p3D *D,Alignment *A);
 int filter_columns_with_dist(Alignment *B, int **pos,int **col,int ***dm, double maxd);
 int filter_columns_with_dist_strict(Alignment *B, int **pos,int **col,int ***dm, double maxd);

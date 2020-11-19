@@ -855,3 +855,6 @@ double    km_data2evaluate ( double **d, int n, int dim);
 double km_kmeans_bs (double **data, int n, int dim, int k,double t, double **centroids, int nrounds);
 
 int mat2process (int n, char *flist[]);
+int set_verbose(int mode);
+int verbose();
+
