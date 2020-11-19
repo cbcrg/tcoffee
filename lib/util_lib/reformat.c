@@ -367,11 +367,12 @@ int seq_reformat ( int argc, char **in_argv)
 		fprintf ( stdout, "\n     +phylo3D.<tree|gtree>Replaces evaluate3D for the estimation of 3D trees\n");
 		fprintf ( stdout, "\n        +enb <int>...........Specifies the number of excluded nb (def=3)\n");
 		fprintf ( stdout, "\n        +replicates <int>....Specifies the number of replicates (def=0)\n");
-		fprintf ( stdout, "\n        +maxd <int>..........Specifies the distance cutoff (def=maximum distance on provided PDBs)\n");
+		fprintf ( stdout, "\n        +maxd <int|scan>.....Specifies the distance cutoff (def=maximum distance on provided PDBs)\n");
 		fprintf ( stdout, "\n        +strict_maxsd........ALL distances within pairs of coolumns must be <=maxd to be kept\n");
 		fprintf ( stdout, "\n        +align_method.<st>...Specifies which T-Coffee method in gtree, use sa_pair for struc based aln\n");
 		fprintf ( stdout, "\n        +columns4tree.<file>.Specifies the columns to be used <c1> <c2> on each line (1-len_aln)\n");
 		fprintf ( stdout, "\n        +max_gap.<float>.....Specifies the maximum fraction of gaps for columns to be considered (<=)\n");
+		fprintf ( stdout, "\n        +print_nsites........adds to the dm output a line specifying the number of sites used\n");
 		
 		
 		
@@ -11712,10 +11713,7 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	   if (!ACTION(1))cputenv ("scan3D=100");
 	   else cputenv ("scan3D=%s",ACTION(1));
 	 }
-       else if (strm (action, "print_nsites"))
-	 {
-	   cputenv ("PRINT_NSITES=1");
-	 }
+       else if (strm (action, "print_nsites"))cputenv ("PRINT_NSITES=1");
        else if ( strm(action, "ref_tree"))cputenv ("REFERENCE_TREE=%s", ACTION(1));
        else if ( strm(action, "replicates"))cputenv ("REPLICATES_4_TCOFFEE=%s",ACTION(1));
        else if ( strm(action, "enb"))cputenv ("enb_4_TCOFFEE=%s",ACTION(1));
