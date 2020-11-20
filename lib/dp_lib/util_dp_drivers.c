@@ -2815,10 +2815,15 @@ Alignment * align_two_structures ( Sequence *S, int s1, int s2, char *mode)
   FILE *fp;
   
   fp=vfopen (in, "w");
-  fprintf (fp, ">%s _P_ %s\n%s",S->name[s1],seq2T_value(S,s1, "template_name", "_P_"),S->seq[s1]);
-  fprintf (fp, ">%s _P_ %s\n%s",S->name[s2],seq2T_value(S,s2, "template_name", "_P_"),S->seq[s2]);
+
+  
+  fprintf (fp, ">%s _P_ %s\n%s\n",S->name[s1],seq2T_value(S,s1, "template_file", "_P_"),S->seq[s1]);
+  fprintf (fp, ">%s _P_ %s\n%s\n",S->name[s2],seq2T_value(S,s2, "template_file", "_P_"),S->seq[s2]);
   vfclose (fp);
-  printf_system ("t_coffee -in %s -method %s -outfile=%s -output fasta_aln -quiet >/dev/null 2>/dev/null",in,mode, out);
+
+  
+  if (verbose()==2)printf_system ("t_coffee -in %s -template_file %s -method %s -outfile=%s -output fasta_aln",in,in,mode, out);
+  else printf_system             ("t_coffee -in %s -template_file %s -method %s -outfile=%s -output fasta_aln -quiet >/dev/null 2>/dev/null",in,in,mode, out);
   return quick_read_fasta_aln (NULL,out);
 }
   

@@ -153,7 +153,7 @@ Alignment *phylo3d_gt (Alignment *inA, Constraint_list *CL)
 	  rs2=name_is_in_hlist (A->name[s2], S->name, S->nseq); 
 
 	  if (!align_method)B=align_two_sequences (S->seq[s1], S->seq[s2], "blosum62mt", -8, -1, "myers_miller_pair_wise");
-	  else B=align_two_structures  (S, rs1, rs2,align_method);
+	  else B=align_two_structures  (CL->S, rs1, rs2,align_method);
 	
 
 	  
