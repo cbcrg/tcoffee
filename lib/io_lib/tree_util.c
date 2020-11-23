@@ -8354,8 +8354,70 @@ int ktree2klist (KT_node K, KT_node *KL, int *n)
   return n[0];
 }
 
+Alignment * sorttrim (Alignment *A,int ntrim)
+{
+  int **lu, *max, *used;
+  int s, c;
+  FILE *fp;
+  char *tmp=vtmpnam (NULL);
+  int maxnseq;
+  int newn;
+  int bin,nbin=100;
+  if (!A) return A;
+  else if (A->nseq<=ntrim)return A;
+  
 
-Sequence * regtrim (Sequence *S, NT_node T, int N)
+  
+
+  lu=declare_int     (nbin, A->nseq);
+  max =(int*)vcalloc (nbin, sizeof (int));
+  used=(int*)vcalloc (nbin, sizeof (int));
+    
+  for (maxnseq=0,s=1; s<A->nseq; s++)
+    {
+      int bin, n, t;
+      
+      for (t=0, n=0,c=0; c<A->len_aln; c++)
+	{
+	  char c1=A->seq_al[0][c]; 
+	  char c2=A->seq_al[s][c]; 
+	  
+
+	  if (c1=='-' || c2=='-')continue;
+	  if (c1!=c2)n++;
+	  t++;
+	}
+      if (t==0)continue;
+      bin=((n*100)/t)%nbin;
+      lu[bin][max[bin]++]=s;
+      maxnseq++;
+    }
+  
+  fp=vfopen (tmp, "w");
+  fprintf (fp, ">%s\n%s\n",A->name[0], A->seq_al[0]);
+  
+  newn=0;
+  while ( newn<maxnseq && newn<ntrim)
+    {
+      for (bin=0; bin<nbin; bin++)
+	{
+	  if (used[bin]==max[bin])continue;
+	  else s=lu[bin][used[bin]++];
+	  fprintf (fp, ">%s\n%s\n",A->name[s], A->seq_al[s]);
+	  newn++;
+	}
+    }
+  vfclose (fp);
+  
+  vfree (max);
+  vfree (used);
+  free_int (lu, -1);
+  return quick_read_fasta_aln (A, tmp);
+}
+
+
+
+Sequence  * regtrim (Sequence *S, NT_node T, int N)
 {
   NT_node *CL, *NL;
   int left, right, nc,nn, a,s,terminal;

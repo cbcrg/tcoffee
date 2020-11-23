@@ -208,7 +208,7 @@ int free_3dD (p3D*D)
 
 p3D* fill_p3D (Alignment *A, Constraint_list *CL)
 {
-  int a;
+  int a,b;
   p3D *D=(p3D*)vcalloc ( sizeof (p3D), 1);
   D->A=A;
   D->CL=CL;
@@ -240,6 +240,8 @@ p3D* fill_p3D (Alignment *A, Constraint_list *CL)
   
 
   D->pos=aln2pos_simple (A, A->nseq);
+
+  
   D->dm3d=aln2dm3d (A, CL, &D->extremed);
   if (getenv ("maxd_4_TCOFFEE"))
     {
@@ -395,8 +397,8 @@ int filter_columns_with_dist_strict(Alignment *B, int **pos,int **col, int***dm,
 	  int r1=pos[s][c1]-1;
 	  int r2=pos[s][c2]-1;
 	  if (r1<r2){int rb=r1; r1=r2;r2=rb;}
-	  
-	  if (r1>=0 && r2>=0 && dm[s][r1-1][r2-1]<=maxd)count++;
+	  	  
+	  if (r1>=0 && r2>=0 && dm[s][r1][r2]<=maxd)count++;
 	}
       if ( count==B->nseq)
 	{
@@ -657,8 +659,7 @@ double pair2dist(p3D *D, int s1, int s2)
       if (D->used_site_pair)D->used_site_pair[c1][c2]=D->used_site_pair[c2][c1]=1;
 
     }
-  
-  if (max<MY_EPSILON)score=-100;
+    if (max<MY_EPSILON)score=-100;
   else score=(double)100*((double)1 - (score/max));
   return score;
 }

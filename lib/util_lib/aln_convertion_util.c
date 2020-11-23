@@ -6277,6 +6277,74 @@ char *trim_template_file (char *file, Sequence *S);//Remove from template file a
  * \param[in,out] S Sequence object, will be modified.
  * \param[in] template_list String containing the template file or commands how to get one
  */
+static int ntemp;
+Sequence * seq2mmseq_template_seq(Sequence *S,  Fname *F)
+{
+  /*Expected format for the template file:
+    >seq_name _X_ Target_template
+    X: S for Structures
+    G for genomes (Exoset)
+    When alternative templates are given for a sequence, the first one superseeds all the others
+  */
+  
+  
+  /*Fill the sequences*/
+  /*1: No template*/
+  char buf[1000];
+ 
+  int PmC,PmI,PMI;
+  int BmC,BmI,BMI, Trim;
+  char *server;
+  char *pdb_db,*prot_db;
+  char pdb_type[100];
+  char *p;
+  int remove_template_file=0;
+  static char *seqdb;
+ 
+  static char *seq=vtmpnam (NULL);
+  static char *outfile=vtmpnam(NULL);
+  static char *tf=NULL;
+  static char *command;
+  ntemp++;
+
+  remove_template_file=get_int_variable ("remove_template_file");
+  server=get_string_variable ("blast_server");
+  pdb_db=get_string_variable ("pdb_db");
+  prot_db=get_string_variable ("prot_db");         
+
+  PmI=get_int_variable ("pdb_min_sim");
+  PMI=get_int_variable ("pdb_max_sim");
+  PmC=get_int_variable ("pdb_min_cov");
+
+  BmI=get_int_variable ("prot_min_sim");
+  BMI=get_int_variable ("prot_max_sim");
+  BmC=get_int_variable ("prot_min_cov");
+  Trim=get_int_variable("psitrim");
+  
+  output_fasta_seqS(seq,S);
+  if (!F)F=parse_fname (S->file[0]);
+
+
+  
+  tf=csprintf (tf, "%s%s_F_%d.template_list", F->path,F->name,ntemp);
+  fprintf ( stderr, "\n! Running MMSEQ against %s -- This may take a while...\n", prot_db);
+  command=csprintf ( command, "t_coffee -other_pg mmseqs2prf.pl -q %s -db %s -o %s -template_file %s  -cachedb %s -quiet", seq, prot_db,outfile, tf, get_cache_dir());
+  printf_system (command);
+  if ( check_file_exists (tf) && format_is_fasta(tf))
+	{
+	  S=seq2template_seq (S,tf, F);
+	  trim_template_file (tf,S);
+	}
+  else
+    {
+      
+      add_warning (stderr, "Could not Run %s to find templates[%s](unforked mode)\n",command, PROGRAM);
+      return NULL;
+    }
+  
+  vfree (command);
+  return S;
+}
 Sequence * seq2template_seq ( Sequence *S, char *template_list, Fname *F)
 {
   /*Expected format for the template file:
@@ -6314,6 +6382,8 @@ Sequence * seq2template_seq ( Sequence *S, char *template_list, Fname *F)
   BmC=get_int_variable ("prot_min_cov");
   Trim=get_int_variable("psitrim");
   
+  if (template_list && strm(template_list, "MMSEQ"))return seq2mmseq_template_seq(S,F);
+      
 
   if (strm (prot_db, "dataset") || strm (prot_db, "self"))
     {
@@ -6660,7 +6730,7 @@ Sequence * seq2template_seq ( Sequence *S, char *template_list, Fname *F)
 
   else if (strstr (template_list, "SCRIPT_"))
     {
-	  char x[299];
+      char x[299];
       char *tmp1,*command;
       Alignment *A;
       char outfile[1000];
