@@ -389,18 +389,24 @@ int filter_columns_with_dist_strict(Alignment *B, int **pos,int **col, int***dm,
   while (col[i][0]!=-1)
     {
       int count;
+      int max;
       int c1=col[i][0];
       int c2=col[i][1];
       
-      for (count=0,s=0; s<B->nseq; s++)
+      for (max=0,count=0,s=0; s<B->nseq; s++)
 	{
 	  int r1=pos[s][c1]-1;
 	  int r2=pos[s][c2]-1;
 	  if (r1<r2){int rb=r1; r1=r2;r2=rb;}
-	  	  
-	  if (r1>=0 && r2>=0 && dm[s][r1][r2]<=maxd)count++;
+	  
+	  if (r1>=0 && r2>=0)
+	    {
+	      max++;
+	      if (dm[s][r1][r2]<=maxd)count++;
+	    }
+	  
 	}
-      if ( count==B->nseq)
+      if ( count==max)
 	{
 	  col[ni][0]=c1;
 	  col[ni][1]=c2;
