@@ -51,6 +51,9 @@ double scan_maxd (p3D *D)
   float bmaxd=1500;
   Sequence *S=aln2seq(D->A);
   Alignment *A=D->A;
+  int strict;
+  int bstrict=0;
+  int bnsites=0;
   int scan3D_min=(getenv("min_maxd_4_TCOFFEE"))?atof(getenv("min_maxd_4_TCOFFEE")):5;
   int scan3D_max=(getenv("max_maxd_4_TCOFFEE"))?atof(getenv("max_maxd_4_TCOFFEE")):D->extremed;
   
@@ -79,23 +82,29 @@ double scan_maxd (p3D *D)
   bmaxd=D->extremed;
  
   for (a=scan3D_min; a<scan3D_max; a++)
-    {
+    for (strict=0; strict<=1; strict++)
+      {
       static char *treeF=vtmpnam (NULL);
       D->maxd=(double)a*100;
       makerep(D,0);
       filter_columns_with_dist (A,D->pos, D->colrep, D->dm3d, D->maxd);
+      
+      cputenv ("strict_maxd_4_TCOFFEE=%d", strict);
+      
       
       if (aln2dm(D,A))
 	{
 	  dist2nj_tree (D->dm, A->name, A->nseq, treeF);
 	  T=main_read_tree(treeF);
 	  rf=simple_tree_cmp(RT,T, S, 1);
-	  if (verbose())fprintf ( stderr, "\n!# Threshold = %3d Angstrom ==> %6.2f %% Similiarity with ref_tree -- Nsites: %d", a, rf, D->nsites) ;
+	  if (verbose())fprintf ( stderr, "\n!# Threshold = %3d Angstrom ==> %6.2f %% Similiarity with ref_tree -- Nsites: %d strict_maxd: %d", a, rf, D->nsites, strict) ;
 	  
 	  if ( rf>=brf)
 	    {
 	      brf=rf;
 	      bmaxd=(double)a;
+	      bstrict=strict;
+	      bnsites=D->nsites;
 	    }
 	}
       else
@@ -105,14 +114,14 @@ double scan_maxd (p3D *D)
     }
   if (brf>0)
     {
-      if (verbose())fprintf ( stderr, "\n!# Optimal Threshold: %d Angstrom  ==> %.2f %% RF similarity with ref_tree\n", (int)bmaxd, brf);
+      if (verbose())fprintf ( stderr, "\n!# Optimal Threshold: %d Angstrom  ==> %.2f %% RF similarity with ref_tree +strict_maxd: %d Nsites: %d\n", (int)bmaxd, brf,bstrict,bnsites);
     }
   else
     {
       if (verbose())fprintf ( stderr, "\n!# WARNING -- Missing Values -- Could not find any suitable threshold - Use max value %d Angstrom -use a higher value for scan3D_max ", (int)bmaxd);
     }
   free_sequence (S, -1);
-  
+  cputenv ("strict_maxd_4_TCOFFEE=%d", bstrict);
   return bmaxd*100;//in picometers
 }
 
@@ -375,7 +384,7 @@ Alignment * addtree (p3D *D,Alignment *A)
 }
 int filter_columns_with_dist(Alignment *B, int **pos,int **col, int***dm, double maxd)
 {
-  if ( getenv ("strict_maxd_4_TCOFFEE"))return filter_columns_with_dist_strict(B,pos,col,dm,maxd);
+  if ( getenv ("strict_maxd_4_TCOFFEE") && atoi(getenv ("strict_maxd_4_TCOFFEE"))==1)return filter_columns_with_dist_strict(B,pos,col,dm,maxd);
   else return filter_columns_with_dist_relaxed(B,pos,col,dm,maxd);
 } 
   
@@ -750,9 +759,10 @@ double phylo3d2score (double w1, double w2, double *rscore, double *rmax)
    //If 
    rmax[0]=we;
    rscore[0]=pow(sc,distance_modeE)*we;
-   return rscore[0]/rmax[0];
-   
+   return rscore[0]/rmax[0];   
 }
+
+
 
 
 
