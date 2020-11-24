@@ -27,6 +27,7 @@ Alignment *phylo3d (Alignment *inA, Constraint_list *CL)
   
   //Filter columns with distances
   if (D->maxd<MY_EPSILON)D->maxd=scan_maxd(D);
+
   D->N=filter_columns_with_dist (A,D->pos, D->col,D->dm3d,D->maxd);
       
   //Compute the first tree or DM
@@ -56,7 +57,7 @@ double scan_maxd (p3D *D)
   int bnsites=0;
   int scan3D_min=(getenv("min_maxd_4_TCOFFEE"))?atof(getenv("min_maxd_4_TCOFFEE")):5;
   int scan3D_max=(getenv("max_maxd_4_TCOFFEE"))?atof(getenv("max_maxd_4_TCOFFEE")):D->extremed;
-  
+  int start, end;
   int a;
 
   if (!getenv ("REFERENCE_TREE"))
@@ -81,44 +82,54 @@ double scan_maxd (p3D *D)
   brf=0;
   bmaxd=D->extremed;
  
+   
+  if (getenv ("soft_maxd_4_TCOFFEE")){start=0; end=0;}
+  else if ( getenv ("strict_maxd_4_TCOFFEE")){start=1; end=1;}
+  else{start=0; end=1;}
+  
   for (a=scan3D_min; a<scan3D_max; a++)
-    for (strict=0; strict<=1; strict++)
-      {
-      static char *treeF=vtmpnam (NULL);
-      D->maxd=(double)a*100;
-      makerep(D,0);
-      filter_columns_with_dist (A,D->pos, D->colrep, D->dm3d, D->maxd);
-      
-      cputenv ("strict_maxd_4_TCOFFEE=%d", strict);
-      
-      
-      if (aln2dm(D,A))
+    {
+     
+      for (strict=start; strict<=end; strict++)
 	{
-	  dist2nj_tree (D->dm, A->name, A->nseq, treeF);
-	  T=main_read_tree(treeF);
-	  rf=simple_tree_cmp(RT,T, S, 1);
-	  if (verbose())fprintf ( stderr, "\n!# Threshold = %3d Angstrom ==> %6.2f %% Similiarity with ref_tree -- Nsites: %d strict_maxd: %d", a, rf, D->nsites, strict) ;
+	  static char *treeF=vtmpnam (NULL);
+	  D->maxd=(double)a*100;
+	  cputenv ("strict_maxd_4_TCOFFEE=%d", strict);
+	  makerep(D,0);
+	  filter_columns_with_dist (A,D->pos, D->colrep, D->dm3d, D->maxd);
 	  
-	  if ( rf>=brf)
+	  
+	  
+	  
+	  if (aln2dm(D,A))
 	    {
-	      brf=rf;
-	      bmaxd=(double)a;
-	      bstrict=strict;
-	      bnsites=D->nsites;
+	      dist2nj_tree (D->dm, A->name, A->nseq, treeF);
+	      T=main_read_tree(treeF);
+	      rf=simple_tree_cmp(RT,T, S, 1);
+	      
+	      if (verbose())fprintf ( stderr, "\n!# scan       : +maxd %3d %-12s ==> RF vs reftree %5.2f Nsites: %5d", a, (strict)?"+strict_maxd":"+soft_maxd", (float) 100-rf,D->nsites);
+			      
+	      if ( rf>=brf)
+		{
+		  brf=rf;
+		  bmaxd=(double)a;
+		  bstrict=strict;
+		  bnsites=D->nsites;
+		}
 	    }
-	}
-      else
-	{
-	  if (verbose())fprintf ( stderr, "\n!# Threshold = %3d Angstrom ==> Missing Values in the distance matrix", a) ;
+	  else
+	    {
+	      if (verbose())fprintf ( stderr, "\n!# Threshold = %3d Angstrom ==> Missing Values in the distance matrix", a) ;
+	    }
 	}
     }
   if (brf>0)
     {
-      if (verbose())fprintf ( stderr, "\n!# Optimal Threshold: %d Angstrom  ==> %.2f %% RF similarity with ref_tree +strict_maxd: %d Nsites: %d\n", (int)bmaxd, brf,bstrict,bnsites);
+      if (verbose())fprintf ( stderr, "\n!# scan result: +maxd %3d %-12s ==> RF vs reftree %5.2f Nsites: %5d\n", (int)bmaxd, (strict)?"strict_maxd":"soft_maxd", (float) 100-brf,bnsites);
     }
   else
     {
-      if (verbose())fprintf ( stderr, "\n!# WARNING -- Missing Values -- Could not find any suitable threshold - Use max value %d Angstrom -use a higher value for scan3D_max ", (int)bmaxd);
+      if (verbose())fprintf ( stderr, "\n!# WARNING -- Missing Values -- Could not find any suitable threshold - Use max value %d Angstrom", (int)bmaxd);
     }
   free_sequence (S, -1);
   cputenv ("strict_maxd_4_TCOFFEE=%d", bstrict);
@@ -365,8 +376,8 @@ Alignment * addtree (p3D *D,Alignment *A)
      
       
       fprintf (fp, "!# MAXD: %.2f  Angstrom",(float)D->maxd/100);
-      if (D->nsites >-1)   fprintf (fp, "-- NSITES: %d  %.2f%%",D->nsites, p1);
-      if (D->nsitepairs>-1)fprintf (fp, "-- NSITEPAIRS: %d %.2f%%", D->nsitepairs,p2);
+      if (D->nsites >-1)   fprintf (fp, " -- NSITES: %d  %.2f%%",D->nsites, p1);
+      if (D->nsitepairs>-1)fprintf (fp, " -- NSITEPAIRS: %d %.2f%%", D->nsitepairs,p2);
       fprintf (fp, "\n");
     }
   for ( s1=0; s1<A->nseq;s1++)

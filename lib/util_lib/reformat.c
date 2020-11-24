@@ -370,7 +370,9 @@ int seq_reformat ( int argc, char **in_argv)
 		fprintf ( stdout, "\n        +enb <int>..............Specifies the number of excluded nb (def=3)\n");
 		fprintf ( stdout, "\n        +replicates <int>.......Specifies the number of replicates (def=0)\n");
 		fprintf ( stdout, "\n        +maxd <int|scan>........Specifies the distance cutoff (def=maximum distance on provided PDBs)\n");
-		fprintf ( stdout, "\n        +strict_maxd............ALL distances within pairs of columns must be <=maxd to be kept\n");
+		fprintf ( stdout, "\n        +strict_maxd............ALL distances within pairs of columns must be <=maxd for a pair to be kept\n");
+		fprintf ( stdout, "\n        +soft_maxd..............ANY distances within pairs of columns must be <=maxd for a pair to be kept\n");
+		
 		fprintf ( stdout, "\n        +align_method.<st1 st2>.Specifies which T-Coffee method in gtree, use sa_pair for struc based aln\n");
 		fprintf ( stdout, "\n        +columns4tree.<file>....Specifies the columns to be used <c1> <c2> on each line (1-len_aln)\n");
 		fprintf ( stdout, "\n        +max_gap.<float>........Specifies the maximum fraction of gaps for columns to be considered (<=)\n");
@@ -11727,6 +11729,8 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
        else if ( strm(action, "max_maxd"))cputenv ("max_maxd_4_TCOFFEE=%s",ACTION(1));
        else if ( strm(action, "min_maxd"))cputenv ("min_maxd_4_TCOFFEE=%s",ACTION(1));
        else if ( strm(action, "strict_maxd"))cputenv ("strict_maxd_4_TCOFFEE=%s",ACTION(1));
+       else if ( strm(action, "soft_maxd"))cputenv ("soft_maxd_4_TCOFFEE=%s",ACTION(1));
+       
        else if ( strm(action, "align_method"))
 	 {
 	   char *ml=NULL;
