@@ -86,11 +86,9 @@ double scan_maxd (p3D *D)
   if (getenv ("soft_maxd_4_TCOFFEE")){start=0; end=0;}
   else if ( getenv ("strict_maxd_4_TCOFFEE")){start=1; end=1;}
   else{start=0; end=1;}
-  
-  for (a=scan3D_min; a<scan3D_max; a++)
+  for (strict=start; strict<=end; strict++)
     {
-     
-      for (strict=start; strict<=end; strict++)
+      for (a=scan3D_min; a<scan3D_max; a++)
 	{
 	  static char *treeF=vtmpnam (NULL);
 	  D->maxd=(double)a*100;
@@ -98,18 +96,15 @@ double scan_maxd (p3D *D)
 	  makerep(D,0);
 	  filter_columns_with_dist (A,D->pos, D->colrep, D->dm3d, D->maxd);
 	  
-	  
-	  
-	  
 	  if (aln2dm(D,A))
 	    {
 	      dist2nj_tree (D->dm, A->name, A->nseq, treeF);
 	      T=main_read_tree(treeF);
 	      rf=simple_tree_cmp(RT,T, S, 1);
 	      
-	      if (verbose())fprintf ( stderr, "\n!# scan       : +maxd %3d %-12s ==> RF vs reftree %5.2f Nsites: %5d", a, (strict)?"+strict_maxd":"+soft_maxd", (float) 100-rf,D->nsites);
+	      if (verbose())fprintf ( stderr, "\n!# scan        : +maxd %3d %-12s ==> RF vs reftree %5.2f Nsites: %5d", a, (strict)?"+strict_maxd":"+soft_maxd", (float) 100-rf,D->nsites);
 			      
-	      if ( rf>=brf)
+	      if ( rf>brf || (rf==brf && D->nsites>bnsites) || (rf==brf && (double)a>=bmaxd))
 		{
 		  brf=rf;
 		  bmaxd=(double)a;
@@ -125,11 +120,11 @@ double scan_maxd (p3D *D)
     }
   if (brf>0)
     {
-      if (verbose())fprintf ( stderr, "\n!# scan result: +maxd %3d %-12s ==> RF vs reftree %5.2f Nsites: %5d\n", (int)bmaxd, (strict)?"strict_maxd":"soft_maxd", (float) 100-brf,bnsites);
+      if (verbose())fprintf ( stderr, "\n!# scan result : +maxd %3d %-12s ==> RF vs reftree %5.2f Nsites: %5d\n", (int)bmaxd, (strict)?"+strict_maxd":"+soft_maxd", (float) 100-brf,bnsites);
     }
   else
     {
-      if (verbose())fprintf ( stderr, "\n!# WARNING -- Missing Values -- Could not find any suitable threshold - Use max value %d Angstrom", (int)bmaxd);
+      if (verbose())fprintf ( stderr, "\n!# WARNING -- Missing Values -- Could not find any suitable threshold - Use max value +maxd %d Angstrom", (int)bmaxd);
     }
   free_sequence (S, -1);
   cputenv ("strict_maxd_4_TCOFFEE=%d", bstrict);
