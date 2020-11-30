@@ -179,6 +179,7 @@ quote="'"'"
 SCRIPT_LIB_OBJECTS=\
 	msa2bootstrap.pl\
 	tc_generic_method.pl\
+	mmseqs2prf.pl\
 	dynamic.pl\
 	rnapdb2protpdb.pl\
 	generic_method.tc_method\
@@ -220,6 +221,10 @@ dynamic.pl:\
 	$(SCRIPT_LIB)/dynamic.pl
 	cp $(SCRIPT_LIB)/dynamic.pl .
 	echo "my $(dollar)program=$(quote)$(PROGRAM) ($(VERSION))$(quote);">> dynamic.pl
+mmseqs2prf.pl:\
+	$(SCRIPT_LIB)/mmseqs2prf.pl
+	cp $(SCRIPT_LIB)/mmseqs2prf.pl .
+	echo "my $(dollar)program=$(quote)$(PROGRAM) ($(VERSION))$(quote);">> mmseqs2prf.pl
 rnapdb2protpdb.pl:\
 	$(SCRIPT_LIB)/rnapdb2protpdb.pl
 	cp $(SCRIPT_LIB)/rnapdb2protpdb.pl .

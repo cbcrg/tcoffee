@@ -104,12 +104,13 @@ double scan_maxd (p3D *D)
 	      
 	      if (verbose())fprintf ( stderr, "\n!# scan        : +maxd %3d %-12s ==> RF vs reftree %5.2f Nsites: %5d", a, (strict)?"+strict_maxd":"+soft_maxd", (float) 100-rf,D->nsites);
 			      
-	      if ( rf>brf || (rf==brf && D->nsites>bnsites) || (rf==brf && (double)a>=bmaxd))
+	      if ((!getenv ("first_maxd_4_TCOFFEE") && (rf>brf || (rf==brf && D->nsites>bnsites) || (rf==brf && (double)a>=bmaxd))) || ((rf>brf)))
 		{
 		  brf=rf;
 		  bmaxd=(double)a;
 		  bstrict=strict;
 		  bnsites=D->nsites;
+		  fprintf (stderr, "***");
 		}
 	    }
 	  else

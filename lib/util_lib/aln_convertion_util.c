@@ -6278,7 +6278,7 @@ char *trim_template_file (char *file, Sequence *S);//Remove from template file a
  * \param[in] template_list String containing the template file or commands how to get one
  */
 static int ntemp;
-Sequence * seq2mmseq_template_seq(Sequence *S,  Fname *F)
+Sequence * seq2mmseqs_template_seq(Sequence *S,  Fname *F)
 {
   /*Expected format for the template file:
     >seq_name _X_ Target_template
@@ -6305,6 +6305,7 @@ Sequence * seq2mmseq_template_seq(Sequence *S,  Fname *F)
   static char *outfile=vtmpnam(NULL);
   static char *tf=NULL;
   static char *command;
+  char *cache=get_cache_dir();
   ntemp++;
 
   remove_template_file=get_int_variable ("remove_template_file");
@@ -6326,9 +6327,9 @@ Sequence * seq2mmseq_template_seq(Sequence *S,  Fname *F)
 
 
   
-  tf=csprintf (tf, "%s%s_F_%d.template_list", F->path,F->name,ntemp);
-  fprintf ( stderr, "\n! Running MMSEQ against %s -- This may take a while...\n", prot_db);
-  command=csprintf ( command, "t_coffee -other_pg mmseqs2prf.pl -q %s -db %s -o %s -template_file %s  -cachedb %s -quiet", seq, prot_db,outfile, tf, get_cache_dir());
+  tf=csprintf (tf, "%s%s_R_%d.template_list", F->path,F->name,ntemp);
+  fprintf ( stderr, "\n! Running MMSEQS against %s -- This may take a while...\n", prot_db);
+command=csprintf ( command, "t_coffee -other_pg mmseqs2prf.pl -q %s -db %s -o %s  -template_file %s  -cachedb %s -prot_min_sin %d -prot_max_sim %d -prot_min_cov %d -psitrim %d -quiet", seq, prot_db,cache, tf,cache, BmI, BMI, BmC, Trim);
   printf_system (command);
   if ( check_file_exists (tf) && format_is_fasta(tf))
 	{
@@ -6382,7 +6383,7 @@ Sequence * seq2template_seq ( Sequence *S, char *template_list, Fname *F)
   BmC=get_int_variable ("prot_min_cov");
   Trim=get_int_variable("psitrim");
   
-  if (template_list && strm(template_list, "MMSEQ"))return seq2mmseq_template_seq(S,F);
+  if (template_list && strm(template_list, "MMSEQS"))return seq2mmseqs_template_seq(S,F);
       
 
   if (strm (prot_db, "dataset") || strm (prot_db, "self"))

@@ -225,7 +225,10 @@ int seq_reformat ( int argc, char **in_argv)
 		fprintf ( stdout, "\n     .......................! seq offset_value (0 by default)");
 		fprintf ( stdout, "\n     .....................Can extract as many positions as needed");
 		fprintf ( stdout, "\n     .....................seq=cons: measure positions on the full aln");
-		fprintf ( stdout, "\n     +cat_aln.............Concatenates the alignments input via -in and -in2");
+		
+		
+		fprintf ( stdout, "\n     +split.<N>............Split fasta file into smaller files\n");
+		fprintf ( stdout, "\n     +cat_aln..............Concatenates the alignments input via -in and -in2");
 		fprintf ( stdout, "\n     +cat_aln.............-if no -in2, -in is expected to be a list of alignments to concatenate");
 		fprintf ( stdout, "\n     +orthologous_cat..<mode>: mode=voronoi or nothing");
 		fprintf ( stdout, "\n     ......................-in: sequences from different species");
@@ -1610,7 +1613,7 @@ long *fasta2map(char *file)
   FILE *fp;
   int i=0;
   long pos=0;
-  char c,lc;
+  char c,lc,pc;
   long *map;
   int ml=1000;
   int a;
@@ -1634,16 +1637,18 @@ long *fasta2map(char *file)
 
   fp=vfopen(file, "r");
   pos=0;
+  pc='\n';
   while (fgets(buf,VERY_LONG_STRING,fp))
     {
       int d=0;
       while ((c=buf[d++])!='\0')
 	{
-	  if (c=='>')
+	  if (c=='>' && pc=='\n')
 	    {
 	      if (i>=ml){ml+=VERY_LONG_STRING; map=(long*)vrealloc (map, ml*sizeof (long));}
 	      map[i++]=pos;
 	    }
+	  pc=c;
 	  pos++;
 	}
     }
@@ -1680,6 +1685,45 @@ Alignment *reload_aln(Alignment *A)
   char *tmp=vtmpnam (NULL);
   dump_msa (A,tmp);
   return quick_read_fasta_aln(A,tmp);
+}
+char *      split_fasta (char *file, int size)
+{
+  long *map;
+  int i, j,nseq, n;
+  FILE *fp=NULL;
+  char *split=NULL;
+ 
+  fprintf (stderr, "! Indexing started");
+  file2record_it(NULL,0, NULL);
+  map=fasta2map(file);
+  nseq=read_array_size_new (map)-1;
+  fprintf (stderr, "! Indexing Finished -- %d Sequences", nseq);
+  for(n=0,j=0,i=0;i<nseq; i++,j++)
+    {
+      char *s;
+      
+      if (j==0|| j==size)
+	{
+	  j=0;
+	  fprintf (stdout, "%s.%d.split\n",file, n);
+	  split=csprintf(split,"%s.%d.split", file, n);
+	  if (fp){vfclose(fp);}
+	  fp=vfopen(split, "w");
+	  n++;
+	}
+      if ((s=file2record_it(file,i, map)))
+	{
+	  fprintf (fp, "%s",s);
+	}
+      else
+	{
+	  HERE ("FAILED to parse file. Possible file corruption [FATAL]");exit (0);
+	}
+    }
+  vfclose (fp);
+  vfree(map);
+  exit (EXIT_SUCCESS);
+  return NULL;
 }
 Alignment * quick_read_fasta_aln (Alignment *A, char *file)
 {
@@ -11071,7 +11115,8 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	   D2=D2in;
 	   DST=DSTin;
 	 }
-       if (!D1->A)D1->A=copy_aln (D1in->A, NULL);
+
+       if (D1 && !D1->A && D1in && D1in->A)D1->A=copy_aln (D1in->A, NULL);
 
        if (  strm(action, "seqnos"))
 	 {
@@ -11730,6 +11775,7 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
        else if ( strm(action, "min_maxd"))cputenv ("min_maxd_4_TCOFFEE=%s",ACTION(1));
        else if ( strm(action, "strict_maxd"))cputenv ("strict_maxd_4_TCOFFEE=%s",ACTION(1));
        else if ( strm(action, "soft_maxd"))cputenv ("soft_maxd_4_TCOFFEE=%s",ACTION(1));
+       else if ( strm(action, "first_maxd"))cputenv ("first_maxd_4_TCOFFEE=%s",ACTION(1));
        
        else if ( strm(action, "align_method"))
 	 {
@@ -12388,7 +12434,28 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	 {
 	   D1->A=orthologous_concatenate_aln (D1->A,D2->S, ACTION (1));
 	 }
+       else if ( strm (action, "split"))
+	 {
+	   char *file=split_fasta (ACTION(1), atoi (ACTION(2)));
+	   vfclose (display_file_content (NULL,file));
+	 }
+			     
+       else if (ACTION(1) && is_aln(ACTION(1)))
+	     {
+	         Alignment *B;
+		 int n=1;
 
+		 while (ACTION(n))
+		   {
+
+		     B=main_read_aln (ACTION(n), NULL);
+		     D1->A=concatenate_aln (D1->A, B, NULL);
+		     n++;
+		   }
+		 D1->S=aln2seq(D1->A);
+	     }
+
+       
        else if ( strm (action, "cat_aln"))
 	 {
 	   /*D1->A=aln_cat ( D1->A, D2 ->A);*/

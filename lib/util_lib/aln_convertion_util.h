@@ -260,7 +260,7 @@ Sequence * display_seq_template_files (Sequence *S);
 Sequence * handle_seq_template_file (Sequence *S, char *mode);
 int handle_X_template_files ( X_template *T, char *mode);
 
-Sequence * seq2mmseq_template_seq(Sequence *S,  Fname *F);
+Sequence * seq2mmseqs_template_seq(Sequence *S,  Fname *F);
 Sequence * seq2template_seq ( Sequence *S, char *template_file, Fname *F);
 char * seq2template_file (Sequence *S, char *file);
 int seq2template_file2 (Sequence *S, char *file, char *mode);
