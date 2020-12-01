@@ -2828,11 +2828,10 @@ Alignment * align_two_structures ( Sequence *S, int s1, int s2, char *mode)
   else command=csprintf (command,"t_coffee -in %s -template_file %s -method %s -outfile=%s -output fasta_aln -quiet >/dev/null 2>/dev/null",in,in,mode, out);
   system (command);
   
-  if (!check_file_exists (out))
+  if (!format_is_fasta(out))
     {
-      command=csprintf (command,"t_coffee -in %s -template_file %s -method %s -outfile=%s -output fasta_aln",in,in,mode, out);
-      system (command);
-      printf_exit ( EXIT_FAILURE, stderr, "\nCould not align %s and %s with %s [FATAL:%s]",S->name[s1],S->name[s2],mode,PROGRAM);
+      add_warning ( stderr, "\nCould not align %s and %s with %s\nUse sequence alignment instead",S->name[s1],S->name[s2],mode,PROGRAM);
+      return align_two_sequences (S->seq[s1], S->seq[s2], "blosum62mt", -8, -1, "myers_miller_pair_wise");
     }
   return quick_read_fasta_aln (NULL,out);
 }
