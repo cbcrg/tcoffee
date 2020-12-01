@@ -2812,6 +2812,7 @@ Alignment * align_two_structures ( Sequence *S, int s1, int s2, char *mode)
 {
   static char *in=vtmpnam (NULL);
   static char *out=vtmpnam (NULL);
+  static char *command=NULL;
   FILE *fp;
   
   fp=vfopen (in, "w");
@@ -2822,8 +2823,17 @@ Alignment * align_two_structures ( Sequence *S, int s1, int s2, char *mode)
   vfclose (fp);
 
   
-  if (verbose()==2)printf_system ("t_coffee -in %s -template_file %s -method %s -outfile=%s -output fasta_aln",in,in,mode, out);
-  else printf_system             ("t_coffee -in %s -template_file %s -method %s -outfile=%s -output fasta_aln -quiet >/dev/null 2>/dev/null",in,in,mode, out);
+  
+  if (verbose()==2)command=csprintf (command,"t_coffee -in %s -template_file %s -method %s -outfile=%s -output fasta_aln",in,in,mode, out);
+  else command=csprintf (command,"t_coffee -in %s -template_file %s -method %s -outfile=%s -output fasta_aln -quiet >/dev/null 2>/dev/null",in,in,mode, out);
+  system (command);
+  
+  if (!check_file_exists (out))
+    {
+      command=csprintf (command,"t_coffee -in %s -template_file %s -method %s -outfile=%s -output fasta_aln",in,in,mode, out);
+      system (command);
+      printf_exit ( EXIT_FAILURE, stderr, "\nCould not align %s and %s with %s [FATAL:%s]",S->name[s1],S->name[s2],mode,PROGRAM);
+    }
   return quick_read_fasta_aln (NULL,out);
 }
   
