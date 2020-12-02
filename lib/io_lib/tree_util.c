@@ -8399,7 +8399,7 @@ Alignment * sorttrim (Alignment *A,int ntrim)
   newn=0;
   while ( newn<maxnseq && newn<ntrim)
     {
-      for (bin=0; bin<nbin; bin++)
+      for (bin=0; bin<nbin && newn<ntrim; bin++)
 	{
 	  if (used[bin]==max[bin])continue;
 	  else s=lu[bin][used[bin]++];

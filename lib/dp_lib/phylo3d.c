@@ -160,7 +160,9 @@ Alignment *phylo3d_gt (Alignment *inA, Constraint_list *CL)
   for (n=0,s1=0; s1<A->nseq-1; s1++)
     {
       int rs1, rs2;
-      rs1=name_is_in_hlist (A->name[s1], S->name, S->nseq);
+      int cls1, cls2;
+      cls1=name_is_in_hlist (A->name[s1], (CL->S)->name, (CL->S)->nseq);
+      rs1 =name_is_in_hlist (A->name[s1],      S->name,        S->nseq);
       for ( s2=s1+1; s2<A->nseq; s2++, n++)
 	{
 	  int  *buf_pos_s1, *buf_pos_s2;
@@ -169,9 +171,12 @@ Alignment *phylo3d_gt (Alignment *inA, Constraint_list *CL)
 	  rs2=name_is_in_hlist (A->name[s2], S->name, S->nseq); 
 
 	  if (!align_method)B=align_two_sequences (S->seq[s1], S->seq[s2], "blosum62mt", -8, -1, "myers_miller_pair_wise");
-	  else B=align_two_structures  (CL->S, rs1, rs2,align_method);
-	
-
+	  else 
+	    {
+	      cls2=name_is_in_hlist (A->name[s2], (CL->S)->name, (CL->S)->nseq);
+	      B=align_two_structures  (CL->S, cls1, cls2,align_method);
+	    }
+	  
 	  
 	  pos=aln2pos_simple(B,2);
 	  msa2column_list (B,D->colrep);

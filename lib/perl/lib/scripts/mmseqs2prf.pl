@@ -66,7 +66,7 @@ for ($a=0; $a<=$#ARGV; $a++)
     elsif ($ARGV[$a] eq "-s")            {$S="-s ".$ARGV[++$a];}
 	   
   }
-if (!$dbf || !-e $dbf){print STDERR "ERROR: mmseqs2prf required a database via -protein_db $FATAL\n";exit ($EXIT_FAILURE);}
+if (!$dbf){print STDERR "ERROR: mmseqs2prf required a database via -protein_db $FATAL\n";exit ($EXIT_FAILURE);}
 if (!$qff){print STDERR "ERROR: mmseqs2prf required a query    -q $FATAL";exit ($EXIT_FAILURE);}
 if (!is_installed("mmseqs")){print STDERR "ERROR: mmseqs2prf required mmseqs to be installed $FATAL\n";exit ($EXIT_FAILURE);}
 
@@ -90,6 +90,8 @@ if ( -e $dbf && isfasta($dbf))
     $q{search }="$cacheq/out.MMSEQSSEARCH";
     $q{convert}="$cacheq/out.MMSEQSCONVERT";
     
+    
+
     if (!-e $q{search} || $FORCE)
       {system ("mmseqs search $q{db} $db{db} $q{search} $db{index} $S -a $QUIET");}
     else{print STDERR "! mmseqs search : use cached $q{search}\n";}
@@ -101,7 +103,8 @@ if ( -e $dbf && isfasta($dbf))
 else
   {
      $q{convert}="$cacheq/out.MMSEQSCONVERT";
-     split_mmseqs($qf, $cacheq, $updateq, $
+     split_mmseqs($qf, $cacheq, $updateq, $dbf, $cachedb, $updatedb,$S,$q{convert});
+   }
 
 mmseqs2prf ($q{convert},$outdir,$prot_min_sim,$prot_max_sim, $prot_min_cov,%H);
 prf2trimprf($outdir,$psitrim_mode, $psitrim_tree, $psitrim, %H);
@@ -168,8 +171,89 @@ sub h2lu
       }
     return %lu;
   }
-
 sub mmseqs2prf
+  {
+    #"query[0],target[1],qaln[2],taln[3],qstart[4],qend[5],pident[6],qcov[7],qlen[8]\" $QUIET");
+    my ($out,$outdir,$min_id, $max_id,$min_cov, %h)=@_;
+    my $ff  =new FileHandle;
+    my $prf =new FileHandle;
+    my $nn;
+    my $tot;
+    my $psn;
+    my %lu=h2lu(%h);
+    my %luf;
+    
+    open ($ff,$out);
+    while (<$ff>)
+      {
+	my $l=$_;
+	my @ll=split (/\s/, $l);
+	my $sn=$ll[0];
+	my $f =$lu{$sn}{0};
+	my $cf=$h {$f}{prf}{$sn}{absolute};
+	
+	if ($sn ne $psn)
+	  {
+	    close $prf;
+	    if ($luf{$cf}){open ($prf, ">>$cf");}
+	    else
+	      {		
+		open ($prf, ">$cf");
+		print $prf ">$sn\n$h{$f}{seq}{$sn}\n";
+	      }
+	  }
+	$nn=++$luf{$cf};
+	$psn=$sn;
+	
+	my $id=$ll[6]*100;
+	my $cov=$ll[7]*100;
+	my $len=$ll[8];
+	
+	if ($id<=$max_id && $id>=$min_id && $cov>$min_cov)
+	  {
+	    print $prf ">$sn\_$nn\n";
+	    for (my $a=1; $a<$ll[4]; $a++){print $prf "-"}
+	    
+	    my @ql=split (//,$ll[2]);
+	    my @tl=split (//,$ll[3]);
+	    my $qlen=length($ll[2]);
+	    for (my $a=0; $a<$qlen; $a++)
+	      {
+		if ($ql[$a] ne "-"){print $prf "$tl[$a]";}
+	      }
+	    for (my $a=$ll[5]; $a<$len; $a++){print $prf "-"}
+	    print $prf "\n";
+	  }
+      }
+    close($prf);
+    close($ff);
+
+    # checkout the un-used ones
+    foreach my $sn (keys(%lu))
+      {
+	my $f=$lu{$sn}{0};
+
+	if (!-e $h{$f}{prf}{$sn}{absolute})
+	  {
+	    open ($prf,">$h{$f}{prf}{$sn}{absolute}");
+	    print $prf ">$sn\n$h{$f}{seq}{$sn}\n";
+	    close (prf);
+	  }
+      }
+    #duplicate prf files that are shared by different input datasets
+    foreach my $sn (keys (%lu))
+      {
+	my $f0=$lu{$sn}{0};
+	
+	foreach my $i (keys(%{$lu{$sn}}))
+	  {	
+	    my $f=$lu{$sn}{$i};
+	    if (! -e $h{$f}{prf}{$sn}{absolute}){system ("cp $h{$f0}{prf}{$sn}{absolute} $h{$f}{prf}{$sn}{absolute}");}
+	  }
+      }
+  }
+
+sub mmseqs2prf_old
   {
     #"query[0],target[1],qaln[2],taln[3],qstart[4],qend[5],pident[6],qcov[7],qlen[8]\" $QUIET");
     my ($out,$outdir,$min_id, $max_id,$min_cov, %h)=@_;
@@ -579,14 +663,17 @@ sub split_mmseqs
       my ($qf,$cacheq,$updateq, $db,$cachedb, $updatedb, $s,$out)=@_;
       my @dbl=string2fasta_list($db);
       
+      print "OUT=$out\n";
+
       foreach my $d (@dbl)
 	{
-	  my %db=file2db($dbf,$cachedb, $updatedb);
-	  my %q =file2db($qf, $cacheq , $updateq);
-	  
-	  $q{search }="$cacheq/$d.MMSEQSSEARCH";
-	  $q{convert}="$cacheq/$d.MMSEQSCONVERT";
-	  
+	  print "! Process Database $d\n";
+	  my %db=file2db($d ,$cachedb,$updatedb);
+	  my %q =file2db($qf,$cacheq ,$updateq);
+	  my $ld=abs2file ($d);
+	  $q{search }="$cacheq/$ld.MMSEQSSEARCH";
+	  $q{convert}="$cacheq/$ld.MMSEQSCONVERT";
+	 
 	  system ("mmseqs search $q{db} $db{db} $q{search} $db{index} $s -a $QUIET");
 	  system ("mmseqs convertalis $q{db} $db{db} $q{search} $q{convert} --format-output \"query,target,qaln,taln,qstart,qend,pident,qcov,qlen\" $QUIET");
 	  system ("cat $q{convert} >> $out");
