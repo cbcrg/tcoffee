@@ -217,7 +217,7 @@ else
 #  Netaddress for pdb
    
 # $netaddress="http://www.rcsb.org/pdb/cgi/export.cgi/%%.pdb.gz?format=PDB&pdbId=%%&compression=gz";
-$netaddress="http://www.rcsb.org/pdb/files/%%.pdb.gz";
+$netaddress="https://files.rcsb.org/download/%%.pdb.gz";
 $netcompression_pg="gunzip";
 $netcompression="gz";
 
@@ -1934,8 +1934,10 @@ sub url2file
     
     if (!$CONFIGURATION){&check_configuration ("wget", "INTERNET", "gzip");$CONFIGURATION=1;}
     
-    if (&pg_is_installed ("wget"))   {$pg="wget"; $flag="-O";$arg=$wget_arg;}
-    elsif (&pg_is_installed ("curl")){$pg="curl"; $flag="-o";$arg=$curl_arg;}
+
+    if (&pg_is_installed ("curl")){$pg="curl"; $flag="-o";$arg=$curl_arg;}
+    elsif (&pg_is_installed ("wget"))   {$pg="wget"; $flag="-O";$arg=$wget_arg;}
+    
     return safe_system ("$pg $flag$out $address >/dev/null 2>/dev/null");
 
 }

@@ -1956,7 +1956,6 @@ char **identify_list_format ( char **list, int n)
 	   char mode;
 
 
-
 	   declare_name (name);
 	   for ( a=0; a< n; a++)
 	       {
@@ -2234,6 +2233,7 @@ char*  is_pdb_struc_strict ( char *name)
      if (is_pdb_file(name)){r=name;}
      else if (is_pdb_name (name))
        {
+	 HERE ("extract_from_pdb -netfile \'%s\' > %s/%s 2>/dev/null",name, get_cache_dir(),name);
 	 printf_system ("extract_from_pdb -netfile \'%s\' > %s/%s 2>/dev/null",name, get_cache_dir(),name);
 	 if ( is_pdb_file(name))r=name;
 	 else r=NULL;

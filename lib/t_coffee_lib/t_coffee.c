@@ -4522,8 +4522,14 @@ get_cl_param(\
 		   if ( list_file[a][0]=='P' && !check_file_exists(list_file[a]))
 		     {
 		       char buf[1000];
+		       char *b2;
 		       sprintf(buf, "%s", list_file[a]+1);
-		       sprintf(list_file[a], "P%s",is_pdb_struc (buf));
+		       b2=is_pdb_struc (buf);
+		       if (b2)sprintf(list_file[a], "P%s",b2);
+		       else 
+			 {
+			   myexit(fprintf_error (stderr, "\nERROR: Could not find PDB structure %s [FATAL:%s]",list_file[a], PROGRAM));
+			 }
 		     }
 		 }
 	       
