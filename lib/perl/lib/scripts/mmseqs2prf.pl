@@ -7,6 +7,7 @@ use Cwd;
 use File::Path;
 use Sys::Hostname;
 use File::Temp qw/ tempfile tempdir /;
+
 my $QUIET=">/dev/null 2>/dev/null";
 my $VERBOSE=$ENV{VERBOSE_4_DYNAMIC};
 my $FATAL="[FATAL:mmseqs2prf]";
@@ -15,7 +16,7 @@ our $EXIT_SUCCESS=0;
 our $LAST_COM="";
 
 my $tmpdir = File::Temp->newdir();
-my $FORCE;
+
 my $doquiet=0;
 my ($outdir,$cachedb,$cacheq);
 
@@ -36,18 +37,24 @@ my $S;
 
 my $updatedb=0;
 my $updateq=0;
+my $update=0;
 my $qff;
 my %CIRCULAR;
+my $mmseqsR;
+my %R;
+my $split=1000000;
 
 for ($a=0; $a<=$#ARGV; $a++)
   {
     if    ($ARGV[$a] eq "-protein_db" || $ARGV[$a] eq "-db"){$dbf=file2abs($ARGV[++$a]);}
     elsif ($ARGV[$a] eq "-q" || $ARGV[$a] eq "-i") {$qff =file2abs($ARGV[++$a]);}
-    elsif ($ARGV[$a] eq "-f") {$FORCE=1;}
+    elsif ($ARGV[$a] eq "-update"){$update=1;}
     elsif ($ARGV[$a] eq "-quiet") {$doquiet=1;}
     
-    elsif ($ARGV[$a] eq "-o") {$outdir=file2abs($ARGV[++$a]);}
-    elsif ($ARGV[$a] eq "-template_file") {$TF=($ARGV[++$a]);}
+    elsif ($ARGV[$a] eq "-odir") {$outdir=file2abs($ARGV[++$a]);}
+    elsif ($ARGV[$a] eq "-o")    {$mmseqsR=file2abs($ARGV[++$a]);}
+    
+    elsif ($ARGV[$a] eq "-template_file" || $ARGV[$a] eq "-tf") {$TF=($ARGV[++$a]);}
     elsif ($ARGV[$a] eq "-cachedb") {$cachedb=file2abs($ARGV[++$a]);}
     elsif ($ARGV[$a] eq "-updatedb") {$updatedb=1;}
     
@@ -64,8 +71,10 @@ for ($a=0; $a<=$#ARGV; $a++)
     elsif ($ARGV[$a] eq "-psitrim_tree") {$psitrim_tree=$ARGV[++$a];}
     elsif ($ARGV[$a] eq "-psitrim")      {$psitrim=$ARGV[++$a];}
     elsif ($ARGV[$a] eq "-s")            {$S="-s ".$ARGV[++$a];}
-	   
+    elsif ($ARGV[$a] eq "-split")        {$split=$ARGV[++$a];}
+    else {die "$ARGV[$a] is an unknown argument $FATAL";}
   }
+
 if (!$dbf){print STDERR "ERROR: mmseqs2prf required a database via -protein_db $FATAL\n";exit ($EXIT_FAILURE);}
 if (!$qff){print STDERR "ERROR: mmseqs2prf required a query    -q $FATAL";exit ($EXIT_FAILURE);}
 if (!is_installed("mmseqs")){print STDERR "ERROR: mmseqs2prf required mmseqs to be installed $FATAL\n";exit ($EXIT_FAILURE);}
@@ -74,39 +83,19 @@ if (!is_installed("mmseqs")){print STDERR "ERROR: mmseqs2prf required mmseqs to 
 if   ($cachedb eq "TMP"){$cachedb=$tmpdir;}
 elsif(!$cachedb){$cachedb=file2path($dbf);}
 
+if   (!$mmseqsR){$mmseqsR="./out.mmseqs";}
 if   (!$cacheq || $cacheq eq "TMP"){$cacheq="$tmpdir/query";}
-if   (!$outdir  ){$outdir="./";}
-if   ( $FORCE && -e $out){unlink($out);}
-if   (!$doquiet){$QUIET="";}
+if   (!$outdir  ){$outdir="./R_dir";}
+if   (!$doquiet) {$QUIET="";}
+
 mymkdir ($outdir,$cachedb,$cacheq,$tmpdir);
 my ($qf,%H)=filelist2h($outdir,string2fasta_list($qff));
-
 make_output_structure($outdir,%H);
-if ( -e $dbf && isfasta($dbf))
-  {
-    %db=file2db($dbf,$cachedb, $updatedb);
-    %q =file2db($qf, $cacheq , $updateq);
-    
-    $q{search }="$cacheq/out.MMSEQSSEARCH";
-    $q{convert}="$cacheq/out.MMSEQSCONVERT";
-    
-    
 
-    if (!-e $q{search} || $FORCE)
-      {system ("mmseqs search $q{db} $db{db} $q{search} $db{index} $S -a $QUIET");}
-    else{print STDERR "! mmseqs search : use cached $q{search}\n";}
-    
-    if (!-e $q{convert} || $FORCE)
-      {system ("mmseqs convertalis $q{db} $db{db} $q{search} $q{convert} --format-output \"query,target,qaln,taln,qstart,qend,pident,qcov,qlen\" $QUIET");}
-    else {print  STDERR "! mmseqs convertalis : use $q{convert}";}
-  }
-else
-  {
-     $q{convert}="$cacheq/out.MMSEQSCONVERT";
-     split_mmseqs($qf, $cacheq, $updateq, $dbf, $cachedb, $updatedb,$S,$q{convert});
-   }
 
-mmseqs2prf ($q{convert},$outdir,$prot_min_sim,$prot_max_sim, $prot_min_cov,%H);
+if ( ! -e $mmseqsR || $update){split_mmseqs($qf, $cacheq, $updateq, $dbf, $cachedb, $updatedb,$S,$mmseqsR,$split);}
+
+mmseqs2prf ($mmseqsR,$outdir,$prot_min_sim,$prot_max_sim, $prot_min_cov,%H);
 prf2trimprf($outdir,$psitrim_mode, $psitrim_tree, $psitrim, %H);
 
 if ($TF){h2template_file ($TF,%H);}
@@ -208,9 +197,10 @@ sub mmseqs2prf
 	my $id=$ll[6]*100;
 	my $cov=$ll[7]*100;
 	my $len=$ll[8];
-	
+	print "$id $max_id $min_id\n";
 	if ($id<=$max_id && $id>=$min_id && $cov>$min_cov)
 	  {
+	    print "Keep";
 	    print $prf ">$sn\_$nn\n";
 	    for (my $a=1; $a<$ll[4]; $a++){print $prf "-"}
 	    
@@ -227,81 +217,6 @@ sub mmseqs2prf
       }
     close($prf);
     close($ff);
-
-    # checkout the un-used ones
-    foreach my $sn (keys(%lu))
-      {
-	my $f=$lu{$sn}{0};
-
-	if (!-e $h{$f}{prf}{$sn}{absolute})
-	  {
-	    open ($prf,">$h{$f}{prf}{$sn}{absolute}");
-	    print $prf ">$sn\n$h{$f}{seq}{$sn}\n";
-	    close (prf);
-	  }
-      }
-    #duplicate prf files that are shared by different input datasets
-    foreach my $sn (keys (%lu))
-      {
-	my $f0=$lu{$sn}{0};
-	
-	foreach my $i (keys(%{$lu{$sn}}))
-	  {	
-	    my $f=$lu{$sn}{$i};
-	    if (! -e $h{$f}{prf}{$sn}{absolute}){system ("cp $h{$f0}{prf}{$sn}{absolute} $h{$f}{prf}{$sn}{absolute}");}
-	  }
-      }
-  }
-
-sub mmseqs2prf_old
-  {
-    #"query[0],target[1],qaln[2],taln[3],qstart[4],qend[5],pident[6],qcov[7],qlen[8]\" $QUIET");
-    my ($out,$outdir,$min_id, $max_id,$min_cov, %h)=@_;
-    my $ff  =new FileHandle;
-    my $prf =new FileHandle;
-    my $nn;
-    my $tot;
-
-    my %lu=h2lu(%h);
-    
-    
-    open ($ff,$out);
-    while (<$ff>)
-      {
-	my $l=$_;
-	my @ll=split (/\s/, $l);
-	my $sn=$ll[0];
-	my $f=$lu{$sn}{0};
-		
-	if (!-e $h{$f}{prf}{$sn}{absolute})
-	  {
-	    close $prf;
-	    open ($prf, ">$h{$f}{prf}{$sn}{absolute}");
-	    print $prf ">$sn\n$h{$f}{seq}{$sn}\n";
-	  }
-	$nn++;
-	my $id=$ll[6]*100;
-	my $cov=$ll[7]*100;
-	my $len=$ll[8];
-	
-	if ($id<=$max_id && $id>=$min_id && $cov>$min_cov)
-	  {
-	    print $prf ">$sn\_$nn\n";
-	    for (my $a=1; $a<$ll[4]; $a++){print $prf "-"}
-	    
-	    my @ql=split (//,$ll[2]);
-	    my @tl=split (//,$ll[3]);
-	    my $qlen=length($ll[2]);
-	    for (my $a=0; $a<$qlen; $a++)
-	      {
-		if ($ql[$a] ne "-"){print $prf "$tl[$a]";}
-	      }
-	    for (my $a=$ll[5]; $a<$len; $a++){print $prf "-"}
-	    print $prf "\n";
-	  }
-      }
-    close($prf);
-    close ($ff);
 
     # checkout the un-used ones
     foreach my $sn (keys(%lu))
@@ -447,9 +362,14 @@ sub mymkdir
 	{
 	  if ( $a && !-d $a)
 	    {
-	      mkdir ($a) or return 0;
+	      system ("mkdir -p $a");
+	      if ( !-d $a)
+		{
+		  die "Could not Create $a $FATAL\n";
+		}
 	    }
 	}
+
       return 1;
     }
 sub clean_file_name
@@ -479,14 +399,31 @@ sub string2fasta_list
 	    {
 	      foreach my $string2 (file2list($f))
 		{
-
-		  push (@l2, string2fasta_list($string2));
+		  my @l3=string2fasta_list($string2);
+		  foreach my $string3 (@l3)
+		    {
+		      push (@l2, $string3);
+		    }
 		}
 	    }
 	}
-      return @l2;
+      return shrinklist(@l2);
     }
-    
+sub shrinklist
+      {
+	my @l=@_;
+	my @l2;
+
+	foreach my $e (@l)
+	  {
+	    if ($e)
+	      {
+		print "PUSH [$e]\n";
+		push (@l2,$e);
+	      }
+	  }
+	return @l2;
+      }
 sub string2list
     {
       my $string=@_[0];
@@ -618,9 +555,9 @@ sub filelist2h
 	    $h{$f}{name }{$name}=$name;
 	    $h{$f}{cname}{$name}=$cname;
 	    $h{$f}{prf}{$name}{relative}="$cname.R.prf";
-	    $h{$f}{prf}{$name}{absolute}="$h{$f}{template_dir}/$h{$f}{prf}{$name}{relative}";
+	    $h{$f}{prf}{$name}{absolute}="$tmpdir/$h{$f}{prf}{$name}{relative}";
 	    
-	    $h{$f}{tprf}{$name}{relative}="$cname.R.tprf";
+	    $h{$f}{tprf}{$name}{relative}="$cname.R.prf";
 	    $h{$f}{tprf}{$name}{absolute}="$h{$f}{template_dir}/$h{$f}{tprf}{$name}{relative}";
 	    
 	    $h{$f}{templates}.=">$name _R_ $h{$f}{tprf}{$name}{relative}\n";
@@ -660,24 +597,99 @@ sub is_installed
   
 sub split_mmseqs
     {
-      my ($qf,$cacheq,$updateq, $db,$cachedb, $updatedb, $s,$out)=@_;
-      my @dbl=string2fasta_list($db);
+      my ($qf,$cacheq,$updateq, $db,$cachedb, $updatedb, $s,$out,$split)=@_;
       
-      print "OUT=$out\n";
+      my @dbl=splitfasta($split,(string2fasta_list($db)));
+      
 
+      if ( -e $out){unlink ($out)}
+
+
+     
       foreach my $d (@dbl)
 	{
+	  my $uid=getuid();
+	  my $lcacheo="$tmpdir/$uid/search/";
+	  my $lcachedb=(($d =~/$tmpdir/))?"$tmpdir/$uid/db/":$cachedb;
+	  my $lcacheq=$cacheq;
+	  mymkdir ($lcacheo, $lcachedb);
+	  
 	  print "! Process Database $d\n";
-	  my %db=file2db($d ,$cachedb,$updatedb);
-	  my %q =file2db($qf,$cacheq ,$updateq);
+	  
+	  my %db=file2db($d ,$lcachedb,$updatedb);
+	  my %q =file2db($qf,$lcacheq ,$updateq );
 	  my $ld=abs2file ($d);
-	  $q{search }="$cacheq/$ld.MMSEQSSEARCH";
-	  $q{convert}="$cacheq/$ld.MMSEQSCONVERT";
+
+	  if (! -d $lcacheo){die "NO CACHE";}
+
+	  $q{search }="$lcacheo/$ld\.MMSEQSSEARCH";
+	  $q{convert}="$lcacheo/$ld\.MMSEQSCONVERT";
 	 
 	  system ("mmseqs search $q{db} $db{db} $q{search} $db{index} $s -a $QUIET");
 	  system ("mmseqs convertalis $q{db} $db{db} $q{search} $q{convert} --format-output \"query,target,qaln,taln,qstart,qend,pident,qcov,qlen\" $QUIET");
 	  system ("cat $q{convert} >> $out");
+	  
 	}
       return $out;
     }
     
+sub splitfasta 
+      {
+	my ($split,@list)=@_;
+	my @fl;
+
+		
+	if (!$split){return @list;}
+	
+	foreach my $e (@list)
+	  {
+	    
+	    my $n=`grep -c ">" $e`;
+	    
+	    if ($n>$split)
+	      {
+		my $uid=getuid();
+		my $odir="$tmpdir/$uid/";
+		mymkdir ($odir);
+		system ("t_coffee -other_pg seq_reformat -action +odir $odir +split $e $split");
+		push (@fl,string2list ("$odir/*.split"));
+	      }
+	    else
+	      {
+		push (@fl, $e);
+	      }
+	  }
+	return @fl;
+      }
+sub getuid
+	{
+	  my $n;
+	  my $l=3;
+	  my $string=randomstring ($l);
+	  while ($R{$string})
+	    {
+	      $n++;
+	      
+	      if ($n==10){$l++;}
+	      $string=randomstring($l);
+	    }
+	  $R{$string}=1;
+	  return $string;
+	}
+		
+sub randomstring
+	  {
+	    my $l=shift;
+	    my @s;
+	    my @alp=split (//, 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_');
+	    
+	    my $lalp=@alp;
+	  
+	    for ( my $i=0; $i<$l; $i++)
+	      {
+		$s[$i]=$alp[rand($lalp)];
+	      }
+	    return join ('',@s);
+	  }
+	  
+		  

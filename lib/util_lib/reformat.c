@@ -1617,35 +1617,21 @@ long *fasta2map(char *file)
   long *map;
   int ml=1000;
   int a;
-  char buf[VERY_LONG_STRING];
-  
-
+  char buf[SUPER_LONG_STRING];
   
   if ( !file || !check_file_exists (file) || !(fp=vfopen(file, "r"))) return NULL;
   
   map=(long*)vcalloc (ml, sizeof (long));
-  
-  
-  while ((c=fgetc(fp))!=EOF){;}
-  vfclose(fp);
-  
-  fp=vfopen(file, "r");
-  while (fgets(buf,VERY_LONG_STRING,fp));
-  
-  vfclose(fp);  
-  
-
-  fp=vfopen(file, "r");
   pos=0;
   pc='\n';
-  while (fgets(buf,VERY_LONG_STRING,fp))
+  while (fgets(buf,SUPER_LONG_STRING,fp))
     {
       int d=0;
       while ((c=buf[d++])!='\0')
 	{
 	  if (c=='>' && pc=='\n')
 	    {
-	      if (i>=ml){ml+=VERY_LONG_STRING; map=(long*)vrealloc (map, ml*sizeof (long));}
+	      if (i>=ml){ml+=SUPER_LONG_STRING; map=(long*)vrealloc (map, ml*sizeof (long));}
 	      map[i++]=pos;
 	    }
 	  pc=c;
@@ -1692,28 +1678,59 @@ char *      split_fasta (char *file, int size)
   int i, j,nseq, n;
   FILE *fp=NULL;
   char *split=NULL;
- 
-  fprintf (stderr, "! Indexing started");
+  char *buf=NULL;
+  int nb=0;
+  char *fill=NULL;
+  char *odir=NULL;
+  char *ofile=afname2fname(file);
+  
+  
+  if ( getenv("odir_4_TCOFFEE"))
+    {
+      char *buf=getenv("odir_4_TCOFFEE");
+      if (buf[0]=='/')odir=csprintf (odir,"%s/",buf);
+      else odir=csprintf (odir,"./%s/", buf);
+    }
+  else
+    odir=csprintf (odir, "./");
+  my_mkdir (odir);
+  
+  fprintf (stderr, "! Start Indexing\n");
   file2record_it(NULL,0, NULL);
   map=fasta2map(file);
   nseq=read_array_size_new (map)-1;
-  fprintf (stderr, "! Indexing Finished -- %d Sequences", nseq);
+  fprintf (stderr, "! Indexing Finished -- %d Sequences\n", nseq);
+  
+  
+  
   for(n=0,j=0,i=0;i<nseq; i++,j++)
     {
       char *s;
       
       if (j==0|| j==size)
 	{
+	  
 	  j=0;
-	  fprintf (stdout, "%s.%d.split\n",file, n);
-	  split=csprintf(split,"%s.%d.split", file, n);
+	  if (n<10)fill=csprintf (fill, "00");
+	  else if (n<100)fill=csprintf (fill, "0");
+	  else fill=csprintf (fill, "0");
+	  
+	  fprintf (stdout, "%s%s.%s%d.split --- %.2f%%\n",odir,ofile,fill,n, ((float)i/(float)nseq)*(float)100);
+	  split=csprintf(split,"%s%s.%s%d.split", odir,ofile, fill,n);
 	  if (fp){vfclose(fp);}
 	  fp=vfopen(split, "w");
 	  n++;
 	}
       if ((s=file2record_it(file,i, map)))
 	{
-	  fprintf (fp, "%s",s);
+	  buf=vcat(buf,s);
+	  nb++;
+	  if ( nb=10000)
+	    {
+	      fprintf (fp, "%s",buf);
+	      buf[0]='\0';
+	      nb=0;
+	    }
 	}
       else
 	{
@@ -11776,7 +11793,7 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
        else if ( strm(action, "strict_maxd"))cputenv ("strict_maxd_4_TCOFFEE=%s",ACTION(1));
        else if ( strm(action, "soft_maxd"))cputenv ("soft_maxd_4_TCOFFEE=%s",ACTION(1));
        else if ( strm(action, "first_maxd"))cputenv ("first_maxd_4_TCOFFEE=%s",ACTION(1));
-       
+       else if ( strm(action, "odir"))cputenv ("odir_4_TCOFFEE=%s",ACTION(1));
        else if ( strm(action, "align_method"))
 	 {
 	   char *ml=NULL;

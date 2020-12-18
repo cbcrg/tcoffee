@@ -253,17 +253,20 @@
 #define MAX_LEN_ALN      1
 #define MAX_N_LIST       100
 
-#define COMMENT_SIZE     1000
-#define MAXNAMES         1000
-#define FILENAMELEN 	 500            /* Max. file name length */
-#define MAX_N_PARAM      2000
-#define MAX_PARAM_LEN    200
-#define MAX_LINE_LENGTH  10000
-#define ALN_LINE_LENGTH  50
-#define SHORT_STRING     10
-#define STRING           300
-#define LONG_STRING      1000
-#define VERY_LONG_STRING 10000
+#define COMMENT_SIZE      1000
+#define MAXNAMES          1000
+#define FILENAMELEN 	  500            /* Max. file name length */
+#define MAX_N_PARAM       2000
+#define MAX_PARAM_LEN     200
+#define MAX_LINE_LENGTH   10000
+#define ALN_LINE_LENGTH   50
+#define SHORT_STRING      10
+#define STRING            300
+#define LONG_STRING       1000
+#define VERY_LONG_STRING  10000
+#define SUPER_LONG_STRING 100000
+#define MEGA_LONG_STRING  1000000
+
 
 #define AA_ALPHABET            "acdefghiklmnpqrstvwy-ACDEFGHIKLMNPQRSTVWY"
 #define DNA_ALPHABET           "AGCTUNRYMKSWHBVD-agctunrymkswhbvd"

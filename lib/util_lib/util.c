@@ -2935,7 +2935,8 @@ Fname* parse_fname ( char *array)
 	 int l;
 	 Fname *F;
 
-
+	 if (!array) return NULL;
+	 
 	 F=declare_fname( sizeof(array) );
 
 	 sprintf ( F->full, "%s", array);
@@ -2958,6 +2959,42 @@ Fname* parse_fname ( char *array)
 
 	return F;
         }
+char *afname2fname (char *name)
+{
+  char *fname=NULL;
+  int l;
+  
+  if (!name) return NULL;
+  
+  l=strlen (name)-1;
+  while (name[l]!='/' && l>-1)l--;
+
+  fname=csprintf (fname, "%s", name+l+1);
+  return fname;
+}
+char *fname2suffix (char *name)
+{
+  char *fname=NULL;
+  int l;
+  
+  if (!name) return NULL;
+  
+  l=strlen (name)-1;
+  while (name[l]!='.' && l>-1)l--;
+  if (l==-1)fname=csprintf (fname, "");
+  else fname=csprintf (fname, "%s", name+l+1);
+  return fname;
+}
+char *fname2prefix (char *name)
+{
+  int l;
+  char *fname=afname2fname(name);
+  if (!fname) return fname;
+  l=strlen (fname)-1;
+  while (fname[l]!='.' && l>-1)l--;
+  if (l>-1)fname[l]='\0';
+  return fname;
+}
 char *filename2path (char *name)
 {
   char *nname;

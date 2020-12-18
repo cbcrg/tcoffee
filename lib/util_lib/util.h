@@ -385,6 +385,10 @@ FILE *print_array_char (FILE *out, char **array, int n, char *sep);
 char *extract_suffixe ( char *array);
 char * path2filename ( char *array);
 char *filename2path (char *name);
+char *afname2fname (char *name);
+char  *fname2suffix (char *name);
+char  *fname2prefix (char *name);
+
 Fname* parse_fname ( char *array);
 
 void string_array_convert ( char **array, int n_strings, int ns, char **sl);

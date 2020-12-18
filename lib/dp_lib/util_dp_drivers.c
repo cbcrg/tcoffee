@@ -2813,6 +2813,8 @@ Alignment * align_two_structures ( Sequence *S, int s1, int s2, char *mode)
   static char *in=vtmpnam (NULL);
   static char *out=vtmpnam (NULL);
   static char *command=NULL;
+  Alignment *R;
+  
   FILE *fp;
   
   fp=vfopen (in, "w");
@@ -2833,7 +2835,9 @@ Alignment * align_two_structures ( Sequence *S, int s1, int s2, char *mode)
       add_warning ( stderr, "\nCould not align %s and %s with %s\nUse sequence alignment instead",S->name[s1],S->name[s2],mode,PROGRAM);
       return align_two_sequences (S->seq[s1], S->seq[s2], "blosum62mt", -8, -1, "myers_miller_pair_wise");
     }
-  return quick_read_fasta_aln (NULL,out);
+  R=quick_read_fasta_aln (NULL,out);
+  remove(out);
+  return R;
 }
   
   
