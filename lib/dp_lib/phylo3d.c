@@ -508,28 +508,34 @@ int filter_columns_with_gap (int **col, Alignment *B, float max_gap)
 }
  int   **  file2column_list (char *file, int **list)
 {
-  int i, n;
+  int i,j,n;
   char ***l;
-
+  
   if (!(l=file2list (file, " \t")))return NULL;
-    
-  i=0;
+  
+  
+  i=j=0;
   while (l[i++]);
   if (!list)list=declare_int (i+1, 3);
+  i=j=0;
   while (l[i])
     {
       
       int n=atoi(l[i][0]);
+  
       if (n>=3 && l[i][1][0]!='#')
 	{
-	  list[n][0]=atoi (l[i][1])-1;
-	  list[n][1]=atoi (l[i][2])-1;
-	  n++;
+	  
+	  list[j][0]=atoi (l[i][1])-1;
+	  list[j][1]=atoi (l[i][2])-1;
+	  HERE ("%d %d", list[j][0], list [j][1]);
+	  j++;
 	}
       i++;
     }  
-  list[n][0]=-1;
+  list[j][0]=-1;
   free_arrayN((void***)l, 3);
+  
   return list;
 }
    
