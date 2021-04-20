@@ -63,7 +63,7 @@ use Time::HiRes qw(usleep);
 
 # Base URL for service
 my $baseUrl = 'https://www.ebi.ac.uk/Tools/services/rest/ncbiblast';
-my $version = '2020-02-28 14:43';
+my $version = '2019-07-03 16:26';
 
 # Set interval for checking status
 my $checkInterval = 3;
@@ -80,7 +80,7 @@ my %params = (
     'debugLevel' => 0,
     'maxJobs'    => 1
 );
-my @database;
+
 # Default parameter values (should get these from the service)
 GetOptions(
     # Tool specific options
@@ -98,13 +98,12 @@ GetOptions(
     'seqrange=s'      => \$params{'seqrange'},       # Specify a range or section of the input sequence to use in the search. Example: Specifying '34-89' in an input sequence of total length 100, will tell BLAST to only use residues 34 to 89, inclusive.
     'gapalign'        => \$params{'gapalign'},       # This is a true/false setting that tells the program the perform optimised alignments within regions involving gaps. If set to true, the program will perform an alignment using gaps. Otherwise, if it is set to false, it will report only individual HSP where two sequence match each other, and thus will not produce alignments with gaps.
     'wordsize=i'      => \$params{'wordsize'},       # Word size for wordfinder algorithm
-    'taxids=s'        => \$params{'taxids'},         # Specify one or more TaxIDs so that the BLAST search becomes taxonomically aware.
     'compstats=s'     => \$params{'compstats'},      # Use composition-based statistics.
     'align=i'         => \$params{'align'},          # Formating for the alignments
     'transltable=i'   => \$params{'transltable'},    # Query Genetic code to use in translation
     'stype=s'         => \$params{'stype'},          # Indicates if the sequence is protein or DNA/RNA.
     'sequence=s'      => \$params{'sequence'},       # The query sequence can be entered directly into this form. The sequence can be in GCG, FASTA, EMBL (Nucleotide only), GenBank, PIR, NBRF, PHYLIP or UniProtKB/Swiss-Prot (Protein only) format. A partially formatted sequence is not accepted. Adding a return to the end of the sequence may help certain applications understand the input. Note that directly using data from word processors may yield unpredictable results as hidden/control characters may be present.
-    'database=s'      => \@database,                 # Database
+    'database=s'      => \$params{'database'},       # Database
     # Generic options
     'email=s'         => \$params{'email'},          # User e-mail address
     'title=s'         => \$params{'title'},          # Job title
@@ -133,7 +132,6 @@ if ($params{'verbose'}) {$outputLevel++}
 if ($params{'quiet'}) {$outputLevel--}
 if ($params{'pollFreq'}) {$checkInterval = $params{'pollFreq'} * 1000 * 1000}
 if ($params{'baseUrl'}) {$baseUrl = $params{'baseUrl'}}
-$params{"database"} = [@database];
 
 # Debug mode: LWP version
 &print_debug_message('MAIN', 'LWP::VERSION: ' . $LWP::VERSION,
@@ -847,7 +845,7 @@ sub _job_list_poll {
                 print STDERR
                     "Warning: job $jobid failed for sequence $job_number: $seq_id\n";
             }
-            # Duplicated getting results.
+			# Duplicated getting results.
             #&get_results($jobid, $seq_id);
             splice(@$jobid_list, $jobNum, 1);
         }
@@ -1374,8 +1372,6 @@ Sequence similarity search with NCBI Blast.
                         individual HSP where two sequence match each other, and thus
                         will not produce alignments with gaps.
   --wordsize            Word size for wordfinder algorithm.
-  --taxids              Specify one or more TaxIDs so that the BLAST search becomes
-                        taxonomically aware.
   --compstats           Use composition-based statistics.
   --align               Formating for the alignments.
   --transltable         Query Genetic code to use in translation.
