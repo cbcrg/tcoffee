@@ -37,7 +37,10 @@ Alignment *phylo3d (Alignment *inA, Constraint_list *CL)
   
   for (a=1; a<=D->replicates;a++)
     {
-      makerep(D,1);
+      //0-> re-use all the columns
+      //1-> draw with resampling among ALL the pairs
+      //2-> draw with resampling among ALL the columns
+      makerep(D,2);
       aln2dm(D,A);
       addtree(D,A);
     }
@@ -272,6 +275,7 @@ p3D* fill_p3D (Alignment *A, Constraint_list *CL)
   D->dm =declare_double(A->nseq, A->nseq);
   D->nsites=-1;
   D->used_site=(int*)vcalloc (A->len_aln, sizeof (int));
+  
   D->nsitepairs=-1;
   D->used_site_pair=declare_int (A->len_aln, A->len_aln);
   
@@ -286,8 +290,10 @@ p3D* fill_p3D (Alignment *A, Constraint_list *CL)
 
 p3D * makerep (p3D *D, int mode)
 {
-  if (mode==0)      D->colrep=col2rep(D->col, D->colrep, D->N);
-  else if ( mode==1)D->colrep=col2bsrep(D->col, D->colrep, D->N);
+  if      ( mode==0)D->colrep=col2rep    (D->col, D->colrep, D->N);
+  else if ( mode==1)D->colrep=col2bsrep1 (D->col, D->colrep, D->N);
+  else if ( mode==2)D->colrep=col2bsrep2 (D->col, D->colrep, D->N);
+  
   return D;
 }
 
@@ -304,7 +310,7 @@ int **col2rep (int **colin,int **colout, int ni)
   colout[i][0]=-1;
   return colout;
 }
-int **col2bsrep (int **colin,int **colout, int ni)
+int **col2bsrep1 (int **colin,int **colout, int ni)
 {
   int i;
   if (!colout)colout=declare_int (ni+1,3);
@@ -317,6 +323,78 @@ int **col2bsrep (int **colin,int **colout, int ni)
   colout[i][0]=-1;
   return colout;
 }
+int **col2bsrep2 (int **colin,int **colout, int ni)
+{
+  /*select maxp sites with re-sampling among the maxp sites in colin*/
+  /*keep the all against all that are declared in colin*/
+    
+  int i, j, k;
+  int p1,p2, pmax;
+  static int  ns;
+  static int *l1;
+  static int *ls;
+  static int **pairs;
+  static int *bs;
+  static int rni;
+  if (!colout)colout=declare_int (ni+1,3);
+
+  if (rni!=ni)//flush out everything
+    {
+      if (l1)vfree(l1);
+      if (ls)vfree (ls);
+      ns=0;
+      if (pairs)free_int(pairs, -1);
+      l1=NULL;
+      ls=NULL;
+      pairs=NULL;
+      rni=ni;
+    }
+  if (rni==0)return NULL;
+  
+  if (!l1)
+    {
+      //estimate the max #columns
+      l1=(int*)vcalloc (ni, sizeof (int));
+      ls=(int*)vcalloc (ni, sizeof (int));
+      for (i=0; i<ni; i++)
+	{
+	  l1[colin[i][0]]=1;
+	  l1[colin[i][1]]=1;
+	}
+      for (ns=0,i=0; i<=ni; i++)if (l1[i])ls[ns++]=i;
+
+      pairs=declare_int (ls[ns-1]+1,ls[ns-1]+1);
+      for (i=0; i<ni; i++)
+	{
+	  int p1=colin[i][0];
+	  int p2=colin[i][1];
+	  pairs[p1][p2]=pairs[p2][p1]=1;
+	}
+      bs=(int*)vcalloc (ns, sizeof (int));
+    }
+  
+  for (i=0; i< ns; i++)bs[i]=ls[rand()%ns];
+  
+  for (k=0,i=0; i<ns-1; i++)
+    {
+      for (j=i+1; j<ns; j++)
+	{
+	  p1=bs[i];
+	  p2=bs[j];
+	  if (pairs[p1][p2])
+	    {
+	      colout[k][0]=p1;
+	      colout[k][1]=p2;
+	      k++;
+	    }
+	}
+    }
+  
+  colout[k][0]=-1;
+  return colout;
+}
+
+
 
 int **col2scramble_col (int **col, int ni)
 {
@@ -430,6 +508,7 @@ int filter_columns_with_dist_strict(Alignment *B, int **pos,int **col, int***dm,
       i++;
     }
   col[ni][0]=-1;
+  
   return ni;
 }
 int filter_columns_with_dist_relaxed(Alignment *B, int **pos,int **col, int***dm, double maxd)
@@ -528,7 +607,6 @@ int filter_columns_with_gap (int **col, Alignment *B, float max_gap)
 	  
 	  list[j][0]=atoi (l[i][1])-1;
 	  list[j][1]=atoi (l[i][2])-1;
-	  HERE ("%d %d", list[j][0], list [j][1]);
 	  j++;
 	}
       i++;

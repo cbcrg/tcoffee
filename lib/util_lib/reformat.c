@@ -3823,6 +3823,21 @@ int main_output  (Sequence_data_struc *D1, Sequence_data_struc *D2, Sequence_dat
 	  {
 	    output_treelist (out_file, D1->A);
 	  }
+	else if (strm (out_format, "dndbs") || strm (out_format, "newickbs"))
+	  {
+	    print_newick_tree (treelist2bootstrap2 (D1->A), out_file);
+	    
+	  }
+	else if (strm (out_format, "avgbs"))
+	  {
+	    
+	    NT_node BST;
+	    char*tlist=vtmpnam (NULL);
+	    
+	    output_treelist   (tlist, D1->A);
+	    printf_system( "msa2bootstrap.pl -i %s -o %s -input tree >/dev/null 2>/dev/null",tlist, out_file);
+	    
+	  }
 	else if (strm (out_format, "fasta_tree") )
 	  {
 	    if (!D1)return 1;

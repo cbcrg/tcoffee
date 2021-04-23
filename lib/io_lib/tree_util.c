@@ -4693,11 +4693,11 @@ void output_fasta_tree (char *fname, Alignment*A)
 	  }
 	vfclose (fp);
 	}
-void output_treelist (char *fname, Alignment*A)
+int output_treelist (char *fname, Alignment*A)
 	{
 	int a;
 	FILE *fp;
-	if ( !A || !A->nseq) return;
+	if ( !A || !A->nseq) return 0;
 
 	if (A->Tree)return  output_treelist (fname, A->Tree);
 	
@@ -4708,6 +4708,7 @@ void output_treelist (char *fname, Alignment*A)
 	    fprintf ( fp, "%s\n",A->seq_al[a]);
 	  }
 	vfclose (fp);
+	return A->nseq; 
 	}  
   
 
@@ -7573,8 +7574,21 @@ int **treelist2ns (NT_node T,Sequence *B,char *ref)
     return support;
   }
 
-
-
+NT_node treelist2bootstrap2( Alignment *A)
+{
+  static char*tlist=vtmpnam (NULL);
+  static char*outf =vtmpnam (NULL);
+  NT_node T;
+	    
+  int nrep;
+  nrep=output_treelist   (tlist, A);
+  printf_system( "msa2bootstrap.pl -i %s -o %s -input tree >/dev/null 2>/dev/null",tlist, outf);
+  
+  T=main_read_tree(outf);
+  T=tree_dist2normalized_tree_dist (T,nrep);
+  return T;
+}
+  
 NT_node treelist2bootstrap ( NT_node *L, char *file)
 {
   char *outfile;
@@ -7586,7 +7600,7 @@ NT_node treelist2bootstrap ( NT_node *L, char *file)
       file=vtmpnam (NULL);
       vfclose (print_tree_list (L,"newick", vfopen (file, "w")));
     }
-
+      
   outfile=vtmpnam (NULL);
 
   printf_system( "msa2bootstrap.pl -i %s -o %s -input tree >/dev/null 2>/dev/null", file, outfile);
@@ -7940,7 +7954,7 @@ char *kmsa2msa (KT_node K,Sequence *S, ALNcol***S2,ALNcol*start)
     }
   free_aln (A);
   
-  //OUT ionly defined in the parent process
+  //OUT only defined in the parent process
   //This is how the recursion stops
   if (!out) return out;
   
@@ -8105,7 +8119,7 @@ ALNcol * msa2graph (Alignment *A, Sequence *S, ALNcol***S2,ALNcol*msa,int seq)
   //S2 is a list of residues with each residue pointing to a position on MSA
   //This way, MSA is only ONE string of Length MSA as opposed to N Strings of length MSA
   //When A is integrated within MSA, for each column, we look for an S2 residue pointing to an ALNcol in msa. 
-  //If there is none, then this is an unmatched column and a column of gpas must be inserted in the rest of the sequences
+  //If there is none, then this is an unmatched column and a column of gaps must be inserted in the rest of the sequences
   
   gapcount=(int*)vcalloc ( A->len_aln, sizeof (int));
   rescount=(int*)vcalloc ( A->len_aln, sizeof (int));
@@ -8173,7 +8187,7 @@ ALNcol * msa2graph (Alignment *A, Sequence *S, ALNcol***S2,ALNcol*msa,int seq)
   
   
 	
-
+  //Map new columns 
   for (c=0; c<A->len_aln; c++)
     {
       p=NULL;
@@ -8207,8 +8221,10 @@ ALNcol * msa2graph (Alignment *A, Sequence *S, ALNcol***S2,ALNcol*msa,int seq)
 	}
     }
  
+  
   if (!msa)//graph gets turned into msa
     {
+      
       msa=start=declare_alncol();
       end=declare_alncol();
       start->aa=-1;
@@ -8221,16 +8237,15 @@ ALNcol * msa2graph (Alignment *A, Sequence *S, ALNcol***S2,ALNcol*msa,int seq)
 	}
      
     }
-  //Insert graph into msa by expanding seq
-  //Trick: graph[A->len_aln] contains all the nodes
-  //the ones from seq are already in. They can be recognised with aa==1
-  //the new ones are the gaps and they need to be connected to the aa==1
-  
-  else 
+   else if (compact == 0)//concatenate 
     {
-      ALNcol*last=msa;
-      int len=0;
+      //Insert graph into msa by expanding seq
+      //Trick: graph[A->len_aln] contains all the nodes
+      //the ones from seq are already in. They can be recognised with aa==1
+      //the new ones are the gaps and they need to be connected to the aa==1
       
+      ALNcol*last=msa;
+           
       for (c=0; c<S->len[seq]; c++)(S2[seq][c])->aa=1;
       for (c=0; c<A->len_aln; c++)
 	{
@@ -8245,7 +8260,37 @@ ALNcol * msa2graph (Alignment *A, Sequence *S, ALNcol***S2,ALNcol*msa,int seq)
 	}
       for (c=0; c<S->len[seq]; c++)(S2[seq][c])->aa=0;
     }
+   else if ( compact ==1)//stack
+    {
+      //Same as above but stack positions gapped between the same pair of residues in the guide sequence
+      ALNcol*last=msa;
+           
+      for (c=0; c<S->len[seq]; c++)(S2[seq][c])->aa=1;
+      for (c=0; c<A->len_aln; c++)
+	{
+	  if (graph[c]->aa)last=graph[c];
+	  else if (last->next && !(last->next)->aa)
+	    {
+	      for ( s=0; s<A->nseq; s++)
+		{
+		  int ir=pos[s][c];
+		  if (ir!=-1 && S2[lu[s]][ir])S2[lu[s]][ir]=last;
+		}
+	      last=last->next;
+	    }
+	  else
+	    {
+	      graph[c]->next=last->next;
+	      last->next= graph[c];
+	      last=last->next;
+	    }
+	}
+      for (c=0; c<S->len[seq]; c++)(S2[seq][c])->aa=0;
+    }
   
+  
+  
+      
   //This assigns an index to every column in the linked list MSA
   
   if (check_homoplasy)

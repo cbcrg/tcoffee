@@ -7261,6 +7261,11 @@ Alignment * t_coffee_dpa (int argc, char **argv)
 	  reg_pool=1;
 	  
 	}
+      else if (strm (argv[a],"-compact")  )
+	{
+	  cputenv ("COMPACT_4_TCOFFEE=1");
+	  
+	}
       else if (strm (argv[a], "-method") || strm (argv[a], "-dpa_method") || strm (argv[a], "-reg_method"))
 	{
 	  dpa_aligner=argv[++a];

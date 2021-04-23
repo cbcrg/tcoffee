@@ -276,7 +276,7 @@ Sequence * get_nexus    (char*file);
 Sequence * get_treelist (char *fname);
 Sequence*get_fasta_tree (char *fname, char *comment_out);
 void output_fasta_tree (char *fname, Alignment*A);
-void output_treelist (char *fname, Alignment*A);
+int output_treelist (char *fname, Alignment*A);
 
 NT_node main_read_tree(char *treefile);
 NT_node quick_read_tree(char *treefile);
@@ -356,6 +356,8 @@ Alignment *treelist2node_support_best (Alignment *T);
 
 float update_node_support (NT_node T1, NT_node T2, int nseq);
 NT_node treelist2bootstrap ( NT_node *L, char *file);
+NT_node treelist2bootstrap2 ( Alignment *A);
+
 NT_node treelist2filtered_bootstrap ( NT_node *L, char *file, int **score,float f);
 
 Sequence * treelist2seq ( Sequence *S);
