@@ -3039,7 +3039,7 @@ get_cl_param(\
 			    /*TYPE*/      "S"              ,\
 			    /*OPTIONAL?*/ OPTIONAL         ,\
 			    /*MAX Nval*/  1                ,\
-			    /*DOC*/       "d: diffraction, n: nmr, m:model" ,\
+			    /*DOC*/       "d: diffraction, n: nmr, e: em, m:model" ,\
 			    /*Parameter*/ &pdb_type          ,\
 			    /*Def 1*/     "d"             ,\
 			    /*Def 2*/     "d"             ,\

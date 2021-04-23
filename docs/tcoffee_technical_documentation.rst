@@ -721,7 +721,7 @@ Minimum coverage for inclusion of a sequence in a PSI-BLAST profile.
 Database for PDB template to be selected by EXPRESSO. By default it runs on the PDB, but you can specify a version installed locally on your system,
 
 - **-pdb_type** (usage:**-pdb_type=[d,n,m,dnm,dn]**/default:**-pdb_type=d**)
-The different types are as follow: "d" stands for XRAY structures (diffraction), "n" stands for NMR structures and "m" stands for models.
+The different types are as follow: "d" stands for XRAY structures (diffraction), "n" stands for NMR structures, "e" stands for EM structures and "m" stands for models.
 
 - **-pdb_min_sim** (usage:**-pdb_min_sim= [%identity]**/default:35)
 Minimum % identity for a PDB template to be selected by Expresso.
