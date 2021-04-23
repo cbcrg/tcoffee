@@ -2994,7 +2994,7 @@ Command 4: Running Expresso using a local BLAST/PDB
 <p>To use Expresso, you have different option from an entirely automated procedure to tailored procedure, by selecting either your own structures or by defining different criteria for the template selection. You can have an exhaustive list in the <strong>T-Coffee Technical Documentation</strong> (subsection <strong>Template based T-Coffee modes</strong>) yet the most important parameters for the template selection are the following:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p><strong>-pdb_type</strong>    : type of structure (“d” for diffraction/XRAY or “n” NMR structures)</p></li>
+<li><p><strong>-pdb_type</strong>    : type of structure (“d” for diffraction/XRAY or “n” NMR structures or "e" for electron microscopy/EM)</p></li>
 <li><p><strong>-pdb_min_cov</strong> : minimum coverage between query sequence and template (from 0-100%)</p></li>
 <li><p><strong>-pdb_min_sim</strong> : minimum identity between query sequence and template (from 0-100%)</p></li>
 </ul>
@@ -5063,7 +5063,7 @@ Increase the scale Increase sensitivity  More alignments( i.e. -50).</p>
 <ul class="simple">
 <li><p><strong>-pdb_type</strong> (usage:<strong>-pdb_type=[d,n,m,dnm,dn]</strong>/default:<strong>-pdb_type=d</strong>)</p></li>
 </ul>
-<p>The different types are as follow: “d” stands for XRAY structures (diffraction), “n” stands for NMR structures and “m” stands for models.</p>
+<p>The different types are as follow: “d” stands for XRAY structures (diffraction), “n” stands for NMR structures, "e" stands for EM structures and “m” stands for models.</p>
 <ul class="simple">
 <li><p><strong>-pdb_min_sim</strong> (usage:<strong>-pdb_min_sim= [%identity]</strong>/default:35)</p></li>
 </ul>

@@ -1270,7 +1270,7 @@ Template search paramaters
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 To use Expresso, you have different option from an entirely automated procedure to tailored procedure, by selecting either your own structures or by defining different criteria for the template selection. You can have an exhaustive list in the **T-Coffee Technical Documentation** (subsection **Template based T-Coffee modes**) yet the most important parameters for the template selection are the following:
 
- - **-pdb_type**    : type of structure ("d" for diffraction/XRAY or "n" NMR structures)
+ - **-pdb_type**    : type of structure ("d" for diffraction/XRAY or "n" NMR structures or "e" EM structures)
  - **-pdb_min_cov** : minimum coverage between query sequence and template (from 0-100%)
  - **-pdb_min_sim** : minimum identity between query sequence and template (from 0-100%)
 
@@ -1444,7 +1444,7 @@ By Default, RSAP-Coffee only runs sap, but you can also run other structural met
 
    $#: t_coffee <yourseq.fasta> -mode rsapcoffee -method sap_pair, mustang_pair, TMalign_pair -template_file <template file>
 
-The default procedure is meant to handle a muxture of PDB files and sequences. All possble PDB sequences pairs are aligned using strucure based methods (structural library) and all possiblée sequence pairs (including PDB sequences) sequences are then aligned using the R-Coffee mode (secondary library). In the secondary library, the PDB sequences are aligned using their experimentallyerived secondary structures, as estimated by X3DNA. Note that id you aonly have structures, you may use the folloing command lines to carry out a strict structure based sequence alignment:
+The default procedure is meant to handle a muxture of PDB files and sequences. All possble PDB sequences pairs are aligned using strucure based methods (structural library) and all possiblï¿½e sequence pairs (including PDB sequences) sequences are then aligned using the R-Coffee mode (secondary library). In the secondary library, the PDB sequences are aligned using their experimentallyerived secondary structures, as estimated by X3DNA. Note that id you aonly have structures, you may use the folloing command lines to carry out a strict structure based sequence alignment:
 
 ::
 

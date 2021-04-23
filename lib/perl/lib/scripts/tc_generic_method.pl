@@ -645,6 +645,7 @@ sub type2etype
 
     if ( $type=~/n/){$etype.="NMR ";}
     if ( $type=~/d/){$etype.="diffraction ";}
+	if ( $type=~/e/){$etype.="EM ";}
     if ( $type=~/m/){$etype.="model ";}
     return $etype;
   }
@@ -672,6 +673,7 @@ sub pdb_has_right_type
 
     if ( $r eq "NMR" && $type=~/n/){return 1;}
     elsif ( $r eq "diffraction" && $type=~/d/){return 1;}
+	elsif ( $r eq "EM" && $type=~/e/){return 1;}
     elsif ( $r eq "model" && $type=~/m/){return 1;}
     else {return 0;}
   }
