@@ -327,6 +327,8 @@ int **col2bsrep2 (int **colin,int **colout, int ni)
 {
   /*select maxp sites with re-sampling among the maxp sites in colin*/
   /*keep the all against all that are declared in colin*/
+  /*The total number is guarranteed, but not the total number of pairs*/
+  
     
   int i, j, k;
   int p1,p2, pmax;
@@ -362,16 +364,16 @@ int **col2bsrep2 (int **colin,int **colout, int ni)
 	  if (colin[i][0]>mni)mni=colin[i][0];
 	  if (colin[i][1]>mni)mni=colin[i][1];
 	}
-      l1=(int*)vcalloc (mni+1, sizeof (int));
-      ls=(int*)vcalloc (mni+1, sizeof (int));
+      l1=(int*)vcalloc (mni+1, sizeof (int));//cache for the columns
+      ls=(int*)vcalloc (mni+1, sizeof (int));//ls: list of sites => list of used columns, collected from tghe cache
       for (i=0; i<ni; i++)
 	{
 	  l1[colin[i][0]]=1;
 	  l1[colin[i][1]]=1;
 	}
       for (ns=0,i=0; i<=mni; i++)if (l1[i])ls[ns++]=i;
-
-      pairs=declare_int (mni+1,mni+1);
+      
+      pairs=declare_int (mni+1,mni+1);//Look up 2D array of all used columns - sparse because of the distance filtering
       for (i=0; i<ni; i++)
 	{
 	  int p1=colin[i][0];
@@ -784,7 +786,8 @@ double phylo3d2score (double w1, double w2, double *rscore, double *rmax)
   static int   distance_mode;
   static double distance_modeE;
   static int no_weights;
-  
+  //4 - initial measure (1-rlativeDelta)²=> concave function, different from Kimura
+  //7 - more Kimura like: (1-rlativeDelta²)=>convex
 
   if (!setparam)
     {
@@ -849,6 +852,17 @@ double phylo3d2score (double w1, double w2, double *rscore, double *rmax)
        we=1;
        sc=(double)(FABS((w1-w2)));
      }
+   else if ( distance_mode ==7)
+     {
+       double rdelta;
+       we=((w1>w2)?w1:w2);
+       rdelta=FABS((w1-w2))/we;
+       rdelta*=rdelta;
+       rscore[0]=1-rdelta;
+       rmax[1]=we;
+       return rscore[0];
+     }
+	 
    
    if (no_weights)
      we=1;
