@@ -354,16 +354,24 @@ int **col2bsrep2 (int **colin,int **colout, int ni)
   if (!l1)
     {
       //estimate the max #columns
-      l1=(int*)vcalloc (ni, sizeof (int));
-      ls=(int*)vcalloc (ni, sizeof (int));
+      
+      int mni=0;//index of the right-most column
+      
+      for (mni=0,i=0; i<ni; i++)
+	{
+	  if (colin[i][0]>mni)mni=colin[i][0];
+	  if (colin[i][1]>mni)mni=colin[i][1];
+	}
+      l1=(int*)vcalloc (mni+1, sizeof (int));
+      ls=(int*)vcalloc (mni+1, sizeof (int));
       for (i=0; i<ni; i++)
 	{
 	  l1[colin[i][0]]=1;
 	  l1[colin[i][1]]=1;
 	}
-      for (ns=0,i=0; i<=ni; i++)if (l1[i])ls[ns++]=i;
+      for (ns=0,i=0; i<=mni; i++)if (l1[i])ls[ns++]=i;
 
-      pairs=declare_int (ls[ns-1]+1,ls[ns-1]+1);
+      pairs=declare_int (mni+1,mni+1);
       for (i=0; i<ni; i++)
 	{
 	  int p1=colin[i][0];
