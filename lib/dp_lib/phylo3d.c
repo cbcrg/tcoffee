@@ -788,7 +788,7 @@ double phylo3d2score (double w1, double w2, double *rscore, double *rmax)
   static int no_weights;
   //4 - initial measure (1-rlativeDelta)²=> concave function, different from Kimura
   //7 - more Kimura like: (1-rlativeDelta²)=>convex
-
+  //8 - linear rdelta (1-RelativeDelta)
   if (!setparam)
     {
       setparam=1;
@@ -862,7 +862,15 @@ double phylo3d2score (double w1, double w2, double *rscore, double *rmax)
        rmax[1]=we;
        return rscore[0];
      }
-	 
+   else if ( distance_mode ==8)
+     {
+       double rdelta;
+       we=((w1>w2)?w1:w2);
+       rdelta=FABS((w1-w2))/we;
+       rscore[0]=1-rdelta;
+       rmax[1]=we;
+       return rscore[0];
+     }	 
    
    if (no_weights)
      we=1;
