@@ -801,6 +801,8 @@ double phylo3d2score (double w1, double w2, double *rscore, double *rmax)
       if (getenv ("THREED_TREE_NO_WEIGHTS"))no_weights=atoigetenv ("THREED_TREE_NO_WEIGHTS");
       else no_weights=1;
     }
+
+ 
 			   
    //first attempt-- Major issue because non symetrical and therefore not a distance
    if (!distance_mode)
@@ -852,23 +854,34 @@ double phylo3d2score (double w1, double w2, double *rscore, double *rmax)
        we=1;
        sc=(double)(FABS((w1-w2)));
      }
-   else if ( distance_mode ==7)
+   else if ( distance_mode ==7)//Convexb -- Kimura like: 1-D^2 -- assiumes that D is over-estimated
      {
        double rdelta;
        we=((w1>w2)?w1:w2);
        rdelta=FABS((w1-w2))/we;
+              
        rdelta*=rdelta;
        rscore[0]=1-rdelta;
-       rmax[1]=we;
+       rmax[0]=1;
        return rscore[0];
      }
-   else if ( distance_mode ==8)
+   else if ( distance_mode ==8)//Linear -- 1-D -- No assumption on D
      {
        double rdelta;
        we=((w1>w2)?w1:w2);
        rdelta=FABS((w1-w2))/we;
        rscore[0]=1-rdelta;
-       rmax[1]=we;
+       rmax[0]=1;
+       return rscore[0];
+     }	 
+   else if  (distance_mode ==9)//concave -- (1-D)^2 -- Asumes D is iunder- estimated
+     {
+       double rdelta;
+       we=((w1>w2)?w1:w2);
+       rdelta=FABS((w1-w2))/we;
+       rscore[0]=1-rdelta;
+       rscore[0]*=rscore[0];
+       rmax[0]=1;
        return rscore[0];
      }	 
    
