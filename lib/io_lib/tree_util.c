@@ -6481,7 +6481,8 @@ int treelist2splits( Sequence *S, Sequence *TS)
   char **wl;
   FILE *fp;
   char file_list[100000];
-  
+  int  IsMainT=0;
+  int  InMainT=0;
   split_file=vtmpnam (NULL);
   sorted_split_file =vtmpnam (NULL);
 
@@ -6489,7 +6490,27 @@ int treelist2splits( Sequence *S, Sequence *TS)
   used=(int*)vcalloc (n, sizeof (int));
 
   T=read_tree_list (S);
-  if (!TS)TS=tree2seq(T[0], NULL);
+  
+  if (!TS)
+    {
+      
+      Sequence *S1=tree2seq(T[0], NULL);
+      char *tmp1=vtmpnam (NULL);
+      char *tmp2=vtmpnam(NULL);
+      fp=vfopen (tmp1, "w");
+      for (a=0; a< S1->nseq; a++)
+	{
+	  fprintf (fp,">%s\n", S1->name[a]);
+	}
+      vfclose (fp);
+      printf_system ( "cat %s | sort > %s", tmp1, tmp2);
+      
+      TS=get_fasta_sequence (tmp2, NULL);
+    }
+  
+	  
+	
+
   nseq=TS->nseq;
   fp=vfopen (split_file, "w");
 
@@ -6504,9 +6525,9 @@ int treelist2splits( Sequence *S, Sequence *TS)
   
   vfclose (fp);
   printf_system ("cp %s split_file::IGNORE_FAILURE::", split_file);
-    
+  
   printf_system ( "cat %s | grep 1| sort > %s::IGNORE_FAILURE::", split_file, sorted_split_file);
-
+  printf_system ("cp %s cedric", sorted_split_file);
   fp=vfopen (sorted_split_file, "r");
   
   for ( a=0; a<TS->nseq; a++)fprintf ( stdout, "SEQ_INDEX %d %s\n", a+1, TS->name[a]);
@@ -6520,33 +6541,49 @@ int treelist2splits( Sequence *S, Sequence *TS)
       wl=string2list (buf);
       spl=wl[1];
       fname=wl[3];
-            
+      
+      
+
+
+      //To avoid any confusion, ALL splits start with 1, even if collected otherwise
+      if (spl[0]!='1')
+	for ( a=0; a< strlen (spl); a++)
+	  if ( spl[a]=='0')
+	    spl[a]='1';
+	  else
+	    spl[a]='0';
+      
       if (!ref_spl)
 	{
 	  ref_spl=(char*)vcalloc (strlen (spl)+1, sizeof (char));
 	  sprintf ( ref_spl, "%s", spl);
 	  file_list[0]='\0';
 	  n=1;
-	}
-      else if ( !strm (spl, ref_spl))
+	  if ( strm (fname, "Tree_1"))InMainT=1;
+	}      
+      else if ( !strm (spl, ref_spl))//will have to deal with a new split
 	{
 	  int i;
 	  int n0=0, n1=0;
-	  
+
 	  for (i=0; i<nseq; i++)
 	    {
 	      n0+=(ref_spl[i]=='0')?1:0;
 	      n1+=(ref_spl[i]=='1')?1:0;
 	    }
 	  
-	  if (n>1 && strstr (file_list, fname))n--;
+	  if (n>1 && strstr (file_list, fname));
 	  else
 	    {
 	      if (n>1)strcat (file_list, "####");
 	      strcat (file_list, fname);
 	    }
 	  
-	  fprintf ( stdout, "%d\t%d\t%s\t%s\t",((n0>n1)?n1:n0),n,ref_spl, file_list);
+	  n-=InMainT;
+
+	  fprintf ( stdout, "#SPLIT1,%15s,%d,%d,%s,%s,%s\n",S->file[0],((n0>n1)?n1:n0),n,ref_spl,(InMainT==0)?"repl":"tree", (strstr(S->file[0], "_1d_"))?"1d":"3d");
+	  fprintf ( stdout, "#SPLIT2: %15s %d\t%d\t%s\t%s\t",S->file[0],((n0>n1)?n1:n0),n,ref_spl, file_list);
+	  
 	  
 	  for (i=0,a=0; a<nseq; a++)
 	    if (ref_spl[a]=='1')
@@ -6567,13 +6604,18 @@ int treelist2splits( Sequence *S, Sequence *TS)
 	  file_list[0]='\0';
 	  sprintf ( ref_spl, "%s", spl);
 	  n=1;
+	  if strm (fname, "Tree_1")InMainT=1;
+	  else InMainT=0;
 	}
-      else
+      else 
 	{
 	  if (n>1)strcat (file_list, "####");
 	  strcat (file_list, fname);
 	  n++;
+	  if strm (fname, "Tree_1")InMainT=1;
 	}
+      
+      
       free_char (wl, -1);
     }
   vfclose (fp);

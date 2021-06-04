@@ -2076,7 +2076,7 @@ sub dirsync
     my (@in)=@_;
     my ($from_dir, $to_dir)=@in;
     my ($press_dir, $ignore);
-    my $disc="Movies4"; # used to be Movies3
+    my $disc="Movies5"; # used to be Movies3
     my $synced=0;
     
     if ($from_dir eq "reset"){return flag2unset();}
@@ -2463,6 +2463,7 @@ sub flag2unset
 	     }
 sub flag2status
 	       {
+		 print "The File $FLAG is ON\n";
 		 if (-e $FLAG){return 1;}
 		 return 0;
 	       }

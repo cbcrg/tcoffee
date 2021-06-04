@@ -774,7 +774,7 @@ double pair2dist(p3D *D, int s1, int s2)
       if (D->used_site_pair)D->used_site_pair[c1][c2]=D->used_site_pair[c2][c1]=1;
 
     }
-    if (max<MY_EPSILON)score=-100;
+  if (max<MY_EPSILON)score=-100;
   else score=(double)100*((double)1 - (score/max));
   return score;
 }
