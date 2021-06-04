@@ -178,9 +178,9 @@ t_coffee -other_pg seq_reformat -in 3d_sample4.aln -action +upper -output clusta
 t_coffee -other_pg apdb -aln 3d_sample4.aln    
 t_coffee -in Rsample_profile1.aln,Rsample_profile2.aln -mode=3dcoffee -outfile=aligned_prf.aln  
 t_coffee sample_seq1.fasta -in=Mclustalw_pair,Mclustalw_msa,Mslow_pair -outfile=clustal_text  
-t_coffee -mode 3dcoffee -in Sseq.fas P2PTC    
-t_coffee -mode 3dcoffee -in S2seqs.fas -template_file SELF_P_   
-t_coffee -in Msap_pair Ssample_seq7.fasta -template_file template_file7.template -weight 1001 -out_lib test_lib7.tc_lib -lib_only    
+#t_coffee -mode 3dcoffee -in Sseq.fas P2PTC    
+#t_coffee -mode 3dcoffee -in S2seqs.fas -template_file SELF_P_   
+#t_coffee -in Msap_pair Ssample_seq7.fasta -template_file template_file7.template -weight 1001 -out_lib test_lib7.tc_lib -lib_only    
 t_coffee -in Asample_aln5.aln -outfile test.aln    
 cat sample_param_file.param  | t_coffee -parameters=stdin    
 cat sample_seq1.fasta | t_coffee -infile=stdin    
