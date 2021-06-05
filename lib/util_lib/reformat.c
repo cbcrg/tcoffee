@@ -511,8 +511,15 @@ int seq_reformat ( int argc, char **in_argv)
 
 
 		fprintf ( stdout, "\n     +treelist2seq.C.......Reports the species observed in C%% of the trees");
-		fprintf ( stdout, "\n     +treelist2splits......List and counts all the splits in a list of trees");
+		fprintf ( stdout, "\n     +treelist2split_count.List and counts all the splits in a list of trees");
 		fprintf ( stdout, "\n     ......................splits can be restricted to a list of sequences provided via -in2");
+		fprintf ( stdout, "\n     ......................if providing a concatenated trees via -in use -input=treelist");
+		fprintf ( stdout, "\n     ......................if no sequence provided seqnames are extracted and sorted alphbetically");
+		fprintf ( stdout, "\n     ......................splits are coded in split 1 and 0 with the first sequences being int split1");
+		fprintf ( stdout, "\n     ......................the first tree is assumed to the the original (ori) and the others (rep)");
+		fprintf ( stdout, "\n     +treelist2split_list..List and counts all the splits in a list of trees");
+		fprintf ( stdout, "\n     ......................see tree_list2split_count. Same rules apply");
+
 		fprintf ( stdout, "\n     +treelist2dmat.......outputs a distance matrix for a list of trees");
 
 		fprintf ( stdout, "\n     +tree_compute n s....Computes a tree using the MSA provided with -in");
@@ -11569,12 +11576,16 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	   treelist2leafgroup (D1->S, (D2)?D2->S:NULL, ACTION(1));
 	   myexit (0);
 	 }
-       else if ( strm(action, "treelist2splits"))
+       else if ( strm(action, "treelist2splits") || strm(action, "treelist2split_count"))
 	 {
 	   if (D1->T)D1->S=add_file2file_list ((D1->T)->file, NULL);
-	   treelist2splits (D1->S, (D2)?D2->S:NULL);
+	   treelist2split_count (D1->S, (D2)?D2->S:NULL);
 	 }
-
+       else if (strm(action, "treelist2split_list"))
+	 {
+	   if (D1->T)D1->S=add_file2file_list ((D1->T)->file, NULL);
+	   treelist2split_list (D1->S, (D2)?D2->S:NULL);
+	 }
        else if ( strm(action, "treelist2dmat"))
 	 {
 	   treelist2dmat (D1->S);

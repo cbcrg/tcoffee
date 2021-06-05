@@ -326,7 +326,9 @@ int count_groups( Sequence *S, char *s);
 Split ** count_splits( NT_node RT, Sequence *S, char *s);
 NT_node *treelist2prune_treelist (Sequence *S, Sequence *TS, FILE *out);
 int** treelist2groups (Sequence *S, Sequence *ST, char *depth, FILE *out);
-int treelist2splits (Sequence *S, Sequence *ST);
+int treelist2split_list  (Sequence *S, Sequence *ST);
+int treelist2split_count (Sequence *S, Sequence *ST);
+
 int treelist2leafgroup ( Sequence *S, Sequence *TS, char *taxon);
 int ***tree2dist ( NT_node T, Sequence *S, int ***d);
 int treelist2frame (Sequence *S, Sequence *TS);

@@ -4574,6 +4574,8 @@ Sequence * get_treelist (char *fname)
     }
   vfclose (fpin);
   vfclose (fpout);
+  
+  
   return get_fasta_tree(seq, NULL);
 }
 Sequence*get_fasta_tree (char *fname, char *comment_out)
@@ -4616,8 +4618,7 @@ Sequence*get_fasta_tree (char *fname, char *comment_out)
 			fscanf_seq_name (fp,name);
 			while ((c=fgetc(fp))!='\n' && c!=EOF);
 			while ((c=fgetc(fp))!='>' && c!=EOF)
-			  if (isgraph(c))
-			    clen++;
+			  clen++;
 			 max_len_seq=(clen> max_len_seq)?clen: max_len_seq;
 			 min_len_seq=(clen< min_len_seq)?clen: min_len_seq;
 			 clen=0;
@@ -4628,6 +4629,7 @@ Sequence*get_fasta_tree (char *fname, char *comment_out)
 		}
 
     vfclose (fp);
+    
     LS=declare_sequence (  min_len_seq,  max_len_seq,nseq);
 
     LS->nseq=nseq;
@@ -4654,7 +4656,6 @@ Sequence*get_fasta_tree (char *fname, char *comment_out)
 			        {
 				  LS->seq[current][p++]=c;
 				}
-
 			LS->seq[current][p]='\0';
 			LS->len[current]=strlen ( LS->seq[current]);
 
@@ -4782,7 +4783,7 @@ NT_node find_node_in_tree (int *key, int nseq, NT_node T)
 NT_node recode_tree (NT_node T, Sequence *S)
 {
 
-
+  int a;
   if (!T) return T;
 
 
@@ -4794,7 +4795,7 @@ NT_node recode_tree (NT_node T, Sequence *S)
 
   if ( T->isseq)
     {
-
+      
       int i;
       i=name_is_in_list (T->name, S->name, S->nseq, -1);
 
@@ -4814,7 +4815,7 @@ NT_node recode_tree (NT_node T, Sequence *S)
   else
     {
       NT_node R,L;
-      int a;
+    
 
       R=recode_tree (T->left, S);
 
@@ -4846,6 +4847,7 @@ NT_node recode_tree (NT_node T, Sequence *S)
 
 	}
     }
+ 
   return T;
 }
 float *seq2dpa_weight (Sequence *S, char *mode)
@@ -5296,15 +5298,16 @@ int tree2split_list (NT_node T, int ns,int **sl, int* n)
   return 1;
 }
 
-NT_node display_splits (NT_node T,Sequence *S, FILE *fp, char *name)
+NT_node display_splits (NT_node T,Sequence *S, FILE *fp, char *name, char *file, char *sep)
 {
   int a;
+  int n;
   if (!T) return T;
 
   if (!S)S=tree2seq (T,NULL);
 
-  display_splits (T->right,S, fp, name);
-  display_splits (T->left, S, fp, name);
+  display_splits (T->right,S, fp, name,file,sep);
+  display_splits (T->left, S, fp, name,file,sep);
 
 
 
@@ -5316,16 +5319,21 @@ NT_node display_splits (NT_node T,Sequence *S, FILE *fp, char *name)
   //Removed because it prevents some splits to be reported replaced with !T-Parent test.
   else
     {
-      int t=0;
-      for (a=0; a< S->nseq; a++)
+      int n;
+      
+      for (n=0,a=0; a< S->nseq; a++)
+	  n+=T->lseq2[a];
+      n=MIN(n,(S->nseq-n));
+      
+      if ( n>1)
 	{
-	  fprintf (fp, "%d", T->lseq2[a]);
-	  t+=T->lseq2[a];
+	  for (a=0; a< S->nseq; a++)
+	    fprintf (fp, "%d", (T->lseq2[0])?T->lseq2[a]:1-T->lseq2[a]);
+	  fprintf ( fp, "%s%d", sep,n);
+      	  if (name)fprintf (fp, "%s%s", sep,name);
+	  if (file)fprintf (fp, "%s%s", sep,file);
+	  fprintf (fp, "\n");
 	}
-
-      fprintf ( fp, " %d", MIN(t,((S->nseq)-t)));
-      if (name)fprintf (fp, " %s", name);
-      fprintf (fp, "\n");
     }
   return T;
 }
@@ -6467,7 +6475,56 @@ Split * declare_split (int nseq, int ntrees)
   S->split=(char*)vcalloc ( nseq+1, sizeof (char));
   return S;
 }
-int treelist2splits( Sequence *S, Sequence *TS)
+
+int treelist2split_list( Sequence *S, Sequence *TS)
+{
+  //Displays the list of all the splits of every tree
+  //Does not cout them
+  NT_node *T;
+  int n=0,nseq, a, c;
+  
+  int *used;
+
+  char *split_file, *sorted_split_file;
+  char *buf=NULL, *ref_spl=NULL;
+  char *spl;
+  char *fname;
+  char **wl;
+  FILE *fp;
+  char file_list[100000];
+  int  IsMainT=0;
+  int  InMainT=0;
+  split_file=vtmpnam (NULL);
+  sorted_split_file =vtmpnam (NULL);
+
+  n=S->nseq;
+  used=(int*)vcalloc (n, sizeof (int));
+  T=read_tree_list (S);
+  
+  if (!TS)
+    {
+      Sequence *S1=tree2seq(T[0], NULL);
+      char *tmp1=vtmpnam (NULL);
+      char *tmp2=vtmpnam(NULL);
+      fp=vfopen (tmp1, "w");
+      for (a=0; a< S1->nseq; a++)
+	{
+	  fprintf (fp,">%s\n", S1->name[a]);
+	}
+      vfclose (fp);
+      printf_system ( "cat %s | sort > %s", tmp1, tmp2);
+      TS=get_fasta_sequence (tmp2, NULL);
+    }
+  for ( a=0; a< S->nseq; a++)
+    {
+      T[a]=prune_tree  (T[a], TS);
+      T[a]=recode_tree (T[a], TS);
+      display_splits (T[a], TS,stdout, S->name[a], S->file[0], ",");
+    }
+  myexit (0);
+  }
+ 
+int treelist2split_count( Sequence *S, Sequence *TS)
 {
   NT_node *T;
   int n=0,nseq, a, c;
@@ -6483,6 +6540,7 @@ int treelist2splits( Sequence *S, Sequence *TS)
   char file_list[100000];
   int  IsMainT=0;
   int  InMainT=0;
+  
   split_file=vtmpnam (NULL);
   sorted_split_file =vtmpnam (NULL);
 
@@ -6520,7 +6578,7 @@ int treelist2splits( Sequence *S, Sequence *TS)
       
       T[a]=prune_tree  (T[a], TS);
       T[a]=recode_tree (T[a], TS);
-      display_splits (T[a], TS,fp, S->name[a]);
+      display_splits (T[a], TS,fp, S->name[a], S->file[0], " ");
     }
   
   vfclose (fp);
@@ -6580,8 +6638,8 @@ int treelist2splits( Sequence *S, Sequence *TS)
 	    }
 	  
 	  n-=InMainT;
-
-	  fprintf ( stdout, "#SPLIT1,%15s,%d,%d,%s,%s,%s\n",S->file[0],((n0>n1)?n1:n0),n,ref_spl,(InMainT==0)?"repl":"tree", (strstr(S->file[0], "_1d_"))?"1d":"3d");
+	  
+	  fprintf ( stdout, "#SPLIT1,%15s,%d,%d,%s,%s,%s\n",S->file[0],((n0>n1)?n1:n0),n,ref_spl,(InMainT==0)?"replicate":"original", (strstr(S->file[0], "_3d_"))?"3d":"1d");
 	  fprintf ( stdout, "#SPLIT2: %15s %d\t%d\t%s\t%s\t",S->file[0],((n0>n1)?n1:n0),n,ref_spl, file_list);
 	  
 	  
@@ -6623,6 +6681,7 @@ int treelist2splits( Sequence *S, Sequence *TS)
 
   myexit (0);
 }
+
 
 int treelist2splits_old ( Sequence *S, Sequence *TS)
 {
