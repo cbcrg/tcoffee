@@ -8189,7 +8189,7 @@ ALNcol * msa2graph (Alignment *A, Sequence *S, ALNcol***S2,ALNcol*msa,int seq)
   ALNcol**graph=(ALNcol**)vcalloc ( A->len_aln, sizeof (ALNcol*));
   ALNcol *lp, *p, *test;
   ALNcol *start, *end, *parent, *child, *lchild, *lparent;
-  int compact=-1;
+  int compact=0;
   int check_homoplasy=1;
   int *rescount;
   int *gapcount;
@@ -8273,7 +8273,7 @@ ALNcol * msa2graph (Alignment *A, Sequence *S, ALNcol***S2,ALNcol*msa,int seq)
 	  start=(S2[seq][r])->next;
 	  end  =(S2[seq][r+1]);
 	  g=re=0;
-	  while (start!=end)
+	  while (start && start!=end)
 	    {
 	      g+=start->ngap;
 	      re+=start->nres;
@@ -8325,7 +8325,6 @@ ALNcol * msa2graph (Alignment *A, Sequence *S, ALNcol***S2,ALNcol*msa,int seq)
   
   if (!msa)//graph gets turned into msa
     {
-      
       msa=start=declare_alncol();
       end=declare_alncol();
       start->aa=-1;
@@ -8335,33 +8334,9 @@ ALNcol * msa2graph (Alignment *A, Sequence *S, ALNcol***S2,ALNcol*msa,int seq)
       for (c=0; c<A->len_aln; c++)
 	{
 	  graph[c]->next=(c<A->len_aln-1)?graph[c+1]:end;
-	}
-     
+  	}
     }
-   else if (compact == 0)//concatenate 
-    {
-      //Insert graph into msa by expanding seq
-      //Trick: graph[A->len_aln] contains all the nodes
-      //the ones from seq are already in. They can be recognised with aa==1
-      //the new ones are the gaps and they need to be connected to the aa==1
-      
-      ALNcol*last=msa;
-           
-      for (c=0; c<S->len[seq]; c++)(S2[seq][c])->aa=1;
-      for (c=0; c<A->len_aln; c++)
-	{
-	  if (graph[c]->aa)last=graph[c];
-	  else 
-	    {
-	      //This is where new columns of gaps are inserted in the MSA
-	      graph[c]->next=last->next;
-	      last->next=graph[c];
-	      last=last->next;
-	    }
-	}
-      for (c=0; c<S->len[seq]; c++)(S2[seq][c])->aa=0;
-    }
-   else if ( compact ==1)//stack
+  else if ( compact ==1)//stack
     {
       //Same as above but stack positions gapped between the same pair of residues in the guide sequence
       ALNcol*last=msa;
@@ -8388,8 +8363,33 @@ ALNcol * msa2graph (Alignment *A, Sequence *S, ALNcol***S2,ALNcol*msa,int seq)
 	}
       for (c=0; c<S->len[seq]; c++)(S2[seq][c])->aa=0;
     }
-  
-  
+  else if ( compact==-1)
+    {
+      HERE ("WARNING MSAs not being properly combined");
+    }
+  else
+    {
+      //Insert graph into msa by expanding seq
+      //Trick: graph[A->len_aln] contains all the nodes
+      //the ones from seq are already in. They can be recognised with aa==1
+      //the new ones are the gaps and they need to be connected to the aa==1
+      //This is the mode that was used in the NAture Biotech
+      ALNcol*last=msa;
+           
+      for (c=0; c<S->len[seq]; c++)(S2[seq][c])->aa=1;
+      for (c=0; c<A->len_aln; c++)
+	{
+	  if (graph[c]->aa)last=graph[c];
+	  else 
+	    {
+	      //This is where new columns of gaps are inserted in the MSA
+	      graph[c]->next=last->next;
+	      last->next=graph[c];
+	      last=last->next;
+	    }
+	}
+      for (c=0; c<S->len[seq]; c++)(S2[seq][c])->aa=0;
+    }
   
       
   //This assigns an index to every column in the linked list MSA

@@ -220,13 +220,13 @@ $threadFlag4tc=($thread)?"-thread $thread ":"-thread 1 ";
 $threadFlag4famsa=($thread)?"-t $thread ":"-t 1 ";
 $CL4tc.=" $threadFlag4tc ";
 
-print "\n![dynamic.pl] --- CL4tc == $CL4tc\n";  
+if ($VERBOSE){print "\n![dynamic.pl] --- CL4tc == $CL4tc\n";}
 
 my $cmethod=$method2use;
 $cmethod=~s/_pair/_msa/;
 $cmethod=~s/_msa//;
 
-print "\n![dynamic.pl] --- cmethod == $cmethod\n";  
+if ($VERBOSE){print "\n![dynamic.pl] --- cmethod == $cmethod\n";}
 
 if ($cmethod eq "tcoffee"|| $cmethod eq "t_coffee" )
   {
