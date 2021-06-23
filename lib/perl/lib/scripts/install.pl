@@ -538,7 +538,7 @@ sub url2file
       }
     
     if     (&pg_is_installed    ("wget")){$pg="wget"; $flag="-O";$arg="--tries=2 --connect-timeout=10 --no-check-certificate $wget_arg";}
-    elsif  (&pg_is_installed    ("curl")){$pg="curl"; $flag="-o";$arg=$curl_arg;}
+    elsif  (&pg_is_installed    ("curl")){$pg="curl"; $flag="-f -o";$arg=$curl_arg;}
     else
       {
 	printf stderr "\nERROR: No pg for remote file fetching [wget or curl][FATAL]\n";
