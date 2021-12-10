@@ -1284,7 +1284,8 @@ sub is_released
     my $name=&remote_is_pdb_name ($in);
     my $hold=&remote_is_on_hold($in);
     
-    $r=($name && !$hold)?1:0;
+    #$r=($name && !$hold)?1:0;
+    $r=($name)?1:0;
     return $r;
   }
 
