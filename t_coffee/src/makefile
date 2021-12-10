@@ -26,6 +26,7 @@ m='undocumented beta release tested with $(type) tests'
 #
 ifndef HOME2
 HOME2=$(HOME)/Dropbox
+SRC_DIR=$(HOME2)/projects/git/tcoffee/t_coffee/src
 endif
 #### These paths related to the publishing on the production machine: they can stay relative
 WEB_DIR=$(HOME2)/dropBoxShared/Work/tcoffee.org/public_html/
@@ -56,14 +57,14 @@ endif
 
 ##### These paths must be defined relatively to the src directory
 ifndef LIB_DIR
-#LIB_DIR=/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/
-LIB_DIR=$(CURDIR)/../../lib
+#LIB_DIR=/Users/cnotredame_1/Dropbox/projects/git/tcoffee/lib/
+LIB_DIR=$(SRC_DIR)/../../lib
 endif
 
 
 
 ifndef GIT_DIR
-GIT_DIR=$(CURDIR)/../../
+GIT_DIR=$(SRC_DIR)/../../
 endif
 
 ifndef GIT_BIN
@@ -71,7 +72,7 @@ GIT_BIN=$(GIT_DIR)/binaries
 endif
 
 ifndef EXECUTABLE_DIR
-EXECUTABLE_DIR=$(CURDIR)
+EXECUTABLE_DIR=$(SRC_DIR)
 endif
 
 ifndef RST_DOC

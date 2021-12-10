@@ -11,7 +11,6 @@
 #include "define_header.h"
 
 //-----------MARIA ADDED CHANGES------------//
-
 FILE * compare_al_to_lib ( Constraint_list *CL, int start, char *fname, Sequence *S)
 {
     
@@ -624,7 +623,7 @@ int aln_compare ( int argc, char *argv[])
 	   fprintf (stderr, "\nERROR: %s DOES NOT EXIST[FATAL:%s]\n",  pep2_file, PROGRAM);
 	   myexit(EXIT_FAILURE);
 	 }
-	
+	   
        if ( alignment1_file[0])sprintf ( seq_list[n_seq_file++], "A%s", alignment1_file);
        if ( alignment2_file[0])sprintf ( seq_list[n_seq_file++], "A%s", alignment2_file);
        if ( pep1_file[0])sprintf ( seq_list[n_seq_file++], "S%s", pep1_file);
@@ -646,10 +645,11 @@ int aln_compare ( int argc, char *argv[])
 	  tmp_pos= (char **) malloc ( CL->S->nseq * sizeof(char *) );
 	  for (i=0; i< B->nseq; i++){
 	    for (j=0; j< CL->S->nseq; j++){
-		if( strcmp(CL->S->name[j], B->name[i])==0 ){
+		if( strcmp(CL->S->name[j], B->name[i])==0 )
+			{
 		      tmp_pos[j]=B->seq_al[i]; 						//printf(" %s   \n", tmp_pos[j]);
 		      break;
-		}
+			}	
 	    }
 	  }
 	  B->seq_al = tmp_pos;								//printf("\n");   for (i=0; i< B->nseq; i++){ printf(" %s   \n", B->seq_al[i]);  }
@@ -726,24 +726,24 @@ int aln_compare ( int argc, char *argv[])
 	    {
 	      int *entry;
 	      while ( (entry=extract_entry (CL_A)) )
-		{
-// 		  HERE ("-%d-S1:%d S2:%d R1:%d R2:%d", ++c, entry[SEQ1], entry[SEQ2], entry[R1], entry[R2]);
-		  s1=entry[SEQ1];
-		  s2=entry[SEQ2];
-		  glob[0]++;
-		  glob[s1+1]++;
-		  glob[s2+1]++;
-		  pw_glob[s1][s2]++;
-		  pw_glob[s2][s1]++;
-		  entry[MISC]=1;
+			{
+// 		  	HERE ("-%d-S1:%d S2:%d R1:%d R2:%d", ++c, entry[SEQ1], entry[SEQ2], entry[R1], entry[R2]);
+		  	s1=entry[SEQ1];
+		  	s2=entry[SEQ2];
+		  	glob[0]++;
+		  	glob[s1+1]++;
+		  	glob[s2+1]++;
+		  	pw_glob[s1][s2]++;
+		  	pw_glob[s2][s1]++;
+		  	entry[MISC]=1;
 		  
-		  if ((main_search_in_list_constraint (entry,&pos_in_clist,4,CL_B))!=NULL)
-		    add_entry2list (entry,CL_A);
+		  	if ((main_search_in_list_constraint (entry,&pos_in_clist,4,CL_B))!=NULL)
+		    	add_entry2list (entry,CL_A);
 		  
-		}
+			}
 	    }
-       else if ( strm( compare_mode, "column") )
-	    {
+	 else if ( strm( compare_mode, "column") )
+	   	{
 	      int *entry;
 	      posA=aln2pos_simple_2(A);
 	      posB=aln2pos_simple_2(B);
@@ -765,57 +765,57 @@ int aln_compare ( int argc, char *argv[])
 		  }
 	      
 	      while ( (entry=extract_entry (CL_A)) )
-		{
-		  s1=entry[SEQ1];
-		  s2=entry[SEQ2];
-		  r1=entry[R1];
-		  entry[MISC]=0;
-		  glob[0]++;
-		  glob[s1+1]++;
-		  glob[s2+1]++;
-		  pw_glob[s1][s2]++;
-		  pw_glob[s2][s1]++;
+			{
+		  	s1=entry[SEQ1];
+		  	s2=entry[SEQ2];
+		  	r1=entry[R1];
+		  	entry[MISC]=0;
+		  	glob[0]++;
+		  	glob[s1+1]++;
+		  	glob[s2+1]++;
+		  	pw_glob[s1][s2]++;
+		  	pw_glob[s2][s1]++;
 		  
-		  if (seq_cache[s1][r1])
-		  {
+		  	if (seq_cache[s1][r1])
+		  	{
 		     entry[MISC]=1;
 		     add_entry2list (entry, CL_A);
-		  }
+		  	}
 		}
 	      free_int (posA, -1);
 	      free_int (posB, -1);
 	      free_int (seq_cache, -1);      
 	    }	
 	else if ( strm( compare_mode, "tc") )
-	{
+		{
 	      correct_column = (int*)vcalloc(A->len_aln+1, sizeof (int));
 	      posA=aln2pos_simple_2(A);
 	      posB=aln2pos_simple_2(B);
 	      for ( a=0; a< A->len_aln; a++)
-		for ( b=0; b<B->len_aln; b++)
-		  {
-		    is_same = compare_pos_column(posA, a, posB, b, A->nseq);
-		    if(is_same)
-		      correct_column[a] = is_same;
-		  }
+	      	for ( b=0; b<B->len_aln; b++)
+	      		{
+		    	is_same = compare_pos_column(posA, a, posB, b, A->nseq);
+		    	if(is_same)
+		      		correct_column[a] = is_same;
+		  	}
 	      free_int (posB, -1);
-	}
+		}
 	
-       for ( a=0; a< n_structure; a++)
+	for ( a=0; a< n_structure; a++)
            {
 	       ST=read_structure (struct_file[a],struct_format[a], A,B,ST,n_symbol[a], symbol_list[a]); 
-	   }
+		   }
        
       /*RESULT ARRAY DECLARATION*/    
     
-       tot_count=declare_int (n_categories+1, A->nseq+1);
-       pos_count=declare_int (n_categories+1, A->nseq+1);
+    tot_count=declare_int (n_categories+1, A->nseq+1);
+    pos_count=declare_int (n_categories+1, A->nseq+1);
        
        
-       pw_tot_count=(int***)vcalloc ( A->nseq, sizeof (int**));
-       for ( a=0; a< A->nseq; a++)pw_tot_count[a]=declare_int ( A->nseq, n_categories);    
-       pw_pos_count=(int***)vcalloc ( A->nseq, sizeof (int**));
-       for ( a=0; a< A->nseq; a++)pw_pos_count[a]=declare_int ( A->nseq, n_categories);
+    pw_tot_count=(int***)vcalloc ( A->nseq, sizeof (int**));
+    for ( a=0; a< A->nseq; a++)pw_tot_count[a]=declare_int ( A->nseq, n_categories);    
+    pw_pos_count=(int***)vcalloc ( A->nseq, sizeof (int**));
+    for ( a=0; a< A->nseq; a++)pw_pos_count[a]=declare_int ( A->nseq, n_categories);
        
      /*COMPARISON MODULE*/
        if (strm( compare_mode, "tc") )
@@ -867,18 +867,20 @@ int aln_compare ( int argc, char *argv[])
 	   free_int (posA, -1);
 	 }
        else
-	 {
+	 	{
 	   /*COMPARISON MODULE*/
 	   int *entry;
-	   for ( a=0; a< n_categories; a++)
+
+		for ( a=0; a< n_categories; a++)
 	     {
 	       while ( (entry=extract_entry (CL_A)) )
-		 {
+		 	{
 		   s1=entry[SEQ1];
 		   s2=entry[SEQ2];
 		   r1=entry[R1];
 		   r2=entry[R2];
 		   c= entry[MISC];
+		   c=1;
 		   if ( is_in_struct_category ( s1, s2, r1, r2, ST, category[a], n_sub_categories[a]))
 		     {
 		       tot_count[a][0]++;
@@ -886,20 +888,20 @@ int aln_compare ( int argc, char *argv[])
 		       tot_count[a][s2+1]++;
 		       pw_tot_count[s1][s2][a]++;
 		       pw_tot_count[s2][s1][a]++;
-		       
+		     
 		       if(print_pair)
-		       {
-			  HERE("%s,%s,%s",get_structure_residue(s1,r1,ST), get_structure_residue(s2,r2,ST),(c==1)?"Y":"N");
-		       }
+		       	{
+			  	HERE("%s,%s,%s",get_structure_residue(s1,r1,ST), get_structure_residue(s2,r2,ST),(c==1)?"Y":"N");
+		      	}
 		       
 		       if ( c==1)
-			 {
-			   pw_pos_count[s1][s2][a]++;
-			   pw_pos_count[s2][s1][a]++;
-			   pos_count[a][0]++;
-			   pos_count[a][s1+1]++;
-			   pos_count[a][s2+1]++;
-			 }
+			 	{	
+			   	pw_pos_count[s1][s2][a]++;
+			   	pw_pos_count[s2][s1][a]++;
+			   	pos_count[a][0]++;
+			   	pos_count[a][s1+1]++;
+			   	pos_count[a][s2+1]++;
+			 	}
 		     }
 		 }
 	     }
@@ -1267,7 +1269,6 @@ int is_in_struct_category ( int s1, int s2, int r1, int r2, Structure *ST, char 
     static int **r;
     
     
-
     
     if ( ST==NULL)return 1;
     if ( struc_r1!=NULL)
@@ -1285,16 +1286,16 @@ int is_in_struct_category ( int s1, int s2, int r1, int r2, Structure *ST, char 
 
     
     for ( a=1; a< n_cat; a+=2)
-	{
+	    {
         sprintf ( first, "%s", cat[a]);
-	sprintf ( second,"%s", cat[a+1]);
-	r[0][0]=struc_matches_pattern ( struc_r1, first);
-	r[0][1]=struc_matches_pattern ( struc_r2, first);
-	r[1][0]=struc_matches_pattern ( struc_r1, second);
-	r[1][1]=struc_matches_pattern ( struc_r2, second);
+	    sprintf ( second,"%s", cat[a+1]);
+	    r[0][0]=struc_matches_pattern ( struc_r1, first);
+	    r[0][1]=struc_matches_pattern ( struc_r2, first);
+	    r[1][0]=struc_matches_pattern ( struc_r1, second);
+	    r[1][1]=struc_matches_pattern ( struc_r2, second);
 	
-	if ( (r[0][0]&&r[1][1])||(r[1][0]&&r[0][1]))return 1;
-	}	
+	    if ( (r[0][0]&&r[1][1])||(r[1][0]&&r[0][1]))return 1;
+	    }	
    return 0;
    }
 
@@ -1393,22 +1394,22 @@ int parse_category_list ( char *category_list_in, char ***category, int*n_sub_ca
     z=category_list;
     while ((y=strtok(z, ";"))!=NULL)
         {
-	sprintf ( category[n++][2], "%s", y);
-	z=NULL;
-	}
-
+		sprintf ( category[n++][2], "%s", y);
+		z=NULL;
+		}
     
     for ( a=0; a< n; a++)
-	{
-	 sprintf (category_list,"%s",strtok(category[a][2], "="));
-	 sprintf (category[a][0],"%s",strtok (NULL, "="));
-	 sprintf ( category[a][++n_sub_categories[a]],"%s", strtok(category_list, "[]+"));
-	 while ( ((y=strtok(NULL, "[]+"))!=NULL))
+		{
+		n_sub_categories[a]=0;
+	 	sprintf (category_list,"%s",strtok(category[a][2], "="));
+	 	sprintf (category[a][0],"%s",strtok (NULL, "="));
+	 	sprintf ( category[a][++n_sub_categories[a]],"%s", strtok(category_list, "[]+"));
+	 	while ( ((y=strtok(NULL, "[]+"))!=NULL))
 	        {
-		if ( strcmp (y, "#")==0)y=category[a][n_sub_categories[a]];
+			if ( strcmp (y, "#")==0)y=category[a][n_sub_categories[a]];
 	        sprintf ( category[a][++n_sub_categories[a]],"%s",y);
+			}
 		}
-	}
     return n;
     }
 
