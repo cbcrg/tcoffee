@@ -26,7 +26,8 @@ m='undocumented beta release tested with $(type) tests'
 #
 ifndef HOME2
 HOME2=$(HOME)/Dropbox
-SRC_DIR=$(HOME2)/projects/git/tcoffee/t_coffee/src
+#SRC_DIR=$(HOME2)/projects/git/tcoffee/t_coffee/src
+SRC_DIR=$(PWD)
 endif
 #### These paths related to the publishing on the production machine: they can stay relative
 WEB_DIR=$(HOME2)/dropBoxShared/Work/tcoffee.org/public_html/
