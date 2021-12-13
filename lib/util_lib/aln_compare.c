@@ -880,7 +880,7 @@ int aln_compare ( int argc, char *argv[])
 		   r1=entry[R1];
 		   r2=entry[R2];
 		   c= entry[MISC];
-		   c=1;
+		   /*c=1;*/
 		   if ( is_in_struct_category ( s1, s2, r1, r2, ST, category[a], n_sub_categories[a]))
 		     {
 		       tot_count[a][0]++;
@@ -1049,7 +1049,7 @@ FILE *output_pair_wise_sequence_results (FILE *fp,  Result *R)
          {
 	 for ( d=c+1; d< (R->A)->nseq; d++)    
 	     {
-	     fprintf (fp, "%-10s %-10s%s",(R->A)->name[c],(R->A)->name[d],SSPACE);
+	     fprintf (fp, "%-15s %-15s%s",(R->A)->name[c],(R->A)->name[d],SSPACE);
 	     fprintf (fp, "%5.1f%s", R->sim[c][d], SSPACE);
 	     
 	     for (a=0; a< R->n_categories; a++)
@@ -1069,7 +1069,7 @@ FILE *output_sequence_results (FILE *fp,  Result *R)
     
      for ( c=1; c<=R->A->nseq; c++)
          {
-	 fprintf (fp, "%-10s %-10s%s",(R->A)->name[c-1], "..",SSPACE);
+	 fprintf (fp, "%-15s %-15s%s",(R->A)->name[c-1], "..",SSPACE);
 	 fprintf (fp, "%5.1f%s", R->sim_param[c-1][0],SSPACE);
 	 for (a=0; a< R->n_categories; a++)
 		 {
