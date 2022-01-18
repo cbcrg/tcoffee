@@ -186,8 +186,7 @@ Alignment * main_coffee_evaluate_output ( Alignment *IN,Constraint_list *CL, con
 {
   
   Alignment *TopS=NULL, *LastS=NULL, *CurrentS=NULL;
-  
-
+ 
   if ( IN->A){IN=IN->A;}
   while (IN)
     {
@@ -225,11 +224,11 @@ Alignment * main_coffee_evaluate_output2 ( Alignment *IN,Constraint_list *CL, co
    else if ( strm (mode, "no"))return NULL;
    else if ( strstr( mode, "triplet") || strstr (mode, "tcs"))
      {
+     
        return triplet_coffee_evaluate_output ( IN,CL);
      }
    else if ( strstr ( mode, "fast"))
      {
-      
        return fast_coffee_evaluate_output ( IN,CL);
      }
    else if ( strstr ( mode, "slow"))
