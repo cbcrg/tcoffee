@@ -1218,9 +1218,9 @@ sub get_pdb_entry_type_file
 
 sub get_unrealeased_file
   {
-    my $cache_file="$cache/unrealeased.xml";
+    my $cache_file="$cache/unreleased_entries.json.gz";
     my $env_file  = $ENV{"PDB_UNREALEASED_FILE"};
-    my $pdb_file  ="$ENV{'PDB_DIR'}/derived_data/unrealeased.xml";
+    my $pdb_file  ="$ENV{'PDB_DIR'}/derived_data/unreleased_entries.json.gz";
     
     
     if ($env_file eq "NO" || $env_file eq "No" || $env_file eq "no" || $env_file eq "0"){return "NO";}
@@ -1236,12 +1236,12 @@ sub get_unrealeased_file
 	if (-e $cache_file){return $cache_file;}
 	elsif ( $env_file && ! -e $env_file)
 	  {
-	    &url2file("http://www.rcsb.org/pdb/rest/getUnreleased",$env_file);
+	    &url2file("https://ftp.rcsb.org/pub/pdb/holdings/unreleased_entries.json.gz",$env_file);
 	    if ( -e $env_file && !-z $env_file){return $env_file;}
 	  }
 	else
 	  {
-	    add_warning($$,$$,"UNREALEASED_FILE must be set to the location of your unrealeased.xml file as downloaded from http://www.rcsb.org/pdb/rest/getUnreleased when using NO_REMOTE_PDB_DIR=1");
+	    add_warning($$,$$,"UNREALEASED_FILE must be set to the location of your unrealeased.xml file as downloaded from https://ftp.rcsb.org/pub/pdb/holdings/unreleased_entries.json.gz when using NO_REMOTE_PDB_DIR=1");
 	    return "";
 	  }
       }
@@ -1250,7 +1250,7 @@ sub get_unrealeased_file
 	my $new_file=vtmpnam ();
 	if (!-e $cache_file || (-M $cache_file)>1)
 	  {
-	    &url2file("http://www.rcsb.org/pdb/rest/getUnreleased",$new_file);
+	    &url2file("https://ftp.rcsb.org/pub/pdb/holdings/unreleased_entries.json.gz",$new_file);
 	    if ( !-z $new_file){system ("mv $new_file $cache_file"); unlink ($new_file); $new_file=$cache_file;}
 	    else {unlink($new_file);}
 	  }
@@ -1261,13 +1261,13 @@ sub get_unrealeased_file
 	
 	if (!-e $cache_file && !-e $new_file)
 	  {
-	    add_warning($$,$$,"Could not download http://www.rcsb.org/pdb/rest/getUnreleased");
+	    add_warning($$,$$,"Could not download https://ftp.rcsb.org/pub/pdb/holdings/unreleased_entries.json.gz");
 	    return "";
 	  }
 	elsif (-e $cache_file && !-e $new_file)
 	  {
 	    my $m=(-M $cache_file);
-	    add_warning($$,$$,"Could not update file http://www.rcsb.org/pdb/rest/getUnreleased. Older Version [$cache_file]($m Month(s) ) will be used");
+	    add_warning($$,$$,"Could not update file https://ftp.rcsb.org/pub/pdb/holdings/unreleased_entries.json.gz. Older Version [$cache_file]($m Month(s) ) will be used");
 	    return $cache_file;
 	  }
 	else
@@ -1284,7 +1284,7 @@ sub is_released
     my $name=&remote_is_pdb_name ($in);
     my $hold=&remote_is_on_hold($in);
     
-    #$r=($name && !$hold)?1:0;
+    $r=($name && !$hold)?1:0;
     $r=($name)?1:0;
     return $r;
   }
@@ -1367,7 +1367,7 @@ sub remote_is_on_hold
     $ref_file=&get_unrealeased_file();
     if (!-e $ref_file)
       {
-	add_warning ($$,$$,"Cannot find unrealeased.xml;  $in is assumed to be released;");
+	add_warning ($$,$$,"Cannot find https://ftp.rcsb.org/pub/pdb/holdings/unreleased_entries.json.gz;  $in is assumed to be released;");
 	return 1;
       }
     
