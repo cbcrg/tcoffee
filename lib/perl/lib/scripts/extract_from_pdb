@@ -1285,7 +1285,6 @@ sub is_released
     my $hold=&remote_is_on_hold($in);
     
     $r=($name && !$hold)?1:0;
-    $r=($name)?1:0;
     return $r;
   }
 
