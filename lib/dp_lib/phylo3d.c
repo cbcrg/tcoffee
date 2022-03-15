@@ -792,6 +792,7 @@ double pair2dist(p3D *D, int s1, int s2)
 	score=score/max;
       else
 	score=sqrt(score/max);
+      
     }
   else score=(double)100*((double)1 - (score/max));
 
