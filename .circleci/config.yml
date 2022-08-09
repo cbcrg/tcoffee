@@ -34,7 +34,7 @@ jobs:
             set -x
             ## Modified
             ## rsync -avz -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" ~/publish/sandbox/test-results/index.html ec2-user@tcoffee.org:~/Dropbox/Public/public_html/Packages/tests/test-results-linux-x64-$(date +"%Y-%m-%d-%H:%M").html
-            aws s3 cp ~/publish/sandbox/test-results/index.html s3://tcoffee-packages-tests/tests/test-results-linux-x64-$(date +"%Y-%m-%d-%H:%M").html
+            aws s3 cp ~/publish/sandbox/test-results/index.html s3://tcoffee-packages/tests/test-results-linux-x64-$(date +"%Y-%m-%d-%H:%M").html
             [[ "$test_status" != 0 ]] && exit $test_status || true
             )
           no_output_timeout: 30m
@@ -52,25 +52,25 @@ jobs:
           cp ~/tcoffee/build/web-readme.txt ~/publish/sandbox/distributions/$MODE/$version/readme.txt
           #
           #Start publishing the latest release -- make sure the receiving directory is not empty before deleting its content 
-          ## Modified
           ## rsync -avzr -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" ~/tcoffee/lib/version/version_number.version ec2-user@tcoffee.org:~/Dropbox/Public/public_html/Packages/$MODE/Latest;
-          ### aws s3 cp ~/tcoffee/lib/version/version_number.version s3://tcoffee-packages-tests/Packages/$MODE/Latest/;
           ## ssh ec2-user@tcoffee.org "rm  ~/Dropbox/Public/public_html/Packages/$MODE/Latest/*;";
-          ### aws s3 rm s3://tcoffee-packages-tests/Packages/Stable/Latest/ --recursive --exclude "";
+          # Don't need to remove the content of the directory, sync --delete will do it
+          ### aws s3 rm s3://tcoffee-packages/Packages/Stable/Latest/ --recursive --exclude "";
+          ### aws s3 cp ~/tcoffee/lib/version/version_number.version s3://tcoffee-packages/Packages/$MODE/Latest/;
           ## rsync -avzr -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" ~/publish/sandbox/distributions/$MODE/$version/* ec2-user@tcoffee.org:~/Dropbox/Public/public_html/Packages/$MODE/Latest;
-          aws s3 sync ~/publish/sandbox/distributions/$MODE/$version/ s3://tcoffee-packages-tests/$MODE/Latest/ --delete; ## tested
+          aws s3 sync ~/publish/sandbox/distributions/$MODE/$version/ s3://tcoffee-packages/$MODE/Latest/ --delete;
           ## rsync -avzr -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" ~/tcoffee/docs/.html/* ec2-user@tcoffee.org:~/Dropbox/Public/public_html/Projects/tcoffee/documentation/;
-          aws s3 sync ~/tcoffee/docs/.html s3://tcoffee.org/Projects/tcoffee/documentation-tests; ##tested
+          aws s3 sync ~/tcoffee/docs/.html s3://tcoffee.org/Projects/tcoffee/documentation;
           #
           #Published binaries into the binary dir -- in case the macosx is available, publish it as well -- This will be the case when the release is launched from a mac
           ## rsync -avzr -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" ~/tcoffee/binaries/macosx/t_coffee ec2-user@tcoffee.org:~/Dropbox/Public/public_html/Packages/Binaries/tcoffee/macosx/t_coffee.$macosx_bversion;
           ## rsync -avzr -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" ~/tcoffee/binaries/linux/t_coffee ec2-user@tcoffee.org:~/Dropbox/Public/public_html/Packages/Binaries/tcoffee/linux/t_coffee.$linux_bversion;
-          aws s3 cp ~/tcoffee/binaries/macosx/t_coffee s3://tcoffee-packages-tests/Binaries/tcoffee/macosx/t_coffee.$macosx_bversion; ##tested ## do not delete binaries kept
-          aws s3 cp ~/tcoffee/binaries/linux/t_coffee s3://tcoffee-packages-tests/Binaries/tcoffee/linux/t_coffee.$linux_bversion; ##tested ## do not delete binaries kept
+          aws s3 cp ~/tcoffee/binaries/macosx/t_coffee s3://tcoffee-packages/Binaries/tcoffee/macosx/t_coffee.$macosx_bversion;
+          aws s3 cp ~/tcoffee/binaries/linux/t_coffee s3://tcoffee-packages/Binaries/tcoffee/linux/t_coffee.$linux_bversion;
           #
           #Publish the various distribution files into archives
           ## ssh ec2-user@tcoffee.org "cp -r ~/Dropbox/Public/public_html/Packages/$MODE/Latest/* ~/Dropbox/Public/public_html/Packages/Archives";
-          aws s3 cp s3://tcoffee-packages-tests/$MODE/Latest/ s3://tcoffee-packages-tests/Packages/Archives/  --recursive ## tested;
+          aws s3 cp s3://tcoffee-packages/$MODE/Latest/ s3://tcoffee-packages/Packages/Archives/ --recursive;
           #
           # tag and push latest  
           docker login -u $DOCKER_USER -p $DOCKER_PASS
