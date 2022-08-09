@@ -51,7 +51,7 @@ jobs:
           linux_bversion=$(cat ~/tcoffee/binaries/linux/version_number.version);
           cp ~/tcoffee/build/web-readme.txt ~/publish/sandbox/distributions/$MODE/$version/readme.txt
           #
-          #Start publishing the latest release -- make sure the receiving directory is not empty before deleting its content 
+          # Start publishing the latest release -- make sure the receiving directory is not empty before deleting its content 
           ## rsync -avzr -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" ~/tcoffee/lib/version/version_number.version ec2-user@tcoffee.org:~/Dropbox/Public/public_html/Packages/$MODE/Latest;
           ## ssh ec2-user@tcoffee.org "rm  ~/Dropbox/Public/public_html/Packages/$MODE/Latest/*;";
           # Don't need to remove the content of the directory, sync --delete will do it
