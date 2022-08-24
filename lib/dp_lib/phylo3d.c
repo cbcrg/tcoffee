@@ -443,12 +443,22 @@ Alignment * addtree (p3D *D,Alignment *A)
   FILE *fp;
   int s1, s2;
   Alignment *TREEA=A->Tree;
-  
+  int dotree=1;
+  if (!getenv ("THREED_TREE_DM"))dotree=0;
+   
 
-  if (A->nseq>2)dist2nj_tree (D->dm, A->name, A->nseq, treeF);
-  TREEA->seq_al[TREEA->nseq]=file2string(treeF);
-  sprintf (TREEA->name[TREEA->nseq], "%d",TREEA->nseq+1); 	    
-  TREEA->seq_al[TREEA->nseq]=file2string(treeF);
+  if (A->nseq>2 && dotree)
+    {
+      dist2nj_tree (D->dm, A->name, A->nseq, treeF);
+      TREEA->seq_al[TREEA->nseq]=file2string(treeF);
+      sprintf (TREEA->name[TREEA->nseq], "%d",TREEA->nseq+1); 	    
+     
+    }
+  else
+    {
+      sprintf (TREEA->name[TREEA->nseq], "%d",TREEA->nseq+1); 
+      TREEA->seq_al[TREEA->nseq]=csprintf (TREEA->seq_al[TREEA->nseq], "uncomputedtree");
+    }
   fp=vfopen (TREEA->dmF_list[TREEA->nseq], "w");
   
   fprintf ( fp, "%d \n", A->nseq);
@@ -690,6 +700,7 @@ Alignment *aln2trim3d (Alignment *A, Constraint_list *CL)
 
 int aln2dm (p3D *D, Alignment *A)
 {
+  // Turns A into either a distance matrix or a similarity matrix
   int rv=1;
   int s1, s2;
   int c1,c2, t;
@@ -728,7 +739,7 @@ int aln2dm (p3D *D, Alignment *A)
 double pair2dist(p3D *D, int s1, int s2)
 { 
   //s1 and s2 match the D->dm3d 
-  // check the offseet of the residue index - starts at 1 or 0
+  //check the offseet of the residue index - starts at 1 or 0
   double score=0;
   double max=0;
   double rscore, rmax;
@@ -775,7 +786,17 @@ double pair2dist(p3D *D, int s1, int s2)
 
     }
   if (max<MY_EPSILON)score=-100;
+  else if (getenv ("THREED_TREE_DM"))
+    {
+      if(atoigetenv ("THREED_TREE_DM")==1)
+	score=score/max;
+      else
+	score=sqrt(score/max);
+      
+    }
   else score=(double)100*((double)1 - (score/max));
+
+  
   return score;
 }
 double phylo3d2score (double w1, double w2, double *rscore, double *rmax)
@@ -883,7 +904,25 @@ double phylo3d2score (double w1, double w2, double *rscore, double *rmax)
        rscore[0]*=rscore[0];
        rmax[0]=1;
        return rscore[0];
-     }	 
+     }
+   else if (distance_mode==10)
+     {
+       static int setv=0;
+       if (!setv){cputenv ("THREED_TREE_DM=1");setv=1;}
+       rscore[0]=FABS((w1-w2));
+       rmax[0]=1;
+       
+       return rscore[0];
+     }
+   else if (distance_mode==11)
+     {
+       static int setv=0;
+       if (!setv){cputenv ("THREED_TREE_DM=2");setv=1;}
+       rscore[0]=(w1-w2)*(w1-w2);
+       rmax[0]=1;
+       return rscore[0];
+     }
+	 
    
    if (no_weights)
      we=1;
