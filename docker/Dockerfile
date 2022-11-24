@@ -1,4 +1,4 @@
-FROM debian:jessie
+FROM debian:stretch
 MAINTAINER Paolo Di Tommaso <paolo.ditommaso@gmail.com>
 
 RUN apt-get update --fix-missing && \
