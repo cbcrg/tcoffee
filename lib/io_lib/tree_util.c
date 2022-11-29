@@ -8081,14 +8081,23 @@ char* tree2msa4dpa (NT_node T, Sequence *S, int N, char *method)
 	
 static int nalncol;
 ALNcol* declare_alncol ();
+ALNcol* free_alncol ();
+
 ALNcol* declare_alncol ()
 {
-  static int n;
+  static int n, a;
   ALNcol *p=(ALNcol*)vcalloc (1, sizeof (ALNcol));
-  //p->id=++n; //put this back when debugging pointers
+  p->prf=(int*)vcalloc (256, sizeof (int));
+  p->id=++n; //put this back when debugging pointers
   return p;
 }
-
+ALNcol* free_alncol (ALNcol*p)
+{
+  vfree (p->prf);
+  vfree (p);
+  return NULL;
+}
+static int alncountx;
 char *kmsa2msa (KT_node K,Sequence *S, ALNcol***S2,ALNcol*start)
 {
   int a, s, c;
@@ -8140,8 +8149,11 @@ char *kmsa2msa (KT_node K,Sequence *S, ALNcol***S2,ALNcol*start)
 	      nn=0;
 	    }
 	  output_completion (stderr,s,S->nseq, 100, "Final MSA");
+
+
 	  for (c=0; c<S->len[s]; c++)
 	    {
+
 	      S2[s][c]->aa=S->seq[s][c];
 	    }
 	  fprintf (fp, ">%s\n", S->name[s]);
@@ -8243,7 +8255,277 @@ char *kmsa2msa (KT_node K,Sequence *S, ALNcol***S2,ALNcol*start)
   
   return out;
 }
+char * graph2seq(ALNcol** g, int gl);
+ALNcol * msa2graph_new (Alignment *A, Sequence *S, ALNcol***S2,ALNcol*msa,int seq);
+ALNcol * msa2graph_old (Alignment *A, Sequence *S, ALNcol***S2,ALNcol*msa,int seq);
 ALNcol * msa2graph (Alignment *A, Sequence *S, ALNcol***S2,ALNcol*msa,int seq)
+{
+  return msa2graph_old(A,S,S2,msa,seq);
+}
+ALNcol * msa2graph_new (Alignment *A, Sequence *S, ALNcol***S2,ALNcol*msa,int seq)
+{
+  //Thread msa in the child section
+  int s, c,ir, subseq, a;
+  int * lu =(int*) vcalloc (A->nseq, sizeof (int));
+  int **pos=(int**)declare_int (A->nseq, A->len_aln);
+  ALNcol**graph=(ALNcol**)vcalloc ( A->len_aln, sizeof (ALNcol*));
+  ALNcol *lp, *p, *test;
+  ALNcol *start, *end, *parent, *child, *lchild, *lparent;
+  int compact=0;
+  int check_homoplasy=1;
+  int *rescount;
+  int *gapcount;
+  int  nnseq;
+  static int tt;
+  static int tt2;
+  
+  if (A->len_aln==0)return msa;
+  nnseq=(msa)?(A->nseq+(msa->next)->nseq-1):A->nseq;
+
+  //1-fill up the look up section: pos
+  subseq=-1;
+ 
+  for (s=0; s<A->nseq; s++)
+    {
+      int r;
+      lu[s]=name_is_in_hlist (A->name[s],S->name, S->nseq);
+      for (r=0,c=0; c<A->len_aln; c++)
+	{
+	  if (A->seq_al[s][c]!='-')pos[s][c]=r++;
+	  else pos[s][c]=-1;
+	}
+      //This matches the index of seq in S - the complete sequence dataset and in A, the subMSA
+      if (lu[s]==seq)subseq=s;
+    }
+  
+  //The MSA is a linked list of ALNcol having the length of the full MSA
+  //S2 is a list of residues with each residue pointing to a position on MSA
+  //This way, MSA is only ONE string of Length MSA as opposed to N Strings of length MSA
+  //When A is integrated within MSA, for each column, we look for an S2 residue pointing to an ALNcol in msa. 
+  //If there is none, then this is an unmatched column and a column of gaps must be inserted in the rest of the sequences
+  
+  gapcount=(int*)vcalloc ( A->len_aln, sizeof (int));
+  rescount=(int*)vcalloc ( A->len_aln, sizeof (int));
+  for ( s=0; s<A->nseq; s++)
+    if (s!=subseq)
+      for (c=0; c<A->len_aln; c++)
+	{
+	  if (A->seq_al[s][c]=='-')gapcount[c]++;
+	  else rescount[c]++;
+	}
+  
+  
+  //Map new columns 
+  for (c=0; c<A->len_aln; c++)
+    {
+      int master_seq=-1;
+      p=NULL;
+      
+      //scan A->nseq to check if one of the residue is already mapped onto MSA
+      //If such a residue is mapped then the whole column is mapped
+      for (s=0; s<A->nseq; s++)
+	{
+	  ir=pos[s][c];
+
+	  if (ir!=-1 && S2[lu[s]][ir] )
+	    {
+	      p=S2[lu[s]][ir];
+	      graph[c]=p;// graph is the new A being inserted. THis column connects the corresponding column in A it to an existing column in the parent
+	      p->nres+=rescount[c];
+	      master_seq=s;
+	      break;
+	    }
+	}
+      
+      //If no residue was found to be mapped for msa
+      //all residues of this column will then be mapped onto this MSA position
+      if (!p)
+	{
+	  p=graph[c]=(ALNcol*)declare_alncol();//This column does not 
+	  p->nres=rescount[c];
+	}
+
+      for (s=0; s<A->nseq; s++)
+	{	  
+	  ir=pos[s][c];
+	  if (ir!=-1 && !S2[lu[s]][ir])S2[lu[s]][ir]=p;
+	  if (s!=master_seq)p->prf[A->seq_al[s][c]]++;
+	  //p is an empty column it will trigger a insertion in msa in the next step.
+	}
+      
+    }
+
+  //use next2 top create branched insertions (i.e. parent insert goes via next, child insert goes via next2
+  
+    
+
+ //   /Next---->X----NEXT----
+ //  /
+ // X-----Next2----->X------->Next2----->NULL
+
+  
+  if (!msa)//graph gets turned into msa
+    {
+      msa=start=declare_alncol();
+      end=declare_alncol();
+      start->aa=-1;
+      end->aa=-1;
+      start->next=graph[0];
+
+      for (c=0; c<A->len_aln; c++)
+	{
+	  graph[c]->next=(c<A->len_aln-1)?graph[c+1]:end;
+  	}
+    }
+  else
+    {
+      int count=0;
+      
+      for (c=1; c<A->len_aln; c++)
+	{
+	  ALNcol *p =graph[c  ];
+	  ALNcol *pp=graph[c-1];
+	  if (p->next==NULL)pp->next2=p;
+	}
+      
+      //make sure the empty start connects to A if starts with a gap in the master seq
+      if (!graph[0]->aa)msa->next2=graph[0];
+      
+      
+      
+
+
+      
+      for (c=0; c<S->len[seq]; c++)(S2[seq][c])->aa=1;//tag every msa column that is already assigned to seq
+      start=msa;
+      while (start){HERE ("Pa %d %d", start->id, start->aa);start=start->next; }
+      for (c=0; c<A->len_aln; c++)HERE ("Ch: %d %d %d %d",graph[c]->id, graph[c]->aa, (graph[c]->next2)?1:0, (graph[c]->next)?1:0); 
+	
+      
+      start=msa;
+      while (start->next)
+	if (!start->next2){HERE ("8: %d %d", start->id, start->aa);start=start->next;if (count==20)exit(0);count++;}          //No insert in Child, INCREMENT
+	else if (start->next2)       //Insert in Child
+	  {
+	    HERE ("9");
+	    if ((start->next)->aa)   //No Insert in parent
+	      {
+		ALNcol *last =start->next;
+		HERE ("10");
+		p=start->next2;
+		start->next2=NULL;
+		while (p)
+		  {
+		    HERE ("-");
+		    start->next=p;
+		    start=p;//INCREMENT
+		    start->next=last;
+		    p=start->next2;
+		    start->next2=NULL;
+		  }
+		HERE ("11.1");
+	      }
+	    else
+	      {
+		int cl, pl;
+		ALNcol *r,*pa,*ch,**parent, **child, *last;
+		Alignment *SA;
+		//prepare the parent
+		int pcount, ccount;
+		char *pseq, *cseq;
+		HERE ("11 %d", start->id);
+		if ( start->id==57)exit(0);
+		last=start;
+		
+		pl=0;pa=start->next;
+		while (!pa->aa){pa=pa->next;pl++;}
+		start=pa;//the last element will be where the alignment gets branched with the MSA when finishe
+		
+		parent=(ALNcol**)vcalloc (pl, sizeof (ALNcol*));
+		pl=0;p=start->next;
+		while (!pa->aa){parent [pl++]=pa;pa=pa->next;pl++;}
+		pseq=graph2seq(parent, pl);
+
+
+		
+		cl=0;ch=start->next2;
+
+		while (ch){ch=ch->next2;cl++;}
+		child=(ALNcol**)vcalloc (cl, sizeof (ALNcol*));
+		cl=0;ch=start->next2;
+		while (ch){child[cl++]=ch;ch=ch->next2;}
+		cseq=graph2seq(child, cl);
+
+		SA=align_two_sequences (pseq,cseq,"pam250mt",-10,-2, "myers_miller_pair_wise");
+		pcount=ccount=0;
+		for (c=0; c<SA->len_aln; c++)
+		  {
+		    char rp=SA->seq_al[0][c];
+		    char rc=SA->seq_al[1][c];
+		    if      (rc=='-')pcount++;
+		    else if (rp=='-')//insert the children node
+		      {
+			p=child[ccount];
+			p->next=last->next;
+			last->next=p;
+			p->next2=NULL;
+			last=p;
+			ccount++;
+		      }
+		    else //merge the two nodes
+		      {
+			pa=parent[pcount];
+			ch=child [ccount];
+			for (s=0; s<A->nseq; s++)
+			  {	  
+			    int ir=pos[s][ccount];
+			    if (ir!=-1 && !S2[lu[s]][ir])S2[lu[s]][ir]=pa;
+			    if (s!=seq)p->prf[A->seq_al[s][c]]++;
+			  }
+			child[ccount]=free_alncol(ch);
+
+			last=p;
+			ccount++;
+			pcount++;
+		      }
+		  }
+		vfree (cseq); vfree(pseq);
+		vfree(child); vfree(parent);
+		free_aln (SA);
+		start=last;
+	      }
+	    HERE ("11.2");
+	  }
+     }
+  HERE ("12");
+  //reset aa in msa      
+  for (c=0; c<S->len[seq]; c++)(S2[seq][c])->aa=0;	    
+
+  HERE ("Done");
+  vfree (graph);
+  vfree (lu);
+  free_int (pos,-1);
+  vfree (gapcount); vfree(rescount);
+  return msa;
+}  
+char * graph2seq(ALNcol** g, int gl)
+{
+  int a, b, score,bscore;
+  char *seq=(char*)vcalloc (gl+1, sizeof (char));
+  for ( score=bscore=0,a=0; a<gl; a++)
+    {
+      for (b=0; b<26; b++)
+	{
+	  score=g[a]->prf[b+'a']+g[a]->prf[b+'A'];
+	  if (score>bscore)
+	    seq[a]=b+'a';
+	}
+      
+    }
+  return seq;
+}
+
+ALNcol * msa2graph_old (Alignment *A, Sequence *S, ALNcol***S2,ALNcol*msa,int seq)
 {
   //Thread msa in the child section
   int s, c,ir, subseq, a;

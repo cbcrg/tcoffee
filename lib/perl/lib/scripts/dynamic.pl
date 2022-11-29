@@ -242,8 +242,8 @@ elsif ($cmethod eq "clustalo")
     my_system ("clustalo -i $infile $treeFlag -o $outfile  --force $threadFlag $QUIET");
     }
 elsif ($cmethod =~/sparsecore/)
-  {
-    my_system ("mafft-sparsecore.rb -i $infile > $outfile $QUIET");
+{
+    my_system ("mafft-sparsecore.rb -i $infile -C \"--anysymbol\"> $outfile $QUIET");
   }
 elsif (($cmethod =~/mafft/))
   {
@@ -263,7 +263,7 @@ elsif (($cmethod =~/mafft/))
       {
 	$mm=~s/1/i/;
 	$retree="--retree 1 "
-      };
+      }
     
     my_system ("$mm --anysymbol $threadFlag $treeFlag $retree $infile > $outfile $QUIET");
   }
@@ -289,7 +289,7 @@ else
   }
 
 #Flush output if none provided
-if ( ! -e $outfile)
+if ( ! -e $outfile || -s $outfile <1)
   {
     print "ERROR - No MSA computed - $LAST_COM -- [FATAL:dynamic.pl]\n";
     my_exit ($CDIR,$EXIT_FAILURE);

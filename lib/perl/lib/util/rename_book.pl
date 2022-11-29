@@ -2076,7 +2076,7 @@ sub dirsync
     my (@in)=@_;
     my ($from_dir, $to_dir)=@in;
     my ($press_dir, $ignore);
-    my $disc="Movies5"; # used to be Movies3
+    my $disc="Movies6"; # used to be Movies3
     my $synced=0;
     
     if ($from_dir eq "reset"){return flag2unset();}
