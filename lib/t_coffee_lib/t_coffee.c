@@ -7150,11 +7150,15 @@ Alignment * t_coffee_dpa (int argc, char **argv)
   set_int_variable    ("reg_dnd_depth",3);
   set_string_variable ("reg_dnd_mode", "codnd");
   //*_4_CLTCOFFEE gets added to the T-Coffee command line of any slave;
+  
 
   //Set Some Defaults that can be over-written by the CL parsing below
   //Note that by default ALL flag get added to the env variable <name>_4_CLTCOFFEE. These variables are then used to construct the slave CL in dynamic.pl
   cputenv ("blast_server_4_CLTCOFFEE=LOCAL");
- 
+
+  /*Set some default parameters*/
+  cputenv ("COMPACT_4_TCOFFEE=1");//-expand to turn it off
+    
   for (a=1; a<argc; a++)
     {
       
@@ -7266,6 +7270,11 @@ Alignment * t_coffee_dpa (int argc, char **argv)
 	  cputenv ("COMPACT_4_TCOFFEE=1");
 	  
 	}
+      else if (strm (argv[a],"-expand")  )
+	{
+	  cputenv ("COMPACT_4_TCOFFEE=0");
+	  
+	}
       else if (strm (argv[a], "-method") || strm (argv[a], "-dpa_method") || strm (argv[a], "-reg_method"))
 	{
 	  dpa_aligner=argv[++a];
@@ -7356,7 +7365,7 @@ Alignment * t_coffee_dpa (int argc, char **argv)
       command=(char*)vcalloc (10000, sizeof (char));
       sprintf (command, "clustalo_msa");
     }
-  
+  cputenv ("COMMAND_4_TCOFFEE=%s", command);
 
   //prepare output names
   //output the MSA

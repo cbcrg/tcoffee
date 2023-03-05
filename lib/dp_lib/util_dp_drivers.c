@@ -2841,6 +2841,17 @@ Alignment * align_two_structures ( Sequence *S, int s1, int s2, char *mode)
 }
   
   
+Alignment * align_two_sequences_with_external_method ( char *seq1, char *seq2, char *method)
+{
+  static char *in=vtmpnam  (NULL);
+  static char *out=vtmpnam (NULL);
+    
+  if (!seq1 || !seq2 || !method)return NULL;
+  string2file (in, "w",">A\n%s\n>B\n%s\n", seq1, seq2);
+  safe_remove (out);
+  printf_system ("dynamic.pl -method %s -seq %s -outfile %s", method, in, out);
+  return quick_read_aln(out);
+}
 
 Alignment * align_two_sequences ( char *seq1, char *seq2, char *in_matrix, int gop, int gep, char *in_align_mode)
 {
