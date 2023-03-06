@@ -8493,7 +8493,7 @@ int graph_align (int mode,Alignment *A,int **pos,int *lu, Sequence *S, ALNcol***
       for (c=ms; c<=me; c++)cgraph[clen++]=mgraph[c];
       for (c=ss; c<=se; c++)cgraph[clen++]=sgraph[c];
     }
-  else if (mode==1)//align consencus
+  else if (mode==1)//align consensus
     {
       int c, p;
       Alignment *SA;
