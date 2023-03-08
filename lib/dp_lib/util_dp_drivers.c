@@ -2849,7 +2849,8 @@ Alignment * align_two_sequences_with_external_method ( char *seq1, char *seq2, c
   if (!seq1 || !seq2 || !method)return NULL;
   string2file (in, "w",">A\n%s\n>B\n%s\n", seq1, seq2);
   safe_remove (out);
-  printf_system ("dynamic.pl -method %s -seq %s -outfile %s", method, in, out);
+  //Note: if the method fails to align the considered sequences, dynamic.pl will retun an empty file (-noexit) and the function restuns NULL, leaving it for the handling function to launch computation in a different way
+  printf_system ("dynamic.pl -method %s -seq %s -outfile %s -noexit", method, in, out);
   return quick_read_aln(out);
 }
 

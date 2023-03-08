@@ -8487,6 +8487,8 @@ int  msagraph2len(ALNcol*msa)
 char *prf2seq (int **prf, int len);
 int graph_align (int mode,Alignment *A,int **pos,int *lu, Sequence *S, ALNcol***S2, ALNcol**mgraph, int ms, int me,ALNcol**sgraph, int ss, int se, ALNcol**cgraph,int clen)
 {
+  ALNcol *Sn, *Mn;
+  
   if (mode==0)//concatenate
     {
       int c;
@@ -8502,7 +8504,9 @@ int graph_align (int mode,Alignment *A,int **pos,int *lu, Sequence *S, ALNcol***
       int **mprf, **sprf;
       char *mseq, *sseq;
       int mpos, spos;
-      char *method;
+      char *method=getenv("COMMAND_4_TCOFFEE");
+
+     
       mprf=(int**)vcalloc (ml,sizeof (int**));
       for (p=0,c=ms; c<=me;c++,p++)
 	mprf[p]=mgraph[c]->prf;
@@ -8514,31 +8518,42 @@ int graph_align (int mode,Alignment *A,int **pos,int *lu, Sequence *S, ALNcol***
 	sprf[p]=sgraph[c]->prf;
       sseq=prf2seq(sprf,sl);
 
-      if ((method=getenv ("COMMAND_4_TCOFFEE")))
-	SA=align_two_sequences_with_external_method (mseq, sseq, method);
-      else
+
+            
+      if ((SA=align_two_sequences_with_external_method (mseq, sseq, method))==NULL)
 	SA=align_two_sequences (mseq,sseq,"pam250mt",-10,-2, "myers_miller_pair_wise");
       
-      for (c=0, mpos=0, spos=0; c<SA->len_aln; c++)
+      for (c=0, mpos=0, spos=0; c<SA->len_aln; c++, clen++)
 	{
+	  
 	  int maa=SA->seq_al[0][c];
 	  int saa=SA->seq_al[1][c];
-	  if (maa!='-')mpos++;
-	  if (saa!='-')spos++;
 
-	  if      (saa=='-')cgraph[clen++]=mgraph[ms+mpos-1];
-	  else if (maa=='-')cgraph[clen++]=sgraph[ss+spos-1]; 
-	  else
+	  Sn=Mn=NULL;
+	  if (maa!='-'){mpos++;Mn=mgraph[ms+mpos-1];}
+	  if (saa!='-'){spos++;Sn=sgraph[ss+spos-1];} 
+
+	  
+	  if (Sn && Mn)//merge Sn into Mn
 	    {
 	      int s, r;
+
+	      //redirect Sn nodes (in s2) to Mn 
 	      for (s=0; s<A->nseq; s++)
 		{
 		  int r=pos[s][ss-1+spos-1];
-		  if (r!=-1)S2[lu[s]][r]=mgraph[ms+mpos-1];
+		  if (r!=-1)S2[lu[s]][r]=Mn;
 		}
-	      cgraph[clen++]=mgraph[ms+mpos-1];
-	      free_alncol(sgraph[ss+spos-1]);
+	      //update Sn prf counts
+	      for (s=0; s<26; s++)
+		Mn->prf[s]+=Sn->prf[s];
+	      Mn->nres+=Sn->nres;
+	      free_alncol(Sn);
 	    }
+	  else if (!Mn)Mn=Sn;
+
+	  cgraph[clen]=Mn;
+
 	}
       free_aln (SA);
       vfree(mprf);vfree (mseq);
@@ -8547,8 +8562,26 @@ int graph_align (int mode,Alignment *A,int **pos,int *lu, Sequence *S, ALNcol***
   
   return clen;
 }
-
 char *prf2seq (int **prf, int len)
+{
+  int score, bscore, baa;
+  int c, l;
+  
+  char *seq=(char*)vcalloc (len+1,sizeof (char));
+  
+  for (c=0; c<len; c++)
+    {
+      for (l=0; l<26; l++)
+	{
+	  score=prf[c][l];
+	  if ( l==0 || score>bscore){bscore=score;baa=l+'a';}
+	}
+      seq[c]=baa;
+    }
+  seq[c]='\0';
+  return seq;
+}
+char *prf2seq_old (int **prf, int len)
 {
   static int **matrix=read_matrice ( "pam250mt");;
   int score, bscore, baa;

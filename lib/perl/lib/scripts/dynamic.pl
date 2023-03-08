@@ -11,7 +11,7 @@ my $VERBOSE=$ENV{VERBOSE_4_DYNAMIC};
 our $EXIT_FAILURE=1;
 our $EXIT_SUCCESS=0;
 our $LAST_COM="";
-
+our $NOEXIT=0;
 my %method;
 my $method2use;
 my $treeF;
@@ -56,6 +56,7 @@ for ($a=0; $a<=$#ARGV; $a++)
   
     elsif ($ARGV[$a] eq "-thread"){$thread=$ARGV[++$a]}
     elsif ($ARGV[$a] eq "-tcarg") {$tcarg=file2string($ARGV[++$a]);}
+    elsif ($ARGV[$a] eq "-noexit") {$NOEXIT=1;}
     else 
       {
 	add2tcenv($a++,@ARGV);
@@ -290,10 +291,17 @@ else
 
 #Flush output if none provided
 if ( ! -e $outfile || -s $outfile <1)
-  {
-    print "ERROR - No MSA computed - $LAST_COM -- [FATAL:dynamic.pl]\n";
-    my_exit ($CDIR,$EXIT_FAILURE);
-  }
+{
+    if ($NOEXIT==0)
+      {  
+	print "ERROR - No MSA computed - $LAST_COM -- [FATAL:dynamic.pl]\n";
+	my_exit ($CDIR,$EXIT_FAILURE);
+      }
+    else
+      {
+	print "WARNING - No MSA computed - $LAST_COM -- [WARNING:dynamic.pl]\n";
+      }
+}
 elsif ( $flush)
  {
    open (F, $outfile);
