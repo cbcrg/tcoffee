@@ -7270,6 +7270,11 @@ Alignment * t_coffee_dpa (int argc, char **argv)
 	  cputenv ("COMPACT_4_TCOFFEE=1");
 	  
 	}
+      else if (strm (argv[a],"-quickcompact")  )
+	{
+	  cputenv ("COMPACT_4_TCOFFEE=2");
+	  
+	}
       else if (strm (argv[a],"-expand")  )
 	{
 	  cputenv ("COMPACT_4_TCOFFEE=0");

@@ -8495,7 +8495,7 @@ int graph_align (int mode,Alignment *A,int **pos,int *lu, Sequence *S, ALNcol***
       for (c=ms; c<=me; c++)cgraph[clen++]=mgraph[c];
       for (c=ss; c<=se; c++)cgraph[clen++]=sgraph[c];
     }
-  else if (mode==1)//align consensus
+  else if (mode>=1)//align consensus
     {
       int c, p;
       Alignment *SA;
@@ -8505,7 +8505,7 @@ int graph_align (int mode,Alignment *A,int **pos,int *lu, Sequence *S, ALNcol***
       char *mseq, *sseq;
       int mpos, spos;
       char *method=getenv("COMMAND_4_TCOFFEE");
-
+      
      
       mprf=(int**)vcalloc (ml,sizeof (int**));
       for (p=0,c=ms; c<=me;c++,p++)
@@ -8519,9 +8519,13 @@ int graph_align (int mode,Alignment *A,int **pos,int *lu, Sequence *S, ALNcol***
       sseq=prf2seq(sprf,sl);
 
 
-            
-      if ((SA=align_two_sequences_with_external_method (mseq, sseq, method))==NULL)
-	SA=align_two_sequences (mseq,sseq,"pam250mt",-10,-2, "myers_miller_pair_wise");
+      if ( mode==1)
+	{
+	  if ((SA=align_two_sequences_with_external_method (mseq, sseq, method))==NULL)
+	    SA=align_two_sequences (mseq,sseq,"blosum62mt",-10,-2, "myers_miller_pair_wise");
+	}
+      else
+	 SA=align_two_sequences (mseq,sseq,"blosum62mt",-10,-2, "myers_miller_pair_wise");
       
       for (c=0, mpos=0, spos=0; c<SA->len_aln; c++, clen++)
 	{
