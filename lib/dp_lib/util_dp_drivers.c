@@ -214,6 +214,13 @@ Constraint_list *seq2list     ( Job_TC *job)
 	  A=fast_pair (job);
 	  RCL=A->CL;
 	}
+      else if ( strm ( mode, "3di_pair"))
+	{
+	  A=fast_pair (job);
+	  RCL=A->CL;
+	  
+	}
+	    
       else if ( strm ( mode, "proba_pair") )
 	{
 	  
@@ -536,6 +543,23 @@ Constraint_list *method2pw_cl (TC_method *M, Constraint_list *CL)
 	      PW_CL->get_dp_cost=cw_profile_get_dp_cost;
 	      PW_CL->evaluate_residue_pair=evaluate_matrix_score;
 	      PW_CL->extend_jit=0;
+	    }
+       else if ( strm (mode, "3di_pair"))
+	    {
+
+	      PW_CL->maximise=1;
+	      PW_CL->TG_MODE=1;
+	      PW_CL->use_fragments=0;
+	      sprintf (PW_CL->dp_mode, "proba_pair_wise");
+	      sprintf (PW_CL->matrix_for_aa_group,"%s", group_mat);
+	      PW_CL->residue_index=NULL;
+	      PW_CL->get_dp_cost=slow_get_dp_cost;
+	      PW_CL->evaluate_residue_pair=evaluate_matrix_score;
+	      PW_CL->extend_jit=0;
+	      if (get_string_variable ("3dimatrix"))
+		PW_CL->M=read_matrice (get_string_variable ("3dimatrix"));
+	      else
+		PW_CL->M=read_matrice (get_string_variable ("idmat"));
 	    }
       else if ( strm (mode, "proba_pair"))
 	    {
@@ -1274,7 +1298,6 @@ Constraint_list * profile_pair (TC_method *M , char *in_seq, Constraint_list *CL
 	A1=seq2R_template_profile(CL->S,s1);
 	A2=seq2R_template_profile(CL->S,s2);
 
-	
 	prf1_file=vtmpnam (NULL);
 	fp=vfopen (prf1_file, "w");
 	
@@ -1291,6 +1314,7 @@ Constraint_list * profile_pair (TC_method *M , char *in_seq, Constraint_list *CL
 	  }
 	else
 	  {
+	    HERE ("NO A1");
 	    fprintf ( fp, ">%s\n%s%s\n",sn1, (CL->S)->seq[s1], PATCH_PRF);
 	  }
 	vfclose (fp);
@@ -2511,14 +2535,20 @@ Alignment * fast_pair      (Job_TC *job)
 	    for ( a=0; a< n; a++)
 	        {
 		  s=seqlist[a+2];
+		 
 		  if ( strm (M->seq_type, "G"))
 		    {
 		      buf[s]=S->seq[s];
 		      S->seq[s]=((((S->T[s])->G)->VG)->S)->seq[0];
-		  }
-		else
-		  buf[s]=S->seq[s];
-
+		    }
+		  else if ( strm (M->seq_type, "E"))
+		    {
+		      buf[s]=S->seq[s];
+		      S->seq[s]=((((S->T[s])->E)->VE)->S)->seq[0];
+		    }
+		  else
+		    buf[s]=S->seq[s];
+		  
 		  A->seq_al[a]=csprintf (A->seq_al[a], "%s", S->seq[s]);
 		  A->name[a]=csprintf (A->name[a], "%s", (CL->S)->name[s]);
 		  

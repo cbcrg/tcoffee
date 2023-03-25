@@ -6545,14 +6545,18 @@ Sequence * seq2template_seq ( Sequence *S, char *template_list, Fname *F)
       for (a=0; a< S->nseq; a++)
 	{
 
-	  if ( (p=strstr (template_list,"SELF_")))p=S->name[a];
+	  if ( (p=strstr (template_list,"SELF_")))
+	    {
+	      p=S->name[a];
+	    }
+	  
 	  else if ( strstr (template_list, "SEQFILE_"))p=template_list;
 	  else
 	    {
 	      fprintf ( stderr, "\nUnkown mode for Template [FATAL:%s]\n", PROGRAM);
 	      myexit (EXIT_FAILURE);
 	    }
-
+	  
 	  if (      strstr (template_list, "_P_") && !(S->T[a])->P)(S->T[a])->P  =fill_P_template  ( S->name[a], p,S);//PDB
 	  else if ( strstr (template_list, "_S_") && !(S->T[a])->S)(S->T[a])->S  =fill_S_template  ( S->name[a], p,S);//Sequence
 	  else if ( strstr (template_list, "_R_" )&& !(S->T[a])->R)(S->T[a])->R  =fill_R_template  ( S->name[a], p,S);//pRofile
@@ -6891,10 +6895,6 @@ int seq2n_X_template ( Sequence *S, char *type)
 struct X_template *fill_X_template ( char *name, char *p, char *token)
 {
   struct X_template *X;
-
-
-
-
   char *k;
 
   X=(X_template*)vcalloc (1, sizeof (X_template));
@@ -6902,7 +6902,11 @@ struct X_template *fill_X_template ( char *name, char *p, char *token)
   if ( (k=strstr (p, token)))sscanf (k+strlen(token), "%s",X->template_name);
   else sprintf (X->template_name, "%s", p);
 
-
+  
+    
+  
+    
+  
   /*Add a Structure HERE*/
   sprintf ( X->template_type, "%s", token);
   if ( strm (token, "_P_"))X->VP=(P_template*)vcalloc (1, sizeof (P_template));
@@ -7288,7 +7292,8 @@ struct X_template *fill_R_template ( char *name,char *p, Sequence *S)
   /*Profile template*/
   struct X_template *R;
 
-
+  
+  
   R=fill_X_template ( name, p, "_R_");
   sprintf (R->template_format , "fasta_aln");
   
@@ -7395,12 +7400,21 @@ struct X_template *fill_E_template ( char *name,char *p, Sequence *S)
 {
   /*Profile template*/
   struct X_template *E;
+  static char *tdir;
 
+  if (!tdir)tdir=get_string_variable ("template_dir_E_");
+  
 
   E=fill_X_template ( name, p, "_E_");
   sprintf (E->template_format , "fasta_seq");
 
-  if (!is_aln(E->template_name) && !is_seq (E->template_name))
+  sprintf (E->template_file, "%s%s%s",(tdir)?tdir:"",(tdir)?"/":"",p);
+  if (!is_aln(E->template_file) && !is_seq (E->template_file))
+    sprintf (E->template_file, "%s%s%s._E_",(tdir)?tdir:"",(tdir)?"/":"",p);
+  
+    
+  
+  if (!is_aln(E->template_file) && !is_seq (E->template_file))
     {
 
       add_information ( stderr, "_E_ Template %s Could not be found\n",E->template_name);
@@ -7409,8 +7423,7 @@ struct X_template *fill_E_template ( char *name,char *p, Sequence *S)
     }
   else
     {
-      (E->VE)->S=main_read_seq (E->template_name);
-      sprintf ( E->template_file, "%s", E->template_name);
+      (E->VE)->S=main_read_seq (E->template_file);
     }
   return E;
 }

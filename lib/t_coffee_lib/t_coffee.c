@@ -243,6 +243,8 @@ int batch_main ( int argc, char **argv)
 	char **template_file_list;
 	int n_template_file;
 
+	char*template_dir_E_;
+	
 	char **template_mode_list;
 	int n_template_mode;
 
@@ -291,6 +293,7 @@ int batch_main ( int argc, char **argv)
 	int len;
 	char *infile;
 	char *matrix;
+	char *threedimatrix;
 	char *dp_mode;
 	char *profile_mode;
 	char *profile_comparison;
@@ -1405,6 +1408,27 @@ if ( !do_evaluate)
 					  );
 	       if (n_template_file)cputenv ("template_file_4_TCOFFEE=%s",template_file_list[0]);
 	       
+	       declare_name(template_dir_E_);
+	       get_cl_param(			\
+			    /*argc*/      argc          ,\
+			    /*argv*/      argv          ,\
+			    /*output*/    &le           ,\
+			    /*Name*/      "-template_dir_E_"         ,\
+			    /*Flag*/      &garbage      ,\
+			    /*TYPE*/      "S"           ,\
+			    /*OPTIONAL?*/ OPTIONAL      ,\
+			    /*MAX Nval*/  1000           ,\
+			    /*DOC*/       "directory for _E_ templates (_R_ <dir> _P_ <dir>...",\
+			    /*Parameter*/ &template_dir_E_     ,	\
+			    /*Def 1*/    "./",\
+			    /*Def 2*/     "./"       ,\
+			    /*Min_value*/ "any"         ,\
+			    /*Max Value*/ "any"          \
+			    );
+	       set_string_variable ("template_dir_E_",template_dir_E_);
+	       
+
+	       
 /*PARAMETER PROTOTYPE:    VERSION      */
 	       setenv_list=declare_char (100, STRING);
 	       n_setenv=get_cl_param(\
@@ -2197,6 +2221,27 @@ if ( !do_evaluate)
 			    /*Min_value*/ "any"          ,\
 			    /*Max Value*/ "any"           \
 		   );
+
+	       declare_name (threedimatrix);
+	       get_cl_param(					\
+			    /*argc*/      argc           ,\
+			    /*argv*/      argv           ,\
+			    /*output*/    &le            ,\
+			    /*Name*/      "-threedimatrix"      ,\
+			    /*Flag*/      &garbage       ,\
+			    /*TYPE*/      "S"            ,\
+			    /*OPTIONAL?*/ OPTIONAL       ,\
+			    /*MAX Nval*/  1              ,\
+			    /*DOC*/       "Specifies the substitution matrix used on 3di.",\
+			    /*Parameter*/ &threedimatrix        ,\
+			    /*Def 1*/    "idmat"              ,\
+			    /*Def 2*/    "default"    ,\
+			    /*Min_value*/ "any"          ,\
+			    /*Max Value*/ "any"           \
+		   );
+	       set_string_variable ("3dimatrix",threedimatrix);
+	       	       
+	       
 /*PARAMETER PROTOTYPE:    TG_MODE    */
 
 	       get_cl_param(\
@@ -5092,8 +5137,7 @@ get_cl_param(\
 	        */
 	       if ( (CL->S)->nseq>1 && CL->ne==0 && !CL->M &&!(do_convert && n_list>0))
 		 {
-		   fprintf ( stderr, "\n******************ERROR*****************************************\n");
-
+		   fprintf ( stderr, "\n****************** ERROR *****************************************\n");
 		   fprintf ( stderr, "\nYou have not provided any method or enough Sequences[FATAL]");
 		   fprintf ( stderr, "\nIf you have used the '-in' Flag, ADD the methods you wish to use:");
 		   fprintf ( stderr, "\n\t-in <your sequences> Mlalign_id_pair Mfast_pair\n");
@@ -7277,12 +7321,13 @@ Alignment * t_coffee_dpa (int argc, char **argv)
 	}
       else if (strm (argv[a],"-expand")  )
 	{
-	  cputenv ("COMPACT_4_TCOFFEE=0");
-	  
+	  cputenv ("COMPACT_4_TCOFFEE=0");	  
 	}
       else if (strm (argv[a], "-method") || strm (argv[a], "-dpa_method") || strm (argv[a], "-reg_method"))
 	{
 	  dpa_aligner=argv[++a];
+	  if (isfile(dpa_aligner))
+	    dpa_aligner=fname2abs(dpa_aligner);
 	}
       else if (strm (argv[a], "-cache"))
 	{
@@ -7290,7 +7335,7 @@ Alignment * t_coffee_dpa (int argc, char **argv)
 	}
       else if (strm (argv[a],"-in") || strm (argv[a],"-infile"))
 	{
-	  myexit (fprintf_error (stderr, "%s is not supported when using -dpa [FATAL:%s]", argv[a],PROGRAM));
+	  myexit (fprintf_error (stderr, "%s is not supported when using -dpa, use -seq to input sequences [FATAL:%s]", argv[a],PROGRAM));
 	}
      
       else if ( strstr (argv[a], "reg_homoplasy"))

@@ -5367,8 +5367,28 @@ char *** produce_method_file ( char *method)
 	fprintf ( fp, "SUPPORTED  NO");
 	vfclose (fp);}
 	
-
-
+	/* pairwise method to align 3di sequences (i.e. structures turned into alphabet using foldseek)*/
+	sprintf (list[n][0], "fs_pair");
+	sprintf (list[n][1], "%s", vtmpnam(NULL));
+	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
+	fprintf ( fp, "DOC Probabilistic pairwise alignment\n");
+	fprintf ( fp, "EXECUTABLE proba_pair\n");
+	fprintf ( fp, "ALN_MODE   pairwise\n");
+	fprintf ( fp, "OUT_MODE   fL\n");
+	fprintf ( fp, "IN_FLAG    no_name\n");
+	fprintf ( fp, "OUT_FLAG   no_name\n");
+	fprintf ( fp, "SEQ_TYPE   E\n");
+	if ( strm ( retrieve_seq_type(), "DNA") || strm (retrieve_seq_type(), "RNA"))
+	{
+		fprintf ( fp, "GOP   %d\n",CODE4DNA);//code for DNA
+	}
+	else
+	{
+		fprintf ( fp, "GOP   %d\n",CODE4PROTEINS);//Code for Proteins
+	}
+	fprintf ( fp, "ADDRESS    %s\n", ADDRESS_BUILT_IN);
+	fprintf ( fp, "PROGRAM    %s\n", PROGRAM_BUILT_IN);
+	vfclose (fp);}
 
 	sprintf (list[n][0], "proba_pair");
 	sprintf (list[n][1], "%s", vtmpnam(NULL));

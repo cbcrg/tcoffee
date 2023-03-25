@@ -75,6 +75,7 @@ if ($tree eq "list")
     my_system ("t_coffee -other_pg seq_reformat -in $f -action +seq2dnd list ");
     $do_exit=1;
   }
+
 if ($method2use eq "list")
   {
     my %ml;
@@ -229,7 +230,26 @@ $cmethod=~s/_msa//;
 
 if ($VERBOSE){print "\n![dynamic.pl] --- cmethod == $cmethod\n";}
 
-if ($cmethod eq "tcoffee"|| $cmethod eq "t_coffee" )
+if (-e $method2use)
+     {
+    
+      my $com=file2string($method2use);
+      
+      if (!($com=~s/\$input/$infile/))
+	  {
+	      print "ERROR - provided command [$com] should specify <input> [FATAL:dynamic.pl]\n";
+	      exit ($EXIT_FAILURE);
+	  }
+      if (!($com=~s/\$output/$outfile/))
+	  {
+	      print "ERROR - provided command [$com] should specify <input> [FATAL:dynamic.pl]\n";
+	      exit ($EXIT_FAILURE);
+	  }
+            
+      my_system ($com);
+  }
+
+elsif ($cmethod eq "tcoffee"|| $cmethod eq "t_coffee" )
   {
     my_system ("t_coffee -seq $infile -outfile $outfile -output fasta_aln $CL4tc>/dev/null  $QUIET");    
   }
@@ -318,9 +338,11 @@ if ($VERBOSE!=-1)
     while (<F>)
       {
 	my $l=$_;
-	if ( $VERBOSE || $l=~/WARNING/ || $l=~/ERROR/ || $l=~/INFORNATION/){print stderr "$l";}
+	print ("------  $l");
+	if ( $VERBOSE || $l=~/WARNING/ || $l=~/ERROR/ || $l=~/INFORMATION/){print stderr "$l";}
       }
     close (F);
+    if (-e $stderrF){unlink ($stderrF);}
   }
 
 my_exit ($CDIR,$EXIT_SUCCESS);
