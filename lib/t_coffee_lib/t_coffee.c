@@ -293,7 +293,10 @@ int batch_main ( int argc, char **argv)
 	int len;
 	char *infile;
 	char *matrix;
-	char *threedimatrix;
+	char *fs_matrix;
+	int fs_gop;
+	int fs_gep;
+	  
 	char *dp_mode;
 	char *profile_mode;
 	char *profile_comparison;
@@ -2222,25 +2225,61 @@ if ( !do_evaluate)
 			    /*Max Value*/ "any"           \
 		   );
 
-	       declare_name (threedimatrix);
+	       declare_name (fs_matrix);
 	       get_cl_param(					\
 			    /*argc*/      argc           ,\
 			    /*argv*/      argv           ,\
 			    /*output*/    &le            ,\
-			    /*Name*/      "-threedimatrix"      ,\
+			    /*Name*/      "-fs_matrix"      ,\
 			    /*Flag*/      &garbage       ,\
 			    /*TYPE*/      "S"            ,\
 			    /*OPTIONAL?*/ OPTIONAL       ,\
 			    /*MAX Nval*/  1              ,\
 			    /*DOC*/       "Specifies the substitution matrix used on 3di.",\
-			    /*Parameter*/ &threedimatrix        ,\
+			    /*Parameter*/ &fs_matrix        ,\
 			    /*Def 1*/    "idmat"              ,\
 			    /*Def 2*/    "default"    ,\
 			    /*Min_value*/ "any"          ,\
 			    /*Max Value*/ "any"           \
 		   );
-	       set_string_variable ("3dimatrix",threedimatrix);
-	       	       
+	       set_string_variable ("fs_matrix",fs_matrix);
+
+	       get_cl_param(					\
+			    /*argc*/      argc           ,\
+			    /*argv*/      argv           ,\
+			    /*output*/    &le            ,\
+			    /*Name*/      "-fs_gop"      ,\
+			    /*Flag*/      &garbage       ,\
+			    /*TYPE*/      "D"            ,\
+			    /*OPTIONAL?*/ OPTIONAL       ,\
+			    /*MAX Nval*/  1              ,\
+			    /*DOC*/       "Must Be Negative",\
+			    /*Parameter*/ &fs_gop        ,\
+			    /*Def 1*/    "1"              ,\
+			    /*Def 2*/    ""    ,\
+			    /*Min_value*/ "any"          ,\
+			    /*Max Value*/ "any"           \
+		   );
+	       set_int_variable ("fs_gop",fs_gop);
+
+	       get_cl_param(					\
+			    /*argc*/      argc           ,\
+			    /*argv*/      argv           ,\
+			    /*output*/    &le            ,\
+			    /*Name*/      "-fs_gep"      ,\
+			    /*Flag*/      &garbage       ,\
+			    /*TYPE*/      "D"            ,\
+			    /*OPTIONAL?*/ OPTIONAL       ,\
+			    /*MAX Nval*/  1              ,\
+			    /*DOC*/       "Must Be Negative",\
+			    /*Parameter*/ &fs_gep        ,\
+			    /*Def 1*/    "1"              ,\
+			    /*Def 2*/    ""    ,\
+			    /*Min_value*/ "any"          ,\
+			    /*Max Value*/ "any"           \
+		   );
+	       set_int_variable ("fs_gep",fs_gep);
+	       
 	       
 /*PARAMETER PROTOTYPE:    TG_MODE    */
 

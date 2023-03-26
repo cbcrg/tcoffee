@@ -46,8 +46,7 @@ Constraint_list *fork_subset_produce_list   ( Constraint_list *CL, Sequence *S, 
 int job2first_seq(Job_TC *job);
 
 Constraint_list *produce_list   ( Constraint_list *CL, Sequence *S, char * method,char *weight,char *mem_mode)
-{
-	Job_TC *job=NULL;
+{	Job_TC *job=NULL;
 	FILE *local_stderr;
 	int njob;
 	int nproc;
@@ -5372,7 +5371,7 @@ char *** produce_method_file ( char *method)
 	sprintf (list[n][1], "%s", vtmpnam(NULL));
 	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
 	fprintf ( fp, "DOC Probabilistic pairwise alignment\n");
-	fprintf ( fp, "EXECUTABLE proba_pair\n");
+	fprintf ( fp, "EXECUTABLE fs_pair\n");
 	fprintf ( fp, "ALN_MODE   pairwise\n");
 	fprintf ( fp, "OUT_MODE   fL\n");
 	fprintf ( fp, "IN_FLAG    no_name\n");
@@ -5451,7 +5450,7 @@ char *** produce_method_file ( char *method)
 	vfclose (fp);}
 
 
-	//Llaign ID PAIR
+	//lalign ID PAIR
 	sprintf (list[n][0], "lalign_id_pair");
 	sprintf (list[n][1], "%s", vtmpnam(NULL));
 	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
@@ -5479,6 +5478,27 @@ char *** produce_method_file ( char *method)
 	fprintf ( fp, "PROGRAM    %s\n", PROGRAM_BUILT_IN);
 	vfclose (fp);}
 
+
+	//fs_lalign_id_pair
+	sprintf (list[n][0], "fs_lalign_id_pair");
+	sprintf (list[n][1], "%s", vtmpnam(NULL));
+	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
+	fprintf ( fp, "DOC local alignment reporting the N best pairwise local alignments\n");
+	fprintf ( fp, "EXECUTABLE fs_lalign_id_pair\n");
+	fprintf ( fp, "ALN_MODE   pairwise\n");
+	fprintf ( fp, "OUT_MODE   fL\n");
+	fprintf ( fp, "IN_FLAG    no_name\n");
+	fprintf ( fp, "OUT_FLAG   no_name\n");
+	
+	fprintf ( fp, "MATRIX     blosum50mt\n");
+	fprintf ( fp, "GOP   -10\n");
+	fprintf ( fp, "GEP   -4\n");
+	fprintf ( fp, "MAXID  100\n");
+	fprintf ( fp, "SEQ_TYPE   E\n");
+	fprintf ( fp, "ADDRESS    %s\n", ADDRESS_BUILT_IN);
+	fprintf ( fp, "PROGRAM    %s\n", PROGRAM_BUILT_IN);
+	vfclose (fp);}
+	
 
 
 	//Llaign RS_S PAIR for Mocca

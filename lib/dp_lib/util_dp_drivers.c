@@ -198,35 +198,30 @@ Constraint_list *seq2list     ( Job_TC *job)
 		   || strm ( mode, "blast_pair")    || strm (mode, "lalign_blast_pair") \
 		   || strm ( mode, "viterbi_pair")  || strm (mode, "slow_pair")      || strm(mode, "glocal_pair") || strm (mode, "biphasic_pair") \
 		   || strm ( mode, "islow_pair")    || strm (mode, "tm_slow_pair") || strm (mode, "r_slow_pair") \
-		   || strm ( mode, "lalign_id_pair")|| strm (mode, "tm_lalign_id_pair") || strm (mode , "lalign_len_pair") \
+		    || strm ( mode, "lalign_id_pair")|| strm (mode, "tm_lalign_id_pair") || strm (mode , "lalign_len_pair") || strm(mode, "fs_lalign_id_pair") \
 		   || strm (mode, "prrp_aln")       || strm ( mode, "test_pair") \
 		   || strm (mode, "cdna_fast_pair") || strm (mode, "diaa_slow_pair") || strm (mode, "monoaa_slow_pair")\
 		   || strncmp (mode,"cdna_fast_pair",14)==0	\
 		   )
 	{
-
+	  
 	  A=fast_pair (job);
 	  RCL=aln2constraint_list ((A->A)?A->A:A, CL,weight);
 	}
 
-      else if ( strm ( mode, "subop1_pair") || strm ( mode, "subop2_pair") )
+      else if ( strm ( mode, "subop1_pair") || strm ( mode, "subop_pair") )
 	{
 	  A=fast_pair (job);
 	  RCL=A->CL;
-	}
-      else if ( strm ( mode, "3di_pair"))
-	{
-	  A=fast_pair (job);
-	  RCL=A->CL;
-	  
 	}
 	    
-      else if ( strm ( mode, "proba_pair") )
+      else if ( strm ( mode, "proba_pair") || strm (mode, "fs_pair"))
 	{
 	  
 	  A=fast_pair (job);
 	  RCL=A->CL;
 	}
+      
       else if ( strm ( mode, "best_pair4prot"))
 	{
 	  RCL=best_pair4prot (job);
@@ -544,9 +539,9 @@ Constraint_list *method2pw_cl (TC_method *M, Constraint_list *CL)
 	      PW_CL->evaluate_residue_pair=evaluate_matrix_score;
 	      PW_CL->extend_jit=0;
 	    }
-       else if ( strm (mode, "3di_pair"))
+       else if ( strm (mode, "fs_pair"))
 	    {
-
+	      
 	      PW_CL->maximise=1;
 	      PW_CL->TG_MODE=1;
 	      PW_CL->use_fragments=0;
@@ -556,10 +551,22 @@ Constraint_list *method2pw_cl (TC_method *M, Constraint_list *CL)
 	      PW_CL->get_dp_cost=slow_get_dp_cost;
 	      PW_CL->evaluate_residue_pair=evaluate_matrix_score;
 	      PW_CL->extend_jit=0;
-	      if (get_string_variable ("3dimatrix"))
-		PW_CL->M=read_matrice (get_string_variable ("3dimatrix"));
+	      
+	      if (get_string_variable ("fs_matrix"))
+		PW_CL->M=read_matrice (get_string_variable ("fs_matrix"));
 	      else
-		PW_CL->M=read_matrice (get_string_variable ("idmat"));
+		PW_CL->M=read_matrice ("idmat");
+
+	      if (int_variable_isset ("fs_gop") && get_int_variable("fs_gop")<0)
+		PW_CL->gop=get_int_variable("fs_gop");
+	      else
+		PW_CL->gop= get_avg_matrix_mm (PW_CL->M, AA_ALPHABET)*10;
+	      
+	      if (int_variable_isset ("fs_gep") &&  get_int_variable("fs_gep")<0)
+		PW_CL->gep=get_int_variable("fs_gep");
+	      else
+		PW_CL->gep= -1;
+	      
 	    }
       else if ( strm (mode, "proba_pair"))
 	    {
@@ -716,6 +723,7 @@ Constraint_list *method2pw_cl (TC_method *M, Constraint_list *CL)
 	    sprintf (PW_CL->matrix_for_aa_group,"%s", group_mat);
 	    PW_CL->extend_jit=0;
 	  }
+      
 	else if ( strm ( mode , "lalign_id_pair"))
 	  {
 	    PW_CL->residue_index=NULL;
@@ -729,6 +737,35 @@ Constraint_list *method2pw_cl (TC_method *M, Constraint_list *CL)
 	    sprintf (PW_CL->matrix_for_aa_group,"%s", group_mat);
 	    PW_CL->extend_jit=0;
 	  }
+      else if ( strm ( mode , "fs_lalign_id_pair"))
+	  {
+	    PW_CL->residue_index=NULL;
+	    PW_CL->maximise=1;
+	    PW_CL->TG_MODE=1;
+	    PW_CL->use_fragments=0;
+	    PW_CL->pair_wise=sim_pair_wise_lalign;
+	    PW_CL->evaluate_residue_pair=evaluate_matrix_score;
+	    PW_CL->get_dp_cost=slow_get_dp_cost;
+	    PW_CL->lalign_n_top=CL->lalign_n_top;
+	    sprintf (PW_CL->matrix_for_aa_group,"%s", group_mat);
+	    PW_CL->extend_jit=0;
+
+	    if (get_string_variable ("fs_matrix"))
+	      PW_CL->M=read_matrice (get_string_variable ("fs_matrix"));
+	    else
+	      PW_CL->M=read_matrice ("idmat");
+	    
+	    if (int_variable_isset ("fs_gop") && get_int_variable("fs_gop")<0)
+	      PW_CL->gop=get_int_variable("fs_gop");
+	    else
+	      PW_CL->gop= get_avg_matrix_mm (PW_CL->M, AA_ALPHABET)*10;
+	    
+	    if (int_variable_isset ("fs_gep") &&  get_int_variable("fs_gep")<0)
+	      PW_CL->gep=get_int_variable("fs_gep");
+	    else
+	      PW_CL->gep= -1;
+	  }
+      
       	else if ( strm ( mode , "tm_lalign_id_pair"))
 	  {
 	    PW_CL->residue_index=NULL;
