@@ -14,7 +14,7 @@
 #include "dp_lib_header.h"
 
 static int entry_len;
-
+int dump2ne (char*file, int entry_len);
 /**
  * \file util_constraints_list.c
  * All utilities for the Constraint_list.
@@ -60,7 +60,7 @@ Constraint_list *produce_list   ( Constraint_list *CL, Sequence *S, char * metho
 	njob=queue2n(job)+1;
 
 	nproc=get_nproc();
-
+	HERE ("CL->multi_thread=%s", CL->multi_thread);
 	if (strstr ( CL->multi_thread, "jobcells"))return fork_cell_produce_list (CL, S, method, weight, mem_mode,job,nproc,local_stderr);
 	else if (strstr ( CL->multi_thread, "joblines"))return fork_line_produce_list (CL, S, method, weight, mem_mode,job, nproc,local_stderr);
 	else if (strstr ( CL->multi_thread, "jobs"))return fork_subset_produce_list (CL, S, method, weight, mem_mode,job, nproc,local_stderr); //Recommended default
@@ -143,6 +143,7 @@ Constraint_list *fork_subset_produce_list   ( Constraint_list *CL, Sequence *S, 
 	      done=0;
 	      while (job!=end)
 		{
+		  //empty_constraint_list (CL);
 		  if (a==0)output_completion ( local_stderr,done,todo,1, "Submit   Job");
 		  job=print_lib_job (job, "io->CL=%p control->submitF=%p control->retrieveF=%p control->mode=%s",CL,submit_lib_job, retrieve_lib_job, CL->multi_thread );
 		  
@@ -1278,12 +1279,32 @@ char *make_aln_command(TC_method *m, char *seq, char *aln)
 /*                                                                   */
 /*                                                                   */
 /*********************************************************************/
-Constraint_list *  unfreeze_constraint_list (Constraint_list *CL)
+Constraint_list *  unfreeze_constraint_list_old (Constraint_list *CL)
 {
 	free_int (CL->freeze, -1);
 	CL->freeze=NULL;
 }
+Constraint_list *  unfreeze_constraint_list (Constraint_list *CL)
+{
+  int s1, r1, b;
+	Sequence *S=CL->S;
+	for (s1=0; s1<S->nseq; s1++)
+	  for (r1=1; r1<=S->len[s1]; r1++)
+	    for (b=1; b<CL->residue_index[s1][r1][0]; b+=ICHUNK)
+	      CL->residue_index[s1][r1][b+MISC]=0;
+	return CL;
+}
 Constraint_list *  freeze_constraint_list (Constraint_list *CL)
+{
+  int s1, r1, b;
+  Sequence *S=CL->S;
+  for (s1=0; s1<S->nseq; s1++)
+    for (r1=1; r1<=S->len[s1]; r1++)
+      for (b=1; b<CL->residue_index[s1][r1][0]; b+=ICHUNK)
+	CL->residue_index[s1][r1][b+MISC]=CL->residue_index[s1][r1][b+WE];
+  return CL;
+}
+Constraint_list *  freeze_constraint_list_old (Constraint_list *CL)
 {
 	int a, b, d=0;
 	Sequence *S=CL->S;
@@ -1320,13 +1341,26 @@ Constraint_list *  empty_constraint_list (Constraint_list *CL)
   CL->ne=0;
   return CL;
 }
-
+int dump2ne (char*file, int entry_len)
+{
+  int *entry, b, c, e, tot;
+  FILE *fp;
+  int count=0;
+  if (!file) return 0;
+  entry=(int*)vcalloc ( entry_len+1, sizeof (int));
+  fp=vfopen (file, "rb");
+  if (!fp) return 0;
+  while ((b=fread (entry, sizeof(int), entry_len, fp))==entry_len)count++;
+  vfree(entry);
+  vfclose (fp);
+  return count;
+}
 Constraint_list *  undump_constraint_list (Constraint_list *CL, char *file)
 {
 
 	int *entry, b, c, e, tot;
 	FILE *fp;
-	
+
 	if (!CL || !CL->residue_index)return CL;
 	entry=(int*)vcalloc ( CL->entry_len+1, sizeof (int));
 	
@@ -1372,7 +1406,7 @@ int safe_dump_constraint_list (Constraint_list *CL,char *file, char *mode, Seque
 		if (entry[R1]<=0)continue;
 		
 		b=(CL->freeze)?CL->freeze[s1][r1]:1;
-		for (;b<CL->residue_index[s1][r1][0]; b+=ICHUNK)
+		for (b=1;b<CL->residue_index[s1][r1][0]; b+=ICHUNK)
 		  {
 		    s2=CL->residue_index[s1][r1][b+SEQ2];
 		    r2=CL->residue_index[s1][r1][b+R2];
@@ -1389,7 +1423,8 @@ int safe_dump_constraint_list (Constraint_list *CL,char *file, char *mode, Seque
 			    entry[WE]=CL->residue_index[s1][r1][b+WE];
 			    entry[CONS]=CL->residue_index[s1][r1][b+CONS];
 			    entry[MISC]=CL->residue_index[s1][r1][b+MISC];
-			    fwrite(entry, sizeof (int),CL->entry_len,fp);
+			    if (entry[MISC]!=entry[WE])
+			      fwrite(entry, sizeof (int),CL->entry_len,fp);
 			  }
 		      }
 		  }
@@ -1745,8 +1780,11 @@ Constraint_list *add_entry2list( CLIST_TYPE *entry, Constraint_list *CL)
   int r1=entry[R1];
   int r2=entry[R2];
 
-  if (entry[INDEX])return add_entry2list2(entry, CL);
-
+  if (entry[INDEX])
+    {
+      return add_entry2list2(entry, CL);
+    }
+  
   entry[SEQ1]=s2;
   entry[SEQ2]=s1;
   entry[R1]=r2;
@@ -2169,12 +2207,7 @@ Constraint_list*reload_constraint_list (Constraint_list *CL)
 
 Constraint_list* read_n_constraint_list(char **fname,int n_list, char *in_mode,char *mem_mode,char *weight_mode, char *type,FILE *local_stderr, Constraint_list *CL, char *seq_source)
 {
-
-  
-  if (1==1 && !strstr (CL->multi_thread, "methods"))//deprecated
-    return fork_read_n_constraint_list(fname,n_list, in_mode,mem_mode,weight_mode,type,local_stderr, CL, seq_source, 1);
-  else
-    return fork_read_n_constraint_list(fname,n_list, in_mode,mem_mode,weight_mode,type,local_stderr, CL, seq_source, get_nproc());
+  return fork_read_n_constraint_list(fname,n_list, in_mode,mem_mode,weight_mode,type,local_stderr, CL, seq_source, get_nproc());
 }
 
 
@@ -2226,7 +2259,6 @@ Constraint_list* fork_read_n_constraint_list(char **fname,int n_list, char *in_m
 		n_list=1;
 
 		return read_constraint_list (CL, fname[0], in_mode, mem_mode,weight_mode);
-// 		return fork_read_n_constraint_list(fname,n_list, in_mode,mem_mode,weight_mode, type,local_stderr, CL, seq_source,1);
 
 	}
 
@@ -2234,11 +2266,13 @@ Constraint_list* fork_read_n_constraint_list(char **fname,int n_list, char *in_m
 
 	if (CL->ne)
 	{
+	  
 		dump_constraint_list(CL,tmp_list[n_list], "w");
 		CL->ne=0;
 	}
 
 	CL->local_stderr=local_stderr;
+
 	fprintf ( local_stderr, "\n\tMulti Core Mode (read): %d processor(s):\n", nproc);
 	for (ns=0,a=0; a< n_list; a++)
 	{
@@ -2251,7 +2285,9 @@ Constraint_list* fork_read_n_constraint_list(char **fname,int n_list, char *in_m
 			initiate_vtmpnam (NULL);
 			CL->local_stderr=vfopen("/dev/null", "w");
 			in=CL->ne;
+			
 			CL=read_constraint_list (CL, fname[a], in_mode, mem_mode,weight_mode);
+			
 			if (CL->ne>in)dump_constraint_list(CL,tmp_list[a], "w");
 			myexit (EXIT_SUCCESS);
 		}
@@ -2264,6 +2300,7 @@ Constraint_list* fork_read_n_constraint_list(char **fname,int n_list, char *in_m
 			{
 				b=proclist[vwait(NULL)];
 				fprintf (local_stderr, "\n\txxx Retrieved %s",fname[a]);
+				
 				if (tmp_list[b] && check_file_exists (tmp_list[b]))
 				{
 					CL=undump_constraint_list(CL,tmp_list[b]);
@@ -2280,8 +2317,9 @@ Constraint_list* fork_read_n_constraint_list(char **fname,int n_list, char *in_m
 		a=proclist[pid2];
 		fprintf (local_stderr, "\n\txxx Retrieved %s",fname[a]);
 		if (tmp_list[a] && check_file_exists (tmp_list[a]))
-		{
-			CL=undump_constraint_list (CL,tmp_list[a]);
+		  {
+		    
+		    CL=undump_constraint_list (CL,tmp_list[a]);
 		}
 		ns--;
 	}
@@ -2291,7 +2329,7 @@ Constraint_list* fork_read_n_constraint_list(char **fname,int n_list, char *in_m
 	{
 		CL=undump_constraint_list(CL,tmp_list[n_list]);
 	}
-
+	
 	CL->local_stderr=local_stderr;
 
 	vfree (proclist);
@@ -2367,6 +2405,7 @@ Constraint_list* read_constraint_list(Constraint_list *CL,char *in_fname,char *i
 	  {
 	    
 	    CL=produce_list ( CL, CL->S, fname,weight_mode,mem_mode);
+	    
 	  }
 	else if (strm(read_mode, "matrix"))
 	{
@@ -4365,8 +4404,8 @@ Constraint_list *merge_constraint_list   ( Constraint_list *SL, Constraint_list 
 	  entry[SEQ1]=(cache)?cache[s1][0]:s1;
 	  entry[R1]=(cache)?cache[s1][r1]:r1;
 	  if (entry[R1]<=0)continue;
-	  b=(SL->freeze)?SL->freeze[s1][r1]:1;
-	  for (;b<SL->residue_index[s1][r1][0]; b+=ICHUNK)
+	  
+	  for (b=1;b<SL->residue_index[s1][r1][0]; b+=ICHUNK)
 	    {
 	      s2=SL->residue_index[s1][r1][b+SEQ2];
 	      r2=SL->residue_index[s1][r1][b+R2];

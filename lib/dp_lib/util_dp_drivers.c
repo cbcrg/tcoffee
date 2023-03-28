@@ -556,26 +556,15 @@ Constraint_list *method2pw_cl (TC_method *M, Constraint_list *CL)
 	      PW_CL->get_dp_cost=slow_get_dp_cost;
 	      PW_CL->evaluate_residue_pair=evaluate_matrix_score;
 	      PW_CL->extend_jit=0;
+
 	      
 	      if (get_string_variable ("fs_matrix"))sprintf (PW_CL->method_matrix,"%s",get_string_variable ("fs_matrix"));
 	      else sprintf (PW_CL->method_matrix,"idmat");
-
-	      
-	      
-	      if (int_variable_isset ("fs_gop") && get_int_variable("fs_gop")<0)
-		PW_CL->gop=get_int_variable("fs_gop");
-	      else
-		PW_CL->gop= get_avg_matrix_mm (PW_CL->M, AA_ALPHABET)*10;
-	      
-	      if (int_variable_isset ("fs_gep") &&  get_int_variable("fs_gep")<0)
-		PW_CL->gep=get_int_variable("fs_gep");
-	      else
-		PW_CL->gep= -1;
-	      
+	      	      	      
 	    }
       else if ( strm (mode, "proba_pair"))
 	    {
-
+	      
 	      PW_CL->maximise=1;
 	      PW_CL->TG_MODE=1;
 	      PW_CL->use_fragments=0;

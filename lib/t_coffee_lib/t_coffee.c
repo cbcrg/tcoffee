@@ -5137,8 +5137,6 @@ get_cl_param(\
 	       if ((CL->S)->nseq>1 && !do_convert)
 		 {
 		   CL=read_n_constraint_list (list_file,n_list,NULL, mem_mode,weight,type, le, CL, seq_source);
-		   
-		   //CL=post_process_constraint_list (CL); //needed when constraints are added, for instance the RNA modes
 		 }
 	       else if ( do_convert && out_lib[0])
 		 {
@@ -5151,12 +5149,12 @@ get_cl_param(\
 		     CL=read_n_constraint_list (list_file,n_list,NULL, mem_mode,weight,type, le, CL, seq_source);
 		     }
 		 }
+	 
 	       //This very important step insures the CL is symetrical
 	       //This is essential for the remaining computation
 	       //It should not be done before because some methods may not be symetrical for specific reasons
 	       //And the CL may be used in different contexts
 	       CL=CL2simCL (CL);
-
 	       
 	       if ( CL->M)clean_aln=0;
 
@@ -5276,13 +5274,14 @@ get_cl_param(\
 	       
 	       if (CL->ne>0 && out_lib[0]!='\0' && !strm (out_lib, "no"))
 	         {
-		   
 		   if (strstr (out_lib_mode, "extended"))
 		     {
 		       char emode[1000];
 		       //Do the processing before saving the extended lib*/
 		       processed_lib=1;
+		      
 		       if ( filter_lib) CL=filter_constraint_list (CL,CL->weight_field, filter_lib);
+		      
 		       for (a=0; a<relax_lib; a++)CL=relax_constraint_list (CL);
 		       for (a=0; a<shrink_lib; a++)CL=shrink_constraint_list (CL);
 		       sprintf ( emode, "lib_%s", out_lib_mode);
@@ -5316,11 +5315,13 @@ get_cl_param(\
 
 	      if (!processed_lib)
 			  {
-			  if ( filter_lib) CL=filter_constraint_list (CL,CL->weight_field, filter_lib);
-			  if (atoigetenv ("EXTEND4TC")==1)CL=extend_constraint_list(CL);
 
-			  for (a=0; a<relax_lib; a++)CL=relax_constraint_list (CL);
-			  for (a=0; a<shrink_lib; a++)CL=shrink_constraint_list (CL);
+			    if ( filter_lib) CL=filter_constraint_list (CL,CL->weight_field, filter_lib);
+
+			    if (atoigetenv ("EXTEND4TC")==1)CL=extend_constraint_list(CL);
+			    
+			    for (a=0; a<relax_lib; a++)CL=relax_constraint_list (CL);
+			    for (a=0; a<shrink_lib; a++)CL=shrink_constraint_list (CL);
 			  }
 
 	      CL=evaluate_constraint_list_reference (CL);
