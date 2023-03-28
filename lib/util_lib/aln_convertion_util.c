@@ -5579,6 +5579,9 @@ int **fix_seq_seq (Sequence *S0, Sequence *Sx)
   char *use_template;
 
   //Trigger fixing with a template rather than the sequence itself
+  //currently not used
+
+  
   use_template=get_string_variable ("fix_seq_seq_with_template");
   
   index=(int**)vcalloc ( S0->nseq, sizeof (int*));
@@ -5591,7 +5594,10 @@ int **fix_seq_seq (Sequence *S0, Sequence *Sx)
       if (i!=-1)
 	{
 	  seq=Sx->seq[i];
-	  if (use_template)seq=seq2E_template_string (Sx,i);
+	  if (use_template)
+	    {
+	      seq=seq2E_template_string (Sx,i);
+	    }
 	  if (!seq) seq=Sx->seq[i];
 	}
 	      
@@ -5609,8 +5615,9 @@ int **fix_seq_seq (Sequence *S0, Sequence *Sx)
 	  int nr0=0;
 	  int nr1=0;
 	  Alignment *B;
-	  
+	  //HERE ("\n%s\n%s\n\n",S0->seq[s0],seq);
 	  B=align_two_sequences (S0->seq[s0], seq, const_cast<char*>( (strm(S0->type, "PROTEIN"))?"blosum62mt":"idmat"), -4,-1, "myers_miller_pair_wise");
+	  //print_aln (B);
 	  for (c=0; c<B->len_aln; c++)
 	    {
 

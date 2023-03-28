@@ -198,17 +198,22 @@ Constraint_list *seq2list     ( Job_TC *job)
 		   || strm ( mode, "blast_pair")    || strm (mode, "lalign_blast_pair") \
 		   || strm ( mode, "viterbi_pair")  || strm (mode, "slow_pair")      || strm(mode, "glocal_pair") || strm (mode, "biphasic_pair") \
 		   || strm ( mode, "islow_pair")    || strm (mode, "tm_slow_pair") || strm (mode, "r_slow_pair") \
-		    || strm ( mode, "lalign_id_pair")|| strm (mode, "tm_lalign_id_pair") || strm (mode , "lalign_len_pair") || strm(mode, "fs_lalign_id_pair") \
+		    || strm ( mode, "lalign_id_pair")|| strm (mode, "tm_lalign_id_pair") || strm (mode , "lalign_len_pair")\
 		   || strm (mode, "prrp_aln")       || strm ( mode, "test_pair") \
 		   || strm (mode, "cdna_fast_pair") || strm (mode, "diaa_slow_pair") || strm (mode, "monoaa_slow_pair")\
 		   || strncmp (mode,"cdna_fast_pair",14)==0	\
 		   )
 	{
-	  
 	  A=fast_pair (job);
 	  RCL=aln2constraint_list ((A->A)?A->A:A, CL,weight);
 	}
-
+      else if ( strm (mode, "fs_lalign_id_pair"))
+	{
+	  set_string_variable ("fix_seq_seq_with_template", "_E_");
+	  A=fast_pair (job);
+	  RCL=aln2constraint_list ((A->A)?A->A:A, CL,weight);
+	  unset_string_variable ("fix_seq_seq_with_template");
+	}
       else if ( strm ( mode, "subop1_pair") || strm ( mode, "subop_pair") )
 	{
 	  A=fast_pair (job);
@@ -552,11 +557,11 @@ Constraint_list *method2pw_cl (TC_method *M, Constraint_list *CL)
 	      PW_CL->evaluate_residue_pair=evaluate_matrix_score;
 	      PW_CL->extend_jit=0;
 	      
-	      if (get_string_variable ("fs_matrix"))
-		PW_CL->M=read_matrice (get_string_variable ("fs_matrix"));
-	      else
-		PW_CL->M=read_matrice ("idmat");
+	      if (get_string_variable ("fs_matrix"))sprintf (PW_CL->method_matrix,"%s",get_string_variable ("fs_matrix"));
+	      else sprintf (PW_CL->method_matrix,"idmat");
 
+	      
+	      
 	      if (int_variable_isset ("fs_gop") && get_int_variable("fs_gop")<0)
 		PW_CL->gop=get_int_variable("fs_gop");
 	      else
@@ -2585,7 +2590,7 @@ Alignment * fast_pair      (Job_TC *job)
 		    }
 		  else
 		    buf[s]=S->seq[s];
-		  
+
 		  A->seq_al[a]=csprintf (A->seq_al[a], "%s", S->seq[s]);
 		  A->name[a]=csprintf (A->name[a], "%s", (CL->S)->name[s]);
 		  
@@ -4079,7 +4084,7 @@ int sa_align_groups (Alignment *A, Constraint_list *CL, int *used, int minid, in
   if (A->nseq==n) return -1;
   if (!ls){ls=declare_int (2, n); ns=(int*)vcalloc (3, sizeof (int));}
   if (!f)f=declare_int (n,n);
-  HERE ("***** 1******");
+  
 
   sa_get_next_group (A, CL,used,&s0, &s1,f);
   if (g0==-1) return -1;
@@ -5816,12 +5821,13 @@ int pair_wise   (Alignment *A, int*ns, int **l_s,Constraint_list *CL )
 	Pwfunc function;
 
 
-
+	
 	if (read_size_int (ns, sizeof (int))==3 && ns[2]!=-1)
 	  {
+	    
 	    return pair_wise_ms(A,ns,l_s,CL);
 	  }
-
+	
 	/*Make sure evaluation functions update their cache if needed*/
 	A=update_aln_random_tag (A);
 

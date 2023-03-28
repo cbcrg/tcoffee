@@ -1436,7 +1436,8 @@ Constraint_list *ProbaMatrix2CL (Alignment *A, int *ns, int **ls, int NumMatrixT
   int a;
   static float F=4; //potential number of full suboptimal alignmnents incorporated in the library
   static int tot_old, tot_new;
-  
+
+
   if (!A)
     {
       free_int (list, -1);list=NULL;
@@ -1445,7 +1446,7 @@ Constraint_list *ProbaMatrix2CL (Alignment *A, int *ns, int **ls, int NumMatrixT
       vfree(entry); entry=NULL;
       return NULL;
     }
-  
+
   I=strlen (A->seq_al[ls[0][0]]);
   J=strlen (A->seq_al[ls[1][0]]);
 
@@ -1465,18 +1466,20 @@ Constraint_list *ProbaMatrix2CL (Alignment *A, int *ns, int **ls, int NumMatrixT
 
 
   totalProb = ComputeTotalProbability (I,J,NumMatrixTypes, NumInsertStates,forward, backward);
-
+  
   ij = 0;
   for (list_n=0,ij=0,i =0; i <= I; i++)
     {
       for (j =0; j <= J; j++, ij+=NumMatrixTypes)
 	{
 	  v= EXP (MIN(LOG_ONE,(forward[ij] + backward[ij] - totalProb)));
+	  
 	  if (v>thr)//Conservative reduction of the list size to speed up the sorting
 	    {
 	      list[list_n][0]=i;
 	      list[list_n][1]=j;
 	      list[list_n][2]=(int)((float)v*(float)NORM_F);
+	      
 	      list_n++;
 	    }
 	  if (v>0.01)old_n++;
@@ -2002,7 +2005,7 @@ float ** get_emitPairs (char *mat, char *alp, float **p, float *s)
     else if (strm (rmat, mat))return p;
 
     sprintf (rmat,"%s", mat);
-
+    
     M=read_matrice (mat);
     l=strlen (alp);
 
