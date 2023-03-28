@@ -60,7 +60,7 @@ Constraint_list *produce_list   ( Constraint_list *CL, Sequence *S, char * metho
 	njob=queue2n(job)+1;
 
 	nproc=get_nproc();
-	HERE ("CL->multi_thread=%s", CL->multi_thread);
+
 	if (strstr ( CL->multi_thread, "jobcells"))return fork_cell_produce_list (CL, S, method, weight, mem_mode,job,nproc,local_stderr);
 	else if (strstr ( CL->multi_thread, "joblines"))return fork_line_produce_list (CL, S, method, weight, mem_mode,job, nproc,local_stderr);
 	else if (strstr ( CL->multi_thread, "jobs"))return fork_subset_produce_list (CL, S, method, weight, mem_mode,job, nproc,local_stderr); //Recommended default
