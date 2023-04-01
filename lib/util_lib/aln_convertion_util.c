@@ -6582,7 +6582,7 @@ Sequence * seq2template_seq ( Sequence *S, char *template_list, Fname *F)
 	  else if ( strstr (template_list, "_G_" )&& !(S->T[a])->G)(S->T[a])->G  =fill_G_template  ( S->name[a], p,S);//Genomic
 	  else if ( strstr (template_list, "_F_" )&& !(S->T[a])->F)(S->T[a])->F  =fill_F_template  ( S->name[a], p,S);//Fold
 	  else if ( strstr (template_list, "_T_" )&& !(S->T[a])->T)(S->T[a])->T  =fill_T_template  ( S->name[a], p,S);//Trans Membrane
-	  else if ( strstr (template_list, "_E_" )&& !(S->T[a])->E)(S->T[a])->E  =fill_E_template  ( S->name[a], p,S);//Secondary Structure
+	  else if ( strstr (template_list, "_E_" )&& !(S->T[a])->E)(S->T[a])->E  =fill_E_template  ( a,S->name[a], p,S);//Secondary Structure
 	  else if ( strstr (template_list, "_U_" )&& !(S->T[a])->U)(S->T[a])->U  =fill_U_template  ( S->name[a], p,S);//unicode, list template
 
 	}
@@ -6618,7 +6618,7 @@ Sequence * seq2template_seq ( Sequence *S, char *template_list, Fname *F)
 	      else if (  (p=strstr (T->seq_comment[a], " _R_ ")) && !(S->T[i])->R &&( (S->T[i])->R=fill_R_template (S->name[i],p,S)))ntemp++;
 	      else if (  (p=strstr (T->seq_comment[a], " _G_ ")) && !(S->T[i])->G &&( (S->T[i])->G=fill_G_template (S->name[i],p,S)))ntemp++;
 	      else if (  (p=strstr (T->seq_comment[a], " _T_ ")) && !(S->T[i])->T &&( (S->T[i])->T=fill_T_template (S->name[i],p,S)))ntemp++;
-	      else if (  (p=strstr (T->seq_comment[a], " _E_ ")) && !(S->T[i])->E &&( (S->T[i])->E=fill_E_template (S->name[i],p,S)))ntemp++;
+	      else if (  (p=strstr (T->seq_comment[a], " _E_ ")) && !(S->T[i])->E &&( (S->T[i])->E=fill_E_template (a,S->name[i],p,S)))ntemp++;
 	      else if (  (p=strstr (T->seq_comment[a], " _U_ ")) && !(S->T[i])->U &&( (S->T[i])->E=fill_U_template (S->name[i],p,S)))ntemp++;
 
 	      if (T!=S)strcat (S->seq_comment[i], T->seq_comment[a]);
@@ -7415,7 +7415,7 @@ struct X_template *fill_U_template ( char *name,char *p, Sequence *S)
     }
   return U;
 }
-struct X_template *fill_E_template ( char *name,char *p, Sequence *S)
+struct X_template *fill_E_template ( int sindex,char *name,char *p, Sequence *S)
 {
   /*Profile template*/
   struct X_template *E;
@@ -7442,8 +7442,15 @@ struct X_template *fill_E_template ( char *name,char *p, Sequence *S)
     }
   else
     {
+      int l1, l2;
       (E->VE)->S=main_read_seq (E->template_file);
+      l1=strlen (((E->VE)->S)->seq[0]);
+      l2=strlen (S->seq[sindex]);
+      if (l1!=l2)
+	printf_exit ( EXIT_FAILURE,stderr, "\nERROR: Sequence [%s] - Sequence length: %d -- Template length: %d -- Template File: %s [FATAL:%s]",name, l2, l1, E->template_file, PROGRAM); 
+
     }
+
   return E;
 }
 struct X_template *fill_G_template ( char *name,char *p, Sequence *S)
