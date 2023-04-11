@@ -5575,7 +5575,15 @@ int **fix_seq_seq (Sequence *S0, Sequence *Sx)
   //residues  1-N+1
   int s0, r0,i;
   int **index;
+  char *seq;
+  char *use_template;
 
+  //Trigger fixing with a template rather than the sequence itself
+  //currently not used
+
+  
+  use_template=get_string_variable ("fix_seq_seq_with_template");
+  
   index=(int**)vcalloc ( S0->nseq, sizeof (int*));
   for (s0=0; s0<S0->nseq; s0++)
     {
@@ -5583,8 +5591,18 @@ int **fix_seq_seq (Sequence *S0, Sequence *Sx)
       index[s0]=(int*)vcalloc (l+1, sizeof (int));
       i=index[s0][0]=name_is_in_list (S0->name[s0], Sx->name, Sx->nseq, 100);
 
+      if (i!=-1)
+	{
+	  seq=Sx->seq[i];
+	  if (use_template)
+	    {
+	      seq=seq2E_template_string (Sx,i);
+	    }
+	  if (!seq) seq=Sx->seq[i];
+	}
+	      
       if (i==-1);
-      else if (strim(S0->seq[s0], Sx->seq[i]))
+      else if (strim(S0->seq[s0], seq))
 	{
 	  for (r0=1; r0<=l; r0++)
 	    {
@@ -5597,8 +5615,9 @@ int **fix_seq_seq (Sequence *S0, Sequence *Sx)
 	  int nr0=0;
 	  int nr1=0;
 	  Alignment *B;
-	  
-	  B=align_two_sequences (S0->seq[s0], Sx->seq[i], const_cast<char*>( (strm(S0->type, "PROTEIN"))?"blosum62mt":"idmat"), -4,-1, "myers_miller_pair_wise");
+	  //HERE ("\n%s\n%s\n\n",S0->seq[s0],seq);
+	  B=align_two_sequences (S0->seq[s0], seq, const_cast<char*>( (strm(S0->type, "PROTEIN"))?"blosum62mt":"idmat"), -4,-1, "myers_miller_pair_wise");
+	  //print_aln (B);
 	  for (c=0; c<B->len_aln; c++)
 	    {
 
@@ -6545,21 +6564,25 @@ Sequence * seq2template_seq ( Sequence *S, char *template_list, Fname *F)
       for (a=0; a< S->nseq; a++)
 	{
 
-	  if ( (p=strstr (template_list,"SELF_")))p=S->name[a];
+	  if ( (p=strstr (template_list,"SELF_")))
+	    {
+	      p=S->name[a];
+	    }
+	  
 	  else if ( strstr (template_list, "SEQFILE_"))p=template_list;
 	  else
 	    {
 	      fprintf ( stderr, "\nUnkown mode for Template [FATAL:%s]\n", PROGRAM);
 	      myexit (EXIT_FAILURE);
 	    }
-
+	  
 	  if (      strstr (template_list, "_P_") && !(S->T[a])->P)(S->T[a])->P  =fill_P_template  ( S->name[a], p,S);//PDB
 	  else if ( strstr (template_list, "_S_") && !(S->T[a])->S)(S->T[a])->S  =fill_S_template  ( S->name[a], p,S);//Sequence
 	  else if ( strstr (template_list, "_R_" )&& !(S->T[a])->R)(S->T[a])->R  =fill_R_template  ( S->name[a], p,S);//pRofile
 	  else if ( strstr (template_list, "_G_" )&& !(S->T[a])->G)(S->T[a])->G  =fill_G_template  ( S->name[a], p,S);//Genomic
 	  else if ( strstr (template_list, "_F_" )&& !(S->T[a])->F)(S->T[a])->F  =fill_F_template  ( S->name[a], p,S);//Fold
 	  else if ( strstr (template_list, "_T_" )&& !(S->T[a])->T)(S->T[a])->T  =fill_T_template  ( S->name[a], p,S);//Trans Membrane
-	  else if ( strstr (template_list, "_E_" )&& !(S->T[a])->E)(S->T[a])->E  =fill_E_template  ( S->name[a], p,S);//Secondary Structure
+	  else if ( strstr (template_list, "_E_" )&& !(S->T[a])->E)(S->T[a])->E  =fill_E_template  ( a,S->name[a], p,S);//Secondary Structure
 	  else if ( strstr (template_list, "_U_" )&& !(S->T[a])->U)(S->T[a])->U  =fill_U_template  ( S->name[a], p,S);//unicode, list template
 
 	}
@@ -6595,7 +6618,7 @@ Sequence * seq2template_seq ( Sequence *S, char *template_list, Fname *F)
 	      else if (  (p=strstr (T->seq_comment[a], " _R_ ")) && !(S->T[i])->R &&( (S->T[i])->R=fill_R_template (S->name[i],p,S)))ntemp++;
 	      else if (  (p=strstr (T->seq_comment[a], " _G_ ")) && !(S->T[i])->G &&( (S->T[i])->G=fill_G_template (S->name[i],p,S)))ntemp++;
 	      else if (  (p=strstr (T->seq_comment[a], " _T_ ")) && !(S->T[i])->T &&( (S->T[i])->T=fill_T_template (S->name[i],p,S)))ntemp++;
-	      else if (  (p=strstr (T->seq_comment[a], " _E_ ")) && !(S->T[i])->E &&( (S->T[i])->E=fill_E_template (S->name[i],p,S)))ntemp++;
+	      else if (  (p=strstr (T->seq_comment[a], " _E_ ")) && !(S->T[i])->E &&( (S->T[i])->E=fill_E_template (a,S->name[i],p,S)))ntemp++;
 	      else if (  (p=strstr (T->seq_comment[a], " _U_ ")) && !(S->T[i])->U &&( (S->T[i])->E=fill_U_template (S->name[i],p,S)))ntemp++;
 
 	      if (T!=S)strcat (S->seq_comment[i], T->seq_comment[a]);
@@ -6891,10 +6914,6 @@ int seq2n_X_template ( Sequence *S, char *type)
 struct X_template *fill_X_template ( char *name, char *p, char *token)
 {
   struct X_template *X;
-
-
-
-
   char *k;
 
   X=(X_template*)vcalloc (1, sizeof (X_template));
@@ -6902,7 +6921,11 @@ struct X_template *fill_X_template ( char *name, char *p, char *token)
   if ( (k=strstr (p, token)))sscanf (k+strlen(token), "%s",X->template_name);
   else sprintf (X->template_name, "%s", p);
 
-
+  
+    
+  
+    
+  
   /*Add a Structure HERE*/
   sprintf ( X->template_type, "%s", token);
   if ( strm (token, "_P_"))X->VP=(P_template*)vcalloc (1, sizeof (P_template));
@@ -7288,7 +7311,8 @@ struct X_template *fill_R_template ( char *name,char *p, Sequence *S)
   /*Profile template*/
   struct X_template *R;
 
-
+  
+  
   R=fill_X_template ( name, p, "_R_");
   sprintf (R->template_format , "fasta_aln");
   
@@ -7391,16 +7415,25 @@ struct X_template *fill_U_template ( char *name,char *p, Sequence *S)
     }
   return U;
 }
-struct X_template *fill_E_template ( char *name,char *p, Sequence *S)
+struct X_template *fill_E_template ( int sindex,char *name,char *p, Sequence *S)
 {
   /*Profile template*/
   struct X_template *E;
+  static char *tdir;
 
+  if (!tdir)tdir=get_string_variable ("template_dir_E_");
+  
 
   E=fill_X_template ( name, p, "_E_");
   sprintf (E->template_format , "fasta_seq");
 
-  if (!is_aln(E->template_name) && !is_seq (E->template_name))
+  sprintf (E->template_file, "%s%s%s",(tdir)?tdir:"",(tdir)?"/":"",p);
+  if (!is_aln(E->template_file) && !is_seq (E->template_file))
+    sprintf (E->template_file, "%s%s%s._E_",(tdir)?tdir:"",(tdir)?"/":"",p);
+  
+    
+  
+  if (!is_aln(E->template_file) && !is_seq (E->template_file))
     {
 
       add_information ( stderr, "_E_ Template %s Could not be found\n",E->template_name);
@@ -7409,9 +7442,15 @@ struct X_template *fill_E_template ( char *name,char *p, Sequence *S)
     }
   else
     {
-      (E->VE)->S=main_read_seq (E->template_name);
-      sprintf ( E->template_file, "%s", E->template_name);
+      int l1, l2;
+      (E->VE)->S=main_read_seq (E->template_file);
+      l1=strlen (((E->VE)->S)->seq[0]);
+      l2=strlen (S->seq[sindex]);
+      if (l1!=l2)
+	printf_exit ( EXIT_FAILURE,stderr, "\nERROR: Sequence [%s] - Sequence length: %d -- Template length: %d -- Template File: %s [FATAL:%s]",name, l2, l1, E->template_file, PROGRAM); 
+
     }
+
   return E;
 }
 struct X_template *fill_G_template ( char *name,char *p, Sequence *S)

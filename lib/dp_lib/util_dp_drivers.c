@@ -198,28 +198,35 @@ Constraint_list *seq2list     ( Job_TC *job)
 		   || strm ( mode, "blast_pair")    || strm (mode, "lalign_blast_pair") \
 		   || strm ( mode, "viterbi_pair")  || strm (mode, "slow_pair")      || strm(mode, "glocal_pair") || strm (mode, "biphasic_pair") \
 		   || strm ( mode, "islow_pair")    || strm (mode, "tm_slow_pair") || strm (mode, "r_slow_pair") \
-		   || strm ( mode, "lalign_id_pair")|| strm (mode, "tm_lalign_id_pair") || strm (mode , "lalign_len_pair") \
+		    || strm ( mode, "lalign_id_pair")|| strm (mode, "tm_lalign_id_pair") || strm (mode , "lalign_len_pair")\
 		   || strm (mode, "prrp_aln")       || strm ( mode, "test_pair") \
 		   || strm (mode, "cdna_fast_pair") || strm (mode, "diaa_slow_pair") || strm (mode, "monoaa_slow_pair")\
 		   || strncmp (mode,"cdna_fast_pair",14)==0	\
 		   )
 	{
-
 	  A=fast_pair (job);
 	  RCL=aln2constraint_list ((A->A)?A->A:A, CL,weight);
 	}
-
-      else if ( strm ( mode, "subop1_pair") || strm ( mode, "subop2_pair") )
+      else if ( strm (mode, "fs_lalign_id_pair"))
+	{
+	  set_string_variable ("fix_seq_seq_with_template", "_E_");
+	  A=fast_pair (job);
+	  RCL=aln2constraint_list ((A->A)?A->A:A, CL,weight);
+	  unset_string_variable ("fix_seq_seq_with_template");
+	}
+      else if ( strm ( mode, "subop1_pair") || strm ( mode, "subop_pair") )
 	{
 	  A=fast_pair (job);
 	  RCL=A->CL;
 	}
-      else if ( strm ( mode, "proba_pair") )
+	    
+      else if ( strm ( mode, "proba_pair") || strm (mode, "fs_pair"))
 	{
 	  
 	  A=fast_pair (job);
 	  RCL=A->CL;
 	}
+      
       else if ( strm ( mode, "best_pair4prot"))
 	{
 	  RCL=best_pair4prot (job);
@@ -537,9 +544,27 @@ Constraint_list *method2pw_cl (TC_method *M, Constraint_list *CL)
 	      PW_CL->evaluate_residue_pair=evaluate_matrix_score;
 	      PW_CL->extend_jit=0;
 	    }
+       else if ( strm (mode, "fs_pair"))
+	    {
+	      
+	      PW_CL->maximise=1;
+	      PW_CL->TG_MODE=1;
+	      PW_CL->use_fragments=0;
+	      sprintf (PW_CL->dp_mode, "proba_pair_wise");
+	      sprintf (PW_CL->matrix_for_aa_group,"%s", group_mat);
+	      PW_CL->residue_index=NULL;
+	      PW_CL->get_dp_cost=slow_get_dp_cost;
+	      PW_CL->evaluate_residue_pair=evaluate_matrix_score;
+	      PW_CL->extend_jit=0;
+
+	      
+	      if (get_string_variable ("fs_matrix"))sprintf (PW_CL->method_matrix,"%s",get_string_variable ("fs_matrix"));
+	      else sprintf (PW_CL->method_matrix,"idmat");
+	      	      	      
+	    }
       else if ( strm (mode, "proba_pair"))
 	    {
-
+	      
 	      PW_CL->maximise=1;
 	      PW_CL->TG_MODE=1;
 	      PW_CL->use_fragments=0;
@@ -692,6 +717,7 @@ Constraint_list *method2pw_cl (TC_method *M, Constraint_list *CL)
 	    sprintf (PW_CL->matrix_for_aa_group,"%s", group_mat);
 	    PW_CL->extend_jit=0;
 	  }
+      
 	else if ( strm ( mode , "lalign_id_pair"))
 	  {
 	    PW_CL->residue_index=NULL;
@@ -705,6 +731,35 @@ Constraint_list *method2pw_cl (TC_method *M, Constraint_list *CL)
 	    sprintf (PW_CL->matrix_for_aa_group,"%s", group_mat);
 	    PW_CL->extend_jit=0;
 	  }
+      else if ( strm ( mode , "fs_lalign_id_pair"))
+	  {
+	    PW_CL->residue_index=NULL;
+	    PW_CL->maximise=1;
+	    PW_CL->TG_MODE=1;
+	    PW_CL->use_fragments=0;
+	    PW_CL->pair_wise=sim_pair_wise_lalign;
+	    PW_CL->evaluate_residue_pair=evaluate_matrix_score;
+	    PW_CL->get_dp_cost=slow_get_dp_cost;
+	    PW_CL->lalign_n_top=CL->lalign_n_top;
+	    sprintf (PW_CL->matrix_for_aa_group,"%s", group_mat);
+	    PW_CL->extend_jit=0;
+
+	    if (get_string_variable ("fs_matrix"))
+	      PW_CL->M=read_matrice (get_string_variable ("fs_matrix"));
+	    else
+	      PW_CL->M=read_matrice ("idmat");
+	    
+	    if (int_variable_isset ("fs_gop") && get_int_variable("fs_gop")<0)
+	      PW_CL->gop=get_int_variable("fs_gop");
+	    else
+	      PW_CL->gop= get_avg_matrix_mm (PW_CL->M, AA_ALPHABET)*10;
+	    
+	    if (int_variable_isset ("fs_gep") &&  get_int_variable("fs_gep")<0)
+	      PW_CL->gep=get_int_variable("fs_gep");
+	    else
+	      PW_CL->gep= -1;
+	  }
+      
       	else if ( strm ( mode , "tm_lalign_id_pair"))
 	  {
 	    PW_CL->residue_index=NULL;
@@ -1274,7 +1329,6 @@ Constraint_list * profile_pair (TC_method *M , char *in_seq, Constraint_list *CL
 	A1=seq2R_template_profile(CL->S,s1);
 	A2=seq2R_template_profile(CL->S,s2);
 
-	
 	prf1_file=vtmpnam (NULL);
 	fp=vfopen (prf1_file, "w");
 	
@@ -1291,6 +1345,7 @@ Constraint_list * profile_pair (TC_method *M , char *in_seq, Constraint_list *CL
 	  }
 	else
 	  {
+	    HERE ("NO A1");
 	    fprintf ( fp, ">%s\n%s%s\n",sn1, (CL->S)->seq[s1], PATCH_PRF);
 	  }
 	vfclose (fp);
@@ -2511,13 +2566,19 @@ Alignment * fast_pair      (Job_TC *job)
 	    for ( a=0; a< n; a++)
 	        {
 		  s=seqlist[a+2];
+		 
 		  if ( strm (M->seq_type, "G"))
 		    {
 		      buf[s]=S->seq[s];
 		      S->seq[s]=((((S->T[s])->G)->VG)->S)->seq[0];
-		  }
-		else
-		  buf[s]=S->seq[s];
+		    }
+		  else if ( strm (M->seq_type, "E"))
+		    {
+		      buf[s]=S->seq[s];
+		      S->seq[s]=((((S->T[s])->E)->VE)->S)->seq[0];
+		    }
+		  else
+		    buf[s]=S->seq[s];
 
 		  A->seq_al[a]=csprintf (A->seq_al[a], "%s", S->seq[s]);
 		  A->name[a]=csprintf (A->name[a], "%s", (CL->S)->name[s]);
@@ -2841,6 +2902,18 @@ Alignment * align_two_structures ( Sequence *S, int s1, int s2, char *mode)
 }
   
   
+Alignment * align_two_sequences_with_external_method ( char *seq1, char *seq2, char *method)
+{
+  static char *in=vtmpnam  (NULL);
+  static char *out=vtmpnam (NULL);
+    
+  if (!seq1 || !seq2 || !method)return NULL;
+  string2file (in, "w",">A\n%s\n>B\n%s\n", seq1, seq2);
+  safe_remove (out);
+  //Note: if the method fails to align the considered sequences, dynamic.pl will retun an empty file (-noexit) and the function restuns NULL, leaving it for the handling function to launch computation in a different way
+  printf_system ("dynamic.pl -method %s -seq %s -outfile %s -noexit", method, in, out);
+  return quick_read_aln(out);
+}
 
 Alignment * align_two_sequences ( char *seq1, char *seq2, char *in_matrix, int gop, int gep, char *in_align_mode)
 {
@@ -4000,7 +4073,7 @@ int sa_align_groups (Alignment *A, Constraint_list *CL, int *used, int minid, in
   if (A->nseq==n) return -1;
   if (!ls){ls=declare_int (2, n); ns=(int*)vcalloc (3, sizeof (int));}
   if (!f)f=declare_int (n,n);
-  HERE ("***** 1******");
+  
 
   sa_get_next_group (A, CL,used,&s0, &s1,f);
   if (g0==-1) return -1;
@@ -5737,12 +5810,13 @@ int pair_wise   (Alignment *A, int*ns, int **l_s,Constraint_list *CL )
 	Pwfunc function;
 
 
-
+	
 	if (read_size_int (ns, sizeof (int))==3 && ns[2]!=-1)
 	  {
+	    
 	    return pair_wise_ms(A,ns,l_s,CL);
 	  }
-
+	
 	/*Make sure evaluation functions update their cache if needed*/
 	A=update_aln_random_tag (A);
 

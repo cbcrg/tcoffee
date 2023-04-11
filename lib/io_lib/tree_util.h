@@ -11,8 +11,11 @@ typedef struct ALNcol
   int ngap;
   int nres;
   int nseq;
-  //int id //put this back when debugging pointers
-struct ALNcol *next;
+  int *prf;
+  int id; //put this back when debugging pointers
+  struct ALNcol *next;
+  struct ALNcol *next2;
+  
 };
 typedef struct ALNcol ALNcol;
 

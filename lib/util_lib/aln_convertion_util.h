@@ -288,7 +288,7 @@ struct X_template *fill_S_template ( char *name,char *p, Sequence *S);
 struct X_template *fill_R_template (char *name, char *p, Sequence *S);
 struct X_template *fill_G_template (char *name, char *p, Sequence *S);
 struct X_template *fill_T_template (char *name, char *p, Sequence *S);
-struct X_template *fill_E_template (char *name, char *p, Sequence *S);
+struct X_template *fill_E_template (int sindex,char *name, char *p, Sequence *S);
 struct X_template *fill_U_template (char *name, char *p, Sequence *S);
 
 char *seq2T_value ( Sequence *S, int i, char *param_name, char *template_type);

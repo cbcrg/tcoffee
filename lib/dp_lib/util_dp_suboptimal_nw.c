@@ -220,7 +220,7 @@ int suboptimal_pair_wise ( Alignment *A, int *ns, int **ls, Constraint_list *CL,
 	      entry[R1]=i;entry[R2]=j;
 	      entry[WE]=id;
 	      entry[CONS]=1;
-
+	      
 	      add_entry2list (entry,A->CL);
 	    }
 	}
@@ -628,14 +628,15 @@ int proba_pair_wise ( Alignment *A, int *ns, int **ls, Constraint_list *CL)
    static int TinsProb_ml, TmatchProb_ml;
    int i, j,I, J;
    float *F, *B;
-
+   
    int l;
    float thr=0.01;//ProbCons Default
    char *alphabet;
-
-
+   int do_reset=0;
+   //HERE ("DO reset must be replaced by a higher order reset");
+   
    //Free all the memory
-   if (A==NULL)
+   if (A==NULL || do_reset)
      {
        free_float (transMat, -1);transMat=NULL;
        free_float (insProb, -1);insProb=NULL;
@@ -653,7 +654,7 @@ int proba_pair_wise ( Alignment *A, int *ns, int **ls, Constraint_list *CL)
        forward_proba_pair_wise (NULL, NULL, 0,0,NULL,NULL,NULL,NULL,NULL);
        backward_proba_pair_wise (NULL, NULL, 0,0,NULL,NULL,NULL,NULL,NULL);
        ProbaMatrix2CL(NULL, NULL, NULL, 0, 0, NULL, NULL, 0, NULL);
-       return 0;
+       if (!do_reset || !A)return 0;
      }
 
    if (!transMat && (strm (retrieve_seq_type(), "DNA")))
@@ -1436,7 +1437,8 @@ Constraint_list *ProbaMatrix2CL (Alignment *A, int *ns, int **ls, int NumMatrixT
   int a;
   static float F=4; //potential number of full suboptimal alignmnents incorporated in the library
   static int tot_old, tot_new;
-  
+
+
   if (!A)
     {
       free_int (list, -1);list=NULL;
@@ -1445,6 +1447,8 @@ Constraint_list *ProbaMatrix2CL (Alignment *A, int *ns, int **ls, int NumMatrixT
       vfree(entry); entry=NULL;
       return NULL;
     }
+
+
   
   I=strlen (A->seq_al[ls[0][0]]);
   J=strlen (A->seq_al[ls[1][0]]);
@@ -1465,38 +1469,48 @@ Constraint_list *ProbaMatrix2CL (Alignment *A, int *ns, int **ls, int NumMatrixT
 
 
   totalProb = ComputeTotalProbability (I,J,NumMatrixTypes, NumInsertStates,forward, backward);
-
+  
   ij = 0;
   for (list_n=0,ij=0,i =0; i <= I; i++)
     {
       for (j =0; j <= J; j++, ij+=NumMatrixTypes)
 	{
 	  v= EXP (MIN(LOG_ONE,(forward[ij] + backward[ij] - totalProb)));
+	  
 	  if (v>thr)//Conservative reduction of the list size to speed up the sorting
 	    {
 	      list[list_n][0]=i;
 	      list[list_n][1]=j;
 	      list[list_n][2]=(int)((float)v*(float)NORM_F);
+	      
 	      list_n++;
 	    }
 	  if (v>0.01)old_n++;
 	}
     }
-
+ 
   sort_int_inv (list, 3, 2, 0, list_n-1);
   if (!entry)entry=(int*)vcalloc ( CL->entry_len+1, CL->el_size);
 
-  list_n=MIN(list_n,(F*MIN(I,J)));
+  //list_n=MIN(list_n,(F*MIN(I,J)));
+
+
+  
   for (i=0; i<list_n; i++)
     {
+      int x, y;
+      
        entry[SEQ1]=s1;
        entry[SEQ2]=s2;
        entry[R1]  =list[i][0];
        entry[R2]  =list[i][1];
        entry[WE]  =list[i][2];
        entry[CONS]=1;
+      
        add_entry2list (entry,A->CL);
+      
     }
+
   tot_new+=list_n;
   tot_old+=old_n;
   // HERE ("LIB_SIZE NEW: %d (new) %d (old) [%.2f]", list_n, old_n, (float)tot_new/(float)tot_old);
@@ -2002,7 +2016,7 @@ float ** get_emitPairs (char *mat, char *alp, float **p, float *s)
     else if (strm (rmat, mat))return p;
 
     sprintf (rmat,"%s", mat);
-
+    
     M=read_matrice (mat);
     l=strlen (alp);
 

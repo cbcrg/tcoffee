@@ -243,6 +243,8 @@ int batch_main ( int argc, char **argv)
 	char **template_file_list;
 	int n_template_file;
 
+	char*template_dir_E_;
+	
 	char **template_mode_list;
 	int n_template_mode;
 
@@ -291,6 +293,10 @@ int batch_main ( int argc, char **argv)
 	int len;
 	char *infile;
 	char *matrix;
+	char *fs_matrix;
+	int fs_gop;
+	int fs_gep;
+	  
 	char *dp_mode;
 	char *profile_mode;
 	char *profile_comparison;
@@ -1405,6 +1411,27 @@ if ( !do_evaluate)
 					  );
 	       if (n_template_file)cputenv ("template_file_4_TCOFFEE=%s",template_file_list[0]);
 	       
+	       declare_name(template_dir_E_);
+	       get_cl_param(			\
+			    /*argc*/      argc          ,\
+			    /*argv*/      argv          ,\
+			    /*output*/    &le           ,\
+			    /*Name*/      "-template_dir_E_"         ,\
+			    /*Flag*/      &garbage      ,\
+			    /*TYPE*/      "S"           ,\
+			    /*OPTIONAL?*/ OPTIONAL      ,\
+			    /*MAX Nval*/  1000           ,\
+			    /*DOC*/       "directory for _E_ templates (_R_ <dir> _P_ <dir>...",\
+			    /*Parameter*/ &template_dir_E_     ,	\
+			    /*Def 1*/    "./",\
+			    /*Def 2*/     "./"       ,\
+			    /*Min_value*/ "any"         ,\
+			    /*Max Value*/ "any"          \
+			    );
+	       set_string_variable ("template_dir_E_",template_dir_E_);
+	       
+
+	       
 /*PARAMETER PROTOTYPE:    VERSION      */
 	       setenv_list=declare_char (100, STRING);
 	       n_setenv=get_cl_param(\
@@ -2197,6 +2224,63 @@ if ( !do_evaluate)
 			    /*Min_value*/ "any"          ,\
 			    /*Max Value*/ "any"           \
 		   );
+
+	       declare_name (fs_matrix);
+	       get_cl_param(					\
+			    /*argc*/      argc           ,\
+			    /*argv*/      argv           ,\
+			    /*output*/    &le            ,\
+			    /*Name*/      "-fs_matrix"      ,\
+			    /*Flag*/      &garbage       ,\
+			    /*TYPE*/      "S"            ,\
+			    /*OPTIONAL?*/ OPTIONAL       ,\
+			    /*MAX Nval*/  1              ,\
+			    /*DOC*/       "Specifies the substitution matrix used on 3di.",\
+			    /*Parameter*/ &fs_matrix        ,\
+			    /*Def 1*/    "idmat"              ,\
+			    /*Def 2*/    "default"    ,\
+			    /*Min_value*/ "any"          ,\
+			    /*Max Value*/ "any"           \
+		   );
+	       set_string_variable ("fs_matrix",fs_matrix);
+
+	       get_cl_param(					\
+			    /*argc*/      argc           ,\
+			    /*argv*/      argv           ,\
+			    /*output*/    &le            ,\
+			    /*Name*/      "-fs_gop"      ,\
+			    /*Flag*/      &garbage       ,\
+			    /*TYPE*/      "D"            ,\
+			    /*OPTIONAL?*/ OPTIONAL       ,\
+			    /*MAX Nval*/  1              ,\
+			    /*DOC*/       "Must Be Negative",\
+			    /*Parameter*/ &fs_gop        ,\
+			    /*Def 1*/    "1"              ,\
+			    /*Def 2*/    ""    ,\
+			    /*Min_value*/ "any"          ,\
+			    /*Max Value*/ "any"           \
+		   );
+	       set_int_variable ("fs_gop",fs_gop);
+
+	       get_cl_param(					\
+			    /*argc*/      argc           ,\
+			    /*argv*/      argv           ,\
+			    /*output*/    &le            ,\
+			    /*Name*/      "-fs_gep"      ,\
+			    /*Flag*/      &garbage       ,\
+			    /*TYPE*/      "D"            ,\
+			    /*OPTIONAL?*/ OPTIONAL       ,\
+			    /*MAX Nval*/  1              ,\
+			    /*DOC*/       "Must Be Negative",\
+			    /*Parameter*/ &fs_gep        ,\
+			    /*Def 1*/    "1"              ,\
+			    /*Def 2*/    ""    ,\
+			    /*Min_value*/ "any"          ,\
+			    /*Max Value*/ "any"           \
+		   );
+	       set_int_variable ("fs_gep",fs_gep);
+	       
+	       
 /*PARAMETER PROTOTYPE:    TG_MODE    */
 
 	       get_cl_param(\
@@ -5053,8 +5137,6 @@ get_cl_param(\
 	       if ((CL->S)->nseq>1 && !do_convert)
 		 {
 		   CL=read_n_constraint_list (list_file,n_list,NULL, mem_mode,weight,type, le, CL, seq_source);
-		   
-		   //CL=post_process_constraint_list (CL); //needed when constraints are added, for instance the RNA modes
 		 }
 	       else if ( do_convert && out_lib[0])
 		 {
@@ -5067,12 +5149,12 @@ get_cl_param(\
 		     CL=read_n_constraint_list (list_file,n_list,NULL, mem_mode,weight,type, le, CL, seq_source);
 		     }
 		 }
+	 
 	       //This very important step insures the CL is symetrical
 	       //This is essential for the remaining computation
 	       //It should not be done before because some methods may not be symetrical for specific reasons
 	       //And the CL may be used in different contexts
 	       CL=CL2simCL (CL);
-
 	       
 	       if ( CL->M)clean_aln=0;
 
@@ -5092,8 +5174,7 @@ get_cl_param(\
 	        */
 	       if ( (CL->S)->nseq>1 && CL->ne==0 && !CL->M &&!(do_convert && n_list>0))
 		 {
-		   fprintf ( stderr, "\n******************ERROR*****************************************\n");
-
+		   fprintf ( stderr, "\n****************** ERROR *****************************************\n");
 		   fprintf ( stderr, "\nYou have not provided any method or enough Sequences[FATAL]");
 		   fprintf ( stderr, "\nIf you have used the '-in' Flag, ADD the methods you wish to use:");
 		   fprintf ( stderr, "\n\t-in <your sequences> Mlalign_id_pair Mfast_pair\n");
@@ -5193,13 +5274,14 @@ get_cl_param(\
 	       
 	       if (CL->ne>0 && out_lib[0]!='\0' && !strm (out_lib, "no"))
 	         {
-		   
 		   if (strstr (out_lib_mode, "extended"))
 		     {
 		       char emode[1000];
 		       //Do the processing before saving the extended lib*/
 		       processed_lib=1;
+		      
 		       if ( filter_lib) CL=filter_constraint_list (CL,CL->weight_field, filter_lib);
+		      
 		       for (a=0; a<relax_lib; a++)CL=relax_constraint_list (CL);
 		       for (a=0; a<shrink_lib; a++)CL=shrink_constraint_list (CL);
 		       sprintf ( emode, "lib_%s", out_lib_mode);
@@ -5233,11 +5315,13 @@ get_cl_param(\
 
 	      if (!processed_lib)
 			  {
-			  if ( filter_lib) CL=filter_constraint_list (CL,CL->weight_field, filter_lib);
-			  if (atoigetenv ("EXTEND4TC")==1)CL=extend_constraint_list(CL);
 
-			  for (a=0; a<relax_lib; a++)CL=relax_constraint_list (CL);
-			  for (a=0; a<shrink_lib; a++)CL=shrink_constraint_list (CL);
+			    if ( filter_lib) CL=filter_constraint_list (CL,CL->weight_field, filter_lib);
+
+			    if (atoigetenv ("EXTEND4TC")==1)CL=extend_constraint_list(CL);
+			    
+			    for (a=0; a<relax_lib; a++)CL=relax_constraint_list (CL);
+			    for (a=0; a<shrink_lib; a++)CL=shrink_constraint_list (CL);
 			  }
 
 	      CL=evaluate_constraint_list_reference (CL);
@@ -7150,11 +7234,15 @@ Alignment * t_coffee_dpa (int argc, char **argv)
   set_int_variable    ("reg_dnd_depth",3);
   set_string_variable ("reg_dnd_mode", "codnd");
   //*_4_CLTCOFFEE gets added to the T-Coffee command line of any slave;
+  
 
   //Set Some Defaults that can be over-written by the CL parsing below
   //Note that by default ALL flag get added to the env variable <name>_4_CLTCOFFEE. These variables are then used to construct the slave CL in dynamic.pl
   cputenv ("blast_server_4_CLTCOFFEE=LOCAL");
- 
+
+  /*Set some default parameters*/
+  cputenv ("COMPACT_4_TCOFFEE=1");//-expand to turn it off
+    
   for (a=1; a<argc; a++)
     {
       
@@ -7266,9 +7354,20 @@ Alignment * t_coffee_dpa (int argc, char **argv)
 	  cputenv ("COMPACT_4_TCOFFEE=1");
 	  
 	}
+      else if (strm (argv[a],"-quickcompact")  )
+	{
+	  cputenv ("COMPACT_4_TCOFFEE=2");
+	  
+	}
+      else if (strm (argv[a],"-expand")  )
+	{
+	  cputenv ("COMPACT_4_TCOFFEE=0");	  
+	}
       else if (strm (argv[a], "-method") || strm (argv[a], "-dpa_method") || strm (argv[a], "-reg_method"))
 	{
 	  dpa_aligner=argv[++a];
+	  if (isfile(dpa_aligner))
+	    dpa_aligner=fname2abs(dpa_aligner);
 	}
       else if (strm (argv[a], "-cache"))
 	{
@@ -7276,7 +7375,7 @@ Alignment * t_coffee_dpa (int argc, char **argv)
 	}
       else if (strm (argv[a],"-in") || strm (argv[a],"-infile"))
 	{
-	  myexit (fprintf_error (stderr, "%s is not supported when using -dpa [FATAL:%s]", argv[a],PROGRAM));
+	  myexit (fprintf_error (stderr, "%s is not supported when using -dpa, use -seq to input sequences [FATAL:%s]", argv[a],PROGRAM));
 	}
      
       else if ( strstr (argv[a], "reg_homoplasy"))
@@ -7356,7 +7455,7 @@ Alignment * t_coffee_dpa (int argc, char **argv)
       command=(char*)vcalloc (10000, sizeof (char));
       sprintf (command, "clustalo_msa");
     }
-  
+  cputenv ("COMMAND_4_TCOFFEE=%s", command);
 
   //prepare output names
   //output the MSA

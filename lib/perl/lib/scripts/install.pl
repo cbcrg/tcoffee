@@ -529,6 +529,8 @@ sub url2file
   {
     my ($cmd, $file,$wget_arg, $curl_arg)=(@_);
     my ($exit,$flag, $pg, $arg);
+
+    
     
     if ($INTERNET || check_internet_connection ()){$INTERNET=1;}
     else
@@ -536,6 +538,8 @@ sub url2file
 	print STDERR "ERROR: No Internet Connection [FATAL:install.pl]\n";
 	exit ($EXIT_FAILURE);
       }
+
+    $cmd=~s/http\:/https\:/g;
     
     if     (&pg_is_installed    ("wget")){$pg="wget"; $flag="-O";$arg="--tries=2 --connect-timeout=10 --no-check-certificate $wget_arg";}
     elsif  (&pg_is_installed    ("curl")){$pg="curl"; $flag="-f -o";$arg=$curl_arg;}

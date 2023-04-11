@@ -8081,14 +8081,24 @@ char* tree2msa4dpa (NT_node T, Sequence *S, int N, char *method)
 	
 static int nalncol;
 ALNcol* declare_alncol ();
+ALNcol* free_alncol ();
+
 ALNcol* declare_alncol ()
 {
-  static int n;
+  static int n, a;
   ALNcol *p=(ALNcol*)vcalloc (1, sizeof (ALNcol));
-  //p->id=++n; //put this back when debugging pointers
+  p->prf=(int*)vcalloc (26, sizeof (int));
+  p->id=++n; //put this back when debugging pointers
+  p->aa=-1;
   return p;
 }
-
+ALNcol* free_alncol (ALNcol*p)
+{
+  vfree (p->prf);
+  vfree (p);
+  return NULL;
+}
+static int alncountx;
 char *kmsa2msa (KT_node K,Sequence *S, ALNcol***S2,ALNcol*start)
 {
   int a, s, c;
@@ -8140,8 +8150,11 @@ char *kmsa2msa (KT_node K,Sequence *S, ALNcol***S2,ALNcol*start)
 	      nn=0;
 	    }
 	  output_completion (stderr,s,S->nseq, 100, "Final MSA");
+
+
 	  for (c=0; c<S->len[s]; c++)
 	    {
+
 	      S2[s][c]->aa=S->seq[s][c];
 	    }
 	  fprintf (fp, ">%s\n", S->name[s]);
@@ -8243,7 +8256,361 @@ char *kmsa2msa (KT_node K,Sequence *S, ALNcol***S2,ALNcol*start)
   
   return out;
 }
+char * graph2seq(ALNcol** g, int gl);
+ALNcol * msa2graph_new (Alignment *A, Sequence *S, ALNcol***S2,ALNcol*msa,int seq);
+ALNcol * msa2graph_old (Alignment *A, Sequence *S, ALNcol***S2,ALNcol*msa,int seq);
 ALNcol * msa2graph (Alignment *A, Sequence *S, ALNcol***S2,ALNcol*msa,int seq)
+{
+  return msa2graph_new(A,S,S2,msa,seq);
+}
+void aln2msagraph(Alignment *A, ALNcol **graph,int mseq);
+int msagraph2reset(ALNcol*start);
+int  msagraph2len(ALNcol*msa);
+
+int check_msagraph_integrity (ALNcol*msa, Sequence *S, ALNcol***S2);
+int graph_align (int mode,Alignment *A,int **pos,int *lu, Sequence *S, ALNcol***S2, ALNcol**mgraph, int ms, int me,ALNcol**sgraph, int ss, int se, ALNcol**cgraph,int clen);
+ALNcol * msa2graph_new (Alignment *A, Sequence *S, ALNcol***S2,ALNcol*start,int mseq)
+{
+  //Thread msa in the child section
+  int s,sseq,c,d,r;
+  int * lu =(int*) vcalloc (A->nseq, sizeof (int));
+  int **pos=(int**)declare_int (A->nseq, A->len_aln);
+  ALNcol **sgraph, **mgraph, **cgraph, *curr;
+  int slen,mlen, clen;
+  static ALNcol *end;
+  
+  if (!A || A->len_aln==0)return start;
+
+  //prepare the lookup
+  
+  for (sseq=-1,s=0; s<A->nseq; s++)
+    {
+      lu[s]=name_is_in_hlist (A->name[s],S->name, S->nseq);    
+      if (lu[s]<0)
+	myexit (fprintf_error ( stderr, "\nSequence %s is not properly indexed  [FATAL:%s]",A->name[s], PROGRAM));
+      else if (lu[s]==mseq)
+	sseq=s;
+            
+      //mseq - master sequence in big ALN
+      //sseq - master sequence in slave
+	  
+      for (r=0,c=0; c<A->len_aln; c++)
+	{
+	  if (A->seq_al[s][c]!='-')pos[s][c]=r++;
+	  else pos[s][c]=-1;
+	}
+    }
+  
+  //The MSA is a linked list of ALNcol having the length of the full MSA
+  //S2 is a list of residues with each residue pointing to a position on MSA
+  //This way, MSA is only ONE string of Length MSA as opposed to N Strings of length MSA
+  //When A is integrated within MSA, for each column, we look for an S2 residue pointing to an ALNcol in msa.
+  //If there is none, then this is an unmatched column and a column of gaps must be inserted in the rest of the sequences
+  
+    
+  //Map new columns
+  slen=A->len_aln+2;
+  sgraph=(ALNcol**)vcalloc (slen, sizeof (ALNcol*));
+  for (c=0; c<A->len_aln; c++)
+    {
+      if (mseq==-1)             curr=(ALNcol*)declare_alncol();//this column is unlinked
+      else if (pos[sseq][c]==-1)curr=(ALNcol*)declare_alncol();//this column is unlinked
+      else                      curr=S2[mseq][pos[sseq][c]];
+
+      if (curr==NULL)curr=(ALNcol*)declare_alncol();
+      sgraph[c+1]=curr;      
+      
+      for (s=0; s< A->nseq; s++)
+	{
+	  if ((r=pos[s][c])!=-1)S2[lu[s]][r]=curr;
+	}
+    }
+  
+  aln2msagraph (A,sgraph,sseq);
+  
+  if (!start)//graph gets turned into msa by linking columns
+    {
+      //note sgraph gets turned into mgraph
+      start=sgraph[0]=declare_alncol();
+      end  =sgraph[slen-1]=declare_alncol();
+      start->aa=end->aa=-1;
+      for (c=0; c<=A->len_aln; c++)sgraph[c]->next=sgraph[c+1];
+      vfree (sgraph);
+    }
+  else
+    {
+      // all graphs start on msa, then pos0, and finish on end
+      //1: sgraph - slave built from A
+      //2: mgraph - master built from msa
+      //3: cgraph - conbined graph=sgraph+mgraph
+      
+      
+      int **sync;
+      static int compact_mode=atoigetenv ("COMPACT_4_TCOFFEE");
+      //initialize sgraph
+      sgraph[0]=start;
+      sgraph[slen-1]=end;
+      
+      //initialize mgraph
+      mlen=msagraph2len (start);
+      mgraph=(ALNcol**)vcalloc (mlen, sizeof (ALNcol*));
+      curr=start;
+      c=0;
+      while (curr){mgraph[c]=curr;curr=curr->next;c++;}
+      
+      //initialise cgraph
+      cgraph=(ALNcol**)vcalloc (mlen+slen, sizeof (ALNcol*));
+      
+      // reset mgrap and sgraph
+      //when this is done, blocks of aa==0 surreounded by aa of similar indexes will need to be aligned
+      for (c=0; c<slen; c++)sgraph[c]->aa=0;
+      for (c=0; c<mlen; c++)mgraph[c]->aa=0;
+      for (c=0; c<S->len[mseq];c++){(S2[mseq][c])->aa=c+1;}
+      start->aa=end->aa=-1;
+      
+
+      //initialize the sync table o->start, last on end;
+      //the sync table contains the coordinates of the blocks that need to be aligned
+      //m: master
+      //s: slave
+      sync=declare_int(MAX(slen,mlen),2);     
+      for (c=1; c<mlen-1; c++)if ((mgraph[c])->aa)sync[mgraph[c]->aa][0]=c;
+      sync[S->len[mseq]+1][0]=mlen-1;
+
+      for (c=1; c<slen-1; c++)if ((sgraph[c])->aa)sync[sgraph[c]->aa][1]=c;
+      sync[S->len[mseq]+1][1]=slen-1;
+
+      //do the combination into cgraph
+      for (clen=0,c=0; c<=S->len[mseq];c++)
+	{
+	  int ms=sync[c]  [0];//master start
+	  int me=sync[c+1][0];//master end
+	  int ss=sync[c]  [1];
+	  int se=sync[c+1][1];
+	  
+	  int mdelta=me-ms;
+	  int sdelta=se-ss;
+
+	  cgraph[clen++]=mgraph[ms];
+	  
+	  if (mdelta==1 && sdelta==1);
+	  else if (mdelta>1 && sdelta==1)
+	     for (d=ms+1; d<me; d++)cgraph[clen++]=mgraph[d];
+	  else if (mdelta==1 && sdelta>1)
+	     for (d=ss+1; d<se; d++)cgraph[clen++]=sgraph[d];
+	  else
+	    {
+	      clen=graph_align(compact_mode,A,pos,lu,S,S2,mgraph,ms+1,me-1,sgraph,ss+1,se-1,cgraph,clen);
+	    }
+	}
+      cgraph[clen++]=end;
+      
+      for (c=0; c<clen-1; c++)cgraph[c]->next=cgraph[c+1];
+      vfree (mgraph);vfree (sgraph); vfree(cgraph);
+    }
+ 
+  msagraph2reset(start);
+  //check_msagraph_integrity(start,S, S2);
+  return start;
+}
+void aln2msagraph(Alignment *A, ALNcol **graph,int mseq)
+{
+  //note: c=0 -> start is an empty column
+  
+  int c, s, r;
+  
+  for (c=0; c<A->len_aln; c++)
+    {
+      if (!graph[c+1])HERE ("Column %d is empty",c);
+      for (s=0; s<A->nseq; s++)
+	{
+	  r=A->seq_al[s][c];
+	  if (!is_gap(r) && s!=mseq)
+	    {
+	      graph[c+1]->prf[tolower(r)-'a']++;
+	      graph[c+1]->nres++;
+	    }
+	}
+    }
+  return;
+}
+int msagraph2naa(ALNcol*msa);
+int check_msagraph_integrity (ALNcol*msa, Sequence *S, ALNcol***S2)
+{
+  int s,c;
+  for (s=0; s<S->nseq; s++)
+    {
+      msagraph2reset(msa);
+      if (S2[s][0])
+	{
+	  for (c=0; c<S->len[s]; c++)S2[s][c]->aa=1;
+	  if (msagraph2naa(msa)!=S->len[s])
+	    {
+	      HERE ("pb - %s (%d)", S->name[s], s);
+	      exit(0);
+	    }
+	}
+    }
+  msagraph2reset(msa);
+  return 1;
+}
+int msagraph2naa(ALNcol*msa)
+{
+  int naa=0;
+  while (msa)
+    {
+      if (msa->aa!=-1)naa+=msa->aa;
+      msa=msa->next;
+    }
+  return naa;
+}
+int msagraph2reset(ALNcol*msa)
+{
+  int len=0;
+  ALNcol *start;
+  ALNcol *last;
+
+  start=msa;
+  
+  while (start){last=start;start->aa=0;start=start->next;len++;}
+  if (msa ) msa->aa=-1;
+  if (last)last->aa=-1;
+  last->aa=-1;
+  return len;
+}
+int  msagraph2len(ALNcol*msa)
+{
+  int l=0;
+  while (msa){l++;msa=msa->next;}
+  return l;
+}
+char *prf2seq (int **prf, int len);
+int graph_align (int mode,Alignment *A,int **pos,int *lu, Sequence *S, ALNcol***S2, ALNcol**mgraph, int ms, int me,ALNcol**sgraph, int ss, int se, ALNcol**cgraph,int clen)
+{
+  ALNcol *Sn, *Mn;
+  
+  if (mode==0)//concatenate
+    {
+      int c;
+      for (c=ms; c<=me; c++)cgraph[clen++]=mgraph[c];
+      for (c=ss; c<=se; c++)cgraph[clen++]=sgraph[c];
+    }
+  else if (mode>=1)//align consensus
+    {
+      int c, p;
+      Alignment *SA;
+      int ml=me-ms+1;
+      int sl=se-ss+1;
+      int **mprf, **sprf;
+      char *mseq, *sseq;
+      int mpos, spos;
+      char *method=getenv("COMMAND_4_TCOFFEE");
+      
+     
+      mprf=(int**)vcalloc (ml,sizeof (int**));
+      for (p=0,c=ms; c<=me;c++,p++)
+	mprf[p]=mgraph[c]->prf;
+      mseq=prf2seq(mprf,ml);
+      
+      
+      sprf=(int**)vcalloc (sl,sizeof (int**));
+      for (p=0,c=ss; c<=se;c++,p++)
+	sprf[p]=sgraph[c]->prf;
+      sseq=prf2seq(sprf,sl);
+
+
+      if ( mode==1)
+	{
+	  if ((SA=align_two_sequences_with_external_method (mseq, sseq, method))==NULL)
+	    SA=align_two_sequences (mseq,sseq,"blosum62mt",-10,-2, "myers_miller_pair_wise");
+	}
+      else
+	 SA=align_two_sequences (mseq,sseq,"blosum62mt",-10,-2, "myers_miller_pair_wise");
+      
+      for (c=0, mpos=0, spos=0; c<SA->len_aln; c++, clen++)
+	{
+	  
+	  int maa=SA->seq_al[0][c];
+	  int saa=SA->seq_al[1][c];
+
+	  Sn=Mn=NULL;
+	  if (maa!='-'){mpos++;Mn=mgraph[ms+mpos-1];}
+	  if (saa!='-'){spos++;Sn=sgraph[ss+spos-1];} 
+
+	  
+	  if (Sn && Mn)//merge Sn into Mn
+	    {
+	      int s, r;
+
+	      //redirect Sn nodes (in s2) to Mn 
+	      for (s=0; s<A->nseq; s++)
+		{
+		  int r=pos[s][ss-1+spos-1];
+		  if (r!=-1)S2[lu[s]][r]=Mn;
+		}
+	      //update Sn prf counts
+	      for (s=0; s<26; s++)
+		Mn->prf[s]+=Sn->prf[s];
+	      Mn->nres+=Sn->nres;
+	      free_alncol(Sn);
+	    }
+	  else if (!Mn)Mn=Sn;
+
+	  cgraph[clen]=Mn;
+
+	}
+      free_aln (SA);
+      vfree(mprf);vfree (mseq);
+      vfree(sprf);vfree (sseq);
+    }
+  
+  return clen;
+}
+char *prf2seq (int **prf, int len)
+{
+  int score, bscore, baa;
+  int c, l;
+  
+  char *seq=(char*)vcalloc (len+1,sizeof (char));
+  
+  for (c=0; c<len; c++)
+    {
+      for (l=0; l<26; l++)
+	{
+	  score=prf[c][l];
+	  if ( l==0 || score>bscore){bscore=score;baa=l+'a';}
+	}
+      seq[c]=baa;
+    }
+  seq[c]='\0';
+  return seq;
+}
+char *prf2seq_old (int **prf, int len)
+{
+  static int **matrix=read_matrice ( "pam250mt");;
+  int score, bscore, baa;
+  int c, l1, l2;
+  
+  char *seq=(char*)vcalloc (len+1,sizeof (char));
+  
+  for (c=0; c<len; c++)
+    {
+      for (l1=0; l1<26; l1++)
+	{
+	  for (score=0,l2=0; l2<26; l2++)score+=prf[c][l2]*matrix[l1][l2];
+	  if ( l1==0 || score>bscore){bscore=score;baa=l1+'a';}
+	}
+      seq[c]=baa;
+    }
+  seq[c]='\0';
+  return seq;
+}
+
+      
+  
+
+
+ALNcol * msa2graph_old (Alignment *A, Sequence *S, ALNcol***S2,ALNcol*msa,int seq)
 {
   //Thread msa in the child section
   int s, c,ir, subseq, a;
@@ -9298,7 +9665,7 @@ char *getseq4kmsa2dnd (char *seq, char *alseq, ALNcol *start, ALNcol **S2)
   return alseq;
 }
 
-ALN_node ** msa2graph (Sequence *S, Alignment *A, ALN_node**lu)
+ALN_node ** msa2graphXXX (Sequence *S, Alignment *A, ALN_node**lu)
 {
   int *cc=(int*)vcalloc (A->nseq, sizeof (int));
   ALN_node **aln;
@@ -9374,7 +9741,7 @@ ALN_node* kmsa2graph (Sequence *S,KT_node K,Alignment *A0, ALN_node **lu0, ALN_n
   if (!A0)
     {
       A0=quick_read_aln (K->msaF);
-      lu0=msa2graph (S,A0, NULL);
+      lu0=msa2graphXXX (S,A0, NULL);
       for (a=0; a<A0->nseq; a++)list[ns[0]++]=lu0[a][0];
       reset_output_completion ();
     }  
@@ -9383,7 +9750,7 @@ ALN_node* kmsa2graph (Sequence *S,KT_node K,Alignment *A0, ALN_node **lu0, ALN_n
     {
       ALN_node m, s, t;
       A1 =quick_read_aln ((K->child[a])->msaF);
-      ALN_node **lu1=msa2graph (S,A1, NULL);
+      ALN_node **lu1=msa2graphXXX (S,A1, NULL);
       int i0=name_is_in_list ((K->child[a])->name,A0->name, A0->nseq,MAXNAMES);
       int i1=name_is_in_list ((K->child[a])->name,A1->name, A1->nseq,MAXNAMES);
       
@@ -9446,7 +9813,7 @@ ALN_node* kmsa2graph_seq (Sequence *S,KT_node K,Alignment *A0, ALN_node **lu0, A
   if (!A0)
     {
       A0=quick_read_aln (K->msaF);
-      lu0=msa2graph (S,A0, NULL);
+      lu0=msa2graphXXX (S,A0, NULL);
       for (a=0; a<A0->nseq; a++)list[ns[0]++]=lu0[a][0];
       reset_output_completion ();
     }  
@@ -9459,7 +9826,7 @@ ALN_node* kmsa2graph_seq (Sequence *S,KT_node K,Alignment *A0, ALN_node **lu0, A
       
       ALN_node m, s, t;
       A1 =quick_read_aln ((K->child[a])->msaF);
-      ALN_node **lu1=msa2graph (S,A1, NULL);
+      ALN_node **lu1=msa2graphXXX (S,A1, NULL);
       int i0=name_is_in_list ((K->child[a])->name,A0->name, A0->nseq,MAXNAMES);
       int i1=name_is_in_list ((K->child[a])->name,A1->name, A1->nseq,MAXNAMES);
       
@@ -9949,7 +10316,7 @@ void check_seq_graph (Sequence *S, ALN_node iseq)
 
 
 unsigned long* kmsa2graph_d (Sequence *S,KT_node K,Alignment *A0, unsigned long **lu0, unsigned long *list, int *ns, int *done, int max);
-unsigned long ** msa2graph_d (Sequence *S, Alignment *A, unsigned long**lu);
+unsigned long ** msa2graph_dXXX (Sequence *S, Alignment *A, unsigned long**lu);
 int node2gap_len_d (unsigned long n);
 char *graph2cons_d (unsigned long m, int len);
 unsigned long insert_gap_in_graph_d (unsigned long start);
@@ -10027,7 +10394,7 @@ unsigned long* kmsa2graph_d (Sequence *S,KT_node K,Alignment *A0, unsigned long 
   if (!A0)
     {
       A0=quick_read_aln (K->msaF);
-      lu0=msa2graph_d (S,A0, NULL);
+      lu0=msa2graph_dXXX (S,A0, NULL);
       for (a=0; a<A0->nseq; a++)list[ns[0]++]=lu0[a][0];
     }  
   
@@ -10035,7 +10402,7 @@ unsigned long* kmsa2graph_d (Sequence *S,KT_node K,Alignment *A0, unsigned long 
     {
       unsigned long m, s, t;
       A1 =quick_read_aln ((K->child[a])->msaF);
-      unsigned long **lu1=msa2graph_d (S,A1, NULL);
+      unsigned long **lu1=msa2graph_dXXX (S,A1, NULL);
       int i0=name_is_in_list ((K->child[a])->name,A0->name, A0->nseq,MAXNAMES);
       int i1=name_is_in_list ((K->child[a])->name,A1->name, A1->nseq,MAXNAMES);
       
@@ -10087,7 +10454,7 @@ unsigned long* kmsa2graph_d (Sequence *S,KT_node K,Alignment *A0, unsigned long 
   
   return list;
 }
-unsigned long ** msa2graph_d (Sequence *S, Alignment *A, unsigned long**lu)
+unsigned long ** msa2graph_dXXX (Sequence *S, Alignment *A, unsigned long**lu)
 {
   int *cc=(int*)vcalloc (A->nseq, sizeof (int));
   unsigned long **aln;
@@ -10436,7 +10803,7 @@ ALN_node* kmsa2graph2 (Sequence *S,KT_node K,Alignment *A0, ALN_node **lu0, ALN_
   if (!A0)
     {
       A0=quick_read_aln (K->msaF);
-      lu0=msa2graph (S,A0, NULL);
+      lu0=msa2graphXXX (S,A0, NULL);
       for (a=0; a<A0->nseq; a++)list[ns[0]++]=lu0[a][0];
       reset_output_completion ();
     }  
@@ -10445,7 +10812,7 @@ ALN_node* kmsa2graph2 (Sequence *S,KT_node K,Alignment *A0, ALN_node **lu0, ALN_
     {
       ALN_node m, s, t;
       A1 =quick_read_aln ((K->child[a])->msaF);
-      ALN_node **lu1=msa2graph (S,A1, NULL);
+      ALN_node **lu1=msa2graphXXX (S,A1, NULL);
       int i0=name_is_in_list ((K->child[a])->name,A0->name, A0->nseq,MAXNAMES);
       int i1=name_is_in_list ((K->child[a])->name,A1->name, A1->nseq,MAXNAMES);
       
@@ -10488,7 +10855,7 @@ ALN_node* kmsa2graph2 (Sequence *S,KT_node K,Alignment *A0, ALN_node **lu0, ALN_
       done[0]+=1;
       //output_completion (stderr,done[0],max, 100, "Incorporating MSAs");
       insert_msa_in_msa (lu1[i1][0],lu0[i0][0]);
-      list=kmsa2graph(S,K->child[a], A1, lu1, list, ns, done, max);
+      list=kmsa2graphXXX(S,K->child[a], A1, lu1, list, ns, done, max);
       
       for (b=0; b<A1->nseq; b++)vfree(lu1[b]);
       vfree (lu1);

@@ -2216,7 +2216,7 @@ char*  is_pdb_struc ( char *iname)
   a=0;
   name[a]=csprintf ( name[a], "%s", iname);a++;
   name[a]=csprintf ( name[a], "%s.pdb", iname);a++;
-  if (getenv ("PDB_DIR"))name[a]=csprintf ( name[a], "%s/%s", getenv("PBD_DIE"),iname);a++;
+  if (getenv ("PDB_DIR"))name[a]=csprintf ( name[a], "%s/%s", getenv("PBD_DIR"),iname);a++;
   if (getenv ("PDB_DIR"))name[a]=csprintf ( name[a], "%s/%s.pdb",getenv("PDB_DIR"),iname);a++;
   if (get_cache_dir())name[a]=csprintf ( name[a], "%s/%s", get_cache_dir(),iname);a++;
   if (get_cache_dir())name[a]=csprintf ( name[a], "%s/%s.pdb", get_cache_dir(),iname);a++;

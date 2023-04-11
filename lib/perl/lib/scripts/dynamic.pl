@@ -11,7 +11,7 @@ my $VERBOSE=$ENV{VERBOSE_4_DYNAMIC};
 our $EXIT_FAILURE=1;
 our $EXIT_SUCCESS=0;
 our $LAST_COM="";
-
+our $NOEXIT=0;
 my %method;
 my $method2use;
 my $treeF;
@@ -56,6 +56,7 @@ for ($a=0; $a<=$#ARGV; $a++)
   
     elsif ($ARGV[$a] eq "-thread"){$thread=$ARGV[++$a]}
     elsif ($ARGV[$a] eq "-tcarg") {$tcarg=file2string($ARGV[++$a]);}
+    elsif ($ARGV[$a] eq "-noexit") {$NOEXIT=1;}
     else 
       {
 	add2tcenv($a++,@ARGV);
@@ -74,6 +75,7 @@ if ($tree eq "list")
     my_system ("t_coffee -other_pg seq_reformat -in $f -action +seq2dnd list ");
     $do_exit=1;
   }
+
 if ($method2use eq "list")
   {
     my %ml;
@@ -228,7 +230,26 @@ $cmethod=~s/_msa//;
 
 if ($VERBOSE){print "\n![dynamic.pl] --- cmethod == $cmethod\n";}
 
-if ($cmethod eq "tcoffee"|| $cmethod eq "t_coffee" )
+if (-e $method2use)
+     {
+    
+      my $com=file2string($method2use);
+      
+      if (!($com=~s/\$input/$infile/))
+	  {
+	      print "ERROR - provided command [$com] should specify <input> [FATAL:dynamic.pl]\n";
+	      exit ($EXIT_FAILURE);
+	  }
+      if (!($com=~s/\$output/$outfile/))
+	  {
+	      print "ERROR - provided command [$com] should specify <input> [FATAL:dynamic.pl]\n";
+	      exit ($EXIT_FAILURE);
+	  }
+            
+      my_system ($com);
+  }
+
+elsif ($cmethod eq "tcoffee"|| $cmethod eq "t_coffee" )
   {
     my_system ("t_coffee -seq $infile -outfile $outfile -output fasta_aln $CL4tc>/dev/null  $QUIET");    
   }
@@ -242,8 +263,8 @@ elsif ($cmethod eq "clustalo")
     my_system ("clustalo -i $infile $treeFlag -o $outfile  --force $threadFlag $QUIET");
     }
 elsif ($cmethod =~/sparsecore/)
-  {
-    my_system ("mafft-sparsecore.rb -i $infile > $outfile $QUIET");
+{
+    my_system ("mafft-sparsecore.rb -i $infile -C \"--anysymbol\"> $outfile $QUIET");
   }
 elsif (($cmethod =~/mafft/))
   {
@@ -263,7 +284,7 @@ elsif (($cmethod =~/mafft/))
       {
 	$mm=~s/1/i/;
 	$retree="--retree 1 "
-      };
+      }
     
     my_system ("$mm --anysymbol $threadFlag $treeFlag $retree $infile > $outfile $QUIET");
   }
@@ -289,11 +310,18 @@ else
   }
 
 #Flush output if none provided
-if ( ! -e $outfile)
-  {
-    print "ERROR - No MSA computed - $LAST_COM -- [FATAL:dynamic.pl]\n";
-    my_exit ($CDIR,$EXIT_FAILURE);
-  }
+if ( ! -e $outfile || -s $outfile <1)
+{
+    if ($NOEXIT==0)
+      {  
+	print "ERROR - No MSA computed - $LAST_COM -- [FATAL:dynamic.pl]\n";
+	my_exit ($CDIR,$EXIT_FAILURE);
+      }
+    else
+      {
+	print "WARNING - No MSA computed - $LAST_COM -- [WARNING:dynamic.pl]\n";
+      }
+}
 elsif ( $flush)
  {
    open (F, $outfile);
@@ -310,9 +338,11 @@ if ($VERBOSE!=-1)
     while (<F>)
       {
 	my $l=$_;
-	if ( $VERBOSE || $l=~/WARNING/ || $l=~/ERROR/ || $l=~/INFORNATION/){print stderr "$l";}
+	print ("------  $l");
+	if ( $VERBOSE || $l=~/WARNING/ || $l=~/ERROR/ || $l=~/INFORMATION/){print stderr "$l";}
       }
     close (F);
+    if (-e $stderrF){unlink ($stderrF);}
   }
 
 my_exit ($CDIR,$EXIT_SUCCESS);
