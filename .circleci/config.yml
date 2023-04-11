@@ -60,6 +60,7 @@ jobs:
           ### aws s3 cp ~/tcoffee/lib/version/version_number.version s3://tcoffee-packages/$MODE/Latest/;
           ## rsync -avzr -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" ~/publish/sandbox/distributions/$MODE/$version/* ec2-user@tcoffee.org:~/Dropbox/Public/public_html/Packages/$MODE/Latest;
           aws s3 sync ~/publish/sandbox/distributions/$MODE/$version/ s3://tcoffee-packages/$MODE/Latest/ --delete;
+          aws s3 sync ~/publish/sandbox/distributions/$MODE/$version/ s3://tcoffee.org/Packages/$MODE/Latest/ --delete;
           ## rsync -avzr -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" ~/tcoffee/docs/.html/* ec2-user@tcoffee.org:~/Dropbox/Public/public_html/Projects/tcoffee/documentation/;
           aws s3 sync ~/tcoffee/docs/.html s3://tcoffee.org/Projects/tcoffee/documentation;
           #
