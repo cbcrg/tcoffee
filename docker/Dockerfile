@@ -1,7 +1,7 @@
 FROM debian:stretch
 MAINTAINER Paolo Di Tommaso <paolo.ditommaso@gmail.com>
 
-RUN  sed -i 's/security.debian.org\/debian-security/cdn-aws.deb.debian.org\/debian-security/g' /etc/apt/sources.list && \
+RUN echo "deb http://archive.debian.org/debian stretch main" > /etc/apt/sources.list && \
   apt-get update --fix-missing && \
   apt-get install -q -y bc vim procps ghostscript unzip curl wget && \
   apt-get install -q -y perl-modules libnet-ssleay-perl libcrypt-ssleay-perl libssl-dev libexpat1 libexpat1-dev liblwp-protocol-https-perl && \
@@ -21,7 +21,7 @@ RUN curl -s ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.2.28/ncbi-blas
 #
 # Add T-Coffee
 # 
-ADD tcoffee /opt/tcoffee
+# ADD tcoffee /opt/tcoffee
 
 #
 # Environment 
