@@ -1,10 +1,11 @@
-FROM debian:buster
+FROM debian:stretch
 MAINTAINER Paolo Di Tommaso <paolo.ditommaso@gmail.com>
 
-RUN apt-get update --fix-missing && \
+RUN  sed -i 's/security.debian.org\/debian-security/cdn-aws.deb.debian.org\/debian-security/g' /etc/apt/sources.list && \
+  apt-get update --fix-missing && \
   apt-get install -q -y bc vim procps ghostscript unzip curl wget && \
   apt-get install -q -y perl-modules libnet-ssleay-perl libcrypt-ssleay-perl libssl-dev libexpat1 libexpat1-dev liblwp-protocol-https-perl && \
-  apt-get install -q -y libgfortran4 libglib2.0-0 libgomp1 && \
+  apt-get install -q -y libgfortran3 libglib2.0-0 libgomp1 && \
   apt-get clean  
   
 RUN mkdir -p /root
