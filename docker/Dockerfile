@@ -1,4 +1,4 @@
-FROM debian:stretch
+FROM debian:buster
 MAINTAINER Paolo Di Tommaso <paolo.ditommaso@gmail.com>
 
 RUN apt-get update --fix-missing && \
