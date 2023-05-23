@@ -1241,7 +1241,7 @@ sub get_unrealeased_file
 	  }
 	else
 	  {
-	    add_warning($$,$$,"UNREALEASED_FILE must be set to the location of your unrealeased.xml file as downloaded from https://ftp.rcsb.org/pub/pdb/holdings/unreleased_entries.json.gz when using NO_REMOTE_PDB_DIR=1");
+	    add_warning($$,$$,"UNREALEASED_FILE must be set to the location of your unreleased_entries.json.gz file as downloaded from https://ftp.rcsb.org/pub/pdb/holdings/unreleased_entries.json.gz when using NO_REMOTE_PDB_DIR=1");
 	    return "";
 	  }
       }
