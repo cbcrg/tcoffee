@@ -73,7 +73,7 @@ jobs:
           #
           #Publish the various distribution files into archives
           ## ssh ec2-user@tcoffee.org "cp -r ~/Dropbox/Public/public_html/Packages/$MODE/Latest/* ~/Dropbox/Public/public_html/Packages/Archives";
-          aws s3 cp s3://tcoffee-packages/$MODE/Latest/ s3://tcoffee.org/test_delete_me/Packages/Archives/ --recursive;
+          aws s3 cp s3://tcoffee.org/test_delete_me/Packages/$MODE/Latest/ s3://tcoffee.org/test_delete_me/Packages/Archives/ --recursive;
           #
           # tag and push latest  
           docker login -u $DOCKER_USER -p $DOCKER_PASS
