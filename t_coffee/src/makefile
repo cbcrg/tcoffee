@@ -25,7 +25,7 @@ m='undocumented beta release tested with $(type) tests'
 # variable named 'SANDBOX', otherwise fallback on the defult mechanism
 #
 ifndef HOME2
-HOME2=$(HOME)/Dropbox
+HOME2=$(HOME)/DELETE_ME/makefile_test_release
 endif
 #### These paths related to the publishing on the production machine: they can stay relative
 WEB_DIR=$(HOME2)/dropBoxShared/Work/tcoffee.org/public_html/
