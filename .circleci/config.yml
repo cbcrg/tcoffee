@@ -35,7 +35,7 @@ jobs:
             ## Modified
             ## rsync -avz -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" ~/publish/sandbox/test-results/index.html ec2-user@tcoffee.org:~/Dropbox/Public/public_html/Packages/tests/test-results-linux-x64-$(date +"%Y-%m-%d-%H:%M").html
             ## TODO seems like the path ~/publish/sandbox/test-results/index.html does not exists
-            # aws s3 cp ~/publish/sandbox/test-results/index.html s3://tcoffee-packages/tests/test-results-linux-x64-$(date +"%Y-%m-%d-%H:%M").html
+            aws s3 cp ~/publish/sandbox/test-results/index.html s3://tcoffee-packages/tests/test-results-linux-x64-$(date +"%Y-%m-%d-%H:%M").html
             [[ "$test_status" != 0 ]] && exit $test_status || true
             )
           no_output_timeout: 30m
