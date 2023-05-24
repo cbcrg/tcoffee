@@ -59,7 +59,7 @@ jobs:
           ### aws s3 rm s3://tcoffee-packages/Stable/Latest/ --recursive --exclude "";
           ### aws s3 cp ~/tcoffee/lib/version/version_number.version s3://tcoffee-packages/$MODE/Latest/;
           ## rsync -avzr -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" ~/publish/sandbox/distributions/$MODE/$version/* ec2-user@tcoffee.org:~/Dropbox/Public/public_html/Packages/$MODE/Latest;
-          aws s3 sync ~/publish/sandbox/distributions/$MODE/$version/ s3://tcoffee.org/test_delete_me/$MODE/Latest/ --delete;
+          aws s3 sync ~/publish/sandbox/distributions/$MODE/$version/ s3://tcoffee.org/test_delete_me/Packages/$MODE/Latest/ --delete;
           ## rsync -avzr -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" ~/tcoffee/docs/.html/* ec2-user@tcoffee.org:~/Dropbox/Public/public_html/Projects/tcoffee/documentation/;
           aws s3 sync ~/tcoffee/docs/.html s3://tcoffee.org/test_delete_me/Projects/tcoffee/documentation;
           #
@@ -73,7 +73,7 @@ jobs:
           #
           #Publish the various distribution files into archives
           ## ssh ec2-user@tcoffee.org "cp -r ~/Dropbox/Public/public_html/Packages/$MODE/Latest/* ~/Dropbox/Public/public_html/Packages/Archives";
-          aws s3 cp s3://tcoffee-packages/$MODE/Latest/ s3://tcoffee.org/test_delete_me/Archives/ --recursive;
+          aws s3 cp s3://tcoffee-packages/$MODE/Latest/ s3://tcoffee.org/test_delete_me/Packages/Archives/ --recursive;
           #
           # tag and push latest  
           docker login -u $DOCKER_USER -p $DOCKER_PASS
