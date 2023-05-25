@@ -8,7 +8,7 @@ jobs:
       # **do not edit: start
       # Variable programmatically edited by /lib/perl/scripts/read_program_version.pl when changing release number
       # /lib/perl/scripts/read_program_version.pl gets invoked by make beta|stable|major
-      - run: echo 'export RELEASE="0"' >> $BASH_ENV #UPDATE_RELEASE_STATUS
+      - run: echo 'export RELEASE="1"' >> $BASH_ENV #UPDATE_RELEASE_STATUS
       # **do not edit: end
       - run: mv ~/project ~/tcoffee
       - run: mkdir -p ~/repo 
@@ -48,8 +48,9 @@ jobs:
           #
           if [[ $RELEASE == 1 ]]; then MODE=Stable; else MODE=Beta; fi;
           version=$(cat ~/publish/sandbox/.version);
-          macosx_bversion=$(cat ~/tcoffee/binaries/macosx/version_number.version);
-          linux_bversion=$(cat ~/tcoffee/binaries/linux/version_number.version);
+          ### here is where the binaries version is populated
+          macosx_bversion=$(cat ~/tcoffee/binaries/version_number.version);
+          linux_bversion=$(cat ~/tcoffee/binaries/version_number.version);
           cp ~/tcoffee/build/web-readme.txt ~/publish/sandbox/distributions/$MODE/$version/readme.txt
           #
           # Start publishing the latest release -- make sure the receiving directory is not empty before deleting its content 
