@@ -424,9 +424,9 @@ release2:
 	make distribution VERSION=$(VERSION)
 	make web
 	# tags version for bioconda
-	# git tag $(VERSION)_test
-	# git commit -a -m $(m)	
-	# git push
+	git tag $(VERSION)_test
+	git commit -a -m $(m)	
+	git push
 
 # This part could be removed just maitained to upload stuff to dropbox
 web:
