@@ -99,3 +99,7 @@ jobs:
           docker tag xcoffee cbcrg/tcoffee:$version;
           docker push cbcrg/tcoffee:$version;
           fi
+    filters:
+      tags:
+      only:
+        - /^V.*/
