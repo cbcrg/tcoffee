@@ -74,7 +74,7 @@ jobs:
             # this binaries are pushed to github and not created by CI, that is why they are not in ~/tcoffee/binaries
             aws s3 cp ~/tcoffee/binaries/macosx/t_coffee s3://tcoffee.org/test_delete_me/Packages/Binaries/tcoffee/macosx/t_coffee.$macosx_bversion;
             # distribution is also pushed to github and not created by CI
-            aws s3 cp ~/tcoffee/tarballs/macosx/T-COFFEE_distribution.tar.gz s3://tcoffee.org/test_delete_me/Packages/$MODE/Latest/;
+            aws s3 cp ~/tcoffee/tarballs/macosx/T-COFFEE_distribution_$version.tar.gz s3://tcoffee.org/test_delete_me/Packages/$MODE/Latest/;
           fi;
           #
           # Move the various distribution files into archives
