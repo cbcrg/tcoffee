@@ -423,9 +423,15 @@ release2:
 	sphinx-build -b singlehtml $(RST_DOC) $(HTML_DOC)
 	make distribution VERSION=$(VERSION)
 	make web
+
 	# tags version for bioconda
 	git tag $(VERSION)_test
-	git commit -a -m $(m)	
+	# Stage all modified files (excluding untracked files)
+	git add -u
+	# Exclude makefile (dropbox path different don't want to commit it)
+	git reset t_coffee/src/makefile
+	# Commit the staged files
+	git commit -m $(m)	
 	git push
 
 # This part could be removed just maitained to upload stuff to dropbox
