@@ -66,7 +66,7 @@ jobs:
           # Do not uncomment next line, binaries are created in a linux container, binaries are not for macosx
           # aws s3 cp ~/tcoffee/binaries/macosx/t_coffee s3://tcoffee-packages/Binaries/tcoffee/macosx/t_coffee.$macosx_bversion; # only if launched from mac
           # aws s3 cp ~/tcoffee/binaries/linux/t_coffee s3://tcoffee-packages/Binaries/tcoffee/linux/t_coffee.$version;
-          aws s3 cp ~/publish/sandbox/build/bin/linux/t_coffee s3://tcoffee.org/test_delete_me/Packages/Binaries/tcoffee/linux/t_coffee.$version;
+          aws s3 cp ~/tcoffee/docker/tcoffee/bin/linux/t_coffee s3://tcoffee.org/test_delete_me/Packages/Binaries/tcoffee/linux/t_coffee.$version;
           # Do not uncomment next line, binaries are created in a linux container, binaries are not for macosx
           # aws s3 cp ~/tcoffee/binaries/macosx/t_coffee s3://tcoffee.org/test_delete_me/Packages/Binaries/tcoffee/macosx/t_coffee.$macosx_bversion;
           if [[ $version == $macosx_bversion ]]; 
@@ -77,7 +77,7 @@ jobs:
             aws s3 cp ~/tcoffee/tarballs/macosx/T-COFFEE_distribution_$version.tar.gz s3://tcoffee.org/test_delete_me/Packages/$MODE/Latest/ --delete;
           fi;
           #
-          # Publish the various distribution files into archives
+          # Move the various distribution files into archives
           ## ssh ec2-user@tcoffee.org "cp -r ~/Dropbox/Public/public_html/Packages/$MODE/Latest/* ~/Dropbox/Public/public_html/Packages/Archives";
           aws s3 cp s3://tcoffee-packages/$MODE/Latest/ s3://tcoffee.org/test_delete_me/Packages/Archives/ --recursive;
           # Publish version in web
