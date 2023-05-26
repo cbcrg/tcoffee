@@ -22,7 +22,7 @@ m='undocumented beta release tested with $(type) tests'
 
 #
 # make it possibile to define HOME2 externally using environment
-# variable named 'SANDBOX', otherwise fallback on the defult mechanism
+# variable named 'SANDBOX', otherwise fallback on the default mechanism
 #
 ifndef HOME2
 HOME2=$(HOME)/DELETE_ME/makefile_test_release/
@@ -52,7 +52,15 @@ ifdef OPENMP
     KM_FLAGS=-fopenmp
 endif
 
-
+# Set OSNAME if not set in the environment
+OS_TYPE := $(shell uname)
+ifeq ($(OS_TYPE),Linux)
+    OSNAME := linux
+else ifeq ($(OS_TYPE),Darwin)
+    OSNAME := macosx
+else
+    $(error Unknown operating system: $(OS_TYPE))
+endif
 
 ##### These paths must be defined relatively to the src directory
 ifndef LIB_DIR
@@ -68,6 +76,10 @@ endif
 
 ifndef GIT_BIN
 GIT_BIN=$(GIT_DIR)/binaries
+endif
+
+ifndef GIT_TARBALLS
+GIT_TARBALLS=$(GIT_DIR)/tarballs/$(OSNAME)
 endif
 
 ifndef EXECUTABLE_DIR
@@ -264,6 +276,7 @@ library_distribution:
 	gzip lib.tar
 	mkdir $(DISTRIBUTIONS)
 	mv lib.tar.gz $(DISTRIBUTIONS)/lib_$(VERSION).tar.gz
+	mv lib.tar.gz $(GIT_BIN)/$(OSNAME)/
 
 empty:
 	-rm -f *.o_$(OSNAME)
@@ -356,11 +369,15 @@ packing:
 	mkdir -p $(UNTARED_DISTRIBUTIONS)	
 	mkdir -p $(DISTRIBUTIONS)
 	mkdir -p $(LATEST_DISTRIBUTIONS)
+	mkdir -p $(GIT_TARBALLS)
+	rm -rf $(GIT_TARBALLS)
+	mkdir -p $(GIT_TARBALLS)
 	mv $(DISTRIB_DIR) .
 	tar -cvf $(DISTRIBUTION_FILE).tar $(DISTRIBUTION_FILE)  
 	gzip $(DISTRIBUTION_FILE).tar
 	mv $(DISTRIBUTION_FILE)        $(UNTARED_DISTRIBUTIONS)
 	cp $(DISTRIBUTION_FILE).tar.gz $(DISTRIBUTIONS)
+	cp $(DISTRIBUTION_FILE).tar.gz $(GIT_TARBALLS)
 	mv $(DISTRIBUTION_FILE).tar.gz $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz
 
 
@@ -407,9 +424,9 @@ release2:
 	make distribution VERSION=$(VERSION)
 	make web
 	# tags version for bioconda
-	git tag $(VERSION)_test
-	git commit -a -m $(m)	
-	git push
+	# git tag $(VERSION)_test
+	# git commit -a -m $(m)	
+	# git push
 
 # This part could be removed just maitained to upload stuff to dropbox
 web:

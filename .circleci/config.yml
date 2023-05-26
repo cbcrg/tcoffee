@@ -66,13 +66,15 @@ jobs:
           # Do not uncomment next line, binaries are created in a linux container, binaries are not for macosx
           # aws s3 cp ~/tcoffee/binaries/macosx/t_coffee s3://tcoffee-packages/Binaries/tcoffee/macosx/t_coffee.$macosx_bversion; # only if launched from mac
           # aws s3 cp ~/tcoffee/binaries/linux/t_coffee s3://tcoffee-packages/Binaries/tcoffee/linux/t_coffee.$version;
-          aws s3 cp ~/tcoffee/binaries/linux/t_coffee s3://tcoffee.org/test_delete_me/Packages/Binaries/tcoffee/linux/t_coffee.$version;
+          aws s3 cp ~/publish/sandbox/build/bin/linux/t_coffee s3://tcoffee.org/test_delete_me/Packages/Binaries/tcoffee/linux/t_coffee.$version;
           # Do not uncomment next line, binaries are created in a linux container, binaries are not for macosx
           # aws s3 cp ~/tcoffee/binaries/macosx/t_coffee s3://tcoffee.org/test_delete_me/Packages/Binaries/tcoffee/macosx/t_coffee.$macosx_bversion;
           if [[ $version == $macosx_bversion ]]; 
           then
-            # this binaries are push to github and not created by CI, that is why they are not in ~/tcoffee/binaries
-            aws s3 cp ~/binaries/macosx/t_coffee s3://tcoffee.org/test_delete_me/Packages/Binaries/tcoffee/macosx/t_coffee.$macosx_bversion;
+            # this binaries are pushed to github and not created by CI, that is why they are not in ~/tcoffee/binaries
+            aws s3 cp ~/tcoffee/binaries/macosx/t_coffee s3://tcoffee.org/test_delete_me/Packages/Binaries/tcoffee/macosx/t_coffee.$macosx_bversion;
+            # distribution is also pushed to github and not created by CI
+            aws s3 cp ~/tcoffee/tarballs/macosx/T-COFFEE_distribution_$version.tar.gz s3://tcoffee.org/test_delete_me/Packages/$MODE/Latest/ --delete;
           fi;
           #
           # Publish the various distribution files into archives
