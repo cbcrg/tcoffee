@@ -25,7 +25,7 @@ m='undocumented beta release tested with $(type) tests'
 # variable named 'SANDBOX', otherwise fallback on the default mechanism
 #
 ifndef HOME2
-HOME2=$(HOME)/DELETE_ME/makefile_test_release/
+HOME2=$(HOME)/Dropbox
 endif
 #### These paths related to the publishing on the production machine: they can stay relative
 WEB_DIR=$(HOME2)/dropBoxShared/Work/tcoffee.org/public_html/
@@ -430,11 +430,11 @@ release2:
 
 # This part could be removed just maitained to upload stuff to dropbox
 web:
-	# Docs are published buy CI
+	# Docs are published by CI using the build there
 	rm -f $(WEB_DOC)/*.html
 	cp -r $(HTML_DOC)/* $(WEB_DOC)
 	
-	# Binaries are published by CI
+	# Mac Binaries are published by CI using the binaries produced here and pushed to github
 	cp $(EXECUTABLE_DIR)/$(EXECUTABLE) $(WEB_BIN_DIR)/$(EXECUTABLE).$(VERSION);
 	
 	# Distribution are archived in CI from latest to archives in each release
