@@ -107,6 +107,15 @@ ifndef CIRCLECI_CONFIG
 CIRCLECI_CONFIG=$(GIT_DIR)/.circleci/config.yml
 endif
 
+OS_TYPE := $(shell uname)
+ifeq ($(OS_TYPE),Linux)
+    OSNAME := linux
+else ifeq ($(OS_TYPE),Darwin)
+    OSNAME := macosx
+else
+    $(error Unknown operating system: $(OS_TYPE))
+endif
+
 PERL_LIB_DIR=$(LIB_DIR)/perl/lib
 KO_LIB=$(LIB_DIR)/data_headers
 
@@ -397,14 +406,18 @@ release2:
 	sphinx-build -b singlehtml $(RST_DOC) $(HTML_DOC)
 	make distribution VERSION=$(VERSION)
 	make web
+	# tags version for bioconda
+	git tag $(VERSION)_test
 	git commit -a -m $(m)	
 	git push
 
+# This part could be removed just maitained to upload stuff to dropbox
 web:
 	# Docs are published buy CI
 	rm -f $(WEB_DOC)/*.html
 	cp -r $(HTML_DOC)/* $(WEB_DOC)
 	
+	# Binaries are published by CI
 	cp $(EXECUTABLE_DIR)/$(EXECUTABLE) $(WEB_BIN_DIR)/$(EXECUTABLE).$(VERSION);
 	
 	# Distribution are archived in CI from latest to archives in each release
