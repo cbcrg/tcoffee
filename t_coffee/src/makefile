@@ -246,6 +246,7 @@ general_distribution:
 	cp $(EXECUTABLE) $(DISTRIB_DIR)/bin/$(OSNAME)
 	cp $(EXECUTABLE) $(GIT_BIN)/$(OSNAME)/$(EXECUTABLE)
 	cp $(VERSION_F) $(GIT_BIN)
+	cp $(VERSION_F) $(GIT_BIN)/$(OSNAME)
 	make -i VERSION=$(VERSION) CC=cc license
 
 library_distribution:
