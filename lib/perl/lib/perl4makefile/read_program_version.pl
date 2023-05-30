@@ -60,14 +60,14 @@ if (!-e $major_versionF){print STDERR "major_version File [$major_versionF] coul
 if (($cl=~/-beta/))
   {
     increase ($build_versionF, 1);
-    if ($ENV{'TC_MASTER_NODE'}){system ("git branch -v  >$githubF");}
+    if ($ENV{'TC_MASTER_NODE'}){system ("git rev-parse --short master  >$githubF");}
     circleci2releaseV($circleciF, "0");
   }
 elsif ( ($cl=~/-stable/))
   {
     value2file(0, $build_versionF);
     increase   ($minor_versionF, 1);
-    if ($ENV{'TC_MASTER_NODE'}){system ("git branch -v  >$githubF");}
+    if ($ENV{'TC_MASTER_NODE'}){system ("git rev-parse --short master  >$githubF");}
     circleci2releaseV($circleciF, "1");
   }
 elsif ( ($cl=~/-major/))
@@ -75,7 +75,7 @@ elsif ( ($cl=~/-major/))
     value2file(0, $build_versionF);
     value2file(0, $minor_versionF);
     increase   ($major_versionF, 1);
-    if ($ENV{'TC_MASTER_NODE'}){system ("git branch -v  >$githubF");}
+    if ($ENV{'TC_MASTER_NODE'}){system ("git rev-parse --short master  >$githubF");}
     circleci2releaseV($circleciF, "1");
   }
 
@@ -113,11 +113,8 @@ sub github_file2value
       while (<F>)
 	{
 	  my $l=$_;
-	  chomp $l;
-	  if ($l=~/\* master (\w+) .*/)
-	    {
-	      $value=$1;
-	    }
+	  chomp ($l);
+    $value=$l;
 	  close (F);
 	  return $value;
 	}
