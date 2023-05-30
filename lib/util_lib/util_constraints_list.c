@@ -1831,8 +1831,12 @@ Constraint_list *add_entry2list2 (CLIST_TYPE *entry, Constraint_list *CL)
   else
     {
       i=get_entry_index(entry,CL);
+      
       if (i<0)insert_entry (entry,CL,-i);
-      else update_entry (entry, CL, i);
+      else
+	{
+	  update_entry (entry, CL, i);
+	}
     }
   
   return CL;
@@ -1993,7 +1997,10 @@ Constraint_list *update_entry (CLIST_TYPE *entry, Constraint_list *CL, int i)
 
   CL->residue_index[s1][r1][i+SEQ2]=entry[SEQ2];
   CL->residue_index[s1][r1][i+R2]  =entry[R2];
+  //HERE ("UPDATE %d %d", entry[WE],CL->residue_index[s1][r1][i+WE]);
   CL->residue_index[s1][r1][i+WE]  =MAX(entry[WE],CL->residue_index[s1][r1][i+WE]);
+  //HERE ("--->%d UPDATED",CL->residue_index[s1][r1][i+WE]);
+  
   CL->residue_index[s1][r1][i+CONS]+=entry[CONS];
   CL->residue_index[s1][r1][i+MISC]=entry[MISC];
   return CL;
@@ -2278,6 +2285,7 @@ Constraint_list* fork_read_n_constraint_list(char **fname,int n_list, char *in_m
 	{
 		int pid;
 		ns++;
+		HERE ("ns=%d", ns);
 		pid=vvfork (NULL);
 		if ( pid==0)
 		{
@@ -2288,48 +2296,51 @@ Constraint_list* fork_read_n_constraint_list(char **fname,int n_list, char *in_m
 			
 			CL=read_constraint_list (CL, fname[a], in_mode, mem_mode,weight_mode);
 			
-			if (CL->ne>in)dump_constraint_list(CL,tmp_list[a], "w");
+			//if (CL->ne>in)dump_constraint_list(CL,tmp_list[a], "w");-- This was causing an issue when the libraries had identical side
+			dump_constraint_list(CL,tmp_list[a], "w");
 			myexit (EXIT_SUCCESS);
 		}
 		else
-		{
-			//set_pid (pid);
-			fprintf ( local_stderr, "\n\t--- Process Method/Library/Aln %s", fname[a], ns);
-			proclist[pid]=a;
-			if (ns>=nproc)
-			{
-				b=proclist[vwait(NULL)];
-				fprintf (local_stderr, "\n\txxx Retrieved %s",fname[a]);
-				
-				if (tmp_list[b] && check_file_exists (tmp_list[b]))
-				{
-					CL=undump_constraint_list(CL,tmp_list[b]);
-				}
-				ns--;
-			}
+		  {
+		    //set_pid (pid);
+		    fprintf ( local_stderr, "\n\t--- Process Method/Library/Aln %s", fname[a], ns);
+		    proclist[pid]=a;
+		    if (ns>=nproc)
+		      {
+			int pid2=vwait (NULL);
+			b=proclist[pid2];
+			fprintf (local_stderr, "\n\txxx Retrieved %s",fname[b]);
+			
+			if (tmp_list[b] && check_file_exists (tmp_list[b]))
+			  {
+			    CL=undump_constraint_list(CL,tmp_list[b]);
+			  }
+
+			ns--;
+		      }
 		}
 	}
 
+	
 	while (ns)
-	{
-		int pid2;
-		pid2=vwait(NULL);
-		a=proclist[pid2];
-		fprintf (local_stderr, "\n\txxx Retrieved %s",fname[a]);
-		if (tmp_list[a] && check_file_exists (tmp_list[a]))
-		  {
-		    
-		    CL=undump_constraint_list (CL,tmp_list[a]);
-		}
-		ns--;
-	}
+	  {
+	    int pid2;
+	    pid2=vwait(NULL);
+	    a=proclist[pid2];
+	    fprintf (local_stderr, "\n\txxx Retrieved %s",fname[a]);
+	    if (tmp_list[a] && check_file_exists (tmp_list[a]))
+	      {
+		CL=undump_constraint_list (CL,tmp_list[a]);
+	      }
+	    ns--;
+	  }
+	
 	fprintf ( local_stderr, "\n\n\tAll Methods Retrieved\n");
 
-	if (tmp_list[n_list] && check_file_exists (tmp_list[n_list]))
+	if (tmp_list[n_list] && check_file_exists (tmp_list[n_list-1]))
 	{
 		CL=undump_constraint_list(CL,tmp_list[n_list]);
 	}
-	
 	CL->local_stderr=local_stderr;
 
 	vfree (proclist);
@@ -2861,9 +2872,8 @@ Constraint_list *read_constraint_list_file(Constraint_list *CL, char *fname)
     }
   
   index=fix_seq_seq (NS, CL->S);
-  
-  
 
+  
   entry=(int*)vcalloc ( CL->entry_len+1, sizeof (int));
   
   
@@ -2935,6 +2945,7 @@ Constraint_list *read_constraint_list_file(Constraint_list *CL, char *fname)
 		    {
 		      int ine=CL->ne;
 		      int id=d;
+      
 		      add_entry2list (entry, CL);
 		      d++;
 		    }
