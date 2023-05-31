@@ -24,8 +24,6 @@ jobs:
       - run: sudo chown -R $(id -u):$(id -g) ~/repo ~/publish
   # tests and publish htmls
   test:
-    requires:
-      - build
     machine:
       image: ubuntu-2004:202201-02
     steps:
@@ -49,8 +47,6 @@ jobs:
 
   # publish artifacts
   publish:
-    requires:
-      - test
     machine:
       image: ubuntu-2004:202201-02
     steps:
@@ -94,8 +90,6 @@ jobs:
 
   # tag and push latest
   push_image:
-    requires:
-      - publish
     machine:
       image: ubuntu-2004:202201-02
     steps:
@@ -122,6 +116,13 @@ workflows:
   build_test_publish:
     jobs:
       - build
-      - test
-      - publish
-      # - push_image
+      - test:
+          requires:
+            - build
+      - publish:
+          requires:
+            - test
+      # - push_image:
+      #     requires:
+      #       - publish
+      
