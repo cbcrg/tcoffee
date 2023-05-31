@@ -25,7 +25,7 @@ jobs:
       - persist_to_workspace:
           root: .
           paths:
-            - ~/publish
+            - /publish
   # tests and publish htmls
   test:
     machine:
@@ -58,7 +58,7 @@ jobs:
     steps:
     - checkout
     - attach_workspace:
-        at: .
+          at: .
     - run: |
         #
         # This section will publish onto the websites the various elements produced by "make distribution"
