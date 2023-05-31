@@ -93,7 +93,7 @@ jobs:
         #
 
   # tag and push latest
-  docker:
+  push_image:
     requires:
       - publish
     machine:
@@ -124,4 +124,4 @@ workflows:
       - build
       - test
       - publish
-      # - docker
+      # - push_image
