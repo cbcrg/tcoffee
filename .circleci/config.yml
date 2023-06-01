@@ -137,6 +137,7 @@ workflows:
       - push_image:
           requires:
             - publish
-          tags:
-            only:
-            - /^V.*/
+          filters:
+            tags:
+              only:
+                - /^V.*/
