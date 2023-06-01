@@ -25,7 +25,8 @@ jobs:
       - persist_to_workspace:
           root: /home/circleci
           paths:
-            - publish/
+            - publish
+            - tcoffee
   # tests and publish htmls
   test:
     machine:
