@@ -23,7 +23,7 @@ jobs:
           bash -c 'tcoffee/build/build.sh env tcoffee; mv /root/sandbox /publish'
       - run: sudo chown -R $(id -u):$(id -g) ~/repo ~/publish
       - persist_to_workspace:
-          root: .
+          root: /home/circleci
           paths:
             - publish/
   # tests and publish htmls
@@ -33,7 +33,7 @@ jobs:
     steps:
     - checkout
     - attach_workspace:
-        at: .
+        at: /home/circleci
     - run:
         command: |
           mv ~/publish/sandbox/build ~/tcoffee/docker/tcoffee
@@ -58,7 +58,7 @@ jobs:
     steps:
     - checkout
     - attach_workspace:
-          at: .
+          at: /home/circleci
     - run: |
         #
         # This section will publish onto the websites the various elements produced by "make distribution"
