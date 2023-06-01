@@ -110,7 +110,7 @@ jobs:
         at: /home/circleci
     - checkout
     - run: |
-        docker load -i xcoffee.tar
+        docker load -i ~/xcoffee.tar
         docker login -u $DOCKER_USER -p $DOCKER_PASS
         docker tag xcoffee cbcrg/tcoffee:latest;
         docker push cbcrg/tcoffee:latest;
