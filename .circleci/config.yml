@@ -149,3 +149,5 @@ workflows:
             tags:
               only:
                 - /^V.*/
+            branches:
+              ignore: /.*/
