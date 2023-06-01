@@ -425,14 +425,14 @@ release2:
 	make web
 
 	# tags version for bioconda
-	git tag $(VERSION)_test
+	git tag $(VERSION)
 	# Stage all modified files (excluding untracked files)
 	git add -u
 	# Exclude makefile (dropbox path different don't want to commit it)
 	git reset t_coffee/src/makefile
 	# Commit the staged files
-	git commit -m $(m)	
-	git push
+	git commit -m $(m)
+	git push --tags
 
 # This part could be removed just maitained to upload stuff to dropbox
 web:
