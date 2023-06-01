@@ -130,7 +130,13 @@ workflows:
       - publish:
           requires:
             - test
-      # - push_image:
-      #     requires:
-      #       - publish
-      
+          filters:
+            tags:
+              only:
+                - /^V.*/
+      - push_image:
+          requires:
+            - publish
+          tags:
+            only:
+            - /^V.*/
