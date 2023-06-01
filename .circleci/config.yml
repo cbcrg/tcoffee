@@ -50,7 +50,12 @@ jobs:
           # aws s3 cp ~/publish/sandbox/test-results/index.html s3://tcoffee-packages/tests/test-results-linux-x64-$(date +"%Y-%m-%d-%H:%M").html
           [[ "$test_status" != 0 ]] && exit $test_status || true
           )
+          cd ~/ && docker save -o xcoffee.tar xcoffee
         no_output_timeout: 30m
+    - persist_to_workspace:
+        root: /home/circleci
+        paths: 
+          - xcoffee.tar
 
   # publish artifacts
   publish:
@@ -58,7 +63,7 @@ jobs:
       image: ubuntu-2004:202201-02
     steps:
     - attach_workspace:
-          at: /home/circleci
+        at: /home/circleci
     - run: |
         #
         # This section will publish onto the websites the various elements produced by "make distribution"
@@ -101,8 +106,11 @@ jobs:
     machine:
       image: ubuntu-2004:202201-02
     steps:
+    - attach_workspace:
+        at: /home/circleci
     - checkout
     - run: |
+        docker load -i xcoffee.tar
         docker login -u $DOCKER_USER -p $DOCKER_PASS
         docker tag xcoffee cbcrg/tcoffee:latest;
         docker push cbcrg/tcoffee:latest;
