@@ -31,6 +31,7 @@ jobs:
     machine:
       image: ubuntu-2004:202201-02
     steps:
+    - checkout
     - attach_workspace:
         at: /home/circleci
     - run:
