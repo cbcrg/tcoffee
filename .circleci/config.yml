@@ -142,6 +142,8 @@ workflows:
             tags:
               only:
                 - /^V.*/
+            branches:
+              ignore: /.*/
       - push_image:
           requires:
             - publish
