@@ -82,23 +82,23 @@ jobs:
         ### aws s3 rm s3://tcoffee-packages/Stable/Latest/ --recursive --exclude "";
         ### aws s3 cp ~/tcoffee/lib/version/version_number.version s3://tcoffee-packages/$MODE/Latest/;
         ## rsync -avzr -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" ~/publish/sandbox/distributions/$MODE/$version/* ec2-user@tcoffee.org:~/Dropbox/Public/public_html/Packages/$MODE/Latest;
-        # aws s3 sync ~/publish/sandbox/distributions/$MODE/$version/ s3://tcoffee-packages/$MODE/Latest/ --delete;
-        # aws s3 sync ~/publish/sandbox/distributions/$MODE/$version/ s3://tcoffee.org/Packages/$MODE/Latest/ --delete;
+        aws s3 sync ~/publish/sandbox/distributions/$MODE/$version/ s3://tcoffee-packages/$MODE/Latest/ --delete;
+        aws s3 sync ~/publish/sandbox/distributions/$MODE/$version/ s3://tcoffee.org/Packages/$MODE/Latest/ --delete;
         ## rsync -avzr -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" ~/tcoffee/docs/.html/* ec2-user@tcoffee.org:~/Dropbox/Public/public_html/Projects/tcoffee/documentation/;
-        # aws s3 sync ~/tcoffee/docs/.html s3://tcoffee.org/Projects/tcoffee/documentation;
+        aws s3 sync ~/tcoffee/docs/.html s3://tcoffee.org/Projects/tcoffee/documentation;
         #
         #Published binaries into the binary dir -- in case the macosx is available, publish it as well -- This will be the case when the release is launched from a mac
         ## rsync -avzr -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" ~/tcoffee/binaries/macosx/t_coffee ec2-user@tcoffee.org:~/Dropbox/Public/public_html/Packages/Binaries/tcoffee/macosx/t_coffee.$macosx_bversion;
         ## rsync -avzr -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" ~/tcoffee/binaries/linux/t_coffee ec2-user@tcoffee.org:~/Dropbox/Public/public_html/Packages/Binaries/tcoffee/linux/t_coffee.$linux_bversion;
-        # aws s3 cp ~/tcoffee/binaries/macosx/t_coffee s3://tcoffee-packages/Binaries/tcoffee/macosx/t_coffee.$macosx_bversion; # only if launched from mac
-        # aws s3 cp ~/tcoffee/binaries/linux/t_coffee s3://tcoffee-packages/Binaries/tcoffee/linux/t_coffee.$linux_bversion;
-        # aws s3 cp ~/tcoffee/binaries/macosx/t_coffee s3://tcoffee.org/Binaries/tcoffee/macosx/t_coffee.$macosx_bversion; # only if launched from mac
-        # aws s3 cp ~/tcoffee/binaries/linux/t_coffee s3://tcoffee.org/Packages/Binaries/tcoffee/linux/t_coffee.$linux_bversion;
-        # aws s3 cp ~/tcoffee/binaries/macosx/t_coffee s3://tcoffee.org/Packages/Binaries/tcoffee/macosx/t_coffee.$macosx_bversion; # only if launched from mac
+        aws s3 cp ~/tcoffee/binaries/macosx/t_coffee s3://tcoffee-packages/Binaries/tcoffee/macosx/t_coffee.$macosx_bversion; # only if launched from mac
+        aws s3 cp ~/tcoffee/binaries/linux/t_coffee s3://tcoffee-packages/Binaries/tcoffee/linux/t_coffee.$linux_bversion;
+        aws s3 cp ~/tcoffee/binaries/macosx/t_coffee s3://tcoffee.org/Binaries/tcoffee/macosx/t_coffee.$macosx_bversion; # only if launched from mac
+        aws s3 cp ~/tcoffee/binaries/linux/t_coffee s3://tcoffee.org/Packages/Binaries/tcoffee/linux/t_coffee.$linux_bversion;
+        aws s3 cp ~/tcoffee/binaries/macosx/t_coffee s3://tcoffee.org/Packages/Binaries/tcoffee/macosx/t_coffee.$macosx_bversion; # only if launched from mac
         #
         #Publish the various distribution files into archives
         ## ssh ec2-user@tcoffee.org "cp -r ~/Dropbox/Public/public_html/Packages/$MODE/Latest/* ~/Dropbox/Public/public_html/Packages/Archives";
-        # aws s3 cp s3://tcoffee-packages/$MODE/Latest/ s3://tcoffee-packages/Archives/ --recursive;
+        aws s3 cp s3://tcoffee-packages/$MODE/Latest/ s3://tcoffee-packages/Archives/ --recursive;
         #
 
   # tag and push docker latest
