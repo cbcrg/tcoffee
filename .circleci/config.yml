@@ -27,7 +27,7 @@ jobs:
           paths:
             - publish
             - tcoffee
-  # tests and publish htmls
+  # tests and publish test htmls
   test:
     machine:
       image: ubuntu-2004:202201-02
