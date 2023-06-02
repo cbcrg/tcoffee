@@ -132,18 +132,10 @@ jobs:
 workflows:
   build_test_publish:
     jobs:
-      - build:
-          # required since `publish` has tag filters AND requires `build`
-          filters:
-            branches:
-              ignore: /.*/
+      - build
       - test:
           requires:
             - build
-          # required since `publish` has tag filters AND requires `test`
-          filters:
-            branches:
-              ignore: /.*/
       - publish:
           requires:
             - test
