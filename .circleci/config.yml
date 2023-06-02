@@ -101,7 +101,7 @@ jobs:
         # aws s3 cp s3://tcoffee-packages/$MODE/Latest/ s3://tcoffee-packages/Archives/ --recursive;
         #
 
-  # tag and push latest
+  # tag and push docker latest
   push_image:
     machine:
       image: ubuntu-2004:202201-02
