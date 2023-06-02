@@ -135,34 +135,28 @@ workflows:
       - build:
           # required since `publish` has tag filters AND requires `build`
           filters:
-            tags:
-              only: /.*/
+            branches:
+              ignore: /.*/
       - test:
           requires:
             - build
           # required since `publish` has tag filters AND requires `test`
           filters:
-            tags:
-              only: /.*/
+            branches:
+              ignore: /.*/
       - publish:
           requires:
             - test
           filters:
+            branches:
+              ignore: /.*/
             tags:
-              only:
-                - /^V.*/
-            # branches:
-            #   ignore: /.*/
-            # branches:
-            #   only: ci_workflows/*
+              only: /^V.*/
       - push_image:
           requires:
             - publish
           filters:
+            branches:
+              ignore: /.*/
             tags:
-              only:
-                - /^V.*/
-            # branches:
-            #   ignore: /.*/
-            # branches:
-            #   only: ci_workflows/*
+              only: /^V.*/
