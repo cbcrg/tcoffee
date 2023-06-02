@@ -145,8 +145,8 @@ workflows:
                 - /^V.*/
             # branches:
             #   ignore: /.*/
-            branches:
-              only: ci_workflows/*
+            # branches:
+            #   only: ci_workflows/*
       - push_image:
           requires:
             - publish
@@ -156,5 +156,5 @@ workflows:
                 - /^V.*/
             # branches:
             #   ignore: /.*/
-            branches:
-              only: ci_workflows/*
+            # branches:
+            #   only: ci_workflows/*
