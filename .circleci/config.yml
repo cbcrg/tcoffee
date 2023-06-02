@@ -132,24 +132,29 @@ jobs:
 workflows:
   build_test_publish:
     jobs:
-      - build
+      - build:
+          filters:
+            tags:
+              only: /.*/
       - test:
           requires:
             - build
-      # branches filter is needed
+          filters:
+            tags:
+              only: /.*/
       - publish:
           requires:
             - test
           filters:
-            branches:
-              ignore: /.*/
             tags:
               only: /^V.*/
+            branches:
+              ignore: /.*/
       - push_image:
           requires:
             - publish
           filters:
-            branches:
-              ignore: /.*/
             tags:
               only: /^V.*/
+            branches:
+              ignore: /.*/
