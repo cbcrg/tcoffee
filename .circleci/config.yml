@@ -128,7 +128,8 @@ jobs:
         docker tag xcoffee cbcrg/tcoffee:$version;
         docker push cbcrg/tcoffee:$version;
         fi
-# Workflow declaration
+# Workflow declaration 
+# (https://stackoverflow.com/questions/66689847/executing-a-circleci-job-only-when-tag-matches-a-certain-pattern)
 workflows:
   build_test_publish:
     jobs:
