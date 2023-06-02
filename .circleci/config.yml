@@ -132,10 +132,16 @@ jobs:
 workflows:
   build_test_publish:
     jobs:
-      - build
+      - build:
+          filters:
+            tags:
+              only: /.*/
       - test:
           requires:
             - build
+          filters:
+            tags:
+              only: /.*/
       - publish:
           requires:
             - test
