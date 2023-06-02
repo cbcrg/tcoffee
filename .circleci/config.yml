@@ -131,7 +131,7 @@ jobs:
 
 # Workflow declaration 
 # See here (https://stackoverflow.com/questions/66689847/executing-a-circleci-job-only-when-tag-matches-a-certain-pattern)
-# another example https://goreleaser.com/ci/circle/
+# Another example https://goreleaser.com/ci/circle/
 workflows:
   build_test_publish:
     jobs:
