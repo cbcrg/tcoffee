@@ -133,12 +133,14 @@ workflows:
   build_test_publish:
     jobs:
       - build:
+          # required since `publish` has tag filters AND requires `build`
           filters:
             tags:
               only: /.*/
       - test:
           requires:
             - build
+          # required since `publish` has tag filters AND requires `test`
           filters:
             tags:
               only: /.*/
