@@ -128,8 +128,10 @@ jobs:
         docker tag xcoffee cbcrg/tcoffee:$version;
         docker push cbcrg/tcoffee:$version;
         fi
+
 # Workflow declaration 
 # See here (https://stackoverflow.com/questions/66689847/executing-a-circleci-job-only-when-tag-matches-a-certain-pattern)
+# another example https://goreleaser.com/ci/circle/
 workflows:
   build_test_publish:
     jobs:
@@ -147,15 +149,15 @@ workflows:
           requires:
             - test
           filters:
-            tags:
-              only: /^V.*/
             branches:
               ignore: /.*/
+            tags:
+              only: /^V.*/
       - push_image:
           requires:
             - publish
           filters:
-            tags:
-              only: /^V.*/
             branches:
               ignore: /.*/
+            tags:
+              only: /^V.*/
