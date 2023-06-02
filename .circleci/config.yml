@@ -143,8 +143,10 @@ workflows:
             tags:
               only:
                 - /^V.*/
+            # branches:
+            #   ignore: /.*/
             branches:
-              ignore: /.*/
+              only: ci_workflows/*
       - push_image:
           requires:
             - publish
@@ -152,5 +154,7 @@ workflows:
             tags:
               only:
                 - /^V.*/
+            # branches:
+            #   ignore: /.*/
             branches:
-              ignore: /.*/
+              only: ci_workflows/*
