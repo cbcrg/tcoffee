@@ -432,7 +432,7 @@ release2:
 	git reset t_coffee/src/makefile
 	# Commit the staged files
 	git commit -m $(m)
-	git push --tags
+	git push --follow-tags
 
 # This part could be removed just maitained to upload stuff to dropbox
 web:
