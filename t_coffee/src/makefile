@@ -429,7 +429,7 @@ release2:
 	# Stage all modified files (excluding untracked files)
 	git add -u
 	# Exclude makefile (dropbox path different don't want to commit it)
-	git reset t_coffee/src/makefile
+	git reset ../src/makefile
 	# Commit the staged files
 	git commit -m $(m)
 	git push --follow-tags
