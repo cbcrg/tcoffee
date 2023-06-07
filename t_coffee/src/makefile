@@ -424,31 +424,31 @@ release2:
 	make distribution VERSION=$(VERSION)
 	make web
 
-	# tags version for bioconda
-	git tag $(VERSION)
 	# Stage all modified files (excluding untracked files)
 	git add -u
 	# Exclude makefile (dropbox path different don't want to commit it)
 	git reset ../src/makefile
 	# Commit the staged files
-	git commit -m $(m)
+	git commit -m $(m) version $(VERSION)
+	# tags version for bioconda
+	git tag -a $(VERSION) -m $(VERSION)
 	git push --follow-tags
 
 # This part could be removed just maitained to upload stuff to dropbox
 web:
-	# Docs are published by CI using the build there
-	rm -f $(WEB_DOC)/*.html
-	cp -r $(HTML_DOC)/* $(WEB_DOC)
+	# # Docs are published by CI using the build there
+	# rm -f $(WEB_DOC)/*.html
+	# cp -r $(HTML_DOC)/* $(WEB_DOC)
 	
-	# Mac Binaries are published by CI using the binaries produced here and pushed to github
-	cp $(EXECUTABLE_DIR)/$(EXECUTABLE) $(WEB_BIN_DIR)/$(EXECUTABLE).$(VERSION);
+	# # Mac Binaries are published by CI using the binaries produced here and pushed to github
+	# cp $(EXECUTABLE_DIR)/$(EXECUTABLE) $(WEB_BIN_DIR)/$(EXECUTABLE).$(VERSION);
 	
-	# Distribution are archived in CI from latest to archives in each release
-	mkdir -p $(WEB_ARCHIVE_SOURCES)
-	cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(WEB_ARCHIVE_SOURCES)/$(PROGRAM)_distribution_$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print).tar.gz
+	# # Distribution are archived in CI from latest to archives in each release
+	# mkdir -p $(WEB_ARCHIVE_SOURCES)
+	# cp $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz $(WEB_ARCHIVE_SOURCES)/$(PROGRAM)_distribution_$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print).tar.gz
 	
-	# Done by CI
-	cp $(LIB_DIR)/version/version_number.version  $(WEB_DIR)/Packages/T-COFFEE.version
+	# # Done by CI
+	# cp $(LIB_DIR)/version/version_number.version  $(WEB_DIR)/Packages/T-COFFEE.version
 
 #
 # Include the main T-Coffee makefile
