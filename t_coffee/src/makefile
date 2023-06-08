@@ -432,7 +432,7 @@ release2:
 	# Exclude makefile (dropbox path different don't want to commit it)
 	git reset ../src/makefile
 	# Commit the staged files
-	git commit -m $(m) version $(VERSION)
+	git commit -m $(m)
 	# tags version for bioconda
 	git tag -a $(VERSION) -m $(VERSION)
 	git push --follow-tags
