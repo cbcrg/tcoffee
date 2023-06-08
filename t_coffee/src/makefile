@@ -16,8 +16,7 @@ SHELL := /bin/bash
 
 type=beta
 test=core
-# move below to include the version tag
-# m='undocumented beta release tested with $(type) tests'
+m=Undocumented beta release tested with $(type) tests
 
 
 
@@ -425,14 +424,12 @@ release2:
 	make distribution VERSION=$(VERSION)
 	make web
 	
-	m='Undocumented beta release tested with $(type) tests - $(VERSION)'
-
 	# Stage all modified files (excluding untracked files)
 	git add -u
 	# Exclude makefile (dropbox path different don't want to commit it)
 	git reset ../src/makefile
 	# Commit the staged files
-	git commit -m $(m)
+	git commit -m '$(m) - $(VERSION)'
 	# tags version for bioconda
 	git tag -a $(VERSION) -m $(VERSION)
 	git push --follow-tags
