@@ -70,7 +70,8 @@ jobs:
         # Note that since the distribution is usually triggered by the "git push" in "make release", the basic elements (doc, source and binary of the machine in which make release was launched) should already be published
         #
         if [[ $RELEASE == 1 ]]; then MODE=Stable; else MODE=Beta; fi;
-        version=$(cat ~/publish/sandbox/.version);
+        # version=$(cat ~/publish/sandbox/.version); # version is increased by the CI build
+        version=$(cat ~/tcoffee/lib/version/version_number.version);
         macosx_bversion=$(cat ~/tcoffee/binaries/macosx/version_number.version);
         linux_bversion=$(cat ~/tcoffee/binaries/linux/version_number.version);
         cp ~/tcoffee/build/web-readme.txt ~/publish/sandbox/distributions/$MODE/$version/readme.txt
