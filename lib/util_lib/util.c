@@ -7165,7 +7165,7 @@ char * prepare_cache ( const char *mode)
   else if ( strm (mode, "ignore") ||  strm (mode, "no"))
     {
       
-      cache=csprintf (cache,"%s/",vtmpnam(cache));
+      cache=csprintf (cache,"%s/",vtmpnam(cache));//fixed bug
       printf_system_direct ("mkdir %s",cache);
     }
   else if ( strm (mode, "update"))
