@@ -6817,6 +6817,7 @@ void set_file2remove_off()
 
 char *add2file2remove_list (char *name)
 {
+  
   if ( !tmpname || !name)ntmpname=tmpname=(Tmpname*)vcalloc ( 1, sizeof (Tmpname));
   else if (!ntmpname->name);
   else ntmpname=ntmpname->next=(Tmpname*)vcalloc ( 1, sizeof (Tmpname));
@@ -7164,9 +7165,8 @@ char * prepare_cache ( const char *mode)
   else if ( strm (mode, "ignore") ||  strm (mode, "no"))
     {
       
-      cache=csprintf ("%s/",vtmpnam(cache));
+      cache=csprintf (cache,"%s/",vtmpnam(cache));
       printf_system_direct ("mkdir %s",cache);
-
     }
   else if ( strm (mode, "update"))
     {
@@ -10167,8 +10167,20 @@ void error_exit (int exit_code)
    myexit (exit_code);
  }
 
-
-
+void display_tmpname ()
+{
+  Tmpname *start;
+  start=tmpname;
+  
+  HERE ("DISPLAY TMP NAMES");
+  while (start && start->name)
+    {
+      HERE ("%s", start->name);
+      start=start->next;
+    }
+  HERE ("FINISHED DISPLAYING TMP NAMES");
+  return;
+}
 void clean_exit ()
 {
   Tmpname *b;
@@ -10270,10 +10282,7 @@ void clean_exit ()
       return;
     }
   
-      
- 
-  
-  while ( start && start->name)
+  while (start && start->name)
     {
       
       if ( start && start->name)
