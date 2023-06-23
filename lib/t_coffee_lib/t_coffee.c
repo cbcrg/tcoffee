@@ -510,7 +510,7 @@ int batch_main ( int argc, char **argv)
 	int     display;
 	int sand_box=0;
 
-
+	HERE ("***************   This should be the debugged Version *****************");
 
 	if (sand_box==1)
 	  {
@@ -4245,6 +4245,7 @@ get_cl_param(\
 			   );
 	       if (display)set_int_variable ("display",display);
 	       
+	       
 /*******************************************************************************************************/
 /*                                                                                                     */
 /*                           TCoffee_dpa Parameter:END                                                 */
@@ -4259,8 +4260,9 @@ get_cl_param(\
 		   return EXIT_SUCCESS;
 		 }
 	       get_cl_param( argc, argv,&le, NULL,NULL,NULL,0,0,NULL);
+	      
 	       prepare_cache (cache);
-
+	       
 	       if (print_cache)
 		 {
 		   fprintf (stdout, "%s\n", get_cache_dir());
@@ -4325,7 +4327,9 @@ get_cl_param(\
 /*                                                                                                     */
 /*******************************************************************************************************/
 
+	      
 
+	      
 
 /*Re-introduce the sequences introduced with -infile*/
 /*Standard*/
@@ -4478,7 +4482,7 @@ get_cl_param(\
 			 }
 		     }
 		 }
-	      
+	       
 	       /*Check That Enough Methods/Libraries/Alignments Have been Chiped in*/
 	       
 	       if (list_file)
@@ -4522,7 +4526,7 @@ get_cl_param(\
 		 }
 	      
 /*FILL THE F STRUCTURE (Contains Information for Output names For the defaults)*/
-	     
+	      
 	       	       
 	       if (n_list==0 || argc<=1)
 		 {
@@ -4616,7 +4620,8 @@ get_cl_param(\
 			 }
 		     }
 		 }
-	       
+	      
+
 	       
 	       /*FATAL: NO SEQUENCES*/
 
@@ -5102,11 +5107,7 @@ get_cl_param(\
 	       sprintf (CL->rna_lib, "%s", rna_lib);
 
 
-
-
-
-
-
+	       
 
 	       /**
 	        * \section libcompilation Compile the Library

@@ -7084,7 +7084,10 @@ struct X_template *fill_P_template ( char *name,char *p, Sequence *S)
   sprintf (P->template_format , "pdb");
   sprintf (P->template_file, "%s",template_file);
   sprintf (P->template_name, "%s",name);
-  vfree(template_file); vfree(template_name);
+
+ 
+  //vfree(template_file);!!!! Do Not free template file: it is allocated as a temporary file
+  vfree(template_name);
   
   /*Check the target sequence is similar enough*/
 

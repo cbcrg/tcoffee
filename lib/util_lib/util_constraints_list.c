@@ -2285,7 +2285,7 @@ Constraint_list* fork_read_n_constraint_list(char **fname,int n_list, char *in_m
 	{
 		int pid;
 		ns++;
-		HERE ("ns=%d", ns);
+
 		pid=vvfork (NULL);
 		if ( pid==0)
 		{

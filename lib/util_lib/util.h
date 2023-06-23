@@ -697,7 +697,8 @@ void error_exit_sigabrt(int x);
 
 void error_exit (int);
 void clean_exit();
-
+void display_tmpname ();
+  
 void signal_exit_sigterm (int x);
 void signal_exit_sigint  (int x);
 void signal_exit_sigill (int x);
