@@ -510,7 +510,7 @@ int batch_main ( int argc, char **argv)
 	int     display;
 	int sand_box=0;
 
-
+	HERE ("***************   This should be the debugged Version *****************");
 
 	if (sand_box==1)
 	  {
@@ -4327,7 +4327,9 @@ get_cl_param(\
 /*                                                                                                     */
 /*******************************************************************************************************/
 
+	      
 
+	      
 
 /*Re-introduce the sequences introduced with -infile*/
 /*Standard*/
