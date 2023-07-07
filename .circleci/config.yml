@@ -39,7 +39,7 @@ jobs:
         at: /home/circleci
     - run:
         command: |
-          cat workspace/env-vars >> $BASH_ENV
+          cat /home/circleci/env-vars >> $BASH_ENV
           mv ~/publish/sandbox/build ~/tcoffee/docker/tcoffee
           cd ~/tcoffee/docker/ && docker build -t xcoffee .
           mkdir -p ~/publish/sandbox/test-results
@@ -54,7 +54,6 @@ jobs:
           [[ "$test_status" != 0 ]] && exit $test_status || true
           )
           cd ~/ && docker save -o xcoffee.tar xcoffee
-          echo $RELEASE > test_env_var.log
         no_output_timeout: 30m
     - persist_to_workspace:
         root: /home/circleci
@@ -74,7 +73,7 @@ jobs:
         # This section will publish onto the websites the various elements produced by "make distribution"
         # Note that since the distribution is usually triggered by the "git push" in "make release", the basic elements (doc, source and binary of the machine in which make release was launched) should already be published
         #
-        cat workspace/env-vars >> $BASH_ENV
+        cat /home/circleci/env-vars >> $BASH_ENV
         if [[ $RELEASE == 1 ]]; then MODE=Stable; else MODE=Beta; fi;
         # version=$(cat ~/publish/sandbox/.version); # version is increased by the CI build
         version=$(cat ~/tcoffee/lib/version/version_number.version);
@@ -121,7 +120,7 @@ jobs:
         at: /home/circleci
     - checkout
     - run: |
-        cat workspace/env-vars >> $BASH_ENV
+        cat /home/circleci/env-vars >> $BASH_ENV
         docker load -i ~/xcoffee.tar
         docker login -u $DOCKER_USER -p $DOCKER_PASS
         docker tag xcoffee cbcrg/tcoffee:latest;
