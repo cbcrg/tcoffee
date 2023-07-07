@@ -75,7 +75,7 @@ jobs:
         # This section will publish onto the websites the various elements produced by "make distribution"
         # Note that since the distribution is usually triggered by the "git push" in "make release", the basic elements (doc, source and binary of the machine in which make release was launched) should already be published
         #
-        cat /home/circleci/env-vars >> $BASH_ENV
+        echo $RELEASE > test.log
         if [[ $RELEASE == 1 ]]; then MODE=Stable; else MODE=Beta; fi;
         # version=$(cat ~/publish/sandbox/.version); # version is increased by the CI build
         version=$(cat ~/tcoffee/lib/version/version_number.version);
