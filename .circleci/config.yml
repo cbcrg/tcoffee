@@ -51,6 +51,7 @@ jobs:
           [[ "$test_status" != 0 ]] && exit $test_status || true
           )
           cd ~/ && docker save -o xcoffee.tar xcoffee
+          echo $RELEASE > test_env_var.log
         no_output_timeout: 30m
     - persist_to_workspace:
         root: /home/circleci
@@ -137,16 +138,19 @@ workflows:
   build_test_publish:
     jobs:
       - build:
+          context: release-context
           filters:
             tags:
               only: /.*/
       - test:
+          context: release-context
           requires:
             - build
           filters:
             tags:
               only: /.*/
       - publish:
+          context: release-context
           requires:
             - test
           filters:
@@ -155,6 +159,7 @@ workflows:
             tags:
               only: /^V.*/
       - push_image:
+          context: release-context
           requires:
             - publish
           filters:
