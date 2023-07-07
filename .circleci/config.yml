@@ -10,6 +10,7 @@ jobs:
       # /lib/perl/scripts/read_program_version.pl gets invoked by make beta|stable|major
       - run: echo 'export RELEASE="0"' >> $BASH_ENV #UPDATE_RELEASE_STATUS
       # **do not edit: end
+      - run: echo $RELEASE > /home/circleci/env-vars
       - run: mv ~/project ~/tcoffee
       - run: mkdir -p ~/repo 
       - run: docker pull cbcrg/tcoffee-build-box:1.2
@@ -27,6 +28,7 @@ jobs:
           paths:
             - publish
             - tcoffee
+            - env-vars
   # tests and publish test htmls
   test:
     machine:
@@ -37,6 +39,7 @@ jobs:
         at: /home/circleci
     - run:
         command: |
+          cat workspace/env-vars >> $BASH_ENV
           mv ~/publish/sandbox/build ~/tcoffee/docker/tcoffee
           cd ~/tcoffee/docker/ && docker build -t xcoffee .
           mkdir -p ~/publish/sandbox/test-results
@@ -57,6 +60,7 @@ jobs:
         root: /home/circleci
         paths: 
           - xcoffee.tar
+          - env-vars
 
   # publish artifacts
   publish:
@@ -70,6 +74,7 @@ jobs:
         # This section will publish onto the websites the various elements produced by "make distribution"
         # Note that since the distribution is usually triggered by the "git push" in "make release", the basic elements (doc, source and binary of the machine in which make release was launched) should already be published
         #
+        cat workspace/env-vars >> $BASH_ENV
         if [[ $RELEASE == 1 ]]; then MODE=Stable; else MODE=Beta; fi;
         # version=$(cat ~/publish/sandbox/.version); # version is increased by the CI build
         version=$(cat ~/tcoffee/lib/version/version_number.version);
@@ -102,6 +107,10 @@ jobs:
         ## ssh ec2-user@tcoffee.org "cp -r ~/Dropbox/Public/public_html/Packages/$MODE/Latest/* ~/Dropbox/Public/public_html/Packages/Archives";
         aws s3 cp s3://tcoffee-packages/$MODE/Latest/ s3://tcoffee-packages/Archives/ --recursive;
         #
+    - persist_to_workspace:
+        root: /home/circleci
+        paths: 
+          - env-vars
 
   # tag and push docker latest
   push_image:
@@ -112,6 +121,7 @@ jobs:
         at: /home/circleci
     - checkout
     - run: |
+        cat workspace/env-vars >> $BASH_ENV
         docker load -i ~/xcoffee.tar
         docker login -u $DOCKER_USER -p $DOCKER_PASS
         docker tag xcoffee cbcrg/tcoffee:latest;
@@ -138,19 +148,16 @@ workflows:
   build_test_publish:
     jobs:
       - build:
-          context: release-context
           filters:
             tags:
               only: /.*/
       - test:
-          context: release-context
           requires:
             - build
           filters:
             tags:
               only: /.*/
       - publish:
-          context: release-context
           requires:
             - test
           filters:
@@ -159,7 +166,6 @@ workflows:
             tags:
               only: /^V.*/
       - push_image:
-          context: release-context
           requires:
             - publish
           filters:
