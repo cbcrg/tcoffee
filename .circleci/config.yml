@@ -37,9 +37,10 @@ jobs:
     - checkout
     - attach_workspace:
         at: /home/circleci
+    - run: cat /home/circleci/env-vars >> $BASH_ENV
     - run:
         command: |
-          cat /home/circleci/env-vars >> $BASH_ENV
+          echo $RELEASE > test.log
           mv ~/publish/sandbox/build ~/tcoffee/docker/tcoffee
           cd ~/tcoffee/docker/ && docker build -t xcoffee .
           mkdir -p ~/publish/sandbox/test-results
@@ -68,6 +69,7 @@ jobs:
     steps:
     - attach_workspace:
         at: /home/circleci
+    - run: cat /home/circleci/env-vars >> $BASH_ENV
     - run: |
         #
         # This section will publish onto the websites the various elements produced by "make distribution"
