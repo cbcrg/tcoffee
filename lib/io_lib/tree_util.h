@@ -1,4 +1,4 @@
-#ifndef TREE_UTIL_H
+#ifndef TREE_UTIL_H 
 #define TREE_UTIL_H
 
 typedef struct ALNcol
