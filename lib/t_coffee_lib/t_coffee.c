@@ -510,6 +510,7 @@ int batch_main ( int argc, char **argv)
 	int     display;
 	int sand_box=0;
 
+
 	if (sand_box==1)
 	  {
 	    sb();

@@ -11,6 +11,118 @@
 #include "define_header.h"
 #include "dp_lib_header.h"
 
+int dist2fastme_treeF (double **dm, char **name,int nseq, char *treeF);
+int aln2fastme_treeF  (Alignment *A, int bs, char *treeF);
+Alignment * multistrap  (Alignment *inA,char *RTF,Constraint_list *CL)
+{
+  //will only keep the sequences whose structure is known
+  static char *treeF=vtmpnam (NULL);
+  static char *tree_listF=vtmpnam (NULL);
+  NT_node RT_INITIAL;
+  NT_node RT_COMBINED;
+  NT_node RT_PHYLO3D;
+  Alignment *A=NULL;
+  p3D *D;
+  Sequence  *BTS=NULL;
+  Alignment *BTA=NULL;
+  FILE *fp;
+  int a;
+
+
+  
+
+  if (!RTF || (strm (RTF, "fastme") && !check_file_exists("fastme")))
+    {
+      treeF=vtmpnam (NULL);
+      aln2fastme_treeF (inA, D->replicates,RTF);
+    }
+      
+  A=aln2trim3d(inA, CL);
+  D=fill_p3D(A, CL);
+
+  RT_INITIAL=main_read_tree (RTF);
+  RT_COMBINED=main_read_tree (RTF);
+  RT_PHYLO3D=main_read_tree(RTF);
+  reset_bs2(RT_PHYLO3D);
+  
+  
+ 
+
+  
+  
+  if (!A)printf_exit ( EXIT_FAILURE,stderr, "\nERROR: No contact information could be gathered for any sequence  [FATAL]");  
+  //Filter columns containing too many gaps
+  D->N=filter_columns_with_gap  (D->col, A, D->max_gap);
+  
+  //Filter columns with distances
+  if (D->maxd<MY_EPSILON)D->maxd=scan_maxd(D);
+  D->N=filter_columns_with_dist (A,D->pos, D->col,D->dm3d,D->maxd);
+  makerep (D,0);
+  aln2dm(D,A);
+  
+  dist2fastme_treeF (D->dm, A->name, A->nseq, treeF);
+  string2file(tree_listF,"w", "%s", tree2string (RT_PHYLO3D));
+
+  fprintf ( stderr, "---- generate fastme/phylo3D bootstrap replicates [%d bootstrap cycles]", D->replicates);
+  for (a=1; a<=D->replicates; a++)
+    {
+ 
+      makerep (D,2);
+      aln2dm(D,A);
+      dist2fastme_treeF (D->dm, A->name, A->nseq, treeF);
+      string2file(tree_listF,"a" "%s", file2string (treeF));
+    }
+  fprintf ( stderr, "[DONE]\n");
+  
+  BTS=get_treelist(tree_listF);
+  BTA=seq2aln(BTS,NULL,NO_PAD);
+  BTA=treelist2node_support (BTA);
+
+  string2file (treeF, "w", "%s", BTA->seq_al[0]);
+  RT_PHYLO3D=main_read_tree (treeF);
+
+  combine_bs(RT_COMBINED, RT_PHYLO3D, D->multistrap_mode);
+  fprintf (stderr, "Line 1: fastme boostrapped tree, Line2: fastme/phylo3d bootstrapped tree, Line 3: combined trees [%s]\n",(D->multistrap_mode)?D->multistrap_mode:"geometric");
+  fprintf (stdout,"%s;\n%s;\n%s;\n", tree2string (RT_INITIAL),tree2string (RT_PHYLO3D),tree2string (RT_COMBINED));
+  exit (EXIT_SUCCESS);
+}
+int aln2fastme_treeF  (Alignment *A, int bs, char *treeF)
+{
+  static char *alnF=vtmpnam(NULL);
+  static char *odm=vtmpnam (NULL);
+  fprintf ( stderr, "---- generate fastme tree [%d bootstrap cycles]", bs);
+  if (!check_program_is_installed ("fastme",NULL,NULL,"http://www.atgc-montpellier.fr/fastme",NO_REPORT))printf_exit ( EXIT_FAILURE,stderr, "\nERROR: fastme must be installed [FATAL]");;
+  output_phylip_aln (alnF, A, "w");
+  
+  printf_system ("fastme -i %s  -o %s -m BioNJ -p LG -g 1.0 -s -n -z 5 -b %d -B bst -O %s >/dev/null 2>/dev/null", alnF, treeF,bs,odm);
+  fprintf ( stderr, "[DONE]\n");
+  return 1;
+}
+int dist2fastme_treeF (double **dm, char **name,int nseq, char *treeF)
+{
+  static char *dmF=vtmpnam(NULL);
+  FILE *fp;
+  int s1, s2;
+
+  if (!check_program_is_installed ("fastme",NULL,NULL,"http://www.atgc-montpellier.fr/fastme",NO_REPORT))printf_exit ( EXIT_FAILURE,stderr, "\nERROR: fastme must be installed [FATAL]");
+  
+  fp=vfopen (dmF, "w");
+  fprintf ( fp, "%d \n", nseq);
+  for ( s1=0; s1<nseq;s1++)
+    {
+      fprintf (fp, "%s ",name[s1]);
+      for (s2=0; s2<nseq; s2++)
+	fprintf (fp, "%6.3f ", (float)((double)dm[s1][s2])/(float)100);
+      fprintf (fp, "\n");
+    }
+  fprintf (fp, "\n");
+  vfclose (fp);
+  
+  printf_system ("fastme -i %s -g 1.0 -s -n -z 5 -o %s >/dev/null 2>/dev/null", dmF,treeF);
+  
+  return 1;
+}
+  
 Alignment *phylo3d (Alignment *inA, Constraint_list *CL)
 {
   //will only keep the sequences whose structure is known
@@ -135,7 +247,7 @@ double scan_maxd (p3D *D)
   return bmaxd*100;//in picometers
 }
 
-Alignment *phylo3d_gt (Alignment *inA, Constraint_list *CL)
+Alignment *phylo3d_gt (Alignment *inA, Constraint_list *CL)// phylo3D Guide tree: pw distances will be estimated from unaligned sequences
 {
   Alignment *A=aln2trim3d(inA, CL);
   p3D *D=fill_p3D(A, CL);
@@ -234,6 +346,7 @@ p3D* fill_p3D (Alignment *A, Constraint_list *CL)
   
   if (getenv ("max_gap_4_TCOFFEE")){D->max_gap  =atofgetenv("max_gap_4_TCOFFEE");}
   else D->max_gap=0.5;
+  if (getenv ("MULTISTRAP_MODE"))D->multistrap_mode=csprintf (D->multistrap_mode, "%s",getenv("MULTISTRAP_MODE"));
   
   if (getenv ("TREE_MODE_4_TCOFFEE"))D->tree_mode=csprintf (D->tree_mode, "%s",getenv("TREE_MODE_4_TCOFFEE"));
   else D->tree_mode=csprintf (D->tree_mode, "nj");

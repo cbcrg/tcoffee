@@ -8,6 +8,7 @@ struct p3D
       
       float max_gap;
       char *tree_mode;
+      char *multistrap_mode;
       
       int replicates;
       int enb;
@@ -28,6 +29,7 @@ struct p3D
 
     };
 typedef struct p3D p3D;
+Alignment * multistrap  (Alignment *inA, char *treeF,Constraint_list *CL);
 Alignment *phylo3d (Alignment *inA, Constraint_list *CL);
 Alignment *phylo3d_gt (Alignment *inA, Constraint_list *CL);
 double scan_maxd (p3D *D);

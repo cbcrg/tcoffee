@@ -3472,7 +3472,7 @@ FILE * no_rec_print_tree ( NT_node p, FILE *fp)
 	      if (p->isseq)fprintf ( fp, "%s:%.5f",p->name,p->dist);
 	      else 
 		{
-		  if ( p->bootstrap!=0)fprintf (fp, "%d", (int)p->bootstrap);
+		  if ( p->bootstrap!=0 || get_int_variable ("print_bs"))fprintf (fp, "%d", (int)p->bootstrap);
 		  fprintf ( fp, ":%.5f",p->dist);
 		}
 	    }
@@ -4569,6 +4569,7 @@ Sequence * get_treelist (char *fname)
 	  fprintf (fpout, ">Tree_%d\n%s", ++n,tree);
 	  vfree (tree);
 	}
+      else if (buf[0]==' ' || buf[0]=='\n' || buf[0]=='\t');
       else
 	fprintf (fpout, ">Tree_%d\n%s", ++n,buf);
     }
@@ -7470,12 +7471,21 @@ void display_compare_bs (char *string, NT_node t1, NT_node t2, int nseq)
 }
 Alignment *treelist2node_support (Alignment *T)
 {
+  int is_set=0;
+  if (!get_int_variable ("print_bs"))
+    set_int_variable ("print_bs", 1);
+  else
+    is_set=1;
+  
   if (!T) return T;
   else if (T->Tree)return treelist2node_support (T->Tree);
   
-  return tree2node_support (T->seq_al[0], T);
+  T=tree2node_support (T->seq_al[0], T);
+  if (!is_set)set_int_variable ("print_bs", 0);
+  return T;
+  
 }
-NT_node reset_bs2 (NT_node T);
+
 NT_node reset_bs2 (NT_node T)
 {
   if (!T) return T;
@@ -7485,6 +7495,33 @@ NT_node reset_bs2 (NT_node T)
   T->bootstrap=0;
   return T;
 }
+
+NT_node combine_bs(NT_node T1, NT_node T2, char *mode)
+{
+  float b1, b2;
+
+  if (!T1) return T1;
+  if (!T2) printf_exit ( EXIT_FAILURE,stderr, "\nERROR: Incompatible Trees FATAL]");
+
+
+  
+  
+  combine_bs (T1->left, T2->left, mode);
+  combine_bs (T1->right, T2->right, mode);
+
+  b1=T1->bootstrap;
+  b2=T2->bootstrap;
+
+
+  if (mode && strm (mode, "average"))T1->bootstrap=(b1+b2)/2;
+  else if (mode && strm (mode, "min"))T1->bootstrap=MIN(b1,b2);
+  else if (mode && strm (mode, "max"))T1->bootstrap=MAX(b1,b2);
+  
+  else T1->bootstrap=sqrt(b1*b2);
+  return T1;
+}
+
+
 char*tree2node_support_simple (char *newick_tree, Alignment *T,float *bs)
 {
   NT_node RT, TT;
@@ -7523,7 +7560,7 @@ Alignment *tree2node_support (char *newick_tree, Alignment *T)
   
 
   p=tree2node_support_simple(newick_tree, T, &s);
-  
+    
   T->seq_al[0]=(char*)vrealloc (T->seq_al[0],(strlen (p)+1)*sizeof (char));
   sprintf (T->seq_al[0], "%s",p);
   sprintf (T->name[0], "OriginalDistanceTree");
@@ -7536,7 +7573,7 @@ Alignment *tree2node_support (char *newick_tree, Alignment *T)
 }
 float update_node_support (NT_node T1, NT_node T2, int nseq)
 {
-  //Trees must have been -prune_tree- and -recode_tree- with the same referecne sequence
+  //Trees must have been -prune_tree- and -recode_tree- with the same reference sequence
   //updates node boostrap values in T1
   //Returns the number of nodes in T2 supporting nodes in T1
   

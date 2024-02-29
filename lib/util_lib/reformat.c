@@ -368,8 +368,14 @@ int seq_reformat ( int argc, char **in_argv)
 		fprintf ( stdout, "\n     +tree..gap <F|def=0.5> replicates<D|column|def=1> mode <nj|upgma|def=nj>");
 		
 		fprintf ( stdout, "\n     +remove_nuc.x........Remove Position 1, 2 or 3 of every codon");
-		fprintf ( stdout, "\n     +phylo3D.<tree|gtree>...Replaces evaluate3D for the estimation of 3D trees\n");
-		fprintf ( stdout, "\n     ........................The parameters below must be set BEFORE +phylo3D\n"); 
+		fprintf ( stdout, "\n     +multistrap.<tree|fasml>..tree is a boostrapped tree, or will be estimated with fastml on -in MSA\n");
+		fprintf ( stdout, "\n     ..........................runs phylo3D on -in MSA using -in2 template file\n");
+		fprintf ( stdout, "\n     ..........................run +replicates to estimate a bootstrapped pyhlo3D tree\n");
+		fprintf ( stdout, "\n     ..........................run +multistrap_mode to combine the phylo3D and <tree> boostraps\n");
+		fprintf ( stdout, "\n         +mutistrap_mode.......Must be set BEFORE +multistrap, <geometric|average|min|max>, Def=geometric\n");
+
+		fprintf ( stdout, "\n     +phylo3D.<tree|gtree>......Replaces evaluate3D for the estimation of 3D trees\n");
+		fprintf ( stdout, "\n     ...........................The parameters below must be set BEFORE +phylo3D\n"); 
 		fprintf ( stdout, "\n        +enb <int>..............Specifies the number of excluded nb (def=3)\n");
 		fprintf ( stdout, "\n        +replicates <int>.......Specifies the number of replicates (def=0)\n");
 		fprintf ( stdout, "\n        +maxd <int|scan>........Specifies the distance cutoff (def=maximum distance on provided PDBs)\n");
@@ -1062,7 +1068,7 @@ Sequence_data_struc *read_data_structure ( char *in_format, char *in_file,	Actio
 	    D->S=get_nexus(in_file);
 	    D->A=seq2aln(D->S, D->A,NO_PAD);
 	  }
-	else if ( strm (in_format, "treefile_list") || strm(in_format, "treelist"))
+	else if ( strm (in_format, "treefile_list") || strm(in_format, "treelist") || strm(in_format, "tree_list") || strm(in_format, "newick_list")|| strm(in_format, "newicklist"))
 	  {
 
 	    D->S=get_treelist(in_file);
@@ -11831,6 +11837,7 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
        else if ( strm(action, "phylo3d_dm"))cputenv ("THREED_TREE_MODE=%s",ACTION(1));
        else if ( strm(action, "phylo3d_exp"))cputenv ("THREED_TREE_MODE_EXP=%s",ACTION(1));
        else if ( strm(action, "phylo3d_noweights"))cputenv ("THREED_TREE_NO_WEIGHTS=%s",ACTION(1));
+       else if ( strm(action, "multistrap_mode"))cputenv ("MULTISTRAP_MODE=%s",ACTION(1));
        else if ( strm(action, "columns4tree"))
 	 {
 	   char *f=ACTION(1);//legacy
@@ -11838,11 +11845,12 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	   
 	   cputenv ("columns4tree_4_TCOFFEE=%s",ACTION(1));
 	 }
-       else if (strm (action, "phylo3d"))
+
+       else if (strm (action, "phylo3d") || strm (action, "multistrap") )
 	 {
 	   ungap_seq(D1->S);
 	   if ( !D2 || !D2->S)
-	     printf_exit ( EXIT_FAILURE,stderr, "\nERROR: +phylo3D requires a tenmplate file via -in2");
+	     printf_exit ( EXIT_FAILURE,stderr, "\nERROR: +phylo3D requires a template file via -in2");
 	   D1->CL=pdb2contacts (D1->S, D2->S,D1->CL, "intra","distances",1000000);
 	   if (n_actions>1 && strm (ACTION(1), "gtree"))
 	     {
@@ -11850,7 +11858,12 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	       D1->A=phylo3d_gt (D1->A, D1->CL);
 	     }
 	   else
-	     D1->A=phylo3d (D1->A, D1->CL);
+	     {
+	       if (strm (action, "phylo3d"))
+		 D1->A=phylo3d (D1->A, D1->CL);
+	       else
+		 multistrap (D1->A,ACTION(1), D1->CL);
+	     }
 	 }
        
 

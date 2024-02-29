@@ -346,6 +346,10 @@ int node_sort ( char *name, NT_node T);
 int    treelist2n (NT_node *L);
 int ** treelist2avg_treecmp (NT_node *L, char *file);
 Alignment *treelist2cons (Alignment *T);
+
+NT_node reset_bs2 (NT_node T);
+NT_node combine_bs(NT_node T1, NT_node T2, char *mode);
+
 Alignment *tree2node_support       (char *newicktree,Alignment *T);
 char      *tree2node_support_simple(char *newicktree,Alignment *T, float*bs);
 float      treelist2avg_node_support (Alignment *T);
