@@ -26,5 +26,3 @@ ADD tcoffee /opt/tcoffee
 # Environment 
 #
 ENV PATH=$PATH:/opt/ncbi-blast/bin:/opt/tcoffee/bin:/opt/tcoffee/plugins/linux/ TEMP=/tmp PERL5LIB=/opt/tcoffee/perl/lib/perl5 DIR_4_TCOFFEE=/opt/tcoffee EMAIL_4_TCOFFEE=tcoffee.msa@gmail.com CACHE_4_TCOFFEE=/tmp/cache/ LOCKDIR_4_TCOFFEE=/tmp/lck/ TMP_4_TCOFFEE=/tmp/  
-
-
