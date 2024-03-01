@@ -13,14 +13,14 @@ jobs:
       - run: echo 'export RELEASE="'$RELEASE'"' > /home/circleci/env-vars
       - run: mv ~/project ~/tcoffee
       - run: mkdir -p ~/repo 
-      - run: docker pull cbcrg/tcoffee-build-box:1.2
+      - run: docker pull cbcrg/tcoffee-build-box:1.3
       - run: mkdir $HOME/publish
       - run: |
           docker run -e BUILD_NUMBER=$CIRCLE_BUILD_NUM -e RELEASE=${RELEASE:-0} \
           -v $HOME/tcoffee:/root/tcoffee \
           -v $HOME/repo:/root/repo \
           -v $HOME/publish:/publish \
-          cbcrg/tcoffee-build-box:1.2 \
+          cbcrg/tcoffee-build-box:1.3 \
           bash -c 'tcoffee/build/build.sh env tcoffee; mv /root/sandbox /publish'
       - run: sudo chown -R $(id -u):$(id -g) ~/repo ~/publish
       - persist_to_workspace:
