@@ -1,15 +1,12 @@
-FROM debian:stretch
-MAINTAINER Paolo Di Tommaso <paolo.ditommaso@gmail.com>
+FROM debian:buster
+MAINTAINER Jose Espinosa-Carrasco <espinosacarrascoj@gmail.com>
 
-RUN sed -i s/deb.debian.org/archive.debian.org/g /etc/apt/sources.list && \
-  sed -i s/security.debian.org/archive.debian.org/g /etc/apt/sources.list && \
-  sed -i '/stretch-updates/d' /etc/apt/sources.list && \
-  apt-get update --fix-missing && \
+RUN apt-get update --fix-missing && \
   apt-get install -q -y bc vim procps ghostscript unzip curl wget && \
   apt-get install -q -y perl-modules libnet-ssleay-perl libcrypt-ssleay-perl libssl-dev libexpat1 libexpat1-dev liblwp-protocol-https-perl && \
-  apt-get install -q -y libgfortran3 libglib2.0-0 libgomp1 && \
+  apt-get install -q -y libgfortran5 libglib2.0-0 libgomp1 && \
   apt-get clean  
-  
+
 RUN mkdir -p /root
 ENV HOME /root  
 WORKDIR /root
