@@ -20,8 +20,8 @@ jobs:
           -v $HOME/tcoffee:/root/tcoffee \
           -v $HOME/repo:/root/repo \
           -v $HOME/publish:/publish \
-          cbcrg/tcoffee-build-box:1.3 \
-          bash -c 'git config --global --add safe.directory /root/tcoffee; tcoffee/build/build.sh env tcoffee; mv /root/sandbox /publish'
+          cbcrg/tcoffee-build-box:1.2 \
+          bash -c 'export GIT_REVISION=`git -C tcoffee  rev-parse --short HEAD`; tcoffee/build/build.sh env tcoffee; mv /root/sandbox /publish'
       - run: sudo chown -R $(id -u):$(id -g) ~/repo ~/publish
       - persist_to_workspace:
           root: /home/circleci
