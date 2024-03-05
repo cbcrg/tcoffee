@@ -3,6 +3,7 @@ jobs:
   build:
     machine:
       image: ubuntu-2004:202201-02
+    timeout: 60m  # Set the timeout to 60 minutes
     steps:
       - checkout
       # **do not edit: start
