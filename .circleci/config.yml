@@ -17,6 +17,7 @@ jobs:
       - run: mkdir $HOME/publish
       - run: echo "export GIT_REVISION=\$(git -C ~/tcoffee rev-parse --short HEAD)" > /home/circleci/env-vars
       - run: |
+          echo $GIT_REVISION > git_revision.log \
           docker run -e BUILD_NUMBER=$CIRCLE_BUILD_NUM -e RELEASE=${RELEASE:-0} \
           -v $HOME/tcoffee:/root/tcoffee \
           -v $HOME/repo:/root/repo \
