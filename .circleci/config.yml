@@ -15,10 +15,10 @@ jobs:
       - run: mkdir -p ~/repo 
       - run: docker pull cbcrg/tcoffee-build-box:1.2
       - run: mkdir $HOME/publish
-      - run: echo "export GIT_REVISION=\$(git -C ~/tcoffee rev-parse --short HEAD)" >> $BASH_ENV
-      - run: |
-          echo $GIT_REVISION > git_revision.log
-          docker run -e BUILD_NUMBER=$CIRCLE_BUILD_NUM -e RELEASE=${RELEASE:-0} \
+      - run: echo 'export GIT_HASH=\$(git -C ~/tcoffee rev-parse --short HEAD)' >> $BASH_ENV
+      - run: echo $GIT_HASH > git_hash.log
+      - run: |          
+          docker run -e BUILD_NUMBER=$CIRCLE_BUILD_NUM -e RELEASE=${RELEASE:-0} -e GIT_REVISION=$GIT_HASH \
           -v $HOME/tcoffee:/root/tcoffee \
           -v $HOME/repo:/root/repo \
           -v $HOME/publish:/publish \
