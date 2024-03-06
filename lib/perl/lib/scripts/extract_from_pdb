@@ -216,8 +216,9 @@ else
 #  netaddress for SwissProt
 #  $netaddress="http://www.expasy.ch/cgi-bin/get-pdb-entry.pl?%%";
 #  Netaddress for pdb
-   
-# $netaddress="http://www.rcsb.org/pdb/cgi/export.cgi/%%.pdb.gz?format=PDB&pdbId=%%&compression=gz"; OLD
+
+# OLD see https://cbcrg.slack.com/archives/DVA2EA2GG/p1709661297295109 (updated on 2024-03-06)
+# $netaddress="http://www.rcsb.org/pdb/cgi/export.cgi/%%.pdb.gz?format=PDB&pdbId=%%&compression=gz";
 $netaddress="https://files.rcsb.org/download/%%.pdb.gz";
 $unreleased_netfile="https://files.wwpdb.org/pub/pdb/holdings/unreleased_entries.json.gz";      
 
