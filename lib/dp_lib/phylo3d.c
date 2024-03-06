@@ -1,5 +1,5 @@
 
-#include <stdio.h> 
+#include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 #include <stdarg.h>
@@ -11,8 +11,8 @@
 #include "define_header.h"
 #include "dp_lib_header.h"
 
-int dist2fastme_treeF (double **dm, char **name,int nseq, char *treeF);
-int aln2fastme_treeF  (Alignment *A, int bs, char *treeF);
+//int dist2fastme_treeF (double **dm, char **name,int nseq, char *treeF);
+//int aln2fastme_treeF  (Alignment *A, int bs, char *treeF);
 Alignment * multistrap  (Alignment *inA,char *RTF,Constraint_list *CL)
 {
   //will only keep the sequences whose structure is known
@@ -28,21 +28,27 @@ Alignment * multistrap  (Alignment *inA,char *RTF,Constraint_list *CL)
   FILE *fp;
   int a;
 
-
-  
-
-  if (!RTF || (strm (RTF, "fastme") && !check_file_exists("fastme")))
-    {
-      treeF=vtmpnam (NULL);
-      aln2fastme_treeF (inA, D->replicates,RTF);
-    }
-      
   A=aln2trim3d(inA, CL);
   D=fill_p3D(A, CL);
+  treeF=vtmpnam (NULL);
+  if (RTF &&  (strm (RTF, "iqtree") && !check_file_exists("iqtree")))
+    {
+       
+       aln2iqtree_treeF (inA, D->replicates,treeF);
+    }
+  else if (!RTF || (strm (RTF, "fastme") && !check_file_exists("fastme")))
+    {
+      aln2fastme_treeF (inA, D->replicates,treeF);
+    }
+  else
+    {
+      printf_system ("cp %s %s", RTF, treeF);
+    }
+ 
 
-  RT_INITIAL=main_read_tree (RTF);
-  RT_COMBINED=main_read_tree (RTF);
-  RT_PHYLO3D=main_read_tree(RTF);
+  RT_INITIAL=main_read_tree (treeF);
+  RT_COMBINED=main_read_tree (treeF);
+  RT_PHYLO3D=main_read_tree(treeF);
   reset_bs2(RT_PHYLO3D);
   
   
@@ -62,7 +68,7 @@ Alignment * multistrap  (Alignment *inA,char *RTF,Constraint_list *CL)
   
   dist2fastme_treeF (D->dm, A->name, A->nseq, treeF);
   string2file(tree_listF,"w", "%s", tree2string (RT_PHYLO3D));
-
+  
   fprintf ( stderr, "---- generate fastme/phylo3D bootstrap replicates [%d bootstrap cycles]", D->replicates);
   for (a=1; a<=D->replicates; a++)
     {
@@ -82,10 +88,15 @@ Alignment * multistrap  (Alignment *inA,char *RTF,Constraint_list *CL)
   RT_PHYLO3D=main_read_tree (treeF);
 
   combine_bs(RT_COMBINED, RT_PHYLO3D, D->multistrap_mode);
-  fprintf (stderr, "Line 1: fastme boostrapped tree, Line2: fastme/phylo3d bootstrapped tree, Line 3: combined trees [%s]\n",(D->multistrap_mode)?D->multistrap_mode:"geometric");
-  fprintf (stdout,"%s;\n%s;\n%s;\n", tree2string (RT_INITIAL),tree2string (RT_PHYLO3D),tree2string (RT_COMBINED));
+
+  fprintf (stderr, "Line 1: %s tree with Combined bootstraped [%s] - Line 2 %s tree with phylo3D bootstraps Line 3 %s tree with original boostrap\n", RTF, (D->multistrap_mode)?D->multistrap_mode:"geometric", RTF, RTF);
+
+  
+  fprintf (stdout,"%s%s%s", tree2string (RT_INITIAL),tree2string (RT_PHYLO3D),tree2string (RT_COMBINED));
   exit (EXIT_SUCCESS);
 }
+/*
+Old function, now moved in util_make_tree
 int aln2fastme_treeF  (Alignment *A, int bs, char *treeF)
 {
   static char *alnF=vtmpnam(NULL);
@@ -98,6 +109,7 @@ int aln2fastme_treeF  (Alignment *A, int bs, char *treeF)
   fprintf ( stderr, "[DONE]\n");
   return 1;
 }
+
 int dist2fastme_treeF (double **dm, char **name,int nseq, char *treeF)
 {
   static char *dmF=vtmpnam(NULL);
@@ -122,6 +134,8 @@ int dist2fastme_treeF (double **dm, char **name,int nseq, char *treeF)
   
   return 1;
 }
+*/
+
   
 Alignment *phylo3d (Alignment *inA, Constraint_list *CL)
 {

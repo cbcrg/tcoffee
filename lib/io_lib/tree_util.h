@@ -1,4 +1,4 @@
-#ifndef TREE_UTIL_H 
+#ifndef TREE_UTIL_H
 #define TREE_UTIL_H
 
 typedef struct ALNcol
@@ -349,6 +349,8 @@ Alignment *treelist2cons (Alignment *T);
 
 NT_node reset_bs2 (NT_node T);
 NT_node combine_bs(NT_node T1, NT_node T2, char *mode);
+NT_node absolutebs2relativebs (NT_node T, int tot);
+NT_node relativebs2absolutebs (NT_node T, int tot);
 
 Alignment *tree2node_support       (char *newicktree,Alignment *T);
 char      *tree2node_support_simple(char *newicktree,Alignment *T, float*bs);

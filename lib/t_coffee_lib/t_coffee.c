@@ -1,4 +1,4 @@
-#include <stdio.h> 
+#include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 #include <stdarg.h>
@@ -509,7 +509,6 @@ int batch_main ( int argc, char **argv)
 	int     clean_overaln;
 	int     display;
 	int sand_box=0;
-
 
 	if (sand_box==1)
 	  {

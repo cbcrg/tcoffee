@@ -17,6 +17,18 @@ NT_node ** dist2nj_tree (double **distances, char **out_seq_name, int out_nseq, 
 
 //////////////////////////////////////////////////////////////////////////////
 //
+//                              aln 2 tree
+///////////////////////////////////////////////////////////////////////////////
+
+NT_node aln2cw_tree     (Alignment *A);
+NT_node aln2km_tree (Alignment *A, char *mode, int nboot);
+
+NT_node aln2iqtree_treeF  (Alignment *A, int bs, char *treeF);
+int dist2fastme_treeF (double **dm, char **name,int nseq, char *treeF);
+NT_node aln2fastme_treeF  (Alignment *A, int bs, char *treeF);
+
+//////////////////////////////////////////////////////////////////////////////
+//
 //                              km
 ///////////////////////////////////////////////////////////////////////////////
 double **vector2strip_vector (double**v, int n, int *dim, float frac);
@@ -51,8 +63,7 @@ NT_node   addseq2reg_tree (NT_node T, Sequence *S, int seq, int depth);
 float* node2reg_score(NT_node T, Sequence *S, char *s1, float *v, int depth);
 
 NT_node compute_cw_tree (Alignment *A);
-NT_node aln2cw_tree     (Alignment *A);
-NT_node aln2km_tree (Alignment *A, char *mode, int nboot);
+
 NT_node rec_km_tree (char **name,int n,int dim,double **V, int nboot);
   
 

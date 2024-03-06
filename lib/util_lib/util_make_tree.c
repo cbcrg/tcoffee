@@ -1896,7 +1896,150 @@ double **aln2km_vector (Alignment *A, char *mode, int *dim)
 }
 //////////////////////////////////////////////////////////////////////////////
 //
-//                              km
+//                              aln2tree
+///////////////////////////////////////////////////////////////////////////////
+
+NT_node compute_cw_tree (Alignment *A)
+{
+  return aln2cw_tree (A);
+}
+NT_node aln2cw_tree (Alignment *A)
+{
+  NT_node T=NULL;
+  char *dir =vtmpnam (NULL);
+  char *cdir=get_pwd (NULL);
+
+  my_mkdir (dir);
+  chdir (dir);
+  output_fasta_aln ("aln", A);
+  printf_system_direct ("clustalw -infile=aln -newtree=tree -tree %s",TO_NULL_DEVICE);
+  if (check_file_exists ("tree"))
+    {
+      T=main_read_tree ("tree");
+    }
+  chdir    (cdir);
+  printf_system_direct ("rm %s/*", dir);
+  my_rmdir (dir);
+  vfree (cdir);
+  return T;
+}
+static float tid;
+static float tpairs;
+static int tprint;
+static int km_node;
+static float km_tbootstrap;
+static float km_tnode;
+NT_node    aln2km_tree (Alignment *A, char *mode, int nboot)
+{
+  NT_node T;
+  double **V;
+  Sequence *S;
+  int dim=100;//Keep all the vector components summing up to x% of the cumulated sd
+  
+  KA=A;
+  S=KS=aln2seq(A);
+  
+  if (!nboot)nboot=1;
+  fprintf ( stderr, "\n-- Compute vectors\n");
+  V=aln2km_vector (A, mode, &dim);
+  fprintf ( stderr, "\n-- Estimate Tree (%d boostrap replicates)\n", nboot);
+  T=rec_km_tree (A->name,A->nseq,dim,V, nboot);
+  
+  if (tprint){fprintf ( stderr, "\n---NPAIRS: %d avg id: %.2f %%\n", (int)tpairs, tid/tpairs);}
+  
+  if (nboot>1)fprintf (stderr, "\n-- %5d tested Nodes -- Average bootstrap: %.2f -- %d Replicates\n", (int)km_tnode, km_tbootstrap/km_tnode, nboot);
+  
+  return T;
+}
+
+  
+
+NT_node aln2iqtree_treeF  (Alignment *A, int bs, char *treeF)
+{
+  static char *alnF=vtmpnam(NULL);
+  char *outF=NULL;
+  if (!treeF)treeF=vtmpnam (NULL);
+  
+  fprintf ( stderr, "---- generate iqtree tree [%d bootstrap cycles]", bs);
+  if (!check_program_is_installed ("iqtree",NULL,NULL,"http://www.iqtree.org/",NO_REPORT))printf_exit ( EXIT_FAILURE,stderr, "\nERROR: iqtree must be installed [FATAL]");;
+
+  output_phylip_aln (alnF, A, "w");
+  outF=csprintf (outF, "%s.treefile",alnF);
+  
+  if (bs>0)
+    {
+      NT_node T;
+      printf_system ("iqtree -s %s  -b %d -quiet" ,alnF, bs);
+      T=main_read_tree (outF);
+      T=relativebs2absolutebs(T,bs);
+      string2file (outF, "%s", tree2string (T));
+    }
+  else
+    printf_system ("iqtree -s %s  -quiet" ,alnF);
+
+  HERE ("Copy %s.treefile to cedric", alnF);
+  printf_system ("cp %s.treefile cedric",alnF); 
+  
+  
+  if ( check_file_exists(outF))
+    {
+      printf_system ("rm %s.iqtree",alnF);
+      printf_system ("rm %s.mldist",alnF);
+      printf_system ("rm %s.log",alnF);
+      printf_system ("mv %s.treefile %s", alnF,treeF);
+    }
+  else
+    printf_exit ( EXIT_FAILURE,stderr, "\nERROR: could not run iqtree on the provided data [FATAL]");
+  
+  fprintf ( stderr, "[DONE]\n");
+  return main_read_tree(treeF);
+}
+
+NT_node aln2fastme_treeF  (Alignment *A, int bs, char *treeF)
+{
+  static char *alnF=vtmpnam(NULL);
+  static char *odm=vtmpnam (NULL);
+  if (!treeF)treeF=vtmpnam (NULL);
+  fprintf ( stderr, "---- generate fastme tree [%d bootstrap cycles]", bs);
+  if (!check_program_is_installed ("fastme",NULL,NULL,"http://www.atgc-montpellier.fr/fastme",NO_REPORT))printf_exit ( EXIT_FAILURE,stderr, "\nERROR: fastme must be installed [FATAL]");;
+  output_phylip_aln (alnF, A, "w");
+  
+  if (bs>0)
+    
+    printf_system ("fastme -i %s  -o %s -m BioNJ -p LG -g 1.0 -s -n -z 5 -b %d -B bst -O %s >/dev/null 2>/dev/null", alnF, treeF,bs,odm);
+  else
+    printf_system ("fastme -i %s  -o %s -m BioNJ -p LG -g 1.0 -s -n -z 5  -B bst -O %s >/dev/null 2>/dev/null", alnF, treeF,odm);
+  fprintf ( stderr, "[DONE]\n");
+  return main_read_tree(treeF);
+}
+int dist2fastme_treeF (double **dm, char **name,int nseq, char *treeF)
+{
+  static char *dmF=vtmpnam(NULL);
+  FILE *fp;
+  int s1, s2;
+
+  if (!check_program_is_installed ("fastme",NULL,NULL,"http://www.atgc-montpellier.fr/fastme",NO_REPORT))printf_exit ( EXIT_FAILURE,stderr, "\nERROR: fastme must be installed [FATAL]");
+  
+  fp=vfopen (dmF, "w");
+  fprintf ( fp, "%d \n", nseq);
+  for ( s1=0; s1<nseq;s1++)
+    {
+      fprintf (fp, "%s ",name[s1]);
+      for (s2=0; s2<nseq; s2++)
+	fprintf (fp, "%6.3f ", (float)((double)dm[s1][s2])/(float)100);
+      fprintf (fp, "\n");
+    }
+  fprintf (fp, "\n");
+  vfclose (fp);
+  
+  printf_system ("fastme -i %s -g 1.0 -s -n -z 5 -o %s >/dev/null 2>/dev/null", dmF,treeF);
+  
+  return 1;
+}
+
+//////////////////////////////////////////////////////////////////////////////
+//
+//                              seq2tree
 ///////////////////////////////////////////////////////////////////////////////
 NT_node seq2dnd (Sequence *S, char *dpa_tree)
 {
@@ -2309,30 +2452,7 @@ NT_node seq2cw_dnd ( Sequence *S)
 
 }
 
-NT_node compute_cw_tree (Alignment *A)
-{
-  return aln2cw_tree (A);
-}
-NT_node aln2cw_tree (Alignment *A)
-{
-  NT_node T=NULL;
-  char *dir =vtmpnam (NULL);
-  char *cdir=get_pwd (NULL);
 
-  my_mkdir (dir);
-  chdir (dir);
-  output_fasta_aln ("aln", A);
-  printf_system_direct ("clustalw -infile=aln -newtree=tree -tree %s",TO_NULL_DEVICE);
-  if (check_file_exists ("tree"))
-    {
-      T=main_read_tree ("tree");
-    }
-  chdir    (cdir);
-  printf_system_direct ("rm %s/*", dir);
-  my_rmdir (dir);
-  vfree (cdir);
-  return T;
-}
 NT_node seq2cw_tree ( Sequence *S)
 {
   Alignment *A;
@@ -2622,12 +2742,7 @@ NT_node seq2co_dnd (Sequence *S)
 }
 
 
-static float tid;
-static float tpairs;
-static int tprint;
-static int km_node;
-static float km_tbootstrap;
-static float km_tnode;
+
 
 NT_node list2balanced_dnd (char **name, int n)
 {
@@ -2746,28 +2861,7 @@ NT_node ** seq2km_tree_old (Sequence *S, char *file)
   return read_tree (file, &tot_node, S->nseq, S->name);
 }
   
-NT_node    aln2km_tree (Alignment *A, char *mode, int nboot)
-{
-  NT_node T;
-  double **V;
-  Sequence *S;
-  int dim=100;//Keep all the vector components summing up to x% of the cumulated sd
-  
-  KA=A;
-  S=KS=aln2seq(A);
-  
-  if (!nboot)nboot=1;
-  fprintf ( stderr, "\n-- Compute vectors\n");
-  V=aln2km_vector (A, mode, &dim);
-  fprintf ( stderr, "\n-- Estimate Tree (%d boostrap replicates)\n", nboot);
-  T=rec_km_tree (A->name,A->nseq,dim,V, nboot);
-  
-  if (tprint){fprintf ( stderr, "\n---NPAIRS: %d avg id: %.2f %%\n", (int)tpairs, tid/tpairs);}
-  
-  if (nboot>1)fprintf (stderr, "\n-- %5d tested Nodes -- Average bootstrap: %.2f -- %d Replicates\n", (int)km_tnode, km_tbootstrap/km_tnode, nboot);
-  
-  return T;
-}
+
 NT_node rec_km_tree (char **name,int n,int dim,double **V, int nboot)
 {
   NT_node T;

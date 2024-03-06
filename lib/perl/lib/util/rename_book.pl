@@ -1,7 +1,6 @@
 #!/usr/bin/env perl
 use File::Copy::Recursive qw(fcopy rcopy dircopy fmove rmove dirmove);
 use File::Path qw(make_path remove_tree);
-use File::Path;
 use Cwd;
 use File::Copy;
 use File::Basename;
@@ -9,16 +8,10 @@ use utf8;
 use Encode;
 use DirHandle;
 use File::stat;
-use Test::Simple;
-use Image::ExifTool qw(:Public);
-use Term::ReadKey;
-
+Test::Simple;
 my $MASTER=1;
-my $FLAG="/Users/cnotredame_1/.rename_book.flag";
+my $FLAG="/Users/cnotredame/.rename_book.flag";
 my $dir;
-my $dir2;
-my $dir3;
-
 my $target_dir;
 
 
@@ -29,14 +22,6 @@ for ($a=0; $a<@ARGV; $a++)
     if ($v eq "-dir")
       {
 	$dir="$ARGV[++$a]/";
-      }
-    elsif ($v eq "-dir2")
-      {
-	$dir2="$ARGV[++$a]/";
-      }
-    elsif ($v eq "-dir3")
-      {
-	$dir3="$ARGV[++$a]/";
       }
     elsif ( $v eq "-undo" || $v eq "undo")
       {
@@ -69,27 +54,6 @@ for ($a=0; $a<@ARGV; $a++)
       {
 	flag2unset();
       }
-    elsif ($v eq "-name2timestamp")
-    {
-	$action=$v;
-    }
-    
-    elsif ($v eq "-unrandomize")
-    {
-	$action=$v;
-    }
-    elsif ($v eq "-randomize")
-    {
-	$action=$v;
-    }
-    elsif ($v eq "-zipBD")
-    {
-	$action=$v;
-    }
-    elsif ($v eq "-fixduplicates")
-        {
-	$action=$v;
-        }
     elsif ($v eq "-daemonsync")
       {
 	my $duration=500;
@@ -197,7 +161,7 @@ for ($a=0; $a<@ARGV; $a++)
 	die;
       }
   }
-print "DIR=[$dir]";
+
 if (-e ".undo"){unlink (".undo");}
 
 if (!$dir){$dir=getcwd;}
@@ -210,36 +174,6 @@ if       ($action eq "-rcbx2pdf")
   {
     rec_image2pdf ($dir);
   }
-elsif    ($action eq "-name2timestamp")
-{
-    name2timestamp ($dir);
-    exit(0);
-}
-elsif    ($action eq "-rmduplicates")
-{
-    rm_duplicates ($dir, $dir2);
-    exit(0);
-}
-elsif    ($action eq "-fixduplicates")
-{
-    collect_duplicates ($dir, $dir2, $dir3);
-    exit(0);
-}
-elsif ($action eq "-randomize")
-{
-    randomize_mp3($dir);
-    exit(0);
-}
-elsif ($action eq "-unrandomize")
-{
-    unrandomize_mp3($dir);
-    exit(0);
-}
-elsif ($action eq "-zipBD")
-{
-    zipBD($dir);
-    exit(0);
-}
 elsif    ($action eq "-list_itune")
   {
     my $d1=getcwd;
@@ -1049,8 +983,6 @@ elsif    ($action eq "-year")
 	    my $from;
 	    
 	    $movie_name=~s/\./ /g;
-	    $movie_name=~s/\_/ /g;
-	    
 	    
 	    $to="$movie_name ($year).$movie_ext";
 	    $to=~s/  / /g;
@@ -1655,347 +1587,6 @@ sub rec_list_itune
      }
     return;
   }
-
-sub rmduplicates
-{
-    my $d=shift;
-    my $bk=shift;
-    my %l=rreaddir($d);
-    
-    foreach my $file (keys (%l))
-       {
-	   my $n=$l{$file}{'nv'};
-	   for (my $i=1; $i<=$n; $i++)
-	   {
-	       my $image=$l{$file}{'values'}{$i};
-	       my $hasher = Image::Hash->new;
-	       my $hash = $hasher->hash_image($image);
-
-	       if ($l2{$hash})
-	           {
-		   $l2{$hash}{'nv'}+=1;
-		   my $v=$l2{$hash}{'nv'};
-		   $l2{$file}{'values'}{$v}=$image;
-	           }
-	       else
-	       {
-		   $l2{$hash}{'nv'}=1;
-		   $l2{$hasch}{'values'}{1}=$image;
-	       }
-	   }
-       }
-    foreach $value (keys(%l2))
-    {
-	my $v=$l2{$hash}{'nv'};
-	if ($v>1)
-	{
-	    for ($i=1; $i<=$v; $v++)
-	    {
-		my $f=$l2{$value}{'value'}{$i};
-		print ("$f\n");
-	    }
-	    
-	    print ("\n");
-	}	   
-    }
-}
-	 
-	   
-sub name2timestamp
-{
-    my $d=shift;
-    my %l=rreaddir($d);
-    
-    foreach my $file (keys (%l))
-       {
-	   my $n=$l{$file}{'nv'};
-	   for (my $i=1; $i<=$n; $i++)
-	   {
-	       my $ffile=$l{$file}{'values'}{$i};
-	       $from=$ffile;
-	       $to=0;
-	       my $name;
-	       if (($file=~/^20\d\d-.*/))
-	           {
-		   
-		   $to=$file;
-		   $to=~s/\-/\./g;
-		   $to=$dir2."/".$to;
-	           }
-	       else
-	           {
-		   my ($iname, $ipath, $suffix) = fileparse($from, qr/\.[^.]*/);
-		       
-		   $image_file=$ffile;
-		   my $exifTool = new Image::ExifTool;
-		   my $info = $exifTool->ImageInfo($image_file);
-
-		   my $cdate=$info->{FileCreateDate};
-		   $cdate=~/^(20\d\d).*/;
-		   $year=$1;
-		   
-
-		   if ($info->{DateTimeOriginal})
-		       {
-			   #print" $info->{DateTimeOriginal} [$cdate]\n";
-			   $name=$info->{DateTimeOriginal};
-		       }
-		   elsif ($info->{CreateDate})
-		       {
-			   #print" $info->{CreateDate} [$cdate]\n";
-			   $name=$info->{CreateDate};
-		       }
-		    elsif ($info->{DateCreated})
-		       {
-			   #print" $info->{DateCreated}[$cdate]\n";
-			   $name=$info->{DateCreated};
-		       }
-		   else
-	               {
-			   if ($year==2023){$to=$dir2."/"."undated-".$file;}
-			   else {$name=$cdate;}
-		       }
-		   if (!$to)
-		       {
-			   $name=~s/\:/\./g;
-			   $to=$dir2."/".$name."$suffix";
-		       }
-		   }
-	       my ($name, $path, $suffix) = fileparse($to, qr/\.[^.]*/);
-	       my $ref=$to;
-	       my $n=1;
-	       while (-e $to)
-	       {
-		   
-		   $to=$dir2."/".$name.".".$n.$suffix;
-		   if (!-e $to){print "******** [$to]\n";}
-		   $n+=1;
-	       }
-	       copy ($from, $to);
-	       
-	   }
- 
-       }
-       
-}
-sub unrandomize_mp3
-{
-    my $d=shift;
-    my $dh=new DirHandle;
-    my $containdir=0;
-    opendir ($dh, $d);
-    my @l=readdir($dh);
-    closedir($dh);
-
-    foreach my $d2 (@l)
-    {
-	my $new=$d2;
-	if ($new=~/(^RAND_... - )/)
-	{
-	    print "$1\n";
-	    $new=~s/$1//;
-	}
-	print ("$d2 ---> $new\n");
-				  
-	copy ($d2, $new);
-	unlink ($d2);
-    }
-}	   
-sub randomize_mp3
-{
-    my $d=shift;
-    my $dh=new DirHandle;
-    my $containdir=0;
-    opendir ($dh, $d);
-    my @l=readdir($dh);
-    closedir($dh);
-
-    foreach my $d2 (@l)
-    {
-	my $new=$d2;
-	if ($new=~/(^RAND_... - )/)
-	{
-	    print "$1\n";
-	    $new=~s/$1//;
-	}
-	
-	my $rtag=generate_random_string (3);
-	$new="RAND_$rtag - $new";
-	print ("$d2 ---> $new\n");
-				  
-	copy ($d2, $new);
-	unlink ($d2);
-    }
-}
-    
-sub zipBD
-{
-    my $dir=shift;
-    
-    rzipBD ($dir);
-    return;
-}
-sub rzipBD
-{
-    my $d=shift;
-    my $dh=new DirHandle;
-    my $containdir=0;
-    my $jpg=0;
-    my $nf=0,
-    opendir ($dh, $d);
-    my @l=readdir($dh);
-    closedir($dh);
-    
-    #print "---- Process $d\n";
-    foreach my $d2 (@l)
-    {
-	if ($d2 eq "." || $d2 eq ".." || $d2 eq ".DS_Store"){;}
-	elsif (-d "$d/$d2")
-	   {
-	    
-	       rzipBD ("$d/$d2");
-	       $containsdir=1;
-	   }
-	else
-	    {
-	    if ($d2=~/jpg/ || $d2=~/jpeg/ || $d2=~/JPG/ || $d2=~/JPEG/ || $d2=~/PNG/ || $d2=~/png/ || $d2=~/GIF/ || $d2=~/gif/)
-	        {
-		$jpg++;
-	        }
-	    $nf++;
-	    } 
-    }
-    my $ratio=0;
-    if ($nf>0){$ratio=$jpg/$nf;}
-   
-    if ( $nf>0 && $jpg>0 && $nf > 20 && $ratio>0.8)
-    {
-
-	print "$d -- $jpg -- $nf\n";
-	if (-e "./tmpBD")    {rmtree ("./tmpBD");}
-	if (-e "./tmpBD.zip"){unlink  ("./tmpBD.zip");}
-	rcopy ($d, "tmpBD");
-	system ("zip -r tmpBD.zip tmpBD");
-	if ( -e "./tmpBD.zip" && -s "./tmpBD.zip">100)
-	{
-	    copy ("./tmpBD.zip", "$d\.zip");
-	    rmtree ($d);
-	}
-	else
-	{
-	    print "Failed at creating the zip\n";
-	    exit(0);
-	}
-	
-    }
-    return;
-}
-
-
-
-    
-sub collect_duplicates
-{
-    #collect all the files in d2 having names in d1 and copy them in d3 
-    my $d1=shift;
-    my $d2=shift;
-    my $d3=shift;
-    print "Read $d1\n";
-    my %l1=rreaddir($d1);
-
-    print "Read $d2\n";
-    my %l2=rreaddir($d2);
-
-    print "find duplicates";
-    my $n=0;
-    
-    foreach my $fn (keys (%l1))
-    {
-	
-	
-	my $n1=$l1{$fn}{'nv'};
-	my $n2=$l2{$fn}{'nv'};
-	if ($n1>0 && $n2>0)
-	  {
-	   my %duplicated;   
-	   for (my $i2=1; $i2<=$n2; $i2++)
-	     {
-	     my $f2=$l2{$fn}{'values'}{$i2};
-	    
-
-	     for (my $i1=1;$i1<=$n1; $i1++)
-	         {
-		 my $f1=$l1{$fn}{'values'}{$i1};
-		 my $s1= -s $f1;
-		 my $s2= -s $f2;
-		     
-		 if ($s1!=$s2){$duplicated{$f2}=$f1;}
-		 }
-	     }
-
-	   foreach my $f2 (keys(%duplicated))
-	   {
-	       if (($f2=~/2023/ || $f2=~/2022/ || $f2=~/2021/ || $f2=~/2020/ || $f2=~/2019/ || $f2=~/2018/ || $f2=~/2017/ || $f2=~/2016/ || $f2=~/2015/ || $f2=~/2014/ || $f2=~/2013/ || $f2=~/2012/) && !( $f2=~/Napoli/ ||  $f2=~/Perou/|| $f2=~/Lisbone/))
-	       {
-		   my $from=$f2;
-		   my $to="/Volumes/Torrent/torename/$n".".".$fn;
-		       
-		   print ("copy $from $to\n");
-		   copy($from, $to);
-		   $n=$n+1;
-	       }
-	   }
-	  }
-    }
-}
-		    
-	
-    
-
-sub rreaddir
-{
-    my $dir=shift;
-    my %list;
-    rreaddir_sub ($dir, \%list);
-    return %list;
-}
-sub rreaddir_sub
-{
-    my $d1=shift;
-    my $list =shift;
-    my $dh1=new DirHandle;
-    opendir ($dh1, $d1);
-    my @l1=readdir($dh1);
-    closedir($dh1);
-    
-    print "---- Process $d1\n";
-    foreach my $d2 (@l1)
-    {
-	if ($d2 eq "." || $d2 eq ".." || $d2 eq ".DS_Store"){;}
-	elsif (-d "$d1/$d2")
-	   {
-	    
-	    rreaddir_sub ("$d1/$d2",$list);
-	   }
-	else
-	{
-	    if ($list->{$d2})
-	        {
-		my $v=$list->{$d2}{'nv'}+1;
-		$list->{$d2}->{'nv'}=$v;
-		$list->{$d2}->{'values'}{$v}="$d1/$d2";
-		#print "$d1/$d2\n";
-		}
-	    else
-	        {
-		$list->{$d2}->{'nv'}=1;
-		$list->{$d2}->{'values'}{1}="$d1/$d2";
-	        }
-	} 
-      }
-    return $list;
-}
-    
 sub rec_clean_itune
   {
     my $d1=shift;
@@ -2485,16 +2076,14 @@ sub dirsync
     my (@in)=@_;
     my ($from_dir, $to_dir)=@in;
     my ($press_dir, $ignore);
-    my $disc="Movies7"; # used to be Movies3
+    my $disc="Movies6"; # used to be Movies3
     my $synced=0;
     
-    #if ($from_dir eq "reset"){return flag2unset();}
-    #if (flag2status()&& $MASTER==1){return 0;}
+    if ($from_dir eq "reset"){return flag2unset();}
+    if (flag2status()&& $MASTER==1){return 0;}
     
     flag2set();
     $MASTER=0;
-
-    
     
     $press_dir="/Users/cnotredame/Dropbox/presse";
     $from_dir="/Volumes/Torrent/Download/download.raw/";
@@ -2878,18 +2467,3 @@ sub flag2status
 		 if (-e $FLAG){return 1;}
 		 return 0;
 	       }
-sub generate_random_string
-{
-	my $length_of_randomstring=shift;# the length of 
-			 # the random string to generate
-
-	my @chars=('a'..'z','A'..'Z','0'..'9','_');
-	my $random_string;
-	foreach (1..$length_of_randomstring) 
-	{
-		# rand @chars will generate a random 
-		# number between 0 and scalar @chars
-		$random_string.=$chars[rand @chars];
-	}
-	return $random_string;
-}

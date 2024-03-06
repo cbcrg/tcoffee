@@ -1,4 +1,4 @@
-#include <stdio.h> 
+#include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 #include <stdarg.h>
@@ -7495,6 +7495,24 @@ NT_node reset_bs2 (NT_node T)
   T->bootstrap=0;
   return T;
 }
+NT_node absolutebs2relativebs (NT_node T, int tot)
+{
+  
+  if (!T || !tot) return T;
+  T->bootstrap=(T->bootstrap/tot)*100;
+  absolutebs2relativebs(T->left,tot);
+  absolutebs2relativebs(T->right,tot);
+  return T;
+}
+NT_node relativebs2absolutebs (NT_node T, int tot)
+{
+  
+  if (!T) return T;
+  T->bootstrap=(T->bootstrap/100)*tot;
+  relativebs2absolutebs(T->left,tot);
+  relativebs2absolutebs(T->right,tot);
+  return T;
+}
 
 NT_node combine_bs(NT_node T1, NT_node T2, char *mode)
 {
@@ -7520,6 +7538,9 @@ NT_node combine_bs(NT_node T1, NT_node T2, char *mode)
   else T1->bootstrap=sqrt(b1*b2);
   return T1;
 }
+
+
+
 
 
 char*tree2node_support_simple (char *newick_tree, Alignment *T,float *bs)
