@@ -75,6 +75,12 @@ for ($a=0; $a<@ARGV; $a++)
       {
 	$action=$v;
       }
+    elsif ($v eq "-copy_flist")
+      {
+	  $action=$v;
+	  $from_dir=$ARGV[++$a];
+	  $to_dir=$ARGV[++$a];
+      }
     elsif ($v eq "-ipad")
       {
 	$action=$v;
@@ -564,7 +570,11 @@ elsif($action eq "-renumber")
 	      }
 	  }
       }
-
+elsif       ($action eq "-copy_flist")
+  {
+    copy_flist($from_dir, $to_dir);
+    die;
+  }
 elsif       ($action eq "-ipad")
   {
     ipadsync($from_dir, $to_dir);
@@ -1971,6 +1981,22 @@ sub rec_flac2mp3
       }
     return ;
   }
+sub copy_flist
+{
+    my $file=shift;
+    my $dir=shift;
+
+    open (F, $file);
+    while (<F>)
+    {
+	$f=$_;
+	chomp ($f);
+	print "$f\n";
+	copy ($f, $dir);
+    }
+  return;
+  }  
+	
 sub ipadsync
   {
     my ($root)=@_;

@@ -7469,6 +7469,22 @@ void display_compare_bs (char *string, NT_node t1, NT_node t2, int nseq)
     }
   return;
 }
+NT_node    treelistF2node_support (char *list)
+{
+  Sequence *S;
+  Alignment *A;
+  char *treeF;
+  
+  if (!list || !check_file_exists (list))
+    printf_exit ( EXIT_FAILURE,stderr, "\nERROR: %s does not exist",list);
+  treeF=vtmpnam (NULL);
+  S=get_treelist(list);
+  A=seq2aln(S,NULL,NO_PAD);
+  A=treelist2node_support (A);
+  string2file (treeF, "w", "%s", A->seq_al[0]);
+  return main_read_tree (treeF);
+}
+
 Alignment *treelist2node_support (Alignment *T)
 {
   int is_set=0;
@@ -7513,7 +7529,35 @@ NT_node relativebs2absolutebs (NT_node T, int tot)
   relativebs2absolutebs(T->right,tot);
   return T;
 }
+NT_node combine_bsN(int n,NT_node *T,char *mode)
+{
+  float b1, b2;
+  int a;
+  NT_node *LT =(NT_node*)vcalloc (n, sizeof (NT_node));
+  float   *bsl=(float*  )vcalloc (n, sizeof (NT_node));
+  
+  if (!T[0]) return NULL;
+  if (!T[1]) printf_exit ( EXIT_FAILURE,stderr, "\nERROR: Incompatible Trees FATAL]");
 
+  for (a=0; a<n; a++)
+    {
+      LT[a]=T[a];
+      T[a]=T[a]->left;
+    }
+  combine_bsN (n,T, mode);
+  for (a=0; a<n; a++)
+    {
+      T[a]=LT[a];
+      T[a]=T[a]->right;
+    }
+  combine_bsN (n,T, mode);
+  for (a=0; a<n; a++)T[a]=LT[a];
+  for (a=1; a<n; a++)bsl[a-1]=(T[a])->bootstrap;
+ 
+  (T[0])->bootstrap=bs2combo(bsl, n-1, mode);
+  vfree (LT); vfree(bsl);
+  return T[0];
+}
 NT_node combine_bs(NT_node T1, NT_node T2, char *mode)
 {
   float b1, b2;

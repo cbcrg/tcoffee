@@ -1954,12 +1954,12 @@ NT_node    aln2km_tree (Alignment *A, char *mode, int nboot)
 
   
 
-NT_node aln2iqtree_treeF  (Alignment *A, int bs, char *treeF)
+NT_node aln2iqtree_treeF  (Alignment *A, int bs, char *treeF, char *bstF)
 {
   static char *alnF=vtmpnam(NULL);
   char *outF=NULL;
   if (!treeF)treeF=vtmpnam (NULL);
-  
+  if (!bstF )bstF =vtmpnam (NULL); 
   fprintf ( stderr, "---- generate iqtree tree [%d bootstrap cycles]", bs);
   if (!check_program_is_installed ("iqtree",NULL,NULL,"http://www.iqtree.org/",NO_REPORT))printf_exit ( EXIT_FAILURE,stderr, "\nERROR: iqtree must be installed [FATAL]");;
 
@@ -1969,7 +1969,7 @@ NT_node aln2iqtree_treeF  (Alignment *A, int bs, char *treeF)
   if (bs>0)
     {
       NT_node T;
-      printf_system ("iqtree -s %s  -b %d -quiet" ,alnF, bs);
+      printf_system ("iqtree -s %s  -b %d -quiet " ,alnF, bs);
       T=main_read_tree (outF);
       T=relativebs2absolutebs(T,bs);
       string2file (outF, "%s", tree2string (T));
@@ -1977,16 +1977,20 @@ NT_node aln2iqtree_treeF  (Alignment *A, int bs, char *treeF)
   else
     printf_system ("iqtree -s %s  -quiet" ,alnF);
 
-  HERE ("Copy %s.treefile to cedric", alnF);
-  printf_system ("cp %s.treefile cedric",alnF); 
-  
-  
+    
   if ( check_file_exists(outF))
     {
-      printf_system ("rm %s.iqtree",alnF);
+      
       printf_system ("rm %s.mldist",alnF);
+      printf_system ("rm %s.bionj",alnF);
+      printf_system ("rm %s.ckp.gz",alnF);
+      printf_system ("rm %s.contree",alnF);
+      printf_system ("rm %s.iqtree",alnF);
       printf_system ("rm %s.log",alnF);
+      printf_system ("rm %s.model.gz",alnF);
       printf_system ("mv %s.treefile %s", alnF,treeF);
+      if (bs>0)printf_system ("mv %s.boottrees  %s", alnF,bstF);
+      
     }
   else
     printf_exit ( EXIT_FAILURE,stderr, "\nERROR: could not run iqtree on the provided data [FATAL]");
@@ -1995,20 +1999,21 @@ NT_node aln2iqtree_treeF  (Alignment *A, int bs, char *treeF)
   return main_read_tree(treeF);
 }
 
-NT_node aln2fastme_treeF  (Alignment *A, int bs, char *treeF)
+NT_node aln2fastme_treeF  (Alignment *A, int bs, char *treeF, char *bstF)
 {
   static char *alnF=vtmpnam(NULL);
   static char *odm=vtmpnam (NULL);
   if (!treeF)treeF=vtmpnam (NULL);
+  if (!bstF )bstF=vtmpnam (NULL);
   fprintf ( stderr, "---- generate fastme tree [%d bootstrap cycles]", bs);
   if (!check_program_is_installed ("fastme",NULL,NULL,"http://www.atgc-montpellier.fr/fastme",NO_REPORT))printf_exit ( EXIT_FAILURE,stderr, "\nERROR: fastme must be installed [FATAL]");;
   output_phylip_aln (alnF, A, "w");
   
   if (bs>0)
     
-    printf_system ("fastme -i %s  -o %s -m BioNJ -p LG -g 1.0 -s -n -z 5 -b %d -B bst -O %s >/dev/null 2>/dev/null", alnF, treeF,bs,odm);
+    printf_system ("fastme -i %s  -o %s -m BioNJ -p LG -g 1.0 -s -n -z 5 -b %d -B %s -O %s >/dev/null 2>/dev/null", alnF, treeF,bs,bstF,odm);
   else
-    printf_system ("fastme -i %s  -o %s -m BioNJ -p LG -g 1.0 -s -n -z 5  -B bst -O %s >/dev/null 2>/dev/null", alnF, treeF,odm);
+    printf_system ("fastme -i %s  -o %s -m BioNJ -p LG -g 1.0 -s -n -z 5  -B %s -O %s >/dev/null 2>/dev/null", alnF, treeF,bstF,odm);
   fprintf ( stderr, "[DONE]\n");
   return main_read_tree(treeF);
 }

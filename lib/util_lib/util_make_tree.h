@@ -23,9 +23,9 @@ NT_node ** dist2nj_tree (double **distances, char **out_seq_name, int out_nseq, 
 NT_node aln2cw_tree     (Alignment *A);
 NT_node aln2km_tree (Alignment *A, char *mode, int nboot);
 
-NT_node aln2iqtree_treeF  (Alignment *A, int bs, char *treeF);
+NT_node aln2iqtree_treeF  (Alignment *A, int bs, char *treeF, char *bsF);
 int dist2fastme_treeF (double **dm, char **name,int nseq, char *treeF);
-NT_node aln2fastme_treeF  (Alignment *A, int bs, char *treeF);
+NT_node aln2fastme_treeF  (Alignment *A, int bs, char *treeF, char*bstF);
 
 //////////////////////////////////////////////////////////////////////////////
 //
