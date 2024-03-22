@@ -4,6 +4,7 @@
 #include <stdarg.h>
 #include <string.h>
 #include <ctype.h>
+#include <stdint.h>
 #include <cstdint>  // For uint32_t
 #include "io_lib_header.h"
 #include "util_lib_header.h"
