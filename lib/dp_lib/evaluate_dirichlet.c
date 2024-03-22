@@ -468,7 +468,10 @@ w5  =  8.36339918996282139126e-04, /* 0x3F4B67BA, 0x4CDAD5D1 */
 w6  = -1.63092934096575273989e-03; /* 0xBF5AB89D, 0x0B9E43E4 */
 
 static const double zero=  0.00000000000000000000e+00;
-#ifdef NEW_SIN_PI
+static double sin_pi(double x) {return sin(x * M_PI);}
+
+
+#ifdef EFFICIENT_SIN_PI
 static double sin_pi(double x) {
     double y, z;
     int n;
@@ -514,7 +517,7 @@ static double sin_pi(double x) {
     return -y;
 }
 #endif
-
+#ifdef OLD_SIN_PI
 static double sin_pi(double x)
 {
         double y,z;
@@ -560,7 +563,7 @@ static double sin_pi(double x)
             }
         return -y;
 }
-
+#endif
 
 double lgamma2 ( double x)
 {
