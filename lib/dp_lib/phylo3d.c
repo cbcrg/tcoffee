@@ -1,5 +1,5 @@
 
-#include <stdio.h> 
+#include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 #include <stdarg.h>
@@ -11,9 +11,170 @@
 #include "define_header.h"
 #include "dp_lib_header.h"
 
-int dist2fastme_treeF (double **dm, char **name,int nseq, char *treeF);
-int aln2fastme_treeF  (Alignment *A, int bs, char *treeF);
-Alignment * multistrap  (Alignment *inA,char *RTF,Constraint_list *CL)
+int compare4phylo3d(const void *a, const void *b);
+// A structure to hold labeled data
+typedef struct LabeledData{
+    double score; // Model's score or probability for being positive
+    int label;    // Actual label (0 or 1)
+};
+typedef struct LabeledData LabeleddData;
+
+
+//// AUC for phylo3d
+int splits2npp(int n, float **ns);
+float splits2auc (int n, float **ns);
+double calculateAUC(LabeledData *data, int n);
+void clean_pp (float ***** ns, int ***nn);
+int set_pp (char *family, int nseq,float ***** sl, char ***** splits, int ***nn, char *mode);
+
+Alignment * multistrap  (Alignment *inA,Constraint_list *CL,int nbsF,char **inbsF) 
+{
+  //will only keep the sequences whose structure is known
+  int a,b;
+  char *meF,*mlF,*imdF, **bsF;
+  Alignment *A=NULL;
+  p3D *D;
+  NT_node *TREE;
+  int nrep;
+  char *multistrap_mode=NULL;
+  
+  meF=mlF=imdF=NULL;
+  bsF =(char**)vcalloc   (nbsF, sizeof (char*));
+  TREE=(NT_node*)vcalloc (nbsF, sizeof (NT_node));
+  bsF[0]=inbsF[0];
+		 
+
+   if (getenv ("REPLICATES_4_TCOFFEE"))
+    {
+      if ( strm (getenv ("REPLICATES_4_TCOFFEE"), "columns"))nrep=inA->len_aln;
+      else nrep=atoigetenv ("REPLICATES_4_TCOFFEE");
+    }
+   else
+     nrep=100;
+
+   if (getenv ("MULTISTRAP_MODE"))multistrap_mode=csprintf (NULL,"%s",getenv("MULTISTRAP_MODE"));
+   else multistrap_mode=csprintf (NULL, "average");
+   
+  //1 - generate the required replicates and possibly the reference trees
+  for (a=1; a<nbsF; a++)
+    {
+      if (check_file_exists(bsF[a]))
+	bsF[a]=inbsF[a];
+      else if (strm (inbsF[a], "me"))
+	{
+	  bsF[a]=vtmpnam  (NULL);
+	  meF=vtmpnam (NULL);
+	  
+	  aln2fastme_treeF (inA, nrep,meF,bsF[a]);
+	}
+      else if (strm (inbsF[a], "ml"))
+	{
+	  bsF[a]=vtmpnam  (NULL);
+	  mlF=vtmpnam (NULL);
+	  aln2iqtree_treeF (inA, nrep,mlF,bsF[a]);
+	}
+      else if (strm (inbsF[a], "imd"))
+	{
+	  bsF[a]=vtmpnam  (NULL);
+	  imdF=vtmpnam (NULL);
+	  
+	  A=aln2trim3d(inA, CL);
+	  
+	  if (!A)printf_exit ( EXIT_FAILURE,stderr, "\nERROR: No contact information could be gathered for any sequence  [FATAL]");  
+	  D=fill_p3D(A, CL);
+	  D->N=filter_columns_with_gap  (D->col, A, D->max_gap);
+	  if (D->maxd<MY_EPSILON)D->maxd=scan_maxd(D);
+	  D->N=filter_columns_with_dist (A,D->pos, D->col,D->dm3d,D->maxd);
+	  makerep (D,0);
+	  aln2dm(D,A);  
+	  fprintf ( stderr, "---- generate imd tree [%d bootstrap cycles]", nrep);
+	  dist2fastme_treeF (D->dm, A->name, A->nseq, imdF);
+	  
+	  for (b=0; b<nrep; b++)
+	    {
+	      static char *treeF=vtmpnam(NULL);
+	      makerep (D,2);
+	      aln2dm(D,A);
+	      dist2fastme_treeF (D->dm, A->name, A->nseq, treeF);
+	      string2file(bsF[a],"a" "%s", file2string (treeF));
+	    }
+	}
+    }
+    
+ 
+  //2 - collect the reference tree on which the bs will be estimated
+  if (check_file_exists (bsF[0]));
+  else if (strm (bsF[0], "ml"))
+    {
+      if   (!mlF)
+	{
+	  bsF[0]=vtmpnam(NULL);
+	  aln2fastme_treeF (inA,0,bsF[0],NULL);
+	}
+      else bsF[0]=mlF;
+    }
+  else if ( strm (bsF[0],"me"))
+    {
+      if   (!meF)
+	{
+	  bsF[0]=vtmpnam(NULL);
+	  aln2iqtree_treeF (inA,0,bsF[0],NULL);
+	}
+      else bsF[0]=meF;
+    }
+  else if ( strm (bsF[0],"imd"))
+    {
+      if   (!imdF)
+	{
+	  bsF[0]=vtmpnam(NULL);
+	  A=aln2trim3d(inA, CL);
+	  if (!A)printf_exit ( EXIT_FAILURE,stderr, "\nERROR: No contact information could be gathered for any sequence  [FATAL]");  
+	  D=fill_p3D(A, CL);
+	  D->N=filter_columns_with_gap  (D->col, A, D->max_gap);
+	  if (D->maxd<MY_EPSILON)D->maxd=scan_maxd(D);
+	  D->N=filter_columns_with_dist (A,D->pos, D->col,D->dm3d,D->maxd);
+	  makerep (D,0);
+	  aln2dm(D,A);  
+	  dist2fastme_treeF (D->dm, A->name, A->nseq,bsF[0]);
+	}
+      else bsF[0]=imdF; 
+    }
+  //This is the reference tree in which the new BS will be added
+  TREE[0]=main_read_tree(bsF[0]);
+
+  for ( a=1; a<nbsF; a++)
+    {
+      Sequence  *BTS=NULL;
+      Alignment *BTA=NULL;
+      static char *treeF=vtmpnam (NULL);
+      static char *tmpF =vtmpnam (NULL);
+      NT_node t=main_read_tree (bsF[0]);
+      reset_bs2(t);
+      string2file (treeF,"w", "%s",tree2string(t));
+      
+      printf_system ("cat %s %s > %s",treeF, bsF[a], tmpF); 
+      BTS=get_treelist(tmpF);
+      BTA=seq2aln(BTS,NULL,NO_PAD);
+      treelist2node_support(BTA);
+      string2file (treeF, "w", "%s", BTA->seq_al[0]);
+      TREE[a]=main_read_tree (treeF);
+    }
+  
+  //The combined BS gets added to TREE[0]
+  combine_bsN(nbsF,TREE, multistrap_mode);
+
+  fprintf     ( stdout, "\n");
+  //Print the other way round so that the combined BS is at the bottom
+  for (a=nbsF-1; a>=0; a--)
+    {
+      if (a==0)fprintf ( stdout, "# Reference Tree [%s] with bootsraps added by combining the others, using the %s multistrap mode\n", inbsF[a], multistrap_mode);
+      else fprintf     ( stdout, "# [%s] tree\n", inbsF[a]);
+      fprintf ( stdout, "%s", tree2string (TREE[a]));
+    }
+  exit (EXIT_SUCCESS);
+}
+
+Alignment * multistrap_old  (Alignment *inA,char *RTF,Constraint_list *CL)
 {
   //will only keep the sequences whose structure is known
   static char *treeF=vtmpnam (NULL);
@@ -28,21 +189,26 @@ Alignment * multistrap  (Alignment *inA,char *RTF,Constraint_list *CL)
   FILE *fp;
   int a;
 
-
-  
-
-  if (!RTF || (strm (RTF, "fastme") && !check_file_exists("fastme")))
-    {
-      treeF=vtmpnam (NULL);
-      aln2fastme_treeF (inA, D->replicates,RTF);
-    }
-      
   A=aln2trim3d(inA, CL);
   D=fill_p3D(A, CL);
+  treeF=vtmpnam (NULL);
+  if (RTF &&  (strm (RTF, "iqtree") && !check_file_exists("iqtree")))
+    {
+      aln2iqtree_treeF (inA, D->replicates,treeF,NULL);
+    }
+  else if (!RTF || (strm (RTF, "fastme") && !check_file_exists("fastme")))
+    {
+      aln2fastme_treeF (inA, D->replicates,treeF,NULL);
+    }
+  else
+    {
+      printf_system ("cp %s %s", RTF, treeF);
+    }
+ 
 
-  RT_INITIAL=main_read_tree (RTF);
-  RT_COMBINED=main_read_tree (RTF);
-  RT_PHYLO3D=main_read_tree(RTF);
+  RT_INITIAL=main_read_tree (treeF);
+  RT_COMBINED=main_read_tree (treeF);
+  RT_PHYLO3D=main_read_tree(treeF);
   reset_bs2(RT_PHYLO3D);
   
   
@@ -62,7 +228,7 @@ Alignment * multistrap  (Alignment *inA,char *RTF,Constraint_list *CL)
   
   dist2fastme_treeF (D->dm, A->name, A->nseq, treeF);
   string2file(tree_listF,"w", "%s", tree2string (RT_PHYLO3D));
-
+  
   fprintf ( stderr, "---- generate fastme/phylo3D bootstrap replicates [%d bootstrap cycles]", D->replicates);
   for (a=1; a<=D->replicates; a++)
     {
@@ -82,10 +248,15 @@ Alignment * multistrap  (Alignment *inA,char *RTF,Constraint_list *CL)
   RT_PHYLO3D=main_read_tree (treeF);
 
   combine_bs(RT_COMBINED, RT_PHYLO3D, D->multistrap_mode);
-  fprintf (stderr, "Line 1: fastme boostrapped tree, Line2: fastme/phylo3d bootstrapped tree, Line 3: combined trees [%s]\n",(D->multistrap_mode)?D->multistrap_mode:"geometric");
-  fprintf (stdout,"%s;\n%s;\n%s;\n", tree2string (RT_INITIAL),tree2string (RT_PHYLO3D),tree2string (RT_COMBINED));
+
+  fprintf (stderr, "Line 1: %s tree with Combined bootstraped [%s] - Line 2 %s tree with phylo3D bootstraps Line 3 %s tree with original boostrap\n", RTF, (D->multistrap_mode)?D->multistrap_mode:"geometric", RTF, RTF);
+
+  
+  fprintf (stdout,"%s%s%s", tree2string (RT_INITIAL),tree2string (RT_PHYLO3D),tree2string (RT_COMBINED));
   exit (EXIT_SUCCESS);
 }
+/*
+Old function, now moved in util_make_tree
 int aln2fastme_treeF  (Alignment *A, int bs, char *treeF)
 {
   static char *alnF=vtmpnam(NULL);
@@ -98,6 +269,7 @@ int aln2fastme_treeF  (Alignment *A, int bs, char *treeF)
   fprintf ( stderr, "[DONE]\n");
   return 1;
 }
+
 int dist2fastme_treeF (double **dm, char **name,int nseq, char *treeF)
 {
   static char *dmF=vtmpnam(NULL);
@@ -122,6 +294,8 @@ int dist2fastme_treeF (double **dm, char **name,int nseq, char *treeF)
   
   return 1;
 }
+*/
+
   
 Alignment *phylo3d (Alignment *inA, Constraint_list *CL)
 {
@@ -920,8 +1094,8 @@ double phylo3d2score (double w1, double w2, double *rscore, double *rmax)
   static int   distance_mode;
   static double distance_modeE;
   static int no_weights;
-  //4 - initial measure (1-rlativeDelta)²=> concave function, different from Kimura
-  //7 - more Kimura like: (1-rlativeDelta²)=>convex
+  //4 - initial measure (1-rlativeDelta)Â²=> concave function, different from Kimura
+  //7 - more Kimura like: (1-rlativeDeltaÂ²)=>convex
   //8 - linear rdelta (1-RelativeDelta)
   if (!setparam)
     {
@@ -1048,7 +1222,768 @@ double phylo3d2score (double w1, double w2, double *rscore, double *rmax)
 }
 
 
+//////////////////////////////////////////////////////////////////////
+///                                                              /////
+///                                                              /////
+///       Combined Boostrap Analysis                            /////
+///                                                              /////
+///                                                              /////
+//////////////////////////////////////////////////////////////////////
+
+Sequence * get_phylo3d_seq  (char*family);
+//NT_node get_phylo3d_bm_tree (char*family,char *type, int nbs, Sequence *S);
+NT_node get_phylo3d_bm_tree (char*family,int type, int nbs, int bstype, Sequence *S);
+int tree2splits4phylo3d_bm (NT_node T, int ns,float **sl,char**splits, int* n);
+
+
+int phylo3d_bm ( char *name)
+{
+  NT_node ***T;
+  
+  Sequence *S;
+  float *****sl;
+  char  *****splits;
+  int   ***nn;
+  char **testlist=(char**)vcalloc(100, sizeof (char*));
+  int n_ppformula, n_bsformula, n_cmode,npp,pp, ref, bs, split, cmode;
+  char **ppformula, **bsformula, **cmodelist;
+  char *refS;
+  float *auc;
+  
+  S=get_phylo3d_seq(name);
+
+  
+  T        =(NT_node***  )declare_arrayN(3,sizeof (NT_node),3,3,3);
+  nn       =(int    ***  )declare_arrayN(3,sizeof (int)    ,3,3,3);
+  sl       =(float  *****)declare_arrayN(5,sizeof (float)  ,3,3,3,S->nseq*3,20);
+  splits   =(char   *****)declare_arrayN(5,sizeof (char)   ,3,3,3,S->nseq*3,S->nseq+1);
+  ppformula=(char**)vcalloc (100, sizeof (char*));
+  bsformula=(char**)vcalloc (100, sizeof (char*));
+  cmodelist=(char**)vcalloc (100, sizeof (char*));
+  auc      =(float*)vcalloc (100, sizeof (float));
+
+
+  //Collect all the splits of all the provided trees
+  //assuming: <family><reference trees><boostrap method>
+  //assuming: <family>_<IMD|ME|ML>splits_<IMD|ME|ML>bs<25|100|[empty=200]>.trees
+  //assuming: <family>_<IMD|ME|ML>.trees for the original trees based on 200 columns, and boostrapped on their MSA
+  //In each file, the top tree is the reference <IMD|ME|ML> tree based on 200 columns, followed with a 100 replicates dine according to the boostrap method
+
+  //T[Ref=I,M,L][ncol=25,100,200][bs_support_trees=I,E,L]
+  
+  if (1==1)// Read all the trees
+    {
+      int a, b, c;    
+      for (a=0; a<3; a++)
+	for ( b=0; b<3; b++)
+	  for (c=0; c<3; c++)
+	    T[a][b][c]=get_phylo3d_bm_tree(name,a,b,c, S);
+    }
+  // tree T[ref][ncol4bs][method4bs] contains nn[a][b][c] splits
+  // each split is a 010001 string in splits[a][b][c]
+  // the various characteristics of the splits are in sl[a][b][c][0-nn[a][b][c]][0-..]
+  
+  if (1==1)//collect all the splits
+    {
+      int a, b, c;
+      for (a=0; a<3; a++)//ref
+	for ( b=0; b<3; b++)//ncol for support
+	  for (c=0; c<3; c++)//method for support
+	    {
+	      tree2splits4phylo3d_bm(T[a][b][c],S->nseq,sl[a][b][c],splits[a][b][c], &nn[a][b][c]);
+	    }
+    }
+  
+  /*Set up formula to determine reference branches*/
+  // Methods used to decide on the pp + BS Threshold - as measured on 200 columns
+  // bs defines the threshold for a brnach to be set as PP, ppformula defines the number of methods tha must feature the same branch with a support > BS
+  n_ppformula=0;
+  for (bs=0; bs<3; bs++)
+    {
+      char *bss;
+      if      (bs==0)bss=csprintf (NULL, "000");
+      else if (bs==1)bss=csprintf (NULL, "080");
+      else if (bs==2)bss=csprintf (NULL, "100");
+      
+      ppformula[n_ppformula++]=csprintf (NULL, "I__%s",bss);
+      ppformula[n_ppformula++]=csprintf (NULL, "_E_%s",bss);
+      ppformula[n_ppformula++]=csprintf (NULL, "__L%s",bss);
+      ppformula[n_ppformula++]=csprintf (NULL, "IE_%s",bss);
+      ppformula[n_ppformula++]=csprintf (NULL, "I_L%s",bss);
+      ppformula[n_ppformula++]=csprintf (NULL, "IEL%s",bss);
+      ppformula[n_ppformula++]=csprintf (NULL, "_EL%s",bss);
+      vfree(bss);
+    }
+  
+  //Set up methods to estimate BS: combined methods + number BS
+  //ppformula defines the replicates used estimate the combined support and the number of columns on which these replicates are based
+  n_bsformula=0;
+  for(bs=0; bs<3; bs++)
+    {
+      char *bss;
+      if      (bs==0)bss=csprintf (NULL, "025");
+      else if (bs==1)bss=csprintf (NULL, "100");
+      else if (bs==2)bss=csprintf (NULL, "200");
+      
+      bsformula[n_bsformula++]=csprintf(NULL,"I__%s",bss);
+      bsformula[n_bsformula++]=csprintf(NULL,"_E_%s",bss);
+      bsformula[n_bsformula++]=csprintf(NULL,"__L%s",bss);
+      bsformula[n_bsformula++]=csprintf(NULL,"IE_%s",bss);
+      bsformula[n_bsformula++]=csprintf(NULL,"I_L%s",bss);
+      bsformula[n_bsformula++]=csprintf(NULL,"IEL%s",bss);
+      bsformula[n_bsformula++]=csprintf(NULL,"_EL%s",bss);
+      vfree(bss);
+    }
+
+  n_cmode=0;
+  cmodelist[n_cmode++]=csprintf (NULL,"avg");
+  cmodelist[n_cmode++]=csprintf (NULL,"geo");
+  cmodelist[n_cmode++]=csprintf (NULL,"max");
+  cmodelist[n_cmode++]=csprintf (NULL,"min");
+  
+  
+
+  refS= (char*)vcalloc (3, sizeof (char*));
+  for (cmode=0; cmode<n_cmode; cmode++)
+    {
+      
+      for (pp=0; pp<n_ppformula; pp++)
+	{
+	  // pp have been set according the ppformula rules
+	  // Now each pp branched is marked as sl[reftree][nbs][bstype][split][3]=1
+	  
+	  set_pp(name,S->nseq,sl, splits,nn,ppformula[pp]);
+	  
+	  
+	  for (ref=0; ref<3; ref++)// Reference Tree - Estimated on 200 sites with I/L/E
+	    {
+	      refS=csprintf (refS, "___");
+	      if      (ref==0) refS[0]='I'; //IMD
+	      else if (ref==1) refS[1]='E'; //ME
+	      else if (ref==2) refS[2]='L'; //ML
+	      
+	      //Depending on how pp were collected, the ref tree may have less npp (e.g. if reftree is I and PP=L inter E)
+	      //Topology (sl[a][0][a]==topology(sl[a][1][a]==topology(sl[a][2][a]
+	      //work on sl[a][2][a] by convention as it is the true reference tree with its native bs
+	      
+	      npp =splits2npp (nn[ref][2][ref], sl[ref][2][ref]);
+	      if ( npp>0 && npp<S->nseq)
+		{
+		  for (bs=0; bs<n_bsformula; bs++)
+		    {
+		      int bsbin=bsformula[bs][3]-'0';
+		      
+		      for (split=0; split<nn[ref][2][ref]; split++)
+			{
+			  //float newbs=0;
+			  //int nbs=0;
+			  
+			  //if (bsformula[bs][0]=='I'){newbs+=sl[ref][bsbin][0][split][2];nbs++;}
+			  //if (bsformula[bs][1]=='E'){newbs+=sl[ref][bsbin][1][split][2];nbs++;}
+			  //if (bsformula[bs][2]=='L'){newbs+=sl[ref][bsbin][2][split][2];nbs++;}
+			  //sl[ref][bsbin][ref][split][4]=newbs/(float)nbs;
+			  int ncbs=0;
+			  float cbs[3];
+			  
+			  if (bsformula[bs][0]=='I')cbs[ncbs++]=sl[ref][bsbin][0][split][2];
+			  if (bsformula[bs][1]=='E')cbs[ncbs++]=sl[ref][bsbin][1][split][2];
+			  if (bsformula[bs][2]=='L')cbs[ncbs++]=sl[ref][bsbin][2][split][2];
+			  
+			  sl[ref][bsbin][ref][split][4]=bs2combo(cbs, ncbs, cmodelist[cmode]);
+			}
+		      auc[bs]=splits2auc(nn[ref][bsbin][ref], sl[ref][bsbin][ref]);
+		    }
+		  //Display AUC - the float values of the AUCs
+		  fprintf ( stdout,"AUC family: %-20s cmode: %s ref: %s ppmode: %s npp: %d bs: ", name, cmodelist[cmode],refS, ppformula[pp],npp); 
+		  for (bs=0; bs<n_bsformula; bs++)
+		    {
+		      fprintf (stdout,"%s %.2f %d %d ",bsformula[bs],auc[bs], (auc[bs]>0.99999)?1:0, 4*(bs+1)-2+10);
+		    }
+		  fprintf (stdout, "\n");
+		}
+	    }
+	}
+    }
+  exit (0);
+
+}
+
+float bs2combo(float *cbs, int n, char *mode)
+{
+  int a;
+  float newbs;
+  
+  newbs=0;
+  if (n==0)return 0;
+  else if (strm (mode, "average"))
+    {
+      for (a=0; a<n; a++)newbs+=cbs[a];
+      newbs/=(float)n;
+    }
+  else if ( strm (mode, "min"))
+    {
+      newbs=cbs[0];
+      for ( a=0; a<n; a++)
+	if (cbs[a]<newbs)newbs=cbs[a];
+    }
+  else if ( strm (mode, "max"))
+    {
+      newbs=cbs[0];
+      for (a=0; a<n; a++)
+	if (cbs[a]>newbs)newbs=cbs[a];
+    }
+  else if ( strm (mode, "geometric"))
+    {
+      for (a=0; a<n; a++)
+	{
+	  if (cbs[a]<0.0001) return 0;
+	  else newbs+= log((double)cbs[a]);
+	}
+      newbs=(float)exp(double(newbs/(float)n));
+    }
+  return newbs;
+  
+}  
+	    
+	
+
+Sequence * get_phylo3d_seq  (char*family)
+{
+  Sequence *S;
+  char *treelist=csprintf (NULL, "%s_%s.trees",family, "IMD");
+  S=get_treelist (treelist);
+  return tree2seq(newick_string2tree(S->seq[0]), NULL);
+}
 
 
 
+
+NT_node get_phylo3d_bm_tree (char*family,int type, int ncol, int bstype, Sequence *S)
+{
+  static char *treelist;
+  static char *typeS;
+  static char *ncolS;
+  static char *bstypeS;
+  NT_node T;
+
+  if (type == bstype && ncol==2)
+    {
+      if      (type==0)treelist=csprintf (treelist, "%s_IMD.trees",family);
+      else if (type==1)treelist=csprintf (treelist, "%s_ME.trees",family);
+      else if (type==2)treelist=csprintf (treelist, "%s_ML.trees",family);
+    }
+  else
+    {  
+      if      (type==0)typeS=csprintf (typeS, "IMDsplits");
+      else if (type==1)typeS=csprintf (typeS, "MEsplits");
+      else if (type==2)typeS=csprintf (typeS, "MLsplits");
+      
+      
+      if      (ncol==0)ncolS=csprintf (ncolS, "25");
+      else if (ncol==1)ncolS=csprintf (ncolS, "100");
+      else if (ncol==2)ncolS=csprintf (ncolS, "");
+
+      
+
+      
+      if      (bstype==0)bstypeS=csprintf (bstypeS, "IMDbs");
+      else if (bstype==1)bstypeS=csprintf (bstypeS, "MEbs");
+      else if (bstype==2)bstypeS=csprintf (bstypeS, "MLbs");
+
+      treelist=csprintf (treelist,"%s_%s_%s%s.trees", family,typeS,bstypeS,ncolS);
+    }
+
+  if ( check_file_exists (treelist)==0)
+    {
+      printf_exit ( EXIT_FAILURE,stderr, "\nERROR: %s does not exist [FATAL]", treelist);
+    }
+
+  T=treelistF2node_support (treelist);
+  T=prune_tree(T,S);
+  T=recode_tree(T,S);
+  return T;
+
+}
  
+
+
+int tree2splits4phylo3d_bm (NT_node T, int ns,float **sl,char**splits, int* n)
+{
+  if (!T)  return 0;
+  if (!sl) return 0;
+
+  tree2splits4phylo3d_bm(T->right, ns, sl, splits,n);
+  tree2splits4phylo3d_bm(T->left , ns, sl, splits,n);
+
+  if (!T->right) return 1;
+  else if (T->parent && !(T->parent)->parent)return 1;
+  else if ( T->dist==0)return 1;
+  else
+    {
+      int flip=T->lseq2[0];
+      int a;
+      int depth=0;
+      for (a=0; a< ns; a++)
+	{
+	  splits[n[0]][a]=(flip==1)?T->lseq2[a]+'0':1-T->lseq2[a]+'0';
+	  depth+=T->lseq2[a];
+	}
+      
+      splits[n[0]][a]='\0';
+      sl[n[0]][0]=T->dist;
+      sl[n[0]][1]=MIN((ns-depth), depth);
+      sl[n[0]][2]=T->bootstrap;
+      n[0]++;
+
+    }
+  return 1;
+}
+
+
+
+
+
+
+void clean_pp (float *****sl, int ***nn)
+{
+  int a, b, c,d;
+  for ( a=0; a<3; a++)
+    for (b=0; b<3; b++)
+      for (c=0; c<3; c++)
+	for ( d=0; d<nn[a][b][c]; d++)
+	  sl[a][b][c][d][3]=0;
+  return;
+}
+int set_pp (char *family, int nseq,float ***** sl, char ***** splits, int ***nn, char *teststring) 
+{
+  //imd is 0 me is 1, ml is 2
+  // 25 columns is 0, 100 columns is 2, 200 columns is 2
+  //set the pp according to the agreement of imd, me, ml on the 200 trees (ns[imd/me/ml][2][imd/me/ml]
+  // sl..[0] branch lentgh
+  // sl..[1] depth
+  // sl..[2] native bs
+  // sl..[3] PP mark (1 if PP)
+  // sl..[4] will contained the combined bs
+  
+  int imd, me, ml, bs;
+  int a, b, c, d, e,f,g,t;
+  int passed;
+  char *rb;
+  int   depth;
+  int npp=0;
+
+  imd=me=ml=0;
+  if (teststring[0]=='I')imd=1;
+  if (teststring[1]=='E')me=1;
+  if (teststring[2]=='L')ml=1;
+  bs=atoi(teststring+3);
+
+  
+  clean_pp(sl, nn);
+  for (a=0; a<nn[0][2][0]; a++)
+    for ( b=0; b<nn[1][2][1]; b++)
+      for ( c=0; c<nn[2][2][2]; c++)
+	{
+	  char  *b1=splits[0][2][0][a];
+	  float bs1   = sl[0][2][0][a][2];
+	  
+	  char  *b2=splits[1][2][1][b];
+	  float bs2=    sl[1][2][1][b][2];
+	  
+	  char  *b3=splits[2][2][2][c];
+	  float bs3=    sl[2][2][2][c][2];
+	  
+	  passed=0;
+	  if ( imd && me && ml)
+	    {
+	      if (bs1>=bs && bs2>=bs && bs3>=bs && strm (b1,b2) && strm (b1, b3))
+		{
+		  passed=1;
+		  rb=b1;
+		}
+	    }
+	  else if ( imd && me)
+	    {
+	       if (bs1>=bs && bs2>=bs  && strm (b1,b2))
+		 {
+		   passed=1;
+		   rb=b1;
+		 }
+	    }
+	  else if ( imd && ml)
+	    {
+	      if (bs1>=bs && bs3>=bs  && strm (b1,b3))
+		 {
+		   passed=1;
+		   rb=b1;
+		 }
+	    }
+	  else if ( me && ml)
+	    {
+	      if (bs2>=bs && bs3>=bs  && strm (b2,b3))
+		 {
+		   passed=1;
+		   rb=b2;
+		 }
+	    }
+	  else if (imd)
+	    {
+	      if (bs1>=bs)
+		 {
+		   passed=1;
+		   rb=b1;
+		 }
+	    }
+	  else if (me)
+	    {
+	      if (bs2>=bs)
+		 {
+		   passed=1;
+		   rb=b2;
+		 }
+	    }
+	  else if (ml)
+	    {
+	      if (bs3>=bs)
+		 {
+		   passed=1;
+		   rb=b3;
+		 }
+	    }
+	  
+	  if (passed) 
+	    {
+	      for (d=0; d<3; d++)
+		for (e=0; e<3; e++)
+		  for (f=0; f<3; f++)
+		    for (g=0; g<nn[d][e][f]; g++)
+		      {
+			if (strm (rb, splits[d][e][f][g]))sl[d][e][f][g][3]=1;
+		      }
+	    }
+	}
+  // All the original trees may OR may not contain the split that has just been identified
+  // This reporting makes it possible to collect the PP associated with a ppmode that collects specific splits across the references
+  // for instance I+E may reprt 200 branches, but if L is the refernce tree, it may only contains 150 of these branches thus leading to 150 trees being reported as PP for ref: __L ppmode: IE_080
+  for (a=0; a<3; a++)
+    {
+      for (b=0; b<nn[a][0][0]; b++)
+	{
+	  if (sl[a][0][0][b][3]==1)
+	    {
+	      char ref[10];
+	      depth=sl[a][0][0][b][1];
+	      if (a==0)      sprintf (ref, "I__");
+	      else if ( a==1)sprintf (ref, "_E_");
+	      else if ( a==2)sprintf (ref, "__L");
+	      
+	      fprintf ( stdout, "PPLIST family: %-10s nseq: %d ref: %s ppmode: %s split: %s depth: %3d rdepth: %.2f\n",family, nseq,ref,teststring,splits[a][0][0][b],depth, (float)((float)(2*depth)/(float)(nseq)));
+	    }
+	}
+    }
+  
+  return 1;
+}
+
+int splits2npp  (int nnodes, float **nodes)
+{
+  int a;
+  int npp=0;
+  for (a=0; a<nnodes; a++)
+    npp+=(nodes[a][3]>0.01)?1:0;
+  return npp;
+}
+  
+
+
+
+
+///////////////////////////////// Test //////////////////////////////////////////////
+int phylo3d_bm_test ( char *name)
+{
+  NT_node ***T;
+  
+  Sequence *S;
+  float *****sl;
+  char  *****splits;
+  int   ***nn;
+  char **testlist=(char**)vcalloc(100, sizeof (char*));
+  int n_ppformula, n_bsformula, npp,pp, ref, bs, split;
+  char **ppformula, **bsformula;
+  char *refS;
+  float *auc;
+  
+  S=get_phylo3d_seq(name);
+
+  
+  T        =(NT_node***  )declare_arrayN(3,sizeof (NT_node),3,3,3);
+  nn       =(int    ***  )declare_arrayN(3,sizeof (int)    ,3,3,3);
+  sl       =(float  *****)declare_arrayN(5,sizeof (float)  ,3,3,3,S->nseq*3,20);
+  splits   =(char   *****)declare_arrayN(5,sizeof (char)   ,3,3,3,S->nseq*3,S->nseq+1);
+  ppformula=(char**)vcalloc (100, sizeof (char*));
+  bsformula=(char**)vcalloc (100, sizeof (char*));
+  auc      =(float*)vcalloc (100, sizeof (float));
+
+  if (1==1)// Read all the trees
+    {
+      int a, b, c;    
+      for (a=0; a<3; a++)
+	for ( b=0; b<3; b++)
+	  for (c=0; c<3; c++)
+	    T[a][b][c]=get_phylo3d_bm_tree(name,a,b,c, S);
+    }
+  
+  if (1==1)//collect all the splits
+    {
+      int a, b, c;
+      for (a=0; a<3; a++)
+	for ( b=0; b<3; b++)
+	  for (c=0; c<3; c++)
+	    {
+	      tree2splits4phylo3d_bm(T[a][b][c],S->nseq,sl[a][b][c],splits[a][b][c], &nn[a][b][c]);
+	    }
+    }
+  
+  /*Set up formula to determine reference branches*/
+  // Methods used to decide on the pp + BS Threshold - as measured on 200 columns
+  n_ppformula=0;
+  ppformula[n_ppformula++]=csprintf (NULL, "IEL080");
+  set_pp (name, S->nseq,sl, splits,nn,ppformula[pp]);
+  n_bsformula=0;
+  bsformula[n_bsformula++]=csprintf(NULL,"I__025");
+  bsformula[n_bsformula++]=csprintf(NULL,"_E_025");
+  bsformula[n_bsformula++]=csprintf(NULL,"__L025");
+  bsformula[n_bsformula++]=csprintf(NULL,"IE_025");
+  bsformula[n_bsformula++]=csprintf(NULL,"I_L025");
+  bsformula[n_bsformula++]=csprintf(NULL,"_EL025");
+  bsformula[n_bsformula++]=csprintf(NULL,"IEL025");
+  
+  ref=0;
+  npp =splits2npp (nn[0][0][0], sl[0][0][0]);
+  
+  
+  if (npp>0 && npp<S->nseq)
+    {
+      fprintf ( stdout,"%-20s -- %2d pp %d seq -- %s%d%d%d ---", name,npp, S->nseq,"IEL",0, 0, 0);
+      for (bs=0; bs<n_bsformula; bs++)
+	{
+	  int bsbin=bsformula[bs][3]-'0';
+	  
+	  float newbs=0;
+	  int  nbs=0;
+	  for (split=0; split<nn[ref][2][ref]; split++)
+	    {
+	      nbs=0;
+	      newbs=0;
+	      if (bsformula[bs][0]=='I'){newbs+=sl[ref][bsbin][0][split][2];nbs++;}
+	      if (bsformula[bs][1]=='E'){newbs+=sl[ref][bsbin][1][split][2];nbs++;}
+	      if (bsformula[bs][2]=='L'){newbs+=sl[ref][bsbin][2][split][2];nbs++;}
+	      sl[ref][bsbin][ref][split][4]=newbs/nbs;
+	      //if ( strm (bsformula[bs], "IML025"))HERE ("%2d %2d --- %3d %s\n",split, (int)sl[ref][bsbin][ref][split][2],(int)sl[ref][bsbin][ref][split][4],splits[ref][bsbin][ref][split]);
+	    }
+	  
+	  fprintf (stdout, " %.2f",splits2auc(nn[ref][bsbin][ref], sl[ref][bsbin][ref]));
+	}
+      fprintf (stdout, "\n");
+    }
+  
+  exit (0);
+
+}
+
+//////////////////////  AUC
+
+
+float splits2auc(int nnodes, float **nodes)
+{
+  static LabeledData *data=(LabeledData *) vcalloc (nnodes*2, sizeof (LabeledData));
+  int a;
+  
+  for (a=0; a<nnodes; a++)
+    {
+      //fprintf (stderr, "\t %d %f\n", (int)nodes[a][3],nodes[a][4]); 
+      data[a].label=(nodes[a][3]>0.01)?1:0;
+      data[a].score=(double)nodes[a][4];
+    }
+  int n = nnodes;
+    
+    // Sort the data by scores in descending order
+    qsort(data, n, sizeof(LabeledData), compare4phylo3d);
+    //for (a=0; a<n; a++)
+    //  HERE ("Sample %d %f", data[a].label,data[a].score);
+    
+   
+    // Calculate and print the AUC
+    double auc = calculateAUC(data, n);
+    return (float)auc;
+}
+int compare4phylo3d(const void *a, const void *b) {
+    LabeledData *dataA = (LabeledData *)a;
+    LabeledData *dataB = (LabeledData *)b;
+    if (dataB->score > dataA->score) return 1;
+    if (dataB->score < dataA->score) return -1;
+    return 0;
+}
+double calculateAUC_1(LabeledData *data, int n);
+double calculateAUC_2(LabeledData *data, int n);
+double calculateAUC(LabeledData *data, int n) 
+  {
+    double auc1,auc2,auc;
+    //auc1=calculateAUC_1(data,n);
+    auc2=calculateAUC_2(data,n);
+    //if ( auc!=calculateAUC_2(data,n))
+    //  exit (0);
+    //HERE ("%.2f %.2f", (float) auc1, (float) auc2);
+    return auc2;
+  }
+
+double calculateAUC_1(LabeledData *data, int n)
+{
+  
+    double auc = 0.0, prev_fpr = 0.0, prev_tpr = 0.0, tpr = 0.0, fpr = 0.0;
+    int tp = 0, fp = 0, positives = 0, negatives = 0;
+    
+    for (int i = 0; i < n; i++) {
+        if (data[i].label == 1) positives++;
+        else negatives++;
+    }
+    
+    for (int i = 0; i < n; i++) {
+        if (data[i].label == 1) tp++;
+        else fp++;
+
+        tpr = (double)tp / positives;
+        fpr = (double)fp / negatives;
+
+        if (fp == 0 && tp > 0) { // Start of ROC curve (0,0) to (0,1)
+            prev_tpr = tpr;
+            continue;
+        }
+
+        if (i > 0 || (fp > 0 && tp > 0)) { // Avoid division by zero and ensure movement on ROC
+            auc += (fpr - prev_fpr) * (tpr + prev_tpr) / 2.0;
+            prev_fpr = fpr;
+            prev_tpr = tpr;
+        }
+    }
+
+    return auc;
+}
+
+double calculateAUC_3(LabeledData *data, int n)
+{
+  int i, item,positives, negatives;
+  int tt, tf, ft, ff;
+  int total_true_0, total_true_1;
+  double sens, spec, tpf, fpf, tpf_prev, fpf_prev, roc_area;
+
+  i=item=positives=negatives=tt=tf=ff=ft;
+  tpf=fpf=tpf_prev=fpf_prev=sens=spec=roc_area=0;
+  
+  for (i = 0; i < n; i++) {
+        if (data[i].label == 1) positives++;
+        else negatives++;
+  }
+
+  for (i=0; i<n; i++)
+    {
+      HERE ( "------- Labels: %d", data[i].label);
+    }
+  
+    tt=0;
+    tf=positives;
+    ft=0;
+    ff=negatives;
+
+    sens = ((double) tt) / ((double) (tt+tf));
+    spec = ((double) ff) / ((double) (ft+ff));
+    tpf = sens;
+    fpf = 1.0 - spec;
+    
+    roc_area = 0.0;
+    tpf_prev = tpf;
+    fpf_prev = fpf;
+
+  for (item=0; item<n; item++)
+    {
+      tt+= data[item].label;
+      tf-= data[item].label;
+      ft+= 1 - data[item].label;
+      ff-= 1 - data[item].label;
+      
+      sens = ((double) tt) / ((double) (tt+tf));
+      spec = ((double) ff) / ((double) (ft+ff));
+
+     
+      
+      tpf  = sens;
+      fpf  = 1.0 - spec;
+
+      if ( item < n-1 )
+	if ( data[item].score != data[item-1].score )
+	  {
+	    
+	    roc_area+= 0.5*(tpf+tpf_prev)*(fpf-fpf_prev);
+	    HERE ("         Sen: %.2f Spe: %.2f ---- %.2f --- %.2f  --- %d ",sens, spec, 0.5*(tpf+tpf_prev)*(fpf-fpf_prev),data[item].score, data[item].label );
+	    tpf_prev = tpf;
+	    fpf_prev = fpf;
+	    
+	  }
+
+      if ( item == n-1 )
+	{
+	  HERE ("*************");
+	  roc_area+= 0.5*(tpf+tpf_prev)*(fpf-fpf_prev);
+	  HERE ("         Sen: %.2f Spe: %.2f ---- %.2f --- %.2f  --- %d ",sens, spec, 0.5*(tpf+tpf_prev)*(fpf-fpf_prev),data[item].score, data[item].label );
+	 
+	}
+    }
+   
+  return roc_area;
+}
+
+
+//////7 AUC New
+double calculateAUC_2(LabeledData *data, int n) {
+    double auc = 0.0, prev_fpr = 0.0, prev_tpr = 0.0;
+    int tp = 0, fp = 0, positives = 0, negatives = 0;
+    
+    for (int i = 0; i < n; i++) {
+        if (data[i].label == 1) positives++;
+        else negatives++;
+    }
+    
+    for (int i = 0; i < n; )
+      {
+        int j = i;
+        int tie_fp = 0, tie_tp = 0;
+        
+        // Handle ties by aggregating them
+        while (j < n && data[j].score == data[i].score) {
+            if (data[j].label == 1) tie_tp++;
+            else tie_fp++;
+            j++;
+        }
+
+        tp += tie_tp;
+        fp += tie_fp;
+
+	double tpr = tp / (double)positives;
+	double fpr = fp / (double)negatives;
+	     
+	if (fp == 0 && tp > 0) // Start of ROC curve (0,0) to (0,1)
+	  {
+	    prev_tpr = tpr;
+	  }
+	else if (i>0 || (fp>0 && tp>0))
+	  {
+	    auc += (fpr - prev_fpr) * (tpr + prev_tpr) / 2.0;
+	    prev_fpr = fpr;
+	    prev_tpr = tpr;
+	  }
+	
+        i = j; // Move to the next group of scores
+    }
+    
+    return auc;
+}

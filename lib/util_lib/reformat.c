@@ -1,4 +1,4 @@
-#include <stdio.h> 
+#include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 #include <stdarg.h>
@@ -368,11 +368,16 @@ int seq_reformat ( int argc, char **in_argv)
 		fprintf ( stdout, "\n     +tree..gap <F|def=0.5> replicates<D|column|def=1> mode <nj|upgma|def=nj>");
 		
 		fprintf ( stdout, "\n     +remove_nuc.x........Remove Position 1, 2 or 3 of every codon");
-		fprintf ( stdout, "\n     +multistrap.<tree|fasml>..tree is a boostrapped tree, or will be estimated with fastml on -in MSA\n");
-		fprintf ( stdout, "\n     ..........................runs phylo3D on -in MSA using -in2 template file\n");
-		fprintf ( stdout, "\n     ..........................run +replicates to estimate a bootstrapped pyhlo3D tree\n");
-		fprintf ( stdout, "\n     ..........................run +multistrap_mode to combine the phylo3D and <tree> boostraps\n");
-		fprintf ( stdout, "\n         +mutistrap_mode.......Must be set BEFORE +multistrap, <geometric|average|min|max>, Def=geometric\n");
+		fprintf ( stdout, "\n     +multistrap.(<ml|me|imd|file> <..>).. The first velue defines the reference tree estimated on -in MSA\n");
+		fprintf ( stdout, "\n     ......................................The following values are boostrap replicte methods or files containing replicates\n");
+		fprintf ( stdout, "\n     ......................................ml is an iqtree with default parameters\n");
+		fprintf ( stdout, "\n     ......................................me is an ml tree with default parameters\n");
+		fprintf ( stdout, "\n     ......................................imd is phylo3D tree on -in MSA using -in2 template file\n");
+		fprintf ( stdout, "\n     ......................................the methods generate +replicates (set BEFORE) to estimate bootstrap supports [def=100]\n");
+		fprintf ( stdout, "\n     ......................................boostraps combined with +multistrap_mode <average|geometric|min|max>\n");
+		fprintf ( stdout, "\n     ..................................... +multistrap_mode must be set BEFORE +multistrap\n");
+		fprintf ( stdout, "\n     +multistrap_mode..................... see +multistrap, default=average\n");
+			  
 
 		fprintf ( stdout, "\n     +phylo3D.<tree|gtree>......Replaces evaluate3D for the estimation of 3D trees\n");
 		fprintf ( stdout, "\n     ...........................The parameters below must be set BEFORE +phylo3D\n"); 
@@ -11845,8 +11850,30 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	   
 	   cputenv ("columns4tree_4_TCOFFEE=%s",ACTION(1));
 	 }
+       else if (strm (action, "phylo3d_bm_test"))
+	 {
+	   phylo3d_bm_test(ACTION (1));
+	 }
+       else if (strm (action, "phylo3d_bm"))
+	 {
+	   phylo3d_bm(ACTION (1));
+	 }
+       else if ( strm(action, "multistrap"))
+	 {
+	   char **bs;
+	   
+	   ungap_seq(D1->S);
+	   
+	   if (D1 && D1->S &&  D2 && D2->S)
+	     D1->CL=pdb2contacts (D1->S, D2->S,D1->CL, "intra","distances",1000000);
+	   bs=(char**)vcalloc (n_actions, sizeof(char*));
+	   for (a=1; a<n_actions; a++)
+	     bs[a-1]=csprintf ( NULL, "%s", ACTION(a));
 
-       else if (strm (action, "phylo3d") || strm (action, "multistrap") )
+	   multistrap (D1->A, D1->CL,n_actions-1, bs); 
+	 }
+	   
+       else if (strm (action, "phylo3d") )
 	 {
 	   ungap_seq(D1->S);
 	   if ( !D2 || !D2->S)
@@ -11857,13 +11884,8 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	       if (!D1->A)D1->A=seq2aln (D1->S,NULL, RM_GAP);
 	       D1->A=phylo3d_gt (D1->A, D1->CL);
 	     }
-	   else
-	     {
-	       if (strm (action, "phylo3d"))
-		 D1->A=phylo3d (D1->A, D1->CL);
-	       else
-		 multistrap (D1->A,ACTION(1), D1->CL);
-	     }
+	   else D1->A=phylo3d (D1->A, D1->CL);
+
 	 }
        
 

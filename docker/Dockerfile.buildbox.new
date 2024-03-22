@@ -1,10 +1,15 @@
-FROM debian:jessie
+# Dockerfile created to build the T-Coffee package updating the base image to debian:buster
+# The old one had a version of git not compatible with the current repository
+# This one though, was not building the package correctly (maybe the update to openjdk-11 or the new gcc c compiler is causing the problem)
+# Keeping the old Dockerfile for now (git hash is passed to build now by a env variable)
+FROM debian:buster
 MAINTAINER Jose Espinosa-Carrasco <espinosacarrascoj@gmail.com>
 
 RUN apt-get update --fix-missing && \
   apt-get install -q -y bc wget curl vim nano unzip make gcc g++ gfortran && \
-  apt-get install -q -y perl-modules libnet-ssleay-perl libcrypt-ssleay-perl libssl-dev libexpat1 libexpat1-dev liblwp-protocol-https-perl && \
+  apt-get install -q -y perl-modules libnet-ssleay-perl libcrypt-ssleay-perl libssl-dev libexpat1 libexpat1-dev liblwp-protocol-https-perl libxml-simple-perl && \
   apt-get install -q -y libglib2.0-0  && \
+  apt-get install -q -y zlib1g-dev && \
   apt-get clean 
 
 RUN wget -q cpanmin.us -O /usr/local/bin/cpanm && \
