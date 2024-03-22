@@ -45,7 +45,7 @@ WEB_ARCHIVE_SOURCES=$(WEB_DIR)/Packages/Archives/
 CC=g++
 ifndef CFLAGS
 #CFLAGS=-O3 -Wno-write-strings
-CFLAGS=-ggdb -std=c++11 -w
+CFLAGS=-ggdb  -w
 endif
 
 ifdef OPENMP

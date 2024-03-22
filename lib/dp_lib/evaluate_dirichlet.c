@@ -4,12 +4,13 @@
 #include <stdarg.h>
 #include <string.h>
 #include <ctype.h>
-#include <stdint.h>
-#include <cstdint>  // For uint32_t
+//#include <stdint.h>
+//#include <cstdint>  // For uint32_t
 #include "io_lib_header.h"
 #include "util_lib_header.h"
 #include "define_header.h"
 #include "dp_lib_header.h"
+
 static float dm[]={
 0.178091,
 1.18065, 0.270671, 0.039848, 0.017576, 0.016415, 0.014268, 0.131916, 0.012391, 0.022599, 0.020358, 0.030727, 0.015315, 0.048298, 0.053803, 0.020662, 0.023612, 0.216147, 0.147226, 0.065438, 0.003758, 0.009621,
@@ -467,6 +468,7 @@ w5  =  8.36339918996282139126e-04, /* 0x3F4B67BA, 0x4CDAD5D1 */
 w6  = -1.63092934096575273989e-03; /* 0xBF5AB89D, 0x0B9E43E4 */
 
 static const double zero=  0.00000000000000000000e+00;
+#ifdef NEW_SIN_PI
 static double sin_pi(double x) {
     double y, z;
     int n;
@@ -511,7 +513,8 @@ static double sin_pi(double x) {
     }
     return -y;
 }
-#ifdef OLD_SIN_PI
+#endif
+
 static double sin_pi(double x)
 {
         double y,z;
@@ -557,7 +560,7 @@ static double sin_pi(double x)
             }
         return -y;
 }
-#endif
+
 
 double lgamma2 ( double x)
 {
