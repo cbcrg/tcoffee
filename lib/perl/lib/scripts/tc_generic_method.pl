@@ -1815,6 +1815,12 @@ sub id2pdbid
 
     if ($id =~/pdb(.*)/){$id=$1;}
     elsif ( $id=~/(\S+)\s+mol:protein/){$id=$1;}
+
+    if ($id=~/_/)
+    {
+	$id=~ s/_.*$//;
+    }
+    
     $id=~s/[:|��_]//g;
     return $id;
   }
