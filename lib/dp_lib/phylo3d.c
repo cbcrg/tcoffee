@@ -1234,9 +1234,135 @@ Sequence * get_phylo3d_seq  (char*family);
 //NT_node get_phylo3d_bm_tree (char*family,char *type, int nbs, Sequence *S);
 NT_node get_phylo3d_bm_tree (char*family,int type, int nbs, int bstype, Sequence *S);
 int tree2splits4phylo3d_bm (NT_node T, int ns,float **sl,char**splits, int* n);
+int phylo3d_bm_debug ( char *name);
+int phylo3d_bm_complete ( char *name);
+
 
 
 int phylo3d_bm ( char *name)
+{
+  int debug=0;
+
+  if ( debug)phylo3d_bm_debug (name);
+  else phylo3d_bm_complete (name);
+
+  exit (0);
+  
+}
+  
+  
+int phylo3d_bm_debug ( char *name)
+{
+  NT_node ***T;
+  
+  Sequence *S;
+  float *****sl;
+  char  *****splits;
+  int   ***nn;
+  char **testlist=(char**)vcalloc(100, sizeof (char*));
+  int n_ppformula, n_bsformula, n_cmode,npp,pp, ref, bs, split, cmode;
+  char **ppformula, **bsformula, **cmodelist;
+  char *refS;
+  float *auc;
+  
+  S=get_phylo3d_seq(name);
+
+  
+  T        =(NT_node***  )declare_arrayN(3,sizeof (NT_node),3,3,3);
+  nn       =(int    ***  )declare_arrayN(3,sizeof (int)    ,3,3,3);
+  sl       =(float  *****)declare_arrayN(5,sizeof (float)  ,3,3,3,S->nseq*3,20);
+  splits   =(char   *****)declare_arrayN(5,sizeof (char)   ,3,3,3,S->nseq*3,S->nseq+1);
+  ppformula=(char**)vcalloc (100, sizeof (char*));
+  bsformula=(char**)vcalloc (100, sizeof (char*));
+  cmodelist=(char**)vcalloc (100, sizeof (char*));
+  auc      =(float*)vcalloc (100, sizeof (float));
+
+  if (1==1)// Read all the trees
+    {
+      int a, b, c;    
+      for (a=0; a<3; a++)
+	for ( b=0; b<3; b++)
+	  for (c=0; c<3; c++)
+	    T[a][b][c]=get_phylo3d_bm_tree(name,a,b,c, S);
+    }
+  if (1==1)//collect all the splits
+    {
+      int a, b, c;
+      for (a=0; a<3; a++)//ref
+	for ( b=0; b<3; b++)//ncol for support
+	  for (c=0; c<3; c++)//method for support
+	    {
+	      tree2splits4phylo3d_bm(T[a][b][c],S->nseq,sl[a][b][c],splits[a][b][c], &nn[a][b][c]);
+	    }
+    }
+  
+  
+  n_ppformula=0;
+  ppformula[n_ppformula++]=csprintf (NULL, "I__080");
+  
+  n_bsformula=0;
+  bsformula[n_bsformula++]=csprintf(NULL,"I__200");
+
+  n_cmode=0;
+  cmodelist[n_cmode++]=csprintf (NULL,"avg");
+
+  
+
+  refS= (char*)vcalloc (3, sizeof (char*));
+  for (cmode=0; cmode<n_cmode; cmode++)
+    {
+      
+      for (pp=0; pp<n_ppformula; pp++)
+	{
+	  // pp have been set according the ppformula rules
+	  // Now each pp branched is marked as sl[reftree][nbs][bstype][split][3]=1
+	  
+	  set_pp(name,S->nseq,sl, splits,nn,ppformula[pp]);
+	  	  
+	  for (ref=0; ref<1; ref++)// Reference Tree - Estimated on 200 sites with I/L/E
+	    {
+	      
+	      if      (ref==0) refS[0]='I'; //IMD
+	      else if (ref==1) refS[1]='E'; //ME
+	      else if (ref==2) refS[2]='L'; //ML
+	      
+	      npp =splits2npp (nn[ref][2][ref], sl[ref][2][ref]);
+	      if ( npp>0 && npp<(S->nseq-3))//Exclude cases where there are no PP or where all the internal are PP
+		{
+		 for (bs=0; bs<n_bsformula; bs++)
+		    {
+		      int bsbin=bsformula[bs][3]-'0';
+		      
+		      for (split=0; split<nn[ref][2][ref]; split++)
+			{
+			  int ncbs=0;
+			  float cbs[3];
+			  
+			  if (bsformula[bs][0]=='I')cbs[ncbs++]=sl[ref][bsbin][0][split][2];
+			  if (bsformula[bs][1]=='E')cbs[ncbs++]=sl[ref][bsbin][1][split][2];
+			  if (bsformula[bs][2]=='L')cbs[ncbs++]=sl[ref][bsbin][2][split][2];
+			  
+			  sl[ref][bsbin][ref][split][4]=bs2combo(cbs, ncbs, cmodelist[cmode]);
+			}
+		      auc[bs]=splits2auc(nn[ref][bsbin][ref], sl[ref][bsbin][ref]);
+		    }
+		  //Display AUC - the float values of the AUCs
+		  fprintf ( stdout,"AUC family: %-20s cmode: %s ref: %s ppmode: %s npp: %d bs: ", name, cmodelist[cmode],refS, ppformula[pp],npp); 
+		  for (bs=0; bs<n_bsformula; bs++)
+		    {
+		      fprintf (stdout,"%s %.2f %d %d ",bsformula[bs],auc[bs], (auc[bs]>0.99999)?1:0, 4*(bs+1)-2+10);
+		    }
+		  fprintf (stdout, "\n");
+		}
+	    }
+	}
+    }
+  exit (0);
+
+}
+
+
+int phylo3d_bm_complete ( char *name)
 {
   NT_node ***T;
   
@@ -1367,7 +1493,7 @@ int phylo3d_bm ( char *name)
 	      //work on sl[a][2][a] by convention as it is the true reference tree with its native bs
 	      
 	      npp =splits2npp (nn[ref][2][ref], sl[ref][2][ref]);
-	      if ( npp>0 && npp<S->nseq)
+	      if ( npp>0 && npp<(S->nseq-3))//Exclude cases where there are no PP or where all the internal are PP
 		{
 		 for (bs=0; bs<n_bsformula; bs++)
 		    {
@@ -1664,7 +1790,7 @@ int set_pp (char *family, int nseq,float ***** sl, char ***** splits, int ***nn,
 	}
   // All the original trees may OR may not contain the split that has just been identified
   // This reporting makes it possible to collect the PP associated with a ppmode that collects specific splits across the references
-  // for instance I+E may reprt 200 branches, but if L is the refernce tree, it may only contains 150 of these branches thus leading to 150 trees being reported as PP for ref: __L ppmode: IE_080
+  // for instance I+E may reprt 200 branches, but if L is the reference tree, it may only contains 150 of these branches thus leading to 150 trees being reported as PP for ref: __L ppmode: IE_080
   for (a=0; a<3; a++)
     {
       for (b=0; b<nn[a][0][0]; b++)
@@ -1676,8 +1802,12 @@ int set_pp (char *family, int nseq,float ***** sl, char ***** splits, int ***nn,
 	      if (a==0)      sprintf (ref, "I__");
 	      else if ( a==1)sprintf (ref, "_E_");
 	      else if ( a==2)sprintf (ref, "__L");
+
+	      float bs1   = sl[a][2][0][b][2];
+	      float bs2   = sl[a][2][1][b][2];
+	      float bs3   = sl[a][2][2][b][2];
 	      
-	      fprintf ( stdout, "PPLIST family: %-10s nseq: %d ref: %s ppmode: %s split: %s depth: %3d rdepth: %.2f\n",family, nseq,ref,teststring,splits[a][0][0][b],depth, (float)((float)(2*depth)/(float)(nseq)));
+	      fprintf ( stdout, "PPLIST family: %-10s nseq: %d ref: %s ppmode: %s split: %s depth: %3d rdepth: %.2f IMDBS: %3d MEBS: %3d MLBS: %3d\n",family, nseq,ref,teststring,splits[a][0][0][b],depth, (float)((float)(2*depth)/(float)(nseq)), (int)bs1, (int)bs2, (int)bs3);
 	    }
 	}
     }
@@ -1833,7 +1963,7 @@ double calculateAUC(LabeledData *data, int n)
     auc2=calculateAUC_2(data,n);
     //if ( auc!=calculateAUC_2(data,n))
     //  exit (0);
-    //HERE ("%.2f %.2f", (float) auc1, (float) auc2);
+    
     return auc2;
   }
 
