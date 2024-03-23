@@ -1236,7 +1236,7 @@ NT_node get_phylo3d_bm_tree (char*family,int type, int nbs, int bstype, Sequence
 int tree2splits4phylo3d_bm (NT_node T, int ns,float **sl,char**splits, int* n);
 int phylo3d_bm_debug ( char *name);
 int phylo3d_bm_complete ( char *name);
-
+int set_pp_debug (char *family, int nseq,float ***** sl, char ***** splits, int ***nn, char *teststring) ;
 
 
 int phylo3d_bm ( char *name)
@@ -1283,8 +1283,13 @@ int phylo3d_bm_debug ( char *name)
       for (a=0; a<3; a++)
 	for ( b=0; b<3; b++)
 	  for (c=0; c<3; c++)
-	    T[a][b][c]=get_phylo3d_bm_tree(name,a,b,c, S);
+	    {
+	      
+	      T[a][b][c]=get_phylo3d_bm_tree(name,a,b,c, S);
+	      fprintf (stdout, "NSEQ: %d\n", tree2nseq(T[a][b][c]));
+	    }
     }
+
   if (1==1)//collect all the splits
     {
       int a, b, c;
@@ -1298,7 +1303,7 @@ int phylo3d_bm_debug ( char *name)
   
   
   n_ppformula=0;
-  ppformula[n_ppformula++]=csprintf (NULL, "I__080");
+  ppformula[n_ppformula++]=csprintf (NULL, "__L080");
   
   n_bsformula=0;
   bsformula[n_bsformula++]=csprintf(NULL,"I__200");
@@ -1317,9 +1322,9 @@ int phylo3d_bm_debug ( char *name)
 	  // pp have been set according the ppformula rules
 	  // Now each pp branched is marked as sl[reftree][nbs][bstype][split][3]=1
 	  
-	  set_pp(name,S->nseq,sl, splits,nn,ppformula[pp]);
+	  set_pp_debug(name,S->nseq,sl, splits,nn,ppformula[pp]);
 	  	  
-	  for (ref=0; ref<1; ref++)// Reference Tree - Estimated on 200 sites with I/L/E
+	  for (ref=1; ref<=1; ref++)// Reference Tree - Estimated on 200 sites with I/L/E
 	    {
 	      
 	      if      (ref==0) refS[0]='I'; //IMD
@@ -1578,7 +1583,9 @@ Sequence * get_phylo3d_seq  (char*family)
   Sequence *S;
   char *treelist=csprintf (NULL, "%s_%s.trees",family, "IMD");
   S=get_treelist (treelist);
-  return tree2seq(newick_string2tree(S->seq[0]), NULL);
+  S=tree2seq(newick_string2tree(S->seq[0]), NULL);
+  S=seq2alpha_sorted_seq (S);
+  return S;
 }
 
 
@@ -1623,7 +1630,7 @@ NT_node get_phylo3d_bm_tree (char*family,int type, int ncol, int bstype, Sequenc
     {
       printf_exit ( EXIT_FAILURE,stderr, "\nERROR: %s does not exist [FATAL]", treelist);
     }
-
+  
   T=treelistF2node_support (treelist);
   T=prune_tree(T,S);
   T=recode_tree(T,S);
@@ -1642,7 +1649,7 @@ int tree2splits4phylo3d_bm (NT_node T, int ns,float **sl,char**splits, int* n)
   tree2splits4phylo3d_bm(T->left , ns, sl, splits,n);
 
   if (!T->right) return 1;
-  else if (T->parent && !(T->parent)->parent)return 1;
+  //else if (T->parent && !(T->parent)->parent)return 1;
   else if ( T->dist==0)return 1;
   else
     {
@@ -1679,6 +1686,155 @@ void clean_pp (float *****sl, int ***nn)
 	for ( d=0; d<nn[a][b][c]; d++)
 	  sl[a][b][c][d][3]=0;
   return;
+}
+int set_pp_debug (char *family, int nseq,float ***** sl, char ***** splits, int ***nn, char *teststring) 
+{
+  //imd is 0 me is 1, ml is 2
+  // 25 columns is 0, 100 columns is 2, 200 columns is 2
+  //set the pp according to the agreement of imd, me, ml on the 200 trees (ns[imd/me/ml][2][imd/me/ml]
+  // sl..[0] branch lentgh
+  // sl..[1] depth
+  // sl..[2] native bs
+  // sl..[3] PP mark (1 if PP)
+  // sl..[4] will contained the combined bs
+  int ref;
+  int imd, me, ml, bs;
+  int a, b, c, d, e,f,g,t;
+  int passed;
+  char *rb;
+  int   depth;
+  int npp=0;
+
+  imd=me=ml=0;
+  if (teststring[0]=='I')imd=1;
+  if (teststring[1]=='E')me=1;
+  if (teststring[2]=='L')ml=1;
+  bs=atoi(teststring+3);
+
+  // display IMD tree
+  for (ref=0; ref<3; ref++)
+    for (a=0; a<nn[ref][2][ref]; a++)
+      {
+        char  *b=splits[ref][2][ref][a];
+	float bs=sl    [ref][2][ref][a][2];
+	if       (ref==0) fprintf (stdout,"TREE I__ ");
+	else if  (ref==1) fprintf (stdout,"TREE _E_ ");
+	else              fprintf (stdout,"TREE __L ");
+	fprintf ( stdout, "%s %.2f\n", b, bs);
+      }
+  exit (0);
+  
+
+
+  
+  clean_pp(sl, nn);
+  for (a=0; a<nn[0][2][0]; a++)
+    for ( b=0; b<nn[1][2][1]; b++)
+      for ( c=0; c<nn[2][2][2]; c++)
+	{
+	  char  *b1=splits[0][2][0][a];
+	  float bs1   = sl[0][2][0][a][2];
+	  
+	  char  *b2=splits[1][2][1][b];
+	  float bs2=    sl[1][2][1][b][2];
+	  
+	  char  *b3=splits[2][2][2][c];
+	  float bs3=    sl[2][2][2][c][2];
+	  
+	  passed=0;
+	  if ( imd && me && ml)
+	    {
+	      if (bs1>=bs && bs2>=bs && bs3>=bs && strm (b1,b2) && strm (b1, b3))
+		{
+		  passed=1;
+		  rb=b1;
+		}
+	    }
+	  else if ( imd && me)
+	    {
+	       if (bs1>=bs && bs2>=bs  && strm (b1,b2))
+		 {
+		   passed=1;
+		   rb=b1;
+		 }
+	    }
+	  else if ( imd && ml)
+	    {
+	      if (bs1>=bs && bs3>=bs  && strm (b1,b3))
+		 {
+		   passed=1;
+		   rb=b1;
+		 }
+	    }
+	  else if ( me && ml)
+	    {
+	      if (bs2>=bs && bs3>=bs  && strm (b2,b3))
+		 {
+		   passed=1;
+		   rb=b2;
+		 }
+	    }
+	  else if (imd)
+	    {
+	      if (bs1>=bs)
+		 {
+		   passed=1;
+		   rb=b1;
+		 }
+	    }
+	  else if (me)
+	    {
+	      if (bs2>=bs)
+		 {
+		   passed=1;
+		   rb=b2;
+		 }
+	    }
+	  else if (ml)
+	    {
+	      if (bs3>=bs)
+		 {
+		   passed=1;
+		   rb=b3;
+		 }
+	    }
+	  
+	  if (passed) 
+	    {
+	      for (d=0; d<3; d++)
+		for (e=0; e<3; e++)
+		  for (f=0; f<3; f++)
+		    for (g=0; g<nn[d][e][f]; g++)
+		      {
+			if (strm (rb, splits[d][e][f][g]))sl[d][e][f][g][3]=1;
+		      }
+	    }
+	}
+  // All the original trees may OR may not contain the split that has just been identified
+  // This reporting makes it possible to collect the PP associated with a ppmode that collects specific splits across the references
+  // for instance I+E may reprt 200 branches, but if L is the reference tree, it may only contains 150 of these branches thus leading to 150 trees being reported as PP for ref: __L ppmode: IE_080
+  for (a=0; a<3; a++)
+    {
+      for (b=0; b<nn[a][0][0]; b++)
+	{
+	  if (sl[a][0][0][b][3]==1)
+	    {
+	      char ref[10];
+	      depth=sl[a][0][0][b][1];
+	      if (a==0)      sprintf (ref, "I__");
+	      else if ( a==1)sprintf (ref, "_E_");
+	      else if ( a==2)sprintf (ref, "__L");
+
+	      float bs1   = sl[a][2][0][b][2];
+	      float bs2   = sl[a][2][1][b][2];
+	      float bs3   = sl[a][2][2][b][2];
+	      
+	      fprintf ( stdout, "PPLIST family: %-10s nseq: %d ref: %s ppmode: %s split: %s depth: %3d rdepth: %.2f IMDBS: %3d MEBS: %3d MLBS: %3d\n",family, nseq,ref,teststring,splits[a][0][0][b],depth, (float)((float)(2*depth)/(float)(nseq)), (int)bs1, (int)bs2, (int)bs3);
+	    }
+	}
+    }
+  
+  return 1;
 }
 int set_pp (char *family, int nseq,float ***** sl, char ***** splits, int ***nn, char *teststring) 
 {
@@ -1844,7 +2000,7 @@ int phylo3d_bm_test ( char *name)
   float *auc;
   
   S=get_phylo3d_seq(name);
-
+  
   
   T        =(NT_node***  )declare_arrayN(3,sizeof (NT_node),3,3,3);
   nn       =(int    ***  )declare_arrayN(3,sizeof (int)    ,3,3,3);

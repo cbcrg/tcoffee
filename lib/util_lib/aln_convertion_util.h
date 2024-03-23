@@ -231,6 +231,7 @@ Sequence  * extract_sub_seq( Sequence  *COOR, Sequence *S);
 Sequence * add_prf2seq  (char *alnfile, Sequence *S);
 int prf_in_seq ( Sequence *S);
 Sequence * add_sequence ( Sequence *IN, Sequence *OUT, int i);
+Sequence *seq2alpha_sorted_seq(Sequence *S);
 Sequence  * trim_seq     ( Sequence   *A, Sequence  *B);
 Sequence  * reorder_seq  ( Sequence   *A, char **name, int nseq);
 Sequence  * reorder_seq_2  ( Sequence   *A, int **name,int field, int nseq);
