@@ -53,7 +53,7 @@ Alignment * multistrap  (Alignment *inA,Constraint_list *CL,int nbsF,char **inbs
      nrep=100;
 
    if (getenv ("MULTISTRAP_MODE"))multistrap_mode=csprintf (NULL,"%s",getenv("MULTISTRAP_MODE"));
-   else multistrap_mode=csprintf (NULL, "average");
+   else multistrap_mode=csprintf (NULL, "avg");
    
   //1 - generate the required replicates and possibly the reference trees
   for (a=1; a<nbsF; a++)
@@ -1296,7 +1296,7 @@ int phylo3d_bm ( char *name)
   
   /*Set up formula to determine reference branches*/
   // Methods used to decide on the pp + BS Threshold - as measured on 200 columns
-  // bs defines the threshold for a brnach to be set as PP, ppformula defines the number of methods tha must feature the same branch with a support > BS
+  // bs defines the threshold for a branch to be set as PP, ppformula defines the number of methods tha must feature the same branch with a support > BS
   n_ppformula=0;
   for (bs=0; bs<3; bs++)
     {
@@ -1369,7 +1369,7 @@ int phylo3d_bm ( char *name)
 	      npp =splits2npp (nn[ref][2][ref], sl[ref][2][ref]);
 	      if ( npp>0 && npp<S->nseq)
 		{
-		  for (bs=0; bs<n_bsformula; bs++)
+		 for (bs=0; bs<n_bsformula; bs++)
 		    {
 		      int bsbin=bsformula[bs][3]-'0';
 		      
@@ -1415,7 +1415,7 @@ float bs2combo(float *cbs, int n, char *mode)
   
   newbs=0;
   if (n==0)return 0;
-  else if (strm (mode, "average"))
+  else if (strm (mode, "avg"))
     {
       for (a=0; a<n; a++)newbs+=cbs[a];
       newbs/=(float)n;
@@ -1432,7 +1432,7 @@ float bs2combo(float *cbs, int n, char *mode)
       for (a=0; a<n; a++)
 	if (cbs[a]>newbs)newbs=cbs[a];
     }
-  else if ( strm (mode, "geometric"))
+  else if ( strm (mode, "geo"))
     {
       for (a=0; a<n; a++)
 	{
