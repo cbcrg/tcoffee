@@ -14,6 +14,7 @@ Contents:
    tcoffee_installation
    tcoffee_quickstart_regressive
    tcoffee_quickstart_unistrap
+   tcoffee_quickstart_multistrap
    tcoffee_quickstart
    tcoffee_main_documentation
    tcoffee_technical_documentation

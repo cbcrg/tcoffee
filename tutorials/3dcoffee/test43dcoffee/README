@@ -1,0 +1,5 @@
+#preprocess your structures using t_coffee -other_pg extract_from_pdb, to extrat the chain and /or the domain that best corresponds to your sequences
+# idealy, the sequence and the PDB should be perfect match, but if they are not the PDB induced sequence will be reconciliated with the sequence provided via -in
+# template file declares which PDB corresponds to which structure
+
+t_coffee -in PF03143.seq -template_file PF03143_ref.template_list -method sap_pair  proba_pair

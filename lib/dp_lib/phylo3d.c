@@ -43,10 +43,10 @@ Alignment * multistrap  (Alignment *inA,Constraint_list *CL,int nbsF,char **inbs
   TREE=(NT_node*)vcalloc (nbsF, sizeof (NT_node));
   bsF[0]=inbsF[0];
 		 
-
-   if (getenv ("REPLICATES_4_TCOFFEE"))
+    
+  if (getenv ("REPLICATES_4_TCOFFEE"))
     {
-      if ( strm (getenv ("REPLICATES_4_TCOFFEE"), "columns"))nrep=inA->len_aln;
+      if ( inA && strm (getenv ("REPLICATES_4_TCOFFEE"), "columns"))nrep=inA->len_aln;
       else nrep=atoigetenv ("REPLICATES_4_TCOFFEE");
     }
    else
@@ -58,7 +58,7 @@ Alignment * multistrap  (Alignment *inA,Constraint_list *CL,int nbsF,char **inbs
   //1 - generate the required replicates and possibly the reference trees
   for (a=1; a<nbsF; a++)
     {
-      if (check_file_exists(bsF[a]))
+      if (check_file_exists(inbsF[a]))
 	bsF[a]=inbsF[a];
       else if (strm (inbsF[a], "me"))
 	{
@@ -98,6 +98,10 @@ Alignment * multistrap  (Alignment *inA,Constraint_list *CL,int nbsF,char **inbs
 	      dist2fastme_treeF (D->dm, A->name, A->nseq, treeF);
 	      string2file(bsF[a],"a" "%s", file2string (treeF));
 	    }
+	}
+      else
+	{
+	  printf_exit ( EXIT_FAILURE,stderr, "\nERROR: %s is neither a valid file or a valid tree method", inbsF[a]);
 	}
     }
     
@@ -139,6 +143,11 @@ Alignment * multistrap  (Alignment *inA,Constraint_list *CL,int nbsF,char **inbs
 	}
       else bsF[0]=imdF; 
     }
+  else
+    {
+      printf_exit ( EXIT_FAILURE,stderr, "\nERROR: %s is neither a valid file or a valid tree method", inbsF[0]);
+    }
+    
   //This is the reference tree in which the new BS will be added
   TREE[0]=main_read_tree(bsF[0]);
 
@@ -249,7 +258,7 @@ Alignment * multistrap_old  (Alignment *inA,char *RTF,Constraint_list *CL)
 
   combine_bs(RT_COMBINED, RT_PHYLO3D, D->multistrap_mode);
 
-  fprintf (stderr, "Line 1: %s tree with Combined bootstraped [%s] - Line 2 %s tree with phylo3D bootstraps Line 3 %s tree with original boostrap\n", RTF, (D->multistrap_mode)?D->multistrap_mode:"geometric", RTF, RTF);
+  fprintf (stderr, "Line 1: %s tree with Combined bootstraped [%s] - Line 2 %s tree with phylo3D bootstraps Line 3 %s tree with original bootstrap\n", RTF, (D->multistrap_mode)?D->multistrap_mode:"geometric", RTF, RTF);
 
   
   fprintf (stdout,"%s%s%s", tree2string (RT_INITIAL),tree2string (RT_PHYLO3D),tree2string (RT_COMBINED));
@@ -725,18 +734,26 @@ int   col2max(int **col)
 }
 Alignment * addtree (p3D *D,Alignment *A)
 {
+  char *s;
   static char *treeF=vtmpnam (NULL);
   static int ml=get_longest_string (A->name, A->nseq, NULL, NULL)+1;
   FILE *fp;
   int s1, s2;
   Alignment *TREEA=A->Tree;
   int dotree=1;
-  if (!getenv ("THREED_TREE_DM"))dotree=0;
+  //if (!getenv ("THREED_TREE_DM"))dotree=0;
    
 
   if (A->nseq>2 && dotree)
     {
-      dist2nj_tree (D->dm, A->name, A->nseq, treeF);
+      if (((s=get_string_variable("treemode"))!=NULL) && strm (s,"fastme"))
+	{
+	  dist2fastme_treeF (D->dm, A->name, A->nseq,treeF);
+	}
+      else
+	{
+	  dist2nj_tree (D->dm, A->name, A->nseq, treeF);
+	}
       TREEA->seq_al[TREEA->nseq]=file2string(treeF);
       sprintf (TREEA->name[TREEA->nseq], "%d",TREEA->nseq+1); 	    
      
@@ -1546,7 +1563,7 @@ float bs2combo(float *cbs, int n, char *mode)
   
   newbs=0;
   if (n==0)return 0;
-  else if (strm (mode, "avg"))
+  else if (strm (mode, "avg") || strm (mode, "average"))
     {
       for (a=0; a<n; a++)newbs+=cbs[a];
       newbs/=(float)n;
@@ -1563,7 +1580,7 @@ float bs2combo(float *cbs, int n, char *mode)
       for (a=0; a<n; a++)
 	if (cbs[a]>newbs)newbs=cbs[a];
     }
-  else if ( strm (mode, "geo"))
+  else if ( strm (mode, "geo") || strm (mode, "geometric"))
     {
       for (a=0; a<n; a++)
 	{
