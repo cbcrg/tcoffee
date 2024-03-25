@@ -1,0 +1,4 @@
+# generate the distance matrix 
+t_coffee -other_pg seq_reformat -in PF03143_tmalign.fa -in2 PF03143_ref.template_list2 -action +replicates  100 +phylo3d +print_replicates -output dm > PF03143_phylo3d.matrices 2>PF03143_phylo3d_mat_err_log
+# estimate the tree
+fastme -i dm -g 1.0 -s -n -z 5 -o fastme 

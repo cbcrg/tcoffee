@@ -7531,6 +7531,7 @@ NT_node relativebs2absolutebs (NT_node T, int tot)
 }
 NT_node combine_bsN(int n,NT_node *T,char *mode)
 {
+  //mode: avg, geometric, min,max
   float b1, b2;
   int a;
   NT_node *LT =(NT_node*)vcalloc (n, sizeof (NT_node));

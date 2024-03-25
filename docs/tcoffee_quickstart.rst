@@ -170,6 +170,8 @@ Expresso
 --------
 The default installation of T-Coffee provides you with the EBI wublast.pl client required to run Expresso ) command 1). Using this, Expresso will BLAST your sequences against the PDB database, identify the best targets (by default X-RAY structures, minimum 35% identical to your sequences) and use them to align your proteins using a structural aligner. If all the required structural packages for Expresso are not installed or if you want to select another structural aligner, you can select the structural package you want to use, for instance, if can use TM-align rather than SAP (command 2).
 
+.. note::  you may need to install cpanm Mozilla::CA [sudo cpanm Mozilla::CA] to run the EBI web server
+
 ::
 
   Command 1: 

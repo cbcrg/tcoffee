@@ -374,7 +374,7 @@ int seq_reformat ( int argc, char **in_argv)
 		fprintf ( stdout, "\n     ......................................me is an ml tree with default parameters\n");
 		fprintf ( stdout, "\n     ......................................imd is phylo3D tree on -in MSA using -in2 template file\n");
 		fprintf ( stdout, "\n     ......................................the methods generate +replicates (set BEFORE) to estimate bootstrap supports [def=100]\n");
-		fprintf ( stdout, "\n     ......................................boostraps combined with +multistrap_mode <average|geometric|min|max>\n");
+		fprintf ( stdout, "\n     ......................................boostraps combined with +multistrap_mode <avg|geo|min|max>\n");
 		fprintf ( stdout, "\n     ..................................... +multistrap_mode must be set BEFORE +multistrap\n");
 		fprintf ( stdout, "\n     +multistrap_mode..................... see +multistrap, default=average\n");
 			  
@@ -11862,7 +11862,7 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	 {
 	   char **bs;
 	   
-	   ungap_seq(D1->S);
+	   if (D1 && D1->S)ungap_seq(D1->S);
 	   
 	   if (D1 && D1->S &&  D2 && D2->S)
 	     D1->CL=pdb2contacts (D1->S, D2->S,D1->CL, "intra","distances",1000000);
@@ -11870,7 +11870,7 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	   for (a=1; a<n_actions; a++)
 	     bs[a-1]=csprintf ( NULL, "%s", ACTION(a));
 
-	   multistrap (D1->A, D1->CL,n_actions-1, bs); 
+	   multistrap ((D1)?D1->A:NULL, (D1)?D1->CL:NULL,n_actions-1, bs); 
 	 }
 	   
        else if (strm (action, "phylo3d") )

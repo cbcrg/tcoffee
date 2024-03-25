@@ -2572,7 +2572,7 @@ sub run_blast
 	$CACHE_STATUS="COMPUTE CACHE";
 	if ( $SERVER eq "EBI_SOAP")
 	  {
-	    &check_configuration ("EMAIL","SOAP::Light","INTERNET");
+	    &check_configuration ("EMAIL","SOAP::Lite","INTERNET");
 
 	    $cl_method=$method;
 	    if ($cl_method =~/wu/)
@@ -2600,7 +2600,8 @@ sub run_blast
 	      }
 	  }
 	elsif ($SERVER eq "EBI_REST" || $SERVER eq "EBI")
-	  {
+	{
+	    # Meant to interract with the EBI REST Client, available on: https://github.com/ebi-jdispatcher/webservice-clients
 	    $cl_method=$method;
 	    &check_configuration("EMAIL","XML::Simple", "INTERNET");
 	    if ($db eq "uniprot"){$db1="uniprotkb";}
@@ -2620,9 +2621,13 @@ sub run_blast
 	      {
 		#if ( $cl_method =~/psiblast/){$cl_method ="blastp $psiJFlag";}
 		if ( $cl_method =~/psiblast/){$cl_method ="blastp";}
-		$command="t_coffee -other_pg ncbiblast_lwp.pl --email $EMAIL --database $db1 --program $cl_method --outfile $outfile --alignments 5 --stype protein $infile>/dev/null 2>$error_log";
+		#
 		#DEBUG
 		#$command="t_coffee -other_pg ncbiblast_lwp.pl --email $EMAIL -D $db1 -p $cl_method --outfile $outfile --align 5 --stype protein $infile";
+		#New version - now deprecated
+		#$command="t_coffee -other_pg ncbiblast_lwp.pl --email $EMAIL --database $db1 --program $cl_method --outfile $outfile --alignments 5 --stype protein $infile>/dev/null 2>$error_log";
+		#newer version: 25/03/2024
+		$command="t_coffee -other_pg ncbiblast.pl --email $EMAIL --database $db1 --program $cl_method --outfile $outfile --alignments 5 --stype protein $infile>/dev/null 2>$error_log";
 		
 		my $maxrun=5;#number of crashes accepetd
 		my $nrun;
@@ -2644,7 +2649,7 @@ sub run_blast
 		    if (!$success && ($nrun<$maxrun || -e "$outfile.out.txt"))
 		      {
 			$keep_going=1;
-			add_warning($$,$$,"[ncbiblast_lwp.pl] [$command] failed to produce xml output -- will ne tried again [$nrun]");
+			add_warning($$,$$,"[ncbiblast.pl] [$command] failed to produce xml output -- will ne tried again [$nrun]");
 		      }
 		  }
 		
@@ -2654,7 +2659,7 @@ sub run_blast
 		elsif (-e "$outfile.xml..xml"){`mv $outfile.xml..xml $outfile`;}
 		else
 		  {
-		    add_warning($$,$$,"[ncbiblast_lwp.pl] [$command] failed to produce xml output");
+		    add_warning($$,$$,"[ncbiblast.pl] [$command] failed to produce xml output");
 		  }
 	      }
 	  }

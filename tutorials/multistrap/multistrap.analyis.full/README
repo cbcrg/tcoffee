@@ -1,0 +1,25 @@
+list.txt: list of all families
+<family>_<ME|ML|IMD>.trees: corresponding tree with 100 replicates with the considered method
+<family><ME|ML|IMD>splits_<IMD|ME|ML>bs.trees: corresponding trees followed by 100 bootsrap replictes estimated on 200 columns (full dataset)
+<family><ME|ML|IMD>splits_<IMD|ME|ML>bs100.trees: corresponding trees followed by 100 bootsrap replictes estimated on 100 columns 
+<family><ME|ML|IMD>splits_<IMD|ME|ML>bs100.trees: corresponding trees followed by 100 bootsrap replictes estimated on 25 columns 
+
+./process_list.pl 't_coffee -other_pg seq_reformat -action +phylo3d_bm $' list.txt > auc.txt # produces the AUC analysis, dataset per dataset
+./auc2analyze.pl auc.txt >auc.analyze.txt # measure statistics on the auc data
+cat auc.txt | grep TABLE >auc.analyze.tsv # produces the tables
+
+#auc.txt
+AUC family: PF00026              cmode: avg ref: I__ ppmode: __L000 npp: 8 bs: I__025 0.85 0 12 _E_025 0.97 0 16 __L025 0.96 0 20 IE_025 0.94 0 24 I_L025 0.93 0 28 IEL025 0.96 0 32 _EL025 0.97 0 36 I__100 0.92 0 40 _E_100 0.96 0 44 __L100 0.98 0 48 IE_100 0.98 0 52 I_L100 0.99 0 56 IEL100 0.99 0 60 _EL100 0.98 0 64 I__200 0.90 0 68 _E_200 1.00 1 72 __L200 1.00 1 76 IE_200 1.00 1 80 I_L200 1.00 1 84 IEL200 1.00 1 88 _EL200 1.00 1 92
+
+I__: IMD
+_E_: ME
+__L: ML
+ref: tree used as reference for the rest of the line
+ppmode: extraction of the reference branches, eg: IEL080, all branches common in IMD, ME and ML trees and having BS values >=80 
+npp: number of proven positives in reference tree, as generated above
+bs: IEL100 <x> <y> <z>: combo boostrap on I, E and L boostrap collections, x: auc, y: 1 if AUC=1, z: ignore
+
+
+PPLIST family: PF00026    nseq: 32 ref: __L ppmode: __L000 split: 10000000000000001000000111111011 depth:  10 rdepth: 0.62
+
+list of reference branches associated with a ppmode
