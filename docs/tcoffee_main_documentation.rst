@@ -1246,6 +1246,8 @@ Running Expresso/3D-Coffee
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 Both Expresso (command 1) and 3D-Coffee (command 2) are modes of T-Coffee you can call with the flag **-mode**; the correspond to a preestablished configuration with default parameters. The template selection is indicated with the flag **-template_file** followed by either **PDB** (means BLAST will run remotely on the PDB) or **_SELF_P_** (means that the PDB identifier is the name of the sequence so there is no need to run BLAST) or a template file of your choice. As you can see in commands 1 and2, SAP (sap_pair) is the default structural aligner but you can choose alternative aligner(s) installed. You can give any combination of methods with the flag **-method**, but at least one has to be a structural aligner (command 3). You can also specify local installations of BLAST and PDB (command 4) **which is highly recommended if you want reproducible results**.
 
+.. note::  you may need to install cpanm Mozilla::CA [sudo cpanm Mozilla::CA] to run the EBI web server
+
 ::
 
   Command 1: two ways of running Expresso
@@ -1628,10 +1630,11 @@ Computing very accurate (but slow) alignments with PSI/TM-Coffee
 -----------------------------------------------------------------
 PSI-Coffee is currently the most accurate mode of T-Coffee but also the slowest. Its principle is rather simple: it associates every sequence with a profile of homologous sequences gathered using BLAST on a sequence database (nr by default). PSI-Coffee then uses the profiles instead of the initial sequences to makes a multiple profile alignment (command 1). In a last step, your profiles are replaced by their initial query sequence from your initial dataset and returns a MSA of your sequences. PSI-Coffee can also use reduced database instead of nr (installed locally) in order to speed-up the process. A special mode, TM-Coffee, exists using PSI-Coffee but specialized to align transmembrane proteins using a reduced database of TM proteins and also including a prediction of transmembrane domains with the flag **-template_file PSITM** (command 2). It is much faster as the search database is limited to known transmembrane protein, however, it applies in only specific cases unlike PSI-Coffee which is a general method. You can find more information about TM-Coffee `here <http://tcoffee.crg.cat/apps/tcoffee/tutorial_tmcoffee.html>`_. If you want to specify a local BLAST version and a local database of your choice, just add to your command line the flags **-blast_server** and **-protein_db** and the corresponding paths.
 
+.. note::  you may need to install cpanm Mozilla::CA [sudo cpanm Mozilla::CA]
 
 
-::
-  you may need to install cpanm Mozilla::CA [sudo cpanm Mozilla::CA] 
+
+:: 
   Command 1: PSI-Coffee
   $$: t_coffee sample_seq1.fasta -mode psicoffee
   

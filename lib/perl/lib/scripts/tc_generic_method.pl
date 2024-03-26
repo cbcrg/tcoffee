@@ -2618,7 +2618,8 @@ sub run_blast
 		$command="t_coffee -other_pg wublast_lwp.pl --email $EMAIL -D $db1 -p $cl_method --outfile $outfile --align 5 --stype protein $infile>/dev/null 2>error_log";
 	      }
 	    else
-	      {
+	    {
+		&check_configuration ("EMAIL","MOZILLA::CA","INTERNET");
 		#if ( $cl_method =~/psiblast/){$cl_method ="blastp $psiJFlag";}
 		if ( $cl_method =~/psiblast/){$cl_method ="blastp";}
 		#
@@ -2627,6 +2628,7 @@ sub run_blast
 		#New version - now deprecated
 		#$command="t_coffee -other_pg ncbiblast_lwp.pl --email $EMAIL --database $db1 --program $cl_method --outfile $outfile --alignments 5 --stype protein $infile>/dev/null 2>$error_log";
 		#newer version: 25/03/2024
+
 		$command="t_coffee -other_pg ncbiblast.pl --email $EMAIL --database $db1 --program $cl_method --outfile $outfile --alignments 5 --stype protein $infile>/dev/null 2>$error_log";
 		
 		my $maxrun=5;#number of crashes accepetd
@@ -2649,7 +2651,8 @@ sub run_blast
 		    if (!$success && ($nrun<$maxrun || -e "$outfile.out.txt"))
 		      {
 			$keep_going=1;
-			add_warning($$,$$,"[ncbiblast.pl] [$command] failed to produce xml output -- will ne tried again [$nrun]");
+			add_warning($$,$$,"[ncbiblast.pl] [$command] failed to produce xml output -- will try again [$nrun/$maxrun]");
+			
 		      }
 		  }
 		
@@ -2659,7 +2662,8 @@ sub run_blast
 		elsif (-e "$outfile.xml..xml"){`mv $outfile.xml..xml $outfile`;}
 		else
 		  {
-		    add_warning($$,$$,"[ncbiblast.pl] [$command] failed to produce xml output");
+		      add_warning($$,$$,"[ncbiblast.pl] [$command] failed to produce xml output");
+		      flush_error_file($error_log);
 		  }
 	      }
 	  }
@@ -3439,6 +3443,16 @@ BEGIN
 
 
     }
+sub flush_error_file
+{
+    my $file=shift;
+    open (F, "$file") or return 0;
+    while (<F>)
+    {
+	printf (STDERR "$_");
+    }
+    close (F);
+}
 sub flush_error
   {
     my $msg=shift;
