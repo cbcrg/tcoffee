@@ -4,10 +4,13 @@
 #include <stdarg.h>
 #include <string.h>
 #include <ctype.h>
+//#include <stdint.h>
+//#include <cstdint>  // For uint32_t
 #include "io_lib_header.h"
 #include "util_lib_header.h"
 #include "define_header.h"
 #include "dp_lib_header.h"
+
 static float dm[]={
 0.178091,
 1.18065, 0.270671, 0.039848, 0.017576, 0.016415, 0.014268, 0.131916, 0.012391, 0.022599, 0.020358, 0.030727, 0.015315, 0.048298, 0.053803, 0.020662, 0.023612, 0.216147, 0.147226, 0.065438, 0.003758, 0.009621,
@@ -27,6 +30,7 @@ static float dm[]={
 4.98768, 0.452171, 0.114613, 0.06246, 0.115702, 0.284246, 0.140204, 0.100358, 0.55023, 0.143995, 0.700649, 0.27658, 0.118569, 0.09747, 0.126673, 0.143634, 0.278983, 0.358482, 0.66175, 0.061533, 0.199373,
 0.234585,
 0.0995, 0.005193, 0.004039, 0.006722, 0.006121, 0.003468, 0.016931, 0.003647, 0.002184, 0.005019, 0.00599, 0.001473, 0.004158, 0.009055, 0.00363, 0.006583, 0.003172, 0.00369, 0.002967, 0.002772,0.002686};
+
 
 double int_logB (int *i, int n)
 	{
@@ -464,12 +468,63 @@ w5  =  8.36339918996282139126e-04, /* 0x3F4B67BA, 0x4CDAD5D1 */
 w6  = -1.63092934096575273989e-03; /* 0xBF5AB89D, 0x0B9E43E4 */
 
 static const double zero=  0.00000000000000000000e+00;
+static double sin_pi(double x) {return sin(x * M_PI);}
 
+
+#ifdef EFFICIENT_SIN_PI
+static double sin_pi(double x) {
+    double y, z;
+    int n;
+    uint32_t ix;
+
+    // Copy the high 32 bits of x into ix safely
+    unsigned long long ull;
+    memcpy(&ull, &x, sizeof(x));
+    ix = static_cast<uint32_t>(ull >> 32) & 0x7FFFFFFF;
+
+    if (ix < 0x3FD00000) return sin(pi * x);
+    y = -x; // x is assumed negative
+
+    // Argument reduction
+    z = floor(y);
+    if (z != y) { // inexact anyway
+        y *= 0.5;
+        y = 2.0 * (y - floor(y)); // y = |x| mod 2.0
+        n = static_cast<int>(y * 4.0);
+    } else {
+        if (ix >= 0x43400000) {
+            y = zero;
+            n = 0; // y must be even
+        } else {
+            if (ix < 0x43300000) z = y + two52; // exact
+            memcpy(&ull, &z, sizeof(z)); // Safe bit manipulation
+            n = ull & 1;
+            y = n;
+            n <<= 2;
+        }
+    }
+
+    switch (n) {
+        case 0: y = sin(pi * y); break;
+        case 1:
+        case 2: y = cos(pi * (0.5 - y)); break;
+        case 3:
+        case 4: y = sin(pi * (one - y)); break;
+        case 5:
+        case 6: y = -cos(pi * (y - 1.5)); break;
+        default: y = sin(pi * (y - 2.0)); break;
+    }
+    return -y;
+}
+#endif
+#ifdef OLD_SIN_PI
 static double sin_pi(double x)
 {
         double y,z;
         int n,ix;
-
+	unsigned long long ull;
+	memcpy(&ull, &x, sizeof(x));
+	
         ix=(*(long long *)&x)>>32;
         ix &= 0x7fffffff;
 
@@ -508,12 +563,111 @@ static double sin_pi(double x)
             }
         return -y;
 }
+#endif
 
 double lgamma2 ( double x)
 {
   int s;
   return lgamma_r ( x, &s);
 }
+double lgamma_r(double x, int *signgamp)
+{
+        double t, y, z, nadj = 0, p, p1, p2, p3, q, r, w;
+	int i, ix, hx, lx;
+	
+	unsigned long long ull;
+	memcpy(&ull, &x, sizeof(x));
+	
+	// Extracting higher and lower parts of the double's bit representation
+	hx = ull >> 32; // Higher 32 bits
+	lx = ull & 0xFFFFFFFF; // Lower 32 bits
+	
+        *signgamp = 1;
+        ix = hx&0x7fffffff;
+        if(ix>=0x7ff00000) return x*x;
+        if((ix|lx)==0) return one/fabs(x);
+        if(ix<0x3b900000) {        /* |x|<2**-70, return -log(|x|) */
+            if(hx<0) {
+                *signgamp = -1;
+                return -log(-x);
+            } else return -log(x);
+        }
+        if(hx<0) {
+            if(ix>=0x43300000)         /* |x|>=2**52, must be -integer */
+                return x/zero;
+            t = sin_pi(x);
+            if(t==zero) return one/fabs(t); /* -integer */
+            nadj = log(pi/fabs(t*x));
+            if(t<zero) *signgamp = -1;
+            x = -x;
+        }
+
+     /* purge off 1 and 2 */
+        if((((ix-0x3ff00000)|lx)==0)||(((ix-0x40000000)|lx)==0)) r = 0;
+     /* for x < 2.0 */
+        else if(ix<0x40000000) {
+            if(ix<=0x3feccccc) {         /* lgamma(x) = lgamma(x+1)-log(x) */
+                r = -log(x);
+                if(ix>=0x3FE76944) {y = one-x; i= 0;}
+                else if(ix>=0x3FCDA661) {y= x-(tc-one); i=1;}
+                  else {y = x; i=2;}
+            } else {
+                  r = zero;
+                if(ix>=0x3FFBB4C3) {y=2.0-x;i=0;} /* [1.7316,2] */
+                else if(ix>=0x3FF3B4C4) {y=x-tc;i=1;} /* [1.23,1.73] */
+                else {y=x-one;i=2;}
+            }
+            switch(i) {
+              case 0:
+                z = y*y;
+                p1 = a0+z*(a2+z*(a4+z*(a6+z*(a8+z*a10))));
+                p2 = z*(a1+z*(a3+z*(a5+z*(a7+z*(a9+z*a11)))));
+                p  = y*p1+p2;
+                r  += (p-0.5*y); break;
+              case 1:
+                z = y*y;
+                w = z*y;
+                p1 = t0+w*(t3+w*(t6+w*(t9 +w*t12)));        /* parallel comp */
+                p2 = t1+w*(t4+w*(t7+w*(t10+w*t13)));
+                p3 = t2+w*(t5+w*(t8+w*(t11+w*t14)));
+                p  = z*p1-(tt-w*(p2+y*p3));
+                r += (tf + p); break;
+              case 2:
+                p1 = y*(u0+y*(u1+y*(u2+y*(u3+y*(u4+y*u5)))));
+                p2 = one+y*(v1+y*(v2+y*(v3+y*(v4+y*v5))));
+                r += (-0.5*y + p1/p2);
+            }
+        }
+        else if(ix<0x40200000) {                         /* x < 8.0 */
+            i = (int)x;
+            t = zero;
+            y = x-(double)i;
+            p = y*(s0+y*(s1+y*(s2+y*(s3+y*(s4+y*(s5+y*s6))))));
+            q = one+y*(r1+y*(r2+y*(r3+y*(r4+y*(r5+y*r6)))));
+            r = half*y+p/q;
+            z = one;        /* lgamma(1+s) = log(s) + lgamma(s) */
+            switch(i) {
+            case 7: z *= (y+6.0);        /* FALLTHRU */
+            case 6: z *= (y+5.0);        /* FALLTHRU */
+            case 5: z *= (y+4.0);        /* FALLTHRU */
+            case 4: z *= (y+3.0);        /* FALLTHRU */
+            case 3: z *= (y+2.0);        /* FALLTHRU */
+                    r += log(z); break;
+            }
+     /* 8.0 <= x < 2**58 */
+        } else if (ix < 0x43900000) {
+            t = log(x);
+            z = one/x;
+            y = z*z;
+            w = w0+z*(w1+y*(w2+y*(w3+y*(w4+y*(w5+y*w6)))));
+            r = (x-half)*(t-one)+w;
+        } else
+     /* 2**58 <= x <= inf */
+            r =  x*(log(x)-one);
+        if(hx<0) r = nadj - r;
+        return r;
+}
+#ifdef OLD_LGAMMA
 double lgamma_r(double x, int *signgamp)
 {
         double t,y,z,nadj=0,p,p1,p2,p3,q,r,w;
@@ -608,6 +762,7 @@ double lgamma_r(double x, int *signgamp)
         if(hx<0) r = nadj - r;
         return r;
 }
+#endif
 
 double **prf2dmx (double **in, double **prf, int len)
 {

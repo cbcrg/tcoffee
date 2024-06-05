@@ -7840,7 +7840,15 @@ Alignment * reorder_aln ( Alignment *A, char **iname, int nseq)
   
   return A;
 }
-
+Sequence * seq2alpha_sorted_seq(Sequence *S)
+{
+  char ** new_order=duplicate_char (S->name, -1, -1);
+  new_order=sort_string_array   (new_order, S->nseq);
+  S=reorder_seq(S,new_order,S->nseq);
+  free_char (new_order, -1);
+  return S;
+}
+  
 Sequence * reorder_seq_2 ( Sequence *A, int **order,int field, int nseq)
 	{
 	  char **name;

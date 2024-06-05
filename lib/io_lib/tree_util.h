@@ -1,4 +1,4 @@
-#ifndef TREE_UTIL_H 
+#ifndef TREE_UTIL_H
 #define TREE_UTIL_H
 
 typedef struct ALNcol
@@ -96,6 +96,7 @@ typedef struct tnode{
   int *ldist;
   float dist;
   float bootstrap;
+  
   float dp;
   int order;
   int aligned;
@@ -235,7 +236,7 @@ void clear_tree (NT_node T);
 int display_leaf ( NT_node T, FILE *fp);
 int display_leaf_below_node ( NT_node T, FILE *fp);
 NT_node display_leaf_nb (NT_node T, int n, FILE *fp, char *name);
-NT_node display_splits (NT_node T,Sequence *S, FILE *fp, char *name);
+NT_node display_splits (NT_node T,Sequence *S, FILE *fp, char *name, char *file, char *sep);
 int tree2clusters   (NT_node T, int *nc,int **cl, double **dist, double Thr, int min);
 
 int tree2split_list (NT_node T, int nseq, int **split_list, int *n);
@@ -348,7 +349,11 @@ int ** treelist2avg_treecmp (NT_node *L, char *file);
 Alignment *treelist2cons (Alignment *T);
 
 NT_node reset_bs2 (NT_node T);
-NT_node combine_bs(NT_node T1, NT_node T2, char *mode);
+NT_node combine_bs (NT_node T1, NT_node T2, char *mode);
+NT_node combine_bsN(int n,NT_node *T1,char *mode);
+
+NT_node absolutebs2relativebs (NT_node T, int tot);
+NT_node relativebs2absolutebs (NT_node T, int tot);
 
 Alignment *tree2node_support       (char *newicktree,Alignment *T);
 char      *tree2node_support_simple(char *newicktree,Alignment *T, float*bs);
@@ -360,6 +365,7 @@ void display_compare_bs (char *string, NT_node t1, NT_node t2, int nseq);
 
 
 int **     treelist2ns (NT_node T,Sequence *B,char *ref);
+NT_node    treelistF2node_support(char *file);
 Alignment *treelist2node_support (Alignment *T);
 Alignment *treelist2node_support_best (Alignment *T);
 

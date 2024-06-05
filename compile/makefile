@@ -144,7 +144,7 @@ WEBSERVICES_LIB_OBJECTS=\
 	dalilite.pl\
 	wublast.pl\
 	blastpgp.pl\
-	ncbiblast_lwp.pl\
+	ncbiblast.pl\
 	wublast_lwp.pl
 
 
@@ -165,9 +165,9 @@ wublast_lwp.pl:\
 	$(WEBSERVICES_LIB)/wublast_lwp.pl
 	cp $(WEBSERVICES_LIB)/wublast_lwp.pl .
 
-ncbiblast_lwp.pl:\
-	$(WEBSERVICES_LIB)/ncbiblast_lwp.pl
-	cp $(WEBSERVICES_LIB)/ncbiblast_lwp.pl .
+ncbiblast.pl:\
+	$(WEBSERVICES_LIB)/ncbiblast.pl
+	cp $(WEBSERVICES_LIB)/ncbiblast.pl .
 
 #########################################################################
 ########################      	SCRIPT_LIB   ############################

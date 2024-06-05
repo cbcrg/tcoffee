@@ -16,6 +16,8 @@ $print_avg=1;
 $print_sd=0;
 $print_sum=0;
 $print_n=0;
+$one_only=0;
+
 foreach $value ( @ARGV)
     {
 	if ($value ne $ARGV[$np]) 
@@ -27,6 +29,11 @@ foreach $value ( @ARGV)
 	       $step=$ARGV[++$np];
 	       $np++;
 	     }
+	elsif ($value eq "-one_only")
+	{
+	    $one_only=1;
+	    $np++;
+	}
 	elsif($value eq "-print_all")
 	    {
 	    $print_sd=$print_avg=$print_n=$print_sum=1;
@@ -239,10 +246,14 @@ else
 	
 	if ($bin && $bin==$interval){$bin--;}
 	for ( $a=0; $a<$nyf; $a++)
-	  {
-	    $sum{$a}{$bin}+=$list[$y_field[$a]];
-	    $sum2{$a}{$bin}+=$list[$y_field[$a]]*$list[$y_field[$a]];
-	    $n{$a}{$bin}++;
+	{
+	    if ($one_only && $list[$y_field[$a]]<1){;}
+	    else
+	    {
+		$sum{$a}{$bin}+=$list[$y_field[$a]];
+		$sum2{$a}{$bin}+=$list[$y_field[$a]]*$list[$y_field[$a]];
+		$n{$a}{$bin}++;
+	    }
 	  }
       }
     

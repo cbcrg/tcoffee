@@ -33,7 +33,8 @@ our $ERRORDIR=$ENV{"ERRORDIR_4_TCOFFEE"};
 our $ERRORFILE=$ENV{"ERRORFILE_4_TCOFFEE"};
 &set_lock ($$);
 if (isshellpid(getppid())){lock4tc(getppid(), "LLOCK", "LSET", "$$\n");}
-      
+
+
 ########################## GLOBAL VARIABLES ################
 our $SILENT=" >/dev/null 2>/dev/null";
 our $INTERNET=-1;
@@ -215,9 +216,12 @@ else
 #  netaddress for SwissProt
 #  $netaddress="http://www.expasy.ch/cgi-bin/get-pdb-entry.pl?%%";
 #  Netaddress for pdb
-   
+
+# OLD see https://cbcrg.slack.com/archives/DVA2EA2GG/p1709661297295109 (updated on 2024-03-06)
 # $netaddress="http://www.rcsb.org/pdb/cgi/export.cgi/%%.pdb.gz?format=PDB&pdbId=%%&compression=gz";
 $netaddress="https://files.rcsb.org/download/%%.pdb.gz";
+$unreleased_netfile="https://files.wwpdb.org/pub/pdb/holdings/unreleased_entries.json.gz";      
+
 $netcompression_pg="gunzip";
 $netcompression="gz";
 
@@ -1236,12 +1240,12 @@ sub get_unrealeased_file
 	if (-e $cache_file){return $cache_file;}
 	elsif ( $env_file && ! -e $env_file)
 	  {
-	    &url2file("https://ftp.rcsb.org/pub/pdb/holdings/unreleased_entries.json.gz",$env_file);
+	    &url2file($unreleased_netfile,$env_file);
 	    if ( -e $env_file && !-z $env_file){return $env_file;}
 	  }
 	else
 	  {
-	    add_warning($$,$$,"UNREALEASED_FILE must be set to the location of your unreleased_entries.json.gz file as downloaded from https://ftp.rcsb.org/pub/pdb/holdings/unreleased_entries.json.gz when using NO_REMOTE_PDB_DIR=1");
+	    add_warning($$,$$,"UNREALEASED_FILE must be set to the location of your unreleased_entries.json.gz file as downloaded from $unrealesed_netfile when using NO_REMOTE_PDB_DIR=1");
 	    return "";
 	  }
       }
@@ -1250,7 +1254,7 @@ sub get_unrealeased_file
 	my $new_file=vtmpnam ();
 	if (!-e $cache_file || (-M $cache_file)>1)
 	  {
-	    &url2file("https://ftp.rcsb.org/pub/pdb/holdings/unreleased_entries.json.gz",$new_file);
+	    &url2file($unreleased_netfile,$new_file);
 	    if ( !-z $new_file){system ("mv $new_file $cache_file"); unlink ($new_file); $new_file=$cache_file;}
 	    else {unlink($new_file);}
 	  }
@@ -1261,13 +1265,13 @@ sub get_unrealeased_file
 	
 	if (!-e $cache_file && !-e $new_file)
 	  {
-	    add_warning($$,$$,"Could not download https://ftp.rcsb.org/pub/pdb/holdings/unreleased_entries.json.gz");
+	    add_warning($$,$$,"Could not download $unreleased_netfile");
 	    return "";
 	  }
 	elsif (-e $cache_file && !-e $new_file)
 	  {
 	    my $m=(-M $cache_file);
-	    add_warning($$,$$,"Could not update file https://ftp.rcsb.org/pub/pdb/holdings/unreleased_entries.json.gz. Older Version [$cache_file]($m Month(s) ) will be used");
+	    add_warning($$,$$,"Could not update file $unreleased_netfile. Older Version [$cache_file]($m Month(s) ) will be used");
 	    return $cache_file;
 	  }
 	else
@@ -1366,7 +1370,7 @@ sub remote_is_on_hold
     $ref_file=&get_unrealeased_file();
     if (!-e $ref_file)
       {
-	add_warning ($$,$$,"Cannot find https://ftp.rcsb.org/pub/pdb/holdings/unreleased_entries.json.gz;  $in is assumed to be released;");
+	add_warning ($$,$$,"Cannot $unreleased_netfile;  $in is assumed to be released;");
 	return 1;
       }
     
