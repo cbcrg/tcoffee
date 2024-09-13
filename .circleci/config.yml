@@ -34,7 +34,7 @@ jobs:
   # tests and publish test htmls
   test:
     machine:
-      image: ubuntu-2004:202201-02
+      image: ubuntu-2204:2024.01.1
     steps:
     - checkout
     - attach_workspace:
@@ -67,7 +67,7 @@ jobs:
   # publish artifacts
   publish:
     machine:
-      image: ubuntu-2004:202201-02
+      image: ubuntu-2204:2024.01.1
     steps:
     - attach_workspace:
         at: /home/circleci
@@ -118,7 +118,7 @@ jobs:
   # tag and push docker latest
   push_image:
     machine:
-      image: ubuntu-2004:202201-02
+      image: ubuntu-2204:2024.01.1
     steps:
     - attach_workspace:
         at: /home/circleci
