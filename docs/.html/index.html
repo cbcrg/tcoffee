@@ -5189,8 +5189,8 @@ $$: t_coffee sample_seq1.fasta -method=slow_pair,lalign_id_pair -distance_matrix
 <h4>Q: How can I change the default output format?<a class="headerlink" href="#q-how-can-i-change-the-default-output-format" title="Permalink to this headline"></a></h4>
 <p>A: See the <strong>-output</strong> option in the <strong>T-Coffee Main Documentation</strong>; nearly all common output formats are recognized by T-Coffee.</p>
 </section>
-<section id="q-my-sequences-are-slightly-different-between-all-the-alignments">
-<h4>Q: My sequences are slightly different between all the alignments.<a class="headerlink" href="#q-my-sequences-are-slightly-different-between-all-the-alignments" title="Permalink to this headline"></a></h4>
+<section id="q-my-sequences-are-slightly-different-across-all-the-alignments-being-combined-is-it-an-issue">
+<h4>Q: My sequences are slightly different across all the alignments being combined is it an issue?<a class="headerlink" href="#q-my-sequences-are-slightly-different-across-all-the-alignments-being-combined-is-it-an-issue" title="Permalink to this headline"></a></h4>
 <p>A: It does not matter. T-Coffee will reconstruct a set of sequences that incorporates all the residues potentially missing in some of the sequences (See flag <strong>-in</strong>).</p>
 </section>
 <section id="q-is-it-possible-to-pipe-stuff-out-of-t-coffee">
@@ -5537,7 +5537,7 @@ $$: t_coffee -infile=sample_aln1.aln -evaluate -method proba_pair
 <li><p>4.02: <strong>-mode=dna</strong> is still available but not any more needed or supported. Use <strong>-type=protein or dna</strong> if you need to force things</p></li>
 <li><p>3.28: corrected a bug that prevents short sequences from being correctly aligned</p></li>
 <li><p>Use of &#64; as a separator when specifying methods parameters</p></li>
-<li><p>The most notable modifications have to do with the structure of the input. From version 2.20, all files must be tagged to indicate their nature (A: alignment, S: Sequence, L: Library…). We are becoming stricter, but that’s for your own good… Another important modification has to do with the flag -matrix: it now controls the matrix being used for the computation</p></li>
+<li><p>The most notable modifications have to do with the structure of the input. From version 2.20, all files must be tagged to indicate their nature (A: alignment, S: Sequence, L: Library…). We are becoming stricter, but that’s for your own good. Another important modification has to do with the flag -matrix: it now controls the matrix being used for the computation</p></li>
 </ul>
 </section>
 </section>

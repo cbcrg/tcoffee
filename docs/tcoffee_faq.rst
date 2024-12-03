@@ -53,7 +53,7 @@ A: You can use a more accurate, slower and less memory hungry dynamic programmin
 ********************
 Input/Output control
 ********************
-Q: How many sequences can T_Coffee handle? 
+Q: How many sequences can T_Coffee handle?
 ------------------------------------------
 A: T-Coffee is recommanded for a maximum of 200. Above this number, the regreessive flavor (**t_coffee -reg** ) should be used
 
@@ -62,7 +62,7 @@ Q: Can I change line length in the defaut format?
 A: Yes, by using the flag **-aln_line_length**.
 
 Q: Can I prevent the output of all the warnings?
------------------------------------------------
+------------------------------------------------
 A: Yes, by setting **-no_warning**.
 
 Q: How many ways to pass parameters to t_coffee?
@@ -73,8 +73,8 @@ Q: How can I change the default output format?
 ----------------------------------------------
 A: See the **-output** option in the **T-Coffee Main Documentation**; nearly all common output formats are recognized by T-Coffee.
 
-Q: My sequences are slightly different between all the alignments.
-------------------------------------------------------------------
+Q: My sequences are slightly different across all the alignments being combined is it an issue?
+-----------------------------------------------------------------------------------------------
 A: It does not matter. T-Coffee will reconstruct a set of sequences that incorporates all the residues potentially missing in some of the sequences (See flag **-in**).
 
 Q: Is it possible to pipe stuff out of T-Coffee?
@@ -491,5 +491,6 @@ Release Notes
 - 4.02: **-mode=dna** is still available but not any more needed or supported. Use **-type=protein or dna** if you need to force things
 - 3.28: corrected a bug that prevents short sequences from being correctly aligned
 - Use of @ as a separator when specifying methods parameters
-- The most notable modifications have to do with the structure of the input. From version 2.20, all files must be tagged to indicate their nature (A: alignment, S: Sequence, L: Library...). We are becoming stricter, but that's for your own good... Another important modification has to do with the flag -matrix: it now controls the matrix being used for the computation
+- The most notable modifications have to do with the structure of the input. From version 2.20, all files must be tagged to indicate their nature (A: alignment, S: Sequence, L: Library...). We are becoming stricter, but that's for your own good. Another important modification has to do with the flag -matrix: it now controls the matrix being used for the computation
+  
  

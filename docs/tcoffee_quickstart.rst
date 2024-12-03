@@ -6,7 +6,7 @@ Quick Start T-Coffee
 ******************************
 Basic Command Lines (or modes)
 ******************************
-This chapter is a quick overview on how to run T-Coffee alignment using predefined procedures we call "modes". All the files mentioned can be found `here <https://github.com/cbcrg/tcoffee/tree/master/examples>`_. You can also use examples associated with their corresponding command lines from the subsection **Tutorial (practical examples)** published in Nature Protocols (2011). Refer to the section **T-Coffee Manual** for more technical details about T-Coffee usage and tools. Please, use the corresponding citation when using a specific mode or tools of T-Coffee (see **References and Citations**) otherwise cite T-Coffee. 
+This chapter is a quick overview on how to run T-Coffee alignment using predefined procedures we call "modes". All the files mentioned can be found `here <https://github.com/cbcrg/tcoffee/tree/master/examples>`__. You can also use examples associated with their corresponding command lines from the subsection **Tutorial (practical examples)** published in Nature Protocols (2011). Refer to the section **T-Coffee Manual** for more technical details about T-Coffee usage and tools. Please, use the corresponding citation when using a specific mode or tools of T-Coffee (see **References and Citations**) otherwise cite T-Coffee. 
 
 
 Protein sequences
@@ -292,7 +292,7 @@ There are several parts: 1) the protein section presents controlled cases for PS
 
 Materials
 =========
-The list of files (input and output) required by this protocol is available from `here <http://www.tcoffee.org/Packages/NatureProtocols/NatureProtocolDataset.tar.gz>`_. They can be automatically retrieved using the following command:
+The list of files (input and output) required by this protocol is available from `here <http://www.tcoffee.org/Packages/NatureProtocols/NatureProtocolDataset.tar.gz>`__. They can be automatically retrieved using the following command:
 
 ::
 
