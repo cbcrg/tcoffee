@@ -8,7 +8,7 @@ jobs:
       # **do not edit: start
       # Variable programmatically edited by /lib/perl/scripts/read_program_version.pl when changing release number
       # /lib/perl/scripts/read_program_version.pl gets invoked by make beta|stable|major
-      - run: echo 'export RELEASE="1"' >> $BASH_ENV #UPDATE_RELEASE_STATUS
+      - run: echo 'export RELEASE="0"' >> $BASH_ENV #UPDATE_RELEASE_STATUS
       # **do not edit: end
       - run: echo 'export RELEASE="'$RELEASE'"' > /home/circleci/env-vars
       - run: mv ~/project ~/tcoffee
@@ -34,7 +34,7 @@ jobs:
   # tests and publish test htmls
   test:
     machine:
-      image: ubuntu-2004:202201-02
+      image: ubuntu-2204:2024.11.1
     steps:
     - checkout
     - attach_workspace:
@@ -67,7 +67,7 @@ jobs:
   # publish artifacts
   publish:
     machine:
-      image: ubuntu-2004:202201-02
+      image: ubuntu-2204:2024.11.1
     steps:
     - attach_workspace:
         at: /home/circleci
@@ -118,7 +118,7 @@ jobs:
   # tag and push docker latest
   push_image:
     machine:
-      image: ubuntu-2004:202201-02
+      image: ubuntu-2204:2024.11.1
     steps:
     - attach_workspace:
         at: /home/circleci
