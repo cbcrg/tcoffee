@@ -19,7 +19,9 @@ typedef struct LabeledData{
 };
 typedef struct LabeledData LabeleddData;
 
-
+//// MCC for phylo3d
+void splits2optimalmcc(int length, float **nodes, float*result);
+double calculateMCC(int TP, int TN, int FP, int FN);
 //// AUC for phylo3d
 int splits2npp(int n, float **ns);
 float splits2auc (int n, float **ns);
@@ -624,7 +626,7 @@ int **col2bsrep2 (int **colin,int **colout, int ni)
   /*select maxp sites with re-sampling among the maxp sites in colin*/
   /*keep the all against all that are declared in colin*/
   /*The total number is guarranteed, but not the total number of pairs*/
-  
+  //colin: list of all pairs of eligeable column pairs after the various upstream filtrations. colin[pairindex][0=Right MSA Column OR -1 if end 1=LeftMSA column]
     
   int i, j, k;
   int p1,p2, pmax;
@@ -1238,7 +1240,8 @@ double phylo3d2score (double w1, double w2, double *rscore, double *rmax)
    return rscore[0]/rmax[0];   
 }
 
-
+// these functions replicate in C the benchmark analysis of the phylo3D paper (Nature Communication)
+// They have been checked to deliver exactly the same results as the ones in the Nextflow pipeline 
 //////////////////////////////////////////////////////////////////////
 ///                                                              /////
 ///                                                              /////
@@ -1280,7 +1283,8 @@ int phylo3d_bm_debug ( char *name)
   int n_ppformula, n_bsformula, n_cmode,npp,pp, ref, bs, split, cmode;
   char **ppformula, **bsformula, **cmodelist;
   char *refS;
-  float *auc;
+  float *auc, **mcc;
+  
   
   S=get_phylo3d_seq(name);
 
@@ -1293,6 +1297,7 @@ int phylo3d_bm_debug ( char *name)
   bsformula=(char**)vcalloc (100, sizeof (char*));
   cmodelist=(char**)vcalloc (100, sizeof (char*));
   auc      =(float*)vcalloc (100, sizeof (float));
+  mcc      =declare_float (100, 4);
 
   if (1==1)// Read all the trees
     {
@@ -1367,12 +1372,19 @@ int phylo3d_bm_debug ( char *name)
 			  sl[ref][bsbin][ref][split][4]=bs2combo(cbs, ncbs, cmodelist[cmode]);
 			}
 		      auc[bs]=splits2auc(nn[ref][bsbin][ref], sl[ref][bsbin][ref]);
+		      splits2optimalmcc (nn[ref][bsbin][ref], sl[ref][bsbin][ref], mcc[bs]);
 		    }
 		  //Display AUC - the float values of the AUCs
 		  fprintf ( stdout,"AUC family: %-20s cmode: %s ref: %s ppmode: %s npp: %d bs: ", name, cmodelist[cmode],refS, ppformula[pp],npp); 
 		  for (bs=0; bs<n_bsformula; bs++)
 		    {
 		      fprintf (stdout,"%s %.2f %d %d ",bsformula[bs],auc[bs], (auc[bs]>0.99999)?1:0, 4*(bs+1)-2+10);
+		    }
+		  fprintf (stdout, "\n");
+		  fprintf ( stdout,"MCC family: %-20s cmode: %s ref: %s ppmode: %s npp: %d bs: ", name, cmodelist[cmode],refS, ppformula[pp],npp); 
+		  for (bs=0; bs<n_bsformula; bs++)
+		    {
+		      fprintf (stdout,"%s %.2f %.2f %.2f ",mcc[bs][1],mcc[bs][2],mcc[bs][3]);
 		    }
 		  fprintf (stdout, "\n");
 		}
@@ -1396,7 +1408,7 @@ int phylo3d_bm_complete ( char *name)
   int n_ppformula, n_bsformula, n_cmode,npp,pp, ref, bs, split, cmode;
   char **ppformula, **bsformula, **cmodelist;
   char *refS;
-  float *auc;
+  float *auc,**mcc;
   
   S=get_phylo3d_seq(name);
 
@@ -1409,7 +1421,7 @@ int phylo3d_bm_complete ( char *name)
   bsformula=(char**)vcalloc (100, sizeof (char*));
   cmodelist=(char**)vcalloc (100, sizeof (char*));
   auc      =(float*)vcalloc (100, sizeof (float));
-
+  mcc      =declare_float (100, 4);
 
   //Collect all the splits of all the provided trees
   //assuming: <family><reference trees><boostrap method>
@@ -1540,12 +1552,19 @@ int phylo3d_bm_complete ( char *name)
 			  sl[ref][bsbin][ref][split][4]=bs2combo(cbs, ncbs, cmodelist[cmode]);
 			}
 		      auc[bs]=splits2auc(nn[ref][bsbin][ref], sl[ref][bsbin][ref]);
+		      splits2optimalmcc (nn[ref][bsbin][ref], sl[ref][bsbin][ref], mcc[bs]);
 		    }
 		  //Display AUC - the float values of the AUCs
 		  fprintf ( stdout,"AUC family: %-20s cmode: %s ref: %s ppmode: %s npp: %d bs: ", name, cmodelist[cmode],refS, ppformula[pp],npp); 
 		  for (bs=0; bs<n_bsformula; bs++)
 		    {
 		      fprintf (stdout,"%s %.2f %d %d ",bsformula[bs],auc[bs], (auc[bs]>0.99999)?1:0, 4*(bs+1)-2+10);
+		    }
+		  fprintf (stdout, "\n");
+		  fprintf ( stdout,"MCC family: %-20s cmode: %s ref: %s ppmode: %s npp: %d bs: ", name, cmodelist[cmode],refS, ppformula[pp],npp); 
+		  for (bs=0; bs<n_bsformula; bs++)
+		    {
+		      fprintf (stdout,"%s %.2f %.2f %.2f ",bsformula[bs],mcc[bs][1],mcc[bs][2],mcc[bs][3]);
 		    }
 		  fprintf (stdout, "\n");
 		}
@@ -2290,3 +2309,68 @@ double calculateAUC_2(LabeledData *data, int n) {
     
     return auc;
 }
+///////////////////////////////// MCC
+
+double calculateMCC(int TP, int TN, int FP, int FN) {
+    double denominator = sqrt((TP + FP) * (TP + FN) * (TN + FP) * (TN + FN));
+    if(denominator == 0) return 0; // Avoid division by zero
+    return ((double)TP * TN - (double)FP * FN) / denominator;
+}
+
+void splits2optimalmcc(int length, float **nodes, float *result)
+  {
+    LabeledData *data=(LabeledData *) vcalloc (length*2, sizeof (LabeledData));
+    double optimalMCC = -2, optimalThreshold = -1, sensitivity = 0, specificity = 0, currentMCC;
+
+        
+    int TP = 0, TN = 0, FP = 0, FN = 0;
+    int a,i;
+    
+    for (a=0; a<length; a++)
+      {
+	//fprintf (stderr, "\t %d %f\n", (int)nodes[a][3],nodes[a][4]); 
+	data[a].label=(nodes[a][3]>0.01)?1:0;
+	data[a].score=(double)nodes[a][4];
+      }
+    int n = length;
+    
+    // Sort the data by scores in descending order
+    qsort(data,length, sizeof(LabeledData), compare4phylo3d);
+    
+    TN=FN=0;
+    for (i=length-1; i>=0; i--)
+      {
+	
+	if(data[i].label == 1)TP++;
+	else FP++;
+      }
+    optimalMCC=currentMCC=calculateMCC(TP, TN, FP, FN);
+    sensitivity = TP / (double)(TP + FN);
+    specificity = TN / (double)(TN + FP);
+    optimalThreshold =0;
+
+    for (i=length-1; i>=0; i--)
+      {
+        if(data[i].label == 1) {TP--;FN++;}
+	else {FP--;TN++;}
+	currentMCC = calculateMCC(TP, TN, FP, FN);
+        if(currentMCC > optimalMCC)
+	  {
+            optimalMCC = currentMCC;
+            optimalThreshold = data[i].score;
+            sensitivity = TP / (double)(TP + FN);
+            specificity = TN / (double)(TN + FP);
+        }
+	//fprintf ( stdout, "%2f %d -- %d %d %d %d -- %5.2f [%5.2f] [%5.2f]\n", data[i].score, data[i].label, TP, TN, FP, FN, currentMCC, sensitivity, specificity);
+			  
+      }
+
+   
+    result[0]= (float)optimalMCC;
+    result[1]= (float)optimalThreshold;
+    result[2]= (float)sensitivity;//TP rate
+    result[3]= (float)specificity;//TN rate
+
+    return;
+  }
+    

@@ -6,7 +6,7 @@ use Cwd;
 use File::Path;
 use Sys::Hostname;
 ########################## ENVIRONEMENT VARIABLES ##########
-# PDB_UNREALEASED_FILE
+# PDB_UNRELEASED_FILE
 # PDB_ENTRY_TYPE_FILE
 # NO_REMOTE_PDB_DIR
 # PDB_DIR
@@ -1191,7 +1191,7 @@ sub get_pdb_entry_type_file
 	if (!-e $cache_file || (-M $cache_file)>1)
 	  {
 	    $new_file=vtmpnam();
-	    &url2file("ftp://ftp.wwpdb.org/pub/pdb/derived_data/pdb_entry_type.txt", $new_file);
+	    &url2file($unreleased_netfile, $new_file);
 	    if ( !-z $new_file){system ("mv $new_file $cache_file"); unlink ($new_file); $new_file=$cache_file;}
 	    else {unlink($new_file);}
 	  }
@@ -1202,13 +1202,13 @@ sub get_pdb_entry_type_file
 	
 	if (!-e $cache_file && !-e $new_file)
 	  {
-	    add_warning($$,$$,"Could not download ftp://ftp.wwpdb.org/pub/pdb/derived_data/pdb_entry_type.txt");
+	    add_warning($$,$$,"Could not download $unreleased_netfile");
 	    return "";
 	  }
 	elsif (-e $cache_file && !-e $new_file)
 	  {
 	    my $m=(-M $cache_file);
-	    add_warning($$,$$,"Could not update file ftp://ftp.wwpdb.org/pub/pdb/derived_data/pdb_entry_type.txt. Older Version [$cache_file]($m Month(s) old) will be used instead");
+	    add_warning($$,$$,"Could not update $unreleased_netfile. Older Version [$cache_file]($m Month(s) old) will be used instead");
 	    return $cache_file;
 	  }
 	else
@@ -1220,10 +1220,10 @@ sub get_pdb_entry_type_file
 
 
 
-sub get_unrealeased_file
+sub get_unreleased_file
   {
     my $cache_file="$cache/unreleased_entries.json.gz";
-    my $env_file  = $ENV{"PDB_UNREALEASED_FILE"};
+    my $env_file  = $ENV{"PDB_UNRELEASED_FILE"};
     my $pdb_file  ="$ENV{'PDB_DIR'}/derived_data/unreleased_entries.json.gz";
     
     
@@ -1245,7 +1245,7 @@ sub get_unrealeased_file
 	  }
 	else
 	  {
-	    add_warning($$,$$,"UNREALEASED_FILE must be set to the location of your unreleased_entries.json.gz file as downloaded from $unrealesed_netfile when using NO_REMOTE_PDB_DIR=1");
+	    add_warning($$,$$,"UNRELEASED_FILE must be set to the location of your unreleased_entries.json.gz file as downloaded from $unrelesed_netfile when using NO_REMOTE_PDB_DIR=1");
 	    return "";
 	  }
       }
@@ -1306,7 +1306,7 @@ sub remote_is_pdb_name
     if ( $in=~/[^\w\d\:\_]/){return 0;}
     elsif (!-e $ref_file)
       {
-	add_warning ($$,$$,"Cannot find pdb_entry_type.txt;  $in is assumed to be valid; add ftp://ftp.wwpdb.org/pub/pdb/derived_data/pdb_entry_type.txt in $cache to automatically check name status");
+	add_warning ($$,$$,"Cannot find pdb_entry_type.txt;  $in is assumed to be valid; add $unreleased_netfile in $cache to automatically check name status");
 	return 1;
       }
     else
@@ -1334,7 +1334,7 @@ sub pdb2model_type
     $ref_file=&get_pdb_entry_type_file();
     if (!-e $ref_file)
       {
-	add_warning ($$,$$,"Cannot find pdb_entry_type.txt;  $in is assumed to be diffraction; add ftp://ftp.wwpdb.org/pub/pdb/derived_data/pdb_entry_type.txt in $cache to check name status");
+	add_warning ($$,$$,"Cannot find pdb_entry_type.txt;  $in is assumed to be diffraction; add $unreleased_netfile in $cache to check name status");
 	return "diffraction";
       }
     else
@@ -1360,14 +1360,14 @@ sub remote_is_on_hold
 
 
     
-    $ref_file=&get_unrealeased_file();
+    $ref_file=&get_unreleased_file();
     if ($ref_file eq "NO"){return 0;}
 
 
     if ($no_remote_pdb==1){return 0;}
     if ( $in=~/[^\w\d\:\_]/){return 0;}
     
-    $ref_file=&get_unrealeased_file();
+    $ref_file=&get_unreleased_file();
     if (!-e $ref_file)
       {
 	add_warning ($$,$$,"Cannot $unreleased_netfile;  $in is assumed to be released;");
@@ -6035,42 +6035,3 @@ sub check_pg_is_installed
 
 
 #####################DEprecated Functions
-sub remote_is_pdb_name_deprecated
-{
-    my $in=@_[0];
-    my ($ref_file, $pdb);
-    my ($value,$value1,$value2);
-    my $max=2;
-    
-    
-    
-    $ref_file="$cache/pdb_entry_type.txt";
-    
-    if ( $in=~/[^\w\d\:\_]/){return 0;}
-    elsif ($no_remote_pdb_dir==1)
-      {
-	my $pdbdir=$ENV{'PDB_DIR'};
-	
-	my $r1="$pdbdir/derived_data/pdb_entry_type.txt";
-	my $r2=$ref_file;
-	if    (-e $r1){$ref_file=$r1;}
-	elsif (-e $r2){$ref_file=$r2;}
-	else
-	  {
-	    my $p=substr ($in,0, 4);
-	    add_warning ($$, $$, "Cannot find pdb_entry_type.txt;  $p is assumed to be valid; add ftp://ftp.wwpdb.org/pub/pdb/derived_data/pdb_entry_type.txt in $cache to check name status");
-	  }
-      }
-    elsif ( !-e $ref_file || (-M $ref_file)>$max || -z $ref_file)
-      {
-	&url2file("ftp://ftp.wwpdb.org/pub/pdb/derived_data/pdb_entry_type.txt", $ref_file);
-      }
-    $pdb=substr ($in,0, 4);
-    chomp(($value1=`grep -c $pdb $ref_file`));
-    $pdb=lc($pdb);
-    chomp(($value2=`grep -c $pdb $ref_file`));
-    $value=($value1 || $value2)?1:0;
-    $value=($value>0)?1:0;
-    
-    return $value;
-  }

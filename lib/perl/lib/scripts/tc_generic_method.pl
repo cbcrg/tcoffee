@@ -2559,7 +2559,9 @@ sub run_blast
   {
     my ($name, $method, $db, $infile, $outfile, $run)=(@_);
     if (!$run){$run=1;}
-    my $error_log=vtmpnam();
+    my $error_log1=vtmpnam();
+    my $error_log2=vtmpnam();
+    
     my $cl_db;
     my $psiJ=($ENV{psiJ_4_TCOFFEE})?$ENV{psiJ_4_TCOFFEE}:1;
     
@@ -2585,7 +2587,7 @@ sub run_blast
 		    $cl_method="blastp";
 		  }
 
-		$command="t_coffee -other_pg wublast.pl --email $EMAIL $infile -D $db -p $cl_method --outfile $outfile -o xml>/dev/null 2>$error_log";
+		$command="t_coffee -other_pg wublast.pl --email $EMAIL $infile -D $db -p $cl_method --outfile $outfile -o xml>$error_log1 2>$error_log2";
 		&safe_system ( $command);
 		if (-e "$outfile.xml") {`mv $outfile.xml $outfile`;}
 	      }
@@ -2593,7 +2595,7 @@ sub run_blast
 	      {
 		if ($cl_method eq "psiblast"){$cl_method ="blastp $psiJFlag";}
 
-		$command="t_coffee -other_pg blastpgp.pl --email $EMAIL $infile -d $db --outfile $outfile -p $cl_method --mode PSI-Blast>/dev/null 2>$error_log";
+		$command="t_coffee -other_pg blastpgp.pl --email $EMAIL $infile -d $db --outfile $outfile -p $cl_method --mode PSI-Blast>$error_log1 2>$error_log2";
 		&safe_system ( $command);
 
 		if (-e "$outfile.xml") {`mv $outfile.xml $outfile`;}
@@ -2615,7 +2617,7 @@ sub run_blast
 		
 		if ( $cl_method eq "psiblast"){$cl_method="blastp";}
 
-		$command="t_coffee -other_pg wublast_lwp.pl --email $EMAIL -D $db1 -p $cl_method --outfile $outfile --align 5 --stype protein $infile>/dev/null 2>error_log";
+		$command="t_coffee -other_pg wublast_lwp.pl --email $EMAIL -D $db1 -p $cl_method --outfile $outfile --align 5 --stype protein $infilet>$error_log1 2>$error_log2";
 	      }
 	    else
 	    {
@@ -2623,13 +2625,8 @@ sub run_blast
 		#if ( $cl_method =~/psiblast/){$cl_method ="blastp $psiJFlag";}
 		if ( $cl_method =~/psiblast/){$cl_method ="blastp";}
 		#
-		#DEBUG
-		#$command="t_coffee -other_pg ncbiblast_lwp.pl --email $EMAIL -D $db1 -p $cl_method --outfile $outfile --align 5 --stype protein $infile";
-		#New version - now deprecated
-		#$command="t_coffee -other_pg ncbiblast_lwp.pl --email $EMAIL --database $db1 --program $cl_method --outfile $outfile --alignments 5 --stype protein $infile>/dev/null 2>$error_log";
-		#newer version: 25/03/2024
-
-		$command="t_coffee -other_pg ncbiblast.pl --email $EMAIL --database $db1 --program $cl_method --outfile $outfile --alignments 5 --stype protein $infile>/dev/null 2>$error_log";
+		
+		$command="t_coffee -other_pg ncbiblast.pl --email $EMAIL --database $db1 --program $cl_method --outfile $outfile --alignments 5 --stype protein $Infile>$error_log1 2>$error_log2";
 		
 		my $maxrun=5;#number of crashes accepetd
 		my $nrun;
@@ -2663,7 +2660,9 @@ sub run_blast
 		else
 		  {
 		      add_warning($$,$$,"[ncbiblast.pl] [$command] failed to produce xml output");
-		      flush_error_file($error_log);
+		      flush_error_file($error_log1);
+		      flush_error_file($error_log2);
+		      
 		  }
 	      }
 	  }
@@ -2687,7 +2686,7 @@ sub run_blast
 	    $command="$client -p $method -d $db -i $infile -o $outfile -m 7";
 	    &safe_system ($command);
 	  }
-	elsif ( $SERVER eq "LOCAL_blastall")
+ata	elsif ( $SERVER eq "LOCAL_blastall")
 	  {
 	    &check_configuration ("blastall");
 	    if ( $method eq "psiblast" || $psiJ>1){myexit(add_error (EXIT_FAILURE,$$,$$,getppid(), "BLAST_FAILURE::$SERVER does not Support psiblast mode ($psiJFlag)",$CL));}
