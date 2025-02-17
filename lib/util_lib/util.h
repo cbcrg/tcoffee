@@ -511,7 +511,7 @@ char *lock2name (int pid, int type);
 int release_all_locks (int pid);
 char *lock (int pid, int type, int action, char *value, ...);
 int check_process (const char *com,int pid,int r, int failure_handling);
-int max_n_pid();
+long max_n_pid();
 int assert_pid (pid_t p);
 pid_t **declare_pidtable ();
 pid_t set_pid (pid_t p);
@@ -561,6 +561,7 @@ methods: idem
 mcoffee: idem
 */
 int set_nproc (int nproc);
+long get_max_n_pid();
 int get_nproc ();
 char *get_os();
 char *get_lockdir_4_tcoffee ();

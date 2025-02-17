@@ -393,7 +393,8 @@ stable:
 	make release  type=stable
 major:
 	make release  type=major
-
+rstdoc:
+	sphinx-build -b singlehtml $(RST_DOC) $(HTML_DOC)
 release:
 	make version release_type=$(type)
 	make test-$(test)
@@ -423,7 +424,6 @@ release2:
 	sphinx-build -b singlehtml $(RST_DOC) $(HTML_DOC)
 	make distribution VERSION=$(VERSION)
 	make web
-
 # Stage all modified files (excluding untracked files)
 	git add -u
 # Exclude makefile (dropbox path different don't want to commit it)

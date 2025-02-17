@@ -1,0 +1,4 @@
+#The following CL will produce an <me> tree from PF03143_tmalign.fa that will be boostrapped using 3 me replicates, 3 ml replicates and 3 imd replicates. The last reported tree will contain the me tree with the boostrap support of the three methods (imd, me, ml) arthmetically combined on each me branch
+t_coffee -other_pg seq_reformat -in PF03143_tmalign.fa -in2 PF03143_ref.template_list -action +replicates  3 +multistrap_mode average +multistrap me me ml imd
+#THis CL will combine the replicates into the branch support of reftree
+t_coffee -other_pg seq_reformat -action +multistrap_mode avg +multistrap reftree.nwk bootstrap1 bootstrap2 bootstrap3 

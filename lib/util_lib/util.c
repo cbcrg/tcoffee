@@ -15,11 +15,12 @@
 #include <fcntl.h>
 #include <sys/file.h>
 #include <sys/types.h>
+#include <sys/resource.h>
 #include <unistd.h>
 
 // required to find out the numOfCores on MACOSX
 // see function 'getNumCores' below
-#ifdef MACOS
+#ifdef __APPLE__
 #include <sys/param.h>
 #include <sys/sysctl.h>
 #endif
@@ -4976,15 +4977,22 @@ int safe_system (const char * com_in)
 }
 
 
-int max_n_pid()
+long max_n_pid()
 {
-  static int max;
+  static long max;
   
   if (!max)
     {
       if (getenv ("MAX_N_PID_4_TCOFFEE"))max=atoigetenv ("MAX_N_PID_4_TCOFFEE");
-      else max=MAX_N_PID;
+      else max=get_max_n_pid();
+
+      if (max<0)
+	{
+	  max=MAX_N_PID;
+	  add_warning (stderr, "Could not programmatically fetch MX_N_PI, will use the complier gard defined limit MAX_N_PID");
+	}
     }
+  
   return max;
 }
 
@@ -4994,7 +5002,7 @@ int assert_pid (pid_t p)
 {
   if ( p>= max_n_pid() || p<0)
     {
-      printf_exit (EXIT_FAILURE, stderr, "MAX_N_PID exceded -- Recompile changing the value of MAX_N_PID (current: %d Requested: %d) OR setenv MAX_N_PID_4_TCOFFEE=%d", MAX_N_PID, p,p);
+      printf_exit (EXIT_FAILURE, stderr, "MAX_N_PID exceded -- Recompile changing the value of MAX_N_PID (current: %d Requested: %d) OR setenv MAX_N_PID_4_TCOFFEE=%d", (int)max_n_pid(), p,p);
     }
   return 1;
 }
@@ -5580,6 +5588,10 @@ char *get_lockdir_4_tcoffee ()
 }
 
 
+
+
+  
+
 int getNumCores() {
 #ifdef MACOS
     int nm[2];
@@ -5607,6 +5619,40 @@ int set_nproc(int np)
 
   //set to 0 if to be reset by environement
   nproc=np;
+}
+
+
+
+long get_max_n_pid()
+{
+  
+  long maxproc = -1;
+  
+#ifdef __APPLE__
+  return 99998;
+  size_t size = sizeof(maxproc);
+  if (sysctlbyname("kern.maxproc", &maxproc, &size, NULL, 0) == 0) {
+    return maxproc;
+  } else {
+    perror("sysctl kern.maxproc");
+    return -1;
+  }
+#else
+  FILE *f = fopen("/proc/sys/kernel/pid_max", "r");
+  if (f) {
+    if (fscanf(f, "%ld", &maxproc) == 1) {
+      fclose(f);
+      return maxproc;
+    } else {
+      perror("fscanf pid_max");
+      fclose(f);
+      return -1;
+    }
+  } else {
+    perror("fopen /proc/sys/kernel/pid_max");
+    return -1;
+  }
+#endif
 }
 
 int get_nproc ()

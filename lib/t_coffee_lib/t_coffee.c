@@ -7528,9 +7528,15 @@ Alignment * t_coffee_dpa (int argc, char **argv)
   
   alnfile=tree2msa4dpa(T, S, dpa_nseq, command);
   fprintf ( le, "!Compute MSA --- done\n");
- 
-  printf_system ("mv %s %s", alnfile, outfile);
-  display_output_filename (le, "MSA",get_string_variable ("output"),outfile, CHECK);
+  if ( strm (outfile, "sdtout") || strm (outfile, "STDOUT"))
+    display_file_content (stdout, alnfile);
+  else if ( strm (outfile, "sdterr") || strm (outfile, "STDERR"))
+    display_file_content (stderr, alnfile);
+  else
+    {
+      printf_system ("mv %s %s", alnfile, outfile);
+      display_output_filename (le, "MSA",get_string_variable ("output"),outfile, CHECK);
+    }
   if (homoplasy)display_output_filename (le, "HOMOPLASY","homoplasy",homoplasy, CHECK);
   
   //output The tree
