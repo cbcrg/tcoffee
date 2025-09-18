@@ -5619,6 +5619,8 @@ int set_nproc(int np)
 
   //set to 0 if to be reset by environement
   nproc=np;
+  return nproc;
+  return 1;
 }
 
 

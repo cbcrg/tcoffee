@@ -1038,11 +1038,15 @@ elsif    ($action eq "-replace")
 	    my $from=$f;
 	    my $to=$f;
 	    $to=~s/$string_in/$string_out/;
-	    if ($from ne $to && $from ne "." && $from ne "..")
-	      {
+	    if ($from ne $to && $from ne "." && $from ne ".." && (!-e $to || (-f $to && -z $to)))
+	    {
 		print "---- mv $from --> $to\n";
 		&my_rename ($from,$to);
-	      }
+	    }
+	    elsif (-e $to)
+	    {
+		print "[ERROR] ---- mv $from --> $to [Destination already exists]\n";
+	    }
 	  }
       }
   }
@@ -1371,7 +1375,6 @@ sub my_rename
 	open (F, ">.undo");
 	print F "$f\$s\n";
 	close (F);
-	
 	rename ($f, $s);
       }
   }
