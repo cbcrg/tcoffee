@@ -28,10 +28,11 @@ ifndef HOME2
 HOME2=$(HOME)/Dropbox
 endif
 #### These paths related to the publishing on the production machine: they can stay relative
-WEB_DIR=$(HOME2)/dropBoxShared/Work/tcoffee.org/public_html/
+WEB_DIR=$(HOME2)/projects/git/tcoffee.org/public_html
 WEB_DOC=$(WEB_DIR)/Projects/tcoffee/documentation
-WEB_BIN_DIR=$(HOME2)/dropBoxShared/Work/tcoffee.org/public_html/Packages/Binaries/tcoffee/$(OSNAME)/
-WEB_ARCHIVE_SOURCES=$(WEB_DIR)/Packages/Archives/
+WEB_BIN_DIR = $(WEB_DIR)/Packages/Binaries/tcoffee/$(OSNAME)
+WEB_ARCHIVE_SOURCES = $(WEB_DIR)/Packages/Archives
+
 
 
 ###########################################################
@@ -435,7 +436,24 @@ release2:
 	git push --follow-tags
 
 # This part could be removed just maitained to upload stuff to dropbox
+
 web:
+	@echo "WEB_DIR=$(WEB_DIR)"
+	@echo "WEB_DOC=$(WEB_DOC)"
+	@echo "WEB_BIN_DIR=$(WEB_BIN_DIR)"
+	@echo "WEB_ARCHIVE_SOURCES=$(WEB_ARCHIVE_SOURCES)"
+	@if [ -z "$(strip $(WEB_DOC))" ]; then \
+		echo "WEB_DOC is empty; skipping web publish."; exit 0; \
+	fi
+	mkdir -p "$(WEB_DOC)" "$(WEB_BIN_DIR)" "$(WEB_ARCHIVE_SOURCES)" "$(WEB_DIR)/Packages"
+	rm -f "$(WEB_DOC)"/*.html || true
+	cp -R "$(HTML_DOC)"/* "$(WEB_DOC)/"
+	cp "$(EXECUTABLE_DIR)/$(EXECUTABLE)" "$(WEB_BIN_DIR)/$(EXECUTABLE).$(VERSION)"
+	cp "$(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz" \
+	   "$(WEB_ARCHIVE_SOURCES)/$(PROGRAM)_distribution_$(shell $(PERL4MAKEFILE_LIB)/read_program_version.pl -path=$(VER_DIR) -print).tar.gz"
+	cp "$(LIB_DIR)/version/version_number.version"  "$(WEB_DIR)/Packages/T-COFFEE.version"
+
+web_old:
 # Docs are published by CI using the build there
 	rm -f $(WEB_DOC)/*.html
 	cp -r $(HTML_DOC)/* $(WEB_DOC)
