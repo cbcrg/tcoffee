@@ -5632,13 +5632,7 @@ long get_max_n_pid()
   
 #ifdef __APPLE__
   return 99998;
-  size_t size = sizeof(maxproc);
-  if (sysctlbyname("kern.maxproc", &maxproc, &size, NULL, 0) == 0) {
-    return maxproc;
-  } else {
-    perror("sysctl kern.maxproc");
-    return -1;
-  }
+
 #else
   FILE *f = fopen("/proc/sys/kernel/pid_max", "r");
   if (f) {
