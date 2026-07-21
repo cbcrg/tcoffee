@@ -3,7 +3,7 @@
 # This one though, was not building the package correctly (maybe the update to openjdk-11 or the new gcc c compiler is causing the problem)
 # Keeping the old Dockerfile for now (git hash is passed to build now by a env variable)
 FROM debian:buster
-MAINTAINER Jose Espinosa-Carrasco <espinosacarrascoj@gmail.com>
+LABEL "maintainer"="Jose Espinosa-Carrasco <espinosacarrascoj@gmail.com>"
 
 RUN apt-get update --fix-missing && \
   apt-get install -q -y bc wget curl vim nano unzip make gcc g++ gfortran && \

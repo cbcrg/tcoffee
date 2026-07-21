@@ -1,5 +1,5 @@
 FROM debian:jessie
-MAINTAINER Jose Espinosa-Carrasco <espinosacarrascoj@gmail.com>
+LABEL "maintainer"="Jose Espinosa-Carrasco <espinosacarrascoj@gmail.com>"
 
 RUN apt-get update --fix-missing && \
   apt-get install -q -y bc wget curl vim nano unzip make gcc g++ gfortran && \

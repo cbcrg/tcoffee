@@ -1,5 +1,6 @@
 FROM debian:stretch
-MAINTAINER Jose Espinosa-Carrasco <espinosacarrascoj@gmail.com>
+
+LABEL "maintainer"="Jose Espinosa-Carrasco <espinosacarrascoj@gmail.com>"
 
 RUN sed -i s/deb.debian.org/archive.debian.org/g /etc/apt/sources.list && \
   sed -i s/security.debian.org/archive.debian.org/g /etc/apt/sources.list && \
