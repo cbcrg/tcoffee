@@ -25,7 +25,7 @@ RUN apt-get update --fix-missing && \
 #
 # Installbuilder 
 # 
-RUN curl -s  https://s3-eu-west-1.amazonaws.com/cbcrg-eu/tcoffee-ci/installbuilder-8.6.0.tar.gz | tar xz &&\
+RUN curl -s  https://s3-eu-west-1.amazonaws.com/proteinfold-dataset/tcoffee/tcoffee-ci/installbuilder-8.6.0.tar.gz | tar xz &&\
   ln -s $HOME/installbuilder-8.6.0 $HOME/installbuilder
 
 #
