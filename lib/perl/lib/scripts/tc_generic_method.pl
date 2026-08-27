@@ -2686,7 +2686,7 @@ sub run_blast
 	    $command="$client -p $method -d $db -i $infile -o $outfile -m 7";
 	    &safe_system ($command);
 	  }
-ata	elsif ( $SERVER eq "LOCAL_blastall")
+	elsif ( $SERVER eq "LOCAL_blastall")
 	  {
 	    &check_configuration ("blastall");
 	    if ( $method eq "psiblast" || $psiJ>1){myexit(add_error (EXIT_FAILURE,$$,$$,getppid(), "BLAST_FAILURE::$SERVER does not Support psiblast mode ($psiJFlag)",$CL));}
