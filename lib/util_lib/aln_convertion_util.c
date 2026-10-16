@@ -7812,6 +7812,11 @@ Alignment * reorder_aln ( Alignment *A, char **iname, int nseq)
   char **seq_al=(char**)vcalloc (nseq, sizeof (char*));
   char **name=(char**)vcalloc (nseq, sizeof (char*));
   char **aln_comment=(char**)vcalloc(nseq, sizeof (char*));
+  /*seq_comment must be permuted with the rest: output_fasta_aln() prints
+    A->name[a] next to A->seq_comment[a], and the _P_ template annotation
+    lives in seq_comment. Leaving it behind pairs every name with another
+    sequence's template.*/
+  char **seq_comment=(char**)vcalloc(nseq, sizeof (char*));
   int  **order=(int**)vcalloc(nseq, sizeof (int*));
   
   
@@ -7822,6 +7827,7 @@ Alignment * reorder_aln ( Alignment *A, char **iname, int nseq)
 	  seq_al[n]=A->seq_al[i];
 	  name[n]=A->name[i];
 	  aln_comment[n]=A->aln_comment[i];
+	  if (A->seq_comment)seq_comment[n]=A->seq_comment[i];
 	  order[n]=A->order[i];
 	  n++;
 	}
@@ -7831,10 +7837,14 @@ Alignment * reorder_aln ( Alignment *A, char **iname, int nseq)
     {
       A->seq_al[a]=seq_al[a];
       A->name[a]=name[a];
-      aln_comment[a]=A->aln_comment[a];
+      /*was `aln_comment[a]=A->aln_comment[a]`, i.e. assigned the wrong way
+        round into a local about to be freed, so aln_comment was never
+        actually reordered either.*/
+      A->aln_comment[a]=aln_comment[a];
+      if (A->seq_comment)A->seq_comment[a]=seq_comment[a];
       A->order[a]=order[a];
     }
-  vfree (seq_al);vfree(name); vfree(aln_comment); vfree(order);
+  vfree (seq_al);vfree(name); vfree(aln_comment); vfree(seq_comment); vfree(order);
   
   if ( A->A)A->A=reorder_aln(A->A, name, nseq);
   
