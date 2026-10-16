@@ -517,6 +517,13 @@ HEADERS	= define_header.h programmes_define.h perl_header_lib.h
 
 OBJECTS = $(UT_LIB_OBJECTS) $(IO_LIB_OBJECTS) $(DP_LIB_OBJECTS) $(DEV1_LIB_OBJECTS) $(FASTAL_LIB_OBJECTS) $(KM_COFFEE_OBJECTS) $(T_COFFEE_LIB_OBJECTS)
 
+# The objects include the headers above, so they must be complete before any
+# object is compiled: listed only beside the objects (t_coffee: $(HEADERS)
+# $(OBJECTS)), a parallel `make -j` compiled util.c while perl_header_lib.h
+# was still being written, and failed. Order-only, so a header regenerated
+# with a new date does not on its own make every object rebuild.
+$(OBJECTS): | $(HEADERS)
+
 # ===================================================================
 # 	ALL target: create the main application file
 # ===================================================================
